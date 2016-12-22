@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="SoftArcs.WPFSmartLibrary.SmartUserControls.SmartIndicator" x:Name="VisualRoot"
+				 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+				 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+				 mc:Ignorable="d" d:DesignWidth="120" d:DesignHeight="20" 
+				 Loaded="SmartIndicator_Loaded" SizeChanged="SmartIndicator_SizeChanged"
+				 Background="#FF303030">
+				 <!-- TODO : Delete Background property => only for TESTING purposes !!! -->
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<Grid.Resources>
+			<Style x:Key="IndicatorTriangleStyle" TargetType="Path">
+				<Setter Property="Data" Value="M50,25 L55,20 60,25 Z" />
+				<Setter Property="Fill" Value="#FFF0F0F0" />
+				<Setter Property="Stroke" Value="Black" />
+				<Setter Property="StrokeThickness" Value="1" />
+				<Setter Property="Width" Value="10" />
+			</Style>
+		</Grid.Resources>
+
+		<Border Grid.ColumnSpan="3" CornerRadius="3" Background="Black" />
+
+		<Border x:Name="LowIndicator" Grid.Column="0" Background="Red" CornerRadius="4,0,0,4" Margin="1"
+				  Opacity="0.3" />
+		<Border x:Name="MiddleIndicator" Grid.Column="1" Background="Yellow" Margin="1" Opacity="0.9" />
+		<Border x:Name="HighIndicator" Grid.Column="2" Background="Green" CornerRadius="0,4,4,0" Margin="1"
+				  Opacity="0.3" />
+
+		<Border Grid.Column="0" BorderBrush="Black" BorderThickness="2,2,1,2" CornerRadius="3,0,0,3" />
+		<Border Grid.Column="1" BorderBrush="Black" BorderThickness="1,2,1,2" CornerRadius="0" />
+		<Border Grid.Column="2" BorderBrush="Black" BorderThickness="1,2,2,2" CornerRadius="0,3,3,0" />
+
+		<Path x:Name="Indicator" x:FieldModifier="public" Grid.Row="1" Grid.ColumnSpan="3" Stretch="Fill"
+				Style="{StaticResource IndicatorTriangleStyle}">
+			<Path.RenderTransform>
+				<TranslateTransform x:Name="IndicatorTranslateTransform" />
+			</Path.RenderTransform>
+		</Path>
+	</Grid>
+
+</UserControl>

@@ -1,0 +1,47 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="InterfacesTemplate.ttinclude" #>
+<#@ include file="EntityViewInterfacesTemplate.ttinclude" #>
+<#@ include file="AutoEntityViewInterfacesTemplate.ttinclude" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="T4Entities" #>
+<#+
+// <copyright file="DataLayer.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+	public void CreateInterfaces(  Application app,string appFolder,Dictionary<string,string> settings,List<ApplicationEntity> entities)
+	{
+		// create simple properties
+		foreach (var entity in entities)
+		{
+			var tpl = new InterfaceTemplate(entity);
+			tpl.Output.Project = Path.Combine(appFolder, settings["Project"]) ;
+			tpl.Output.File = settings["Folder"] + @"\" + entity.Entity.Name + ".cs";
+			tpl.Render();
+
+
+			var atpl = new AutoEntityViewInterfaceTemplate(entity.Entity);
+			atpl.Output.Project = Path.Combine(appFolder, settings["Project"]) ;
+			atpl.Output.File = settings["Folder"] + @"\AutoEntityViews\" + entity.Entity.Name + ".cs";
+			atpl.Render();
+
+
+		    foreach (var entityView in entity.Entity.EntityViews)
+		    {
+		        var vtpl = new EntityViewInterfaceTemplate(entityView);
+				vtpl.Output.Project = Path.Combine(appFolder, settings["Project"]) ;
+				vtpl.Output.File = settings["Folder"] + @"\EntityViews\" + entityView.Name + ".cs";
+				vtpl.Render(); 
+		    }
+			
+		}
+
+	}
+	
+
+
+
+#>

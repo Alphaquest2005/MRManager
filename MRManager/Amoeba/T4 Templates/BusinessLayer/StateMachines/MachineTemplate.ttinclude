@@ -1,0 +1,68 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ include file="C:\Prism\Clients\Amoeba\T4 Templates\Utilities\T4 System Functions\T4SysUtilities.ttinclude" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class MachineTemplate : CSharpTemplate
+{
+	public MachineTemplate(ApplicationStateMachine sm)
+	{
+		StateMachine = sm;
+	}
+
+	public ApplicationStateMachine StateMachine { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+	    var initialState = StateMachine.StateMachine.MachineStates.OfType<InitialState>().FirstOrDefault();
+	    if (initialState == null)
+	    {
+	        //WriteToOutput("Missing Inital State for StateMachine:" + StateMachine.StateMachine.MachineName);
+	        return "Missing Inital State for StateMachine:" + StateMachine.StateMachine.MachineName;
+	    }
+#>
+
+using Stateless;
+
+namespace BusinessLayer.StateMachines
+{
+	public partial class <#= StateMachine.StateMachine.MachineName #>: StateMachine<States, Triggers>
+	{
+		public <#= StateMachine.StateMachine.MachineName #>():base(States.<#=initialState.State.StateName #>)
+		{
+<#+ foreach (var t in StateMachine.StateMachine.MachineStates)
+{ #>
+
+			this.Configure(States.<#=t.State.StateName #>)<#+ foreach (var i in t.Transitions.SelectMany(z => z.TransitionFunctions.OfType<OnEntry>()))
+		{ #>
+
+				.OnEntry(t => <#=i.FunctionSet.FunctionSetName#>())<#+} #>
+<#+ foreach (var i in t.Transitions.SelectMany(z => z.TransitionFunctions.OfType<OnExit>()))
+		{ #>
+
+				.OnExit(t => <#=i.FunctionSet.FunctionSetName#>())<#+} #>
+<#+ foreach (var i in t.Transitions.SelectMany(z => z.TransitionFunctions.OfType<T4Entities.Internal>()))
+		{ #>
+			
+				.InternalTransition(Triggers.<#=i.Transition.MachineTrigger.Trigger.TriggerName #>, t => StateMachineFunctions.<#=i.FunctionSet.FunctionSetName#>())<#+    } #>
+<#+ foreach (var i in t.Transitions.Where(x => x.DestinationMachineState != null))
+		{ #>
+				
+				.Permit(Triggers.<#=i.MachineTrigger.Trigger.TriggerName #>, States.<#=i.DestinationMachineState.State.StateName #>)<#+} #>;
+<#+} #>
+		}
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

@@ -1,0 +1,33 @@
+﻿<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="..\..\..\Utilities\DataAccess\Repository.ttinclude" once="true" #>
+<#@ include file="SummaryViewModelTemplate.ttinclude" #>
+
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ assembly name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#+
+// <copyright file="DataLayer.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+	public void CreateSummaryViewModels(Application app,string AppFolder, Dictionary<string, string> settings,ApplicationEntity mainEntity)
+	{
+		var pPath = Path.Combine(AppFolder, settings["Project"]) ;
+		// create simple properties
+	    
+	    if (mainEntity != null)
+	    {
+	        var tpl = new SummaryViewModelTemplate(mainEntity);
+	        tpl.Output.Project = pPath;
+	        tpl.Output.File = settings["Folder"] + @"\" + mainEntity.Entity.Name + @"\SummaryViewModel.cs";
+	        tpl.Render();
+	    }
+
+	}
+
+
+
+#>

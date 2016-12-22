@@ -1,0 +1,16 @@
+using System.Collections.Generic;
+using SystemInterfaces;
+using JB.Collections.Reactive;
+
+
+namespace ViewModel.Interfaces
+{
+    public interface IScreenViewModel: IViewModel
+    {
+        ObservableCollection<IViewModel> HeaderViewModels { get; }
+        ObservableCollection<IViewModel> LeftViewModels { get; }
+        ObservableCollection<IViewModel> RightViewModels { get; }
+        ObservableCollection<IViewModel> FooterViewModels { get; }
+        ObservableCollection<IViewModel> BodyViewModels { get;}
+    }
+}

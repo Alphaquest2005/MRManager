@@ -1,0 +1,68 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Amoeba\Amoeba\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll" #>
+<#@ import namespace="MoreLinq" #>
+<#@ import namespace="System.Linq" #>
+
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class ConstructorViewModelTemplate : CSharpTemplate
+{
+	public ConstructorViewModelTemplate(Entity entity)
+	{
+		Entity = entity;
+	}
+
+	public Entity Entity { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+using System.ComponentModel;
+using Core.Common.UI;
+using Interfaces;
+using DesignTime;
+using ValidationSets;
+
+namespace ViewModels
+{
+	public partial class <#=Entity.Name#>ViewModel_AutoGen : BaseViewModel<I<#=Entity.Name#>>
+	{
+		public <#=Entity.Name#>ViewModel_AutoGen(): base(new I<#=Entity.Name#>Validator())
+		{
+<#+ if (Entity.EntityProperties.Any(x => x.TestValues.Any(z => z.RowId != 0)))
+{ #>
+			if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+			{
+				CurrentEntity = DesignDataContext.<#=Entity.Name #>;
+				base.EntitySet.Add(DesignDataContext.<#=Entity.Name #>);
+			}
+			else
+			{
+				CurrentEntity = CreateNullEntity();
+			}
+<#+ }
+else
+{
+#>
+				CurrentEntity = CreateNullEntity();
+<#+ } #>
+			OnCreated();        
+			OnTotals();
+		}
+			
+		partial void OnCreated();
+		partial void OnTotals();
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

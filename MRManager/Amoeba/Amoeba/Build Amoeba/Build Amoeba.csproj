@@ -1,0 +1,1410 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8D7F52A5-8733-45F4-B533-F91D67CF73B5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Build_Amoeba</RootNamespace>
+    <AssemblyName>Build Amoeba</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Amoeba-Master.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Amoeba-Master.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Amoeba-Master.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Amoeba-Master.cs</LastGenOutput>
+      <LastOutputs>
+..\Amoeba\App.xaml
+..\Amoeba\App.xaml.cs
+..\Amoeba\MainWindow.xaml
+..\Amoeba\MainWindow.xaml.cs
+..\DataTemplates\AllDataTemplatesResource.xaml
+..\DataTemplates\AllEntityViewDataTemplatesResource.xaml
+..\DataTemplates\Generated AutoView Templates\ApplicationEntitiesAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\ApplicationsAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\ApplicationSettingAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\DataPropertiesAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\DataTypesAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\EntitiesAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\EntityPropertiesAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\EntityRelationshipsAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\EntityViewAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\EntityViewEntityPropertiesAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\EntityViewPropertiesAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\EntityViewPropertyFunctionAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\EntityViewPropertyFunctionParameterAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\EntityViewViewPropertiesAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\FunctionBodyAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\FunctionParametersAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\FunctionReturnTypeAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\FunctionsAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\FunctionSetFunctionsAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\FunctionSetsAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\LayersAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\LayoutAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\ModelTypesAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\OperatorsAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\ParametersAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\PartsAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\PresentationPropertiesAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\PrimaryKeyOptionsAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\ProcessAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\ProcessStepsAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\ProcessStepScreensAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\ProjectsAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\RelationshipTypesAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\ScreenLayoutsAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\ScreenPartsAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\ScreensAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\ScreenViewsAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\SettingsAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\SettingsNamesAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\StateMachinesAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\StateMachineStatesAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\StateMachineTriggersAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\StatesAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\StepsAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\TestValuesAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\TriggersAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\ViewEntityAutoViewRDT.xaml
+..\DataTemplates\Generated AutoView Templates\ViewsAutoViewRDT.xaml
+..\DataTemplates\Generated DataTemplates\ApplicationEntitiesDT.xaml
+..\DataTemplates\Generated DataTemplates\ApplicationsDT.xaml
+..\DataTemplates\Generated DataTemplates\ApplicationSettingDT.xaml
+..\DataTemplates\Generated DataTemplates\DataPropertiesDT.xaml
+..\DataTemplates\Generated DataTemplates\DataTypesDT.xaml
+..\DataTemplates\Generated DataTemplates\EntitiesDT.xaml
+..\DataTemplates\Generated DataTemplates\EntityPropertiesDT.xaml
+..\DataTemplates\Generated DataTemplates\EntityRelationshipsDT.xaml
+..\DataTemplates\Generated DataTemplates\EntityViewDT.xaml
+..\DataTemplates\Generated DataTemplates\EntityViewEntityPropertiesDT.xaml
+..\DataTemplates\Generated DataTemplates\EntityViewPropertiesDT.xaml
+..\DataTemplates\Generated DataTemplates\EntityViewPropertyFunctionDT.xaml
+..\DataTemplates\Generated DataTemplates\EntityViewPropertyFunctionParameterDT.xaml
+..\DataTemplates\Generated DataTemplates\EntityViewViewPropertiesDT.xaml
+..\DataTemplates\Generated DataTemplates\FunctionBodyDT.xaml
+..\DataTemplates\Generated DataTemplates\FunctionParametersDT.xaml
+..\DataTemplates\Generated DataTemplates\FunctionReturnTypeDT.xaml
+..\DataTemplates\Generated DataTemplates\FunctionsDT.xaml
+..\DataTemplates\Generated DataTemplates\FunctionSetFunctionsDT.xaml
+..\DataTemplates\Generated DataTemplates\FunctionSetsDT.xaml
+..\DataTemplates\Generated DataTemplates\LayersDT.xaml
+..\DataTemplates\Generated DataTemplates\LayoutDT.xaml
+..\DataTemplates\Generated DataTemplates\ModelTypesDT.xaml
+..\DataTemplates\Generated DataTemplates\OperatorsDT.xaml
+..\DataTemplates\Generated DataTemplates\ParametersDT.xaml
+..\DataTemplates\Generated DataTemplates\PartsDT.xaml
+..\DataTemplates\Generated DataTemplates\PresentationPropertiesDT.xaml
+..\DataTemplates\Generated DataTemplates\PrimaryKeyOptionsDT.xaml
+..\DataTemplates\Generated DataTemplates\ProcessDT.xaml
+..\DataTemplates\Generated DataTemplates\ProcessStepScreensDT.xaml
+..\DataTemplates\Generated DataTemplates\ProcessStepsDT.xaml
+..\DataTemplates\Generated DataTemplates\ProjectsDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\ApplicationEntitiesRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\ApplicationSettingRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\ApplicationsRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\DataPropertiesRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\DataTypesRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\EntitiesRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\EntityPropertiesRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\EntityRelationshipsRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\EntityViewEntityPropertiesRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\EntityViewPropertiesRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\EntityViewPropertyFunctionParameterRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\EntityViewPropertyFunctionRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\EntityViewRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\EntityViewViewPropertiesRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\FunctionBodyRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\FunctionParametersRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\FunctionReturnTypeRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\FunctionSetFunctionsRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\FunctionSetsRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\FunctionsRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\LayersRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\LayoutRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\ModelTypesRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\OperatorsRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\ParametersRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\PartsRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\PresentationPropertiesRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\PrimaryKeyOptionsRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\ProcessRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\ProcessStepScreensRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\ProcessStepsRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\ProjectsRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\RelationshipTypesRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\ScreenLayoutsRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\ScreenPartsRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\ScreensRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\ScreenViewsRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\SettingsNamesRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\SettingsRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\StateMachinesRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\StateMachineStatesRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\StateMachineTriggersRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\StatesRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\StepsRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\TestValuesRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\TriggersRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\ViewEntityRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\ViewsRDT.xaml
+..\DataTemplates\Generated DataTemplates\RelationshipTypesDT.xaml
+..\DataTemplates\Generated DataTemplates\ScreenLayoutsDT.xaml
+..\DataTemplates\Generated DataTemplates\ScreenPartsDT.xaml
+..\DataTemplates\Generated DataTemplates\ScreensDT.xaml
+..\DataTemplates\Generated DataTemplates\ScreenViewsDT.xaml
+..\DataTemplates\Generated DataTemplates\SettingsDT.xaml
+..\DataTemplates\Generated DataTemplates\SettingsNamesDT.xaml
+..\DataTemplates\Generated DataTemplates\StateMachinesDT.xaml
+..\DataTemplates\Generated DataTemplates\StateMachineStatesDT.xaml
+..\DataTemplates\Generated DataTemplates\StateMachineTriggersDT.xaml
+..\DataTemplates\Generated DataTemplates\StatesDT.xaml
+..\DataTemplates\Generated DataTemplates\StepsDT.xaml
+..\DataTemplates\Generated DataTemplates\TestValuesDT.xaml
+..\DataTemplates\Generated DataTemplates\TriggersDT.xaml
+..\DataTemplates\Generated DataTemplates\ViewEntityDT.xaml
+..\DataTemplates\Generated DataTemplates\ViewsDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\ApplicationEntitiesWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\ApplicationSettingWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\ApplicationsWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\DataPropertiesWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\DataTypesWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\EntitiesWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\EntityPropertiesWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\EntityRelationshipsWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\EntityViewEntityPropertiesWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\EntityViewPropertiesWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\EntityViewPropertyFunctionParameterWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\EntityViewPropertyFunctionWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\EntityViewViewPropertiesWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\EntityViewWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\FunctionBodyWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\FunctionParametersWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\FunctionReturnTypeWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\FunctionSetFunctionsWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\FunctionSetsWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\FunctionsWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\LayersWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\LayoutWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\ModelTypesWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\OperatorsWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\ParametersWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\PartsWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\PresentationPropertiesWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\PrimaryKeyOptionsWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\ProcessStepScreensWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\ProcessStepsWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\ProcessWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\ProjectsWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\RelationshipTypesWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\ScreenLayoutsWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\ScreenPartsWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\ScreensWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\ScreenViewsWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\SettingsNamesWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\SettingsWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\StateMachineStatesWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\StateMachinesWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\StateMachineTriggersWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\StatesWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\StepsWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\TestValuesWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\TriggersWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\ViewEntityWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\ViewsWDT.xaml
+..\DesignTimeData\DesignTimeResource.xaml
+..\DesignTimeData\Generated Models\DesignDataContext.cs
+..\EF.Mappings\Generated Mappings\ApplicationEntities.cs
+..\EF.Mappings\Generated Mappings\Applications.cs
+..\EF.Mappings\Generated Mappings\ApplicationSetting.cs
+..\EF.Mappings\Generated Mappings\DataProperties.cs
+..\EF.Mappings\Generated Mappings\DataTypes.cs
+..\EF.Mappings\Generated Mappings\Entities.cs
+..\EF.Mappings\Generated Mappings\EntityProperties.cs
+..\EF.Mappings\Generated Mappings\EntityRelationships.cs
+..\EF.Mappings\Generated Mappings\EntityView.cs
+..\EF.Mappings\Generated Mappings\EntityViewEntityProperties.cs
+..\EF.Mappings\Generated Mappings\EntityViewProperties.cs
+..\EF.Mappings\Generated Mappings\EntityViewPropertyFunction.cs
+..\EF.Mappings\Generated Mappings\EntityViewPropertyFunctionParameter.cs
+..\EF.Mappings\Generated Mappings\EntityViewViewProperties.cs
+..\EF.Mappings\Generated Mappings\FunctionBody.cs
+..\EF.Mappings\Generated Mappings\FunctionParameters.cs
+..\EF.Mappings\Generated Mappings\FunctionReturnType.cs
+..\EF.Mappings\Generated Mappings\Functions.cs
+..\EF.Mappings\Generated Mappings\FunctionSetFunctions.cs
+..\EF.Mappings\Generated Mappings\FunctionSets.cs
+..\EF.Mappings\Generated Mappings\Layers.cs
+..\EF.Mappings\Generated Mappings\Layout.cs
+..\EF.Mappings\Generated Mappings\ModelTypes.cs
+..\EF.Mappings\Generated Mappings\Operators.cs
+..\EF.Mappings\Generated Mappings\Parameters.cs
+..\EF.Mappings\Generated Mappings\Parts.cs
+..\EF.Mappings\Generated Mappings\PresentationProperties.cs
+..\EF.Mappings\Generated Mappings\PrimaryKeyOptions.cs
+..\EF.Mappings\Generated Mappings\Process.cs
+..\EF.Mappings\Generated Mappings\ProcessSteps.cs
+..\EF.Mappings\Generated Mappings\ProcessStepScreens.cs
+..\EF.Mappings\Generated Mappings\Projects.cs
+..\EF.Mappings\Generated Mappings\RelationshipTypes.cs
+..\EF.Mappings\Generated Mappings\ScreenLayouts.cs
+..\EF.Mappings\Generated Mappings\ScreenParts.cs
+..\EF.Mappings\Generated Mappings\Screens.cs
+..\EF.Mappings\Generated Mappings\ScreenViews.cs
+..\EF.Mappings\Generated Mappings\Settings.cs
+..\EF.Mappings\Generated Mappings\SettingsNames.cs
+..\EF.Mappings\Generated Mappings\StateMachines.cs
+..\EF.Mappings\Generated Mappings\StateMachineStates.cs
+..\EF.Mappings\Generated Mappings\StateMachineTriggers.cs
+..\EF.Mappings\Generated Mappings\States.cs
+..\EF.Mappings\Generated Mappings\Steps.cs
+..\EF.Mappings\Generated Mappings\TestValues.cs
+..\EF.Mappings\Generated Mappings\Triggers.cs
+..\EF.Mappings\Generated Mappings\ViewEntity.cs
+..\EF.Mappings\Generated Mappings\Views.cs
+..\EFDataContext\Generated DBContexts\AmoebaDBContext.cs
+..\EFDataContext\Generated DBContexts\AmoebaDBContext-Intialization.cs
+..\EFEntities\EFEntity.cs
+..\EFEntities\Generated Entities\ApplicationEntities.cs
+..\EFEntities\Generated Entities\Applications.cs
+..\EFEntities\Generated Entities\ApplicationSetting.cs
+..\EFEntities\Generated Entities\DataProperties.cs
+..\EFEntities\Generated Entities\DataTypes.cs
+..\EFEntities\Generated Entities\Entities.cs
+..\EFEntities\Generated Entities\EntityProperties.cs
+..\EFEntities\Generated Entities\EntityRelationships.cs
+..\EFEntities\Generated Entities\EntityView.cs
+..\EFEntities\Generated Entities\EntityViewEntityProperties.cs
+..\EFEntities\Generated Entities\EntityViewProperties.cs
+..\EFEntities\Generated Entities\EntityViewPropertyFunction.cs
+..\EFEntities\Generated Entities\EntityViewPropertyFunctionParameter.cs
+..\EFEntities\Generated Entities\EntityViewViewProperties.cs
+..\EFEntities\Generated Entities\FunctionBody.cs
+..\EFEntities\Generated Entities\FunctionParameters.cs
+..\EFEntities\Generated Entities\FunctionReturnType.cs
+..\EFEntities\Generated Entities\Functions.cs
+..\EFEntities\Generated Entities\FunctionSetFunctions.cs
+..\EFEntities\Generated Entities\FunctionSets.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\ApplicationEntitiesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\ApplicationsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\ApplicationSettingAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\DataPropertiesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\DataTypesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\EntitiesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\EntityPropertiesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\EntityRelationshipsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\EntityViewAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\EntityViewEntityPropertiesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\EntityViewPropertiesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\EntityViewPropertyFunctionAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\EntityViewPropertyFunctionParameterAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\EntityViewViewPropertiesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\FunctionBodyAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\FunctionParametersAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\FunctionReturnTypeAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\FunctionsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\FunctionSetFunctionsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\FunctionSetsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\LayersAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\LayoutAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\ModelTypesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\OperatorsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\ParametersAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\PartsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\PresentationPropertiesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\PrimaryKeyOptionsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\ProcessAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\ProcessStepsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\ProcessStepScreensAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\ProjectsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\RelationshipTypesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\ScreenLayoutsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\ScreenPartsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\ScreensAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\ScreenViewsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\SettingsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\SettingsNamesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\StateMachinesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\StateMachineStatesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\StateMachineTriggersAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\StatesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\StepsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\TestValuesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\TriggersAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\ViewEntityAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\ViewsAutoView.cs
+..\EFEntities\Generated Entities\Layers.cs
+..\EFEntities\Generated Entities\Layout.cs
+..\EFEntities\Generated Entities\ModelTypes.cs
+..\EFEntities\Generated Entities\Operators.cs
+..\EFEntities\Generated Entities\Parameters.cs
+..\EFEntities\Generated Entities\Parts.cs
+..\EFEntities\Generated Entities\PresentationProperties.cs
+..\EFEntities\Generated Entities\PrimaryKeyOptions.cs
+..\EFEntities\Generated Entities\Process.cs
+..\EFEntities\Generated Entities\ProcessSteps.cs
+..\EFEntities\Generated Entities\ProcessStepScreens.cs
+..\EFEntities\Generated Entities\Projects.cs
+..\EFEntities\Generated Entities\RelationshipTypes.cs
+..\EFEntities\Generated Entities\ScreenLayouts.cs
+..\EFEntities\Generated Entities\ScreenParts.cs
+..\EFEntities\Generated Entities\Screens.cs
+..\EFEntities\Generated Entities\ScreenViews.cs
+..\EFEntities\Generated Entities\Settings.cs
+..\EFEntities\Generated Entities\SettingsNames.cs
+..\EFEntities\Generated Entities\StateMachines.cs
+..\EFEntities\Generated Entities\StateMachineStates.cs
+..\EFEntities\Generated Entities\StateMachineTriggers.cs
+..\EFEntities\Generated Entities\States.cs
+..\EFEntities\Generated Entities\Steps.cs
+..\EFEntities\Generated Entities\TestValues.cs
+..\EFEntities\Generated Entities\Triggers.cs
+..\EFEntities\Generated Entities\ViewEntity.cs
+..\EFEntities\Generated Entities\Views.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\ApplicationEntitiesAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\ApplicationsAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\ApplicationSettingAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\DataPropertiesAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\DataTypesAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\EntitiesAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\EntityPropertiesAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\EntityRelationshipsAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\EntityViewAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\EntityViewEntityPropertiesAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\EntityViewPropertiesAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\EntityViewPropertyFunctionAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\EntityViewPropertyFunctionParameterAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\EntityViewViewPropertiesAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\FunctionBodyAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\FunctionParametersAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\FunctionReturnTypeAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\FunctionsAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\FunctionSetFunctionsAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\FunctionSetsAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\LayersAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\LayoutAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\ModelTypesAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\OperatorsAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\ParametersAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\PartsAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\PresentationPropertiesAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\PrimaryKeyOptionsAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\ProcessAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\ProcessStepsAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\ProcessStepScreensAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\ProjectsAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\RelationshipTypesAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\ScreenLayoutsAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\ScreenPartsAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\ScreensAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\ScreenViewsAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\SettingsAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\SettingsNamesAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\StateMachinesAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\StateMachineStatesAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\StateMachineTriggersAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\StatesAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\StepsAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\TestValuesAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\TriggersAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\ViewEntityAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\ViewsAutoView.cs
+..\Expressions\Generated Expressions\Entity Expressions\ApplicationEntities.cs
+..\Expressions\Generated Expressions\Entity Expressions\Applications.cs
+..\Expressions\Generated Expressions\Entity Expressions\ApplicationSetting.cs
+..\Expressions\Generated Expressions\Entity Expressions\DataProperties.cs
+..\Expressions\Generated Expressions\Entity Expressions\DataTypes.cs
+..\Expressions\Generated Expressions\Entity Expressions\Entities.cs
+..\Expressions\Generated Expressions\Entity Expressions\EntityProperties.cs
+..\Expressions\Generated Expressions\Entity Expressions\EntityRelationships.cs
+..\Expressions\Generated Expressions\Entity Expressions\EntityView.cs
+..\Expressions\Generated Expressions\Entity Expressions\EntityViewEntityProperties.cs
+..\Expressions\Generated Expressions\Entity Expressions\EntityViewProperties.cs
+..\Expressions\Generated Expressions\Entity Expressions\EntityViewPropertyFunction.cs
+..\Expressions\Generated Expressions\Entity Expressions\EntityViewPropertyFunctionParameter.cs
+..\Expressions\Generated Expressions\Entity Expressions\EntityViewViewProperties.cs
+..\Expressions\Generated Expressions\Entity Expressions\FunctionBody.cs
+..\Expressions\Generated Expressions\Entity Expressions\FunctionParameters.cs
+..\Expressions\Generated Expressions\Entity Expressions\FunctionReturnType.cs
+..\Expressions\Generated Expressions\Entity Expressions\Functions.cs
+..\Expressions\Generated Expressions\Entity Expressions\FunctionSetFunctions.cs
+..\Expressions\Generated Expressions\Entity Expressions\FunctionSets.cs
+..\Expressions\Generated Expressions\Entity Expressions\Layers.cs
+..\Expressions\Generated Expressions\Entity Expressions\Layout.cs
+..\Expressions\Generated Expressions\Entity Expressions\ModelTypes.cs
+..\Expressions\Generated Expressions\Entity Expressions\Operators.cs
+..\Expressions\Generated Expressions\Entity Expressions\Parameters.cs
+..\Expressions\Generated Expressions\Entity Expressions\Parts.cs
+..\Expressions\Generated Expressions\Entity Expressions\PresentationProperties.cs
+..\Expressions\Generated Expressions\Entity Expressions\PrimaryKeyOptions.cs
+..\Expressions\Generated Expressions\Entity Expressions\Process.cs
+..\Expressions\Generated Expressions\Entity Expressions\ProcessSteps.cs
+..\Expressions\Generated Expressions\Entity Expressions\ProcessStepScreens.cs
+..\Expressions\Generated Expressions\Entity Expressions\Projects.cs
+..\Expressions\Generated Expressions\Entity Expressions\RelationshipTypes.cs
+..\Expressions\Generated Expressions\Entity Expressions\ScreenLayouts.cs
+..\Expressions\Generated Expressions\Entity Expressions\ScreenParts.cs
+..\Expressions\Generated Expressions\Entity Expressions\Screens.cs
+..\Expressions\Generated Expressions\Entity Expressions\ScreenViews.cs
+..\Expressions\Generated Expressions\Entity Expressions\Settings.cs
+..\Expressions\Generated Expressions\Entity Expressions\SettingsNames.cs
+..\Expressions\Generated Expressions\Entity Expressions\StateMachines.cs
+..\Expressions\Generated Expressions\Entity Expressions\StateMachineStates.cs
+..\Expressions\Generated Expressions\Entity Expressions\StateMachineTriggers.cs
+..\Expressions\Generated Expressions\Entity Expressions\States.cs
+..\Expressions\Generated Expressions\Entity Expressions\Steps.cs
+..\Expressions\Generated Expressions\Entity Expressions\TestValues.cs
+..\Expressions\Generated Expressions\Entity Expressions\Triggers.cs
+..\Expressions\Generated Expressions\Entity Expressions\ViewEntity.cs
+..\Expressions\Generated Expressions\Entity Expressions\Views.cs
+..\Expressions\Generated Expressions\Function Expressions\AutoFunctions.cs
+..\Interfaces\Generated Interfaces\ApplicationEntities.cs
+..\Interfaces\Generated Interfaces\Applications.cs
+..\Interfaces\Generated Interfaces\ApplicationSetting.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\ApplicationEntities.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\Applications.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\ApplicationSetting.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\DataProperties.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\DataTypes.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\Entities.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\EntityProperties.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\EntityRelationships.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\EntityView.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\EntityViewEntityProperties.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\EntityViewProperties.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\EntityViewPropertyFunction.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\EntityViewPropertyFunctionParameter.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\EntityViewViewProperties.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\FunctionBody.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\FunctionParameters.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\FunctionReturnType.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\Functions.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\FunctionSetFunctions.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\FunctionSets.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\Layers.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\Layout.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\ModelTypes.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\Operators.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\Parameters.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\Parts.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\PresentationProperties.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\PrimaryKeyOptions.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\Process.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\ProcessSteps.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\ProcessStepScreens.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\Projects.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\RelationshipTypes.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\ScreenLayouts.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\ScreenParts.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\Screens.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\ScreenViews.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\Settings.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\SettingsNames.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\StateMachines.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\StateMachineStates.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\StateMachineTriggers.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\States.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\Steps.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\TestValues.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\Triggers.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\ViewEntity.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\Views.cs
+..\Interfaces\Generated Interfaces\DataProperties.cs
+..\Interfaces\Generated Interfaces\DataTypes.cs
+..\Interfaces\Generated Interfaces\Entities.cs
+..\Interfaces\Generated Interfaces\EntityProperties.cs
+..\Interfaces\Generated Interfaces\EntityRelationships.cs
+..\Interfaces\Generated Interfaces\EntityView.cs
+..\Interfaces\Generated Interfaces\EntityViewEntityProperties.cs
+..\Interfaces\Generated Interfaces\EntityViewProperties.cs
+..\Interfaces\Generated Interfaces\EntityViewPropertyFunction.cs
+..\Interfaces\Generated Interfaces\EntityViewPropertyFunctionParameter.cs
+..\Interfaces\Generated Interfaces\EntityViewViewProperties.cs
+..\Interfaces\Generated Interfaces\FunctionBody.cs
+..\Interfaces\Generated Interfaces\FunctionParameters.cs
+..\Interfaces\Generated Interfaces\FunctionReturnType.cs
+..\Interfaces\Generated Interfaces\Functions.cs
+..\Interfaces\Generated Interfaces\FunctionSetFunctions.cs
+..\Interfaces\Generated Interfaces\FunctionSets.cs
+..\Interfaces\Generated Interfaces\Layers.cs
+..\Interfaces\Generated Interfaces\Layout.cs
+..\Interfaces\Generated Interfaces\ModelTypes.cs
+..\Interfaces\Generated Interfaces\Operators.cs
+..\Interfaces\Generated Interfaces\Parameters.cs
+..\Interfaces\Generated Interfaces\Parts.cs
+..\Interfaces\Generated Interfaces\PresentationProperties.cs
+..\Interfaces\Generated Interfaces\PrimaryKeyOptions.cs
+..\Interfaces\Generated Interfaces\Process.cs
+..\Interfaces\Generated Interfaces\ProcessSteps.cs
+..\Interfaces\Generated Interfaces\ProcessStepScreens.cs
+..\Interfaces\Generated Interfaces\Projects.cs
+..\Interfaces\Generated Interfaces\RelationshipTypes.cs
+..\Interfaces\Generated Interfaces\ScreenLayouts.cs
+..\Interfaces\Generated Interfaces\ScreenParts.cs
+..\Interfaces\Generated Interfaces\Screens.cs
+..\Interfaces\Generated Interfaces\ScreenViews.cs
+..\Interfaces\Generated Interfaces\Settings.cs
+..\Interfaces\Generated Interfaces\SettingsNames.cs
+..\Interfaces\Generated Interfaces\StateMachines.cs
+..\Interfaces\Generated Interfaces\StateMachineStates.cs
+..\Interfaces\Generated Interfaces\StateMachineTriggers.cs
+..\Interfaces\Generated Interfaces\States.cs
+..\Interfaces\Generated Interfaces\Steps.cs
+..\Interfaces\Generated Interfaces\TestValues.cs
+..\Interfaces\Generated Interfaces\Triggers.cs
+..\Interfaces\Generated Interfaces\ViewEntity.cs
+..\Interfaces\Generated Interfaces\Views.cs
+..\NH.Mappings\Generated Mappings\ApplicationEntities.cs
+..\NH.Mappings\Generated Mappings\Applications.cs
+..\NH.Mappings\Generated Mappings\ApplicationSetting.cs
+..\NH.Mappings\Generated Mappings\DataProperties.cs
+..\NH.Mappings\Generated Mappings\DataTypes.cs
+..\NH.Mappings\Generated Mappings\Entities.cs
+..\NH.Mappings\Generated Mappings\EntityProperties.cs
+..\NH.Mappings\Generated Mappings\EntityRelationships.cs
+..\NH.Mappings\Generated Mappings\EntityView.cs
+..\NH.Mappings\Generated Mappings\EntityViewEntityProperties.cs
+..\NH.Mappings\Generated Mappings\EntityViewProperties.cs
+..\NH.Mappings\Generated Mappings\EntityViewPropertyFunction.cs
+..\NH.Mappings\Generated Mappings\EntityViewPropertyFunctionParameter.cs
+..\NH.Mappings\Generated Mappings\EntityViewViewProperties.cs
+..\NH.Mappings\Generated Mappings\FunctionBody.cs
+..\NH.Mappings\Generated Mappings\FunctionParameters.cs
+..\NH.Mappings\Generated Mappings\FunctionReturnType.cs
+..\NH.Mappings\Generated Mappings\Functions.cs
+..\NH.Mappings\Generated Mappings\FunctionSetFunctions.cs
+..\NH.Mappings\Generated Mappings\FunctionSets.cs
+..\NH.Mappings\Generated Mappings\Layers.cs
+..\NH.Mappings\Generated Mappings\Layout.cs
+..\NH.Mappings\Generated Mappings\ModelTypes.cs
+..\NH.Mappings\Generated Mappings\Operators.cs
+..\NH.Mappings\Generated Mappings\Parameters.cs
+..\NH.Mappings\Generated Mappings\Parts.cs
+..\NH.Mappings\Generated Mappings\PresentationProperties.cs
+..\NH.Mappings\Generated Mappings\PrimaryKeyOptions.cs
+..\NH.Mappings\Generated Mappings\Process.cs
+..\NH.Mappings\Generated Mappings\ProcessSteps.cs
+..\NH.Mappings\Generated Mappings\ProcessStepScreens.cs
+..\NH.Mappings\Generated Mappings\Projects.cs
+..\NH.Mappings\Generated Mappings\RelationshipTypes.cs
+..\NH.Mappings\Generated Mappings\ScreenLayouts.cs
+..\NH.Mappings\Generated Mappings\ScreenParts.cs
+..\NH.Mappings\Generated Mappings\Screens.cs
+..\NH.Mappings\Generated Mappings\ScreenViews.cs
+..\NH.Mappings\Generated Mappings\Settings.cs
+..\NH.Mappings\Generated Mappings\SettingsNames.cs
+..\NH.Mappings\Generated Mappings\StateMachines.cs
+..\NH.Mappings\Generated Mappings\StateMachineStates.cs
+..\NH.Mappings\Generated Mappings\StateMachineTriggers.cs
+..\NH.Mappings\Generated Mappings\States.cs
+..\NH.Mappings\Generated Mappings\Steps.cs
+..\NH.Mappings\Generated Mappings\TestValues.cs
+..\NH.Mappings\Generated Mappings\Triggers.cs
+..\NH.Mappings\Generated Mappings\ViewEntity.cs
+..\NH.Mappings\Generated Mappings\Views.cs
+..\UnitTests\Generated Tests\Auto Expressions\AutoExpressionTest.cs
+..\UnitTests\Generated Tests\EntityView Expressions\EntityViewExpressionTests.cs
+..\ValidationSets\Generated ValidationSets\ApplicationEntities.cs
+..\ValidationSets\Generated ValidationSets\Applications.cs
+..\ValidationSets\Generated ValidationSets\ApplicationSetting.cs
+..\ValidationSets\Generated ValidationSets\DataProperties.cs
+..\ValidationSets\Generated ValidationSets\DataTypes.cs
+..\ValidationSets\Generated ValidationSets\Entities.cs
+..\ValidationSets\Generated ValidationSets\EntityProperties.cs
+..\ValidationSets\Generated ValidationSets\EntityRelationships.cs
+..\ValidationSets\Generated ValidationSets\EntityView.cs
+..\ValidationSets\Generated ValidationSets\EntityViewEntityProperties.cs
+..\ValidationSets\Generated ValidationSets\EntityViewProperties.cs
+..\ValidationSets\Generated ValidationSets\EntityViewPropertyFunction.cs
+..\ValidationSets\Generated ValidationSets\EntityViewPropertyFunctionParameter.cs
+..\ValidationSets\Generated ValidationSets\EntityViewViewProperties.cs
+..\ValidationSets\Generated ValidationSets\FunctionBody.cs
+..\ValidationSets\Generated ValidationSets\FunctionParameters.cs
+..\ValidationSets\Generated ValidationSets\FunctionReturnType.cs
+..\ValidationSets\Generated ValidationSets\Functions.cs
+..\ValidationSets\Generated ValidationSets\FunctionSetFunctions.cs
+..\ValidationSets\Generated ValidationSets\FunctionSets.cs
+..\ValidationSets\Generated ValidationSets\Layers.cs
+..\ValidationSets\Generated ValidationSets\Layout.cs
+..\ValidationSets\Generated ValidationSets\ModelTypes.cs
+..\ValidationSets\Generated ValidationSets\Operators.cs
+..\ValidationSets\Generated ValidationSets\Parameters.cs
+..\ValidationSets\Generated ValidationSets\Parts.cs
+..\ValidationSets\Generated ValidationSets\PresentationProperties.cs
+..\ValidationSets\Generated ValidationSets\PrimaryKeyOptions.cs
+..\ValidationSets\Generated ValidationSets\Process.cs
+..\ValidationSets\Generated ValidationSets\ProcessSteps.cs
+..\ValidationSets\Generated ValidationSets\ProcessStepScreens.cs
+..\ValidationSets\Generated ValidationSets\Projects.cs
+..\ValidationSets\Generated ValidationSets\RelationshipTypes.cs
+..\ValidationSets\Generated ValidationSets\ScreenLayouts.cs
+..\ValidationSets\Generated ValidationSets\ScreenParts.cs
+..\ValidationSets\Generated ValidationSets\Screens.cs
+..\ValidationSets\Generated ValidationSets\ScreenViews.cs
+..\ValidationSets\Generated ValidationSets\Settings.cs
+..\ValidationSets\Generated ValidationSets\SettingsNames.cs
+..\ValidationSets\Generated ValidationSets\StateMachines.cs
+..\ValidationSets\Generated ValidationSets\StateMachineStates.cs
+..\ValidationSets\Generated ValidationSets\StateMachineTriggers.cs
+..\ValidationSets\Generated ValidationSets\States.cs
+..\ValidationSets\Generated ValidationSets\Steps.cs
+..\ValidationSets\Generated ValidationSets\TestValues.cs
+..\ValidationSets\Generated ValidationSets\Triggers.cs
+..\ValidationSets\Generated ValidationSets\ViewEntity.cs
+..\ValidationSets\Generated ValidationSets\Views.cs
+..\ViewModels\Generated AutoViews\ApplicationEntitiesAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\ApplicationEntitiesAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\ApplicationEntitiesAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\ApplicationEntitiesAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\ApplicationsAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\ApplicationsAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\ApplicationsAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\ApplicationsAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\ApplicationSettingAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\ApplicationSettingAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\ApplicationSettingAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\ApplicationSettingAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\DataPropertiesAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\DataPropertiesAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\DataPropertiesAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\DataPropertiesAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\DataTypesAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\DataTypesAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\DataTypesAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\DataTypesAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\EntitiesAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\EntitiesAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\EntitiesAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\EntitiesAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\EntityPropertiesAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\EntityPropertiesAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\EntityPropertiesAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\EntityPropertiesAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\EntityRelationshipsAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\EntityRelationshipsAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\EntityRelationshipsAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\EntityRelationshipsAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\EntityViewAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\EntityViewAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\EntityViewAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\EntityViewAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\EntityViewEntityPropertiesAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\EntityViewEntityPropertiesAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\EntityViewEntityPropertiesAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\EntityViewEntityPropertiesAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\EntityViewPropertiesAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\EntityViewPropertiesAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\EntityViewPropertiesAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\EntityViewPropertiesAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\EntityViewPropertyFunctionAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\EntityViewPropertyFunctionAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\EntityViewPropertyFunctionAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\EntityViewPropertyFunctionAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\EntityViewPropertyFunctionParameterAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\EntityViewPropertyFunctionParameterAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\EntityViewPropertyFunctionParameterAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\EntityViewPropertyFunctionParameterAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\EntityViewViewPropertiesAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\EntityViewViewPropertiesAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\EntityViewViewPropertiesAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\EntityViewViewPropertiesAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\FunctionBodyAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\FunctionBodyAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\FunctionBodyAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\FunctionBodyAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\FunctionParametersAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\FunctionParametersAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\FunctionParametersAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\FunctionParametersAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\FunctionReturnTypeAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\FunctionReturnTypeAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\FunctionReturnTypeAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\FunctionReturnTypeAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\FunctionsAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\FunctionsAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\FunctionsAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\FunctionsAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\FunctionSetFunctionsAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\FunctionSetFunctionsAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\FunctionSetFunctionsAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\FunctionSetFunctionsAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\FunctionSetsAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\FunctionSetsAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\FunctionSetsAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\FunctionSetsAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\LayersAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\LayersAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\LayersAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\LayersAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\LayoutAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\LayoutAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\LayoutAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\LayoutAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\ModelTypesAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\ModelTypesAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\ModelTypesAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\ModelTypesAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\OperatorsAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\OperatorsAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\OperatorsAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\OperatorsAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\ParametersAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\ParametersAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\ParametersAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\ParametersAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\PartsAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\PartsAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\PartsAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\PartsAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\PresentationPropertiesAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\PresentationPropertiesAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\PresentationPropertiesAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\PresentationPropertiesAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\PrimaryKeyOptionsAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\PrimaryKeyOptionsAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\PrimaryKeyOptionsAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\PrimaryKeyOptionsAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\ProcessAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\ProcessAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\ProcessAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\ProcessAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\ProcessStepsAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\ProcessStepsAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\ProcessStepsAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\ProcessStepsAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\ProcessStepScreensAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\ProcessStepScreensAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\ProcessStepScreensAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\ProcessStepScreensAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\ProjectsAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\ProjectsAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\ProjectsAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\ProjectsAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\RelationshipTypesAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\RelationshipTypesAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\RelationshipTypesAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\RelationshipTypesAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\ScreenLayoutsAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\ScreenLayoutsAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\ScreenLayoutsAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\ScreenLayoutsAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\ScreenPartsAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\ScreenPartsAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\ScreenPartsAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\ScreenPartsAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\ScreensAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\ScreensAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\ScreensAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\ScreensAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\ScreenViewsAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\ScreenViewsAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\ScreenViewsAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\ScreenViewsAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\SettingsAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\SettingsAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\SettingsAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\SettingsAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\SettingsNamesAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\SettingsNamesAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\SettingsNamesAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\SettingsNamesAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\StateMachinesAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\StateMachinesAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\StateMachinesAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\StateMachinesAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\StateMachineStatesAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\StateMachineStatesAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\StateMachineStatesAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\StateMachineStatesAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\StateMachineTriggersAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\StateMachineTriggersAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\StateMachineTriggersAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\StateMachineTriggersAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\StatesAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\StatesAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\StatesAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\StatesAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\StepsAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\StepsAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\StepsAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\StepsAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\TestValuesAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\TestValuesAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\TestValuesAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\TestValuesAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\TriggersAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\TriggersAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\TriggersAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\TriggersAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\ViewEntityAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\ViewEntityAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\ViewEntityAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\ViewEntityAutoView\Navigation.cs
+..\ViewModels\Generated AutoViews\ViewsAutoView\Constructor.cs
+..\ViewModels\Generated AutoViews\ViewsAutoView\Entity.cs
+..\ViewModels\Generated AutoViews\ViewsAutoView\Instance.cs
+..\ViewModels\Generated AutoViews\ViewsAutoView\Navigation.cs
+..\ViewModels\Generated ViewModels\Applications\SummaryViewModel.cs
+..\ViewModels\Generated ViewModels\BaseViewModel\Instance.cs
+..\ViewModels\Generated ViewModels\BaseViewModel\Navigation.cs
+..\ViewModels\Generated ViewModels\DataTypes\SummaryViewModel.cs
+..\ViewModels\Generated ViewModels\Entities\SummaryViewModel.cs
+..\ViewModels\Generated ViewModels\Functions\SummaryViewModel.cs
+..\ViewModels\Generated ViewModels\Layers\SummaryViewModel.cs
+..\ViewModels\Generated ViewModels\Layout\SummaryViewModel.cs
+..\ViewModels\Generated ViewModels\MainViewModel.cs
+..\ViewModels\Generated ViewModels\MainWindowViewModel.cs
+..\ViewModels\Generated ViewModels\Model\ApplicationEntities\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\ApplicationEntities\Entity.cs
+..\ViewModels\Generated ViewModels\Model\ApplicationEntities\Instance.cs
+..\ViewModels\Generated ViewModels\Model\ApplicationEntities\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\Applications\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\Applications\Entity.cs
+..\ViewModels\Generated ViewModels\Model\Applications\Instance.cs
+..\ViewModels\Generated ViewModels\Model\Applications\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\ApplicationSetting\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\ApplicationSetting\Entity.cs
+..\ViewModels\Generated ViewModels\Model\ApplicationSetting\Instance.cs
+..\ViewModels\Generated ViewModels\Model\ApplicationSetting\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\DataProperties\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\DataProperties\Entity.cs
+..\ViewModels\Generated ViewModels\Model\DataProperties\Instance.cs
+..\ViewModels\Generated ViewModels\Model\DataProperties\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\DataTypes\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\DataTypes\Entity.cs
+..\ViewModels\Generated ViewModels\Model\DataTypes\Instance.cs
+..\ViewModels\Generated ViewModels\Model\DataTypes\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\Entities\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\Entities\Entity.cs
+..\ViewModels\Generated ViewModels\Model\Entities\Instance.cs
+..\ViewModels\Generated ViewModels\Model\Entities\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\EntityProperties\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\EntityProperties\Entity.cs
+..\ViewModels\Generated ViewModels\Model\EntityProperties\Instance.cs
+..\ViewModels\Generated ViewModels\Model\EntityProperties\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\EntityRelationships\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\EntityRelationships\Entity.cs
+..\ViewModels\Generated ViewModels\Model\EntityRelationships\Instance.cs
+..\ViewModels\Generated ViewModels\Model\EntityRelationships\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\EntityView\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\EntityView\Entity.cs
+..\ViewModels\Generated ViewModels\Model\EntityView\Instance.cs
+..\ViewModels\Generated ViewModels\Model\EntityView\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewEntityProperties\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewEntityProperties\Entity.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewEntityProperties\Instance.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewEntityProperties\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewProperties\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewProperties\Entity.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewProperties\Instance.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewProperties\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewPropertyFunction\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewPropertyFunction\Entity.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewPropertyFunction\Instance.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewPropertyFunction\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewPropertyFunctionParameter\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewPropertyFunctionParameter\Entity.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewPropertyFunctionParameter\Instance.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewPropertyFunctionParameter\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewViewProperties\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewViewProperties\Entity.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewViewProperties\Instance.cs
+..\ViewModels\Generated ViewModels\Model\EntityViewViewProperties\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\FunctionBody\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\FunctionBody\Entity.cs
+..\ViewModels\Generated ViewModels\Model\FunctionBody\Instance.cs
+..\ViewModels\Generated ViewModels\Model\FunctionBody\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\FunctionParameters\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\FunctionParameters\Entity.cs
+..\ViewModels\Generated ViewModels\Model\FunctionParameters\Instance.cs
+..\ViewModels\Generated ViewModels\Model\FunctionParameters\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\FunctionReturnType\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\FunctionReturnType\Entity.cs
+..\ViewModels\Generated ViewModels\Model\FunctionReturnType\Instance.cs
+..\ViewModels\Generated ViewModels\Model\FunctionReturnType\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\Functions\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\Functions\Entity.cs
+..\ViewModels\Generated ViewModels\Model\Functions\Instance.cs
+..\ViewModels\Generated ViewModels\Model\Functions\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\FunctionSetFunctions\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\FunctionSetFunctions\Entity.cs
+..\ViewModels\Generated ViewModels\Model\FunctionSetFunctions\Instance.cs
+..\ViewModels\Generated ViewModels\Model\FunctionSetFunctions\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\FunctionSets\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\FunctionSets\Entity.cs
+..\ViewModels\Generated ViewModels\Model\FunctionSets\Instance.cs
+..\ViewModels\Generated ViewModels\Model\FunctionSets\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\Layers\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\Layers\Entity.cs
+..\ViewModels\Generated ViewModels\Model\Layers\Instance.cs
+..\ViewModels\Generated ViewModels\Model\Layers\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\Layout\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\Layout\Entity.cs
+..\ViewModels\Generated ViewModels\Model\Layout\Instance.cs
+..\ViewModels\Generated ViewModels\Model\Layout\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\ModelTypes\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\ModelTypes\Entity.cs
+..\ViewModels\Generated ViewModels\Model\ModelTypes\Instance.cs
+..\ViewModels\Generated ViewModels\Model\ModelTypes\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\Operators\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\Operators\Entity.cs
+..\ViewModels\Generated ViewModels\Model\Operators\Instance.cs
+..\ViewModels\Generated ViewModels\Model\Operators\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\Parameters\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\Parameters\Entity.cs
+..\ViewModels\Generated ViewModels\Model\Parameters\Instance.cs
+..\ViewModels\Generated ViewModels\Model\Parameters\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\Parts\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\Parts\Entity.cs
+..\ViewModels\Generated ViewModels\Model\Parts\Instance.cs
+..\ViewModels\Generated ViewModels\Model\Parts\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\PresentationProperties\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\PresentationProperties\Entity.cs
+..\ViewModels\Generated ViewModels\Model\PresentationProperties\Instance.cs
+..\ViewModels\Generated ViewModels\Model\PresentationProperties\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\PrimaryKeyOptions\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\PrimaryKeyOptions\Entity.cs
+..\ViewModels\Generated ViewModels\Model\PrimaryKeyOptions\Instance.cs
+..\ViewModels\Generated ViewModels\Model\PrimaryKeyOptions\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\Process\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\Process\Entity.cs
+..\ViewModels\Generated ViewModels\Model\Process\Instance.cs
+..\ViewModels\Generated ViewModels\Model\Process\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\ProcessSteps\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\ProcessSteps\Entity.cs
+..\ViewModels\Generated ViewModels\Model\ProcessSteps\Instance.cs
+..\ViewModels\Generated ViewModels\Model\ProcessSteps\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\ProcessStepScreens\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\ProcessStepScreens\Entity.cs
+..\ViewModels\Generated ViewModels\Model\ProcessStepScreens\Instance.cs
+..\ViewModels\Generated ViewModels\Model\ProcessStepScreens\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\Projects\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\Projects\Entity.cs
+..\ViewModels\Generated ViewModels\Model\Projects\Instance.cs
+..\ViewModels\Generated ViewModels\Model\Projects\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\RelationshipTypes\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\RelationshipTypes\Entity.cs
+..\ViewModels\Generated ViewModels\Model\RelationshipTypes\Instance.cs
+..\ViewModels\Generated ViewModels\Model\RelationshipTypes\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\ScreenLayouts\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\ScreenLayouts\Entity.cs
+..\ViewModels\Generated ViewModels\Model\ScreenLayouts\Instance.cs
+..\ViewModels\Generated ViewModels\Model\ScreenLayouts\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\ScreenParts\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\ScreenParts\Entity.cs
+..\ViewModels\Generated ViewModels\Model\ScreenParts\Instance.cs
+..\ViewModels\Generated ViewModels\Model\ScreenParts\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\Screens\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\Screens\Entity.cs
+..\ViewModels\Generated ViewModels\Model\Screens\Instance.cs
+..\ViewModels\Generated ViewModels\Model\Screens\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\ScreenViews\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\ScreenViews\Entity.cs
+..\ViewModels\Generated ViewModels\Model\ScreenViews\Instance.cs
+..\ViewModels\Generated ViewModels\Model\ScreenViews\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\Settings\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\Settings\Entity.cs
+..\ViewModels\Generated ViewModels\Model\Settings\Instance.cs
+..\ViewModels\Generated ViewModels\Model\Settings\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\SettingsNames\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\SettingsNames\Entity.cs
+..\ViewModels\Generated ViewModels\Model\SettingsNames\Instance.cs
+..\ViewModels\Generated ViewModels\Model\SettingsNames\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\StateMachines\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\StateMachines\Entity.cs
+..\ViewModels\Generated ViewModels\Model\StateMachines\Instance.cs
+..\ViewModels\Generated ViewModels\Model\StateMachines\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\StateMachineStates\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\StateMachineStates\Entity.cs
+..\ViewModels\Generated ViewModels\Model\StateMachineStates\Instance.cs
+..\ViewModels\Generated ViewModels\Model\StateMachineStates\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\StateMachineTriggers\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\StateMachineTriggers\Entity.cs
+..\ViewModels\Generated ViewModels\Model\StateMachineTriggers\Instance.cs
+..\ViewModels\Generated ViewModels\Model\StateMachineTriggers\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\States\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\States\Entity.cs
+..\ViewModels\Generated ViewModels\Model\States\Instance.cs
+..\ViewModels\Generated ViewModels\Model\States\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\Steps\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\Steps\Entity.cs
+..\ViewModels\Generated ViewModels\Model\Steps\Instance.cs
+..\ViewModels\Generated ViewModels\Model\Steps\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\TestValues\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\TestValues\Entity.cs
+..\ViewModels\Generated ViewModels\Model\TestValues\Instance.cs
+..\ViewModels\Generated ViewModels\Model\TestValues\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\Triggers\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\Triggers\Entity.cs
+..\ViewModels\Generated ViewModels\Model\Triggers\Instance.cs
+..\ViewModels\Generated ViewModels\Model\Triggers\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\ViewEntity\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\ViewEntity\Entity.cs
+..\ViewModels\Generated ViewModels\Model\ViewEntity\Instance.cs
+..\ViewModels\Generated ViewModels\Model\ViewEntity\Navigation.cs
+..\ViewModels\Generated ViewModels\Model\Views\Constructor.cs
+..\ViewModels\Generated ViewModels\Model\Views\Entity.cs
+..\ViewModels\Generated ViewModels\Model\Views\Instance.cs
+..\ViewModels\Generated ViewModels\Model\Views\Navigation.cs
+..\ViewModels\Generated ViewModels\ModelTypes\SummaryViewModel.cs
+..\ViewModels\Generated ViewModels\Parts\SummaryViewModel.cs
+..\ViewModels\Generated ViewModels\Process\SummaryViewModel.cs
+..\ViewModels\Generated ViewModels\Projects\SummaryViewModel.cs
+..\ViewModels\Generated ViewModels\RelationshipTypes\SummaryViewModel.cs
+..\ViewModels\Generated ViewModels\Screens\SummaryViewModel.cs
+..\ViewModels\Generated ViewModels\StateMachines\SummaryViewModel.cs
+..\ViewModels\Generated ViewModels\States\SummaryViewModel.cs
+..\ViewModels\Generated ViewModels\Steps\SummaryViewModel.cs
+..\ViewModels\Generated ViewModels\Triggers\SummaryViewModel.cs
+..\ViewModels\Generated ViewModels\Views\SummaryViewModel.cs
+..\Views\Generated Views\AutoViews\ApplicationEntitiesListView.xaml
+..\Views\Generated Views\AutoViews\ApplicationEntitiesListView.xaml.cs
+..\Views\Generated Views\AutoViews\ApplicationSettingListView.xaml
+..\Views\Generated Views\AutoViews\ApplicationSettingListView.xaml.cs
+..\Views\Generated Views\AutoViews\ApplicationsListView.xaml
+..\Views\Generated Views\AutoViews\ApplicationsListView.xaml.cs
+..\Views\Generated Views\AutoViews\DataPropertiesListView.xaml
+..\Views\Generated Views\AutoViews\DataPropertiesListView.xaml.cs
+..\Views\Generated Views\AutoViews\DataTypesListView.xaml
+..\Views\Generated Views\AutoViews\DataTypesListView.xaml.cs
+..\Views\Generated Views\AutoViews\EntitiesListView.xaml
+..\Views\Generated Views\AutoViews\EntitiesListView.xaml.cs
+..\Views\Generated Views\AutoViews\EntityPropertiesListView.xaml
+..\Views\Generated Views\AutoViews\EntityPropertiesListView.xaml.cs
+..\Views\Generated Views\AutoViews\EntityRelationshipsListView.xaml
+..\Views\Generated Views\AutoViews\EntityRelationshipsListView.xaml.cs
+..\Views\Generated Views\AutoViews\EntityViewEntityPropertiesListView.xaml
+..\Views\Generated Views\AutoViews\EntityViewEntityPropertiesListView.xaml.cs
+..\Views\Generated Views\AutoViews\EntityViewListView.xaml
+..\Views\Generated Views\AutoViews\EntityViewListView.xaml.cs
+..\Views\Generated Views\AutoViews\EntityViewPropertiesListView.xaml
+..\Views\Generated Views\AutoViews\EntityViewPropertiesListView.xaml.cs
+..\Views\Generated Views\AutoViews\EntityViewPropertyFunctionListView.xaml
+..\Views\Generated Views\AutoViews\EntityViewPropertyFunctionListView.xaml.cs
+..\Views\Generated Views\AutoViews\EntityViewPropertyFunctionParameterListView.xaml
+..\Views\Generated Views\AutoViews\EntityViewPropertyFunctionParameterListView.xaml.cs
+..\Views\Generated Views\AutoViews\EntityViewViewPropertiesListView.xaml
+..\Views\Generated Views\AutoViews\EntityViewViewPropertiesListView.xaml.cs
+..\Views\Generated Views\AutoViews\FunctionBodyListView.xaml
+..\Views\Generated Views\AutoViews\FunctionBodyListView.xaml.cs
+..\Views\Generated Views\AutoViews\FunctionParametersListView.xaml
+..\Views\Generated Views\AutoViews\FunctionParametersListView.xaml.cs
+..\Views\Generated Views\AutoViews\FunctionReturnTypeListView.xaml
+..\Views\Generated Views\AutoViews\FunctionReturnTypeListView.xaml.cs
+..\Views\Generated Views\AutoViews\FunctionSetFunctionsListView.xaml
+..\Views\Generated Views\AutoViews\FunctionSetFunctionsListView.xaml.cs
+..\Views\Generated Views\AutoViews\FunctionSetsListView.xaml
+..\Views\Generated Views\AutoViews\FunctionSetsListView.xaml.cs
+..\Views\Generated Views\AutoViews\FunctionsListView.xaml
+..\Views\Generated Views\AutoViews\FunctionsListView.xaml.cs
+..\Views\Generated Views\AutoViews\LayersListView.xaml
+..\Views\Generated Views\AutoViews\LayersListView.xaml.cs
+..\Views\Generated Views\AutoViews\LayoutListView.xaml
+..\Views\Generated Views\AutoViews\LayoutListView.xaml.cs
+..\Views\Generated Views\AutoViews\ModelTypesListView.xaml
+..\Views\Generated Views\AutoViews\ModelTypesListView.xaml.cs
+..\Views\Generated Views\AutoViews\OperatorsListView.xaml
+..\Views\Generated Views\AutoViews\OperatorsListView.xaml.cs
+..\Views\Generated Views\AutoViews\ParametersListView.xaml
+..\Views\Generated Views\AutoViews\ParametersListView.xaml.cs
+..\Views\Generated Views\AutoViews\PartsListView.xaml
+..\Views\Generated Views\AutoViews\PartsListView.xaml.cs
+..\Views\Generated Views\AutoViews\PresentationPropertiesListView.xaml
+..\Views\Generated Views\AutoViews\PresentationPropertiesListView.xaml.cs
+..\Views\Generated Views\AutoViews\PrimaryKeyOptionsListView.xaml
+..\Views\Generated Views\AutoViews\PrimaryKeyOptionsListView.xaml.cs
+..\Views\Generated Views\AutoViews\ProcessListView.xaml
+..\Views\Generated Views\AutoViews\ProcessListView.xaml.cs
+..\Views\Generated Views\AutoViews\ProcessStepScreensListView.xaml
+..\Views\Generated Views\AutoViews\ProcessStepScreensListView.xaml.cs
+..\Views\Generated Views\AutoViews\ProcessStepsListView.xaml
+..\Views\Generated Views\AutoViews\ProcessStepsListView.xaml.cs
+..\Views\Generated Views\AutoViews\ProjectsListView.xaml
+..\Views\Generated Views\AutoViews\ProjectsListView.xaml.cs
+..\Views\Generated Views\AutoViews\RelationshipTypesListView.xaml
+..\Views\Generated Views\AutoViews\RelationshipTypesListView.xaml.cs
+..\Views\Generated Views\AutoViews\ScreenLayoutsListView.xaml
+..\Views\Generated Views\AutoViews\ScreenLayoutsListView.xaml.cs
+..\Views\Generated Views\AutoViews\ScreenPartsListView.xaml
+..\Views\Generated Views\AutoViews\ScreenPartsListView.xaml.cs
+..\Views\Generated Views\AutoViews\ScreensListView.xaml
+..\Views\Generated Views\AutoViews\ScreensListView.xaml.cs
+..\Views\Generated Views\AutoViews\ScreenViewsListView.xaml
+..\Views\Generated Views\AutoViews\ScreenViewsListView.xaml.cs
+..\Views\Generated Views\AutoViews\SettingsListView.xaml
+..\Views\Generated Views\AutoViews\SettingsListView.xaml.cs
+..\Views\Generated Views\AutoViews\SettingsNamesListView.xaml
+..\Views\Generated Views\AutoViews\SettingsNamesListView.xaml.cs
+..\Views\Generated Views\AutoViews\StateMachinesListView.xaml
+..\Views\Generated Views\AutoViews\StateMachinesListView.xaml.cs
+..\Views\Generated Views\AutoViews\StateMachineStatesListView.xaml
+..\Views\Generated Views\AutoViews\StateMachineStatesListView.xaml.cs
+..\Views\Generated Views\AutoViews\StateMachineTriggersListView.xaml
+..\Views\Generated Views\AutoViews\StateMachineTriggersListView.xaml.cs
+..\Views\Generated Views\AutoViews\StatesListView.xaml
+..\Views\Generated Views\AutoViews\StatesListView.xaml.cs
+..\Views\Generated Views\AutoViews\StepsListView.xaml
+..\Views\Generated Views\AutoViews\StepsListView.xaml.cs
+..\Views\Generated Views\AutoViews\TestValuesListView.xaml
+..\Views\Generated Views\AutoViews\TestValuesListView.xaml.cs
+..\Views\Generated Views\AutoViews\TriggersListView.xaml
+..\Views\Generated Views\AutoViews\TriggersListView.xaml.cs
+..\Views\Generated Views\AutoViews\ViewEntityListView.xaml
+..\Views\Generated Views\AutoViews\ViewEntityListView.xaml.cs
+..\Views\Generated Views\AutoViews\ViewsListView.xaml
+..\Views\Generated Views\AutoViews\ViewsListView.xaml.cs
+..\Views\Generated Views\MainView_AutoGen.xaml
+..\Views\Generated Views\MainView_AutoGen.xaml.cs
+..\Views\Generated Views\MainWindow_AutoGen.xaml
+..\Views\Generated Views\MainWindow_AutoGen.xaml.cs
+..\Views\Generated Views\Model\ApplicationEntitiesListView.xaml
+..\Views\Generated Views\Model\ApplicationEntitiesListView.xaml.cs
+..\Views\Generated Views\Model\ApplicationSettingListView.xaml
+..\Views\Generated Views\Model\ApplicationSettingListView.xaml.cs
+..\Views\Generated Views\Model\ApplicationsListView.xaml
+..\Views\Generated Views\Model\ApplicationsListView.xaml.cs
+..\Views\Generated Views\Model\DataPropertiesListView.xaml
+..\Views\Generated Views\Model\DataPropertiesListView.xaml.cs
+..\Views\Generated Views\Model\DataTypesListView.xaml
+..\Views\Generated Views\Model\DataTypesListView.xaml.cs
+..\Views\Generated Views\Model\EntitiesListView.xaml
+..\Views\Generated Views\Model\EntitiesListView.xaml.cs
+..\Views\Generated Views\Model\EntityPropertiesListView.xaml
+..\Views\Generated Views\Model\EntityPropertiesListView.xaml.cs
+..\Views\Generated Views\Model\EntityRelationshipsListView.xaml
+..\Views\Generated Views\Model\EntityRelationshipsListView.xaml.cs
+..\Views\Generated Views\Model\EntityViewEntityPropertiesListView.xaml
+..\Views\Generated Views\Model\EntityViewEntityPropertiesListView.xaml.cs
+..\Views\Generated Views\Model\EntityViewListView.xaml
+..\Views\Generated Views\Model\EntityViewListView.xaml.cs
+..\Views\Generated Views\Model\EntityViewPropertiesListView.xaml
+..\Views\Generated Views\Model\EntityViewPropertiesListView.xaml.cs
+..\Views\Generated Views\Model\EntityViewPropertyFunctionListView.xaml
+..\Views\Generated Views\Model\EntityViewPropertyFunctionListView.xaml.cs
+..\Views\Generated Views\Model\EntityViewPropertyFunctionParameterListView.xaml
+..\Views\Generated Views\Model\EntityViewPropertyFunctionParameterListView.xaml.cs
+..\Views\Generated Views\Model\EntityViewViewPropertiesListView.xaml
+..\Views\Generated Views\Model\EntityViewViewPropertiesListView.xaml.cs
+..\Views\Generated Views\Model\FunctionBodyListView.xaml
+..\Views\Generated Views\Model\FunctionBodyListView.xaml.cs
+..\Views\Generated Views\Model\FunctionParametersListView.xaml
+..\Views\Generated Views\Model\FunctionParametersListView.xaml.cs
+..\Views\Generated Views\Model\FunctionReturnTypeListView.xaml
+..\Views\Generated Views\Model\FunctionReturnTypeListView.xaml.cs
+..\Views\Generated Views\Model\FunctionSetFunctionsListView.xaml
+..\Views\Generated Views\Model\FunctionSetFunctionsListView.xaml.cs
+..\Views\Generated Views\Model\FunctionSetsListView.xaml
+..\Views\Generated Views\Model\FunctionSetsListView.xaml.cs
+..\Views\Generated Views\Model\FunctionsListView.xaml
+..\Views\Generated Views\Model\FunctionsListView.xaml.cs
+..\Views\Generated Views\Model\LayersListView.xaml
+..\Views\Generated Views\Model\LayersListView.xaml.cs
+..\Views\Generated Views\Model\LayoutListView.xaml
+..\Views\Generated Views\Model\LayoutListView.xaml.cs
+..\Views\Generated Views\Model\ModelTypesListView.xaml
+..\Views\Generated Views\Model\ModelTypesListView.xaml.cs
+..\Views\Generated Views\Model\OperatorsListView.xaml
+..\Views\Generated Views\Model\OperatorsListView.xaml.cs
+..\Views\Generated Views\Model\ParametersListView.xaml
+..\Views\Generated Views\Model\ParametersListView.xaml.cs
+..\Views\Generated Views\Model\PartsListView.xaml
+..\Views\Generated Views\Model\PartsListView.xaml.cs
+..\Views\Generated Views\Model\PresentationPropertiesListView.xaml
+..\Views\Generated Views\Model\PresentationPropertiesListView.xaml.cs
+..\Views\Generated Views\Model\PrimaryKeyOptionsListView.xaml
+..\Views\Generated Views\Model\PrimaryKeyOptionsListView.xaml.cs
+..\Views\Generated Views\Model\ProcessListView.xaml
+..\Views\Generated Views\Model\ProcessListView.xaml.cs
+..\Views\Generated Views\Model\ProcessStepScreensListView.xaml
+..\Views\Generated Views\Model\ProcessStepScreensListView.xaml.cs
+..\Views\Generated Views\Model\ProcessStepsListView.xaml
+..\Views\Generated Views\Model\ProcessStepsListView.xaml.cs
+..\Views\Generated Views\Model\ProjectsListView.xaml
+..\Views\Generated Views\Model\ProjectsListView.xaml.cs
+..\Views\Generated Views\Model\RelationshipTypesListView.xaml
+..\Views\Generated Views\Model\RelationshipTypesListView.xaml.cs
+..\Views\Generated Views\Model\ScreenLayoutsListView.xaml
+..\Views\Generated Views\Model\ScreenLayoutsListView.xaml.cs
+..\Views\Generated Views\Model\ScreenPartsListView.xaml
+..\Views\Generated Views\Model\ScreenPartsListView.xaml.cs
+..\Views\Generated Views\Model\ScreensListView.xaml
+..\Views\Generated Views\Model\ScreensListView.xaml.cs
+..\Views\Generated Views\Model\ScreenViewsListView.xaml
+..\Views\Generated Views\Model\ScreenViewsListView.xaml.cs
+..\Views\Generated Views\Model\SettingsListView.xaml
+..\Views\Generated Views\Model\SettingsListView.xaml.cs
+..\Views\Generated Views\Model\SettingsNamesListView.xaml
+..\Views\Generated Views\Model\SettingsNamesListView.xaml.cs
+..\Views\Generated Views\Model\StateMachinesListView.xaml
+..\Views\Generated Views\Model\StateMachinesListView.xaml.cs
+..\Views\Generated Views\Model\StateMachineStatesListView.xaml
+..\Views\Generated Views\Model\StateMachineStatesListView.xaml.cs
+..\Views\Generated Views\Model\StateMachineTriggersListView.xaml
+..\Views\Generated Views\Model\StateMachineTriggersListView.xaml.cs
+..\Views\Generated Views\Model\StatesListView.xaml
+..\Views\Generated Views\Model\StatesListView.xaml.cs
+..\Views\Generated Views\Model\StepsListView.xaml
+..\Views\Generated Views\Model\StepsListView.xaml.cs
+..\Views\Generated Views\Model\TestValuesListView.xaml
+..\Views\Generated Views\Model\TestValuesListView.xaml.cs
+..\Views\Generated Views\Model\TriggersListView.xaml
+..\Views\Generated Views\Model\TriggersListView.xaml.cs
+..\Views\Generated Views\Model\ViewEntityListView.xaml
+..\Views\Generated Views\Model\ViewEntityListView.xaml.cs
+..\Views\Generated Views\Model\ViewsListView.xaml
+..\Views\Generated Views\Model\ViewsListView.xaml.cs
+..\Views\Generated Views\SummaryViews\Applications\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Applications\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Applications\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Applications\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Applications\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Applications\SummaryViewDetails_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\DataTypes\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\DataTypes\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\DataTypes\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\DataTypes\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\DataTypes\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\DataTypes\SummaryViewDetails_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Entities\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Entities\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Entities\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Entities\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Entities\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Entities\SummaryViewDetails_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Functions\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Functions\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Functions\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Functions\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Functions\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Functions\SummaryViewDetails_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Layers\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Layers\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Layers\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Layers\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Layers\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Layers\SummaryViewDetails_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Layout\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Layout\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Layout\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Layout\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Layout\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Layout\SummaryViewDetails_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\ModelTypes\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\ModelTypes\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\ModelTypes\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\ModelTypes\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\ModelTypes\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\ModelTypes\SummaryViewDetails_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Parts\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Parts\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Parts\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Parts\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Parts\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Parts\SummaryViewDetails_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Process\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Process\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Process\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Process\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Process\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Process\SummaryViewDetails_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Projects\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Projects\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Projects\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Projects\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Projects\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Projects\SummaryViewDetails_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\RelationshipTypes\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\RelationshipTypes\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\RelationshipTypes\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\RelationshipTypes\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\RelationshipTypes\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\RelationshipTypes\SummaryViewDetails_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Screens\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Screens\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Screens\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Screens\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Screens\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Screens\SummaryViewDetails_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\StateMachines\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\StateMachines\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\StateMachines\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\StateMachines\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\StateMachines\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\StateMachines\SummaryViewDetails_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\States\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\States\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\States\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\States\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\States\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\States\SummaryViewDetails_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Steps\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Steps\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Steps\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Steps\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Steps\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Steps\SummaryViewDetails_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Triggers\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Triggers\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Triggers\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Triggers\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Triggers\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Triggers\SummaryViewDetails_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Views\SummaryListView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Views\SummaryListView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Views\SummaryView_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Views\SummaryView_AutoGen.xaml.cs
+..\Views\Generated Views\SummaryViews\Views\SummaryViewDetails_AutoGen.xaml
+..\Views\Generated Views\SummaryViews\Views\SummaryViewDetails_AutoGen.xaml.cs
+</LastOutputs>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

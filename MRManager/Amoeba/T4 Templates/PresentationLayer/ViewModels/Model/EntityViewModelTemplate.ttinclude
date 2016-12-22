@@ -1,0 +1,77 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class EntityViewModelTemplate : CSharpTemplate
+{
+	public EntityViewModelTemplate(Entity entity)
+	{
+		Entity = entity;
+	}
+
+	public Entity Entity { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+	    var parentProperties =
+	        Entity.EntityProperties.SelectMany(x=>x.DataProperties).Where(x => (x.EntityProperty.ParentRelationships.Any() && x.ModelType.Name != "EntityId") || (x.EntityProperty.ParentRelationships.Any(z => z.RelationshipType.Name == "1:1") && x.ModelType.Name == "EntityId"));// &&  )
+#>
+using System;
+using Core.Common.UI;
+using EF.Entities;
+using DataInterfaces;
+using Interfaces;
+using Utilities;
+
+namespace ViewModels
+{
+	public partial class <#=Entity.Name#>ViewModel_AutoGen 
+	{
+<#+
+	foreach (var prop in Entity.EntityProperties.Select(x=>x.DataProperties.FirstOrDefault(z=> z.DataType != null && z.EntityProperty != null)))
+	{
+	    if (prop == null) continue;
+#>
+		public <#=prop.DataType.Name #> <#= prop.EntityProperty.PropertyName #>  { get { return GetValue(); } set { SetValue(value); }
+	    }
+<#+ }
+#>
+
+		protected override I<#=Entity.Name#> CreateEntity()
+		{
+			return new <#=Entity.Name#>() 
+					{
+<#+							if(parentProperties.Any())
+							{
+							    foreach (var k in parentProperties)
+							    {
+							        var prp = k.EntityProperty.ParentRelationships.FirstOrDefault();
+							        if (prp == null) continue;
+#>
+						<#=k.EntityProperty.PropertyName #> = BaseViewModel.Current<#= prp.ParentProperty.Entity.Name#>.Id, 
+<#+
+								}
+							}
+#>
+						RowState = DataInterfaces.RowState.Added
+					};
+		}
+		protected override sealed I<#=Entity.Name#> CreateNullEntity()
+		{
+			return new <#=Entity.Name#>(){ Id = EntityStates.NullEntity };
+		}
+	
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

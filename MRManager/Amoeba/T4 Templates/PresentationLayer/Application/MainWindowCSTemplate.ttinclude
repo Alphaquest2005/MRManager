@@ -1,0 +1,97 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="CodeLibary.TextFunctions" #>
+<#@ assembly name="C:\Prism\Core.Common\CodeLibary\CodeLibary\bin\Debug\CodeLibary.dll" #>
+
+<#+
+public class AppMainWindowCSTemplate : CSharpTemplate
+{
+	public AppMainWindowCSTemplate(Application app)
+	{
+		App = app;
+	}
+
+	private Application App { get; }
+	public override string TransformText()
+	{
+
+#>
+using System;
+using System.Windows;
+using System.Windows.Input;
+using SystemMessages;
+using EF.DBContexts;
+using EF.Entities;
+using EventAggregator;
+using EventMessages;
+using Interfaces;
+using NH.DBContext;
+using ViewModels;
+using Application = System.Windows.Application;
+using DataInterfaces;
+
+namespace <#=App.Name #>
+{
+	/// <summary>
+	/// Interaction logic for MainWindow.xaml
+	/// </summary>
+	public partial class MainWindow : Window
+	{
+		public MainWindow()
+		{
+			InitializeComponent();
+			var t = new <#=App.Name #>DBContext().GetType().Assembly;
+			var x = new EFEntity<IEntity>().GetType().Assembly;
+			var d = new NHDBContext();
+			BootStrapper.BootStrapper.Instance.StartUp(d,t ,x );
+			
+		}
+		private void Window_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		{
+			DragMove();
+		}
+
+		private void Button_Click_1(object sender, RoutedEventArgs e)
+		{
+			Application.Current.Shutdown();
+
+		}
+
+		private void Grid_PreviewMouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
+		{
+			DragMove();
+		}
+
+
+		public IApplicationSetting CurrentApplicationSetting => BaseViewModel.CurrentApplicationSetting;
+
+
+		private void MinimizeWindow(object sender, MouseButtonEventArgs e)
+		{
+			WindowState = WindowState.Minimized;
+		}
+
+		private void SwitchWindowState(object sender, MouseButtonEventArgs e)
+		{
+			if (this.WindowState == WindowState.Maximized)
+			{
+				WindowState = WindowState.Normal;
+				return;
+			}
+			if (WindowState == WindowState.Normal)
+			{
+				WindowState = WindowState.Maximized;
+
+			}
+
+		}
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

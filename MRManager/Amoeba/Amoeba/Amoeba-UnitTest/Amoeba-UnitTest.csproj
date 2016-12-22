@@ -1,0 +1,409 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{53BD3DE7-7DFD-441B-BC66-7ADC798F972B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Amoeba_UnitTest</RootNamespace>
+    <AssemblyName>Amoeba-UnitTest</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="JB.Common, Version=0.8.103.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\JB.Common.0.8.103-pre\lib\net45\JB.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JB.Common.Collections, Version=0.8.103.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\JB.Common.Collections.0.8.103-pre\lib\net45\JB.Common.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JB.Common.Collections.Reactive, Version=0.8.103.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\JB.Common.Collections.Reactive.0.8.103-pre\lib\net45\JB.Common.Collections.Reactive.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JB.Common.Reactive, Version=0.8.103.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\JB.Common.Reactive.0.8.103-pre\lib\net45\JB.Common.Reactive.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Microsoft.EntityFrameworkCore.1.1.0\lib\net451\Microsoft.EntityFrameworkCore.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Microsoft.Extensions.Caching.Abstractions.1.1.0\lib\netstandard1.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Microsoft.Extensions.Caching.Memory.1.1.0\lib\net451\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Microsoft.Extensions.DependencyInjection.1.1.0\lib\netstandard1.1\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.1.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Microsoft.Extensions.Logging.1.1.0\lib\netstandard1.1\Microsoft.Extensions.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Microsoft.Extensions.Logging.Abstractions.1.1.0\lib\netstandard1.1\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Microsoft.Extensions.Options.1.1.0\lib\netstandard1.0\Microsoft.Extensions.Options.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Microsoft.Extensions.Primitives.1.1.0\lib\netstandard1.0\Microsoft.Extensions.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ReactiveUI, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\reactiveui-core.7.0.0\lib\Net45\ReactiveUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Remotion.Linq.2.1.1\lib\net45\Remotion.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Splat.1.6.2\lib\Net45\Splat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.Collections.Immutable.1.3.0\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.Diagnostics.DiagnosticSource.4.3.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.Net.Http.4.3.0\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Reactive.Core, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Rx-Core.2.3.0-beta2\lib\net46\System.Reactive.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Rx-Interfaces.2.3.0-beta2\lib\net46\System.Reactive.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Rx-Linq.2.3.0-beta2\lib\net46\System.Reactive.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Rx-PlatformServices.2.3.0-beta2\lib\net46\System.Reactive.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Rx-XAML.2.3.0-beta2\lib\net46\System.Reactive.Windows.Threading.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.Runtime.CompilerServices.Unsafe.4.3.0\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="LoadEntitySetUnitTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Core.Common\CodeLibary\CodeLibary\CodeLibary.csproj">
+      <Project>{20fa02f3-c3c7-4fc0-838d-47f5afe8f09f}</Project>
+      <Name>CodeLibary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\ActorSystem\ActorSystem.csproj">
+      <Project>{338fefd0-b7fa-46db-8041-c5ed7778e6c0}</Project>
+      <Name>ActorSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\BootStrapper\BootStrapper.csproj">
+      <Project>{5dfeea8b-baba-4544-bf36-0a76a0d10c1b}</Project>
+      <Name>BootStrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\CommonMessages\CommonMessages.csproj">
+      <Project>{77007560-89dc-4e1f-9313-ae064a048ad4}</Project>
+      <Name>CommonMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\Common\Common.csproj">
+      <Project>{cb6d5fbc-0c13-437d-b4f3-a0ec4d5673b3}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\Converters\Converters.csproj">
+      <Project>{b7f58070-3c58-46af-95d1-6fc0d99d48ee}</Project>
+      <Name>Converters</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\Core.Common.UI\Core.Common.UI.csproj">
+      <Project>{5dd82ad7-f344-45e3-92cc-96f8d07700af}</Project>
+      <Name>Core.Common.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\DataInterfaces\DataInterfaces.csproj">
+      <Project>{f6008330-ba42-454b-a0b4-82455de56776}</Project>
+      <Name>DataInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\DataMessages\DataMessages.csproj">
+      <Project>{78f76c1d-baf2-4ac1-a05f-a8a7b4a3b95e}</Project>
+      <Name>DataMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\DataServices\DataServices.csproj">
+      <Project>{320107b2-d414-434b-ae0d-4d9f18ff49b8}</Project>
+      <Name>DataServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\EFRepository\EFRepository.csproj">
+      <Project>{415ddc8a-a74d-4afa-8fcb-2706a062a4fd}</Project>
+      <Name>EFRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\EventAggregator\EventAggregator.csproj">
+      <Project>{31e6b370-01f0-4489-832f-436cb97a6718}</Project>
+      <Name>EventAggregator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\EventMessages\EventMessages.csproj">
+      <Project>{e3d04176-3758-4c9d-84f3-7a4d3859eae5}</Project>
+      <Name>EventMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\LinqSpecs\LinqSpecs.csproj">
+      <Project>{d60875a3-0de2-409d-86a0-f540224d054c}</Project>
+      <Name>LinqSpecs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\Logging\Logging.csproj">
+      <Project>{459c400c-cc7c-4a97-9d0f-05a61eb4f7c8}</Project>
+      <Name>Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\Stateless\Stateless.csproj">
+      <Project>{a15eec02-60ec-4705-a58b-a6ecd55a9628}</Project>
+      <Name>Stateless</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\SystemInterfaces\SystemInterfaces.csproj">
+      <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>
+      <Name>SystemInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\SystemMessages\SystemMessages.csproj">
+      <Project>{2c88291e-05eb-4be9-8b33-18f9d56cf928}</Project>
+      <Name>SystemMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\UserControls\UserControls.csproj">
+      <Project>{51a5da32-159c-4888-b6dd-798aeee70364}</Project>
+      <Name>UserControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\Utilities\Utilities.csproj">
+      <Project>{0f9427b1-792e-4c35-97d8-22a9494ce28f}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\ViewMessages\ViewMessages.csproj">
+      <Project>{eb1e2e94-d6fb-49df-8036-9bf910e3b7aa}</Project>
+      <Name>ViewMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\ViewModel.Interfaces\ViewModel.Interfaces.csproj">
+      <Project>{2f936e24-723e-4e7a-b21c-d6f618c74651}</Project>
+      <Name>ViewModel.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Amoeba\Amoeba.csproj">
+      <Project>{8fa6ac03-2536-428a-843f-9d09234f2f4f}</Project>
+      <Name>Amoeba</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Build Amoeba\Build Amoeba.csproj">
+      <Project>{8d7f52a5-8733-45f4-b533-f91d67cf73b5}</Project>
+      <Name>Build Amoeba</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataTemplates\DataTemplates.csproj">
+      <Project>{c93bb83a-9df6-4707-8978-b2668b4b9e03}</Project>
+      <Name>DataTemplates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EF.Mappings\EF.Mappings.csproj">
+      <Project>{da54313c-4b98-49b1-a8f9-b5827f121886}</Project>
+      <Name>EF.Mappings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EFDataContext\EF.DBContext.csproj">
+      <Project>{27c692a7-9601-43fb-8243-42b997107649}</Project>
+      <Name>EF.DBContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EFEntities\EF.Entities.csproj">
+      <Project>{fad2a8c8-a1b4-4a3c-8e37-0388c0e3733c}</Project>
+      <Name>EF.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{ad573873-c8e6-4ea3-93f5-0d39a92fc9f6}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NH.DBContext\NH.DBContext.csproj">
+      <Project>{cd566324-734e-47ae-991f-d4da3e701910}</Project>
+      <Name>NH.DBContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NH.Mappings\NH.Mappings.csproj">
+      <Project>{7eba796f-77a6-47b5-aafa-2d6315ca1cb1}</Project>
+      <Name>NH.Mappings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{9ef43ee7-b520-42d9-a75e-2d2887fd234c}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Specifications\Specifications.csproj">
+      <Project>{0b16da18-f343-4b39-a7a5-2699e60b6308}</Project>
+      <Name>Specifications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StateMachines\StateMachines.csproj">
+      <Project>{cae45f3f-038f-4441-9390-0600b0036d14}</Project>
+      <Name>StateMachines</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ValidationSets\ValidationSets.csproj">
+      <Project>{6a9c99e7-2552-4a6c-b26e-2d727c5d85ce}</Project>
+      <Name>ValidationSets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModels\ViewModels.csproj">
+      <Project>{c4ac8652-59f0-4fc9-a0a1-303a009da9b0}</Project>
+      <Name>ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Views\Views.csproj">
+      <Project>{879c9901-cb5c-407a-8655-e3c3632c1d7b}</Project>
+      <Name>Views</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,11 @@
+﻿{
+  "dependencies": {
+    "Reactive.EventAggregator": "2.0.0"
+  },
+  "frameworks": {
+    "net461": {}
+  },
+  "runtimes": {
+    "win": {}
+  }
+}

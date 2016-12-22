@@ -1,0 +1,43 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="..\..\..\Utilities\DataAccess\Repository.ttinclude" once="true" #>
+<#@ include file="Navigation.ttinclude" #>
+<#@ include file="Instance.ttinclude" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#+
+// <copyright file="DataLayer.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+	public void CreateBaseViewModel(  Application app,string AppFolder,Dictionary<string,string> settings,List<ApplicationEntity> mainEntities,List<ApplicationEntity> entities)
+	{
+		var pPath = Path.Combine(AppFolder, settings["Project"]) ;
+		// create simple properties
+		var fe = entities.Where(x => x.Entity.EntityProperties.All(z => !z.ParentRelationships.Any() && !mainEntities.Contains(x)));
+		mainEntities.AddRange(fe);
+	    
+	        
+	        
+	        var ntpl = new BaseViewModelNavigationTemplate(mainEntities.Select(x => x.Entity), entities.Select(x => x.Entity), this);
+	        ntpl.Output.Project = pPath;
+	        ntpl.Output.File = settings["Folder"]  + @"\BaseViewModel\Navigation.cs";
+	        ntpl.Render();
+	
+
+
+
+
+
+	    var itpl = new BaseViewModelInstanceTemplate();
+		    itpl.Output.Project = pPath;
+			itpl.Output.File = settings["Folder"] + @"\BaseViewModel\Instance.cs";
+			itpl.Render(); 
+
+	}
+
+
+
+#>

@@ -1,0 +1,137 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Specifications\bin\Debug\Specifications.dll"#>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Specifications\bin\Debug\LinqSpecs.dll"#>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Amoeba\Amoeba\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba Projects\MRManager\T4Utilities\bin\Debug\T4Utilities.dll"#>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class EntityExpressionTemplate : CSharpTemplate
+{
+	public EntityExpressionTemplate(ApplicationEntity entity)
+	{
+		Entity = entity;
+	}
+
+	public ApplicationEntity Entity { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+	    var entityidcheck = Entity.Entity.EntityProperties.SelectMany(x => x.DataProperties)
+	        .FirstOrDefault(x => x != null && x.ModelType != null && x.ModelType.Name == "EntityId");
+		var entityId =
+			 entityidcheck != null ? entityidcheck.EntityProperty.PropertyName : null;
+	    if (entityId == null) return "null EntityId";
+		
+			Dictionary<Entity, List<List<Entity>>> leafEntities = new Dictionary<Entity, List<List<Entity>>>();
+			var leaftrail = new List<Entity>();
+			T4Utilities.GetLeafEntities(Entity.Entity,ref leafEntities,ref leaftrail);
+		
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Common.DataEntites;
+using EF.Entities;
+using Interfaces;
+
+namespace Entity.Expressions
+{
+	public static partial class <#= Entity.Entity.Name #>Expressions
+	{
+		public static IQueryable<<#= Entity.Entity.Name #>> Get<#= Entity.Entity.Name #>ById(this IQueryable<<#= Entity.Entity.Name #>> query, int Id) => query.Where(x => x.<#= entityId#> == Id);
+
+
+// Get Leaf Properties
+<#+		
+foreach (var leaf in leafEntities)
+{
+	
+#>    
+		public static IQueryable<<#=leaf.Key.Name #>> Get<#=leaf.Key.EntitySetName #>(this IQueryable<<#= Entity.Entity.Name #>> query) => query<#+ 
+									
+									foreach (var entity in leaf.Value.OrderBy(x=> x.Count).FirstOrDefault())
+									{ 
+										if (entity.Name == Entity.Entity.Name) continue;
+										#>.<#=entity.EntitySetName #>()<#+ 
+									} #>;
+<#+ } 
+#>
+
+			// Child Properties
+<#+
+		foreach (var cr in Entity.Entity.EntityProperties.SelectMany(x => x.ChildRelationships))
+		{
+			var hasManyChildren = cr.ChildProperty.DataProperties.All(x => x.ModelType.Name != "EntityId");
+			//if (cr.ChildProperty.DataProperties.Any(x => x.ModelType.Name == "EntityId"))
+			//{
+#>
+				public static IQueryable<<#=cr.ChildProperty.Entity.Name #>> <#= cr.ChildProperty.Entity.EntitySetName #>(this IQueryable<<#=Entity.Entity.Name #>> <#=Entity.Entity.Name.ToLower() #>) => <#=Entity.Entity.Name.ToLower() #>.<#= hasManyChildren?"SelectMany":"Select"#>(x => x.<#= cr.ChildProperty.Entity.EntitySetName #>);
+				public static IQueryable<<#=cr.ChildProperty.Entity.Name #>> <#= cr.ChildProperty.Entity.EntitySetName #>(this IQueryable<<#=Entity.Entity.Name #>> <#=Entity.Entity.Name.ToLower() #>, int id) => <#=Entity.Entity.Name.ToLower() #>.Where(x => x.Id == id).<#= hasManyChildren?"SelectMany":"Select"#>(x => x.<#= cr.ChildProperty.Entity.EntitySetName #>);
+<#+		//	}
+		}
+#>
+			//Parent Properties
+<#+
+		foreach (var pr in Entity.Entity.EntityProperties.SelectMany(x => x.ParentRelationships))
+		{
+			var hasManyChildren = pr.ChildProperty.DataProperties.All(x => x.ModelType.Name != "EntityId");
+			//if (pr.ParentProperty.DataProperties.Any(x => x.ModelType.Name == "EntityId"))
+			//{
+#>
+				//public static IQueryable<<#= Entity.Entity.Name #>> <#= Entity.Entity.EntitySetName #>(this IQueryable<<#=pr.ParentProperty.Entity.Name #>> <#=pr.ParentProperty.Entity.Name.ToLower() #>) => <#=pr.ParentProperty.Entity.Name.ToLower() #>.<#= hasManyChildren?"SelectMany":"Select"#>(x => x.<#= Entity.Entity.EntitySetName #>);
+				public static IQueryable<<#=pr.ParentProperty.Entity.Name #>> <#=pr.ParentProperty.Entity.EntitySetName #>(this IQueryable<<#= Entity.Entity.EntitySetName #>> query) => query.Select(x => x.<#=pr.ParentProperty.Entity.EntitySetName #>);
+<#+			//}
+		}
+#>
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+
+	//private static void GetLeafEntities(Entity entity,ref  Dictionary<Entity,List<Entity>> leafEntities, ref List<Entity> trail)
+	//{
+		//if (trail.Contains(entity)) return;
+		//if(leafEntities.Keys.Contains(entity)) return;
+//
+		//trail.Add(entity);
+//
+	    //var cRels = entity.EntityProperties.SelectMany(x => x.ChildRelationships);
+	    //var pRels = entity.EntityProperties.SelectMany(x => x.ParentRelationships);
+//
+	    //var isLeaf = (!cRels.Any() && pRels.Count() == 1) ;//|| (!pRels.Any() && trail.Count() > 1 )
+	    //if (!isLeaf)
+	    //{
+	        //foreach (var pr in pRels)
+	        //{
+	            //if (!trail.Contains(pr.ParentProperty.Entity))
+	                //GetLeafEntities(pr.ParentProperty.Entity, ref leafEntities, ref trail);
+	        //}
+//
+			//foreach (var cr in cRels)
+	        //{
+	            //if (!trail.Contains(cr.ChildProperty.Entity))
+	                //GetLeafEntities(cr.ChildProperty.Entity, ref leafEntities, ref trail);
+	        //}
+	    //}
+	    //if(!leafEntities.Keys.Contains(entity))leafEntities.Add(entity, new List<Entity>(trail));
+	    //
+		////trail = new List<Entity>();
+	    //trail.Remove(entity);
+	//}
+
+
+	
+
+
+#>

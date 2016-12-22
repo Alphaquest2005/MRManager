@@ -1,0 +1,30 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="DataEntities\DataEntities.ttinclude" #>
+<#@ include file="DBContext\DBContext.ttinclude" #>
+<#@ include file="Mappings\EF\CreateEFMappings.ttinclude" #>
+<#@ include file="Mappings\NH\CreateNHMappings.ttinclude" #>
+<#@ include file="Interfaces\Interfaces.ttinclude" #>
+<#@ include file="ValidationSets\ValidationSets.ttinclude" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#+
+// <copyright file="DataLayer.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+	public void CreateDataLayer(Application app, List<Setting> settings)
+	{
+		//get entities
+		var entities = GetEntities(app.Id).Where(x => x.Entity.Id > 0).ToList();
+	    var appFolder = settings.FirstOrDefault(x => x.Project.Name == "Application" && x.Name == "ApplicationFolder").Value;
+
+		CreateDataEntities(app, appFolder, settings.Where(x => x.Project.Name == "Entities").ToDictionary(x => x.Name, x => x.Value), entities);
+		CreateEFMappings(app, appFolder, settings.Where(x => x.Project.Name == "EF.Mappings" ).ToDictionary(x => x.Name, x => x.Value), entities);
+		CreateNHMappings(app, appFolder, settings.Where(x => x.Project.Name == "NH.Mappings").ToDictionary(x => x.Name, x => x.Value), entities);
+		CreateDBContext(app, appFolder, settings.Where(x => x.Project.Name == "DBContext").ToDictionary(x => x.Name, x => x.Value), entities.Where(x => x.Entity.Id > 0).ToList());
+		CreateInterfaces(app, appFolder, settings.Where(x => x.Project.Name == "Interfaces").ToDictionary(x => x.Name, x => x.Value), entities);
+		CreateValidationSets(app, appFolder, settings.Where(x => x.Project.Name == "ValidationSets").ToDictionary(x => x.Name, x => x.Value), entities);
+	}
+
+#>

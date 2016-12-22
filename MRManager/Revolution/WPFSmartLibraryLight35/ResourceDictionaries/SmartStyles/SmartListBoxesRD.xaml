@@ -1,0 +1,35 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+						  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<!--                                        Smart ListBoxItem Styles                                        -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<Style x:Key="ListBoxItemNotFocusedHighlightingStyle" TargetType="{x:Type ListBoxItem}">
+		<Style.Resources>
+			<!--SelectedItem 'BackgroundColor' without focus-->
+			<SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="LightBlue"/>
+		</Style.Resources>
+	</Style>
+
+	<Style x:Key="ListBoxItemStandardHighlightingStyle" TargetType="{x:Type ListBoxItem}">
+		<Style.Resources>
+			<!--SelectedItem 'BackgroundColor' with focus-->
+			<SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightSkyBlue" Opacity=".4"/>
+			<!--SelectedItem 'BackgroundColor' without focus-->
+			<SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="LightBlue" Opacity=".4"/>
+		</Style.Resources>
+	</Style>
+
+	<Style x:Key="ListBoxItemClippedTextStyle" TargetType="{x:Type ListBoxItem}">
+		<Setter Property="ContentTemplate">
+			<Setter.Value>
+				<DataTemplate>
+					<!-- Best practice solution to clip and show a ListBox-Entry properly -->
+					<TextBlock Text="{TemplateBinding Content}" TextTrimming="CharacterEllipsis"
+								  ToolTip="{TemplateBinding Content}" />
+				</DataTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary> 

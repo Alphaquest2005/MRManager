@@ -1,0 +1,67 @@
+﻿<Window x:Class="Amoeba.MainWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:automodels="clr-namespace:ViewModels;assembly=ViewModels"
+		xmlns:views="clr-namespace:Views;assembly=Views"
+		mc:Ignorable="d"
+		Title="MainWindow" Height="350" Width="525" ResizeMode="CanResizeWithGrip"
+		SizeToContent="WidthAndHeight"
+		WindowState="Maximized"
+		WindowStyle="None">
+	<Window.Background>
+		<ImageBrush ImageSource="{DynamicResource BackGround}" Stretch="UniformToFill"/>
+	</Window.Background>
+	<Window.Resources>
+		<x:Static x:Key="MainWindowViewModelDataSource" Member="automodels:MainWindowViewModel.Instance" />
+	</Window.Resources>
+
+
+	<Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource MainWindowViewModelDataSource}}" Background="#4C0E0475">
+		<views:MainView_AutoGen Margin="0,0,0,0" />
+
+		<Grid x:Name="HeaderBar"
+			  Height="35"
+			  Margin="0,0,-0.49,0"
+			  VerticalAlignment="Top"
+			  Background="#00000000">
+
+			<Grid Margin="0,0,-0.49,0"
+				  Background="#00000000"
+				  PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown_1" />
+
+			<TextBlock Width="35"
+					   Height="50"
+					   Margin="0,10,0.4,0"
+					   HorizontalAlignment="Right"
+					   VerticalAlignment="Top"
+					   FontFamily="Segoe UI Symbol"
+					   FontSize="24"
+					   MouseLeftButtonDown="Button_Click_1"
+					   Style="{StaticResource CloseButtonStyle}"
+					   Text="&#xE10A;" />
+			<TextBlock Width="30"
+					   Height="32"
+					   Margin="0,8,39.69,-5"
+					   HorizontalAlignment="Right"
+					   VerticalAlignment="Top"
+					   FontFamily="Segoe UI Symbol"
+					   FontSize="24"
+					   MouseLeftButtonDown="SwitchWindowState"
+					   Style="{DynamicResource TextButtonStyle}"
+					   Text="&#xE155;" />
+			<TextBlock Width="30"
+					   Height="25"
+					   Margin="0,16,69.69,-6"
+					   HorizontalAlignment="Right"
+					   VerticalAlignment="Top"
+					   FontFamily="Segoe UI Symbol"
+					   FontSize="24"
+					   MouseLeftButtonDown="MinimizeWindow"
+					   Style="{DynamicResource TextButtonStyle}"
+					   Text="&#xE108;" />
+		</Grid>
+	</Grid>
+</Window>
+

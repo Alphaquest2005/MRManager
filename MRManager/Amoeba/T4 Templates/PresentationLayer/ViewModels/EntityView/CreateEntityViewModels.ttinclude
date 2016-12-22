@@ -1,0 +1,47 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="..\..\..\Utilities\DataAccess\Repository.ttinclude" once="true" #>
+<#@ include file="EntityViewModelTemplate.ttinclude" #>
+<#@ include file="ConstructorViewModelTemplate.ttinclude" #>
+<#@ include file="InstanceViewModelTemplate.ttinclude" #>
+<#@ include file="NavigationViewModelTemplate.ttinclude" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="System.IO" #>
+<#+
+// <copyright file="DataLayer.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+	public void CreateEntityViewViewModels(Application app,string AppFolder, Dictionary<string, string> settings, IEnumerable<EntityView> entityViews)
+	{
+		var pPath = Path.Combine(AppFolder, settings["Project"]) ;
+		// create simple properties
+		foreach (var entityView in entityViews)
+		{
+			var tpl = new EntityViewViewModelTemplate(entityView);
+		    tpl.Output.Project = pPath;
+			tpl.Output.File = "Generated EntityViews" + @"\" + entityView.Name + @"\Entity.cs";
+			tpl.Render(); 
+
+			var ctpl = new ConstructorEntityViewModelTemplate(entityView);
+		    ctpl.Output.Project = pPath;
+			ctpl.Output.File = "Generated EntityViews" + @"\" + entityView.Name + @"\Constructor.cs";
+			ctpl.Render(); 
+
+			var itpl = new InstanceEntityViewModelTemplate(entityView);
+		    itpl.Output.Project = pPath;
+			itpl.Output.File = "Generated EntityViews" + @"\" + entityView.Name + @"\Instance.cs";
+			itpl.Render(); 
+
+			var ntpl = new NavigationEntityViewModelTemplate(entityView);
+		    ntpl.Output.Project = pPath;
+			ntpl.Output.File = "Generated EntityViews" + @"\" + entityView.Name + @"\Navigation.cs";
+			ntpl.Render(); 
+		}
+
+	}
+
+
+
+#>

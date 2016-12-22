@@ -1,0 +1,50 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class ValidationSetTemplate : CSharpTemplate
+{
+	public ValidationSetTemplate(ApplicationEntity entity)
+	{
+		Entity = entity;
+	}
+
+	public ApplicationEntity Entity { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+
+using FluentValidation;
+using Interfaces;
+
+namespace ValidationSets
+{
+	
+	public class I<#=Entity.Entity.Name #>Validator : AbstractValidator<I<#=Entity.Entity.Name #>>
+	{
+		public I<#=Entity.Entity.Name #>Validator()
+		{
+			CascadeMode = CascadeMode.Continue;
+<#+
+	foreach (var prop in Entity.Entity.EntityProperties.SelectMany(x=>x.DataProperties))
+	{
+#>
+			RuleFor(x => x.<#= prop.EntityProperty.PropertyName #>).NotNull();
+<#+ }
+#>
+		}
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

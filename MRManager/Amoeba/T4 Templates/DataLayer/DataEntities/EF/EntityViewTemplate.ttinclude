@@ -1,0 +1,59 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Specifications\bin\Debug\Specifications.dll"#>
+<#@ import namespace="Specifications" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Specifications\bin\Debug\LinqSpecs.dll"#>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Amoeba\Amoeba\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll" #>
+<#@ import namespace="MoreLinq" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class EntityViewEntityTemplate : CSharpTemplate
+{
+	public EntityViewEntityTemplate(EntityView entityView)
+	{
+		EntityView = entityView;
+	}
+
+	public EntityView EntityView { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+using System;
+using System.Collections.Generic;
+using Common.DataEntites;
+using EF.Entities;
+using Interfaces;
+
+namespace EF.Entities
+{
+	public partial class <#= EntityView.Name #>: BaseEntity, I<#= EntityView.Name #>
+	{
+<#+
+	foreach (var prop in EntityView.EntityViewProperties)
+	{
+	    var dataType = prop.EntityProperty == null
+	        ? prop.EntityViewViewProperty.EntityProperty.DataProperties.First().DataType.Name
+	        : prop.EntityProperty.DataProperties.First().DataType.Name;
+
+	    var funcDataType = prop.EntityViewPropertyFunctions.Any() && prop.EntityViewPropertyFunctions.All(x => x.Function.ReturnDataType != null)
+							? prop.EntityViewPropertyFunctions.Last().Function.ReturnDataType.DataType.Name:dataType;
+#>
+		public <#=funcDataType#><#=funcDataType != "string"?"?":"" #> <#= prop.Name #> { get; set; }
+<#+ }
+#>
+
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

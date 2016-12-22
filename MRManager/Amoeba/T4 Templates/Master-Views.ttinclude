@@ -1,0 +1,32 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true"#>
+<#@ output extension=".cs"#>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="PresentationLayer\Views\CreateViews.ttinclude" #>
+<#@ include file="C:\Prism\Clients\Amoeba Projects\MRManager\Amoeba\T4 Templates\Utilities\DataAccess\Repository.ttinclude" once="true" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba Projects\MRManager\T4Utilities\bin\Debug\T4Utilities.dll"#>
+<#+
+
+	public void GenerateViews(string appName)
+    {
+        try
+        {
+            var app = AmoebaRepository.GetApp(appName);
+
+            var appFolder = app.Settings.FirstOrDefault(x => x.Project.Name == "Application" && x.Name == "ApplicationFolder").Value;
+			var entities = GetEntities(app.Id).Where(x => x.Entity.Id > 0).ToList();
+			var ml = T4Utilities.GetMainEntities(entities);
+			CreateViews(app,appFolder, app.Settings.Where(x => x.Project.Name == "Views" ).ToDictionary(x => x.Name, x => x.Value),ml, entities.Select(x=> x.Entity).ToList());
+
+
+
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+#>
+

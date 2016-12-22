@@ -1,0 +1,73 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class NavigationViewModelTemplate : CSharpTemplate
+{
+	public NavigationViewModelTemplate(Entity entity)
+	{
+		Entity = entity;
+	}
+
+	public Entity Entity { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+	    var plst =
+	        Entity.EntityProperties.SelectMany(x => x.ParentRelationships)
+	            .Where(x => x.ParentProperty != null && x.ParentProperty.Entity != null && x.ChildProperty != null).Distinct();
+#>
+
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using Core.Common.UI;
+using CommonMessages;
+using EventAggregator;
+using EventMessages;
+using Interfaces;
+using Utilities;
+
+namespace ViewModels
+{
+	public partial class <#=Entity.Name#>ViewModel_AutoGen 
+	{
+		MessageSource msgSource => new MessageSource(this.ToString());
+		protected virtual void WireEvents()
+		{
+<#+ foreach (var p in plst)
+	{
+#>
+			EventMessageBus.Current.GetEvent<CurrentEntityChanged<I<#=p.ParentProperty.Entity.Name #>>>(msgSource).Subscribe(x => handle<#=p.ChildProperty.PropertyName #>Changed(x.EntityId));      
+<#+ }
+ #>                  
+		}
+<#+ foreach (EntityRelationship p in plst)
+	{
+#>
+		private void handle<#=p.ChildProperty.PropertyName#>Changed(int entityId)
+		{
+					
+			if(entityId != EntityStates.NullEntity)
+			if(CurrentEntity.Id == EntityStates.NullEntity || CurrentEntity.Id != entityId)
+			{
+				CurrentEntity = CreateNullEntity();
+				FilterExpression = new List<Expression<Func<I<#=Entity.Name#>, bool>>>() {x => x.<#=p.ChildProperty.PropertyName #> == entityId};
+			}
+		}
+<#+ }
+ #> 
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

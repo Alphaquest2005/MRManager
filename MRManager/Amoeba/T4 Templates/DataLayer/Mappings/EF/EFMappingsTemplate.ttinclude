@@ -1,0 +1,103 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class EFMappingTemplate : CSharpTemplate
+{
+	public EFMappingTemplate(ApplicationEntity entity)
+	{
+		Entity = entity;
+	}
+
+	public ApplicationEntity Entity { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+using System;
+using EF.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace EF.Mappings
+{
+	public class <#= Entity.Entity.Name #>Map
+	{
+		public static void Map(EntityTypeBuilder<<#= Entity.Entity.Name #>> entityBuilder)
+		{
+			entityBuilder.ToTable("<#= Entity.Entity.EntitySetName #>", "<#= Entity.Entity.SchemaName #>");
+<#+
+	    var entityId = Entity.Entity.EntityProperties.SelectMany(x=>x.DataProperties).FirstOrDefault(x => x.ModelType.Name == "EntityId");
+		if(entityId == null) return "";
+		var isPCal = Entity.Entity.EntityProperties.Any(x => x.DataProperties.Any(z => z != null && z.ModelType != null && z.ModelType.Name == "EntityId" && z.PrimaryKeyOption != null && z.PrimaryKeyOption.IsCalculated));
+#>
+			entityBuilder.HasKey(t => t.<#=entityId.EntityProperty.PropertyName #>);
+			entityBuilder.Property(t => t.<#=entityId.EntityProperty.PropertyName #>).HasColumnName("<#=entityId.EntityProperty.PropertyName #>").<#=!isPCal?"ValueGeneratedNever()":"UseSqlServerIdentityColumn()" #>;	
+<#+
+	foreach (var prop in Entity.Entity.EntityProperties.SelectMany(x=>x.DataProperties).Where(x => x.ModelType.Name != "EntityId" ))
+	{
+	    var hasMaxLength = "";
+	    string isRequired = (prop.DataType.Name == "Byte[]"?".ValueGeneratedOnAdd()":".IsRequired()");
+	    var mval = (prop.MaxLength == -1 ? "Int32.MaxValue" : prop.MaxLength.ToString());
+	    if (prop.DataType.Name == "string") hasMaxLength = $".HasMaxLength({mval})";
+		
+#>
+			entityBuilder.Property(t => t.<#=prop.EntityProperty.PropertyName #>).HasColumnName("<#=prop.EntityProperty.PropertyName #>")<#=isRequired #><#=hasMaxLength #>;
+<#+ }
+#>
+		//-------------------Navigation Properties -------------------------------//
+<#+
+	    foreach (var cr in Entity.Entity.EntityProperties.SelectMany(x=> x.ChildRelationships))
+	    {
+			var hasManyParents = cr.ParentProperty.DataProperties.All(x => x.ModelType.Name != "EntityId");
+			if(cr.ChildProperty.DataProperties.Any(x => x.ModelType.Name == "EntityId"))
+	        {
+					
+					// do single property types
+#>
+				entityBuilder.HasOne(p => p.<#=cr.ChildProperty.Entity.Name #>).<#=hasManyParents?"WithMany(p => p." + cr.ParentProperty.Entity.EntitySetName + ")":"WithOne(p => p." + cr.ParentProperty.Entity.Name + ")" #>.HasForeignKey<#=hasManyParents?"": string.Format("<{0}>",cr.ParentProperty.Entity.Name == Entity.Entity.Name? cr.ChildProperty.Entity.Name: cr.ParentProperty.Entity.Name)  #>(c => c.<#=cr.ParentProperty.PropertyName #>)<#=hasManyParents?"":".OnDelete(DeleteBehavior.Restrict)" #>;
+<#+			}
+			else
+	        { // do collection types
+#>
+				entityBuilder.HasMany(x => x.<#=cr.ChildProperty.Entity.EntitySetName #>).WithOne(p => p.<#=cr.ParentProperty.Entity.Name#>).HasForeignKey<#=!hasManyParents?"": string.Format("<{0}>",cr.ParentProperty.Entity.Name == Entity.Entity.Name? cr.ChildProperty.Entity.Name: cr.ParentProperty.Entity.Name)  #>(c => c.<#=cr.ChildProperty.PropertyName #>)<#=hasManyParents?"":".OnDelete(DeleteBehavior.Restrict)" #>;
+<#+ 
+			} 
+	    }
+ #>	
+				//----------------Parent Properties
+<#+
+	    foreach (var cr in Entity.Entity.EntityProperties.SelectMany(x=> x.ParentRelationships))
+	    {
+			var hasManyChildren = cr.ChildProperty.DataProperties.All(x => x.ModelType.Name != "EntityId");
+			if(cr.ParentProperty.DataProperties.Any(x => x.ModelType.Name == "EntityId"))
+			{
+			    
+					// do single property types
+#>
+				//entityBuilder.HasOne(p => p.<#=cr.ParentProperty.Entity.Name #>).<#=hasManyChildren?"WithMany(p => p." + cr.ChildProperty.Entity.EntitySetName + ")":"WithOne(p => p." + cr.ChildProperty.Entity.Name + ")" #>.HasForeignKey<#=hasManyChildren?"": string.Format("<{0}>",cr.ChildProperty.Entity.Name == Entity.Entity.Name? cr.ParentProperty.Entity.Name: cr.ChildProperty.Entity.Name)  #>(c => c.<#=cr.ChildProperty.PropertyName #>).OnDelete(DeleteBehavior.Restrict);
+<#+			}
+			else
+	        { /// do collection types
+#>
+				//entityBuilder.HasMany(x => x.<#=cr.ParentProperty.Entity.EntitySetName #>).WithOne(p => p.<#=cr.ChildProperty.Entity.Name #>).HasForeignKey<#=!hasManyChildren?"": string.Format("<{0}>",cr.ChildProperty.Entity.Name == Entity.Entity.Name? cr.ParentProperty.Entity.Name: cr.ChildProperty.Entity.Name)  #>(c => c.<#=cr.ChildProperty.PropertyName #>);
+<#+ 
+			} 
+	    }
+ #>	
+		}
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

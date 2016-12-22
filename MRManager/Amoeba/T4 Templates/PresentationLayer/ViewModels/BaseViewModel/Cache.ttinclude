@@ -1,0 +1,135 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="T4Entities" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class BaseViewModelTemplate : CSharpTemplate
+{
+	public BaseViewModelTemplate(List<ApplicationEntity> entities)
+	{
+		Entities = entities;
+	}
+
+	public List<ApplicationEntity> Entities { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.ComponentModel;
+using CommonMessages;
+using DataEntites;
+using EF.Entities;
+using EventAggregator;
+using EventMessages;
+using Interfaces;
+using ReactiveUI;
+
+namespace ViewModels
+{
+	public partial class BaseViewModel: ReactiveObject // ViewModelBase<BaseViewModel>
+	{
+		 private static readonly BaseViewModel _instance;
+		 static BaseViewModel()
+		{
+			_instance = new BaseViewModel();
+		}
+
+		public static BaseViewModel Instance
+		{
+			get { return _instance; }
+		}
+		
+		public BaseViewModel()
+		{
+			
+		}
+
+	   MessageSource msgSource => new MessageSource(this.ToString());
+		
+		class BaseQSOnCreated: BaseViewModel
+		{
+		   // Load Repository
+				public BaseQSOnCreated()
+				{
+					try
+					{
+						if (System.ComponentModel.LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
+ <#+
+	foreach (var entity in Entities)
+	{
+#>
+						EventMessageBus.Current.Publish(new LoadEntitySet<I<#=entity.Entity.Name #>>(msgSource), msgSource);
+						EventMessageBus.Current.GetEvent<CurrentEntityUpdated<I<#=entity.Entity.Name #>>>(msgSource).Subscribe(x => handleCurrent<#=entity.Entity.Name #>Changed(x.Entity));
+						EventMessageBus.Current.GetEvent<EntitySetLoaded<I<#=entity.Entity.Name #>>>(msgSource).Subscribe(x => handle<#=entity.Entity.EntitySetName #>Loaded(x.Entities));
+
+<#+ }
+#>
+
+					}
+					catch (Exception)
+					{
+						throw;
+					}  				
+				}
+		}
+
+ <#+
+	foreach (var entity in Entities)
+	{
+#>
+		public ConcurrentDictionary<int, I<#=entity.Entity.Name #>> <#=entity.Entity.EntitySetName #>Cache { get; } = new ConcurrentDictionary<int, I<#=entity.Entity.Name #>>();
+
+	    internal void handle<#=entity.Entity.EntitySetName #>Loaded(IEnumerable<I<#=entity.Entity.Name #>> entities)
+	    {
+	        <#=entity.Entity.EntitySetName #>Cache.Clear();
+	        foreach (var itm in entities)
+	        {
+	            <#=entity.Entity.EntitySetName #>Cache.AddOrUpdate(itm.Id, itm,(k,v) => itm);
+	        }
+			this.RaisePropertyChanged();
+	    }
+
+		internal void handleCurrent<#=entity.Entity.Name #>Changed(I<#=entity.Entity.Name #> entity)
+		{
+			Current<#=entity.Entity.Name #> = entity;
+			<#=entity.Entity.EntitySetName #>Cache.AddOrUpdate(entity.Id, entity,(k,v) => entity);
+			this.RaisePropertyChanged();
+		}
+
+		private I<#=entity.Entity.Name #> _current<#=entity.Entity.Name #> = NullEntity<<#=entity.Entity.Name #>>.Instance;
+		public I<#=entity.Entity.Name #> Current<#=entity.Entity.Name #>
+		{
+			get
+			{
+				return _current<#=entity.Entity.Name #>;
+			}
+			set
+			{
+				if (_current<#=entity.Entity.Name #> != value)
+				{
+					this.RaiseAndSetIfChanged(ref _current<#=entity.Entity.Name #>, value ?? NullEntity<<#=entity.Entity.Name #>>.Instance);
+					// EventMessageBus.Current.Publish(new CurrentEntityChanged<I<#=entity.Entity.Name #>>(_current<#=entity.Entity.Name #>), msgSource);
+
+					// all current navigation properties = null
+
+				}
+			}
+		}
+<#+ }
+#>		
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

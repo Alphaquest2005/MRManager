@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Parameter">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        Name="Id"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Name"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="50" />
+          <AnsiConstraint />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Name="EntityParameters"
+        Association="FK_EntityParameters_Parameters"
+        FromEnd="Parameters"
+        ToEnd="EntityParameters" />
+      <NavigationProperty
+        Name="FunctionOperations"
+        Association="FK_FunctionOperations_Parameters"
+        FromEnd="Parameters"
+        ToEnd="FunctionOperations" />
+      <NavigationProperty
+        Name="FunctionParameters"
+        Association="FK_FunctionParameters_Parameters"
+        FromEnd="Parameters"
+        ToEnd="FunctionParameters" />
+      <NavigationProperty
+        Name="DataType"
+        Association="FK_Parameters_DataTypes"
+        FromEnd="Parameters"
+        ToEnd="DataTypes" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_EntityParameters_Parameters">
+    <AssociationEnd
+      Name="Parameters"
+      Multiplicity="One"
+      EntityType="Parameter">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="EntityParameters"
+      Multiplicity="Many"
+      EntityType="EntityParameter" />
+  </Association>
+  <Association
+    Name="FK_FunctionOperations_Parameters">
+    <AssociationEnd
+      Name="Parameters"
+      Multiplicity="One"
+      EntityType="Parameter">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="FunctionOperations"
+      Multiplicity="Many"
+      EntityType="FunctionOperation" />
+  </Association>
+  <Association
+    Name="FK_FunctionParameters_Parameters">
+    <AssociationEnd
+      Name="Parameters"
+      Multiplicity="One"
+      EntityType="Parameter">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="FunctionParameters"
+      Multiplicity="Many"
+      EntityType="FunctionParameter" />
+  </Association>
+  <EntityContainer
+    Name="RevolutionAppDBData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      Name="Parameters"
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Parameter" />
+    <AssociationSet
+      Name="FK_EntityParameters_Parameters"
+      Association="FK_EntityParameters_Parameters">
+      <AssociationSetEnd
+        Name="Parameters"
+        EntitySet="Parameters" />
+      <AssociationSetEnd
+        Name="EntityParameters"
+        EntitySet="EntityParameters" />
+    </AssociationSet>
+    <AssociationSet
+      Name="FK_FunctionOperations_Parameters"
+      Association="FK_FunctionOperations_Parameters">
+      <AssociationSetEnd
+        Name="Parameters"
+        EntitySet="Parameters" />
+      <AssociationSetEnd
+        Name="FunctionOperations"
+        EntitySet="FunctionOperations" />
+    </AssociationSet>
+    <AssociationSet
+      Name="FK_FunctionParameters_Parameters"
+      Association="FK_FunctionParameters_Parameters">
+      <AssociationSetEnd
+        Name="Parameters"
+        EntitySet="Parameters" />
+      <AssociationSetEnd
+        Name="FunctionParameters"
+        EntitySet="FunctionParameters" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Parameters_Single"
+      ReturnType="Parameter">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Id" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Id" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Parameters" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Id' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Parameters_SingleOrDefault"
+      ReturnType="Parameter">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Id" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Id" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Parameters" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Id' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="RevolutionAppDBDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Parameters">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Parameters" />
+        <SsdlProperty
+          Name="Id"
+          Nullable="False"
+          Type="int"
+          Property="Parameter/Properties[Id]" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Name"
+          Nullable="False"
+          Type="varchar"
+          Property="Parameter/Properties[Name]" />
+        <SsdlForeignKeyProperty
+          Name="DataTypeId"
+          Nullable="False"
+          Type="int"
+          PropertyName="DataTypeId" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_EntityParameters_Parameters">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_EntityParameters_Parameters" />
+        <SsdlAssociationSetEnd
+          End="RevolutionAppDBData/Members[FK_EntityParameters_Parameters]/Members[Parameters]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="RevolutionAppDBData/Members[FK_EntityParameters_Parameters]/Members[EntityParameters]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ParameterId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_FunctionOperations_Parameters">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_FunctionOperations_Parameters" />
+        <SsdlAssociationSetEnd
+          End="RevolutionAppDBData/Members[FK_FunctionOperations_Parameters]/Members[Parameters]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="RevolutionAppDBData/Members[FK_FunctionOperations_Parameters]/Members[FunctionOperations]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ParameterId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_FunctionParameters_Parameters">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_FunctionParameters_Parameters" />
+        <SsdlAssociationSetEnd
+          End="RevolutionAppDBData/Members[FK_FunctionParameters_Parameters]/Members[Parameters]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="RevolutionAppDBData/Members[FK_FunctionParameters_Parameters]/Members[FunctionParameters]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ParameterId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

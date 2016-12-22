@@ -1,0 +1,60 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class EntityViewViewModelTemplate : CSharpTemplate
+{
+	public EntityViewViewModelTemplate(EntityView entityView)
+	{
+		EntityView = entityView;
+	}
+
+	public EntityView EntityView { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+	    
+#>
+using System;
+using Core.Common.UI;
+using EF.Entities;
+using DataInterfaces;
+using Interfaces;
+using Utilities;
+
+namespace ViewModels
+{
+	public partial class <#=EntityView.Name#>ViewModel_AutoGen 
+	{
+<#+
+	foreach (var prop in EntityView.EntityViewProperties)
+	{
+#>
+		public object <#= prop.Name #>  { get { return GetValue(); } set { SetValue(value); }
+	    }
+<#+ }
+#>
+		//protected override I<#=EntityView.Name#> CreateEntity()// can't create entity
+	    //{
+	        //return this.CurrentEntity;
+	    //}
+	//
+		protected sealed override I<#=EntityView.Name#> CreateNullEntity()
+		{
+			return new <#=EntityView.Name#>(){Id = EntityStates.NullEntity};
+		}
+	
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

@@ -1,0 +1,12 @@
+﻿{
+  "dependencies": {
+    "JB.Common.Collections.Reactive": "0.8.103-pre",
+    "reactiveui-core": "7.0.0"
+  },
+  "frameworks": {
+    "net461": {}
+  },
+  "runtimes": {
+    "win": {}
+  }
+}

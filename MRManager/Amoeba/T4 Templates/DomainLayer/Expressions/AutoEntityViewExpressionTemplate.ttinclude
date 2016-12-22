@@ -1,0 +1,65 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Dynamic" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba Projects\MRManager\T4Utilities\bin\Debug\T4Utilities.dll"#>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Specifications\bin\Debug\Specifications.dll"#>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Specifications\bin\Debug\LinqSpecs.dll"#>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ assembly name="Microsoft.CSharp" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Amoeba\Amoeba\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+	public class AutoEntityViewExpressionTemplate : CSharpTemplate
+	{
+		public AutoEntityViewExpressionTemplate(Entity entity)
+		{
+			Entity = entity;
+		}
+
+		public static Entity Entity { get; set; }
+
+		public override string TransformText()
+		{
+			base.TransformText();
+
+			Dictionary<string, dynamic> res = T4Utilities.GetAutoEntityView(Entity);
+
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using Common.DataEntites;
+using EF.Entities;
+using Interfaces;
+
+namespace Entity.Expressions
+{
+	public static partial class <#= Entity.Name #>Expressions
+	{
+
+		public static Expression<Func<<#= Entity.Name #>, <#= Entity.Name #>AutoView>> <#= Entity.Name #>AutoViewExpression { get; } =
+		
+			x => new <#= Entity.Name #>AutoView 
+			{
+				Id = x.Id,
+<#+ foreach (var itm in res)
+{
+#> 				<#=itm.Key #> = x.<#=itm.Value.ViewPath #>,   
+<#+
+}
+#>
+			};
+	}
+}
+<#+
+			return this.GenerationEnvironment.ToString();
+		}
+	}
+#>

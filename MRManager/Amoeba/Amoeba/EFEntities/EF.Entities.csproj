@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FAD2A8C8-A1B4-4A3C-8E37-0388C0E3733C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EF.Entities</RootNamespace>
+    <AssemblyName>EF.Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EFEntity.cs" />
+    <Compile Include="Generated Entities\ApplicationEntities.cs" />
+    <Compile Include="Generated Entities\Applications.cs" />
+    <Compile Include="Generated Entities\ApplicationSetting.cs" />
+    <Compile Include="Generated Entities\DataProperties.cs" />
+    <Compile Include="Generated Entities\DataTypes.cs" />
+    <Compile Include="Generated Entities\Entities.cs" />
+    <Compile Include="Generated Entities\EntityProperties.cs" />
+    <Compile Include="Generated Entities\EntityRelationships.cs" />
+    <Compile Include="Generated Entities\EntityView.cs" />
+    <Compile Include="Generated Entities\EntityViewEntityProperties.cs" />
+    <Compile Include="Generated Entities\EntityViewProperties.cs" />
+    <Compile Include="Generated Entities\EntityViewPropertyFunction.cs" />
+    <Compile Include="Generated Entities\EntityViewPropertyFunctionParameter.cs" />
+    <Compile Include="Generated Entities\EntityViewViewProperties.cs" />
+    <Compile Include="Generated Entities\FunctionBody.cs" />
+    <Compile Include="Generated Entities\FunctionParameters.cs" />
+    <Compile Include="Generated Entities\FunctionReturnType.cs" />
+    <Compile Include="Generated Entities\Functions.cs" />
+    <Compile Include="Generated Entities\FunctionSetFunctions.cs" />
+    <Compile Include="Generated Entities\FunctionSets.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\ApplicationEntitiesAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\ApplicationsAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\ApplicationSettingAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\DataPropertiesAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\DataTypesAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\EntitiesAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\EntityPropertiesAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\EntityRelationshipsAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\EntityViewAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\EntityViewEntityPropertiesAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\EntityViewPropertiesAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\EntityViewPropertyFunctionAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\EntityViewPropertyFunctionParameterAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\EntityViewViewPropertiesAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\FunctionBodyAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\FunctionParametersAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\FunctionReturnTypeAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\FunctionsAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\FunctionSetFunctionsAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\FunctionSetsAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\LayersAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\LayoutAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\ModelTypesAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\OperatorsAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\ParametersAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\PartsAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\PresentationPropertiesAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\PrimaryKeyOptionsAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\ProcessAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\ProcessStepsAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\ProcessStepScreensAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\ProjectsAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\RelationshipTypesAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\ScreenLayoutsAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\ScreenPartsAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\ScreensAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\ScreenViewsAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\SettingsAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\SettingsNamesAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\StateMachinesAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\StateMachineStatesAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\StateMachineTriggersAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\StatesAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\StepsAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\TestValuesAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\TriggersAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\ViewEntityAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\ViewsAutoView.cs" />
+    <Compile Include="Generated Entities\Layers.cs" />
+    <Compile Include="Generated Entities\Layout.cs" />
+    <Compile Include="Generated Entities\ModelTypes.cs" />
+    <Compile Include="Generated Entities\Operators.cs" />
+    <Compile Include="Generated Entities\Parameters.cs" />
+    <Compile Include="Generated Entities\Parts.cs" />
+    <Compile Include="Generated Entities\PresentationProperties.cs" />
+    <Compile Include="Generated Entities\PrimaryKeyOptions.cs" />
+    <Compile Include="Generated Entities\Process.cs" />
+    <Compile Include="Generated Entities\ProcessSteps.cs" />
+    <Compile Include="Generated Entities\ProcessStepScreens.cs" />
+    <Compile Include="Generated Entities\Projects.cs" />
+    <Compile Include="Generated Entities\RelationshipTypes.cs" />
+    <Compile Include="Generated Entities\ScreenLayouts.cs" />
+    <Compile Include="Generated Entities\ScreenParts.cs" />
+    <Compile Include="Generated Entities\Screens.cs" />
+    <Compile Include="Generated Entities\ScreenViews.cs" />
+    <Compile Include="Generated Entities\Settings.cs" />
+    <Compile Include="Generated Entities\SettingsNames.cs" />
+    <Compile Include="Generated Entities\StateMachines.cs" />
+    <Compile Include="Generated Entities\StateMachineStates.cs" />
+    <Compile Include="Generated Entities\StateMachineTriggers.cs" />
+    <Compile Include="Generated Entities\States.cs" />
+    <Compile Include="Generated Entities\Steps.cs" />
+    <Compile Include="Generated Entities\TestValues.cs" />
+    <Compile Include="Generated Entities\Triggers.cs" />
+    <Compile Include="Generated Entities\ViewEntity.cs" />
+    <Compile Include="Generated Entities\Views.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Revolution\Common\Common.csproj">
+      <Project>{cb6d5fbc-0c13-437d-b4f3-a0ec4d5673b3}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\DataInterfaces\DataInterfaces.csproj">
+      <Project>{F6008330-BA42-454B-A0B4-82455DE56776}</Project>
+      <Name>DataInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{ad573873-c8e6-4ea3-93f5-0d39a92fc9f6}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="project.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

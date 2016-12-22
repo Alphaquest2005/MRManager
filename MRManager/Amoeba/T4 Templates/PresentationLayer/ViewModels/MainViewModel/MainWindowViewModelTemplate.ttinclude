@@ -1,0 +1,62 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class MainWindowViewModelTemplate : CSharpTemplate
+{
+
+
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+
+using System.Windows.Input;
+using Core.Common.UI;
+
+namespace ViewModels
+{
+	public class MainWindowViewModel 
+	{
+		 private static readonly MainWindowViewModel instance;
+		 static MainWindowViewModel()
+		{
+			instance = new MainWindowViewModel();
+		}
+
+		 public static MainWindowViewModel Instance
+		{
+			get { return instance; }
+		}
+
+		public MainWindowViewModel()
+		{
+			this.navMREntitiesQS = new RelayCommand(OnNavMREntitiesQS);
+	            
+		}
+
+		private RelayCommand navMREntitiesQS;
+		private void OnNavMREntitiesQS()
+		{
+			Core.Common.UI.AppSlider.Slider.MoveTo("MREntitiesQSEXP"); 
+		}
+
+		public ICommand NavMREntitiesQS
+		{
+			get { return this.navMREntitiesQS; }
+		}
+
+	 
+		
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

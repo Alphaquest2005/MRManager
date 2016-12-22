@@ -1,0 +1,51 @@
+﻿<#@ template language="C#" hostspecific="true" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Repository.dll" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="T4Repository" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+
+
+	public static Application GetApp(string appName)
+	{
+		 return AmoebaRepository.GetApp(appName);
+	}
+
+	public static  List<ApplicationEntity> GetEntities(int appId)
+	{
+		return AmoebaRepository.GetEntities(appId);
+	}
+
+	public static  List<Function> GetFunctions(int appId)
+	{
+		return AmoebaRepository.GetFunctions(appId);
+	}
+
+	public static List<EntityView> GetEntityViews(int appId)
+	{
+		return AmoebaRepository.GetEntityViews(appId);
+	}
+
+	//public List<ApplicationStateMachine> GetStateMachines(int appId)
+	//{
+		//return AmoebaRepository.GetStateMachines(appId);
+	//}
+//
+	//public List<State> GetStates()
+	//{
+		//return AmoebaRepository.GetStates();
+	//}
+//
+	//public List<Trigger> GetTriggers()
+	//{
+		//return AmoebaRepository.GetTriggers();
+	//}
+//
+	public static List<FunctionSet> GetFunctionSets()
+	{
+		return AmoebaRepository.GetFunctionSets();
+	}
+#>

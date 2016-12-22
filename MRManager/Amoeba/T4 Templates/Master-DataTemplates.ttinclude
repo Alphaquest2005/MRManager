@@ -1,0 +1,30 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true"#>
+<#@ output extension=".cs"#>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="PresentationLayer\DataTemplates\CreateDataTemplates.ttinclude" #>
+<#@ include file="C:\Prism\Clients\Amoeba Projects\MRManager\Amoeba\T4 Templates\Utilities\DataAccess\Repository.ttinclude" once="true" #>
+<#+
+
+	public void GenerateDataTemplates(string appName)
+	{
+		try
+		{
+			var app = AmoebaRepository.GetApp(appName);
+
+			var appFolder = app.Settings.FirstOrDefault(x => x.Project.Name == "Application" && x.Name == "ApplicationFolder").Value;
+			var entities = GetEntities(app.Id).Where(x => x.Entity.Id > 0).ToList();
+			CreateDataTemplates(app,appFolder, app.Settings.Where(x => x.Project.Name == "DataTemplates" ).ToDictionary(x => x.Name, x => x.Value), entities);
+
+
+
+		}
+		catch (Exception)
+		{
+			throw;
+		}
+	}
+
+#>
+

@@ -1,0 +1,91 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="CodeLibary.TextFunctions" #>
+<#@ assembly name="C:\Prism\Core.Common\CodeLibary\CodeLibary\bin\Debug\CodeLibary.dll" #>
+
+<#+
+public class SummaryViewDetailsCSTemplate : CSharpTemplate
+{
+	public SummaryViewDetailsCSTemplate(ApplicationEntity mainEntity, List<Entity> entities)
+	{
+		Entities = entities;
+	    MainEntity = mainEntity;
+	}
+	public ApplicationEntity MainEntity { get;}
+	public List<Entity> Entities { get;}
+	public override string TransformText()
+	{
+
+#>
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+
+namespace Views
+{
+	/// <summary>
+	/// Interaction logic for SummaryList.xaml
+	/// </summary>
+	public partial class <#=MainEntity.Entity.Name #>SummaryDetailsView 
+	{
+		public <#=MainEntity.Entity.Name #>SummaryDetailsView()
+		{
+			this.InitializeComponent();
+
+			// Insert code required on object creation below this point.
+		}
+
+		private void BringIntoView(object sender, MouseEventArgs e)
+		{
+			BringIntoView(sender);
+			e.Handled = true;
+		}
+
+		private void BringIntoView(object sender)
+		{
+			if (typeof (Expander).IsInstanceOfType(sender))
+			{
+				Slider.BringIntoView(((FrameworkElement) sender) as Expander);
+			}
+			else
+			{
+				Expander p = ((FrameworkElement) sender).Parent as Expander;
+				p.UpdateLayout();
+				Slider.BringIntoView(p);
+			}
+		}
+<#+foreach (var entity in Entities.Distinct())
+{
+#> 
+		private void GoTo<#=entity.Name #>(object sender, MouseButtonEventArgs e)
+		{
+			Slider.BringIntoView("<#=entity.Name #>ListEXP");
+			e.Handled = true;
+		}
+		private void GoTo<#=entity.Name #>AutoView(object sender, MouseButtonEventArgs e)
+		{
+			Slider.BringIntoView("<#=entity.Name #>AutoViewListEXP");
+			e.Handled = true;
+		}
+		<#+foreach (var view in entity.EntityViews)
+		{
+		#>
+				private void GoTo<#=view.Name #>(object sender, MouseButtonEventArgs e)
+				{
+					Slider.BringIntoView("<#=view.Name #>ListEXP");
+					e.Handled = true;
+				}
+		<#+ } #>
+<#+} 
+ #>  
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

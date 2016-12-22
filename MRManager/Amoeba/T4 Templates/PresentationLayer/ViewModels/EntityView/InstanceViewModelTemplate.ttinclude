@@ -1,0 +1,45 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class InstanceEntityViewModelTemplate : CSharpTemplate
+{
+	public InstanceEntityViewModelTemplate(EntityView entityView)
+	{
+		EntityView = entityView;
+	}
+
+	public EntityView EntityView { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+
+using Core.Common.UI;
+using Interfaces;
+
+namespace ViewModels
+{
+	public partial class <#=EntityView.Name#>ViewModel_AutoGen 
+	{
+	   private static readonly <#=EntityView.Name#>ViewModel_AutoGen instance;
+	   static <#=EntityView.Name#>ViewModel_AutoGen()
+		{
+			instance = new <#=EntityView.Name#>ViewModel_AutoGen();
+			instance.WireEvents();
+		}
+
+	   public static <#=EntityView.Name#>ViewModel_AutoGen Instance => instance;
+	
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

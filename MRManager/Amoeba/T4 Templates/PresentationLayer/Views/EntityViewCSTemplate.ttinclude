@@ -1,0 +1,57 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="CodeLibary.TextFunctions" #>
+<#@ assembly name="C:\Prism\Core.Common\CodeLibary\CodeLibary\bin\Debug\CodeLibary.dll" #>
+
+<#+
+public class EntityViewCSTemplate : CSharpTemplate
+{
+	public EntityViewCSTemplate(EntityView entityView)
+	{
+		EntityView = entityView;
+	}
+
+	public EntityView EntityView { get;}
+
+	public override string TransformText()
+	{
+		var top = 0;
+#>
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using ViewModels;
+
+
+namespace Views
+{
+/// <summary>
+	/// Interaction logic for <#=EntityView.Name#>.xaml
+	/// </summary>
+	public partial class <#=EntityView.Name#>List_AutoGen
+	{
+		public <#=EntityView.Name#>List_AutoGen()
+		{
+			try
+			{
+				this.InitializeComponent();
+				im = this.FindResource("<#=EntityView.Name#>ViewModelDataSource") as <#=EntityView.Name#>ViewModel_AutoGen;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message + ex.StackTrace);
+			}
+		}
+		<#=EntityView.Name#>ViewModel_AutoGen im;
+
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

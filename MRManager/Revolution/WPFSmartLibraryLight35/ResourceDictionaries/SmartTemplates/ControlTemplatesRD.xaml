@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+						  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<!--                                       Validation Error Templates                                       -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<ControlTemplate x:Key="TextBoxValidationErrorRedXTemplate">
+
+		<DockPanel LastChildFill="True">
+			<Image DockPanel.Dock="Right" Margin="2,0,0,0" Height="20" Width="20"
+					 ToolTip="{Binding ElementName=adornedElement, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"
+					 Source="../../CommonImages/ValidationError.png" />
+
+			<Border BorderBrush="Red" BorderThickness="1">
+				<AdornedElementPlaceholder x:Name="adornedElement" />
+			</Border>
+		</DockPanel>
+
+	</ControlTemplate>
+
+</ResourceDictionary> 

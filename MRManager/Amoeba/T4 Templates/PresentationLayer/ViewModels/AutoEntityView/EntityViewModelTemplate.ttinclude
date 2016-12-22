@@ -1,0 +1,58 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="Microsoft.CSharp" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba Projects\MRManager\T4Utilities\bin\Debug\T4Utilities.dll"#>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class AutoEntityViewViewModelTemplate : CSharpTemplate
+{
+	public AutoEntityViewViewModelTemplate(Entity entity)
+	{
+		Entity = entity;
+	}
+
+	public Entity Entity { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+	    var res = T4Utilities.GetAutoEntityView(Entity);
+	    
+#>
+using System;
+using Core.Common.UI;
+using EF.Entities;
+using DataInterfaces;
+using Interfaces;
+using Utilities;
+
+namespace ViewModels
+{
+	public partial class <#=Entity.Name#>AutoViewModel_AutoGen 
+	{
+<#+
+	foreach (var prop in res)
+	{
+#>
+		public object <#= prop.Key #>  { get { return GetValue(); } set { SetValue(value); }}
+<#+ }
+#>
+		
+		protected sealed override I<#=Entity.Name#>AutoView CreateNullEntity()
+		{
+			return new <#=Entity.Name#>AutoView(){Id = EntityStates.NullEntity};
+		}
+	
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

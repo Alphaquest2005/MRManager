@@ -1,0 +1,22 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="DataEntities\CreateDataEntities.ttinclude" #>
+
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#+
+// <copyright file="DataLayer.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+	public void CreateDesignTimeLayer(Application app, List<Setting> settings)
+	{
+		//get entities
+		var entities = GetEntities(app.Id).Where(x => x.Entity.Id > 0).ToList();
+	    var appFolder = settings.FirstOrDefault(x => x.Project.Name == "Application" && x.Name == "ApplicationFolder").Value;
+
+		CreateDesignDataEntities(app, appFolder, settings.Where(x => x.Project.Name == "DesignTimeData").ToDictionary(x => x.Name, x => x.Value), entities);
+		
+	}
+
+#>

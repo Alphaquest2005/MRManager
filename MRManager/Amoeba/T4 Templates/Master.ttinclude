@@ -1,0 +1,35 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true"#>
+<#@ output extension=".cs"#>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="DataLayer\DataLayer.ttinclude"#>
+<#@ include file="DesignTimeLayer\DesignTimeLayer.ttinclude"#>
+//< #@ include file="BusinessLayer\BusinessLayer.ttinclude"# >
+<#@ include file="DomainLayer\DomainLayer.ttinclude"#>
+<#@ include file="UnitTests\UnitTestsLayer.ttinclude"#>
+<#@ include file="PresentationLayer\PresentationLayer.ttinclude"#>
+<#+
+
+	public void GenerateApplication(string appName)
+	{
+		try
+		{
+			var app = AmoebaRepository.GetApp(appName);
+
+			CreateDataLayer(app, app.Settings.Where(x => x.Layer.Name == "DataLayer" || x.Layer.Name == "Solution").ToList());
+			CreatePresentationLayer(app, app.Settings.Where(x => x.Layer.Name == "PresentationLayer" || x.Layer.Name == "Solution").ToList());
+			CreateDesignTimeLayer(app, app.Settings.Where(x => x.Layer.Name == "DesignTimeLayer" || x.Layer.Name == "Solution").ToList());
+			CreateDomainLayer(app, app.Settings.Where(x => x.Layer.Name == "DomainLayer" || x.Layer.Name == "Solution").ToList());
+			CreateUnitTests(app, app.Settings.Where(x => x.Layer.Name == "UnitTests" || x.Layer.Name == "Solution").ToList());
+			//CreateBusinessLayer(app, app.Settings.Where(x => x.Layer.Name == "BusinessLayer" || x.Layer.Name == "Solution").ToList() );
+
+		}
+		catch (Exception)
+		{
+			throw;
+		}
+	}
+
+#>
+

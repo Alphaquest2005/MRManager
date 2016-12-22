@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2AB54CE2-E09B-40B4-9CBF-184B3E770B0D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Expressions</RootNamespace>
+    <AssemblyName>Expressions</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutoFunctions.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\AddressCitiesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\AddressCountriesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\AddressesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\AddressLinesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\AddressParishesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\AddressStatesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\AddressTypesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\AddressZipCodesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\AllergiesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ApplicationSettingAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\AssignedDatingAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\BloodPressureAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\BoatInfoAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\CarePlanAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\CarePlanDetailsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\CarePlanDetailsSuggestedMedicationAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\CitiesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ComponentsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\CountriesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\DefaultImagesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ExamDetailComponentsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ExamDetailsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ExamResultsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ExamResults_AnioticFluidAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ExamResults_FetalDatesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ExamResults_SimpleValuesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ExamResults_UmbilicalArteryAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ExamsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ExamTypesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ForeignAddressesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ForeignPhoneNumbersAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\HeightAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\InterviewsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\MaritalStatusAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\MarketingMediumAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\MediaAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\MediaTypesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\MedicalCategoryAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\NonResidentCompanyInfoAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\NonResidentHotelInfoAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\OccupationsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\OrganisationAddressAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\OrganisationPhoneNumbersAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\OrganisationsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\Organisations_CompanysAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\Organisations_HotelsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ParishCitiesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ParishesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PatientAllergiesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PatientDoctorAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PatientReligonAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PatientResponsesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PatientResultsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PatientSyntomsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PatientVisitAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PatientVisitVitalSignsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PersonAddressesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PersonCountryOfResidenceAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PersonEmailAddressAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PersonJobAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PersonMaritalStatusAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PersonMediaAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PersonNamesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PersonPhoneNumbersAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PersonsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\Persons_ArrivalDepartureInfoAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\Persons_DoctorAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\Persons_EmergencyContactAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\Persons_NextOfKinAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\Persons_NonResidentPatientAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\Persons_NursesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\Persons_PatientAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PhaseAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PhoneTypesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PrimaryPersonAddressAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PrimaryPersonPhoneNumberAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PulseAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\QuestionsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ReligonsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\RespirationAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ResponseAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ResponseImagesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ResponseOptionsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ResponseSuggestionsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ResponseSuggestions_CarePlansAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ResponseSuggestions_InterviewsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ResultFieldNamesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\SexAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\StatesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\StudentInfoAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\SyntomsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\TemperatureAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\UltraSoundGeneralEvaluationAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\UnitsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\VitalSignsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\WeightAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ZipCodesAutoView.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\AddressCities.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\AddressCountries.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Addresses.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\AddressLines.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\AddressParishes.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\AddressStates.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\AddressTypes.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\AddressZipCodes.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Allergies.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ApplicationSetting.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\AssignedDating.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\BloodPressure.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\BoatInfo.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\CarePlan.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\CarePlanDetails.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\CarePlanDetailsSuggestedMedication.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Cities.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Components.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Countries.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\DefaultImages.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ExamDetailComponents.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ExamDetails.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ExamResults.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ExamResults_AnioticFluid.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ExamResults_FetalDates.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ExamResults_SimpleValues.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ExamResults_UmbilicalArtery.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Exams.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ExamTypes.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ForeignAddresses.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ForeignPhoneNumbers.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Height.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Interviews.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\MaritalStatus.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\MarketingMedium.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Media.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\MediaTypes.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\MedicalCategory.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\NonResidentCompanyInfo.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\NonResidentHotelInfo.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Occupations.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\OrganisationAddress.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\OrganisationPhoneNumbers.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Organisations.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Organisations_Companys.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Organisations_Hotels.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ParishCities.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Parishes.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PatientAllergies.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PatientDoctor.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PatientReligon.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PatientResponses.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PatientResults.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PatientSyntoms.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PatientVisit.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PatientVisitVitalSigns.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PersonAddresses.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PersonCountryOfResidence.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PersonEmailAddress.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PersonJob.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PersonMaritalStatus.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PersonMedia.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PersonNames.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PersonPhoneNumbers.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Persons.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Persons_ArrivalDepartureInfo.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Persons_Doctor.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Persons_EmergencyContact.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Persons_NextOfKin.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Persons_NonResidentPatient.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Persons_Nurses.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Persons_Patient.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Phase.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PhoneTypes.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PrimaryPersonAddress.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PrimaryPersonPhoneNumber.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Pulse.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Questions.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Religons.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Respiration.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Response.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ResponseImages.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ResponseOptions.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ResponseSuggestions.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ResponseSuggestions_CarePlans.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ResponseSuggestions_Interviews.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ResultFieldNames.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Sex.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\States.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\StudentInfo.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Syntoms.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Temperature.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\UltraSoundGeneralEvaluation.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Units.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\VitalSigns.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Weight.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ZipCodes.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\AddressInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\AddressLineInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\AllergiesInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\BloodPressureInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\CountryInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\ForeignAddressInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\ForeignPhoneNumberInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\HeightInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\InterviewInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\InterviewReponses.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\NonResidentPatientInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\ParishInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\PatientAddressInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\PatientCountryOfResidence.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\PatientInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\PatientJobInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\PatientPhoneNumbers.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\PatientResponseInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\PatientSummaryInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\PatientSyntomsInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\PatientVisitInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\PersonAddressInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\PersonInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\PersonNameInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\PersonPhoneNumberInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\PulseInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\RespirationInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\ResponseOptionInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\TemperatureInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\VitalsHistoryInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\VitalSignsInfo.cs" />
+    <Compile Include="Generated Expressions\EntityView Expressions\WeightInfo.cs" />
+    <Compile Include="Generated Expressions\Function Expressions\AutoFunctions.cs" />
+    <Compile Include="PersonSummary.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EFEntities\EF.Entities.csproj">
+      <Project>{FAD2A8C8-A1B4-4A3C-8E37-0388C0E3733C}</Project>
+      <Name>EF.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{AD573873-C8E6-4EA3-93F5-0D39A92FC9F6}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\Common\Common.csproj">
+      <Project>{cb6d5fbc-0c13-437d-b4f3-a0ec4d5673b3}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\DataInterfaces\DataInterfaces.csproj">
+      <Project>{f6008330-ba42-454b-a0b4-82455de56776}</Project>
+      <Name>DataInterfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="project.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

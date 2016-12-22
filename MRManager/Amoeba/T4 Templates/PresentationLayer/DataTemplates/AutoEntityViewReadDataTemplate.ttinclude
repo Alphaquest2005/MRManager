@@ -1,0 +1,82 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="CodeLibary.TextFunctions" #>
+<#@ assembly name="C:\Prism\Core.Common\CodeLibary\CodeLibary\bin\Debug\CodeLibary.dll" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba Projects\MRManager\T4Utilities\bin\Debug\T4Utilities.dll"#>
+<#@ assembly name="Microsoft.CSharp" #>
+
+<#+
+public class AutoEntityViewReadDataTemplate : CSharpTemplate
+{
+	public AutoEntityViewReadDataTemplate(Entity entity)
+	{
+		Entity = entity;
+	}
+
+	public Entity Entity { get;}
+
+	public override string TransformText()
+	{
+	    var res = T4Utilities.GetAutoEntityView(Entity);
+		
+#>
+<ResourceDictionary 
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		mc:Ignorable="d"
+		xmlns:converters="clr-namespace:Converters;assembly=Converters"
+		xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
+		xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels">
+
+		<DataTemplate x:Key="<#=Entity.Name #>AutoViewRDT"  DataType="{x:Type Interfaces:I<#=Entity.Name #>AutoView}">
+			<DataTemplate.Resources>
+				<converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+				<x:Static Member="viewModels:<#=Entity.Name #>AutoViewModel_AutoGen.Instance" x:Key="<#=Entity.Name #>ViewModelDataSource"/>
+			</DataTemplate.Resources>
+			<Grid Height="Auto" Width="497">
+				<StackPanel Orientation="Horizontal">
+					<StackPanel Width="Auto" Margin="10,0,10,0" HorizontalAlignment="Left">
+<#+
+	foreach (var prop in res)
+	{
+	    var propertyName = prop.Key;
+#>						<TextBlock Text="<#=TextFunctions.AddSpacesToSentence(propertyName.Replace("Id",""))#>"  Visibility="{Binding <#=propertyName #>, Converter={StaticResource NullVisibilityConverter}}" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto" MinWidth ="75" TextAlignment="Right"/>			
+<#+
+	}
+#>
+					</StackPanel>
+				<StackPanel Width="Auto" Margin="10,0,10,0" HorizontalAlignment="Left">
+<#+
+	foreach (var prop in res)
+	{
+
+	    string dataType = prop.Value.DataType;
+	    var propertyName = prop.Key;
+		switch (dataType)
+		{
+			case "bool":
+#>
+					<CheckBox IsChecked="{Binding Path=<#= propertyName #>, UpdateSourceTrigger=PropertyChanged}" Content="" Visibility="{Binding <#=propertyName #>, Converter={StaticResource NullVisibilityConverter}}" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto" />
+<#+			break;
+			default:
+#>					<TextBlock Text="{Binding Path=<#= propertyName#>, FallbackValue='<#=propertyName#>', UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Visibility="{Binding <#=propertyName #>, Converter={StaticResource NullVisibilityConverter}}" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto"  MinWidth ="75" />
+<#+
+			break;
+		}
+	}
+#>
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+		</DataTemplate>	
+</ResourceDictionary>
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

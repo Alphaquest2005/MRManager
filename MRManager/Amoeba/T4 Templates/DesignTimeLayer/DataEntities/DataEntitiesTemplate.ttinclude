@@ -1,0 +1,95 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Amoeba\Amoeba\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll" #>
+<#@ import namespace="MoreLinq" #>
+<#@ import namespace="System.Linq" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class DataEntitiesTemplate : CSharpTemplate
+{
+	public DataEntitiesTemplate( string appName,List<ApplicationEntity> entities)
+	{
+		Entities = entities;
+		AppName = appName;
+	}
+
+	private string AppName;
+	List<ApplicationEntity> Entities { get; }
+	
+	
+
+	public override string TransformText()
+	{
+		base.TransformText();
+	   var convertDic = new Dictionary<string, string>() ;
+		convertDic.Add("int", "ToInt32");
+		convertDic.Add("string", "ToString");
+		convertDic.Add("DateTime", "ToDateTime");
+		convertDic.Add("double", "ToDouble");
+		convertDic.Add("Guid", "ToGuid");
+		convertDic.Add("Int64", "ToInt64");
+		convertDic.Add("Byte[]", "ToByte");
+			
+
+#>
+using System.ComponentModel;
+using System;
+using EF.Entities;
+using Interfaces;
+
+namespace DesignTime
+{
+	public partial class DesignDataContext 
+	{
+		private static readonly DesignDataContext _instance = new DesignDataContext();
+
+		public static DesignDataContext Instance { get; } = _instance;
+
+<#+ foreach (var entity in Entities)
+{
+
+
+
+	var testvals = entity.Entity.EntityProperties.SelectMany(x => x.TestValues).Where(x => x.RowId != 0).ToList();
+	if (!testvals.Any()) continue;
+	var props = testvals.GroupBy(z => z.RowId);
+
+#>
+<#+
+			foreach (var grp in props)
+			{
+#>
+		public static I<#=entity.Entity.Name #> <#=entity.Entity.Name #> {get;} = new <#=entity.Entity.Name #> {<#+
+							foreach (var val in grp)
+							{
+								
+							    
+								if (val.EntityProperty.DataProperties.FirstOrDefault() == null || val.EntityProperty.DataProperties.FirstOrDefault().DataType.Name == "Byte[]") continue;
+								var convtxt = convertDic.ContainsKey(val.EntityProperty.DataProperties.FirstOrDefault().DataType.Name)
+									? convertDic[val.EntityProperty.DataProperties.FirstOrDefault().DataType.Name]
+									: null;
+								if (convtxt == null) continue;
+#><#=val.EntityProperty.PropertyName #> = Convert.<#=convtxt #>(@"<#=val.Value #>")<#=val == grp.Last() ? "" : "," #><#+
+							}
+#>};
+<#+
+				break;
+			}
+ #>
+	 
+<#+
+}
+#>
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

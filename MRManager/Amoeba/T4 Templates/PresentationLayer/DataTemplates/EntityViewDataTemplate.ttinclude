@@ -1,0 +1,66 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="CodeLibary.TextFunctions" #>
+<#@ assembly name="C:\Prism\Core.Common\CodeLibary\CodeLibary\bin\Debug\CodeLibary.dll" #>
+
+<#+
+public class EntityViewDataTemplate : CSharpTemplate
+{
+	public EntityViewDataTemplate(EntityView entityView)
+	{
+		EntityView = entityView;
+	}
+
+	public EntityView EntityView { get;}
+
+	public override string TransformText()
+	{
+		
+#>
+<ResourceDictionary 
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		mc:Ignorable="d"
+		xmlns:converters="clr-namespace:Converters;assembly=Converters"
+		xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
+		xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+		xmlns:dataInterfaces="clr-namespace:DataInterfaces;assembly=DataInterfaces">
+
+	<Style x:Key="<#=EntityView.Name #>DT" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource ThemeListBoxItem}">
+
+        <!-- Default Template -->
+        <Setter Property="ContentTemplate" Value="{DynamicResource <#=EntityView.Name #>RDT}" />
+
+        <!-- Triggers to change Template -->
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition  Binding="{Binding RowState, Source={x:Static viewModels:<#=EntityView.Name #>ViewModel_AutoGen.Instance}}" Value="{x:Static dataInterfaces:RowState.Added}"/>
+                    <Condition  Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsSelected}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="ContentTemplate" Value="{DynamicResource <#=EntityView.Name #>WDT}" />
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition  Binding="{Binding RowState, Source={x:Static viewModels:<#=EntityView.Name #>ViewModel_AutoGen.Instance}}" Value="{x:Static dataInterfaces:RowState.Modified}"/>
+                    <Condition  Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsSelected}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="ContentTemplate" Value="{DynamicResource <#=EntityView.Name #>WDT}" />
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

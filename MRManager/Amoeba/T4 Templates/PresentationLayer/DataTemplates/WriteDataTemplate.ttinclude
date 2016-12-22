@@ -1,0 +1,201 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="CodeLibary.TextFunctions" #>
+<#@ assembly name="C:\Prism\Core.Common\CodeLibary\CodeLibary\bin\Debug\CodeLibary.dll" #>
+
+<#+
+public class WriteDataTemplate : CSharpTemplate
+{
+	public WriteDataTemplate(ApplicationEntity entity)
+	{
+		Entity = entity;
+	}
+
+	public ApplicationEntity Entity { get;}
+
+	public override string TransformText()
+	{
+		var top = 0;
+#>
+<ResourceDictionary 
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		mc:Ignorable="d"
+		xmlns:converters="clr-namespace:Converters;assembly=Converters"
+		xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
+		xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels">
+
+		<DataTemplate x:Key="<#=Entity.Entity.Name #>WDT"  DataType="{x:Type Interfaces:I<#=Entity.Entity.Name #>}">
+			<DataTemplate.Resources>
+				<converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+			</DataTemplate.Resources>
+			<Grid Height="Auto" Width="497">
+				<StackPanel Orientation="Horizontal">
+					<StackPanel Width="Auto" Margin="10,0,10,0" HorizontalAlignment="Left">
+<#+
+	foreach (var prop in Entity.Entity.EntityProperties.Where(x => x.DataProperties.All(z => z.ModelType.Name != "EntityId")).SelectMany(x=>x.DataProperties))
+		{
+
+
+		
+		if(prop.ModelType.Name == "ForeignKey")
+		{
+			
+			var plst = prop.EntityProperty.ChildRelationships.Concat(prop.EntityProperty.ParentRelationships);
+			var elst = plst.Select(x => x.ParentProperty.Entity)
+					.Concat(plst.Select(x => x.ChildProperty.Entity))
+					.Where(x => x!= null && x.Name != Entity.Entity.Name);
+				//.Where(
+					//x =>
+						//x.Name == Entity.Entity.Name ||
+						//x.Name == Entity.Entity.Name);
+			var pEntity = elst.FirstOrDefault();
+
+			if (pEntity == null) continue;
+			var pEntityPrimaryKey =
+				pEntity.EntityProperties.SelectMany(x=>x.DataProperties).FirstOrDefault(x => x.ModelType.Name == "EntityId");
+			if(pEntityPrimaryKey == null) continue;
+			var pName = pEntity.EntityProperties.SelectMany(x=>x.DataProperties).FirstOrDefault(x => x.ModelType.Name == "EntityName");
+		    if (pName == null) continue;
+			if (prop.EntityProperty.PresentationProperty == null)
+			{
+#>
+						<TextBlock Text="<#=TextFunctions.AddSpacesToSentence(prop.EntityProperty.PropertyName.Replace("Id",""))#>" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto" MinWidth ="75" TextAlignment="Right"/>			
+<#+			}
+			else
+			{
+#>
+						<TextBlock Text="<#=TextFunctions.AddSpacesToSentence(prop.EntityProperty.PresentationProperty.DisplayName.Replace("Id",""))#>" ToolTip="<#=prop.EntityProperty.PresentationProperty.ToolTip#>" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto" MinWidth ="75" TextAlignment="Right"/>
+<#+                
+			}
+			continue;
+		} #>
+
+<#+
+	
+		
+
+		switch (prop.DataType.Name)
+		{
+			case "bool":
+#>
+						<TextBlock Text="<#=TextFunctions.AddSpacesToSentence(prop.EntityProperty.PropertyName) #>" ToolTip="<#=prop.EntityProperty.PresentationProperty != null?prop.EntityProperty.PresentationProperty.ToolTip:""#>" HorizontalAlignment="Right" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto"  MinWidth ="75" TextAlignment="Right"/>
+<#+			break;
+			default:
+#>
+						<TextBlock Text="<#=TextFunctions.AddSpacesToSentence(prop.EntityProperty.PresentationProperty != null?prop.EntityProperty.PresentationProperty.DisplayName:prop.EntityProperty.PropertyName)#>" ToolTip="<#=prop.EntityProperty.PresentationProperty != null?prop.EntityProperty.PresentationProperty.ToolTip:""#>" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto" TextAlignment="Right" />
+<#+
+			break;
+		}
+	}
+#>
+					</StackPanel>
+				<StackPanel Width="Auto" Margin="10,0,10,0" HorizontalAlignment="Left">
+<#+
+	foreach (var prop in Entity.Entity.EntityProperties.SelectMany(x=>x.DataProperties).Where(x => x.ModelType.Name != "EntityId"))
+		{
+
+
+		
+		if(prop.ModelType.Name == "ForeignKey")
+		{
+			
+			var plst = prop.EntityProperty.ChildRelationships.Concat(prop.EntityProperty.ParentRelationships);
+			var elst = plst.Select(x => x.ParentProperty.Entity)
+					.Concat(plst.Select(x => x.ChildProperty.Entity))
+					.Where(x => x!= null && x.Name != Entity.Entity.Name);
+				
+			var pEntity = elst.FirstOrDefault();
+
+			if (pEntity == null) continue;
+			var pEntityPrimaryKey =
+				pEntity.EntityProperties.SelectMany(x=>x.DataProperties).FirstOrDefault(x => x.ModelType.Name == "EntityId");
+		    var pName = pEntity.EntityProperties.SelectMany(x=>x.DataProperties).FirstOrDefault(x => x.ModelType.Name == "EntityName");
+		    if (pName == null) continue;
+			if(pEntityPrimaryKey == null) continue;
+		    var fProperty =
+		        pEntity.EntityProperties.FirstOrDefault(x => x.DataProperties.Any(z => z.ModelType.Name == "ForeignKey")) 
+				?? pEntityPrimaryKey.EntityProperty.Entity.EntityProperties.FirstOrDefault(x => x.Entity.Name == pEntity.Name);
+			
+		    Entity fEntity = null;
+			DataProperty fName = null;
+			
+			
+
+
+		    var fe = fProperty.ParentRelationships.FirstOrDefault(x => x.ParentProperty!= null && x.ParentProperty.Entity != null && x.ParentProperty.Entity.Id != Entity.EntityId) ??
+		             fProperty.ChildRelationships.FirstOrDefault(x => x.ChildProperty!= null && x.ChildProperty.Entity != null && x.ChildProperty.Entity.Id != Entity.EntityId);
+		    if(fProperty != null && fProperty.ParentRelationships.FirstOrDefault() != null && fe != null) fEntity = fe.ParentProperty.Entity;
+			if(fEntity == null && fProperty.ChildRelationships.FirstOrDefault() != null && fe != null) fEntity = fe.ChildProperty.Entity;
+			if(fEntity != null)
+			 fName = fEntity.EntityProperties.SelectMany(x=>x.DataProperties).FirstOrDefault(x => x.ModelType.Name == "EntityName");
+			
+
+			if (prop.EntityProperty.PresentationProperty == null)
+			{
+#>					<ComboBox SelectedValue="{Binding Path=<#=prop.EntityProperty.PropertyName#>, Source={x:Static viewModels:<#=Entity.Entity.Name #>ViewModel_AutoGen.Instance}, UpdateSourceTrigger=PropertyChanged}"                          
+								DisplayMemberPath="<#=pName.EntityProperty.PropertyName#>"  SelectedValuePath="<#=pEntityPrimaryKey.EntityProperty.PropertyName#>" 
+								ItemsSource="{Binding Source={x:Static Member=viewModels:BaseViewModel.Instance}, Path=<#=pEntity.EntitySetName#>Cache, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, IsAsync=True}" 
+								IsEditable="False" IsEnabled="True" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto"  MinWidth ="75" FontSize="14"<#=fProperty == null || fName == null?"/":"" #>>
+<#+				if (fProperty != null && fName != null)
+				{ 
+
+#>
+						<ComboBox.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Orientation="Horizontal">
+									<ComboBox SelectedValue="{Binding Path=<#=fProperty.PropertyName #>}"                          
+										DisplayMemberPath="<#=fName.EntityProperty.PropertyName #>"  SelectedValuePath="Id" 
+										ItemsSource="{Binding Source={x:Static Member=viewModels:BaseViewModel.Instance}, Path=<#=fEntity.EntitySetName #>Cache, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, IsAsync=True}" 
+										IsEditable="False" IsEnabled="False" Template="{DynamicResource LookUpTextBlock}" HorizontalAlignment="Left" Height="24"  VerticalAlignment="Top" Width="Auto"  MinWidth ="75" FontSize="14" />
+									<TextBlock Text="{Binding <#=pName.EntityProperty.PropertyName#>}" Margin="10,0,0,0" Width="Auto" />
+								</StackPanel>
+							</DataTemplate>
+						</ComboBox.ItemTemplate>
+					</ComboBox>
+<#+				} #>
+<#+			}
+			else
+			{
+#>					<ComboBox SelectedValue="{Binding Path=<#=prop.EntityProperty.PropertyName#>, Source={x:Static viewModels:<#=Entity.Entity.Name #>ViewModel_AutoGen.Instance}, UpdateSourceTrigger=PropertyChanged}"                          
+								DisplayMemberPath="<#=pName.EntityProperty.PropertyName#>"  SelectedValuePath="<#=pEntityPrimaryKey.EntityProperty.PropertyName#>" 
+								ItemsSource="{Binding Source={x:Static Member=viewModels:BaseViewModel.Instance}, Path=<#=pEntity.EntitySetName#>Cache.Values, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, IsAsync=True}" 
+								ToolTip="<#=prop.EntityProperty.PresentationProperty.ToolTip#>" 
+								IsEditable="True" IsEnabled="False" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto"  MinWidth ="75" FontSize="14" /> 
+<#+                
+			}
+			continue;
+} #>
+
+<#+
+	
+		
+
+		switch (prop.DataType.Name)
+		{
+			case "bool":
+#>
+					<CheckBox IsChecked="{Binding Path=<#= prop.EntityProperty.PropertyName #>, Source={x:Static viewModels:<#=Entity.Entity.Name #>ViewModel_AutoGen.Instance}, UpdateSourceTrigger=PropertyChanged}" Content="" ToolTip="<#=prop.EntityProperty.PresentationProperty != null?prop.EntityProperty.PresentationProperty.ToolTip:""#>" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto" />
+<#+			break;
+			default:
+#>					<TextBox Text="{Binding Path=<#= prop.EntityProperty.PropertyName#>, Source={x:Static viewModels:<#=Entity.Entity.Name #>ViewModel_AutoGen.Instance}, FallbackValue='<#=prop.EntityProperty.PropertyName#>', UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" ToolTip="<#=prop.EntityProperty.PresentationProperty != null?prop.EntityProperty.PresentationProperty.ToolTip:""#>" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto"  MinWidth ="75" />
+<#+
+			break;
+		}
+	}
+#>
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+		</DataTemplate>	
+</ResourceDictionary>
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

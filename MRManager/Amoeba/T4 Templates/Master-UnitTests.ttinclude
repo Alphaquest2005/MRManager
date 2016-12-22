@@ -1,0 +1,31 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true"#>
+<#@ output extension=".cs"#>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="UnitTests\UnitTestsLayer.ttinclude"#>
+<#+
+
+	public void GenerateUnitTests(string appName)
+	{
+		try
+		{
+			var app = AmoebaRepository.GetApp(appName);
+
+			var appFolder = app.Settings.FirstOrDefault(x => x.Project.Name == "Application" && x.Name == "ApplicationFolder").Value;
+			var entities = GetEntities(app.Id).Where(x => x.Entity.Id > 0).ToList();
+
+			
+			CreatExpressionUnitTests(app, appFolder, app.Settings.Where(x => x.Layer.Name == "UnitTests" && x.Project.Name == "UnitTests").ToDictionary(x => x.Name, x => x.Value), entities);
+			
+
+
+		}
+		catch (Exception)
+		{
+			throw;
+		}
+	}
+
+#>
+

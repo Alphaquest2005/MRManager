@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{320107B2-D414-434B-AE0D-4D9F18FF49B8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataServices</RootNamespace>
+    <AssemblyName>DataServices</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actors\BaseActor.cs" />
+    <Compile Include="Actors\EntityDataServiceActor.cs" />
+    <Compile Include="Actors\ViewModelActor.cs" />
+    <Compile Include="Data\UserInfoData.cs" />
+    <Compile Include="Data\MachineInfos.cs" />
+    <Compile Include="Supervisors\BaseSupervisor.cs" />
+    <Compile Include="Data\Processes.cs" />
+    <Compile Include="Supervisors\ProcessSupervisor.cs" />
+    <Compile Include="Data\ProcessViewModels.cs" />
+    <Compile Include="Supervisors\ViewModelSupervisor.cs" />
+    <Compile Include="Actors\ProcessActor.cs" />
+    <Compile Include="Supervisors\EntityDataServiceSupervisor.cs" />
+    <Compile Include="Utils\CreateEntityExtensions.cs" />
+    <Compile Include="DataContextManager.cs" />
+    <Compile Include="Actors\GetMediaActor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\DeleteEntityExtensions.cs" />
+    <Compile Include="Utils\EntityChangesExtensions.cs" />
+    <Compile Include="Utils\GetEntityExtensions.cs" />
+    <Compile Include="Utils\LoadEntitySetExtensions.cs" />
+    <Compile Include="Utils\LoadEntityViewExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DesignTimeData\DesignTimeData.csproj">
+      <Project>{e7ec52dc-8650-4cf0-bcab-ed8a9473d2cf}</Project>
+      <Name>DesignTimeData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EFEntities\EF.Entities.csproj">
+      <Project>{fad2a8c8-a1b4-4a3c-8e37-0388c0e3733c}</Project>
+      <Name>EF.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Interfaces.csproj">
+      <Project>{ad573873-c8e6-4ea3-93f5-0d39a92fc9f6}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TypeMaps\TypeMaps.csproj">
+      <Project>{75c0650c-ce23-44f5-a44f-e4b443dfff70}</Project>
+      <Name>TypeMaps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ViewModels\ViewModels.csproj">
+      <Project>{db1e7bd6-7fe0-4cdd-8b6d-edbb0d156b41}</Project>
+      <Name>ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonMessages\CommonMessages.csproj">
+      <Project>{77007560-89DC-4E1F-9313-AE064A048AD4}</Project>
+      <Name>CommonMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{cb6d5fbc-0c13-437d-b4f3-a0ec4d5673b3}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common.UI\Core.Common.UI.csproj">
+      <Project>{5dd82ad7-f344-45e3-92cc-96f8d07700af}</Project>
+      <Name>Core.Common.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataInterfaces\DataInterfaces.csproj">
+      <Project>{f7c99950-1cf5-49ed-830d-cbc87e7a9c16}</Project>
+      <Name>DataInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataMessages\DataMessages.csproj">
+      <Project>{78F76C1D-BAF2-4AC1-A05F-A8A7B4A3B95E}</Project>
+      <Name>DataMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EFRepository\EFRepository.csproj">
+      <Project>{415DDC8A-A74D-4AFA-8FCB-2706A062A4FD}</Project>
+      <Name>EFRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EventAggregator\EventAggregator.csproj">
+      <Project>{31E6B370-01F0-4489-832F-436CB97A6718}</Project>
+      <Name>EventAggregator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EventMessages\EventMessages.csproj">
+      <Project>{E3D04176-3758-4C9D-84F3-7A4D3859EAE5}</Project>
+      <Name>EventMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RevolutionEntities\RevolutionEntities.csproj">
+      <Project>{c827930a-0d05-4ee2-b9ac-db1cf5144e16}</Project>
+      <Name>RevolutionEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemInterfaces\SystemInterfaces.csproj">
+      <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>
+      <Name>SystemInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemMessages\SystemMessages.csproj">
+      <Project>{2C88291E-05EB-4BE9-8B33-18F9D56CF928}</Project>
+      <Name>SystemMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{0F9427B1-792E-4C35-97D8-22A9494CE28F}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewMessages\ViewMessages.csproj">
+      <Project>{eb1e2e94-d6fb-49df-8036-9bf910e3b7aa}</Project>
+      <Name>ViewMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModel.Interfaces\ViewModel.Interfaces.csproj">
+      <Project>{2f936e24-723e-4e7a-b21c-d6f618c74651}</Project>
+      <Name>ViewModel.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

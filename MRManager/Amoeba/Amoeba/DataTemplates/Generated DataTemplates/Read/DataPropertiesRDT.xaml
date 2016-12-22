@@ -1,0 +1,41 @@
+﻿<ResourceDictionary 
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		mc:Ignorable="d"
+		xmlns:converters="clr-namespace:Converters;assembly=Converters"
+		xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
+		xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels">
+
+		<DataTemplate x:Key="DataPropertiesRDT"  DataType="{x:Type Interfaces:IDataProperties}">
+			<DataTemplate.Resources>
+				<converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+			</DataTemplate.Resources>
+			<Grid Height="Auto" Width="497">
+				<StackPanel Orientation="Horizontal">
+					<StackPanel Width="Auto" Margin="10,0,10,0" HorizontalAlignment="Left">
+						<TextBlock Text="Data Type" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto" MinWidth ="75" TextAlignment="Right"/>			
+						<TextBlock Text="Entity Property" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto" MinWidth ="75" TextAlignment="Right"/>			
+						<TextBlock Text="Max Length" ToolTip="" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto" TextAlignment="Right" />
+						<TextBlock Text="Model Type" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto" MinWidth ="75" TextAlignment="Right"/>			
+					</StackPanel>
+				<StackPanel Width="Auto" Margin="10,0,10,0" HorizontalAlignment="Left">
+					<ComboBox SelectedValue="{Binding Path=DataTypeId}"                          
+								DisplayMemberPath="Name"  SelectedValuePath="Id" 
+								ItemsSource="{Binding Source={x:Static Member=viewModels:BaseViewModel.Instance}, Path=DataTypesCache, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, IsAsync=True}" 
+								IsEditable="False" IsEnabled="False" Template="{DynamicResource LookUpTextBlock}" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto"  MinWidth ="75" FontSize="14" /> 
+					<ComboBox SelectedValue="{Binding Path=EntityPropertyId}"                          
+								DisplayMemberPath="PropertyName"  SelectedValuePath="Id" 
+								ItemsSource="{Binding Source={x:Static Member=viewModels:BaseViewModel.Instance}, Path=EntityPropertiesCache, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, IsAsync=True}" 
+								IsEditable="False" IsEnabled="False" Template="{DynamicResource LookUpTextBlock}" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto"  MinWidth ="75" FontSize="14" /> 
+					<TextBlock Text="{Binding Path=MaxLength, FallbackValue='MaxLength', UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" ToolTip="" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto"  MinWidth ="75" />
+					<ComboBox SelectedValue="{Binding Path=ModelTypeId}"                          
+								DisplayMemberPath="Name"  SelectedValuePath="Id" 
+								ItemsSource="{Binding Source={x:Static Member=viewModels:BaseViewModel.Instance}, Path=ModelTypesCache, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, IsAsync=True}" 
+								IsEditable="False" IsEnabled="False" Template="{DynamicResource LookUpTextBlock}" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto"  MinWidth ="75" FontSize="14" /> 
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+		</DataTemplate>	
+</ResourceDictionary>

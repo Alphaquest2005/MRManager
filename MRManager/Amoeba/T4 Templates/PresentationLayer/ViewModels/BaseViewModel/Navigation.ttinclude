@@ -1,0 +1,178 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="T4Entities" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class BaseViewModelNavigationTemplate : CSharpTemplate
+{
+	public BaseViewModelNavigationTemplate(IEnumerable<Entity> mainEntity, IEnumerable<Entity> entities, TextTransformation writer)
+	{
+		Entities = entities;
+		MainEntities = mainEntity;
+		_writer = writer;
+	}
+
+	public IEnumerable<Entity> Entities { get;}
+	public IEnumerable<Entity> MainEntities { get; }
+	private TextTransformation _writer = null;
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.ComponentModel;
+using SystemMessages;
+using CommonMessages;
+using DataEntites;
+using EF.Entities;
+using EventAggregator;
+using EventMessages;
+using Interfaces;
+using JB.Collections.Reactive;
+using ReactiveUI;
+using System.Linq;
+using DesignTime;
+
+namespace ViewModels
+{
+	public partial class BaseViewModel
+	{
+		 
+		private static MessageSource msgSource => new MessageSource(BaseViewModel.Instance.ToString());
+				static BaseViewModel()
+				{
+					try
+					{
+						_instance = new BaseViewModel();
+						if (System.ComponentModel.LicenseManager.UsageMode == LicenseUsageMode.Designtime) 
+							{
+<#+foreach (var entity in Entities)
+{
+	if (!entity.EntityProperties.Any(x => x.TestValues.Any(z=> z.RowId != 0))) continue;
+#>
+								<#=entity.EntitySetName #>Cache.Add(DesignDataContext.<#=entity.Name #>);
+<#+} #>						}
+ <#+
+	foreach (var mainEntity in MainEntities)
+	{
+		var el = T4Utilities.GetEntitiesForMainEntity(mainEntity).ToList();
+		foreach (var entity in el)
+		{
+#>
+						EventMessageBus.Current.GetEvent<EntitySetLoaded<I<#=entity.Name #>>>(msgSource).Subscribe(x => handle<#=entity.EntitySetName #>Loaded(x.Entities));
+						EventMessageBus.Current.GetEvent<CurrentEntityUpdated<I<#=entity.Name #>>>(msgSource).Subscribe(x => handleCurrent<#=entity.Name #>Updated(x.Entity));
+						EventMessageBus.Current.GetEvent<CurrentEntityChanged<I<#=entity.Name #>>>(msgSource).Subscribe(x => handleCurrent<#=entity.Name #>Changed(x.EntityId));
+						EventMessageBus.Current.GetEvent<DataServiceStarted<LoadEntitySet<I<#=entity.Name #>>>>(msgSource)
+							.Subscribe(x =>EventMessageBus.Current.Publish(new LoadEntitySet<I<#=entity.Name #>>(msgSource), msgSource));
+						EventMessageBus.Current.GetEvent<EntityCreated<I<#=entity.Name #>>>(msgSource).Subscribe(x => handle<#=entity.Name #>Created(x.Entity));
+						EventMessageBus.Current.GetEvent<EntityDeleted<I<#=entity.Name #>>>(msgSource).Subscribe(x => handle<#=entity.Name #>Deleted(x.EntityId));
+
+<#+		}
+	}
+#>
+
+					}
+					catch (Exception)
+					{
+						throw;
+					}  				
+				}
+		
+
+ <#+
+	foreach (var entity in Entities)
+	{
+#>
+		public static ObservableList<I<#=entity.Name #>> <#=entity.EntitySetName #>Cache { get; } = new ObservableList<I<#=entity.Name #>>();
+		
+		private static void handle<#=entity.Name #>Deleted(int entityId)
+		{
+		   
+			var ce = <#=entity.EntitySetName #>Cache.FirstOrDefault(x => x.Id == entityId);
+			if (ce == null) return;
+			System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
+			{
+				<#=entity.EntitySetName #>Cache.Remove(ce);
+				if (Current<#=entity.Name #>.Id == entityId) Current<#=entity.Name #> = default(I<#=entity.Name #>);
+			   
+			}));
+			//Instance.RaisePropertyChanged(nameof(<#=entity.EntitySetName #>Cache));
+		}
+
+		private static void handle<#=entity.Name #>Created(I<#=entity.Name #> entity)
+		{
+			System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
+			{
+			   if(!<#=entity.EntitySetName #>Cache.Contains(entity)) <#=entity.EntitySetName #>Cache.Add(entity); //CurrentEntity = default(IEntity);
+			}));
+		   
+		}
+
+		static void handle<#=entity.EntitySetName #>Loaded(IEnumerable<I<#=entity.Name #>> entities)
+		{
+			System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
+			{
+				<#=entity.EntitySetName #>Cache.Clear();
+				foreach (var itm in entities)
+				{
+					<#=entity.EntitySetName #>Cache.Add(itm);
+				}
+				//((IReactiveObject) new BaseViewModel()).RaisePropertyChanged();
+			}));
+		}
+
+		static void handleCurrent<#=entity.Name #>Updated(I<#=entity.Name #> entity)
+		{
+			System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
+			{
+				Current<#=entity.Name #> = entity;
+				
+			   //if(!<#=entity.EntitySetName #>Cache.Contains(entity)) <#=entity.EntitySetName #>Cache.Add(entity);
+			   //((IReactiveObject) new BaseViewModel()).RaisePropertyChanged();
+			}));
+		}
+
+		static void handleCurrent<#=entity.Name #>Changed(int entityId)
+		{
+			System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
+			{
+				Current<#=entity.Name #> = <#=entity.EntitySetName #>Cache.FirstOrDefault(x => x.Id == entityId);
+			}));
+		}
+
+		static I<#=entity.Name #> _current<#=entity.Name #> = NullEntity<<#=entity.Name #>>.Instance;
+		public static I<#=entity.Name #> Current<#=entity.Name #>
+		{
+			get
+			{
+				return _current<#=entity.Name #>;
+			}
+			set
+			{
+				if (_current<#=entity.Name #> != value)
+				{
+					((IReactiveObject) new BaseViewModel()).RaiseAndSetIfChanged(ref _current<#=entity.Name #>, value ?? NullEntity<<#=entity.Name #>>.Instance);
+					// EventMessageBus.Current.Publish(new CurrentEntityChanged<I<#=entity.Name #>>(_current<#=entity.Name #>), msgSource);
+
+					// all current navigation properties = null
+
+				}
+			}
+		}
+<#+ }
+#>		
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

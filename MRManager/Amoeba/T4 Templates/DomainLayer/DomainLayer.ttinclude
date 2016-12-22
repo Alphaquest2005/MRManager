@@ -1,0 +1,21 @@
+﻿<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="Expressions\CreateEntityExpressions.ttinclude" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#+
+// <copyright file="DataLayer.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+	public void CreateDomainLayer(Application app, List<Setting> settings)
+	{
+		//get entities
+	    var appSettings = settings.Where(x => x.Project.Name == "Application").ToDictionary(x => x.Name, x => x.Value);
+		var entities = GetEntities(app.Id).Where(x => x.Entity.Id > 0).ToList();
+		CreateEntityExpressions(app,appSettings["ApplicationFolder"], settings.Where(x => x.Project.Name == "Expressions" ).ToDictionary(x => x.Name, x => x.Value), entities);
+
+
+		
+	}
+
+#>

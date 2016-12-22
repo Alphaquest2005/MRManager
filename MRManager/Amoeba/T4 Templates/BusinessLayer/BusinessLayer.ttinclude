@@ -1,0 +1,19 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="StateMachines\CreateStateMachines.ttinclude" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#+
+// <copyright file="DataLayer.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+	public void CreateBusinessLayer(Application app, List<Setting> settings)
+	{
+		//get entities
+		var entities = GetStateMachines(app.Id);
+		CreateStateMachines(app, settings.Where(x => x.Project.ProjectName == "StateMachines" || x.Project.ProjectName == "Application").ToDictionary(x => x.Name, x => x.Value), entities);
+		
+	}
+
+#>

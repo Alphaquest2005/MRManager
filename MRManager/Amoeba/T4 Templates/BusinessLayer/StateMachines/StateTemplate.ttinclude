@@ -1,0 +1,45 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class StateTemplate : CSharpTemplate
+{
+	public StateTemplate(List<State> sm)
+	{
+		States = sm;
+	}
+
+	public List<State> States { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+
+
+
+namespace BusinessLayer.StateMachines
+{
+	
+		public enum States
+		{
+<#+ foreach (var t in States)
+{ #>
+			<#=t.StateName #> = <#=t.Id #><#=t == States.LastOrDefault()?"":"," #>	
+<#+    
+} #>
+		}
+	
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

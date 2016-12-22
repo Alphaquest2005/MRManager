@@ -1,0 +1,57 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Amoeba\Amoeba\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll" #>
+<#@ import namespace="MoreLinq" #>
+<#@ import namespace="System.Linq" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class AutoExpressionTestTemplate : CSharpTemplate
+{
+	public AutoExpressionTestTemplate(IEnumerable<Entity> entities)
+	{
+		Entities = entities;
+	}
+
+	public IEnumerable<Entity> Entities { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using EF.DBContexts;
+using Entity.Expressions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace UnitTests.Expressions
+{
+	[TestClass]
+	public class  AutoExpressionTests
+	{
+<#+
+		foreach (var entity in Entities)
+		{
+#>
+		[TestMethod]
+		public void <#=entity.Name #>ExpressionGetData()
+		{
+			var res = MRManagerDBContext.Instance.<#=entity.EntitySetName #>.Select(<#=entity.Name #>Expressions.<#=entity.Name #>AutoViewExpression).ToList();
+			if (res.Any()) Debug.Assert(true);
+		}
+<#+		} #>
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

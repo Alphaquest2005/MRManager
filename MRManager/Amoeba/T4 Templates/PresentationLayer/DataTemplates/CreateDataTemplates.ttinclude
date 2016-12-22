@@ -1,0 +1,91 @@
+﻿<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="DataTemplate.ttinclude" #>
+<#@ include file="ReadDataTemplate.ttinclude" #>
+<#@ include file="AutoEntityViewReadDataTemplate.ttinclude" #>
+<#@ include file="WriteDataTemplate.ttinclude" #>
+
+<#@ include file="EntityViewDataTemplate.ttinclude" #>
+<#@ include file="EntityViewReadDataTemplate.ttinclude" #>
+<#@ include file="EntityViewWriteDataTemplate.ttinclude" #>
+<#@ include file="EntityViewDataTemplateResource.ttinclude" #>
+
+<#@ include file="DataTemplateResource.ttinclude" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="T4Entities" #>
+<#+
+// <copyright file="DataLayer.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+	public void CreateDataTemplates(Application app, string AppFolder, Dictionary<string, string> settings, List<ApplicationEntity> entities)
+	{
+		// create simple properties
+		foreach (var entity in entities)
+		{
+			var tpl = new DataTemplate(entity);
+			tpl.Output.Project = Path.Combine(AppFolder, settings["Project"]) ;
+			tpl.Output.File = settings["Folder"] + @"\" + entity.Entity.Name + "DT.xaml";
+			tpl.Render(); 
+
+			var rtpl = new ReadDataTemplate(entity);
+			rtpl.Output.Project = Path.Combine(AppFolder, settings["Project"]) ;
+			rtpl.Output.File = settings["Folder"] + @"\Read\" + entity.Entity.Name + "RDT.xaml";
+			rtpl.Render(); 
+
+			var wtpl = new WriteDataTemplate(entity);
+			wtpl.Output.Project = Path.Combine(AppFolder, settings["Project"]) ;
+			wtpl.Output.File = settings["Folder"] + @"\Write\" + entity.Entity.Name + "WDT.xaml";
+			wtpl.Render(); 
+
+			var avtpl = new AutoEntityViewReadDataTemplate(entity.Entity);
+			avtpl.Output.Project = Path.Combine(AppFolder, settings["Project"]) ;
+			avtpl.Output.File = "Generated AutoView Templates" + @"\" + entity.Entity.Name + "AutoViewRDT.xaml";
+			avtpl.Render(); 
+		}
+
+		
+			var names = entities.Select(x => x.Entity.Name).ToList();
+			var atpl = new DataTemplateResource(names);
+			atpl.Output.Project = Path.Combine(AppFolder, settings["Project"]) ;
+			atpl.Output.File =  @"AllDataTemplatesResource.xaml";
+			atpl.Render();
+
+	    CreateEntityViewDataTemplates(app, AppFolder, settings, entities);
+
+	}
+
+	public void CreateEntityViewDataTemplates(Application app, string AppFolder, Dictionary<string, string> settings,
+		List<ApplicationEntity> entities)
+	{
+		// create simple properties
+	    var elst = entities.SelectMany(x => x.Entity.EntityViews);
+	   
+		foreach (var entityView in elst )
+		{
+			var tpl = new EntityViewDataTemplate(entityView);
+			tpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			tpl.Output.File = settings["Folder"] + @"\" + entityView.Name + "DT.xaml";
+			tpl.Render();
+
+			var rtpl = new EntityViewReadDataTemplate(entityView);
+			rtpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			rtpl.Output.File = settings["Folder"] + @"\Read\" + entityView.Name + "RDT.xaml";
+			rtpl.Render();
+
+			var wtpl = new EntityViewWriteDataTemplate(entityView);
+			wtpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			wtpl.Output.File = settings["Folder"] + @"\Write\" + entityView.Name + "WDT.xaml";
+			wtpl.Render();
+		}
+
+			var names = elst.Select(x=> x.Name).ToList();
+			
+			var atpl = new EntityViewDataTemplateResource(names);
+			atpl.Output.Project = Path.Combine(AppFolder, settings["Project"]) ;
+			atpl.Output.File =  @"AllEntityViewDataTemplatesResource.xaml";
+			atpl.Render(); 
+	}
+
+#>

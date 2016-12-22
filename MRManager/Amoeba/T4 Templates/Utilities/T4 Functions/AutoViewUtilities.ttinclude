@@ -1,0 +1,318 @@
+﻿<#@ template language="C#" hostspecific="true" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Repository.dll" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="T4Repository" #>
+<#@ import namespace="System.Linq" #>
+
+<#+
+    public static class AutoViewUtilities
+    {
+        //private static string GetPropertyString(bool? isMany, EntityProperty p, bool? prevIsMany)
+        //{
+            //if (prevIsMany == null) return p.PropertyName;
+            //if (isMany == null) return p.PropertyName;
+            //if (prevIsMany == true)
+            //{
+                //return string.Format("Select(z => z.{0})", p.PropertyName);
+            //}
+            //else
+            //{
+                //if (isMany == true)
+                //{
+                    //return string.Format("Select(z => z.{0})", p.PropertyName);
+                //}
+                //else
+                //{
+                    //return p.PropertyName;
+                //}
+            //}
+//
+//
+        //}
+//
+//
+        //private static void GetAutoEntityView(Entity Entity, Entity prevEntity, Entity entity, string navPath,
+            //ref Dictionary<string, string> res,
+            //int level, ref Stack prevIsMany, bool? isMany)
+        //{
+//
+            //foreach (var p in entity.EntityProperties)
+            //{
+                //if (p.DataProperties.Any() && p.DataProperties.All(x => x.ModelType.Name == "EntityId") && level <= 1)
+                //{
+                    //prevEntity = entity;
+//
+                    //var prlst = p.ChildRelationships.Where(x => x.ChildProperty.Entity != entity);
+                    //if (prlst.Any())
+                    //{
+                        //for (int i = 0; i < prlst.Count(); i++)
+                        //{
+                            //var crel = prlst.ElementAt(i);
+//
+                            //var curEntity = crel.ChildProperty.Entity;
+                            //if (
+                                //curEntity.EntityProperties.SelectMany(x => x.DataProperties)
+                                    //.Count(x => x.ModelType.Name == "ForeignKey") > 2)
+                            //{
+                                //continue;
+                            //}
+                            //if (Entity == curEntity)
+                            //{
+                                //continue;
+                            //}
+                            //GetIsCurrentEntityMany(prevEntity, curEntity, out isMany);
+                            //if (isMany == null)
+                            //{
+                                //continue;
+                            //}
+//
+//
+                            //var nav = NavString(level == 0 ? false : (bool) prevIsMany.Peek(), isMany, curEntity, i,
+                                //false); //i == etrail.Value.Count - 1
+                            //prevIsMany.Push(isMany);
+                            //var resNavPath = navPath + nav;
+//
+                            //GetAutoEntityView(Entity, prevEntity, curEntity, resNavPath, ref res, level + 1,
+                                //ref prevIsMany,
+                                //isMany);
+                            //prevIsMany.Pop();
+                        //}
+//
+                    //}
+                //}
+//
+                //if (p.DataProperties.Any() && p.DataProperties.All(x => x.ModelType.Name == "ForeignKey") && level <= 1)
+                //{
+                    ////var etrail = leafEntities.FirstOrDefault().Value.Where(x => x.EntityProperties);
+                    ////if (etrail.Equals(default(KeyValuePair<Entity, List<Entity>>))) continue;
+                    //prevEntity = entity;
+//
+//
+                    //var rlst = p.ParentRelationships.Where(x => x.ParentProperty.Entity != entity);
+                    //if (rlst.Any())
+                    //{
+                        //for (int i = 0; i < rlst.Count(); i++)
+                        //{
+                            //var prel = rlst.ElementAt(i);
+                            //var curEntity = prel.ParentProperty.Entity;
+                            //if (Entity == curEntity)
+                            //{
+                                //continue;
+                            //}
+                            //if (
+                                //curEntity.EntityProperties.SelectMany(x => x.DataProperties)
+                                    //.Count(x => x.ModelType.Name == "ForeignKey") > 2)
+                            //{
+                                //continue;
+                            //}
+//
+                            //GetIsCurrentEntityMany(prevEntity, curEntity, out isMany);
+                            //if (isMany == null)
+                            //{
+                                //continue;
+                            //}
+//
+//
+                            //var nav = NavString(level == 0 ? false : (bool) prevIsMany.Peek(), isMany, curEntity, i,
+                                //false); //i == etrail.Value.Count - 1
+                            //prevIsMany.Push(isMany);
+                            //var resNavPath = navPath + nav;
+//
+//
+                            //GetAutoEntityView(Entity, prevEntity, curEntity, resNavPath, ref res, level + 1,
+                                //ref prevIsMany,
+                                //isMany);
+//
+                            //prevIsMany.Pop();
+//
+                        //}
+//
+                    //}
+//
+                //}
+//
+            //}
+//
+            //var entityNameProps = entity.EntityProperties.Where(x => x.DataProperties.Any(z =>
+                //z.ModelType.Name == "EntityName" ||
+                //(z.ModelType.Name == "Attribute" && z.EntityProperty.PropertyName == "Value"))).ToList();
+            //foreach (var prop in entityNameProps)
+            //{
+//
+                //if (isMany == null) continue;
+                //var key = res.Keys.Contains(prop.Entity.Name)
+                    //? prevEntity == null ? "" : prevEntity.Name + prop.Entity.Name
+                    //: prop.Entity.Name;
+//
+                //var val = String.Format("{0}{1}{2}", navPath,
+                    //GetPropertyString(prevIsMany.Count >= 1 ? (bool?) prevIsMany.Peek() : false, prop,
+                        //prevIsMany.Contains(true)),
+                    //(prevIsMany.Count >= 1 ? (bool?) prevIsMany.Peek() : false) == true ? ".LastOrDefault()" : "");
+//
+                //res.Add(key, val);
+//
+            //}
+//
+        //}
+//
+        //public static Dictionary<string, string> GetAutoEntityView(Entity Entity)
+        //{
+            //var res = new Dictionary<string, string>();
+            //var prevIsMany = new Stack();
+            //GetAutoEntityView(Entity, null, Entity, "", ref res, 0, ref prevIsMany, null);
+            //return res;
+        //}
+//
+//
+        //public static void GetLeafEntities(Entity entity, ref Dictionary<Entity, List<Entity>> leafEntities,
+            //ref List<Entity> trail)
+        //{
+            //if (trail.Contains(entity)) return;
+            //if (leafEntities.Keys.Contains(entity)) return;
+//
+            //trail.Add(entity);
+//
+            //var cRels = entity.EntityProperties.SelectMany(x => x.ChildRelationships);
+            //var pRels = entity.EntityProperties.SelectMany(x => x.ParentRelationships);
+//
+            //var isLeaf = (!cRels.Any() && pRels.Count() == 1) ||
+                         //entity.EntityProperties.Any(x => x.DataProperties.Any(z => z.ModelType.Name == "EntityName"));
+            //if (!isLeaf)
+            //{
+                //foreach (var pr in pRels)
+                //{
+                    //if (!trail.Contains(pr.ParentProperty.Entity))
+                        //GetLeafEntities(pr.ParentProperty.Entity, ref leafEntities, ref trail);
+                //}
+//
+                //foreach (var cr in cRels)
+                //{
+                    //if (!trail.Contains(cr.ChildProperty.Entity))
+                        //GetLeafEntities(cr.ChildProperty.Entity, ref leafEntities, ref trail);
+                //}
+            //}
+            //if (!leafEntities.Keys.Contains(entity)) leafEntities.Add(entity, new List<Entity>(trail));
+//
+            ////trail = new List<Entity>();
+            //trail.Remove(entity);
+        //}
+    //}
+//
+//
+    //public static void GetIsCurrentEntityMany(Entity prevEntity, Entity CurEntity, out bool? isMany)
+    //{
+        //EntityRelationship rel = null;
+        //EntityProperty relProp = null;
+        //if (
+            //prevEntity.EntityProperties.SelectMany(x => x.ChildRelationships)
+                //.FirstOrDefault(x => x.ChildProperty.Entity == CurEntity) != null)
+        //{
+            //rel = prevEntity.EntityProperties.SelectMany(x => x.ChildRelationships)
+                //.FirstOrDefault(x => x.ChildProperty.Entity == CurEntity);
+            //relProp = rel.ChildProperty;
+            //isMany = relProp.DataProperties.All(x => x.ModelType.Name == "ForeignKey") &&
+                     //!(relProp.DataProperties.All(x => x.ModelType.Name == "EntityId"));
+            //return;
+        //}
+        //else if (
+            //prevEntity.EntityProperties.SelectMany(x => x.ParentRelationships)
+                //.FirstOrDefault(x => x.ParentProperty.Entity == CurEntity) != null)
+        //{
+            //rel = prevEntity.EntityProperties.SelectMany(x => x.ParentRelationships)
+                //.FirstOrDefault(x => x.ParentProperty.Entity == CurEntity);
+            //relProp = rel.ParentProperty;
+            //isMany = relProp.DataProperties.All(x => x.ModelType.Name == "ForeignKey") &&
+                     //!(relProp.DataProperties.All(x => x.ModelType.Name == "EntityId"));
+            //return;
+        //}
+//
+        //isMany = null;
+//
+    //}
+//
+    //public static string NavString(bool? prevIsMany, bool? isMany, Entity curEntity, int i, bool isLast)
+    //{
+        //if (prevIsMany == null) return curEntity.EntitySetName + ".";
+//
+        //if (prevIsMany == true)
+        //{
+            //if (isLast)
+            //{
+                //if (isMany == true)
+                //{
+//
+                    //return string.Format("SelectMany(x{0} => x{0}.{1}).", i, curEntity.EntitySetName);
+                //}
+                //else
+                //{
+                    //return string.Format("Select(x{0} => x{0}.{1}).", i, curEntity.EntitySetName);
+                //}
+            //}
+            //else
+            //{
+                //if (isMany == true)
+                //{
+                    //return string.Format("SelectMany(x{0} => x{0}.{1}).", i, curEntity.EntitySetName);
+                //}
+                //else
+                //{
+                    //return string.Format("Select(x{0} => x{0}.{1}).", i, curEntity.EntitySetName);
+                //}
+            //}
+//
+        //}
+        //else
+        //{
+            //return curEntity.EntitySetName + ".";
+//
+        //}
+//
+    //}
+//
+    //public static string GetPropertyString(bool? isMany, EntityViewProperty p, bool? prevIsMany)
+    //{
+        //if (prevIsMany == null)
+            //return p.EntityProperty != null
+                //? p.EntityProperty.PropertyName
+                //: p.EntityViewViewProperty.EntityProperty.PropertyName;
+        //if (isMany == null)
+            //return p.EntityProperty != null
+                //? p.EntityProperty.PropertyName
+                //: p.EntityViewViewProperty.EntityProperty.PropertyName;
+        //if (prevIsMany == true)
+        //{
+            //return string.Format("Select(z => z.{0})",
+                //p.EntityProperty != null
+                    //? p.EntityProperty.PropertyName
+                    //: p.EntityViewViewProperty.EntityProperty.PropertyName);
+        //}
+        //else
+        //{
+            //if (isMany == true)
+            //{
+                //return string.Format("Select(z => z.{0})",
+                    //p.EntityProperty != null
+                        //? p.EntityProperty.PropertyName
+                        //: p.EntityViewViewProperty.EntityProperty.PropertyName);
+            //}
+            //else
+            //{
+                //return p.EntityProperty.PropertyName;
+            //}
+        //}
+//
+//
+    //}
+
+
+}
+
+
+
+
+
+#>

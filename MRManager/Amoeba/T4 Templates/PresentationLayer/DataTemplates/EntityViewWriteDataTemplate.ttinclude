@@ -1,0 +1,86 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="CodeLibary.TextFunctions" #>
+<#@ assembly name="C:\Prism\Core.Common\CodeLibary\CodeLibary\bin\Debug\CodeLibary.dll" #>
+
+<#+
+public class EntityViewWriteDataTemplate : CSharpTemplate
+{
+	public EntityViewWriteDataTemplate(EntityView entityView)
+	{
+		EntityView = entityView;
+	}
+
+	public EntityView EntityView { get;}
+
+	public override string TransformText()
+	{
+		
+#>
+<ResourceDictionary 
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		mc:Ignorable="d"
+		xmlns:converters="clr-namespace:Converters;assembly=Converters"
+		xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
+		xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels">
+
+		<DataTemplate x:Key="<#=EntityView.Name #>WDT"  DataType="{x:Type Interfaces:I<#=EntityView.Name #>}">
+			<DataTemplate.Resources>
+				<converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+			</DataTemplate.Resources>
+			<Grid Height="Auto" Width="497">
+				<StackPanel Orientation="Horizontal">
+					<StackPanel Width="Auto" Margin="10,0,10,0" HorizontalAlignment="Left">
+<#+
+	foreach (var prop in EntityView.EntityViewProperties)
+		{
+				var propertyName = prop.EntityProperty == null
+	        ? prop.EntityViewViewProperty.Name
+	        : prop.Name;
+#>
+						<TextBlock Text="<#=TextFunctions.AddSpacesToSentence(propertyName.Replace("Id",""))#>" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto" MinWidth ="75" TextAlignment="Right"/>			
+
+<#+		} #>
+
+
+					</StackPanel>
+				<StackPanel Width="Auto" Margin="10,0,10,0" HorizontalAlignment="Left">
+<#+
+	foreach (var prop in EntityView.EntityViewProperties)
+		{
+			var dataType = prop.EntityProperty == null
+	        ? prop.EntityViewViewProperty.EntityProperty.DataProperties.First().DataType.Name
+	        : prop.EntityProperty.DataProperties.First().DataType.Name;
+		var propertyName = prop.EntityProperty == null
+	        ? prop.EntityViewViewProperty.Name
+	        : prop.Name;
+
+		switch (dataType)
+		{
+			case "bool":
+#>
+					<CheckBox IsChecked="{Binding Path=<#= propertyName #>, Source={x:Static viewModels:<#=EntityView.Name #>ViewModel_AutoGen.Instance}, UpdateSourceTrigger=PropertyChanged}" Content="" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto" />
+<#+			break;
+			default:
+#>					<TextBox Text="{Binding Path=<#= propertyName#>, Source={x:Static viewModels:<#=EntityView.Name #>ViewModel_AutoGen.Instance}, FallbackValue='<#=propertyName#>', UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto"  MinWidth ="75" />
+<#+
+			break;
+		}
+	}
+#>
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+		</DataTemplate>	
+</ResourceDictionary>
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

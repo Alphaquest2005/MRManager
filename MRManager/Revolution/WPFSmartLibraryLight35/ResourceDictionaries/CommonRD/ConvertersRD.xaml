@@ -1,0 +1,37 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+						  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						  xmlns:conv="clr-namespace:SoftArcs.WPFSmartLibrary.ValueConverter">
+
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<!--                                     Miscellaneous Boolean Converter                                    -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+	<conv:BoolToVisibilityConverter x:Key="BoolToOppositeVisibilityConverter" OppositeBooleanValue="True" />
+	<conv:BoolToOppositeBoolConverter x:Key="BoolToOppositeBoolConverter" />
+	<conv:BoolToBrushConverter x:Key="BoolToBrushConverter" />
+
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<!--                                      Miscellaneous Brush Converter                                     -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<conv:BrushToColorConverter x:Key="BrushToColorConverter" />
+
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<!--                                    Miscellaneous Visibility Converter                                  -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+	<conv:StringToVisibilityConverter x:Key="StringToOppositeVisibilityConverter" OppositeStringValue="True" />
+
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<!--                                     Miscellaneous Numeric Converter                                    -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<conv:DoubleToEmptyStringConverter x:Key="DoubleToEmptyStringConverter" />
+	<conv:IntToEmptyStringConverter x:Key="IntToEmptyStringConverter" />
+	<conv:IntToBrushConverter x:Key="IntToBrushConverter" />
+
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<!--                                         Miscellaneous Converter                                        -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<conv:DateTimeToEmptyStringConverter x:Key="DateTimeToEmptyStringConverter" />
+	<conv:EnumMatchToBooleanConverter x:Key="EnumConverter" />
+
+</ResourceDictionary> 

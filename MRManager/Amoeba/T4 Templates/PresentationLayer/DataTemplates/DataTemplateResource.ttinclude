@@ -1,0 +1,45 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="CodeLibary.TextFunctions" #>
+<#@ assembly name="C:\Prism\Core.Common\CodeLibary\CodeLibary\bin\Debug\CodeLibary.dll" #>
+
+<#+
+public class DataTemplateResource : CSharpTemplate
+{
+	public DataTemplateResource(List<string> namesEntities)
+	{
+		NamesEntities = namesEntities;
+		
+	}
+
+	public List<string> NamesEntities { get;}
+	
+
+	public override string TransformText()
+	{
+		
+#>
+		<ResourceDictionary 
+				xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+			<ResourceDictionary.MergedDictionaries>
+<#+
+		foreach (var name in NamesEntities)
+		{
+#>
+				<ResourceDictionary Source="Generated DataTemplates/<#=name #>DT.xaml" />
+				<ResourceDictionary Source="Generated DataTemplates/Read/<#=name #>RDT.xaml" />
+				<ResourceDictionary Source="Generated AutoView Templates/<#=name #>AutoViewRDT.xaml" />
+				<ResourceDictionary Source="Generated DataTemplates/Write/<#=name #>WDT.xaml" />
+<#+		} #>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

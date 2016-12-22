@@ -1,0 +1,154 @@
+﻿<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="ViewTemplate.ttinclude" #>
+<#@ include file="ViewCSTemplate.ttinclude" #>
+<#@ include file="EntityViewTemplate.ttinclude" #>
+<#@ include file="AutoEntityViewTemplate.ttinclude" #>
+<#@ include file="AutoEntityViewCSTemplate.ttinclude" #>
+<#@ include file="EntityViewCSTemplate.ttinclude" #>
+<#@ include file="MainViewTemplate.ttinclude" #>
+<#@ include file="MainViewCSTemplate.ttinclude" #>
+<#@ include file="MainWindowTemplate.ttinclude" #>
+<#@ include file="MainWindowCSTemplate.ttinclude" #>
+<#@ include file="SummaryListViewTemplate.ttinclude" #>
+<#@ include file="SummaryListViewCSTemplate.ttinclude" #>
+<#@ include file="SummaryViewTemplate.ttinclude" #>
+<#@ include file="SummaryViewCSTemplate.ttinclude" #>
+<#@ include file="SummaryViewDetailsCSTemplate.ttinclude" #>
+<#@ include file="SummaryViewDetailsTemplate.ttinclude" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba Projects\MRManager\T4Utilities\bin\Debug\T4Utilities.dll"#>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="T4Entities" #>
+<#+
+// <copyright file="DataLayer.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+	public void CreateViews(Application app,string AppFolder, Dictionary<string, string> settings, List<ApplicationEntity> mainEntities,List<Entity> entities)
+	{
+		// create simple properties
+		foreach (var entity in entities)
+		{
+			var tpl = new ViewTemplate(entity);
+			tpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			tpl.Output.File = settings["Folder"] +  @"\Model\" + @"\" + entity.Name + "ListView.xaml";
+			tpl.Render();
+
+			var ctpl = new ViewCSTemplate(entity);
+			ctpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			ctpl.Output.File = settings["Folder"] + @"\Model\" + @"\" + entity.Name + "ListView.xaml.cs";
+			ctpl.Render();
+
+			var atpl = new AutoEntityViewTemplate(entity);
+			atpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			atpl.Output.File = settings["Folder"] + @"\AutoViews\" + @"\" + entity.Name + "ListView.xaml";
+			atpl.Render();
+
+
+			var actpl = new AutoEntityViewCSTemplate(entity);
+			actpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			actpl.Output.File = settings["Folder"] + @"\AutoViews\" + @"\" + entity.Name + "ListView.xaml.cs";
+			actpl.Render();
+		}
+
+		foreach (var entityView in entities.SelectMany(x=> x.EntityViews))
+		{
+			var tpl = new EntityViewTemplate(entityView);
+			tpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			tpl.Output.File = settings["Folder"] +  @"\EntityViews\" + @"\" + entityView.Name + "ListView.xaml";
+			tpl.Render();
+
+			var ctpl = new EntityViewCSTemplate(entityView);
+			ctpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			ctpl.Output.File = settings["Folder"] + @"\EntityViews\" + @"\" + entityView.Name + "ListView.xaml.cs";
+			ctpl.Render();
+		}
+
+		var mtpl = new MainViewTemplate(mainEntities);
+		mtpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+		mtpl.Output.File = settings["Folder"] + @"\MainView_AutoGen.xaml";
+		mtpl.Render();
+
+		var mctpl = new MainViewCSTemplate();
+		mctpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+		mctpl.Output.File = settings["Folder"] + @"\MainView_AutoGen.xaml.cs";
+		mctpl.Render();
+
+
+		var wtpl = new MainWindowTemplate();
+		wtpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+		wtpl.Output.File = settings["Folder"] + @"\MainWindow_AutoGen.xaml";
+		wtpl.Render();
+
+		var wctpl = new MainWindowCSTemplate();
+		wctpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+		wctpl.Output.File = settings["Folder"] + @"\MainWindow_AutoGen.xaml.cs";
+		wctpl.Render();
+
+
+		foreach (var mainEntity in mainEntities)
+		{
+			 var el = T4Utilities.GetEntitiesForMainEntity(mainEntity.Entity);
+			
+			var sltpl = new SummaryListViewTemplate(mainEntity);
+			sltpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			sltpl.Output.File = settings["Folder"] + @"\SummaryViews\" + mainEntity.Entity.Name + @"\" +
+								@"\SummaryListView_AutoGen.xaml";
+			sltpl.Render();
+
+			var slctpl = new SummaryListViewCSTemplate(mainEntity);
+			slctpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			slctpl.Output.File = settings["Folder"] + @"\SummaryViews\" + mainEntity.Entity.Name + @"\" +
+								 @"\SummaryListView_AutoGen.xaml.cs";
+			slctpl.Render();
+
+			var sdtpl = new SummaryViewDetailsTemplate(el, mainEntity);
+			sdtpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			sdtpl.Output.File = settings["Folder"] + @"\SummaryViews\" + mainEntity.Entity.Name + @"\" +
+								@"\SummaryViewDetails_AutoGen.xaml";
+			sdtpl.Render();
+			var sdctpl = new SummaryViewDetailsCSTemplate(mainEntity,el);
+			sdctpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			sdctpl.Output.File = settings["Folder"] + @"\SummaryViews\" + mainEntity.Entity.Name + @"\" +
+								 @"\SummaryViewDetails_AutoGen.xaml.cs";
+			sdctpl.Render();
+
+
+			var stpl = new SummaryViewTemplate(mainEntity);
+			stpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			stpl.Output.File = settings["Folder"] + @"\SummaryViews\" + mainEntity.Entity.Name + @"\" +
+							   @"\SummaryView_AutoGen.xaml";
+			stpl.Render();
+
+			var sctpl = new SummaryViewCSTemplate(mainEntity);
+			sctpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			sctpl.Output.File = settings["Folder"] + @"\SummaryViews\" + mainEntity.Entity.Name + @"\" +
+								@"\SummaryView_AutoGen.xaml.cs";
+			sctpl.Render();
+
+		}
+
+	}
+
+	public void CreateEntityViews(Application app, string AppFolder, Dictionary<string, string> settings,
+		List<ApplicationEntity> mainEntities, List<Entity> entities)
+	{
+		// create simple properties
+		
+
+		foreach (var entityView in entities.SelectMany(x => x.EntityViews))
+		{
+			var tpl = new EntityViewTemplate(entityView);
+			tpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			tpl.Output.File = settings["Folder"] + @"\ntityViews\" + @"\" + entityView.Name + "ListView.xaml";
+			tpl.Render();
+
+			var ctpl = new EntityViewCSTemplate(entityView);
+			ctpl.Output.Project = Path.Combine(AppFolder, settings["Project"]);
+			ctpl.Output.File = settings["Folder"] + @"\EntityViews\" + @"\" + entityView.Name + "ListView.xaml.cs";
+			ctpl.Render();
+		}
+	}
+
+#>

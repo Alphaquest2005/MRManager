@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6BA1D455-8C8B-427B-B628-EB934B36F9BB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Expressions</RootNamespace>
+    <AssemblyName>Expressions</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ApplicationEntitiesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ApplicationsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ApplicationSettingAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\DataPropertiesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\DataTypesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\EntitiesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\EntityPropertiesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\EntityRelationshipsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\EntityViewAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\EntityViewEntityPropertiesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\EntityViewPropertiesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\EntityViewPropertyFunctionAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\EntityViewPropertyFunctionParameterAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\EntityViewViewPropertiesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\FunctionBodyAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\FunctionParametersAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\FunctionReturnTypeAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\FunctionsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\FunctionSetFunctionsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\FunctionSetsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\LayersAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\LayoutAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ModelTypesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\OperatorsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ParametersAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PartsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PresentationPropertiesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\PrimaryKeyOptionsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ProcessAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ProcessStepsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ProcessStepScreensAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ProjectsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\RelationshipTypesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ScreenLayoutsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ScreenPartsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ScreensAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ScreenViewsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\SettingsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\SettingsNamesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\StateMachinesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\StateMachineStatesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\StateMachineTriggersAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\StatesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\StepsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\TestValuesAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\TriggersAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ViewEntityAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\ViewsAutoView.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ApplicationEntities.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Applications.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ApplicationSetting.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\DataProperties.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\DataTypes.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Entities.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\EntityProperties.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\EntityRelationships.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\EntityView.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\EntityViewEntityProperties.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\EntityViewProperties.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\EntityViewPropertyFunction.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\EntityViewPropertyFunctionParameter.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\EntityViewViewProperties.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\FunctionBody.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\FunctionParameters.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\FunctionReturnType.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Functions.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\FunctionSetFunctions.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\FunctionSets.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Layers.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Layout.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ModelTypes.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Operators.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Parameters.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Parts.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PresentationProperties.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\PrimaryKeyOptions.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Process.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ProcessSteps.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ProcessStepScreens.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Projects.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\RelationshipTypes.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ScreenLayouts.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ScreenParts.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Screens.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ScreenViews.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Settings.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\SettingsNames.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\StateMachines.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\StateMachineStates.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\StateMachineTriggers.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\States.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Steps.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\TestValues.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Triggers.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\ViewEntity.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\Views.cs" />
+    <Compile Include="Generated Expressions\Function Expressions\AutoFunctions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Revolution\Common\Common.csproj">
+      <Project>{cb6d5fbc-0c13-437d-b4f3-a0ec4d5673b3}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\DataInterfaces\DataInterfaces.csproj">
+      <Project>{f6008330-ba42-454b-a0b4-82455de56776}</Project>
+      <Name>DataInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EFEntities\EF.Entities.csproj">
+      <Project>{fad2a8c8-a1b4-4a3c-8e37-0388c0e3733c}</Project>
+      <Name>EF.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{ad573873-c8e6-4ea3-93f5-0d39a92fc9f6}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

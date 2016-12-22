@@ -1,0 +1,94 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Specifications\bin\Debug\Specifications.dll"#>
+<#@ import namespace="Specifications" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Specifications\bin\Debug\LinqSpecs.dll"#>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Amoeba\Amoeba\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll" #>
+<#@ import namespace="MoreLinq" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class EFEntityTemplate : CSharpTemplate
+{
+	public EFEntityTemplate(ApplicationEntity entity)
+	{
+		Entity = entity;
+	}
+
+	public ApplicationEntity Entity { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+using System;
+using System.Collections.Generic;
+using Common.DataEntites;
+using EF.Entities;
+using Interfaces;
+
+namespace EF.Entities
+{
+	public partial class <#= Entity.Entity.Name #>: BaseEntity, I<#= Entity.Entity.Name #>
+	{
+<#+
+	if(!EntitySpecificationContext.HasEntityId.IsSatisfiedBy(Entity.Entity)) return "EntityId Missing";
+	if(!DataPropertySpecificationContext.IntZeroLength.IsSatisfiedBy(Entity.Entity.EntityProperties.SelectMany(x=>x.DataProperties).First(x => x.ModelType.Name == "EntityId"))) return "EntryId DataType fail Int is Zero Check";
+	foreach (DataProperty prop in Entity.Entity.EntityProperties.SelectMany(x=>x.DataProperties).Where(z => z.ModelType.Name != "EntityId" && z.EntityProperty.PropertyName != "Id").DistinctBy(x => x.EntityPropertyId))
+	{
+	    
+#>
+		public virtual <#=prop.DataType.Name #> <#= prop.EntityProperty.PropertyName #> { get; set; }
+<#+ }
+#>
+
+		//-------------------Navigation Properties -------------------------------//
+			// ---------Child Relationships
+<#+
+	    foreach (var cr in Entity.Entity.EntityProperties.SelectMany(x=> x.ChildRelationships))
+	    {
+			if(cr.ChildProperty.DataProperties.Any(x => x.ModelType.Name == "EntityId"))
+	        {
+					// do single property types
+#>
+				public virtual <#=cr.ChildProperty.Entity.Name #> <#=cr.ChildProperty.Entity.Name #> {get; set;}
+<#+			}
+			else
+	        { /// do collection types
+#>
+				public virtual ICollection<<#=cr.ChildProperty.Entity.Name #>> <#=cr.ChildProperty.Entity.EntitySetName #> {get; set;}
+<#+ 
+			} 
+	    }
+ #>		
+			// ---------Parent Relationships
+<#+
+	    foreach (var cr in Entity.Entity.EntityProperties.SelectMany(x=> x.ParentRelationships))
+	    {
+			if(cr.ParentProperty.DataProperties.Any(x => x.ModelType.Name == "EntityId"))
+	        {
+					// do single property types
+#>
+				public virtual <#=cr.ParentProperty.Entity.Name #> <#=cr.ParentProperty.Entity.Name #> {get; set;}
+<#+			}
+			else
+	        { /// do collection types
+#>
+				public virtual ICollection<<#=cr.ParentProperty.Entity.Name #>> <#=cr.ParentProperty.Entity.EntitySetName #> {get; set;}
+<#+ 
+			} 
+	    }
+ #>	
+
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

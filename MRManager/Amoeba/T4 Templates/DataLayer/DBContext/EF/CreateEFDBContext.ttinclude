@@ -1,0 +1,31 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="..\..\..\Utilities\DataAccess\Repository.ttinclude" once="true" #>
+<#@ include file="DBContextTemplate.ttinclude" #>
+<#@ include file="DBContextIntitalizationTemplate.ttinclude" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="System.IO" #>
+<#+
+// <copyright file="DataLayer.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+	public void CreateEFDBContext(  Application app,string appFolder,Dictionary<string,string> settings,List<ApplicationEntity> entities)
+	{
+		// create simple properties
+			var tpl = new DBContextTemplate(app.Name,entities);
+			tpl.Output.Project = Path.Combine(appFolder, settings["Project"]) ;
+			tpl.Output.File = settings["Folder"] + @"\" + app.Name + "DBContext.cs";
+			tpl.Render(); 
+
+			var ipl = new DBContextIntializationTemplate(app.Name,settings["MigrationStratergy"], entities);
+			ipl.Output.Project = Path.Combine(appFolder, settings["Project"]) ;
+			ipl.Output.File = settings["Folder"] + @"\" + app.Name + "DBContext-Intialization.cs";
+			ipl.Render(); 
+		
+	}
+
+
+
+#>

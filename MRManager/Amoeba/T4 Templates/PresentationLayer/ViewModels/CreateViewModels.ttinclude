@@ -1,0 +1,30 @@
+﻿<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="Model\CreateEntityViewModels.ttinclude" #>
+<#@ include file="EntityView\CreateEntityViewModels.ttinclude" #>
+<#@ include file="AutoEntityView\CreateAutoEntityViewModels.ttinclude" #>
+<#@ include file="MainViewModel\CreateMainViewModels.ttinclude" #>
+<#@ include file="SummaryViewModel\CreateSummaryViewModels.ttinclude" #>
+<#@ include file="BaseViewModel\CreateBaseViewModels.ttinclude" #>
+<#+
+// <copyright file="DataLayer.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+	public void CreateViewModels(Application app,string AppFolder, Dictionary<string, string> settings,
+		List<ApplicationEntity> mainEntities, List<ApplicationEntity> entities)
+	{
+		foreach (var mainEntity in mainEntities)
+		{
+			CreateSummaryViewModels(app,AppFolder, settings, mainEntity);
+		}
+
+		CreateEntityViewModels(app,AppFolder, settings, entities.Select(x=>x.Entity).ToList());
+		CreateBaseViewModel(app,AppFolder, settings, mainEntities, entities);
+		CreateMainViewModels(app,AppFolder, settings, entities);
+		CreateEntityViewViewModels(app,AppFolder, settings, entities.SelectMany(x=>x.Entity.EntityViews).ToList());
+		CreateAutoViewModels(app,AppFolder, settings, entities.Select(x=>x.Entity).ToList());
+	}
+
+	
+#>

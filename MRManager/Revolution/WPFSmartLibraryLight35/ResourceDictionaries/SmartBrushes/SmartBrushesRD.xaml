@@ -1,0 +1,81 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+						  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<!--                                     "Gray" LinearGradientBrushes                                       -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<LinearGradientBrush x:Key="LightToGrayBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+		<GradientStop Color="#FFF3F3F3" Offset="0"/>
+		<GradientStop Color="#FFAAAAAA" Offset="1"/>
+	</LinearGradientBrush>
+
+	<LinearGradientBrush x:Key="GrayToLightBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+		<GradientStop Color="#FFAAAAAA" Offset="0"/>
+		<GradientStop Color="#FFF3F3F3" Offset="1"/>
+	</LinearGradientBrush>
+
+	<LinearGradientBrush x:Key="GrayToDarkBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+		<GradientStop Color="Gray" Offset="0"/>
+		<GradientStop Color="#FF222222" Offset="1"/>
+	</LinearGradientBrush>
+
+	<LinearGradientBrush x:Key="DarkToGrayBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+		<GradientStop Color="#FF222222" Offset="0"/>
+		<GradientStop Color="Gray" Offset="1"/>
+	</LinearGradientBrush>
+
+	<LinearGradientBrush x:Key="DimGrayToDarkBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+		<GradientStop Color="DimGray" Offset="0"/>
+		<GradientStop Color="#FF222222" Offset="1"/>
+	</LinearGradientBrush>
+
+	<LinearGradientBrush x:Key="DarkToDimGrayBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+		<GradientStop Color="#FF222222" Offset="0"/>
+		<GradientStop Color="DimGray" Offset="1"/>
+	</LinearGradientBrush>
+
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<!--                                      "Silver" LinearGradientBrushes                                     -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<LinearGradientBrush x:Key="SilverToGainsboroBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+		<GradientStop Color="Silver" Offset="0"/>
+		<GradientStop Color="Gainsboro" Offset="1"/>
+	</LinearGradientBrush>
+
+	<LinearGradientBrush x:Key="SmartSilverShiningBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+		<GradientStop Color="Gainsboro" Offset="0"/>
+		<GradientStop Color="#FFFFFFFF" Offset="1"/>
+	</LinearGradientBrush>
+
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<!--                                      "Purple" LinearGradientBrushes                                    -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<LinearGradientBrush x:Key="HorizonBackgroundPurpleBrush" StartPoint="0,0" EndPoint="0,1">
+		<GradientStop Offset="0" Color="Black" />
+		<GradientStop Offset="0.49" Color="Purple" />
+		<GradientStop Offset="0.50" Color="Purple" />
+		<GradientStop Offset="1" Color="Black" />
+	</LinearGradientBrush>
+
+	<LinearGradientBrush x:Key="HorizonBackgroundLightPurpleBrush" StartPoint="0,0" EndPoint="0,1">
+		<GradientStop Offset="0" Color="#FFFFD8EC" />
+		<GradientStop Offset="1" Color="#FFEFA7FA" />
+	</LinearGradientBrush>
+
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<!--                                        "Red" LinearGradientBrushes                                     -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<LinearGradientBrush x:Key="LightToDarkRedBrush" StartPoint="0,0" EndPoint="0,1">
+		<GradientStop Offset="0" Color="#FFD41014" />
+		<GradientStop Offset="1" Color="DarkRed" />
+	</LinearGradientBrush>
+
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<!--                                       "Blue" LinearGradientBrushes                                     -->
+	<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<LinearGradientBrush x:Key="LightToBlueBrush" StartPoint="0,0" EndPoint="0,1">
+		<GradientStop Offset="0" Color="#FF9CB8D8" />
+		<GradientStop Offset="1" Color="#FF1E4C81" />
+	</LinearGradientBrush>
+
+</ResourceDictionary> 

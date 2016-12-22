@@ -1,0 +1,54 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Amoeba\Amoeba\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll" #>
+<#@ import namespace="MoreLinq" #>
+<#@ import namespace="System.Linq" #>
+
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class ConstructorAutoEntityViewModelTemplate : CSharpTemplate
+{
+	public ConstructorAutoEntityViewModelTemplate(Entity entity)
+	{
+		Entity = entity;
+	}
+
+	public Entity Entity { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+using System.ComponentModel;
+using Core.Common.UI;
+using Interfaces;
+using DesignTime;
+using ValidationSets;
+
+namespace ViewModels
+{
+	public partial class <#=Entity.Name#>AutoViewModel_AutoGen : BaseEntityViewModel<I<#=Entity.Name#>AutoView>
+	{
+		public <#=Entity.Name#>AutoViewModel_AutoGen()
+		{
+
+			CurrentEntity = CreateNullEntity();
+
+			OnCreated();        
+			OnTotals();
+		}
+			
+		partial void OnCreated();
+		partial void OnTotals();
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{879C9901-CB5C-407A-8655-E3C3632C1D7B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Views</RootNamespace>
+    <AssemblyName>Views</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ToBeGenerated\Model\AddressCitiesListView.xaml.cs">
+      <DependentUpon>AddressCitiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToBeGenerated\Summary\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToBeGenerated\Summary\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToBeGenerated\Summary\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ToBeGenerated\SystemViews\Screen.xaml.cs">
+      <DependentUpon>Screen.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="project.json" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataTemplates\DataTemplates.csproj">
+      <Project>{2f8bef84-3c02-48a4-a576-fbf41e3fffdd}</Project>
+      <Name>DataTemplates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DesignTimeData\DesignTimeData.csproj">
+      <Project>{e7ec52dc-8650-4cf0-bcab-ed8a9473d2cf}</Project>
+      <Name>DesignTimeData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EFEntities\EF.Entities.csproj">
+      <Project>{FAD2A8C8-A1B4-4A3C-8E37-0388C0E3733C}</Project>
+      <Name>EF.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{AD573873-C8E6-4EA3-93F5-0D39A92FC9F6}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\CommonMessages\CommonMessages.csproj">
+      <Project>{77007560-89dc-4e1f-9313-ae064a048ad4}</Project>
+      <Name>CommonMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\Common\Common.csproj">
+      <Project>{cb6d5fbc-0c13-437d-b4f3-a0ec4d5673b3}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\Core.Common.UI\Core.Common.UI.csproj">
+      <Project>{5dd82ad7-f344-45e3-92cc-96f8d07700af}</Project>
+      <Name>Core.Common.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\EventAggregator\EventAggregator.csproj">
+      <Project>{31e6b370-01f0-4489-832f-436cb97a6718}</Project>
+      <Name>EventAggregator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\EventMessages\EventMessages.csproj">
+      <Project>{e3d04176-3758-4c9d-84f3-7a4d3859eae5}</Project>
+      <Name>EventMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\SystemInterfaces\SystemInterfaces.csproj">
+      <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>
+      <Name>SystemInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\ViewMessages\ViewMessages.csproj">
+      <Project>{eb1e2e94-d6fb-49df-8036-9bf910e3b7aa}</Project>
+      <Name>ViewMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\ViewModel.Interfaces\ViewModel.Interfaces.csproj">
+      <Project>{2f936e24-723e-4e7a-b21c-d6f618c74651}</Project>
+      <Name>ViewModel.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModels\ViewModels.csproj">
+      <Project>{db1e7bd6-7fe0-4cdd-8b6d-edbb0d156b41}</Project>
+      <Name>ViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ToBeGenerated\Model\AddressCitiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ToBeGenerated\Summary\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ToBeGenerated\Summary\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ToBeGenerated\Summary\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ToBeGenerated\SystemViews\Screen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

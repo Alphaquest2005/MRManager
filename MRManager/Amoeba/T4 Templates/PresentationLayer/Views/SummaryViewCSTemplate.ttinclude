@@ -1,0 +1,42 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="CodeLibary.TextFunctions" #>
+<#@ assembly name="C:\Prism\Core.Common\CodeLibary\CodeLibary\bin\Debug\CodeLibary.dll" #>
+
+<#+
+public class SummaryViewCSTemplate : CSharpTemplate
+{
+	public SummaryViewCSTemplate(ApplicationEntity entity)
+	{
+		Entity = entity;
+	}
+
+	public ApplicationEntity Entity { get;}
+	public override string TransformText()
+	{
+		var top = 0;
+#>
+namespace Views
+{
+	/// <summary>
+	/// Interaction logic for <#=Entity.Entity.Name#>SummaryList.xaml
+	/// </summary>
+	public partial class <#=Entity.Entity.Name#>SummaryView
+	{
+		public <#=Entity.Entity.Name#>SummaryView()
+		{
+			this.InitializeComponent();
+			
+			// Insert code required on object creation below this point.
+		}
+       
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

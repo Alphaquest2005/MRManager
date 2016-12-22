@@ -1,0 +1,63 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Amoeba\Amoeba\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll" #>
+<#@ import namespace="MoreLinq" #>
+
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class NHMappingTemplate : CSharpTemplate
+{
+	public NHMappingTemplate(ApplicationEntity entity)
+	{
+		Entity = entity;
+	}
+
+	public ApplicationEntity Entity { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+
+using EF.Entities;
+using FluentNHibernate.Mapping;
+
+namespace NH.Mappings
+{
+	public class <#= Entity.Entity.Name #>Map: ClassMap<<#= Entity.Entity.Name #>>
+	{
+		public <#= Entity.Entity.Name #>Map()
+		{
+			
+<#+
+		var entityId = Entity.Entity.EntityProperties.SelectMany(x=>x.DataProperties).FirstOrDefault(x => x.ModelType.Name == "EntityId");
+		if(entityId == null) return "";
+#>
+			Id(t => t.<#=entityId.EntityProperty.PropertyName #>, "<#=entityId.EntityProperty.PropertyName #>")<#=(entityId.EntityProperty.ParentRelationships.Any(x => x.RelationshipType.Name == "1:1")?".GeneratedBy.Assigned()":"") #>;        
+			  Table("<#=entityId.EntityProperty.Entity.EntitySetName#>");
+			  Schema("<#=entityId.EntityProperty.Entity.SchemaName#>");
+<#+
+	foreach (var prop in Entity.Entity.EntityProperties.SelectMany(x=>x.DataProperties).Where(x => x.ModelType.Name != "EntityId").DistinctBy(x=> x.EntityPropertyId))
+	{
+		//var hasMaxLength = "";
+		//const string isRequired = ".IsRequired()";
+		//if (prop.DataType.Name == "string") hasMaxLength = $".HasMaxLength({prop.DataProperty.MaxLength})";
+		
+#>
+				Map(t => t.<#=prop.EntityProperty.PropertyName #>).Column("<#=prop.EntityProperty.PropertyName #>").Not.LazyLoad();	
+<#+ }
+#>
+		}
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

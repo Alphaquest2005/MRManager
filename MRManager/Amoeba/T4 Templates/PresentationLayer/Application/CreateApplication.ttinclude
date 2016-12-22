@@ -1,0 +1,45 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="AppXamlCSTemplate.ttinclude" #>
+<#@ include file="AppXamlTemplate.ttinclude" #>
+<#@ include file="MainWindowTemplate.ttinclude" #>
+<#@ include file="MainWindowCSTemplate.ttinclude" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="T4Entities" #>
+<#+
+// <copyright file="DataLayer.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+	public void CreateApplication(Application app, Dictionary<string, string> settings)
+	{
+		// create simple properties
+		var mctpl = new AppXamlCSTemplate(app);
+		mctpl.Output.Project = Path.Combine(settings["ApplicationFolder"], settings["Project"]);
+		mctpl.Output.File = @"App.xaml.cs";
+		mctpl.Render();
+
+
+		var atpl = new AppXamlTemplate(app);
+		atpl.Output.Project = Path.Combine(settings["ApplicationFolder"], settings["Project"]);
+		atpl.Output.File =  @"App.xaml";
+		atpl.Render();
+
+		var wtpl = new AppMainWindowTemplate(app);
+		wtpl.Output.Project = Path.Combine(settings["ApplicationFolder"], settings["Project"]);
+		wtpl.Output.File = @"MainWindow.xaml";
+		wtpl.Render();
+
+		var wctpl = new AppMainWindowCSTemplate(app);
+		wctpl.Output.Project = Path.Combine(settings["ApplicationFolder"], settings["Project"]);
+		wctpl.Output.File = @"MainWindow.xaml.cs";
+		wctpl.Render();
+	}
+
+
+
+
+
+#>

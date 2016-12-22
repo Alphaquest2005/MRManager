@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DA54313C-4B98-49B1-A8F9-B5827F121886}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EF.Mappings</RootNamespace>
+    <AssemblyName>EF.Mappings</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CarePlan.cs" />
+    <Compile Include="CarePlanDetails.cs" />
+    <Compile Include="Generated Mappings\AddressCities.cs" />
+    <Compile Include="Generated Mappings\AddressCountries.cs" />
+    <Compile Include="Generated Mappings\Addresses.cs" />
+    <Compile Include="Generated Mappings\AddressLines.cs" />
+    <Compile Include="Generated Mappings\AddressParishes.cs" />
+    <Compile Include="Generated Mappings\AddressStates.cs" />
+    <Compile Include="Generated Mappings\AddressTypes.cs" />
+    <Compile Include="Generated Mappings\AddressZipCodes.cs" />
+    <Compile Include="Generated Mappings\Allergies.cs" />
+    <Compile Include="Generated Mappings\ApplicationSetting.cs" />
+    <Compile Include="Generated Mappings\AssignedDating.cs" />
+    <Compile Include="Generated Mappings\BloodPressure.cs" />
+    <Compile Include="Generated Mappings\BoatInfo.cs" />
+    <Compile Include="Generated Mappings\CarePlan.cs" />
+    <Compile Include="Generated Mappings\CarePlanDetails.cs" />
+    <Compile Include="Generated Mappings\CarePlanDetailsSuggestedMedication.cs" />
+    <Compile Include="Generated Mappings\Cities.cs" />
+    <Compile Include="Generated Mappings\Components.cs" />
+    <Compile Include="Generated Mappings\Countries.cs" />
+    <Compile Include="Generated Mappings\DefaultImages.cs" />
+    <Compile Include="Generated Mappings\ExamDetailComponents.cs" />
+    <Compile Include="Generated Mappings\ExamDetails.cs" />
+    <Compile Include="Generated Mappings\ExamResults.cs" />
+    <Compile Include="Generated Mappings\ExamResults_AnioticFluid.cs" />
+    <Compile Include="Generated Mappings\ExamResults_FetalDates.cs" />
+    <Compile Include="Generated Mappings\ExamResults_SimpleValues.cs" />
+    <Compile Include="Generated Mappings\ExamResults_UmbilicalArtery.cs" />
+    <Compile Include="Generated Mappings\Exams.cs" />
+    <Compile Include="Generated Mappings\ExamTypes.cs" />
+    <Compile Include="Generated Mappings\ForeignAddresses.cs" />
+    <Compile Include="Generated Mappings\ForeignPhoneNumbers.cs" />
+    <Compile Include="Generated Mappings\Height.cs" />
+    <Compile Include="Generated Mappings\Interviews.cs" />
+    <Compile Include="Generated Mappings\MaritalStatus.cs" />
+    <Compile Include="Generated Mappings\MarketingMedium.cs" />
+    <Compile Include="Generated Mappings\Media.cs" />
+    <Compile Include="Generated Mappings\MediaTypes.cs" />
+    <Compile Include="Generated Mappings\MedicalCategory.cs" />
+    <Compile Include="Generated Mappings\NonResidentCompanyInfo.cs" />
+    <Compile Include="Generated Mappings\NonResidentHotelInfo.cs" />
+    <Compile Include="Generated Mappings\Occupations.cs" />
+    <Compile Include="Generated Mappings\OrganisationAddress.cs" />
+    <Compile Include="Generated Mappings\OrganisationPhoneNumbers.cs" />
+    <Compile Include="Generated Mappings\Organisations.cs" />
+    <Compile Include="Generated Mappings\Organisations_Companys.cs" />
+    <Compile Include="Generated Mappings\Organisations_Hotels.cs" />
+    <Compile Include="Generated Mappings\ParishCities.cs" />
+    <Compile Include="Generated Mappings\Parishes.cs" />
+    <Compile Include="Generated Mappings\PatientAllergies.cs" />
+    <Compile Include="Generated Mappings\PatientDoctor.cs" />
+    <Compile Include="Generated Mappings\PatientReligon.cs" />
+    <Compile Include="Generated Mappings\PatientResponses.cs" />
+    <Compile Include="Generated Mappings\PatientResults.cs" />
+    <Compile Include="Generated Mappings\PatientSyntoms.cs" />
+    <Compile Include="Generated Mappings\PatientVisit.cs" />
+    <Compile Include="Generated Mappings\PatientVisitVitalSigns.cs" />
+    <Compile Include="Generated Mappings\PersonAddresses.cs" />
+    <Compile Include="Generated Mappings\PersonCountryOfResidence.cs" />
+    <Compile Include="Generated Mappings\PersonEmailAddress.cs" />
+    <Compile Include="Generated Mappings\PersonJob.cs" />
+    <Compile Include="Generated Mappings\PersonMaritalStatus.cs" />
+    <Compile Include="Generated Mappings\PersonMedia.cs" />
+    <Compile Include="Generated Mappings\PersonNames.cs" />
+    <Compile Include="Generated Mappings\PersonPhoneNumbers.cs" />
+    <Compile Include="Generated Mappings\Persons.cs" />
+    <Compile Include="Generated Mappings\Persons_ArrivalDepartureInfo.cs" />
+    <Compile Include="Generated Mappings\Persons_Doctor.cs" />
+    <Compile Include="Generated Mappings\Persons_EmergencyContact.cs" />
+    <Compile Include="Generated Mappings\Persons_NextOfKin.cs" />
+    <Compile Include="Generated Mappings\Persons_NonResidentPatient.cs" />
+    <Compile Include="Generated Mappings\Persons_Nurses.cs" />
+    <Compile Include="Generated Mappings\Persons_Patient.cs" />
+    <Compile Include="Generated Mappings\Phase.cs" />
+    <Compile Include="Generated Mappings\PhoneTypes.cs" />
+    <Compile Include="Generated Mappings\PrimaryPersonAddress.cs" />
+    <Compile Include="Generated Mappings\PrimaryPersonPhoneNumber.cs" />
+    <Compile Include="Generated Mappings\Pulse.cs" />
+    <Compile Include="Generated Mappings\Questions.cs" />
+    <Compile Include="Generated Mappings\Religons.cs" />
+    <Compile Include="Generated Mappings\Respiration.cs" />
+    <Compile Include="Generated Mappings\Response.cs" />
+    <Compile Include="Generated Mappings\ResponseImages.cs" />
+    <Compile Include="Generated Mappings\ResponseOptions.cs" />
+    <Compile Include="Generated Mappings\ResponseSuggestions.cs" />
+    <Compile Include="Generated Mappings\ResponseSuggestions_CarePlans.cs" />
+    <Compile Include="Generated Mappings\ResponseSuggestions_Interviews.cs" />
+    <Compile Include="Generated Mappings\ResultFieldNames.cs" />
+    <Compile Include="Generated Mappings\Sex.cs" />
+    <Compile Include="Generated Mappings\States.cs" />
+    <Compile Include="Generated Mappings\StudentInfo.cs" />
+    <Compile Include="Generated Mappings\Syntoms.cs" />
+    <Compile Include="Generated Mappings\Temperature.cs" />
+    <Compile Include="Generated Mappings\UltraSoundGeneralEvaluation.cs" />
+    <Compile Include="Generated Mappings\Units.cs" />
+    <Compile Include="Generated Mappings\VitalSigns.cs" />
+    <Compile Include="Generated Mappings\Weight.cs" />
+    <Compile Include="Generated Mappings\ZipCodes.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EFEntities\EF.Entities.csproj">
+      <Project>{fad2a8c8-a1b4-4a3c-8e37-0388c0e3733c}</Project>
+      <Name>EF.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{AD573873-C8E6-4EA3-93F5-0D39A92FC9F6}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\Common\Common.csproj">
+      <Project>{cb6d5fbc-0c13-437d-b4f3-a0ec4d5673b3}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\DataInterfaces\DataInterfaces.csproj">
+      <Project>{f6008330-ba42-454b-a0b4-82455de56776}</Project>
+      <Name>DataInterfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

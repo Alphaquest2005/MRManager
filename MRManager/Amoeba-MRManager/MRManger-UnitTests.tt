@@ -1,0 +1,11 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="C:\Prism\Clients\Amoeba Projects\MRManager\Amoeba\T4 Templates\Master-UnitTests.ttinclude" #>
+<#
+// <copyright file="MRManger-Master.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+    GenerateUnitTests("MRManager");
+#>

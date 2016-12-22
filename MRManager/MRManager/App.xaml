@@ -1,0 +1,16 @@
+﻿<Application x:Class="MRManager.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Resources;component/UIResources.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/DataTemplates;component/CustomTemplatesResource.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/DataTemplates;component/AllDataTemplatesResource.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/DataTemplates;component/AllEntityViewDataTemplatesResource.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>

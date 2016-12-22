@@ -1,0 +1,136 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Specifications\bin\Debug\Specifications.dll"#>
+<#@ import namespace="Specifications" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Specifications\bin\Debug\LinqSpecs.dll"#>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Amoeba\Amoeba\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba Projects\MRManager\T4Utilities\bin\Debug\T4Utilities.dll"#>
+<#@ import namespace="MoreLinq" #>
+
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+	public class EntityViewExpressionTemplate : CSharpTemplate
+	{
+		public EntityViewExpressionTemplate(EntityView entityView)
+		{
+			EntityView = entityView;
+		}
+
+		public EntityView EntityView { get; }
+
+		public override string TransformText()
+		{
+			base.TransformText();
+			Dictionary<Entity, List<List<Entity>>> leafEntities = new Dictionary<Entity, List<List<Entity>>>();
+			var leaftrail = new List<Entity>();
+			T4Utilities.GetLeafEntities(EntityView.Entity, ref leafEntities, ref leaftrail);
+
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using Common.DataEntites;
+using EF.Entities;
+using Interfaces;
+
+namespace Entity.Expressions
+{
+	public static partial class <#= EntityView.Entity.Name #>Expressions
+	{
+
+		public static Expression<Func<<#= EntityView.Entity.Name #>, <#= EntityView.Name #>>> <#= EntityView.Entity.Name #>To<#= EntityView.Name #>Expression { get; } =
+		
+			x => new <#= EntityView.Name #>()
+			{
+				Id = x.Id,
+<#+foreach (var p in EntityView.EntityViewProperties)
+{
+	 var keyLst =
+		leafEntities
+			.FirstOrDefault(x => x.Key == (p.EntityProperty ?? p.EntityViewViewProperty.EntityProperty).Entity).Value;
+	if(keyLst == null) continue;
+	if (keyLst.Equals(default(KeyValuePair<Entity, List<List<Entity>>>))) continue;
+	var etrail = keyLst.OrderBy(x => x.Count).FirstOrDefault(x=> x.Any(z => z == EntityView.Entity));
+	if (etrail == null || !etrail.Any()) continue;
+	var prevEntity = EntityView.Entity;
+	bool? prevIsMany = null;
+	bool? isMany = null;
+	var isFirstDefault = false;
+	if (p.EntityProperty != null)
+	{
+
+
+#>				<#= p.Name #> = x.<#+ for (int i = 1; i < etrail.Count; i++)
+{
+	var curEntity = etrail[i];
+	T4Utilities.GetIsCurrentEntityMany(prevEntity,curEntity , out isMany);
+	if (isMany == null) continue;	
+	
+
+	#><#=	
+	isFirstDefault?etrail[i].EntitySetName + ".":																							
+	T4Utilities.NavString(prevIsMany, isMany, curEntity, i, i == etrail.Count - 1, out isFirstDefault) #><#+
+	prevEntity = curEntity;
+	if (isMany == true) prevIsMany = isMany;
+
+} #><#=T4Utilities.GetPropertyString(isMany, p, prevIsMany,isFirstDefault) #><#+ 
+
+					foreach (var pf in p.EntityViewPropertyFunctions)
+					{
+						#>.<#= pf.Function.Name #>(<#=
+	pf.EntityViewPropertyFunctionParameter != null ? "\"" + pf.EntityViewPropertyFunctionParameter.Value + "\"" : ""
+	#>)<#+ } #><#=
+	prevIsMany == true && !p.EntityViewPropertyFunctions.Any() && !isFirstDefault ? ".StringJoin(\",\")" : "" #>,
+<#+
+	}
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	else if (p.EntityViewViewProperty != null)
+
+
+
+
+	{
+#>				<#= p.Name #> = x.<#+ for (int i = 1; i < etrail.Count; i++)
+{
+	var curEntity = etrail[i];
+	T4Utilities.GetIsCurrentEntityMany(prevEntity,curEntity , out isMany);
+	if (isMany == null) continue;
+
+	#><#=
+	isFirstDefault?curEntity.EntitySetName + ".":	
+	T4Utilities.NavString(prevIsMany, isMany, curEntity, i, i == etrail.Count - 1,out isFirstDefault) #><#+
+	prevEntity = curEntity;
+	if (isMany == true) prevIsMany = isMany;
+
+} #><#=T4Utilities.GetPropertyString(isMany, p, prevIsMany, isFirstDefault) #><#+ 
+
+					foreach (var pf in p.EntityViewPropertyFunctions)
+					{
+						#>.<#= pf.Function.Name #>(<#=
+	pf.EntityViewPropertyFunctionParameter != null ? "\"" + pf.EntityViewPropertyFunctionParameter.Value + "\"" : ""
+	#>)<#+ } #><#=
+	prevIsMany == true && !p.EntityViewPropertyFunctions.Any() && !isFirstDefault? ".StringJoin(\",\")" : "" #>,
+<#+ } #>
+<#+ } #>
+			};
+	}
+}
+<#+
+			return this.GenerationEnvironment.ToString();
+		}
+
+
+	}
+
+#>

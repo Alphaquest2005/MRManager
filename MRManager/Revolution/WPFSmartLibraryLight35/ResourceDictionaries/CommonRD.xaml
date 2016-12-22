@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+						  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<ResourceDictionary.MergedDictionaries>
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<!--                               Include all "Common Converter Resources"                                 -->
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<ResourceDictionary Source="CommonRD/ConvertersRD.xaml" />
+
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<!--                             Include all "Common Text and Font Resources"                               -->
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<ResourceDictionary Source="CommonRD/TextAndFontsRD.xaml" />
+
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<!--                                      Include all "Smart Brushes"                                       -->
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<ResourceDictionary Source="SmartBrushes/SmartBrushesRD.xaml" />
+
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<!--                                    Include all "Smart Storyboards"                                     -->
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<ResourceDictionary Source="SmartStoryboards/SmartStoryboardsRD.xaml" />
+
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<!--                                      Include all "Smart Styles"                                        -->
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<ResourceDictionary Source="SmartStyles/SmartBordersRD.xaml" />
+		<ResourceDictionary Source="SmartStyles/SmartButtonsRD.xaml" />
+		<ResourceDictionary Source="SmartStyles/SmartImagesRD.xaml" />
+		<ResourceDictionary Source="SmartStyles/SmartListBoxesRD.xaml" />
+		<ResourceDictionary Source="SmartStyles/SmartPasswordBoxesRD.xaml" />
+		<ResourceDictionary Source="SmartStyles/SmartTextBoxesRD.xaml" />
+
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<!--                                  Include all "Smart ControlTemplates"                                  -->
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<ResourceDictionary Source="SmartTemplates/ControlTemplatesRD.xaml" />
+		<ResourceDictionary Source="SmartTemplates/SmartButtonTemplatesRD.xaml" />
+
+	</ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary> 

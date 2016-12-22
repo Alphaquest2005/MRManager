@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6A9C99E7-2552-4A6C-B26E-2D727C5D85CE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ValidationSets</RootNamespace>
+    <AssemblyName>ValidationSets</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Generated ValidationSets\ApplicationEntities.cs" />
+    <Compile Include="Generated ValidationSets\Applications.cs" />
+    <Compile Include="Generated ValidationSets\ApplicationSetting.cs" />
+    <Compile Include="Generated ValidationSets\DataProperties.cs" />
+    <Compile Include="Generated ValidationSets\DataTypes.cs" />
+    <Compile Include="Generated ValidationSets\Entities.cs" />
+    <Compile Include="Generated ValidationSets\EntityProperties.cs" />
+    <Compile Include="Generated ValidationSets\EntityRelationships.cs" />
+    <Compile Include="Generated ValidationSets\EntityView.cs" />
+    <Compile Include="Generated ValidationSets\EntityViewEntityProperties.cs" />
+    <Compile Include="Generated ValidationSets\EntityViewProperties.cs" />
+    <Compile Include="Generated ValidationSets\EntityViewPropertyFunction.cs" />
+    <Compile Include="Generated ValidationSets\EntityViewPropertyFunctionParameter.cs" />
+    <Compile Include="Generated ValidationSets\EntityViewViewProperties.cs" />
+    <Compile Include="Generated ValidationSets\FunctionBody.cs" />
+    <Compile Include="Generated ValidationSets\FunctionParameters.cs" />
+    <Compile Include="Generated ValidationSets\FunctionReturnType.cs" />
+    <Compile Include="Generated ValidationSets\Functions.cs" />
+    <Compile Include="Generated ValidationSets\FunctionSetFunctions.cs" />
+    <Compile Include="Generated ValidationSets\FunctionSets.cs" />
+    <Compile Include="Generated ValidationSets\Layers.cs" />
+    <Compile Include="Generated ValidationSets\Layout.cs" />
+    <Compile Include="Generated ValidationSets\ModelTypes.cs" />
+    <Compile Include="Generated ValidationSets\Operators.cs" />
+    <Compile Include="Generated ValidationSets\Parameters.cs" />
+    <Compile Include="Generated ValidationSets\Parts.cs" />
+    <Compile Include="Generated ValidationSets\PresentationProperties.cs" />
+    <Compile Include="Generated ValidationSets\PrimaryKeyOptions.cs" />
+    <Compile Include="Generated ValidationSets\Process.cs" />
+    <Compile Include="Generated ValidationSets\ProcessSteps.cs" />
+    <Compile Include="Generated ValidationSets\ProcessStepScreens.cs" />
+    <Compile Include="Generated ValidationSets\Projects.cs" />
+    <Compile Include="Generated ValidationSets\RelationshipTypes.cs" />
+    <Compile Include="Generated ValidationSets\ScreenLayouts.cs" />
+    <Compile Include="Generated ValidationSets\ScreenParts.cs" />
+    <Compile Include="Generated ValidationSets\Screens.cs" />
+    <Compile Include="Generated ValidationSets\ScreenViews.cs" />
+    <Compile Include="Generated ValidationSets\Settings.cs" />
+    <Compile Include="Generated ValidationSets\SettingsNames.cs" />
+    <Compile Include="Generated ValidationSets\StateMachines.cs" />
+    <Compile Include="Generated ValidationSets\StateMachineStates.cs" />
+    <Compile Include="Generated ValidationSets\StateMachineTriggers.cs" />
+    <Compile Include="Generated ValidationSets\States.cs" />
+    <Compile Include="Generated ValidationSets\Steps.cs" />
+    <Compile Include="Generated ValidationSets\TestValues.cs" />
+    <Compile Include="Generated ValidationSets\Triggers.cs" />
+    <Compile Include="Generated ValidationSets\ViewEntity.cs" />
+    <Compile Include="Generated ValidationSets\Views.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Revolution\DataInterfaces\DataInterfaces.csproj">
+      <Project>{F6008330-BA42-454B-A0B4-82455DE56776}</Project>
+      <Name>DataInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{ad573873-c8e6-4ea3-93f5-0d39a92fc9f6}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="project.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

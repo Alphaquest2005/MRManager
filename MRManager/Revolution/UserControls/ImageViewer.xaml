@@ -1,0 +1,129 @@
+﻿<UserControl x:Class="UserControls.ImageViewer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:UserControls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Name="this"
+             d:DesignHeight="500"
+             d:DesignWidth="947.5"
+             DataContextChanged="ImageViewer_OnDataContextChanged"
+             mc:Ignorable="d">
+
+    <Grid>
+
+        <Image x:Name="imgMain"
+               MaxHeight="500"
+               Margin="239,10,237.333,10"
+               Source="{Binding CurrentImage,
+                                ElementName=this}" />
+
+
+
+
+
+        <Button Width="204"
+                Height="137"
+                Margin="0,174,10.333,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="btnNext_Click">
+            <Button.Template>
+                <ControlTemplate>
+
+                    <Image Source="{Binding NextImage, ElementName=this, FallbackValue=ImageViewerAssets/nback.png}" />
+
+                </ControlTemplate>
+
+            </Button.Template>
+        </Button>
+
+        <Button Width="212"
+                Height="137"
+                Margin="10,174,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="btnPrevious_Click">
+            <Button.Template>
+                <ControlTemplate>
+
+                    <Image Margin="0" Source="{Binding PreviousImage, ElementName=this, FallbackValue='ImageViewerAssets/nforward.png'}" />
+
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+    </Grid>
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
+            <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal" />
+        </ItemsPanelTemplate>
+
+        <Style x:Key="ListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding" Value="2,0,0,0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="#EEFFFFFF"
+                                BorderBrush="#FFCCCCCC"
+                                BorderThickness="1"
+                                RenderTransformOrigin="1,1"
+                                SnapsToDevicePixels="true">
+                            <Grid>
+                                <Image x:Name="img"
+                                       Width="64"
+                                       Height="64"
+                                       Source="{Binding Path=ImageUri}"
+                                       Stretch="Fill"
+                                       ToolTipService.Placement="Top">
+                                    <Image.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform x:Name="scaleTrans"
+                                                            ScaleX="1"
+                                                            ScaleY="1" />
+                                        </TransformGroup>
+                                    </Image.RenderTransform>
+                                    <Image.ToolTip>
+                                        <ToolTip Background="{x:Null}"
+                                                 BorderBrush="{x:Null}"
+                                                 DataContext="{Binding Path=PlacementTarget,
+                                                                       RelativeSource={x:Static RelativeSource.Self}}"
+                                                 Effect="{x:Null}"
+                                                 HasDropShadow="False">
+                                            <Border Width="100"
+                                                    Height="160"
+                                                    Margin="0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Background="{x:Null}">
+                                                <Grid Background="{x:Null}">
+
+                                                    <Border Width="82"
+                                                            Height="95.197"
+                                                            Margin="8,9.583,8,52.5">
+                                                        <Border.Background>
+                                                            <LinearGradientBrush StartPoint="0.141,0.107" EndPoint="0.859,0.893">
+                                                                <GradientStop Offset="0" Color="#FF98C897" />
+                                                                <GradientStop Offset="1" Color="#FFACE500" />
+                                                                <GradientStop Offset="0.289" Color="#FFCFF163" />
+                                                            </LinearGradientBrush>
+                                                        </Border.Background>
+                                                        <Image Source="{Binding Path=Source}" />
+                                                    </Border>
+                                                </Grid>
+                                            </Border>
+                                        </ToolTip>
+                                    </Image.ToolTip>
+                                </Image>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+</UserControl>

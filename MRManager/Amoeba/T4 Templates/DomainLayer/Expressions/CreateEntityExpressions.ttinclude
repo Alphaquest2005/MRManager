@@ -1,0 +1,63 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="..\..\Utilities\DataAccess\Repository.ttinclude" once="true" #>
+<#@ include file="EntityExpressionTemplate.ttinclude" #>
+<#@ include file="FunctionExpressionTemplate.ttinclude" #>
+<#@ include file="AutoFunctionExpressionTemplate.ttinclude" #>
+<#@ include file="EntityViewExpressionTemplate.ttinclude" #>
+<#@ include file="AutoEntityViewExpressionTemplate.ttinclude" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="System.IO" #>
+<#+
+// <copyright file="DataLayer.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+	public void CreateEntityExpressions(  Application app,string appFolder,Dictionary<string,string> settings,List<ApplicationEntity> entities)
+	{
+		// create simple properties
+		foreach (var entity in entities)
+		{
+			var tpl = new EntityExpressionTemplate(entity);
+			tpl.Output.Project = Path.Combine(appFolder, settings["Project"]) ;
+			tpl.Output.File = settings["Folder"] + @"\Entity Expressions\" + entity.Entity.Name + ".cs";
+			tpl.Render(); 
+
+			var atpl = new AutoEntityViewExpressionTemplate(entity.Entity);
+			atpl.Output.Project = Path.Combine(appFolder, settings["Project"]) ;
+			atpl.Output.File = settings["Folder"] + @"\AutoEntityView Expressions\" + entity.Entity.Name + "AutoView.cs";
+			atpl.Render(); 
+			
+		}
+
+	    var functions = GetFunctions(app.Id);
+		foreach (var func in functions)
+		{
+			var tpl = new FunctionExpressionTemplate(func);
+			tpl.Output.Project = Path.Combine(appFolder, settings["Project"]) ;
+			tpl.Output.File = settings["Folder"] + @"\Function Expressions\" + func.Name + ".cs";
+			tpl.Render(); 
+			
+		}
+
+		var entityViews = GetEntityViews(app.Id);
+		foreach (var func in entityViews)
+		{
+			var tpl = new EntityViewExpressionTemplate(func);
+			tpl.Output.Project = Path.Combine(appFolder, settings["Project"]) ;
+			tpl.Output.File = settings["Folder"] + @"\EntityView Expressions\" + func.Name + ".cs";
+			tpl.Render(); 
+			
+		}
+
+
+		var aftpl = new AutoFunctionExpressionTemplate();
+			aftpl.Output.Project = Path.Combine(appFolder, settings["Project"]) ;
+			aftpl.Output.File = settings["Folder"] + @"\Function Expressions\AutoFunctions.cs";
+			aftpl.Render(); 
+
+	}
+
+
+
+#>

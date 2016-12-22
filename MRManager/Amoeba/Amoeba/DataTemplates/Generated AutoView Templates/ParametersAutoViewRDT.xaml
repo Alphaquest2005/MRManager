@@ -1,0 +1,33 @@
+﻿<ResourceDictionary 
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		mc:Ignorable="d"
+		xmlns:converters="clr-namespace:Converters;assembly=Converters"
+		xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
+		xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels">
+
+		<DataTemplate x:Key="ParametersAutoViewRDT"  DataType="{x:Type Interfaces:IParametersAutoView}">
+			<DataTemplate.Resources>
+				<converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+				<x:Static Member="viewModels:ParametersAutoViewModel_AutoGen.Instance" x:Key="ParametersViewModelDataSource"/>
+			</DataTemplate.Resources>
+			<Grid Height="Auto" Width="497">
+				<StackPanel Orientation="Horizontal">
+					<StackPanel Width="Auto" Margin="10,0,10,0" HorizontalAlignment="Left">
+						<TextBlock Text="Data Types"  Visibility="{Binding DataTypes, Converter={StaticResource NullVisibilityConverter}}" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto" MinWidth ="75" TextAlignment="Right"/>			
+						<TextBlock Text="Entity View Property Function Parameter"  Visibility="{Binding EntityViewPropertyFunctionParameter, Converter={StaticResource NullVisibilityConverter}}" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto" MinWidth ="75" TextAlignment="Right"/>			
+						<TextBlock Text="Functions"  Visibility="{Binding Functions, Converter={StaticResource NullVisibilityConverter}}" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto" MinWidth ="75" TextAlignment="Right"/>			
+						<TextBlock Text="Parameters"  Visibility="{Binding Parameters, Converter={StaticResource NullVisibilityConverter}}" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto" MinWidth ="75" TextAlignment="Right"/>			
+					</StackPanel>
+				<StackPanel Width="Auto" Margin="10,0,10,0" HorizontalAlignment="Left">
+					<TextBlock Text="{Binding Path=DataTypes, FallbackValue='DataTypes', UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Visibility="{Binding DataTypes, Converter={StaticResource NullVisibilityConverter}}" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto"  MinWidth ="75" />
+					<TextBlock Text="{Binding Path=EntityViewPropertyFunctionParameter, FallbackValue='EntityViewPropertyFunctionParameter', UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Visibility="{Binding EntityViewPropertyFunctionParameter, Converter={StaticResource NullVisibilityConverter}}" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto"  MinWidth ="75" />
+					<TextBlock Text="{Binding Path=Functions, FallbackValue='Functions', UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Visibility="{Binding Functions, Converter={StaticResource NullVisibilityConverter}}" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto"  MinWidth ="75" />
+					<TextBlock Text="{Binding Path=Parameters, FallbackValue='Parameters', UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Visibility="{Binding Parameters, Converter={StaticResource NullVisibilityConverter}}" HorizontalAlignment="Left" Height="24" Margin="0,10,0,0" VerticalAlignment="Top" Width="Auto"  MinWidth ="75" />
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+		</DataTemplate>	
+</ResourceDictionary>

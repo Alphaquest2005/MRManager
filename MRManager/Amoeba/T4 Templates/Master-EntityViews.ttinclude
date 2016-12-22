@@ -1,0 +1,32 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true"#>
+<#@ output extension=".cs"#>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="Master.ttinclude"#>
+<#+
+
+	public void GenerateEntityViews(string appName)
+	{
+		try
+		{
+			var app = AmoebaRepository.GetApp(appName);
+
+			var appFolder = app.Settings.FirstOrDefault(x => x.Project.Name == "Application" && x.Name == "ApplicationFolder").Value;
+			var entities = GetEntities(app.Id).Where(x => x.Entity.Id > 0).ToList();
+			var ml = T4Utilities.GetMainEntities(entities);
+			CreateEntityViewViewModels(app,appFolder, app.Settings.Where(x => x.Project.Name == "ViewModels" ).ToDictionary(x => x.Name, x => x.Value), entities.SelectMany(x=> x.Entity.EntityViews));
+			CreateInterfaces(app, appFolder, app.Settings.Where(x => x.Layer.Name == "DataLayer" && x.Project.Name == "Interfaces").ToDictionary(x => x.Name, x => x.Value), entities);
+			CreateEntityViewEntities(app, appFolder, app.Settings.Where(x => x.Project.Name == "Entities").ToDictionary(x => x.Name, x => x.Value), entities.SelectMany(x=> x.Entity.EntityViews));
+			CreateEntityViewValidationSets(app, appFolder, app.Settings.Where(x => x.Project.Name == "ValidationSets").ToDictionary(x => x.Name, x => x.Value), entities.SelectMany(x=> x.Entity.EntityViews));
+			CreateEntityViews(app,appFolder, app.Settings.Where(x => x.Project.Name == "Views" ).ToDictionary(x => x.Name, x => x.Value),ml, entities.Select(x=> x.Entity).ToList());
+			CreateEntityViewDataTemplates(app,appFolder, app.Settings.Where(x => x.Project.Name == "DataTemplates" ).ToDictionary(x => x.Name, x => x.Value), entities);
+		}
+		catch (Exception)
+		{
+			throw;
+		}
+	}
+
+#>
+

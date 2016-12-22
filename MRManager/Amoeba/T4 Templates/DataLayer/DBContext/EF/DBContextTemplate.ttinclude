@@ -1,0 +1,63 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class DBContextTemplate : CSharpTemplate
+{
+	public DBContextTemplate(string appName, List<ApplicationEntity> entities)
+	{
+		AppName = appName;
+		Entities = entities;
+	}
+
+	public string AppName { get;}
+	public List<ApplicationEntity> Entities { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+
+using EF.Entities;
+using EF.Mappings;
+using Microsoft.EntityFrameworkCore;
+
+namespace EF.DBContexts
+{
+	public partial class <#= AppName#>DBContext:DbContext
+	{
+<#+
+	foreach (var entity in Entities)
+	{
+#>
+		public DbSet<<#=entity.Entity.Name #>> <#= entity.Entity.EntitySetName #> { get; set; }
+<#+ }
+#>
+	
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			optionsBuilder.UseSqlServer(DBContext.Properties.Settings.Default.DbConnectionString);
+		}
+	
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+	<#+
+		foreach (var entity in Entities)
+		{
+	#>
+			<#=entity.Entity.Name #>Map.Map(modelBuilder.Entity<<#=entity.Entity.Name #>>());
+	<#+ }
+	#>
+		}
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

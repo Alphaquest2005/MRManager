@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="41280246c92d49889321203cd4118ff6" Name="Diagram1" ZoomLevel="90">
+        <EntityTypeShape EntityType="AmoebaDBModel.ApplicationEntity" Width="1.5" PointX="3.625" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AmoebaDBModel.Application" Width="1.5" PointX="1.375" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AmoebaDBModel.DataType" Width="1.5" PointX="7.125" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AmoebaDBModel.Entity" Width="2.125" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AmoebaDBModel.EntityProperty" Width="2" PointX="3.625" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AmoebaDBModel.EntityRelationship" Width="2.25" PointX="6.375" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AmoebaDBModel.ModelType" Width="1.5" PointX="7.125" PointY="17.375" IsExpanded="true" />
+        <AssociationConnector Association="AmoebaDBModel.FK_ApplicationEntities_Applications" ManuallyRouted="false" />
+        <AssociationConnector Association="AmoebaDBModel.FK_ApplicationEntities_Entities" ManuallyRouted="false" />
+        <AssociationConnector Association="AmoebaDBModel.FK_EntityProperties_Entities" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AmoebaDBModel.Setting" Width="1.5" PointX="6.625" PointY="4" />
+        <AssociationConnector Association="AmoebaDBModel.FK_Settings_Applications" />
+        <EntityTypeShape EntityType="AmoebaDBModel.Project" Width="1.5" PointX="4.375" PointY="0.75" />
+        <AssociationConnector Association="AmoebaDBModel.FK_Settings_Projects" />
+        <EntityTypeShape EntityType="AmoebaDBModel.Layer" Width="1.5" PointX="4.375" PointY="3.375" />
+        <AssociationConnector Association="AmoebaDBModel.FK_Settings_Layers" />
+        <EntityTypeShape EntityType="AmoebaDBModel.DataProperty" Width="1.5" PointX="9.375" PointY="12.375" />
+        <AssociationConnector Association="AmoebaDBModel.FK_DataProperties_DataTypes" />
+        <AssociationConnector Association="AmoebaDBModel.FK_DataProperties_ModelTypes" />
+        <AssociationConnector Association="AmoebaDBModel.FK_ChildProperty" />
+        <AssociationConnector Association="AmoebaDBModel.FK_ParentProperty" />
+        <EntityTypeShape EntityType="AmoebaDBModel.RelationshipType" Width="1.5" PointX="4.125" PointY="7" />
+        <AssociationConnector Association="AmoebaDBModel.FK_EntityRelationships_RelationshipTypes1" />
+        <EntityTypeShape EntityType="AmoebaDBModel.PresentationProperty" Width="1.5" PointX="6.375" PointY="14.375" />
+        <EntityTypeShape EntityType="AmoebaDBModel.FunctionSet" Width="1.5" PointX="0.75" PointY="1.125" />
+        <AssociationConnector Association="AmoebaDBModel.EntityPropertyPresentationProperty" />
+        <AssociationConnector Association="AmoebaDBModel.FK_DataProperties_EntityProperties1" />
+        <AssociationConnector Association="AmoebaDBModel.FK_PresentationProperties_EntityProperties" />
+        <EntityTypeShape EntityType="AmoebaDBModel.TestValue" Width="1.5" PointX="6.375" PointY="20.875" />
+        <AssociationConnector Association="AmoebaDBModel.FK_TestData_EntityProperties" />
+        <EntityTypeShape EntityType="AmoebaDBModel.PrimaryKeyOption" Width="1.5" PointX="11.625" PointY="13" />
+        <AssociationConnector Association="AmoebaDBModel.FK_PrimaryKeyOptions_DataProperties" />
+        <EntityTypeShape EntityType="AmoebaDBModel.EntityView" Width="1.5" PointX="3.625" PointY="17" />
+        <EntityTypeShape EntityType="AmoebaDBModel.EntityViewPropertyFunction" Width="2.375" PointX="12.5" PointY="16.5" />
+        <EntityTypeShape EntityType="AmoebaDBModel.EntityViewPropertyFunctionParameter" Width="2.875" PointX="15.625" PointY="16.5" />
+        <EntityTypeShape EntityType="AmoebaDBModel.FunctionBody" Width="1.5" PointX="12.5" PointY="20.25" />
+        <EntityTypeShape EntityType="AmoebaDBModel.FunctionParameter" Width="1.5" PointX="13.375" PointY="23.5" />
+        <EntityTypeShape EntityType="AmoebaDBModel.Function" Width="2" PointX="9.75" PointY="20.5" />
+        <EntityTypeShape EntityType="AmoebaDBModel.FunctionSetFunction" Width="1.5" PointX="0.75" PointY="4.125" />
+        <EntityTypeShape EntityType="AmoebaDBModel.Operator" Width="1.5" PointX="6.75" PointY="1.125" />
+        <EntityTypeShape EntityType="AmoebaDBModel.Parameter" Width="1.5" PointX="11.125" PointY="23.5" />
+        <AssociationConnector Association="AmoebaDBModel.FK_EntityView_Entities" />
+        <AssociationConnector Association="AmoebaDBModel.FK_EntityViewPropertyFunction_Functions" />
+        <AssociationConnector Association="AmoebaDBModel.FK_EntityViewPropertyFunctionParameter_EntityViewPropertyFunction" />
+        <AssociationConnector Association="AmoebaDBModel.FK_EntityViewPropertyFunctionParameter_FunctionParameters" />
+        <AssociationConnector Association="AmoebaDBModel.FK_FunctionBody_Functions" />
+        <AssociationConnector Association="AmoebaDBModel.FK_FunctionParameters_Functions" />
+        <AssociationConnector Association="AmoebaDBModel.FK_FunctionParameters_Parameters" />
+        <AssociationConnector Association="AmoebaDBModel.FK_Parameters_DataTypes" />
+        <EntityTypeShape EntityType="AmoebaDBModel.FunctionReturnType" Width="1.5" PointX="14.5" PointY="13.125" />
+        <AssociationConnector Association="AmoebaDBModel.FK_FunctionReturnType_Functions" />
+        <AssociationConnector Association="AmoebaDBModel.DataTypeFunctionReturnType" />
+        <EntityTypeShape EntityType="AmoebaDBModel.EntityViewProperty" Width="2.375" PointX="9.375" PointY="16.25" />
+        <AssociationConnector Association="AmoebaDBModel.FK_EntityViewProperties_EntityView" />
+        <AssociationConnector Association="AmoebaDBModel.FK_EntityViewPropertyFunction_EntityViewProperties" />
+        <AssociationConnector Association="AmoebaDBModel.EntityViewEntityProperties" />
+        <AssociationConnector Association="AmoebaDBModel.EntityViewViewProperties" />
+      </Diagram>
+      <Diagram DiagramId="0a9b7d6a76004e688540b5aef4921358" Name="StateMachine" >
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

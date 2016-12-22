@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7EBA796F-77A6-47B5-AAFA-2D6315CA1CB1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NH.Mappings</RootNamespace>
+    <AssemblyName>NH.Mappings</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Generated Mappings\ApplicationEntities.cs" />
+    <Compile Include="Generated Mappings\Applications.cs" />
+    <Compile Include="Generated Mappings\ApplicationSetting.cs" />
+    <Compile Include="Generated Mappings\DataProperties.cs" />
+    <Compile Include="Generated Mappings\DataTypes.cs" />
+    <Compile Include="Generated Mappings\Entities.cs" />
+    <Compile Include="Generated Mappings\EntityProperties.cs" />
+    <Compile Include="Generated Mappings\EntityRelationships.cs" />
+    <Compile Include="Generated Mappings\EntityView.cs" />
+    <Compile Include="Generated Mappings\EntityViewEntityProperties.cs" />
+    <Compile Include="Generated Mappings\EntityViewProperties.cs" />
+    <Compile Include="Generated Mappings\EntityViewPropertyFunction.cs" />
+    <Compile Include="Generated Mappings\EntityViewPropertyFunctionParameter.cs" />
+    <Compile Include="Generated Mappings\EntityViewViewProperties.cs" />
+    <Compile Include="Generated Mappings\FunctionBody.cs" />
+    <Compile Include="Generated Mappings\FunctionParameters.cs" />
+    <Compile Include="Generated Mappings\FunctionReturnType.cs" />
+    <Compile Include="Generated Mappings\Functions.cs" />
+    <Compile Include="Generated Mappings\FunctionSetFunctions.cs" />
+    <Compile Include="Generated Mappings\FunctionSets.cs" />
+    <Compile Include="Generated Mappings\Layers.cs" />
+    <Compile Include="Generated Mappings\Layout.cs" />
+    <Compile Include="Generated Mappings\ModelTypes.cs" />
+    <Compile Include="Generated Mappings\Operators.cs" />
+    <Compile Include="Generated Mappings\Parameters.cs" />
+    <Compile Include="Generated Mappings\Parts.cs" />
+    <Compile Include="Generated Mappings\PresentationProperties.cs" />
+    <Compile Include="Generated Mappings\PrimaryKeyOptions.cs" />
+    <Compile Include="Generated Mappings\Process.cs" />
+    <Compile Include="Generated Mappings\ProcessSteps.cs" />
+    <Compile Include="Generated Mappings\ProcessStepScreens.cs" />
+    <Compile Include="Generated Mappings\Projects.cs" />
+    <Compile Include="Generated Mappings\RelationshipTypes.cs" />
+    <Compile Include="Generated Mappings\ScreenLayouts.cs" />
+    <Compile Include="Generated Mappings\ScreenParts.cs" />
+    <Compile Include="Generated Mappings\Screens.cs" />
+    <Compile Include="Generated Mappings\ScreenViews.cs" />
+    <Compile Include="Generated Mappings\Settings.cs" />
+    <Compile Include="Generated Mappings\SettingsNames.cs" />
+    <Compile Include="Generated Mappings\StateMachines.cs" />
+    <Compile Include="Generated Mappings\StateMachineStates.cs" />
+    <Compile Include="Generated Mappings\StateMachineTriggers.cs" />
+    <Compile Include="Generated Mappings\States.cs" />
+    <Compile Include="Generated Mappings\Steps.cs" />
+    <Compile Include="Generated Mappings\TestValues.cs" />
+    <Compile Include="Generated Mappings\Triggers.cs" />
+    <Compile Include="Generated Mappings\ViewEntity.cs" />
+    <Compile Include="Generated Mappings\Views.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Revolution\Common\Common.csproj">
+      <Project>{CB6D5FBC-0C13-437D-B4F3-A0EC4D5673B3}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\DataInterfaces\DataInterfaces.csproj">
+      <Project>{F6008330-BA42-454B-A0B4-82455DE56776}</Project>
+      <Name>DataInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EFEntities\EF.Entities.csproj">
+      <Project>{FAD2A8C8-A1B4-4A3C-8E37-0388C0E3733C}</Project>
+      <Name>EF.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{AD573873-C8E6-4EA3-93F5-0D39A92FC9F6}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="project.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

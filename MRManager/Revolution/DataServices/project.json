@@ -1,0 +1,12 @@
+﻿{
+  "dependencies": {
+    "Akka.Persistence.SqlServer": "1.1.1.7-beta",
+    "JB.Common.Collections": "0.8.103-pre"
+  },
+  "frameworks": {
+    "net461": {}
+  },
+  "runtimes": {
+    "win": {}
+  }
+}

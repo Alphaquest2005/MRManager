@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6A9C99E7-2552-4A6C-B26E-2D727C5D85CE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ValidationSets</RootNamespace>
+    <AssemblyName>ValidationSets</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Generated ValidationSets\EntityValidator.cs" />
+    <Compile Include="Generated ValidationSets\AddressCountries.cs" />
+    <Compile Include="Generated ValidationSets\Addresses.cs" />
+    <Compile Include="Generated ValidationSets\AddressLines.cs" />
+    <Compile Include="Generated ValidationSets\AddressParishes.cs" />
+    <Compile Include="Generated ValidationSets\AddressStates.cs" />
+    <Compile Include="Generated ValidationSets\AddressTypes.cs" />
+    <Compile Include="Generated ValidationSets\AddressZipCodes.cs" />
+    <Compile Include="Generated ValidationSets\Allergies.cs" />
+    <Compile Include="Generated ValidationSets\ApplicationSetting.cs" />
+    <Compile Include="Generated ValidationSets\AssignedDating.cs" />
+    <Compile Include="Generated ValidationSets\BloodPressure.cs" />
+    <Compile Include="Generated ValidationSets\BoatInfo.cs" />
+    <Compile Include="Generated ValidationSets\CarePlan.cs" />
+    <Compile Include="Generated ValidationSets\CarePlanDetails.cs" />
+    <Compile Include="Generated ValidationSets\CarePlanDetailsSuggestedMedication.cs" />
+    <Compile Include="Generated ValidationSets\Cities.cs" />
+    <Compile Include="Generated ValidationSets\Components.cs" />
+    <Compile Include="Generated ValidationSets\Countries.cs" />
+    <Compile Include="Generated ValidationSets\DefaultImages.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\AddressInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\AddressLineInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\AllergiesInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\BloodPressureInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\CountryInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\ForeignAddressInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\ForeignPhoneNumberInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\HeightInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\InterviewInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\InterviewReponses.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\NonResidentPatientInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\ParishInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\PatientAddressInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\PatientCountryOfResidence.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\PatientInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\PatientJobInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\PatientPhoneNumbers.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\PatientResponseInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\PatientSummaryInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\PatientSyntomsInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\PatientVisitInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\PersonAddressInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\PersonInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\PersonNameInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\PersonPhoneNumberInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\PulseInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\RespirationInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\ResponseOptionInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\TemperatureInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\VitalsHistoryInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\VitalSignsInfo.cs" />
+    <Compile Include="Generated ValidationSets\Entity Views\WeightInfo.cs" />
+    <Compile Include="Generated ValidationSets\ExamDetailComponents.cs" />
+    <Compile Include="Generated ValidationSets\ExamDetails.cs" />
+    <Compile Include="Generated ValidationSets\ExamResults.cs" />
+    <Compile Include="Generated ValidationSets\ExamResults_AnioticFluid.cs" />
+    <Compile Include="Generated ValidationSets\ExamResults_FetalDates.cs" />
+    <Compile Include="Generated ValidationSets\ExamResults_SimpleValues.cs" />
+    <Compile Include="Generated ValidationSets\ExamResults_UmbilicalArtery.cs" />
+    <Compile Include="Generated ValidationSets\Exams.cs" />
+    <Compile Include="Generated ValidationSets\ExamTypes.cs" />
+    <Compile Include="Generated ValidationSets\ForeignAddresses.cs" />
+    <Compile Include="Generated ValidationSets\ForeignPhoneNumbers.cs" />
+    <Compile Include="Generated ValidationSets\Height.cs" />
+    <Compile Include="Generated ValidationSets\Interviews.cs" />
+    <Compile Include="Generated ValidationSets\MaritalStatus.cs" />
+    <Compile Include="Generated ValidationSets\MarketingMedium.cs" />
+    <Compile Include="Generated ValidationSets\Media.cs" />
+    <Compile Include="Generated ValidationSets\MediaTypes.cs" />
+    <Compile Include="Generated ValidationSets\MedicalCategory.cs" />
+    <Compile Include="Generated ValidationSets\NonResidentCompanyInfo.cs" />
+    <Compile Include="Generated ValidationSets\NonResidentHotelInfo.cs" />
+    <Compile Include="Generated ValidationSets\Occupations.cs" />
+    <Compile Include="Generated ValidationSets\OrganisationAddress.cs" />
+    <Compile Include="Generated ValidationSets\OrganisationPhoneNumbers.cs" />
+    <Compile Include="Generated ValidationSets\Organisations.cs" />
+    <Compile Include="Generated ValidationSets\Organisations_Companys.cs" />
+    <Compile Include="Generated ValidationSets\Organisations_Hotels.cs" />
+    <Compile Include="Generated ValidationSets\ParishCities.cs" />
+    <Compile Include="Generated ValidationSets\Parishes.cs" />
+    <Compile Include="Generated ValidationSets\PatientAllergies.cs" />
+    <Compile Include="Generated ValidationSets\PatientDoctor.cs" />
+    <Compile Include="Generated ValidationSets\PatientReligon.cs" />
+    <Compile Include="Generated ValidationSets\PatientResponses.cs" />
+    <Compile Include="Generated ValidationSets\PatientResults.cs" />
+    <Compile Include="Generated ValidationSets\PatientSyntoms.cs" />
+    <Compile Include="Generated ValidationSets\PatientVisit.cs" />
+    <Compile Include="Generated ValidationSets\PatientVisitVitalSigns.cs" />
+    <Compile Include="Generated ValidationSets\PersonAddresses.cs" />
+    <Compile Include="Generated ValidationSets\PersonCountryOfResidence.cs" />
+    <Compile Include="Generated ValidationSets\PersonEmailAddress.cs" />
+    <Compile Include="Generated ValidationSets\PersonJob.cs" />
+    <Compile Include="Generated ValidationSets\PersonMaritalStatus.cs" />
+    <Compile Include="Generated ValidationSets\PersonMedia.cs" />
+    <Compile Include="Generated ValidationSets\PersonNames.cs" />
+    <Compile Include="Generated ValidationSets\PersonPhoneNumbers.cs" />
+    <Compile Include="Generated ValidationSets\Persons.cs" />
+    <Compile Include="Generated ValidationSets\Persons_ArrivalDepartureInfo.cs" />
+    <Compile Include="Generated ValidationSets\Persons_Doctor.cs" />
+    <Compile Include="Generated ValidationSets\Persons_EmergencyContact.cs" />
+    <Compile Include="Generated ValidationSets\Persons_NextOfKin.cs" />
+    <Compile Include="Generated ValidationSets\Persons_NonResidentPatient.cs" />
+    <Compile Include="Generated ValidationSets\Persons_Nurses.cs" />
+    <Compile Include="Generated ValidationSets\Persons_Patient.cs" />
+    <Compile Include="Generated ValidationSets\Phase.cs" />
+    <Compile Include="Generated ValidationSets\PhoneTypes.cs" />
+    <Compile Include="Generated ValidationSets\PrimaryPersonAddress.cs" />
+    <Compile Include="Generated ValidationSets\PrimaryPersonPhoneNumber.cs" />
+    <Compile Include="Generated ValidationSets\Pulse.cs" />
+    <Compile Include="Generated ValidationSets\Questions.cs" />
+    <Compile Include="Generated ValidationSets\Religons.cs" />
+    <Compile Include="Generated ValidationSets\Respiration.cs" />
+    <Compile Include="Generated ValidationSets\Response.cs" />
+    <Compile Include="Generated ValidationSets\ResponseImages.cs" />
+    <Compile Include="Generated ValidationSets\ResponseOptions.cs" />
+    <Compile Include="Generated ValidationSets\ResponseSuggestions.cs" />
+    <Compile Include="Generated ValidationSets\ResponseSuggestions_CarePlans.cs" />
+    <Compile Include="Generated ValidationSets\ResponseSuggestions_Interviews.cs" />
+    <Compile Include="Generated ValidationSets\ResultFieldNames.cs" />
+    <Compile Include="Generated ValidationSets\Sex.cs" />
+    <Compile Include="Generated ValidationSets\States.cs" />
+    <Compile Include="Generated ValidationSets\StudentInfo.cs" />
+    <Compile Include="Generated ValidationSets\Syntoms.cs" />
+    <Compile Include="Generated ValidationSets\Temperature.cs" />
+    <Compile Include="Generated ValidationSets\UltraSoundGeneralEvaluation.cs" />
+    <Compile Include="Generated ValidationSets\Units.cs" />
+    <Compile Include="Generated ValidationSets\VitalSigns.cs" />
+    <Compile Include="Generated ValidationSets\Weight.cs" />
+    <Compile Include="Generated ValidationSets\ZipCodes.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{ad573873-c8e6-4ea3-93f5-0d39a92fc9f6}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\DataInterfaces\DataInterfaces.csproj">
+      <Project>{f6008330-ba42-454b-a0b4-82455de56776}</Project>
+      <Name>DataInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\SystemInterfaces\SystemInterfaces.csproj">
+      <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>
+      <Name>SystemInterfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="project.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

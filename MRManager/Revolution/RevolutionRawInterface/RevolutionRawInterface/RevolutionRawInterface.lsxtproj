@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project MSBuildVersion="4.0" ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3813ea5a-29be-40cf-8e60-b3b7c1b88522}</ProjectGuid>
+    <OutputType>WinEXE</OutputType>
+    <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
+    <RootNamespace>RevolutionRawInterface</RootNamespace>
+    <AssemblyName>Microsoft.LightSwitch.Server.Host</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <LightSwitchVersion>v5.0</LightSwitchVersion>
+    <LightSwitchProjectVersion>v4.7</LightSwitchProjectVersion>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
+    <Name>RevolutionRawInterface</Name>
+    <LightSwitchProjectTypeV45>LightSwitch</LightSwitchProjectTypeV45>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>false</SignManifests>
+    <BaseIntermediateOutputPath>bin</BaseIntermediateOutputPath>
+    <ApplicationClientType>Desktop</ApplicationClientType>
+    <ApplicationServerType>LocalHost</ApplicationServerType>
+    <AuthenticationType>None</AuthenticationType>
+    <ApplicationName>RevolutionRawInterface</ApplicationName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <ServiceDefinitionFile>ServiceDefinition.csdef</ServiceDefinitionFile>
+    <ServiceConfigurationFile>ServiceConfiguration.cscfg</ServiceConfigurationFile>
+    <SqlExpressInstanceName>(LocalDB)\MSSQLLocalDB</SqlExpressInstanceName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug</OutputPath>
+    <UseDesignTimeFeatures>true</UseDesignTimeFeatures>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release</OutputPath>
+    <UseDesignTimeFeatures>false</UseDesignTimeFeatures>
+  </PropertyGroup>
+  <ItemGroup>
+    <ServiceDefinition Include="ServiceDefinition.csdef">
+      <Visible>False</Visible>
+    </ServiceDefinition>
+    <ServiceConfiguration Include="ServiceConfiguration.cscfg">
+      <Visible>False</Visible>
+    </ServiceConfiguration>
+    <DiagnosticsConfiguration Include="diagnostics.wadcfg">
+      <Visible>False</Visible>
+    </DiagnosticsConfiguration>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <ItemGroup>
+    <_BuildFile Include="$(LightSwitchSDKPath)\Server\vslshost.exe">
+      <SubFolder>
+      </SubFolder>
+      <PublishType>EntryPoint</PublishType>
+    </_BuildFile>
+    <_BuildFile Include="$(LightSwitchSDKPath)\Server\vslshost.exe.config">
+      <SubFolder>
+      </SubFolder>
+      <PublishType>Desktop</PublishType>
+    </_BuildFile>
+    <_BuildFile Include="$(LightSwitchSDKPath)\Server\vslshost.exe.manifest">
+      <SubFolder>
+      </SubFolder>
+      <PublishType>Exclude</PublishType>
+    </_BuildFile>
+    <_BuildFile Include="$(LightSwitchSDKPath)\Server\ClientAccessPolicy.xml">
+      <SubFolder>
+      </SubFolder>
+      <PublishType>Exclude</PublishType>
+    </_BuildFile>
+    <_BuildFile Include="$(LightSwitchSDKPath)\Server\Microsoft.LightSwitch.Design.svc">
+      <SubFolder>
+      </SubFolder>
+      <PublishType>Exclude</PublishType>
+    </_BuildFile>
+    <_BuildFile Include="$(LightSwitchSDKPath)\Server\Microsoft.LightSwitch.SecurityData.svc">
+      <SubFolder>
+      </SubFolder>
+      <PublishType>
+      </PublishType>
+    </_BuildFile>
+    <_BuildFile Include="RevolutionRawInterface.Server\web.config">
+      <SubFolder>
+      </SubFolder>
+      <PublishType>
+      </PublishType>
+    </_BuildFile>
+    <_BuildFile Include="RevolutionRawInterface.Server\default.aspx">
+      <SubFolder>
+      </SubFolder>
+      <PublishType>
+      </PublishType>
+    </_BuildFile>
+    <_BuildFile Include="diagnostics.wadcfg">
+      <SubFolder>bin</SubFolder>
+      <PublishType>
+      </PublishType>
+    </_BuildFile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="RevolutionRawInterface.DesktopClient\RevolutionRawInterface.DesktopClient.csproj">
+      <Name>RevolutionRawInterface.DesktopClient</Name>
+      <Project>{2e94059e-6e93-4887-b487-135705742aff}</Project>
+      <Private>True</Private>
+      <Type>Client</Type>
+    </ProjectReference>
+    <ProjectReference Include="RevolutionRawInterface.Server\RevolutionRawInterface.Server.csproj">
+      <Name>RevolutionRawInterface.Server</Name>
+      <Project>{02c2fb27-85d2-413a-bded-4c3ad618b481}</Project>
+      <Private>True</Private>
+      <Type>Server</Type>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <LightSwitchExtension Include="Extensions\Microsoft.LightSwitch.Cosmopolitan.lspkg">
+      <ExtensionId>Microsoft.LightSwitch.Cosmopolitan</ExtensionId>
+      <Client>MICROSOFT.LIGHTSWITCH.COSMOPOLITAN.CLIENT</Client>
+    </LightSwitchExtension>
+    <LightSwitchExtension Include="Extensions\Microsoft.LightSwitch.Extensions.lspkg">
+      <ExtensionId>Microsoft.LightSwitch.Extensions</ExtensionId>
+      <Client>MICROSOFT.LIGHTSWITCH.EXTENSIONS.CLIENT;MICROSOFT.LIGHTSWITCH.EXTENSIONS.DESIGN.CLIENT</Client>
+      <Server>MICROSOFT.LIGHTSWITCH.EXTENSIONS.SERVER</Server>
+    </LightSwitchExtension>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\LightSwitch\$(LightSwitchVersion)\Microsoft.LightSwitch.targets" />
+</Project>

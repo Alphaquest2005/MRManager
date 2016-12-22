@@ -1,0 +1,222 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\Amoeba\Amoeba\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba Projects\MRManager\T4Utilities\bin\Debug\T4Utilities.dll"#>
+<#@ import namespace="MoreLinq" #>
+<#@ import namespace="System.Linq" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class DBContextIntializationTemplate : CSharpTemplate
+{
+	public DBContextIntializationTemplate( string appName,string migrationStratergy,List<ApplicationEntity> entities)
+	{
+		AppName = appName;
+		MigrationStratergy = migrationStratergy;
+		Entities = entities;
+	}
+
+	
+	List<ApplicationEntity> Entities { get; }
+	public string AppName { get;}
+	public string MigrationStratergy { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+	   var convertDic = new Dictionary<string, string>() ;
+		convertDic.Add("int", "ToInt32");
+		convertDic.Add("string", "ToString");
+		convertDic.Add("DateTime", "ToDateTime");
+		convertDic.Add("double", "ToDouble");
+		convertDic.Add("Guid", "ToGuid");
+		convertDic.Add("Int64", "ToInt64");
+		convertDic.Add("Byte[]", "ToByte");
+			
+
+#>
+using System;
+using System.Data;
+using EF.Entities;
+using System.ComponentModel;
+using Microsoft.EntityFrameworkCore;
+
+namespace EF.DBContexts
+{
+	public partial class <#= AppName#>DBContext
+	{
+		private static readonly <#= AppName#>DBContext _instance = new <#= AppName#>DBContext();
+
+		public static <#= AppName#>DBContext Instance => _instance;
+
+		static <#= AppName#>DBContext()
+		{
+<#+ if (MigrationStratergy == "Migrate")
+		{ #>
+			Instance.Database.Migrate();
+		}
+<#+		}
+else
+{#>
+			if (System.ComponentModel.LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
+			Instance.Database.EnsureDeleted();
+			Instance.Database.EnsureCreated();
+			CreateSeedData();
+		}
+
+		private static void CreateSeedData()
+		{
+<#+
+	var ml = T4Utilities.GetMainEntities(Entities).Select(x => x.Entity);
+	var res = new List<Entity>();
+
+	var mainEntities = ml as IList<Entity> ?? ml.ToList();
+	mainEntities.ForEach((x) =>
+	{
+		InsertEntitySampleData(x);
+		res.Add(x);
+	});
+				
+	foreach (var mainEntity in mainEntities)
+	{
+		ProcessMainEntity(mainEntity, res);
+
+	}
+	Entities.Select(x => x.Entity).Except(res).ForEach((x) =>
+	{
+	    ProcessMainEntity(x, res);
+	    res.Add(x);
+	});
+#>
+		}
+<#+
+} 
+ #>               
+			
+		
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+#>
+<#+
+	private void ProcessMainEntity(Entity mainEntity, List<Entity> res)
+	{
+		try
+		{
+			var childres = mainEntity.EntityProperties.SelectMany(x => x.ChildRelationships)
+				.Where(x => x != null && x.ChildProperty != null && x.ChildProperty.Entity != null)
+				.Where(x => !res.Contains(x.ChildProperty.Entity))
+				.Select(x => x.ChildProperty.Entity)
+				.DistinctBy(x => x.Id)
+				.ToList();
+
+			//InsertEntitySampleData(mainEntity);
+			foreach (var c in childres)
+			{
+				var parentRes =
+					c.EntityProperties.SelectMany(x => x.ParentRelationships)
+						.Select(x => x.ParentProperty.Entity).DistinctBy(x => x.Id)
+						.Where(x => !res.Contains(x));
+				foreach (var parent in parentRes)
+				{
+					if(!parent.EntityProperties.SelectMany(x => x.ParentRelationships.Select(z => z.ParentProperty.Entity)).All(res.Contains)) continue;
+				    if (!res.Contains(parent))
+				    {
+				        InsertEntitySampleData(parent);
+						res.Add(parent);
+				    }
+					
+				}
+				if(!c.EntityProperties.SelectMany(x => x.ParentRelationships.Select(z => z.ParentProperty.Entity)).All(res.Contains)) continue;
+			    if (!res.Contains(c))
+			    {
+			        InsertEntitySampleData(c);
+					res.Add(c);
+			    }
+				ProcessMainEntity(c, res);
+			}
+		}
+		catch (Exception)
+		{
+			throw;
+		}
+	}
+ #>
+
+<#+
+
+	private void InsertEntitySampleData(Entity entity)
+	{
+#>
+<#+
+				var isPCal = entity.EntityProperties.Any(x => x!= null && x.DataProperties.Any() && x.DataProperties.Any(z => z!= null && z.ModelType != null && z.ModelType.Name == "EntityId" && z.PrimaryKeyOption != null && z.PrimaryKeyOption.IsCalculated));
+				var testvals = entity.EntityProperties.SelectMany(x => x.TestValues).ToList();
+		if (!testvals.Any())
+		{
+#>
+			//No test data for <#=entity.Name #>
+<#+
+			return;
+		}
+				var props = testvals.GroupBy(z => z.RowId);
+				
+#>
+				Instance.Database.ExecuteSqlCommand(@"
+<#+			if (isPCal)
+			{
+#>
+					SET IDENTITY_INSERT <#=entity.SchemaName#>.<#=entity.EntitySetName #> ON
+<#+			}
+ #>
+<#+
+			foreach (var grp in props)
+							{
+#>
+						Insert Into <#=entity.SchemaName#>.<#=entity.EntitySetName#> (<#+
+							foreach (var val in grp)
+							{
+								if(val.EntityProperty.DataProperties.FirstOrDefault() == null) continue;
+							   
+#><#=val.EntityProperty.PropertyName#><#=val == grp.Last()?"":"," #><#+ 
+								}
+#>) Values(<#+
+							foreach (var val in grp)
+								{
+									if(val.EntityProperty.DataProperties.FirstOrDefault() == null) continue;
+								    if (val.EntityProperty.DataProperties.FirstOrDefault().DataType.Name == "Byte[]")
+								    {
+#>cast((select Value from AmoebaDB.dbo.TestValues where Id = <#=val.Id#>) as varbinary(max))<#=val == grp.Last() ? "" : "," #><#+
+								    }
+								    else
+								    {
+#>'<#=val.Value.Replace("'", "''") #>'<#=val == grp.Last() ? "" : "," #><#+
+								    }
+								}
+#>)
+<#+
+							}
+ #><#+		if (isPCal)
+			{ 
+#>
+					SET IDENTITY_INSERT <#=entity.SchemaName#>.<#=entity.EntitySetName #> OFF<#+} #>");
+<#+        
+	}#>
+
+
+
+
+<#+
+		/// end of class
+}
+
+   
+
+#>
+

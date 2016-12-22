@@ -1,0 +1,45 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class TriggerTemplate : CSharpTemplate
+{
+	public TriggerTemplate(List<Trigger> sm)
+	{
+		Triggers = sm;
+	}
+
+	public List<Trigger> Triggers { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+
+
+
+namespace BusinessLayer.StateMachines
+{
+	
+		public enum Triggers
+		{
+<#+ foreach (var t in Triggers)
+{ #>
+			<#=t.TriggerName #> = <#=t.Id #><#=t == Triggers.LastOrDefault()?"":"," #>	
+<#+    
+} #>
+		}
+	
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

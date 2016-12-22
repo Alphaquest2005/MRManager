@@ -1,0 +1,11 @@
+﻿{
+  "dependencies": {
+    "Akka": "1.1.2"
+  },
+  "frameworks": {
+    "net461": {}
+  },
+  "runtimes": {
+    "win": {}
+  }
+}

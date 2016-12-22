@@ -1,0 +1,1202 @@
+﻿<UserControl x:Class="Views.EntitiesSummaryDetailsView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:System="clr-namespace:System;assembly=mscorlib"
+			 xmlns:coreui="clr-namespace:Core.Common.UI;assembly=Core.Common.UI"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:models="clr-namespace:ViewModels;assembly=ViewModels"
+			 xmlns:views="clr-namespace:Views"
+			 Width="800"
+			 Height="Auto"
+			 VerticalAlignment="Top"
+			 mc:Ignorable="d">
+	<UserControl.Resources>
+
+		<Style x:Key="TransparentTextBoxStyle" TargetType="{x:Type TextBox}">
+			<Setter Property="FocusVisualStyle" Value="{x:Null}" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type TextBox}">
+						<Grid>
+							<ScrollViewer x:Name="PART_ContentHost"
+										  Background="#4CFFFFFF"
+										  Focusable="True"
+										  HorizontalScrollBarVisibility="Hidden"
+										  VerticalScrollBarVisibility="Hidden" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+
+		<System:Double x:Key="ExpHeadFontSize">16</System:Double>
+		<Style x:Key="ExpHeadStyle" TargetType="{x:Type TextBlock}">
+			<Setter Property="Foreground" Value="#FFECF9A7" />
+			<Style.Triggers>
+
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Foreground" Value="#FF8E9600" />
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+
+
+	</UserControl.Resources>
+
+	<Grid x:Name="LayoutRoot"
+		  Margin="0,0,0,0">
+
+		<coreui:SliderPanel x:Name="Slider"
+							Margin="150,10,0,0"
+							Orientation="Horizontal">
+			<StackPanel HorizontalAlignment="Stretch"
+						VerticalAlignment="Stretch"
+						Margin="0,10,-10000,0"
+						Height="500"
+						Background="#7FB0CAD3"
+						Orientation="Horizontal">
+ 
+				<Expander x:Name="ApplicationEntitiesListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="ApplicationEntities"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:ApplicationEntitiesList_AutoGen Margin="0" />
+				</Expander>
+
+				<Expander x:Name="ApplicationEntitiesAutoViewListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="ApplicationEntities AutoView"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:ApplicationEntitiesAutoViewList_AutoGen Margin="0" />
+				</Expander>
+
+ 
+				<Expander x:Name="EntityViewEntityPropertiesListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="EntityViewEntityProperties"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:EntityViewEntityPropertiesList_AutoGen Margin="0" />
+				</Expander>
+
+				<Expander x:Name="EntityViewEntityPropertiesAutoViewListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="EntityViewEntityProperties AutoView"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:EntityViewEntityPropertiesAutoViewList_AutoGen Margin="0" />
+				</Expander>
+
+ 
+				<Expander x:Name="EntityViewPropertyFunctionParameterListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="EntityViewPropertyFunctionParameter"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:EntityViewPropertyFunctionParameterList_AutoGen Margin="0" />
+				</Expander>
+
+				<Expander x:Name="EntityViewPropertyFunctionParameterAutoViewListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="EntityViewPropertyFunctionParameter AutoView"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:EntityViewPropertyFunctionParameterAutoViewList_AutoGen Margin="0" />
+				</Expander>
+
+ 
+				<Expander x:Name="EntityViewPropertyFunctionListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="EntityViewPropertyFunction"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:EntityViewPropertyFunctionList_AutoGen Margin="0" />
+				</Expander>
+
+				<Expander x:Name="EntityViewPropertyFunctionAutoViewListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="EntityViewPropertyFunction AutoView"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:EntityViewPropertyFunctionAutoViewList_AutoGen Margin="0" />
+				</Expander>
+
+ 
+				<Expander x:Name="EntityViewViewPropertiesListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="EntityViewViewProperties"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:EntityViewViewPropertiesList_AutoGen Margin="0" />
+				</Expander>
+
+				<Expander x:Name="EntityViewViewPropertiesAutoViewListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="EntityViewViewProperties AutoView"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:EntityViewViewPropertiesAutoViewList_AutoGen Margin="0" />
+				</Expander>
+
+ 
+				<Expander x:Name="EntityViewPropertiesListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="EntityViewProperties"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:EntityViewPropertiesList_AutoGen Margin="0" />
+				</Expander>
+
+				<Expander x:Name="EntityViewPropertiesAutoViewListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="EntityViewProperties AutoView"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:EntityViewPropertiesAutoViewList_AutoGen Margin="0" />
+				</Expander>
+
+ 
+				<Expander x:Name="EntityViewListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="EntityView"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:EntityViewList_AutoGen Margin="0" />
+				</Expander>
+
+				<Expander x:Name="EntityViewAutoViewListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="EntityView AutoView"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:EntityViewAutoViewList_AutoGen Margin="0" />
+				</Expander>
+
+ 
+				<Expander x:Name="PrimaryKeyOptionsListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="PrimaryKeyOptions"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:PrimaryKeyOptionsList_AutoGen Margin="0" />
+				</Expander>
+
+				<Expander x:Name="PrimaryKeyOptionsAutoViewListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="PrimaryKeyOptions AutoView"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:PrimaryKeyOptionsAutoViewList_AutoGen Margin="0" />
+				</Expander>
+
+ 
+				<Expander x:Name="DataPropertiesListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="DataProperties"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:DataPropertiesList_AutoGen Margin="0" />
+				</Expander>
+
+				<Expander x:Name="DataPropertiesAutoViewListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="DataProperties AutoView"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:DataPropertiesAutoViewList_AutoGen Margin="0" />
+				</Expander>
+
+ 
+				<Expander x:Name="PresentationPropertiesListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="PresentationProperties"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:PresentationPropertiesList_AutoGen Margin="0" />
+				</Expander>
+
+				<Expander x:Name="PresentationPropertiesAutoViewListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="PresentationProperties AutoView"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:PresentationPropertiesAutoViewList_AutoGen Margin="0" />
+				</Expander>
+
+ 
+				<Expander x:Name="TestValuesListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="TestValues"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:TestValuesList_AutoGen Margin="0" />
+				</Expander>
+
+				<Expander x:Name="TestValuesAutoViewListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="TestValues AutoView"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:TestValuesAutoViewList_AutoGen Margin="0" />
+				</Expander>
+
+ 
+				<Expander x:Name="EntityPropertiesListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="EntityProperties"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:EntityPropertiesList_AutoGen Margin="0" />
+				</Expander>
+
+				<Expander x:Name="EntityPropertiesAutoViewListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="EntityProperties AutoView"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:EntityPropertiesAutoViewList_AutoGen Margin="0" />
+				</Expander>
+
+ 
+				<Expander x:Name="ViewEntityListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="ViewEntity"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:ViewEntityList_AutoGen Margin="0" />
+				</Expander>
+
+				<Expander x:Name="ViewEntityAutoViewListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="ViewEntity AutoView"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:ViewEntityAutoViewList_AutoGen Margin="0" />
+				</Expander>
+
+ 
+				<Expander x:Name="EntitiesListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="Entities"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:EntitiesList_AutoGen Margin="0" />
+				</Expander>
+
+				<Expander x:Name="EntitiesAutoViewListEXP"
+						  Width="Auto"
+						  Height="Auto"
+						  Margin="0,0,0,10"
+						  HorizontalAlignment="Left"
+						  VerticalAlignment="Top"
+						  Background="#FFDEAFAF"
+						  ExpandDirection="Right"
+						  IsExpanded="True"
+						  Padding="5,5,5,10">
+					<Expander.Header>
+						<Grid Height="Auto" MouseEnter="BringIntoView">
+							<TextBlock Width="55"
+									   Height="63"
+									   Margin="0,10,23,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="40"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="" />
+							<TextBlock Width="78"
+									   Height="42"
+									   Margin="0,65,0.4,0"
+									   HorizontalAlignment="Right"
+									   VerticalAlignment="Top"
+									   FontSize="{DynamicResource ExpHeadFontSize}"
+									   FontWeight="Bold"
+									   RenderTransformOrigin="0.535,1.32"
+									   Style="{DynamicResource ExpHeadStyle}"
+									   Text="Entities AutoView"
+									   TextAlignment="Center"
+									   TextWrapping="Wrap" />
+						</Grid>
+					</Expander.Header>
+					<views:EntitiesAutoViewList_AutoGen Margin="0" />
+				</Expander>
+
+  
+
+			</StackPanel>
+		</coreui:SliderPanel>
+<ScrollViewer HorizontalAlignment="Left" Height="500" Margin="0,10,0,0" VerticalAlignment="Top" Width="142" Padding="0,0,0,0" VerticalScrollBarVisibility="Auto" CanContentScroll="True"  >
+			<StackPanel RenderTransformOrigin="0.5,0.5" Height="500" Width="134" Margin="0,0,0,0">
+  
+		<TextBlock Text="Application" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToApplicationEntities"/>
+		<TextBlock Text="Application Auto View" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToApplicationEntitiesAutoView"/>
+  
+		<TextBlock Text="Entity View Entity Properties" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntityViewEntityProperties"/>
+		<TextBlock Text="Entity View Entity Properties Auto View" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntityViewEntityPropertiesAutoView"/>
+  
+		<TextBlock Text="Entity View Property Function Parameter" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntityViewPropertyFunctionParameter"/>
+		<TextBlock Text="Entity View Property Function Parameter Auto View" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntityViewPropertyFunctionParameterAutoView"/>
+  
+		<TextBlock Text="Entity View Property Function" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntityViewPropertyFunction"/>
+		<TextBlock Text="Entity View Property Function Auto View" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntityViewPropertyFunctionAutoView"/>
+  
+		<TextBlock Text="Entity View View Properties" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntityViewViewProperties"/>
+		<TextBlock Text="Entity View View Properties Auto View" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntityViewViewPropertiesAutoView"/>
+  
+		<TextBlock Text="Entity View Properties" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntityViewProperties"/>
+		<TextBlock Text="Entity View Properties Auto View" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntityViewPropertiesAutoView"/>
+  
+		<TextBlock Text="Entity View" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntityView"/>
+		<TextBlock Text="Entity View Auto View" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntityViewAutoView"/>
+  
+		<TextBlock Text="Primary Key Options" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToPrimaryKeyOptions"/>
+		<TextBlock Text="Primary Key Options Auto View" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToPrimaryKeyOptionsAutoView"/>
+  
+		<TextBlock Text="Data Properties" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToDataProperties"/>
+		<TextBlock Text="Data Properties Auto View" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToDataPropertiesAutoView"/>
+  
+		<TextBlock Text="Entity View Entity Properties" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntityViewEntityProperties"/>
+		<TextBlock Text="Entity View Entity Properties Auto View" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntityViewEntityPropertiesAutoView"/>
+  
+		<TextBlock Text="Presentation Properties" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToPresentationProperties"/>
+		<TextBlock Text="Presentation Properties Auto View" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToPresentationPropertiesAutoView"/>
+  
+		<TextBlock Text="Test Values" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToTestValues"/>
+		<TextBlock Text="Test Values Auto View" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToTestValuesAutoView"/>
+  
+		<TextBlock Text="Entity Properties" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntityProperties"/>
+		<TextBlock Text="Entity Properties Auto View" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntityPropertiesAutoView"/>
+  
+		<TextBlock Text="View Entity" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToViewEntity"/>
+		<TextBlock Text="View Entity Auto View" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToViewEntityAutoView"/>
+  
+		<TextBlock Text="Entities" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntities"/>
+		<TextBlock Text="Entities" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Height="Auto" Margin="0,10,20,10" TextWrapping="Wrap"  VerticalAlignment="Top" Width="Auto" MaxWidth="110" TextAlignment="Right" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold" MouseLeftButtonDown="GoToEntitiesAutoView"/>
+         
+</StackPanel>
+</ScrollViewer>
+		<Rectangle HorizontalAlignment="Left" Height="459" Margin="142,10,0,0" VerticalAlignment="Top" Width="4">
+			<Rectangle.Fill>
+				<RadialGradientBrush>
+					<GradientStop Color="#7F6570B6" Offset="1"/>
+					<GradientStop Color="#FFEDEEF4"/>
+				</RadialGradientBrush>
+			</Rectangle.Fill>
+		</Rectangle>
+		
+	</Grid>
+</UserControl>

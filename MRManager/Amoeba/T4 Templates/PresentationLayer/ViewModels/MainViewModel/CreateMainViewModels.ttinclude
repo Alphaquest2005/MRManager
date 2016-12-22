@@ -1,0 +1,35 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="..\..\..\Utilities\DataAccess\Repository.ttinclude" once="true" #>
+<#@ include file="MainViewModelTemplate.ttinclude" #>
+<#@ include file="MainWindowViewModelTemplate.ttinclude" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ import namespace="System.IO" #>
+<#+
+// <copyright file="DataLayer.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+	public void CreateMainViewModels(Application app,string AppFolder, Dictionary<string, string> settings, List<ApplicationEntity> entities)
+	{
+		var pPath = Path.Combine(AppFolder, settings["Project"]) ;
+		
+		// create simple properties
+		
+			var tpl = new MainViewModelTemplate();
+		    tpl.Output.Project = pPath;
+			tpl.Output.File = settings["Folder"] + @"\MainViewModel.cs";
+			tpl.Render(); 
+
+			var wtpl = new MainWindowViewModelTemplate();
+		    wtpl.Output.Project = pPath;
+			wtpl.Output.File = settings["Folder"] + @"\MainWindowViewModel.cs";
+			wtpl.Render(); 
+
+
+	}
+
+
+
+#>

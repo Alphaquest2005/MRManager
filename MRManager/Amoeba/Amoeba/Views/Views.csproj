@@ -1,0 +1,1170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{879C9901-CB5C-407A-8655-E3C3632C1D7B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Views</RootNamespace>
+    <AssemblyName>Views</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Generated Views\AutoViews\ApplicationEntitiesListView.xaml.cs">
+      <DependentUpon>ApplicationEntitiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\ApplicationSettingListView.xaml.cs">
+      <DependentUpon>ApplicationSettingListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\ApplicationsListView.xaml.cs">
+      <DependentUpon>ApplicationsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\DataPropertiesListView.xaml.cs">
+      <DependentUpon>DataPropertiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\DataTypesListView.xaml.cs">
+      <DependentUpon>DataTypesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\EntitiesListView.xaml.cs">
+      <DependentUpon>EntitiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\EntityPropertiesListView.xaml.cs">
+      <DependentUpon>EntityPropertiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\EntityRelationshipsListView.xaml.cs">
+      <DependentUpon>EntityRelationshipsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\EntityViewEntityPropertiesListView.xaml.cs">
+      <DependentUpon>EntityViewEntityPropertiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\EntityViewListView.xaml.cs">
+      <DependentUpon>EntityViewListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\EntityViewPropertiesListView.xaml.cs">
+      <DependentUpon>EntityViewPropertiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\EntityViewPropertyFunctionListView.xaml.cs">
+      <DependentUpon>EntityViewPropertyFunctionListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\EntityViewPropertyFunctionParameterListView.xaml.cs">
+      <DependentUpon>EntityViewPropertyFunctionParameterListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\EntityViewViewPropertiesListView.xaml.cs">
+      <DependentUpon>EntityViewViewPropertiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\FunctionBodyListView.xaml.cs">
+      <DependentUpon>FunctionBodyListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\FunctionParametersListView.xaml.cs">
+      <DependentUpon>FunctionParametersListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\FunctionReturnTypeListView.xaml.cs">
+      <DependentUpon>FunctionReturnTypeListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\FunctionSetFunctionsListView.xaml.cs">
+      <DependentUpon>FunctionSetFunctionsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\FunctionSetsListView.xaml.cs">
+      <DependentUpon>FunctionSetsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\FunctionsListView.xaml.cs">
+      <DependentUpon>FunctionsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\LayersListView.xaml.cs">
+      <DependentUpon>LayersListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\LayoutListView.xaml.cs">
+      <DependentUpon>LayoutListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\ModelTypesListView.xaml.cs">
+      <DependentUpon>ModelTypesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\OperatorsListView.xaml.cs">
+      <DependentUpon>OperatorsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\ParametersListView.xaml.cs">
+      <DependentUpon>ParametersListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\PartsListView.xaml.cs">
+      <DependentUpon>PartsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\PresentationPropertiesListView.xaml.cs">
+      <DependentUpon>PresentationPropertiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\PrimaryKeyOptionsListView.xaml.cs">
+      <DependentUpon>PrimaryKeyOptionsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\ProcessListView.xaml.cs">
+      <DependentUpon>ProcessListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\ProcessStepScreensListView.xaml.cs">
+      <DependentUpon>ProcessStepScreensListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\ProcessStepsListView.xaml.cs">
+      <DependentUpon>ProcessStepsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\ProjectsListView.xaml.cs">
+      <DependentUpon>ProjectsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\RelationshipTypesListView.xaml.cs">
+      <DependentUpon>RelationshipTypesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\ScreenLayoutsListView.xaml.cs">
+      <DependentUpon>ScreenLayoutsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\ScreenPartsListView.xaml.cs">
+      <DependentUpon>ScreenPartsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\ScreensListView.xaml.cs">
+      <DependentUpon>ScreensListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\ScreenViewsListView.xaml.cs">
+      <DependentUpon>ScreenViewsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\SettingsListView.xaml.cs">
+      <DependentUpon>SettingsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\SettingsNamesListView.xaml.cs">
+      <DependentUpon>SettingsNamesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\StateMachinesListView.xaml.cs">
+      <DependentUpon>StateMachinesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\StateMachineStatesListView.xaml.cs">
+      <DependentUpon>StateMachineStatesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\StateMachineTriggersListView.xaml.cs">
+      <DependentUpon>StateMachineTriggersListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\StatesListView.xaml.cs">
+      <DependentUpon>StatesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\StepsListView.xaml.cs">
+      <DependentUpon>StepsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\TestValuesListView.xaml.cs">
+      <DependentUpon>TestValuesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\TriggersListView.xaml.cs">
+      <DependentUpon>TriggersListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\ViewEntityListView.xaml.cs">
+      <DependentUpon>ViewEntityListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\AutoViews\ViewsListView.xaml.cs">
+      <DependentUpon>ViewsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\MainView_AutoGen.xaml.cs">
+      <DependentUpon>MainView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\MainWindow_AutoGen.xaml.cs">
+      <DependentUpon>MainWindow_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\ApplicationEntitiesListView.xaml.cs">
+      <DependentUpon>ApplicationEntitiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\ApplicationSettingListView.xaml.cs">
+      <DependentUpon>ApplicationSettingListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\ApplicationsListView.xaml.cs">
+      <DependentUpon>ApplicationsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\DataPropertiesListView.xaml.cs">
+      <DependentUpon>DataPropertiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\DataTypesListView.xaml.cs">
+      <DependentUpon>DataTypesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\EntitiesListView.xaml.cs">
+      <DependentUpon>EntitiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\EntityPropertiesListView.xaml.cs">
+      <DependentUpon>EntityPropertiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\EntityRelationshipsListView.xaml.cs">
+      <DependentUpon>EntityRelationshipsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\EntityViewEntityPropertiesListView.xaml.cs">
+      <DependentUpon>EntityViewEntityPropertiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\EntityViewListView.xaml.cs">
+      <DependentUpon>EntityViewListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\EntityViewPropertiesListView.xaml.cs">
+      <DependentUpon>EntityViewPropertiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\EntityViewPropertyFunctionListView.xaml.cs">
+      <DependentUpon>EntityViewPropertyFunctionListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\EntityViewPropertyFunctionParameterListView.xaml.cs">
+      <DependentUpon>EntityViewPropertyFunctionParameterListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\EntityViewViewPropertiesListView.xaml.cs">
+      <DependentUpon>EntityViewViewPropertiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\FunctionBodyListView.xaml.cs">
+      <DependentUpon>FunctionBodyListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\FunctionParametersListView.xaml.cs">
+      <DependentUpon>FunctionParametersListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\FunctionReturnTypeListView.xaml.cs">
+      <DependentUpon>FunctionReturnTypeListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\FunctionSetFunctionsListView.xaml.cs">
+      <DependentUpon>FunctionSetFunctionsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\FunctionSetsListView.xaml.cs">
+      <DependentUpon>FunctionSetsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\FunctionsListView.xaml.cs">
+      <DependentUpon>FunctionsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\LayersListView.xaml.cs">
+      <DependentUpon>LayersListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\LayoutListView.xaml.cs">
+      <DependentUpon>LayoutListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\ModelTypesListView.xaml.cs">
+      <DependentUpon>ModelTypesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\OperatorsListView.xaml.cs">
+      <DependentUpon>OperatorsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\ParametersListView.xaml.cs">
+      <DependentUpon>ParametersListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\PartsListView.xaml.cs">
+      <DependentUpon>PartsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\PresentationPropertiesListView.xaml.cs">
+      <DependentUpon>PresentationPropertiesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\PrimaryKeyOptionsListView.xaml.cs">
+      <DependentUpon>PrimaryKeyOptionsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\ProcessListView.xaml.cs">
+      <DependentUpon>ProcessListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\ProcessStepScreensListView.xaml.cs">
+      <DependentUpon>ProcessStepScreensListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\ProcessStepsListView.xaml.cs">
+      <DependentUpon>ProcessStepsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\ProjectsListView.xaml.cs">
+      <DependentUpon>ProjectsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\RelationshipTypesListView.xaml.cs">
+      <DependentUpon>RelationshipTypesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\ScreenLayoutsListView.xaml.cs">
+      <DependentUpon>ScreenLayoutsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\ScreenPartsListView.xaml.cs">
+      <DependentUpon>ScreenPartsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\ScreensListView.xaml.cs">
+      <DependentUpon>ScreensListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\ScreenViewsListView.xaml.cs">
+      <DependentUpon>ScreenViewsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\SettingsListView.xaml.cs">
+      <DependentUpon>SettingsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\SettingsNamesListView.xaml.cs">
+      <DependentUpon>SettingsNamesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\StateMachinesListView.xaml.cs">
+      <DependentUpon>StateMachinesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\StateMachineStatesListView.xaml.cs">
+      <DependentUpon>StateMachineStatesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\StateMachineTriggersListView.xaml.cs">
+      <DependentUpon>StateMachineTriggersListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\StatesListView.xaml.cs">
+      <DependentUpon>StatesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\StepsListView.xaml.cs">
+      <DependentUpon>StepsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\TestValuesListView.xaml.cs">
+      <DependentUpon>TestValuesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\TriggersListView.xaml.cs">
+      <DependentUpon>TriggersListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\ViewEntityListView.xaml.cs">
+      <DependentUpon>ViewEntityListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\Model\ViewsListView.xaml.cs">
+      <DependentUpon>ViewsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Applications\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Applications\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Applications\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\DataTypes\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\DataTypes\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\DataTypes\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Entities\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Entities\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Entities\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Functions\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Functions\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Functions\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Layers\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Layers\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Layers\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Layout\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Layout\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Layout\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\ModelTypes\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\ModelTypes\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\ModelTypes\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Parts\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Parts\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Parts\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Process\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Process\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Process\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Projects\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Projects\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Projects\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\RelationshipTypes\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\RelationshipTypes\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\RelationshipTypes\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Screens\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Screens\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Screens\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\StateMachines\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\StateMachines\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\StateMachines\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\States\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\States\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\States\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Steps\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Steps\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Steps\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Triggers\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Triggers\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Triggers\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Views\SummaryListView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Views\SummaryViewDetails_AutoGen.xaml.cs">
+      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Generated Views\SummaryViews\Views\SummaryView_AutoGen.xaml.cs">
+      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="project.json" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Revolution\Common\Common.csproj">
+      <Project>{cb6d5fbc-0c13-437d-b4f3-a0ec4d5673b3}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\Core.Common.UI\Core.Common.UI.csproj">
+      <Project>{5DD82AD7-F344-45E3-92CC-96F8D07700AF}</Project>
+      <Name>Core.Common.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\DataInterfaces\DataInterfaces.csproj">
+      <Project>{F6008330-BA42-454B-A0B4-82455DE56776}</Project>
+      <Name>DataInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataTemplates\DataTemplates.csproj">
+      <Project>{c93bb83a-9df6-4707-8978-b2668b4b9e03}</Project>
+      <Name>DataTemplates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EFEntities\EF.Entities.csproj">
+      <Project>{FAD2A8C8-A1B4-4A3C-8E37-0388C0E3733C}</Project>
+      <Name>EF.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{AD573873-C8E6-4EA3-93F5-0D39A92FC9F6}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModels\ViewModels.csproj">
+      <Project>{db1e7bd6-7fe0-4cdd-8b6d-edbb0d156b41}</Project>
+      <Name>ViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Generated Views\AutoViews\ApplicationEntitiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\ApplicationSettingListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\ApplicationsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\DataPropertiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\DataTypesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\EntitiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\EntityPropertiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\EntityRelationshipsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\EntityViewEntityPropertiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\EntityViewListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\EntityViewPropertiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\EntityViewPropertyFunctionListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\EntityViewPropertyFunctionParameterListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\EntityViewViewPropertiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\FunctionBodyListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\FunctionParametersListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\FunctionReturnTypeListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\FunctionSetFunctionsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\FunctionSetsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\FunctionsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\LayersListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\LayoutListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\ModelTypesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\OperatorsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\ParametersListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\PartsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\PresentationPropertiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\PrimaryKeyOptionsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\ProcessListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\ProcessStepScreensListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\ProcessStepsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\ProjectsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\RelationshipTypesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\ScreenLayoutsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\ScreenPartsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\ScreensListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\ScreenViewsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\SettingsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\SettingsNamesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\StateMachinesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\StateMachineStatesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\StateMachineTriggersListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\StatesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\StepsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\TestValuesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\TriggersListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\ViewEntityListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\AutoViews\ViewsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\MainView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\MainWindow_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\ApplicationEntitiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\ApplicationSettingListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\ApplicationsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\DataPropertiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\DataTypesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\EntitiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\EntityPropertiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\EntityRelationshipsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\EntityViewEntityPropertiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\EntityViewListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\EntityViewPropertiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\EntityViewPropertyFunctionListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\EntityViewPropertyFunctionParameterListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\EntityViewViewPropertiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\FunctionBodyListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\FunctionParametersListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\FunctionReturnTypeListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\FunctionSetFunctionsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\FunctionSetsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\FunctionsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\LayersListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\LayoutListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\ModelTypesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\OperatorsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\ParametersListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\PartsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\PresentationPropertiesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\PrimaryKeyOptionsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\ProcessListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\ProcessStepScreensListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\ProcessStepsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\ProjectsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\RelationshipTypesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\ScreenLayoutsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\ScreenPartsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\ScreensListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\ScreenViewsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\SettingsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\SettingsNamesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\StateMachinesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\StateMachineStatesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\StateMachineTriggersListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\StatesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\StepsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\TestValuesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\TriggersListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\ViewEntityListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\Model\ViewsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Applications\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Applications\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Applications\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\DataTypes\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\DataTypes\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\DataTypes\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Entities\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Entities\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Entities\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Functions\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Functions\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Functions\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Layers\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Layers\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Layers\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Layout\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Layout\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Layout\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\ModelTypes\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\ModelTypes\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\ModelTypes\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Parts\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Parts\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Parts\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Process\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Process\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Process\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Projects\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Projects\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Projects\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\RelationshipTypes\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\RelationshipTypes\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\RelationshipTypes\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Screens\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Screens\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Screens\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\StateMachines\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\StateMachines\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\StateMachines\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\States\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\States\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\States\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Steps\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Steps\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Steps\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Triggers\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Triggers\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Triggers\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Views\SummaryListView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Views\SummaryViewDetails_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generated Views\SummaryViews\Views\SummaryView_AutoGen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

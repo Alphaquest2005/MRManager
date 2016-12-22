@@ -1,0 +1,69 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class NavigationAutoEntityViewModelTemplate : CSharpTemplate
+{
+	public NavigationAutoEntityViewModelTemplate(Entity entity)
+	{
+		Entity = entity;
+	}
+
+	public Entity Entity { get;}
+
+	public override string TransformText()
+	{
+		base.TransformText();
+		
+#>
+
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Linq;
+using Core.Common.UI;
+using CommonMessages;
+using EventAggregator;
+using Entity.Expressions;
+using EF.Entities;
+using EventMessages;
+using Interfaces;
+using Utilities;
+
+namespace ViewModels
+{
+	public partial class <#=Entity.Name#>AutoViewModel_AutoGen 
+	{
+		MessageSource msgSource => new MessageSource(this.ToString());
+		protected virtual void WireEvents()
+		{
+
+			EventMessageBus.Current.GetEvent<CurrentEntityChanged<I<#=Entity.Name #>>>(msgSource).Subscribe(x => handle<#=Entity.Name #>Changed(x.EntityId));  
+			EventMessageBus.Current.GetEvent<EntityUpdated<I<#=Entity.Name #>>>(msgSource).Subscribe(x => handle<#=Entity.Name #>Changed(x.Entity.Id));     
+				
+		}
+
+		private void handle<#=Entity.Name#>Changed(int entityId)
+		{
+					
+			if(entityId != EntityStates.NullEntity)
+			if(CurrentEntity.Id == EntityStates.NullEntity || CurrentEntity.Id != entityId)
+			{
+				CurrentEntity = CreateNullEntity();
+				EventMessageBus.Current.Publish(new LoadEntityViewWithFilter<I<#=Entity.Name #>>(x => x.Id == entityId, <#=Entity.Name #>Expressions.<#= Entity.Name #>AutoViewExpression,typeof(I<#=Entity.Name #>AutoView), typeof(<#=Entity.Name #>AutoView), msgSource), msgSource);
+			}
+		}
+
+	}
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

@@ -1,0 +1,565 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C4AC8652-59F0-4FC9-A0A1-303A009DA9B0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ViewModels</RootNamespace>
+    <AssemblyName>ViewModels</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="JB.Common, Version=0.8.103.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\MRManager\packages\JB.Common.0.8.103-pre\lib\net45\JB.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JB.Common.Collections, Version=0.8.103.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\MRManager\packages\JB.Common.Collections.0.8.103-pre\lib\net45\JB.Common.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JB.Common.Collections.Reactive, Version=0.8.103.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\MRManager\packages\JB.Common.Collections.Reactive.0.8.103-pre\lib\net45\JB.Common.Collections.Reactive.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JB.Common.Reactive, Version=0.8.103.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\MRManager\packages\JB.Common.Reactive.0.8.103-pre\lib\net45\JB.Common.Reactive.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ReactiveUI, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\reactiveui-core.7.0.0\lib\Net45\ReactiveUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Splat.1.6.2\lib\Net45\Splat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Reactive.Core, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Rx-Core.2.3.0-beta2\lib\net46\System.Reactive.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Rx-Interfaces.2.3.0-beta2\lib\net46\System.Reactive.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Rx-Linq.2.3.0-beta2\lib\net46\System.Reactive.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Rx-PlatformServices.2.3.0-beta2\lib\net46\System.Reactive.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\Amoeba\packages\Rx-XAML.2.3.0-beta2\lib\net46\System.Reactive.Windows.Threading.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Generated AutoViews\ApplicationEntitiesAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\ApplicationEntitiesAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\ApplicationEntitiesAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\ApplicationEntitiesAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\ApplicationsAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\ApplicationsAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\ApplicationsAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\ApplicationsAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\ApplicationSettingAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\ApplicationSettingAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\ApplicationSettingAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\ApplicationSettingAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\DataPropertiesAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\DataPropertiesAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\DataPropertiesAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\DataPropertiesAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\DataTypesAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\DataTypesAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\DataTypesAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\DataTypesAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\EntitiesAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\EntitiesAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\EntitiesAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\EntitiesAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\EntityPropertiesAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\EntityPropertiesAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\EntityPropertiesAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\EntityPropertiesAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\EntityRelationshipsAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\EntityRelationshipsAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\EntityRelationshipsAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\EntityRelationshipsAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\EntityViewAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\EntityViewAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\EntityViewAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\EntityViewAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\EntityViewEntityPropertiesAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\EntityViewEntityPropertiesAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\EntityViewEntityPropertiesAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\EntityViewEntityPropertiesAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\EntityViewPropertiesAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\EntityViewPropertiesAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\EntityViewPropertiesAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\EntityViewPropertiesAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\EntityViewPropertyFunctionAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\EntityViewPropertyFunctionAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\EntityViewPropertyFunctionAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\EntityViewPropertyFunctionAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\EntityViewPropertyFunctionParameterAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\EntityViewPropertyFunctionParameterAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\EntityViewPropertyFunctionParameterAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\EntityViewPropertyFunctionParameterAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\EntityViewViewPropertiesAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\EntityViewViewPropertiesAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\EntityViewViewPropertiesAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\EntityViewViewPropertiesAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\FunctionBodyAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\FunctionBodyAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\FunctionBodyAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\FunctionBodyAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\FunctionParametersAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\FunctionParametersAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\FunctionParametersAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\FunctionParametersAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\FunctionReturnTypeAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\FunctionReturnTypeAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\FunctionReturnTypeAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\FunctionReturnTypeAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\FunctionsAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\FunctionsAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\FunctionsAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\FunctionsAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\FunctionSetFunctionsAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\FunctionSetFunctionsAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\FunctionSetFunctionsAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\FunctionSetFunctionsAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\FunctionSetsAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\FunctionSetsAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\FunctionSetsAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\FunctionSetsAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\LayersAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\LayersAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\LayersAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\LayersAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\LayoutAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\LayoutAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\LayoutAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\LayoutAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\ModelTypesAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\ModelTypesAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\ModelTypesAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\ModelTypesAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\OperatorsAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\OperatorsAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\OperatorsAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\OperatorsAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\ParametersAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\ParametersAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\ParametersAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\ParametersAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\PartsAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\PartsAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\PartsAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\PartsAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\PresentationPropertiesAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\PresentationPropertiesAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\PresentationPropertiesAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\PresentationPropertiesAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\PrimaryKeyOptionsAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\PrimaryKeyOptionsAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\PrimaryKeyOptionsAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\PrimaryKeyOptionsAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\ProcessAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\ProcessAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\ProcessAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\ProcessAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\ProcessStepsAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\ProcessStepsAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\ProcessStepsAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\ProcessStepsAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\ProcessStepScreensAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\ProcessStepScreensAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\ProcessStepScreensAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\ProcessStepScreensAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\ProjectsAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\ProjectsAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\ProjectsAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\ProjectsAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\RelationshipTypesAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\RelationshipTypesAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\RelationshipTypesAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\RelationshipTypesAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\ScreenLayoutsAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\ScreenLayoutsAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\ScreenLayoutsAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\ScreenLayoutsAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\ScreenPartsAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\ScreenPartsAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\ScreenPartsAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\ScreenPartsAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\ScreensAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\ScreensAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\ScreensAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\ScreensAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\ScreenViewsAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\ScreenViewsAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\ScreenViewsAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\ScreenViewsAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\SettingsAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\SettingsAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\SettingsAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\SettingsAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\SettingsNamesAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\SettingsNamesAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\SettingsNamesAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\SettingsNamesAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\StateMachinesAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\StateMachinesAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\StateMachinesAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\StateMachinesAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\StateMachineStatesAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\StateMachineStatesAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\StateMachineStatesAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\StateMachineStatesAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\StateMachineTriggersAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\StateMachineTriggersAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\StateMachineTriggersAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\StateMachineTriggersAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\StatesAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\StatesAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\StatesAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\StatesAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\StepsAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\StepsAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\StepsAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\StepsAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\TestValuesAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\TestValuesAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\TestValuesAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\TestValuesAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\TriggersAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\TriggersAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\TriggersAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\TriggersAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\ViewEntityAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\ViewEntityAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\ViewEntityAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\ViewEntityAutoView\Navigation.cs" />
+    <Compile Include="Generated AutoViews\ViewsAutoView\Constructor.cs" />
+    <Compile Include="Generated AutoViews\ViewsAutoView\Entity.cs" />
+    <Compile Include="Generated AutoViews\ViewsAutoView\Instance.cs" />
+    <Compile Include="Generated AutoViews\ViewsAutoView\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Applications\SummaryViewModel.cs" />
+    <Compile Include="Generated ViewModels\BaseViewModel\Instance.cs" />
+    <Compile Include="Generated ViewModels\BaseViewModel\Navigation.cs" />
+    <Compile Include="Generated ViewModels\DataTypes\SummaryViewModel.cs" />
+    <Compile Include="Generated ViewModels\Entities\SummaryViewModel.cs" />
+    <Compile Include="Generated ViewModels\Functions\SummaryViewModel.cs" />
+    <Compile Include="Generated ViewModels\Layers\SummaryViewModel.cs" />
+    <Compile Include="Generated ViewModels\Layout\SummaryViewModel.cs" />
+    <Compile Include="Generated ViewModels\MainViewModel.cs" />
+    <Compile Include="Generated ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Generated ViewModels\ModelTypes\SummaryViewModel.cs" />
+    <Compile Include="Generated ViewModels\Model\ApplicationEntities\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\ApplicationEntities\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\ApplicationEntities\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\ApplicationEntities\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\ApplicationSetting\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\ApplicationSetting\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\ApplicationSetting\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\ApplicationSetting\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\Applications\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\Applications\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\Applications\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\Applications\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\DataProperties\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\DataProperties\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\DataProperties\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\DataProperties\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\DataTypes\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\DataTypes\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\DataTypes\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\DataTypes\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\Entities\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\Entities\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\Entities\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\Entities\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityProperties\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityProperties\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityProperties\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityProperties\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityRelationships\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityRelationships\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityRelationships\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityRelationships\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewEntityProperties\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewEntityProperties\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewEntityProperties\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewEntityProperties\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewProperties\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewProperties\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewProperties\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewProperties\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewPropertyFunctionParameter\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewPropertyFunctionParameter\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewPropertyFunctionParameter\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewPropertyFunctionParameter\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewPropertyFunction\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewPropertyFunction\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewPropertyFunction\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewPropertyFunction\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewViewProperties\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewViewProperties\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewViewProperties\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityViewViewProperties\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityView\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityView\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityView\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\EntityView\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionBody\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionBody\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionBody\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionBody\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionParameters\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionParameters\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionParameters\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionParameters\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionReturnType\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionReturnType\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionReturnType\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionReturnType\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionSetFunctions\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionSetFunctions\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionSetFunctions\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionSetFunctions\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionSets\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionSets\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionSets\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\FunctionSets\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\Functions\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\Functions\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\Functions\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\Functions\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\Layers\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\Layers\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\Layers\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\Layers\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\Layout\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\Layout\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\Layout\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\Layout\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\ModelTypes\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\ModelTypes\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\ModelTypes\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\ModelTypes\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\Operators\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\Operators\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\Operators\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\Operators\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\Parameters\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\Parameters\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\Parameters\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\Parameters\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\Parts\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\Parts\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\Parts\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\Parts\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\PresentationProperties\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\PresentationProperties\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\PresentationProperties\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\PresentationProperties\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\PrimaryKeyOptions\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\PrimaryKeyOptions\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\PrimaryKeyOptions\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\PrimaryKeyOptions\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\ProcessStepScreens\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\ProcessStepScreens\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\ProcessStepScreens\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\ProcessStepScreens\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\ProcessSteps\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\ProcessSteps\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\ProcessSteps\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\ProcessSteps\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\Process\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\Process\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\Process\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\Process\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\Projects\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\Projects\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\Projects\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\Projects\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\RelationshipTypes\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\RelationshipTypes\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\RelationshipTypes\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\RelationshipTypes\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\ScreenLayouts\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\ScreenLayouts\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\ScreenLayouts\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\ScreenLayouts\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\ScreenParts\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\ScreenParts\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\ScreenParts\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\ScreenParts\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\Screens\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\Screens\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\Screens\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\Screens\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\ScreenViews\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\ScreenViews\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\ScreenViews\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\ScreenViews\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\SettingsNames\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\SettingsNames\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\SettingsNames\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\SettingsNames\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\Settings\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\Settings\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\Settings\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\Settings\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\StateMachineStates\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\StateMachineStates\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\StateMachineStates\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\StateMachineStates\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\StateMachines\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\StateMachines\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\StateMachines\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\StateMachines\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\StateMachineTriggers\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\StateMachineTriggers\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\StateMachineTriggers\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\StateMachineTriggers\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\States\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\States\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\States\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\States\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\Steps\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\Steps\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\Steps\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\Steps\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\TestValues\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\TestValues\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\TestValues\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\TestValues\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\Triggers\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\Triggers\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\Triggers\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\Triggers\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\ViewEntity\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\ViewEntity\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\ViewEntity\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\ViewEntity\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Model\Views\Constructor.cs" />
+    <Compile Include="Generated ViewModels\Model\Views\Entity.cs" />
+    <Compile Include="Generated ViewModels\Model\Views\Instance.cs" />
+    <Compile Include="Generated ViewModels\Model\Views\Navigation.cs" />
+    <Compile Include="Generated ViewModels\Parts\SummaryViewModel.cs" />
+    <Compile Include="Generated ViewModels\Process\SummaryViewModel.cs" />
+    <Compile Include="Generated ViewModels\Projects\SummaryViewModel.cs" />
+    <Compile Include="Generated ViewModels\RelationshipTypes\SummaryViewModel.cs" />
+    <Compile Include="Generated ViewModels\Screens\SummaryViewModel.cs" />
+    <Compile Include="Generated ViewModels\StateMachines\SummaryViewModel.cs" />
+    <Compile Include="Generated ViewModels\States\SummaryViewModel.cs" />
+    <Compile Include="Generated ViewModels\Steps\SummaryViewModel.cs" />
+    <Compile Include="Generated ViewModels\Triggers\SummaryViewModel.cs" />
+    <Compile Include="Generated ViewModels\Views\SummaryViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Revolution\CommonMessages\CommonMessages.csproj">
+      <Project>{77007560-89dc-4e1f-9313-ae064a048ad4}</Project>
+      <Name>CommonMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\Common\Common.csproj">
+      <Project>{cb6d5fbc-0c13-437d-b4f3-a0ec4d5673b3}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\Core.Common.UI\Core.Common.UI.csproj">
+      <Project>{5dd82ad7-f344-45e3-92cc-96f8d07700af}</Project>
+      <Name>Core.Common.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\DataInterfaces\DataInterfaces.csproj">
+      <Project>{F6008330-BA42-454B-A0B4-82455DE56776}</Project>
+      <Name>DataInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\EventAggregator\EventAggregator.csproj">
+      <Project>{31e6b370-01f0-4489-832f-436cb97a6718}</Project>
+      <Name>EventAggregator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\EventMessages\EventMessages.csproj">
+      <Project>{e3d04176-3758-4c9d-84f3-7a4d3859eae5}</Project>
+      <Name>EventMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\SystemMessages\SystemMessages.csproj">
+      <Project>{2c88291e-05eb-4be9-8b33-18f9d56cf928}</Project>
+      <Name>SystemMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\Utilities\Utilities.csproj">
+      <Project>{0f9427b1-792e-4c35-97d8-22a9494ce28f}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\ViewMessages\ViewMessages.csproj">
+      <Project>{eb1e2e94-d6fb-49df-8036-9bf910e3b7aa}</Project>
+      <Name>ViewMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Revolution\ViewModel.Interfaces\ViewModel.Interfaces.csproj">
+      <Project>{2f936e24-723e-4e7a-b21c-d6f618c74651}</Project>
+      <Name>ViewModel.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EFEntities\EF.Entities.csproj">
+      <Project>{fad2a8c8-a1b4-4a3c-8e37-0388c0e3733c}</Project>
+      <Name>EF.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{ad573873-c8e6-4ea3-93f5-0d39a92fc9f6}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ValidationSets\ValidationSets.csproj">
+      <Project>{6a9c99e7-2552-4a6c-b26e-2d727c5d85ce}</Project>
+      <Name>ValidationSets</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

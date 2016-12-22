@@ -1,0 +1,101 @@
+﻿<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ import namespace="T4Entities" #>
+<#+
+// <copyright file="EFEntityTemplate.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+
+public class SummaryViewModelTemplate : CSharpTemplate
+{
+	public SummaryViewModelTemplate(ApplicationEntity entity)
+	{
+		Entity = entity;
+	}
+
+	public ApplicationEntity Entity { get;}
+
+
+	public override string TransformText()
+	{
+		base.TransformText();
+#>
+
+using System;
+using System.Collections.Generic;
+using SystemMessages;
+using CommonMessages;
+using EventAggregator;
+using EventMessages;
+using Interfaces;
+using EF.Entities;
+using Entity.Expressions;
+using JB.Collections.Reactive;
+using ReactiveUI;
+using ViewModelInterfaces;
+
+namespace ViewModels
+{
+	public partial class <#=Entity.Entity.Name#>SummaryListViewModel : ReactiveObject, ISummaryViewModel<I<#=Entity.Entity.Name#>AutoView>
+	{
+		private static readonly <#=Entity.Entity.Name#>SummaryListViewModel _instance;
+		 static <#=Entity.Entity.Name#>SummaryListViewModel()
+		{
+			_instance = new <#=Entity.Entity.Name#>SummaryListViewModel();
+		}
+
+		public static <#=Entity.Entity.Name#>SummaryListViewModel Instance
+		{
+			get { return _instance; }
+		}
+		MessageSource msgSource => new MessageSource(this.ToString());
+
+		private <#=Entity.Entity.Name #>SummaryListViewModel()
+		{
+			
+			EventMessageBus.Current.GetEvent<EntitySetLoaded<I<#=Entity.Entity.Name #>AutoView>>(msgSource).Subscribe(x => handleEntitySetUpdated(x.Entities));
+			EventMessageBus.Current.GetEvent<DataServiceStarted<LoadEntityView<I<#=Entity.Entity.Name #>>>>(msgSource)
+			   .Subscribe(x => EventMessageBus.Current.Publish(new LoadEntityView<I<#=Entity.Entity.Name #>>(<#=Entity.Entity.Name #>Expressions.<#=Entity.Entity.Name #>AutoViewExpression,typeof(I<#=Entity.Entity.Name #>AutoView), typeof(<#=Entity.Entity.Name #>AutoView), msgSource), msgSource));
+		}
+
+		private void handleEntitySetUpdated(IList<I<#=Entity.Entity.Name #>AutoView> entities)
+		{
+			EntitySet = new ObservableList<I<#=Entity.Entity.Name #>AutoView>(entities);
+		}
+
+		private ObservableList<I<#=Entity.Entity.Name #>AutoView> _EntitySet = new ObservableList<I<#=Entity.Entity.Name #>AutoView>();
+		public ObservableList<I<#=Entity.Entity.Name #>AutoView> EntitySet
+		{
+			get
+			{
+				return _EntitySet;
+			}
+			set
+			{
+				this.RaiseAndSetIfChanged(ref _EntitySet, value ?? new ObservableList<I<#=Entity.Entity.Name #>AutoView>());
+			}
+		}
+
+		private I<#=Entity.Entity.Name #>AutoView _currentEntity;
+
+		public I<#=Entity.Entity.Name #>AutoView CurrentEntity
+		{
+			get { return _currentEntity; }
+			set
+			{
+				if (!Equals(_currentEntity, value))
+				{
+					this.RaiseAndSetIfChanged(ref _currentEntity, value); //value == null? CreateEntity():value
+					if (_currentEntity != null) EventMessageBus.Current.Publish(new CurrentEntityChanged<I<#=Entity.Entity.Name #>>(_currentEntity.Id,msgSource), msgSource);
+				}
+			}
+		}
+
+	}
+
+}
+<#+
+		return this.GenerationEnvironment.ToString();
+	}
+}
+#>

@@ -1,0 +1,43 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ include file="TriggerTemplate.ttinclude" #>
+<#@ include file="StateTemplate.ttinclude" #>
+<#@ include file="FunctionsTemplate.ttinclude" #>
+<#@ include file="MachineTemplate.ttinclude" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="T4Entities" #>
+
+<#+
+// <copyright file="DataLayer.tt" company="">
+//  Copyright © . All Rights Reserved.
+// </copyright>
+	public void CreateStateMachines(Application app , Dictionary<string, string> settings, List<ApplicationStateMachine> smList)
+	{
+			var tpl = new TriggerTemplate(GetTriggers());
+			tpl.Output.Project = Path.Combine(settings["ApplicationFolder"], settings["Project"]) ;
+			tpl.Output.File = settings["Folder"]+ @"\Triggers.cs";
+			tpl.Render(); 
+
+			var stpl = new StateTemplate(GetStates());
+			stpl.Output.Project = Path.Combine(settings["ApplicationFolder"], settings["Project"]) ;
+			stpl.Output.File = settings["Folder"]+ @"\States.cs";
+			stpl.Render(); 
+
+			var ftpl = new FunctionSetTemplate(GetFunctionSets());
+			ftpl.Output.Project = Path.Combine(settings["ApplicationFolder"], settings["Project"]) ;
+			ftpl.Output.File = settings["Folder"]+ @"\Functions.cs";
+			ftpl.Render(); 
+		foreach (var sm in smList)
+		{
+			var mtpl = new MachineTemplate(sm);
+			mtpl.Output.Project = Path.Combine(settings["ApplicationFolder"], settings["Project"]) ;
+			mtpl.Output.File = settings["Folder"]+ @"\" + sm.StateMachine.MachineName + @"\Machine.cs";
+			mtpl.Render(); 
+
+		}
+	}
+
+#>

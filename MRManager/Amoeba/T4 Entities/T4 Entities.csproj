@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{492D62C4-38C5-46CA-880E-6817EA791069}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>T4Entities</RootNamespace>
+    <AssemblyName>T4Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AmoebaEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AmoebaEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AmoebaEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AmoebaEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AmoebaEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="AmoebaDBEntities.cs" />
+    <Compile Include="Application.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationEntity.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BaseEntity.cs" />
+    <Compile Include="DataProperty.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataType.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityProperty.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityRelationship.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityView.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityViewProperty.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityViewPropertyFunction.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityViewPropertyFunctionParameter.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Function.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionBody.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionParameter.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionReturnType.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionSet.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionSetFunction.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Layer.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelType.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Operator.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Parameter.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationProperty.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrimaryKeyOption.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Project.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelationshipType.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Setting.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestValue.cs">
+      <DependentUpon>AmoebaEntities.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="AmoebaEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AmoebaEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="AmoebaEntities.edmx.diagram">
+      <DependentUpon>AmoebaEntities.edmx</DependentUpon>
+    </None>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AmoebaEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AmoebaEntities.edmx</DependentUpon>
+      <LastGenOutput>AmoebaEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AmoebaEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AmoebaEntities.edmx</DependentUpon>
+      <LastGenOutput>AmoebaEntities.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>taskkill /f /fi "pid gt 0" /im T4VsHostProcess.exe</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
