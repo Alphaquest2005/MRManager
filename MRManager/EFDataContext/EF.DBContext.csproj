@@ -52,7 +52,6 @@
       <DependentUpon>20161022153613_m1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\MRManagerDBContextModelSnapshot.cs" />
-    <Compile Include="MRManagerDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
