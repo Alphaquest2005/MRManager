@@ -9,7 +9,7 @@ namespace ViewModels
     {
 
 
-        public ReadEntityViewModel(List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublicatons, ISystemProcess process) : base(eventSubscriptions, eventPublicatons, process)
+        public ReadEntityViewModel(List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublicatons, List<IViewCommand<IViewModel, IEvent>> commands, ISystemProcess process) : base(eventSubscriptions, eventPublicatons,commands, process)
         {
             this.WireEvents();
             

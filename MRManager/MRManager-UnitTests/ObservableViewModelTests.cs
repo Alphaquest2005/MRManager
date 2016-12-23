@@ -24,60 +24,60 @@ namespace MRManager_UnitTests
     [TestClass]
     public class ObservableViewModelTests
     {
-//        [TestMethod]
-//        public void CanAccessProperty()
-//        {
-//            var MsgSource = new MessageSource(this.ToString());
+        [TestMethod]
+        public void InitalizeObserveableWithNoSubscriptions()
+        {
+            var MsgSource = new MessageSource(this.ToString());
+            var viewModel = new LoginViewModel(
+              eventSubscriptions: new List<IEventSubscription<IViewModel, IEvent>>(), 
+               process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T"), new MachineInfo("test", "test location", 2), new User(DesignDataContext.SampleData<IPersons>(), "test", "joe")),
+               eventPublications:new List<IEventPublication<IViewModel, IEvent>>()
+               {
+                   
+               },
+               commands:new List<IViewCommand<IViewModel, IEvent>>()
+               );
 
-//#region subscribtions
-//            var ServiceStartedViewEventSubscription = new ViewEventSubscription<ObservableViewModel<IAddressCities>, ServiceStarted<EntitySetWithFilterLoaded<IAddressCities>>>(
-//                processId: 1,
-//                eventPredicate: (e) => true,
-//                actionPredicate: new List<Func<ObservableViewModel<IAddressCities>, ServiceStarted<EntitySetWithFilterLoaded<IAddressCities>>, bool>>
-//                {
-//                    (s, e) => true
-//                },
-//                action: (s, e) => EventMessageBus.Current.GetEvent<EntitySetWithFilterLoaded<IAddressCities>>(MsgSource).Subscribe(x => s.EntitySet = new ObservableList<IAddressCities>(x.Entities.Select(z => (IAddressCities)z).ToList())));
+            dynamic dynamicViewModel = new DynamicViewModel<ObservableViewModel<IPersons>>(viewModel);
+            dynamicViewModel.CurrentEntity.Value = new Persons() { Id = 5 };
+            // var id = dynamicViewModel.GetValue("Id");
+            Assert.AreEqual(5, dynamicViewModel.Id);
+        }
 
-//            var citiesViewEventSubscription = new ViewEventSubscription<ObservableViewModel<IAddressCities>, CurrentEntityChanged<ICities>>(
-//                processId: 1,
-//                eventPredicate: (e) => e.EntityId != EntityStates.NullEntity,
-//                actionPredicate: new List<Func<ObservableViewModel<IAddressCities>, CurrentEntityChanged<ICities>, bool>>
-//                {
-//                    (s, e) => s.CurrentEntity.Value.Id != e.EntityId
-//                },
-//                action: (s, e) =>
-//                    s.FilterExpression =
-//                        new ObservableList<Expression<Func<IAddressCities, bool>>>() {x => x.CityId == e.EntityId});
-//            var addressesViewEventSubscription = new ViewEventSubscription<ObservableViewModel<IAddressCities>, CurrentEntityChanged<IAddresses>>(
-//                processId: 1,
-//                eventPredicate: (e) => e.EntityId != EntityStates.NullEntity,
-//                actionPredicate: new List<Func<ObservableViewModel<IAddressCities>, CurrentEntityChanged<IAddresses>, bool>>
-//                {
-//                    (s, e) => s.CurrentEntity.Id != e.EntityId
-//                },
-//                action: (s, e) =>
-//                    s.FilterExpression =
-//                        new List<Expression<Func<IAddressCities, bool>>>() {x => x.Id == e.EntityId});
-//#endregion
+        [TestMethod]
+        public void InitalizeObserveableWithPublications()
+        {
+            EventMessageBus.Current.GetEvent<EntityChanges<IPersons>>(new MessageSource(this.ToString()))
+                .Subscribe(x => handleEntityChanges(x));
+            var viewModel = new LoginViewModel(
+              eventSubscriptions: new List<IEventSubscription<IViewModel, IEvent>>(),
+               process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T"), new MachineInfo("test", "test location", 2), new User(DesignDataContext.SampleData<IPersons>(), "test", "joe")),
+               eventPublications: new List<IEventPublication<IViewModel, IEvent>>()
+                                   {
+                                        new ViewEventPublication<LoginViewModel, EntityChanges<IPersons>>(
+                                                        subject:(s) => s.ChangeTracking.DictionaryChanges,
+                                                        subjectPredicate: new List<Func<LoginViewModel, IObservable<dynamic>, bool>>(),
+                                                        messageData:new List<Func<LoginViewModel, dynamic>>()
+                                                        {
+                                                            (s) => s.CurrentEntity.Value.Id,
+                                                            (s) => s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                                                        }),
+                                   },
+               commands: new List<IViewCommand<IViewModel, IEvent>>()
+               );
+
+            dynamic dynamicViewModel = new DynamicViewModel<ObservableViewModel<IPersons>>(viewModel);
+            dynamicViewModel.CurrentEntity.Value = new Persons() { Id = 5 };
 
 
-//            var eventsub = new List<IEventSubscription<IViewModel, IEvent>>()
-//            {
-//                ServiceStartedViewEventSubscription,
-//                citiesViewEventSubscription,
-//                addressesViewEventSubscription
-//            };
-//            var viewModel = new ObservableViewModel<IAddressCities>(
-//              eventSubscriptions: eventsub
+            dynamicViewModel.Id = 6;
+            // var id = dynamicViewModel.GetValue("Id");
+            Assert.AreEqual(6, dynamicViewModel.Id);
+        }
 
-//               process: new SystemProcess(new Process(1,0, "Test Proces", "This is a Test", "T"),new MachineInfo("test", "test location", 2), new User(DesignDataContext.SampleData<IPersons>(), "test","joe") )
-//               );
-
-//            dynamic dynamicViewModel =new DynamicViewModel<ObservableViewModel<IAddressCities>>(viewModel);
-//            dynamicViewModel.CurrentEntity = new AddressCities() {Id = 5,CityId = 10};
-//           // var id = dynamicViewModel.GetValue("Id");
-//            Assert.AreEqual(5, dynamicViewModel.Id);
-//        }
+        private void handleEntityChanges(EntityChanges<IPersons> entityChanges)
+        {
+            Assert.AreEqual(5, entityChanges.EntityId);
+        }
     }
 }

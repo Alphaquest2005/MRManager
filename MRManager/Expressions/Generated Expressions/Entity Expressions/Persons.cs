@@ -188,8 +188,8 @@ namespace Entity.Expressions
 				public static IQueryable<PersonEmailAddress> PersonEmailAddress(this IQueryable<Persons> persons, int id) => persons.Where(x => x.Id == id).SelectMany(x => x.PersonEmailAddress);
 				public static IQueryable<PersonMedia> PersonMedia(this IQueryable<Persons> persons) => persons.SelectMany(x => x.PersonMedia);
 				public static IQueryable<PersonMedia> PersonMedia(this IQueryable<Persons> persons, int id) => persons.Where(x => x.Id == id).SelectMany(x => x.PersonMedia);
-				public static IQueryable<PersonNames> PersonNames(this IQueryable<Persons> persons) => persons.SelectMany(x => x.PersonNames);
-				public static IQueryable<PersonNames> PersonNames(this IQueryable<Persons> persons, int id) => persons.Where(x => x.Id == id).SelectMany(x => x.PersonNames);
+				public static IQueryable<PersonNames> PersonNames(this IQueryable<Persons> persons) => (IQueryable<PersonNames>) persons.SelectMany(x => x.PersonNames);
+				public static IQueryable<PersonNames> PersonNames(this IQueryable<Persons> persons, int id) => (IQueryable<PersonNames>) persons.Where(x => x.Id == id).SelectMany(x => x.PersonNames);
 				public static IQueryable<PersonPhoneNumbers> PersonPhoneNumbers(this IQueryable<Persons> persons) => persons.SelectMany(x => x.PersonPhoneNumbers);
 				public static IQueryable<PersonPhoneNumbers> PersonPhoneNumbers(this IQueryable<Persons> persons, int id) => persons.Where(x => x.Id == id).SelectMany(x => x.PersonPhoneNumbers);
 				public static IQueryable<Persons_Doctor> Persons_Doctor(this IQueryable<Persons> persons) => persons.Select(x => x.Persons_Doctor);

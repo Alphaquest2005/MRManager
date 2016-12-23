@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="IPersons.cs" />
     <Compile Include="Generated Interfaces\AddressCities.cs" />
     <Compile Include="Generated Interfaces\AddressCountries.cs" />
     <Compile Include="Generated Interfaces\Addresses.cs" />

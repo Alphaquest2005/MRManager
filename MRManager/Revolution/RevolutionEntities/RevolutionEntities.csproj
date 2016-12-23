@@ -48,6 +48,7 @@
     <Compile Include="Process\ProcessStep.cs" />
     <Compile Include="Process\SystemProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\EventPublication.cs" />
     <Compile Include="ViewModels\EventSubscription.cs" />
     <Compile Include="ViewModels\ViewEventPublication.cs" />
     <Compile Include="ViewModels\ViewEventSubscription.cs" />

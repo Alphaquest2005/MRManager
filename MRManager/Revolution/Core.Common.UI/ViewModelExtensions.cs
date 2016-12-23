@@ -1,7 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using SystemInterfaces;
 using CommonMessages;
 using EventAggregator;
@@ -20,7 +22,7 @@ namespace Core.Common.UI
                 typeof(ViewModelExtensions)
                     .GetMethod("Subscribe")
                     .MakeGenericMethod(itm.EventType, viewModel.GetType())
-                    .Invoke(viewModel, new object[] {viewModel, itm.EventPredicate, itm.ActionPredicate, itm.Action});
+                    .Invoke(viewModel, new object[] { viewModel, itm.EventPredicate, itm.ActionPredicate, itm.Action });
 
 
                 // Wire(itm.EventType,itm.EventPredicate, itm.ActionPredicate,itm.Action);
@@ -28,12 +30,16 @@ namespace Core.Common.UI
 
             foreach (var itm in viewModel.EventPublications)
             {
-                
-
-              
-
-
-                // Wire(itm.EventType,itm.EventPredicate, itm.ActionPredicate,itm.Action);
+                var subject = itm.Subject.Invoke(viewModel);
+                Action<dynamic> publishMessage = x => {
+                    var paramArray = itm.MessageData.Select(p => p.Invoke(viewModel)).Cast<object>().ToList();
+                    paramArray.Add(viewModel.Process);
+                    paramArray.Add(new MessageSource(viewModel.GetType().ToString()));
+                    var msg = (SystemProcessMessage)Activator.CreateInstance(itm.EventType, paramArray.ToArray());
+                    EventMessageBus.Current.Publish(msg, msg.Source);
+                };
+                subject.Where(x => itm.SubjectPredicate.All(z => z.Invoke(viewModel, x)))
+                    .Subscribe(publishMessage);
             }
 
         }
@@ -44,9 +50,23 @@ namespace Core.Common.UI
             EventMessageBus.Current.GetEvent<TEvent>(new MessageSource(viewModel.GetType().ToString())).Where(eventPredicate).Where(x => predicate.All(z => z.Invoke(viewModel, x))).Subscribe(x => action.Invoke(viewModel, x));
         }
 
-        public static void Publish<TViewModel>(TViewModel viewModel, SystemMessage msg)
+        public static void WireCommands(this DynamicViewModel<IViewModel> viewModel)
         {
-            EventMessageBus.Current.Publish(msg, new MessageSource(viewModel.GetType().ToString()));
+            
+        }
+
+        public static void VerifyConstuctorVsParameterArray(Type t, params object[] p)
+        {
+            System.Diagnostics.Debug.WriteLine("<---- foo");
+            foreach (System.Reflection.ConstructorInfo ci in t.GetConstructors())
+            {
+                System.Diagnostics.Debug.WriteLine(t.FullName + ci.ToString());
+            }
+            foreach (object o in p)
+            {
+                System.Diagnostics.Debug.WriteLine("param:" + o.GetType().FullName);
+            }
+            System.Diagnostics.Debug.WriteLine("foo ---->");
         }
     }
 }

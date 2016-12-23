@@ -268,6 +268,7 @@
     <Compile Include="Generated Entities\VitalSigns.cs" />
     <Compile Include="Generated Entities\Weight.cs" />
     <Compile Include="Generated Entities\ZipCodes.cs" />
+    <Compile Include="Persons.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

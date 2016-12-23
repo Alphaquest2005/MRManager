@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="CacheViewModel.cs" />
     <Compile Include="LoginViewModel.cs" />
-    <Compile Include="DynamicViewModel.cs" />
     <Compile Include="ReadEntityViewModel.cs" />
     <Compile Include="SummaryViewModel.cs" />
     <Compile Include="System ViewModels\MainViewModel.cs" />

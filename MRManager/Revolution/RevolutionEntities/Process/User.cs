@@ -1,4 +1,5 @@
-﻿using SystemInterfaces;
+﻿using System.Diagnostics.Contracts;
+using SystemInterfaces;
 
 
 namespace RevolutionEntities.Process
@@ -12,7 +13,8 @@ namespace RevolutionEntities.Process
 
         public User(IPerson person, string password, string userId)
         {
-            UserName = person.ComputedProperties().Name;
+            Contract.Requires(person != null);
+            UserName = person.Name;
             Password = password;
             UserId = userId;
             Person = person;

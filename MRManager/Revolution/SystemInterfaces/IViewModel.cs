@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 
 namespace SystemInterfaces
@@ -12,5 +13,6 @@ namespace SystemInterfaces
         ISystemProcess Process { get; }
         List<IEventSubscription<IViewModel, IEvent>> EventSubscriptions { get; }
         List<IEventPublication<IViewModel, IEvent>> EventPublications { get; }
+        List<IViewCommand<IViewModel,IEvent>> Commands { get; }
     }
 }

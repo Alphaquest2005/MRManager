@@ -1,57 +1,24 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using SystemInterfaces;
+using Utilities;
 
 namespace RevolutionEntities.ViewModels
 {
-    public class ViewEventPublication<TViewModel, TEvent> : IEventPublication<TViewModel, TEvent> where TViewModel:IViewModel where TEvent:IEvent
+    public class ViewEventPublication<TViewModel, TEvent> :EventPublication<TViewModel, TEvent>, IEventPublication<IViewModel, IEvent> where TViewModel:IViewModel where TEvent:IEvent
     {
-        public Func<TEvent, bool> EventPredicate
+        
+        public ViewEventPublication(Func<TViewModel, IObservable<dynamic>> subject, IEnumerable<Func<TViewModel, IObservable<dynamic>, bool>> subjectPredicate, IEnumerable<Func<TViewModel, dynamic>> messageData)
+                                    :base(subject, subjectPredicate, messageData)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            MessageData = base.MessageData.Select(x => (Func<IViewModel,object>)x.Convert(typeof(IViewModel), typeof(object))).ToList();
+            SubjectPredicate = base.SubjectPredicate.Select(x => (Func<IViewModel, IObservable<dynamic>, bool>)x.Convert(typeof(IViewModel),typeof(IObservable<dynamic>), typeof(bool))).ToList();
+            Subject = (Func<IViewModel, IObservable<dynamic>>)base.Subject.Convert(typeof(IViewModel), typeof(IObservable<dynamic>)); 
         }
 
-        public Type EventType
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public int ProcessId
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public Func<TViewModel, IObservable<IObservable<dynamic>>> Subject
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public IEnumerable<Func<TViewModel, IObservable<IObservable<dynamic>>, TEvent, bool>> SubjectPredicate
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public Type ViewModelType
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public new Func<IViewModel, IObservable<dynamic>> Subject { get; }
+        public new IEnumerable<Func<IViewModel, IObservable<dynamic>, bool>> SubjectPredicate { get; }
+        public new IEnumerable<Func<IViewModel, dynamic>> MessageData { get; }
     }
 }

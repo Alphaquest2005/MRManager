@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using SystemInterfaces;
+using Core.Common.UI;
 using DesignTimeData;
 using EF.Entities;
 using EventMessages;
@@ -55,7 +56,8 @@ namespace MRManager_UnitTests
                                             RowState = DataInterfaces.RowState.Added},
                createNullEntityAction: () => new AddressCities() { Id = EntityStates.NullEntity },
                eventSubscriptionsActions: eventsub,
-               eventPublications: null,
+               eventPublications: new List<IEventPublication<IViewModel, IEvent>>(), 
+               commands: new List<IViewCommand<IViewModel, IEvent>>(), 
                process: new SystemProcess(new Process(1,0, "Test Proces", "This is a Test", "T"),new MachineInfo("test", "test location", 2), new User(DesignDataContext.SampleData<IPersons>(), "test","joe") )
                );
 

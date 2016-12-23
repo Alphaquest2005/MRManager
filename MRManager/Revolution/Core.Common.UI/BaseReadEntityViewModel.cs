@@ -22,7 +22,7 @@ namespace Core.Common.UI
         protected static BaseReadEntityViewModel<TView> _instance = null;
         public static BaseReadEntityViewModel<TView> Instance => _instance;
 
-        protected BaseReadEntityViewModel(List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, ISystemProcess process) : base(process,eventSubscriptions,eventPublications)
+        protected BaseReadEntityViewModel(List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, List<IViewCommand<IViewModel, IEvent>> commands, ISystemProcess process) : base(process,eventSubscriptions,eventPublications,commands)
         {
             _instance = this;
             Process = process;

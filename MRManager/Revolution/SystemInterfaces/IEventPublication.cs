@@ -1,16 +1,27 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace SystemInterfaces
 {
     public interface IEventPublication<in TViewModel, in TEvent> where TViewModel : IViewModel where TEvent : IEvent
     {
-        int ProcessId { get; }
+       // int ProcessId { get; }
         Type EventType { get; }
-        Func<TViewModel, IObservable<IObservable<dynamic>>> Subject { get; }
-        IEnumerable<Func<TViewModel, IObservable<IObservable<dynamic>>, TEvent, bool>> SubjectPredicate { get; }
-        Func<TEvent, bool> EventPredicate { get; }
+        Func<TViewModel, IObservable<dynamic>> Subject { get; }
+        IEnumerable<Func<TViewModel, IObservable<dynamic>, bool>> SubjectPredicate { get; }
+        //Func<TEvent, bool> EventPredicate { get; }
+        IEnumerable<Func<TViewModel, dynamic>> MessageData { get; }
+       
+    }
+
+    public interface IViewCommand<in TViewModel, in TEvent>:IEventPublication<TViewModel,TEvent> where TViewModel : IViewModel where TEvent : IEvent
+    {
+        // int ProcessId { get; }
         
-        Type ViewModelType { get; }
+        string CommandName { get; }
+       
+
+
     }
 }

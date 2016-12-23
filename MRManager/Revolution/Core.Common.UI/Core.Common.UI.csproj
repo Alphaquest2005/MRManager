@@ -55,6 +55,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DynamicViewModel.cs" />
     <Compile Include="ObservableViewModel.cs" />
     <Compile Include="BaseReadEntityViewModel.cs" />
     <Compile Include="BaseViewModel.cs" />

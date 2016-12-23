@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using SystemInterfaces;
 using DataInterfaces;
 using FluentValidation;
 using FluentValidation.Results;
 using JB.Collections.Reactive;
-
+using Reactive.Bindings;
 using ReactiveUI;
 
 
@@ -23,16 +24,15 @@ namespace Core.Common.UI
         protected static ObservableViewModel<TEntity> _instance = null;
         public static ObservableViewModel<TEntity> Instance => _instance;
 
-        protected ObservableViewModel(AbstractValidator<TEntity> validator, List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, ISystemProcess process) : base(process,eventSubscriptions,eventPublications)
+        protected ObservableViewModel(AbstractValidator<TEntity> validator, List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, List<IViewCommand<IViewModel,IEvent>> commands, ISystemProcess process) : base(process,eventSubscriptions,eventPublications, commands)
         {
-            
             Validator = validator;
         }
 
-        public TEntity CurrentEntityWithChanges { get; set; }
+        public ReactiveProperty<TEntity> CurrentEntityWithChanges { get; set; }
 
-        private TEntity _currentEntity;
-        public TEntity CurrentEntity
+        private ReactiveProperty<TEntity> _currentEntity;
+        public ReactiveProperty<TEntity> CurrentEntity
         {
             get { return _currentEntity; }
             set
@@ -40,18 +40,6 @@ namespace Core.Common.UI
                 this.RaiseAndSetIfChanged(ref _currentEntity, value);
             }
         }
-
-        private ObservableList<Expression<Func<TEntity, bool>>> _filterExpression;
-
-        public ObservableList<Expression<Func<TEntity, bool>>> FilterExpression
-        {
-            get { return _filterExpression; }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _filterExpression, value);
-            }
-        }
-
        
         private ObservableList<TEntity> _entitySet = new ObservableList<TEntity>();
         public virtual ObservableList<TEntity> EntitySet
@@ -82,14 +70,15 @@ namespace Core.Common.UI
 
         public dynamic GetValue([CallerMemberName] string property = "UnspecifiedProperty")
         {
-
+            var prop =  CurrentEntity.Value.GetType().GetProperty(property, BindingFlags.Public | BindingFlags.Instance);
+            if(prop == null) return null;
             return ChangeTracking.ContainsKey(property)
                 ? ChangeTracking[property]
-                : CurrentEntityWithChanges.GetType().GetProperty(property).GetValue(CurrentEntityWithChanges);
+                : prop.GetValue(CurrentEntity.Value);
         }
         protected dynamic GetOriginalValue([CallerMemberName] string property = "UnspecifiedProperty")
         {
-            return CurrentEntity.GetType().GetProperty(property).GetValue(CurrentEntity);
+            return CurrentEntity.Value.GetType().GetProperty(property).GetValue(CurrentEntity);
         }
         protected bool GetPropertyIsChanged([CallerMemberName] string property = "UnspecifiedProperty")
         {
@@ -97,7 +86,7 @@ namespace Core.Common.UI
         }
         public void SetValue(dynamic value, [CallerMemberName] string property = "UnspecifiedProperty")
         {
-
+            if (CurrentEntity.Value.GetType().GetProperty(property, BindingFlags.Public |BindingFlags.SetProperty| BindingFlags.Instance) == null) return;
             if (!ChangeTracking.ContainsKey(property))
             {
                 ChangeTracking.AddOrUpdate(property, value);
