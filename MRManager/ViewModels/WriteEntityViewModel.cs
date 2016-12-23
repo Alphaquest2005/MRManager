@@ -16,7 +16,7 @@ namespace ViewModels
 	{
 	    
 	   
-        public WriteEntityViewModel(Func<TEntity> createEntityAction, Func<TEntity> createNullEntityAction, List<IEventSubscription<IViewModel, IEvent>> eventSubscriptionsActions, List<IEventPublication<IViewModel, IEvent>> eventPublications, List<IViewCommand<IViewModel, IEvent>> commands, ISystemProcess process): base(new EntityValidator<TEntity>(), process, eventSubscriptionsActions,eventPublications,commands)
+        public WriteEntityViewModel(Func<TEntity> createEntityAction, Func<TEntity> createNullEntityAction, List<IEventSubscription<IViewModel, IEvent>> eventSubscriptionsActions, List<IEventPublication<IViewModel, IEvent>> eventPublications, ISystemProcess process): base(new EntityValidator<TEntity>(), process, eventSubscriptionsActions,eventPublications)
 		{
             
             CreateEntityAction = createEntityAction;

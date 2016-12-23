@@ -15,13 +15,4 @@ namespace SystemInterfaces
        
     }
 
-    public interface IViewCommand<in TViewModel, in TEvent>:IEventPublication<TViewModel,TEvent> where TViewModel : IViewModel where TEvent : IEvent
-    {
-        // int ProcessId { get; }
-        
-        string CommandName { get; }
-       
-
-
-    }
-}
+ }

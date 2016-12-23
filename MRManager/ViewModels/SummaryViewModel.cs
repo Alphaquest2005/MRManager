@@ -32,7 +32,7 @@ namespace ViewModels
 		//}
 		
 
-		private SummaryListViewModel(List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, List<IViewCommand<IViewModel, IEvent>> commands, ISystemProcess process):base(eventSubscriptions,eventPublications,commands,process)
+		private SummaryListViewModel(List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, ISystemProcess process):base(eventSubscriptions,eventPublications,process)
 		{
 			EventMessageBus.Current.GetEvent<EntitySetLoaded<T>>(MsgSource).Subscribe(x => HandleEntitySetUpdated(x.Entities));
 			EventMessageBus.Current.GetEvent<ServiceStarted<LoadEntityView<T>>>(MsgSource)

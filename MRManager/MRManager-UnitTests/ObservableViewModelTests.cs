@@ -34,8 +34,7 @@ namespace MRManager_UnitTests
                eventPublications:new List<IEventPublication<IViewModel, IEvent>>()
                {
                    
-               },
-               commands:new List<IViewCommand<IViewModel, IEvent>>()
+               }
                );
 
             dynamic dynamicViewModel = new DynamicViewModel<ObservableViewModel<IPersons>>(viewModel);
@@ -61,9 +60,8 @@ namespace MRManager_UnitTests
                                                         {
                                                             (s) => s.CurrentEntity.Value.Id,
                                                             (s) => s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
-                                                        }),
-                                   },
-               commands: new List<IViewCommand<IViewModel, IEvent>>()
+                                                        })
+                                    }
                );
 
             dynamic dynamicViewModel = new DynamicViewModel<ObservableViewModel<IPersons>>(viewModel);

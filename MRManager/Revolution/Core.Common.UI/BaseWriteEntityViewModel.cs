@@ -33,7 +33,7 @@ namespace Core.Common.UI
         private static bool _intialize = false;
 
         
-        protected BaseWriteEntityViewModel(AbstractValidator<TEntity> validator, ISystemProcess process, List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, List<IViewCommand<IViewModel, IEvent>> commands) : base(process, eventSubscriptions, eventPublications, commands)
+        protected BaseWriteEntityViewModel(AbstractValidator<TEntity> validator, ISystemProcess process, List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications) : base(process, eventSubscriptions, eventPublications)
         {
             Validator = validator;
             Process = process;

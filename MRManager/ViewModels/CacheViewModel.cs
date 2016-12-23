@@ -18,8 +18,8 @@ namespace ViewModels
 	public partial class CacheViewModel<T> : ReadEntityViewModel<T> where T:IEntity
 	{
 	   public CacheViewModel(ISystemProcess process,
-			List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, List<IViewCommand<IViewModel, IEvent>> commands)
-			: base(eventSubscriptions, eventPublications,commands, process)
+			List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications)
+			: base(eventSubscriptions, eventPublications, process)
 		{
 			this.WireEvents();
 			if (System.ComponentModel.LicenseManager.UsageMode == LicenseUsageMode.Designtime)

@@ -10,7 +10,7 @@ namespace ViewModels
 {
     public class LoginViewModel : ObservableViewModel<IPersons>
     {
-        public LoginViewModel(List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, List<IViewCommand<IViewModel, IEvent>> commands, ISystemProcess process) : base(new EntityValidator<IPersons>(), eventSubscriptions, eventPublications,commands, process)
+        public LoginViewModel(List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, ISystemProcess process) : base(new EntityValidator<IPersons>(), eventSubscriptions, eventPublications, process)
         {
             this.WireEvents();
             CurrentEntity = new ReactiveProperty<IPersons>(new Persons());
