@@ -13,5 +13,7 @@ namespace SystemInterfaces
         ISystemProcess Process { get; }
         List<IEventSubscription<IViewModel, IEvent>> EventSubscriptions { get; }
         List<IEventPublication<IViewModel, IEvent>> EventPublications { get; }
-       }
+        Dictionary<string,dynamic> Commands { get; }
+        List<IEventCommand<IViewModel, IEvent>> CommandInfo { get; }
+    }
 }

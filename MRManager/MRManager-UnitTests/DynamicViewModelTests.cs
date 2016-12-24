@@ -57,6 +57,7 @@ namespace MRManager_UnitTests
                createNullEntityAction: () => new AddressCities() { Id = EntityStates.NullEntity },
                eventSubscriptionsActions: eventsub,
                eventPublications: new List<IEventPublication<IViewModel, IEvent>>(), 
+               commandInfo:new List<IEventCommand<IViewModel, IEvent>>(), 
                process: new SystemProcess(new Process(1,0, "Test Proces", "This is a Test", "T"),new MachineInfo("test", "test location", 2), new User(DesignDataContext.SampleData<IPersons>(), "test","joe") )
                );
 

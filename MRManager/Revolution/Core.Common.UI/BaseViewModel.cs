@@ -11,11 +11,12 @@ namespace Core.Common.UI
         public MessageSource MsgSource => new MessageSource(this.ToString());
 
 
-        protected BaseViewModel(ISystemProcess process, List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications)
+        protected BaseViewModel(ISystemProcess process, List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, List<IEventCommand<IViewModel, IEvent>> commandInfo)
         {
             Process = process;
             EventSubscriptions = eventSubscriptions;
             EventPublications = eventPublications;
+            CommandInfo = commandInfo;
             Name = process.Name;
             Description = process.Description;
             Symbol = process.Symbol;
@@ -25,7 +26,9 @@ namespace Core.Common.UI
 
         public List<IEventSubscription<IViewModel, IEvent>> EventSubscriptions { get;}
         public List<IEventPublication<IViewModel, IEvent>> EventPublications { get; }
-        
+        public List<IEventCommand<IViewModel, IEvent>> CommandInfo { get; }
+        public Dictionary<string, dynamic> Commands { get; } = new Dictionary<string, dynamic>();
+
         public ISystemProcess Process { get; set; }
         public string Name { get; }
         public string Symbol { get; }

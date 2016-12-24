@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IEvent.cs" />
+    <Compile Include="IEventCommand.cs" />
     <Compile Include="IEventPublication.cs" />
     <Compile Include="IPerson.cs" />
     <Compile Include="IUser.cs" />

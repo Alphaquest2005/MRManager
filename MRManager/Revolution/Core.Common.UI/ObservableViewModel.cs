@@ -24,7 +24,7 @@ namespace Core.Common.UI
         protected static ObservableViewModel<TEntity> _instance = null;
         public static ObservableViewModel<TEntity> Instance => _instance;
 
-        protected ObservableViewModel(AbstractValidator<TEntity> validator, List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, ISystemProcess process) : base(process,eventSubscriptions,eventPublications)
+        protected ObservableViewModel(AbstractValidator<TEntity> validator, List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, List<IEventCommand<IViewModel,IEvent>> commandInfo, ISystemProcess process) : base(process,eventSubscriptions,eventPublications,commandInfo)
         {
             Validator = validator;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reactive;
 using System.Windows;
 using Common;
 using DataInterfaces;
@@ -23,7 +24,8 @@ namespace Core.Common.UI
 
         partial void CrudeOpsContructor()
         {
-            SaveChanges = ReactiveCommand.Create(HandleSaveChanges,ChangeTracking.WhenAny(x => x.Count, x => x.Value > 0));//
+            ReactiveCommand<Unit, Unit> reactiveCommand = ReactiveCommand.Create(HandleSaveChanges,ChangeTracking.WhenAny(x => x.Count, x => x.Value > 0));
+            SaveChanges = reactiveCommand;//
            
 
             
