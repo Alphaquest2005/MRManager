@@ -34,7 +34,7 @@ namespace DataServices.Actors
         {
             try
             {
-                var vm =(TViewModel) Activator.CreateInstance(vmInfo.ViewModelInfo.ViewModelType, new object[] {vmInfo.Process, vmInfo.ViewModelInfo.ViewEventSubscriptions, vmInfo.ViewModelInfo.ViewEventPublications });
+                var vm =(TViewModel) Activator.CreateInstance(vmInfo.ViewModelInfo.ViewModelType, new object[] {vmInfo.Process, vmInfo.ViewModelInfo.Subscriptions, vmInfo.ViewModelInfo.Publications });
                 vm.WireEvents();
                 dynamic dvm = new DynamicViewModel<TViewModel>(vm);
                 EventMessageBus.Current.Publish(new ViewModelCreated<DynamicViewModel<TViewModel>>(dvm,vmInfo.Process, MsgSource), MsgSource);

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using SystemInterfaces;
-using DesignTimeData;
+using DesignTime;
 using Interfaces;
 using RevolutionEntities.Process;
 

@@ -9,7 +9,7 @@ namespace DataInterfaces
     }
 
     [InheritedExport]
-    public interface IEntity
+    public interface IEntity 
     {
         int Id { get; }
         RowState RowState { get; set; }

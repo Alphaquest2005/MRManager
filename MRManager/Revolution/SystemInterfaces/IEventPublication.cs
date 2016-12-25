@@ -9,7 +9,7 @@ namespace SystemInterfaces
        // int ProcessId { get; }
         Type EventType { get; }
         Func<TViewModel, IObservable<dynamic>> Subject { get; }
-        IEnumerable<Func<TViewModel, IObservable<dynamic>, bool>> SubjectPredicate { get; }
+        IEnumerable<Func<TViewModel, bool>> SubjectPredicate { get; }
         //Func<TEvent, bool> EventPredicate { get; }
         IEnumerable<Func<TViewModel, dynamic>> MessageData { get; }
        

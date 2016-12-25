@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using DataInterfaces;
+using Reactive.Bindings;
 
 namespace SystemInterfaces
 {
@@ -15,5 +17,7 @@ namespace SystemInterfaces
         List<IEventPublication<IViewModel, IEvent>> EventPublications { get; }
         Dictionary<string,dynamic> Commands { get; }
         List<IEventCommand<IViewModel, IEvent>> CommandInfo { get; }
+
+        ReactiveProperty<IEntity> CurrentEntity { get; }
     }
 }

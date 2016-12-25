@@ -9,8 +9,8 @@ namespace RevolutionEntities.ViewModels
     public class WriteEntityViewModelInfo<T> : ViewModelInfo, IWriteEntityViewModelInfo<T> where T : IEntity
     {
         public WriteEntityViewModelInfo(int processId, Type viewModelType, Func<T> createEntityAction,
-            Func<T> createNullEntityAction, List<IEventSubscription<IViewModel, IEvent>> viewModelEventSubscriptions, List<IEventPublication<IViewModel, IEvent>> viewModelEventPublications)
-            : base(processId, viewModelEventSubscriptions,viewModelEventPublications,typeof(WriteEntityViewModelInfo<T>))
+            Func<T> createNullEntityAction, List<IEventSubscription<IViewModel, IEvent>> viewModelEventSubscriptions, List<IEventPublication<IViewModel, IEvent>> viewModelEventPublications, List<IEventCommand<IViewModel, IEvent>> viewModelCommands )
+            : base(processId, viewModelEventSubscriptions,viewModelEventPublications, viewModelCommands, typeof(WriteEntityViewModelInfo<T>))
         {
             CreateEntityAction = createEntityAction;
             CreateNullEntityAction = createNullEntityAction;
@@ -26,8 +26,8 @@ namespace RevolutionEntities.ViewModels
 
     public class ReadEntityViewModelInfo<T> : ViewModelInfo, IReadEntityViewModelInfo<T> where T : IEntity
     {
-        public ReadEntityViewModelInfo(int processId, Type viewModelType, List<IEventSubscription<IViewModel, IEvent>> viewModelEventSubscriptions, List<IEventPublication<IViewModel, IEvent>> viewModelEventPublications)
-            : base(processId, viewModelEventSubscriptions,viewModelEventPublications, typeof(ReadEntityViewModelInfo<T>))
+        public ReadEntityViewModelInfo(int processId, Type viewModelType, List<IEventSubscription<IViewModel, IEvent>> viewModelEventSubscriptions, List<IEventPublication<IViewModel, IEvent>> viewModelEventPublications, List<IEventCommand<IViewModel, IEvent>> viewModelCommands)
+            : base(processId, viewModelEventSubscriptions,viewModelEventPublications, viewModelCommands, typeof(ReadEntityViewModelInfo<T>))
         {
            EntityType = default(T);
         }

@@ -69,7 +69,7 @@ namespace Core.Common.UI
                     var msg = (SystemProcessMessage)Activator.CreateInstance(itm.EventType, paramArray.ToArray());
                     EventMessageBus.Current.Publish(msg, msg.Source);
                 };
-                subject//.Where(x => itm.SubjectPredicate.All(z => z.Invoke(viewModel, x)))
+                subject.Where(x => itm.SubjectPredicate.All(z => z.Invoke(viewModel)))
                     .Subscribe(publishMessage);
             }
 

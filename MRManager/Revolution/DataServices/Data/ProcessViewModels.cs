@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using SystemInterfaces;
 using SystemMessages;
@@ -65,6 +66,7 @@ namespace DataServices.Actors
                         action: (s, e) => s.BodyViewModels.Add(e.ViewModel)),
                 },
                 new List<IEventPublication<IViewModel, IEvent>>(),
+                new List<IEventCommand<IViewModel, IEvent>>(), 
                 typeof(ScreenModel)),
 
             ////////////////////////////////////User Login Screen/////////////////////////////////////////////////
@@ -74,15 +76,38 @@ namespace DataServices.Actors
                 2,
                 new List<IEventSubscription<IViewModel, IEvent>>()
                 {
-                    //new ViewEventSubscription<LoginViewModel, ViewModelCreated<IHeaderViewModel>>(
-                    //processId: 1,
-                    //eventPredicate: (e) => e != null,
-                    //actionPredicate: new List<Func<LoginViewModel, ViewModelCreated<IHeaderViewModel>, bool>>
-                    //{
-                    //    (s, e) => s.Process.Id != e.ViewModel.Process.Id
-                    //},
-                    //action: (s, e) => s.HeaderViewModels.Add(e.ViewModel)),
-                },new List<IEventPublication<IViewModel, IEvent>>(), 
+                   new ViewEventSubscription<LoginViewModel, EntityFound<Persons>>(
+                       processId:2,
+                       eventPredicate: e => true,
+                       actionPredicate: new List<Func<LoginViewModel, EntityFound<Persons>, bool>>(),
+                       action: (v,e) => v.CurrentEntity.Value.Persons = e.Entity
+                       ),
+                   new ViewEventSubscription<LoginViewModel, EntityNotFound<Persons>>(
+                       processId:2,
+                       eventPredicate: e => true,
+                       actionPredicate: new List<Func<LoginViewModel, EntityNotFound<Persons>, bool>>(),
+                       action: (v,e) => v.Status = "User not found"
+                       )
+
+                },new List<IEventPublication<IViewModel, IEvent>>()
+                {
+                    new ViewEventPublication<LoginViewModel, EntityChanges<UserSignIn>>(
+                        subject: v => v.ChangeTracking.DictionaryChanges,
+                        subjectPredicate: new List<Func<LoginViewModel, bool>>()
+                                        {
+                                            v => v.ChangeTracking.Keys.Contains("UserName") && v.ChangeTracking.Keys.Count == 1
+                                        },
+                        messageData:new List<Func<LoginViewModel, dynamic>>()
+                                                        {
+                                                            (s) => s.CurrentEntity.Value.Id,
+                                                            (s) => s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                                                        }
+                        )
+                },
+                new List<IEventCommand<IViewModel, IEvent>>()
+                {
+                    
+                },
                 typeof(LoginViewModel)),
 
             //////////////////////////////////////Entity ViewModels ///////////////////////////////////////////////
@@ -123,7 +148,8 @@ namespace DataServices.Actors
                             s.FilterExpression =
                                 new List<Expression<Func<IAddressCities, bool>>>() {x => x.Id == e.EntityId})
                 },
-                viewModelEventPublications:new List<IEventPublication<IViewModel, IEvent>>()),
+                viewModelEventPublications:new List<IEventPublication<IViewModel, IEvent>>(),
+                viewModelCommands: new List<IEventCommand<IViewModel, IEvent>>()),
             new ReadEntityViewModelInfo<IAddressCities>(processId: 3,
                 viewModelType: typeof (CacheViewModel<IAddressCities>),
                 viewModelEventSubscriptions: new List<IEventSubscription<IViewModel, IEvent>>
@@ -178,7 +204,8 @@ namespace DataServices.Actors
                         action: (s, e) => s.HandleEntityDeleted(e.EntityId)),
                 
                 },
-                viewModelEventPublications:new List<IEventPublication<IViewModel, IEvent>>()),
+                viewModelEventPublications:new List<IEventPublication<IViewModel, IEvent>>(),
+                viewModelCommands:new List<IEventCommand<IViewModel, IEvent>>()),
        
         };
     }

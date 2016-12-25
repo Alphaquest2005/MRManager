@@ -78,6 +78,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BlankMessage.cs" />
+    <Compile Include="EntityFound.cs" />
     <Compile Include="ProcessEventFailure.cs" />
     <Compile Include="CurrentEntityChanged.cs" />
     <Compile Include="ProcessStepStarted.cs" />

@@ -19,7 +19,7 @@ namespace DataServices.Actors
                 var p = ctx.Query<T>().FirstOrDefault(x => x.Id == msg.EntityId);
                 if (p != null)
                 {
-                    EventMessageBus.Current.Publish(new EntityUpdated<T>(p,msg.Process, msg.Source), msgSource);
+                    EventMessageBus.Current.Publish(new EntityFound<T>(p,msg.Process, msg.Source), msgSource);
                 }
                 else
                 {

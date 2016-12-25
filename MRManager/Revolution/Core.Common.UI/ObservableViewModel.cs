@@ -17,21 +17,21 @@ using ReactiveUI;
 
 namespace Core.Common.UI
 {
-    public abstract partial class ObservableViewModel<TEntity> : BaseViewModel<ObservableViewModel<TEntity>> where TEntity:IEntity
+    public partial class ObservableViewModel<TEntity> : BaseViewModel<ObservableViewModel<TEntity>> where TEntity:IEntity
     {
         protected AbstractValidator<TEntity> Validator { get; }
         protected ValidationResult ValidationResults = new ValidationResult();
         protected static ObservableViewModel<TEntity> _instance = null;
         public static ObservableViewModel<TEntity> Instance => _instance;
 
-        protected ObservableViewModel(AbstractValidator<TEntity> validator, List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, List<IEventCommand<IViewModel,IEvent>> commandInfo, ISystemProcess process) : base(process,eventSubscriptions,eventPublications,commandInfo)
+        public ObservableViewModel(AbstractValidator<TEntity> validator, List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, List<IEventCommand<IViewModel,IEvent>> commandInfo, ISystemProcess process) : base(process,eventSubscriptions,eventPublications,commandInfo)
         {
             Validator = validator;
         }
 
-        public ReactiveProperty<TEntity> CurrentEntityWithChanges { get; set; }
+        
 
-        private ReactiveProperty<TEntity> _currentEntity;
+        private ReactiveProperty<TEntity> _currentEntity = new ReactiveProperty<TEntity>();
         public ReactiveProperty<TEntity> CurrentEntity
         {
             get { return _currentEntity; }
