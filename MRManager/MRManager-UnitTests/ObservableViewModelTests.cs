@@ -20,6 +20,7 @@ using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
 using Utilities;
+using ViewModel.Interfaces;
 using ViewModels;
 using Process = RevolutionEntities.Process.Process;
 
@@ -33,16 +34,16 @@ namespace MRManager_UnitTests
         {
             var MsgSource = new MessageSource(this.ToString());
             var viewModel = new LoginViewModel(
-              eventSubscriptions: new List<IEventSubscription<IViewModel, IEvent>>(), 
+              eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(), 
                process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T"), new MachineInfo("test", "test location", 2), new User(DesignDataContext.SampleData<IPersons>(), "test", "joe")),
-               eventPublications:new List<IEventPublication<IViewModel, IEvent>>()
+               eventPublications:new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
                    
                },
-               commandInfo: new List<IEventCommand<IViewModel,IEvent>>()
+               commandInfo: new List<IViewModelEventCommand<IViewModel,IEvent>>()
                );
 
-            dynamic dynamicViewModel = new DynamicViewModel<ObservableViewModel<UserSignIn>>(viewModel);
+            dynamic dynamicViewModel = viewModel;
             dynamicViewModel.CurrentEntity.Value = new Persons() { Id = 5 };
             // var id = dynamicViewModel.GetValue("Id");
             Assert.AreEqual(5, dynamicViewModel.Id);
@@ -54,9 +55,9 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<EntityChanges<IUserSignIn>>(new MessageSource(this.ToString()))
                 .Subscribe(x => handleEntityChanges(x));
             var viewModel = new LoginViewModel(
-              eventSubscriptions: new List<IEventSubscription<IViewModel, IEvent>>(),
+              eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T"), new MachineInfo("test", "test location", 2), new User(DesignDataContext.SampleData<IPersons>(), "test", "joe")),
-               eventPublications: new List<IEventPublication<IViewModel, IEvent>>()
+               eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                                    {
                                         new ViewEventPublication<LoginViewModel, EntityChanges<IUserSignIn>>(
                                                         subject:(s) => s.ChangeTracking.DictionaryChanges,
@@ -68,10 +69,10 @@ namespace MRManager_UnitTests
                                                         }
                                                         )
                                     },
-               commandInfo:new List<IEventCommand<IViewModel,IEvent>>()
+               commandInfo:new List<IViewModelEventCommand<IViewModel,IEvent>>()
                );
 
-            dynamic dynamicViewModel = new DynamicViewModel<ObservableViewModel<UserSignIn>>(viewModel);
+            dynamic dynamicViewModel = viewModel;
             dynamicViewModel.CurrentEntity.Value = new Persons() { Id = 5 };
 
 
@@ -86,9 +87,9 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<EntityChanges<IUserSignIn>>(new MessageSource(this.ToString()))
                 .Subscribe(x => handleEntityChanges(x));
             var viewModel = new LoginViewModel(
-              eventSubscriptions: new List<IEventSubscription<IViewModel, IEvent>>(),
+              eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T"), new MachineInfo("test", "test location", 2), new User(DesignDataContext.SampleData<IPersons>(), "test", "joe")),
-               eventPublications: new List<IEventPublication<IViewModel, IEvent>>()
+               eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                                    {
                                         new ViewEventPublication<LoginViewModel, EntityChanges<IUserSignIn>>(
                                                         subject:(s) => s.ChangeTracking.DictionaryChanges,
@@ -103,10 +104,10 @@ namespace MRManager_UnitTests
                                                         }
                                                         )
                                     },
-               commandInfo: new List<IEventCommand<IViewModel, IEvent>>()
+               commandInfo: new List<IViewModelEventCommand<IViewModel, IEvent>>()
                );
 
-            dynamic dynamicViewModel = new DynamicViewModel<ObservableViewModel<UserSignIn>>(viewModel);
+            dynamic dynamicViewModel = viewModel;
             dynamicViewModel.CurrentEntity.Value = new Persons() { Id = 5 };
 
 
@@ -127,7 +128,7 @@ namespace MRManager_UnitTests
                 .Subscribe(x => handleEntityChanges(x));
             var viewModel = CreateLoginViewModel();
 
-            dynamic dynamicViewModel = new DynamicViewModel<ObservableViewModel<UserSignIn>>(viewModel);
+            dynamic dynamicViewModel = viewModel;
             dynamicViewModel.CurrentEntity.Value = new Persons() { Id = 5 };
             dynamicViewModel.ChangeTracking.Add("UserName", "joe");
             dynamicViewModel.ChangeTracking.Add("Password", "test");
@@ -143,7 +144,7 @@ namespace MRManager_UnitTests
                 .Subscribe(x => handleEntityChanges(x));
             var viewModel = CreateLoginViewModel();
 
-            dynamic dynamicViewModel = new DynamicViewModel<ObservableViewModel<UserSignIn>>(viewModel);
+            dynamic dynamicViewModel = viewModel;
             dynamicViewModel.CurrentEntity.Value = new Persons() { Id = 5 };
             dynamicViewModel.ChangeTracking.Add("UserName", "joe");
             dynamicViewModel.ChangeTracking.Add("Password", "test");
@@ -155,13 +156,13 @@ namespace MRManager_UnitTests
         private static LoginViewModel CreateLoginViewModel()
         {
             var viewModel = new LoginViewModel(
-                eventSubscriptions: new List<IEventSubscription<IViewModel, IEvent>>(),
+                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                 process:
                     new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T"),
                         new MachineInfo("test", "test location", 2),
                         new User(DesignDataContext.SampleData<IPersons>(), "test", "joe")),
-                eventPublications: new List<IEventPublication<IViewModel, IEvent>>(),
-                commandInfo: new List<IEventCommand<IViewModel,IEvent>>()
+                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>(),
+                commandInfo: new List<IViewModelEventCommand<IViewModel,IEvent>>()
                 {
                     new ViewEventCommand<LoginViewModel, EntityChanges<IUserSignIn>>("ValidateUserInfo",
                         v =>

@@ -50,7 +50,6 @@
     <Compile Include="IEventSubscription.cs" />
     <Compile Include="IMachineInfo.cs" />
     <Compile Include="IProcessStep.cs" />
-    <Compile Include="IViewModel.cs" />
     <Compile Include="IActorBackBone.cs" />
     <Compile Include="IStartDataService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

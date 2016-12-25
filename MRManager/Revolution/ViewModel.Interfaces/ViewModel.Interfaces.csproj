@@ -42,6 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IViewModelEventCommand.cs" />
+    <Compile Include="IViewModel.cs" />
+    <Compile Include="IViewModelEventSubscription.cs" />
+    <Compile Include="IViewModelEventPublication.cs" />
     <Compile Include="IBodyViewModel.cs" />
     <Compile Include="IFooterViewModel.cs" />
     <Compile Include="IRightViewModel.cs" />
@@ -54,7 +58,7 @@
     <Compile Include="IStartViewModelFactory.cs" />
     <Compile Include="IStartViewModelLocator.cs" />
     <Compile Include="ISummaryViewModel.cs" />
-    <Compile Include="IViewModel.cs" />
+    <Compile Include="IEntityViewModel.cs" />
     <Compile Include="ISummaryViewModelCreated.cs" />
     <Compile Include="IViewModelCreated.cs" />
     <Compile Include="IViewModelLocator.cs" />

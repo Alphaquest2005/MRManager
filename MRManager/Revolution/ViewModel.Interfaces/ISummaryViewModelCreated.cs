@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.Composition;
-using DataInterfaces;
+﻿//using System.ComponentModel.Composition;
+//using DataInterfaces;
 
-namespace ViewModelInterfaces
-{
-    [InheritedExport]
-    public interface ISummaryViewModelCreated<T> where T: IEntity
-    {
-        ISummaryViewModel<T> ViewModel { get; }
-    }
-}
+//namespace ViewModelInterfaces
+//{
+//    [InheritedExport]
+//    public interface ISummaryViewModelCreated<T> where T: IEntity
+//    {
+//        ISummaryViewModel<T> ViewModel { get; }
+//    }
+//}

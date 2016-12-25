@@ -12,6 +12,7 @@ using RevolutionEntities.ViewModels;
 using Utilities;
 using ViewMessages;
 using ViewModel.Interfaces;
+using ViewModelInterfaces;
 using ViewModels;
 
 namespace DataServices.Actors
@@ -23,7 +24,7 @@ namespace DataServices.Actors
             new ViewModelInfo
                 (
                 1,
-                new List<IEventSubscription<IViewModel, IEvent>>()
+                new List<IViewModelEventSubscription<IViewModel, IEvent>>()
                 {   new ViewEventSubscription<ScreenModel, ViewModelCreated<IHeaderViewModel>>(
                     processId: 1,
                     eventPredicate: (e) => e != null,
@@ -65,8 +66,8 @@ namespace DataServices.Actors
                         },
                         action: (s, e) => s.BodyViewModels.Add(e.ViewModel)),
                 },
-                new List<IEventPublication<IViewModel, IEvent>>(),
-                new List<IEventCommand<IViewModel, IEvent>>(), 
+                new List<IViewModelEventPublication<IViewModel, IEvent>>(),
+                new List<IViewModelEventCommand<IViewModel, IEvent>>(), 
                 typeof(ScreenModel)),
 
             ////////////////////////////////////User Login Screen/////////////////////////////////////////////////
@@ -74,7 +75,7 @@ namespace DataServices.Actors
             new ViewModelInfo
                 (
                 2,
-                new List<IEventSubscription<IViewModel, IEvent>>()
+                new List<IViewModelEventSubscription<IViewModel, IEvent>>()
                 {
                    new ViewEventSubscription<LoginViewModel, EntityFound<Persons>>(
                        processId:2,
@@ -89,7 +90,7 @@ namespace DataServices.Actors
                        action: (v,e) => v.Status = "User not found"
                        )
 
-                },new List<IEventPublication<IViewModel, IEvent>>()
+                },new List<IViewModelEventPublication<IViewModel, IEvent>>()
                 {
                     new ViewEventPublication<LoginViewModel, EntityChanges<UserSignIn>>(
                         subject: v => v.ChangeTracking.DictionaryChanges,
@@ -104,7 +105,7 @@ namespace DataServices.Actors
                                                         }
                         )
                 },
-                new List<IEventCommand<IViewModel, IEvent>>()
+                new List<IViewModelEventCommand<IViewModel, IEvent>>()
                 {
                     
                 },
@@ -113,99 +114,99 @@ namespace DataServices.Actors
             //////////////////////////////////////Entity ViewModels ///////////////////////////////////////////////
 
 
-            new WriteEntityViewModelInfo<IAddressCities>(
-                processId: 3,
-                viewModelType: typeof (WriteEntityViewModel<IAddressCities>),
-                createEntityAction: () => new AddressCities()
-                {
-                    CityId = CacheViewModel<ICities>.Instance.CurrentEntity.Id,
-                    Id = CacheViewModel<IAddresses>.Instance.CurrentEntity.Id,
-                    RowState = DataInterfaces.RowState.Added
-                },
-                createNullEntityAction: () => new AddressCities() {Id = EntityStates.NullEntity},
-                viewModelEventSubscriptions: new List<IEventSubscription<IViewModel, IEvent>>
-                {
-                    new ViewEventSubscription<WriteEntityViewModel<IAddressCities>, CurrentEntityChanged<ICities>>(
-                        processId: 3,
-                        eventPredicate: (e) => e.EntityId != EntityStates.NullEntity,
-                        actionPredicate: new List<Func<WriteEntityViewModel<IAddressCities>, CurrentEntityChanged<ICities>, bool>>
-                        {
-                            (s, e) => s.CurrentEntity.Id != e.EntityId
-                        },
-                        action: (s, e) =>
-                            s.FilterExpression =
-                                new List<Expression<Func<IAddressCities, bool>>>() {x => x.CityId == e.EntityId}),
+            //new WriteEntityViewModelInfo<IAddressCities>(
+            //    processId: 3,
+            //    viewModelType: typeof (WriteEntityViewModel<IAddressCities>),
+            //    createEntityAction: () => new AddressCities()
+            //    {
+            //        CityId = CacheViewModel<ICities>.Instance.CurrentEntity.Id,
+            //        Id = CacheViewModel<IAddresses>.Instance.CurrentEntity.Id,
+            //        RowState = DataInterfaces.RowState.Added
+            //    },
+            //    createNullEntityAction: () => new AddressCities() {Id = EntityStates.NullEntity},
+            //    viewModelEventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>
+            //    {
+            //        new ViewEventSubscription<WriteEntityViewModel<IAddressCities>, CurrentEntityChanged<ICities>>(
+            //            processId: 3,
+            //            eventPredicate: (e) => e.EntityId != EntityStates.NullEntity,
+            //            actionPredicate: new List<Func<WriteEntityViewModel<IAddressCities>, CurrentEntityChanged<ICities>, bool>>
+            //            {
+            //                (s, e) => s.CurrentEntity.Id != e.EntityId
+            //            },
+            //            action: (s, e) =>
+            //                s.FilterExpression =
+            //                    new List<Expression<Func<IAddressCities, bool>>>() {x => x.CityId == e.EntityId}),
 
 
-                    new ViewEventSubscription<WriteEntityViewModel<IAddressCities>, CurrentEntityChanged<IAddresses>>(
-                        processId: 3,
-                        eventPredicate: (e) => e.EntityId != EntityStates.NullEntity,
-                        actionPredicate: new List<Func<WriteEntityViewModel<IAddressCities>, CurrentEntityChanged<IAddresses>, bool>>
-                        {
-                            (s, e) => s.CurrentEntity.Id != e.EntityId
-                        },
-                        action: (s, e) =>
-                            s.FilterExpression =
-                                new List<Expression<Func<IAddressCities, bool>>>() {x => x.Id == e.EntityId})
-                },
-                viewModelEventPublications:new List<IEventPublication<IViewModel, IEvent>>(),
-                viewModelCommands: new List<IEventCommand<IViewModel, IEvent>>()),
-            new ReadEntityViewModelInfo<IAddressCities>(processId: 3,
-                viewModelType: typeof (CacheViewModel<IAddressCities>),
-                viewModelEventSubscriptions: new List<IEventSubscription<IViewModel, IEvent>>
-                {
-                    new ViewEventSubscription<CacheViewModel<IAddressCities>, EntitySetLoaded<IAddressCities>>(
-                        processId: 3,
-                        eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<CacheViewModel<IAddressCities>, EntitySetLoaded<IAddressCities>, bool>>
-                        {
-                            (s, e) => s.Process.Id == e.Process.Id
-                        },
-                        action: (s, e) => s.HandleEntitySetLoaded(e.Entities)),
-                    new ViewEventSubscription<CacheViewModel<IAddressCities>, CurrentEntityUpdated<IAddressCities>>(
-                        processId: 3,
-                        eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<CacheViewModel<IAddressCities>, CurrentEntityUpdated<IAddressCities>, bool>>
-                        {
-                            (s, e) => s.Process.Id == e.Process.Id
-                        },
-                        action: (s, e) => s.HandleCurrentEntityUpdated(e.Entity)),
-                    new ViewEventSubscription<CacheViewModel<IAddressCities>, CurrentEntityChanged<IAddressCities>>(
-                        processId: 3,
-                        eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<CacheViewModel<IAddressCities>, CurrentEntityChanged<IAddressCities>, bool>>
-                        {
-                            (s, e) => s.Process.Id == e.Process.Id
-                        },
-                        action: (s, e) => s.HandleCurrentEntityChanged(e.EntityId)),
-                    new ViewEventSubscription<CacheViewModel<IAddressCities>, ServiceStarted<LoadEntitySet<IAddressCities>>>(
-                        processId:3,
-                        eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<CacheViewModel<IAddressCities>, ServiceStarted<LoadEntitySet<IAddressCities>>, bool>>
-                        {
-                            (s, e) => s.Process.Id == e.Process.Id
-                        },
-                        action: (s, e) => EventMessageBus.Current.Publish(new LoadEntitySet<IAddressCities>(e.Process,s.MsgSource), s.MsgSource)),
-                    new ViewEventSubscription<CacheViewModel<IAddressCities>, EntityCreated<IAddressCities>>(
-                        processId: 3,
-                        eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<CacheViewModel<IAddressCities>, EntityCreated<IAddressCities>, bool>>
-                        {
-                            (s, e) => s.Process.Id == e.Process.Id
-                        },
-                        action: (s, e) => s.HandleEntityCreated(e.Entity)),
-                    new ViewEventSubscription<CacheViewModel<IAddressCities>, EntityDeleted<IAddressCities>>(
-                        processId: 3,
-                        eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<CacheViewModel<IAddressCities>, EntityDeleted<IAddressCities>, bool>>
-                        {
-                            (s, e) => s.Process.Id == e.Process.Id
-                        },
-                        action: (s, e) => s.HandleEntityDeleted(e.EntityId)),
+            //        new ViewEventSubscription<WriteEntityViewModel<IAddressCities>, CurrentEntityChanged<IAddresses>>(
+            //            processId: 3,
+            //            eventPredicate: (e) => e.EntityId != EntityStates.NullEntity,
+            //            actionPredicate: new List<Func<WriteEntityViewModel<IAddressCities>, CurrentEntityChanged<IAddresses>, bool>>
+            //            {
+            //                (s, e) => s.CurrentEntity.Id != e.EntityId
+            //            },
+            //            action: (s, e) =>
+            //                s.FilterExpression =
+            //                    new List<Expression<Func<IAddressCities, bool>>>() {x => x.Id == e.EntityId})
+            //    },
+            //    viewModelEventPublications:new List<IViewModelEventPublication<IViewModel, IEvent>>(),
+            //    viewModelCommands: new List<IViewModelEventCommand<IViewModel, IEvent>>()),
+            //new ReadEntityViewModelInfo<IAddressCities>(processId: 3,
+            //    viewModelType: typeof (CacheViewModel<IAddressCities>),
+            //    viewModelEventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>
+            //    {
+            //        new ViewEventSubscription<CacheViewModel<IAddressCities>, EntitySetLoaded<IAddressCities>>(
+            //            processId: 3,
+            //            eventPredicate: (e) => e != null,
+            //            actionPredicate: new List<Func<CacheViewModel<IAddressCities>, EntitySetLoaded<IAddressCities>, bool>>
+            //            {
+            //                (s, e) => s.Process.Id == e.Process.Id
+            //            },
+            //            action: (s, e) => s.HandleEntitySetLoaded(e.Entities)),
+            //        new ViewEventSubscription<CacheViewModel<IAddressCities>, CurrentEntityUpdated<IAddressCities>>(
+            //            processId: 3,
+            //            eventPredicate: (e) => e != null,
+            //            actionPredicate: new List<Func<CacheViewModel<IAddressCities>, CurrentEntityUpdated<IAddressCities>, bool>>
+            //            {
+            //                (s, e) => s.Process.Id == e.Process.Id
+            //            },
+            //            action: (s, e) => s.HandleCurrentEntityUpdated(e.Entity)),
+            //        new ViewEventSubscription<CacheViewModel<IAddressCities>, CurrentEntityChanged<IAddressCities>>(
+            //            processId: 3,
+            //            eventPredicate: (e) => e != null,
+            //            actionPredicate: new List<Func<CacheViewModel<IAddressCities>, CurrentEntityChanged<IAddressCities>, bool>>
+            //            {
+            //                (s, e) => s.Process.Id == e.Process.Id
+            //            },
+            //            action: (s, e) => s.HandleCurrentEntityChanged(e.EntityId)),
+            //        new ViewEventSubscription<CacheViewModel<IAddressCities>, ServiceStarted<LoadEntitySet<IAddressCities>>>(
+            //            processId:3,
+            //            eventPredicate: (e) => e != null,
+            //            actionPredicate: new List<Func<CacheViewModel<IAddressCities>, ServiceStarted<LoadEntitySet<IAddressCities>>, bool>>
+            //            {
+            //                (s, e) => s.Process.Id == e.Process.Id
+            //            },
+            //            action: (s, e) => EventMessageBus.Current.Publish(new LoadEntitySet<IAddressCities>(e.Process,s.MsgSource), s.MsgSource)),
+            //        new ViewEventSubscription<CacheViewModel<IAddressCities>, EntityCreated<IAddressCities>>(
+            //            processId: 3,
+            //            eventPredicate: (e) => e != null,
+            //            actionPredicate: new List<Func<CacheViewModel<IAddressCities>, EntityCreated<IAddressCities>, bool>>
+            //            {
+            //                (s, e) => s.Process.Id == e.Process.Id
+            //            },
+            //            action: (s, e) => s.HandleEntityCreated(e.Entity)),
+            //        new ViewEventSubscription<CacheViewModel<IAddressCities>, EntityDeleted<IAddressCities>>(
+            //            processId: 3,
+            //            eventPredicate: (e) => e != null,
+            //            actionPredicate: new List<Func<CacheViewModel<IAddressCities>, EntityDeleted<IAddressCities>, bool>>
+            //            {
+            //                (s, e) => s.Process.Id == e.Process.Id
+            //            },
+            //            action: (s, e) => s.HandleEntityDeleted(e.EntityId)),
                 
-                },
-                viewModelEventPublications:new List<IEventPublication<IViewModel, IEvent>>(),
-                viewModelCommands:new List<IEventCommand<IViewModel, IEvent>>()),
+            //    },
+            //    viewModelEventPublications:new List<IViewModelEventPublication<IViewModel, IEvent>>(),
+            //    viewModelCommands:new List<IViewModelEventCommand<IViewModel, IEvent>>()),
        
         };
     }

@@ -1,14 +1,27 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using SystemInterfaces;
 using DataInterfaces;
+using Reactive.Bindings;
 
-namespace ViewModelInterfaces
+namespace ViewModel.Interfaces
 {
     [InheritedExport]
-    public interface IViewModel<out TEntity>: IViewModel where TEntity:IEntity
+    public interface IViewModel
     {
-        
-    }
+        string Name { get; }
+        string Symbol { get; }
+        string Description { get; }
+        ISystemProcess Process { get; }
+        List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get; }
+        List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; }
+        Dictionary<string, dynamic> Commands { get; }
+        List<IViewModelEventCommand<IViewModel, IEvent>> CommandInfo { get; }
 
-    
+       
+    }
 }

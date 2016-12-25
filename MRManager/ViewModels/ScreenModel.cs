@@ -16,7 +16,7 @@ namespace ViewModels
 {
 	public partial class ScreenModel : BaseViewModel<ScreenModel>, IScreenViewModel
     {
-        public ScreenModel(ISystemProcess process, List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, List<IEventCommand<IViewModel, IEvent>> commandInfo) : base(process, eventSubscriptions, eventPublications,commandInfo)
+        public ScreenModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo) : base(process, eventSubscriptions, eventPublications,commandInfo)
         {
             this.WireEvents();
         }

@@ -50,7 +50,7 @@ namespace ViewModels
 
 		private void handleApplicationSetting(EntityUpdated<IApplicationSetting> applicationSetting)
 		{
-			CacheViewModel<IApplicationSetting>.Instance.CurrentEntity = applicationSetting.Entity;
+			//CacheViewModel<IApplicationSetting>.Instance.CurrentEntity = applicationSetting.Entity;
 		}
 	}
 }

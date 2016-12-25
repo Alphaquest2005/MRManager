@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using SystemInterfaces;
 using CommonMessages;
+using DataInterfaces;
+using Reactive.Bindings;
 using ReactiveUI;
+using ViewModel.Interfaces;
 
 
 namespace Core.Common.UI
@@ -11,7 +14,7 @@ namespace Core.Common.UI
         public MessageSource MsgSource => new MessageSource(this.ToString());
 
 
-        protected BaseViewModel(ISystemProcess process, List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, List<IEventCommand<IViewModel, IEvent>> commandInfo)
+        protected BaseViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo)
         {
             Process = process;
             EventSubscriptions = eventSubscriptions;
@@ -24,9 +27,10 @@ namespace Core.Common.UI
             this.WireEvents();
         }
 
-        public List<IEventSubscription<IViewModel, IEvent>> EventSubscriptions { get;}
-        public List<IEventPublication<IViewModel, IEvent>> EventPublications { get; }
-        public List<IEventCommand<IViewModel, IEvent>> CommandInfo { get; }
+        public List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get;}
+        public List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; }
+        public List<IViewModelEventCommand<IViewModel, IEvent>> CommandInfo { get; }
+        
         public Dictionary<string, dynamic> Commands { get; } = new Dictionary<string, dynamic>();
 
         public ISystemProcess Process { get; set; }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SystemInterfaces;
 using Common.Dynamic;
+using ViewModel.Interfaces;
 
 namespace Core.Common.UI
 {
@@ -36,9 +37,9 @@ namespace Core.Common.UI
         public string Symbol { get; } = _viewModel.Symbol;
         public string Description { get; } = _viewModel.Description;
         public ISystemProcess Process { get; } = _viewModel.Process;
-        public List<IEventSubscription<IViewModel, IEvent>> EventSubscriptions { get; } = _viewModel.EventSubscriptions;
-        public List<IEventPublication<IViewModel, IEvent>> EventPublications { get; } = _viewModel.EventPublications;
+        public List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get; } = _viewModel.EventSubscriptions;
+        public List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; } = _viewModel.EventPublications;
         public Dictionary<string, dynamic> Commands { get; } = _viewModel.Commands;
-        public List<IEventCommand<IViewModel, IEvent>> CommandInfo { get; } = _viewModel.CommandInfo;
+        public List<IViewModelEventCommand<IViewModel, IEvent>> CommandInfo { get; } = _viewModel.CommandInfo;
     }
 }

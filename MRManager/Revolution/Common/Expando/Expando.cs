@@ -69,7 +69,7 @@ namespace Common.Dynamic
         /// <summary>
         /// Instance of object passed in
         /// </summary>
-        object Instance;
+        public object Instance { get; private set; }
 
         /// <summary>
         /// Cached type of the instance

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using SystemInterfaces;
 using Utilities;
+using ViewModel.Interfaces;
 
 namespace RevolutionEntities.ViewModels
 {
-    public class ViewEventCommand<TViewModel, TEvent> : EventCommand<TViewModel,TEvent>, IEventCommand<IViewModel,IEvent> where TViewModel : IViewModel where TEvent : IEvent
+    public class ViewEventCommand<TViewModel, TEvent> : ViewModelEventCommand<TViewModel,TEvent>, IViewModelEventCommand<IViewModel,IEvent> where TViewModel : IViewModel where TEvent : IEvent
     {
         public ViewEventCommand(string commandName, Func<TViewModel, IObservable<bool>> commandPredicate, Func<TViewModel, IObservable<dynamic>> subject, IEnumerable<Func<TViewModel, bool>> subjectPredicate, IEnumerable<Func<TViewModel, dynamic>> messageData) : base(commandName, commandPredicate, subject, subjectPredicate, messageData)
         {

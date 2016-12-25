@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using SystemInterfaces;
 using Utilities;
+using ViewModel.Interfaces;
 
 namespace RevolutionEntities.ViewModels
 {
     
-    public class ViewEventSubscription<TViewModel, TEvent>: EventSubscription<TViewModel, TEvent>, IEventSubscription<IViewModel, IEvent> where TViewModel : IViewModel where TEvent : IEvent
+    public class ViewEventSubscription<TViewModel, TEvent>: ViewModelEventSubscription<TViewModel, TEvent>, IViewModelEventSubscription<IViewModel, IEvent> where TViewModel : IViewModel where TEvent : IEvent
     {
         public ViewEventSubscription(int processId, Func<TEvent, bool> eventPredicate, IEnumerable<Func<TViewModel, TEvent, bool>> actionPredicate, Action<TViewModel, TEvent> action)
            : base(processId,eventPredicate,actionPredicate,action)

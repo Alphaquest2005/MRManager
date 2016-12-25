@@ -12,6 +12,7 @@ using JB.Collections.Reactive;
 using JB.Reactive.ExtensionMethods;
 using ReactiveUI;
 using Utilities;
+using ViewModel.Interfaces;
 
 
 namespace Core.Common.UI
