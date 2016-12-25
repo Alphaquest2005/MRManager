@@ -2,8 +2,8 @@
 <#@ output extension="cs" #>
 <#@ include file="T4Toolbox.tt" #>
 <#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
-<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Repository.dll" #>
-<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\T4 Repository\bin\Debug\T4Repository.dll" #>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
 <#@ import namespace="T4Entities" #>
 <#@ import namespace="T4Repository" #>
 <#@ import namespace="System.Linq" #>

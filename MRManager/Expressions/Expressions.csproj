@@ -139,6 +139,7 @@
     <Compile Include="Generated Expressions\AutoEntityView Expressions\TemperatureAutoView.cs" />
     <Compile Include="Generated Expressions\AutoEntityView Expressions\UltraSoundGeneralEvaluationAutoView.cs" />
     <Compile Include="Generated Expressions\AutoEntityView Expressions\UnitsAutoView.cs" />
+    <Compile Include="Generated Expressions\AutoEntityView Expressions\UserSignInAutoView.cs" />
     <Compile Include="Generated Expressions\AutoEntityView Expressions\VitalSignsAutoView.cs" />
     <Compile Include="Generated Expressions\AutoEntityView Expressions\WeightAutoView.cs" />
     <Compile Include="Generated Expressions\AutoEntityView Expressions\ZipCodesAutoView.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="Generated Expressions\Entity Expressions\Temperature.cs" />
     <Compile Include="Generated Expressions\Entity Expressions\UltraSoundGeneralEvaluation.cs" />
     <Compile Include="Generated Expressions\Entity Expressions\Units.cs" />
+    <Compile Include="Generated Expressions\Entity Expressions\UserSignIn.cs" />
     <Compile Include="Generated Expressions\Entity Expressions\VitalSigns.cs" />
     <Compile Include="Generated Expressions\Entity Expressions\Weight.cs" />
     <Compile Include="Generated Expressions\Entity Expressions\ZipCodes.cs" />

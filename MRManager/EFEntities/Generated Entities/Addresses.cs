@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using Common.DataEntites;
+using EF.Entities;
 using Interfaces;
 
 namespace EF.Entities

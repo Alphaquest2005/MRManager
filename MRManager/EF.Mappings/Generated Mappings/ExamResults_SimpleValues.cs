@@ -6,6 +6,7 @@
 using System;
 using EF.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EF.Mappings
@@ -18,9 +19,9 @@ namespace EF.Mappings
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();	
 			entityBuilder.Property(t => t.ExamResultsId).HasColumnName("ExamResultsId").IsRequired();
-			entityBuilder.Property(t => t.PatientResultsId).HasColumnName("PatientResultsId").IsRequired();
 			entityBuilder.Property(t => t.ResultFieldId).HasColumnName("ResultFieldId").IsRequired();
 			entityBuilder.Property(t => t.Value).HasColumnName("Value").IsRequired().HasMaxLength(Int32.MaxValue);
+			entityBuilder.Property(t => t.PatientResultsId).HasColumnName("PatientResultsId").IsRequired();
 		//-------------------Navigation Properties -------------------------------//
 	
 				//----------------Parent Properties

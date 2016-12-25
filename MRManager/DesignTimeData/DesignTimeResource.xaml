@@ -1,6 +1,6 @@
-﻿
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:designTimeData="clr-namespace:DesignTimeData">
-    <designTimeData:DesignDataContext x:Key="DesignDataContext" />
-</ResourceDictionary>
+﻿		<ResourceDictionary 
+				xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				xmlns:designTime="clr-namespace:DesignTime">
+				<designTime:DesignDataContext x:Key="DesignDataContext" />
+		</ResourceDictionary>

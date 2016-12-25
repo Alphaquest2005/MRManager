@@ -4,7 +4,7 @@
 <#@ include file="..\..\..\Utilities\DataAccess\Repository.ttinclude" once="true" #>
 <#@ include file="SummaryViewModelTemplate.ttinclude" #>
 
-<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
 <#@ assembly name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
 <#@ import namespace="T4Entities" #>
 <#@ import namespace="System.IO" #>

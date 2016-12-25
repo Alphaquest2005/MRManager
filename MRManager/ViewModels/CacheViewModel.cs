@@ -11,7 +11,7 @@ using System.Linq;
 using SystemInterfaces;
 using Core.Common.UI;
 using DataInterfaces;
-using DesignTimeData;
+using DesignTime;
 
 namespace ViewModels
 {
@@ -28,7 +28,7 @@ namespace ViewModels
 			}
 		}
 
-	    public void HandleEntitySetLoaded(IEnumerable<T> entities)
+		public void HandleEntitySetLoaded(IEnumerable<T> entities)
 		{
 			System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
 			{
@@ -41,7 +41,7 @@ namespace ViewModels
 			}));
 		}
 
-	    public void HandleCurrentEntityUpdated(T entity)
+		public void HandleCurrentEntityUpdated(T entity)
 		{
 			System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
 			{
@@ -50,27 +50,27 @@ namespace ViewModels
 			}));
 		}
 
-        public void HandleEntityCreated(T entity)
-        {
-            System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
-            {
-                EntitySet.Add(entity);
+		public void HandleEntityCreated(T entity)
+		{
+			System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
+			{
+				EntitySet.Add(entity);
 
-            }));
-        }
+			}));
+		}
 
-        public void HandleEntityDeleted(int entityId)
-        {
-            System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
-            {
-                var entity = EntitySet.FirstOrDefault(x => x.Id == entityId);
-                if (entity == null) return;
-                EntitySet.Remove(entity);
+		public void HandleEntityDeleted(int entityId)
+		{
+			System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
+			{
+				var entity = EntitySet.FirstOrDefault(x => x.Id == entityId);
+				if (entity == null) return;
+				EntitySet.Remove(entity);
 
-            }));
-        }
+			}));
+		}
 
-        public void HandleCurrentEntityChanged(int entityId)
+		public void HandleCurrentEntityChanged(int entityId)
 		{
 			System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
 			{

@@ -4,7 +4,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ include file="T4Toolbox.tt" #>
 <#@ include file="PresentationLayer\DataTemplates\CreateDataTemplates.ttinclude" #>
-<#@ include file="C:\Prism\Clients\Amoeba Projects\MRManager\Amoeba\T4 Templates\Utilities\DataAccess\Repository.ttinclude" once="true" #>
+<#@ include file="C:\Prism\GitRepositiory\MRManager\Amoeba\T4 Templates\Utilities\DataAccess\Repository.ttinclude" once="true" #>
 <#+
 
 	public void GenerateDataTemplates(string appName)

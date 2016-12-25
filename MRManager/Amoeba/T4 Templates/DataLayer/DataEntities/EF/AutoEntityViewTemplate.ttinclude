@@ -1,13 +1,13 @@
 ﻿<#@ include file="T4Toolbox.tt" #>
-<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
 <#@ import namespace="T4Entities" #>
-<#@ assembly name="C:\Prism\Clients\Amoeba\Specifications\bin\Debug\Specifications.dll"#>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\Specifications\bin\Debug\Specifications.dll"#>
 <#@ import namespace="Specifications" #>
-<#@ assembly name="C:\Prism\Clients\Amoeba\Specifications\bin\Debug\LinqSpecs.dll"#>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\Specifications\bin\Debug\LinqSpecs.dll"#>
 <#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
 <#@ import namespace="System.Linq" #>
-<#@ assembly name="C:\Prism\Clients\Amoeba\Amoeba\Amoeba\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll" #>
-<#@ assembly name="C:\Prism\Clients\Amoeba Projects\MRManager\T4Utilities\bin\Debug\T4Utilities.dll"#>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\Amoeba\Amoeba\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll" #>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\T4Utilities\bin\Debug\T4Utilities.dll"#>
 <#@ assembly name="Microsoft.CSharp" #>
 <#@ import namespace="MoreLinq" #>
 <#+

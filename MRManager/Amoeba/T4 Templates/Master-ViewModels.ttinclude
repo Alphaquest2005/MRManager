@@ -4,7 +4,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ include file="T4Toolbox.tt" #>
 <#@ include file="PresentationLayer\ViewModels\CreateViewModels.ttinclude" #>
-<#@ assembly name="C:\Prism\Clients\Amoeba Projects\MRManager\T4Utilities\bin\Debug\T4Utilities.dll"#>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\T4Utilities\bin\Debug\T4Utilities.dll"#>
 <#+
 
 	public void GenerateViewModels(string appName)

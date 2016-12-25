@@ -6,15 +6,16 @@
 using System;
 using System.Collections.Generic;
 using Common.DataEntites;
+using EF.Entities;
 using Interfaces;
 
 namespace EF.Entities
 {
 	public partial class PatientVisit: BaseEntity, IPatientVisit
 	{
+		public virtual int PatientId { get; set; }
 		public virtual DateTime DateOfVisit { get; set; }
 		public virtual int DoctorId { get; set; }
-		public virtual int PatientId { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships
@@ -24,8 +25,8 @@ namespace EF.Entities
 				public virtual ICollection<PatientVisitVitalSigns> PatientVisitVitalSigns {get; set;}
 		
 			// ---------Parent Relationships
-				public virtual Persons_Doctor Persons_Doctor {get; set;}
 				public virtual Persons_Patient Persons_Patient {get; set;}
+				public virtual Persons_Doctor Persons_Doctor {get; set;}
 	
 
 	}

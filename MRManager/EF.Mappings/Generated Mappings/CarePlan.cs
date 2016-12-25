@@ -18,8 +18,8 @@ namespace EF.Mappings
 			entityBuilder.ToTable("CarePlan", "Interview");
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();	
-			entityBuilder.Property(t => t.Diagnosis).HasColumnName("Diagnosis").IsRequired().HasMaxLength(Int32.MaxValue);
 			entityBuilder.Property(t => t.Name).HasColumnName("Name").IsRequired().HasMaxLength(50);
+			entityBuilder.Property(t => t.Diagnosis).HasColumnName("Diagnosis").IsRequired().HasMaxLength(Int32.MaxValue);
 		//-------------------Navigation Properties -------------------------------//
 				entityBuilder.HasMany(x => x.CarePlanDetails).WithOne(p => p.CarePlan).HasForeignKey(c => c.CarePlanId).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasMany(x => x.ResponseSuggestions_CarePlans).WithOne(p => p.CarePlan).HasForeignKey(c => c.CarePlanId).OnDelete(DeleteBehavior.Restrict);

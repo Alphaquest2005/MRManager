@@ -17,8 +17,8 @@
 <#@ include file="SummaryViewCSTemplate.ttinclude" #>
 <#@ include file="SummaryViewDetailsCSTemplate.ttinclude" #>
 <#@ include file="SummaryViewDetailsTemplate.ttinclude" #>
-<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
-<#@ assembly name="C:\Prism\Clients\Amoeba Projects\MRManager\T4Utilities\bin\Debug\T4Utilities.dll"#>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\T4Utilities\bin\Debug\T4Utilities.dll"#>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="T4Entities" #>
 <#+

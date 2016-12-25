@@ -8,7 +8,7 @@ using SystemInterfaces;
 using SystemMessages;
 using CommonMessages;
 using Core.Common.UI;
-using DesignTimeData;
+using DesignTime;
 using EF.Entities;
 using EventAggregator;
 using EventMessages;

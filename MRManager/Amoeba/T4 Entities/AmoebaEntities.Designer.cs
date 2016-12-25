@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Prism\Clients\Amoeba\T4 Entities\AmoebaEntities.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Prism\GitRepositiory\MRManager\Amoeba\T4 Entities\AmoebaEntities.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

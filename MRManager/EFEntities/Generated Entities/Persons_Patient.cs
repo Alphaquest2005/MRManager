@@ -6,14 +6,15 @@
 using System;
 using System.Collections.Generic;
 using Common.DataEntites;
+using EF.Entities;
 using Interfaces;
 
 namespace EF.Entities
 {
 	public partial class Persons_Patient: BaseEntity, IPersons_Patient
 	{
-		public virtual int CountryId { get; set; }
 		public virtual DateTime DateOfBirth { get; set; }
+		public virtual int CountryId { get; set; }
 		public virtual int SexId { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//

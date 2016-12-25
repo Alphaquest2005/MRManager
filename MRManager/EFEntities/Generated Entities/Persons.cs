@@ -5,24 +5,32 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using Common.DataEntites;
+using EF.Entities;
 using Interfaces;
 
 namespace EF.Entities
 {
-	public static class EntityExtensions
+	public partial class Persons: BaseEntity, IPersons
 	{
-	    public static string Name(this Persons person)
-	    {
-	        return string.Join(" ", person.PersonNames.Select(z => z.PersonName));
-	    }
+		public virtual DateTime EntryDateTine { get; set; }
+
+		//-------------------Navigation Properties -------------------------------//
+			// ---------Child Relationships
+				public virtual ICollection<PersonAddresses> PersonAddresses {get; set;}
+				public virtual ICollection<PersonEmailAddress> PersonEmailAddress {get; set;}
+				public virtual ICollection<PersonMedia> PersonMedia {get; set;}
+				public virtual ICollection<PersonNames> PersonNames {get; set;}
+				public virtual ICollection<PersonPhoneNumbers> PersonPhoneNumbers {get; set;}
+				public virtual Persons_Doctor Persons_Doctor {get; set;}
+				public virtual Persons_EmergencyContact Persons_EmergencyContact {get; set;}
+				public virtual Persons_NextOfKin Persons_NextOfKin {get; set;}
+				public virtual Persons_Patient Persons_Patient {get; set;}
+				public virtual UserSignIn UserSignIn {get; set;}
+				public virtual ICollection<VitalSigns> VitalSigns {get; set;}
+		
+			// ---------Parent Relationships
+	
+
 	}
-
-
-    public partial class Persons
-    {
-        public string Name => this.Name();
-    }
 }

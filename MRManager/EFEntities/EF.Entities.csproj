@@ -199,6 +199,7 @@
     <Compile Include="Generated Entities\Generated AutoView Templates\TemperatureAutoView.cs" />
     <Compile Include="Generated Entities\Generated AutoView Templates\UltraSoundGeneralEvaluationAutoView.cs" />
     <Compile Include="Generated Entities\Generated AutoView Templates\UnitsAutoView.cs" />
+    <Compile Include="Generated Entities\Generated AutoView Templates\UserSignInAutoView.cs" />
     <Compile Include="Generated Entities\Generated AutoView Templates\VitalSignsAutoView.cs" />
     <Compile Include="Generated Entities\Generated AutoView Templates\WeightAutoView.cs" />
     <Compile Include="Generated Entities\Generated AutoView Templates\ZipCodesAutoView.cs" />
@@ -265,6 +266,7 @@
     <Compile Include="Generated Entities\Temperature.cs" />
     <Compile Include="Generated Entities\UltraSoundGeneralEvaluation.cs" />
     <Compile Include="Generated Entities\Units.cs" />
+    <Compile Include="Generated Entities\UserSignIn.cs" />
     <Compile Include="Generated Entities\VitalSigns.cs" />
     <Compile Include="Generated Entities\Weight.cs" />
     <Compile Include="Generated Entities\ZipCodes.cs" />

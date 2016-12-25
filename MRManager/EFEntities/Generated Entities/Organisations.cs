@@ -6,14 +6,15 @@
 using System;
 using System.Collections.Generic;
 using Common.DataEntites;
+using EF.Entities;
 using Interfaces;
 
 namespace EF.Entities
 {
 	public partial class Organisations: BaseEntity, IOrganisations
 	{
-		public virtual Byte[] EntryTimeStamp { get; set; }
 		public virtual string Name { get; set; }
+		public virtual Byte[] EntryTimeStamp { get; set; }
 		public virtual string VATNumber { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//

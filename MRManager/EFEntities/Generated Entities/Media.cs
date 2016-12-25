@@ -6,14 +6,15 @@
 using System;
 using System.Collections.Generic;
 using Common.DataEntites;
+using EF.Entities;
 using Interfaces;
 
 namespace EF.Entities
 {
 	public partial class Media: BaseEntity, IMedia
 	{
-		public virtual int MediaTypeId { get; set; }
 		public virtual Byte[] Value { get; set; }
+		public virtual int MediaTypeId { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships

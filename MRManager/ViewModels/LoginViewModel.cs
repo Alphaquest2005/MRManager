@@ -12,9 +12,7 @@ namespace ViewModels
     {
         public LoginViewModel(List<IEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IEventPublication<IViewModel, IEvent>> eventPublications, List<IEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process) : base(new EntityValidator<IPersons>(), eventSubscriptions, eventPublications,commandInfo, process)
         {
-            
             CurrentEntity = new ReactiveProperty<IPersons>(new Persons());
-          
         }
     }
 }

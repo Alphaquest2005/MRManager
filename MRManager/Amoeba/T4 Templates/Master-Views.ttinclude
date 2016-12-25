@@ -4,8 +4,8 @@
 <#@ import namespace="System.Linq" #>
 <#@ include file="T4Toolbox.tt" #>
 <#@ include file="PresentationLayer\Views\CreateViews.ttinclude" #>
-<#@ include file="C:\Prism\Clients\Amoeba Projects\MRManager\Amoeba\T4 Templates\Utilities\DataAccess\Repository.ttinclude" once="true" #>
-<#@ assembly name="C:\Prism\Clients\Amoeba Projects\MRManager\T4Utilities\bin\Debug\T4Utilities.dll"#>
+<#@ include file="C:\Prism\GitRepositiory\MRManager\Amoeba\T4 Templates\Utilities\DataAccess\Repository.ttinclude" once="true" #>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\T4Utilities\bin\Debug\T4Utilities.dll"#>
 <#+
 
 	public void GenerateViews(string appName)

@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Generated Interfaces\AutoEntityViews\UserSignIn.cs" />
+    <Compile Include="Generated Interfaces\UserSignIn.cs" />
     <Compile Include="IPersons.cs" />
     <Compile Include="Generated Interfaces\AddressCities.cs" />
     <Compile Include="Generated Interfaces\AddressCountries.cs" />

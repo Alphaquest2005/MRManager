@@ -1,5 +1,5 @@
 ﻿<#@ include file="T4Toolbox.tt" #>
-<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="T4Entities" #>

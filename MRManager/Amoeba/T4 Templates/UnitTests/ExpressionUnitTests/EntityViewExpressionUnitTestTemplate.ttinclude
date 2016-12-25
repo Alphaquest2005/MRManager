@@ -1,9 +1,9 @@
 <#@ include file="T4Toolbox.tt" #>
-<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="T4Entities" #>
 <#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
-<#@ assembly name="C:\Prism\Clients\Amoeba\Amoeba\Amoeba\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll" #>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\Amoeba\Amoeba\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll" #>
 <#@ import namespace="MoreLinq" #>
 <#@ import namespace="System.Linq" #>
 <#+

@@ -3,7 +3,7 @@
 <#@ include file="T4Toolbox.tt" #>
 <#@ include file="ValidationSetTemplate.ttinclude" #>
 <#@ include file="EntityViewValidationSetTemplate.ttinclude" #>
-<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="T4Entities" #>

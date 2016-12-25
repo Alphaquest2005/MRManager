@@ -204,6 +204,7 @@
 ..\Expressions\Generated Expressions\AutoEntityView Expressions\TemperatureAutoView.cs
 ..\Expressions\Generated Expressions\AutoEntityView Expressions\UltraSoundGeneralEvaluationAutoView.cs
 ..\Expressions\Generated Expressions\AutoEntityView Expressions\UnitsAutoView.cs
+..\Expressions\Generated Expressions\AutoEntityView Expressions\UserSignInAutoView.cs
 ..\Expressions\Generated Expressions\AutoEntityView Expressions\VitalSignsAutoView.cs
 ..\Expressions\Generated Expressions\AutoEntityView Expressions\WeightAutoView.cs
 ..\Expressions\Generated Expressions\AutoEntityView Expressions\ZipCodesAutoView.cs
@@ -301,6 +302,7 @@
 ..\Expressions\Generated Expressions\Entity Expressions\Temperature.cs
 ..\Expressions\Generated Expressions\Entity Expressions\UltraSoundGeneralEvaluation.cs
 ..\Expressions\Generated Expressions\Entity Expressions\Units.cs
+..\Expressions\Generated Expressions\Entity Expressions\UserSignIn.cs
 ..\Expressions\Generated Expressions\Entity Expressions\VitalSigns.cs
 ..\Expressions\Generated Expressions\Entity Expressions\Weight.cs
 ..\Expressions\Generated Expressions\Entity Expressions\ZipCodes.cs
@@ -437,6 +439,7 @@
 ..\EF.Mappings\Generated Mappings\Temperature.cs
 ..\EF.Mappings\Generated Mappings\UltraSoundGeneralEvaluation.cs
 ..\EF.Mappings\Generated Mappings\Units.cs
+..\EF.Mappings\Generated Mappings\UserSignIn.cs
 ..\EF.Mappings\Generated Mappings\VitalSigns.cs
 ..\EF.Mappings\Generated Mappings\Weight.cs
 ..\EF.Mappings\Generated Mappings\ZipCodes.cs
@@ -598,6 +601,7 @@
 ..\EFEntities\Generated Entities\Generated AutoView Templates\TemperatureAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\UltraSoundGeneralEvaluationAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\UnitsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\UserSignInAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\VitalSignsAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\WeightAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\ZipCodesAutoView.cs
@@ -664,6 +668,7 @@
 ..\EFEntities\Generated Entities\Temperature.cs
 ..\EFEntities\Generated Entities\UltraSoundGeneralEvaluation.cs
 ..\EFEntities\Generated Entities\Units.cs
+..\EFEntities\Generated Entities\UserSignIn.cs
 ..\EFEntities\Generated Entities\VitalSigns.cs
 ..\EFEntities\Generated Entities\Weight.cs
 ..\EFEntities\Generated Entities\ZipCodes.cs
@@ -778,6 +783,7 @@
 ..\Interfaces\Generated Interfaces\AutoEntityViews\Temperature.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\UltraSoundGeneralEvaluation.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\Units.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\UserSignIn.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\VitalSigns.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\Weight.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\ZipCodes.cs
@@ -896,6 +902,7 @@
 ..\Interfaces\Generated Interfaces\Temperature.cs
 ..\Interfaces\Generated Interfaces\UltraSoundGeneralEvaluation.cs
 ..\Interfaces\Generated Interfaces\Units.cs
+..\Interfaces\Generated Interfaces\UserSignIn.cs
 ..\Interfaces\Generated Interfaces\VitalSigns.cs
 ..\Interfaces\Generated Interfaces\Weight.cs
 ..\Interfaces\Generated Interfaces\ZipCodes.cs
@@ -1631,6 +1638,7 @@
 ..\Interfaces\Generated Interfaces\AutoEntityViews\Temperature.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\UltraSoundGeneralEvaluation.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\Units.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\UserSignIn.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\VitalSigns.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\Weight.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\ZipCodes.cs
@@ -1749,6 +1757,7 @@
 ..\Interfaces\Generated Interfaces\Temperature.cs
 ..\Interfaces\Generated Interfaces\UltraSoundGeneralEvaluation.cs
 ..\Interfaces\Generated Interfaces\Units.cs
+..\Interfaces\Generated Interfaces\UserSignIn.cs
 ..\Interfaces\Generated Interfaces\VitalSigns.cs
 ..\Interfaces\Generated Interfaces\Weight.cs
 ..\Interfaces\Generated Interfaces\ZipCodes.cs

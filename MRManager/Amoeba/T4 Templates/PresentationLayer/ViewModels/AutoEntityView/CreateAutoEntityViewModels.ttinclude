@@ -6,7 +6,7 @@
 <#@ include file="ConstructorViewModelTemplate.ttinclude" #>
 <#@ include file="InstanceViewModelTemplate.ttinclude" #>
 <#@ include file="NavigationViewModelTemplate.ttinclude" #>
-<#@ assembly name="C:\Prism\Clients\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
+<#@ assembly name="C:\Prism\GitRepositiory\MRManager\Amoeba\T4 Repository\bin\Debug\T4Entities.dll" #>
 <#@ import namespace="T4Entities" #>
 <#@ import namespace="System.IO" #>
 <#+
