@@ -17,6 +17,8 @@ namespace ViewModel.Interfaces
         string Symbol { get; }
         string Description { get; }
         ISystemProcess Process { get; }
+        IMessageSource MsgSource { get; }
+
         List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get; }
         List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; }
         Dictionary<string, dynamic> Commands { get; }

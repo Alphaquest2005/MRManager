@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,20 @@ namespace Core.Common.UI
 {
     public class DynamicViewModel<TViewModel> : Expando, IViewModel where TViewModel:IViewModel
     {
-        private static TViewModel _viewModel;
+        public new TViewModel Instance { get; }
         public DynamicViewModel(TViewModel viewModel) : base(viewModel)
         {
-            _viewModel = viewModel;
+            Contract.Requires(viewModel != null);
+            Name = viewModel.Name;
+            CommandInfo = viewModel.CommandInfo;
+            Commands = viewModel.Commands;
+            EventPublications = viewModel.EventPublications;
+            EventSubscriptions = viewModel.EventSubscriptions;
+            Process = viewModel.Process;
+            Description = viewModel.Description;
+            Symbol = viewModel.Symbol;
+            Instance = (TViewModel) base.Instance;
+            MsgSource = ((IViewModel) base.Instance).MsgSource;
         }
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
@@ -33,13 +44,14 @@ namespace Core.Common.UI
             return true;
         }
 
-        public string Name { get; } = _viewModel.Name;
-        public string Symbol { get; } = _viewModel.Symbol;
-        public string Description { get; } = _viewModel.Description;
-        public ISystemProcess Process { get; } = _viewModel.Process;
-        public List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get; } = _viewModel.EventSubscriptions;
-        public List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; } = _viewModel.EventPublications;
-        public Dictionary<string, dynamic> Commands { get; } = _viewModel.Commands;
-        public List<IViewModelEventCommand<IViewModel, IEvent>> CommandInfo { get; } = _viewModel.CommandInfo;
+        public string Name { get; } 
+        public string Symbol { get; }
+        public string Description { get; }
+        public ISystemProcess Process { get; }
+        public IMessageSource MsgSource { get; }
+        public List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get; }
+        public List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; }
+        public Dictionary<string, dynamic> Commands { get; }
+        public List<IViewModelEventCommand<IViewModel, IEvent>> CommandInfo { get; }
     }
 }

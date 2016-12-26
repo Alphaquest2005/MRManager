@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reactive;
-using System.Reactive.Linq;
 using SystemInterfaces;
-using SystemMessages;
 using CommonMessages;
 using Core.Common.UI;
-using DesignTime;
 using EF.Entities;
 using EventAggregator;
 using EventMessages;
 using Interfaces;
-using JB.Collections.Reactive;
 using JB.Reactive.ExtensionMethods;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
-using Utilities;
 using ViewModel.Interfaces;
 using ViewModels;
 using Process = RevolutionEntities.Process.Process;
@@ -33,20 +27,18 @@ namespace MRManager_UnitTests
         public void InitalizeObserveableWithNoSubscriptions()
         {
             var MsgSource = new MessageSource(this.ToString());
-            var viewModel = new LoginViewModel(
-              eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(), 
-               process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")), new MachineInfo("test", "test location", 2)),
+            dynamic viewModel = new LoginViewModel(
+                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
+                process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")), new MachineInfo("test", "test location", 2)),
                eventPublications:new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
                    
                },
                commandInfo: new List<IViewModelEventCommand<IViewModel,IEvent>>()
                );
-
-            dynamic dynamicViewModel = viewModel;
-            dynamicViewModel.CurrentEntity.Value = new Persons() { Id = 5 };
+            viewModel.CurrentEntity.Value = new UserSignIn() { Id = 5, Username = "Joe", Password = "Test"};
             // var id = dynamicViewModel.GetValue("Id");
-            Assert.AreEqual(5, dynamicViewModel.Id);
+           Assert.AreEqual(5, viewModel.Id);
         }
 
         [TestMethod]
@@ -73,7 +65,7 @@ namespace MRManager_UnitTests
                );
 
             dynamic dynamicViewModel = viewModel;
-            dynamicViewModel.CurrentEntity.Value = new Persons() { Id = 5 };
+            dynamicViewModel.CurrentEntity.Value = new UserSignIn() { Id = 5, Username = "Joe", Password = "Test"};
 
 
             dynamicViewModel.Id = 6;
@@ -108,7 +100,7 @@ namespace MRManager_UnitTests
                );
 
             dynamic dynamicViewModel = viewModel;
-            dynamicViewModel.CurrentEntity.Value = new Persons() { Id = 5 };
+            dynamicViewModel.CurrentEntity.Value = new UserSignIn() { Id = 5, Username = "Joe", Password = "Test" };
 
 
             dynamicViewModel.Id = 6;
@@ -129,7 +121,7 @@ namespace MRManager_UnitTests
             var viewModel = CreateLoginViewModel();
 
             dynamic dynamicViewModel = viewModel;
-            dynamicViewModel.CurrentEntity.Value = new Persons() { Id = 5 };
+            dynamicViewModel.CurrentEntity.Value = new UserSignIn() { Id = 5 };
             dynamicViewModel.ChangeTracking.Add("UserName", "joe");
             dynamicViewModel.ChangeTracking.Add("Password", "test");
             dynamicViewModel.Commands["ValidateUserInfo"].Execute();
@@ -145,7 +137,7 @@ namespace MRManager_UnitTests
             var viewModel = CreateLoginViewModel();
 
             dynamic dynamicViewModel = viewModel;
-            dynamicViewModel.CurrentEntity.Value = new Persons() { Id = 5 };
+            dynamicViewModel.CurrentEntity.Value = new UserSignIn() { Id = 5, Username = "Joe", Password = "Test" };
             dynamicViewModel.ChangeTracking.Add("UserName", "joe");
             dynamicViewModel.ChangeTracking.Add("Password", "test");
             dynamicViewModel.Commands["ValidateUserInfo"].Execute();

@@ -13,10 +13,6 @@ namespace EF.Entities
 {
 	public partial class UserSignIn
 	{
-	    public UserSignIn()
-	    {
-	        UserId = Username;
-	    }
-	    public string UserId { get; }
+	    public string UserId { get; set; }
 	}
 }

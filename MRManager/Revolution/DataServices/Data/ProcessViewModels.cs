@@ -83,12 +83,12 @@ namespace DataServices.Actors
                        actionPredicate: new List<Func<LoginViewModel, EntityFound<Persons>, bool>>(),
                        action: (v,e) => v.CurrentEntity.Value.Persons = e.Entity
                        ),
-                   new ViewEventSubscription<LoginViewModel, EntityNotFound<Persons>>(
-                       processId:2,
-                       eventPredicate: e => true,
-                       actionPredicate: new List<Func<LoginViewModel, EntityNotFound<Persons>, bool>>(),
-                       action: (v,e) => v.Status = "User not found"
-                       )
+                   //new ViewEventSubscription<LoginViewModel, EntityNotFound<Persons>>(
+                   //    processId:2,
+                   //    eventPredicate: e => true,
+                   //    actionPredicate: new List<Func<LoginViewModel, EntityNotFound<Persons>, bool>>(),
+                   //    action: (v,e) => v.Status = "User not found"
+                   //    )
 
                 },new List<IViewModelEventPublication<IViewModel, IEvent>>()
                 {

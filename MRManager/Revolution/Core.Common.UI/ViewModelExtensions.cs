@@ -24,14 +24,7 @@ namespace Core.Common.UI
 
             foreach (var itm in viewModel.CommandInfo)
             {
-                Action<dynamic> publishMessage = x =>
-                                {
-                                    var paramArray = itm.MessageData.Select(p => p.Invoke(viewModel)).Cast<object>().ToList();
-                                    paramArray.Add(viewModel.Process);
-                                    paramArray.Add(new MessageSource(viewModel.GetType().ToString()));
-                                    var msg = (ProcessSystemMessage) Activator.CreateInstance(itm.EventType, paramArray.ToArray());
-                                    EventMessageBus.Current.Publish(msg, msg.Source);
-                                };
+                var publishMessage = CreatePublishMessageAction(viewModel, itm);
 
                 var cmd = ReactiveCommand.Create(publishMessage,itm.CommandPredicate.Invoke(viewModel));//new Action<IViewModel>(x => { })
 
@@ -62,20 +55,27 @@ namespace Core.Common.UI
             foreach (var itm in viewModel.EventPublications)
             {
                 var subject  = itm.Subject.Invoke(viewModel);
-                
-                Action<dynamic> publishMessage = x => {
-                    var paramArray = itm.MessageData.Select(p => p.Invoke(viewModel)).Cast<object>().ToList();
-                    paramArray.Add(viewModel.Process);
-                    paramArray.Add(new MessageSource(viewModel.GetType().ToString()));
-                    var msg = (ProcessSystemMessage)Activator.CreateInstance(itm.EventType, paramArray.ToArray());
-                    EventMessageBus.Current.Publish(msg, msg.Source);
-                };
+
+                var publishMessage = CreatePublishMessageAction(viewModel, itm);
                 subject.Where(x => itm.SubjectPredicate.All(z => z.Invoke(viewModel)))
                     .Subscribe(publishMessage);
             }
 
            
 
+        }
+
+        private static Action<dynamic> CreatePublishMessageAction(IViewModel viewModel, IViewModelEventPublication<IViewModel, IEvent> itm)
+        {
+            Action<dynamic> publishMessage = x =>
+            {
+                var paramArray = itm.MessageData.Select(p => p.Invoke(viewModel)).Cast<object>().ToList();
+                paramArray.Add(viewModel.Process);
+                paramArray.Add(new SystemMessage(viewModel.Process.MachineInfo, viewModel.MsgSource));
+                var msg = (ProcessSystemMessage) Activator.CreateInstance(itm.EventType, paramArray.ToArray());
+                EventMessageBus.Current.Publish(msg, msg.Source);
+            };
+            return publishMessage;
         }
 
         public static void Subscribe<TEvent, TViewModel>(TViewModel viewModel, Func<TEvent, bool> eventPredicate,

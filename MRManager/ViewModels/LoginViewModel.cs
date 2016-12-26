@@ -2,6 +2,7 @@
 using SystemInterfaces;
 using Core.Common.UI;
 using EF.Entities;
+using FluentValidation;
 using Interfaces;
 using JB.Collections.Reactive;
 using Reactive.Bindings;
@@ -12,29 +13,16 @@ using ViewModelInterfaces;
 
 namespace ViewModels
 {
-    public class LoginViewModel : DynamicViewModel<ObservableViewModel<UserSignIn>>, IEntityViewModel<UserSignIn>
+    public class LoginViewModel : DynamicViewModel<ObservableViewModel<UserSignIn>>, IEntityViewModel<UserSignIn>, IViewModel
     {
-
-
-        public LoginViewModel(List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions,
-            List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications,
-            List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process)
-            : base(
-                new ObservableViewModel<UserSignIn>(new EntityValidator<UserSignIn>(), eventSubscriptions,
-                    eventPublications, commandInfo, process))
+        public LoginViewModel(List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process) : base(new ObservableViewModel<UserSignIn>(eventSubscriptions, eventPublications, commandInfo, process))
         {
-
+            CurrentEntity = this.Instance.CurrentEntity;
+            ChangeTracking = this.Instance.ChangeTracking;
+            this.WireEvents();
         }
 
-        public ReactiveProperty<UserSignIn> CurrentEntity => this.CurrentEntity;
-        public ObservableDictionary<string, dynamic> ChangeTracking => this.ChangeTracking;
-
-        private string _status;
-
-        public string Status
-        {
-            get { return _status; }
-            set { ((ReactiveObject) this.Instance).RaiseAndSetIfChanged(ref _status, value); }
-        }
+        public ReactiveProperty<UserSignIn> CurrentEntity { get; }
+        public ObservableDictionary<string, dynamic> ChangeTracking { get; }
     }
 }

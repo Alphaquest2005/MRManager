@@ -14,7 +14,7 @@ using ViewModel.Interfaces;
 
 namespace ViewModels
 {
-	public partial class ScreenModel : BaseViewModel<ScreenModel>, IScreenViewModel
+	public partial class ScreenModel : BaseViewModel, IScreenViewModel
     {
         public ScreenModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo) : base(process, eventSubscriptions, eventPublications,commandInfo)
         {
