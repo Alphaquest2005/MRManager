@@ -10,6 +10,7 @@ using CommonMessages;
 using DataInterfaces;
 using EventAggregator;
 using EventMessages;
+using System.Diagnostics.Contracts;
 
 namespace Core.Common.UI.DataVirtualization
 {
@@ -48,7 +49,7 @@ namespace Core.Common.UI.DataVirtualization
         {
 
             EventMessageBus.Current.GetEvent<EntityRangeLoaded<T>>(new MessageSource(this.ToString()))
-                .Subscribe(x => handleRangeLoaded(x.Entities,x.StartIndex, x.OverAllCount, x.Process));
+                .Subscribe(x => handleRangeLoaded(x.Entities,x.StartIndex, x.OverAllCount, x.Process as ISystemProcess));
 
             if (loader == null)
                 throw new ArgumentNullException("loader");
@@ -68,6 +69,7 @@ namespace Core.Common.UI.DataVirtualization
 
         private void handleRangeLoaded(IList<T> entities, int startIndex, int overAllCount, ISystemProcess process)
         {
+            Contract.Requires(process != null);
             Process = process;
            PopulatePageData(startIndex, entities, overAllCount);
         }
@@ -171,7 +173,7 @@ namespace Core.Common.UI.DataVirtualization
 
         private void LoadRange(int startIndex, int count)
         {
-           EventMessageBus.Current.Publish(new LoadEntityRange<T>(startIndex, count, SortDescriptions,Process,new MessageSource(this.ToString())),new MessageSource(this.ToString()));
+           EventMessageBus.Current.Publish(new LoadEntityRange<T>(startIndex, count, SortDescriptions,Process,new SystemMessage(Process.MachineInfo, new MessageSource(this.ToString()))),new MessageSource(this.ToString()));
         }
 
         internal void LoadAsync(int index)

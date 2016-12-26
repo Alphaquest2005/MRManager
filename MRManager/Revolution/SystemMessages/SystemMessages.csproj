@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="ServiceStarted.cs" />
     <Compile Include="StartNextProcess.cs" />
+    <Compile Include="SystemEntityProcessCompleted.cs" />
+    <Compile Include="SystemEntityProcessStarted.cs" />
     <Compile Include="SystemProcessStarted.cs" />
     <Compile Include="SystemStarted.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

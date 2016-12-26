@@ -10,7 +10,7 @@
 //    public class SummaryViewModelCreated<T> : SystemProcessMessage, ISummaryViewModelCreated<T> where T : IEntity
 //    {
 //        [ImportingConstructor]
-//        public SummaryViewModelCreated(ISummaryViewModel<T> viewModel, ISystemProcess process, MessageSource source) : base(process,source)
+//        public SummaryViewModelCreated(ISummaryViewModel<T> viewModel, ISystemProcess process, ISystemMessage msg) : base(process, msg)
 //        {
 //            ViewModel = viewModel;
 //        }

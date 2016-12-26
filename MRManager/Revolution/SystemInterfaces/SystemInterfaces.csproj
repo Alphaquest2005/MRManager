@@ -42,16 +42,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAgent.cs" />
+    <Compile Include="IDataService.cs" />
+    <Compile Include="IEntityProcess.cs" />
     <Compile Include="IEvent.cs" />
     <Compile Include="IEventCommand.cs" />
     <Compile Include="IEventPublication.cs" />
+    <Compile Include="IMessageSource.cs" />
     <Compile Include="IPerson.cs" />
+    <Compile Include="IProcessInfo.cs" />
+    <Compile Include="IProcessService.cs" />
+    <Compile Include="IService.cs" />
+    <Compile Include="ISystem.cs" />
+    <Compile Include="ISystemEntityProcess.cs" />
+    <Compile Include="ISystemProcess.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="IEventSubscription.cs" />
     <Compile Include="IMachineInfo.cs" />
-    <Compile Include="IProcessStep.cs" />
+    <Compile Include="IProcess.cs" />
     <Compile Include="IActorBackBone.cs" />
-    <Compile Include="IStartDataService.cs" />
+    <Compile Include="IStartService.cs" />
+    <Compile Include="IViewModelService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

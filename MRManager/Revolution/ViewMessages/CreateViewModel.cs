@@ -6,9 +6,9 @@ using ViewModelInterfaces;
 namespace ViewMessages
 {
     
-    public class CreateViewModel<T> : SystemProcessMessage, ICreateViewModel<T> where T : IEntity
+    public class CreateViewModel<T> : ProcessSystemMessage, ICreateViewModel<T> where T : IEntity
     {
-        public CreateViewModel(ISystemProcess process, MessageSource source) : base(process,source)
+        public CreateViewModel(ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
         }
     }

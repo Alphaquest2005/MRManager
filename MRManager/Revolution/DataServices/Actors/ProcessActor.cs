@@ -16,18 +16,20 @@ namespace DataServices.Actors
     public class ProcessActor : BaseActor<ProcessActor> 
     {
         public ISystemProcess Process { get; }
-        private readonly List<SystemProcessMessage> msgQue = new List<SystemProcessMessage>(); 
+        public ISystemMessage Msg { get; set; }
+        private readonly List<ProcessSystemMessage> msgQue = new List<ProcessSystemMessage>(); 
         private readonly ImmutableList<ProcessExpectedEvent> _expectedEvents; 
 
-        public ProcessActor(ISystemProcess process)
+        public ProcessActor(ISystemProcess process, ISystemMessage msg)
         {
             Process = process;
-           Command<SystemProcessMessage>(z => HandleProcessEvents(z));
+            Msg = msg;
+            Command<ProcessSystemMessage>(z => HandleProcessEvents(z));
             _expectedEvents = Processes.ExpectedEvents.Where(x => x.ProcessId == process.Id).ToImmutableList();
-            EventMessageBus.Current.Publish(new ServiceStarted<IProcessService>(process, MsgSource), MsgSource);
+            EventMessageBus.Current.Publish(new ServiceStarted<IProcessService>(process, msg), MsgSource);
         }
 
-        private void HandleProcessEvents(SystemProcessMessage pe)
+        private void HandleProcessEvents(ProcessSystemMessage pe)
         {
             // Log the message 
             Persist(pe, (x) => msgQue.Add(x));
@@ -64,7 +66,7 @@ namespace DataServices.Actors
                 }
             }
 
-            if(success) EventMessageBus.Current.Publish(new SystemProcessCompleted(Process, MsgSource), MsgSource);
+            if(success) EventMessageBus.Current.Publish(new SystemProcessCompleted(Process, Msg), MsgSource);
         }
         protected override void OnPersistRejected(Exception cause, object @event, long sequenceNr)
         {

@@ -6,16 +6,15 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using DataInterfaces;
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IUserSignIn:DataInterfaces.IEntity  
+	public partial interface IUserSignIn:IEntity  
 	{
 		string Username { get;}
 		string Password { get;}
-
-
 
 	}
 }

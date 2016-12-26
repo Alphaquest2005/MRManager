@@ -50,6 +50,7 @@
     <Compile Include="Data\MachineInfos.cs" />
     <Compile Include="Supervisors\BaseSupervisor.cs" />
     <Compile Include="Data\Processes.cs" />
+    <Compile Include="Supervisors\EnitityProcessSupervisor.cs" />
     <Compile Include="Supervisors\ProcessSupervisor.cs" />
     <Compile Include="Data\ProcessViewModels.cs" />
     <Compile Include="Supervisors\ViewModelSupervisor.cs" />

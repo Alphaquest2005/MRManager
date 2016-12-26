@@ -19,11 +19,11 @@ namespace DataServices.Actors
                 var p = ctx.Query<T>().FirstOrDefault(x => x.Id == msg.EntityId);
                 if (p != null)
                 {
-                    EventMessageBus.Current.Publish(new EntityFound<T>(p,msg.Process, msg.Source), msgSource);
+                    EventMessageBus.Current.Publish(new EntityFound<T>(p,msg.Process, msg), msgSource);
                 }
                 else
                 {
-                    EventMessageBus.Current.Publish(new EntityNotFound<T>(msg.EntityId,msg.Process, msg.Source), msgSource);
+                    EventMessageBus.Current.Publish(new EntityNotFound<T>(msg.EntityId,msg.Process, msg), msgSource);
                 }
                 
             }

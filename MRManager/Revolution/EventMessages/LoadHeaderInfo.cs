@@ -6,9 +6,9 @@ using DataInterfaces;
 
 namespace EventMessages
 {
-    public class LoadHeaderInfo<T> : SystemProcessMessage where T:class, IEntity
+    public class LoadHeaderInfo<T> : ProcessSystemMessage where T:class, IEntity
     {
-        public LoadHeaderInfo( Expression<Func<T,IHeaderInfo<T>>> selectExpression, ISystemProcess process, MessageSource source) : base(process, source)
+        public LoadHeaderInfo( Expression<Func<T,IHeaderInfo<T>>> selectExpression, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             SelectExpression = selectExpression;
         }

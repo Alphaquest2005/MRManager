@@ -1,6 +1,7 @@
 ﻿using System;
 using SystemInterfaces;
 using SystemMessages;
+using CommonMessages;
 using Core.Common.UI;
 using EventAggregator;
 using EventMessages;
@@ -13,12 +14,12 @@ namespace DataServices.Actors
 {
     public class ViewModelActor : BaseActor<ViewModelActor> 
     {
-        public ViewModelActor(ISystemProcess process)
+        public ViewModelActor(ISystemProcess process, ISystemMessage msg)
         {
             Command<LoadViewModel>(x => HandleProcessViews(x));
             //EventMessageBus.Current.GetEvent<LoadViewModel<IViewModelInfo>>(msgSource).Subscribe(HandleProcessViews);
 
-            EventMessageBus.Current.Publish(new ServiceStarted<IViewModelService>(process, MsgSource), MsgSource);
+            EventMessageBus.Current.Publish(new ServiceStarted<IViewModelService>(process, msg), MsgSource);
         }
 
         private void HandleProcessViews(LoadViewModel pe)
@@ -38,7 +39,7 @@ namespace DataServices.Actors
                 var vm =(TViewModel) Activator.CreateInstance(vmInfo.ViewModelInfo.ViewModelType, new object[] {vmInfo.Process, vmInfo.ViewModelInfo.Subscriptions, vmInfo.ViewModelInfo.Publications });
                 vm.WireEvents();
                 dynamic dvm = new DynamicViewModel<TViewModel>(vm);
-                EventMessageBus.Current.Publish(new ViewModelCreated<DynamicViewModel<TViewModel>>(dvm,vmInfo.Process, MsgSource), MsgSource);
+                EventMessageBus.Current.Publish(new ViewModelCreated<DynamicViewModel<TViewModel>>(dvm,vmInfo.Process, vmInfo), MsgSource);
             }
             catch (Exception ex)
             {
@@ -46,7 +47,7 @@ namespace DataServices.Actors
                                                                         failedEventMessage: vmInfo,
                                                                         expectedEventType:typeof(ViewModelCreated<DynamicViewModel<TViewModel>>),
                                                                         exception:ex,
-                                                                        msgSource:MsgSource), MsgSource);
+                                                                        msg:vmInfo), MsgSource);
             }
            
         }

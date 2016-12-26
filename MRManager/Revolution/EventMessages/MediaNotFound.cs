@@ -5,9 +5,9 @@ using CommonMessages;
 namespace EventMessages
 {
     
-    public class MediaNotFound : SystemProcessMessage
+    public class MediaNotFound : ProcessSystemMessage
     {
-        public MediaNotFound(List<int> mediaIdList, ISystemProcess process, MessageSource source) : base(process, source)
+        public MediaNotFound(List<int> mediaIdList, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             MediaIdList = mediaIdList;
         }

@@ -10,7 +10,7 @@ using Interfaces;
 
 namespace EF.Entities
 {
-	public partial class Persons: BaseEntity, IPersons
+	public partial class Persons
 	{
 	    public string Name { get; }
 	}

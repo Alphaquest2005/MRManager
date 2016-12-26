@@ -7,11 +7,11 @@ using CommonMessages;
 namespace EventMessages
 {
     
-    public class GetMedia : SystemProcessMessage
+    public class GetMedia : ProcessSystemMessage
     {
         public List<int> MediaIdList { get; }
         
-        public GetMedia(List<int> mediaIdList, ISystemProcess process, MessageSource source) : base(process, source)
+        public GetMedia(List<int> mediaIdList, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             Contract.Requires(mediaIdList != null && mediaIdList.Any());
             MediaIdList = mediaIdList;

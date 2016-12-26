@@ -8,12 +8,12 @@ using DataInterfaces;
 
 namespace EventMessages
 {
-    public class LoadEntitySetWithFilter<T> : SystemProcessMessage where T : IEntity
+    public class LoadEntitySetWithFilter<T> : ProcessSystemMessage where T : IEntity
     {
         public List<Expression<Func<T, bool>>> Filter { get; }
       
       
-        public LoadEntitySetWithFilter(List<Expression<Func<T,bool>>> filter, ISystemProcess process, MessageSource source) : base(process, source)
+        public LoadEntitySetWithFilter(List<Expression<Func<T,bool>>> filter, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             Contract.Requires(filter != null);
             Filter = filter;

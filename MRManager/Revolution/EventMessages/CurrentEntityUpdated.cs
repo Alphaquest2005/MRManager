@@ -6,13 +6,13 @@ using DataInterfaces;
 namespace EventMessages
 {
     
-    public class CurrentEntityUpdated<T> : SystemProcessMessage where T : IEntity
+    public class CurrentEntityUpdated<T> : ProcessSystemMessage where T : IEntity
     {
         public T Entity { get; }
         
-        public CurrentEntityUpdated(T entity, ISystemProcess process, MessageSource source) : base(process,source)
+        public CurrentEntityUpdated(T entity, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
-           Contract.Requires(entity != null || source != null);
+           Contract.Requires(entity != null || msg != null);
            
            Entity = entity;
         }

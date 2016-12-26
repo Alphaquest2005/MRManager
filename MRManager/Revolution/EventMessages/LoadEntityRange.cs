@@ -6,7 +6,7 @@ using DataInterfaces;
 
 namespace EventMessages
 {
-    public class LoadEntityRange<T> : SystemProcessMessage where T : IEntity
+    public class LoadEntityRange<T> : ProcessSystemMessage where T : IEntity
     {
         public int StartIndex { get;  }
         public int Count { get;  }
@@ -17,7 +17,7 @@ namespace EventMessages
         public object SortDescriptions { get; }
 
         
-        public LoadEntityRange(int startIndex, int count, string filterExpression, Dictionary<string, string> navExp, IEnumerable<string> includesLst, ISystemProcess process, MessageSource source) : base(process, source)
+        public LoadEntityRange(int startIndex, int count, string filterExpression, Dictionary<string, string> navExp, IEnumerable<string> includesLst, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             StartIndex = startIndex;
             Count = count;
@@ -27,7 +27,7 @@ namespace EventMessages
             
         }
 
-        public LoadEntityRange(int startIndex, int count, SortDescriptionCollection sortDescriptions, ISystemProcess process, MessageSource source) : base(process, source)
+        public LoadEntityRange(int startIndex, int count, SortDescriptionCollection sortDescriptions, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             StartIndex = startIndex;
             Count = count;

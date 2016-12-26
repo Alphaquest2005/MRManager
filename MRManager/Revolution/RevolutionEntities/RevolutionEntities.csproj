@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Process\Agent.cs" />
+    <Compile Include="Process\EntityProcess.cs" />
     <Compile Include="Process\ProcessExpectedEvent.cs" />
+    <Compile Include="Process\ProcessInfo.cs" />
     <Compile Include="Process\User.cs" />
     <Compile Include="Process\MachineInfo.cs" />
     <Compile Include="Process\ProcessStep.cs" />
@@ -61,6 +63,10 @@
     <ProjectReference Include="..\CommonMessages\CommonMessages.csproj">
       <Project>{77007560-89dc-4e1f-9313-ae064a048ad4}</Project>
       <Name>CommonMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{cb6d5fbc-0c13-437d-b4f3-a0ec4d5673b3}</Project>
+      <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataInterfaces\DataInterfaces.csproj">
       <Project>{f6008330-ba42-454b-a0b4-82455de56776}</Project>

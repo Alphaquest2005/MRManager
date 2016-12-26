@@ -272,6 +272,7 @@
     <Compile Include="Generated Entities\ZipCodes.cs" />
     <Compile Include="Persons.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserSignIn.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">

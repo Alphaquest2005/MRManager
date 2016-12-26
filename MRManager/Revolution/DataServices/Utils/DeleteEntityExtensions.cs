@@ -17,7 +17,7 @@ namespace DataServices.Actors
                 var entity = ctx.Load<T>(msg.EntityId);
                 ctx.Delete(entity);
                 transaction.Commit();
-                EventMessageBus.Current.Publish(new EntityDeleted<T>(msg.EntityId,msg.Process, msg.Source),source);
+                EventMessageBus.Current.Publish(new EntityDeleted<T>(msg.EntityId,msg.Process, msg),source);
             }
 
         }

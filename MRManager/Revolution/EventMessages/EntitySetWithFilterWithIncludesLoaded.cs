@@ -7,12 +7,12 @@ using DataInterfaces;
 
 namespace EventMessages
 {
-    public class EntitySetWithFilterWithIncludesLoaded<T> : SystemProcessMessage where T : IEntity
+    public class EntitySetWithFilterWithIncludesLoaded<T> : ProcessSystemMessage where T : IEntity
     {
         public IList<T> Entities { get; }
         public IList<Expression<Func<T, dynamic>>> Includes { get; }
 
-        public EntitySetWithFilterWithIncludesLoaded(IList<T> entities, IList<Expression<Func<T, dynamic>>> includes, ISystemProcess process, MessageSource source) : base(process, source)
+        public EntitySetWithFilterWithIncludesLoaded(IList<T> entities, IList<Expression<Func<T, dynamic>>> includes, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             Entities = entities;
             Includes = includes;

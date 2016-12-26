@@ -5,9 +5,9 @@ using CommonMessages;
 
 namespace EventMessages
 {
-    public class LoadEntityView<T> : SystemProcessMessage
+    public class LoadEntityView<T> : ProcessSystemMessage
     {
-        public LoadEntityView(Expression func, Type viewType, ISystemProcess process, MessageSource source) : base(process, source)
+        public LoadEntityView(Expression func, Type viewType, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             
             try

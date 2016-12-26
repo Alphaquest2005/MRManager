@@ -35,7 +35,7 @@ namespace MRManager_UnitTests
             var MsgSource = new MessageSource(this.ToString());
             var viewModel = new LoginViewModel(
               eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(), 
-               process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T"), new MachineInfo("test", "test location", 2), new User(DesignDataContext.SampleData<IPersons>(), "test", "joe")),
+               process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")), new MachineInfo("test", "test location", 2)),
                eventPublications:new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
                    
@@ -56,7 +56,7 @@ namespace MRManager_UnitTests
                 .Subscribe(x => handleEntityChanges(x));
             var viewModel = new LoginViewModel(
               eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
-               process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T"), new MachineInfo("test", "test location", 2), new User(DesignDataContext.SampleData<IPersons>(), "test", "joe")),
+               process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")), new MachineInfo("test", "test location", 2)),
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                                    {
                                         new ViewEventPublication<LoginViewModel, EntityChanges<IUserSignIn>>(
@@ -88,7 +88,7 @@ namespace MRManager_UnitTests
                 .Subscribe(x => handleEntityChanges(x));
             var viewModel = new LoginViewModel(
               eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
-               process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T"), new MachineInfo("test", "test location", 2), new User(DesignDataContext.SampleData<IPersons>(), "test", "joe")),
+               process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")), new MachineInfo("test", "test location", 2)),
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                                    {
                                         new ViewEventPublication<LoginViewModel, EntityChanges<IUserSignIn>>(
@@ -155,12 +155,12 @@ namespace MRManager_UnitTests
 
         private static LoginViewModel CreateLoginViewModel()
         {
+            
             var viewModel = new LoginViewModel(
                 eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                 process:
-                    new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T"),
-                        new MachineInfo("test", "test location", 2),
-                        new User(DesignDataContext.SampleData<IPersons>(), "test", "joe")),
+                    new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")),
+                        new MachineInfo("test", "test location", 2)),
                 eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>(),
                 commandInfo: new List<IViewModelEventCommand<IViewModel,IEvent>>()
                 {

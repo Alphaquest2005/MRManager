@@ -6,11 +6,10 @@ using CommonMessages;
 namespace SystemMessages
 {
     [Export]
-    public class SystemStarted : SystemProcessMessage
+    public class SystemStarted : ProcessSystemMessage
     {
-        public SystemStarted(ISystemProcess process,MessageSource source ) : base(process,source){}
-
-        
-        
+        public SystemStarted(ISystemProcess process, ISystemMessage msg) : base(process, msg)
+        {
+        }
     }
 }

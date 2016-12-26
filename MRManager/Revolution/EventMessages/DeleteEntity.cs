@@ -7,10 +7,10 @@ using DataInterfaces;
 namespace EventMessages
 {
     [Export]
-    public class DeleteEntity<T> : SystemProcessMessage where T : IEntity
+    public class DeleteEntity<T> : ProcessSystemMessage where T : IEntity
     {
        
-        public DeleteEntity(int entityId, ISystemProcess process, MessageSource source) : base(process, source)
+        public DeleteEntity(int entityId, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             Contract.Requires(entityId > 0);
             EntityId = entityId;

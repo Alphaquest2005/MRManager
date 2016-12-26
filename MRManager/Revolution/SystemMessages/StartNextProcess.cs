@@ -5,9 +5,9 @@ using CommonMessages;
 namespace SystemMessages
 {
     [Export]
-    public class StartNextProcess : SystemProcessMessage
+    public class StartNextProcess : ProcessSystemMessage
     {
-        public StartNextProcess(ISystemProcess process, MessageSource source) : base(process, source)
+        public StartNextProcess(ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
 
         }

@@ -19,7 +19,7 @@ namespace DataServices.Actors
                 p.ApplyChanges(msg.Changes);
                 ctx.SaveOrUpdate(p);
                 transaction.Commit();
-                EventMessageBus.Current.Publish(new EntityUpdated<T>(p,msg.Process, msg.Source), source);
+                EventMessageBus.Current.Publish(new EntityUpdated<T>(p,msg.Process, msg), source);
 
             }
 

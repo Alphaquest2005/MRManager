@@ -5,12 +5,12 @@ using DataInterfaces;
 
 namespace EventMessages
 {
-    public class EntityViewLoaded<T> : SystemProcessMessage where T : IEntity
+    public class EntityViewLoaded<T> : ProcessSystemMessage where T : IEntity
     {
         public IEnumerable<T> Entities { get; }
         
 
-        public EntityViewLoaded(IEnumerable<T> entities, ISystemProcess process, MessageSource source) : base(process,source)
+        public EntityViewLoaded(IEnumerable<T> entities, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             Entities = entities;
         }

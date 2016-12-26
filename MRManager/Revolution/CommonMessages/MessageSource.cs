@@ -1,6 +1,8 @@
-﻿namespace CommonMessages
+﻿using SystemInterfaces;
+
+namespace CommonMessages
 {
-   public class MessageSource
+   public class MessageSource: IMessageSource
     {
        public MessageSource(string source)
        {

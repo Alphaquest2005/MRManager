@@ -6,9 +6,9 @@ using ViewModel.Interfaces;
 namespace ViewMessages
 {
     [Export]
-    public class LoadViewModel : SystemProcessMessage
+    public class LoadViewModel : ProcessSystemMessage
     {
-        public LoadViewModel(IViewModelInfo viewModelInfo, ISystemProcess process, MessageSource source) : base(process, source)
+        public LoadViewModel(IViewModelInfo viewModelInfo, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             ViewModelInfo = viewModelInfo;
 
@@ -18,9 +18,9 @@ namespace ViewMessages
     }
 
     [Export]
-    public class UnloadViewModel : SystemProcessMessage
+    public class UnloadViewModel : ProcessSystemMessage
     {
-        public UnloadViewModel(IViewModelInfo viewModelInfo, ISystemProcess process, MessageSource source) : base(process,source)
+        public UnloadViewModel(IViewModelInfo viewModelInfo, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             ViewModelInfo = viewModelInfo;
 

@@ -1,16 +1,17 @@
-﻿using SystemInterfaces;
+﻿using System;
+using SystemInterfaces;
 
 namespace CommonMessages
 {
-    public interface IMessage
+    public interface IMessage: IEvent
     {
-        MessageSource Source { get; }
-        IMachineInfo MachineInfo { get; }
+       DateTime MessageDateTime { get; }
     }
 
-    public interface ISystemMessage : IMessage, IEvent
+    public interface ISystemMessage : IMessage, ISystem
     {
-
+        
+        
     }
 
 }

@@ -7,12 +7,12 @@ using DataInterfaces;
 namespace EventMessages
 {
     
-    public class EntityChanges<T> : SystemProcessMessage where T : IEntity
+    public class EntityChanges<T> : ProcessSystemMessage where T : IEntity
     {
         public Dictionary<string, dynamic> Changes { get; }
         public int EntityId { get; }
         
-        public EntityChanges(int entityId, Dictionary<string,dynamic> changes, ISystemProcess process, MessageSource source) : base(process, source)
+        public EntityChanges(int entityId, Dictionary<string,dynamic> changes, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             Contract.Requires(changes.Count > 0);
             EntityId = entityId;

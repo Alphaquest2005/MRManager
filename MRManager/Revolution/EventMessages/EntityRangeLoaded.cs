@@ -5,11 +5,11 @@ using DataInterfaces;
 
 namespace EventMessages
 {
-    public class EntityRangeLoaded<T> : SystemProcessMessage where T : IEntity
+    public class EntityRangeLoaded<T> : ProcessSystemMessage where T : IEntity
     {
         public int OverAllCount { get;  }
 
-        public EntityRangeLoaded(IList<T> entities,int startIndex, int overAllCount, ISystemProcess process, MessageSource source) : base(process, source)
+        public EntityRangeLoaded(IList<T> entities,int startIndex, int overAllCount, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             StartIndex = startIndex;
             OverAllCount = overAllCount;

@@ -6,20 +6,18 @@ using RevolutionEntities.Process;
 namespace SystemMessages
 {
     [Export]
-    public class SystemProcessStarted : SystemProcessMessage
+    public class SystemProcessStarted : ProcessSystemMessage
     {
-        public SystemProcessStarted(IProcess processStep,IMachineInfo machineInfo,IUser user, MessageSource source) : base(new SystemProcess(processStep, machineInfo,user), source)
+        public SystemProcessStarted(ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
         }
-       
     }
 
     [Export]
-    public class SystemProcessCompleted : SystemProcessMessage
+    public class SystemProcessCompleted : ProcessSystemMessage
     {
-        public SystemProcessCompleted(ISystemProcess process, MessageSource source) : base(process, source)
+        public SystemProcessCompleted(ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
         }
-
     }
 }

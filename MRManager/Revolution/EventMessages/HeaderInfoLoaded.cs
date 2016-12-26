@@ -5,11 +5,11 @@ using DataInterfaces;
 
 namespace EventMessages
 {
-    public class HeaderInfoLoaded<T> : SystemProcessMessage where T : IEntity
+    public class HeaderInfoLoaded<T> : ProcessSystemMessage where T : IEntity
     {
         public IList<IHeaderInfo<T>> HeaderInfo { get; }
 
-        public HeaderInfoLoaded(IList<IHeaderInfo<T>> headerInfo, ISystemProcess process, MessageSource source) : base(process, source)
+        public HeaderInfoLoaded(IList<IHeaderInfo<T>> headerInfo, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             HeaderInfo = headerInfo;
         }

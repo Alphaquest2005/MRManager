@@ -6,7 +6,7 @@ using DataInterfaces;
 namespace EventMessages
 {
     [Export]
-    public class GetEntityById<T> : SystemProcessMessage, IGetEntityById<T> where T : IEntity
+    public class GetEntityById<T> : ProcessSystemMessage, IGetEntityById<T> where T : IEntity
     {
         bool isReadOnly = false;
         public void Create(int entityId)
@@ -19,7 +19,7 @@ namespace EventMessages
        
         public int EntityId { get; private set; }
 
-        public GetEntityById(ISystemProcess process, MessageSource source) : base(process, source)
+        public GetEntityById(ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
         }
 

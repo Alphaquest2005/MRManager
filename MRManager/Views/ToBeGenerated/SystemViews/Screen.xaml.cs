@@ -25,7 +25,7 @@ namespace Views
 			    EventMessageBus.Current.GetEvent<ViewModelCreated<DynamicViewModel<ScreenModel>>>(MsgSource).Subscribe(x =>
 			    {
 			        Application.Current.Dispatcher.Invoke(() => this.DataContext = x.ViewModel);
-                    EventMessageBus.Current.Publish(new ViewLoadedViewModel<DynamicViewModel<ScreenModel>>(x.ViewModel, x.Process, MsgSource), MsgSource );
+                    EventMessageBus.Current.Publish(new ViewLoadedViewModel<DynamicViewModel<ScreenModel>>(x.ViewModel, x.Process, x), MsgSource );
 
 			    });
 			}

@@ -28,17 +28,17 @@ namespace DataServices.Actors
             //  EventMessageBus.Current.Publish(new ServiceStarted<IViewModelService>(process, MsgSource), MsgSource);
         }
 
-        private void HandleProcessViews(SystemProcessMessage pe)
+        private void HandleProcessViews(ProcessSystemMessage pe)
         {
             foreach (var v in ProcessViewModels.ProcessViewModelInfos.Where(x => x.ProcessId == pe.Process.Id))
             {
-               PublishViewModel(v, pe.Process);
+               PublishViewModel(v, pe);
             }
         }
 
-        public void PublishViewModel(IViewModelInfo viewModelInfo, ISystemProcess process)
+        public void PublishViewModel(IViewModelInfo viewModelInfo, IProcessSystemMessage pe)
         {
-            var msg = new LoadViewModel(viewModelInfo, process, MsgSource);
+            var msg = new LoadViewModel(viewModelInfo, pe.Process, pe);
             _childActor.Tell(msg);
         }
     }

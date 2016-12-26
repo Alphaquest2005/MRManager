@@ -6,7 +6,4 @@ namespace SystemInterfaces
     {
         string Name { get;  }
     }
-    public interface IAgent
-    {
-    }
 }

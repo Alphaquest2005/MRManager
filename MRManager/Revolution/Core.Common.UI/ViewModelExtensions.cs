@@ -29,7 +29,7 @@ namespace Core.Common.UI
                                     var paramArray = itm.MessageData.Select(p => p.Invoke(viewModel)).Cast<object>().ToList();
                                     paramArray.Add(viewModel.Process);
                                     paramArray.Add(new MessageSource(viewModel.GetType().ToString()));
-                                    var msg = (SystemProcessMessage) Activator.CreateInstance(itm.EventType, paramArray.ToArray());
+                                    var msg = (ProcessSystemMessage) Activator.CreateInstance(itm.EventType, paramArray.ToArray());
                                     EventMessageBus.Current.Publish(msg, msg.Source);
                                 };
 
@@ -67,7 +67,7 @@ namespace Core.Common.UI
                     var paramArray = itm.MessageData.Select(p => p.Invoke(viewModel)).Cast<object>().ToList();
                     paramArray.Add(viewModel.Process);
                     paramArray.Add(new MessageSource(viewModel.GetType().ToString()));
-                    var msg = (SystemProcessMessage)Activator.CreateInstance(itm.EventType, paramArray.ToArray());
+                    var msg = (ProcessSystemMessage)Activator.CreateInstance(itm.EventType, paramArray.ToArray());
                     EventMessageBus.Current.Publish(msg, msg.Source);
                 };
                 subject.Where(x => itm.SubjectPredicate.All(z => z.Invoke(viewModel)))

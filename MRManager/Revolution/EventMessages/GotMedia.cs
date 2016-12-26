@@ -9,11 +9,11 @@ using Interfaces;
 namespace EventMessages
 {
     
-    public class GotMedia : SystemProcessMessage
+    public class GotMedia : ProcessSystemMessage
     {
         public List<IMedia> MediaList { get; }
         
-        public GotMedia(List<IMedia> mediaIdList, ISystemProcess process, MessageSource source) : base(process, source)
+        public GotMedia(List<IMedia> mediaIdList, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             Contract.Requires(mediaIdList != null && mediaIdList.Any());
             MediaList = mediaIdList;

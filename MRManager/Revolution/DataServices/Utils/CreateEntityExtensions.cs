@@ -17,7 +17,7 @@ namespace DataServices.Actors
                 ctx.SaveOrUpdate(msg.Entity);
                 transaction.Commit();
                 msg.Entity.RowState = RowState.Unchanged; // get nhibernate to reload entity to set RowState to loaded
-               EventMessageBus.Current.Publish(new EntityCreated<T>(msg.Entity,msg.Process, msg.Source), source);
+               EventMessageBus.Current.Publish(new EntityCreated<T>(msg.Entity,msg.Process, msg), source);
             }
             
         }

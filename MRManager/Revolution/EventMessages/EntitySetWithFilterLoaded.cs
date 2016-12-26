@@ -5,12 +5,12 @@ using DataInterfaces;
 
 namespace EventMessages
 {
-    public class EntitySetWithFilterLoaded<T> : SystemProcessMessage where T : IEntity
+    public class EntitySetWithFilterLoaded<T> : ProcessSystemMessage where T : IEntity
     {
         public IList<T> Entities { get; }
         
 
-        public EntitySetWithFilterLoaded(IList<T> entities, ISystemProcess process, MessageSource source) : base(process, source)
+        public EntitySetWithFilterLoaded(IList<T> entities, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             Entities = entities;
         }

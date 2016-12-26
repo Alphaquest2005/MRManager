@@ -6,11 +6,11 @@ using DataInterfaces;
 namespace EventMessages
 {
     
-    public class EntityDeleted<T> : SystemProcessMessage where T : IEntity
+    public class EntityDeleted<T> : ProcessSystemMessage where T : IEntity
     {
         public int EntityId { get; }
         
-        public EntityDeleted(int entityId, ISystemProcess process, MessageSource source) : base(process, source)
+        public EntityDeleted(int entityId, ISystemProcess process, ISystemMessage msg) : base(process, msg)
         {
             Contract.Requires(entityId != 0);
             EntityId = entityId;

@@ -28,10 +28,10 @@ namespace DataServices.Actors
                
                var machineInfo = MachineInfoData.MachineInfos.FirstOrDefault(x => x.MachineName == Environment.MachineName && x.Processors == Environment.ProcessorCount);
                 if (machineInfo == null) return;
-               var process = Processes.MessageProcesses.FirstOrDefault(x => x.ProcessId == 0);
-               if (process == null) return;
-               var systemProcess = new SystemProcess(process, machineInfo, new Agent("System"));
-                var systemStartedMsg = new SystemStarted(systemProcess, msgSource);
+               var processInfo = Processes.ProcessInfos.FirstOrDefault(x => x.ParentProcessId == 0);
+               if (processInfo == null) return;
+               var systemProcess = new SystemProcess(new Process(processInfo, new Agent("System")), machineInfo);
+                var systemStartedMsg = new SystemStarted(systemProcess, new SystemMessage(machineInfo,msgSource));
                 EF7DataContextBase.Initialize(dbContextAssembly,entityAssembly);
 
 
