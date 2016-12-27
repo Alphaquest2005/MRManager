@@ -10,7 +10,7 @@ namespace EventMessages
     {
         public IHeaderInfo<T> Entity { get; }
     
-        public CurrentHeaderInfoChanged(IHeaderInfo<T> entity, ISystemProcess process, ISystemMessage msg) : base(process, msg)
+        public CurrentHeaderInfoChanged(IHeaderInfo<T> entity, ISystemProcess process, ISourceMessage msg) : base(process, msg)
         {
            Contract.Requires(entity != null);
            Entity = entity;

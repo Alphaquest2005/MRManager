@@ -26,13 +26,17 @@ namespace DataServices.Actors
             Msg = msg;
             Command<ProcessSystemMessage>(z => HandleProcessEvents(z));
             _expectedEvents = Processes.ExpectedEvents.Where(x => x.ProcessId == process.Id).ToImmutableList();
-            EventMessageBus.Current.Publish(new ServiceStarted<IProcessService>(process, msg), MsgSource);
+            EventMessageBus.Current.Publish(new ServiceStarted<IProcessService>(process, SourceMessage), SourceMessage);
         }
 
         private void HandleProcessEvents(ProcessSystemMessage pe)
         {
             // Log the message 
             Persist(pe, (x) => msgQue.Add(x));
+
+            // send out Process State Events
+
+
            //msgQue.Add(pe);
             if (pe.GetType() == typeof (SystemProcessCompleted)) Self.GracefulStop(TimeSpan.FromSeconds(10));
             ProcessEvents();
@@ -66,7 +70,7 @@ namespace DataServices.Actors
                 }
             }
 
-            if(success) EventMessageBus.Current.Publish(new SystemProcessCompleted(Process, Msg), MsgSource);
+            if(success) EventMessageBus.Current.Publish(new SystemProcessCompleted(Process, SourceMessage), SourceMessage);
         }
         protected override void OnPersistRejected(Exception cause, object @event, long sequenceNr)
         {

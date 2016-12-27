@@ -11,6 +11,7 @@ using DataInterfaces;
 using EventAggregator;
 using EventMessages;
 using System.Diagnostics.Contracts;
+using RevolutionEntities.Process;
 
 namespace Core.Common.UI.DataVirtualization
 {
@@ -48,7 +49,7 @@ namespace Core.Common.UI.DataVirtualization
         public VirtualList(IVirtualListLoader<T> loader, int pageSize, SynchronizationContext synchronizationContext)
         {
 
-            EventMessageBus.Current.GetEvent<EntityRangeLoaded<T>>(new MessageSource(this.ToString()))
+            EventMessageBus.Current.GetEvent<EntityRangeLoaded<T>>(SourceMessage)
                 .Subscribe(x => handleRangeLoaded(x.Entities,x.StartIndex, x.OverAllCount, x.Process as ISystemProcess));
 
             if (loader == null)
@@ -170,10 +171,10 @@ namespace Core.Common.UI.DataVirtualization
             var startIndex = pageIndex * _pageSize;
             LoadRange(startIndex, _pageSize);
         }
-
+        SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         private void LoadRange(int startIndex, int count)
         {
-           EventMessageBus.Current.Publish(new LoadEntityRange<T>(startIndex, count, SortDescriptions,Process,new SystemMessage(Process.MachineInfo, new MessageSource(this.ToString()))),new MessageSource(this.ToString()));
+           EventMessageBus.Current.Publish(new LoadEntityRange<T>(startIndex, count, SortDescriptions,Process, SourceMessage), SourceMessage);
         }
 
         internal void LoadAsync(int index)

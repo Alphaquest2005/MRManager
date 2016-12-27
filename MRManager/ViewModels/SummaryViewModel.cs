@@ -34,8 +34,8 @@
 
 //		private SummaryListViewModel(List<IViewModelEventSubscription<IEntityViewModel<>, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IEntityViewModel<>, IEvent>> eventPublications, List<IViewModelEventCommand<IEntityViewModel<>, IEvent>> commandInfo, ISystemProcess process):base(eventSubscriptions,eventPublications, commandInfo,process)
 //		{
-//			EventMessageBus.Current.GetEvent<EntitySetLoaded<T>>(MsgSource).Subscribe(x => HandleEntitySetUpdated(x.Entities));
-//			EventMessageBus.Current.GetEvent<ServiceStarted<LoadEntityView<T>>>(MsgSource)
+//			EventMessageBus.Current.GetEvent<EntitySetLoaded<T>>(SourceMessage).Subscribe(x => HandleEntitySetUpdated(x.Entities));
+//			EventMessageBus.Current.GetEvent<ServiceStarted<LoadEntityView<T>>>(SourceMessage)
 //			   .Subscribe(x => EventMessageBus.Current.Publish(new LoadEntityView<T>(AddressesExpressions.AddressesAutoViewExpression,typeof(T),x.Process, MsgSource), MsgSource));
 //		}
 

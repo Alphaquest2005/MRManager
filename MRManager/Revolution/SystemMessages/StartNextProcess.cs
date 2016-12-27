@@ -7,7 +7,7 @@ namespace SystemMessages
     [Export]
     public class StartNextProcess : ProcessSystemMessage
     {
-        public StartNextProcess(ISystemProcess process, ISystemMessage msg) : base(process, msg)
+        public StartNextProcess(ISystemProcess process, ISourceMessage msg) : base(process, msg)
         {
 
         }

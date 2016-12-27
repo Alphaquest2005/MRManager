@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using CommonMessages;
 using EventAggregator;
+using RevolutionEntities.Process;
 using ViewMessages;
 using ViewModels;
 
@@ -13,7 +14,7 @@ namespace Views
 {
 	public partial class Screen
 	{
-        protected MessageSource MsgSource => new MessageSource(this.ToString());
+        protected SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 		public Screen()
 		{
             
@@ -22,10 +23,10 @@ namespace Views
                 // Required to initialize variables
                 InitializeComponent();
 				AppSlider.Slider = this.slider;
-			    EventMessageBus.Current.GetEvent<ViewModelCreated<DynamicViewModel<ScreenModel>>>(MsgSource).Subscribe(x =>
+			    EventMessageBus.Current.GetEvent<ViewModelCreated<DynamicViewModel<ScreenModel>>>(SourceMessage).Subscribe(x =>
 			    {
 			        Application.Current.Dispatcher.Invoke(() => this.DataContext = x.ViewModel);
-                    EventMessageBus.Current.Publish(new ViewLoadedViewModel<DynamicViewModel<ScreenModel>>(x.ViewModel, x.Process, x), MsgSource );
+                    EventMessageBus.Current.Publish(new ViewLoadedViewModel<DynamicViewModel<ScreenModel>>(x.ViewModel, x.Process, SourceMessage), SourceMessage );
 
 			    });
 			}

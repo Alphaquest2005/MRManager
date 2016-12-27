@@ -10,6 +10,7 @@ using Core.Common.UI;
 using EventAggregator;
 using EventMessages;
 using Interfaces;
+using RevolutionEntities.Process;
 using ViewMessages;
 
 namespace ViewModels
@@ -28,7 +29,7 @@ namespace ViewModels
 		}
 
 		public static SliderPanel Slider { get; set; }
-		MessageSource msgSource => new MessageSource(this.ToString());
+		SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
 		public MainViewModel()
 		{
@@ -38,8 +39,8 @@ namespace ViewModels
 				//var a = new GetEntityById<IApplicationSetting>(,MsgSource);
 				//a.Create(1);
 				//EventMessageBus.Current.Publish(a,MsgSource);
-				EventMessageBus.Current.GetEvent<EntityUpdated<IApplicationSetting>>(msgSource).Subscribe(handleApplicationSetting);
-				EventMessageBus.Current.GetEvent<ViewNav>(msgSource).Subscribe(x => Slider.BringIntoView(x.View));
+				EventMessageBus.Current.GetEvent<EntityUpdated<IApplicationSetting>>(SourceMessage).Subscribe(handleApplicationSetting);
+				EventMessageBus.Current.GetEvent<ViewNav>(SourceMessage).Subscribe(x => Slider.BringIntoView(x.View));
 
 			}
 			catch (Exception)

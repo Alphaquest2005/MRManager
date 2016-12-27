@@ -38,7 +38,7 @@ namespace Core.Common.UI
                 //   .Subscribe(publishMessage);
 
             }
-            //EventMessageBus.Current.GetEvent<CurrentEntityChanged<IAddresses>>(MsgSource).Subscribe(x => handleIdChanged(x.EntityId));  
+            //EventMessageBus.Current.GetEvent<CurrentEntityChanged<IAddresses>>(SourceMessage).Subscribe(x => handleIdChanged(x.EntityId));  
             foreach (var itm in viewModel.EventSubscriptions)
             {
                 typeof(ViewModelExtensions)
@@ -71,9 +71,9 @@ namespace Core.Common.UI
             {
                 var paramArray = itm.MessageData.Select(p => p.Invoke(viewModel)).Cast<object>().ToList();
                 paramArray.Add(viewModel.Process);
-                paramArray.Add(new SystemMessage(viewModel.Process.MachineInfo, viewModel.MsgSource));
+                paramArray.Add(new SystemMessage(viewModel.Process.MachineInfo, viewModel.SourceMessage.Source));
                 var msg = (ProcessSystemMessage) Activator.CreateInstance(itm.EventType, paramArray.ToArray());
-                EventMessageBus.Current.Publish(msg, msg.Source);
+                EventMessageBus.Current.Publish(msg, viewModel.SourceMessage);
             };
             return publishMessage;
         }
@@ -81,13 +81,9 @@ namespace Core.Common.UI
         public static void Subscribe<TEvent, TViewModel>(TViewModel viewModel, Func<TEvent, bool> eventPredicate,
             IEnumerable<Func<TViewModel, TEvent, bool>> predicate, Action<TViewModel, TEvent> action)
         {
-            EventMessageBus.Current.GetEvent<TEvent>(new MessageSource(viewModel.GetType().ToString())).Where(eventPredicate).Where(x => predicate.All(z => z.Invoke(viewModel, x))).Subscribe(x => action.Invoke(viewModel, x));
+            EventMessageBus.Current.GetEvent<TEvent>(((IViewModel)viewModel).SourceMessage).Where(eventPredicate).Where(x => predicate.All(z => z.Invoke(viewModel, x))).Subscribe(x => action.Invoke(viewModel, x));
         }
 
-        public static void WireCommands(this DynamicViewModel<IViewModel> viewModel)
-        {
-            
-        }
 
         public static void VerifyConstuctorVsParameterArray(Type t, params object[] p)
         {

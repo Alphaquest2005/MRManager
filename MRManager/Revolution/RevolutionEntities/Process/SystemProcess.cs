@@ -14,9 +14,21 @@ namespace RevolutionEntities.Process
    
     }
 
-    public class SystemProcess<TEntity> : SystemProcess, ISystemEntityProcess<TEntity> where TEntity : IEntity
+    public class ProcessState : IProcessState
     {
-        public SystemProcess(TEntity entity, ISystemProcess process) : base(process, process.MachineInfo)
+        public ProcessState(int processId, string status)
+        {
+            ProcessId = processId;
+            Status = status;
+        }
+
+        public int ProcessId { get; }
+        public string Status { get; }
+    }
+
+    public class ProcessState<TEntity> :ProcessState, IProcessState<TEntity> where TEntity : IEntity
+    {
+        public ProcessState(int processId, string status, TEntity entity) : base(processId, status)
         {
             Entity = entity;
         }

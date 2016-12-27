@@ -20,7 +20,7 @@
           
 //        }
 
-//        MessageSource MsgSource => new MessageSource(this.ToString());
+//        SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
 //        private void HandleGetEntityById(List<int> entityId, MessageSource source)
 //       {

@@ -9,7 +9,7 @@ namespace EventMessages
     {
         public string Filter { get; }
         
-        public FilterChanged(string filter, ISystemProcess process, ISystemMessage msg) : base(process, msg)
+        public FilterChanged(string filter, ISystemProcess process, ISourceMessage msg) : base(process, msg)
         {
             Filter = filter;
         }

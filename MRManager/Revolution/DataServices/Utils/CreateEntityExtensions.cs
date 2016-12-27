@@ -8,7 +8,7 @@ namespace DataServices.Actors
     public static class CreateEntityExtensions
     {
         
-        public static void CreateEntity<T>(this CreateEntity<T> msg, IDataContext dbContext, MessageSource source) where T:IEntity
+        public static void CreateEntity<T>(this CreateEntity<T> msg, IDataContext dbContext, ISourceMessage source) where T:IEntity
         {
            
             using (var ctx = dbContext.Instance.OpenSession())
@@ -17,7 +17,7 @@ namespace DataServices.Actors
                 ctx.SaveOrUpdate(msg.Entity);
                 transaction.Commit();
                 msg.Entity.RowState = RowState.Unchanged; // get nhibernate to reload entity to set RowState to loaded
-               EventMessageBus.Current.Publish(new EntityCreated<T>(msg.Entity,msg.Process, msg), source);
+               EventMessageBus.Current.Publish(new EntityCreated<T>(msg.Entity,msg.Process, source), source);
             }
             
         }

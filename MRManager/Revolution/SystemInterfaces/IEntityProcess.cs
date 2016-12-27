@@ -2,7 +2,7 @@
 
 namespace SystemInterfaces
 {
-    public interface IEntityProcess<out TEntity>:IProcess where TEntity : IEntity
+    public interface IProcess<out TEntity>:IProcess where TEntity : IEntity
     {
         TEntity Entity { get; }
     }

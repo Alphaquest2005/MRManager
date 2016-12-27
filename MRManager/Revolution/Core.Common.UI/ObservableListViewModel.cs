@@ -20,16 +20,15 @@ using ViewModelInterfaces;
 
 namespace Core.Common.UI
 {
-    public partial class ObservableViewModel<TEntity> : BaseViewModel where TEntity:IEntity
+    public partial class ObservableListViewModel<TEntity> : BaseViewModel where TEntity:IEntity
     {
         protected AbstractValidator<TEntity> Validator { get; }
         protected ValidationResult ValidationResults = new ValidationResult();
         protected static ObservableViewModel<TEntity> _instance = null;
         public static ObservableViewModel<TEntity> Instance => _instance;
 
-        public ObservableViewModel(List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel,IEvent>> commandInfo, ISystemProcess process) : base(process,eventSubscriptions,eventPublications,commandInfo)
+        public ObservableListViewModel(List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel,IEvent>> commandInfo, ISystemProcess process) : base(process,eventSubscriptions,eventPublications,commandInfo)
         {
-            //Leave the validation for client side input validation...
             Validator = new EntityValidator<TEntity>();
         }
 
@@ -45,7 +44,33 @@ namespace Core.Common.UI
             }
         }
        
-       
+        private ObservableList<TEntity> _entitySet = new ObservableList<TEntity>();
+        public virtual ObservableList<TEntity> EntitySet
+        {
+            get
+            {
+                return _entitySet;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _entitySet, value);
+            }
+        }
+
+        private ObservableList<TEntity> _selectedEntities = new ObservableList<TEntity>();
+        public ObservableList<TEntity> SelectedEntities
+        {
+            get
+            {
+                return _selectedEntities;
+            }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedEntities, value);
+            }
+        }
+
+
         public dynamic GetValue([CallerMemberName] string property = "UnspecifiedProperty")
         {
             var prop =  CurrentEntity.Value.GetType().GetProperty(property, BindingFlags.Public | BindingFlags.Instance);

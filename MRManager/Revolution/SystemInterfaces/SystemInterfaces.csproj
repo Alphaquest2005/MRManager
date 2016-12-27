@@ -52,9 +52,9 @@
     <Compile Include="IPerson.cs" />
     <Compile Include="IProcessInfo.cs" />
     <Compile Include="IProcessService.cs" />
+    <Compile Include="IProcessState.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="ISystem.cs" />
-    <Compile Include="ISystemEntityProcess.cs" />
     <Compile Include="ISystemProcess.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="IEventSubscription.cs" />

@@ -55,22 +55,22 @@
 //            ChangeTracking.DictionaryChanges.Subscribe(x => HandleSaveChanges());
 
 
-//           EventMessageBus.Current.GetEvent<EntityUpdated<TEntity>>(MsgSource)
+//           EventMessageBus.Current.GetEvent<EntityUpdated<TEntity>>(SourceMessage)
 //                                .Subscribe(z => handleEntityUpdated(z.Entity));
 
-//             EventMessageBus.Current.GetEvent<EntityCreated<TEntity>>(MsgSource)
+//             EventMessageBus.Current.GetEvent<EntityCreated<TEntity>>(SourceMessage)
 //                .Subscribe(x => HandleEntityCreated(x.Entity));
 
-//            EventMessageBus.Current.GetEvent<EntityDeleted<TEntity>>(MsgSource)
+//            EventMessageBus.Current.GetEvent<EntityDeleted<TEntity>>(SourceMessage)
 //                .Subscribe(x => HandleEntityDeleted(x.EntityId));
 
-//            EventMessageBus.Current.GetEvent<EntitySetWithFilterLoaded<TEntity>>(MsgSource)
+//            EventMessageBus.Current.GetEvent<EntitySetWithFilterLoaded<TEntity>>(SourceMessage)
 //                .Subscribe(x => handleEntitySetUpdated(x.Entities));
 
-//            EventMessageBus.Current.GetEvent<EntitySetLoaded<TEntity>>(MsgSource)
+//            EventMessageBus.Current.GetEvent<EntitySetLoaded<TEntity>>(SourceMessage)
 //                .Subscribe(x => handleEntitySetUpdated(x.Entities));
 
-//            EventMessageBus.Current.GetEvent<EntitySetWithFilterWithIncludesLoaded<TEntity>>(MsgSource)
+//            EventMessageBus.Current.GetEvent<EntitySetWithFilterWithIncludesLoaded<TEntity>>(SourceMessage)
 //                .Subscribe(x => handleEntitySetUpdated(x.Entities));
 //        }
 

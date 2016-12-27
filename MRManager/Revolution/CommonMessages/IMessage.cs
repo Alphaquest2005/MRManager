@@ -7,11 +7,4 @@ namespace CommonMessages
     {
        DateTime MessageDateTime { get; }
     }
-
-    public interface ISystemMessage : IMessage, ISystem
-    {
-        
-        
-    }
-
 }

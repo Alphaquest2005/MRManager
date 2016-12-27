@@ -12,6 +12,6 @@ namespace EF.Entities
 {
 	public partial class Persons
 	{
-	    public string Name { get; }
+	    public virtual string Name { get; set; }
 	}
 }

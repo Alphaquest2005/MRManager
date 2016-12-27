@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SystemInterfaces;
 using CommonMessages;
 using DataInterfaces;
 using Reactive.Bindings;
 using ReactiveUI;
+using RevolutionEntities.Process;
 using ViewModel.Interfaces;
 
 
@@ -21,11 +23,9 @@ namespace Core.Common.UI
             Name = process.Name;
             Description = process.Description;
             Symbol = process.Symbol;
-            MsgSource = new MessageSource(this.ToString());
-
         }
 
-        public IMessageSource MsgSource { get; }
+        public ISourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         public List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get;}
         public List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; }
         public List<IViewModelEventCommand<IViewModel, IEvent>> CommandInfo { get; }

@@ -24,8 +24,10 @@ namespace RevolutionEntities.Process
             Description = processInfo.Description;
             Symbol = processInfo.Symbol;
             User = user;
-
+           
         }
+
+ 
 
         public int Id { get; }
         public int ParentProcessId { get; set; }
@@ -33,5 +35,6 @@ namespace RevolutionEntities.Process
         public string Description { get; }
         public string Symbol { get; }
         public IUser User { get; }
+        
     }
 }

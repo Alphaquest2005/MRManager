@@ -1,29 +1,7 @@
-﻿using System;
-using SystemInterfaces;
+﻿using SystemInterfaces;
 
 namespace CommonMessages
 {
-
-
-    public class SystemMessage :ISystemMessage
-    {
-        public SystemMessage(IMachineInfo machineInfo, IMessageSource source)
-        {
-            Source = source;
-            MessageDateTime = DateTime.Now;
-            MachineInfo = machineInfo;
-        }
-
-        public IMessageSource Source { get; }
-        public DateTime MessageDateTime { get; }
-        public IMachineInfo MachineInfo { get; }
-    }
-
-    public interface IProcessSystemMessage:  ISystemMessage, IProcess
-    {
-        ISystemProcess Process { get; }
-    }
-
     public class ProcessSystemMessage : SystemMessage, IProcessSystemMessage
     {
         public ProcessSystemMessage(ISystemProcess process, ISystemMessage msg) : base(msg.MachineInfo,msg.Source)

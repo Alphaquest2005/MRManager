@@ -8,7 +8,7 @@ namespace DataServices.Actors
     public static class DeleteEntityExtensions
     {
         
-        public static void DeleteEntity<T>(this DeleteEntity<T> msg, IDataContext dbContext, MessageSource source) where T : IEntity
+        public static void DeleteEntity<T>(this DeleteEntity<T> msg, IDataContext dbContext, ISourceMessage source) where T : IEntity
         {
 
             using (var ctx = dbContext.Instance.OpenSession())
@@ -17,7 +17,7 @@ namespace DataServices.Actors
                 var entity = ctx.Load<T>(msg.EntityId);
                 ctx.Delete(entity);
                 transaction.Commit();
-                EventMessageBus.Current.Publish(new EntityDeleted<T>(msg.EntityId,msg.Process, msg),source);
+                EventMessageBus.Current.Publish(new EntityDeleted<T>(msg.EntityId,msg.Process, source),source);
             }
 
         }

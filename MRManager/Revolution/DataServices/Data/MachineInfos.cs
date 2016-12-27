@@ -9,7 +9,6 @@ namespace DataServices.Actors
         public static List<IMachineInfo> MachineInfos = new List<IMachineInfo>()
         {
             new MachineInfo(machineName:"ALPHAQUEST-PC",
-                machineLocation:"Home",
                 processors:8)
         };
 

@@ -13,7 +13,7 @@ namespace EventMessages
     {
         public List<IMedia> MediaList { get; }
         
-        public GotMedia(List<IMedia> mediaIdList, ISystemProcess process, ISystemMessage msg) : base(process, msg)
+        public GotMedia(List<IMedia> mediaIdList, ISystemProcess process, ISourceMessage msg) : base(process, msg)
         {
             Contract.Requires(mediaIdList != null && mediaIdList.Any());
             MediaList = mediaIdList;

@@ -77,18 +77,12 @@ namespace DataServices.Actors
                 2,
                 new List<IViewModelEventSubscription<IViewModel, IEvent>>()
                 {
-                   new ViewEventSubscription<LoginViewModel, EntityFound<Persons>>(
+                   new ViewEventSubscription<LoginViewModel, ProcessStateMessage<UserSignIn>>(
                        processId:2,
                        eventPredicate: e => true,
-                       actionPredicate: new List<Func<LoginViewModel, EntityFound<Persons>, bool>>(),
-                       action: (v,e) => v.CurrentEntity.Value.Persons = e.Entity
+                       actionPredicate: new List<Func<LoginViewModel, ProcessStateMessage<UserSignIn>, bool>>(),
+                       action: (v,e) => v.CurrentEntity.Value = e.State.Entity
                        ),
-                   //new ViewEventSubscription<LoginViewModel, EntityNotFound<Persons>>(
-                   //    processId:2,
-                   //    eventPredicate: e => true,
-                   //    actionPredicate: new List<Func<LoginViewModel, EntityNotFound<Persons>, bool>>(),
-                   //    action: (v,e) => v.Status = "User not found"
-                   //    )
 
                 },new List<IViewModelEventPublication<IViewModel, IEvent>>()
                 {

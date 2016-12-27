@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SystemInterfaces;
+using CommonMessages;
 using DataInterfaces;
 using Reactive.Bindings;
 
@@ -17,7 +18,7 @@ namespace ViewModel.Interfaces
         string Symbol { get; }
         string Description { get; }
         ISystemProcess Process { get; }
-        IMessageSource MsgSource { get; }
+        ISourceMessage SourceMessage { get; }
 
         List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get; }
         List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; }

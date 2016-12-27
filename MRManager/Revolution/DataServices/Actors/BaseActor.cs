@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Akka.Persistence;
 using CommonMessages;
+using RevolutionEntities.Process;
 using Utilities;
 
 namespace DataServices.Actors
@@ -31,9 +32,10 @@ namespace DataServices.Actors
         }
 
 
-        internal MessageSource MsgSource => new MessageSource(this.ToString());
-
+        internal SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        
 
     }
 
+  
 }

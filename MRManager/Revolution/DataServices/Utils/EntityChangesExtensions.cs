@@ -8,7 +8,7 @@ namespace DataServices.Actors
 {
     public static class EntityChangesExtensions
     {
-        public static void UpdateEntity<T>(this EntityChanges<T> msg, IDataContext dbContext, MessageSource source) where T : IEntity
+        public static void UpdateEntity<T>(this EntityChanges<T> msg, IDataContext dbContext, ISourceMessage source) where T : IEntity
         {
 
             using (var ctx = dbContext.Instance.OpenSession())
@@ -19,7 +19,7 @@ namespace DataServices.Actors
                 p.ApplyChanges(msg.Changes);
                 ctx.SaveOrUpdate(p);
                 transaction.Commit();
-                EventMessageBus.Current.Publish(new EntityUpdated<T>(p,msg.Process, msg), source);
+                EventMessageBus.Current.Publish(new EntityUpdated<T>(p,msg.Process, source), source);
 
             }
 

@@ -16,7 +16,7 @@ namespace EventAggregator
 
         public static EventMessageBus Current { get; }
 
-        public IObservable<TEvent> GetEvent<TEvent>(IMessageSource caller)
+        public IObservable<TEvent> GetEvent<TEvent>(ISourceMessage caller)
         {
             Contract.Requires(caller != null);
             Logger.Log( LoggingLevel.Info ,"Caller:" + caller.Source + " | GetEvent : " + typeof(TEvent).ToString());
@@ -24,7 +24,7 @@ namespace EventAggregator
         }
 
 
-        public void Publish<TEvent>(TEvent sampleEvent, IMessageSource sender)
+        public void Publish<TEvent>(TEvent sampleEvent, ISourceMessage sender)
         {
             Contract.Requires(sender != null || sampleEvent != null);
             Logger.Log(LoggingLevel.Info, "Sender:" + sender.Source + " | PublishEvent : " + typeof(TEvent));

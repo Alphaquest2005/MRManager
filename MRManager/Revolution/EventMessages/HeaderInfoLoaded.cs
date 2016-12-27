@@ -9,7 +9,7 @@ namespace EventMessages
     {
         public IList<IHeaderInfo<T>> HeaderInfo { get; }
 
-        public HeaderInfoLoaded(IList<IHeaderInfo<T>> headerInfo, ISystemProcess process, ISystemMessage msg) : base(process, msg)
+        public HeaderInfoLoaded(IList<IHeaderInfo<T>> headerInfo, ISystemProcess process, ISourceMessage msg) : base(process, msg)
         {
             HeaderInfo = headerInfo;
         }

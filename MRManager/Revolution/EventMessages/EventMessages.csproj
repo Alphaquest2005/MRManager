@@ -81,7 +81,6 @@
     <Compile Include="EntityFound.cs" />
     <Compile Include="ProcessEventFailure.cs" />
     <Compile Include="CurrentEntityChanged.cs" />
-    <Compile Include="ProcessStepStarted.cs" />
     <Compile Include="EntityViewLoaded.cs" />
     <Compile Include="LoadEntityViewWithFilter.cs" />
     <Compile Include="LoadEntityView.cs" />

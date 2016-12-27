@@ -1,5 +1,7 @@
 ﻿using System;
+using SystemInterfaces;
 using CommonMessages;
+using DataInterfaces;
 
 namespace EventMessages
 {
@@ -19,5 +21,15 @@ namespace EventMessages
             Exception = exception;
             
         }
+    }
+
+    public class ProcessStateMessage<TEntity> : ProcessSystemMessage where TEntity : IEntity
+    {
+        public ProcessStateMessage(IProcessState<TEntity> state, ISystemProcess process, ISystemMessage msg, int processId) : base(process, msg)
+        {
+            State = state;
+        }
+
+        public IProcessState<TEntity> State { get; }
     }
 }

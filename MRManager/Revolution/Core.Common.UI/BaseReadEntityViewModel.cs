@@ -38,8 +38,8 @@
 
 //        private void WireEvents()
 //        {
-//            EventMessageBus.Current.GetEvent<ServiceStarted<EntitySetWithFilterLoaded<TView>>>(MsgSource)
-//                .Subscribe(z => EventMessageBus.Current.GetEvent<EntitySetWithFilterLoaded<TView>>(MsgSource).Subscribe(x => HandleEntitySetUpdated(x.Entities)));
+//            EventMessageBus.Current.GetEvent<ServiceStarted<EntitySetWithFilterLoaded<TView>>>(SourceMessage)
+//                .Subscribe(z => EventMessageBus.Current.GetEvent<EntitySetWithFilterLoaded<TView>>(SourceMessage).Subscribe(x => HandleEntitySetUpdated(x.Entities)));
 
 //        }
 

@@ -9,7 +9,7 @@ namespace DataServices.Actors
 {
     public static class LoadEntityViewExtensions
     {
-        public static void LoadEntityView<T>(this LoadEntityView<T> msg, IDataContext dbContext,  MessageSource source) where T : IEntity
+        public static void LoadEntityView<T>(this LoadEntityView<T> msg, IDataContext dbContext,  ISourceMessage source) where T : IEntity
         {
 
             Type viewDBType = null;
@@ -25,7 +25,7 @@ namespace DataServices.Actors
             EventMessageBus.Current.Publish(entitySetInst, source);
         }
 
-        public static void LoadEntityView<T>(this LoadEntityViewWithFilter<T> msg, IDataContext dbContext,  MessageSource source) where T : IEntity
+        public static void LoadEntityView<T>(this LoadEntityViewWithFilter<T> msg, IDataContext dbContext, ISourceMessage source) where T : IEntity
         {
 
             var task = typeof(EF7DataContext<T>)
@@ -36,7 +36,7 @@ namespace DataServices.Actors
 
 
             var entitySetType = typeof(EntitySetWithFilterLoaded<>).MakeGenericType(msg.ViewType);
-            var entitySetInst = Activator.CreateInstance(entitySetType, task, msg.Process, msg.Source);
+            var entitySetInst = Activator.CreateInstance(entitySetType, task, msg.Process, source);
             EventMessageBus.Current.Publish(entitySetInst, source);
         }
     }

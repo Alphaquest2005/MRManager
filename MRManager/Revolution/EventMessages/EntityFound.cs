@@ -6,7 +6,7 @@ namespace EventMessages
 {
     public class EntityFound<T> : ProcessSystemMessage where T : IEntity
     {
-        public EntityFound(T entity, ISystemProcess process, ISystemMessage msg) : base(process, msg)
+        public EntityFound(T entity, ISystemProcess process, ISourceMessage msg) : base(process, msg)
         {
             Entity = entity;
         }

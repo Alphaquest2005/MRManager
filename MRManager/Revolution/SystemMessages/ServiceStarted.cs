@@ -8,7 +8,7 @@ namespace SystemMessages
     [Export]
     public class ServiceStarted<TService> : ProcessSystemMessage 
     {
-        public ServiceStarted(ISystemProcess process, ISystemMessage msg) : base(process, msg)
+        public ServiceStarted(ISystemProcess process, ISourceMessage msg) : base(process, msg)
         {
         }
     }

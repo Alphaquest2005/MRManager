@@ -7,7 +7,7 @@ namespace EventMessages
     
     public class EntityNotFound<T> : ProcessSystemMessage where T : IEntity
     {
-        public EntityNotFound(int entityId, ISystemProcess process, ISystemMessage msg) : base(process, msg)
+        public EntityNotFound(int entityId, ISystemProcess process, ISourceMessage msg) : base(process, msg)
         {
             EntityId = entityId;
         }
