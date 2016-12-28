@@ -15,7 +15,7 @@ namespace ViewModels
 {
     public class LoginViewModel : DynamicViewModel<ObservableViewModel<UserSignIn>>, IEntityViewModel<UserSignIn>, IViewModel
     {
-        public LoginViewModel(List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process) : base(new ObservableViewModel<UserSignIn>(eventSubscriptions, eventPublications, commandInfo, process))
+        public LoginViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo) : base(new ObservableViewModel<UserSignIn>(eventSubscriptions, eventPublications, commandInfo, process))
         {
             CurrentEntity = this.Instance.CurrentEntity;
             ChangeTracking = this.Instance.ChangeTracking;

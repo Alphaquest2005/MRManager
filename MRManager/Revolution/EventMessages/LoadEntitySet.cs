@@ -6,7 +6,7 @@ namespace EventMessages
 {
     public class LoadEntitySet<T> : ProcessSystemMessage where T : IEntity
     {
-        public LoadEntitySet(ISystemProcess process, ISourceMessage msg) : base(process, msg)
+        public LoadEntitySet(ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
             
         }

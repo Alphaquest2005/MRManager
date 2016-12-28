@@ -14,12 +14,12 @@ namespace DataServices.Actors
        
       
         internal IDataContext DbContext { get; }
-        public EntityDataServiceActor(IDataContext ctx, Action<IDataContext, ISourceMessage, TService> action, ISystemProcess process, ISourceMessage msg) 
+        public EntityDataServiceActor(IDataContext ctx, Action<IDataContext, ISourceMessage, TService> action, ISystemProcess process) 
         {
             DbContext = ctx;
             Action = action;
             Command<TService>(m => HandledEvent(m));
-            EventMessageBus.Current.Publish(new ServiceStarted<TService>(process,msg), SourceMessage);
+            EventMessageBus.Current.Publish(new ServiceStarted<TService>(process,SourceMessage), SourceMessage);
         }
 
         

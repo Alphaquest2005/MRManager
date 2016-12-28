@@ -19,7 +19,7 @@ namespace EventMessages
        
         public int EntityId { get; private set; }
 
-        public GetEntityById(ISystemProcess process, ISourceMessage msg) : base(process, msg)
+        public GetEntityById(ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
         }
 

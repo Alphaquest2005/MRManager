@@ -12,7 +12,7 @@ namespace EventMessages
         public IList<T> Entities { get; }
         public IList<Expression<Func<T, dynamic>>> Includes { get; }
 
-        public EntitySetWithFilterWithIncludesLoaded(IList<T> entities, IList<Expression<Func<T, dynamic>>> includes, ISystemProcess process, ISourceMessage msg) : base(process, msg)
+        public EntitySetWithFilterWithIncludesLoaded(IList<T> entities, IList<Expression<Func<T, dynamic>>> includes, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
             Entities = entities;
             Includes = includes;

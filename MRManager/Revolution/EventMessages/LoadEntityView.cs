@@ -7,7 +7,7 @@ namespace EventMessages
 {
     public class LoadEntityView<T> : ProcessSystemMessage
     {
-        public LoadEntityView(Expression func, Type viewType, ISystemProcess process, ISourceMessage msg) : base(process, msg)
+        public LoadEntityView(Expression func, Type viewType, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
             
             try

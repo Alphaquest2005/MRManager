@@ -3,87 +3,62 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using SystemInterfaces;
 using SystemMessages;
 using Akka.Actor;
 using CommonMessages;
 using EventAggregator;
+using FluentValidation.Resources;
+using NHibernate.Util;
 using RevolutionEntities.Process;
 using StartUp.Messages;
 
 namespace DataServices.Actors
 {
-    public class ProcessActor : BaseActor<ProcessActor> 
+    public class ProcessActor : BaseActor<ProcessActor>
     {
         public ISystemProcess Process { get; }
-        public ISystemMessage Msg { get; set; }
-        private readonly List<ProcessSystemMessage> msgQue = new List<ProcessSystemMessage>(); 
-        private readonly ImmutableList<ProcessExpectedEvent> _expectedEvents; 
+       
+        private readonly List<IProcessSystemMessage> msgQue = new List<IProcessSystemMessage>(); 
+        private readonly IEnumerable<Processes.EventAction> _complexEvents = new List<Processes.EventAction>();
+       
 
-        public ProcessActor(ISystemProcess process, ISystemMessage msg)
+        private static Action<ProcessActor> ExitAction => (x) => x.Self.GracefulStop(TimeSpan.FromSeconds(10));
+        List<ProcessExpectedEvent> ExitPredicate = new List<ProcessExpectedEvent>()
+            {
+                new ProcessExpectedEvent(1, typeof (SystemProcessCompleted), eventPredicate: (e) => e.Id == 1)
+            };
+
+        public ProcessActor(ISystemProcess process)
         {
             Process = process;
-            Msg = msg;
-            Command<ProcessSystemMessage>(z => HandleProcessEvents(z));
-            _expectedEvents = Processes.ExpectedEvents.Where(x => x.ProcessId == process.Id).ToImmutableList();
+            Command<IProcessSystemMessage>(z => HandleProcessEvents(z));
+            if(Processes.ProcessComplexEvents.Any(x => x.ProcessId == process.Id)) _complexEvents = Processes.ProcessComplexEvents.Where(x => x.ProcessId == process.Id);
             EventMessageBus.Current.Publish(new ServiceStarted<IProcessService>(process, SourceMessage), SourceMessage);
         }
 
-        private void HandleProcessEvents(ProcessSystemMessage pe)
+        private void HandleProcessEvents(IProcessSystemMessage pe)
         {
             // Log the message 
-            Persist(pe, (x) => msgQue.Add(x));
+            //TODO: Reenable event log
+            // Persist(pe, (x) => msgQue.Add(x));
 
             // send out Process State Events
 
+            msgQue.Add(pe);
 
-           //msgQue.Add(pe);
-            if (pe.GetType() == typeof (SystemProcessCompleted)) Self.GracefulStop(TimeSpan.FromSeconds(10));
-            ProcessEvents();
+            _complexEvents.Where(x => !x.Raised).ForEach(x => {
+                                                                 if (!CheckExpectedEvents.Invoke(x.Events, msgQue))return;
+                                                                  x.Raised = true;
+                                                                  x.Action.Invoke(this);});
         }
 
-        private void ProcessEvents()
+
+        public IActorRef ActorRef()
         {
-            // raise events like Process Complete -> go to Next Step
-            
-            var success = true;
-            foreach (var expectedEvent in _expectedEvents)
-            {
-                //get from 
-                var events = msgQue.Where(x => x.GetType() == expectedEvent.EventType).ToList();
-                if (!events.Any())
-                {
-                    success = false;
-                    break;
-                }
-                else
-                {
-                    if (events.Any(x => expectedEvent.EventPredicate.Invoke(x) != true))
-                    {
-                        success = false;
-                        break;
-                    }
-                    else
-                    {
-                        // raise Complex Event
-                    }
-                }
-            }
-
-            if(success) EventMessageBus.Current.Publish(new SystemProcessCompleted(Process, SourceMessage), SourceMessage);
+            return this.Self;
         }
-        protected override void OnPersistRejected(Exception cause, object @event, long sequenceNr)
-        {
-            base.OnPersistRejected(cause, @event, sequenceNr);
-            Debugger.Break();
-        }
-
-        protected override void OnPersistFailure(Exception cause, object @event, long sequenceNr)
-        {
-            base.OnPersistFailure(cause, @event, sequenceNr);
-            Debugger.Break();
-        }
-
     }
 
 

@@ -23,10 +23,10 @@ namespace Views
                 // Required to initialize variables
                 InitializeComponent();
 				AppSlider.Slider = this.slider;
-			    EventMessageBus.Current.GetEvent<ViewModelCreated<DynamicViewModel<ScreenModel>>>(SourceMessage).Subscribe(x =>
+			    EventMessageBus.Current.GetEvent<ViewModelCreated<ScreenModel>>(SourceMessage).Subscribe(x =>
 			    {
 			        Application.Current.Dispatcher.Invoke(() => this.DataContext = x.ViewModel);
-                    EventMessageBus.Current.Publish(new ViewLoadedViewModel<DynamicViewModel<ScreenModel>>(x.ViewModel, x.Process, SourceMessage), SourceMessage );
+                    EventMessageBus.Current.Publish(new ViewLoadedViewModel<ScreenModel>(x.ViewModel, x.Process, SourceMessage), SourceMessage );
 
 			    });
 			}

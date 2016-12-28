@@ -9,7 +9,7 @@ namespace ViewMessages
     public class ViewModelCreated<TViewModel> : ProcessSystemMessage, IViewModelEvent<TViewModel>
     {
         [ImportingConstructor]
-        public ViewModelCreated(TViewModel viewModel, ISystemProcess process, ISourceMessage msg) : base(process, msg)
+        public ViewModelCreated(TViewModel viewModel, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
             ViewModel = viewModel;
         }
@@ -23,7 +23,7 @@ namespace ViewMessages
     {
         //occurs when viewmodel loaded in View
         [ImportingConstructor]
-        public ViewLoadedViewModel(TViewModel viewModel, ISystemProcess process, ISourceMessage msg) : base(process, msg)
+        public ViewLoadedViewModel(TViewModel viewModel, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
             ViewModel = viewModel;
         }
@@ -36,7 +36,7 @@ namespace ViewMessages
     public class ViewModelUnloaded<TViewModel> : ProcessSystemMessage, IViewModelEvent<TViewModel>
     {
         [ImportingConstructor]
-        public ViewModelUnloaded(TViewModel viewModel, ISystemProcess process, ISourceMessage msg) : base(process, msg)
+        public ViewModelUnloaded(TViewModel viewModel, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
             ViewModel = viewModel;
         }

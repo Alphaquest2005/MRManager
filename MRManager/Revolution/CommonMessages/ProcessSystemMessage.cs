@@ -4,7 +4,7 @@ namespace CommonMessages
 {
     public class ProcessSystemMessage : SystemMessage, IProcessSystemMessage
     {
-        public ProcessSystemMessage(ISystemProcess process, ISystemMessage msg) : base(msg.MachineInfo,msg.Source)
+        public ProcessSystemMessage(ISystemProcess process, ISourceMessage sourceMsg) : base(sourceMsg.MachineInfo,sourceMsg.Source)
         {
             Process = process;
             ParentProcessId = Process.ParentProcessId;

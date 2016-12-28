@@ -9,6 +9,7 @@ namespace CommonMessages
 {
     public interface ISourceMessage:ISystemMessage
     {
+        
     }
 
     public class SourceMessage: ISourceMessage

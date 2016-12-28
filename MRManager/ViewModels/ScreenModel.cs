@@ -18,13 +18,12 @@ namespace ViewModels
 {
 	public partial class ScreenModel : BaseViewModel, IScreenViewModel
     {
-        public ScreenModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo) : base(process, eventSubscriptions, eventPublications,commandInfo)
+	    public ScreenModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo) : base(process, eventSubscriptions, eventPublications,commandInfo)
         {
             this.WireEvents();
         }
     
-	    public ISourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
-
+	    
         public ObservableCollection<IViewModel> HeaderViewModels { get; } = new ObservableCollection<IViewModel>();
         public ObservableCollection<IViewModel> LeftViewModels { get; } = new ObservableCollection<IViewModel>();
         public ObservableCollection<IViewModel> RightViewModels { get; } = new ObservableCollection<IViewModel>();

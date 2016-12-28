@@ -10,7 +10,7 @@ namespace EventMessages
         public IEnumerable<T> Entities { get; }
         
 
-        public EntityViewLoaded(IEnumerable<T> entities, ISystemProcess process, ISourceMessage msg) : base(process, msg)
+        public EntityViewLoaded(IEnumerable<T> entities, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
             Entities = entities;
         }

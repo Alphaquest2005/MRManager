@@ -8,15 +8,16 @@ namespace EventMessages
     public class ProcessEventFailure: ProcessSystemMessage
     {
         public Type FailedEventType { get; set; }
-        public ProcessSystemMessage FailedEventMessage { get; set; }
+        public IProcessSystemMessage FailedEventMessage { get; set; }
         public Type ExpectedEventType { get; set; }
         public Exception Exception { get; set; }
         public MessageSource MsgSource { get; set; }
 
-        public ProcessEventFailure(Type failedEventType, ProcessSystemMessage failedEventMessage, Type expectedEventType,Exception exception,  ISystemMessage msg):base( failedEventMessage.Process,msg)
+        public ProcessEventFailure(Type failedEventType, IProcessSystemMessage failedEventMessage, Type expectedEventType,Exception exception,  ISourceMessage SourceMsg):base( failedEventMessage.Process,SourceMsg)
         {
             FailedEventType = failedEventType;
-            FailedEventMessage = failedEventMessage;
+            //TODO: need to implement serialization
+            //FailedEventMessage = failedEventMessage;
             ExpectedEventType = expectedEventType;
             Exception = exception;
             
@@ -25,7 +26,7 @@ namespace EventMessages
 
     public class ProcessStateMessage<TEntity> : ProcessSystemMessage where TEntity : IEntity
     {
-        public ProcessStateMessage(IProcessState<TEntity> state, ISystemProcess process, ISystemMessage msg, int processId) : base(process, msg)
+        public ProcessStateMessage(IProcessState<TEntity> state, ISystemProcess process, ISourceMessage sourceMsg, int processId) : base(process, sourceMsg)
         {
             State = state;
         }

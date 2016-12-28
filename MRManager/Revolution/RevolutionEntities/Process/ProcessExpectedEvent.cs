@@ -7,9 +7,9 @@ namespace RevolutionEntities.Process
     {
         public int ProcessId { get; }
         public Type EventType { get; }
-        public Func<ProcessSystemMessage, bool> EventPredicate { get; }
+        public Func<IProcessSystemMessage, bool> EventPredicate { get; }
 
-        public ProcessExpectedEvent(int processId, Type eventType, Func<ProcessSystemMessage, bool> eventPredicate)
+        public ProcessExpectedEvent(int processId, Type eventType, Func<IProcessSystemMessage, bool> eventPredicate)
         {
             ProcessId = processId;
             EventType = eventType;

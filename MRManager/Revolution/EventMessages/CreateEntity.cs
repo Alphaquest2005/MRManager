@@ -11,7 +11,7 @@ namespace EventMessages
     
         public T Entity { get; }
         
-        public CreateEntity(T entity, ISystemProcess process, ISourceMessage msg) : base(process, msg)
+        public CreateEntity(T entity, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
             Contract.Requires(entity != null);
             Entity = entity;

@@ -36,10 +36,10 @@ namespace DataServices.Actors
         {
             try
             {
-                var vm =(TViewModel) Activator.CreateInstance(vmInfo.ViewModelInfo.ViewModelType, new object[] {vmInfo.Process, vmInfo.ViewModelInfo.Subscriptions, vmInfo.ViewModelInfo.Publications });
-                vm.WireEvents();
-                dynamic dvm = new DynamicViewModel<TViewModel>(vm);
-                EventMessageBus.Current.Publish(new ViewModelCreated<DynamicViewModel<TViewModel>>(dvm,vmInfo.Process, SourceMessage), SourceMessage);
+                var vm =(TViewModel) Activator.CreateInstance(vmInfo.ViewModelInfo.ViewModelType, new object[] {vmInfo.Process, vmInfo.ViewModelInfo.Subscriptions, vmInfo.ViewModelInfo.Publications, vmInfo.ViewModelInfo.Commands });
+                EventMessageBus.Current.Publish(new ViewModelCreated<TViewModel>(vm, vmInfo.Process, SourceMessage), SourceMessage);
+                //dynamic dvm = new DynamicViewModel<TViewModel>(vm);
+                // EventMessageBus.Current.Publish(new ViewModelCreated<DynamicViewModel<TViewModel>>(dvm,vmInfo.Process, SourceMessage), SourceMessage);
             }
             catch (Exception ex)
             {
@@ -47,7 +47,7 @@ namespace DataServices.Actors
                                                                         failedEventMessage: vmInfo,
                                                                         expectedEventType:typeof(ViewModelCreated<DynamicViewModel<TViewModel>>),
                                                                         exception:ex,
-                                                                        msg:vmInfo), SourceMessage);
+                                                                        SourceMsg:SourceMessage), SourceMessage);
             }
            
         }

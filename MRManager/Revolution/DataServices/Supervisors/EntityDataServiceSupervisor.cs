@@ -55,7 +55,7 @@ namespace DataServices.Actors
                     this.GetType()
                         .GetMethod("CreateEntityActor")
                         .MakeGenericMethod(itm.Key)
-                        .Invoke(this, new object[] {dbContext, itm.Value});
+                        .Invoke(this, new object[] {dbContext, itm.Value, process});
                 }
                 catch (Exception ex)
                 {
@@ -63,7 +63,7 @@ namespace DataServices.Actors
                         failedEventMessage: new ProcessSystemMessage(process, SourceMessage), 
                         expectedEventType: typeof (ServiceStarted<>),
                         exception: ex,
-                        msg: new ProcessSystemMessage(process, SourceMessage)),SourceMessage);
+                        SourceMsg: SourceMessage),SourceMessage);
                 }
             }
 
@@ -86,7 +86,7 @@ namespace DataServices.Actors
                         failedEventMessage: new ProcessSystemMessage(process, SourceMessage),
                         expectedEventType: typeof(ServiceStarted<>),
                         exception: ex,
-                        msg: new ProcessSystemMessage(process, SourceMessage)), SourceMessage);
+                        SourceMsg: SourceMessage), SourceMessage);
             }
             
         }

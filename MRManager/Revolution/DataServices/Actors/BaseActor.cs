@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Akka.Persistence;
 using CommonMessages;
 using RevolutionEntities.Process;
@@ -9,7 +11,23 @@ namespace DataServices.Actors
 {
     public class BaseActor<T>: ReceivePersistentActor
     {
-       
+        internal SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+
+        internal Func<IList<ProcessExpectedEvent>, IList<IProcessSystemMessage>, bool> CheckExpectedEvents {
+            get; } = (expectedEvents, eventSource) =>
+        {
+            if (!expectedEvents.Any()) return false;
+
+            foreach (var expectedEvent in expectedEvents)
+            {
+                var events = eventSource.Where(x => x.GetType() == expectedEvent.EventType).ToList();
+                if (!events.Any()) return false;
+                if (events.Any(x => expectedEvent.EventPredicate.Invoke(x) != true)) return false;
+            }
+            return true;
+        };
+
+
         public override string PersistenceId
         {
             get
@@ -30,10 +48,6 @@ namespace DataServices.Actors
             base.OnPersistFailure(cause, @event, sequenceNr);
             Debugger.Break();
         }
-
-
-        internal SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
-        
 
     }
 

@@ -10,7 +10,7 @@ namespace EventMessages
     {
         public IList<T> Changes { get; }
         
-        public SelectedEntitiesChanged(IList<T> changes, ISystemProcess process, ISourceMessage msg) : base(process, msg)
+        public SelectedEntitiesChanged(IList<T> changes, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
            Changes = changes;
         }

@@ -7,7 +7,7 @@ namespace EventMessages
     
     public class MediaNotFound : ProcessSystemMessage
     {
-        public MediaNotFound(List<int> mediaIdList, ISystemProcess process, ISourceMessage msg) : base(process, msg)
+        public MediaNotFound(List<int> mediaIdList, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
             MediaIdList = mediaIdList;
         }

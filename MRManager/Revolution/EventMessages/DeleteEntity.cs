@@ -10,7 +10,7 @@ namespace EventMessages
     public class DeleteEntity<T> : ProcessSystemMessage where T : IEntity
     {
        
-        public DeleteEntity(int entityId, ISystemProcess process, ISourceMessage msg) : base(process, msg)
+        public DeleteEntity(int entityId, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
             Contract.Requires(entityId > 0);
             EntityId = entityId;
