@@ -6,11 +6,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IVitalSignsAutoView:DataInterfaces.IEntity  
+	public partial interface IVitalSignsAutoView:IEntity  
 	{
 		string Units { get;}
 		string HeightUnits { get;}

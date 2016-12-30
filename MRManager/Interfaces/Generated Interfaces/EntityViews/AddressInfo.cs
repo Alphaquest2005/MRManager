@@ -6,11 +6,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IAddressInfo:DataInterfaces.IEntity  
+	public partial interface IAddressInfo:IEntity  
 	{
 		string AddressLine { get;}
 		string City { get;}

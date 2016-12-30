@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Data;
+using SystemInterfaces;
 using DataInterfaces;
 
 namespace Core.Common.UI.DataVirtualization

@@ -10,6 +10,11 @@ namespace RevolutionEntities.Process
             MachineInfo = machineInfo;
         }
 
+        public SystemProcess(IProcessInfo processInfo, IUser user, IMachineInfo machineInfo) : base(processInfo.Id, processInfo.ParentProcessId, processInfo.Name, processInfo.Description, processInfo.Symbol, user)
+        {
+            MachineInfo = machineInfo;
+        }
+
         public IMachineInfo MachineInfo { get; }
    
     }

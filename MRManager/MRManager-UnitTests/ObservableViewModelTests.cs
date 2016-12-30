@@ -82,7 +82,7 @@ namespace MRManager_UnitTests
                        subject:(s) => s.ChangeTracking.DictionaryChanges,
                        subjectPredicate: new List<Func<LoginViewModel, bool>>()
                        {
-                           v => v.ChangeTracking.Keys.Contains("UserName")
+                           v => v.ChangeTracking.Keys.Contains(nameof(v.CurrentEntity.Value.Username))
                        },
                        messageData:new List<Func<LoginViewModel, dynamic>>()
                        {
@@ -97,7 +97,7 @@ namespace MRManager_UnitTests
 
 
             dynamicViewModel.Id = 6;
-            dynamicViewModel.ChangeTracking.Add("UserName", "joe");
+            dynamicViewModel.ChangeTracking.Add(nameof(IUserSignIn.Username), "joe");
             // var id = dynamicViewModel.GetValue("Id");
             Assert.AreEqual(6, dynamicViewModel.Id);
         }
@@ -115,8 +115,8 @@ namespace MRManager_UnitTests
 
             dynamic dynamicViewModel = viewModel;
             dynamicViewModel.CurrentEntity.Value = new UserSignIn() { Id = 5 };
-            dynamicViewModel.ChangeTracking.Add("UserName", "joe");
-            dynamicViewModel.ChangeTracking.Add("Password", "test");
+            dynamicViewModel.ChangeTracking.Add(nameof(IUserSignIn.Username), "joe");
+            dynamicViewModel.ChangeTracking.Add(nameof(IUserSignIn.Username), "test");
             dynamicViewModel.Commands["ValidateUserInfo"].Execute();
             // var id = dynamicViewModel.GetValue("Id");
             Assert.AreEqual(5, dynamicViewModel.Id);
@@ -131,8 +131,8 @@ namespace MRManager_UnitTests
 
             dynamic dynamicViewModel = viewModel;
             dynamicViewModel.CurrentEntity.Value = new UserSignIn() { Id = 5, Username = "Joe", Password = "Test" };
-            dynamicViewModel.ChangeTracking.Add("UserName", "joe");
-            dynamicViewModel.ChangeTracking.Add("Password", "test");
+            dynamicViewModel.ChangeTracking.Add(nameof(IUserSignIn.Username), "joe");
+            dynamicViewModel.ChangeTracking.Add(nameof(IUserSignIn.Password), "test");
             dynamicViewModel.Commands["ValidateUserInfo"].Execute();
             // var id = dynamicViewModel.GetValue("Id");
             Assert.AreEqual(5, dynamicViewModel.Id);
@@ -149,7 +149,7 @@ namespace MRManager_UnitTests
                     new ViewEventCommand<LoginViewModel, EntityChanges<IUserSignIn>>("ValidateUserInfo",
                         v =>
                             v.ChangeTracking.WhenAny(x => x.Keys,
-                                x => x.Value.Contains("Password") && x.Value.Contains("UserName")), 
+                                x => x.Value.Contains(nameof(IUserSignIn.Password)) && x.Value.Contains(nameof(IUserSignIn.Username))), 
                         subject: (s) => ((ReactiveCommand<IViewModel, Unit>) s.Commands["ValidateUserInfo"]).AsObservable(),
                         subjectPredicate: new List<Func<LoginViewModel, bool>>()
                         {

@@ -24,7 +24,7 @@
     <Grid x:Name="LayoutRoot"
           Background="#4C0E0475"
           DataContext="{Binding Source={StaticResource MainWindowViewModelDataSource}}">
-        <views:Screen Margin="0,100,0,0" />
+        <views:Screen Margin="0,100,0,0" DataContext="{Binding BodyViewModels[0], Source={StaticResource MainWindowViewModelDataSource}}" />
         <TextBlock x:Name="BackBtn"
                    Width="70"
                    Height="70"

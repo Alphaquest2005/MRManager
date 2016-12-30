@@ -6,11 +6,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IAddressZipCodesAutoView:DataInterfaces.IEntity  
+	public partial interface IAddressZipCodesAutoView:IEntity  
 	{
 		string ZipCodes { get;}
 

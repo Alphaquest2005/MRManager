@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Threading;
+using SystemInterfaces;
 using DataInterfaces;
 
 namespace Core.Common.UI.DataVirtualization

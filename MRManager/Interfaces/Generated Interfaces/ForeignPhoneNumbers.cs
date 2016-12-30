@@ -6,11 +6,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
+
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IForeignPhoneNumbers:DataInterfaces.IEntity  
+	public partial interface IForeignPhoneNumbers:IEntity  
 	{
 		int PersonId { get;}
 		string PhoneNumber { get;}

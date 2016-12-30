@@ -6,11 +6,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
+
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IHeight:DataInterfaces.IEntity  
+	public partial interface IHeight:IEntity  
 	{
 		double Value { get;}
 		int UnitId { get;}

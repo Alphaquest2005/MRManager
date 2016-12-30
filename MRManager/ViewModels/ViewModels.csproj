@@ -95,6 +95,10 @@
       <Project>{e3d04176-3758-4c9d-84f3-7a4d3859eae5}</Project>
       <Name>EventMessages</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Revolution\RevolutionData\RevolutionData.csproj">
+      <Project>{959d7f6b-0426-452c-8962-c0f4dadbe3b4}</Project>
+      <Name>RevolutionData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Revolution\RevolutionEntities\RevolutionEntities.csproj">
       <Project>{c827930a-0d05-4ee2-b9ac-db1cf5144e16}</Project>
       <Name>RevolutionEntities</Name>

@@ -25,8 +25,9 @@ namespace DataServices.Actors
         
         private void HandledEvent(TService msg)
         {
-           Persist(msg, x => Action.Invoke(DbContext, SourceMessage, x));
-           // Action.Invoke(DbContext, MsgSource, msg);
+            //TODO:Implement Logging
+          // Persist(msg, x => { });//x => Action.Invoke(DbContext, SourceMessage, x)
+           Action.Invoke(DbContext, SourceMessage, msg);
         }
     }
 }

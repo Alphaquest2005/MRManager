@@ -6,11 +6,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
+
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IVitalSigns:DataInterfaces.IEntity  
+	public partial interface IVitalSigns:IEntity  
 	{
 		DateTime DateTimeOfReading { get;}
 		int ReaderId { get;}

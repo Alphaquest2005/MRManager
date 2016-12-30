@@ -6,11 +6,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
+
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IPersonMedia:DataInterfaces.IEntity  
+	public partial interface IPersonMedia:IEntity  
 	{
 		int MediaId { get;}
 		int PersonId { get;}

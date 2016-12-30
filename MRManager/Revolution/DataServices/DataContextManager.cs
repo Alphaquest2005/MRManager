@@ -13,6 +13,7 @@ using EFRepository;
 using EventAggregator;
 using EventMessages;
 using NHibernate.Metadata;
+using RevolutionData;
 using RevolutionEntities.Process;
 using StartUp.Messages;
 
@@ -70,7 +71,7 @@ namespace DataServices.Actors
                 s.Tell(systemStartedMsg);
             }
 
-            return;
+            
             var actorList = new Dictionary<string, Type>()
             {
                 {"{0}EntityDataServiceSupervisor", typeof (EntityDataServiceSupervisor<>)},

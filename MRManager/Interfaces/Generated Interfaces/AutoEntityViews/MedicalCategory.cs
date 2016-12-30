@@ -6,11 +6,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IMedicalCategoryAutoView:DataInterfaces.IEntity  
+	public partial interface IMedicalCategoryAutoView:IEntity  
 	{
 		string Phase { get;}
 		string Interviews { get;}

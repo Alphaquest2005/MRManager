@@ -6,11 +6,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IHeightAutoView:DataInterfaces.IEntity  
+	public partial interface IHeightAutoView:IEntity  
 	{
 		int? Pulse { get;}
 		int? Respiration { get;}

@@ -6,11 +6,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
+
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IExamResults_FetalDates:DataInterfaces.IEntity  
+	public partial interface IExamResults_FetalDates:IEntity  
 	{
 		int ExamResultsId { get;}
 		DateTime StartDate { get;}

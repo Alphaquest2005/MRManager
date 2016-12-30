@@ -1,10 +1,6 @@
-using SystemInterfaces;
-
-namespace CommonMessages
+﻿namespace SystemInterfaces
 {
     public interface ISystemMessage : IMessage, ISystem
     {
-        
-        
     }
 }

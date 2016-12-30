@@ -6,11 +6,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
+
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface ICarePlanDetails:DataInterfaces.IEntity  
+	public partial interface ICarePlanDetails:IEntity  
 	{
 		int CarePlanId { get;}
 		string Instructions { get;}

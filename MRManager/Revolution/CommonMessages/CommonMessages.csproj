@@ -43,9 +43,6 @@
   <ItemGroup>
     <Compile Include="SourceMessage.cs" />
     <Compile Include="SystemMessage.cs" />
-    <Compile Include="IMessage.cs" />
-    <Compile Include="IProcessSystemMessage.cs" />
-    <Compile Include="ISystemMessage.cs" />
     <Compile Include="MessageSource.cs" />
     <Compile Include="ProcessSystemMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

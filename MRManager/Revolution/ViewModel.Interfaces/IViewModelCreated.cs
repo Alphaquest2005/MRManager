@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.Composition;
+using SystemInterfaces;
 
-namespace ViewModelInterfaces
+namespace ViewModel.Interfaces
 {
     [InheritedExport]
-    public interface IViewModelEvent<T> 
+    public interface IViewModelCreated<TViewModel> : IProcessSystemMessage, IViewModelEvent<TViewModel>
     {
-        T ViewModel { get; }
     }
 }

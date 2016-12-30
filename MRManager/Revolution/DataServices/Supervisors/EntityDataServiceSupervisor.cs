@@ -34,18 +34,18 @@ namespace DataServices.Actors
         readonly Dictionary<Type, object> entityEvents =
             new Dictionary<Type, object>()
             {
-                {typeof (CreateEntity<TEntity>), CreateAction},
-                {typeof (DeleteEntity<TEntity>), DeleteAction},
-                {typeof (EntityChanges<TEntity>), UpdateAction},
-                {typeof (GetEntityById<TEntity>), GetEntityByIdAction},
+                //{typeof (CreateEntity<TEntity>), CreateAction},
+                //{typeof (DeleteEntity<TEntity>), DeleteAction},
+                //{typeof (EntityChanges<TEntity>), UpdateAction},
+                //{typeof (GetEntityById<TEntity>), GetEntityByIdAction},
                 {typeof (GetEntityWithChanges<TEntity>), GetEntityWithChangesAction},
 
-                {typeof (LoadEntitySet<TEntity>), LoadEntitySet},
-                {typeof (LoadEntitySetWithFilter<TEntity>), LoadEntitySetWithFilter},
-                {typeof (LoadEntitySetWithFilterWithIncludes<TEntity>), LoadEntitySetWithFilterWithIncludes},
+                //{typeof (LoadEntitySet<TEntity>), LoadEntitySet},
+                //{typeof (LoadEntitySetWithFilter<TEntity>), LoadEntitySetWithFilter},
+                //{typeof (LoadEntitySetWithFilterWithIncludes<TEntity>), LoadEntitySetWithFilterWithIncludes},
 
-                {typeof (LoadEntityView<TEntity>), LoadEntityView},
-                {typeof (LoadEntityViewWithFilter<TEntity>), LoadEntityViewWithFilter},
+                //{typeof (LoadEntityView<TEntity>), LoadEntityView},
+                //{typeof (LoadEntityViewWithFilter<TEntity>), LoadEntityViewWithFilter},
             };
 
         public EntityDataServiceSupervisor(IDataContext dbContext, ISystemProcess process)

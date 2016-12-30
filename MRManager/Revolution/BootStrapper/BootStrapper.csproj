@@ -50,6 +50,10 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Actor.Interfaces\Actor.Interfaces.csproj">
+      <Project>{8b10c72d-9f33-4290-b562-44cf1f718fa5}</Project>
+      <Name>Actor.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CommonMessages\CommonMessages.csproj">
       <Project>{77007560-89DC-4E1F-9313-AE064A048AD4}</Project>
       <Name>CommonMessages</Name>

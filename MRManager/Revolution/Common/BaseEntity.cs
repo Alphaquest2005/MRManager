@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
+using SystemInterfaces;
 using Common.Dynamic;
-using DataInterfaces;
 
 namespace Common.DataEntites
 {

@@ -6,11 +6,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
+
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IUltraSoundGeneralEvaluation:DataInterfaces.IEntity  
+	public partial interface IUltraSoundGeneralEvaluation:IEntity  
 	{
 		string CardiaActivity { get;}
 		string Placenta { get;}

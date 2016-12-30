@@ -6,11 +6,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
+
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IParishes:DataInterfaces.IEntity  
+	public partial interface IParishes:IEntity  
 	{
 		string Name { get;}
 

@@ -19,7 +19,8 @@ namespace Utilities
        {
            BitmapImage bi = new BitmapImage();
            bi.BeginInit();
-           bi.StreamSource = new MemoryStream(itm.Value);
+            //TODO: implement this
+          // bi.StreamSource = new MemoryStream(itm.Value);
            bi.EndInit();
            bi.Freeze();
            return bi;

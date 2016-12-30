@@ -6,11 +6,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IMediaTypesAutoView:DataInterfaces.IEntity  
+	public partial interface IMediaTypesAutoView:IEntity  
 	{
 		Byte[] Media { get;}
 		string MediaTypes { get;}

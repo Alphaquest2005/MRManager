@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.Composition;
 
-
-namespace DataInterfaces
+namespace SystemInterfaces
 {
     [InheritedExport]
     public interface IGetEntityById<T>
     {
-       void Create(int entityId);
+        void Create(int entityId);
     }
 }

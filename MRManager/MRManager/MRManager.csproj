@@ -129,6 +129,10 @@
       <Project>{9ef43ee7-b520-42d9-a75e-2d2887fd234c}</Project>
       <Name>Resources</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Revolution\Actor.Interfaces\Actor.Interfaces.csproj">
+      <Project>{8b10c72d-9f33-4290-b562-44cf1f718fa5}</Project>
+      <Name>Actor.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Revolution\ActorSystem\ActorSystem.csproj">
       <Project>{338fefd0-b7fa-46db-8041-c5ed7778e6c0}</Project>
       <Name>ActorSystem</Name>
@@ -156,10 +160,6 @@
     <ProjectReference Include="..\Revolution\DataInterfaces\DataInterfaces.csproj">
       <Project>{f6008330-ba42-454b-a0b4-82455de56776}</Project>
       <Name>DataInterfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Revolution\DataMessages\DataMessages.csproj">
-      <Project>{78f76c1d-baf2-4ac1-a05f-a8a7b4a3b95e}</Project>
-      <Name>DataMessages</Name>
     </ProjectReference>
     <ProjectReference Include="..\Revolution\DataServices\DataServices.csproj">
       <Project>{320107b2-d414-434b-ae0d-4d9f18ff49b8}</Project>

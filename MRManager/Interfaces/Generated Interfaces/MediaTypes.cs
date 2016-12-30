@@ -6,11 +6,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
+
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IMediaTypes:DataInterfaces.IEntity  
+	public partial interface IMediaTypes:IEntity  
 	{
 		string MediaTypeName { get;}
 		string FileExtension { get;}

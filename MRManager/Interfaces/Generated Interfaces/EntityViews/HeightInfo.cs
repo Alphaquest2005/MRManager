@@ -6,11 +6,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IHeightInfo:DataInterfaces.IEntity  
+	public partial interface IHeightInfo:IEntity  
 	{
 		double? Heights { get;}
 		string Unit { get;}

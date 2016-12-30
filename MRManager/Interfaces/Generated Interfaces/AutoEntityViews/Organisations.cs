@@ -6,11 +6,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IOrganisationsAutoView:DataInterfaces.IEntity  
+	public partial interface IOrganisationsAutoView:IEntity  
 	{
 		string PhoneTypes { get;}
 		string Organisations { get;}

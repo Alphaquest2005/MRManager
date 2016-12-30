@@ -6,11 +6,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IParishesAutoView:DataInterfaces.IEntity  
+	public partial interface IParishesAutoView:IEntity  
 	{
 		string Cities { get;}
 		string Parishes { get;}

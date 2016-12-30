@@ -42,6 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISystemProcessStarted.cs" />
+    <Compile Include="ISourceMessage.cs" />
+    <Compile Include="IMedia.cs" />
+    <Compile Include="RowState.cs" />
+    <Compile Include="IEntity.cs" />
+    <Compile Include="IGetEntityById.cs" />
+    <Compile Include="ISystemMessage.cs" />
+    <Compile Include="IMessage.cs" />
     <Compile Include="IAgent.cs" />
     <Compile Include="IDataService.cs" />
     <Compile Include="IEntityProcess.cs" />
@@ -53,23 +61,18 @@
     <Compile Include="IProcessInfo.cs" />
     <Compile Include="IProcessService.cs" />
     <Compile Include="IProcessState.cs" />
+    <Compile Include="IProcessSystemMessage.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="ISystem.cs" />
     <Compile Include="ISystemProcess.cs" />
+    <Compile Include="ISystemProcessCompleted.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="IEventSubscription.cs" />
     <Compile Include="IMachineInfo.cs" />
     <Compile Include="IProcess.cs" />
-    <Compile Include="IActorBackBone.cs" />
     <Compile Include="IStartService.cs" />
     <Compile Include="IViewModelService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataInterfaces\DataInterfaces.csproj">
-      <Project>{F6008330-BA42-454B-A0B4-82455DE56776}</Project>
-      <Name>DataInterfaces</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />

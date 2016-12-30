@@ -7,25 +7,29 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using SystemInterfaces;
 using SystemMessages;
+using Actor.Interfaces;
 using Akka.Actor;
 using CommonMessages;
 using EventAggregator;
 using FluentValidation.Resources;
 using NHibernate.Intercept;
 using NHibernate.Util;
+using RevolutionData;
 using RevolutionEntities.Process;
 using StartUp.Messages;
 
 namespace DataServices.Actors
 {
-    public class ProcessActor : BaseActor<ProcessActor>
+
+
+    public class ProcessActor : BaseActor<ProcessActor>, IProcessActor
     {
         public ISystemProcess Process { get; }
         
        
         private readonly List<IProcessSystemMessage> msgQue = new List<IProcessSystemMessage>(); 
-        private readonly IEnumerable<Processes.EventAction> _complexEvents = new List<Processes.EventAction>();
-        public ConcurrentDictionary<Type, dynamic> ProcessStateMessages = new ConcurrentDictionary<Type, dynamic>();  
+        private readonly IEnumerable<EventAction> _complexEvents = new List<EventAction>();
+        public ConcurrentDictionary<Type, dynamic> ProcessStateMessages { get; }= new ConcurrentDictionary<Type, dynamic>();  
        
 
         public ProcessActor(ISystemProcess process)
@@ -40,7 +44,7 @@ namespace DataServices.Actors
         {
             // Log the message 
             //TODO: Reenable event log
-            // Persist(pe, (x) => msgQue.Add(x));
+            //Persist(pe, x => { });//(x) => msgQue.Add(x)
 
             // send out Process State Events
 
@@ -53,10 +57,8 @@ namespace DataServices.Actors
         }
 
 
-        public IActorRef ActorRef()
-        {
-            return this.Self;
-        }
+        public IActorRef ActorRef => this.Self;
+        
     }
 
 

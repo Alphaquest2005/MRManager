@@ -6,11 +6,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
+
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IAddressCountries:DataInterfaces.IEntity  
+	public partial interface IAddressCountries:IEntity  
 	{
 		int CountryId { get;}
 

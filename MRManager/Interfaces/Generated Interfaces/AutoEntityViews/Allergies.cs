@@ -6,11 +6,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IAllergiesAutoView:DataInterfaces.IEntity  
+	public partial interface IAllergiesAutoView:IEntity  
 	{
 		string Allergies { get;}
 

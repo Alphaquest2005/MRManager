@@ -84,7 +84,6 @@
     <Compile Include="EntityViewLoaded.cs" />
     <Compile Include="LoadEntityViewWithFilter.cs" />
     <Compile Include="LoadEntityView.cs" />
-    <Compile Include="CurrentHeaderInfoChanged.cs" />
     <Compile Include="CreateEntity.cs" />
     <Compile Include="EntityChanges.cs" />
     <Compile Include="EntityDeleted.cs" />
@@ -96,9 +95,7 @@
     <Compile Include="GotMedia.cs" />
     <Compile Include="GetMedia.cs" />
     <Compile Include="LoadEntitySetWithFilterWithIncludes.cs" />
-    <Compile Include="LoadHeaderInfo.cs" />
     <Compile Include="LoadResults.cs" />
-    <Compile Include="HeaderInfoLoaded.cs" />
     <Compile Include="ProcessStateMessage.cs" />
     <Compile Include="RequestProcessState.cs" />
     <Compile Include="ResultsLoaded.cs" />

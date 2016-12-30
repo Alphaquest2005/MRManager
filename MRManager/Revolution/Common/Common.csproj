@@ -31,16 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="JB.Common.Collections">
-      <HintPath>..\..\SAMS-MRManager\MRManager\packages\JB.Common.Collections.0.8.101-pre\lib\net45\JB.Common.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="JB.Common.Collections.Reactive">
-      <HintPath>..\..\SAMS-MRManager\MRManager\packages\JB.Common.Collections.Reactive.0.8.101-pre\lib\net45\JB.Common.Collections.Reactive.dll</HintPath>
-    </Reference>
-    <Reference Include="JB.Common.Reactive">
-      <HintPath>..\..\SAMS-MRManager\MRManager\packages\JB.Common.Reactive.0.8.101-pre\lib\net45\JB.Common.Reactive.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -63,9 +55,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BootStrapper\BootStrapper.csproj">
+      <Project>{5dfeea8b-baba-4544-bf36-0a76a0d10c1b}</Project>
+      <Name>BootStrapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataInterfaces\DataInterfaces.csproj">
       <Project>{F6008330-BA42-454B-A0B4-82455DE56776}</Project>
       <Name>DataInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemInterfaces\SystemInterfaces.csproj">
+      <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>
+      <Name>SystemInterfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

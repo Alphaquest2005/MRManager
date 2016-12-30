@@ -82,6 +82,10 @@
       <Project>{459c400c-cc7c-4a97-9d0f-05a61eb4f7c8}</Project>
       <Name>Logging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SystemInterfaces\SystemInterfaces.csproj">
+      <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>
+      <Name>SystemInterfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utilities\Utilities.csproj">
       <Project>{0f9427b1-792e-4c35-97d8-22a9494ce28f}</Project>
       <Name>Utilities</Name>

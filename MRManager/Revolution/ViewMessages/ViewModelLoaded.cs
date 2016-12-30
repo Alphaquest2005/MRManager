@@ -1,12 +1,17 @@
 ﻿using System.ComponentModel.Composition;
 using SystemInterfaces;
 using CommonMessages;
+using ViewModel.Interfaces;
 using ViewModelInterfaces;
 
 namespace ViewMessages
 {
+    public interface IViewModelCreated<TViewModel> :IProcessSystemMessage, IViewModelEvent<TViewModel>
+    {
+    }
+
     [Export]
-    public class ViewModelCreated<TViewModel> : ProcessSystemMessage, IViewModelEvent<TViewModel>
+    public class ViewModelCreated<TViewModel> : ProcessSystemMessage, IViewModelCreated<TViewModel>
     {
         [ImportingConstructor]
         public ViewModelCreated(TViewModel viewModel, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
@@ -18,16 +23,20 @@ namespace ViewMessages
 
     }
 
+
+
     [Export]
-    public class ViewLoadedViewModel<TViewModel> : ProcessSystemMessage, IViewModelEvent<TViewModel>
+    public class ViewModelLoaded<TLoadingViewModel,TViewModel> : ProcessSystemMessage, IViewModelLoaded<TLoadingViewModel,TViewModel>
     {
         //occurs when viewmodel loaded in View
         [ImportingConstructor]
-        public ViewLoadedViewModel(TViewModel viewModel, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public ViewModelLoaded(TLoadingViewModel loadingViewModel, TViewModel viewModel, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
+            LoadingViewModel = loadingViewModel;
             ViewModel = viewModel;
         }
 
+        public TLoadingViewModel LoadingViewModel { get; }
         public TViewModel ViewModel { get; }
 
     }

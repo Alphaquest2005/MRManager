@@ -73,7 +73,7 @@ namespace Core.Common.UI
             {
                 var paramArray = itm.MessageData.Select(p => p.Invoke(viewModel)).Cast<object>().ToList();
                 paramArray.Add(viewModel.Process);
-                paramArray.Add(new SystemMessage(viewModel.Process.MachineInfo, viewModel.SourceMessage.Source));
+                paramArray.Add(viewModel.SourceMessage);
                 var msg = (ProcessSystemMessage) Activator.CreateInstance(itm.EventType, paramArray.ToArray());
                 EventMessageBus.Current.Publish(msg, viewModel.SourceMessage);
             };

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using SystemInterfaces;
+using Actor.Interfaces;
 using Akka.Persistence;
 using CommonMessages;
 using RevolutionEntities.Process;
@@ -9,9 +11,9 @@ using Utilities;
 
 namespace DataServices.Actors
 {
-    public class BaseActor<T>: ReceivePersistentActor
+    public class BaseActor<T>: ReceivePersistentActor, IAgent
     {
-        internal SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public ISourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
         internal Func<IList<ProcessExpectedEvent>, IList<IProcessSystemMessage>, bool> CheckExpectedEvents {
             get; } = (expectedEvents, eventSource) =>
@@ -49,6 +51,7 @@ namespace DataServices.Actors
             Debugger.Break();
         }
 
+        public string UserId => this.SourceMessage.Source.Source;
     }
 
   

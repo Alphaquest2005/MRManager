@@ -3,8 +3,6 @@ using SystemInterfaces;
 
 namespace CommonMessages
 {
-
-
     public class SystemMessage :ISystemMessage
     {
         public SystemMessage(IMachineInfo machineInfo, IMessageSource source)

@@ -6,11 +6,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
+
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IPersonEmailAddress:DataInterfaces.IEntity  
+	public partial interface IPersonEmailAddress:IEntity  
 	{
 		string Email { get;}
 		int PersonId { get;}

@@ -1,5 +1,5 @@
 ﻿using System;
-using CommonMessages;
+using SystemInterfaces;
 using Utilities;
 
 namespace RevolutionEntities.Process

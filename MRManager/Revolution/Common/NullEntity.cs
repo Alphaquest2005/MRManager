@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Reflection;
 using Common.DataEntites;
@@ -6,15 +7,23 @@ using DataInterfaces;
 
 namespace DataEntites
 {
-    public sealed class NullEntity<T>: BaseEntity where T:class,IEntity, new()
+    public sealed class NullEntity<T>: BaseEntity 
     {
         
         private static readonly T instance;
         static NullEntity()
         {
-
-            instance = new T() {Id = -1};
-                //(T) Activator.CreateInstance(Assembly.GetExecutingAssembly().ExportedTypes.FirstOrDefault(x => x.Name == typeof(T).Name.Substring(1)).GetType());
+            var export = BootStrapper.BootStrapper.Container.GetExport<T>();
+            if (export != null)
+            {
+                var itm = export.Value;
+                instance = (T) Activator.CreateInstance(itm.GetType());
+            }
+            else
+            {
+                instance = default(T);
+            }
+            
         }
 
         public static T Instance => instance;

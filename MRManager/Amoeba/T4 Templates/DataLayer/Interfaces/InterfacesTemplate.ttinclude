@@ -26,11 +26,13 @@ public class InterfaceTemplate : CSharpTemplate
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
+
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface I<#= Entity.Entity.Name #>:DataInterfaces.IEntity  
+	public partial interface I<#= Entity.Entity.Name #>:IEntity  
 	{
 <#+
 	foreach (DataProperty prop in Entity.Entity.EntityProperties.SelectMany(x=>x.DataProperties).Where(x => x.ModelType.Name != "EntityId" && x.EntityProperty.PropertyName != "Id").DistinctBy(x => x.EntityPropertyId))

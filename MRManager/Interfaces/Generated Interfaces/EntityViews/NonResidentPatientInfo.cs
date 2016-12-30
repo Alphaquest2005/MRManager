@@ -6,11 +6,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface INonResidentPatientInfo:DataInterfaces.IEntity  
+	public partial interface INonResidentPatientInfo:IEntity  
 	{
 		string Boatinfo { get;}
 		string MarinaList { get;}

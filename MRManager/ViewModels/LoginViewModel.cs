@@ -14,16 +14,18 @@ using ViewModelInterfaces;
 
 namespace ViewModels
 {
-    public class LoginViewModel : DynamicViewModel<ObservableViewModel<UserSignIn>>, IEntityViewModel<UserSignIn>
+   
+
+    public class LoginViewModel : DynamicViewModel<ObservableViewModel<IUserSignIn>>, IEntityViewModel<IUserSignIn>, ILoginViewModel
     {
-        public LoginViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableViewModel<UserSignIn>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
+        public LoginViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableViewModel<IUserSignIn>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
             CurrentEntity = this.Instance.CurrentEntity;
             ChangeTracking = this.Instance.ChangeTracking;
             this.WireEvents();
         }
 
-        public ReactiveProperty<UserSignIn> CurrentEntity { get; }
+        public ReactiveProperty<IUserSignIn> CurrentEntity { get; }
         public ObservableDictionary<string, dynamic> ChangeTracking { get; }
     }
 }

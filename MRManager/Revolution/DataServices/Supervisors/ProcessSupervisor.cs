@@ -8,6 +8,7 @@ using Akka.Actor;
 using CommonMessages;
 using EventAggregator;
 using EventMessages;
+using RevolutionData;
 using RevolutionEntities.Process;
 using Utilities;
 

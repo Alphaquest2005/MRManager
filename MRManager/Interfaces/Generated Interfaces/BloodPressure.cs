@@ -6,11 +6,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
+
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IBloodPressure:DataInterfaces.IEntity  
+	public partial interface IBloodPressure:IEntity  
 	{
 		int Systolic { get;}
 		int Diastolic { get;}

@@ -76,7 +76,6 @@
     <Compile Include="FlowDocuments\Fragment.cs" />
     <Compile Include="FlowDocuments\Helpers.cs" />
     <Compile Include="FlowDocuments\ItemsContent.cs" />
-    <Compile Include="IAutoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SliderControl.cs" />
     <Compile Include="splashscreen.cs" />

@@ -144,10 +144,6 @@
       <Project>{f6008330-ba42-454b-a0b4-82455de56776}</Project>
       <Name>DataInterfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Revolution\DataMessages\DataMessages.csproj">
-      <Project>{78f76c1d-baf2-4ac1-a05f-a8a7b4a3b95e}</Project>
-      <Name>DataMessages</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Revolution\DataServices\DataServices.csproj">
       <Project>{320107b2-d414-434b-ae0d-4d9f18ff49b8}</Project>
       <Name>DataServices</Name>

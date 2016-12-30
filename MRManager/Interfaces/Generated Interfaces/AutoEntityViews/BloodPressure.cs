@@ -6,11 +6,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IBloodPressureAutoView:DataInterfaces.IEntity  
+	public partial interface IBloodPressureAutoView:IEntity  
 	{
 		double? Height { get;}
 		int? Pulse { get;}

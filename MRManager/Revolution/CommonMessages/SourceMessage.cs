@@ -7,11 +7,6 @@ using SystemInterfaces;
 
 namespace CommonMessages
 {
-    public interface ISourceMessage:ISystemMessage
-    {
-        
-    }
-
     public class SourceMessage: ISourceMessage
     {
         public SourceMessage(IMessageSource source, IMachineInfo machineInfo)

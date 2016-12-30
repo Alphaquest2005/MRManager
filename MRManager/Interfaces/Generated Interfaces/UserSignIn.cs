@@ -6,7 +6,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using DataInterfaces;
+using SystemInterfaces;
+
 
 namespace Interfaces
 {
@@ -15,6 +16,8 @@ namespace Interfaces
 	{
 		string Username { get;}
 		string Password { get;}
+
+
 
 	}
 }

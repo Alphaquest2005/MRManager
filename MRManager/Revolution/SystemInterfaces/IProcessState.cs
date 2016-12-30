@@ -1,6 +1,4 @@
-﻿using DataInterfaces;
-
-namespace SystemInterfaces
+﻿namespace SystemInterfaces
 {
     public interface IProcessState
     {

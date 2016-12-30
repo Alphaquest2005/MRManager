@@ -26,11 +26,12 @@ public class EntityViewInterfaceTemplate : CSharpTemplate
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
 
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface I<#= EntityView.Name #>:DataInterfaces.IEntity  
+	public partial interface I<#= EntityView.Name #>:IEntity  
 	{
 <#+
 	foreach (var prop in EntityView.EntityViewProperties)

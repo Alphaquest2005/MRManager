@@ -42,12 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IActorBackBone.cs" />
     <Compile Include="IDataContext.cs" />
-    <Compile Include="IEntity.cs" />
-    <Compile Include="IGetEntityById.cs" />
-    <Compile Include="IGetEntityByIdServiceReady.cs" />
-    <Compile Include="IHeaderInfo.cs" />
-    <Compile Include="IMedia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

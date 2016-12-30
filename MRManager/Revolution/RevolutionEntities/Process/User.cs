@@ -6,7 +6,7 @@ namespace RevolutionEntities.Process
 {
     public class User: IUser
     {
-        private string UserName { get; }
+        private string Username { get; }
         private string Password { get; }
 
         public IPerson Person { get; }
@@ -14,7 +14,7 @@ namespace RevolutionEntities.Process
         public User(IPerson person, string password, string userId)
         {
             Contract.Requires(person != null);
-            UserName = person.Name;
+            Username = person.Name;
             Password = password;
             UserId = userId;
             Person = person;
