@@ -4,7 +4,7 @@ using Utilities;
 
 namespace RevolutionEntities.Process
 {
-    public class ProcessExpectedEvent
+    public class ProcessExpectedEvent : IProcessExpectedEvent
     {
         public int ProcessId { get; }
         public Type EventType { get; }

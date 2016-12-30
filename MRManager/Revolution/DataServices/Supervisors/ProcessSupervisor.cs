@@ -20,22 +20,22 @@ namespace DataServices.Actors
 
         public ProcessSupervisor()
         {
-            EventMessageBus.Current.GetEvent<SystemProcessCompleted>(SourceMessage).Subscribe(x => HandleProcessCompleted(x));
-            Receive<SystemStarted>(x => HandleProcessViews(x));
+            EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(SourceMessage).Subscribe(x => HandleProcessCompleted(x));
+            Receive<ISystemStarted>(x => HandleProcessViews(x));
         }
 
-        private void HandleProcessCompleted(ProcessSystemMessage se)
+        private void HandleProcessCompleted(ISystemProcessCompleted se)
         {
             var processSteps = Processes.ProcessInfos.Where(x => x.ParentProcessId == se.Process.Id);
             CreateProcesses(se, processSteps);
         }
-        private void HandleProcessViews(ProcessSystemMessage se)
+        private void HandleProcessViews(ISystemStarted se)
         {
             var processSteps = Processes.ProcessInfos.Where(x => x.Id == se.Process.Id);
             CreateProcesses(se, processSteps);
         }
 
-        private void CreateProcesses(ProcessSystemMessage se, IEnumerable<IProcessInfo> processSteps)
+        private void CreateProcesses(IProcessSystemMessage se, IEnumerable<IProcessInfo> processSteps)
         {
             foreach (var pe in processSteps.Select(p => new SystemProcessStarted(new SystemProcess(new Process(p.Id, p.ParentProcessId, p.Name, p.Description, p.Symbol, se.User), SourceMessage.MachineInfo),SourceMessage)))
             {

@@ -5,6 +5,7 @@ using System.Reactive.Linq;
 using System.Reflection;
 using SystemInterfaces;
 using SystemMessages;
+using Actor.Interfaces;
 using Akka.Actor;
 using CommonMessages;
 using NHibernate;
@@ -19,10 +20,12 @@ using StartUp.Messages;
 
 namespace DataServices.Actors
 {
-    public class DataContextManager : ReceiveActor
+
+
+    public class ServiceManager : ReceiveActor, IServiceManager
     {
 
-        protected SourceMessage SourceMessage
+        public ISourceMessage SourceMessage
             =>
                 new SourceMessage(new MessageSource(this.ToString()),
                     new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
@@ -30,11 +33,11 @@ namespace DataServices.Actors
         static List<IActorRef> supervisors = new List<IActorRef>();
 
 
-        public DataContextManager(IDataContext dbContext, Assembly dbContextAssembly, Assembly entityAssembly)
+        public ServiceManager(IDataContext dbContext, Assembly dbContextAssembly, Assembly entityAssembly)
         {
             try
             {
-
+                
                 var machineInfo =
                     MachineInfoData.MachineInfos.FirstOrDefault(
                         x => x.MachineName == Environment.MachineName && x.Processors == Environment.ProcessorCount);
@@ -44,18 +47,26 @@ namespace DataServices.Actors
                 var systemProcess = new SystemProcess(new Process(processInfo, new Agent("System")), machineInfo);
                 var systemStartedMsg = new SystemStarted(systemProcess, SourceMessage);
                 EF7DataContextBase.Initialize(dbContextAssembly, entityAssembly);
-                EventMessageBus.Current.GetEvent<ServiceStarted<IProcessService>>(SourceMessage).Where(x => x.Process.Id == 1)//only start up process
-                    .Subscribe(x => HandleProcessStarted(dbContext, x.Process, systemStartedMsg));
 
-                var processSup = Context.ActorOf(Props.Create<ProcessSupervisor>(), "ProcessSupervisor");
+                 var processSup = Context.ActorOf(Props.Create<ProcessSupervisor>(), "ProcessSupervisor");
                 processSup.Tell(systemStartedMsg);
-
-
+                
+                EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(SourceMessage).Where(x => x.Process.Id == 1)//only start up process
+                    .Subscribe(x =>
+                    {
+                        EventMessageBus.Current.Publish(new ServiceStarted<IServiceManager>(this,systemProcess,SourceMessage), SourceMessage);
+                        HandleProcessStarted(dbContext, x.Process, systemStartedMsg);
+                    });
+                
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: typeof(ServiceStarted<IServiceManager>),
+                    failedEventMessage: null,
+                    expectedEventType: typeof(ServiceStarted<IServiceManager>),
+                    exception: ex,
+                    SourceMsg: SourceMessage), SourceMessage);
 
-                throw;
             }
         }
 
@@ -111,6 +122,8 @@ namespace DataServices.Actors
             }
 
         }
+
+        public string UserId => this.SourceMessage.Source.Source;
     }
 
 

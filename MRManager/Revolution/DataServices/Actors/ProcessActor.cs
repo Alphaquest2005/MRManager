@@ -28,7 +28,7 @@ namespace DataServices.Actors
         
        
         private readonly List<IProcessSystemMessage> msgQue = new List<IProcessSystemMessage>(); 
-        private readonly IEnumerable<EventAction> _complexEvents = new List<EventAction>();
+        private readonly IEnumerable<IEventAction> _complexEvents = new List<EventAction>();
         public ConcurrentDictionary<Type, dynamic> ProcessStateMessages { get; }= new ConcurrentDictionary<Type, dynamic>();  
        
 
@@ -37,7 +37,7 @@ namespace DataServices.Actors
             Process = process;
             Command<IProcessSystemMessage>(z => HandleProcessEvents(z));
             if(Processes.ProcessComplexEvents.Any(x => x.ProcessId == process.Id)) _complexEvents = Processes.ProcessComplexEvents.Where(x => x.ProcessId == process.Id);
-            EventMessageBus.Current.Publish(new ServiceStarted<IProcessService>(process, SourceMessage), SourceMessage);
+            EventMessageBus.Current.Publish(new ServiceStarted<IProcessService>(this,process, SourceMessage), SourceMessage);
         }
 
         private void HandleProcessEvents(IProcessSystemMessage pe)

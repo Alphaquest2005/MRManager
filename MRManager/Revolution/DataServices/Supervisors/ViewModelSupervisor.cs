@@ -13,7 +13,8 @@ using ViewModel.Interfaces;
 
 namespace DataServices.Actors
 {
-    public class ViewModelSupervisor : BaseSupervisor<ViewModelSupervisor>
+  
+    public class ViewModelSupervisor : BaseSupervisor<ViewModelSupervisor>, IViewModelSupervisor
     {
 
         private IActorRef _childActor;
@@ -25,12 +26,12 @@ namespace DataServices.Actors
             _childActor = Context.ActorOf(Props.Create<ViewModelActor>(process).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
                     "ViewModelActorEntityActor");
 
-            EventMessageBus.Current.GetEvent<SystemProcessStarted>(SourceMessage).Subscribe(x => HandleProcessViews(x));
-            Receive<SystemStarted>(x => HandleProcessViews(x));
-             EventMessageBus.Current.Publish(new ServiceStarted<IViewModelService>(process, SourceMessage), SourceMessage);
+            EventMessageBus.Current.GetEvent<ISystemProcessStarted>(SourceMessage).Subscribe(x => HandleProcessViews(x));
+            Receive<ISystemStarted>(x => HandleProcessViews(x));
+             EventMessageBus.Current.Publish(new ServiceStarted<IViewModelSupervisor>(this,process, SourceMessage), SourceMessage);
         }
 
-        private void HandleProcessViews(ProcessSystemMessage pe)
+        private void HandleProcessViews(IProcessSystemMessage pe)
         {
             foreach (var v in ProcessViewModels.ProcessViewModelInfos.Where(x => x.ProcessId == pe.Process.Id))
             {

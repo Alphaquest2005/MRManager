@@ -15,7 +15,7 @@ namespace DataServices.Actors
     {
         public ISourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
-        internal Func<IList<ProcessExpectedEvent>, IList<IProcessSystemMessage>, bool> CheckExpectedEvents {
+        internal Func<IList<IProcessExpectedEvent>, IList<IProcessSystemMessage>, bool> CheckExpectedEvents {
             get; } = (expectedEvents, eventSource) =>
         {
             if (!expectedEvents.Any()) return false;

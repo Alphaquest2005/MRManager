@@ -31,19 +31,19 @@ namespace RevolutionData
                     (actor, msg) =>
                         EventMessageBus.Current.Publish(new SystemProcessCompleted(actor.Process, actor.SourceMessage),
                             actor.SourceMessage),
-                events: new List<ProcessExpectedEvent>()
+                events: new List<IProcessExpectedEvent>()
                 {
                     new ProcessExpectedEvent (processId: 1, eventType: typeof (ISystemProcessStarted), eventPredicate: (e) => e != null),
-                    new ProcessExpectedEvent (processId: 1, eventType: typeof (IViewModelCreated<IScreenViewModel>),eventPredicate: (e) => e != null),
-                    new ProcessExpectedEvent (processId: 1, eventType: typeof (IViewModelLoaded<IMainWindowViewModel,IScreenViewModel>),eventPredicate: (e) => e != null),
+                    new ProcessExpectedEvent (processId: 1, eventType: typeof (IViewModelCreated<IScreenModel>),eventPredicate: (e) => e != null),
+                    new ProcessExpectedEvent (processId: 1, eventType: typeof (IViewModelLoaded<IMainWindowViewModel,IScreenModel>),eventPredicate: (e) => e != null),
                 }),
             new EventAction(
                 processId:1,
                 action:
                     (actor, msg) => {}, //actor.ActorRef().GracefulStop(TimeSpan.FromSeconds(10)),TODO: figure out way to close actor without messing up command not working
-                events: new List<ProcessExpectedEvent>()
+                events: new List<IProcessExpectedEvent>()
                 {
-                    new ProcessExpectedEvent (processId: 1, eventType: typeof (SystemProcessCompleted), eventPredicate: (e) => e != null)
+                    new ProcessExpectedEvent (processId: 1, eventType: typeof (ISystemProcessCompleted), eventPredicate: (e) => e != null)
                 }),
             new EventAction(
                 processId:2,
@@ -56,13 +56,13 @@ namespace RevolutionData
                         actor.ProcessStateMessages.AddOrUpdate(typeof(IUserSignIn),psMsg, (key,value) => ps);
                         EventMessageBus.Current.Publish(psMsg, actor.SourceMessage);
                     },
-                events: new List<ProcessExpectedEvent>()
+                events: new List<IProcessExpectedEvent>()
                 {
                     new ProcessExpectedEvent (processId: 2, eventType: typeof (ISystemProcessStarted), eventPredicate: (e) => e != null),
                     new ProcessExpectedEvent (processId: 1, eventType: typeof (IViewModelCreated<ILoginViewModel>),eventPredicate: (e) => e != null),
-                    new ProcessExpectedEvent (processId: 1, eventType: typeof (IViewModelLoaded<IScreenViewModel,ILoginViewModel>),eventPredicate: (e) => e != null),
+                    new ProcessExpectedEvent (processId: 1, eventType: typeof (IViewModelLoaded<IScreenModel,ILoginViewModel>),eventPredicate: (e) => e != null),
                 }),
-            new EventAction<EntityFound<IUserSignIn>>(
+            new EventAction<IEntityFound<IUserSignIn>>(
                 processId:2,
                 action:
                     (actor, msg) =>
@@ -73,7 +73,7 @@ namespace RevolutionData
                         actor.ProcessStateMessages.AddOrUpdate(typeof(IUserSignIn),psMsg, (key,value) => ps);
                         EventMessageBus.Current.Publish(psMsg, actor.SourceMessage);
                     },
-                events: new List<ProcessExpectedEvent>()
+                events: new List<IProcessExpectedEvent>()
                 {
                     new ProcessExpectedEvent<EntityFound<IUserSignIn>> (processId: 2, eventPredicate: (e) => e.Entity != null)
                 }),
@@ -88,9 +88,9 @@ namespace RevolutionData
                         }
 
                     },
-                events: new List<ProcessExpectedEvent>()
+                events: new List<IProcessExpectedEvent>()
                 {
-                    new ProcessExpectedEvent (processId: 2, eventType: typeof(RequestProcessState), eventPredicate: (e) => e != null)
+                    new ProcessExpectedEvent (processId: 2, eventType: typeof(IRequestProcessState), eventPredicate: (e) => e != null)
                 }),
         };
 

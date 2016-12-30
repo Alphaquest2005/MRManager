@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using SystemInterfaces;
+using Actor.Interfaces;
 using CommonMessages;
 using DataInterfaces;
 using EF.DBContexts;
@@ -13,39 +16,40 @@ using ViewMessages;
 using ViewModel.Interfaces;
 using ViewModels;
 
+
 namespace MRManager_UnitTests
 {
     [TestClass]
     public class SystemIntializationProcess
     {
-        protected SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
-        [TestMethod]
-        public void ScreenModelRecieveLoginViewModelInBody()
-        {
-            var process =
-                new SystemProcess(new Process(2, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")),
-                    SourceMessage.MachineInfo);
-            var vm = new LoginViewModel(process: process,
-               eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
-               eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
-               {
 
-               }, commandInfo: new List<IViewModelEventCommand<IViewModel, IEvent>>(), orientation: typeof(IBodyViewModel));
-            EventMessageBus.Current.GetEvent<ViewModelCreated<IViewModel>>(SourceMessage)
-                .Subscribe(x => GetBodyView(x));
-            EventMessageBus.Current.Publish(new ViewModelCreated<IViewModel>(vm,process,SourceMessage),SourceMessage);
+        protected ISourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        [TestMethod]
+        public void DataContextStarted()
+        {
+         
+
+            IServiceStarted<IServiceManager> msgRecieved = null;
+            EventMessageBus.Current.GetEvent<IServiceStarted<IServiceManager>>(SourceMessage)
+                .Subscribe(x => msgRecieved = x);
+            StartSystem();
+            Thread.Sleep(TimeSpan.FromSeconds(60));
+            Assert.IsNotNull(msgRecieved);
         }
 
-        private void GetBodyView(ViewModelCreated<IViewModel> vm)
+        private void GetBodyView(IViewModelCreated<IViewModel> vm)
         {
             Assert.AreEqual(typeof(LoginViewModel), vm.ViewModel.GetType());
         }
 
         private void StartSystem()
         {
-            
+
+            var t = new MRManagerDBContext().GetType().Assembly;
+            var x = new EFEntity<IEntity>().GetType().Assembly;
             var d = new NHDBContext();
-            
+            BootStrapper.BootStrapper.Instance.StartUp(d, t, x);
+
         }
     }
 }

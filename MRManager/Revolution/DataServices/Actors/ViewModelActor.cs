@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using SystemInterfaces;
 using SystemMessages;
+using BootStrapper;
 using CommonMessages;
 using Core.Common.UI;
 using EventAggregator;
@@ -12,17 +14,17 @@ using ViewModels;
 
 namespace DataServices.Actors
 {
-    public class ViewModelActor : BaseActor<ViewModelActor> 
+    public class ViewModelActor : BaseActor<ViewModelActor>, IViewModelService
     {
         public ViewModelActor(ISystemProcess process)
         {
             Command<LoadViewModel>(x => HandleProcessViews(x));
             //EventMessageBus.Current.GetEvent<LoadViewModel<IViewModelInfo>>(SourceMessage).Subscribe(HandleProcessViews);
 
-            EventMessageBus.Current.Publish(new ServiceStarted<IViewModelService>(process, SourceMessage), SourceMessage);
+            EventMessageBus.Current.Publish(new ServiceStarted<IViewModelService>(this,process, SourceMessage), SourceMessage);
         }
 
-        private void HandleProcessViews(LoadViewModel pe)
+        private void HandleProcessViews(ILoadViewModel pe)
         {
             this.GetType()
                     .GetMethod("LoadEntityViewModel")
@@ -36,7 +38,8 @@ namespace DataServices.Actors
         {
             try
             {
-                var vm =(TViewModel) Activator.CreateInstance(vmInfo.ViewModelInfo.ViewModelType, new object[] {vmInfo.Process, vmInfo.ViewModelInfo.Subscriptions, vmInfo.ViewModelInfo.Publications, vmInfo.ViewModelInfo.Commands, vmInfo.ViewModelInfo.Orientation });
+                var concreteVM = BootStrapper.BootStrapper.Container.GetExportedTypes<TViewModel>().FirstOrDefault();
+                var vm =(TViewModel) Activator.CreateInstance( concreteVM/*vmInfo.ViewModelInfo.ViewModelType*/, new object[] {vmInfo.Process, vmInfo.ViewModelInfo.Subscriptions, vmInfo.ViewModelInfo.Publications, vmInfo.ViewModelInfo.Commands, vmInfo.ViewModelInfo.Orientation });
                 EventMessageBus.Current.Publish(new ViewModelCreated<TViewModel>(vm, vmInfo.Process, SourceMessage), SourceMessage);
                 EventMessageBus.Current.Publish(new ViewModelCreated<IViewModel>(vm, vmInfo.Process, SourceMessage), SourceMessage);
                 //dynamic dvm = new DynamicViewModel<TViewModel>(vm);
@@ -44,9 +47,9 @@ namespace DataServices.Actors
             }
             catch (Exception ex)
             {
-                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType:typeof(LoadViewModel),
+                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType:typeof(ILoadViewModel),
                                                                         failedEventMessage: vmInfo,
-                                                                        expectedEventType:typeof(ViewModelCreated<DynamicViewModel<TViewModel>>),
+                                                                        expectedEventType:typeof(IViewModelCreated<IDynamicViewModel<TViewModel>>),
                                                                         exception:ex,
                                                                         SourceMsg:SourceMessage), SourceMessage);
             }

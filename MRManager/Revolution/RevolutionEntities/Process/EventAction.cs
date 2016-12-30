@@ -10,10 +10,10 @@ using Utilities;
 
 namespace RevolutionEntities.Process
 {
-    public class EventAction
+    public class EventAction : IEventAction
     {
         public EventAction(int processId, Action<IProcessActor, IProcessSystemMessage> action,
-            IList<ProcessExpectedEvent> events)
+            IList<IProcessExpectedEvent> events)
         {
             Events = events;
             ProcessId = processId;
@@ -21,14 +21,14 @@ namespace RevolutionEntities.Process
         }
 
         public int ProcessId { get; }
-        public IList<ProcessExpectedEvent> Events { get; }
+        public IList<IProcessExpectedEvent> Events { get; }
         public Action<IProcessActor, IProcessSystemMessage> Action { get; }
         public bool Raised { get; set; } = false;
     }
 
-    public class EventAction<TEvent> : EventAction where TEvent : IProcessSystemMessage
+    public class EventAction<TEvent> : EventAction, IEventAction<TEvent> where TEvent : IProcessSystemMessage
     {
-        public EventAction(int processId, Action<IProcessActor, TEvent> action, IList<ProcessExpectedEvent> events) : base(processId, (Action<IProcessActor, IProcessSystemMessage>)action.Convert(typeof(IProcessActor), typeof(IProcessSystemMessage)), events)
+        public EventAction(int processId, Action<IProcessActor, TEvent> action, IList<IProcessExpectedEvent> events) : base(processId, (Action<IProcessActor, IProcessSystemMessage>)action.Convert(typeof(IProcessActor), typeof(IProcessSystemMessage)), events)
         {
         }
     }

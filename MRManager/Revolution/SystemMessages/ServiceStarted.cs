@@ -5,11 +5,16 @@ using CommonMessages;
 
 namespace SystemMessages
 {
+   
+
     [Export]
-    public class ServiceStarted<TService> : ProcessSystemMessage 
+    public class ServiceStarted<TService> : ProcessSystemMessage, IServiceStarted<TService>
     {
-        public ServiceStarted(ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public ServiceStarted(TService service, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
+            Service = service;
         }
+
+        public TService Service { get; }
     }
 }

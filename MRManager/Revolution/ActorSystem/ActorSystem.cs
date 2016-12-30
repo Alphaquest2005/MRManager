@@ -24,8 +24,7 @@ namespace ActorBackBone
              try
             {
                 System = ActorSystem.Create("System");
-                System.ActorOf(Props.Create(() => new DataContextManager(ctx, dbContextAssembly, entityAssembly)),
-                    "DataContextManager");
+                System.ActorOf(Props.Create<ServiceManager>(ctx, dbContextAssembly, entityAssembly),"ServiceManager");
                 Instance = this;
             }
             catch (Exception)

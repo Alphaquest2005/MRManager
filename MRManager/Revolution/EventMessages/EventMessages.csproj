@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="BlankMessage.cs" />
     <Compile Include="EntityFound.cs" />
+    <Compile Include="IEntityFound.cs" />
     <Compile Include="ProcessEventFailure.cs" />
     <Compile Include="CurrentEntityChanged.cs" />
     <Compile Include="EntityViewLoaded.cs" />

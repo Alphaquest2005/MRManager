@@ -10,7 +10,9 @@ using ViewModel.Interfaces;
 
 namespace Core.Common.UI
 {
-    public class DynamicViewModel<TViewModel> : Expando, IViewModel where TViewModel:IViewModel
+
+
+    public class DynamicViewModel<TViewModel> : Expando, IDynamicViewModel<TViewModel> where TViewModel:IViewModel
     {
         public new TViewModel Instance { get; }
         public DynamicViewModel(TViewModel viewModel) : base(viewModel)

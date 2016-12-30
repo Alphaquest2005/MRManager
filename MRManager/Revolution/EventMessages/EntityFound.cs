@@ -4,7 +4,7 @@ using DataInterfaces;
 
 namespace EventMessages
 {
-    public class EntityFound<T> : ProcessSystemMessage where T : IEntity
+    public class EntityFound<T> : ProcessSystemMessage, IEntityFound<T> where T : IEntity
     {
         public EntityFound(T entity, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {

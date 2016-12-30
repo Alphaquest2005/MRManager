@@ -6,7 +6,7 @@ using ViewModel.Interfaces;
 namespace ViewMessages
 {
     [Export]
-    public class LoadViewModel : ProcessSystemMessage
+    public class LoadViewModel : ProcessSystemMessage, ILoadViewModel
     {
         public LoadViewModel(IViewModelInfo viewModelInfo, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {

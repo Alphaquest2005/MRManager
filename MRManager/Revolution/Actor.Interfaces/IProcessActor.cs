@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SystemInterfaces;
 using Akka.Actor;
-using CommonMessages;
+using StartUp.Messages;
 
 namespace Actor.Interfaces
 {
     [InheritedExport]
-    public interface IProcessActor:IAgent
+    public interface IProcessActor:IAgent, IProcessService
     {
         ISystemProcess Process { get; }
         ConcurrentDictionary<Type, dynamic> ProcessStateMessages { get; }

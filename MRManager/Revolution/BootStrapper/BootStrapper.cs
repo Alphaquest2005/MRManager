@@ -60,6 +60,4 @@ namespace BootStrapper
 
         public static CompositionContainer Container { get;  }
     }
-
-  
 }

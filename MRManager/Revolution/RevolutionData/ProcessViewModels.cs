@@ -23,42 +23,42 @@ namespace RevolutionData
                 (
                 1,
                 new List<IViewModelEventSubscription<IViewModel, IEvent>>()
-                {   new ViewEventSubscription<IScreenViewModel, IViewModelCreated<IViewModel>>(
+                {   new ViewEventSubscription<IScreenModel, IViewModelCreated<IViewModel>>(
                     processId: 1,
                     eventPredicate: (e) => e != null,
-                    actionPredicate: new List<Func<IScreenViewModel, IViewModelCreated<IViewModel>, bool>>
+                    actionPredicate: new List<Func<IScreenModel, IViewModelCreated<IViewModel>, bool>>
                     {
                         (s, e) => s.Process.Id != e.ViewModel.Process.Id && e.ViewModel.Orientation == typeof(IHeaderViewModel)
                     },
                     action: (s, e) => s.HeaderViewModels.Add(e.ViewModel)),
-                    new ViewEventSubscription<IScreenViewModel, IViewModelCreated<IViewModel>>(
+                    new ViewEventSubscription<IScreenModel, IViewModelCreated<IViewModel>>(
                         processId: 1,
                         eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<IScreenViewModel, IViewModelCreated<IViewModel>, bool>>
+                        actionPredicate: new List<Func<IScreenModel, IViewModelCreated<IViewModel>, bool>>
                         {
                             (s, e) => s.Process.Id != e.ViewModel.Process.Id && e.ViewModel.Orientation == typeof(ILeftViewModel)
                         },
                         action: (s, e) => s.LeftViewModels.Add(e.ViewModel)),
-                    new ViewEventSubscription<IScreenViewModel, IViewModelCreated<IViewModel>>(
+                    new ViewEventSubscription<IScreenModel, IViewModelCreated<IViewModel>>(
                         processId: 1,
                         eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<IScreenViewModel, IViewModelCreated<IViewModel>, bool>>
+                        actionPredicate: new List<Func<IScreenModel, IViewModelCreated<IViewModel>, bool>>
                         {
                             (s, e) => s.Process.Id != e.ViewModel.Process.Id && e.ViewModel.Orientation == typeof(IRightViewModel)
                         },
                         action: (s, e) => s.RightViewModels.Add(e.ViewModel)),
-                    new ViewEventSubscription<IScreenViewModel, IViewModelCreated<IViewModel>>(
+                    new ViewEventSubscription<IScreenModel, IViewModelCreated<IViewModel>>(
                         processId:1,
                         eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<IScreenViewModel, IViewModelCreated<IViewModel>, bool>>
+                        actionPredicate: new List<Func<IScreenModel, IViewModelCreated<IViewModel>, bool>>
                         {
                             (s, e) => s.Process.Id != e.ViewModel.Process.Id && e.ViewModel.Orientation == typeof(IFooterViewModel)
                         },
                         action: (s, e) => s.FooterViewModels.Add(e.ViewModel)),
-                    new ViewEventSubscription<IScreenViewModel, IViewModelCreated<IViewModel>>(
+                    new ViewEventSubscription<IScreenModel, IViewModelCreated<IViewModel>>(
                         processId: 1,
                         eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<IScreenViewModel, IViewModelCreated<IViewModel>, bool>>
+                        actionPredicate: new List<Func<IScreenModel, IViewModelCreated<IViewModel>, bool>>
                         {
                             (s, e) => s.Process.Id != e.ViewModel.Process.Id && e.ViewModel.Orientation == typeof(IBodyViewModel)
                         },
@@ -66,7 +66,7 @@ namespace RevolutionData
                 },
                 new List<IViewModelEventPublication<IViewModel, IEvent>>(),
                 new List<IViewModelEventCommand<IViewModel, IEvent>>(),
-                typeof(IScreenViewModel),
+                typeof(IScreenModel),
                 typeof(IBodyViewModel)),
 
             ////////////////////////////////////User Login Screen/////////////////////////////////////////////////

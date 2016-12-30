@@ -41,10 +41,10 @@ namespace ViewModels
             : base(new SystemProcess(Processes.ProcessInfos.FirstOrDefault(),new Agent("System"), new MachineInfo(Environment.MachineName, Environment.ProcessorCount)),
                   new List<IViewModelEventSubscription<IViewModel, IEvent>>()
                   {
-                      new ViewEventSubscription<MainWindowViewModel, ViewModelCreated<IScreenViewModel>>(
+                      new ViewEventSubscription<IMainWindowViewModel, IViewModelCreated<IScreenModel>>(
                         processId: 1,
                         eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<MainWindowViewModel, ViewModelCreated<IScreenViewModel>, bool>>
+                        actionPredicate: new List<Func<IMainWindowViewModel, IViewModelCreated<IScreenModel>, bool>>
                         {
                             (s, e) => s.Process.Id != e.ViewModel.Process.Id
                         },
@@ -52,13 +52,13 @@ namespace ViewModels
                   },
                   new List<IViewModelEventPublication<IViewModel, IEvent>>()
                   {
-                       new ViewEventPublication<MainWindowViewModel, ViewModelLoaded<IMainWindowViewModel,IScreenViewModel>>(
+                       new ViewEventPublication<IMainWindowViewModel, IViewModelLoaded<IMainWindowViewModel,IScreenModel>>(
                         subject: v => v.BodyViewModels.CollectionChanges,
-                        subjectPredicate: new List<Func<MainWindowViewModel, bool>>()
+                        subjectPredicate: new List<Func<IMainWindowViewModel, bool>>()
                                         {
                                             v => v.BodyViewModels.LastOrDefault() != null
                                         },
-                        messageData:new List<Func<MainWindowViewModel, dynamic>>()
+                        messageData:new List<Func<IMainWindowViewModel, dynamic>>()
                                         {
                                             (s) => s,
                                             (s) => s.BodyViewModels.Last()

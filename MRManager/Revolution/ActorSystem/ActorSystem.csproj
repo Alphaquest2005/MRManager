@@ -49,6 +49,10 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Actor.Interfaces\Actor.Interfaces.csproj">
+      <Project>{8b10c72d-9f33-4290-b562-44cf1f718fa5}</Project>
+      <Name>Actor.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataInterfaces\DataInterfaces.csproj">
       <Project>{f6008330-ba42-454b-a0b4-82455de56776}</Project>
       <Name>DataInterfaces</Name>

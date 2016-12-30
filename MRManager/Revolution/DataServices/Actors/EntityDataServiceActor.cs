@@ -1,6 +1,7 @@
 ﻿using System;
 using SystemInterfaces;
 using SystemMessages;
+using Actor.Interfaces;
 using CommonMessages;
 using DataInterfaces;
 using EventAggregator;
@@ -8,7 +9,11 @@ using RevolutionEntities.Process;
 
 namespace DataServices.Actors
 {
-    public class EntityDataServiceActor<TService>: BaseActor<EntityDataServiceActor<TService>>
+    public interface IEntityDataServiceActor<TService>:IAgent
+    {
+    }
+
+    public class EntityDataServiceActor<TService>: BaseActor<EntityDataServiceActor<TService>>, IEntityDataServiceActor<TService>
     {
         private Action<IDataContext, ISourceMessage, TService> Action { get; }
        
@@ -19,7 +24,7 @@ namespace DataServices.Actors
             DbContext = ctx;
             Action = action;
             Command<TService>(m => HandledEvent(m));
-            EventMessageBus.Current.Publish(new ServiceStarted<TService>(process,SourceMessage), SourceMessage);
+            EventMessageBus.Current.Publish(new ServiceStarted<IEntityDataServiceActor<TService>>(this,process,SourceMessage), SourceMessage);
         }
 
         

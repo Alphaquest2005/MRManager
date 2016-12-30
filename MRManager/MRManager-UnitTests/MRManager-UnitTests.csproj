@@ -48,6 +48,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -68,6 +69,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="SingleThreadTaskScheduler.cs" />
     <Compile Include="ObservableViewModelTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -115,6 +117,10 @@
     <ProjectReference Include="..\Resources\Resources.csproj">
       <Project>{9ef43ee7-b520-42d9-a75e-2d2887fd234c}</Project>
       <Name>Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\Actor.Interfaces\Actor.Interfaces.csproj">
+      <Project>{8b10c72d-9f33-4290-b562-44cf1f718fa5}</Project>
+      <Name>Actor.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Revolution\ActorSystem\ActorSystem.csproj">
       <Project>{338fefd0-b7fa-46db-8041-c5ed7778e6c0}</Project>

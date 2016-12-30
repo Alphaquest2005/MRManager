@@ -42,6 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="IRequestProcessState.cs" />
+    <Compile Include="IEntityFound.cs" />
+    <Compile Include="IProcessExpectedEvent.cs" />
+    <Compile Include="ISystemStarted.cs" />
+    <Compile Include="IServiceStarted.cs" />
     <Compile Include="IProcessStateDetailedInfo.cs" />
     <Compile Include="ISystemProcessStarted.cs" />
     <Compile Include="ISourceMessage.cs" />
