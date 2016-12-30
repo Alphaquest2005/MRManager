@@ -2,5 +2,6 @@
 {
     public interface IViewModelEvent<T>
     {
+
     }
 }

@@ -16,7 +16,7 @@ namespace ViewModels
 {
    
 
-    public class LoginViewModel : DynamicViewModel<ObservableViewModel<IUserSignIn>>, IEntityViewModel<IUserSignIn>, ILoginViewModel
+    public class LoginViewModel : DynamicViewModel<ObservableViewModel<IUserSignIn>>, ILoginViewModel
     {
         public LoginViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableViewModel<IUserSignIn>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {

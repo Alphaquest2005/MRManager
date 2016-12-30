@@ -16,7 +16,7 @@ using ViewModels;
 namespace MRManager_UnitTests
 {
     [TestClass]
-    public class SystemTesting
+    public class SystemIntializationProcess
     {
         protected SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         [TestMethod]

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Interfaces;
+using ViewModelInterfaces;
 
 namespace ViewModel.Interfaces
 {
-    public interface ILoginViewModel
+    public interface ILoginViewModel: IEntityViewModel<IUserSignIn>
     {
     }
 }

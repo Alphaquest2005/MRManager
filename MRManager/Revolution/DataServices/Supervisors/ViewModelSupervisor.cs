@@ -6,6 +6,7 @@ using Akka.Actor;
 using Akka.Routing;
 using CommonMessages;
 using EventAggregator;
+using RevolutionData;
 using StartUp.Messages;
 using ViewMessages;
 using ViewModel.Interfaces;

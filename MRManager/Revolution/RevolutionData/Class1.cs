@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mime;
+using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using SystemInterfaces;
 using EventMessages;
 using Interfaces;
+using JB.Reactive.ExtensionMethods;
+using ReactiveUI;
 using RevolutionEntities.ViewModels;
 using ViewModel.Interfaces;
 
@@ -44,22 +47,22 @@ namespace RevolutionData
                             (s, e) => s.Process.Id != e.ViewModel.Process.Id && e.ViewModel.Orientation == typeof(IRightViewModel)
                         },
                         action: (s, e) => s.RightViewModels.Add(e.ViewModel)),
-                    new ViewEventSubscription<IScreenViewModel, ViewModelCreated<IViewModel>>(
+                    new ViewEventSubscription<IScreenViewModel, IViewModelCreated<IViewModel>>(
                         processId:1,
                         eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<IScreenViewModel, ViewModelCreated<IViewModel>, bool>>
+                        actionPredicate: new List<Func<IScreenViewModel, IViewModelCreated<IViewModel>, bool>>
                         {
                             (s, e) => s.Process.Id != e.ViewModel.Process.Id && e.ViewModel.Orientation == typeof(IFooterViewModel)
                         },
                         action: (s, e) => s.FooterViewModels.Add(e.ViewModel)),
-                    new ViewEventSubscription<IScreenViewModel, ViewModelCreated<IViewModel>>(
+                    new ViewEventSubscription<IScreenViewModel, IViewModelCreated<IViewModel>>(
                         processId: 1,
                         eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<IScreenViewModel, ViewModelCreated<IViewModel>, bool>>
+                        actionPredicate: new List<Func<IScreenViewModel, IViewModelCreated<IViewModel>, bool>>
                         {
                             (s, e) => s.Process.Id != e.ViewModel.Process.Id && e.ViewModel.Orientation == typeof(IBodyViewModel)
                         },
-                        action: (s, e) => MediaTypeNames.Application.Current.Dispatcher.Invoke(() => s.BodyViewModels.Add(e.ViewModel))),
+                        action: (s, e) => Application.Current.Dispatcher.Invoke(() => s.BodyViewModels.Add(e.ViewModel))),
                 },
                 new List<IViewModelEventPublication<IViewModel, IEvent>>(),
                 new List<IViewModelEventCommand<IViewModel, IEvent>>(),
@@ -103,11 +106,11 @@ namespace RevolutionData
                             v.ChangeTracking.WhenAny(x => x.Keys,
                                 x => x.Value.Contains(nameof(v.CurrentEntity.Value.Password)) && x.Value.Contains(nameof(v.CurrentEntity.Value.Username))),
                         subject: (s) => ((ReactiveCommand<IViewModel, Unit>) s.Commands["ValidateUserInfo"]).AsObservable(),
-                        subjectPredicate: new List<Func<LoginViewModel, bool>>()
+                        subjectPredicate: new List<Func<ILoginViewModel, bool>>()
                         {
                             (v) => v.ChangeTracking.Keys.Count > 2
                         },
-                        messageData: new List<Func<LoginViewModel, dynamic>>()
+                        messageData: new List<Func<ILoginViewModel, dynamic>>()
                         {
                             (s) => s.CurrentEntity?.Value.Id,
                             (s) => s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)

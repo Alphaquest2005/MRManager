@@ -6,9 +6,6 @@ using ViewModelInterfaces;
 
 namespace ViewMessages
 {
-    public interface IViewModelCreated<TViewModel> :IProcessSystemMessage, IViewModelEvent<TViewModel>
-    {
-    }
 
     [Export]
     public class ViewModelCreated<TViewModel> : ProcessSystemMessage, IViewModelCreated<TViewModel>
