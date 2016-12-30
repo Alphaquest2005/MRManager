@@ -1,18 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
+using System.Reactive;
+using System.Windows;
 using SystemInterfaces;
-using SystemMessages;
 using EF.Entities;
-using EventAggregator;
 using EventMessages;
 using Interfaces;
+using JB.Reactive.ExtensionMethods;
+using ReactiveUI;
 using RevolutionEntities.ViewModels;
-using Utilities;
 using ViewMessages;
 using ViewModel.Interfaces;
-using ViewModelInterfaces;
 using ViewModels;
 
 namespace DataServices.Actors
@@ -25,85 +24,102 @@ namespace DataServices.Actors
                 (
                 1,
                 new List<IViewModelEventSubscription<IViewModel, IEvent>>()
-                {   new ViewEventSubscription<ScreenModel, ViewModelCreated<IHeaderViewModel>>(
+                {   new ViewEventSubscription<ScreenModel, ViewModelCreated<IViewModel>>(
                     processId: 1,
                     eventPredicate: (e) => e != null,
-                    actionPredicate: new List<Func<ScreenModel, ViewModelCreated<IHeaderViewModel>, bool>>
+                    actionPredicate: new List<Func<ScreenModel, ViewModelCreated<IViewModel>, bool>>
                     {
-                        (s, e) => s.Process.Id != e.ViewModel.Process.Id
+                        (s, e) => s.Process.Id != e.ViewModel.Process.Id && e.ViewModel.Orientation == typeof(IHeaderViewModel)
                     },
                     action: (s, e) => s.HeaderViewModels.Add(e.ViewModel)),
-                    new ViewEventSubscription<ScreenModel, ViewModelCreated<ILeftViewModel>>(
+                    new ViewEventSubscription<ScreenModel, ViewModelCreated<IViewModel>>(
                         processId: 1,
                         eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<ScreenModel, ViewModelCreated<ILeftViewModel>, bool>>
+                        actionPredicate: new List<Func<ScreenModel, ViewModelCreated<IViewModel>, bool>>
                         {
-                            (s, e) => s.Process.Id != e.ViewModel.Process.Id
+                            (s, e) => s.Process.Id != e.ViewModel.Process.Id && e.ViewModel.Orientation == typeof(ILeftViewModel)
                         },
                         action: (s, e) => s.LeftViewModels.Add(e.ViewModel)),
-                    new ViewEventSubscription<ScreenModel, ViewModelCreated<IRightViewModel>>(
+                    new ViewEventSubscription<ScreenModel, ViewModelCreated<IViewModel>>(
                         processId: 1,
                         eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<ScreenModel, ViewModelCreated<IRightViewModel>, bool>>
+                        actionPredicate: new List<Func<ScreenModel, ViewModelCreated<IViewModel>, bool>>
                         {
-                            (s, e) => s.Process.Id != e.ViewModel.Process.Id
+                            (s, e) => s.Process.Id != e.ViewModel.Process.Id && e.ViewModel.Orientation == typeof(IRightViewModel)
                         },
                         action: (s, e) => s.RightViewModels.Add(e.ViewModel)),
-                    new ViewEventSubscription<ScreenModel, ViewModelCreated<IFooterViewModel>>(
+                    new ViewEventSubscription<ScreenModel, ViewModelCreated<IViewModel>>(
                         processId:1,
                         eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<ScreenModel, ViewModelCreated<IFooterViewModel>, bool>>
+                        actionPredicate: new List<Func<ScreenModel, ViewModelCreated<IViewModel>, bool>>
                         {
-                            (s, e) => s.Process.Id != e.ViewModel.Process.Id
+                            (s, e) => s.Process.Id != e.ViewModel.Process.Id && e.ViewModel.Orientation == typeof(IFooterViewModel)
                         },
                         action: (s, e) => s.FooterViewModels.Add(e.ViewModel)),
-                    new ViewEventSubscription<ScreenModel, ViewModelCreated<IBodyViewModel>>(
+                    new ViewEventSubscription<ScreenModel, ViewModelCreated<IViewModel>>(
                         processId: 1,
                         eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<ScreenModel, ViewModelCreated<IBodyViewModel>, bool>>
+                        actionPredicate: new List<Func<ScreenModel, ViewModelCreated<IViewModel>, bool>>
                         {
-                            (s, e) => s.Process.Id != e.ViewModel.Process.Id
+                            (s, e) => s.Process.Id != e.ViewModel.Process.Id && e.ViewModel.Orientation == typeof(IBodyViewModel)
                         },
-                        action: (s, e) => s.BodyViewModels.Add(e.ViewModel)),
+                        action: (s, e) => Application.Current.Dispatcher.Invoke(() => s.BodyViewModels.Add(e.ViewModel))),
                 },
                 new List<IViewModelEventPublication<IViewModel, IEvent>>(),
                 new List<IViewModelEventCommand<IViewModel, IEvent>>(), 
-                typeof(ScreenModel)),
+                typeof(ScreenModel),
+                typeof(IBodyViewModel)),
 
             ////////////////////////////////////User Login Screen/////////////////////////////////////////////////
 
             new ViewModelInfo
                 (
-                2,
-                new List<IViewModelEventSubscription<IViewModel, IEvent>>()
+                processId:2,
+                subscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>()
                 {
                    new ViewEventSubscription<LoginViewModel, ProcessStateMessage<UserSignIn>>(
                        processId:2,
-                       eventPredicate: e => true,
+                       eventPredicate: e => e != null,
                        actionPredicate: new List<Func<LoginViewModel, ProcessStateMessage<UserSignIn>, bool>>(),
                        action: (v,e) => v.CurrentEntity.Value = e.State.Entity
                        ),
 
-                },new List<IViewModelEventPublication<IViewModel, IEvent>>()
+                },
+                publications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                 {
-                    new ViewEventPublication<LoginViewModel, EntityChanges<UserSignIn>>(
+                    new ViewEventPublication<LoginViewModel, GetEntityWithChanges<UserSignIn>>(
                         subject: v => v.ChangeTracking.DictionaryChanges,
                         subjectPredicate: new List<Func<LoginViewModel, bool>>()
                                         {
                                             v => v.ChangeTracking.Keys.Contains("UserName") && v.ChangeTracking.Keys.Count == 1
                                         },
                         messageData:new List<Func<LoginViewModel, dynamic>>()
-                                                        {
-                                                            (s) => s.CurrentEntity.Value.Id,
-                                                            (s) => s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
-                                                        }
+                                        {
+                                            (s) => s.CurrentEntity.Value.Id,
+                                            (s) => s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                                        }
                         )
                 },
-                new List<IViewModelEventCommand<IViewModel, IEvent>>()
+                commands: new List<IViewModelEventCommand<IViewModel,IEvent>>()
                 {
-                    
+                    new ViewEventCommand<LoginViewModel, GetEntityWithChanges<IUserSignIn>>("ValidateUserInfo",
+                        v =>
+                            v.ChangeTracking.WhenAny(x => x.Keys,
+                                x => x.Value.Contains("Password") && x.Value.Contains("UserName")),
+                        subject: (s) => ((ReactiveCommand<IViewModel, Unit>) s.Commands["ValidateUserInfo"]).AsObservable(),
+                        subjectPredicate: new List<Func<LoginViewModel, bool>>()
+                        {
+                            (v) => v.ChangeTracking.Keys.Count > 2
+                        },
+                        messageData: new List<Func<LoginViewModel, dynamic>>()
+                        {
+                            (s) => s.CurrentEntity?.Value.Id,
+                            (s) => s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                        }),
+                     
                 },
-                typeof(LoginViewModel)),
+                viewModelType: typeof(LoginViewModel),
+                orientation: typeof(IBodyViewModel)),
 
             //////////////////////////////////////Entity ViewModels ///////////////////////////////////////////////
 

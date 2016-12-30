@@ -26,7 +26,15 @@
             </Style.Triggers>
         </Style>
 
-        <!--<DataTemplate DataType="viewModels:EntityViewModel<interfaces:IAddressCities>"></DataTemplate>-->
+        <DataTemplate DataType="viewModels:LoginViewModel">
+            <StackPanel Width="500"
+                        Height="500"
+                        Background="DarkGray">
+                <TextBox Text="{Binding UserName}" />
+                <TextBox Text="{Binding Password}" />
+                <Button Command="{Binding Commands[ValidateUserInfo]}" Content="Login" />
+            </StackPanel>
+        </DataTemplate>
 
 
     </UserControl.Resources>
@@ -48,7 +56,7 @@
                             Orientation="Horizontal">
 
             <ItemsControl Margin="0"
-                          Background="#FFC5C55B"
+                          Background="#7FC5C55B"
                           ItemsSource="{Binding BodyViewModels}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

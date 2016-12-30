@@ -20,14 +20,14 @@ using ViewModelInterfaces;
 
 namespace Core.Common.UI
 {
-    public partial class ObservableListViewModel<TEntity> : BaseViewModel where TEntity:IEntity
+    public partial class ObservableListViewModel<TEntity> : BaseViewModel<ObservableListViewModel<TEntity>> where TEntity:IEntity
     {
         protected AbstractValidator<TEntity> Validator { get; }
         protected ValidationResult ValidationResults = new ValidationResult();
         protected static ObservableViewModel<TEntity> _instance = null;
         public static ObservableViewModel<TEntity> Instance => _instance;
 
-        public ObservableListViewModel(List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel,IEvent>> commandInfo, ISystemProcess process) : base(process,eventSubscriptions,eventPublications,commandInfo)
+        public ObservableListViewModel(List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process, Type orientation) : base(process,eventSubscriptions,eventPublications,commandInfo, orientation)
         {
             Validator = new EntityValidator<TEntity>();
         }

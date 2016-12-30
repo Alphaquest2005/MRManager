@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Reflection;
 using SystemInterfaces;
 using SystemMessages;
@@ -42,7 +43,7 @@ namespace DataServices.Actors
                 var systemProcess = new SystemProcess(new Process(processInfo, new Agent("System")), machineInfo);
                 var systemStartedMsg = new SystemStarted(systemProcess, SourceMessage);
                 EF7DataContextBase.Initialize(dbContextAssembly, entityAssembly);
-                EventMessageBus.Current.GetEvent<ServiceStarted<IProcessService>>(SourceMessage)
+                EventMessageBus.Current.GetEvent<ServiceStarted<IProcessService>>(SourceMessage).Where(x => x.Process.Id == 1)//only start up process
                     .Subscribe(x => HandleProcessStarted(dbContext, x.Process, systemStartedMsg));
 
                 var processSup = Context.ActorOf(Props.Create<ProcessSupervisor>(), "ProcessSupervisor");

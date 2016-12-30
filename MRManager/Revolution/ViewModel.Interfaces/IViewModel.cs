@@ -25,6 +25,7 @@ namespace ViewModel.Interfaces
         Dictionary<string, dynamic> Commands { get; }
         List<IViewModelEventCommand<IViewModel, IEvent>> CommandInfo { get; }
 
-       
+        Type Orientation { get; }
+        Type ViewModelType { get; }
     }
 }

@@ -13,5 +13,7 @@ namespace ViewModel.Interfaces
 
         List<IViewModelEventCommand<IViewModel, IEvent>> Commands { get; }
         Type ViewModelType { get; }
+        Type Orientation { get; }
+
     }
 }

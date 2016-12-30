@@ -73,11 +73,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTest2.cs" />
     <Compile Include="DynamicViewModelTests.cs" />
+    <Compile Include="SystemTesting.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataTemplates\DataTemplates.csproj">
+      <Project>{2f8bef84-3c02-48a4-a576-fbf41e3fffdd}</Project>
+      <Name>DataTemplates</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DesignTimeData\DesignTimeData.csproj">
       <Project>{e7ec52dc-8650-4cf0-bcab-ed8a9473d2cf}</Project>
       <Name>DesignTimeData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EF.Mappings\EF.Mappings.csproj">
+      <Project>{da54313c-4b98-49b1-a8f9-b5827f121886}</Project>
+      <Name>EF.Mappings</Name>
     </ProjectReference>
     <ProjectReference Include="..\EFDataContext\EF.DBContext.csproj">
       <Project>{27C692A7-9601-43FB-8243-42B997107649}</Project>
@@ -95,6 +104,26 @@
       <Project>{2ab54ce2-e09b-40b4-9cbf-184b3e770b0d}</Project>
       <Name>Expressions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NH.DBContext\NH.DBContext.csproj">
+      <Project>{cd566324-734e-47ae-991f-d4da3e701910}</Project>
+      <Name>NH.DBContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NH.Mappings\NH.Mappings.csproj">
+      <Project>{7eba796f-77a6-47b5-aafa-2d6315ca1cb1}</Project>
+      <Name>NH.Mappings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{9ef43ee7-b520-42d9-a75e-2d2887fd234c}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\ActorSystem\ActorSystem.csproj">
+      <Project>{338fefd0-b7fa-46db-8041-c5ed7778e6c0}</Project>
+      <Name>ActorSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\BootStrapper\BootStrapper.csproj">
+      <Project>{5dfeea8b-baba-4544-bf36-0a76a0d10c1b}</Project>
+      <Name>BootStrapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Revolution\CommonMessages\CommonMessages.csproj">
       <Project>{77007560-89dc-4e1f-9313-ae064a048ad4}</Project>
       <Name>CommonMessages</Name>
@@ -102,6 +131,10 @@
     <ProjectReference Include="..\Revolution\Common\Common.csproj">
       <Project>{cb6d5fbc-0c13-437d-b4f3-a0ec4d5673b3}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\Converters\Converters.csproj">
+      <Project>{b7f58070-3c58-46af-95d1-6fc0d99d48ee}</Project>
+      <Name>Converters</Name>
     </ProjectReference>
     <ProjectReference Include="..\Revolution\Core.Common.UI\Core.Common.UI.csproj">
       <Project>{5dd82ad7-f344-45e3-92cc-96f8d07700af}</Project>
@@ -111,9 +144,21 @@
       <Project>{f6008330-ba42-454b-a0b4-82455de56776}</Project>
       <Name>DataInterfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Revolution\DataMessages\DataMessages.csproj">
+      <Project>{78f76c1d-baf2-4ac1-a05f-a8a7b4a3b95e}</Project>
+      <Name>DataMessages</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Revolution\DataServices\DataServices.csproj">
       <Project>{320107b2-d414-434b-ae0d-4d9f18ff49b8}</Project>
       <Name>DataServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\DynamicLinq\System.Linq.Dynamic\System.Linq.Dynamic.csproj">
+      <Project>{17c0d5de-c72d-4a06-a12c-445ebcf3b9ea}</Project>
+      <Name>System.Linq.Dynamic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\EFRepository\EFRepository.csproj">
+      <Project>{415ddc8a-a74d-4afa-8fcb-2706a062a4fd}</Project>
+      <Name>EFRepository</Name>
     </ProjectReference>
     <ProjectReference Include="..\Revolution\EventAggregator\EventAggregator.csproj">
       <Project>{31e6b370-01f0-4489-832f-436cb97a6718}</Project>
@@ -122,6 +167,14 @@
     <ProjectReference Include="..\Revolution\EventMessages\EventMessages.csproj">
       <Project>{e3d04176-3758-4c9d-84f3-7a4d3859eae5}</Project>
       <Name>EventMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\LinqSpecs\LinqSpecs.csproj">
+      <Project>{d60875a3-0de2-409d-86a0-f540224d054c}</Project>
+      <Name>LinqSpecs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\PropertyExtensions\PropertyExtensions.csproj">
+      <Project>{a50703de-44b8-4dde-8227-a5ee1e39ee84}</Project>
+      <Name>PropertyExtensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Revolution\RevolutionEntities\RevolutionEntities.csproj">
       <Project>{c827930a-0d05-4ee2-b9ac-db1cf5144e16}</Project>
@@ -135,6 +188,10 @@
       <Project>{2c88291e-05eb-4be9-8b33-18f9d56cf928}</Project>
       <Name>SystemMessages</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Revolution\UserControls\UserControls.csproj">
+      <Project>{51a5da32-159c-4888-b6dd-798aeee70364}</Project>
+      <Name>UserControls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Revolution\Utilities\Utilities.csproj">
       <Project>{0f9427b1-792e-4c35-97d8-22a9494ce28f}</Project>
       <Name>Utilities</Name>
@@ -147,9 +204,25 @@
       <Project>{2f936e24-723e-4e7a-b21c-d6f618c74651}</Project>
       <Name>ViewModel.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Specifications\Specifications.csproj">
+      <Project>{0b16da18-f343-4b39-a7a5-2699e60b6308}</Project>
+      <Name>Specifications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TypeMaps\TypeMaps.csproj">
+      <Project>{75c0650c-ce23-44f5-a44f-e4b443dfff70}</Project>
+      <Name>TypeMaps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ValidationSets\ValidationSets.csproj">
+      <Project>{6a9c99e7-2552-4a6c-b26e-2d727c5d85ce}</Project>
+      <Name>ValidationSets</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ViewModels\ViewModels.csproj">
       <Project>{db1e7bd6-7fe0-4cdd-8b6d-edbb0d156b41}</Project>
       <Name>ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Views\Views.csproj">
+      <Project>{879c9901-cb5c-407a-8655-e3c3632c1d7b}</Project>
+      <Name>Views</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

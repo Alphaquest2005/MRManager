@@ -99,6 +99,8 @@
     <Compile Include="LoadHeaderInfo.cs" />
     <Compile Include="LoadResults.cs" />
     <Compile Include="HeaderInfoLoaded.cs" />
+    <Compile Include="ProcessStateMessage.cs" />
+    <Compile Include="RequestProcessState.cs" />
     <Compile Include="ResultsLoaded.cs" />
     <Compile Include="EntitySetWithFilterLoaded.cs" />
     <Compile Include="EntityUpdated.cs" />

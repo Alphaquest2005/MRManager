@@ -16,12 +16,13 @@ using ViewMessages;
 
 namespace DataServices.Actors
 {
-    public class EntityDataServiceSupervisor<TEntity> : ReceiveActor where TEntity : IEntity
+    public class EntityDataServiceSupervisor<TEntity> : ReceiveActor where TEntity : class, IEntity
     {
         private static readonly Action<IDataContext, ISourceMessage, CreateEntity<TEntity>> CreateAction = (ctx, s, x) => x.CreateEntity(ctx, s);
         private static readonly Action<IDataContext, ISourceMessage, DeleteEntity<TEntity>> DeleteAction = (ctx, s, x) => x.DeleteEntity(ctx, s);
         private static readonly Action<IDataContext, ISourceMessage, EntityChanges<TEntity>> UpdateAction = (ctx, s, x) => x.UpdateEntity(ctx, s);
-        private static readonly Action<IDataContext, ISourceMessage, GetEntityById<TEntity>> GetAction = (ctx, s, x) => x.GetEntity(ctx, s);
+        private static readonly Action<IDataContext, ISourceMessage, GetEntityById<TEntity>> GetEntityByIdAction = (ctx, s, x) => x.GetEntity(ctx, s);
+        private static readonly Action<IDataContext, ISourceMessage, GetEntityWithChanges<TEntity>> GetEntityWithChangesAction = (ctx, s, x) => x.GetEntity(ctx, s);
 
         private static readonly Action<IDataContext, ISourceMessage, LoadEntitySet<TEntity>> LoadEntitySet = (ctx, s, x) => x.LoadEntitySet(ctx, s);
         private static readonly Action<IDataContext, ISourceMessage, LoadEntitySetWithFilter<TEntity>> LoadEntitySetWithFilter = (ctx, s, x) => x.LoadEntitySet(ctx, s);
@@ -36,7 +37,8 @@ namespace DataServices.Actors
                 {typeof (CreateEntity<TEntity>), CreateAction},
                 {typeof (DeleteEntity<TEntity>), DeleteAction},
                 {typeof (EntityChanges<TEntity>), UpdateAction},
-                {typeof (GetEntityById<TEntity>), GetAction},
+                {typeof (GetEntityById<TEntity>), GetEntityByIdAction},
+                {typeof (GetEntityWithChanges<TEntity>), GetEntityWithChangesAction},
 
                 {typeof (LoadEntitySet<TEntity>), LoadEntitySet},
                 {typeof (LoadEntitySetWithFilter<TEntity>), LoadEntitySetWithFilter},

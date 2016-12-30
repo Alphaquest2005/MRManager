@@ -1,5 +1,6 @@
 ﻿using System;
 using CommonMessages;
+using Utilities;
 
 namespace RevolutionEntities.Process
 {
@@ -14,6 +15,16 @@ namespace RevolutionEntities.Process
             ProcessId = processId;
             EventType = eventType;
             EventPredicate = eventPredicate;
+        }
+    }
+
+    public class ProcessExpectedEvent<TEvent>: ProcessExpectedEvent where TEvent:IProcessSystemMessage
+    {
+        public ProcessExpectedEvent(int processId, Func<TEvent, bool> eventPredicate) 
+            : base(processId,
+            typeof(TEvent),
+            (Func<IProcessSystemMessage,bool>) eventPredicate.Convert(typeof(IProcessSystemMessage),typeof(bool)))
+        {
         }
     }
 }

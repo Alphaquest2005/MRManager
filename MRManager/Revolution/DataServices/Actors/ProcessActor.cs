@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -10,6 +11,7 @@ using Akka.Actor;
 using CommonMessages;
 using EventAggregator;
 using FluentValidation.Resources;
+using NHibernate.Intercept;
 using NHibernate.Util;
 using RevolutionEntities.Process;
 using StartUp.Messages;
@@ -19,16 +21,12 @@ namespace DataServices.Actors
     public class ProcessActor : BaseActor<ProcessActor>
     {
         public ISystemProcess Process { get; }
+        
        
         private readonly List<IProcessSystemMessage> msgQue = new List<IProcessSystemMessage>(); 
         private readonly IEnumerable<Processes.EventAction> _complexEvents = new List<Processes.EventAction>();
+        public ConcurrentDictionary<Type, dynamic> ProcessStateMessages = new ConcurrentDictionary<Type, dynamic>();  
        
-
-        private static Action<ProcessActor> ExitAction => (x) => x.Self.GracefulStop(TimeSpan.FromSeconds(10));
-        List<ProcessExpectedEvent> ExitPredicate = new List<ProcessExpectedEvent>()
-            {
-                new ProcessExpectedEvent(1, typeof (SystemProcessCompleted), eventPredicate: (e) => e.Id == 1)
-            };
 
         public ProcessActor(ISystemProcess process)
         {
@@ -51,7 +49,7 @@ namespace DataServices.Actors
             _complexEvents.Where(x => !x.Raised).ForEach(x => {
                                                                  if (!CheckExpectedEvents.Invoke(x.Events, msgQue))return;
                                                                   x.Raised = true;
-                                                                  x.Action.Invoke(this);});
+                                                                  x.Action.Invoke(this, pe);});
         }
 
 

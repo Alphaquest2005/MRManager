@@ -11,15 +11,17 @@ using ViewModel.Interfaces;
 
 namespace Core.Common.UI
 {
-    public abstract class BaseViewModel : ReactiveObject, IViewModel
+    public abstract class BaseViewModel<TViewModel> : ReactiveObject, IViewModel
     {
        
-        protected BaseViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo)
+        protected BaseViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
         {
             Process = process;
             EventSubscriptions = eventSubscriptions;
             EventPublications = eventPublications;
             CommandInfo = commandInfo;
+            Orientation = orientation;
+            ViewModelType = typeof(TViewModel);
             Name = process.Name;
             Description = process.Description;
             Symbol = process.Symbol;
@@ -29,7 +31,9 @@ namespace Core.Common.UI
         public List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get;}
         public List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; }
         public List<IViewModelEventCommand<IViewModel, IEvent>> CommandInfo { get; }
-        
+        public Type Orientation { get; }
+        public Type ViewModelType { get; }
+
         public Dictionary<string, dynamic> Commands { get; } = new Dictionary<string, dynamic>();
 
         public ISystemProcess Process { get; set; }

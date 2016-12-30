@@ -36,8 +36,9 @@ namespace DataServices.Actors
         {
             try
             {
-                var vm =(TViewModel) Activator.CreateInstance(vmInfo.ViewModelInfo.ViewModelType, new object[] {vmInfo.Process, vmInfo.ViewModelInfo.Subscriptions, vmInfo.ViewModelInfo.Publications, vmInfo.ViewModelInfo.Commands });
+                var vm =(TViewModel) Activator.CreateInstance(vmInfo.ViewModelInfo.ViewModelType, new object[] {vmInfo.Process, vmInfo.ViewModelInfo.Subscriptions, vmInfo.ViewModelInfo.Publications, vmInfo.ViewModelInfo.Commands, vmInfo.ViewModelInfo.Orientation });
                 EventMessageBus.Current.Publish(new ViewModelCreated<TViewModel>(vm, vmInfo.Process, SourceMessage), SourceMessage);
+                EventMessageBus.Current.Publish(new ViewModelCreated<IViewModel>(vm, vmInfo.Process, SourceMessage), SourceMessage);
                 //dynamic dvm = new DynamicViewModel<TViewModel>(vm);
                 // EventMessageBus.Current.Publish(new ViewModelCreated<DynamicViewModel<TViewModel>>(dvm,vmInfo.Process, SourceMessage), SourceMessage);
             }

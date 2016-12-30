@@ -28,6 +28,8 @@ namespace Core.Common.UI
             Description = viewModel.Description;
             Symbol = viewModel.Symbol;
             Instance = (TViewModel) base.Instance;
+            Orientation = viewModel.Orientation;
+            ViewModelType = typeof (TViewModel);
         }
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
@@ -54,5 +56,7 @@ namespace Core.Common.UI
         public List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; }
         public Dictionary<string, dynamic> Commands { get; }
         public List<IViewModelEventCommand<IViewModel, IEvent>> CommandInfo { get; }
+        public Type Orientation { get; }
+        public Type ViewModelType { get; }
     }
 }

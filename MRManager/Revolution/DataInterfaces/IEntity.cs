@@ -11,7 +11,7 @@ namespace DataInterfaces
     [InheritedExport]
     public interface IEntity 
     {
-        int Id { get; }
+        int Id { get; set; }
         RowState RowState { get; set; }
 
         dynamic ComputedProperties { get; }

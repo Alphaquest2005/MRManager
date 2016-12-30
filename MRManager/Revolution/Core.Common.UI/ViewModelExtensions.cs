@@ -6,8 +6,10 @@ using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
 using SystemInterfaces;
+using SystemMessages;
 using CommonMessages;
 using EventAggregator;
+using EventMessages;
 using JB.Collections.Reactive;
 using JB.Reactive.ExtensionMethods;
 using ReactiveUI;
@@ -61,7 +63,7 @@ namespace Core.Common.UI
                     .Subscribe(publishMessage);
             }
 
-           
+           EventMessageBus.Current.Publish(new RequestProcessState(viewModel.Process, viewModel.SourceMessage), viewModel.SourceMessage);
 
         }
 

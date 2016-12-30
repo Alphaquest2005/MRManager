@@ -1,6 +1,7 @@
 ﻿
 using Core.Common.UI;
 using System;
+using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -8,6 +9,7 @@ using CommonMessages;
 using EventAggregator;
 using RevolutionEntities.Process;
 using ViewMessages;
+using ViewModel.Interfaces;
 using ViewModels;
 
 namespace Views
@@ -24,7 +26,7 @@ namespace Views
                 InitializeComponent();
 				AppSlider.Slider = this.slider;
 			    EventMessageBus.Current.GetEvent<ViewModelCreated<ScreenModel>>(SourceMessage).Subscribe(x =>
-			    {
+                {
 			        Application.Current.Dispatcher.Invoke(() => this.DataContext = x.ViewModel);
                     EventMessageBus.Current.Publish(new ViewLoadedViewModel<ScreenModel>(x.ViewModel, x.Process, SourceMessage), SourceMessage );
 

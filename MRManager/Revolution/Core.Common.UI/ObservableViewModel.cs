@@ -20,14 +20,14 @@ using ViewModelInterfaces;
 
 namespace Core.Common.UI
 {
-    public partial class ObservableViewModel<TEntity> : BaseViewModel where TEntity:IEntity
+    public partial class ObservableViewModel<TEntity> : BaseViewModel<ObservableViewModel<TEntity>> where TEntity:IEntity
     {
         protected AbstractValidator<TEntity> Validator { get; }
         protected ValidationResult ValidationResults = new ValidationResult();
         protected static ObservableViewModel<TEntity> _instance = null;
         public static ObservableViewModel<TEntity> Instance => _instance;
 
-        public ObservableViewModel(List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel,IEvent>> commandInfo, ISystemProcess process) : base(process,eventSubscriptions,eventPublications,commandInfo)
+        public ObservableViewModel(List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process, Type orientation) : base(process,eventSubscriptions,eventPublications,commandInfo, orientation)
         {
             //Leave the validation for client side input validation...
             Validator = new EntityValidator<TEntity>();
@@ -48,7 +48,8 @@ namespace Core.Common.UI
        
         public dynamic GetValue([CallerMemberName] string property = "UnspecifiedProperty")
         {
-            var prop =  CurrentEntity.Value.GetType().GetProperty(property, BindingFlags.Public | BindingFlags.Instance);
+            if (CurrentEntity == null || CurrentEntity.Value == null) return null;
+            var prop =  CurrentEntity?.Value.GetType().GetProperty(property, BindingFlags.Public | BindingFlags.Instance);
             if(prop == null) return null;
             return ChangeTracking.ContainsKey(property)
                 ? ChangeTracking[property]
