@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using CommonMessages;
 
 namespace Actor.Interfaces
 {
+    [InheritedExport]
     public interface IProcessActor:IAgent
     {
         ISystemProcess Process { get; }
@@ -17,10 +19,4 @@ namespace Actor.Interfaces
         IActorRef ActorRef { get; }
         
     }
-
-    public interface IAgent : IUser
-    {
-        ISourceMessage SourceMessage { get; }
-    }
-
 }

@@ -1,4 +1,6 @@
-﻿namespace SystemInterfaces
+﻿using System.ComponentModel.Composition;
+
+namespace SystemInterfaces
 {
     public enum RowState
     {

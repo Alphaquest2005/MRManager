@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using JB.Collections.Reactive;
 
 namespace ViewModel.Interfaces
 {
+    [InheritedExport]
     public interface IAutoViewModel<T> where T : IEntity
     {
        // VirtualList<T> VirtualData { get; set; }

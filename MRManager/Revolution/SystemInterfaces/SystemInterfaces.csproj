@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IProcessStateDetailedInfo.cs" />
     <Compile Include="ISystemProcessStarted.cs" />
     <Compile Include="ISourceMessage.cs" />
     <Compile Include="IMedia.cs" />
@@ -50,11 +51,9 @@
     <Compile Include="IGetEntityById.cs" />
     <Compile Include="ISystemMessage.cs" />
     <Compile Include="IMessage.cs" />
-    <Compile Include="IAgent.cs" />
     <Compile Include="IDataService.cs" />
     <Compile Include="IEntityProcess.cs" />
     <Compile Include="IEvent.cs" />
-    <Compile Include="IEventCommand.cs" />
     <Compile Include="IEventPublication.cs" />
     <Compile Include="IMessageSource.cs" />
     <Compile Include="IPerson.cs" />

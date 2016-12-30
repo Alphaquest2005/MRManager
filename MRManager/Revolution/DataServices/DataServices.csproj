@@ -46,8 +46,6 @@
     <Compile Include="Actors\BaseActor.cs" />
     <Compile Include="Actors\EntityDataServiceActor.cs" />
     <Compile Include="Actors\ViewModelActor.cs" />
-    <Compile Include="Data\UserInfoData.cs" />
-    <Compile Include="Data\MachineInfos.cs" />
     <Compile Include="Supervisors\BaseSupervisor.cs" />
     <Compile Include="Data\Processes.cs" />
     <Compile Include="Supervisors\ProcessSupervisor.cs" />

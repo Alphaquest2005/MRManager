@@ -1,8 +1,12 @@
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using SystemInterfaces;
 using RevolutionEntities.Process;
 
-namespace DataServices.Actors
+namespace RevolutionData
 {
     public class MachineInfoData
     {

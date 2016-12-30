@@ -2,6 +2,7 @@
 
 namespace SystemInterfaces
 {
+    
     [InheritedExport]
     public interface IGetEntityById<T>
     {

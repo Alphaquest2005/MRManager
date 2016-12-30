@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using SystemInterfaces;
 
 namespace ViewModel.Interfaces
 {
+    [InheritedExport]
     public interface IViewModelInfo
     {
         int ProcessId { get; }

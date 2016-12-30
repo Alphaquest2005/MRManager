@@ -3,7 +3,9 @@
 namespace SystemInterfaces
 {
     [InheritedExport]
-    public interface ISystemProcessCompleted : IProcessSystemMessage
+    public interface IProcessStateDetailedInfo
     {
+        string Status { get; }
+        string Notes { get; }
     }
 }

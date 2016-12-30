@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using SystemInterfaces;
 using JB.Collections.Reactive;
 
 
 namespace ViewModel.Interfaces
 {
+    [InheritedExport]
     public interface IScreenViewModel: IViewModel
     {
         ObservableCollection<IViewModel> HeaderViewModels { get; }
