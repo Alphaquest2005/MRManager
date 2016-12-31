@@ -11,6 +11,7 @@ using Interfaces;
 using JB.Reactive.ExtensionMethods;
 using ReactiveUI;
 using RevolutionEntities.ViewModels;
+using ViewMessages;
 using ViewModel.Interfaces;
 
 namespace RevolutionData
@@ -19,6 +20,48 @@ namespace RevolutionData
     {
         public static readonly List<IViewModelInfo> ProcessViewModelInfos = new List<IViewModelInfo>()
         {
+             new ViewModelInfo
+                (
+                0,// set to zero to prevent ViewActorInializing this view
+                new List<IViewModelEventSubscription<IViewModel, IEvent>>()
+                {   new ViewEventSubscription<IMainWindowViewModel, IViewModelCreated<IScreenModel>>(
+                    processId: 1,
+                    eventPredicate: (e) => e != null,
+                    actionPredicate: new List<Func<IMainWindowViewModel, IViewModelCreated<IScreenModel>, bool>>
+                    {
+                        (s, e) => s.Process.Id == e.ViewModel.Process.Id 
+                    },
+                    action: (s, e) =>
+                    {
+                        if (Application.Current == null)
+                        {
+                            s.BodyViewModels.Add(e.ViewModel);
+                        }
+                        else
+                        {
+                            Application.Current.Dispatcher.Invoke(() => s.BodyViewModels.Add(e.ViewModel));
+                        }
+                    })
+                },
+                new List<IViewModelEventPublication<IViewModel, IEvent>>()
+                  {
+                       new ViewEventPublication<IMainWindowViewModel, IViewModelLoaded<IMainWindowViewModel,IScreenModel>>(
+                        subject: v => v.BodyViewModels.CollectionChanges,
+                        subjectPredicate: new List<Func<IMainWindowViewModel, bool>>()
+                                        {
+                                            v => v.BodyViewModels.LastOrDefault() != null
+                                        },
+                        messageData:new List<Func<IMainWindowViewModel, dynamic>>()
+                                        {
+                                            (s) => s,
+                                            (s) => s.BodyViewModels.Last()
+                                        }
+                        )
+                  }, 
+                new List<IViewModelEventCommand<IViewModel, IEvent>>(),
+                typeof(IMainWindowViewModel),
+                typeof(IBodyViewModel)), 
+
             new ViewModelInfo
                 (
                 1,
@@ -30,7 +73,7 @@ namespace RevolutionData
                     {
                         (s, e) => s.Process.Id != e.ViewModel.Process.Id && e.ViewModel.Orientation == typeof(IHeaderViewModel)
                     },
-                    action: (s, e) => s.HeaderViewModels.Add(e.ViewModel)),
+                    action: (s, e) => Application.Current.Dispatcher.Invoke(() => s.HeaderViewModels.Add(e.ViewModel))),
                     new ViewEventSubscription<IScreenModel, IViewModelCreated<IViewModel>>(
                         processId: 1,
                         eventPredicate: (e) => e != null,

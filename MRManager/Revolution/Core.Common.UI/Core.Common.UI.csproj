@@ -131,6 +131,10 @@
       <Project>{6a9c99e7-2552-4a6c-b26e-2d727c5d85ce}</Project>
       <Name>ValidationSets</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BootStrapper\BootStrapper.csproj">
+      <Project>{5dfeea8b-baba-4544-bf36-0a76a0d10c1b}</Project>
+      <Name>BootStrapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CommonMessages\CommonMessages.csproj">
       <Project>{77007560-89DC-4E1F-9313-AE064A048AD4}</Project>
       <Name>CommonMessages</Name>

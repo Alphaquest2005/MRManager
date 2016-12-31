@@ -9,7 +9,7 @@ namespace BootStrapper
 {
     public static class MEFExtensions
     {
-        public static IEnumerable<Type> GetExportedTypes<T>(this CompositionContainer container)
+        public static IEnumerable<Type> GetExportedTypes<T>(this CompositionContainer container, T type)
         {
             return container.Catalog.Parts
                 .Select(part => ComposablePartExportType<T>(part))

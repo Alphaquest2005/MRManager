@@ -71,7 +71,7 @@
     <Compile Include="ISummaryViewModelCreated.cs" />
     <Compile Include="IViewModelCreated.cs" />
     <Compile Include="IViewModelLocator.cs" />
-    <Compile Include="IScreenViewModel.cs" />
+    <Compile Include="IScreenLayoutViewModel.cs" />
     <Compile Include="IViewType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

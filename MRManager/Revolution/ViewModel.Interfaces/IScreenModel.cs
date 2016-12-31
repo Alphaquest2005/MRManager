@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ViewModel.Interfaces
 {
     [InheritedExport]
-    public interface IScreenModel : IScreenViewModel
+    public interface IScreenModel : IScreenLayoutViewModel
     {
     }
 }

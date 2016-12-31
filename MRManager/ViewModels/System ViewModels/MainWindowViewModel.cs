@@ -39,34 +39,10 @@ namespace ViewModels
 
         public MainWindowViewModel()
             : base(new SystemProcess(Processes.ProcessInfos.FirstOrDefault(),new Agent("System"), new MachineInfo(Environment.MachineName, Environment.ProcessorCount)),
-                  new List<IViewModelEventSubscription<IViewModel, IEvent>>()
-                  {
-                      new ViewEventSubscription<IMainWindowViewModel, IViewModelCreated<IScreenModel>>(
-                        processId: 1,
-                        eventPredicate: (e) => e != null,
-                        actionPredicate: new List<Func<IMainWindowViewModel, IViewModelCreated<IScreenModel>, bool>>
-                        {
-                            (s, e) => s.Process.Id != e.ViewModel.Process.Id
-                        },
-                        action: (s, e) => Application.Current.Dispatcher.Invoke(() => s.BodyViewModels.Add(e.ViewModel)))
-                  },
-                  new List<IViewModelEventPublication<IViewModel, IEvent>>()
-                  {
-                       new ViewEventPublication<IMainWindowViewModel, IViewModelLoaded<IMainWindowViewModel,IScreenModel>>(
-                        subject: v => v.BodyViewModels.CollectionChanges,
-                        subjectPredicate: new List<Func<IMainWindowViewModel, bool>>()
-                                        {
-                                            v => v.BodyViewModels.LastOrDefault() != null
-                                        },
-                        messageData:new List<Func<IMainWindowViewModel, dynamic>>()
-                                        {
-                                            (s) => s,
-                                            (s) => s.BodyViewModels.Last()
-                                        }
-                        )
-                  },
-                  new List<IViewModelEventCommand<IViewModel, IEvent>>(),
-                  typeof(IBodyViewModel))
+                  ProcessViewModels.ProcessViewModelInfos.FirstOrDefault().Subscriptions,
+                  ProcessViewModels.ProcessViewModelInfos.FirstOrDefault().Publications,
+                  ProcessViewModels.ProcessViewModelInfos.FirstOrDefault().Commands,
+                  ProcessViewModels.ProcessViewModelInfos.FirstOrDefault().Orientation)
         {
             this.WireEvents();
         }

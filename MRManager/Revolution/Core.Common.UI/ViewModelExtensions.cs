@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SystemInterfaces;
 using SystemMessages;
+using BootStrapper;
 using CommonMessages;
 using EventAggregator;
 using EventMessages;
@@ -74,7 +75,8 @@ namespace Core.Common.UI
                 var paramArray = itm.MessageData.Select(p => p.Invoke(viewModel)).Cast<object>().ToList();
                 paramArray.Add(viewModel.Process);
                 paramArray.Add(viewModel.SourceMessage);
-                var msg = (ProcessSystemMessage) Activator.CreateInstance(itm.EventType, paramArray.ToArray());
+                var concreteEvent = BootStrapper.BootStrapper.Container.GetExportedTypes(itm.EventType).FirstOrDefault();
+                var msg = (ProcessSystemMessage) Activator.CreateInstance(concreteEvent, paramArray.ToArray());
                 EventMessageBus.Current.Publish(msg, viewModel.SourceMessage);
             };
             return publishMessage;

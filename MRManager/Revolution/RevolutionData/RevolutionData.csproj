@@ -146,6 +146,10 @@
       <Project>{2c88291e-05eb-4be9-8b33-18f9d56cf928}</Project>
       <Name>SystemMessages</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ViewMessages\ViewMessages.csproj">
+      <Project>{eb1e2e94-d6fb-49df-8036-9bf910e3b7aa}</Project>
+      <Name>ViewMessages</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ViewModel.Interfaces\ViewModel.Interfaces.csproj">
       <Project>{2f936e24-723e-4e7a-b21c-d6f618c74651}</Project>
       <Name>ViewModel.Interfaces</Name>

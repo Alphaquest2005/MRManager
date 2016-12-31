@@ -7,7 +7,7 @@ using JB.Collections.Reactive;
 namespace ViewModel.Interfaces
 {
     [InheritedExport]
-    public interface IScreenViewModel: IViewModel
+    public interface IScreenLayoutViewModel: IViewModel
     {
         ObservableCollection<IViewModel> HeaderViewModels { get; }
         ObservableCollection<IViewModel> LeftViewModels { get; }
