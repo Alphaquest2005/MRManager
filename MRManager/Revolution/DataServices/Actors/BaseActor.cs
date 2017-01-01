@@ -15,19 +15,19 @@ namespace DataServices.Actors
     {
         public ISourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
-        internal Func<IList<IProcessExpectedEvent>, IList<IProcessSystemMessage>, bool> CheckExpectedEvents {
-            get; } = (expectedEvents, eventSource) =>
-        {
-            if (!expectedEvents.Any()) return false;
-
-            foreach (var expectedEvent in expectedEvents)
-            {
-                var events = eventSource.Where(x => x.GetType() == expectedEvent.EventType).ToList();
-                if (!events.Any()) return false;
-                if (events.Any(x => expectedEvent.EventPredicate.Invoke(x) != true)) return false;
-            }
-            return true;
-        };
+        //internal Func<IList<IProcessExpectedEvent>, IList<IProcessSystemMessage>, bool> CheckExpectedEvents {
+        //    get; } = (expectedEvents, eventSource) =>
+        //{
+        //    if (!expectedEvents.Any()) return false;
+        //    //ToDo: Convert to Visitor to keep immutability
+        //    foreach (var expectedEvent in expectedEvents)
+        //    {
+        //        var events = eventSource.Where(x => x.GetType() == expectedEvent.EventType).ToList();
+        //        if (!events.Any()) return false;
+        //        if (events.Any(x => expectedEvent.Validate(x) != true)) return false;
+        //    }
+        //    return true;
+        //};
 
 
         public override string PersistenceId

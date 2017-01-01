@@ -6,23 +6,7 @@ using ViewModelInterfaces;
 
 namespace ViewMessages
 {
-
-    [Export]
-    public class ViewModelCreated<TViewModel> : ProcessSystemMessage, IViewModelCreated<TViewModel>
-    {
-        [ImportingConstructor]
-        public ViewModelCreated(TViewModel viewModel, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
-        {
-            ViewModel = viewModel;
-        }
-
-        public TViewModel ViewModel { get; }
-
-    }
-
-
-
-    [Export]
+    [Export(typeof(IViewModelLoaded<,>))]
     public class ViewModelLoaded<TLoadingViewModel,TViewModel> : ProcessSystemMessage, IViewModelLoaded<TLoadingViewModel,TViewModel>
     {
         //occurs when viewmodel loaded in View

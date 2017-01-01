@@ -11,5 +11,6 @@ namespace SystemInterfaces
         Func<IProcessSystemMessage, bool> EventPredicate { get; }
         Type EventType { get; }
         int ProcessId { get; }
+        
     }
 }

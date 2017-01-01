@@ -28,7 +28,7 @@ namespace DataServices.Actors
         
        
         private readonly List<IProcessSystemMessage> msgQue = new List<IProcessSystemMessage>(); 
-        private readonly IEnumerable<IEventAction> _complexEvents = new List<EventAction>();
+        private readonly IEnumerable<IComplexEvent> _complexEvents = new List<IComplexEvent>();
         public ConcurrentDictionary<Type, dynamic> ProcessStateMessages { get; }= new ConcurrentDictionary<Type, dynamic>();  
        
 
@@ -49,18 +49,13 @@ namespace DataServices.Actors
             // send out Process State Events
 
             msgQue.Add(pe);
-
-            _complexEvents.Where(x => !x.Raised).ForEach(x => {
-                                                                 if (!CheckExpectedEvents.Invoke(x.Events, msgQue))return;
-                                                                  x.Raised = true;
-                                                                  x.Action.Invoke(this, pe);});
+            _complexEvents.ForEach(x => x.Execute(new ComplexEventParameters(this,msgQue,pe)));
         }
 
 
         public IActorRef ActorRef => this.Self;
         
     }
-
 
 
 

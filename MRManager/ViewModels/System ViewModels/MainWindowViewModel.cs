@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -22,7 +23,7 @@ using ViewModel.Interfaces;
 
 namespace ViewModels
 {
-
+    [Export]
     public class MainWindowViewModel : BaseViewModel<MainWindowViewModel>, IMainWindowViewModel
     {
         private static readonly MainWindowViewModel instance;
@@ -46,16 +47,6 @@ namespace ViewModels
         {
             this.WireEvents();
         }
-
-        //public MainWindowViewModel()
-        //{
-        //          EventMessageBus.Current.GetEvent<ViewModelCreated<IScreenViewModel>>(SourceMessage).Subscribe(x =>
-        //          {
-        //              Application.Current.Dispatcher.Invoke(() => this.DataContext = x.ViewModel);
-        //              EventMessageBus.Current.Publish(new ViewLoadedViewModel<IScreenViewModel>(x.ViewModel, x.Process, SourceMessage), SourceMessage);
-
-        //          });
-        //      }
 
 
         public ObservableCollection<IViewModel> HeaderViewModels { get; } = new ObservableCollection<IViewModel>();

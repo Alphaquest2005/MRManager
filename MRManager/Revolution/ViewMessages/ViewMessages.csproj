@@ -47,6 +47,7 @@
     <Compile Include="CreateSummaryViewModel.cs" />
     <Compile Include="LoadEntityViewModel.cs" />
     <Compile Include="LoadViewModel.cs" />
+    <Compile Include="ViewModelCreated.cs" />
     <Compile Include="ViewNav.cs" />
     <Compile Include="CreateViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

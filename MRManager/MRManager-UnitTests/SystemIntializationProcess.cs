@@ -61,7 +61,7 @@ namespace MRManager_UnitTests
 
             
             StartSystem();
-            Thread.Sleep(TimeSpan.FromSeconds(60));
+            Thread.Sleep(TimeSpan.FromSeconds(75));
 
             Assert.IsNotNull(processStarted);
             Assert.IsNotNull(viewModelSupervisorStarted);

@@ -42,13 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Process\Agent.cs" />
-    <Compile Include="Process\EventAction.cs" />
+    <Compile Include="Process\ComplEventAction.cs" />
     <Compile Include="Process\EntityProcess.cs" />
     <Compile Include="Process\IEventAction.cs" />
     <Compile Include="Process\IProcessExpectedEvent.cs" />
     <Compile Include="Process\ProcessExpectedEvent.cs" />
     <Compile Include="Process\ProcessInfo.cs" />
     <Compile Include="Process\ProcessStateDetailedInfo.cs" />
+    <Compile Include="Process\ProcessSystemMessageExtensions.cs" />
     <Compile Include="Process\User.cs" />
     <Compile Include="Process\MachineInfo.cs" />
     <Compile Include="Process\ProcessStep.cs" />

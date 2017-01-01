@@ -76,7 +76,7 @@ namespace Core.Common.UI
                 paramArray.Add(viewModel.Process);
                 paramArray.Add(viewModel.SourceMessage);
                 var concreteEvent = BootStrapper.BootStrapper.Container.GetExportedTypes(itm.EventType).FirstOrDefault();
-                var msg = (ProcessSystemMessage) Activator.CreateInstance(concreteEvent, paramArray.ToArray());
+                var msg = (ProcessSystemMessage) Activator.CreateInstance(concreteEvent??itm.EventType, paramArray.ToArray());
                 EventMessageBus.Current.Publish(msg, viewModel.SourceMessage);
             };
             return publishMessage;
