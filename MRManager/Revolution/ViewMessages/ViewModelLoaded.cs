@@ -6,7 +6,7 @@ using ViewModelInterfaces;
 
 namespace ViewMessages
 {
-    [Export(typeof(IViewModelLoaded<,>))]
+    [Export]
     public class ViewModelLoaded<TLoadingViewModel,TViewModel> : ProcessSystemMessage, IViewModelLoaded<TLoadingViewModel,TViewModel>
     {
         //occurs when viewmodel loaded in View

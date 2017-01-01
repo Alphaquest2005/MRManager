@@ -40,7 +40,7 @@ namespace MRManager_UnitTests
         private IProcessSystemMessage viewModelSupervisorStarted;
         private IProcessSystemMessage processStarted;
         private IProcessSystemMessage screenViewModelCreated;
-        private IProcessSystemMessage screenViewModelLoadedInMainWindowViewModel;
+       private IProcessSystemMessage screenViewModelLoadedInMainWindowViewModel;
         private IProcessSystemMessage processCompleted;
         private IProcessSystemMessage mainWindowViewModelCreated;
 
@@ -56,12 +56,12 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<ISystemProcessStarted>(SourceMessage).Where(procesPredicate).Subscribe(x => ProcessStarted(x));
             EventMessageBus.Current.GetEvent<IViewModelCreated<IScreenModel>>(SourceMessage).Where(procesPredicate).Subscribe(x => ScreenModelCreated(x));
 
-            EventMessageBus.Current.GetEvent <IViewModelLoaded <IMainWindowViewModel, IScreenModel>>(SourceMessage).Subscribe(x => ScreenModelLoadedInMainWindowViewModel(x));
+            EventMessageBus.Current.GetEvent <IViewModelLoaded<IMainWindowViewModel, IScreenModel>>(SourceMessage).Subscribe(x => ScreenModelLoadedInMainWindowViewModel(x));
             EventMessageBus.Current.GetEvent <ISystemProcessCompleted>(SourceMessage).Where(procesPredicate).Subscribe(x => ProcessCompleted(x));
 
             
             StartSystem();
-            Thread.Sleep(TimeSpan.FromSeconds(75));
+            Thread.Sleep(TimeSpan.FromSeconds(30));
 
             Assert.IsNotNull(processStarted);
             Assert.IsNotNull(viewModelSupervisorStarted);

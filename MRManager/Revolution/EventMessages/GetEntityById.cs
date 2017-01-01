@@ -9,23 +9,21 @@ namespace EventMessages
     [Export]
     public class GetEntityById<T> : ProcessSystemMessage, IGetEntityById<T> where T : IEntity
     {
-        bool isReadOnly = false;
-        public void Create(int entityId)
-        {
+        //bool isReadOnly = false;
+        //public void Create(int entityId)
+        //{
             
-            if(isReadOnly) return;
-            EntityId = entityId;
-            isReadOnly = true;
-        }
+        //    if(isReadOnly) return;
+        //    EntityId = entityId;
+        //    isReadOnly = true;
+        //}
        
-        public int EntityId { get; private set; }
+        public int EntityId { get; }
 
-        public GetEntityById(ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public GetEntityById( int entityId ,ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
-
+            EntityId = entityId;
         }
-
-       
     }
 
     [Export]

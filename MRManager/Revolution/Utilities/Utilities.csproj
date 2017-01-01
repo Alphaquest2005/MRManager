@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="BoxingSafeConverter.cs" />
     <Compile Include="ActorExtensions.cs" />
+    <Compile Include="GenericContractTypeMapping.cs" />
     <Compile Include="FuncExtensions.cs" />
     <Compile Include="TypeNameExtensions.cs" />
     <Compile Include="ExpressionConverter.cs" />

@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using SystemInterfaces;
 using Actor.Interfaces;
+using CommonMessages;
+using EventAggregator;
 using NHibernate.Util;
+using ViewModel.Interfaces;
 
 namespace RevolutionEntities.Process
 {
@@ -35,6 +38,10 @@ namespace RevolutionEntities.Process
 
     public static class ComplexEventActionExtensions
     {
+        static ComplexEventActionExtensions()
+        {
+            EventMessageBus.Current.GetEvent<IViewModelLoaded<IMainWindowViewModel, IScreenModel>>(new SourceMessage(new MessageSource("complexeventactions"), new MachineInfo(Environment.MachineName, Environment.ProcessorCount) )).Subscribe(x => {});
+        }
         private static ConcurrentDictionary<IComplexEvent, bool> RaisedEvents { get; } = new ConcurrentDictionary<IComplexEvent, bool>();
 
         private static ConcurrentDictionary<IComplexEvent, Action<IComplexEventParameters>> ComplexEventActions { get; } = new ConcurrentDictionary<IComplexEvent, Action<IComplexEventParameters>>();
@@ -49,9 +56,9 @@ namespace RevolutionEntities.Process
 
         private static void CheckExpectedEvents(this IComplexEvent complexEvent, IComplexEventParameters paramArray)
         {
-            complexEvent.Events.ForEach(expectedEvent => paramArray.Messages.Where(x => x.GetType() == expectedEvent.EventType && !x.IsValid())
+            complexEvent.Events.ForEach(expectedEvent => paramArray.Messages.Where(x => expectedEvent.EventType.IsInstanceOfType(x) && !x.IsValid())//
                                                                .ForEach(x => expectedEvent.Validate(x)));
-            complexEvent.Execute(paramArray);
+           
 
         }
 

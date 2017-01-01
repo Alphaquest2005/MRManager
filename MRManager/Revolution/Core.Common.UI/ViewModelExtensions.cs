@@ -76,6 +76,7 @@ namespace Core.Common.UI
                 paramArray.Add(viewModel.Process);
                 paramArray.Add(viewModel.SourceMessage);
                 var concreteEvent = BootStrapper.BootStrapper.Container.GetExportedTypes(itm.EventType).FirstOrDefault();
+                //TODO: Replace MEF with Good IOC container - can't do <,>
                 var msg = (ProcessSystemMessage) Activator.CreateInstance(concreteEvent??itm.EventType, paramArray.ToArray());
                 EventMessageBus.Current.Publish(msg, viewModel.SourceMessage);
             };

@@ -1,6 +1,9 @@
-﻿namespace ViewMessages
+﻿using System.ComponentModel.Composition;
+
+namespace ViewMessages
 {
-   public class ViewMessageConst
+    [Export]
+    public class ViewMessageConst
    {
         private static readonly ViewMessageConst instance;
         static ViewMessageConst()

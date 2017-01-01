@@ -45,7 +45,7 @@ namespace RevolutionData
                 {
                     new ProcessExpectedEvent (processId: 2, eventType: typeof (ISystemProcessStarted), eventPredicate: (e) => e != null),
                     new ProcessExpectedEvent (processId: 1, eventType: typeof (IViewModelCreated<ILoginViewModel>),eventPredicate: (e) => e != null),
-                    new ProcessExpectedEvent (processId: 1, eventType: typeof (ViewModelLoaded<IMainWindowViewModel,IScreenModel>),eventPredicate: (e) => e != null),
+                    new ProcessExpectedEvent (processId: 1, eventType: typeof (ViewModelLoaded<IScreenModel,ILoginViewModel>),eventPredicate: (e) => e != null),
                 }).RegisterAction(cp => {
 
                         var ps = new ProcessState<IUserSignIn>(cp.Actor.Process.Id, NullEntity<IUserSignIn>.Instance,ProcessStateInfo.WaitingOnUserName);

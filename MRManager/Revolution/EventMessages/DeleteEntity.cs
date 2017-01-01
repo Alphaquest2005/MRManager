@@ -15,7 +15,7 @@ namespace EventMessages
             Contract.Requires(entityId > 0);
             EntityId = entityId;
         }
-        public int EntityId { get; private set; }
+        public int EntityId { get; }
 
     }
 }

@@ -82,7 +82,7 @@ namespace DataServices.Actors
                 s.Tell(systemStartedMsg);
             }
 
-            
+            return;
             var actorList = new Dictionary<string, Type>()
             {
                 {"{0}EntityDataServiceSupervisor", typeof (EntityDataServiceSupervisor<>)},

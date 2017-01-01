@@ -24,6 +24,7 @@ namespace BootStrapper
                         "*.dll");
                 GenericCatalog genericCatalog = new GenericCatalog(catalog);
                 Container = new CompositionContainer(genericCatalog);
+                DirectoryContainer = new CompositionContainer(catalog);
             }
             catch (Exception)
             {
@@ -34,6 +35,8 @@ namespace BootStrapper
 
 
         }
+
+        public static CompositionContainer DirectoryContainer { get;  }
 
         public static BootStrapper Instance { get; }
 

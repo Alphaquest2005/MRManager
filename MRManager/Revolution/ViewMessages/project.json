@@ -1,5 +1,7 @@
 ﻿{
-  "dependencies": {},
+  "dependencies": {
+    "MefContrib": "1.2.2.1"
+  },
   "frameworks": {
     "net461": {}
   },

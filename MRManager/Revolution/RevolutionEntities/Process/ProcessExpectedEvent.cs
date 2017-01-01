@@ -9,9 +9,6 @@ namespace RevolutionEntities.Process
     public class ProcessExpectedEvent : IProcessExpectedEvent
     {
         public int ProcessId { get; }
-       
-
-        public bool Raised { get; private set; }
 
         public Type EventType { get; }
         public Func<IProcessSystemMessage, bool> EventPredicate { get; }
