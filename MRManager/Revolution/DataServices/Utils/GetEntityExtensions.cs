@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Linq.Dynamic;
 using SystemInterfaces;
@@ -39,18 +40,32 @@ namespace DataServices.Actors
             using (var transaction = ctx.BeginTransaction())
             {
 
-                
-                var whereStr = msg.Changes.Aggregate("", (str, itm) => str + ($"{itm.Key} == \"{itm.Value}\" &&"));
-                whereStr = whereStr.TrimEnd('&');
-                var p = ctx.Query<TEntity>().Where(whereStr).FirstOrDefault();
-                if (p != null)
+                try
                 {
-                    EventMessageBus.Current.Publish(new EntityFound<TEntity>(p, msg.Process, msgSource), msgSource);
+                    var whereStr = msg.Changes.Aggregate("", (str, itm) => str + ($"{itm.Key} == \"{itm.Value}\" &&"));
+                    whereStr = whereStr.TrimEnd('&');
+                    var p = ctx.Query<TEntity>().Where(whereStr).FirstOrDefault();
+                    if (p != null)
+                    {
+                        EventMessageBus.Current.Publish(
+                            new EntityWithChangesFound<TEntity>(p, msg.Changes, msg.Process, msgSource), msgSource);
+                    }
+                    else
+                    {
+                        EventMessageBus.Current.Publish(
+                            new EntityNotFound<TEntity>(msg.EntityId, msg.Process, msgSource), msgSource);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    EventMessageBus.Current.Publish(new EntityNotFound<TEntity>(msg.EntityId, msg.Process, msgSource), msgSource);
+
+                    EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: typeof(IGetEntityWithChanges<TEntity>),
+                                                                         failedEventMessage: msg,
+                                                                         expectedEventType: typeof(IEntityWithChangesFound<TEntity>),
+                                                                         exception: ex,
+                                                                         SourceMsg: msgSource), msgSource);
                 }
+
 
             }
 

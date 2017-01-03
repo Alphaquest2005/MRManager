@@ -77,17 +77,10 @@ namespace RevolutionData
                     var psMsg = new ProcessStateMessage<IUserSignIn>(ps, cp.Actor.Process,cp.Actor.SourceMessage);
                     cp.Actor.ProcessStateMessages.AddOrUpdate(typeof(IUserSignIn),psMsg, (key,value) => ps);
                     EventMessageBus.Current.Publish(psMsg, cp.Actor.SourceMessage);
-                    
-                }),
-            new ComplexEventAction(
-                processId: 2,
-                events: new List<IProcessExpectedEvent>()
-                {
-                    new ProcessExpectedEvent<IEntityWithChangesFound<IUserSignIn>> (processId: 2, eventPredicate: (e) => e.Entity != null && e.Changes.Count == 2 && e.Changes.ContainsKey(nameof(IUserSignIn.Password)))
-                }).RegisterAction((cp) =>
-                {
                     EventMessageBus.Current.Publish(new UserValidated(cp.Msg.Entity, cp.Actor.Process, cp.Actor.SourceMessage), cp.Actor.SourceMessage);
+                    // have to do it so cuz i dropping events 
                 }),
+            
             new ComplexEventAction(
                 processId:2,
                 events: new List<IProcessExpectedEvent>()

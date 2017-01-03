@@ -52,7 +52,7 @@ namespace MRManager_UnitTests
             StartSystem();
             
             
-            Thread.Sleep(TimeSpan.FromSeconds(600));
+            Thread.Sleep(TimeSpan.FromSeconds(60));
 
             Process1Asserts();
             Process2Asserts();
@@ -85,14 +85,18 @@ namespace MRManager_UnitTests
                     });
             EventMessageBus.Current.GetEvent<IGetEntityWithChanges<IUserSignIn>>(SourceMessage)
                 .Subscribe(x => UserNameEntityChanges = x);
-            EventMessageBus.Current.GetEvent<IEntityWithChangesFound<IUserSignIn>>(SourceMessage).Subscribe(x => userFound = x);
+            EventMessageBus.Current.GetEvent<IEntityWithChangesFound<IUserSignIn>>(SourceMessage).Where(x => x.Process.Id == 2 && x.Entity.Username == "joe" && x.Changes.Count == 1).Subscribe(
+                x =>
+                {
+                   ((dynamic)LoginViewModelCreated.ViewModel).Password = "test";
+                    ((dynamic)LoginViewModelCreated.ViewModel).Commands["ValidateUserInfo"].Execute();
+                });
             EventMessageBus.Current.GetEvent<IProcessStateMessage<IUserSignIn>>(SourceMessage)
                 .Where(x => x.Process.Id == 2 && x.State.Entity.Username == "joe")
                 .Subscribe(
                     x =>
                     {
-                        // publish username changes
-                        LoginViewModelCreated.ViewModel.ChangeTracking.AddOrUpdate(nameof(IUserSignIn.Password), "test");
+                        userFound = x;
                     });
             EventMessageBus.Current.GetEvent<IUserValidated>(SourceMessage).Subscribe(x => userValidated = x);
 
@@ -133,7 +137,7 @@ namespace MRManager_UnitTests
         private IRequestProcessState process2StateRequest;
         private List<IProcessStateMessage<IUserSignIn>> process2StateMessageList = new List<IProcessStateMessage<IUserSignIn>>();
         private IGetEntityWithChanges<IUserSignIn> UserNameEntityChanges;
-        private IEntityWithChangesFound<IUserSignIn> userFound;
+        private IProcessStateMessage<IUserSignIn> userFound;
         private IUserValidated userValidated;
         private IServiceStarted<IEntityDataServiceActor<IGetEntityWithChanges<IUserSignIn>>> getEntityChangesActor;
         private List<IProcessEventFailure> EventFailures = new List<IProcessEventFailure>(); 
