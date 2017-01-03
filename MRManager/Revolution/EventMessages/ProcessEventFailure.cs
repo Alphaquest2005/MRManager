@@ -4,7 +4,8 @@ using CommonMessages;
 
 namespace EventMessages
 {
-    public class ProcessEventFailure: ProcessSystemMessage
+
+    public class ProcessEventFailure: ProcessSystemMessage, IProcessEventFailure
     {
         public Type FailedEventType { get; set; }
         public IProcessSystemMessage FailedEventMessage { get; set; }

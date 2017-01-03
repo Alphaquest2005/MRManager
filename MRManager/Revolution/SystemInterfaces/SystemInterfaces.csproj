@@ -42,7 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="IProcessEventFailure.cs" />
+    <Compile Include="IEntityWithChangesFound.cs" />
+    <Compile Include="IGetEntityWithChanges.cs" />
+    <Compile Include="IProcessStateMessage.cs" />
     <Compile Include="IRequestProcessState.cs" />
     <Compile Include="IEntityFound.cs" />
     <Compile Include="IProcessExpectedEvent.cs" />

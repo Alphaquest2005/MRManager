@@ -59,6 +59,7 @@
     <Compile Include="ViewModels\EventSubscription.cs" />
     <Compile Include="ViewModels\ViewEventCommand.cs" />
     <Compile Include="ViewModels\ViewEventPublication.cs" />
+    <Compile Include="ViewModels\ViewEventPublicationParameters.cs" />
     <Compile Include="ViewModels\ViewEventSubscription.cs" />
     <Compile Include="ViewModels\EntityViewModelInfo.cs" />
     <Compile Include="ViewModels\ViewModelInfo.cs" />

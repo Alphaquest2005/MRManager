@@ -106,6 +106,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Domain.Interfaces\Domain.Interfaces.csproj">
+      <Project>{e41cf673-fe71-4aae-a8fc-b571a36c1211}</Project>
+      <Name>Domain.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DomainMessages\DomainMessages.csproj">
+      <Project>{7ee26a5b-63e6-450e-b4bd-66d0205fb492}</Project>
+      <Name>DomainMessages</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Interfaces\Interfaces.csproj">
       <Project>{ad573873-c8e6-4ea3-93f5-0d39a92fc9f6}</Project>
       <Name>Interfaces</Name>

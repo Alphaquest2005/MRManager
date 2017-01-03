@@ -5,6 +5,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 using Common.DataEntites;
 using EF.Entities;
 using Interfaces;
@@ -13,6 +15,8 @@ namespace EF.Entities
 {
 	public partial class UserSignIn
 	{
+        [NotMapped]
+        [IgnoreDataMember]
 	    public virtual string UserId { get; set; }
 	}
 }

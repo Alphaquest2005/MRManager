@@ -10,6 +10,7 @@ using Core.Common.UI;
 using DataInterfaces;
 using EventAggregator;
 using EventMessages;
+using Interfaces;
 using RevolutionEntities.Process;
 using Utilities;
 using ViewMessages;
@@ -22,7 +23,7 @@ namespace DataServices.Actors
         private static readonly Action<IDataContext, ISourceMessage, DeleteEntity<TEntity>> DeleteAction = (ctx, s, x) => x.DeleteEntity(ctx, s);
         private static readonly Action<IDataContext, ISourceMessage, EntityChanges<TEntity>> UpdateAction = (ctx, s, x) => x.UpdateEntity(ctx, s);
         private static readonly Action<IDataContext, ISourceMessage, GetEntityById<TEntity>> GetEntityByIdAction = (ctx, s, x) => x.GetEntity(ctx, s);
-        private static readonly Action<IDataContext, ISourceMessage, GetEntityWithChanges<TEntity>> GetEntityWithChangesAction = (ctx, s, x) => x.GetEntity(ctx, s);
+        private static readonly Action<IDataContext, ISourceMessage, IGetEntityWithChanges<TEntity>> GetEntityWithChangesAction = (ctx, s, x) => x.GetEntity(ctx, s);
 
         private static readonly Action<IDataContext, ISourceMessage, LoadEntitySet<TEntity>> LoadEntitySet = (ctx, s, x) => x.LoadEntitySet(ctx, s);
         private static readonly Action<IDataContext, ISourceMessage, LoadEntitySetWithFilter<TEntity>> LoadEntitySetWithFilter = (ctx, s, x) => x.LoadEntitySet(ctx, s);
@@ -38,7 +39,7 @@ namespace DataServices.Actors
                 //{typeof (DeleteEntity<TEntity>), DeleteAction},
                 //{typeof (EntityChanges<TEntity>), UpdateAction},
                 //{typeof (GetEntityById<TEntity>), GetEntityByIdAction},
-                {typeof (GetEntityWithChanges<TEntity>), GetEntityWithChangesAction},
+                {typeof (IGetEntityWithChanges<TEntity>), GetEntityWithChangesAction},
 
                 //{typeof (LoadEntitySet<TEntity>), LoadEntitySet},
                 //{typeof (LoadEntitySetWithFilter<TEntity>), LoadEntitySetWithFilter},

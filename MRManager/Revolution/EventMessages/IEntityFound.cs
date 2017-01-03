@@ -1,6 +1,0 @@
-﻿using SystemInterfaces;
-
-namespace EventMessages
-{
-
-}

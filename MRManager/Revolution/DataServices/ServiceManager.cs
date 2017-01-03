@@ -90,7 +90,7 @@ namespace DataServices.Actors
 
             foreach (var itm in actorList)
             {
-                foreach (var c in dbContext.Instance.GetAllClassMetadata())
+                foreach (var c in dbContext.Instance.GetAllClassMetadata().Where(x => x.Value.EntityName.Contains("UserSignIn")))
                 {
                     CreateActors(c, itm.Value, itm.Key, dbContext, systemProcess, systemStartedMsg);
                 }
@@ -104,7 +104,7 @@ namespace DataServices.Actors
             IDataContext dbContext, ISystemProcess process, IProcessSystemMessage systemStartedmsg)
         {
 
-            var classType = c.Value.GetMappedClass(EntityMode.Poco).GetInterfaces().Last();
+            var classType = c.Value.GetMappedClass(EntityMode.Poco).GetInterfaces().FirstOrDefault(x => x.Name.Contains(c.Value.EntityName.Substring(c.Value.EntityName.LastIndexOf('.')+1)));
             var specificListType = genericListType.MakeGenericType(classType);
             try
             {

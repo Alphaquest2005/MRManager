@@ -10,7 +10,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-	[InheritedExport]
+	
 	public partial interface IUserSignIn:IUser
 	{
 

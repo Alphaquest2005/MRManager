@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using SystemInterfaces;
+using DataEntites;
 using DataInterfaces;
 using FluentValidation;
 using FluentValidation.Results;
@@ -35,7 +36,7 @@ namespace Core.Common.UI
 
         
 
-        private ReactiveProperty<TEntity> _currentEntity = new ReactiveProperty<TEntity>();
+        private ReactiveProperty<TEntity> _currentEntity = new ReactiveProperty<TEntity>(NullEntity<TEntity>.Instance);
         public ReactiveProperty<TEntity> CurrentEntity
         {
             get { return _currentEntity; }

@@ -18,7 +18,7 @@
 			
 			CreateDataEntities(app, appFolder, app.Settings.Where(x => x.Layer.Name == "DataLayer" && x.Project.Name == "Entities").ToDictionary(x => x.Name, x => x.Value), entities);
 			CreateEFMappings(app, appFolder, app.Settings.Where(x => x.Layer.Name == "DataLayer" && x.Project.Name == "EF.Mappings" ).ToDictionary(x => x.Name, x => x.Value), entities);
-
+			CreateNHMappings(app, appFolder, app.Settings.Where(x =>  x.Layer.Name == "DataLayer" && x.Project.Name == "NH.Mappings").ToDictionary(x => x.Name, x => x.Value), entities);
 
 		}
 		catch (Exception)

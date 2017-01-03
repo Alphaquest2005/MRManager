@@ -32,7 +32,7 @@ namespace DataServices.Actors
 
         }
 
-        public static void GetEntity<TEntity>(this GetEntityWithChanges<TEntity> msg, IDataContext dbContext, ISourceMessage msgSource) where TEntity : class, IEntity
+        public static void GetEntity<TEntity>(this IGetEntityWithChanges<TEntity> msg, IDataContext dbContext, ISourceMessage msgSource) where TEntity : class, IEntity
         {
            
             using (var ctx = dbContext.Instance.OpenSession())
@@ -40,7 +40,8 @@ namespace DataServices.Actors
             {
 
                 
-                var whereStr = msg.Changes.Aggregate("", (str, itm) => str + ($"{itm.Key} == {itm.Value} &&"));
+                var whereStr = msg.Changes.Aggregate("", (str, itm) => str + ($"{itm.Key} == \"{itm.Value}\" &&"));
+                whereStr = whereStr.TrimEnd('&');
                 var p = ctx.Query<TEntity>().Where(whereStr).FirstOrDefault();
                 if (p != null)
                 {

@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IScreenModel.cs" />
+    <Compile Include="IViewEventPublicationParameters.cs" />
     <Compile Include="IViewModelSupervisor.cs" />
     <Compile Include="IDynamicViewModel.cs" />
     <Compile Include="ILoadViewModel.cs" />

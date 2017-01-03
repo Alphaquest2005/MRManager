@@ -86,6 +86,14 @@
       <Project>{e7ec52dc-8650-4cf0-bcab-ed8a9473d2cf}</Project>
       <Name>DesignTimeData</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Domain.Interfaces\Domain.Interfaces.csproj">
+      <Project>{e41cf673-fe71-4aae-a8fc-b571a36c1211}</Project>
+      <Name>Domain.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DomainMessages\DomainMessages.csproj">
+      <Project>{7ee26a5b-63e6-450e-b4bd-66d0205fb492}</Project>
+      <Name>DomainMessages</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EF.Mappings\EF.Mappings.csproj">
       <Project>{da54313c-4b98-49b1-a8f9-b5827f121886}</Project>
       <Name>EF.Mappings</Name>

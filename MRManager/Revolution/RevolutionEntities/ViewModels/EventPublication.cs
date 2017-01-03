@@ -7,7 +7,7 @@ namespace RevolutionEntities.ViewModels
 {
     public class EventPublication<TViewModel, TEvent>: IViewModelEventPublication<TViewModel, TEvent> where TViewModel : IViewModel where TEvent : IEvent
     {
-        public EventPublication(Func<TViewModel, IObservable<dynamic>> subject, IEnumerable<Func<TViewModel, bool>> subjectPredicate, IEnumerable<Func<TViewModel, dynamic>> messageData)
+        public EventPublication(Func<TViewModel, IObservable<dynamic>> subject, IEnumerable<Func<TViewModel, bool>> subjectPredicate, Func<TViewModel, IViewEventPublicationParameter> messageData)
         {
             EventType = typeof(TEvent);
             Subject = subject;
@@ -19,7 +19,7 @@ namespace RevolutionEntities.ViewModels
         public Type EventType { get; }
         public Func<TViewModel, IObservable<dynamic>> Subject { get; }
         public IEnumerable<Func<TViewModel, bool>> SubjectPredicate { get; }
-        public IEnumerable<Func<TViewModel, dynamic>> MessageData { get; }
+        public Func<TViewModel, IViewEventPublicationParameter> MessageData { get; }
 
         Type ViewModelType { get; }
     }

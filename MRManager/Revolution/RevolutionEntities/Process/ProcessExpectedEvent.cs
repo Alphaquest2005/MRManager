@@ -49,7 +49,13 @@ namespace RevolutionEntities.Process
             return RaisedExpectedEvents.ContainsKey(expectedEvent);
         }
 
-
+        public static bool Drop(this IProcessExpectedEvent expectedEvent)
+        {
+            if (!RaisedExpectedEvents.ContainsKey(expectedEvent)) return true;
+            bool wasDropped;
+            RaisedExpectedEvents.TryRemove(expectedEvent, out wasDropped);
+            return wasDropped;
+        }
     }
 
 

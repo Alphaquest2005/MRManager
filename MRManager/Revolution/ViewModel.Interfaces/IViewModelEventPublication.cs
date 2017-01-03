@@ -15,7 +15,7 @@ namespace ViewModel.Interfaces
         Func<TViewModel, IObservable<dynamic>> Subject { get; }
         IEnumerable<Func<TViewModel, bool>> SubjectPredicate { get; }
         //Func<TEvent, bool> EventPredicate { get; }
-        IEnumerable<Func<TViewModel, dynamic>> MessageData { get; }
+        Func<TViewModel, IViewEventPublicationParameter> MessageData { get; }
 
     }
 }

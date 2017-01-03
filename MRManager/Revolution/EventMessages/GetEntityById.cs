@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using SystemInterfaces;
 using CommonMessages;
 using DataInterfaces;
@@ -24,20 +23,5 @@ namespace EventMessages
         {
             EntityId = entityId;
         }
-    }
-
-    [Export]
-    public class GetEntityWithChanges<TEntity> : ProcessSystemMessage where TEntity : IEntity
-    {
-        public GetEntityWithChanges(int entityId, Dictionary<string, dynamic> changes, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
-        {
-            Changes = changes;
-            EntityId = entityId;
-        }
-
-        public Dictionary<string, dynamic> Changes { get; }
-        public int EntityId { get; }
-
-       
     }
 }

@@ -52,12 +52,7 @@ namespace MRManager_UnitTests
                    new ViewEventPublication<LoginViewModel, EntityChanges<IUserSignIn>>(
                        subject:(s) => s.ChangeTracking.DictionaryChanges,
                        subjectPredicate: new List<Func<LoginViewModel, bool>>(),
-                       messageData:new List<Func<LoginViewModel, dynamic>>()
-                       {
-                           (s) => s.CurrentEntity.Value.Id,
-                           (s) => s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
-                       }
-                       )
+                       messageData:(s) => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value.Id, s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)}, s.Process, s.SourceMessage ))
                }, commandInfo: new List<IViewModelEventCommand<IViewModel,IEvent>>(), orientation: typeof(IBodyViewModel));
 
             dynamic dynamicViewModel = viewModel;
@@ -84,12 +79,7 @@ namespace MRManager_UnitTests
                        {
                            v => v.ChangeTracking.Keys.Contains(nameof(v.CurrentEntity.Value.Username))
                        },
-                       messageData:new List<Func<LoginViewModel, dynamic>>()
-                       {
-                           (s) => s.CurrentEntity.Value.Id,
-                           (s) => s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
-                       }
-                       )
+                       messageData:(s) => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value.Id, s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)}, s.Process, s.SourceMessage ))
                }, commandInfo: new List<IViewModelEventCommand<IViewModel, IEvent>>(), orientation: typeof(IBodyViewModel));
 
             dynamic dynamicViewModel = viewModel;
@@ -155,11 +145,7 @@ namespace MRManager_UnitTests
                         {
                             (v) => v.ChangeTracking.Keys.Count > 2
                         },
-                        messageData: new List<Func<LoginViewModel, dynamic>>()
-                        {
-                            (s) => s.CurrentEntity?.Value.Id,
-                            (s) => s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
-                        })
+                        messageData: s => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},s.Process,s.SourceMessage))
                 }, orientation: typeof(IBodyViewModel));
             return viewModel;
         }

@@ -72,9 +72,10 @@ namespace Core.Common.UI
         {
             Action<dynamic> publishMessage = x =>
             {
-                var paramArray = itm.MessageData.Select(p => p.Invoke(viewModel)).Cast<object>().ToList();
-                paramArray.Add(viewModel.Process);
-                paramArray.Add(viewModel.SourceMessage);
+                var param = itm.MessageData.Invoke(viewModel);
+                var paramArray = param.Params.ToList();
+                paramArray.Add(param.Process);
+                paramArray.Add(param.SourceMessage);
                 var concreteEvent = BootStrapper.BootStrapper.Container.GetExportedTypes(itm.EventType).FirstOrDefault();
                 //TODO: Replace MEF with Good IOC container - can't do <,>
                 var msg = (ProcessSystemMessage) Activator.CreateInstance(concreteEvent??itm.EventType, paramArray.ToArray());

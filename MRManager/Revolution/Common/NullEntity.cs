@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Reflection;
+using SystemInterfaces;
 using Common.DataEntites;
 using DataInterfaces;
 
@@ -18,12 +19,15 @@ namespace DataEntites
             {
                 var itm = export.Value;
                 instance = (T) Activator.CreateInstance(itm.GetType());
+                
             }
             else
             {
                 instance = default(T);
             }
-            
+            var entity = instance as IEntity;
+            if (entity != null) entity.Id = -1;
+
         }
 
         public static T Instance => instance;
