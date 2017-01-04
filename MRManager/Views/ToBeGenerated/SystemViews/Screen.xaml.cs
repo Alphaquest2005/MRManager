@@ -25,6 +25,7 @@ namespace Views
                 // Required to initialize variables
                 InitializeComponent();
 				AppSlider.Slider = this.slider;
+                //TODO: Figure out the proper way to bind and get this out
                 EventMessageBus.Current.GetEvent<IViewModelCreated<IScreenModel>>(SourceMessage).Subscribe(x =>
                 {
                     Application.Current.Dispatcher.Invoke(() => { this.DataContext = x.ViewModel; });
