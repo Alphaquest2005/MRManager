@@ -72,7 +72,7 @@ namespace DataServices.Actors
 
         }
 
-        public void CreateEntityActor<TEvent>(IDataContext dbContext, object action, ISystemProcess process)
+        public void CreateEntityActor<TEvent>(IDataContext dbContext, object action, ISystemProcess process) where TEvent : IMessage
         {
             /// Create Actor Per Event
             try

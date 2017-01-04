@@ -54,6 +54,7 @@
     <Compile Include="SummaryViewModelCreated.cs" />
     <Compile Include="ViewMessageConst.cs" />
     <Compile Include="ViewModelLoaded.cs" />
+    <Compile Include="ViewStateLoaded.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonMessages\CommonMessages.csproj">

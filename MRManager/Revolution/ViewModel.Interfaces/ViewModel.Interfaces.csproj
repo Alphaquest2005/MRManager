@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IViewStateLoaded.cs" />
     <Compile Include="IScreenModel.cs" />
     <Compile Include="IViewEventPublicationParameters.cs" />
     <Compile Include="IViewModelSupervisor.cs" />

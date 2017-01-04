@@ -19,14 +19,16 @@ namespace ViewModels
     [Export]
     public class LoginViewModel : DynamicViewModel<ObservableViewModel<IUserSignIn>>, ILoginViewModel
     {
-        public LoginViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableViewModel<IUserSignIn>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
+        public LoginViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableViewModel<IUserSignIn>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
-            CurrentEntity = this.Instance.CurrentEntity;
+            Validator = this.Instance.Validator;
+            State = this.Instance.State;
             ChangeTracking = this.Instance.ChangeTracking;
             this.WireEvents();
         }
 
-        public ReactiveProperty<IUserSignIn> CurrentEntity { get; }
+        public AbstractValidator<IUserSignIn> Validator { get; }
+        public ReactiveProperty<IProcessState<IUserSignIn>> State { get; }
         public ObservableDictionary<string, dynamic> ChangeTracking { get; }
     }
 }

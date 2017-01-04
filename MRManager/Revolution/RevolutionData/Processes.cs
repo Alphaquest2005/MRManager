@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SystemInterfaces;
 using SystemMessages;
 using DataEntites;
@@ -45,13 +46,13 @@ namespace RevolutionData
                 events: new List<IProcessExpectedEvent>()
                 {
                     new ProcessExpectedEvent (processId: 2, eventType: typeof (ISystemProcessStarted), eventPredicate: (e) => e != null),
-                    new ProcessExpectedEvent (processId: 2, eventType: typeof (IViewModelCreated<ILoginViewModel>),eventPredicate: (e) => e != null),
-                    new ProcessExpectedEvent (processId: 2, eventType: typeof (IViewModelLoaded<IScreenModel,IViewModel>),eventPredicate: (e) => e != null),
+                    //new ProcessExpectedEvent (processId: 2, eventType: typeof (IViewModelCreated<ILoginViewModel>),eventPredicate: (e) => e != null),
+                    //new ProcessExpectedEvent (processId: 2, eventType: typeof (IViewModelLoaded<IScreenModel,IViewModel>),eventPredicate: (e) => e != null),
                 }).RegisterAction(cp => {
 
                         var ps = new ProcessState<IUserSignIn>(cp.Actor.Process.Id, NullEntity<IUserSignIn>.Instance,ProcessStateInfo.WaitingOnUserName);
                         var psMsg = new ProcessStateMessage<IUserSignIn>(ps, cp.Actor.Process,cp.Actor.SourceMessage);
-                        cp.Actor.ProcessStateMessages.AddOrUpdate(ps.Entity.GetType(),ps, (key,value) => ps);
+                        cp.Actor.ProcessStateMessages.AddOrUpdate(ps.Entity.GetType(),psMsg, (key,value) => psMsg);
                         EventMessageBus.Current.Publish(psMsg, cp.Actor.SourceMessage);
                     }),
             new ComplexEventAction(
@@ -63,7 +64,7 @@ namespace RevolutionData
                 {
                     var ps = new ProcessState<IUserSignIn>(cp.Actor.Process.Id, cp.Msg.Entity, new ProcessStateDetailedInfo($"Welcome {cp.Msg.Entity.Username}", "Please Enter your Password"));
                     var psMsg = new ProcessStateMessage<IUserSignIn>(ps, cp.Actor.Process,cp.Actor.SourceMessage);
-                    cp.Actor.ProcessStateMessages.AddOrUpdate(typeof(IUserSignIn),psMsg, (key,value) => ps);
+                    cp.Actor.ProcessStateMessages.AddOrUpdate(typeof(IUserSignIn),psMsg, (key,value) => psMsg);
                     EventMessageBus.Current.Publish(psMsg, cp.Actor.SourceMessage);
                 }),
             new ComplexEventAction(
@@ -75,7 +76,7 @@ namespace RevolutionData
                 {
                     var ps = new ProcessState<IUserSignIn>(cp.Actor.Process.Id, cp.Msg.Entity, new ProcessStateDetailedInfo($"User: {cp.Msg.Entity.Username} Validated", "User Validated"));
                     var psMsg = new ProcessStateMessage<IUserSignIn>(ps, cp.Actor.Process,cp.Actor.SourceMessage);
-                    cp.Actor.ProcessStateMessages.AddOrUpdate(typeof(IUserSignIn),psMsg, (key,value) => ps);
+                    cp.Actor.ProcessStateMessages.AddOrUpdate(typeof(IUserSignIn),psMsg, (key,value) => psMsg);
                     EventMessageBus.Current.Publish(psMsg, cp.Actor.SourceMessage);
                     EventMessageBus.Current.Publish(new UserValidated(cp.Msg.Entity, cp.Actor.Process, cp.Actor.SourceMessage), cp.Actor.SourceMessage);
                     // have to do it so cuz i dropping events 
@@ -89,10 +90,9 @@ namespace RevolutionData
                 }).RegisterAction((cp) =>
                     {
                         foreach (var ps in cp.Actor.ProcessStateMessages)
-                        {
-                            EventMessageBus.Current.Publish(ps.Value, cp.Actor.SourceMessage);
-                        }
-
+                            {
+                                EventMessageBus.Current.Publish(ps.Value, cp.Actor.SourceMessage);
+                            }
                     }),
         };
 

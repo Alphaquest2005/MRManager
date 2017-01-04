@@ -10,6 +10,7 @@ using EventMessages;
 using Interfaces;
 using JB.Reactive.ExtensionMethods;
 using ReactiveUI;
+using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
 using ViewMessages;
 using ViewModel.Interfaces;
@@ -179,7 +180,7 @@ namespace RevolutionData
                        processId:2,
                        eventPredicate: e => e != null,
                        actionPredicate: new List<Func<ILoginViewModel, IProcessStateMessage<IUserSignIn>, bool>>(),
-                       action: (v,e) => v.CurrentEntity.Value = e.State.Entity
+                       action: (v,e) => v.State.Value = e.State
                        ),
 
                 },
@@ -189,21 +190,30 @@ namespace RevolutionData
                         subject: v => v.ChangeTracking.DictionaryChanges,
                         subjectPredicate: new List<Func<ILoginViewModel, bool>>()
                                         {
-                                            v => v.ChangeTracking.Keys.Contains(nameof(v.CurrentEntity.Value.Username)) && v.ChangeTracking.Keys.Count == 1
+                                            v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Username)) && v.ChangeTracking.Keys.Count == 1
                                         },
-                        messageData: s => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},s.Process,s.SourceMessage))
+                        messageData: s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},s.Process,s.SourceMessage)),
+
+
+                     new ViewEventPublication<ILoginViewModel, ViewStateLoaded<ILoginViewModel,IProcessState<IUserSignIn>>>(
+                        subject: v => v.State,
+                        subjectPredicate: new List<Func<ILoginViewModel, bool>>()
+                        {
+                            v => v.State != null
+                        },
+                        messageData: s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},s.Process,s.SourceMessage))
                 },
                 commands: new List<IViewModelEventCommand<IViewModel,IEvent>>()
                 {
                     new ViewEventCommand<ILoginViewModel, GetEntityWithChanges<IUserSignIn>>("ValidateUserInfo",
                         v =>
-                            v.ChangeTracking.WhenAny(x => x.Keys,x => x.Value.Contains(nameof(v.CurrentEntity.Value.Username))),
+                            v.ChangeTracking.WhenAny(x => x.Keys,x => x.Value.Contains(nameof(v.State.Value.Entity.Username))),
                         subject: (s) => ((ReactiveCommand<IViewModel, Unit>) s.Commands["ValidateUserInfo"]).AsObservable(),
                         subjectPredicate: new List<Func<ILoginViewModel, bool>>()
                         {
                             (v) => true
                         },
-                        messageData: s => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},s.Process,s.SourceMessage)),
+                        messageData: s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},s.Process,s.SourceMessage)),
 
                 },
                 viewModelType: typeof(ILoginViewModel),

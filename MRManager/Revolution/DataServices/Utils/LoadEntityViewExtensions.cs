@@ -5,6 +5,7 @@ using DataInterfaces;
 using EFRepository;
 using EventAggregator;
 using EventMessages;
+using NHibernate.Linq.Functions;
 
 namespace DataServices.Actors
 {
@@ -23,7 +24,8 @@ namespace DataServices.Actors
 
             var entitySetType = typeof(EntitySetLoaded<>).MakeGenericType(msg.ViewType);
             var entitySetInst = Activator.CreateInstance(entitySetType, task,msg.Process, msg.Source);
-            EventMessageBus.Current.Publish(entitySetInst, source);
+            //ToDo: publish view message
+         //   EventMessageBus.Current.Publish(entitySetInst, source);
         }
 
         public static void LoadEntityView<T>(this LoadEntityViewWithFilter<T> msg, IDataContext dbContext, ISourceMessage source) where T : IEntity
@@ -38,7 +40,8 @@ namespace DataServices.Actors
 
             var entitySetType = typeof(EntitySetWithFilterLoaded<>).MakeGenericType(msg.ViewType);
             var entitySetInst = Activator.CreateInstance(entitySetType, task, msg.Process, source);
-            EventMessageBus.Current.Publish(entitySetInst, source);
+            //Todo: publish view message
+           // EventMessageBus.Current.Publish(entitySetInst, source);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Actor.Interfaces
     public interface IProcessActor:IAgent, IProcessService
     {
         ISystemProcess Process { get; }
-        ConcurrentDictionary<Type, dynamic> ProcessStateMessages { get; }
+        ConcurrentDictionary<Type, IProcessStateMessage<IEntity>> ProcessStateMessages { get; }
         IActorRef ActorRef { get; }
         
     }

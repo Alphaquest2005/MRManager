@@ -52,7 +52,7 @@ namespace MRManager_UnitTests
             StartSystem();
             
             
-            Thread.Sleep(TimeSpan.FromSeconds(15));
+            Thread.Sleep(TimeSpan.FromSeconds(60));
 
             Process1Asserts();
             Process2Asserts();
@@ -69,20 +69,24 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(SourceMessage).Where(processPredicate).Subscribe(x => process2ServiceActorStarted = x);
             EventMessageBus.Current.GetEvent<ISystemProcessStarted>(SourceMessage).Where(processPredicate).Subscribe(x => process2Started = x);
             EventMessageBus.Current.GetEvent<IViewModelCreated<ILoginViewModel>>(SourceMessage).Where(x => x.Process.Id == 2).Subscribe(x => LoginViewModelCreated = x);
-            EventMessageBus.Current.GetEvent<IViewModelLoaded<IScreenModel, IViewModel>>(SourceMessage).Subscribe(x => LoginViewModelLoadedInMScreenViewModel = x);
+            EventMessageBus.Current.GetEvent<IViewModelLoaded<IScreenModel, IViewModel>>(SourceMessage).Subscribe(x =>
+            {
+                LoginViewModelLoadedInMScreenViewModel = x;
+            });
             EventMessageBus.Current.GetEvent<IRequestProcessState>(SourceMessage).Where(x => x.Process.Id == 2).Subscribe(x => process2StateRequest = x);
+
+            EventMessageBus.Current.GetEvent<IViewStateLoaded<ILoginViewModel, IProcessState<IUserSignIn>>>(SourceMessage)
+                .Where(x => x.Process.Id == 2)
+                .Subscribe(x => viewLoadedState = x);
+
+            EventMessageBus.Current.GetEvent<IViewStateLoaded<ILoginViewModel, IProcessState<IUserSignIn>>>(SourceMessage)
+               .Where(z => z.Process.Id == 2 && process2StateRequest != null && z.State.Entity == NullEntity<IUserSignIn>.Instance)
+               .Subscribe(z =>((dynamic)LoginViewModelCreated.ViewModel).Username = "joe");
 
             EventMessageBus.Current.GetEvent<IServiceStarted<IEntityDataServiceActor<IGetEntityWithChanges<IUserSignIn>>>>(SourceMessage).Subscribe(x => getEntityChangesActor = x);
 
             EventMessageBus.Current.GetEvent<IProcessStateMessage<IUserSignIn>>(SourceMessage).Where(x => x.Process.Id == 2).Subscribe(x => process2StateMessageList.Add(x));
-            EventMessageBus.Current.GetEvent<IProcessStateMessage<IUserSignIn>>(SourceMessage)
-                .Where(x => x.Process.Id == 2 && x.State.Entity == NullEntity<IUserSignIn>.Instance)
-                .Subscribe(
-                    x =>
-                    {
-                        // publish username changes
-                        ((dynamic)LoginViewModelCreated.ViewModel).Username = "joe";
-                    });
+            
             EventMessageBus.Current.GetEvent<IGetEntityWithChanges<IUserSignIn>>(SourceMessage)
                 .Subscribe(x => UserNameEntityChanges = x);
             EventMessageBus.Current.GetEvent<IEntityWithChangesFound<IUserSignIn>>(SourceMessage).Where(x => x.Process.Id == 2 && x.Entity.Username == "joe" && x.Changes.Count == 1).Subscribe(
@@ -108,13 +112,15 @@ namespace MRManager_UnitTests
             Assert.IsNotNull(process2ServiceActorStarted);
             Assert.IsNotNull(process2Started);
             Assert.IsNotNull(LoginViewModelCreated);
+            Assert.IsTrue(process2StateMessageList.Count >= 1);
             Assert.IsNotNull(LoginViewModelLoadedInMScreenViewModel);
             Assert.IsInstanceOfType(LoginViewModelLoadedInMScreenViewModel.ViewModel, typeof(ILoginViewModel));
             Assert.IsNotNull(getEntityChangesActor);
             Assert.IsNotNull(process2StateRequest);
-            Assert.IsTrue(process2StateMessageList.Count >= 1);
-            Assert.IsNotNull(UserNameEntityChanges);
             Assert.IsTrue(process2StateMessageList.Count >= 2);
+            Assert.IsNotNull(viewLoadedState);
+            Assert.IsNotNull(UserNameEntityChanges);
+           
             Assert.IsNotNull(userValidated);
             
 
@@ -140,8 +146,9 @@ namespace MRManager_UnitTests
         private IProcessStateMessage<IUserSignIn> userFound;
         private IUserValidated userValidated;
         private IServiceStarted<IEntityDataServiceActor<IGetEntityWithChanges<IUserSignIn>>> getEntityChangesActor;
-        private List<IProcessEventFailure> EventFailures = new List<IProcessEventFailure>(); 
-        
+        private List<IProcessEventFailure> EventFailures = new List<IProcessEventFailure>();
+        private IViewStateLoaded<ILoginViewModel, IProcessState<IUserSignIn>> viewLoadedState;
+
 
         private void RegisterProcess1Events()
         {
