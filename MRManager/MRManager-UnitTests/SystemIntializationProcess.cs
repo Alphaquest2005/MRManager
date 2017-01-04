@@ -52,7 +52,7 @@ namespace MRManager_UnitTests
             StartSystem();
             
             
-            Thread.Sleep(TimeSpan.FromSeconds(60));
+            Thread.Sleep(TimeSpan.FromSeconds(15));
 
             Process1Asserts();
             Process2Asserts();

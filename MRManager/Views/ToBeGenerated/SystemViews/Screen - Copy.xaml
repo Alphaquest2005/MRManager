@@ -7,7 +7,6 @@
              xmlns:interfaces="clr-namespace:Interfaces;assembly=Interfaces"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
-             xmlns:viewModels1="clr-namespace:ViewModel.Interfaces;assembly=ViewModel.Interfaces"
              xmlns:views="clr-namespace:Views"
              d:DesignHeight="640"
              d:DesignWidth="10000"
@@ -27,15 +26,13 @@
             </Style.Triggers>
         </Style>
 
-        <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
+        <DataTemplate x:Key="LoginTemplate" DataType="{x:Type viewModels:LoginViewModel}">
             <StackPanel Width="500"
                         Height="500"
                         Background="#FF142695">
                 <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBox Background="#FF30AC14" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
                 <Button Command="{Binding Commands[ValidateUserInfo]}" Content="Login" />
-                <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
         </DataTemplate>
 

@@ -197,12 +197,11 @@ namespace RevolutionData
                 {
                     new ViewEventCommand<ILoginViewModel, GetEntityWithChanges<IUserSignIn>>("ValidateUserInfo",
                         v =>
-                            v.ChangeTracking.WhenAny(x => x.Keys,
-                                x => x.Value.Contains(nameof(v.CurrentEntity.Value.Password)) && x.Value.Contains(nameof(v.CurrentEntity.Value.Username))),
+                            v.ChangeTracking.WhenAny(x => x.Keys,x => x.Value.Contains(nameof(v.CurrentEntity.Value.Username))),
                         subject: (s) => ((ReactiveCommand<IViewModel, Unit>) s.Commands["ValidateUserInfo"]).AsObservable(),
                         subjectPredicate: new List<Func<ILoginViewModel, bool>>()
                         {
-                            (v) => v.ChangeTracking.Keys.Count > 2
+                            (v) => true
                         },
                         messageData: s => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},s.Process,s.SourceMessage)),
 

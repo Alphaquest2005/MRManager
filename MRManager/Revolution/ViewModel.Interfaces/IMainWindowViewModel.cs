@@ -4,11 +4,13 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Reactive.Bindings;
 
 namespace ViewModel.Interfaces
 {
     [InheritedExport]
     public interface IMainWindowViewModel : IScreenLayoutViewModel
     {
+        ReactiveProperty<IScreenModel> ScreenModel { get; }
     }
 }

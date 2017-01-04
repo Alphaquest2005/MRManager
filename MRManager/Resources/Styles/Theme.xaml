@@ -57,7 +57,7 @@
 							</VisualStateGroup>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualStateGroup.Transitions>
-									<VisualTransition GeneratedDuration="00:00:00.3000000"/>
+									<!--<VisualTransition GeneratedDuration="00:00:00.3000000"/>-->
 									<VisualTransition From="MouseOver" GeneratedDuration="00:00:00" To="Pressed"/>
 									<VisualTransition From="MouseOver" GeneratedDuration="00:00:00.1000000" To="Normal"/>
 								</VisualStateGroup.Transitions>
@@ -96,12 +96,12 @@
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<Storyboard>
-										<!--<ColorAnimationUsingKeyFrames Duration="00:00:00.001" Storyboard.TargetName="White" Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+										<ColorAnimationUsingKeyFrames Duration="00:00:00.001" Storyboard.TargetName="White" Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
 											<SplineColorKeyFrame KeyTime="0" Value="#FFECECEC"/>
 										</ColorAnimationUsingKeyFrames>
 										<ColorAnimationUsingKeyFrames Duration="00:00:00.001" Storyboard.TargetName="White" Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
 											<SplineColorKeyFrame KeyTime="0" Value="#FFECECEC"/>
-										</ColorAnimationUsingKeyFrames>-->
+										</ColorAnimationUsingKeyFrames>
 										<DoubleAnimationUsingKeyFrames Duration="00:00:00.001" Storyboard.TargetName="Background" Storyboard.TargetProperty="(UIElement.Opacity)">
 											<SplineDoubleKeyFrame KeyTime="0" Value="0.2"/>
 										</DoubleAnimationUsingKeyFrames>

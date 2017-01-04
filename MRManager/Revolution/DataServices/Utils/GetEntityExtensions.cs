@@ -44,6 +44,7 @@ namespace DataServices.Actors
                 {
                     var whereStr = msg.Changes.Aggregate("", (str, itm) => str + ($"{itm.Key} == \"{itm.Value}\" &&"));
                     whereStr = whereStr.TrimEnd('&');
+                    if (string.IsNullOrEmpty(whereStr)) return;
                     var p = ctx.Query<TEntity>().Where(whereStr).FirstOrDefault();
                     if (p != null)
                     {

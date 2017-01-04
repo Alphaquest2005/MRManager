@@ -70,5 +70,10 @@ namespace MRManager
 			}
 
 		}
-	}
+
+        private void Screen_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
+    }
 }

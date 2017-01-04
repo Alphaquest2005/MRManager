@@ -15,6 +15,7 @@ using CommonMessages;
 using Core.Common.UI;
 using EventAggregator;
 using JB.Collections.Reactive;
+using Reactive.Bindings;
 using RevolutionData;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
@@ -46,6 +47,7 @@ namespace ViewModels
                   ProcessViewModels.ProcessViewModelInfos.FirstOrDefault().Orientation)
         {
             this.WireEvents();
+
         }
 
 
@@ -54,6 +56,8 @@ namespace ViewModels
         public ObservableCollection<IViewModel> RightViewModels { get; } = new ObservableCollection<IViewModel>();
         public ObservableCollection<IViewModel> FooterViewModels { get; } = new ObservableCollection<IViewModel>();
         public ObservableCollection<IViewModel> BodyViewModels { get; } = new ObservableCollection<IViewModel>();
+
+        public ReactiveProperty<IScreenModel> ScreenModel { get; } = new ReactiveProperty<IScreenModel>(); 
 
         
 
