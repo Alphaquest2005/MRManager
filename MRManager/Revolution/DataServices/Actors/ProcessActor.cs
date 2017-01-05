@@ -27,7 +27,7 @@ namespace DataServices.Actors
        
         private readonly List<IProcessSystemMessage> msgQue = new List<IProcessSystemMessage>(); 
         private readonly IEnumerable<IComplexEvent> _complexEvents = new List<IComplexEvent>();
-        public ConcurrentDictionary<Type, IProcessStateMessage<IEntity>> ProcessStateMessages { get; }= new ConcurrentDictionary<Type, IProcessStateMessage<IEntity>>();  
+        public ConcurrentDictionary<Type, IProcessStateMessage<IEntityId>> ProcessStateMessages { get; }= new ConcurrentDictionary<Type, IProcessStateMessage<IEntityId>>();  
        
 
         public ProcessActor(ISystemProcess process)

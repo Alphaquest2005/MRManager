@@ -18,6 +18,8 @@ namespace Common
             return entity;
         }
 
+
+        
         public static T ApplyChanges<T>(this T entity, T changedEntity) where T : IEntity
         {
 

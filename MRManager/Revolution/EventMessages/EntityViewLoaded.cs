@@ -5,12 +5,13 @@ using CommonMessages;
 
 namespace EventMessages
 {
-    public class EntityViewLoaded<T> : ProcessSystemMessage where T : IEntity
+
+    public class EntityViewLoaded<TView> : ProcessSystemMessage, IEntityViewLoaded<TView> where TView : IEntityId
     {
-        public IEnumerable<T> Entities { get; }
+        public IEnumerable<TView> Entities { get; }
         
 
-        public EntityViewLoaded(IEnumerable<T> entities, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public EntityViewLoaded(IEnumerable<TView> entities, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
             Entities = entities;
         }

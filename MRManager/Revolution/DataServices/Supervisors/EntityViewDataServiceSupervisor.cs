@@ -14,17 +14,16 @@ using ViewMessages;
 
 namespace DataServices.Actors
 {
-    public class EntityDataServiceSupervisor<TEntity> : ReceiveActor where TEntity : class, IEntity
+    public class EntityViewDataServiceSupervisor<TEntityView> : ReceiveActor where TEntityView : IEntityId
+//where TEntity : class, IEntity where TEntityView:IEntityView<TEntity>
     {
-        private static readonly Action<ICreateEntity<TEntity>> CreateAction = ( x) => x.CreateEntity();
-        private static readonly Action<IDeleteEntity<TEntity>> DeleteAction = (x) => x.DeleteEntity();
-        private static readonly Action<IUpdateEntity<TEntity>> UpdateAction = (x) => x.UpdateEntity();
-        private static readonly Action<IGetEntityById<TEntity>> GetEntityByIdAction = (x) => x.GetEntity();
-        private static readonly Action<ISourceMessage, IGetEntityWithChanges<TEntity>> GetEntityWithChangesAction = (s, x) => x.GetEntity();
+        
+        private static readonly Action<IGetEntityViewById<TEntityView>> GetEntityByIdAction = (x) => x.GetEntity();
+        private static readonly Action<IGetEntityViewWithChanges<TEntityView>> GetEntityWithChangesAction = (s, x) => x.GetEntity();
 
-        private static readonly Action<ISourceMessage, ILoadEntitySet<TEntity>> LoadEntitySet = (s, x) => x.LoadEntitySet();
-        private static readonly Action<ISourceMessage, ILoadEntitySetWithFilter<TEntity>> LoadEntitySetWithFilter = (s, x) => x.LoadEntitySet();
-        private static readonly Action<ISourceMessage, ILoadEntitySetWithFilterWithIncludes<TEntity>> LoadEntitySetWithFilterWithIncludes = (s, x) => x.LoadEntitySet();
+        //private static readonly Action<ISourceMessage, ILoadEntitySet<TEntity>> LoadEntitySet = (s, x) => x.LoadEntitySet();
+        //private static readonly Action<ISourceMessage, ILoadEntitySetWithFilter<TEntity>> LoadEntitySetWithFilter = (s, x) => x.LoadEntitySet();
+        //private static readonly Action<ISourceMessage, ILoadEntitySetWithFilterWithIncludes<TEntity>> LoadEntitySetWithFilterWithIncludes = (s, x) => x.LoadEntitySet();
 
         //TODO: Add EntityViews
         //private static readonly Action<ISourceMessage, LoadEntityView<TEntity>> LoadEntityView = (s, x) => LoadEntityView(s, x);
@@ -33,11 +32,9 @@ namespace DataServices.Actors
         readonly Dictionary<Type, object> entityEvents =
             new Dictionary<Type, object>()
             {
-                //{typeof (CreateEntity<TEntity>), CreateAction},
-                //{typeof (DeleteEntity<TEntity>), DeleteAction},
-                //{typeof (EntityChanges<TEntity>), UpdateAction},
+                
                 //{typeof (GetEntityById<TEntity>), GetEntityByIdAction},
-                {typeof (IGetEntityWithChanges<TEntity>), GetEntityWithChangesAction},
+                {typeof (IGetEntityViewById<TEntityView>), GetEntityByIdAction},
 
                 //{typeof (LoadEntitySet<TEntity>), LoadEntitySet},
                 //{typeof (LoadEntitySetWithFilter<TEntity>), LoadEntitySetWithFilter},
@@ -47,14 +44,14 @@ namespace DataServices.Actors
                 //{typeof (LoadEntityViewWithFilter<TEntity>), LoadEntityViewWithFilter},
             };
 
-        public EntityDataServiceSupervisor(ISystemProcess process)
+        public EntityViewDataServiceSupervisor(ISystemProcess process)
         {
             foreach (var itm in entityEvents)
             {
                 try
                 {
                     this.GetType()
-                        .GetMethod("CreateEntityActor")
+                        .GetMethod("CreateEntityViewActor")
                         .MakeGenericMethod(itm.Key)
                         .Invoke(this, new object[] {itm.Value, process});
                 }
@@ -70,7 +67,7 @@ namespace DataServices.Actors
 
         }
 
-        public void CreateEntityActor<TEvent>(object action, ISystemProcess process) where TEvent : IMessage
+        public void CreateEntityViewActor<TEvent>(object action, ISystemProcess process) where TEvent : IMessage
         {
             /// Create Actor Per Event
             try

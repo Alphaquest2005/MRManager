@@ -80,6 +80,7 @@
     <Compile Include="BlankMessage.cs" />
     <Compile Include="EntityFound.cs" />
     <Compile Include="EntityWithChangesFound.cs" />
+    <Compile Include="GetEntityViewWithChanges.cs" />
     <Compile Include="GetEntityWithChanges.cs" />
     <Compile Include="ProcessEventFailure.cs" />
     <Compile Include="CurrentEntityChanged.cs" />

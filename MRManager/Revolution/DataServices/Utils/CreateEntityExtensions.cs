@@ -10,9 +10,9 @@ namespace DataServices.Actors
     public static class CreateEntityExtensions
     {
         
-        public static void CreateEntity<TEntity>(this ICreateEntity<TEntity> msg, ISourceMessage source) where TEntity: class, IEntity
+        public static void CreateEntity<TEntity>(this ICreateEntity<TEntity> msg) where TEntity: class, IEntity
         {
-            EF7DataContext<TEntity>.Create(msg.Entity, msg.Process);
+            EF7DataContext<TEntity>.Create(msg);
         }
 
     }

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoFunctions.cs" />
+    <Compile Include="FindExpression.cs" />
     <Compile Include="Generated Expressions\Entity Expressions\AddressCities.cs" />
     <Compile Include="Generated Expressions\Entity Expressions\AddressCountries.cs" />
     <Compile Include="Generated Expressions\Entity Expressions\Addresses.cs" />

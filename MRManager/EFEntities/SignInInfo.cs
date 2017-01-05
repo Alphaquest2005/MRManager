@@ -12,7 +12,7 @@ using Interfaces;
 
 namespace EF.Entities
 {
-	public partial class SignInInfo: BaseEntityView<IMedia>, ISignInInfo
+	public partial class SignInInfo: EntityView<IMedia>, ISignInInfo
 	{
 		public Byte[] Medias { get; set; }
 		public string Usersignin { get; set; }

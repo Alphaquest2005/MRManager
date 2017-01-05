@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using SystemInterfaces;
+using EFReposi;
 
 
 namespace EFRepository
@@ -11,8 +13,10 @@ namespace EFRepository
     {
         private static Type EntityType { get; }
         private static Type ctxType { get; }
+        
         static EF7DataContext()
         {
+            
             var t = typeof(TEntity);
             EntityType = EntityTypes.FirstOrDefault(x => x.Name == (t.Name.Substring(1)));
             ctxType = ContextTypes.FirstOrDefault(x => x.BaseType != null && x.BaseType.Name.Contains("DbContext"));
@@ -21,81 +25,65 @@ namespace EFRepository
         }
 
 
-        public static void GetEntityView<TView,TViewDBEntity>(Expression<Func<TEntity, bool>> filter, Expression query)
+
+        public static void Create(ICreateEntity<TEntity> msg )
         {
-            try
-            {
-                var rep = new Repository<TEntity, TView, TViewDBEntity>();
-
-                rep.GetType()
-                    .GetMethod("GetEntityView")
-                    .MakeGenericMethod(ctxType, EntityType)
-                    .Invoke(rep, new object[] { filter, query });
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        public static void Create(TEntity entity, ISystemProcess process)
-        {
-            typeof(Repository<,>).MakeGenericType(ctxType, EntityType)
+            typeof(EntityRepository<,,>).MakeGenericType(typeof(TEntity),EntityType, ctxType)
                 .GetMethod("Create")
-                .Invoke(null, new object[] { entity, process });
+                .Invoke(null, new object[] { msg});
 
         }
 
-        public static void Delete(int entityId, ISystemProcess process)
+        public static void Delete(IDeleteEntity<TEntity> msg )
         {
-            typeof(Repository<,>).MakeGenericType(ctxType, EntityType)
+            typeof(EntityRepository<,,>).MakeGenericType(typeof(TEntity),EntityType, ctxType)
                 .GetMethod("Delete")
-               .Invoke(null, new object[] { entityId, process });
+               .Invoke(null, new object[] { msg });
             
         }
 
-        public static void Update(int entityId, Dictionary<string, object> changes, ISystemProcess process)
+        public static void Update(IUpdateEntity<TEntity> msg )
         {
-            typeof(Repository<,>).MakeGenericType(ctxType, EntityType)
+            typeof(EntityRepository<,,>).MakeGenericType(typeof(TEntity),EntityType, ctxType)
                  .GetMethod("Update")
-                 .Invoke(null, new object[] { entityId, changes, process });
+                 .Invoke(null, new object[] { msg});
         }
 
-        public static void GetEntityById(int entityId, ISystemProcess process)
+        public static void GetEntityById(IGetEntityById<TEntity> msg )
         {
-            typeof(Repository<,>).MakeGenericType(ctxType, EntityType)
+            typeof(EntityRepository<,,>).MakeGenericType(typeof(TEntity),EntityType, ctxType)
                   .GetMethod("GetEntityById")
-                  .Invoke(null, new object[] { entityId, process });
+                  .Invoke(null, new object[] { msg });
         }
-        public static void GetEntityWithChanges(int entityId, Dictionary<string, object> changes, ISystemProcess process)
+        public static void GetEntityWithChanges(IGetEntityWithChanges<TEntity> msg )
         {
-            typeof(Repository<,>).MakeGenericType(ctxType, EntityType)
+            typeof(EntityRepository<,,>).MakeGenericType(typeof(TEntity),EntityType, ctxType)
                 .GetMethod("GetEntityWithChanges")
-                .Invoke(null, new object[] { entityId, changes, process });
+                .Invoke(null, new object[] { msg});
         }
 
-        public static void LoadEntitySet(ISystemProcess process)
+        public static void LoadEntitySet(ILoadEntitySet<TEntity> msg )
         {
-            typeof(Repository<,>).MakeGenericType(ctxType, EntityType)
+            typeof(EntityRepository<,,>).MakeGenericType(typeof(TEntity),EntityType, ctxType)
                 .GetMethod("LoadEntitySet")
-                .Invoke(null, new object[] { process });
+                .Invoke(null, new object[] { msg });
         }
 
-        public static void LoadEntitySetWithFilter(List<Expression<Func<TEntity, bool>>> filter, ISystemProcess process)
+        public static void LoadEntitySetWithFilter(ILoadEntitySetWithFilter<TEntity> msg )
         {
-            typeof(Repository<,>).MakeGenericType(ctxType, EntityType)
+            typeof(EntityRepository<,,>).MakeGenericType(typeof(TEntity),EntityType, ctxType)
                  .GetMethod("LoadEntitySetWithFilter")
-                 .Invoke(null, new object[] { filter, process });
+                 .Invoke(null, new object[] { msg});
         }
 
-        public static void LoadEntitySetWithFilterWithIncludes(List<Expression<Func<TEntity, bool>>> filter, List<Expression<Func<TEntity, object>>> includes, ISystemProcess process)
+        public static void LoadEntitySetWithFilterWithIncludes(ILoadEntitySetWithFilterWithIncludes<TEntity> msg )
         {
-            typeof(Repository<,>).MakeGenericType(ctxType, EntityType)
+            typeof(EntityRepository<,,>).MakeGenericType(typeof(TEntity),EntityType, ctxType)
                 .GetMethod("LoadEntitySetWithFilterWithIncludes")
-                .Invoke(null, new object[] { filter, includes, process });
+                .Invoke(null, new object[] { msg });
         }
-    }
 
+        
+    }
 
 }

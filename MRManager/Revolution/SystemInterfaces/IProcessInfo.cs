@@ -13,7 +13,7 @@ namespace SystemInterfaces
         string Symbol { get; }
     }
 
-    public interface IProcessInfo<TEntity>:IProcessInfo where TEntity:IEntity
+    public interface IProcessInfo<TEntity>:IProcessInfo where TEntity:IEntityId
     {
       Type EntityType { get; }
     }

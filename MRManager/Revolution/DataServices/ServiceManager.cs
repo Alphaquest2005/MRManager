@@ -43,8 +43,7 @@ namespace DataServices.Actors
                 if (processInfo == null) return;
                 var systemProcess = new SystemProcess(new Process(processInfo, new Agent("System")), machineInfo);
                 var systemStartedMsg = new SystemStarted(systemProcess, SourceMessage);
-                EF7DataContextBase.Initialize(dbContextAssembly, entityAssembly);
-
+               
                  var processSup = Context.ActorOf(Props.Create<ProcessSupervisor>(), "ProcessSupervisor");
                 processSup.Tell(systemStartedMsg);
                 
@@ -87,7 +86,7 @@ namespace DataServices.Actors
 
             foreach (var itm in actorList)
             {
-                foreach (var c in EF7DataContextBase.EntityTypes.Where(x => x.Name.Contains("SignInInfo")))
+                foreach (var c in EF7DataContextBase.EntityTypes.Where(x => x.GetInterfaces().Any(z => z == typeof(IEntity) ) && x.Name.Contains("Persons")))
                 {
                     CreateActors(c, itm.Value, itm.Key, systemProcess, systemStartedMsg);
                 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SystemInterfaces
 {
     [InheritedExport]
-    public interface IProcessStateMessage<out TEntity>:IProcessSystemMessage where TEntity : IEntity
+    public interface IProcessStateMessage<out TEntity>:IProcessSystemMessage where TEntity : IEntityId
     {
         IProcessState<TEntity> State { get; }
     }

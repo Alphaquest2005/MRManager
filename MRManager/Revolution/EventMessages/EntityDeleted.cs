@@ -6,7 +6,7 @@ using CommonMessages;
 namespace EventMessages
 {
 
-    public class EntityDeleted<T> : ProcessSystemMessage, IEntityDeleted where T : IEntity
+    public class EntityDeleted<TEntity> : ProcessSystemMessage, IEntityDeleted<TEntity> where TEntity : IEntity
     {
         public int EntityId { get; }
         

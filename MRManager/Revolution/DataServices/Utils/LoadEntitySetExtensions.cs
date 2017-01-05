@@ -10,27 +10,26 @@ namespace DataServices.Actors
     {
 
 
-        public static void LoadEntitySet<TEntity>(this ILoadEntitySet<TEntity> msg, ISourceMessage source)
+        public static void LoadEntitySet<TEntity>(this ILoadEntitySet<TEntity> msg)
             where TEntity : class, IEntity
         {
 
-            EF7DataContext<TEntity>.LoadEntitySet(msg.Process);
+            EF7DataContext<TEntity>.LoadEntitySet(msg);
 
         }
 
-        public static void LoadEntitySet<TEntity>(this ILoadEntitySetWithFilter<TEntity> msg, ISourceMessage source)
+        public static void LoadEntitySet<TEntity>(this ILoadEntitySetWithFilter<TEntity> msg)
             where TEntity : class, IEntity
         {
 
-            EF7DataContext<TEntity>.LoadEntitySetWithFilter(msg.Filter, msg.Process);
+            EF7DataContext<TEntity>.LoadEntitySetWithFilter(msg);
 
         }
 
-        public static void LoadEntitySet<TEntity>(this ILoadEntitySetWithFilterWithIncludes<TEntity> msg,
-            ISourceMessage source) where TEntity : class, IEntity
+        public static void LoadEntitySet<TEntity>(this ILoadEntitySetWithFilterWithIncludes<TEntity> msg) where TEntity : class, IEntity
         {
 
-            EF7DataContext<TEntity>.LoadEntitySetWithFilterWithIncludes(msg.Filter, msg.Includes, msg.Process);
+            EF7DataContext<TEntity>.LoadEntitySetWithFilterWithIncludes(msg);
 
         }
     }

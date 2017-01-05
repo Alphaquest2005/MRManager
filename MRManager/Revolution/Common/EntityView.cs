@@ -7,21 +7,11 @@ using Common.Dynamic;
 namespace Common.DataEntites
 {
    
-    public abstract class BaseEntityView<TEntity> : IEntityView<TEntity> where TEntity:IEntity
+    public abstract class EntityView<TEntity> : IEntityView<TEntity> where TEntity: IEntity
     {
-        public virtual int Id { get; set; }
-
-        [IgnoreDataMember]
-        [NotMapped]
         public Type EntityType => typeof(TEntity);
 
-        [IgnoreDataMember]
-        [NotMapped]
-        public virtual RowState RowState { get; set; } = RowState.Loaded ;
-        [IgnoreDataMember]
-        [NotMapped]
-        public virtual dynamic ComputedProperties { get; set; } = new Expando();
-
+        public int Id { get; set; }
 
         private readonly Guid _entityGuid = Guid.NewGuid();
 
@@ -36,14 +26,14 @@ namespace Common.DataEntites
             return Id == other.Id;
         }
 
-        public static bool operator ==(BaseEntityView<TEntity> a, BaseEntityView<TEntity> b)
+        public static bool operator ==(EntityView<TEntity> a, EntityView<TEntity> b)
         {
             if (ReferenceEquals(a, null) && ReferenceEquals(b, null)) return true;
             if (ReferenceEquals(a, null) || ReferenceEquals(b, null)) return false;
             return a.Equals(b);
         }
 
-        public static bool operator !=(BaseEntityView<TEntity> a, BaseEntityView<TEntity> b)
+        public static bool operator !=(EntityView<TEntity> a, EntityView<TEntity> b)
         {
             return !(a == b);
         }

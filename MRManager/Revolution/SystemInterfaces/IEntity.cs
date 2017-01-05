@@ -3,9 +3,8 @@ using System.ComponentModel.Composition;
 namespace SystemInterfaces
 {
     [InheritedExport]
-    public interface IEntity
+    public interface IEntity:IEntityId
     {
-        int Id { get; set; }
         RowState RowState { get; set; }
 
         dynamic ComputedProperties { get; }

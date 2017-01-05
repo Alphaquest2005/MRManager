@@ -5,8 +5,9 @@ using CommonMessages;
 
 namespace EventMessages
 {
-    
-    public class EntityUpdated<T> : ProcessSystemMessage where T : IEntity
+
+
+    public class EntityUpdated<T> : ProcessSystemMessage, IEntityUpdated<T> where T : IEntity
     {
         public T Entity { get; }
         

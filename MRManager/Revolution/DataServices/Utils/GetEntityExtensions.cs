@@ -12,17 +12,28 @@ namespace DataServices.Actors
     public static class GetEntityExtensions
     {
        
-        public static void GetEntity<TEntity>(this IGetEntityById<TEntity> msg, ISourceMessage msgSource ) where TEntity : class, IEntity
+        public static void GetEntity<TEntity>(this IGetEntityById<TEntity> msg) where TEntity : class, IEntity
         {
 
-            EF7DataContext<TEntity>.GetEntityById(msg.EntityId, msg.Process);
+            EF7DataContext<TEntity>.GetEntityById(msg);
         }
 
-        public static void GetEntity<TEntity>(this IGetEntityWithChanges<TEntity> msg, ISourceMessage msgSource) where TEntity : class, IEntity
+        public static void GetEntity<TEntity>(this IGetEntityWithChanges<TEntity> msg) where TEntity : class, IEntity
         {
 
-            EF7DataContext<TEntity>.GetEntityWithChanges(msg.EntityId, msg.Changes, msg.Process);
+            EF7DataContext<TEntity>.GetEntityWithChanges(msg);
         }
 
+        public static void GetEntity<TEntityView>(this IGetEntityViewById<TEntityView> msg) where TEntityView : IEntityId
+        {
+
+            EntityViewDataContext<TEntityView>.GetEntityById(msg);
+        }
+
+        public static void GetEntity<TEntityView>(this IGetEntityViewWithChanges<TEntityView> msg) where TEntityView : IEntityId
+        {
+
+            EntityViewDataContext<TEntityView>.GetEntityWithChanges(msg);
+        }
     }
 }

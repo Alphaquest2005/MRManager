@@ -8,7 +8,7 @@ using ViewModel.Interfaces;
 namespace ViewModelInterfaces
 {
     [InheritedExport]
-    public interface IEntityViewModel<TEntity>: IViewModel where TEntity:IEntity
+    public interface IEntityViewModel<TEntity>: IViewModel where TEntity:IEntityId
     {
         AbstractValidator<TEntity> Validator { get; }
         ReactiveProperty<IProcessState<TEntity>> State { get; }

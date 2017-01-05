@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SystemInterfaces
 {
     [InheritedExport]
-    public interface IProcessEventFailure
+    public interface IProcessEventFailure:IProcessSystemMessage
     {
         Type FailedEventType { get; set; }
         IProcessSystemMessage FailedEventMessage { get; set; }

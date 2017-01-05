@@ -6,7 +6,7 @@ using CommonMessages;
 namespace EventMessages
 {
     [Export]
-    public class GetEntityWithChanges<TEntity> : ProcessSystemMessage, IGetEntityWithChanges<TEntity> where TEntity : IEntity
+    public class GetEntityWithChanges<TEntity> : ProcessSystemMessage, IGetEntityWithChanges<TEntity> where TEntity : IEntityId
     {
         public GetEntityWithChanges(int entityId, Dictionary<string, dynamic> changes, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
@@ -16,7 +16,5 @@ namespace EventMessages
 
         public Dictionary<string, dynamic> Changes { get; }
         public int EntityId { get; }
-
-       
     }
 }

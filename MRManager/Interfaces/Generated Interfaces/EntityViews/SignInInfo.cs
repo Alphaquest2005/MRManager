@@ -11,7 +11,7 @@ using SystemInterfaces;
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface ISignInInfo:IEntityView<IMedia> 
+	public partial interface ISignInInfo:IEntityView<IMedia>
 	{
 		Byte[] Medias { get;}
 		string Usersignin { get;}

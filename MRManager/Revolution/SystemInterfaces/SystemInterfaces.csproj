@@ -43,7 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="IEntityViewLoaded.cs" />
+    <Compile Include="IEntityUpdated.cs" />
+    <Compile Include="IEntityId.cs" />
     <Compile Include="IEntitySetWithFilterWithIncludesLoaded.cs" />
+    <Compile Include="IGetEntityViewById.cs" />
+    <Compile Include="IGetEntityViewWithChanges.cs" />
     <Compile Include="ILoadEntitySetWithFilterWithIncludes.cs" />
     <Compile Include="ILoadEntitySetWithFilter.cs" />
     <Compile Include="IEntitySetWithFilterLoaded.cs" />

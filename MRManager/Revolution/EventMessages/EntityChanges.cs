@@ -7,7 +7,7 @@ using CommonMessages;
 namespace EventMessages
 {
     
-    public class EntityChanges<T> : ProcessSystemMessage where T : IEntity
+    public class EntityChanges<T> : ProcessSystemMessage where T : IEntityId
     {
         public Dictionary<string, dynamic> Changes { get; }
         public int EntityId { get; }

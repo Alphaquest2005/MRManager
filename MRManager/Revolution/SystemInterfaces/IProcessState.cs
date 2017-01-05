@@ -11,7 +11,7 @@ namespace SystemInterfaces
     }
 
     [InheritedExport]
-    public interface IProcessState<out TEntity>: IProcessState where TEntity:IEntity
+    public interface IProcessState<out TEntity>: IProcessState where TEntity: IEntityId
     {
        TEntity Entity { get; }
     }

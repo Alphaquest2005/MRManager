@@ -44,8 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF7DataContextBase.cs" />
+    <Compile Include="EntityRepository.cs" />
+    <Compile Include="EntityViewDataContext.cs" />
+    <Compile Include="EntityViewRepository.cs" />
     <Compile Include="MyLoggingProvider.cs" />
-    <Compile Include="Repository.cs" />
     <Compile Include="EF7DataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

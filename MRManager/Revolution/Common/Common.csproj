@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseEntityView.cs" />
+    <Compile Include="EntityView.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="EntityExtensions.cs" />
     <Compile Include="Expando\Expando.cs" />

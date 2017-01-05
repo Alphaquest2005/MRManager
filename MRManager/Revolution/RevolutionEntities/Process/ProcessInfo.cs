@@ -22,7 +22,7 @@ namespace RevolutionEntities.Process
       
     }
 
-    public class ProcessInfo<TEntity> : IProcessInfo<TEntity> where TEntity : IEntity
+    public class ProcessInfo<TEntity> : IProcessInfo<TEntity> where TEntity : IEntityId
     {
         public ProcessInfo(int id, int parentProcessId, string name, string description, string symbol)
         {
