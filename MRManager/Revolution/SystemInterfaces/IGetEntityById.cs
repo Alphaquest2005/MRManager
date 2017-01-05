@@ -4,8 +4,9 @@ namespace SystemInterfaces
 {
     
     [InheritedExport]
-    public interface IGetEntityById<T>
+    public interface IGetEntityById<T>:IProcessSystemMessage
     {
        // void Create(int entityId);
+        int EntityId { get; }
     }
 }

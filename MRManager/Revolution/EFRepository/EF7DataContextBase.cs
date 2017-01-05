@@ -7,8 +7,8 @@ namespace EFRepository
 {
     public abstract class EF7DataContextBase
     {
-        protected static List<Type> ContextTypes;
-        protected static List<Type> EntityTypes;
+        public static List<Type> ContextTypes;
+        public static List<Type> EntityTypes;
 
         public static void Initialize(Assembly dbContextAssembly, Assembly entityAssembly)
         {

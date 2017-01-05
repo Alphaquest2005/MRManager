@@ -4,9 +4,7 @@ using SystemInterfaces;
 using Core.Common.UI;
 using EF.DBContexts;
 using EF.Entities;
-using NH.DBContext;
 using Application = System.Windows.Application;
-using DataInterfaces;
 
 namespace MRManager
 {
@@ -20,8 +18,7 @@ namespace MRManager
 			InitializeComponent();
 			var t = new MRManagerDBContext().GetType().Assembly;
 			var x = new EFEntity<IEntity>().GetType().Assembly;
-			var d = new NHDBContext();
-			BootStrapper.BootStrapper.Instance.StartUp(d,t ,x );
+			BootStrapper.BootStrapper.Instance.StartUp(t ,x );
 			
 		}
         private void BackBtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

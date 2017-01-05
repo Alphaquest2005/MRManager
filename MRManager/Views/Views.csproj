@@ -127,10 +127,6 @@
       <Project>{5dd82ad7-f344-45e3-92cc-96f8d07700af}</Project>
       <Name>Core.Common.UI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Revolution\DataInterfaces\DataInterfaces.csproj">
-      <Project>{f6008330-ba42-454b-a0b4-82455de56776}</Project>
-      <Name>DataInterfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Revolution\EventAggregator\EventAggregator.csproj">
       <Project>{31e6b370-01f0-4489-832f-436cb97a6718}</Project>
       <Name>EventAggregator</Name>

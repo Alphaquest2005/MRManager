@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IActorBackBone.cs" />
     <Compile Include="IComplexEvent.cs" />
     <Compile Include="IServiceManager.cs" />
     <Compile Include="IAgent.cs" />

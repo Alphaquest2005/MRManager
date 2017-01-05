@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using SystemInterfaces;
-using CommonMessages;
 using log4netWrapper;
 
 namespace EventAggregator

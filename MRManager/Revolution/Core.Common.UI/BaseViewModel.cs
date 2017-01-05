@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using SystemInterfaces;
 using CommonMessages;
-using DataInterfaces;
+
 using Reactive.Bindings;
 using ReactiveUI;
 using RevolutionEntities.Process;

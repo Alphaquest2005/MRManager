@@ -2,8 +2,7 @@
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Reflection;
-using SystemInterfaces;
-using DataInterfaces;
+using Actor.Interfaces;
 using MefContrib.Hosting.Generics;
 
 
@@ -40,12 +39,12 @@ namespace BootStrapper
 
         public static BootStrapper Instance { get; }
 
-        public void StartUp(IDataContext ctx, Assembly dbContextAssembly, Assembly entityAssembly)
+        public void StartUp(Assembly dbContextAssembly, Assembly entityAssembly)
         {
             try
             {
                 var x = Container.GetExport<IActorBackBone>().Value;
-                x.Intialize(ctx, dbContextAssembly, entityAssembly);
+                x.Intialize(dbContextAssembly, entityAssembly);
             }
             catch (Exception)
             {

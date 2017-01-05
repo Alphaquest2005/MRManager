@@ -1,17 +1,16 @@
 using System;
 using SystemInterfaces;
 using CommonMessages;
-using DataInterfaces;
 using EFRepository;
 using EventAggregator;
 using EventMessages;
-using NHibernate.Linq.Functions;
+
 
 namespace DataServices.Actors
 {
     public static class LoadEntityViewExtensions
     {
-        public static void LoadEntityView<T>(this LoadEntityView<T> msg, IDataContext dbContext,  ISourceMessage source) where T : IEntity
+        public static void LoadEntityView<T>(this LoadEntityView<T> msg, ISourceMessage source) where T : class, IEntity
         {
 
             Type viewDBType = null;
@@ -28,7 +27,7 @@ namespace DataServices.Actors
          //   EventMessageBus.Current.Publish(entitySetInst, source);
         }
 
-        public static void LoadEntityView<T>(this LoadEntityViewWithFilter<T> msg, IDataContext dbContext, ISourceMessage source) where T : IEntity
+        public static void LoadEntityView<T>(this LoadEntityViewWithFilter<T> msg, ISourceMessage source) where T : class, IEntity
         {
 
             var task = typeof(EF7DataContext<T>)

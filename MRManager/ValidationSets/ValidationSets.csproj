@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Generated ValidationSets\Entity Views\SignInInfo.cs" />
     <Compile Include="Generated ValidationSets\EntityValidator.cs" />
     <Compile Include="Generated ValidationSets\AddressCountries.cs" />
     <Compile Include="Generated ValidationSets\Addresses.cs" />
@@ -176,10 +177,6 @@
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{ad573873-c8e6-4ea3-93f5-0d39a92fc9f6}</Project>
       <Name>Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Revolution\DataInterfaces\DataInterfaces.csproj">
-      <Project>{f6008330-ba42-454b-a0b4-82455de56776}</Project>
-      <Name>DataInterfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Revolution\SystemInterfaces\SystemInterfaces.csproj">
       <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>

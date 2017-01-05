@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SystemInterfaces;
 using Actor.Interfaces;
-using CommonMessages;
-using EventAggregator;
-using NHibernate.Util;
+using MoreLinq;
 using ViewModel.Interfaces;
 
 namespace RevolutionEntities.Process

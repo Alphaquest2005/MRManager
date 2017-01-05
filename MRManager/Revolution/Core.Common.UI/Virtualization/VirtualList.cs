@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using SystemInterfaces;
 using CommonMessages;
-using DataInterfaces;
 using EventAggregator;
 using EventMessages;
 using System.Diagnostics.Contracts;

@@ -1,12 +1,13 @@
 ﻿using System.Diagnostics.Contracts;
 using SystemInterfaces;
 using CommonMessages;
-using DataInterfaces;
+
 
 namespace EventMessages
 {
-    
-    public class CreateEntity<T> : ProcessSystemMessage where T : IEntity
+
+
+    public class CreateEntity<T> : ProcessSystemMessage, ICreateEntity<T> where T : IEntity
     {
     
         public T Entity { get; }

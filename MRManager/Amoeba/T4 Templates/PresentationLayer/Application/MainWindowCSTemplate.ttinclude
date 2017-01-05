@@ -31,7 +31,7 @@ using Interfaces;
 using NH.DBContext;
 using ViewModels;
 using Application = System.Windows.Application;
-using DataInterfaces;
+
 
 namespace <#=App.Name #>
 {

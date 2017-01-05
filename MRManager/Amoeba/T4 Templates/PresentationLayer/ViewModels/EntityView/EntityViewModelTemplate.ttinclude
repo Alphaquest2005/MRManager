@@ -25,7 +25,7 @@ public class EntityViewViewModelTemplate : CSharpTemplate
 using System;
 using Core.Common.UI;
 using EF.Entities;
-using DataInterfaces;
+
 using Interfaces;
 using Utilities;
 

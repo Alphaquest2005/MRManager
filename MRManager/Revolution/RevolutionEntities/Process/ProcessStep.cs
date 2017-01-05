@@ -1,6 +1,4 @@
 ﻿using SystemInterfaces;
-using DataEntites;
-using Common.DataEntites;
 
 namespace RevolutionEntities.Process
 {

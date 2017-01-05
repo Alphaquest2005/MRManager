@@ -1,6 +1,7 @@
+using System;
 using SystemInterfaces;
 using CommonMessages;
-using DataInterfaces;
+using EFRepository;
 using EventAggregator;
 using EventMessages;
 
@@ -9,18 +10,9 @@ namespace DataServices.Actors
     public static class DeleteEntityExtensions
     {
         
-        public static void DeleteEntity<T>(this DeleteEntity<T> msg, IDataContext dbContext, ISourceMessage source) where T : IEntity
+        public static void DeleteEntity<TEntity>(this IDeleteEntity<TEntity> msg, ISourceMessage source) where TEntity : class, IEntity
         {
-
-            using (var ctx = dbContext.Instance.OpenSession())
-            using (var transaction = ctx.BeginTransaction())
-            {
-                var entity = ctx.Load<T>(msg.EntityId);
-                ctx.Delete(entity);
-                transaction.Commit();
-                EventMessageBus.Current.Publish(new EntityDeleted<T>(msg.EntityId,msg.Process, source),source);
-            }
-
+            EF7DataContext<TEntity>.Delete(msg.EntityId, msg.Process);
         }
 
     }

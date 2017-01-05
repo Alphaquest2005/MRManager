@@ -102,10 +102,6 @@
       <Project>{5dd82ad7-f344-45e3-92cc-96f8d07700af}</Project>
       <Name>Core.Common.UI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataInterfaces\DataInterfaces.csproj">
-      <Project>{f7c99950-1cf5-49ed-830d-cbc87e7a9c16}</Project>
-      <Name>DataInterfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DynamicLinq\System.Linq.Dynamic\System.Linq.Dynamic.csproj">
       <Project>{17c0d5de-c72d-4a06-a12c-445ebcf3b9ea}</Project>
       <Name>System.Linq.Dynamic</Name>

@@ -17,7 +17,7 @@ public class DefaulEFEntityTemplate : CSharpTemplate
 		base.TransformText();
 #>
 using Common.Dynamic;
-using DataInterfaces;
+
 
 namespace EF.Entities
 {

@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics.Contracts;
 using SystemInterfaces;
 using CommonMessages;
-using DataInterfaces;
+
 
 namespace EventMessages
 {
-    
-    public class EntityDeleted<T> : ProcessSystemMessage where T : IEntity
+
+    public class EntityDeleted<T> : ProcessSystemMessage, IEntityDeleted where T : IEntity
     {
         public int EntityId { get; }
         

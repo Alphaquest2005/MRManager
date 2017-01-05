@@ -114,6 +114,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CurrentEntityUpdated.cs" />
     <Compile Include="SelectedEntitiesChanged.cs" />
+    <Compile Include="UpdateEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Interfaces\Interfaces.csproj">
@@ -123,10 +124,6 @@
     <ProjectReference Include="..\CommonMessages\CommonMessages.csproj">
       <Project>{77007560-89DC-4E1F-9313-AE064A048AD4}</Project>
       <Name>CommonMessages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataInterfaces\DataInterfaces.csproj">
-      <Project>{F7C99950-1CF5-49ED-830D-CBC87E7A9C16}</Project>
-      <Name>DataInterfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\SystemInterfaces\SystemInterfaces.csproj">
       <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>

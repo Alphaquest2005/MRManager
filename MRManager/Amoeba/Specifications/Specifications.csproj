@@ -48,10 +48,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Revolution\DataInterfaces\DataInterfaces.csproj">
-      <Project>{F6008330-BA42-454B-A0B4-82455DE56776}</Project>
-      <Name>DataInterfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Revolution\LinqSpecs\LinqSpecs.csproj">
       <Project>{d60875a3-0de2-409d-86a0-f540224d054c}</Project>
       <Name>LinqSpecs</Name>

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseEntityView.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="EntityExtensions.cs" />
     <Compile Include="Expando\Expando.cs" />
@@ -58,10 +59,6 @@
     <ProjectReference Include="..\BootStrapper\BootStrapper.csproj">
       <Project>{5dfeea8b-baba-4544-bf36-0a76a0d10c1b}</Project>
       <Name>BootStrapper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataInterfaces\DataInterfaces.csproj">
-      <Project>{F6008330-BA42-454B-A0B4-82455DE56776}</Project>
-      <Name>DataInterfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\SystemInterfaces\SystemInterfaces.csproj">
       <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>

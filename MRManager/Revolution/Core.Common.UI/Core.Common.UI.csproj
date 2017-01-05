@@ -143,10 +143,6 @@
       <Project>{CB6D5FBC-0C13-437D-B4F3-A0EC4D5673B3}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataInterfaces\DataInterfaces.csproj">
-      <Project>{F6008330-BA42-454B-A0B4-82455DE56776}</Project>
-      <Name>DataInterfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EventAggregator\EventAggregator.csproj">
       <Project>{31E6B370-01F0-4489-832F-436CB97A6718}</Project>
       <Name>EventAggregator</Name>

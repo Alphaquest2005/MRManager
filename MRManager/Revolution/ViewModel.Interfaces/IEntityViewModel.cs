@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.Composition;
 using SystemInterfaces;
-using DataInterfaces;
 using FluentValidation;
 using JB.Collections.Reactive;
 using Reactive.Bindings;

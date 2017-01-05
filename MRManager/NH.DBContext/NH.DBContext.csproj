@@ -58,10 +58,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NH.Mappings\NH.Mappings.csproj">
-      <Project>{7eba796f-77a6-47b5-aafa-2d6315ca1cb1}</Project>
-      <Name>NH.Mappings</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Revolution\DataInterfaces\DataInterfaces.csproj">
       <Project>{f6008330-ba42-454b-a0b4-82455de56776}</Project>
       <Name>DataInterfaces</Name>

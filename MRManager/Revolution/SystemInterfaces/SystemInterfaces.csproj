@@ -42,6 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="IEntitySetWithFilterWithIncludesLoaded.cs" />
+    <Compile Include="ILoadEntitySetWithFilterWithIncludes.cs" />
+    <Compile Include="ILoadEntitySetWithFilter.cs" />
+    <Compile Include="IEntitySetWithFilterLoaded.cs" />
+    <Compile Include="IEntitySetLoaded.cs" />
+    <Compile Include="ILoadEntitySet.cs" />
+    <Compile Include="IEntityDeleted.cs" />
+    <Compile Include="IDeleteEntity.cs" />
+    <Compile Include="ICreateEntity.cs" />
+    <Compile Include="IEntityCreated.cs" />
+    <Compile Include="IEntityView.cs" />
     <Compile Include="IProcessEventFailure.cs" />
     <Compile Include="IEntityWithChangesFound.cs" />
     <Compile Include="IGetEntityWithChanges.cs" />
@@ -55,6 +67,7 @@
     <Compile Include="ISystemProcessStarted.cs" />
     <Compile Include="ISourceMessage.cs" />
     <Compile Include="IMedia.cs" />
+    <Compile Include="IUpdateEntity.cs" />
     <Compile Include="RowState.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IGetEntityById.cs" />

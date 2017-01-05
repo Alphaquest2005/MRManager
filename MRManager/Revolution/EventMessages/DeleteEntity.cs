@@ -2,12 +2,13 @@
 using System.Diagnostics.Contracts;
 using SystemInterfaces;
 using CommonMessages;
-using DataInterfaces;
 
 namespace EventMessages
 {
+
+
     [Export]
-    public class DeleteEntity<T> : ProcessSystemMessage where T : IEntity
+    public class DeleteEntity<TEntity> : ProcessSystemMessage, IDeleteEntity<TEntity> where TEntity : IEntity
     {
        
         public DeleteEntity(int entityId, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)

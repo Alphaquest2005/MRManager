@@ -2,8 +2,8 @@
 using System.ComponentModel.Composition;
 using System.Reflection;
 using SystemInterfaces;
+using Actor.Interfaces;
 using Akka.Actor;
-using DataInterfaces;
 using DataServices.Actors;
 
 
@@ -19,12 +19,12 @@ namespace ActorBackBone
         public static ActorSystem System { get; private set; }
 
 
-        public void Intialize(IDataContext ctx, Assembly dbContextAssembly, Assembly entityAssembly)
+        public void Intialize(Assembly dbContextAssembly, Assembly entityAssembly)
         {
              try
             {
                 System = ActorSystem.Create("System");
-                System.ActorOf(Props.Create<ServiceManager>(ctx, dbContextAssembly, entityAssembly),"ServiceManager");
+                System.ActorOf(Props.Create<ServiceManager>(dbContextAssembly, entityAssembly),"ServiceManager");
                 Instance = this;
             }
             catch (Exception)

@@ -4,13 +4,11 @@ using SystemInterfaces;
 using SystemMessages;
 using BootStrapper;
 using CommonMessages;
-using Core.Common.UI;
 using EventAggregator;
 using EventMessages;
 using StartUp.Messages;
 using ViewMessages;
 using ViewModel.Interfaces;
-using ViewModels;
 
 namespace DataServices.Actors
 {

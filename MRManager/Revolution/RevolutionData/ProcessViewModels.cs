@@ -179,26 +179,26 @@ namespace RevolutionData
                 processId:2,
                 subscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>()
                 {
-                   new ViewEventSubscription<ILoginViewModel, IProcessStateMessage<IUserSignIn>>(
+                   new ViewEventSubscription<ILoginViewModel, IProcessStateMessage<ISignInInfo>>(
                        processId:2,
                        eventPredicate: e => e != null,
-                       actionPredicate: new List<Func<ILoginViewModel, IProcessStateMessage<IUserSignIn>, bool>>(),
+                       actionPredicate: new List<Func<ILoginViewModel, IProcessStateMessage<ISignInInfo>, bool>>(),
                        action: (v,e) => v.State.Value = e.State
                        ),
 
                 },
                 publications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                 {
-                    new ViewEventPublication<ILoginViewModel, GetEntityWithChanges<IUserSignIn>>(
+                    new ViewEventPublication<ILoginViewModel, GetEntityWithChanges<ISignInInfo>>(
                         subject: v => v.ChangeTracking.DictionaryChanges,
                         subjectPredicate: new List<Func<ILoginViewModel, bool>>()
                                         {
-                                            v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Username)) && v.ChangeTracking.Keys.Count == 1
+                                            v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Usersignin)) && v.ChangeTracking.Keys.Count == 1
                                         },
                         messageData: s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},s.Process,s.SourceMessage)),
 
 
-                     new ViewEventPublication<ILoginViewModel, ViewStateLoaded<ILoginViewModel,IProcessState<IUserSignIn>>>(
+                     new ViewEventPublication<ILoginViewModel, ViewStateLoaded<ILoginViewModel,IProcessState<ISignInInfo>>>(
                         subject: v => v.State,
                         subjectPredicate: new List<Func<ILoginViewModel, bool>>()
                         {
@@ -208,9 +208,9 @@ namespace RevolutionData
                 },
                 commands: new List<IViewModelEventCommand<IViewModel,IEvent>>()
                 {
-                    new ViewEventCommand<ILoginViewModel, GetEntityWithChanges<IUserSignIn>>("ValidateUserInfo",
+                    new ViewEventCommand<ILoginViewModel, GetEntityWithChanges<ISignInInfo>>("ValidateUserInfo",
                         v =>
-                            v.ChangeTracking.WhenAny(x => x.Keys,x => x.Value.Contains(nameof(v.State.Value.Entity.Username))),
+                            v.ChangeTracking.WhenAny(x => x.Keys,x => x.Value.Contains(nameof(v.State.Value.Entity.Usersignin))),
                         subject: (s) => ((ReactiveCommand<IViewModel, Unit>) s.Commands["ValidateUserInfo"]).AsObservable(),
                         subjectPredicate: new List<Func<ILoginViewModel, bool>>()
                         {

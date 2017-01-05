@@ -4,11 +4,13 @@ using System.Diagnostics.Contracts;
 using System.Linq.Expressions;
 using SystemInterfaces;
 using CommonMessages;
-using DataInterfaces;
+
 
 namespace EventMessages
 {
-    public class LoadEntitySetWithFilter<T> : ProcessSystemMessage where T : IEntity
+  
+
+    public class LoadEntitySetWithFilter<T> : ProcessSystemMessage, ILoadEntitySetWithFilter<T> where T : IEntity
     {
         public List<Expression<Func<T, bool>>> Filter { get; }
       

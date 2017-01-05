@@ -3,38 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using SystemInterfaces;
-using DataInterfaces;
 
 
 namespace EFRepository
 {
-    public class EF7DataContext<T> : EF7DataContextBase where T : IEntity
+    public class EF7DataContext<TEntity> : EF7DataContextBase where TEntity : class, IEntity
     {
-        public static List<T> GetData(List<Expression<Func<T, bool>>> filter,
-            List<Expression<Func<T, dynamic>>> includes)
+        private static Type EntityType { get; }
+        private static Type ctxType { get; }
+        static EF7DataContext()
+        {
+            var t = typeof(TEntity);
+            EntityType = EntityTypes.FirstOrDefault(x => x.Name == (t.Name.Substring(1)));
+            ctxType = ContextTypes.FirstOrDefault(x => x.BaseType != null && x.BaseType.Name.Contains("DbContext"));
+            if (EntityType == null) throw new InvalidOperationException("DataType Is not Found");
+            if (ctxType == null) throw new InvalidOperationException("DBContext Is not Found");
+        }
+
+
+        public static void GetEntityView<TView,TViewDBEntity>(Expression<Func<TEntity, bool>> filter, Expression query)
         {
             try
             {
+                var rep = new Repository<TEntity, TView, TViewDBEntity>();
 
-                var t = typeof (T);
-                var type = EntityTypes.FirstOrDefault(x => x.Name == (t.Name.Substring(1)));
-                if (type == null) return new List<T>();
-
-
-                Type ctxType =
-                    ContextTypes.FirstOrDefault(x => x.BaseType != null && x.BaseType.Name.Contains("DbContext"));
-                if (ctxType == null) return new List<T>();
-                var rep = new Repository<T>();
-
-
-
-                var task = rep.GetType()
-                    .GetMethod("GetData")
-                    .MakeGenericMethod(ctxType, type)
-                    .Invoke(rep, new object[] {filter, includes});
-
-
-                return (List<T>) task;
+                rep.GetType()
+                    .GetMethod("GetEntityView")
+                    .MakeGenericMethod(ctxType, EntityType)
+                    .Invoke(rep, new object[] { filter, query });
             }
             catch (Exception)
             {
@@ -43,37 +39,61 @@ namespace EFRepository
             }
         }
 
-        public static List<TView> GetEntityView<TView,TViewDBEntity>(Expression<Func<T, bool>> filter, Expression query)
+        public static void Create(TEntity entity, ISystemProcess process)
         {
-            try
-            {
-                var t = typeof(T);
-                var type = EntityTypes.FirstOrDefault(x => x.Name == (t.Name.Substring(1)));
-                if (type == null) return new List<TView>();
+            typeof(Repository<,>).MakeGenericType(ctxType, EntityType)
+                .GetMethod("Create")
+                .Invoke(null, new object[] { entity, process });
 
+        }
 
-                Type ctxType =
-                    ContextTypes.FirstOrDefault(x => x.BaseType != null && x.BaseType.Name.Contains("DbContext"));
-                if (ctxType == null) return new List<TView>();
-                var rep = new Repository<T, TView, TViewDBEntity>();
+        public static void Delete(int entityId, ISystemProcess process)
+        {
+            typeof(Repository<,>).MakeGenericType(ctxType, EntityType)
+                .GetMethod("Delete")
+               .Invoke(null, new object[] { entityId, process });
+            
+        }
 
+        public static void Update(int entityId, Dictionary<string, object> changes, ISystemProcess process)
+        {
+            typeof(Repository<,>).MakeGenericType(ctxType, EntityType)
+                 .GetMethod("Update")
+                 .Invoke(null, new object[] { entityId, changes, process });
+        }
 
+        public static void GetEntityById(int entityId, ISystemProcess process)
+        {
+            typeof(Repository<,>).MakeGenericType(ctxType, EntityType)
+                  .GetMethod("GetEntityById")
+                  .Invoke(null, new object[] { entityId, process });
+        }
+        public static void GetEntityWithChanges(int entityId, Dictionary<string, object> changes, ISystemProcess process)
+        {
+            typeof(Repository<,>).MakeGenericType(ctxType, EntityType)
+                .GetMethod("GetEntityWithChanges")
+                .Invoke(null, new object[] { entityId, changes, process });
+        }
 
+        public static void LoadEntitySet(ISystemProcess process)
+        {
+            typeof(Repository<,>).MakeGenericType(ctxType, EntityType)
+                .GetMethod("LoadEntitySet")
+                .Invoke(null, new object[] { process });
+        }
 
-                var task = rep.GetType()
-                    .GetMethod("GetEntityView")
-                    .MakeGenericMethod(ctxType, type)
-                    .Invoke(rep, new object[] { filter, query });
+        public static void LoadEntitySetWithFilter(List<Expression<Func<TEntity, bool>>> filter, ISystemProcess process)
+        {
+            typeof(Repository<,>).MakeGenericType(ctxType, EntityType)
+                 .GetMethod("LoadEntitySetWithFilter")
+                 .Invoke(null, new object[] { filter, process });
+        }
 
-
-                return (List<TView>)task;
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+        public static void LoadEntitySetWithFilterWithIncludes(List<Expression<Func<TEntity, bool>>> filter, List<Expression<Func<TEntity, object>>> includes, ISystemProcess process)
+        {
+            typeof(Repository<,>).MakeGenericType(ctxType, EntityType)
+                .GetMethod("LoadEntitySetWithFilterWithIncludes")
+                .Invoke(null, new object[] { filter, includes, process });
         }
     }
 

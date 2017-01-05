@@ -44,7 +44,7 @@ namespace MRManager_UnitTests
         [TestMethod]
         public void InitalizeObserveableWithPublications()
         {
-            EventMessageBus.Current.GetEvent<EntityChanges<IUserSignIn>>(SourceMessage)
+            EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(SourceMessage)
                 .Subscribe(x => handleEntityChanges(x));
             var viewModel = new LoginViewModel(process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")), SourceMessage.MachineInfo),
                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
@@ -68,17 +68,17 @@ namespace MRManager_UnitTests
         [TestMethod]
         public void InitalizeObserveableWithPublicationsSubjectPredicate()
         {
-            EventMessageBus.Current.GetEvent<EntityChanges<IUserSignIn>>(SourceMessage)
+            EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(SourceMessage)
                 .Subscribe(x => handleEntityChanges(x));
             var viewModel = new LoginViewModel(process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")), SourceMessage.MachineInfo),
                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
-                   new ViewEventPublication<LoginViewModel, EntityChanges<IUserSignIn>>(
+                   new ViewEventPublication<LoginViewModel, EntityChanges<ISignInInfo>>(
                        subject:(s) => s.ChangeTracking.DictionaryChanges,
                        subjectPredicate: new List<Func<LoginViewModel, bool>>()
                        {
-                           v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Username))
+                           v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Usersignin))
                        },
                        messageData:(s) => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id, s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)}, s.Process, s.SourceMessage ))
                }, commandInfo: new List<IViewModelEventCommand<IViewModel, IEvent>>(), orientation: typeof(IBodyViewModel));
@@ -93,21 +93,21 @@ namespace MRManager_UnitTests
             Assert.AreEqual(6, dynamicViewModel.Id);
         }
 
-        private void handleEntityChanges(EntityChanges<IUserSignIn> entityChanges)
+        private void handleEntityChanges(EntityChanges<ISignInInfo> entityChanges)
         {
             Assert.AreEqual(5, entityChanges.EntityId);
         }
         [TestMethod]
         public void InitalizeObserveableWithCommand()
         {
-            EventMessageBus.Current.GetEvent<EntityChanges<IUserSignIn>>(SourceMessage)
+            EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(SourceMessage)
                 .Subscribe(x => handleEntityChanges(x));
             var viewModel = CreateLoginViewModel();
 
             dynamic dynamicViewModel = viewModel;
             dynamicViewModel.CurrentEntity.Value = new UserSignIn() { Id = 5 };
-            dynamicViewModel.ChangeTracking.Add(nameof(IUserSignIn.Username), "joe");
-            dynamicViewModel.ChangeTracking.Add(nameof(IUserSignIn.Username), "test");
+            dynamicViewModel.ChangeTracking.Add(nameof(ISignInInfo.Usersignin), "joe");
+            dynamicViewModel.ChangeTracking.Add(nameof(ISignInInfo.Usersignin), "test");
             dynamicViewModel.Commands["ValidateUserInfo"].Execute();
             // var id = dynamicViewModel.GetValue("Id");
             Assert.AreEqual(5, dynamicViewModel.Id);
@@ -116,14 +116,14 @@ namespace MRManager_UnitTests
         [TestMethod]
         public void TestCommandPredicate()
         {
-            EventMessageBus.Current.GetEvent<EntityChanges<IUserSignIn>>(SourceMessage)
+            EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(SourceMessage)
                 .Subscribe(x => handleEntityChanges(x));
             var viewModel = CreateLoginViewModel();
 
             dynamic dynamicViewModel = viewModel;
             dynamicViewModel.CurrentEntity.Value = new UserSignIn() { Id = 5, Username = "Joe", Password = "Test" };
-            dynamicViewModel.ChangeTracking.Add(nameof(IUserSignIn.Username), "joe");
-            dynamicViewModel.ChangeTracking.Add(nameof(IUserSignIn.Password), "test");
+            dynamicViewModel.ChangeTracking.Add(nameof(ISignInInfo.Usersignin), "joe");
+            dynamicViewModel.ChangeTracking.Add(nameof(ISignInInfo.Password), "test");
             dynamicViewModel.Commands["ValidateUserInfo"].Execute();
             // var id = dynamicViewModel.GetValue("Id");
             Assert.AreEqual(5, dynamicViewModel.Id);

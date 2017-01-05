@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using SystemInterfaces;
 using CommonMessages;
-using RevolutionEntities.Process;
 
 namespace SystemMessages
 {

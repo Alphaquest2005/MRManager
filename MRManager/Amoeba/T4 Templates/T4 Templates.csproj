@@ -147,8 +147,6 @@
     <None Include="DataLayer\DBContext\DBContext.ttinclude" />
     <None Include="DataLayer\DBContext\EF\CreateEFDBContext.ttinclude" />
     <None Include="DataLayer\DBContext\EF\DBContextTemplate.ttinclude" />
-    <None Include="DataLayer\Mappings\NH\CreateNHMappings.ttinclude" />
-    <None Include="DataLayer\Mappings\NH\NHMappingsTemplate.ttinclude" />
     <None Include="DataLayer\ValidationSets\ValidationSets.ttinclude" />
     <None Include="DataLayer\ValidationSets\EntityViewValidationSetTemplate.ttinclude" />
     <None Include="DataLayer\ValidationSets\ValidationSetTemplate.ttinclude" />

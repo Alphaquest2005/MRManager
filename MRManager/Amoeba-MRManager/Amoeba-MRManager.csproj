@@ -334,6 +334,7 @@
 ..\Expressions\Generated Expressions\EntityView Expressions\PulseInfo.cs
 ..\Expressions\Generated Expressions\EntityView Expressions\RespirationInfo.cs
 ..\Expressions\Generated Expressions\EntityView Expressions\ResponseOptionInfo.cs
+..\Expressions\Generated Expressions\EntityView Expressions\SignInInfo.cs
 ..\Expressions\Generated Expressions\EntityView Expressions\TemperatureInfo.cs
 ..\Expressions\Generated Expressions\EntityView Expressions\VitalsHistoryInfo.cs
 ..\Expressions\Generated Expressions\EntityView Expressions\VitalSignsInfo.cs
@@ -1557,12 +1558,14 @@
 ..\DataTemplates\Generated DataTemplates\Read\PulseInfoRDT.xaml
 ..\DataTemplates\Generated DataTemplates\Read\RespirationInfoRDT.xaml
 ..\DataTemplates\Generated DataTemplates\Read\ResponseOptionInfoRDT.xaml
+..\DataTemplates\Generated DataTemplates\Read\SignInInfoRDT.xaml
 ..\DataTemplates\Generated DataTemplates\Read\TemperatureInfoRDT.xaml
 ..\DataTemplates\Generated DataTemplates\Read\VitalsHistoryInfoRDT.xaml
 ..\DataTemplates\Generated DataTemplates\Read\VitalSignsInfoRDT.xaml
 ..\DataTemplates\Generated DataTemplates\Read\WeightInfoRDT.xaml
 ..\DataTemplates\Generated DataTemplates\RespirationInfoDT.xaml
 ..\DataTemplates\Generated DataTemplates\ResponseOptionInfoDT.xaml
+..\DataTemplates\Generated DataTemplates\SignInInfoDT.xaml
 ..\DataTemplates\Generated DataTemplates\TemperatureInfoDT.xaml
 ..\DataTemplates\Generated DataTemplates\VitalsHistoryInfoDT.xaml
 ..\DataTemplates\Generated DataTemplates\VitalSignsInfoDT.xaml
@@ -1595,6 +1598,7 @@
 ..\DataTemplates\Generated DataTemplates\Write\PulseInfoWDT.xaml
 ..\DataTemplates\Generated DataTemplates\Write\RespirationInfoWDT.xaml
 ..\DataTemplates\Generated DataTemplates\Write\ResponseOptionInfoWDT.xaml
+..\DataTemplates\Generated DataTemplates\Write\SignInInfoWDT.xaml
 ..\DataTemplates\Generated DataTemplates\Write\TemperatureInfoWDT.xaml
 ..\DataTemplates\Generated DataTemplates\Write\VitalsHistoryInfoWDT.xaml
 ..\DataTemplates\Generated DataTemplates\Write\VitalSignsInfoWDT.xaml
@@ -1627,6 +1631,7 @@
 ..\EFEntities\Generated Entities\Entity Views\PulseInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\RespirationInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\ResponseOptionInfo.cs
+..\EFEntities\Generated Entities\Entity Views\SignInInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\TemperatureInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\VitalsHistoryInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\VitalSignsInfo.cs
@@ -1777,6 +1782,7 @@
 ..\Interfaces\Generated Interfaces\EntityViews\PulseInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\RespirationInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\ResponseOptionInfo.cs
+..\Interfaces\Generated Interfaces\EntityViews\SignInInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\TemperatureInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\VitalsHistoryInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\VitalSignsInfo.cs
@@ -1887,6 +1893,7 @@
 ..\ValidationSets\Generated ValidationSets\Entity Views\PulseInfo.cs
 ..\ValidationSets\Generated ValidationSets\Entity Views\RespirationInfo.cs
 ..\ValidationSets\Generated ValidationSets\Entity Views\ResponseOptionInfo.cs
+..\ValidationSets\Generated ValidationSets\Entity Views\SignInInfo.cs
 ..\ValidationSets\Generated ValidationSets\Entity Views\TemperatureInfo.cs
 ..\ValidationSets\Generated ValidationSets\Entity Views\VitalsHistoryInfo.cs
 ..\ValidationSets\Generated ValidationSets\Entity Views\VitalSignsInfo.cs
@@ -2003,6 +2010,10 @@
 ..\ViewModels\Generated EntityViews\ResponseOptionInfo\Entity.cs
 ..\ViewModels\Generated EntityViews\ResponseOptionInfo\Instance.cs
 ..\ViewModels\Generated EntityViews\ResponseOptionInfo\Navigation.cs
+..\ViewModels\Generated EntityViews\SignInInfo\Constructor.cs
+..\ViewModels\Generated EntityViews\SignInInfo\Entity.cs
+..\ViewModels\Generated EntityViews\SignInInfo\Instance.cs
+..\ViewModels\Generated EntityViews\SignInInfo\Navigation.cs
 ..\ViewModels\Generated EntityViews\TemperatureInfo\Constructor.cs
 ..\ViewModels\Generated EntityViews\TemperatureInfo\Entity.cs
 ..\ViewModels\Generated EntityViews\TemperatureInfo\Instance.cs
@@ -2047,6 +2058,7 @@
 ..\Views\Generated Views\EntityViews\PulseInfoListView.xaml.cs
 ..\Views\Generated Views\EntityViews\RespirationInfoListView.xaml.cs
 ..\Views\Generated Views\EntityViews\ResponseOptionInfoListView.xaml.cs
+..\Views\Generated Views\EntityViews\SignInInfoListView.xaml.cs
 ..\Views\Generated Views\EntityViews\TemperatureInfoListView.xaml.cs
 ..\Views\Generated Views\EntityViews\VitalsHistoryInfoListView.xaml.cs
 ..\Views\Generated Views\EntityViews\VitalSignsInfoListView.xaml.cs
@@ -2079,6 +2091,7 @@
 ..\Views\Generated Views\ntityViews\PulseInfoListView.xaml
 ..\Views\Generated Views\ntityViews\RespirationInfoListView.xaml
 ..\Views\Generated Views\ntityViews\ResponseOptionInfoListView.xaml
+..\Views\Generated Views\ntityViews\SignInInfoListView.xaml
 ..\Views\Generated Views\ntityViews\TemperatureInfoListView.xaml
 ..\Views\Generated Views\ntityViews\VitalsHistoryInfoListView.xaml
 ..\Views\Generated Views\ntityViews\VitalSignsInfoListView.xaml

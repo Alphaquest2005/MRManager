@@ -6,7 +6,6 @@ using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
 using SystemInterfaces;
-using SystemMessages;
 using BootStrapper;
 using CommonMessages;
 using EventAggregator;
@@ -14,7 +13,6 @@ using EventMessages;
 using JB.Collections.Reactive;
 using JB.Reactive.ExtensionMethods;
 using ReactiveUI;
-using Utilities;
 using ViewModel.Interfaces;
 
 

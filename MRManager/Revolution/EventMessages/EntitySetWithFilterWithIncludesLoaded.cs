@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using SystemInterfaces;
 using CommonMessages;
-using DataInterfaces;
+
 
 namespace EventMessages
 {
-    public class EntitySetWithFilterWithIncludesLoaded<T> : ProcessSystemMessage where T : IEntity
+  
+
+    public class EntitySetWithFilterWithIncludesLoaded<T> : ProcessSystemMessage, IEntitySetWithFilterWithIncludesLoaded<T> where T : IEntity
     {
         public IList<T> Entities { get; }
         public IList<Expression<Func<T, dynamic>>> Includes { get; }

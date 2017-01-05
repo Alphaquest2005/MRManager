@@ -1,7 +1,7 @@
+using System;
 using SystemInterfaces;
-using Common;
 using CommonMessages;
-using DataInterfaces;
+using EFRepository;
 using EventAggregator;
 using EventMessages;
 
@@ -9,20 +9,11 @@ namespace DataServices.Actors
 {
     public static class EntityChangesExtensions
     {
-        public static void UpdateEntity<T>(this EntityChanges<T> msg, IDataContext dbContext, ISourceMessage source) where T : IEntity
+        public static void UpdateEntity<TEntity>(this IUpdateEntity<TEntity> msg, ISourceMessage source) where TEntity : class, IEntity
         {
 
-            using (var ctx = dbContext.Instance.OpenSession())
-            using (var transaction = ctx.BeginTransaction())
-            {
-
-                var p = ctx.Load<T>(msg.EntityId);
-                p.ApplyChanges(msg.Changes);
-                ctx.SaveOrUpdate(p);
-                transaction.Commit();
-                EventMessageBus.Current.Publish(new EntityUpdated<T>(p,msg.Process, source), source);
-
-            }
+            EF7DataContext<TEntity>.Update(msg.EntityId, msg.Changes, msg.Process);
+            
 
         }
     }

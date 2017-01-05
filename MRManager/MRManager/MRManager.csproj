@@ -117,14 +117,6 @@
       <Project>{ad573873-c8e6-4ea3-93f5-0d39a92fc9f6}</Project>
       <Name>Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NH.DBContext\NH.DBContext.csproj">
-      <Project>{cd566324-734e-47ae-991f-d4da3e701910}</Project>
-      <Name>NH.DBContext</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NH.Mappings\NH.Mappings.csproj">
-      <Project>{7eba796f-77a6-47b5-aafa-2d6315ca1cb1}</Project>
-      <Name>NH.Mappings</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Resources\Resources.csproj">
       <Project>{9ef43ee7-b520-42d9-a75e-2d2887fd234c}</Project>
       <Name>Resources</Name>
@@ -156,10 +148,6 @@
     <ProjectReference Include="..\Revolution\Core.Common.UI\Core.Common.UI.csproj">
       <Project>{5dd82ad7-f344-45e3-92cc-96f8d07700af}</Project>
       <Name>Core.Common.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Revolution\DataInterfaces\DataInterfaces.csproj">
-      <Project>{f6008330-ba42-454b-a0b4-82455de56776}</Project>
-      <Name>DataInterfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Revolution\DataServices\DataServices.csproj">
       <Project>{320107b2-d414-434b-ae0d-4d9f18ff49b8}</Project>

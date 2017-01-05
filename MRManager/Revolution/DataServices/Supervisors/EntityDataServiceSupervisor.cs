@@ -6,11 +6,8 @@ using Akka.Actor;
 using Akka.IO;
 using Akka.Routing;
 using CommonMessages;
-using Core.Common.UI;
-using DataInterfaces;
 using EventAggregator;
 using EventMessages;
-using Interfaces;
 using RevolutionEntities.Process;
 using Utilities;
 using ViewMessages;
@@ -19,18 +16,18 @@ namespace DataServices.Actors
 {
     public class EntityDataServiceSupervisor<TEntity> : ReceiveActor where TEntity : class, IEntity
     {
-        private static readonly Action<IDataContext, ISourceMessage, CreateEntity<TEntity>> CreateAction = (ctx, s, x) => x.CreateEntity(ctx, s);
-        private static readonly Action<IDataContext, ISourceMessage, DeleteEntity<TEntity>> DeleteAction = (ctx, s, x) => x.DeleteEntity(ctx, s);
-        private static readonly Action<IDataContext, ISourceMessage, EntityChanges<TEntity>> UpdateAction = (ctx, s, x) => x.UpdateEntity(ctx, s);
-        private static readonly Action<IDataContext, ISourceMessage, GetEntityById<TEntity>> GetEntityByIdAction = (ctx, s, x) => x.GetEntity(ctx, s);
-        private static readonly Action<IDataContext, ISourceMessage, IGetEntityWithChanges<TEntity>> GetEntityWithChangesAction = (ctx, s, x) => x.GetEntity(ctx, s);
+        private static readonly Action<ISourceMessage, ICreateEntity<TEntity>> CreateAction = (s, x) => x.CreateEntity(s);
+        private static readonly Action<ISourceMessage, IDeleteEntity<TEntity>> DeleteAction = (s, x) => x.DeleteEntity(s);
+        private static readonly Action<ISourceMessage, IUpdateEntity<TEntity>> UpdateAction = (s, x) => x.UpdateEntity(s);
+        private static readonly Action<ISourceMessage, IGetEntityById<TEntity>> GetEntityByIdAction = (s, x) => x.GetEntity(s);
+        private static readonly Action<ISourceMessage, IGetEntityWithChanges<TEntity>> GetEntityWithChangesAction = (s, x) => x.GetEntity(s);
 
-        private static readonly Action<IDataContext, ISourceMessage, LoadEntitySet<TEntity>> LoadEntitySet = (ctx, s, x) => x.LoadEntitySet(ctx, s);
-        private static readonly Action<IDataContext, ISourceMessage, LoadEntitySetWithFilter<TEntity>> LoadEntitySetWithFilter = (ctx, s, x) => x.LoadEntitySet(ctx, s);
-        private static readonly Action<IDataContext, ISourceMessage, LoadEntitySetWithFilterWithIncludes<TEntity>> LoadEntitySetWithFilterWithIncludes = (ctx, s, x) => x.LoadEntitySet(ctx, s);
+        private static readonly Action<ISourceMessage, ILoadEntitySet<TEntity>> LoadEntitySet = (s, x) => x.LoadEntitySet(s);
+        private static readonly Action<ISourceMessage, ILoadEntitySetWithFilter<TEntity>> LoadEntitySetWithFilter = (s, x) => x.LoadEntitySet(s);
+        private static readonly Action<ISourceMessage, ILoadEntitySetWithFilterWithIncludes<TEntity>> LoadEntitySetWithFilterWithIncludes = (s, x) => x.LoadEntitySet(s);
 
-        private static readonly Action<IDataContext, ISourceMessage, LoadEntityView<TEntity>> LoadEntityView = (ctx, s, x) => x.LoadEntityView(ctx, s);
-        private static readonly Action<IDataContext, ISourceMessage, LoadEntityViewWithFilter<TEntity>> LoadEntityViewWithFilter = (ctx, s, x) => x.LoadEntityView(ctx, s);
+        private static readonly Action<ISourceMessage, LoadEntityView<TEntity>> LoadEntityView = (s, x) => x.LoadEntityView(s);
+        private static readonly Action<ISourceMessage, LoadEntityViewWithFilter<TEntity>> LoadEntityViewWithFilter = (s, x) => x.LoadEntityView(s);
 
         readonly Dictionary<Type, object> entityEvents =
             new Dictionary<Type, object>()
@@ -49,7 +46,7 @@ namespace DataServices.Actors
                 //{typeof (LoadEntityViewWithFilter<TEntity>), LoadEntityViewWithFilter},
             };
 
-        public EntityDataServiceSupervisor(IDataContext dbContext, ISystemProcess process)
+        public EntityDataServiceSupervisor(ISystemProcess process)
         {
             foreach (var itm in entityEvents)
             {
@@ -58,7 +55,7 @@ namespace DataServices.Actors
                     this.GetType()
                         .GetMethod("CreateEntityActor")
                         .MakeGenericMethod(itm.Key)
-                        .Invoke(this, new object[] {dbContext, itm.Value, process});
+                        .Invoke(this, new object[] {itm.Value, process});
                 }
                 catch (Exception ex)
                 {
@@ -72,13 +69,13 @@ namespace DataServices.Actors
 
         }
 
-        public void CreateEntityActor<TEvent>(IDataContext dbContext, object action, ISystemProcess process) where TEvent : IMessage
+        public void CreateEntityActor<TEvent>(object action, ISystemProcess process) where TEvent : IMessage
         {
             /// Create Actor Per Event
             try
             {
                     Type actorType = typeof(EntityDataServiceActor<>).MakeGenericType(typeof(TEvent));
-                    _childActor = Context.ActorOf(Props.Create(actorType, dbContext, action, process).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
+                    _childActor = Context.ActorOf(Props.Create(actorType, action, process).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
                             "EntityDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
 
                     EventMessageBus.Current.GetEvent<TEvent>(SourceMessage).Subscribe(x => _childActor.Tell(x));
