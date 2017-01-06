@@ -82,13 +82,27 @@ namespace DataServices.Actors
             var actorList = new Dictionary<string, Type>()
             {
                 {"{0}EntityDataServiceSupervisor", typeof (EntityDataServiceSupervisor<>)},
+                {"{0}EntityViewDataServiceSupervisor", typeof (EntityViewDataServiceSupervisor<>)},
             };
 
             foreach (var itm in actorList)
             {
                 foreach (var c in EF7DataContextBase.EntityTypes.Where(x => x.GetInterfaces().Any(z => z == typeof(IEntity) ) && x.Name.Contains("Persons")))
                 {
-                    CreateActors(c, itm.Value, itm.Key, systemProcess, systemStartedMsg);
+                    CreateEntityActors(c, itm.Value, itm.Key, systemProcess, systemStartedMsg);
+                }
+            }
+
+            var viewActorList = new Dictionary<string, Type>()
+            {
+                {"{0}EntityViewDataServiceSupervisor", typeof (EntityViewDataServiceSupervisor<>)},
+            };
+
+            foreach (var itm in viewActorList)
+            {
+                foreach (var c in EF7DataContextBase.EntityTypes.Where(x => x.GetInterfaces().Any(z => z == typeof(IEntityView<>)) && x.Name.Contains("SignInInfo")))
+                {
+                    CreateEntityViewActors(c, itm.Value, itm.Key, systemProcess, systemStartedMsg);
                 }
             }
 
@@ -96,7 +110,7 @@ namespace DataServices.Actors
             //EventMessageBus.Current.Publish(systemStartedMsg, SourceMessage);
         }
 
-        private void CreateActors(Type c, Type genericListType, string actorName,
+        private void CreateEntityActors(Type c, Type genericListType, string actorName,
             ISystemProcess process, IProcessSystemMessage systemStartedmsg)
         {
 
@@ -113,6 +127,28 @@ namespace DataServices.Actors
                 EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: systemStartedmsg.GetType(),
                     failedEventMessage: systemStartedmsg,
                     expectedEventType: typeof (ServiceStarted<>).MakeGenericType(specificListType),
+                    exception: ex,
+                    SourceMsg: SourceMessage), SourceMessage);
+            }
+
+        }
+
+        private void CreateEntityViewActors(Type c, Type genericListType, string actorName, ISystemProcess process, IProcessSystemMessage systemStartedmsg)
+        {
+
+            var classType = c.GetInterfaces().FirstOrDefault(x => x.Name.Contains(c.Name.Substring(c.Name.LastIndexOf('.') + 1)));
+            var specificListType = genericListType.MakeGenericType(classType);
+            try
+            {
+                supervisors.Add(Context.ActorOf(Props.Create(specificListType, process),
+                    string.Format(actorName, classType.Name)));
+            }
+            catch (Exception ex)
+            {
+
+                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: systemStartedmsg.GetType(),
+                    failedEventMessage: systemStartedmsg,
+                    expectedEventType: typeof(ServiceStarted<>).MakeGenericType(specificListType),
                     exception: ex,
                     SourceMsg: SourceMessage), SourceMessage);
             }

@@ -8,21 +8,21 @@ using RevolutionEntities.Process;
 
 namespace DataServices.Actors
 {
-    public interface IEntityDataServiceActor<TService>:IAgent
+    public interface IEntityViewDataServiceActor<TService>:IAgent
     {
     }
 
-    public class EntityDataServiceActor<TService>: BaseActor<EntityDataServiceActor<TService>>, IEntityDataServiceActor<TService>
+    public class EntityViewDataServiceActor<TService>: BaseActor<EntityViewDataServiceActor<TService>>, IEntityViewDataServiceActor<TService>
     {
         private Action<TService> Action { get; }
        
       
         
-        public EntityDataServiceActor(Action<TService> action, ISystemProcess process) 
+        public EntityViewDataServiceActor(Action<TService> action, ISystemProcess process) 
         {
             Action = action;
             Command<TService>(m => HandledEvent(m));
-            EventMessageBus.Current.Publish(new ServiceStarted<IEntityDataServiceActor<TService>>(this,process,SourceMessage), SourceMessage);
+            EventMessageBus.Current.Publish(new ServiceStarted<IEntityViewDataServiceActor<TService>>(this,process,SourceMessage), SourceMessage);
         }
 
         

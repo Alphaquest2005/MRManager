@@ -43,6 +43,20 @@ namespace MRManager_UnitTests
         }
 
         [TestMethod]
+        public void EntityViewGetEntityWithChanges()
+        {
+            IEntityViewLoaded<ISignInInfo> signonInfo = null;
+            EventMessageBus.Current.GetEvent<IEntityViewLoaded<ISignInInfo>>(SourceMessage).Subscribe(x => signonInfo = x);
+            EventMessageBus.Current.GetEvent<IProcessEventFailure>(SourceMessage)
+                .Subscribe(x => Debugger.Log(0, "Test", x.Exception.Message + ":-:" + x.Exception.StackTrace));
+            var msg = new GetEntityViewWithChanges<ISignInInfo>(1, new Dictionary<string, dynamic>() { { "Usersignin", "joe" } }, testProcess, SourceMessage);
+            msg.GetEntity();
+            Thread.Sleep(2);
+            Assert.IsNotNull(signonInfo);
+        }
+
+
+        [TestMethod]
         public void Create()
         {
 

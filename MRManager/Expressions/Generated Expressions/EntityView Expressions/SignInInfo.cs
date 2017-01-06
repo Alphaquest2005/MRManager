@@ -16,14 +16,14 @@ namespace Entity.Expressions
 	public static partial class MediaExpressions
 	{
 
-		public static Expression<Func<Media, SignInInfo>> MediaToSignInInfoExpression { get; } =
+		public static Expression<Func<UserSignIn, SignInInfo>> SignInInfoExpression { get; } =
 		
 			x => new SignInInfo()
 			{
 				Id = x.Id,
-				Medias = x.Value,
-				Usersignin = x.PersonMedia.Select(x2 => x2.Persons).Select(x3 => x3.UserSignIn).Select(z => z.Username).StringJoin(","),
-				Password = x.PersonMedia.Select(x2 => x2.Persons).Select(x3 => x3.UserSignIn).Select(z => z.Password).StringJoin(","),
+				Medias = x.Persons.PersonMedia.Select(x2 => x2.Media).Select(x3 => x3.Value).FirstOrDefault(),
+				Usersignin = x.Username,
+				Password = x.Password,
 			};
 	}
 }

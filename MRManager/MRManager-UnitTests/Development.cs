@@ -47,7 +47,7 @@ namespace MRManager_UnitTests
         {
             using (var ctx = new MRManagerDBContext())
                 {
-                    var res = ctx.Set<Media>().Select(MediaExpressions.MediaToSignInInfoExpression).FirstOrDefault(x => x.Id == 1);
+                   // var res = ctx.Set<Media>().Select(MediaExpressions.MediaToSignInInfoExpression).FirstOrDefault(x => x.Id == 1);
 
                     
                 }

@@ -13,13 +13,14 @@ using Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;
+using System.Linq.Dynamic;
 using MoreLinq;
 using RevolutionEntities.Process;
 using Utilities;
 
 namespace EFRepository
 {
-    public class EntityViewRepository<TView,TDbView, TEntity, TDbEntity, TDbContext> where TDbView:IEntityId where TDbEntity : class,IEntity where TDbContext : DbContext, new() where TEntity : class, IEntity where TView : IEntityView<TEntity>
+    public class EntityViewRepository<TView,TDbView, TEntity, TDbEntity, TDbContext> where TDbView:class, IEntityId where TDbEntity : class,IEntity where TDbContext : DbContext, new() where TEntity : class, IEntity where TView : IEntityView<TEntity>
     {
         public static ISourceMessage SourceMessage => new SourceMessage(new MessageSource(typeof(EntityViewRepository<TView,TDbView,TEntity, TDbEntity, TDbContext>).ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         public static void GetEntityById(IGetEntityViewById<TView>  msg)
@@ -58,7 +59,7 @@ namespace EFRepository
                     var whereStr = msg.Changes.Aggregate("", (str, itm) => str + ($"{itm.Key} == \"{itm.Value}\" &&"));
                     whereStr = whereStr.TrimEnd('&');
                     if (string.IsNullOrEmpty(whereStr)) return;
-                    var res = ctx.Set<TDbEntity>().Select(exp).DistinctBy(x => x.Id).Select(x => (TView)(object)x).Where(whereStr).ToList();//
+                    var res = ctx.Set<TDbEntity>().Select(exp).Distinct().Where(whereStr).DistinctBy(x => x.Id).Select(x => (TView)(object)x).ToList();//
                    
                     EventMessageBus.Current.Publish(new EntityViewLoaded<TView>(res, msg.Process, SourceMessage), SourceMessage);
                 }

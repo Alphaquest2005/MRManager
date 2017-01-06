@@ -19,7 +19,7 @@ namespace DataServices.Actors
     {
         
         private static readonly Action<IGetEntityViewById<TEntityView>> GetEntityByIdAction = (x) => x.GetEntity();
-        private static readonly Action<IGetEntityViewWithChanges<TEntityView>> GetEntityWithChangesAction = (s, x) => x.GetEntity();
+        private static readonly Action<IGetEntityViewWithChanges<TEntityView>> GetEntityWithChangesAction = (x) => x.GetEntity();
 
         //private static readonly Action<ISourceMessage, ILoadEntitySet<TEntity>> LoadEntitySet = (s, x) => x.LoadEntitySet();
         //private static readonly Action<ISourceMessage, ILoadEntitySetWithFilter<TEntity>> LoadEntitySetWithFilter = (s, x) => x.LoadEntitySet();
@@ -35,6 +35,7 @@ namespace DataServices.Actors
                 
                 //{typeof (GetEntityById<TEntity>), GetEntityByIdAction},
                 {typeof (IGetEntityViewById<TEntityView>), GetEntityByIdAction},
+                {typeof (IGetEntityViewWithChanges<TEntityView>), GetEntityWithChangesAction},
 
                 //{typeof (LoadEntitySet<TEntity>), LoadEntitySet},
                 //{typeof (LoadEntitySetWithFilter<TEntity>), LoadEntitySetWithFilter},
@@ -72,9 +73,9 @@ namespace DataServices.Actors
             /// Create Actor Per Event
             try
             {
-                    Type actorType = typeof(EntityDataServiceActor<>).MakeGenericType(typeof(TEvent));
+                    Type actorType = typeof(EntityViewDataServiceActor<>).MakeGenericType(typeof(TEvent));
                     _childActor = Context.ActorOf(Props.Create(actorType, action, process).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
-                            "EntityDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
+                            "EntityViewDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
 
                     EventMessageBus.Current.GetEvent<TEvent>(SourceMessage).Subscribe(x => _childActor.Tell(x));
             }
