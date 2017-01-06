@@ -59,26 +59,52 @@ namespace RevolutionData
                 processId: 2,
                 events: new List<IProcessExpectedEvent>()
                 {
-                    new ProcessExpectedEvent<IEntityWithChangesFound<ISignInInfo>> (processId: 2, eventPredicate: (e) => e.Entity != null && e.Changes.Count == 1 && e.Changes.ContainsKey(nameof(ISignInInfo.Usersignin)))
+                    new ProcessExpectedEvent<IEntityViewWithChangesFound<ISignInInfo>> (processId: 2, eventPredicate: (e) => e.Entity != null && e.Changes.Count == 1 && e.Changes.ContainsKey(nameof(ISignInInfo.Usersignin)))
                 }).RegisterAction((cp) =>
                 {
-                    var ps = new ProcessState<ISignInInfo>(cp.Actor.Process.Id, cp.Msg.Entity, new ProcessStateDetailedInfo($"Welcome {cp.Msg.Entity.Username}", "Please Enter your Password"));
-                    var psMsg = new ProcessStateMessage<ISignInInfo>(ps, cp.Actor.Process,cp.Actor.SourceMessage);
-                    cp.Actor.ProcessStateMessages.AddOrUpdate(typeof(ISignInInfo),psMsg, (key,value) => psMsg);
-                    EventMessageBus.Current.Publish(psMsg, cp.Actor.SourceMessage);
+                    try
+                    {
+                        var ps = new ProcessState<ISignInInfo>(cp.Actor.Process.Id, cp.Msg.Entity,new ProcessStateDetailedInfo($"Welcome {cp.Msg.Entity.Usersignin}","Please Enter your Password"));
+                        var psMsg = new ProcessStateMessage<ISignInInfo>(ps, cp.Actor.Process, cp.Actor.SourceMessage);
+                        cp.Actor.ProcessStateMessages.AddOrUpdate(typeof (ISignInInfo), psMsg, (key, value) => psMsg);
+                        EventMessageBus.Current.Publish(psMsg, cp.Actor.SourceMessage);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: typeof(IProcessStateMessage<ISignInInfo>),
+                        failedEventMessage: cp.Msg,
+                        expectedEventType: typeof (ServiceStarted<>),
+                        exception: ex,
+                        SourceMsg: cp.Actor.SourceMessage),cp.Actor.SourceMessage);
+                    }
+
                 }),
             new ComplexEventAction(
                 processId: 2,
                 events: new List<IProcessExpectedEvent>()
                 {
-                    new ProcessExpectedEvent<IEntityWithChangesFound<ISignInInfo>> (processId: 2, eventPredicate: (e) => e.Entity != null && e.Changes.Count == 2 && e.Changes.ContainsKey(nameof(ISignInInfo.Password)))
+                    new ProcessExpectedEvent<IEntityViewWithChangesFound<ISignInInfo>> (processId: 2, eventPredicate: (e) => e.Entity != null && e.Changes.Count == 2 && e.Changes.ContainsKey(nameof(ISignInInfo.Password)))
                 }).RegisterAction((cp) =>
                 {
-                    var ps = new ProcessState<ISignInInfo>(cp.Actor.Process.Id, cp.Msg.Entity, new ProcessStateDetailedInfo($"User: {cp.Msg.Entity.Username} Validated", "User Validated"));
-                    var psMsg = new ProcessStateMessage<ISignInInfo>(ps, cp.Actor.Process,cp.Actor.SourceMessage);
-                    cp.Actor.ProcessStateMessages.AddOrUpdate(typeof(ISignInInfo),psMsg, (key,value) => psMsg);
-                    EventMessageBus.Current.Publish(psMsg, cp.Actor.SourceMessage);
-                    EventMessageBus.Current.Publish(new UserValidated(cp.Msg.Entity, cp.Actor.Process, cp.Actor.SourceMessage), cp.Actor.SourceMessage);
+                    try
+                    {
+                        var ps = new ProcessState<ISignInInfo>(cp.Actor.Process.Id, cp.Msg.Entity,new ProcessStateDetailedInfo($"User: {cp.Msg.Entity.Usersignin} Validated", "User Validated"));
+                        var psMsg = new ProcessStateMessage<ISignInInfo>(ps, cp.Actor.Process, cp.Actor.SourceMessage);
+                        cp.Actor.ProcessStateMessages.AddOrUpdate(typeof (ISignInInfo), psMsg, (key, value) => psMsg);
+                        EventMessageBus.Current.Publish(psMsg, cp.Actor.SourceMessage);
+                        EventMessageBus.Current.Publish(new UserValidated(cp.Msg.Entity, cp.Actor.Process, cp.Actor.SourceMessage),cp.Actor.SourceMessage);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: typeof(IProcessStateMessage<ISignInInfo>),
+                        failedEventMessage: cp.Msg,
+                        expectedEventType: typeof (ServiceStarted<>),
+                        exception: ex,
+                        SourceMsg: cp.Actor.SourceMessage),cp.Actor.SourceMessage);
+                    }
+
                     // have to do it so cuz i dropping events 
                 }),
             

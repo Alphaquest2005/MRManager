@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SystemInterfaces
 {
     [InheritedExport]
-    public interface IEntityWithChangesFound<TEntity>:IProcessSystemMessage where TEntity : IEntity
+    public interface IEntityViewWithChangesFound<TView> : IProcessSystemMessage
     {
-        TEntity Entity { get; set; }
+        TView Entity { get; set; }
         Dictionary<string, object> Changes { get; }
     }
 }

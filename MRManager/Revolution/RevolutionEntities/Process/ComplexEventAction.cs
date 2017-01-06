@@ -51,7 +51,11 @@ namespace RevolutionEntities.Process
 
         private static void CheckExpectedEvents(this IComplexEvent complexEvent, IComplexEventParameters paramArray)
         {
-            complexEvent.Events.ForEach(expectedEvent => paramArray.Messages.Where(x => !x.IsValid()).Where(x => expectedEvent.EventType.IsInstanceOfType(x) )//
+
+            complexEvent.Events.ForEach(expectedEvent => paramArray.Messages.Where(x => x.GetType().GetInterfaces().Any(z => z == expectedEvent.EventType))
+                                                                            .Where(x => expectedEvent.EventPredicate.Invoke(x))
+                                                                            .Where(x => !x.IsValid())
+                                                                            //
                                                                .ForEach(x => expectedEvent.Validate(x)));
            
 

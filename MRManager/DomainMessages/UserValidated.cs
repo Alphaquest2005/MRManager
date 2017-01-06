@@ -12,11 +12,11 @@ namespace DomainMessages
 {
     public class UserValidated : ProcessSystemMessage, IUserValidated
     {
-        public UserValidated(IUserSignIn userSignIn, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public UserValidated(ISignInInfo userSignIn, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
         {
             UserSignIn = userSignIn;
         }
 
-        public IUserSignIn UserSignIn { get; }
+        public ISignInInfo UserSignIn { get; }
     }
 }

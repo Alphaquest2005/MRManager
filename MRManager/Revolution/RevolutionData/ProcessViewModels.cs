@@ -189,7 +189,7 @@ namespace RevolutionData
                 },
                 publications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                 {
-                    new ViewEventPublication<ILoginViewModel, GetEntityWithChanges<ISignInInfo>>(
+                    new ViewEventPublication<ILoginViewModel, GetEntityViewWithChanges<ISignInInfo>>(
                         subject: v => v.ChangeTracking.DictionaryChanges,
                         subjectPredicate: new List<Func<ILoginViewModel, bool>>()
                                         {
@@ -208,7 +208,7 @@ namespace RevolutionData
                 },
                 commands: new List<IViewModelEventCommand<IViewModel,IEvent>>()
                 {
-                    new ViewEventCommand<ILoginViewModel, GetEntityWithChanges<ISignInInfo>>("ValidateUserInfo",
+                    new ViewEventCommand<ILoginViewModel, GetEntityViewWithChanges<ISignInInfo>>("ValidateUserInfo",
                         v =>
                             v.ChangeTracking.WhenAny(x => x.Keys,x => x.Value.Contains(nameof(v.State.Value.Entity.Usersignin))),
                         subject: (s) => ((ReactiveCommand<IViewModel, Unit>) s.Commands["ValidateUserInfo"]).AsObservable(),

@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="BlankMessage.cs" />
     <Compile Include="EntityFound.cs" />
+    <Compile Include="EntityViewWithChangesFound.cs" />
     <Compile Include="EntityWithChangesFound.cs" />
     <Compile Include="GetEntityViewWithChanges.cs" />
     <Compile Include="GetEntityWithChanges.cs" />

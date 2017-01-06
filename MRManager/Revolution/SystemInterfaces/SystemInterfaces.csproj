@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="IEntityViewWithChangesFound.cs" />
     <Compile Include="IEntityViewLoaded.cs" />
     <Compile Include="IEntityUpdated.cs" />
     <Compile Include="IEntityId.cs" />

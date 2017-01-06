@@ -43,11 +43,13 @@ namespace DataServices.Actors
             // Log the message 
             //TODO: Reenable event log
             //Persist(pe, x => { });//(x) => msgQue.Add(x)
-
+            
             // send out Process State Events
 
             msgQue.Add(pe);
-            _complexEvents.ForEach(x => x.Execute(new ComplexEventParameters(this,msgQue,pe)));
+            _complexEvents.Where(cp => cp.Events.Any(e => pe.GetType().GetInterfaces().Any(z => z == e.EventType) 
+                                                          && e.EventPredicate.Invoke(pe)))
+                          .ForEach(x => x.Execute(new ComplexEventParameters(this,msgQue,pe)));
         }
 
 

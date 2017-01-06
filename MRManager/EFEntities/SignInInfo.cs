@@ -5,20 +5,24 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Windows.Media.Imaging;
 using SystemInterfaces;
 using Common.DataEntites;
 using EF.Entities;
 using Interfaces;
+using Utilities;
 
 namespace EF.Entities
 {
+    [Export]
 	public partial class SignInInfo: EntityView<IUserSignIn>, ISignInInfo
 	{
 		public Byte[] Medias { get; set; }
 		public string Usersignin { get; set; }
 		public string Password { get; set; }
 
-	    
-	    
+        public BitmapImage Image => Medias.ConvertByteToImage();
+
 	}
 }

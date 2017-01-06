@@ -100,7 +100,7 @@ namespace DataServices.Actors
 
             foreach (var itm in viewActorList)
             {
-                foreach (var c in EF7DataContextBase.EntityTypes.Where(x => x.GetInterfaces().Any(z => z == typeof(IEntityView<>)) && x.Name.Contains("SignInInfo")))
+                foreach (var c in EF7DataContextBase.EntityTypes.Where(x => x.GetInterfaces().Any(z => z.IsGenericType && z.GetGenericTypeDefinition() == typeof(IEntityView<>)) && x.Name.Contains("SignInInfo")))
                 {
                     CreateEntityViewActors(c, itm.Value, itm.Key, systemProcess, systemStartedMsg);
                 }

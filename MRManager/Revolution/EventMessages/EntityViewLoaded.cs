@@ -6,7 +6,7 @@ using CommonMessages;
 namespace EventMessages
 {
 
-    public class EntityViewLoaded<TView> : ProcessSystemMessage, IEntityViewLoaded<TView> where TView : IEntityId
+    public class EntityViewLoaded<TView> : ProcessSystemMessage, IEntityViewLoaded<TView> where TView : IEntityView
     {
         public IEnumerable<TView> Entities { get; }
         

@@ -4,10 +4,16 @@ using System.ComponentModel.Composition;
 namespace SystemInterfaces
 {
     [InheritedExport]
-    public interface IEntityView<TEntity>:IEntityId where TEntity: IEntity
+    public interface IEntityView<TEntity>: IEntityView where TEntity: IEntity
     {
-        Type EntityType { get; }
+      
     }
 
-    
+    [InheritedExport]
+    public interface IEntityView : IEntityId 
+    {
+       
+    }
+
+
 }
