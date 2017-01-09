@@ -5,6 +5,7 @@ namespace SystemInterfaces
     [InheritedExport]
     public interface IEvent
     {
-        IMessageSource Source { get; }
+        //ToDo:Check to remove this
+        ISource Source { get; }
     }
 }

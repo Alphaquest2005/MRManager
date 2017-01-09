@@ -1,9 +1,10 @@
 using System.ComponentModel.Composition;
+using SystemInterfaces;
 
-namespace StartUp.Messages
+namespace SystemInterfaces
 {
     [InheritedExport]
-    public interface IService<TService>
+    public interface IService<TService>: IProcessSource
     {
     }
 }

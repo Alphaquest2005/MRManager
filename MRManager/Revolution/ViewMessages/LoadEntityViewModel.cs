@@ -9,7 +9,7 @@
 //    [Export]
 //    public class LoadEntityViewModel<TEntity> : SystemProcessMessage where TEntity : IEntity
 //    {
-//        public LoadEntityViewModel(IReadEntityViewModelInfo<TEntity> entityViewModelInfo, ISystemProcess process, ISourceMessage msg) : base(process, msg)
+//        public LoadEntityViewModel(IReadEntityViewModelInfo<TEntity> entityViewModelInfo, ISystemProcess process, ISystemSource msg) : base(process, msg)
 //        {
 //            EntityViewModelInfo = entityViewModelInfo;
 
@@ -21,7 +21,7 @@
 //    [Export]
 //    public class UnloadEntityViewModel<TEntity> : SystemProcessMessage where TEntity : IEntity
 //    {
-//        public UnloadEntityViewModel(IReadEntityViewModelInfo<TEntity> entityViewModelInfo, ISystemProcess process, ISourceMessage msg) : base(process, msg)
+//        public UnloadEntityViewModel(IReadEntityViewModelInfo<TEntity> entityViewModelInfo, ISystemProcess process, ISystemSource msg) : base(process, msg)
 //        {
 //            EntityViewModelInfo = entityViewModelInfo;
 

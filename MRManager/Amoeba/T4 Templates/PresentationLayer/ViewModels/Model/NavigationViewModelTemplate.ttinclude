@@ -39,13 +39,13 @@ namespace ViewModels
 {
 	public partial class <#=Entity.Name#>ViewModel_AutoGen 
 	{
-		SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+		Source Source => new Source(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 		protected virtual void WireEvents()
 		{
 <#+ foreach (var p in plst)
 	{
 #>
-			EventMessageBus.Current.GetEvent<CurrentEntityChanged<I<#=p.ParentProperty.Entity.Name #>>>(SourceMessage).Subscribe(x => handle<#=p.ChildProperty.PropertyName #>Changed(x.EntityId));      
+			EventMessageBus.Current.GetEvent<CurrentEntityChanged<I<#=p.ParentProperty.Entity.Name #>>>(Source).Subscribe(x => handle<#=p.ChildProperty.PropertyName #>Changed(x.EntityId));      
 <#+ }
  #>                  
 		}

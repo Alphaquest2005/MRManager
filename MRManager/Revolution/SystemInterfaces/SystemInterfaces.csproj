@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="IEntityViewWithChangesFound.cs" />
     <Compile Include="IEntityViewLoaded.cs" />
     <Compile Include="IEntityUpdated.cs" />
@@ -62,15 +63,17 @@
     <Compile Include="IProcessEventFailure.cs" />
     <Compile Include="IEntityWithChangesFound.cs" />
     <Compile Include="IGetEntityWithChanges.cs" />
+    <Compile Include="IProcessSource.cs" />
     <Compile Include="IProcessStateMessage.cs" />
     <Compile Include="IRequestProcessState.cs" />
     <Compile Include="IEntityFound.cs" />
     <Compile Include="IProcessExpectedEvent.cs" />
+    <Compile Include="ISource.cs" />
+    <Compile Include="ISystemSource.cs" />
     <Compile Include="ISystemStarted.cs" />
     <Compile Include="IServiceStarted.cs" />
     <Compile Include="IProcessStateDetailedInfo.cs" />
     <Compile Include="ISystemProcessStarted.cs" />
-    <Compile Include="ISourceMessage.cs" />
     <Compile Include="IMedia.cs" />
     <Compile Include="IUpdateEntity.cs" />
     <Compile Include="RowState.cs" />
@@ -85,7 +88,6 @@
     <Compile Include="IMessageSource.cs" />
     <Compile Include="IPerson.cs" />
     <Compile Include="IProcessInfo.cs" />
-    <Compile Include="IProcessService.cs" />
     <Compile Include="IProcessState.cs" />
     <Compile Include="IProcessSystemMessage.cs" />
     <Compile Include="IService.cs" />

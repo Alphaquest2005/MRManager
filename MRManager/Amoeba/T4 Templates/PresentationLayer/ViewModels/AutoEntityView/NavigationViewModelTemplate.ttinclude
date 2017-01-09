@@ -40,12 +40,12 @@ namespace ViewModels
 {
 	public partial class <#=Entity.Name#>AutoViewModel_AutoGen 
 	{
-		SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+		Source Source => new Source(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 		protected virtual void WireEvents()
 		{
 
-			EventMessageBus.Current.GetEvent<CurrentEntityChanged<I<#=Entity.Name #>>>(SourceMessage).Subscribe(x => handle<#=Entity.Name #>Changed(x.EntityId));  
-			EventMessageBus.Current.GetEvent<EntityUpdated<I<#=Entity.Name #>>>(SourceMessage).Subscribe(x => handle<#=Entity.Name #>Changed(x.Entity.Id));     
+			EventMessageBus.Current.GetEvent<CurrentEntityChanged<I<#=Entity.Name #>>>(Source).Subscribe(x => handle<#=Entity.Name #>Changed(x.EntityId));  
+			EventMessageBus.Current.GetEvent<EntityUpdated<I<#=Entity.Name #>>>(Source).Subscribe(x => handle<#=Entity.Name #>Changed(x.Entity.Id));     
 				
 		}
 

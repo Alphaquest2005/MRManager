@@ -5,6 +5,8 @@ using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using SystemInterfaces;
+using Common;
 using CommonMessages;
 using EventAggregator;
 using RevolutionEntities.Process;
@@ -16,8 +18,8 @@ namespace Views
 {
 	public partial class Screen
 	{
-        protected SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
-		public Screen()
+        public ISystemSource Source => new Source(Guid.NewGuid(), $"View:{typeof(Screen)}>", new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public Screen()
 		{
             
 			try
@@ -25,8 +27,9 @@ namespace Views
                 // Required to initialize variables
                 InitializeComponent();
 				AppSlider.Slider = this.slider;
-                //TODO: Figure out the proper way to bind and get this out
-                EventMessageBus.Current.GetEvent<IViewModelCreated<IScreenModel>>(SourceMessage).Subscribe(x =>
+                //TODO: Figure out the proper way to bind and get this out xaml is not a source
+                
+                EventMessageBus.Current.GetEvent<IViewModelCreated<IScreenModel>>(Source).Subscribe(x =>
                 {
                     Application.Current.Dispatcher.Invoke(() => { this.DataContext = x.ViewModel; });
                 });

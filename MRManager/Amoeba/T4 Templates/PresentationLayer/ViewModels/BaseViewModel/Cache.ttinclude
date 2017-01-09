@@ -53,7 +53,7 @@ namespace ViewModels
 			
 		}
 
-	   SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+	   Source Source => new Source(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 		
 		class BaseQSOnCreated: BaseViewModel
 		{
@@ -67,9 +67,9 @@ namespace ViewModels
 	foreach (var entity in Entities)
 	{
 #>
-						EventMessageBus.Current.Publish(new LoadEntitySet<I<#=entity.Entity.Name #>>(SourceMessage), msgSource);
-						EventMessageBus.Current.GetEvent<CurrentEntityUpdated<I<#=entity.Entity.Name #>>>(SourceMessage).Subscribe(x => handleCurrent<#=entity.Entity.Name #>Changed(x.Entity));
-						EventMessageBus.Current.GetEvent<EntitySetLoaded<I<#=entity.Entity.Name #>>>(SourceMessage).Subscribe(x => handle<#=entity.Entity.EntitySetName #>Loaded(x.Entities));
+						EventMessageBus.Current.Publish(new LoadEntitySet<I<#=entity.Entity.Name #>>(Source), msgSource);
+						EventMessageBus.Current.GetEvent<CurrentEntityUpdated<I<#=entity.Entity.Name #>>>(Source).Subscribe(x => handleCurrent<#=entity.Entity.Name #>Changed(x.Entity));
+						EventMessageBus.Current.GetEvent<EntitySetLoaded<I<#=entity.Entity.Name #>>>(Source).Subscribe(x => handle<#=entity.Entity.EntitySetName #>Loaded(x.Entities));
 
 <#+ }
 #>

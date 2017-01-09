@@ -22,9 +22,9 @@ namespace MRManager_UnitTests
             new SystemProcess(new Process(-1, -1, "Testing", "Testing", "T", new Agent("UnitTest")),
                 new MachineInfo("TestMachine", 1));
 
-        protected ISourceMessage SourceMessage
+        protected ISystemSource Source
             =>
-                new SourceMessage(new MessageSource(this.ToString()),
+                new Source(new MessageSource(this.ToString()),
                     new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
        static IEntityCreated<IPersons> createdPerson;
@@ -33,10 +33,10 @@ namespace MRManager_UnitTests
         public void EntityViewGetEntityById()
         {
             IEntityFound<ISignInInfo> signonInfo = null;
-            EventMessageBus.Current.GetEvent<IEntityFound<ISignInInfo>>(SourceMessage).Subscribe(x => signonInfo = x);
-            EventMessageBus.Current.GetEvent<IProcessEventFailure>(SourceMessage)
+            EventMessageBus.Current.GetEvent<IEntityFound<ISignInInfo>>(Source).Subscribe(x => signonInfo = x);
+            EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source)
                 .Subscribe(x => Debugger.Log(0, "Test", x.Exception.Message + ":-:" + x.Exception.StackTrace));
-            var msg = new GetEntityViewById<ISignInInfo>(1, testProcess, SourceMessage);
+            var msg = new GetEntityViewById<ISignInInfo>(1, testProcess, Source);
             msg.GetEntity();
             Thread.Sleep(2);
             Assert.IsNotNull(signonInfo);
@@ -46,10 +46,10 @@ namespace MRManager_UnitTests
         public void EntityViewGetEntityWithChanges()
         {
             IEntityViewLoaded<ISignInInfo> signonInfo = null;
-            EventMessageBus.Current.GetEvent<IEntityViewLoaded<ISignInInfo>>(SourceMessage).Subscribe(x => signonInfo = x);
-            EventMessageBus.Current.GetEvent<IProcessEventFailure>(SourceMessage)
+            EventMessageBus.Current.GetEvent<IEntityViewLoaded<ISignInInfo>>(Source).Subscribe(x => signonInfo = x);
+            EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source)
                 .Subscribe(x => Debugger.Log(0, "Test", x.Exception.Message + ":-:" + x.Exception.StackTrace));
-            var msg = new GetEntityViewWithChanges<ISignInInfo>(1, new Dictionary<string, dynamic>() { { "Usersignin", "joe" } }, testProcess, SourceMessage);
+            var msg = new GetEntityViewWithChanges<ISignInInfo>(1, new Dictionary<string, dynamic>() { { "Usersignin", "joe" } }, testProcess, Source);
             msg.GetEntity();
             Thread.Sleep(2);
             Assert.IsNotNull(signonInfo);
@@ -60,10 +60,10 @@ namespace MRManager_UnitTests
         public void Create()
         {
 
-            EventMessageBus.Current.GetEvent<IEntityCreated<IPersons>>(SourceMessage).Subscribe(x => createdPerson = x);
-            EventMessageBus.Current.GetEvent<IProcessEventFailure>(SourceMessage)
+            EventMessageBus.Current.GetEvent<IEntityCreated<IPersons>>(Source).Subscribe(x => createdPerson = x);
+            EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source)
                 .Subscribe(x => Debugger.Log(0, "Test", x.Exception.Message + ":-:" + x.Exception.StackTrace));
-            var msg = new CreateEntity<IPersons>(new Persons(), testProcess, SourceMessage);
+            var msg = new CreateEntity<IPersons>(new Persons(), testProcess, Source);
             msg.CreateEntity();
             Thread.Sleep(2);
             Assert.IsNotNull(createdPerson);
@@ -75,11 +75,11 @@ namespace MRManager_UnitTests
         public void Update()
         {
             IEntityUpdated<IPersons> updatedPerson = null;
-            EventMessageBus.Current.GetEvent<IEntityUpdated<IPersons>>(SourceMessage).Subscribe(x => updatedPerson = x);
-            EventMessageBus.Current.GetEvent<IProcessEventFailure>(SourceMessage)
+            EventMessageBus.Current.GetEvent<IEntityUpdated<IPersons>>(Source).Subscribe(x => updatedPerson = x);
+            EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source)
                 .Subscribe(x => Debugger.Log(0, "Test", x.Exception.Message + ":-:" + x.Exception.StackTrace));
             var msg = new UpdateEntity<IPersons>(createdPerson.Entity.Id, new Dictionary<string, dynamic>() {{"Name", "TestJoe"}},
-                testProcess, SourceMessage);
+                testProcess, Source);
             msg.UpdateEntity();
             Thread.Sleep(2);
             Assert.IsNotNull(updatedPerson);
@@ -89,10 +89,10 @@ namespace MRManager_UnitTests
         public void GetEntityById()
         {
             IEntityFound<IPersons> getPerson = null;
-            EventMessageBus.Current.GetEvent<IEntityFound<IPersons>>(SourceMessage).Subscribe(x => getPerson = x);
-            EventMessageBus.Current.GetEvent<IProcessEventFailure>(SourceMessage)
+            EventMessageBus.Current.GetEvent<IEntityFound<IPersons>>(Source).Subscribe(x => getPerson = x);
+            EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source)
                 .Subscribe(x => Debugger.Log(0, "Test", x.Exception.Message + ":-:" + x.Exception.StackTrace));
-            var msg = new GetEntityById<IPersons>(createdPerson.Entity.Id, testProcess, SourceMessage);
+            var msg = new GetEntityById<IPersons>(createdPerson.Entity.Id, testProcess, Source);
             msg.GetEntity();
             Thread.Sleep(2);
             Assert.IsNotNull(getPerson);
@@ -102,12 +102,12 @@ namespace MRManager_UnitTests
         public void GetEntityWithChanges()
         {
             IEntityWithChangesFound<IPersons> updatedPerson = null;
-            EventMessageBus.Current.GetEvent<IEntityWithChangesFound<IPersons>>(SourceMessage)
+            EventMessageBus.Current.GetEvent<IEntityWithChangesFound<IPersons>>(Source)
                 .Subscribe(x => updatedPerson = x);
-            EventMessageBus.Current.GetEvent<IProcessEventFailure>(SourceMessage)
+            EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source)
                 .Subscribe(x => Debugger.Log(0, "Test", x.Exception.Message + ":-:" + x.Exception.StackTrace));
             var msg = new GetEntityWithChanges<IPersons>(createdPerson.Entity.Id, new Dictionary<string, dynamic>() {{"Name", "TestJoe"}},
-                testProcess, SourceMessage);
+                testProcess, Source);
             msg.GetEntity();
             Thread.Sleep(3);
             Assert.IsNotNull(updatedPerson);
@@ -117,10 +117,10 @@ namespace MRManager_UnitTests
         public void Delete()
         {
             IEntityDeleted<IPersons> deletedPerson = null;
-            EventMessageBus.Current.GetEvent<IEntityDeleted<IPersons>>(SourceMessage).Subscribe(x => deletedPerson = x);
-            EventMessageBus.Current.GetEvent<IProcessEventFailure>(SourceMessage)
+            EventMessageBus.Current.GetEvent<IEntityDeleted<IPersons>>(Source).Subscribe(x => deletedPerson = x);
+            EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source)
                 .Subscribe(x => Debugger.Log(0, "Test", x.Exception.Message + ":-:" + x.Exception.StackTrace));
-            var msg = new DeleteEntity<IPersons>(createdPerson.Entity.Id, testProcess, SourceMessage);
+            var msg = new DeleteEntity<IPersons>(createdPerson.Entity.Id, testProcess, Source);
             msg.DeleteEntity();
             Thread.Sleep(10);
             Assert.IsNotNull(deletedPerson);
@@ -130,11 +130,11 @@ namespace MRManager_UnitTests
         public void LoadEntitySet()
         {
             IEntitySetLoaded<IPersons> updatedPerson = null;
-            EventMessageBus.Current.GetEvent<IEntitySetLoaded<IPersons>>(SourceMessage)
+            EventMessageBus.Current.GetEvent<IEntitySetLoaded<IPersons>>(Source)
                 .Subscribe(x => updatedPerson = x);
-            EventMessageBus.Current.GetEvent<IProcessEventFailure>(SourceMessage)
+            EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source)
                 .Subscribe(x => Debugger.Log(0, "Test", x.Exception.Message + ":-:" + x.Exception.StackTrace));
-            var msg = new LoadEntitySet<IPersons>(testProcess, SourceMessage);
+            var msg = new LoadEntitySet<IPersons>(testProcess, Source);
             msg.LoadEntitySet();
             Thread.Sleep(2);
             Assert.IsNotNull(updatedPerson);

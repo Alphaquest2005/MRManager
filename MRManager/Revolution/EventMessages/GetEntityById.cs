@@ -10,7 +10,7 @@ namespace EventMessages
     {
         public int EntityId { get; }
 
-        public GetEntityById( int entityId ,ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public GetEntityById( int entityId ,ISystemProcess process, ISystemSource source) : base(process, source)
         {
             EntityId = entityId;
         }
@@ -21,7 +21,7 @@ namespace EventMessages
     {
         public int EntityId { get; }
 
-        public GetEntityViewById(int entityId, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public GetEntityViewById(int entityId, ISystemProcess process, ISystemSource source) : base(process, source)
         {
             EntityId = entityId;
         }

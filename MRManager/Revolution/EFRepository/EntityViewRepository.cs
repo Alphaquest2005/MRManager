@@ -14,15 +14,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;
 using System.Linq.Dynamic;
+using Common;
 using MoreLinq;
 using RevolutionEntities.Process;
 using Utilities;
+using Source = Common.Source;
 
 namespace EFRepository
 {
     public class EntityViewRepository<TView,TDbView, TEntity, TDbEntity, TDbContext> where TDbView:class, IEntityId where TDbEntity : class,IEntity where TDbContext : DbContext, new() where TEntity : class, IEntity where TView : IEntityView<TEntity>
     {
-        public static ISourceMessage SourceMessage => new SourceMessage(new MessageSource(typeof(EntityViewRepository<TView,TDbView,TEntity, TDbEntity, TDbContext>).ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+
+        public static ISystemSource Source => new Source(Guid.NewGuid(), $"EntityRepository:<{typeof(TView).GetFriendlyName()},{typeof(TDbView).GetFriendlyName()},{typeof(TEntity).GetFriendlyName()},{typeof(TDbEntity).GetFriendlyName()},{typeof(TDbContext).GetFriendlyName()}>", new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         public static void GetEntityById(IGetEntityViewById<TView>  msg)
         {
             try
@@ -33,7 +36,7 @@ namespace EFRepository
                     // ReSharper disable once ReplaceWithSingleCallToFirstOrDefault cuz EF7 bugging LEAVE JUST SO
                     var res = ctx.Set<TDbEntity>().Select(exp).DistinctBy(x => x.Id).FirstOrDefault();//
                     
-                    EventMessageBus.Current.Publish(new EntityFound<TView>((TView)(object)res, msg.Process, SourceMessage), SourceMessage);
+                    EventMessageBus.Current.Publish(new EntityFound<TView>((TView)(object)res, msg.Process, Source), Source);
                 }
             }
             catch (Exception ex)
@@ -43,7 +46,7 @@ namespace EFRepository
                     failedEventMessage: msg,
                     expectedEventType: typeof(IEntityFound<TView>),
                     exception: ex,
-                    SourceMsg: SourceMessage), SourceMessage);
+                    source: Source), Source);
             }
 
         }
@@ -61,7 +64,7 @@ namespace EFRepository
                     if (string.IsNullOrEmpty(whereStr)) return;
                     var res = ctx.Set<TDbEntity>().Select(exp).Distinct().Where(whereStr).DistinctBy(x => x.Id).FirstOrDefault(x => x.Id == msg.EntityId);//
                    
-                    EventMessageBus.Current.Publish(new EntityViewWithChangesFound<TView>((TView)(object)res,msg.Changes, msg.Process, SourceMessage), SourceMessage);
+                    EventMessageBus.Current.Publish(new EntityViewWithChangesFound<TView>((TView)(object)res,msg.Changes, msg.Process, Source), Source);
                 }
             }
             catch (Exception ex)
@@ -71,7 +74,7 @@ namespace EFRepository
                     failedEventMessage: msg,
                     expectedEventType: typeof(IEntityViewLoaded<TView>),
                     exception: ex,
-                    SourceMsg: SourceMessage), SourceMessage);
+                    source: Source), Source);
             }
 
         }

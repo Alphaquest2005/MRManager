@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Dynamic;
 using SystemInterfaces;
+using Common;
 using Common.Dynamic;
 using CommonMessages;
 using RevolutionEntities.Process;
+using Utilities;
 using ViewModel.Interfaces;
 
 namespace Core.Common.UI
@@ -14,6 +16,7 @@ namespace Core.Common.UI
 
     public class DynamicViewModel<TViewModel> : Expando, IDynamicViewModel<TViewModel> where TViewModel:IViewModel
     {
+        public ISource Source => new Source(Guid.NewGuid(), "DynamicViewModel:" + typeof(TViewModel).GetFriendlyName(), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         public new TViewModel Instance { get; }
         public DynamicViewModel(TViewModel viewModel) : base(viewModel)
         {
@@ -50,7 +53,6 @@ namespace Core.Common.UI
         public string Symbol { get; }
         public string Description { get; }
         public ISystemProcess Process { get; }
-        public ISourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         public List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get; }
         public List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; }
         public Dictionary<string, dynamic> Commands { get; }

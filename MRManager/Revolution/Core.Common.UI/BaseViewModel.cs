@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using SystemInterfaces;
+using Common;
 using CommonMessages;
 
 using Reactive.Bindings;
 using ReactiveUI;
 using RevolutionEntities.Process;
+using Utilities;
 using ViewModel.Interfaces;
 
 
@@ -13,7 +15,7 @@ namespace Core.Common.UI
 {
     public abstract class BaseViewModel<TViewModel> : ReactiveObject, IViewModel
     {
-       
+        public ISystemSource Source => new Source(Guid.NewGuid(), "ViewModel:" + typeof(TViewModel).GetFriendlyName(), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         protected BaseViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
         {
             Process = process;
@@ -27,7 +29,7 @@ namespace Core.Common.UI
             Symbol = process.Symbol;
         }
 
-        public ISourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        
         public List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get;}
         public List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; }
         public List<IViewModelEventCommand<IViewModel, IEvent>> CommandInfo { get; }

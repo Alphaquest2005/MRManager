@@ -17,9 +17,9 @@ namespace DataServices.Actors
         public ViewModelActor(ISystemProcess process)
         {
             Command<LoadViewModel>(x => HandleProcessViews(x));
-            //EventMessageBus.Current.GetEvent<LoadViewModel<IViewModelInfo>>(SourceMessage).Subscribe(HandleProcessViews);
+            //EventMessageBus.Current.GetEvent<LoadViewModel<IViewModelInfo>>(source).Subscribe(HandleProcessViews);
 
-            EventMessageBus.Current.Publish(new ServiceStarted<IViewModelService>(this,process, SourceMessage), SourceMessage);
+            EventMessageBus.Current.Publish(new ServiceStarted<IViewModelService>(this,process, Source), Source);
         }
 
         private void HandleProcessViews(ILoadViewModel pe)
@@ -38,10 +38,10 @@ namespace DataServices.Actors
             {
                 var concreteVM = BootStrapper.BootStrapper.Container.GetExportedTypes<TViewModel>().FirstOrDefault();
                 var vm =(TViewModel) Activator.CreateInstance( concreteVM/*vmInfo.ViewModelInfo.ViewModelType*/, new object[] {vmInfo.Process, vmInfo.ViewModelInfo.Subscriptions, vmInfo.ViewModelInfo.Publications, vmInfo.ViewModelInfo.Commands, vmInfo.ViewModelInfo.Orientation });
-                EventMessageBus.Current.Publish(new ViewModelCreated<TViewModel>(vm, vmInfo.Process, SourceMessage), SourceMessage);
-                EventMessageBus.Current.Publish(new ViewModelCreated<IViewModel>(vm, vmInfo.Process, SourceMessage), SourceMessage);
+                EventMessageBus.Current.Publish(new ViewModelCreated<TViewModel>(vm, vmInfo.Process, Source), Source);
+                EventMessageBus.Current.Publish(new ViewModelCreated<IViewModel>(vm, vmInfo.Process, Source), Source);
                 //dynamic dvm = new DynamicViewModel<TViewModel>(vm);
-                // EventMessageBus.Current.Publish(new ViewModelCreated<DynamicViewModel<TViewModel>>(dvm,vmInfo.Process, SourceMessage), SourceMessage);
+                // EventMessageBus.Current.Publish(new ViewModelCreated<DynamicViewModel<TViewModel>>(dvm,vmInfo.Process, source), source);
             }
             catch (Exception ex)
             {
@@ -49,7 +49,7 @@ namespace DataServices.Actors
                                                                         failedEventMessage: vmInfo,
                                                                         expectedEventType:typeof(IViewModelCreated<IDynamicViewModel<TViewModel>>),
                                                                         exception:ex,
-                                                                        SourceMsg:SourceMessage), SourceMessage);
+                                                                        source:Source), Source);
             }
            
         }

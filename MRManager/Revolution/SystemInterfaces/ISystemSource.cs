@@ -3,8 +3,8 @@
 namespace SystemInterfaces
 {
     [InheritedExport]
-    public interface ISourceMessage : ISystemMessage
+    public interface ISystemSource:ISource
     {
-
+        IMachineInfo MachineInfo { get; }
     }
 }

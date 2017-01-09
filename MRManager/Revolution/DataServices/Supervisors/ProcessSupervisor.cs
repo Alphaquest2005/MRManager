@@ -20,7 +20,7 @@ namespace DataServices.Actors
 
         public ProcessSupervisor()
         {
-            EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(SourceMessage).Subscribe(x => HandleProcessCompleted(x));
+            EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(Source).Subscribe(x => HandleProcessCompleted(x));
             Receive<ISystemStarted>(x => HandleProcessViews(x));
         }
 
@@ -37,15 +37,15 @@ namespace DataServices.Actors
 
         private void CreateProcesses(IProcessSystemMessage se, IEnumerable<IProcessInfo> processSteps)
         {
-            foreach (var pe in processSteps.Select(p => new SystemProcessStarted(new SystemProcess(new Process(p.Id, p.ParentProcessId, p.Name, p.Description, p.Symbol, se.User), SourceMessage.MachineInfo),SourceMessage)))
+            foreach (var pe in processSteps.Select(p => new SystemProcessStarted(new SystemProcess(new Process(p.Id, p.ParentProcessId, p.Name, p.Description, p.Symbol, se.User), Source.MachineInfo),Source)))
             {
                 try
                 {
                     var childActor = Context.ActorOf(Props.Create<ProcessActor>(pe.Process), "ProcessActor-" + pe.Process.Name.GetSafeActorName());
-                    EventMessageBus.Current.GetEvent<IProcessSystemMessage>(SourceMessage)
+                    EventMessageBus.Current.GetEvent<IProcessSystemMessage>(Source)
                         .Where(x => x.Process.Id == pe.Process.Id && x.MachineInfo.MachineName == pe.MachineInfo.MachineName)
                         .Subscribe(x => childActor.Tell(x));
-                    EventMessageBus.Current.Publish(pe, SourceMessage);
+                    EventMessageBus.Current.Publish(pe, Source);
                 }
                 catch (Exception ex)
                 {
@@ -53,7 +53,7 @@ namespace DataServices.Actors
                                                                         failedEventMessage: pe,
                                                                         expectedEventType: typeof(SystemProcessStarted),
                                                                         exception: ex,
-                                                                        SourceMsg: SourceMessage), SourceMessage);
+                                                                        source: Source), Source);
                 }
                 
             }

@@ -15,7 +15,7 @@ namespace EventMessages
         public List<Expression<Func<T, bool>>> Filter { get; }
       
       
-        public LoadEntitySetWithFilter(List<Expression<Func<T,bool>>> filter, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public LoadEntitySetWithFilter(List<Expression<Func<T,bool>>> filter, ISystemProcess process, ISystemSource source) : base(process, source)
         {
             Contract.Requires(filter != null);
             Filter = filter;

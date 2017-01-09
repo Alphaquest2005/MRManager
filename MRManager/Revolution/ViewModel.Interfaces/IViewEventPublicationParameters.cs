@@ -8,7 +8,7 @@ namespace ViewModel.Interfaces
     {
         object[] Params { get; }
         ISystemProcess Process { get; }
-        ISourceMessage SourceMessage { get; }
+        ISource Source { get; }
     }
 
   

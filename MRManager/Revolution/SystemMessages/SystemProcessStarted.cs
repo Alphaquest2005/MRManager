@@ -8,7 +8,7 @@ namespace SystemMessages
     [Export]
     public class SystemProcessStarted : ProcessSystemMessage, ISystemProcessStarted
     {
-        public SystemProcessStarted(ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public SystemProcessStarted(ISystemProcess process, ISystemSource source) : base(process, source)
         {
         }
     }
@@ -17,7 +17,7 @@ namespace SystemMessages
     [Export]
     public class SystemProcessCompleted : ProcessSystemMessage, ISystemProcessCompleted
     {
-        public SystemProcessCompleted(ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public SystemProcessCompleted(ISystemProcess process, ISystemSource source) : base(process, source)
         {
         }
     }

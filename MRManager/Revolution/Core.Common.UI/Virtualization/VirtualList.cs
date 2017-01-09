@@ -48,8 +48,8 @@ namespace Core.Common.UI.DataVirtualization
         public VirtualList(IVirtualListLoader<T> loader, int pageSize, SynchronizationContext synchronizationContext)
         {
 
-            EventMessageBus.Current.GetEvent<EntityRangeLoaded<T>>(SourceMessage)
-                .Subscribe(x => handleRangeLoaded(x.Entities,x.StartIndex, x.OverAllCount, x.Process as ISystemProcess));
+            //EventMessageBus.Current.GetEvent<EntityRangeLoaded<T>>(Source)
+            //    .Subscribe(x => handleRangeLoaded(x.Entities,x.StartIndex, x.OverAllCount, x.Process as ISystemProcess));
 
             if (loader == null)
                 throw new ArgumentNullException("loader");
@@ -170,10 +170,10 @@ namespace Core.Common.UI.DataVirtualization
             var startIndex = pageIndex * _pageSize;
             LoadRange(startIndex, _pageSize);
         }
-        SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        //Source Source => new Source(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         private void LoadRange(int startIndex, int count)
         {
-           EventMessageBus.Current.Publish(new LoadEntityRange<T>(startIndex, count, SortDescriptions,Process, SourceMessage), SourceMessage);
+          // EventMessageBus.Current.Publish(new LoadEntityRange<T>(startIndex, count, SortDescriptions,Process, Source), Source);
         }
 
         internal void LoadAsync(int index)

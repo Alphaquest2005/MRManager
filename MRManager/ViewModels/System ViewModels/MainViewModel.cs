@@ -29,7 +29,7 @@
 //		}
 
 //		public static SliderPanel Slider { get; set; }
-//		SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+//		Source Source => new Source(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
 //		public MainViewModel()
 //		{
@@ -39,7 +39,7 @@
 //				//var a = new GetEntityById<IApplicationSetting>(,MsgSource);
 //				//a.Create(1);
 //				//EventMessageBus.Current.Publish(a,MsgSource);
-//				EventMessageBus.Current.GetEvent<EntityUpdated<IApplicationSetting>>(SourceMessage).Subscribe(handleApplicationSetting);
+//				EventMessageBus.Current.GetEvent<EntityUpdated<IApplicationSetting>>(Source).Subscribe(handleApplicationSetting);
 				
 
 //			}

@@ -10,9 +10,9 @@ namespace EventMessages
     {
         public T Entity { get; }
         
-        public CurrentEntityUpdated(T entity, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public CurrentEntityUpdated(T entity, ISystemProcess process, ISystemSource source) : base(process, source)
         {
-           Contract.Requires(entity != null || sourceMsg != null);
+           Contract.Requires(entity != null || source != null);
            
            Entity = entity;
         }

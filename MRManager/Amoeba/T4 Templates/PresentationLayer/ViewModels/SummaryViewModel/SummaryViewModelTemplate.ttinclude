@@ -48,13 +48,13 @@ namespace ViewModels
 		{
 			get { return _instance; }
 		}
-		SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+		Source Source => new Source(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
 		private <#=Entity.Entity.Name #>SummaryListViewModel()
 		{
 			
-			EventMessageBus.Current.GetEvent<EntitySetLoaded<I<#=Entity.Entity.Name #>AutoView>>(SourceMessage).Subscribe(x => handleEntitySetUpdated(x.Entities));
-			EventMessageBus.Current.GetEvent<DataServiceStarted<LoadEntityView<I<#=Entity.Entity.Name #>>>>(SourceMessage)
+			EventMessageBus.Current.GetEvent<EntitySetLoaded<I<#=Entity.Entity.Name #>AutoView>>(Source).Subscribe(x => handleEntitySetUpdated(x.Entities));
+			EventMessageBus.Current.GetEvent<DataServiceStarted<LoadEntityView<I<#=Entity.Entity.Name #>>>>(Source)
 			   .Subscribe(x => EventMessageBus.Current.Publish(new LoadEntityView<I<#=Entity.Entity.Name #>>(<#=Entity.Entity.Name #>Expressions.<#=Entity.Entity.Name #>AutoViewExpression,typeof(I<#=Entity.Entity.Name #>AutoView), typeof(<#=Entity.Entity.Name #>AutoView), msgSource), msgSource));
 		}
 

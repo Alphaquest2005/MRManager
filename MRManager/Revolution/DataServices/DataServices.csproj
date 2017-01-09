@@ -46,6 +46,7 @@
     <Compile Include="Actors\BaseActor.cs" />
     <Compile Include="Actors\EntityViewDataServiceActor.cs" />
     <Compile Include="Actors\EntityDataServiceActor.cs" />
+    <Compile Include="Actors\ComplexEventActor.cs" />
     <Compile Include="Actors\ViewModelActor.cs" />
     <Compile Include="Supervisors\BaseSupervisor.cs" />
     <Compile Include="Supervisors\EntityViewDataServiceSupervisor.cs" />

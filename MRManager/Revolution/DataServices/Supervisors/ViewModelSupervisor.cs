@@ -26,9 +26,9 @@ namespace DataServices.Actors
             _childActor = Context.ActorOf(Props.Create<ViewModelActor>(process).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
                     "ViewModelActorEntityActor");
 
-            EventMessageBus.Current.GetEvent<ISystemProcessStarted>(SourceMessage).Subscribe(x => HandleProcessViews(x));
+            EventMessageBus.Current.GetEvent<ISystemProcessStarted>(Source).Subscribe(x => HandleProcessViews(x));
             Receive<ISystemStarted>(x => HandleProcessViews(x));
-             EventMessageBus.Current.Publish(new ServiceStarted<IViewModelSupervisor>(this,process, SourceMessage), SourceMessage);
+             EventMessageBus.Current.Publish(new ServiceStarted<IViewModelSupervisor>(this,process, Source), Source);
         }
 
         private void HandleProcessViews(IProcessSystemMessage pe)
@@ -41,7 +41,7 @@ namespace DataServices.Actors
 
         public void PublishViewModel(IViewModelInfo viewModelInfo, IProcessSystemMessage pe)
         {
-            var msg = new LoadViewModel(viewModelInfo, pe.Process, SourceMessage);
+            var msg = new LoadViewModel(viewModelInfo, pe.Process, Source);
             _childActor.Tell(msg);
         }
     }

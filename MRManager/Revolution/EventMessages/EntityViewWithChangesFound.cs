@@ -8,7 +8,7 @@ namespace EventMessages
     [Export]
     public class EntityViewWithChangesFound<TView> : ProcessSystemMessage, IEntityViewWithChangesFound<TView> where TView:IEntityView
     {
-        public EntityViewWithChangesFound(TView entity, Dictionary<string, dynamic> changes, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public EntityViewWithChangesFound(TView entity, Dictionary<string, dynamic> changes, ISystemProcess process, ISystemSource source) : base(process, source)
         {
             Entity = entity;
             Changes = changes;

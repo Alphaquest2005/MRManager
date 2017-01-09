@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using SystemInterfaces;
 using Actor.Interfaces;
+using Common;
 using CommonMessages;
 using DataEntites;
 using DataServices.Actors;
@@ -17,9 +18,11 @@ using Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RevolutionEntities.Process;
 using StartUp.Messages;
+using Utilities;
 using ViewMessages;
 using ViewModel.Interfaces;
 using ViewModels;
+using IProcessService = StartUp.Messages.IProcessService;
 
 
 namespace MRManager_UnitTests
@@ -27,8 +30,8 @@ namespace MRManager_UnitTests
     [TestClass]
     public class SystemIntializationProcess
     {
-        
-        protected ISourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+
+        public ISource Source => new Source(Guid.NewGuid(), "TestCase" + typeof(SystemIntializationProcess).GetFriendlyName(), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         private static void StartSystem()
         {
 
@@ -63,43 +66,43 @@ namespace MRManager_UnitTests
 
             Func<IProcessSystemMessage, bool> processPredicate = x => x.Process.Id == 2;
             
-            EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(SourceMessage).Where(processPredicate).Subscribe(x => process2ServiceActorStarted = x);
-            EventMessageBus.Current.GetEvent<ISystemProcessStarted>(SourceMessage).Where(processPredicate).Subscribe(x => process2Started = x);
-            EventMessageBus.Current.GetEvent<IViewModelCreated<ILoginViewModel>>(SourceMessage).Where(x => x.Process.Id == 2).Subscribe(x => LoginViewModelCreated = x);
-            EventMessageBus.Current.GetEvent<IViewModelLoaded<IScreenModel, IViewModel>>(SourceMessage).Subscribe(x =>
+            EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source).Where(processPredicate).Subscribe(x => process2ServiceActorStarted = x);
+            EventMessageBus.Current.GetEvent<ISystemProcessStarted>(Source).Where(processPredicate).Subscribe(x => process2Started = x);
+            EventMessageBus.Current.GetEvent<IViewModelCreated<ILoginViewModel>>(Source).Where(x => x.Process.Id == 2).Subscribe(x => LoginViewModelCreated = x);
+            EventMessageBus.Current.GetEvent<IViewModelLoaded<IScreenModel, IViewModel>>(Source).Subscribe(x =>
             {
                 LoginViewModelLoadedInMScreenViewModel = x;
             });
-            EventMessageBus.Current.GetEvent<IRequestProcessState>(SourceMessage).Where(x => x.Process.Id == 2).Subscribe(x => process2StateRequest = x);
+            EventMessageBus.Current.GetEvent<IRequestProcessState>(Source).Where(x => x.Process.Id == 2).Subscribe(x => process2StateRequest = x);
 
-            EventMessageBus.Current.GetEvent<IViewStateLoaded<ILoginViewModel, IProcessState<ISignInInfo>>>(SourceMessage)
+            EventMessageBus.Current.GetEvent<IViewStateLoaded<ILoginViewModel, IProcessState<ISignInInfo>>>(Source)
                 .Where(x => x.Process.Id == 2)
                 .Subscribe(x => viewLoadedState = x);
 
-            EventMessageBus.Current.GetEvent<IViewStateLoaded<ILoginViewModel, IProcessState<ISignInInfo>>>(SourceMessage)
+            EventMessageBus.Current.GetEvent<IViewStateLoaded<ILoginViewModel, IProcessState<ISignInInfo>>>(Source)
                .Where(z => z.Process.Id == 2 && process2StateRequest != null && z.State.Entity == NullEntity<ISignInInfo>.Instance)
                .Subscribe(z =>((dynamic)LoginViewModelCreated.ViewModel).Usersignin = "joe");
 
-            EventMessageBus.Current.GetEvent<IServiceStarted<IEntityViewDataServiceActor<IGetEntityViewWithChanges<ISignInInfo>>>>(SourceMessage).Subscribe(x => getEntityChangesActor = x);
+            EventMessageBus.Current.GetEvent<IServiceStarted<IEntityViewDataServiceActor<IGetEntityViewWithChanges<ISignInInfo>>>>(Source).Subscribe(x => getEntityChangesActor = x);
 
-            EventMessageBus.Current.GetEvent<IProcessStateMessage<ISignInInfo>>(SourceMessage).Where(x => x.Process.Id == 2).Subscribe(x => process2StateMessageList.Add(x));
+            EventMessageBus.Current.GetEvent<IProcessStateMessage<ISignInInfo>>(Source).Where(x => x.Process.Id == 2).Subscribe(x => process2StateMessageList.Add(x));
             
-            EventMessageBus.Current.GetEvent<IGetEntityViewWithChanges<ISignInInfo>>(SourceMessage).Subscribe(x => UserNameEntityChanges = x);
+            EventMessageBus.Current.GetEvent<IGetEntityViewWithChanges<ISignInInfo>>(Source).Subscribe(x => UserNameEntityChanges = x);
 
-            EventMessageBus.Current.GetEvent<IEntityViewWithChangesFound<ISignInInfo>>(SourceMessage).Where(x => x.Process.Id == 2 && x.Entity.Usersignin == "joe" && x.Changes.Count == 1).Subscribe(
+            EventMessageBus.Current.GetEvent<IEntityViewWithChangesFound<ISignInInfo>>(Source).Where(x => x.Process.Id == 2 && x.Entity.Usersignin == "joe" && x.Changes.Count == 1).Subscribe(
                 x =>
                 {
                    ((dynamic)LoginViewModelCreated.ViewModel).Password = "test";
                     ((dynamic)LoginViewModelCreated.ViewModel).Commands["ValidateUserInfo"].Execute();
                 });
-            EventMessageBus.Current.GetEvent<IEntityViewWithChangesFound<ISignInInfo>>(SourceMessage)
+            EventMessageBus.Current.GetEvent<IEntityViewWithChangesFound<ISignInInfo>>(Source)
                 .Where(x => x.Process.Id == 2 && x.Changes.Count == 2 && x.Entity.Usersignin == "joe")
                 .Subscribe(
                     x =>
                     {
                         userFound = x;
                     });
-            EventMessageBus.Current.GetEvent<IUserValidated>(SourceMessage).Subscribe(x => userValidated = x);
+            EventMessageBus.Current.GetEvent<IUserValidated>(Source).Subscribe(x => userValidated = x);
 
         }
 
@@ -149,16 +152,16 @@ namespace MRManager_UnitTests
 
         private void RegisterProcess1Events()
         {
-            EventMessageBus.Current.GetEvent<IServiceStarted<IServiceManager>>(SourceMessage).Subscribe(x => serviceManagerStarted = x);
-            EventMessageBus.Current.GetEvent<ProcessEventFailure>(SourceMessage).Subscribe(x => EventFailures.Add(x));
+            EventMessageBus.Current.GetEvent<IServiceStarted<IServiceManager>>(Source).Subscribe(x => serviceManagerStarted = x);
+            EventMessageBus.Current.GetEvent<ProcessEventFailure>(Source).Subscribe(x => EventFailures.Add(x));
             Func<IProcessSystemMessage, bool> procesPredicate = x => x.Process.Id == 1;
             //IServiceStarted<IServiceManager> serviceStarted = null;
-            EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(SourceMessage).Where(procesPredicate).Subscribe(x => processServiceActorStarted = x);
-            EventMessageBus.Current.GetEvent<IServiceStarted<IViewModelSupervisor>>(SourceMessage).Where(procesPredicate).Subscribe(x => viewModelSupervisorStarted = x);
-            EventMessageBus.Current.GetEvent<ISystemProcessStarted>(SourceMessage).Where(procesPredicate).Subscribe(x => processStarted = x);
-            EventMessageBus.Current.GetEvent<IViewModelCreated<IScreenModel>>(SourceMessage).Where(procesPredicate).Subscribe(x => screenViewModelCreated = x);
-            EventMessageBus.Current.GetEvent<IViewModelLoaded<IMainWindowViewModel, IScreenModel>>(SourceMessage).Subscribe(x => screenViewModelLoadedInMainWindowViewModel = x);
-            EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(SourceMessage).Where(procesPredicate).Subscribe(x => processCompleted = x);
+            EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source).Where(procesPredicate).Subscribe(x => processServiceActorStarted = x);
+            EventMessageBus.Current.GetEvent<IServiceStarted<IViewModelSupervisor>>(Source).Where(procesPredicate).Subscribe(x => viewModelSupervisorStarted = x);
+            EventMessageBus.Current.GetEvent<ISystemProcessStarted>(Source).Where(procesPredicate).Subscribe(x => processStarted = x);
+            EventMessageBus.Current.GetEvent<IViewModelCreated<IScreenModel>>(Source).Where(procesPredicate).Subscribe(x => screenViewModelCreated = x);
+            EventMessageBus.Current.GetEvent<IViewModelLoaded<IMainWindowViewModel, IScreenModel>>(Source).Subscribe(x => screenViewModelLoadedInMainWindowViewModel = x);
+            EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(Source).Where(procesPredicate).Subscribe(x => processCompleted = x);
         }
 
         private void Process1Asserts()

@@ -9,29 +9,22 @@ using ViewModel.Interfaces;
 
 namespace RevolutionEntities.Process
 {
-    public class ComplexEventParameters : IComplexEventParameters
+    public class ComplexEventAction: IComplexEventAction
     {
-        public ComplexEventParameters(IProcessActor actor, IList<IProcessSystemMessage> messages, dynamic msg)
-        {
-            Actor = actor;
-            Messages = messages;
-            Msg = msg;
-        }
-
-        public IProcessActor Actor { get; }
-        public IList<IProcessSystemMessage> Messages { get; }
-        public dynamic Msg { get; }
-    }
-    public class ComplexEventAction: IComplexEvent
-    {
-        public ComplexEventAction(int processId, IList<IProcessExpectedEvent> events)
+        public ComplexEventAction(int processId, IList<IProcessExpectedEvent> events, Type expectedMessageType, IProcessAction action, IProcessStateDetailedInfo processInfo)
         {
             ProcessId = processId;
             Events = events;
+            ExpectedMessageType = expectedMessageType;
+            ProcessInfo = processInfo;
+            Action = action;
         }
 
         public IList<IProcessExpectedEvent> Events { get; }
         public int ProcessId { get; }
+        public Type ExpectedMessageType { get; }
+        public IProcessStateDetailedInfo ProcessInfo { get; }
+        public IProcessAction Action { get; }
     }
 
     public static class ComplexEventActionExtensions
@@ -49,21 +42,21 @@ namespace RevolutionEntities.Process
             return complexEvent;
         }
 
-        private static void CheckExpectedEvents(this IComplexEvent complexEvent, IComplexEventParameters paramArray)
-        {
+        //private static void CheckExpectedEvents(this IComplexEvent complexEvent, IComplexEventParameters paramArray)
+        //{
 
-            complexEvent.Events.ForEach(expectedEvent => paramArray.Messages.Where(x => x.GetType().GetInterfaces().Any(z => z == expectedEvent.EventType))
-                                                                            .Where(x => expectedEvent.EventPredicate.Invoke(x))
-                                                                            .Where(x => !x.IsValid())
-                                                                            //
-                                                               .ForEach(x => expectedEvent.Validate(x)));
+        //    complexEvent.Events.ForEach(expectedEvent => paramArray.Messages.Where(x => x.GetType().GetInterfaces().Any(z => z == expectedEvent.EventType))
+        //                                                                    .Where(x => expectedEvent.EventPredicate.Invoke(x))
+        //                                                                    .Where(x => !x.IsValid())
+        //                                                                    //
+        //                                                       .ForEach(x => expectedEvent.Validate(x)));
            
 
-        }
+        //}
 
         public static void Execute(this IComplexEvent complexEvent, IComplexEventParameters paramArray)
         {
-            CheckExpectedEvents(complexEvent,paramArray);
+            //CheckExpectedEvents(complexEvent,paramArray);
             if (!complexEvent.Events.All(x => x.Raised())) return;
             ComplexEventActions[complexEvent].Invoke(paramArray);
             RaiseEventAction(complexEvent);

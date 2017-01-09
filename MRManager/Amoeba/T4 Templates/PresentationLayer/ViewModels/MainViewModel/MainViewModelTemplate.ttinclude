@@ -40,18 +40,18 @@ namespace ViewModels
 		}
 
 		public static SliderPanel Slider { get; set; }
-		SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+		Source Source => new Source(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
 		public MainViewModel()
 		{
 			try
 			{
 				
-				var a = new GetEntityById<IApplicationSetting>(SourceMessage);
+				var a = new GetEntityById<IApplicationSetting>(Source);
 				a.Create(1);
 				EventMessageBus.Current.Publish(a,msgSource);
-				EventMessageBus.Current.GetEvent<IApplicationSetting>(SourceMessage).Subscribe(handleApplicationSetting);
-				EventMessageBus.Current.GetEvent<ViewNav>(SourceMessage).Subscribe(x => Slider.BringIntoView(x.View));
+				EventMessageBus.Current.GetEvent<IApplicationSetting>(Source).Subscribe(handleApplicationSetting);
+				EventMessageBus.Current.GetEvent<ViewNav>(Source).Subscribe(x => Slider.BringIntoView(x.View));
 
 			}
 			catch (Exception)

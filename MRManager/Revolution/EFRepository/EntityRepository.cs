@@ -18,10 +18,10 @@ using Utilities;
 
 namespace EFReposi
 {
-    public class EntityRepository<TEntity,TDBEntity, TDBContext> where TEntity:IEntity where TDBContext : DbContext, new() where TDBEntity:class, IEntity
+    public class EntityRepository<TEntity,TDBEntity, TDBContext>:IProcessSource where TEntity:IEntity where TDBContext : DbContext, new() where TDBEntity:class, IEntity
     {
-        public static ISourceMessage SourceMessage => new SourceMessage(new MessageSource(typeof(EntityRepository<TEntity,TDBEntity, TDBContext>).ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
-        public static void Create(ICreateEntity<TEntity> msg )
+        public  ISystemSource Source => new Source(Guid.NewGuid(), $"EntityRepository:<{typeof(TEntity).GetFriendlyName()},{typeof(TDBEntity).GetFriendlyName()},{typeof(TDBContext).GetFriendlyName()}>" , new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public  void Create(ICreateEntity<TEntity> msg )
         {
             Contract.Requires(msg.Entity.Id == 0);
             try
@@ -30,7 +30,7 @@ namespace EFReposi
                 {
                     ctx.Set<TDBEntity>().Add((TDBEntity)(object) msg.Entity);
                     ctx.SaveChanges(true);
-                    EventMessageBus.Current.Publish(new EntityCreated<TEntity>(msg.Entity, msg.Process, SourceMessage), SourceMessage);
+                    EventMessageBus.Current.Publish(new EntityCreated<TEntity>(msg.Entity, msg.Process, Source), Source);
                 }
             }
             catch (Exception ex)
@@ -40,11 +40,11 @@ namespace EFReposi
                     failedEventMessage: msg,
                     expectedEventType: typeof(IEntityCreated<TEntity>),
                     exception: ex,
-                    SourceMsg: SourceMessage), SourceMessage);
+                    source: Source), Source);
             }
         }
 
-        public static void Update(IUpdateEntity<TEntity> msg)
+        public void Update(IUpdateEntity<TEntity> msg)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace EFReposi
                     ctx.Set<TDBEntity>().Update(entity);
 
                     ctx.SaveChanges(true);
-                    EventMessageBus.Current.Publish(new EntityUpdated<TEntity>((TEntity)(object)entity, msg.Process, SourceMessage), SourceMessage);
+                    EventMessageBus.Current.Publish(new EntityUpdated<TEntity>((TEntity)(object)entity, msg.Process, Source), Source);
                 }
             }
             catch (Exception ex)
@@ -65,12 +65,12 @@ namespace EFReposi
                     failedEventMessage: msg, 
                     expectedEventType: typeof(IEntityUpdated<TEntity>),
                     exception: ex,
-                    SourceMsg: SourceMessage), SourceMessage);
+                    source: Source), Source);
             }
 
         }
 
-        public static void Delete(IDeleteEntity<TEntity> msg )
+        public void Delete(IDeleteEntity<TEntity> msg )
         {
             try
             {
@@ -81,7 +81,7 @@ namespace EFReposi
                         var entity = ctx.Set<TDBEntity>().Find(msg.EntityId);
                         ctx.Set<TDBEntity>().Remove(entity);
                         ctx.SaveChanges(true);
-                        EventMessageBus.Current.Publish(new EntityDeleted<TEntity>(msg.EntityId, msg.Process, SourceMessage), SourceMessage);
+                        EventMessageBus.Current.Publish(new EntityDeleted<TEntity>(msg.EntityId, msg.Process, Source), Source);
                     }
                 }
             }
@@ -91,21 +91,21 @@ namespace EFReposi
                     failedEventMessage: msg,
                     expectedEventType: typeof(IEntityDeleted<TEntity>),
                     exception: ex,
-                    SourceMsg: SourceMessage), SourceMessage);
+                    source: Source), Source);
             }
 
 
         }
 
 
-        public static void GetEntityById(IGetEntityById<TEntity> msg )
+        public void GetEntityById(IGetEntityById<TEntity> msg )
         {
             try
             {
                 using (var ctx = new TDBContext())
                 {
                     var p = ctx.Set<TDBEntity>().First(x => x.Id == msg.EntityId);
-                    EventMessageBus.Current.Publish(new EntityFound<TEntity>((TEntity)(object)p, msg.Process, SourceMessage), SourceMessage);
+                    EventMessageBus.Current.Publish(new EntityFound<TEntity>((TEntity)(object)p, msg.Process, Source), Source);
                 }
             }
             catch (Exception ex)
@@ -115,13 +115,13 @@ namespace EFReposi
                     failedEventMessage: msg,
                     expectedEventType: typeof(IEntityFound<TEntity>),
                     exception: ex,
-                    SourceMsg: SourceMessage), SourceMessage);
+                    source: Source), Source);
             }
 
 
         }
 
-        public static void GetEntityWithChanges(IGetEntityWithChanges<TEntity> msg )
+        public void GetEntityWithChanges(IGetEntityWithChanges<TEntity> msg )
         {
 
             using (var ctx = new TDBContext())
@@ -133,7 +133,7 @@ namespace EFReposi
                     whereStr = whereStr.TrimEnd('&');
                     if (string.IsNullOrEmpty(whereStr)) return;
                     var p = ctx.Set<TDBEntity>().Where(whereStr).First();
-                    EventMessageBus.Current.Publish(new EntityWithChangesFound<TEntity>((TEntity)(object)p, msg.Changes, msg.Process, SourceMessage), SourceMessage);
+                    EventMessageBus.Current.Publish(new EntityWithChangesFound<TEntity>((TEntity)(object)p, msg.Changes, msg.Process, Source), Source);
 
                 }
                 catch (Exception ex)
@@ -143,7 +143,7 @@ namespace EFReposi
                     failedEventMessage: msg,
                     expectedEventType: typeof(IEntityWithChangesFound<TEntity>),
                     exception: ex,
-                    SourceMsg: SourceMessage), SourceMessage);
+                    source: Source), Source);
                 }
 
 
@@ -152,7 +152,7 @@ namespace EFReposi
         }
 
 
-        public static void LoadEntitySet(ILoadEntitySet<TEntity> msg)
+        public void LoadEntitySet(ILoadEntitySet<TEntity> msg)
         {
             try
             {
@@ -164,7 +164,7 @@ namespace EFReposi
                     IQueryable<TDBEntity> rres = ctx.Set<TDBEntity>();
                     var res = rres.Select(x => (TEntity)(object)x).ToList(); //;
 
-                    EventMessageBus.Current.Publish(new EntitySetLoaded<TEntity>(res, msg.Process, SourceMessage), SourceMessage);
+                    EventMessageBus.Current.Publish(new EntitySetLoaded<TEntity>(res, msg.Process, Source), Source);
                 }
 
             }
@@ -175,11 +175,11 @@ namespace EFReposi
                     failedEventMessage: msg,
                     expectedEventType: typeof(IEntitySetLoaded<TEntity>),
                     exception: ex,
-                    SourceMsg: SourceMessage), SourceMessage);
+                    source: Source), Source);
             }
         }
 
-        public static void LoadEntitySetWithFilter(ILoadEntitySetWithFilter<TEntity> msg )
+        public void LoadEntitySetWithFilter(ILoadEntitySetWithFilter<TEntity> msg )
         {
             try
             {
@@ -199,7 +199,7 @@ namespace EFReposi
 
 
                     var res = rres.Select(x => (TEntity)(object)x).ToList();
-                    EventMessageBus.Current.Publish(new EntitySetWithFilterLoaded<TEntity>(res, msg.Process, SourceMessage), SourceMessage);
+                    EventMessageBus.Current.Publish(new EntitySetWithFilterLoaded<TEntity>(res, msg.Process, Source), Source);
                 }
 
 
@@ -211,11 +211,11 @@ namespace EFReposi
                     failedEventMessage: msg,
                     expectedEventType: typeof(IEntitySetWithFilterLoaded<TEntity>),
                     exception: ex,
-                    SourceMsg: SourceMessage), SourceMessage);
+                    source: Source), Source);
             }
         }
 
-        public static void EntitySetWithFilterWithIncludesLoaded(ILoadEntitySetWithFilterWithIncludes<TEntity> msg )
+        public void EntitySetWithFilterWithIncludesLoaded(ILoadEntitySetWithFilterWithIncludes<TEntity> msg )
         {
             try
             {
@@ -235,7 +235,7 @@ namespace EFReposi
                     rres = rfilter?.Aggregate(rres, (current, s) => current.Where(s));
 
                     var res = rres.Select(x => (TEntity)(object)x).ToList();
-                    EventMessageBus.Current.Publish(new EntitySetWithFilterWithIncludesLoaded<TEntity>(res, msg.Includes, msg.Process, SourceMessage), SourceMessage);
+                    EventMessageBus.Current.Publish(new EntitySetWithFilterWithIncludesLoaded<TEntity>(res, msg.Includes, msg.Process, Source), Source);
                 }
 
 
@@ -247,7 +247,7 @@ namespace EFReposi
                     failedEventMessage: msg,
                     expectedEventType: typeof(IEntitySetWithFilterWithIncludesLoaded<TEntity>),
                     exception: ex,
-                    SourceMsg: SourceMessage), SourceMessage);
+                    source: Source), Source);
             }
         }
     }

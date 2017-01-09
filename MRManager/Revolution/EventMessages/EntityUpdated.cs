@@ -11,7 +11,7 @@ namespace EventMessages
     {
         public T Entity { get; }
         
-        public EntityUpdated(T entity,ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public EntityUpdated(T entity,ISystemProcess process, ISystemSource source) : base(process, source)
         {
             Contract.Requires(entity != null);
             Entity = entity;

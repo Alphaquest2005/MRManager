@@ -189,7 +189,8 @@
     <ItemsPanelTemplate x:Key="HorizontalItemsPanelTPL">
         <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
     </ItemsPanelTemplate>
-    <Style x:Key="VirturalLoadLisBoxItem" TargetType="{x:Type ListBoxItem}" >
+    
+    <!--<Style x:Key="VirturalLoadLisBoxItem" TargetType="{x:Type ListBoxItem}" >
         <Setter Property="dataVirtualization:VirtualListItemBase.AutoLoad" Value="true" />
     </Style>
     <Style  x:Key="VirturalLoadListBox" TargetType="{x:Type ListBox}">
@@ -197,7 +198,7 @@
         <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
         <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="True" />
         <Setter Property="dataVirtualization:VirtualListLoadingIndicator.IsAttached" Value="True" />
-    </Style>
+    </Style>-->
 
 
     <!--<Style x:Key="ReportListBoxStyle" TargetType="{x:Type ListBox}">

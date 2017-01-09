@@ -5,6 +5,7 @@ using SystemMessages;
 using Akka.Actor;
 using Akka.IO;
 using Akka.Routing;
+using Common;
 using CommonMessages;
 using EventAggregator;
 using EventMessages;
@@ -14,20 +15,21 @@ using ViewMessages;
 
 namespace DataServices.Actors
 {
-    public class EntityViewDataServiceSupervisor<TEntityView> : ReceiveActor where TEntityView : IEntityId
+    public class EntityViewDataServiceSupervisor<TEntityView> : ReceiveActor, IProcessSource where TEntityView : IEntityId
 //where TEntity : class, IEntity where TEntityView:IEntityView<TEntity>
     {
-        
+        public ISystemSource Source => new Source(Guid.NewGuid(), $"EntityViewSupervisor:<{typeof(TEntityView).GetFriendlyName()}>", new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+
         private static readonly Action<IGetEntityViewById<TEntityView>> GetEntityByIdAction = (x) => x.GetEntity();
         private static readonly Action<IGetEntityViewWithChanges<TEntityView>> GetEntityWithChangesAction = (x) => x.GetEntity();
 
-        //private static readonly Action<ISourceMessage, ILoadEntitySet<TEntity>> LoadEntitySet = (s, x) => x.LoadEntitySet();
-        //private static readonly Action<ISourceMessage, ILoadEntitySetWithFilter<TEntity>> LoadEntitySetWithFilter = (s, x) => x.LoadEntitySet();
-        //private static readonly Action<ISourceMessage, ILoadEntitySetWithFilterWithIncludes<TEntity>> LoadEntitySetWithFilterWithIncludes = (s, x) => x.LoadEntitySet();
+        //private static readonly Action<ISystemSource, ILoadEntitySet<TEntity>> LoadEntitySet = (s, x) => x.LoadEntitySet();
+        //private static readonly Action<ISystemSource, ILoadEntitySetWithFilter<TEntity>> LoadEntitySetWithFilter = (s, x) => x.LoadEntitySet();
+        //private static readonly Action<ISystemSource, ILoadEntitySetWithFilterWithIncludes<TEntity>> LoadEntitySetWithFilterWithIncludes = (s, x) => x.LoadEntitySet();
 
         //TODO: Add EntityViews
-        //private static readonly Action<ISourceMessage, LoadEntityView<TEntity>> LoadEntityView = (s, x) => LoadEntityView(s, x);
-        //private static readonly Action<ISourceMessage, LoadEntityViewWithFilter<TEntity>> LoadEntityViewWithFilter = (s, x) => x.LoadEntityView(s);
+        //private static readonly Action<ISystemSource, LoadEntityView<TEntity>> LoadEntityView = (s, x) => LoadEntityView(s, x);
+        //private static readonly Action<ISystemSource, LoadEntityViewWithFilter<TEntity>> LoadEntityViewWithFilter = (s, x) => x.LoadEntityView(s);
 
         readonly Dictionary<Type, object> entityEvents =
             new Dictionary<Type, object>()
@@ -59,10 +61,10 @@ namespace DataServices.Actors
                 catch (Exception ex)
                 {
                     EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: itm.Key,
-                        failedEventMessage: new ProcessSystemMessage(process, SourceMessage), 
+                        failedEventMessage: new ProcessSystemMessage(process, Source), 
                         expectedEventType: typeof (ServiceStarted<>),
                         exception: ex,
-                        SourceMsg: SourceMessage),SourceMessage);
+                        source: Source),Source);
                 }
             }
 
@@ -77,21 +79,21 @@ namespace DataServices.Actors
                     _childActor = Context.ActorOf(Props.Create(actorType, action, process).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
                             "EntityViewDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
 
-                    EventMessageBus.Current.GetEvent<TEvent>(SourceMessage).Subscribe(x => _childActor.Tell(x));
+                    EventMessageBus.Current.GetEvent<TEvent>(Source).Subscribe(x => _childActor.Tell(x));
             }
             catch (Exception ex)
             {
                 EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: typeof(ServiceStarted<TEvent>),
-                        failedEventMessage: new ProcessSystemMessage(process, SourceMessage),
+                        failedEventMessage: new ProcessSystemMessage(process, Source),
                         expectedEventType: typeof(ServiceStarted<>),
                         exception: ex,
-                        SourceMsg: SourceMessage), SourceMessage);
+                        source: Source), Source);
             }
             
         }
 
         private IActorRef _childActor;
-        SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        
 
       
 

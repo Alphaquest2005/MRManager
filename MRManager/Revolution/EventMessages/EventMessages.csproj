@@ -78,6 +78,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BlankMessage.cs" />
+    <Compile Include="ComplexEventActionTimedOut.cs" />
     <Compile Include="EntityFound.cs" />
     <Compile Include="EntityViewWithChangesFound.cs" />
     <Compile Include="EntityWithChangesFound.cs" />
@@ -122,6 +123,10 @@
     <ProjectReference Include="..\..\Interfaces\Interfaces.csproj">
       <Project>{AD573873-C8E6-4EA3-93F5-0D39A92FC9F6}</Project>
       <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Actor.Interfaces\Actor.Interfaces.csproj">
+      <Project>{8b10c72d-9f33-4290-b562-44cf1f718fa5}</Project>
+      <Name>Actor.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\CommonMessages\CommonMessages.csproj">
       <Project>{77007560-89DC-4E1F-9313-AE064A048AD4}</Project>

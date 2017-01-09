@@ -7,9 +7,13 @@ namespace SystemInterfaces
 {
     public interface IProcessExpectedEvent
     {
+        string Key { get; }
         Func<IProcessSystemMessage, bool> EventPredicate { get; }
         Type EventType { get; }
         int ProcessId { get; }
-        
+
+        IProcessStateDetailedInfo ProcessInfo { get; }
+        ISourceType ExpectedSourceType { get; }
+
     }
 }

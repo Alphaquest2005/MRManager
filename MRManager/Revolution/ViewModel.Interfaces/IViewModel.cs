@@ -9,14 +9,13 @@ using Reactive.Bindings;
 namespace ViewModel.Interfaces
 {
     [InheritedExport]
-    public interface IViewModel
+    public interface IViewModel:IProcessSource
     {
         string Name { get; }
         string Symbol { get; }
         string Description { get; }
         ISystemProcess Process { get; }
-        ISourceMessage SourceMessage { get; }
-
+        
         List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get; }
         List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; }
         Dictionary<string, dynamic> Commands { get; }

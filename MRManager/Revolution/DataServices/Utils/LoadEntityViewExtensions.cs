@@ -27,7 +27,7 @@ namespace DataServices.Actors
         // //   EventMessageBus.Current.Publish(entitySetInst, source);
         //}
 
-        //public static void LoadEntityView<TEntityView, TEntity>(this LoadEntityViewWithFilter<TEntity> msg, ISourceMessage source) where TEntity : class, IEntity where TEntityView : IEntityView<TEntity>
+        //public static void LoadEntityView<TEntityView, TEntity>(this LoadEntityViewWithFilter<TEntity> msg, ISystemSource source) where TEntity : class, IEntity where TEntityView : IEntityView<TEntity>
         //{
 
         //    var task = typeof(EntityViewDataContext<TEntityView,>)

@@ -6,6 +6,6 @@ namespace Actor.Interfaces
     [InheritedExport]
     public interface IAgent : IUser
     {
-        ISourceMessage SourceMessage { get; }
+       
     }
 }

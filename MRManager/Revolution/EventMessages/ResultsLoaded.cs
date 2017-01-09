@@ -9,7 +9,7 @@ namespace EventMessages
     {
         public IList<TResults> Entities { get; }
 
-        public ResultsLoaded(IList<TResults> entities, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public ResultsLoaded(IList<TResults> entities, ISystemProcess process, ISystemSource source) : base(process, source)
         {
             Entities = entities;
         }

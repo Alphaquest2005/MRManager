@@ -15,18 +15,18 @@ namespace EventAggregator
 
         public static EventMessageBus Current { get; }
 
-        public IObservable<TEvent> GetEvent<TEvent>(ISourceMessage caller) where TEvent : IMessage
+        public IObservable<TEvent> GetEvent<TEvent>(ISource caller) where TEvent : IMessage
         {
             Contract.Requires(caller != null);
-            Logger.Log( LoggingLevel.Info ,"Caller:" + caller.Source + " | GetEvent : " + typeof(TEvent).ToString());
+            Logger.Log( LoggingLevel.Info ,"Caller:" + caller.SourceName + " | GetEvent : " + typeof(TEvent).ToString());
             return ea.GetEvent<TEvent>();
         }
 
 
-        public void Publish<TEvent>(TEvent sampleEvent, ISourceMessage sender) where TEvent : IMessage
+        public void Publish<TEvent>(TEvent sampleEvent, ISource sender) where TEvent : IMessage
         {
             Contract.Requires(sender != null || sampleEvent != null);
-            Logger.Log(LoggingLevel.Info, "Sender:" + sender.Source + " | PublishEvent : " + typeof(TEvent));
+            Logger.Log(LoggingLevel.Info, "Sender:" + sender.SourceName + " | PublishEvent : " + typeof(TEvent));
             ea.Publish(sampleEvent);
         }
     }

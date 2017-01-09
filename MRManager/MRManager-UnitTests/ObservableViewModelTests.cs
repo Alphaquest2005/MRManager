@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using SystemInterfaces;
+using Common;
 using CommonMessages;
 using Core.Common.UI;
 using DataEntites;
@@ -15,6 +16,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
+using Utilities;
 using ViewModel.Interfaces;
 using ViewModels;
 using Process = RevolutionEntities.Process.Process;
@@ -22,15 +24,15 @@ using Process = RevolutionEntities.Process.Process;
 namespace MRManager_UnitTests
 {
     [TestClass]
-    public class ObservableViewModelTests
+    public class ObservableViewModelTests:IProcessSource
     {
-        protected SourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public ISystemSource Source => new Source(Guid.NewGuid(), $"EntityRepository:<{typeof(ObservableViewModelTests).GetFriendlyName()}>", new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
         [TestMethod]
         public void InitalizeObserveableWithNoSubscriptions()
         {
             var MsgSource = new MessageSource(this.ToString());
-            dynamic viewModel = new LoginViewModel(process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")),SourceMessage.MachineInfo),
+            dynamic viewModel = new LoginViewModel(process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")),Source.MachineInfo),
                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
@@ -44,16 +46,16 @@ namespace MRManager_UnitTests
         [TestMethod]
         public void InitalizeObserveableWithPublications()
         {
-            EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(SourceMessage)
+            EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(Source)
                 .Subscribe(x => handleEntityChanges(x));
-            var viewModel = new LoginViewModel(process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")), SourceMessage.MachineInfo),
+            var viewModel = new LoginViewModel(process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")), Source.MachineInfo),
                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
                    new ViewEventPublication<LoginViewModel, EntityChanges<IUserSignIn>>(
                        subject:(s) => s.ChangeTracking.DictionaryChanges,
                        subjectPredicate: new List<Func<LoginViewModel, bool>>(),
-                       messageData:(s) => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id, s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)}, s.Process, s.SourceMessage ))
+                       messageData:(s) => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id, s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)}, s.Process, s.Source ))
                }, commandInfo: new List<IViewModelEventCommand<IViewModel,IEvent>>(), orientation: typeof(IBodyViewModel));
 
             dynamic dynamicViewModel = viewModel;
@@ -68,9 +70,9 @@ namespace MRManager_UnitTests
         [TestMethod]
         public void InitalizeObserveableWithPublicationsSubjectPredicate()
         {
-            EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(SourceMessage)
+            EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(Source)
                 .Subscribe(x => handleEntityChanges(x));
-            var viewModel = new LoginViewModel(process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")), SourceMessage.MachineInfo),
+            var viewModel = new LoginViewModel(process: new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")), Source.MachineInfo),
                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
@@ -80,7 +82,7 @@ namespace MRManager_UnitTests
                        {
                            v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Usersignin))
                        },
-                       messageData:(s) => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id, s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)}, s.Process, s.SourceMessage ))
+                       messageData:(s) => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id, s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)}, s.Process, s.Source ))
                }, commandInfo: new List<IViewModelEventCommand<IViewModel, IEvent>>(), orientation: typeof(IBodyViewModel));
 
             dynamic dynamicViewModel = viewModel;
@@ -100,7 +102,7 @@ namespace MRManager_UnitTests
         [TestMethod]
         public void InitalizeObserveableWithCommand()
         {
-            EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(SourceMessage)
+            EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(Source)
                 .Subscribe(x => handleEntityChanges(x));
             var viewModel = CreateLoginViewModel();
 
@@ -116,7 +118,7 @@ namespace MRManager_UnitTests
         [TestMethod]
         public void TestCommandPredicate()
         {
-            EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(SourceMessage)
+            EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(Source)
                 .Subscribe(x => handleEntityChanges(x));
             var viewModel = CreateLoginViewModel();
 
@@ -146,7 +148,7 @@ namespace MRManager_UnitTests
                         {
                             (v) => v.ChangeTracking.Keys.Count > 2
                         },
-                        messageData: s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},s.Process,s.SourceMessage))
+                        messageData: s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},s.Process,s.Source))
                 }, orientation: typeof(IBodyViewModel));
             return viewModel;
         }

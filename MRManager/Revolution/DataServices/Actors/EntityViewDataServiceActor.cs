@@ -22,14 +22,14 @@ namespace DataServices.Actors
         {
             Action = action;
             Command<TService>(m => HandledEvent(m));
-            EventMessageBus.Current.Publish(new ServiceStarted<IEntityViewDataServiceActor<TService>>(this,process,SourceMessage), SourceMessage);
+            EventMessageBus.Current.Publish(new ServiceStarted<IEntityViewDataServiceActor<TService>>(this,process,Source), Source);
         }
 
         
         private void HandledEvent(TService msg)
         {
             //TODO:Implement Logging
-          // Persist(msg, x => { });//x => Action.Invoke(DbContext, SourceMessage, x)
+          // Persist(msg, x => { });//x => Action.Invoke(DbContext, Source, x)
            Action.Invoke(msg);
         }
     }

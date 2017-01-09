@@ -7,7 +7,7 @@ namespace EventMessages
 
     public class ProcessStateMessage<TEntity> : ProcessSystemMessage, IProcessStateMessage<TEntity> where TEntity : IEntityId
     {
-        public ProcessStateMessage(IProcessState<TEntity> state, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public ProcessStateMessage(IProcessState<TEntity> state, ISystemProcess process, ISystemSource source) : base(process, source)
         {
             State = state;
         }

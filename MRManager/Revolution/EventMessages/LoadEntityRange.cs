@@ -17,7 +17,7 @@ namespace EventMessages
         public object SortDescriptions { get; }
 
         
-        public LoadEntityRange(int startIndex, int count, string filterExpression, Dictionary<string, string> navExp, IEnumerable<string> includesLst, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public LoadEntityRange(int startIndex, int count, string filterExpression, Dictionary<string, string> navExp, IEnumerable<string> includesLst, ISystemProcess process, ISystemSource source) : base(process, source)
         {
             StartIndex = startIndex;
             Count = count;
@@ -27,7 +27,7 @@ namespace EventMessages
             
         }
 
-        public LoadEntityRange(int startIndex, int count, SortDescriptionCollection sortDescriptions, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public LoadEntityRange(int startIndex, int count, SortDescriptionCollection sortDescriptions, ISystemProcess process, ISystemSource source) : base(process, source)
         {
             StartIndex = startIndex;
             Count = count;

@@ -9,7 +9,7 @@ namespace EventMessages
     {
         public T Value { get; }
 
-        public EventMessage(T val, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public EventMessage(T val, ISystemProcess process, ISystemSource source) : base(process, source)
         {
             Value = val;
         }

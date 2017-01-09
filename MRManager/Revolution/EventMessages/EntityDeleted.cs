@@ -10,7 +10,7 @@ namespace EventMessages
     {
         public int EntityId { get; }
         
-        public EntityDeleted(int entityId, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public EntityDeleted(int entityId, ISystemProcess process, ISystemSource source) : base(process, source)
         {
             Contract.Requires(entityId != 0);
             EntityId = entityId;

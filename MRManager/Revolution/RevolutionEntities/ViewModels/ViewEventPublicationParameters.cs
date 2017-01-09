@@ -5,15 +5,15 @@ namespace RevolutionEntities.ViewModels
 {
     public class ViewEventPublicationParameter :IViewEventPublicationParameter
     {
-        public ViewEventPublicationParameter(object[] @params, ISystemProcess process, ISourceMessage sourceMessage)
+        public ViewEventPublicationParameter(object[] @params, ISystemProcess process, ISource source)
         {
             Params = @params;
             Process = process;
-            SourceMessage = sourceMessage;
+            Source = source;
         }
 
         public object[] Params { get; }
         public ISystemProcess Process { get; }
-        public ISourceMessage SourceMessage { get; }
+        public ISource Source { get; }
     }
 }

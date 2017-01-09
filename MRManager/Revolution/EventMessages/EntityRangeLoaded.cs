@@ -9,7 +9,7 @@ namespace EventMessages
     {
         public int OverAllCount { get;  }
 
-        public EntityRangeLoaded(IList<T> entities,int startIndex, int overAllCount, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public EntityRangeLoaded(IList<T> entities,int startIndex, int overAllCount, ISystemProcess process, ISystemSource source) : base(process, source)
         {
             StartIndex = startIndex;
             OverAllCount = overAllCount;

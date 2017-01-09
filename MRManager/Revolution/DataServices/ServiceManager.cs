@@ -7,6 +7,7 @@ using SystemInterfaces;
 using SystemMessages;
 using Actor.Interfaces;
 using Akka.Actor;
+using Common;
 using CommonMessages;
 using EFRepository;
 using EventAggregator;
@@ -14,6 +15,7 @@ using EventMessages;
 using RevolutionData;
 using RevolutionEntities.Process;
 using StartUp.Messages;
+using IProcessService = StartUp.Messages.IProcessService;
 
 namespace DataServices.Actors
 {
@@ -22,10 +24,9 @@ namespace DataServices.Actors
     public class ServiceManager : ReceiveActor, IServiceManager
     {
 
-        public ISourceMessage SourceMessage
+        public ISystemSource Source
             =>
-                new SourceMessage(new MessageSource(this.ToString()),
-                    new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+                new Source(Guid.NewGuid(),"ServiceManager",new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
         static List<IActorRef> supervisors = new List<IActorRef>();
 
@@ -42,15 +43,15 @@ namespace DataServices.Actors
                 var processInfo = Processes.ProcessInfos.FirstOrDefault(x => x.ParentProcessId == 0);
                 if (processInfo == null) return;
                 var systemProcess = new SystemProcess(new Process(processInfo, new Agent("System")), machineInfo);
-                var systemStartedMsg = new SystemStarted(systemProcess, SourceMessage);
+                var systemStartedMsg = new SystemStarted(systemProcess, Source);
                
                  var processSup = Context.ActorOf(Props.Create<ProcessSupervisor>(), "ProcessSupervisor");
                 processSup.Tell(systemStartedMsg);
                 
-                EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(SourceMessage).Where(x => x.Process.Id == 1)//only start up process
+                EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source).Where(x => x.Process.Id == 1)//only start up process
                     .Subscribe(x =>
                     {
-                        EventMessageBus.Current.Publish(new ServiceStarted<IServiceManager>(this,systemProcess,SourceMessage), SourceMessage);
+                        EventMessageBus.Current.Publish(new ServiceStarted<IServiceManager>(this,systemProcess,Source), Source);
                         HandleProcessStarted(x.Process, systemStartedMsg);
                     });
                 
@@ -61,7 +62,7 @@ namespace DataServices.Actors
                     failedEventMessage: null,
                     expectedEventType: typeof(ServiceStarted<IServiceManager>),
                     exception: ex,
-                    SourceMsg: SourceMessage), SourceMessage);
+                    source: Source), Source);
 
             }
         }
@@ -107,7 +108,7 @@ namespace DataServices.Actors
             }
 
 
-            //EventMessageBus.Current.Publish(systemStartedMsg, SourceMessage);
+            //EventMessageBus.Current.Publish(systemStartedMsg, Source);
         }
 
         private void CreateEntityActors(Type c, Type genericListType, string actorName,
@@ -128,7 +129,7 @@ namespace DataServices.Actors
                     failedEventMessage: systemStartedmsg,
                     expectedEventType: typeof (ServiceStarted<>).MakeGenericType(specificListType),
                     exception: ex,
-                    SourceMsg: SourceMessage), SourceMessage);
+                    source: Source), Source);
             }
 
         }
@@ -150,12 +151,12 @@ namespace DataServices.Actors
                     failedEventMessage: systemStartedmsg,
                     expectedEventType: typeof(ServiceStarted<>).MakeGenericType(specificListType),
                     exception: ex,
-                    SourceMsg: SourceMessage), SourceMessage);
+                    source: Source), Source);
             }
 
         }
 
-        public string UserId => this.SourceMessage.Source.Source;
+        public string UserId => this.Source.Source.Source;
     }
 
 

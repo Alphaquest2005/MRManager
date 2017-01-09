@@ -8,7 +8,7 @@ using StartUp.Messages;
 namespace Actor.Interfaces
 {
     [InheritedExport]
-    public interface IProcessActor:IAgent, IProcessService
+    public interface IProcessService:IAgent, IService<IProcessService>
     {
         ISystemProcess Process { get; }
         ConcurrentDictionary<Type, IProcessStateMessage<IEntityId>> ProcessStateMessages { get; }

@@ -11,7 +11,7 @@ namespace EventMessages
         public IEnumerable<TView> Entities { get; }
         
 
-        public EntityViewLoaded(IEnumerable<TView> entities, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public EntityViewLoaded(IEnumerable<TView> entities, ISystemProcess process, ISystemSource source) : base(process, source)
         {
             Entities = entities;
         }

@@ -39,7 +39,7 @@ namespace Core.Common.UI
                 //   .Subscribe(publishMessage);
 
             }
-            //EventMessageBus.Current.GetEvent<CurrentEntityChanged<IAddresses>>(SourceMessage).Subscribe(x => handleIdChanged(x.EntityId));  
+            //EventMessageBus.Current.GetEvent<CurrentEntityChanged<IAddresses>>(Source).Subscribe(x => handleIdChanged(x.EntityId));  
             foreach (var itm in viewModel.EventSubscriptions)
             {
                 typeof(ViewModelExtensions)
@@ -62,7 +62,7 @@ namespace Core.Common.UI
                     .Subscribe(publishMessage);
             }
 
-           EventMessageBus.Current.Publish(new RequestProcessState(viewModel.Process, viewModel.SourceMessage), viewModel.SourceMessage);
+           EventMessageBus.Current.Publish(new RequestProcessState(viewModel.Process, viewModel.Source), viewModel.Source);
 
         }
 
@@ -73,11 +73,11 @@ namespace Core.Common.UI
                 var param = itm.MessageData.Invoke(viewModel);
                 var paramArray = param.Params.ToList();
                 paramArray.Add(param.Process);
-                paramArray.Add(param.SourceMessage);
+                paramArray.Add(param.Source);
                 var concreteEvent = BootStrapper.BootStrapper.Container.GetExportedTypes(itm.EventType).FirstOrDefault();
                 //TODO: Replace MEF with Good IOC container - can't do <,>
                 var msg = (ProcessSystemMessage) Activator.CreateInstance(concreteEvent??itm.EventType, paramArray.ToArray());
-                EventMessageBus.Current.Publish(msg, viewModel.SourceMessage);
+                EventMessageBus.Current.Publish(msg, viewModel.Source);
             };
             return publishMessage;
         }
@@ -85,7 +85,7 @@ namespace Core.Common.UI
         public static void Subscribe<TEvent, TViewModel>(TViewModel viewModel, Func<TEvent, bool> eventPredicate,
             IEnumerable<Func<TViewModel, TEvent, bool>> predicate, Action<TViewModel, TEvent> action) where TEvent : IMessage
         {
-            EventMessageBus.Current.GetEvent<TEvent>(((IViewModel)viewModel).SourceMessage).Where(eventPredicate).Where(x => predicate.All(z => z.Invoke(viewModel, x))).Subscribe(x => action.Invoke(viewModel, x));
+            EventMessageBus.Current.GetEvent<TEvent>(((IViewModel)viewModel).Source).Where(eventPredicate).Where(x => predicate.All(z => z.Invoke(viewModel, x))).Subscribe(x => action.Invoke(viewModel, x));
         }
 
 

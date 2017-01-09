@@ -5,16 +5,16 @@ using System.Linq;
 using SystemInterfaces;
 using Actor.Interfaces;
 using Akka.Persistence;
+using Common;
 using CommonMessages;
 using RevolutionEntities.Process;
 using Utilities;
 
 namespace DataServices.Actors
 {
-    public class BaseActor<T>: ReceivePersistentActor, IAgent
+    public class BaseActor<T>: ReceivePersistentActor, IAgent, IProcessSource
     {
-        public ISourceMessage SourceMessage => new SourceMessage(new MessageSource(this.ToString()), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
-
+        public ISystemSource Source => new Source(Guid.NewGuid(), "PersistentActor" + typeof(T).GetFriendlyName(), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         //internal Func<IList<IProcessExpectedEvent>, IList<IProcessSystemMessage>, bool> CheckExpectedEvents {
         //    get; } = (expectedEvents, eventSource) =>
         //{
@@ -51,7 +51,8 @@ namespace DataServices.Actors
             Debugger.Break();
         }
 
-        public string UserId => this.SourceMessage.Source.Source;
+        public string UserId => this.Source.SourceName;
+        
     }
 
   

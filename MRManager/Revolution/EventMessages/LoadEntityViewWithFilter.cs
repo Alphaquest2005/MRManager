@@ -7,7 +7,7 @@ namespace EventMessages
 {
     public class LoadEntityViewWithFilter<T> : ProcessSystemMessage
     {
-        public LoadEntityViewWithFilter(Expression<Func<T, bool>> filter, Expression func, Type viewType, Type viewDbType, ISystemProcess process, ISourceMessage sourceMsg) : base(process, sourceMsg)
+        public LoadEntityViewWithFilter(Expression<Func<T, bool>> filter, Expression func, Type viewType, Type viewDbType, ISystemProcess process, ISystemSource source) : base(process, source)
         {
             
             try

@@ -55,7 +55,7 @@ namespace RevolutionData
                                         {
                                             v => v.BodyViewModels.LastOrDefault() != null
                                         },
-                        messageData:(s) => new ViewEventPublicationParameter(new object[] {s, s.BodyViewModels.Last()},s.Process, s.SourceMessage ))
+                        messageData:(s) => new ViewEventPublicationParameter(new object[] {s, s.BodyViewModels.Last()},s.Process, s.Source ))
                   }, 
                 new List<IViewModelEventCommand<IViewModel, IEvent>>(),
                 typeof(IMainWindowViewModel),
@@ -164,7 +164,7 @@ namespace RevolutionData
                                         {
                                             v => v.BodyViewModels.LastOrDefault() != null
                                         },
-                        messageData:(s) => new ViewEventPublicationParameter(new object[] {s, s.BodyViewModels.Last()},s.BodyViewModels.Last().Process,s.SourceMessage)
+                        messageData:(s) => new ViewEventPublicationParameter(new object[] {s, s.BodyViewModels.Last()},s.BodyViewModels.Last().Process,s.Source)
                                         
                         )
                 },
@@ -195,7 +195,7 @@ namespace RevolutionData
                                         {
                                             v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Usersignin)) && v.ChangeTracking.Keys.Count == 1
                                         },
-                        messageData: s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},s.Process,s.SourceMessage)),
+                        messageData: s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},s.Process,s.Source)),
 
 
                      new ViewEventPublication<ILoginViewModel, ViewStateLoaded<ILoginViewModel,IProcessState<ISignInInfo>>>(
@@ -204,7 +204,7 @@ namespace RevolutionData
                         {
                             v => v.State != null
                         },
-                        messageData: s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},s.Process,s.SourceMessage))
+                        messageData: s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},s.Process,s.Source))
                 },
                 commands: new List<IViewModelEventCommand<IViewModel,IEvent>>()
                 {
@@ -216,7 +216,7 @@ namespace RevolutionData
                         {
                             (v) => true
                         },
-                        messageData: s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},s.Process,s.SourceMessage)),
+                        messageData: s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},s.Process,s.Source)),
 
                 },
                 viewModelType: typeof(ILoginViewModel),
