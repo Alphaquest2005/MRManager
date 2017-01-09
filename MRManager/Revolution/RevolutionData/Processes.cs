@@ -6,6 +6,7 @@ using SystemInterfaces;
 using SystemMessages;
 using Actor.Interfaces;
 using DataEntites;
+using Domain.Interfaces;
 using DomainMessages;
 using EventAggregator;
 using EventMessages;
@@ -76,64 +77,30 @@ namespace RevolutionData
                         processId: 2, eventPredicate: (e) => e.Entity != null && e.Changes.Count == 1 && e.Changes.ContainsKey(nameof(ISignInInfo.Usersignin)), expectedSourceType: new SourceType(typeof(IEntityViewRepository)), processInfo: new ProcessStateDetailedInfo("User Name Found","Not Verified"))
                 },
                 expectedMessageType:typeof(IProcessStateMessage<ISignInInfo>),
-                action:).RegisterAction((cp) =>
-                {
-                    try
-                    {
-                        
-                       
-                    }
-                    catch (Exception ex)
-                    {
-
-                        EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: typeof(IProcessStateMessage<ISignInInfo>),
-                        failedEventMessage: cp.Msg,
-                        expectedEventType: typeof (ServiceStarted<>),
-                        exception: ex,
-                        source: cp.Actor.Source),cp.Actor.Source);
-                    }
-
-                }),
+                action:ProcessActions.UserNameFound,
+                processInfo:new ProcessStateDetailedInfo("Welcome User","")),
             new ComplexEventAction(
+                key:"203",
                 processId: 2,
                 events: new List<IProcessExpectedEvent>()
                 {
-                    new ProcessExpectedEvent<IEntityViewWithChangesFound<ISignInInfo>> (processId: 2, eventPredicate: (e) => e.Entity != null && e.Changes.Count == 2 && e.Changes.ContainsKey(nameof(ISignInInfo.Password)), processInfo: TODO, expectedSourceType: TODO, key: TODO)
-                }).RegisterAction((cp) =>
-                {
-                    try
-                    {
-                        var ps = new ProcessState<ISignInInfo>(cp.Actor.Process.Id, cp.Msg.Entity,new ProcessStateDetailedInfo($"User: {cp.Msg.Entity.Usersignin} Validated", "User Validated"));
-                        var psMsg = new ProcessStateMessage<ISignInInfo>(ps, cp.Actor.Process, cp.Actor.Source);
-                        cp.Actor.ProcessStateMessages.AddOrUpdate(typeof (ISignInInfo), psMsg, (key, value) => psMsg);
-                        EventMessageBus.Current.Publish(psMsg, cp.Actor.Source);
-                        EventMessageBus.Current.Publish(new UserValidated(cp.Msg.Entity, cp.Actor.Process, cp.Actor.Source),cp.Actor.Source);
-                    }
-                    catch (Exception ex)
-                    {
-
-                        EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: typeof(IProcessStateMessage<ISignInInfo>),
-                        failedEventMessage: cp.Msg,
-                        expectedEventType: typeof (ServiceStarted<>),
-                        exception: ex,
-                        source: cp.Actor.Source),cp.Actor.Source);
-                    }
-
-                    // have to do it so cuz i dropping events 
-                }),
-            
+                    new ProcessExpectedEvent<IEntityViewWithChangesFound<ISignInInfo>> (processId: 2, eventPredicate: (e) => e.Entity != null && e.Changes.Count == 2 && e.Changes.ContainsKey(nameof(ISignInInfo.Password)), processInfo: new ProcessStateDetailedInfo("User Found with Both Username and Password",""), expectedSourceType: new SourceType(typeof(IEntityViewRepository)), key: "ValidatedUser")
+                },
+                expectedMessageType:typeof(IProcessStateMessage<ISignInInfo>),
+                action:ProcessActions.SetProcessStatetoValidatedUser,
+                processInfo: new ProcessStateDetailedInfo("Set User Validated ProcessState","")),
             new ComplexEventAction(
-                processId:2,
+                key:"204",
+                processId: 2,
                 events: new List<IProcessExpectedEvent>()
                 {
-                    new ProcessExpectedEvent (processId: 2, eventType: typeof(IRequestProcessState), eventPredicate: (e) => e != null)
-                }).RegisterAction((cp) =>
-                    {
-                        foreach (var ps in cp.Actor.ProcessStateMessages)
-                            {
-                                EventMessageBus.Current.Publish(ps.Value, cp.Actor.Source);
-                            }
-                    }),
+                    
+                },
+                expectedMessageType:typeof(IUserValidated),
+                processInfo:new ProcessStateDetailedInfo("Inform Domain User Validated",""),
+                action: ProcessActions.UserValidated),
+            
+           
         };
 
         

@@ -33,25 +33,15 @@ namespace DataServices.Actors
         private readonly IEnumerable<IComplexEventAction> _complexEvents = new List<IComplexEventAction>();
         public ConcurrentDictionary<Type, IProcessStateMessage<IEntityId>> ProcessStateMessages { get; }= new ConcurrentDictionary<Type, IProcessStateMessage<IEntityId>>();
 
-        private Func<ICreateComplexEventService, IProcessSystemMessage> CreateComplexEventService = inMsg =>
-        {
-            var childActor =
-                Context.ActorOf(
-                    Props.Create<ComplexEventActor>(inMsg.ComplexEventService.ComplexEventAction,
-                        inMsg.ComplexEventService.Process),
-                    "ComplexEventActor:-" + inMsg.ComplexEventService.ComplexEventAction.Key.GetSafeActorName());
-            EventMessageBus.Current.GetEvent<IProcessSystemMessage>(inMsg.Source)
-                .Where(
-                    x =>
-                        x.Process.Id == inMsg.Process.Id &&
-                        x.MachineInfo.MachineName == inMsg.Process.MachineInfo.MachineName)
-                .Subscribe(x => childActor.Tell(x));
-            return new ComplexEventServiceCreated(inMsg.ComplexEventService, inMsg.Process, inMsg.Source);
-        };
+
 
         public ProcessActor(ISystemProcess process)
         {
             Process = process;
+            EventMessageBus.Current.GetEvent<IProcessStateMessage<IEntityId>>(Source).Subscribe(x => SaveStateMessages(x));
+            EventMessageBus.Current.GetEvent<IRequestProcessState>(Source).Subscribe(x => HandleRequestState(x));
+            EventMessageBus.Current.GetEvent<IRequestProcessLog>(Source).Subscribe(x => HandleProcessLogRequest(x));
+            EventMessageBus.Current.GetEvent<IComplexEventLogCreated>(Source).Subscribe(x => HandleComplexEventLog(x));
             Command<IProcessSystemMessage>(z => HandleProcessEvents(z));
             if (Processes.ProcessComplexEvents.Any(x => x.ProcessId == process.Id))
             {
@@ -68,6 +58,26 @@ namespace DataServices.Actors
 
         }
 
+        private void HandleProcessLogRequest(IRequestProcessLog requestProcessLog)
+        {
+            //Request logs from ComplexEventActors
+            var msg = new RequestComplexEventLog(Process,Source);
+            Publish(msg);
+        }
+
+        private void HandleRequestState(IRequestProcessState requestProcessState)
+        {
+            foreach (var ps in ProcessStateMessages)
+            {
+                Publish(ps.Value);
+            }
+        }
+
+        private void SaveStateMessages(IProcessStateMessage<IEntityId> pe)
+        {
+            ProcessStateMessages.AddOrUpdate(pe.GetType(), pe, (k, v) => pe);
+        }
+
         private void StartActors(IEnumerable<IComplexEventAction> complexEvents)
         {
             foreach (var cp in complexEvents)
@@ -77,8 +87,6 @@ namespace DataServices.Actors
                 {
                     var outMsg = CreateComplexEventService.Invoke(inMsg);
                     Publish(outMsg);
-
-
                 }
                 catch (Exception ex)
                 {
@@ -96,18 +104,26 @@ namespace DataServices.Actors
             // send out Process State Events
 
             msgQue.Add(pe);
-            if(pe.GetType().GetGenericTypeDefinition() == typeof(IProcessStateMessage<>))
-            {
-                ProcessStateMessages.AddOrUpdate(pe.GetType(), (IProcessStateMessage<IEntityId>) pe, (k, v) => (IProcessStateMessage<IEntityId>) pe);
-            }
-            //_complexEvents.Where(cp => cp.Events.Any(e => pe.GetType().GetInterfaces().Any(z => z == e.EventType) 
-            //                                              && e.EventPredicate.Invoke(pe)))
-            //              .ForEach(x => x.Execute(new ComplexEventParameters(this,msgQue,pe)));
+           
         }
 
 
         public IActorRef ActorRef => this.Self;
-        
+                private Func<ICreateComplexEventService, IProcessSystemMessage> CreateComplexEventService = inMsg =>
+        {
+            var childActor =
+                Context.ActorOf(
+                    Props.Create<ComplexEventActor>(inMsg.ComplexEventService.ComplexEventAction,
+                        inMsg.ComplexEventService.Process),
+                    "ComplexEventActor:-" + inMsg.ComplexEventService.ComplexEventAction.Key.GetSafeActorName());
+            EventMessageBus.Current.GetEvent<IProcessSystemMessage>(inMsg.Source)
+                .Where(
+                    x =>
+                        x.Process.Id == inMsg.Process.Id &&
+                        x.MachineInfo.MachineName == inMsg.Process.MachineInfo.MachineName)
+                .Subscribe(x => childActor.Tell(x));
+            return new ComplexEventServiceCreated(inMsg.ComplexEventService, inMsg.Process, inMsg.Source);
+        };
     }
 
 
