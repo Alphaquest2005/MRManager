@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="IEntityViewWithChangesFound.cs" />
     <Compile Include="IEntityViewLoaded.cs" />
     <Compile Include="IEntityUpdated.cs" />
@@ -69,6 +69,7 @@
     <Compile Include="IEntityFound.cs" />
     <Compile Include="IProcessExpectedEvent.cs" />
     <Compile Include="ISource.cs" />
+    <Compile Include="ISystemProcessTerminated.cs" />
     <Compile Include="ISystemSource.cs" />
     <Compile Include="ISystemStarted.cs" />
     <Compile Include="IServiceStarted.cs" />

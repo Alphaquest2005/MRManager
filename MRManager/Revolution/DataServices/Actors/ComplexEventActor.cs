@@ -46,18 +46,11 @@ namespace DataServices.Actors
         {
             //Create Timeout Message
             var timeoutMsg = new ComplexEventActionTimedOut(ComplexEventAction, Process, Source);
-            PublishProcesError(timeoutMsg, new ApplicationException($"ComplexEventActionTimedOut:<{ComplexEventAction.ProcessInfo.Status}>"));
+            PublishProcesError(timeoutMsg, new ApplicationException($"ComplexEventActionTimedOut:<{ComplexEventAction.ProcessInfo.Status}>"), ComplexEventAction.ExpectedMessageType);
             // publish message
         }
 
-        private void PublishProcesError(IProcessSystemMessage msg, Exception ex )
-        {
-            EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: msg.GetType(),
-                        failedEventMessage: msg,
-                        expectedEventType: ComplexEventAction.ExpectedMessageType,
-                        exception: ex,
-                        source: Source), Source);
-        }
+
 
         public void WireEvents<TEvent>(TEvent eventType, IProcessExpectedEvent expectedEvent) where TEvent : IProcessSystemMessage
         {
@@ -74,7 +67,17 @@ namespace DataServices.Actors
 
         private void ExecuteAction()
         {
-            ComplexEventAction.Action.Action.Invoke(new ComplexEventParameters(this, Messages.ToDictionary(x => x.Key, x => x.Value )));
+            var inMsg = new ExecuteComplexEventAction(ComplexEventAction.Action, new ComplexEventParameters(this, Messages.ToDictionary(x => x.Key, x => x.Value)), Process, Source);
+            try
+            {
+                var outMsg = ComplexEventAction.Action.Action.Invoke(inMsg.ComplexEventParameters);
+                Publish(outMsg);
+            }
+            catch (Exception ex)
+            {
+                PublishProcesError(inMsg, ex, ComplexEventAction.ExpectedMessageType);
+            }
+           
         }
 
 

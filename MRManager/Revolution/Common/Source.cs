@@ -9,7 +9,7 @@ namespace Common
 {
     public class Source: ISystemSource
     {
-        public Source(Guid sourceId, string sourceName, Type sourceType, IMachineInfo machineInfo)
+        public Source(Guid sourceId, string sourceName, ISourceType sourceType, IMachineInfo machineInfo)
         {
             SourceId = sourceId;
             SourceName = sourceName;
@@ -19,7 +19,7 @@ namespace Common
 
         public Guid SourceId { get; }
         public string SourceName { get; }
-        public Type SourceType { get; }
+        public ISourceType SourceType { get; }
         public IMachineInfo MachineInfo { get; set; }
     }
 }

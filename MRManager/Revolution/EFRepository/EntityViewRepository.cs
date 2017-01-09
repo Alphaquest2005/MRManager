@@ -22,10 +22,10 @@ using Source = Common.Source;
 
 namespace EFRepository
 {
-    public class EntityViewRepository<TView,TDbView, TEntity, TDbEntity, TDbContext> where TDbView:class, IEntityId where TDbEntity : class,IEntity where TDbContext : DbContext, new() where TEntity : class, IEntity where TView : IEntityView<TEntity>
+    public class EntityViewRepository<TView,TDbView, TEntity, TDbEntity, TDbContext>: IEntityViewRepository where TDbView:class, IEntityId where TDbEntity : class,IEntity where TDbContext : DbContext, new() where TEntity : class, IEntity where TView : IEntityView<TEntity>
     {
 
-        public static ISystemSource Source => new Source(Guid.NewGuid(), $"EntityRepository:<{typeof(TView).GetFriendlyName()},{typeof(TDbView).GetFriendlyName()},{typeof(TEntity).GetFriendlyName()},{typeof(TDbEntity).GetFriendlyName()},{typeof(TDbContext).GetFriendlyName()}>", new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public static ISystemSource Source => new Source(Guid.NewGuid(), $"EntityRepository:<{typeof(TView).GetFriendlyName()},{typeof(TDbView).GetFriendlyName()},{typeof(TEntity).GetFriendlyName()},{typeof(TDbEntity).GetFriendlyName()},{typeof(TDbContext).GetFriendlyName()}>",new SourceType(typeof(IEntityViewRepository)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         public static void GetEntityById(IGetEntityViewById<TView>  msg)
         {
             try

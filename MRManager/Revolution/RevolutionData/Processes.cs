@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq.Expressions;
 using SystemInterfaces;
 using SystemMessages;
 using Actor.Interfaces;
@@ -28,57 +30,58 @@ namespace RevolutionData
 
 
 
-        public static List<ComplexEventAction> ProcessComplexEvents = new List<ComplexEventAction>()
+        public static List<IComplexEventAction> ProcessComplexEvents = new List<IComplexEventAction>()
         {
             new ComplexEventAction(
+                key:"101",
                 processId:1,
                 events: new List<IProcessExpectedEvent>()
                 {
-                    new ProcessExpectedEvent (processId: 1, eventType: typeof (ISystemProcessStarted), eventPredicate: (e) => e != null, processInfo: new ProcessStateDetailedInfo("Process Started","First Step"),expectedSourceType: new SourceType(typeof(IProcessService))),
-                    new ProcessExpectedEvent (processId: 1, eventType: typeof (IViewModelCreated<IScreenModel>),eventPredicate: (e) => e != null, processInfo: new ProcessStateDetailedInfo("ScreenView Created","This view contains all views"),expectedSourceType: new SourceType(typeof(IViewModelService) )),
-                    new ProcessExpectedEvent (processId: 1, eventType: typeof (IViewModelLoaded<IMainWindowViewModel,IScreenModel>),eventPredicate: (e) => e != null, processInfo: new ProcessStateDetailedInfo("ScreenView Model loaded in MainWindowViewModel","Only ViewModel in Body"),expectedSourceType: new SourceType(typeof(IViewModelService) )),
+                    new ProcessExpectedEvent (key: "ProcessStarted", processId: 1, eventType: typeof (ISystemProcessStarted), eventPredicate: (e) => e != null, processInfo: new ProcessStateDetailedInfo("Process Started","First Step"),expectedSourceType: new SourceType(typeof(IProcessService))),
+                    new ProcessExpectedEvent (key: "ViewCreated", processId: 1, eventType: typeof (IViewModelCreated<IScreenModel>),eventPredicate: (e) => e != null, processInfo: new ProcessStateDetailedInfo("ScreenView Created","This view contains all views"),expectedSourceType: new SourceType(typeof(IViewModelService) )),
+                    new ProcessExpectedEvent (key: "ViewLoaded", processId: 1, eventType: typeof (IViewModelLoaded<IMainWindowViewModel,IScreenModel>),eventPredicate: (e) => e != null, processInfo: new ProcessStateDetailedInfo("ScreenView Model loaded in MainWindowViewModel","Only ViewModel in Body"),expectedSourceType: new SourceType(typeof(IViewModelService) )),
                 },
                 expectedMessageType:typeof(ISystemProcessCompleted),
                 processInfo:new ProcessStateDetailedInfo("Process Completed","Change Process State to Process Completed" ),
-                action: new ProcessAction(action:(cp) => new SystemProcessCompleted(cp.Actor.Process, cp.Actor.Source),
-                                           processInfo: new ProcessStateDetailedInfo("Process Completed","Create System Process Completed Message"),
-                expectedSourceType: new SourceType(typeof(IComplexEventService))
-                ),
+                action: ProcessActions.ProcessCompleted),
 
 
             new ComplexEventAction(
+                key:"102",
                 processId:1,
                 events: new List<IProcessExpectedEvent>()
                 {
-                    new ProcessExpectedEvent (processId: 1, eventType: typeof (ISystemProcessCompleted), eventPredicate: (e) => e != null)
-                }).RegisterAction((cp) => {}), //actor.ActorRef().GracefulStop(TimeSpan.FromSeconds(10)),TODO: figure out way to close actor without messing up command not working),
+                    new ProcessExpectedEvent (key: "ProcessCompleted",processId: 1, eventType: typeof (ISystemProcessCompleted), eventPredicate: (e) => e != null, processInfo: new ProcessStateDetailedInfo("System Initalization complete","Should Close Process Actor"), )
+                }, 
+                expectedMessageType: typeof(ISystemProcessTerminated),
+                action: ProcessActions.ShutActorDown), 
             new ComplexEventAction(
+                key: "201",
                 processId:2,
                 events: new List<IProcessExpectedEvent>()
                 {
-                    new ProcessExpectedEvent (processId: 2, eventType: typeof (ISystemProcessStarted), eventPredicate: (e) => e != null),
-                    //new ProcessExpectedEvent (processId: 2, eventType: typeof (IViewModelCreated<ILoginViewModel>),eventPredicate: (e) => e != null),
-                    //new ProcessExpectedEvent (processId: 2, eventType: typeof (IViewModelLoaded<IScreenModel,IViewModel>),eventPredicate: (e) => e != null),
-                }).RegisterAction(cp => {
-
-                        var ps = new ProcessState<ISignInInfo>(cp.Actor.Process.Id, NullEntity<ISignInInfo>.Instance,ProcessStateInfo.WaitingOnUserName);
-                        var psMsg = new ProcessStateMessage<ISignInInfo>(ps, cp.Actor.Process,cp.Actor.Source);
-                        cp.Actor.ProcessStateMessages.AddOrUpdate(ps.Entity.GetType(),psMsg, (key,value) => psMsg);
-                        EventMessageBus.Current.Publish(psMsg, cp.Actor.Source);
-                    }),
+                    new ProcessExpectedEvent (key: "ProcessStarted", processId: 2, eventPredicate: (e) => e != null,eventInfo: ProcessExpectedEventInfos.ProcessStarted)
+                    
+                },
+                expectedMessageType: typeof(IProcessStateMessage<ISignInInfo>),
+                action: ProcessActions.IntializeSigninProcessState,
+                processInfo: new ProcessStateDetailedInfo("Intialize Process Start for Signin process","")),
             new ComplexEventAction(
+                key:"202",
                 processId: 2,
                 events: new List<IProcessExpectedEvent>()
                 {
-                    new ProcessExpectedEvent<IEntityViewWithChangesFound<ISignInInfo>> (processId: 2, eventPredicate: (e) => e.Entity != null && e.Changes.Count == 1 && e.Changes.ContainsKey(nameof(ISignInInfo.Usersignin)), expectedSourceType: TODO, processInfo: TODO)
-                }).RegisterAction((cp) =>
+                    new ProcessExpectedEvent<IEntityViewWithChangesFound<ISignInInfo>> (
+                        key:"UserNameFound",
+                        processId: 2, eventPredicate: (e) => e.Entity != null && e.Changes.Count == 1 && e.Changes.ContainsKey(nameof(ISignInInfo.Usersignin)), expectedSourceType: new SourceType(typeof(IEntityViewRepository)), processInfo: new ProcessStateDetailedInfo("User Name Found","Not Verified"))
+                },
+                expectedMessageType:typeof(IProcessStateMessage<ISignInInfo>),
+                action:).RegisterAction((cp) =>
                 {
                     try
                     {
-                        var ps = new ProcessState<ISignInInfo>(cp.Actor.Process.Id, cp.Msg.Entity,new ProcessStateDetailedInfo($"Welcome {cp.Msg.Entity.Usersignin}","Please Enter your Password"));
-                        var psMsg = new ProcessStateMessage<ISignInInfo>(ps, cp.Actor.Process, cp.Actor.Source);
-                        cp.Actor.ProcessStateMessages.AddOrUpdate(typeof (ISignInInfo), psMsg, (key, value) => psMsg);
-                        EventMessageBus.Current.Publish(psMsg, cp.Actor.Source);
+                        
+                       
                     }
                     catch (Exception ex)
                     {
@@ -95,7 +98,7 @@ namespace RevolutionData
                 processId: 2,
                 events: new List<IProcessExpectedEvent>()
                 {
-                    new ProcessExpectedEvent<IEntityViewWithChangesFound<ISignInInfo>> (processId: 2, eventPredicate: (e) => e.Entity != null && e.Changes.Count == 2 && e.Changes.ContainsKey(nameof(ISignInInfo.Password)), expectedSourceType: TODO, processInfo: TODO)
+                    new ProcessExpectedEvent<IEntityViewWithChangesFound<ISignInInfo>> (processId: 2, eventPredicate: (e) => e.Entity != null && e.Changes.Count == 2 && e.Changes.ContainsKey(nameof(ISignInInfo.Password)), processInfo: TODO, expectedSourceType: TODO, key: TODO)
                 }).RegisterAction((cp) =>
                 {
                     try
@@ -133,13 +136,8 @@ namespace RevolutionData
                     }),
         };
 
-
-
-
-
-
+        
     }
-
 
 
 }

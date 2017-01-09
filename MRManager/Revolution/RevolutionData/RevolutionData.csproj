@@ -99,7 +99,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProcessExpectedEventInfos.cs" />
     <Compile Include="MachineInfoData.cs" />
+    <Compile Include="ProcessActions.cs" />
     <Compile Include="ProcessViewModels.cs" />
     <Compile Include="ProcessStateInfo.cs" />
     <Compile Include="Processes.cs" />

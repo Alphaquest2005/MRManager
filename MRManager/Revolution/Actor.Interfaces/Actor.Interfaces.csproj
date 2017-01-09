@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IComplexEventServiceCreated.cs" />
+    <Compile Include="ICreateComplexEventActor.cs" />
+    <Compile Include="IExecuteComplexEventAction.cs" />
     <Compile Include="IComplexEventParameters.cs" />
     <Compile Include="IComplexEventService.cs" />
     <Compile Include="IComplexEventActionTimedOut.cs" />

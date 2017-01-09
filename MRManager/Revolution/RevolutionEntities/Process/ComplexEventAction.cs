@@ -11,15 +11,17 @@ namespace RevolutionEntities.Process
 {
     public class ComplexEventAction: IComplexEventAction
     {
-        public ComplexEventAction(int processId, IList<IProcessExpectedEvent> events, Type expectedMessageType, IProcessAction action, IProcessStateDetailedInfo processInfo)
+        public ComplexEventAction(string key, int processId, IList<IProcessExpectedEvent> events, Type expectedMessageType, IProcessAction action, IProcessStateDetailedInfo processInfo)
         {
             ProcessId = processId;
             Events = events;
             ExpectedMessageType = expectedMessageType;
             ProcessInfo = processInfo;
+            Key = key;
             Action = action;
         }
 
+        public string Key { get; }
         public IList<IProcessExpectedEvent> Events { get; }
         public int ProcessId { get; }
         public Type ExpectedMessageType { get; }
@@ -30,17 +32,17 @@ namespace RevolutionEntities.Process
     public static class ComplexEventActionExtensions
     {
       
-        private static ConcurrentDictionary<IComplexEvent, bool> RaisedEvents { get; } = new ConcurrentDictionary<IComplexEvent, bool>();
+        //private static ConcurrentDictionary<IComplexEvent, bool> RaisedEvents { get; } = new ConcurrentDictionary<IComplexEvent, bool>();
 
-        private static ConcurrentDictionary<IComplexEvent, Action<IComplexEventParameters>> ComplexEventActions { get; } = new ConcurrentDictionary<IComplexEvent, Action<IComplexEventParameters>>();
+        //private static ConcurrentDictionary<IComplexEvent, Action<IComplexEventParameters>> ComplexEventActions { get; } = new ConcurrentDictionary<IComplexEvent, Action<IComplexEventParameters>>();
 
-        private static Action<IComplexEvent> RaiseEventAction { get; } = x => RaisedEvents.AddOrUpdate(x, true, (k, c) => true);
+        //private static Action<IComplexEvent> RaiseEventAction { get; } = x => RaisedEvents.AddOrUpdate(x, true, (k, c) => true);
 
-        public static ComplexEventAction RegisterAction(this ComplexEventAction complexEvent, Action<IComplexEventParameters> action)
-        {
-            ComplexEventActions.AddOrUpdate(complexEvent, action, (k, v) => action);
-            return complexEvent;
-        }
+        //public static ComplexEventAction RegisterAction(this ComplexEventAction complexEvent, Action<IComplexEventParameters> action)
+        //{
+        //    ComplexEventActions.AddOrUpdate(complexEvent, action, (k, v) => action);
+        //    return complexEvent;
+        //}
 
         //private static void CheckExpectedEvents(this IComplexEvent complexEvent, IComplexEventParameters paramArray)
         //{
@@ -54,20 +56,20 @@ namespace RevolutionEntities.Process
 
         //}
 
-        public static void Execute(this IComplexEvent complexEvent, IComplexEventParameters paramArray)
-        {
-            //CheckExpectedEvents(complexEvent,paramArray);
-            if (!complexEvent.Events.All(x => x.Raised())) return;
-            ComplexEventActions[complexEvent].Invoke(paramArray);
-            RaiseEventAction(complexEvent);
-            complexEvent.Events.ForEach(x => x.Drop());
+        //public static void Execute(this IComplexEvent complexEvent, IComplexEventParameters paramArray)
+        //{
+        //    //CheckExpectedEvents(complexEvent,paramArray);
+        //    if (!complexEvent.Events.All(x => x.Raised())) return;
+        //    ComplexEventActions[complexEvent].Invoke(paramArray);
+        //    RaiseEventAction(complexEvent);
+        //    complexEvent.Events.ForEach(x => x.Drop());
             
-        }
+        //}
 
 
-        public static bool Raised(this IComplexEvent complexEvent) 
-        {
-            return RaisedEvents.ContainsKey(complexEvent);
-        }
+        //public static bool Raised(this IComplexEvent complexEvent) 
+        //{
+        //    return RaisedEvents.ContainsKey(complexEvent);
+        //}
     }
 }

@@ -8,7 +8,7 @@ namespace Actor.Interfaces
     public interface IComplexEventParameters
     {
         IComplexEventService Actor { get; }
-        Dictionary<string,IProcessSystemMessage> Messages { get; }
+        Dictionary<string,dynamic> Messages { get; }
        
     }
 }

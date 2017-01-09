@@ -78,6 +78,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BlankMessage.cs" />
+    <Compile Include="ComplexEventServiceCreated.cs" />
+    <Compile Include="CreateComplexEventActor.cs" />
+    <Compile Include="ExecuteComplexEventAction.cs" />
     <Compile Include="ComplexEventActionTimedOut.cs" />
     <Compile Include="EntityFound.cs" />
     <Compile Include="EntityViewWithChangesFound.cs" />

@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Process\Agent.cs" />
+    <Compile Include="Process\ProcessExpectedEventInfo.cs" />
+    <Compile Include="Process\ComplexEventService.cs" />
     <Compile Include="Process\ComplexEventParameters.cs" />
     <Compile Include="Process\ProcessAction.cs" />
     <Compile Include="Process\ComplexEventAction.cs" />

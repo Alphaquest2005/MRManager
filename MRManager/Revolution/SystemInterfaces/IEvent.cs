@@ -6,6 +6,6 @@ namespace SystemInterfaces
     public interface IEvent
     {
         //ToDo:Check to remove this
-        ISource Source { get; }
+        ISystemSource Source { get; }
     }
 }
