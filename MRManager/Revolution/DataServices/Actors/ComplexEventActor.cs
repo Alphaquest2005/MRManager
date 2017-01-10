@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Web.Script.Serialization;
 using SystemInterfaces;
 using SystemMessages;
 using Actor.Interfaces;
@@ -18,7 +19,9 @@ using ReactiveUI;
 using RevolutionData;
 using RevolutionEntities.Process;
 using StartUp.Messages;
+using Utilities;
 using IProcessService = Actor.Interfaces.IProcessService;
+using DataServices.Utils;
 
 namespace DataServices.Actors
 {
@@ -34,19 +37,31 @@ namespace DataServices.Actors
             {
                 this.GetType().GetMethod("WireEvents").MakeGenericMethod(e.EventType).Invoke(this, new object[] {e});
             }
-            this.WhenAny(x => x.Messages, x => x.Value.Count).Timeout(TimeSpan.FromSeconds(10)).Subscribe(x => 
-                                                                { if (ComplexEventAction.Events.All(z => z.Raised()))
-                                                                     ExecuteAction();
-                                                                },
-                                                                z => OnTimeOut());
+            //Todo: make time out configurable
+            this.WhenAny(x => x.InMessages, x => x.Value.Count).Timeout(TimeSpan.FromSeconds((double) EventTimeOut.LongWait)).Subscribe(x => ExecuteAction(),z => OnTimeOut());
+            EventMessageBus.Current.GetEvent<IRequestComplexEventLog>(Source).Subscribe(x => handleComplexEventLogRequest());
+
+        }
+
+        private void handleComplexEventLogRequest()
+        {
+            var xlogs = ComplexEventAction.Events.CreatEventLogs(InMessages.ToDictionary(x => x.Key, x => x.Value), Source);
+            var ologs = OutMessages.CreatEventLogs(Source);
+            var res = new List<IComplexEventLog>();
+            res.AddRange(xlogs);
+            res.AddRange(ologs);
+
+            var msg = new ComplexEventLogCreated(res, Process, Source);
+            Publish(msg);
 
         }
 
         private void OnTimeOut()
         {
-            //Create Timeout Message
-            var timeoutMsg = new ComplexEventActionTimedOut(ComplexEventAction, Process, Source);
-            PublishProcesError(timeoutMsg, new ApplicationException($"ComplexEventActionTimedOut:<{ComplexEventAction.ProcessInfo.Status}>"), ComplexEventAction.ExpectedMessageType);
+            if (ComplexEventAction.Events.All(z => z.Raised())) return;
+                //Create Timeout Message
+                var timeoutMsg = new ComplexEventActionTimedOut(ComplexEventAction, Process, Source);
+                PublishProcesError(timeoutMsg, new ApplicationException($"ComplexEventActionTimedOut:<{ComplexEventAction.ProcessInfo.Status}>"), ComplexEventAction.ExpectedMessageType);
             // publish message
         }
 
@@ -61,13 +76,15 @@ namespace DataServices.Actors
         {
            if(!expectedEvent.EventPredicate.Invoke(message)) return;
             expectedEvent.Validate(message);
-            Messages.AddOrUpdate(expectedEvent.Key, message, (k,v) => message);
+            InMessages.AddOrUpdate(expectedEvent.Key, message, (k,v) => message);
             
         }
 
         private void ExecuteAction()
         {
-            var inMsg = new ExecuteComplexEventAction(ComplexEventAction.Action, new ComplexEventParameters(this, Messages.ToDictionary(x => x.Key, x => x.Value)), Process, Source);
+            if (!ComplexEventAction.Events.All(z => z.Raised())) return;
+            var inMsg = new ExecuteComplexEventAction(ComplexEventAction.Action, new ComplexEventParameters(this, InMessages.ToDictionary(x => x.Key, x => x.Value)), Process, Source);
+            Publish(inMsg);
             try
             {
                 var outMsg = ComplexEventAction.Action.Action.Invoke(inMsg.ComplexEventParameters);
@@ -83,7 +100,7 @@ namespace DataServices.Actors
 
         public IComplexEventAction ComplexEventAction { get; }
         public ISystemProcess Process { get;  }
-        private readonly ConcurrentDictionary<string, IProcessSystemMessage> Messages = new ConcurrentDictionary<string, IProcessSystemMessage>(); 
+        private readonly ConcurrentDictionary<string, IProcessSystemMessage> InMessages = new ConcurrentDictionary<string, IProcessSystemMessage>(); 
 
     }
 

@@ -20,19 +20,19 @@ namespace RevolutionEntities.Process
 
     public class ProcessState : IProcessState
     {
-        public ProcessState(int processId, IProcessStateDetailedInfo stateInfo)
+        public ProcessState(int processId, IProcessStateInfo stateInfo)
         {
             StateInfo = stateInfo;
             ProcessId = processId;
         }
 
         public int ProcessId { get; }
-        public IProcessStateDetailedInfo StateInfo { get; }
+        public IProcessStateInfo StateInfo { get; }
     }
 
     public class ProcessState<TEntity> :ProcessState, IProcessState<TEntity> where TEntity : IEntityId
     {
-        public ProcessState(int processId, TEntity entity, IProcessStateDetailedInfo info) : base(processId, info)
+        public ProcessState(int processId, TEntity entity, IProcessStateInfo info) : base(processId, info)
         {
             Entity = entity;
         }

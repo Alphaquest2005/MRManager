@@ -78,6 +78,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BlankMessage.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="ComplexEventLogCreated.cs" />
     <Compile Include="ComplexEventLog.cs" />
     <Compile Include="ComplexEventServiceCreated.cs" />
     <Compile Include="CreateComplexEventActor.cs" />

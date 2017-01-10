@@ -4,15 +4,16 @@ namespace CommonMessages
 {
     public class ProcessSystemMessage : SystemMessage, IProcessSystemMessage
     {
-        public ProcessSystemMessage(ISystemProcess process, ISystemSource source) : base(source.MachineInfo,source)
+        public ProcessSystemMessage(IProcessStateInfo processInfo, ISystemSource source) : base(source.MachineInfo,source)
         {
-            Process = process;
+            Process = processInfo.Process;
+            ProcessInfo = processInfo;
             ParentProcessId = Process.ParentProcessId;
-            Name = process.Name;
-            Description = process.Description;
-            Symbol = process.Symbol;
-            User = process.User;
-            Id = process.Id;
+            Name = processInfo.Process.Name;
+            Description = processInfo.Process.Description;
+            Symbol = processInfo.Process.Symbol;
+            User = processInfo.Process.User;
+            Id = processInfo.Process.Id;
         }
 
         public int Id { get; }
@@ -22,5 +23,6 @@ namespace CommonMessages
         public string Symbol { get; }
         public IUser User { get; }
         public ISystemProcess Process { get; }
+        public IProcessStateInfo ProcessInfo { get; }
     }
 }

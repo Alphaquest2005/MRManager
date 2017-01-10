@@ -6,7 +6,7 @@ namespace SystemInterfaces
     public interface IProcessState
     {
         int ProcessId { get; }
-        IProcessStateDetailedInfo StateInfo { get; }
+        IProcessStateInfo StateInfo { get; }
         
     }
 

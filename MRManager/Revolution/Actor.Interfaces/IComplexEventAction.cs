@@ -12,7 +12,7 @@ namespace Actor.Interfaces
     public interface IComplexEventAction : IComplexEvent
     {
         Type ExpectedMessageType { get; }
-        IProcessStateDetailedInfo ProcessInfo { get; }
+        IProcessStateInfo ProcessInfo { get; }
         IProcessAction Action { get; }
     }
 }

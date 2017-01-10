@@ -12,7 +12,7 @@ namespace SystemInterfaces
         Type EventType { get; }
         int ProcessId { get; }
 
-        IProcessStateDetailedInfo ProcessInfo { get; }
+        IProcessStateInfo ProcessInfo { get; }
         ISourceType ExpectedSourceType { get; }
 
     }

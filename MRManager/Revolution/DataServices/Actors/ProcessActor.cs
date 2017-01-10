@@ -11,6 +11,7 @@ using SystemMessages;
 using Actor.Interfaces;
 using Akka.Actor;
 using CommonMessages;
+using DataServices.Utils;
 using EventAggregator;
 using EventMessages;
 using MoreLinq;
@@ -19,6 +20,7 @@ using RevolutionEntities.Process;
 using StartUp.Messages;
 using Utilities;
 using IProcessService = Actor.Interfaces.IProcessService;
+using ProcessStateInfo = RevolutionEntities.Process.ProcessStateInfo;
 
 namespace DataServices.Actors
 {
@@ -41,7 +43,7 @@ namespace DataServices.Actors
             EventMessageBus.Current.GetEvent<IProcessStateMessage<IEntityId>>(Source).Subscribe(x => SaveStateMessages(x));
             EventMessageBus.Current.GetEvent<IRequestProcessState>(Source).Subscribe(x => HandleRequestState(x));
             EventMessageBus.Current.GetEvent<IRequestProcessLog>(Source).Subscribe(x => HandleProcessLogRequest(x));
-            EventMessageBus.Current.GetEvent<IComplexEventLogCreated>(Source).Subscribe(x => HandleComplexEventLog(x));
+            EventMessageBus.Current.GetEvent<IComplexEventLogCreated>(Source).Buffer(TimeSpan.FromSeconds((double) EventTimeOut.ShortWait)).Subscribe(x => HandleComplexEventLog(x));
             Command<IProcessSystemMessage>(z => HandleProcessEvents(z));
             if (Processes.ProcessComplexEvents.Any(x => x.ProcessId == process.Id))
             {
@@ -56,6 +58,15 @@ namespace DataServices.Actors
 
             // start actor for each complex event
 
+        }
+
+        private void HandleComplexEventLog(IList<IComplexEventLogCreated> complexEventLogs)
+        {
+            var logs = new List<IComplexEventLog>(OutMessages.CreatEventLogs(Source));
+            logs.AddRange(complexEventLogs.SelectMany(x => x.EventLog).ToList());
+
+            var msg = new ProcessLogCreated(logs.OrderBy(x => x.Time), new ProcessStateInfo(Process, ProcessStates.LogCreated), Source);
+            Publish(msg);
         }
 
         private void HandleProcessLogRequest(IRequestProcessLog requestProcessLog)

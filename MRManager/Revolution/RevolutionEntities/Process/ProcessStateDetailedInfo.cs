@@ -3,16 +3,24 @@ using SystemInterfaces;
 
 namespace RevolutionEntities.Process
 {
-    public class ProcessStateDetailedInfo: IProcessStateDetailedInfo
+    public class ProcessStateInfo: IProcessStateInfo
     {
-        public ProcessStateDetailedInfo(string status, string notes)
+        public ProcessStateInfo(ISystemProcess process, IState state)
         {
-            Status = status;
-            Notes = notes;
+            Process = process;
+            State = state;
         }
 
-        public string Status { get; }
-        public string Notes { get; }
+        public ISystemProcess Process { get; }
+        public IState State { get; }
     }
+
+    public class DynamicProcessStateInfo : ProcessStateInfo
+    {
+        public DynamicProcessStateInfo(ISystemProcess process, string name, string status, string notes) : base(process, new StateWithNotes(name,status, notes))
+        {
+        }
+    }
+
 
 }

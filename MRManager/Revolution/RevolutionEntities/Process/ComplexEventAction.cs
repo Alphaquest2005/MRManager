@@ -11,7 +11,7 @@ namespace RevolutionEntities.Process
 {
     public class ComplexEventAction: IComplexEventAction
     {
-        public ComplexEventAction(string key, int processId, IList<IProcessExpectedEvent> events, Type expectedMessageType, IProcessAction action, IProcessStateDetailedInfo processInfo)
+        public ComplexEventAction(string key, int processId, IList<IProcessExpectedEvent> events, Type expectedMessageType, IProcessAction action, IProcessStateInfo processInfo)
         {
             ProcessId = processId;
             Events = events;
@@ -25,7 +25,7 @@ namespace RevolutionEntities.Process
         public IList<IProcessExpectedEvent> Events { get; }
         public int ProcessId { get; }
         public Type ExpectedMessageType { get; }
-        public IProcessStateDetailedInfo ProcessInfo { get; }
+        public IProcessStateInfo ProcessInfo { get; }
         public IProcessAction Action { get; }
     }
 

@@ -17,31 +17,22 @@ namespace DataServices.Actors
     public class BaseActor<T>: ReceivePersistentActor, IAgent, IProcessSource
     {
         public ISystemSource Source => new Source(Guid.NewGuid(), "PersistentActor" + typeof(T).GetFriendlyName(),new SourceType(typeof(BaseActor<T>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
-        //internal Func<IList<IProcessExpectedEvent>, IList<IProcessSystemMessage>, bool> CheckExpectedEvents {
-        //    get; } = (expectedEvents, eventSource) =>
-        //{
-        //    if (!expectedEvents.Any()) return false;
-        //    //ToDo: Convert to Visitor to keep immutability
-        //    foreach (var expectedEvent in expectedEvents)
-        //    {
-        //        var events = eventSource.Where(x => x.GetType() == expectedEvent.EventType).ToList();
-        //        if (!events.Any()) return false;
-        //        if (events.Any(x => expectedEvent.Validate(x) != true)) return false;
-        //    }
-        //    return true;
-        //};
+        public readonly List<IProcessSystemMessage> OutMessages = new List<IProcessSystemMessage>();
 
         internal void PublishProcesError(IProcessSystemMessage msg, Exception ex, Type expectedMessageType)
         {
-            EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: msg.GetType(),
-                        failedEventMessage: msg,
-                        expectedEventType: expectedMessageType,
-                        exception: ex,
-                        source: Source), Source);
+            var outMsg = new ProcessEventFailure(failedEventType: msg.GetType(),
+                failedEventMessage: msg,
+                expectedEventType: expectedMessageType,
+                exception: ex,
+                source: Source);
+            OutMessages.Add(outMsg);
+            EventMessageBus.Current.Publish(outMsg, Source);
         }
 
         internal void Publish(IProcessSystemMessage msg)
         {
+            OutMessages.Add(msg);
             EventMessageBus.Current.Publish(msg, Source);
         }
         public override string PersistenceId

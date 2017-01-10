@@ -15,11 +15,19 @@ namespace SystemInterfaces
     [InheritedExport]
     public interface IComplexEventLogCreated : IProcessSystemMessage
     {
-        IComplexEventLog EventLog { get; }
+        IEnumerable<IComplexEventLog> EventLog { get; }
     }
 
     public interface IComplexEventLog
     {
-        //ToDo create eventlog
+        string Operation { get; }
+        string Status { get; }
+        DateTime Time { get; }
+        string SourceGuid { get; }
+        string SourceName { get; }
+        string Source { get; }
+        string ExpectedSource { get; }
+        string Message { get; }
+        string ProcessInfo { get; }
     }
 }

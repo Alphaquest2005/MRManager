@@ -9,14 +9,14 @@ namespace RevolutionEntities.Process
     public class ProcessExpectedEvent : IProcessExpectedEvent
     {
         public int ProcessId { get; }
-        public IProcessStateDetailedInfo ProcessInfo { get; }
+        public IProcessStateInfo ProcessInfo { get; }
         public ISourceType ExpectedSourceType { get; }
 
         public Type EventType { get; }
         public string Key { get; }
         public Func<IProcessSystemMessage, bool> EventPredicate { get; }
 
-        public ProcessExpectedEvent(string key,int processId, Type eventType, Func<IProcessSystemMessage, bool> eventPredicate, IProcessStateDetailedInfo processInfo, ISourceType expectedSourceType)
+        public ProcessExpectedEvent(string key,int processId, Type eventType, Func<IProcessSystemMessage, bool> eventPredicate, IProcessStateInfo processInfo, ISourceType expectedSourceType)
         {
             ProcessId = processId;
             EventType = eventType;
@@ -50,7 +50,7 @@ namespace RevolutionEntities.Process
 
     public class ProcessExpectedEvent<TEvent>: ProcessExpectedEvent where TEvent:IProcessSystemMessage
     {
-        public ProcessExpectedEvent(string key, int processId, Func<TEvent, bool> eventPredicate, IProcessStateDetailedInfo processInfo, ISourceType expectedSourceType) 
+        public ProcessExpectedEvent(string key, int processId, Func<TEvent, bool> eventPredicate, IProcessStateInfo processInfo, ISourceType expectedSourceType) 
             : base(key,processId,
             typeof(TEvent),
             (Func<IProcessSystemMessage,bool>) eventPredicate.Convert(typeof(IProcessSystemMessage),typeof(bool)),processInfo, expectedSourceType)

@@ -36,6 +36,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +55,7 @@
     <Compile Include="Supervisors\ViewModelSupervisor.cs" />
     <Compile Include="Actors\ProcessActor.cs" />
     <Compile Include="Supervisors\EntityDataServiceSupervisor.cs" />
+    <Compile Include="Utils\ComplexEventLogsExtensions.cs" />
     <Compile Include="Utils\CreateEntityExtensions.cs" />
     <Compile Include="ServiceManager.cs" />
     <Compile Include="Actors\GetMediaActor.cs" />
