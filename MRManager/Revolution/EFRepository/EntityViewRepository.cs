@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 using System.Linq.Dynamic;
 using Common;
 using MoreLinq;
+using RevolutionData;
 using RevolutionEntities.Process;
 using Utilities;
 using Source = Common.Source;
@@ -36,7 +37,7 @@ namespace EFRepository
                     // ReSharper disable once ReplaceWithSingleCallToFirstOrDefault cuz EF7 bugging LEAVE JUST SO
                     var res = ctx.Set<TDbEntity>().Select(exp).DistinctBy(x => x.Id).FirstOrDefault();//
                     
-                    EventMessageBus.Current.Publish(new EntityFound<TView>((TView)(object)res, msg.Process, Source), Source);
+                    EventMessageBus.Current.Publish(new EntityFound<TView>((TView)(object)res,new StateEventInfo(msg.Process.Id,StateEvents.Data.EntityViewFound, StateCommands.Data.GetEntityView ), msg.Process, Source), Source);
                 }
             }
             catch (Exception ex)
@@ -64,7 +65,7 @@ namespace EFRepository
                     if (string.IsNullOrEmpty(whereStr)) return;
                     var res = ctx.Set<TDbEntity>().Select(exp).Distinct().Where(whereStr).DistinctBy(x => x.Id).FirstOrDefault(x => x.Id == msg.EntityId);//
                    
-                    EventMessageBus.Current.Publish(new EntityViewWithChangesFound<TView>((TView)(object)res,msg.Changes, msg.Process, Source), Source);
+                    EventMessageBus.Current.Publish(new EntityViewWithChangesFound<TView>((TView)(object)res,msg.Changes,new StateEventInfo(msg.Process.Id,StateEvents.Data.EntityViewFound, StateCommands.Data.GetEntityView), msg.Process, Source), Source);
                 }
             }
             catch (Exception ex)

@@ -51,7 +51,7 @@ namespace DataServices.Actors
             res.AddRange(xlogs);
             res.AddRange(ologs);
 
-            var msg = new ComplexEventLogCreated(res, Process, Source);
+            var msg = new ComplexEventLogCreated(res,new StateEventInfo(Process.Id, StateEvents.LogCreated), Process, Source);
             Publish(msg);
 
         }
@@ -60,8 +60,8 @@ namespace DataServices.Actors
         {
             if (ComplexEventAction.Events.All(z => z.Raised())) return;
                 //Create Timeout Message
-                var timeoutMsg = new ComplexEventActionTimedOut(ComplexEventAction, Process, Source);
-                PublishProcesError(timeoutMsg, new ApplicationException($"ComplexEventActionTimedOut:<{ComplexEventAction.ProcessInfo.Status}>"), ComplexEventAction.ExpectedMessageType);
+                var timeoutMsg = new ComplexEventActionTimedOut(ComplexEventAction,new StateEventInfo(Process.Id, StateEvents.TimeOut), Process, Source);
+                PublishProcesError(timeoutMsg, new ApplicationException($"ComplexEventActionTimedOut:<{ComplexEventAction.ProcessInfo.State.Name}>"), ComplexEventAction.ExpectedMessageType);
             // publish message
         }
 
@@ -83,7 +83,7 @@ namespace DataServices.Actors
         private void ExecuteAction()
         {
             if (!ComplexEventAction.Events.All(z => z.Raised())) return;
-            var inMsg = new ExecuteComplexEventAction(ComplexEventAction.Action, new ComplexEventParameters(this, InMessages.ToDictionary(x => x.Key, x => x.Value)), Process, Source);
+            var inMsg = new ExecuteComplexEventAction(ComplexEventAction.Action, new ComplexEventParameters(this, InMessages.ToDictionary(x => x.Key, x => x.Value)),new StateCommandInfo(Process.Id, StateCommands.CreateAction), Process, Source);
             Publish(inMsg);
             try
             {

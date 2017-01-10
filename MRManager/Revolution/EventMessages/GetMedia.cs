@@ -11,7 +11,7 @@ namespace EventMessages
     {
         public List<int> MediaIdList { get; }
         
-        public GetMedia(List<int> mediaIdList, ISystemProcess process, ISystemSource source) : base(process, source)
+        public GetMedia(List<int> mediaIdList, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             Contract.Requires(mediaIdList != null && mediaIdList.Any());
             MediaIdList = mediaIdList;

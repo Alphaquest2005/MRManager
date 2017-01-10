@@ -9,6 +9,7 @@ using Common;
 using CommonMessages;
 using EventAggregator;
 using EventMessages;
+using RevolutionData;
 using RevolutionEntities.Process;
 using Utilities;
 using ViewMessages;
@@ -18,7 +19,7 @@ namespace DataServices.Actors
     public class EntityViewDataServiceSupervisor<TEntityView> : ReceiveActor, IProcessSource where TEntityView : IEntityId
 //where TEntity : class, IEntity where TEntityView:IEntityView<TEntity>
     {
-        public ISystemSource Source => new Source(Guid.NewGuid(), $"EntityViewSupervisor:<{typeof(TEntityView).GetFriendlyName()}>", new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public ISystemSource Source => new Source(Guid.NewGuid(), $"EntityViewSupervisor:<{typeof(TEntityView).GetFriendlyName()}>",new SourceType(typeof(EntityViewDataServiceSupervisor<TEntityView>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
         private static readonly Action<IGetEntityViewById<TEntityView>> GetEntityByIdAction = (x) => x.GetEntity();
         private static readonly Action<IGetEntityViewWithChanges<TEntityView>> GetEntityWithChangesAction = (x) => x.GetEntity();
@@ -51,40 +52,34 @@ namespace DataServices.Actors
         {
             foreach (var itm in entityEvents)
             {
-                try
-                {
-                    this.GetType()
+               this.GetType()
                         .GetMethod("CreateEntityViewActor")
                         .MakeGenericMethod(itm.Key)
                         .Invoke(this, new object[] {itm.Value, process});
-                }
-                catch (Exception ex)
-                {
-                    EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: itm.Key,
-                        failedEventMessage: new ProcessSystemMessage(process, Source), 
-                        expectedEventType: typeof (ServiceStarted<>),
-                        exception: ex,
-                        source: Source),Source);
-                }
+               
             }
 
         }
 
         public void CreateEntityViewActor<TEvent>(object action, ISystemProcess process) where TEvent : IMessage
         {
+            Type actorType = typeof(EntityViewDataServiceActor<>).MakeGenericType(typeof(TEvent));
+            var inMsg = new CreateEntityViewService(actorType, action, new StateCommandInfo(process.Id, StateCommands.CreateService, StateEvents.ServiceCreated), process,Source);
+            EventMessageBus.Current.Publish(inMsg, Source);
             /// Create Actor Per Event
             try
             {
-                    Type actorType = typeof(EntityViewDataServiceActor<>).MakeGenericType(typeof(TEvent));
-                    _childActor = Context.ActorOf(Props.Create(actorType, action, process).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
+               
+                
+                _childActor = Context.ActorOf(Props.Create(inMsg.ActorType, inMsg.Action, inMsg.Process).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
                             "EntityViewDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
 
                     EventMessageBus.Current.GetEvent<TEvent>(Source).Subscribe(x => _childActor.Tell(x));
             }
             catch (Exception ex)
             {
-                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: typeof(ServiceStarted<TEvent>),
-                        failedEventMessage: new ProcessSystemMessage(process, Source),
+                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: inMsg.GetType(),
+                        failedEventMessage: inMsg,
                         expectedEventType: typeof(ServiceStarted<>),
                         exception: ex,
                         source: Source), Source);
@@ -98,5 +93,6 @@ namespace DataServices.Actors
       
 
     }
+
 
 }

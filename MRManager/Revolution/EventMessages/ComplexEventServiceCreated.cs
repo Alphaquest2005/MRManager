@@ -9,7 +9,7 @@ namespace EventMessages
     {
         public IComplexEventService Service { get; set; }
 
-        public ComplexEventServiceCreated(IComplexEventService service, ISystemProcess process, ISystemSource source) : base(process, source)
+        public ComplexEventServiceCreated(IComplexEventService service, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             Service = service;
         }

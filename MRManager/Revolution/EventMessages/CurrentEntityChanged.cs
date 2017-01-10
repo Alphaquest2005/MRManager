@@ -9,7 +9,7 @@ namespace EventMessages
     {
         public int EntityId { get; }
         
-        public CurrentEntityChanged(int entityId, ISystemProcess process, ISystemSource source) : base(process, source)
+        public CurrentEntityChanged(int entityId, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             EntityId = entityId;
         }

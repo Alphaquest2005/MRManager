@@ -15,7 +15,7 @@ namespace EventMessages
         public IComplexEventParameters ComplexEventParameters { get; }
 
 
-        public ExecuteComplexEventAction( IProcessAction action, IComplexEventParameters complexEventParameters, ISystemProcess process, ISystemSource source) : base(process, source)
+        public ExecuteComplexEventAction(IProcessAction action, IComplexEventParameters complexEventParameters, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo ,process, source)
         {
             Action = action;
             ComplexEventParameters = complexEventParameters;

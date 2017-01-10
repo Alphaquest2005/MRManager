@@ -101,7 +101,6 @@
   <ItemGroup>
     <Compile Include="Enums.cs" />
     <Compile Include="ProcessActionStates.cs" />
-    <Compile Include="ProcessExpectedEventInfos.cs" />
     <Compile Include="MachineInfoData.cs" />
     <Compile Include="ProcessActions.cs" />
     <Compile Include="ProcessStates.cs" />

@@ -15,7 +15,7 @@ using EventMessages;
 using RevolutionData;
 using RevolutionEntities.Process;
 using StartUp.Messages;
-using IProcessService = StartUp.Messages.IProcessService;
+
 
 namespace DataServices.Actors
 {
@@ -26,7 +26,7 @@ namespace DataServices.Actors
 
         public ISystemSource Source
             =>
-                new Source(Guid.NewGuid(),"ServiceManager",new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+                new Source(Guid.NewGuid(),"ServiceManager", new SourceType(typeof(IServiceManager)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
         static List<IActorRef> supervisors = new List<IActorRef>();
 
@@ -156,7 +156,7 @@ namespace DataServices.Actors
 
         }
 
-        public string UserId => this.Source.Source.Source;
+        public string UserId => this.Source.SourceName;
     }
 
 

@@ -3,9 +3,7 @@
 namespace SystemInterfaces
 {
     [InheritedExport]
-    public interface IProcessStateInfo
+    public interface IStateInfo : IProcessStateInfo
     {
-        int ProcessId { get; }
-        IState State { get; }
     }
 }

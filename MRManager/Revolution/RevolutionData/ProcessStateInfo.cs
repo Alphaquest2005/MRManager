@@ -5,7 +5,7 @@ namespace RevolutionData
 {
     public static class ProcessStateInfos
     {
-        public static IStateWithNotes AwaitUserName { get; } = new StateWithNotes("AwaitUserName" ,"Waiting for User Name", "Please Enter your User Name. If this is your First Time Login In please Contact the Receptionist for your user info.");
+        //public static IStateEvent AwaitUserName { get; } = new StateEvent("AwaitUserName" ,"Waiting for User Name", "Please Enter your User Name. If this is your First Time Login In please Contact the Receptionist for your user info.");
         //public static ProcessStateDetailedInfo<EntityFound<IUserSignIn>> UserFound { get; } = new ProcessStateDetailedInfo<EntityFound<UserSignIn>>(msg, Func<EntityFound<UserSignIn>,string>, "Please Enter your User Name. If this is your First Time Login In please Contact the Receptionist for your user info.");
 
     }

@@ -14,7 +14,7 @@ namespace EventMessages
 
     public class CreateComplexEventService:ProcessSystemMessage, ICreateComplexEventService
     {
-        public CreateComplexEventService(IComplexEventService complexEventService, ISystemProcess process, ISystemSource source) : base(process, source)
+        public CreateComplexEventService(IComplexEventService complexEventService, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             ComplexEventService = complexEventService;
         }

@@ -12,7 +12,7 @@ namespace EventMessages
         public Dictionary<string, dynamic> Changes { get; }
         public int EntityId { get; }
         
-        public EntityChanges(int entityId, Dictionary<string,dynamic> changes, ISystemProcess process, ISystemSource source) : base(process, source)
+        public EntityChanges(int entityId, Dictionary<string,dynamic> changes, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             Contract.Requires(changes.Count > 0);
             EntityId = entityId;

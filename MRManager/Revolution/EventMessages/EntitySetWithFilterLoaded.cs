@@ -12,7 +12,7 @@ namespace EventMessages
         public IList<TEntity> Entities { get; }
         
 
-        public EntitySetWithFilterLoaded(IList<TEntity> entities, ISystemProcess process, ISystemSource source) : base(process, source)
+        public EntitySetWithFilterLoaded(IList<TEntity> entities, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             Entities = entities;
         }

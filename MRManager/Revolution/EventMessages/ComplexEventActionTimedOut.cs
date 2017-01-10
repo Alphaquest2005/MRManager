@@ -12,7 +12,7 @@ namespace EventMessages
     
         public IComplexEventAction Action { get; }
         
-        public ComplexEventActionTimedOut(IComplexEventAction action, ISystemProcess process, ISystemSource source) : base(process, source)
+        public ComplexEventActionTimedOut(IComplexEventAction action, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             Contract.Requires(action != null);
             Action = action;

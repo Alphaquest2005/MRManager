@@ -14,7 +14,7 @@ namespace EventMessages
         public IList<T> Entities { get; }
         public IList<Expression<Func<T, dynamic>>> Includes { get; }
         //Todo: include filter just to match name
-        public EntitySetWithFilterWithIncludesLoaded(IList<T> entities, IList<Expression<Func<T, dynamic>>> includes, ISystemProcess process, ISystemSource source) : base(process, source)
+        public EntitySetWithFilterWithIncludesLoaded(IList<T> entities, IList<Expression<Func<T, dynamic>>> includes, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             Entities = entities;
             Includes = includes;

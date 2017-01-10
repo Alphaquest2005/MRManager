@@ -11,7 +11,7 @@ namespace ViewMessages
     {
         //occurs when viewmodel loaded in View
         [ImportingConstructor]
-        public ViewModelLoaded(TLoadingViewModel loadingViewModel, TViewModel viewModel, ISystemProcess process, ISystemSource source) : base(process, source)
+        public ViewModelLoaded(TLoadingViewModel loadingViewModel, TViewModel viewModel, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             LoadingViewModel = loadingViewModel;
             ViewModel = viewModel;
@@ -26,7 +26,7 @@ namespace ViewMessages
     public class ViewModelUnloaded<TViewModel> : ProcessSystemMessage, IViewModelEvent<TViewModel>
     {
         [ImportingConstructor]
-        public ViewModelUnloaded(TViewModel viewModel, ISystemProcess process, ISystemSource source) : base(process, source)
+        public ViewModelUnloaded(TViewModel viewModel, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             ViewModel = viewModel;
         }

@@ -7,7 +7,7 @@ namespace EventMessages
 
     public class RequestProcessState : ProcessSystemMessage, IRequestProcessState
     {
-        public RequestProcessState(ISystemProcess process, ISystemSource source) : base(process, source)
+        public RequestProcessState(IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
         }
 

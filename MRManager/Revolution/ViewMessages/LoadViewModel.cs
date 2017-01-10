@@ -8,7 +8,7 @@ namespace ViewMessages
     [Export]
     public class LoadViewModel : ProcessSystemMessage, ILoadViewModel
     {
-        public LoadViewModel(IViewModelInfo viewModelInfo, ISystemProcess process, ISystemSource source) : base(process, source)
+        public LoadViewModel(IViewModelInfo viewModelInfo, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             ViewModelInfo = viewModelInfo;
 
@@ -20,7 +20,7 @@ namespace ViewMessages
     [Export]
     public class UnloadViewModel : ProcessSystemMessage
     {
-        public UnloadViewModel(IViewModelInfo viewModelInfo, ISystemProcess process, ISystemSource source) : base(process, source)
+        public UnloadViewModel(IViewModelInfo viewModelInfo, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             ViewModelInfo = viewModelInfo;
 

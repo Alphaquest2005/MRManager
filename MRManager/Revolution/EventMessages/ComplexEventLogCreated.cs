@@ -13,7 +13,7 @@ namespace EventMessages
     {
         public IEnumerable<IComplexEventLog> EventLog { get; }
 
-        public ComplexEventLogCreated(IEnumerable<IComplexEventLog> logs, ISystemProcess process, ISystemSource source):base(process, source)
+        public ComplexEventLogCreated(IEnumerable<IComplexEventLog> logs, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             EventLog = logs;
         }

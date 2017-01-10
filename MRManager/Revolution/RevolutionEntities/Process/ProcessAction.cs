@@ -15,7 +15,7 @@ namespace RevolutionEntities.Process
         public Func<IComplexEventParameters, IProcessStateInfo> ProcessInfo { get; set; }
         public ISourceType ExpectedSourceType { get; set; }
 
-        public ProcessAction(Func<IComplexEventParameters, IProcessSystemMessage> action, Func<IComplexEventParameters, IProcessStateInfo> processInfo, ISourceType expectedSourceType)
+        public ProcessAction(Func<IComplexEventParameters, IProcessSystemMessage> action, Func<IComplexEventParameters, IStateCommandInfo> processInfo, ISourceType expectedSourceType)
         {
             Action = action;
             ProcessInfo = processInfo;

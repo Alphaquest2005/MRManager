@@ -10,7 +10,7 @@ namespace EventMessages
 {
     public class RequestComplexEventLog : ProcessSystemMessage, IRequestComplexEventLog
     {
-        public RequestComplexEventLog(ISystemProcess process, ISystemSource source) : base(process, source)
+        public RequestComplexEventLog(IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
         }
     }

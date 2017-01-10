@@ -15,7 +15,7 @@ namespace EventMessages
         public List<Expression<Func<T, bool>>> Filter { get; }
         public List<Expression<Func<T,dynamic>>> Includes { get; }
         
-        public LoadEntitySetWithFilterWithIncludes(List<Expression<Func<T,bool>>> filter, List<Expression<Func<T, dynamic>>> includes, ISystemProcess process, ISystemSource source) : base(process, source)
+        public LoadEntitySetWithFilterWithIncludes(List<Expression<Func<T,bool>>> filter, List<Expression<Func<T, dynamic>>> includes, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             Contract.Requires(filter != null);
             Contract.Requires(includes != null);

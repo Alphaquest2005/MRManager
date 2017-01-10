@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IProcessStateUpddated.cs" />
     <Compile Include="IState.cs" />
     <Compile Include="IProcessLogCreated.cs" />
     <Compile Include="IComplexEventLog.cs" />
@@ -72,6 +73,9 @@
     <Compile Include="IEntityFound.cs" />
     <Compile Include="IProcessExpectedEvent.cs" />
     <Compile Include="ISource.cs" />
+    <Compile Include="IStateCommandInfo.cs" />
+    <Compile Include="IStateEventInfo.cs" />
+    <Compile Include="IStateInfo.cs" />
     <Compile Include="ISystemProcessTerminated.cs" />
     <Compile Include="ISystemSource.cs" />
     <Compile Include="ISystemStarted.cs" />

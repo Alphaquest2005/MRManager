@@ -9,7 +9,7 @@ namespace ViewMessages
     [Export]
     public class CreateViewModel<T> : ProcessSystemMessage, ICreateViewModel<T> where T : IEntity
     {
-        public CreateViewModel(ISystemProcess process, ISystemSource source) : base(process, source)
+        public CreateViewModel(IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
         }
     }

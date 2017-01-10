@@ -8,7 +8,7 @@ namespace EventMessages
     [Export]
     public class GetEntityViewWithChanges<TView> : ProcessSystemMessage, IGetEntityViewWithChanges<TView>
     {
-        public GetEntityViewWithChanges(int entityId, Dictionary<string, dynamic> changes, ISystemProcess process, ISystemSource source) : base(process, source)
+        public GetEntityViewWithChanges(int entityId, Dictionary<string, dynamic> changes, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             Changes = changes;
             EntityId = entityId;

@@ -52,9 +52,12 @@
     <Compile Include="Process\IProcessExpectedEvent.cs" />
     <Compile Include="Process\ProcessExpectedEvent.cs" />
     <Compile Include="Process\ProcessInfo.cs" />
-    <Compile Include="Process\ProcessStateDetailedInfo.cs" />
+    <Compile Include="Process\ProcessStateInfo.cs" />
     <Compile Include="Process\ProcessSystemMessageExtensions.cs" />
     <Compile Include="Process\State.cs" />
+    <Compile Include="Process\StateCommandInfo.cs" />
+    <Compile Include="Process\StateEventInfo.cs" />
+    <Compile Include="Process\StateInfo.cs" />
     <Compile Include="Process\User.cs" />
     <Compile Include="Process\MachineInfo.cs" />
     <Compile Include="Process\ProcessStep.cs" />

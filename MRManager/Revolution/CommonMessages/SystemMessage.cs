@@ -5,14 +5,14 @@ namespace CommonMessages
 {
     public class SystemMessage :ISystemMessage
     {
-        public SystemMessage(IMachineInfo machineInfo, ISource source)
+        public SystemMessage(IMachineInfo machineInfo, ISystemSource source)
         {
             Source = source;
             MessageDateTime = DateTime.Now;
             MachineInfo = machineInfo;
         }
 
-        public ISource Source { get; }
+        public ISystemSource Source { get; }
         public DateTime MessageDateTime { get; }
         public IMachineInfo MachineInfo { get; }
     }

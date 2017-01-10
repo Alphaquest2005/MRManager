@@ -9,7 +9,7 @@ namespace ViewMessages
     public class ViewModelCreated<TViewModel> : ProcessSystemMessage, IViewModelCreated<TViewModel>
     {
         [ImportingConstructor]
-        public ViewModelCreated(TViewModel viewModel, ISystemProcess process, ISystemSource source) : base(process, source)
+        public ViewModelCreated(TViewModel viewModel, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             ViewModel = viewModel;
         }

@@ -27,12 +27,12 @@ namespace RevolutionData
                 "101",
                 1, new List<IProcessExpectedEvent>
                 {
-                    new ProcessExpectedEvent ("ProcessStarted", 1, typeof (ISystemProcessStarted), e => e != null, new ProcessStateInfo("Process Started","First Step"), new SourceType(typeof(IProcessService))),
-                    new ProcessExpectedEvent ("ViewCreated", 1, typeof (IViewModelCreated<IScreenModel>), e => e != null, new ProcessStateInfo("ScreenView Created","This view contains all views"), new SourceType(typeof(IViewModelService) )),
-                    new ProcessExpectedEvent ("ViewLoaded", 1, typeof (IViewModelLoaded<IMainWindowViewModel,IScreenModel>), e => e != null, new ProcessStateInfo("ScreenView Model loaded in MainWindowViewModel","Only ViewModel in Body"), new SourceType(typeof(IViewModelService) ))
+                    new ProcessExpectedEvent ("ProcessStarted", 1, typeof (ISystemProcessStarted), e => e != null, new StateEventInfo(1, StateEvents.Started), new SourceType(typeof(IProcessService))),
+                    new ProcessExpectedEvent ("ViewCreated", 1, typeof (IViewModelCreated<IScreenModel>), e => e != null, new StateEventInfo(1,"ScreenViewCreated", "ScreenView Created","This view contains all views"), new SourceType(typeof(IViewModelService) )),
+                    new ProcessExpectedEvent ("ViewLoaded", 1, typeof (IViewModelLoaded<IMainWindowViewModel,IScreenModel>), e => e != null, new StateEventInfo(1,"ScreenViewLoaded","ScreenView Model loaded in MainWindowViewModel","Only ViewModel in Body"), new SourceType(typeof(IViewModelService) ))
                 },
                 typeof(ISystemProcessCompleted),
-                processInfo:new ProcessStateInfo("Process Completed","Change Process State to Process Completed" ),
+                processInfo:new StateCommandInfo(1,StateCommands.SetProcessStateToCompleted ),
                 action: ProcessActions.ProcessCompleted),
 
 
@@ -41,36 +41,63 @@ namespace RevolutionData
                 processId:1,
                 events: new List<IProcessExpectedEvent>
                 {
-                    new ProcessExpectedEvent (key: "ProcessCompleted",processId: 1, eventType: typeof (ISystemProcessCompleted), eventPredicate: e => e != null, processInfo: new ProcessStateInfo("System Initalization complete","Should Close Process Actor"), )
+                    new ProcessExpectedEvent (key: "ProcessCompleted",
+                                              processId: 1,
+                                              eventPredicate: e => e != null,
+                                              eventType: typeof (ISystemProcessCompleted),
+                                              processInfo: new StateEventInfo(1,StateEvents.ProcessCompleted),
+                                              expectedSourceType:new SourceType(typeof(IComplexEventService)))
                 }, 
                 expectedMessageType: typeof(ISystemProcessTerminated),
-                action: ProcessActions.ShutActorDown), 
-            new ComplexEventAction("201",
-                2, new List<IProcessExpectedEvent>
-                {
-                    new ProcessExpectedEvent ("ProcessStarted", 2, e => e != null, ProcessExpectedEventInfos.ProcessStarted)
-                    
-                }, typeof(IProcessStateMessage<ISignInInfo>), ProcessActions.IntializeSigninProcessState, new ProcessStateInfo("Intialize Process Start for Signin process","")),
+                action: ProcessActions.ShutActorDown,
+                processInfo:new StateCommandInfo(1,StateCommands.TerminateActor )), 
             new ComplexEventAction(
-                "202", 2, new List<IProcessExpectedEvent>
+                key:"201",
+                processId:2,
+                events:new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent (key: "ProcessStarted",
+                                              processId: 2,
+                                              eventPredicate: e => e != null,
+                                              eventType: typeof (ISystemProcessCompleted),
+                                              processInfo: new StateEventInfo(1,StateEvents.ProcessCompleted),
+                                              expectedSourceType:new SourceType(typeof(IComplexEventService)))
+                    
+                },
+                expectedMessageType:typeof(IProcessStateMessage<ISignInInfo>),
+                action:ProcessActions.IntializeSigninProcessState,
+                processInfo:new StateCommandInfo(2, StateCommands.CreateIntialState)),
+            new ComplexEventAction(
+                key:"202",
+                processId:2,
+                events:new List<IProcessExpectedEvent>
                 {
                     new ProcessExpectedEvent<IEntityViewWithChangesFound<ISignInInfo>> (
-                        "UserNameFound", 2, e => e.Entity != null && e.Changes.Count == 1 && e.Changes.ContainsKey(nameof(ISignInInfo.Usersignin)), expectedSourceType: new SourceType(typeof(IEntityViewRepository)), processInfo: new ProcessStateInfo("User Name Found","Not Verified"))
+                        "UserNameFound", 2, e => e.Entity != null && e.Changes.Count == 1 && e.Changes.ContainsKey(nameof(ISignInInfo.Usersignin)), expectedSourceType: new SourceType(typeof(IEntityViewRepository)), processInfo: new StateEventInfo(2, StateEvents.UserNameFound))
                 },
-                typeof(IProcessStateMessage<ISignInInfo>),
-                ProcessActions.UserNameFound,
-                new ProcessStateInfo("Welcome User","")),
+                expectedMessageType:typeof(IProcessStateMessage<ISignInInfo>),
+                action: ProcessActions.UserNameFound,
+                processInfo: new StateCommandInfo(2, StateCommands.UpdateState)),
             new ComplexEventAction(
-                "203", 2, new List<IProcessExpectedEvent>
+                key:"203",
+                processId: 2,
+                events: new List<IProcessExpectedEvent>
                 {
-                    new ProcessExpectedEvent<IEntityViewWithChangesFound<ISignInInfo>> (processId: 2, eventPredicate: e => e.Entity != null && e.Changes.Count == 2 && e.Changes.ContainsKey(nameof(ISignInInfo.Password)), processInfo: new ProcessStateInfo("User Found with Both Username and Password",""), expectedSourceType: new SourceType(typeof(IEntityViewRepository)), key: "ValidatedUser")
+                    new ProcessExpectedEvent<IEntityViewWithChangesFound<ISignInInfo>> (processId: 2,
+                                                        eventPredicate: e => e.Entity != null && e.Changes.Count == 2 && e.Changes.ContainsKey(nameof(ISignInInfo.Password)),
+                                                        processInfo: new StateEventInfo(2, StateEvents.UserFound, ),
+                                                        expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
+                                                        key: "ValidatedUser")
                 },
-                typeof(IProcessStateMessage<ISignInInfo>),
-                ProcessActions.SetProcessStatetoValidatedUser, new ProcessStateInfo("Set User Validated ProcessState","")),
+                expectedMessageType: typeof(IProcessStateMessage<ISignInInfo>),
+                action: ProcessActions.SetProcessStatetoValidatedUser,
+                processInfo: new StateCommandInfo(2, StateCommands.UpdateState)),
             new ComplexEventAction(
-                "204", 2, new List<IProcessExpectedEvent>(),
-                typeof(IUserValidated),
-                processInfo:new ProcessStateInfo("Inform Domain User Validated",""),
+                key:"204",
+                processId: 2,
+                events: new List<IProcessExpectedEvent>(),
+                expectedMessageType:typeof(IUserValidated),
+                processInfo:new StateCommandInfo(2, StateCommands.PublishMessage),
                 action: ProcessActions.UserValidated)
             
            

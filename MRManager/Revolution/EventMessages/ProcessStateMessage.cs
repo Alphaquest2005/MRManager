@@ -5,9 +5,9 @@ using CommonMessages;
 namespace EventMessages
 {
 
-    public class ProcessStateMessage<TEntity> : ProcessSystemMessage, IProcessStateMessage<TEntity> where TEntity : IEntityId
+    public class UpdateProcessState<TEntity> : ProcessSystemMessage, IProcessStateMessage<TEntity> where TEntity : IEntityId
     {
-        public ProcessStateMessage(IProcessState<TEntity> state, ISystemProcess process, ISystemSource source) : base(process, source)
+        public UpdateProcessState(IProcessState<TEntity> state, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             State = state;
         }

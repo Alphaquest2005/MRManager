@@ -12,12 +12,20 @@ namespace SystemInterfaces
     {
         string Name { get; }
         string Status { get; }
-    }
-
-    [InheritedExport]
-    public interface IStateWithNotes: IState
-    {
         string Notes { get; }
     }
 
+    [InheritedExport]
+    public interface IStateEvent: IState
+    {
+        
+    }
+
+    [InheritedExport]
+    public interface IStateCommand : IState
+    {
+        
+    }
+
+    
 }

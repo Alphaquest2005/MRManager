@@ -65,14 +65,14 @@ namespace DataServices.Actors
             var logs = new List<IComplexEventLog>(OutMessages.CreatEventLogs(Source));
             logs.AddRange(complexEventLogs.SelectMany(x => x.EventLog).ToList());
 
-            var msg = new ProcessLogCreated(logs.OrderBy(x => x.Time), new ProcessStateInfo(Process, ProcessStates.LogCreated), Source);
+            var msg = new ProcessLogCreated(logs.OrderBy(x => x.Time), new ProcessStateInfo(Process.Id, StateEvents.LogCreated), Process, Source);
             Publish(msg);
         }
 
         private void HandleProcessLogRequest(IRequestProcessLog requestProcessLog)
         {
             //Request logs from ComplexEventActors
-            var msg = new RequestComplexEventLog(Process,Source);
+            var msg = new RequestComplexEventLog(Process,Source, TODO);
             Publish(msg);
         }
 
@@ -86,7 +86,11 @@ namespace DataServices.Actors
 
         private void SaveStateMessages(IProcessStateMessage<IEntityId> pe)
         {
+
             ProcessStateMessages.AddOrUpdate(pe.GetType(), pe, (k, v) => pe);
+            var msg = new ProcessStateUpddated(entityType: pe.GetType(), pe,
+                new StateEventInfo(Process.Id, StateEvents.StateUpdated, StateCommands.UpdateState), Process, Source);
+            Publish(msg);
         }
 
         private void StartActors(IEnumerable<IComplexEventAction> complexEvents)

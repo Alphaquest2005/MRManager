@@ -22,7 +22,7 @@ using Utilities;
 using ViewMessages;
 using ViewModel.Interfaces;
 using ViewModels;
-using IProcessService = StartUp.Messages.IProcessService;
+
 
 
 namespace MRManager_UnitTests
@@ -31,7 +31,7 @@ namespace MRManager_UnitTests
     public class SystemIntializationProcess
     {
 
-        public ISource Source => new Source(Guid.NewGuid(), "TestCase" + typeof(SystemIntializationProcess).GetFriendlyName(), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public ISource Source => new Source(Guid.NewGuid(), "TestCase" + typeof(SystemIntializationProcess).GetFriendlyName(),new SourceType(typeof(SystemIntializationProcess)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         private static void StartSystem()
         {
 

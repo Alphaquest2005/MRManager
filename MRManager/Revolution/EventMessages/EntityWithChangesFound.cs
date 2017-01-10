@@ -8,7 +8,7 @@ namespace EventMessages
     [Export]
     public class EntityWithChangesFound<TEntity> : ProcessSystemMessage, IEntityWithChangesFound<TEntity> where TEntity : IEntity
     {
-        public EntityWithChangesFound(TEntity entity, Dictionary<string, dynamic> changes, ISystemProcess process, ISystemSource source) : base(process, source)
+        public EntityWithChangesFound(TEntity entity, Dictionary<string, dynamic> changes, IProcessStateInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             Entity = entity;
             Changes = changes;

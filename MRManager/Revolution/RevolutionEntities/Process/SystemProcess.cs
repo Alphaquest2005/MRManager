@@ -32,7 +32,7 @@ namespace RevolutionEntities.Process
 
     public class ProcessState<TEntity> :ProcessState, IProcessState<TEntity> where TEntity : IEntityId
     {
-        public ProcessState(int processId, TEntity entity, IProcessStateInfo info) : base(processId, info)
+        public ProcessState(int processId, TEntity entity, IStateInfo info) : base(processId, info)
         {
             Entity = entity;
         }
