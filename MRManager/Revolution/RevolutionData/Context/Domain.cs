@@ -12,7 +12,7 @@ namespace RevolutionData.Context
     {
         public class Commands
         {
-            public static IStateCommand PublishDomainEvent => new StateCommand("PublishMessage", "Publish Message", Events.DomainEventPublished);
+            public static IStateCommand PublishDomainEvent => new StateCommand("PublishMessage", "Publish Message").RegisterExpectedEvent(Events.DomainEventPublished);
         }
 
         public class Events

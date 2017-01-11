@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonMessages\CommonMessages.csproj">
-      <Project>{77007560-89DC-4E1F-9313-AE064A048AD4}</Project>
+      <Project>{77007560-89dc-4e1f-9313-ae064a048ad4}</Project>
       <Name>CommonMessages</Name>
     </ProjectReference>
     <ProjectReference Include="..\Logging\Logging.csproj">

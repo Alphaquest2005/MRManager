@@ -37,7 +37,8 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<IEntityFound<ISignInInfo>>(Source).Subscribe(x => signonInfo = x);
             EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source)
                 .Subscribe(x => Debugger.Log(0, "Test", x.Exception.Message + ":-:" + x.Exception.StackTrace));
-            var msg = new GetEntityViewById<ISignInInfo>(1,new StateCommandInfo(testProcess.Id,RevolutionData.Context.EntityView.Commands.GetEntityView), testProcess, Source);
+            var stateCommandInfo = new StateCommandInfo(testProcess.Id,RevolutionData.Context.EntityView.Commands.GetEntityView);
+            var msg = new GetEntityViewById<ISignInInfo>(1,stateCommandInfo, testProcess, Source);
             msg.GetEntity();
             Thread.Sleep(2);
             Assert.IsNotNull(signonInfo);

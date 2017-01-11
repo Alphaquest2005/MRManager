@@ -12,9 +12,9 @@ namespace RevolutionData.Context
     {
         public class Commands
         {
-            public static IStateCommand CreateAction => new StateCommand("CreateAction", "Action to be Executed", Events.ActionCreated);
-            public static IStateCommand StartService => new StateCommand("CreateService", "Create Actor Service", Events.ServiceStarted);
-            public static IStateCommand TerminateActor => new StateCommand(name: "ShutActorDown", status: "Shut Actor Down", expectedEvent: Events.ActorTerminated);
+            public static IStateCommand CreateAction => new StateCommand("CreateAction", "Action to be Executed").RegisterExpectedEvent(Events.ActionCreated);
+            public static IStateCommand StartService => new StateCommand("CreateService", "Create Actor Service").RegisterExpectedEvent(Events.ServiceStarted);
+            public static IStateCommand TerminateActor => new StateCommand(name: "ShutActorDown", status: "Shut Actor Down").RegisterExpectedEvent(Events.ActorTerminated);
         }
         public class Events
         {

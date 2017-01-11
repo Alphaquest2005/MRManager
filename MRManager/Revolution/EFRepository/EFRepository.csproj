@@ -78,7 +78,7 @@
       <Name>CommonMessages</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{be92d067-c6af-4e15-bb93-6059ae114927}</Project>
+      <Project>{cb6d5fbc-0c13-437d-b4f3-a0ec4d5673b3}</Project>
       <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\DynamicLinq\System.Linq.Dynamic\System.Linq.Dynamic.csproj">

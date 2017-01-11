@@ -7,10 +7,10 @@ namespace RevolutionEntities.Process
         public StateCommandInfo(int processId, IStateCommand state):base(processId, state)
         {
             State = state;
-            
+           
         }
 
+
         public new IStateCommand State { get; }
-       
     }
 }
