@@ -7,6 +7,7 @@ using Akka.Routing;
 using CommonMessages;
 using EventAggregator;
 using RevolutionData;
+using RevolutionEntities.Process;
 using StartUp.Messages;
 using ViewMessages;
 using ViewModel.Interfaces;
@@ -28,7 +29,7 @@ namespace DataServices.Actors
 
             EventMessageBus.Current.GetEvent<ISystemProcessStarted>(Source).Subscribe(x => HandleProcessViews(x));
             Receive<ISystemStarted>(x => HandleProcessViews(x));
-             EventMessageBus.Current.Publish(new ServiceStarted<IViewModelSupervisor>(this,process, Source), Source);
+             EventMessageBus.Current.Publish(new ServiceStarted<IViewModelSupervisor>(this,new StateEventInfo(process.Id, RevolutionData.Context.Actor.Events.ServiceStarted), process, Source), Source);
         }
 
         private void HandleProcessViews(IProcessSystemMessage pe)
@@ -41,7 +42,7 @@ namespace DataServices.Actors
 
         public void PublishViewModel(IViewModelInfo viewModelInfo, IProcessSystemMessage pe)
         {
-            var msg = new LoadViewModel(viewModelInfo, pe.Process, Source);
+            var msg = new LoadViewModel(viewModelInfo,new StateCommandInfo(pe.Process.Id, RevolutionData.Context.ViewModel.Commands.LoadViewModel), pe.Process, Source);
             _childActor.Tell(msg);
         }
     }

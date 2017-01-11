@@ -16,7 +16,7 @@ namespace Core.Common.UI
 
     public class DynamicViewModel<TViewModel> : Expando, IDynamicViewModel<TViewModel> where TViewModel:IViewModel
     {
-        public ISource Source => new Source(Guid.NewGuid(), "DynamicViewModel:" + typeof(TViewModel).GetFriendlyName(), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public ISystemSource Source => new Source(Guid.NewGuid(), "DynamicViewModel:" + typeof(TViewModel).GetFriendlyName(),new SourceType(typeof(DynamicViewModel<TViewModel>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         public new TViewModel Instance { get; }
         public DynamicViewModel(TViewModel viewModel) : base(viewModel)
         {

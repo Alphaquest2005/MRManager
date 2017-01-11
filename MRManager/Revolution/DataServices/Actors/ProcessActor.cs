@@ -53,7 +53,7 @@ namespace DataServices.Actors
             }
             // start actor for each complex event
             
-            Publish(new ServiceStarted<IProcessService>(this,process, Source));
+            Publish(new ServiceStarted<IProcessService>(this,new StateEventInfo(process.Id, RevolutionData.Context.Actor.Events.ServiceStarted), process, Source));
             
 
             // start actor for each complex event
@@ -65,14 +65,14 @@ namespace DataServices.Actors
             var logs = new List<IComplexEventLog>(OutMessages.CreatEventLogs(Source));
             logs.AddRange(complexEventLogs.SelectMany(x => x.EventLog).ToList());
 
-            var msg = new ProcessLogCreated(logs.OrderBy(x => x.Time), new ProcessStateInfo(Process.Id, StateEvents.LogCreated), Process, Source);
+            var msg = new ProcessLogCreated(logs.OrderBy(x => x.Time), new StateEventInfo(Process.Id, RevolutionData.Context.Process.Events.LogCreated), Process, Source);
             Publish(msg);
         }
 
         private void HandleProcessLogRequest(IRequestProcessLog requestProcessLog)
         {
             //Request logs from ComplexEventActors
-            var msg = new RequestComplexEventLog(Process,Source, TODO);
+            var msg = new RequestComplexEventLog(new StateCommandInfo(Process.Id, RevolutionData.Context.Process.Commands.CreateComplexEventLog), Process,Source);
             Publish(msg);
         }
 
@@ -88,8 +88,7 @@ namespace DataServices.Actors
         {
 
             ProcessStateMessages.AddOrUpdate(pe.GetType(), pe, (k, v) => pe);
-            var msg = new ProcessStateUpddated(entityType: pe.GetType(), pe,
-                new StateEventInfo(Process.Id, StateEvents.StateUpdated, StateCommands.UpdateState), Process, Source);
+            var msg = new ProcessStateUpdated(pe.GetType(), pe, new StateEventInfo(Process.Id, RevolutionData.Context.Process.Events.StateUpdated), Process, Source);
             Publish(msg);
         }
 
@@ -97,7 +96,7 @@ namespace DataServices.Actors
         {
             foreach (var cp in complexEvents)
             {
-                var inMsg = new CreateComplexEventService(new ComplexEventService(cp, Process, Source), Process, Source);
+                var inMsg = new CreateComplexEventService(new ComplexEventService(cp, Process, Source),new StateCommandInfo(Process.Id, RevolutionData.Context.Actor.Commands.StartService), Process, Source);
                 try
                 {
                     var outMsg = CreateComplexEventService.Invoke(inMsg);
@@ -137,7 +136,7 @@ namespace DataServices.Actors
                         x.Process.Id == inMsg.Process.Id &&
                         x.MachineInfo.MachineName == inMsg.Process.MachineInfo.MachineName)
                 .Subscribe(x => childActor.Tell(x));
-            return new ComplexEventServiceCreated(inMsg.ComplexEventService, inMsg.Process, inMsg.Source);
+            return new ComplexEventServiceCreated(inMsg.ComplexEventService,new StateEventInfo(inMsg.Process.Id, RevolutionData.Context.Actor.Events.ServiceStarted), inMsg.Process, inMsg.Source);
         };
     }
 

@@ -1,6 +1,6 @@
 using System.ComponentModel.Composition;
 
-namespace StartUp.Messages
+namespace SystemInterfaces
 {
     [InheritedExport]
     public interface IViewModelService : IService<IViewModelService>

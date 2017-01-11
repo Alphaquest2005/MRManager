@@ -22,7 +22,7 @@ namespace DataServices.Actors
         {
             Action = action;
             Command<TService>(m => HandledEvent(m));
-            EventMessageBus.Current.Publish(new ServiceStarted<IEntityDataServiceActor<TService>>(this,process,Source), Source);
+            EventMessageBus.Current.Publish(new ServiceStarted<IEntityDataServiceActor<TService>>(this,new StateEventInfo(process.Id, RevolutionData.Context.Actor.Events.ServiceStarted), process,Source), Source);
         }
 
         

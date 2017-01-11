@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using SystemInterfaces;
 using CommonMessages;
 using EF.Entities;
-using EFReposi;
+
 using Entity.Expressions;
 using EventAggregator;
 using EventMessages;
@@ -16,18 +16,18 @@ using Microsoft.Extensions.Logging;
 using System.Linq.Dynamic;
 using Common;
 using MoreLinq;
-using RevolutionData;
+using RevolutionData.Context;
 using RevolutionEntities.Process;
 using Utilities;
 using Source = Common.Source;
 
 namespace EFRepository
 {
-    public class EntityViewRepository<TView,TDbView, TEntity, TDbEntity, TDbContext>: IEntityViewRepository where TDbView:class, IEntityId where TDbEntity : class,IEntity where TDbContext : DbContext, new() where TEntity : class, IEntity where TView : IEntityView<TEntity>
+    public class EntityViewRepository<TView,TDbView, TEntity, TDbEntity, TDbContext>:BaseRepository<EntityViewRepository<TView, TDbView, TEntity, TDbEntity, TDbContext>>, IEntityViewRepository where TDbView:class, IEntityId where TDbEntity : class,IEntity where TDbContext : DbContext, new() where TEntity : class, IEntity where TView : IEntityView<TEntity>
     {
 
-        public static ISystemSource Source => new Source(Guid.NewGuid(), $"EntityRepository:<{typeof(TView).GetFriendlyName()},{typeof(TDbView).GetFriendlyName()},{typeof(TEntity).GetFriendlyName()},{typeof(TDbEntity).GetFriendlyName()},{typeof(TDbContext).GetFriendlyName()}>",new SourceType(typeof(IEntityViewRepository)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
-        public static void GetEntityById(IGetEntityViewById<TView>  msg)
+        
+        public void GetEntityById(IGetEntityViewById<TView>  msg)
         {
             try
             {
@@ -37,22 +37,18 @@ namespace EFRepository
                     // ReSharper disable once ReplaceWithSingleCallToFirstOrDefault cuz EF7 bugging LEAVE JUST SO
                     var res = ctx.Set<TDbEntity>().Select(exp).DistinctBy(x => x.Id).FirstOrDefault();//
                     
-                    EventMessageBus.Current.Publish(new EntityFound<TView>((TView)(object)res,new StateEventInfo(msg.Process.Id,StateEvents.Data.EntityViewFound, StateCommands.Data.GetEntityView ), msg.Process, Source), Source);
+                    EventMessageBus.Current.Publish(new EntityFound<TView>((TView)(object)res,new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
                 }
             }
             catch (Exception ex)
             {
-
-                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: msg.GetType(),
-                    failedEventMessage: msg,
-                    expectedEventType: typeof(IEntityFound<TView>),
-                    exception: ex,
-                    source: Source), Source);
+                PublishProcesError(msg, ex, typeof(IEntityFound<TView>));
+                
             }
 
         }
 
-        public static void GetEntityWithChanges(IGetEntityViewWithChanges<TView> msg)
+        public void GetEntityWithChanges(IGetEntityViewWithChanges<TView> msg)
         {
             try
             {
@@ -65,17 +61,12 @@ namespace EFRepository
                     if (string.IsNullOrEmpty(whereStr)) return;
                     var res = ctx.Set<TDbEntity>().Select(exp).Distinct().Where(whereStr).DistinctBy(x => x.Id).FirstOrDefault(x => x.Id == msg.EntityId);//
                    
-                    EventMessageBus.Current.Publish(new EntityViewWithChangesFound<TView>((TView)(object)res,msg.Changes,new StateEventInfo(msg.Process.Id,StateEvents.Data.EntityViewFound, StateCommands.Data.GetEntityView), msg.Process, Source), Source);
+                    EventMessageBus.Current.Publish(new EntityViewWithChangesFound<TView>((TView)(object)res,msg.Changes,new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
                 }
             }
             catch (Exception ex)
             {
-
-                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: msg.GetType(),
-                    failedEventMessage: msg,
-                    expectedEventType: typeof(IEntityViewLoaded<TView>),
-                    exception: ex,
-                    source: Source), Source);
+                PublishProcesError(msg, ex, typeof(IEntityViewLoaded<TView>));
             }
 
         }

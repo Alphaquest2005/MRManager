@@ -18,15 +18,21 @@ namespace RevolutionEntities.Process
 
     public class StateEvent : State, IStateEvent
     {
-        public StateEvent(string status, string name, string notes) : base(status, name, notes)
+        public StateEvent(string status, string name, string notes, IStateCommand expectedCommand) : base(status, name, notes)
         {
+            ExpectedCommand = expectedCommand;
         }
+
+        public IStateCommand ExpectedCommand { get; }
     }
 
     public class StateCommand :State, IStateCommand
     {
-        public StateCommand(string status, string name) : base(status, name, "")
+        public StateCommand(string status, string name, IStateEvent expectedEvent) : base(status, name, "")
         {
+            ExpectedEvent = expectedEvent;
         }
+
+        public IStateEvent ExpectedEvent { get; }
     }
 }

@@ -18,7 +18,7 @@ namespace Views
 {
 	public partial class Screen
 	{
-        public ISystemSource Source => new Source(Guid.NewGuid(), $"View:{typeof(Screen)}>", new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public ISystemSource Source => new Source(Guid.NewGuid(), $"View:{typeof(Screen)}>",new SourceType(typeof(Screen)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         public Screen()
 		{
             

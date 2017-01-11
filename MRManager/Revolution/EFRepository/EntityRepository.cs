@@ -16,11 +16,11 @@ using Microsoft.Extensions.Logging;
 using RevolutionEntities.Process;
 using Utilities;
 
-namespace EFReposi
+namespace EFRepository
 {
-    public class EntityRepository<TEntity,TDBEntity, TDBContext>:IProcessSource where TEntity:IEntity where TDBContext : DbContext, new() where TDBEntity:class, IEntity
+    public class EntityRepository<TEntity,TDBEntity, TDBContext>:BaseRepository<EntityRepository<TEntity,TDBEntity, TDBContext>> where TEntity:IEntity where TDBContext : DbContext, new() where TDBEntity:class, IEntity
     {
-        public  ISystemSource Source => new Source(Guid.NewGuid(), $"EntityRepository:<{typeof(TEntity).GetFriendlyName()},{typeof(TDBEntity).GetFriendlyName()},{typeof(TDBContext).GetFriendlyName()}>" , new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        
         public  void Create(ICreateEntity<TEntity> msg )
         {
             Contract.Requires(msg.Entity.Id == 0);
@@ -30,17 +30,12 @@ namespace EFReposi
                 {
                     ctx.Set<TDBEntity>().Add((TDBEntity)(object) msg.Entity);
                     ctx.SaveChanges(true);
-                    EventMessageBus.Current.Publish(new EntityCreated<TEntity>(msg.Entity, msg.Process, Source), Source);
+                    EventMessageBus.Current.Publish(new EntityCreated<TEntity>(msg.Entity,new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntityCreated), msg.Process, Source), Source);
                 }
             }
             catch (Exception ex)
             {
-
-                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: msg.GetType(),
-                    failedEventMessage: msg,
-                    expectedEventType: typeof(IEntityCreated<TEntity>),
-                    exception: ex,
-                    source: Source), Source);
+                PublishProcesError(msg, ex, typeof(IEntityCreated<TEntity>));
             }
         }
 
@@ -55,17 +50,12 @@ namespace EFReposi
                     ctx.Set<TDBEntity>().Update(entity);
 
                     ctx.SaveChanges(true);
-                    EventMessageBus.Current.Publish(new EntityUpdated<TEntity>((TEntity)(object)entity, msg.Process, Source), Source);
+                    EventMessageBus.Current.Publish(new EntityUpdated<TEntity>((TEntity)(object)entity,new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntityUpdated), msg.Process, Source), Source);
                 }
             }
             catch (Exception ex)
             {
-
-                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType:msg.GetType(),
-                    failedEventMessage: msg, 
-                    expectedEventType: typeof(IEntityUpdated<TEntity>),
-                    exception: ex,
-                    source: Source), Source);
+                PublishProcesError(msg, ex, typeof(IEntityUpdated<TEntity>));
             }
 
         }
@@ -81,17 +71,13 @@ namespace EFReposi
                         var entity = ctx.Set<TDBEntity>().Find(msg.EntityId);
                         ctx.Set<TDBEntity>().Remove(entity);
                         ctx.SaveChanges(true);
-                        EventMessageBus.Current.Publish(new EntityDeleted<TEntity>(msg.EntityId, msg.Process, Source), Source);
+                        EventMessageBus.Current.Publish(new EntityDeleted<TEntity>(msg.EntityId,new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntityDeleted), msg.Process, Source), Source);
                     }
                 }
             }
             catch (Exception ex)
             {
-                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: msg.GetType(),
-                    failedEventMessage: msg,
-                    expectedEventType: typeof(IEntityDeleted<TEntity>),
-                    exception: ex,
-                    source: Source), Source);
+                PublishProcesError(msg, ex, typeof(IEntityDeleted<TEntity>));
             }
 
 
@@ -105,17 +91,12 @@ namespace EFReposi
                 using (var ctx = new TDBContext())
                 {
                     var p = ctx.Set<TDBEntity>().First(x => x.Id == msg.EntityId);
-                    EventMessageBus.Current.Publish(new EntityFound<TEntity>((TEntity)(object)p, msg.Process, Source), Source);
+                    EventMessageBus.Current.Publish(new EntityFound<TEntity>((TEntity)(object)p, new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntityFound), msg.Process, Source), Source);
                 }
             }
             catch (Exception ex)
             {
-
-                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: msg.GetType(),
-                    failedEventMessage: msg,
-                    expectedEventType: typeof(IEntityFound<TEntity>),
-                    exception: ex,
-                    source: Source), Source);
+                PublishProcesError(msg, ex, typeof(IEntityFound<TEntity>));
             }
 
 
@@ -133,17 +114,12 @@ namespace EFReposi
                     whereStr = whereStr.TrimEnd('&');
                     if (string.IsNullOrEmpty(whereStr)) return;
                     var p = ctx.Set<TDBEntity>().Where(whereStr).First();
-                    EventMessageBus.Current.Publish(new EntityWithChangesFound<TEntity>((TEntity)(object)p, msg.Changes, msg.Process, Source), Source);
+                    EventMessageBus.Current.Publish(new EntityWithChangesFound<TEntity>((TEntity)(object)p, msg.Changes, new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntityFound), msg.Process, Source), Source);
 
                 }
                 catch (Exception ex)
                 {
-
-                    EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: msg.GetType(),
-                    failedEventMessage: msg,
-                    expectedEventType: typeof(IEntityWithChangesFound<TEntity>),
-                    exception: ex,
-                    source: Source), Source);
+                    PublishProcesError(msg, ex, typeof(IEntityWithChangesFound<TEntity>));
                 }
 
 
@@ -164,18 +140,13 @@ namespace EFReposi
                     IQueryable<TDBEntity> rres = ctx.Set<TDBEntity>();
                     var res = rres.Select(x => (TEntity)(object)x).ToList(); //;
 
-                    EventMessageBus.Current.Publish(new EntitySetLoaded<TEntity>(res, msg.Process, Source), Source);
+                    EventMessageBus.Current.Publish(new EntitySetLoaded<TEntity>(res,new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntitySetLoaded), msg.Process, Source), Source);
                 }
 
             }
             catch (Exception ex)
             {
-
-                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: msg.GetType(),
-                    failedEventMessage: msg,
-                    expectedEventType: typeof(IEntitySetLoaded<TEntity>),
-                    exception: ex,
-                    source: Source), Source);
+                PublishProcesError(msg, ex, typeof(IEntitySetLoaded<TEntity>));
             }
         }
 
@@ -199,19 +170,14 @@ namespace EFReposi
 
 
                     var res = rres.Select(x => (TEntity)(object)x).ToList();
-                    EventMessageBus.Current.Publish(new EntitySetWithFilterLoaded<TEntity>(res, msg.Process, Source), Source);
+                    EventMessageBus.Current.Publish(new EntitySetWithFilterLoaded<TEntity>(res, new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntitySetLoaded), msg.Process, Source), Source);
                 }
 
 
             }
             catch (Exception ex)
             {
-
-                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: msg.GetType(),
-                    failedEventMessage: msg,
-                    expectedEventType: typeof(IEntitySetWithFilterLoaded<TEntity>),
-                    exception: ex,
-                    source: Source), Source);
+                PublishProcesError(msg, ex, typeof(IEntitySetWithFilterLoaded<TEntity>));
             }
         }
 
@@ -235,7 +201,7 @@ namespace EFReposi
                     rres = rfilter?.Aggregate(rres, (current, s) => current.Where(s));
 
                     var res = rres.Select(x => (TEntity)(object)x).ToList();
-                    EventMessageBus.Current.Publish(new EntitySetWithFilterWithIncludesLoaded<TEntity>(res, msg.Includes, msg.Process, Source), Source);
+                    EventMessageBus.Current.Publish(new EntitySetWithFilterWithIncludesLoaded<TEntity>(res, msg.Includes, new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntitySetLoaded), msg.Process, Source), Source);
                 }
 
 
@@ -243,12 +209,11 @@ namespace EFReposi
             }
             catch (Exception ex)
             {
-                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: msg.GetType(),
-                    failedEventMessage: msg,
-                    expectedEventType: typeof(IEntitySetWithFilterWithIncludesLoaded<TEntity>),
-                    exception: ex,
-                    source: Source), Source);
+                PublishProcesError(msg, ex, typeof(IEntitySetWithFilterWithIncludesLoaded<TEntity>));
             }
         }
+
+
     }
 }
+

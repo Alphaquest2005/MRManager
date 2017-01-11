@@ -43,7 +43,7 @@ namespace DataServices.Actors
                 var processInfo = Processes.ProcessInfos.FirstOrDefault(x => x.ParentProcessId == 0);
                 if (processInfo == null) return;
                 var systemProcess = new SystemProcess(new Process(processInfo, new Agent("System")), machineInfo);
-                var systemStartedMsg = new SystemStarted(systemProcess, Source);
+                var systemStartedMsg = new SystemStarted(new StateEventInfo(systemProcess.Id, RevolutionData.Context.Process.Events.ProcessStarted), systemProcess, Source);
                
                  var processSup = Context.ActorOf(Props.Create<ProcessSupervisor>(), "ProcessSupervisor");
                 processSup.Tell(systemStartedMsg);
@@ -51,7 +51,7 @@ namespace DataServices.Actors
                 EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source).Where(x => x.Process.Id == 1)//only start up process
                     .Subscribe(x =>
                     {
-                        EventMessageBus.Current.Publish(new ServiceStarted<IServiceManager>(this,systemProcess,Source), Source);
+                        EventMessageBus.Current.Publish(new ServiceStarted<IServiceManager>(this,new StateEventInfo(systemProcess.Id, RevolutionData.Context.Actor.Events.ServiceStarted), systemProcess,Source), Source);
                         HandleProcessStarted(x.Process, systemStartedMsg);
                     });
                 
@@ -62,7 +62,7 @@ namespace DataServices.Actors
                     failedEventMessage: null,
                     expectedEventType: typeof(ServiceStarted<IServiceManager>),
                     exception: ex,
-                    source: Source), Source);
+                    source: Source, processInfo: new StateEventInfo(1, RevolutionData.Context.Process.Events.Error)), Source);
 
             }
         }
@@ -129,7 +129,7 @@ namespace DataServices.Actors
                     failedEventMessage: systemStartedmsg,
                     expectedEventType: typeof (ServiceStarted<>).MakeGenericType(specificListType),
                     exception: ex,
-                    source: Source), Source);
+                    source: Source, processInfo: new StateEventInfo(systemStartedmsg.Process.Id, RevolutionData.Context.Process.Events.Error)), Source);
             }
 
         }
@@ -151,7 +151,7 @@ namespace DataServices.Actors
                     failedEventMessage: systemStartedmsg,
                     expectedEventType: typeof(ServiceStarted<>).MakeGenericType(specificListType),
                     exception: ex,
-                    source: Source), Source);
+                    source: Source, processInfo: new StateEventInfo(systemStartedmsg.Process.Id, RevolutionData.Context.Process.Events.Error)), Source);
             }
 
         }

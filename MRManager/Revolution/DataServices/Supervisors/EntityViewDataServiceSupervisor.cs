@@ -64,7 +64,7 @@ namespace DataServices.Actors
         public void CreateEntityViewActor<TEvent>(object action, ISystemProcess process) where TEvent : IMessage
         {
             Type actorType = typeof(EntityViewDataServiceActor<>).MakeGenericType(typeof(TEvent));
-            var inMsg = new CreateEntityViewService(actorType, action, new StateCommandInfo(process.Id, StateCommands.CreateService, StateEvents.ServiceCreated), process,Source);
+            var inMsg = new CreateEntityViewService(actorType, action, new StateCommandInfo(process.Id, RevolutionData.Context.Actor.Commands.StartService), process,Source);
             EventMessageBus.Current.Publish(inMsg, Source);
             /// Create Actor Per Event
             try
@@ -82,7 +82,7 @@ namespace DataServices.Actors
                         failedEventMessage: inMsg,
                         expectedEventType: typeof(ServiceStarted<>),
                         exception: ex,
-                        source: Source), Source);
+                        source: Source, processInfo: new StateEventInfo(process.Id, RevolutionData.Context.Process.Events.Error)), Source);
             }
             
         }

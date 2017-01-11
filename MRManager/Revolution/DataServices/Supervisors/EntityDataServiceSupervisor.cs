@@ -52,21 +52,10 @@ namespace DataServices.Actors
         {
             foreach (var itm in entityEvents)
             {
-                try
-                {
-                    this.GetType()
+              this.GetType()
                         .GetMethod("CreateEntityActor")
                         .MakeGenericMethod(itm.Key)
                         .Invoke(this, new object[] {itm.Value, process});
-                }
-                catch (Exception ex)
-                {
-                    EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: itm.Key,
-                        failedEventMessage: new ProcessSystemMessage(process, Source), 
-                        expectedEventType: typeof (ServiceStarted<>),
-                        exception: ex,
-                        source: Source),Source);
-                }
             }
 
         }
@@ -74,9 +63,12 @@ namespace DataServices.Actors
         public void CreateEntityActor<TEvent>(object action, ISystemProcess process) where TEvent : IMessage
         {
             /// Create Actor Per Event
+            Type actorType = typeof(EntityDataServiceActor<>).MakeGenericType(typeof(TEvent));
+            var msg = new CreateEntityService(actorType,action, new StateCommandInfo(process.Id, RevolutionData.Context.Actor.Commands.StartService),process,Source );
             try
             {
-                    Type actorType = typeof(EntityDataServiceActor<>).MakeGenericType(typeof(TEvent));
+                
+                    
                     _childActor = Context.ActorOf(Props.Create(actorType, action, process).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
                             "EntityDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
 
@@ -84,11 +76,12 @@ namespace DataServices.Actors
             }
             catch (Exception ex)
             {
-                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: typeof(ServiceStarted<TEvent>),
-                        failedEventMessage: new ProcessSystemMessage(process, Source),
-                        expectedEventType: typeof(ServiceStarted<>),
-                        exception: ex,
-                        source: Source), Source);
+                new ProcessEventFailure(failedEventType: msg.GetType(),
+               failedEventMessage: msg,
+               expectedEventType: typeof(ServiceStarted<>),
+               exception: ex,
+               source: Source, processInfo: new StateEventInfo(msg.Process.Id, RevolutionData.Context.Process.Events.Error));
+                
             }
             
         }

@@ -1,27 +1,17 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Web.Script.Serialization;
 using SystemInterfaces;
-using SystemMessages;
 using Actor.Interfaces;
-using Akka.Actor;
-using CommonMessages;
 using EventAggregator;
 using EventMessages;
-using MoreLinq;
 using ReactiveUI;
 using RevolutionData;
 using RevolutionEntities.Process;
-using StartUp.Messages;
-using Utilities;
-using IProcessService = Actor.Interfaces.IProcessService;
 using DataServices.Utils;
+
 
 namespace DataServices.Actors
 {
@@ -51,7 +41,7 @@ namespace DataServices.Actors
             res.AddRange(xlogs);
             res.AddRange(ologs);
 
-            var msg = new ComplexEventLogCreated(res,new StateEventInfo(Process.Id, StateEvents.LogCreated), Process, Source);
+            var msg = new ComplexEventLogCreated(res,new StateEventInfo(Process.Id, RevolutionData.Context.Process.Events.LogCreated), Process, Source);
             Publish(msg);
 
         }
@@ -60,7 +50,7 @@ namespace DataServices.Actors
         {
             if (ComplexEventAction.Events.All(z => z.Raised())) return;
                 //Create Timeout Message
-                var timeoutMsg = new ComplexEventActionTimedOut(ComplexEventAction,new StateEventInfo(Process.Id, StateEvents.TimeOut), Process, Source);
+                var timeoutMsg = new ComplexEventActionTimedOut(ComplexEventAction,new StateEventInfo(Process.Id, RevolutionData.Context.Process.Events.ProcessTimeOut), Process, Source);
                 PublishProcesError(timeoutMsg, new ApplicationException($"ComplexEventActionTimedOut:<{ComplexEventAction.ProcessInfo.State.Name}>"), ComplexEventAction.ExpectedMessageType);
             // publish message
         }
@@ -83,7 +73,7 @@ namespace DataServices.Actors
         private void ExecuteAction()
         {
             if (!ComplexEventAction.Events.All(z => z.Raised())) return;
-            var inMsg = new ExecuteComplexEventAction(ComplexEventAction.Action, new ComplexEventParameters(this, InMessages.ToDictionary(x => x.Key, x => x.Value)),new StateCommandInfo(Process.Id, StateCommands.CreateAction), Process, Source);
+            var inMsg = new ExecuteComplexEventAction(ComplexEventAction.Action, new ComplexEventParameters(this, InMessages.ToDictionary(x => x.Key, x => x.Value as object)),new StateCommandInfo(Process.Id, RevolutionData.Context.Actor.Commands.CreateAction), Process, Source);
             Publish(inMsg);
             try
             {

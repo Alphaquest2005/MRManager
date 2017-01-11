@@ -37,7 +37,7 @@ namespace DataServices.Actors
 
         private void CreateProcesses(IProcessSystemMessage se, IEnumerable<IProcessInfo> processSteps)
         {
-            foreach (var pe in processSteps.Select(p => new SystemProcessStarted(new SystemProcess(new Process(p.Id, p.ParentProcessId, p.Name, p.Description, p.Symbol, se.User), Source.MachineInfo),Source)))
+            foreach (var pe in processSteps.Select(p => new SystemProcessStarted(new StateEventInfo(p.Id, RevolutionData.Context.Process.Events.ProcessStarted), new SystemProcess(new Process(p.Id, p.ParentProcessId, p.Name, p.Description, p.Symbol, se.User), Source.MachineInfo),Source)))
             {
                 try
                 {
@@ -53,7 +53,7 @@ namespace DataServices.Actors
                                                                         failedEventMessage: pe,
                                                                         expectedEventType: typeof(SystemProcessStarted),
                                                                         exception: ex,
-                                                                        source: Source), Source);
+                                                                        source: Source, processInfo: new StateEventInfo(pe.Process.Id, RevolutionData.Context.Process.Events.Error)), Source);
                 }
                 
             }

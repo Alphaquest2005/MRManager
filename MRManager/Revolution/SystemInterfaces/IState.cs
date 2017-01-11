@@ -18,13 +18,13 @@ namespace SystemInterfaces
     [InheritedExport]
     public interface IStateEvent: IState
     {
-        
+        IStateCommand ExpectedCommand { get; }
     }
 
     [InheritedExport]
     public interface IStateCommand : IState
     {
-        
+       IStateEvent ExpectedEvent { get; }
     }
 
     

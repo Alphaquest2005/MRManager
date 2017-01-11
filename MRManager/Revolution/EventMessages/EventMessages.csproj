@@ -78,6 +78,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BlankMessage.cs" />
+    <Compile Include="CreateEntityService.cs" />
     <Compile Include="ProcessStateUpddated.cs" />
     <Compile Include="CreateEntityViewService.cs" />
     <Compile Include="ProcessLogCreated.cs" />

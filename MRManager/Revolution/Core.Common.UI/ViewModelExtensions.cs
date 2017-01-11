@@ -13,6 +13,7 @@ using EventMessages;
 using JB.Collections.Reactive;
 using JB.Reactive.ExtensionMethods;
 using ReactiveUI;
+using RevolutionEntities.Process;
 using ViewModel.Interfaces;
 
 
@@ -62,7 +63,7 @@ namespace Core.Common.UI
                     .Subscribe(publishMessage);
             }
 
-           EventMessageBus.Current.Publish(new RequestProcessState(viewModel.Process, viewModel.Source), viewModel.Source);
+           EventMessageBus.Current.Publish(new RequestProcessState(new StateCommandInfo(viewModel.Process.Id, RevolutionData.Context.Process.Commands.PublishState), viewModel.Process, viewModel.Source), viewModel.Source);
 
         }
 

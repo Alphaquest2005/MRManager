@@ -13,7 +13,7 @@ namespace EventMessages
         public Exception Exception { get; set; }
         
 
-        public ProcessEventFailure(Type failedEventType, IProcessSystemMessage failedEventMessage, Type expectedEventType,Exception exception,  ISystemSource source):base( failedEventMessage.Process,source)
+        public ProcessEventFailure(Type failedEventType, IProcessSystemMessage failedEventMessage, Type expectedEventType, Exception exception, IProcessStateInfo processInfo, ISystemSource source):base( processInfo,failedEventMessage.Process,source)
         {
             FailedEventType = failedEventType;
             //TODO: need to implement serialization

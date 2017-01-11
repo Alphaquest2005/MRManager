@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseRepository.cs" />
     <Compile Include="EF7DataContextBase.cs" />
     <Compile Include="EntityRepository.cs" />
     <Compile Include="EntityViewDataContext.cs" />

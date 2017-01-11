@@ -25,7 +25,7 @@ namespace DataServices.Actors
                 failedEventMessage: msg,
                 expectedEventType: expectedMessageType,
                 exception: ex,
-                source: Source);
+                source: Source, processInfo: new StateEventInfo(msg.Process.Id, RevolutionData.Context.Process.Events.Error));
             OutMessages.Add(outMsg);
             EventMessageBus.Current.Publish(outMsg, Source);
         }

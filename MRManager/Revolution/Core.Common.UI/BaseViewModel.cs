@@ -15,7 +15,7 @@ namespace Core.Common.UI
 {
     public abstract class BaseViewModel<TViewModel> : ReactiveObject, IViewModel
     {
-        public ISystemSource Source => new Source(Guid.NewGuid(), "ViewModel:" + typeof(TViewModel).GetFriendlyName(), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public ISystemSource Source => new Source(Guid.NewGuid(), "ViewModel:" + typeof(TViewModel).GetFriendlyName(),new SourceType(typeof(BaseViewModel<TViewModel>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         protected BaseViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
         {
             Process = process;

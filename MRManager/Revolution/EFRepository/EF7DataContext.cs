@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using SystemInterfaces;
-using EFReposi;
+using EFRepository;
 
 
 namespace EFRepository
