@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "log4net": "2.0.5"
+    "log4net": "2.0.7"
   },
   "frameworks": {
     "net461": {}

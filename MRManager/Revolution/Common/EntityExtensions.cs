@@ -30,7 +30,7 @@ namespace Common
             return entity;
         }
 
-        public static T DeepClone<T>(this T entity)
+        public static T DeepClone<T>(this T entity) where T:new()
         {
             var nt = Activator.CreateInstance(entity.GetType());
             foreach (var prop in entity.GetType().GetProperties())

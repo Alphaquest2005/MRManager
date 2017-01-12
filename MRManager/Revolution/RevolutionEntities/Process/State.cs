@@ -44,12 +44,6 @@ namespace RevolutionEntities.Process
         }
 
         public IStateEvent ExpectedEvent { get; }
-
-        public IStateCommand RegisterExpectedEvent(IStateEvent expectedEvent)
-        {
-            return new StateCommand(this.Status, this.Name, expectedEvent);
-        }
-
         public string Name { get; }
         public string Status { get; }
         public string Notes { get; }

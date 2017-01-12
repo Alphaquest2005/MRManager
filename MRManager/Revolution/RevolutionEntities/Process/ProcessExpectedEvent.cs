@@ -60,29 +60,29 @@ namespace RevolutionEntities.Process
 
     public static class ProcessExpectedEventExtensions
     {
-        private static ConcurrentDictionary<IProcessExpectedEvent, bool> RaisedExpectedEvents { get; } = new ConcurrentDictionary<IProcessExpectedEvent, bool>();
+       // private static ConcurrentDictionary<IProcessExpectedEvent, bool> RaisedExpectedEvents { get; } = new ConcurrentDictionary<IProcessExpectedEvent, bool>();
 
         public static bool Validate(this IProcessExpectedEvent expectedEvent,IProcessSystemMessage msg)
         {
             var raised = expectedEvent.EventPredicate.Invoke(msg);
             if (!raised) return false;
             msg.ValidatedBy(expectedEvent);
-            RaisedExpectedEvents.AddOrUpdate(expectedEvent, true, (k, c) => true);
+           // RaisedExpectedEvents.AddOrUpdate(expectedEvent, true, (k, c) => true);
             return true;
         }
 
-        public static bool Raised(this IProcessExpectedEvent expectedEvent)
-        {
-            return RaisedExpectedEvents.ContainsKey(expectedEvent);
-        }
+        //public static bool Raised(this IProcessExpectedEvent expectedEvent)
+        //{
+        //    return RaisedExpectedEvents.ContainsKey(expectedEvent);
+        //}
 
-        public static bool Drop(this IProcessExpectedEvent expectedEvent)
-        {
-            if (!RaisedExpectedEvents.ContainsKey(expectedEvent)) return true;
-            bool wasDropped;
-            RaisedExpectedEvents.TryRemove(expectedEvent, out wasDropped);
-            return wasDropped;
-        }
+        //public static bool Drop(this IProcessExpectedEvent expectedEvent)
+        //{
+        //    if (!RaisedExpectedEvents.ContainsKey(expectedEvent)) return true;
+        //    bool wasDropped;
+        //    RaisedExpectedEvents.TryRemove(expectedEvent, out wasDropped);
+        //    return wasDropped;
+        //}
     }
 
 

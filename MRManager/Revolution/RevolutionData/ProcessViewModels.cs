@@ -8,6 +8,7 @@ using EventMessages;
 using Interfaces;
 using JB.Reactive.ExtensionMethods;
 using ReactiveUI;
+using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
 using ViewMessages;
 using ViewModel.Interfaces;
@@ -46,7 +47,7 @@ namespace RevolutionData
                        {
                                             v => v.BodyViewModels.LastOrDefault() != null
                                         },
-                        s => new ViewEventPublicationParameter(new object[] {s, s.BodyViewModels.Last()},s.Process, s.Source ))
+                        s => new ViewEventPublicationParameter(new object[] {s, s.BodyViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded), s.Process, s.Source ))
                   }, 
                 new List<IViewModelEventCommand<IViewModel, IEvent>>(),
                 typeof(IMainWindowViewModel),
@@ -134,7 +135,7 @@ namespace RevolutionData
                      {
                                             v => v.BodyViewModels.LastOrDefault() != null
                                         },
-                        s => new ViewEventPublicationParameter(new object[] {s, s.BodyViewModels.Last()},s.BodyViewModels.Last().Process,s.Source)
+                        s => new ViewEventPublicationParameter(new object[] {s, s.BodyViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.BodyViewModels.Last().Process,s.Source)
                                         
                         )
                 },
@@ -157,13 +158,13 @@ namespace RevolutionData
                     new ViewEventPublication<ILoginViewModel, GetEntityViewWithChanges<ISignInInfo>>(v => v.ChangeTracking.DictionaryChanges, new List<Func<ILoginViewModel, bool>>
                     {
                                             v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Usersignin)) && v.ChangeTracking.Keys.Count == 1
-                                        }, s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},s.Process,s.Source)),
+                                        }, s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateEventInfo(s.Process.Id, Context.EntityView.Events.EntityViewFound),s.Process,s.Source)),
 
 
                      new ViewEventPublication<ILoginViewModel, ViewStateLoaded<ILoginViewModel,IProcessState<ISignInInfo>>>(v => v.State, new List<Func<ILoginViewModel, bool>>
                      {
                             v => v.State != null
-                        }, s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},s.Process,s.Source))
+                        }, s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source))
                 }, new List<IViewModelEventCommand<IViewModel,IEvent>>
                 {
                     new ViewEventCommand<ILoginViewModel, GetEntityViewWithChanges<ISignInInfo>>("ValidateUserInfo",
@@ -171,7 +172,7 @@ namespace RevolutionData
                             v.ChangeTracking.WhenAny(x => x.Keys,x => x.Value.Contains(nameof(v.State.Value.Entity.Usersignin))), s => ((ReactiveCommand<IViewModel, Unit>) s.Commands["ValidateUserInfo"]).AsObservable(), new List<Func<ILoginViewModel, bool>>
                             {
                             v => true
-                        }, s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},s.Process,s.Source))
+                        }, s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateEventInfo(s.Process.Id, Context.EntityView.Events.EntityViewFound),s.Process,s.Source))
 
                 }, typeof(ILoginViewModel), typeof(IBodyViewModel))
 

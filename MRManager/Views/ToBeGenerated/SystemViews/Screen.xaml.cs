@@ -1,5 +1,4 @@
-﻿
-using Core.Common.UI;
+﻿using Core.Common.UI;
 using System;
 using System.Reactive.Linq;
 using System.Windows;

@@ -27,7 +27,7 @@ namespace RevolutionData
                 "101",
                 1, new List<IProcessExpectedEvent>
                 {
-                    new ProcessExpectedEvent ("ProcessStarted", 1, typeof (ISystemProcessStarted), e => e != null, new StateEventInfo(1, Context.Process.Events.ProcessStarted), new SourceType(typeof(IProcessService))),
+                   // new ProcessExpectedEvent ("ProcessStarted", 1, typeof (ISystemProcessStarted), e => e != null, new StateEventInfo(1, Context.Process.Events.ProcessStarted), new SourceType(typeof(IProcessService))),
                     new ProcessExpectedEvent ("ViewCreated", 1, typeof (IViewModelCreated<IScreenModel>), e => e != null, new StateEventInfo(1,"ScreenViewCreated", "ScreenView Created","This view contains all views", Context.ViewModel.Commands.CreateViewModel), new SourceType(typeof(IViewModelService) )),
                     new ProcessExpectedEvent ("ViewLoaded", 1, typeof (IViewModelLoaded<IMainWindowViewModel,IScreenModel>), e => e != null, new StateEventInfo(1,"ScreenViewLoaded","ScreenView Model loaded in MainWindowViewModel","Only ViewModel in Body", Context.ViewModel.Commands.LoadViewModel), new SourceType(typeof(IViewModelService) ))
                 },
@@ -95,7 +95,14 @@ namespace RevolutionData
             new ComplexEventAction(
                 key:"204",
                 processId: 2,
-                events: new List<IProcessExpectedEvent>(),
+                events: new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent<IEntityViewWithChangesFound<ISignInInfo>> (processId: 2,
+                                                        eventPredicate: e => e.Entity != null && e.Changes.Count == 2 && e.Changes.ContainsKey(nameof(ISignInInfo.Password)),
+                                                        processInfo: new StateEventInfo(2, Context.User.Events.UserFound),
+                                                        expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
+                                                        key: "ValidatedUser")
+                },
                 expectedMessageType:typeof(IUserValidated),
                 processInfo:new StateCommandInfo(2, Context.Domain.Commands.PublishDomainEvent),
                 action: ProcessActions.UserValidated)

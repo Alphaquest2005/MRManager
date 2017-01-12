@@ -31,7 +31,7 @@ namespace MRManager_UnitTests
     public class SystemIntializationProcess
     {
 
-        public ISource Source => new Source(Guid.NewGuid(), "TestCase" + typeof(SystemIntializationProcess).GetFriendlyName(),new SourceType(typeof(SystemIntializationProcess)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public ISystemSource Source => new Source(Guid.NewGuid(), "TestCase" + typeof(SystemIntializationProcess).GetFriendlyName(),new SourceType(typeof(SystemIntializationProcess)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         private static void StartSystem()
         {
 
@@ -52,7 +52,7 @@ namespace MRManager_UnitTests
             StartSystem();
             
             
-            Thread.Sleep(TimeSpan.FromSeconds(60));
+            Thread.Sleep(TimeSpan.FromSeconds(30));
 
             Process1Asserts();
             Process2Asserts();
@@ -152,8 +152,11 @@ namespace MRManager_UnitTests
 
         private void RegisterProcess1Events()
         {
+            EventMessageBus.Current.GetEvent<IProcessLogCreated>(Source).Subscribe(x => ProcessLogs.Add(x));
+            EventMessageBus.Current.GetEvent<IComplexEventLogCreated>(Source).Subscribe(x => ComplextEventLogs.Add(x));
+            EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source).Subscribe(x => EventFailures.Add(x));
             EventMessageBus.Current.GetEvent<IServiceStarted<IServiceManager>>(Source).Subscribe(x => serviceManagerStarted = x);
-            EventMessageBus.Current.GetEvent<ProcessEventFailure>(Source).Subscribe(x => EventFailures.Add(x));
+            
             Func<IProcessSystemMessage, bool> procesPredicate = x => x.Process.Id == 1;
             //IServiceStarted<IServiceManager> serviceStarted = null;
             EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source).Where(procesPredicate).Subscribe(x => processServiceActorStarted = x);
@@ -164,9 +167,13 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(Source).Where(procesPredicate).Subscribe(x => processCompleted = x);
         }
 
+        private List<IComplexEventLogCreated> ComplextEventLogs = new List<IComplexEventLogCreated>();
+
+        private List<IProcessLogCreated> ProcessLogs = new List<IProcessLogCreated>();
+
         private void Process1Asserts()
         {
-            Assert.IsTrue(EventFailures.Count == 0);
+            Assert.IsTrue(EventFailures.Count == 0 && ProcessLogs.Count == 0 && ComplextEventLogs.Count == 0);
             Assert.IsNotNull(processStarted);
             Assert.IsNotNull(viewModelSupervisorStarted);
             Assert.IsNotNull(processServiceActorStarted);

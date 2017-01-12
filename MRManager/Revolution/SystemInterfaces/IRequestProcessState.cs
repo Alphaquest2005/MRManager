@@ -10,11 +10,4 @@ namespace SystemInterfaces
     public interface IRequestProcessState : IProcessSystemMessage
     {
     }
-
-    [InheritedExport]
-    public interface IRequestProcessLog : IProcessSystemMessage
-    {
-        
-    }
-
 }

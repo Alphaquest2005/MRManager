@@ -10,8 +10,8 @@ namespace EFRepository
 {
     public class BaseRepository<TRepository>:IProcessSource
     {
-        public ISystemSource Source => new Source(Guid.NewGuid(), $"EntityRepository:<{typeof(BaseRepository<TRepository>).GetFriendlyName()}>", new SourceType(typeof(BaseRepository<TRepository>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
-        internal void PublishProcesError(IProcessSystemMessage msg, Exception ex, Type expectedMessageType)
+        public static ISystemSource Source => new Source(Guid.NewGuid(), $"EntityRepository:<{typeof(BaseRepository<TRepository>).GetFriendlyName()}>", new SourceType(typeof(BaseRepository<TRepository>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        internal static void PublishProcesError(IProcessSystemMessage msg, Exception ex, Type expectedMessageType)
         {
             var outMsg = new ProcessEventFailure(failedEventType: msg.GetType(),
                 failedEventMessage: msg,
@@ -21,5 +21,7 @@ namespace EFRepository
 
             EventMessageBus.Current.Publish(outMsg, Source);
         }
+
+        ISystemSource IProcessSource.Source => BaseRepository<TRepository>.Source;
     }
 }

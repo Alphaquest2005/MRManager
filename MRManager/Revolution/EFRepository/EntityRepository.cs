@@ -20,8 +20,8 @@ namespace EFRepository
 {
     public class EntityRepository<TEntity,TDBEntity, TDBContext>:BaseRepository<EntityRepository<TEntity,TDBEntity, TDBContext>> where TEntity:IEntity where TDBContext : DbContext, new() where TDBEntity:class, IEntity
     {
-        
-        public  void Create(ICreateEntity<TEntity> msg )
+
+        public static void Create(ICreateEntity<TEntity> msg )
         {
             Contract.Requires(msg.Entity.Id == 0);
             try
@@ -39,7 +39,7 @@ namespace EFRepository
             }
         }
 
-        public void Update(IUpdateEntity<TEntity> msg)
+        public static void Update(IUpdateEntity<TEntity> msg)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace EFRepository
 
         }
 
-        public void Delete(IDeleteEntity<TEntity> msg )
+        public static void Delete(IDeleteEntity<TEntity> msg )
         {
             try
             {
@@ -84,7 +84,7 @@ namespace EFRepository
         }
 
 
-        public void GetEntityById(IGetEntityById<TEntity> msg )
+        public static void GetEntityById(IGetEntityById<TEntity> msg )
         {
             try
             {
@@ -102,7 +102,7 @@ namespace EFRepository
 
         }
 
-        public void GetEntityWithChanges(IGetEntityWithChanges<TEntity> msg )
+        public static void GetEntityWithChanges(IGetEntityWithChanges<TEntity> msg )
         {
 
             using (var ctx = new TDBContext())
@@ -128,7 +128,7 @@ namespace EFRepository
         }
 
 
-        public void LoadEntitySet(ILoadEntitySet<TEntity> msg)
+        public static void LoadEntitySet(ILoadEntitySet<TEntity> msg)
         {
             try
             {
@@ -150,7 +150,7 @@ namespace EFRepository
             }
         }
 
-        public void LoadEntitySetWithFilter(ILoadEntitySetWithFilter<TEntity> msg )
+        public static void LoadEntitySetWithFilter(ILoadEntitySetWithFilter<TEntity> msg )
         {
             try
             {
@@ -181,7 +181,7 @@ namespace EFRepository
             }
         }
 
-        public void EntitySetWithFilterWithIncludesLoaded(ILoadEntitySetWithFilterWithIncludes<TEntity> msg )
+        public static void EntitySetWithFilterWithIncludesLoaded(ILoadEntitySetWithFilterWithIncludes<TEntity> msg )
         {
             try
             {

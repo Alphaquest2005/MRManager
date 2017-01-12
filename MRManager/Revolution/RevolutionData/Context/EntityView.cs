@@ -12,12 +12,12 @@ namespace RevolutionData.Context
     {
         public class Commands
         {
-            public static IStateCommand GetEntityView => new StateCommand("GetEntityView", "Get Entity View Item", new StateEvent("EntityViewFound", "Entity View Item Found", ""));
+            public static IStateCommand GetEntityView => new StateCommand("GetEntityView", "Get Entity View Item", Events.EntityViewFound );
         }
 
         public class Events
         {
-            public static IStateEvent EntityViewFound => new StateEvent("EntityViewFound", "Entity View Item Found", "", new StateCommand("GetEntityView", "Get Entity View Item"));
+            public static IStateEvent EntityViewFound => new StateEvent("EntityViewFound", "Entity View Item Found", "");
         }
     }
 }

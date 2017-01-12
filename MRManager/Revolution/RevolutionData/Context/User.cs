@@ -18,8 +18,8 @@ namespace RevolutionData.Context
 
         public class Events
         {
-           public static IStateEvent UserNameFound => new StateEvent("UserNameFound", "User Name Found", "Just UserName found", Commands.FindUserName);
-           public static IStateEvent UserFound => new StateEvent("UserFound", "User Name & Password Found", "Both UserName and PassWord", Commands.FindUser); 
+           public static IStateEvent UserNameFound => new StateEvent("UserNameFound", "User Name Found", "Just UserName found");
+           public static IStateEvent UserFound => new StateEvent("UserFound", "User Name & Password Found", "Both UserName and PassWord"); 
         }
         
         

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using SystemInterfaces;
@@ -17,7 +18,7 @@ namespace DataServices.Actors
     public class BaseActor<T>: ReceivePersistentActor, IAgent, IProcessSource
     {
         public ISystemSource Source => new Source(Guid.NewGuid(), "PersistentActor" + typeof(T).GetFriendlyName(),new SourceType(typeof(BaseActor<T>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
-        public readonly List<IProcessSystemMessage> OutMessages = new List<IProcessSystemMessage>();
+        public ImmutableList<IProcessSystemMessage> OutMessages = ImmutableList<IProcessSystemMessage>.Empty;
 
         internal void PublishProcesError(IProcessSystemMessage msg, Exception ex, Type expectedMessageType)
         {
@@ -26,14 +27,17 @@ namespace DataServices.Actors
                 expectedEventType: expectedMessageType,
                 exception: ex,
                 source: Source, processInfo: new StateEventInfo(msg.Process.Id, RevolutionData.Context.Process.Events.Error));
-            OutMessages.Add(outMsg);
+            
             EventMessageBus.Current.Publish(outMsg, Source);
+            EventMessageBus.Current.Publish(new RequestProcessLog(new StateCommandInfo(msg.Process.Id, RevolutionData.Context.Process.Commands.CreateLog), msg.Process,Source), Source);
+            OutMessages = OutMessages.Add(outMsg);
         }
 
         internal void Publish(IProcessSystemMessage msg)
         {
-            OutMessages.Add(msg);
+           
             EventMessageBus.Current.Publish(msg, Source);
+            OutMessages = OutMessages.Add(msg);
         }
         public override string PersistenceId
         {
@@ -60,5 +64,5 @@ namespace DataServices.Actors
         
     }
 
-  
+
 }

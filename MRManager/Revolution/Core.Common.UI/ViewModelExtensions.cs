@@ -73,6 +73,7 @@ namespace Core.Common.UI
             {
                 var param = itm.MessageData.Invoke(viewModel);
                 var paramArray = param.Params.ToList();
+                paramArray.Add(param.ProcessInfo);
                 paramArray.Add(param.Process);
                 paramArray.Add(param.Source);
                 var concreteEvent = BootStrapper.BootStrapper.Container.GetExportedTypes(itm.EventType).FirstOrDefault();

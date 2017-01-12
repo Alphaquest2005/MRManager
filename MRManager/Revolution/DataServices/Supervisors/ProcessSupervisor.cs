@@ -37,23 +37,30 @@ namespace DataServices.Actors
 
         private void CreateProcesses(IProcessSystemMessage se, IEnumerable<IProcessInfo> processSteps)
         {
-            foreach (var pe in processSteps.Select(p => new SystemProcessStarted(new StateEventInfo(p.Id, RevolutionData.Context.Process.Events.ProcessStarted), new SystemProcess(new Process(p.Id, p.ParentProcessId, p.Name, p.Description, p.Symbol, se.User), Source.MachineInfo),Source)))
+            foreach (var inMsg in processSteps.Select(p => new StartSystemProcess(new StateCommandInfo(p.Id, RevolutionData.Context.Process.Commands.StartProcess), new SystemProcess(new Process(p.Id, p.ParentProcessId, p.Name, p.Description, p.Symbol, se.User), Source.MachineInfo),Source)))
             {
+
                 try
                 {
-                    var childActor = Context.ActorOf(Props.Create<ProcessActor>(pe.Process), "ProcessActor-" + pe.Process.Name.GetSafeActorName());
+                    EventMessageBus.Current.Publish(inMsg, Source);
+
+                    var childActor = Context.ActorOf(Props.Create<ProcessActor>(inMsg.Process), "ProcessActor-" + inMsg.Process.Name.GetSafeActorName());
                     EventMessageBus.Current.GetEvent<IProcessSystemMessage>(Source)
-                        .Where(x => x.Process.Id == pe.Process.Id && x.MachineInfo.MachineName == pe.MachineInfo.MachineName)
+                        .Where(x => x.Process.Id == inMsg.Process.Id && x.MachineInfo.MachineName == inMsg.MachineInfo.MachineName)
                         .Subscribe(x => childActor.Tell(x));
-                    EventMessageBus.Current.Publish(pe, Source);
+
+                    var outMsg = new SystemProcessStarted(new StateEventInfo(inMsg.Process.Id, RevolutionData.Context.Process.Events.ProcessStarted),inMsg.Process,Source);
+                    //actor Won't instantiate fast enough to catch eventbus publish
+                    childActor.Tell(outMsg);
+                    EventMessageBus.Current.Publish(outMsg, Source);
                 }
                 catch (Exception ex)
                 {
-                    EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: pe.GetType(),
-                                                                        failedEventMessage: pe,
+                    EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: inMsg.GetType(),
+                                                                        failedEventMessage: inMsg,
                                                                         expectedEventType: typeof(SystemProcessStarted),
                                                                         exception: ex,
-                                                                        source: Source, processInfo: new StateEventInfo(pe.Process.Id, RevolutionData.Context.Process.Events.Error)), Source);
+                                                                        source: Source, processInfo: new StateEventInfo(inMsg.Process.Id, RevolutionData.Context.Process.Events.Error)), Source);
                 }
                 
             }

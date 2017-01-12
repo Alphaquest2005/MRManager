@@ -17,8 +17,8 @@ namespace RevolutionData.Context
         }
         public class Events
         {
-            public static IStateEvent ViewModelCreated => new StateEvent("ViewModelCreated","View Model Created", "",Commands.CreateViewModel);
-            public static IStateEvent ViewModelLoaded => new StateEvent("ViewModelLoaded", "View Model Loaded", "", Commands.LoadViewModel);
+            public static IStateEvent ViewModelCreated => new StateEvent("ViewModelCreated","View Model Created", "");
+            public static IStateEvent ViewModelLoaded => new StateEvent("ViewModelLoaded", "View Model Loaded", "");
         }
     }
 

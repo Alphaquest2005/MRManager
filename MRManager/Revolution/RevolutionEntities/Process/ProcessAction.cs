@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using SystemInterfaces;
 using Actor.Interfaces;
+using MefContrib;
+using System.Diagnostics.Contracts;
 
 namespace RevolutionEntities.Process
 {
@@ -17,6 +19,7 @@ namespace RevolutionEntities.Process
 
         public ProcessAction(Func<IComplexEventParameters, IProcessSystemMessage> action, Func<IComplexEventParameters, IStateCommandInfo> processInfo, ISourceType expectedSourceType)
         {
+            Contract.Requires(action != null);
             Action = action;
             ProcessInfo = processInfo;
             ExpectedSourceType = expectedSourceType;

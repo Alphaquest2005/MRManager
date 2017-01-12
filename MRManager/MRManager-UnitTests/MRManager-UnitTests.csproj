@@ -76,6 +76,7 @@
     <Compile Include="SystemIntializationProcess.cs" />
     <Compile Include="DbContextUnitTest.cs" />
     <Compile Include="Development.cs" />
+    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataTemplates\DataTemplates.csproj">

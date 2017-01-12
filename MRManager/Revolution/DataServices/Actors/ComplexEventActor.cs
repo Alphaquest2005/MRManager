@@ -36,28 +36,29 @@ namespace DataServices.Actors
         private void handleComplexEventLogRequest()
         {
             var xlogs = ComplexEventAction.Events.CreatEventLogs(InMessages.ToDictionary(x => x.Key, x => x.Value), Source);
-            var ologs = OutMessages.CreatEventLogs(Source);
+            //var ologs = OutMessages.CreatEventLogs(Source);
             var res = new List<IComplexEventLog>();
             res.AddRange(xlogs);
-            res.AddRange(ologs);
+            //res.AddRange(ologs);
 
-            var msg = new ComplexEventLogCreated(res,new StateEventInfo(Process.Id, RevolutionData.Context.Process.Events.LogCreated), Process, Source);
+            var msg = new ComplexEventLogCreated(res,new StateEventInfo(Process.Id, RevolutionData.Context.Process.Events.ComplexEventLogCreated), Process, Source);
             Publish(msg);
 
         }
 
         private void OnTimeOut()
         {
-            if (ComplexEventAction.Events.All(z => z.Raised())) return;
-                //Create Timeout Message
-                var timeoutMsg = new ComplexEventActionTimedOut(ComplexEventAction,new StateEventInfo(Process.Id, RevolutionData.Context.Process.Events.ProcessTimeOut), Process, Source);
+            //if (ComplexEventAction.Events.All(z => z.Raised())) return;
+            if (InMessages.Count == ComplexEventAction.Events.Count) return;
+            //Create Timeout Message
+            var timeoutMsg = new ComplexEventActionTimedOut(ComplexEventAction,new StateEventInfo(Process.Id, RevolutionData.Context.Process.Events.ProcessTimeOut), Process, Source);
                 PublishProcesError(timeoutMsg, new ApplicationException($"ComplexEventActionTimedOut:<{ComplexEventAction.ProcessInfo.State.Name}>"), ComplexEventAction.ExpectedMessageType);
-            // publish message
+            
         }
 
 
 
-        public void WireEvents<TEvent>(TEvent eventType, IProcessExpectedEvent expectedEvent) where TEvent : IProcessSystemMessage
+        public void WireEvents<TEvent>(IProcessExpectedEvent expectedEvent) where TEvent : IProcessSystemMessage
         {
             EventMessageBus.Current.GetEvent<TEvent>(Source).Subscribe(x => CheckEvent(expectedEvent,x));
         }
@@ -67,12 +68,13 @@ namespace DataServices.Actors
            if(!expectedEvent.EventPredicate.Invoke(message)) return;
             expectedEvent.Validate(message);
             InMessages.AddOrUpdate(expectedEvent.Key, message, (k,v) => message);
-            
+            ExecuteAction();
         }
 
         private void ExecuteAction()
         {
-            if (!ComplexEventAction.Events.All(z => z.Raised())) return;
+           // if (!ComplexEventAction.Events.All(z => z.Raised())) return;
+            if (InMessages.Count != ComplexEventAction.Events.Count) return;
             var inMsg = new ExecuteComplexEventAction(ComplexEventAction.Action, new ComplexEventParameters(this, InMessages.ToDictionary(x => x.Key, x => x.Value as object)),new StateCommandInfo(Process.Id, RevolutionData.Context.Actor.Commands.CreateAction), Process, Source);
             Publish(inMsg);
             try

@@ -24,14 +24,14 @@ namespace RevolutionData.Context
 
         public class Events
         {
-            public static IStateEvent ProcessStarted => new StateEvent("ProcessStarted", "Process Started", "", Commands.StartProcess);
-            public static IStateEvent ProcessTimeOut => new StateEvent("TimeOut", "Process Timed Out", "", Commands.Error);
-            public static IStateEvent ProcessCompleted => new StateEvent("ProcessCompleted", "Process Completed", "", Commands.CompleteProcess);
-            public static IStateEvent StateUpdated => new StateEvent("StateUpdated", "StateUpdated", "", Commands.UpdateState);
-            public static IStateEvent LogCreated => new StateEvent("LogCreated", "Log Created", "", Commands.CreateLog);
-            public static IStateEvent Error => new StateEvent("Error", "Log Created", "", Commands.Error);
-            public static IStateEvent ComplexEventLogCreated => new StateEvent("ComplexEventLogCreated", "ComplexEvent Log Created", "", Commands.CreateComplexEventLog);
-            public static IStateEvent StatePublished => new StateEvent("StatePublished", "Process State Published", "", Commands.PublishState);
+            public static IStateEvent ProcessStarted => new StateEvent("ProcessStarted", "Process Started","", new StateCommand("StartProcess", "Start Process"));
+            public static IStateEvent ProcessTimeOut => new StateEvent("TimeOut", "Process Timed Out", "");
+            public static IStateEvent ProcessCompleted => new StateEvent("ProcessCompleted", "Process Completed", "");
+            public static IStateEvent StateUpdated => new StateEvent("StateUpdated", "StateUpdated", "");
+            public static IStateEvent LogCreated => new StateEvent("LogCreated", "Log Created", "");
+            public static IStateEvent Error => new StateEvent("Error", "Log Created", "");
+            public static IStateEvent ComplexEventLogCreated => new StateEvent("ComplexEventLogCreated", "ComplexEvent Log Created", "");
+            public static IStateEvent StatePublished => new StateEvent("StatePublished", "Process State Published", "");
 
             //closed Loop
         }

@@ -1,8 +1,10 @@
-﻿using SystemMessages;
+﻿using SystemInterfaces;
+using SystemMessages;
 using Actor.Interfaces;
 using DataEntites;
 using DomainMessages;
 using EventMessages;
+using EventMessages.Events;
 using Interfaces;
 using RevolutionEntities.Process;
 
@@ -16,7 +18,7 @@ namespace RevolutionData
                         expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
         public static IProcessAction ShutActorDown = new ProcessAction(
-                        action: null,//actor.ActorRef().GracefulStop(TimeSpan.FromSeconds(10)),TODO: figure out way to close actor without messing up command not working),
+                        action: cp => new ActorTerminated(cp.Actor, new StateEventInfo(cp.Actor.Process.Id, Context.Actor.Events.ActorTerminated), cp.Actor.Process, cp.Actor.Source),//actor.ActorRef().GracefulStop(TimeSpan.FromSeconds(10)),TODO: figure out way to close actor without messing up command not working),
                         processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Actor.Commands.TerminateActor),
                         expectedSourceType: new SourceType(typeof (IProcessService)));
 
@@ -57,4 +59,6 @@ namespace RevolutionData
                         expectedSourceType:new SourceType(typeof(IComplexEventService)) 
                         );
     }
+
+
 }

@@ -27,7 +27,7 @@ namespace EFRepository
     {
 
         
-        public void GetEntityById(IGetEntityViewById<TView>  msg)
+        public static void GetEntityById(IGetEntityViewById<TView>  msg)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace EFRepository
 
         }
 
-        public void GetEntityWithChanges(IGetEntityViewWithChanges<TView> msg)
+        public static void GetEntityWithChanges(IGetEntityViewWithChanges<TView> msg)
         {
             try
             {
