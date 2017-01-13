@@ -10,7 +10,6 @@ namespace ViewModel.Interfaces
     [InheritedExport]
     public interface IViewModelEventCommand<in TViewModel, in TEvent> : IViewModelEventPublication<TViewModel, TEvent> where TViewModel : IViewModel where TEvent : IEvent
     {
-        string CommandName { get; }
         Func<TViewModel, IObservable<bool>> CommandPredicate { get; }
 
     }

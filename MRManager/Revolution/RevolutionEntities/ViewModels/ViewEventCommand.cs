@@ -9,7 +9,7 @@ namespace RevolutionEntities.ViewModels
 {
     public class ViewEventCommand<TViewModel, TEvent> : ViewModelEventCommand<TViewModel,TEvent>, IViewModelEventCommand<IViewModel,IEvent> where TViewModel : IViewModel where TEvent : IEvent
     {
-        public ViewEventCommand(string commandName, Func<TViewModel, IObservable<bool>> commandPredicate, Func<TViewModel, IObservable<dynamic>> subject, IEnumerable<Func<TViewModel, bool>> subjectPredicate, Func<TViewModel, IViewEventPublicationParameter> messageData) : base(commandName, commandPredicate, subject, subjectPredicate, messageData)
+        public ViewEventCommand(string key, Func<TViewModel, IObservable<bool>> commandPredicate, Func<TViewModel, IObservable<dynamic>> subject, IEnumerable<Func<TViewModel, bool>> subjectPredicate, Func<TViewModel, IViewEventPublicationParameter> messageData) : base(key, commandPredicate, subject, subjectPredicate, messageData)
         {
             CommandPredicate = (Func<IViewModel, IObservable<bool>>)base.CommandPredicate.Convert(typeof(IViewModel), typeof(IObservable<bool>));
             MessageData = (Func<IViewModel, IViewEventPublicationParameter>)base.MessageData.Convert(typeof(IViewModel), typeof(IViewEventPublicationParameter));

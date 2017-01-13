@@ -15,7 +15,9 @@ namespace RevolutionData
     public static class ProcessActions
     {
         public static IProcessAction StartProcess = new ProcessAction(
-                        action: cp => new SystemProcessStarted(new StateEventInfo(cp.Actor.Process.Id, Context.Process.Events.ProcessStarted), cp.Actor.Process, cp.Actor.Source),
+                        action: cp => new SystemProcessStarted(
+                            new StateEventInfo(cp.Actor.Process.Id, Context.Process.Events.ProcessStarted),
+                            cp.Actor.Process, cp.Actor.Source),
                         processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.StartProcess),
                         expectedSourceType: new SourceType(typeof(IComplexEventService)));
 

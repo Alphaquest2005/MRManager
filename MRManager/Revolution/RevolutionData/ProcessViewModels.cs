@@ -43,11 +43,14 @@ namespace RevolutionData
                 },
                 new List<IViewModelEventPublication<IViewModel, IEvent>>
                 {
-                       new ViewEventPublication<IMainWindowViewModel, ViewModelLoaded<IMainWindowViewModel,IScreenModel>>(v => v.BodyViewModels.CollectionChanges, new List<Func<IMainWindowViewModel, bool>>
-                       {
-                                            v => v.BodyViewModels.LastOrDefault() != null
-                                        },
-                        s => new ViewEventPublicationParameter(new object[] {s, s.BodyViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded), s.Process, s.Source ))
+                       new ViewEventPublication<IMainWindowViewModel, ViewModelLoaded<IMainWindowViewModel,IScreenModel>>(
+                            key:"ScreenModelinViewModel",
+                            subject: v => v.BodyViewModels.CollectionChanges,
+                            subjectPredicate: new List<Func<IMainWindowViewModel, bool>>
+                                                       {
+                                                           v => v.BodyViewModels.LastOrDefault() != null
+                                                       },
+                            messageData: s => new ViewEventPublicationParameter(new object[] {s, s.BodyViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded), s.Process, s.Source ))
                   }, 
                 new List<IViewModelEventCommand<IViewModel, IEvent>>(),
                 typeof(IMainWindowViewModel),
@@ -131,13 +134,14 @@ namespace RevolutionData
                 },
                 new List<IViewModelEventPublication<IViewModel, IEvent>>
                 {
-                     new ViewEventPublication<IScreenModel, ViewModelLoaded<IScreenModel,IViewModel>>(v => v.BodyViewModels.CollectionChanges, new List<Func<IScreenModel, bool>>
-                     {
-                                            v => v.BodyViewModels.LastOrDefault() != null
-                                        },
-                        s => new ViewEventPublicationParameter(new object[] {s, s.BodyViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.BodyViewModels.Last().Process,s.Source)
-                                        
-                        )
+                     new ViewEventPublication<IScreenModel, ViewModelLoaded<IScreenModel,IViewModel>>(
+                         key:"ScreenModelBody",
+                         subject:v => v.BodyViewModels.CollectionChanges,
+                         subjectPredicate:new List<Func<IScreenModel, bool>>
+                                             {
+                                                 v => v.BodyViewModels.LastOrDefault() != null
+                                             },
+                        messageData:s => new ViewEventPublicationParameter(new object[] {s, s.BodyViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.BodyViewModels.Last().Process,s.Source))
                 },
                 new List<IViewModelEventCommand<IViewModel, IEvent>>(),
                 typeof(IScreenModel),
@@ -155,24 +159,34 @@ namespace RevolutionData
 
                 }, new List<IViewModelEventPublication<IViewModel, IEvent>>
                 {
-                    new ViewEventPublication<ILoginViewModel, GetEntityViewWithChanges<ISignInInfo>>(v => v.ChangeTracking.DictionaryChanges, new List<Func<ILoginViewModel, bool>>
-                    {
-                                            v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Usersignin)) && v.ChangeTracking.Keys.Count == 1
-                                        }, s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateEventInfo(s.Process.Id, Context.EntityView.Events.EntityViewFound),s.Process,s.Source)),
+                    new ViewEventPublication<ILoginViewModel, GetEntityViewWithChanges<ISignInInfo>>(
+                        key:"UserName",
+                        subject:v => v.ChangeTracking.DictionaryChanges,
+                        subjectPredicate: new List<Func<ILoginViewModel, bool>>
+                                            {
+                                                v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Usersignin)) && v.ChangeTracking.Keys.Count == 1
+                                            },
+                        messageData: s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView),s.Process,s.Source)),
 
 
-                     new ViewEventPublication<ILoginViewModel, ViewStateLoaded<ILoginViewModel,IProcessState<ISignInInfo>>>(v => v.State, new List<Func<ILoginViewModel, bool>>
-                     {
-                            v => v.State != null
-                        }, s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source))
+                     new ViewEventPublication<ILoginViewModel, ViewStateLoaded<ILoginViewModel,IProcessState<ISignInInfo>>>(
+                         key:"ILoginModelViewStateLoaded", 
+                         subject:v => v.State,
+                         subjectPredicate:new List<Func<ILoginViewModel, bool>>
+                                             {
+                                                 v => v.State != null
+                                             },
+                         messageData:s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source))
                 }, new List<IViewModelEventCommand<IViewModel,IEvent>>
                 {
-                    new ViewEventCommand<ILoginViewModel, GetEntityViewWithChanges<ISignInInfo>>("ValidateUserInfo",
-                        v =>
-                            v.ChangeTracking.WhenAny(x => x.Keys,x => x.Value.Contains(nameof(v.State.Value.Entity.Usersignin))), s => ((ReactiveCommand<IViewModel, Unit>) s.Commands["ValidateUserInfo"]).AsObservable(), new List<Func<ILoginViewModel, bool>>
-                            {
-                            v => true
-                        }, s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateEventInfo(s.Process.Id, Context.EntityView.Events.EntityViewFound),s.Process,s.Source))
+                    new ViewEventCommand<ILoginViewModel, GetEntityViewWithChanges<ISignInInfo>>(
+                                key:"ValidateUserInfo",
+                                commandPredicate: v => v.ChangeTracking.WhenAny(x => x.Keys,x => x.Value.Contains(nameof(v.State.Value.Entity.Usersignin))),
+                                subject:s => ((ReactiveCommand<IViewModel, Unit>) s.Commands["ValidateUserInfo"]).AsObservable(),
+                                subjectPredicate: new List<Func<ILoginViewModel, bool>> { v => true },
+                                messageData:s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateEventInfo(s.Process.Id, Context.EntityView.Events.EntityViewFound),s.Process,s.Source)),
+
+                    
 
                 }, typeof(ILoginViewModel), typeof(IBodyViewModel))
 

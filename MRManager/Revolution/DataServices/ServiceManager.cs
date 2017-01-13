@@ -29,7 +29,7 @@ namespace DataServices.Actors
             =>
                 new Source(Guid.NewGuid(),"ServiceManager", new SourceType(typeof(IServiceManager)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
-        static ConcurrentQueue<IActorRef> supervisors = new ConcurrentQueue<IActorRef>();
+        
 
 
         public ServiceManager(Assembly dbContextAssembly, Assembly entityAssembly)
@@ -46,9 +46,7 @@ namespace DataServices.Actors
                 var systemProcess = new SystemProcess(new Process(processInfo, new Agent("System")), machineInfo);
                 var systemStartedMsg = new SystemStarted(new StateEventInfo(systemProcess.Id, RevolutionData.Context.Process.Events.ProcessStarted), systemProcess, Source);
                
-                 var processSup = Context.ActorOf(Props.Create<ProcessSupervisor>(), "ProcessSupervisor");
-                processSup.Tell(systemStartedMsg);
-                
+
                 EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source).Where(x => x.Process.Id == 1)//only start up process
                     .Subscribe(x =>
                     {
@@ -56,7 +54,11 @@ namespace DataServices.Actors
                         EventMessageBus.Current.Publish(new ServiceStarted<IServiceManager>(this,new StateEventInfo(systemProcess.Id, RevolutionData.Context.Actor.Events.ServiceStarted), systemProcess,Source), Source);
                         
                     });
-                
+
+                var processSup = Context.ActorOf(Props.Create<ProcessSupervisor>(), "ProcessSupervisor");
+                processSup.Tell(systemStartedMsg);
+
+
             }
             catch (Exception ex)
             {
@@ -74,12 +76,9 @@ namespace DataServices.Actors
             var child = Context.Child("ViewModelSupervisor");
             if (!Equals(child, ActorRefs.Nobody)) return;
 
-            supervisors.Enqueue(Context.ActorOf(Props.Create<ViewModelSupervisor>(systemProcess),
-                "ViewModelSupervisor"));
-            foreach (var s in supervisors)
-            {
-                s.Tell(systemStartedMsg);
-            }
+            Context.ActorOf(Props.Create<ViewModelSupervisor>(systemProcess), "ViewModelSupervisor")
+                .Tell(systemStartedMsg);
+            
 
             
             var actorList = new Dictionary<string, Type>()
@@ -121,8 +120,7 @@ namespace DataServices.Actors
             var specificListType = genericListType.MakeGenericType(classType);
             try
             {
-                supervisors.Enqueue(Context.ActorOf(Props.Create(specificListType, process),
-                    string.Format(actorName, classType.Name)));
+                Context.ActorOf(Props.Create(specificListType, process),string.Format(actorName, classType.Name));
             }
             catch (Exception ex)
             {
@@ -143,8 +141,7 @@ namespace DataServices.Actors
             var specificListType = genericListType.MakeGenericType(classType);
             try
             {
-                supervisors.Enqueue(Context.ActorOf(Props.Create(specificListType, process),
-                    string.Format(actorName, classType.Name)));
+                Context.ActorOf(Props.Create(specificListType, process),string.Format(actorName, classType.Name));
             }
             catch (Exception ex)
             {

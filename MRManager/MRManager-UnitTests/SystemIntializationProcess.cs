@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Threading;
@@ -52,7 +53,7 @@ namespace MRManager_UnitTests
             StartSystem();
             
             
-            Thread.Sleep(TimeSpan.FromSeconds(60));
+            Thread.Sleep(TimeSpan.FromSeconds(30));
 
             Process1Asserts();
             Process2Asserts();
@@ -80,8 +81,8 @@ namespace MRManager_UnitTests
                 .Subscribe(x => viewLoadedState = x);
 
             EventMessageBus.Current.GetEvent<IViewStateLoaded<ILoginViewModel, IProcessState<ISignInInfo>>>(Source)
-               .Where(z => z.Process.Id == 2 && process2StateRequest != null && z.State.Entity == NullEntity<ISignInInfo>.Instance)
-               .Subscribe(z =>((dynamic)LoginViewModelCreated.ViewModel).Usersignin = "joe");
+               .Where(z => z.Process.Id == 2 && process2StateRequest != null && z?.State?.Entity == NullEntity<ISignInInfo>.Instance)
+               .Subscribe(z =>((dynamic)z.ViewModel).Usersignin = "joe");
 
             EventMessageBus.Current.GetEvent<IServiceStarted<IEntityViewDataServiceActor<IGetEntityViewWithChanges<ISignInInfo>>>>(Source).Subscribe(x => getEntityChangesActor = x);
 
@@ -146,15 +147,15 @@ namespace MRManager_UnitTests
         private IEntityViewWithChangesFound<ISignInInfo> userFound;
         private IUserValidated userValidated;
         private IServiceStarted<IEntityViewDataServiceActor<IGetEntityViewWithChanges<ISignInInfo>>> getEntityChangesActor;
-        private List<IProcessEventFailure> EventFailures = new List<IProcessEventFailure>();
+        private ConcurrentQueue<IProcessEventFailure> EventFailures = new ConcurrentQueue<IProcessEventFailure>();
         private IViewStateLoaded<ILoginViewModel, IProcessState<ISignInInfo>> viewLoadedState;
 
 
         private void RegisterProcess1Events()
         {
-            EventMessageBus.Current.GetEvent<IProcessLogCreated>(Source).Subscribe(x => ProcessLogs = x);
-            EventMessageBus.Current.GetEvent<IComplexEventLogCreated>(Source).Subscribe(x => ComplextEventLogs.Add(x));
-            EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source).Subscribe(x => EventFailures.Add(x));
+            EventMessageBus.Current.GetEvent<IProcessLogCreated>(Source).Subscribe(x => ProcessLogs.Enqueue(x));
+            EventMessageBus.Current.GetEvent<IComplexEventLogCreated>(Source).Subscribe(x => ComplextEventLogs.Enqueue(x));
+            EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source).Subscribe(x => EventFailures.Enqueue(x));
             EventMessageBus.Current.GetEvent<IServiceStarted<IServiceManager>>(Source).Subscribe(x => serviceManagerStarted = x);
             
             Func<IProcessSystemMessage, bool> procesPredicate = x => x.Process.Id == 1;
@@ -167,16 +168,17 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(Source).Where(procesPredicate).Subscribe(x => processCompleted = x);
         }
 
-        private List<IComplexEventLogCreated> ComplextEventLogs = new List<IComplexEventLogCreated>();
+        private ConcurrentQueue<IComplexEventLogCreated> ComplextEventLogs = new ConcurrentQueue<IComplexEventLogCreated>();
 
-        private IProcessLogCreated ProcessLogs = null;
+        private ConcurrentQueue<IProcessLogCreated> ProcessLogs =new ConcurrentQueue<IProcessLogCreated>();
 
         private void Process1Asserts()
         {
-            Assert.IsTrue(EventFailures.Count == 0 && ProcessLogs == null && ComplextEventLogs.Count == 0);
+            Assert.IsTrue(EventFailures.Count == 0 && ProcessLogs.IsEmpty && ComplextEventLogs.Count == 0);
+            Assert.IsNotNull(processServiceActorStarted);
             Assert.IsNotNull(processStarted);
             Assert.IsNotNull(viewModelSupervisorStarted);
-            Assert.IsNotNull(processServiceActorStarted);
+            
             Assert.IsNotNull(screenViewModelCreated);
             Assert.IsNotNull(screenViewModelLoadedInMainWindowViewModel);
             Assert.IsNotNull(processCompleted);

@@ -9,7 +9,7 @@ namespace ViewModel.Interfaces
         object[] Params { get; }
         ISystemProcess Process { get; }
         ISource Source { get; }
-        IStateEventInfo ProcessInfo { get; }
+        IProcessStateInfo ProcessInfo { get; }
     }
 
   

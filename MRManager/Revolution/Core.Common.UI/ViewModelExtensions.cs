@@ -30,7 +30,7 @@ namespace Core.Common.UI
 
                 var cmd = ReactiveCommand.Create(publishMessage);//,itm.CommandPredicate.Invoke(viewModel)
 
-                viewModel.Commands.Add(itm.CommandName, cmd);
+                viewModel.Commands.Add(itm.Key, cmd);
 
                 //var subject = itm.Subject.Invoke(viewModel);
 

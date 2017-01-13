@@ -53,9 +53,9 @@ namespace MRManager_UnitTests
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
                    new ViewEventPublication<LoginViewModel, EntityChanges<IUserSignIn>>(
-                       subject:(s) => s.ChangeTracking.DictionaryChanges,
+                       subject: (s) => s.ChangeTracking.DictionaryChanges,
                        subjectPredicate: new List<Func<LoginViewModel, bool>>(),
-                       messageData:(s) => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id, s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateEventInfo(s.Process.Id, RevolutionData.Context.View.Events.EntityChanged), s.Process, s.Source ))
+                       messageData: (s) => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id, s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateEventInfo(s.Process.Id, RevolutionData.Context.View.Events.EntityChanged), s.Process, s.Source ), key: "Entity Changes")
                }, commandInfo: new List<IViewModelEventCommand<IViewModel,IEvent>>(), orientation: typeof(IBodyViewModel));
 
             dynamic dynamicViewModel = viewModel;
@@ -77,12 +77,12 @@ namespace MRManager_UnitTests
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
                    new ViewEventPublication<LoginViewModel, EntityChanges<ISignInInfo>>(
-                       subject:(s) => s.ChangeTracking.DictionaryChanges,
+                       subject: (s) => s.ChangeTracking.DictionaryChanges,
                        subjectPredicate: new List<Func<LoginViewModel, bool>>()
                        {
                            v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Usersignin))
                        },
-                       messageData:(s) => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id, s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateEventInfo(s.Process.Id, RevolutionData.Context.View.Events.EntityChanged), s.Process, s.Source ))
+                       messageData: (s) => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id, s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateEventInfo(s.Process.Id, RevolutionData.Context.View.Events.EntityChanged), s.Process, s.Source ), key: "entity Changes")
                }, commandInfo: new List<IViewModelEventCommand<IViewModel, IEvent>>(), orientation: typeof(IBodyViewModel));
 
             dynamic dynamicViewModel = viewModel;
