@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using SystemInterfaces;
 using SystemMessages;
+using Actor.Interfaces;
 using Akka.Actor;
 using CommonMessages;
 using EventAggregator;
@@ -49,10 +50,12 @@ namespace DataServices.Actors
                         .Where(x => x.Process.Id == inMsg.Process.Id && x.MachineInfo.MachineName == inMsg.MachineInfo.MachineName)
                         .Subscribe(x => childActor.Tell(x));
 
-                    var outMsg = new SystemProcessStarted(new StateEventInfo(inMsg.Process.Id, RevolutionData.Context.Process.Events.ProcessStarted),inMsg.Process,Source);
+                   
                     //actor Won't instantiate fast enough to catch eventbus publish
-                    childActor.Tell(outMsg);
-                    EventMessageBus.Current.Publish(outMsg, Source);
+                    // i waiting for Process Actor to Say its Running before telling everyone process stated... Actor before process logic
+                    //EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source)
+                    //    .Subscribe(x => EventMessageBus.Current.Publish(outMsg, Source));
+
                 }
                 catch (Exception ex)
                 {

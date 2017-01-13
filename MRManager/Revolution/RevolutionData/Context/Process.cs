@@ -12,7 +12,7 @@ namespace RevolutionData.Context
     {
         public class Commands
         {
-            public static IStateCommand CompleteProcess => new StateCommand(name: "CreateProcessCompletedMessage", status: "Create Process Completed Message", expectedEvent: Events.ProcessCompleted);
+            public static IStateCommand CompleteProcess => new StateCommand(name: "CompleteProcess", status: "Create Process Completed Message", expectedEvent: Events.ProcessCompleted);
             public static IStateCommand StartProcess => new StateCommand("StartProcess", "Start Process", Events.ProcessStarted);
             public static IStateCommand CreateState => new StateCommand("CreateIntialState", "Create Intial State", Events.StateUpdated);
             public static IStateCommand UpdateState => new StateCommand("UpdateState", "Update State", Events.StateUpdated);

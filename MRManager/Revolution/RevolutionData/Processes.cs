@@ -23,17 +23,28 @@ namespace RevolutionData
 
         public static List<IComplexEventAction> ProcessComplexEvents = new List<IComplexEventAction>
         {
+             new ComplexEventAction(
+                "100",
+                1, new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent ("ProcessServiceStarted", 1, typeof (IServiceStarted<IProcessService>), e => e != null, new StateEventInfo(1, Context.Actor.Events.ServiceStarted), new SourceType(typeof(IProcessService))),
+                    
+                },
+                typeof(ISystemProcessStarted),
+                processInfo:new StateCommandInfo(1,Context.Process.Commands.StartProcess ),
+                action: ProcessActions.StartProcess),
+
             new ComplexEventAction(
                 "101",
                 1, new List<IProcessExpectedEvent>
                 {
-                   // new ProcessExpectedEvent ("ProcessStarted", 1, typeof (ISystemProcessStarted), e => e != null, new StateEventInfo(1, Context.Process.Events.ProcessStarted), new SourceType(typeof(IProcessService))),
+                    new ProcessExpectedEvent ("ProcessStarted", 1, typeof (ISystemProcessStarted), e => e != null, new StateEventInfo(1, Context.Process.Events.ProcessStarted), new SourceType(typeof(IProcessService))),
                     new ProcessExpectedEvent ("ViewCreated", 1, typeof (IViewModelCreated<IScreenModel>), e => e != null, new StateEventInfo(1,"ScreenViewCreated", "ScreenView Created","This view contains all views", Context.ViewModel.Commands.CreateViewModel), new SourceType(typeof(IViewModelService) )),
                     new ProcessExpectedEvent ("ViewLoaded", 1, typeof (IViewModelLoaded<IMainWindowViewModel,IScreenModel>), e => e != null, new StateEventInfo(1,"ScreenViewLoaded","ScreenView Model loaded in MainWindowViewModel","Only ViewModel in Body", Context.ViewModel.Commands.LoadViewModel), new SourceType(typeof(IViewModelService) ))
                 },
                 typeof(ISystemProcessCompleted),
                 processInfo:new StateCommandInfo(1,Context.Process.Commands.CompleteProcess ),
-                action: ProcessActions.ProcessCompleted),
+                action: ProcessActions.CompleteProcess),
 
 
             new ComplexEventAction(
@@ -50,8 +61,20 @@ namespace RevolutionData
                 }, 
                 expectedMessageType: typeof(ISystemProcessTerminated),
                 action: ProcessActions.ShutActorDown,
-                processInfo:new StateCommandInfo(1,Context.Actor.Commands.TerminateActor )), 
+                processInfo:new StateCommandInfo(1,Context.Actor.Commands.TerminateActor )),
+
             new ComplexEventAction(
+                "200",
+                2, new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent ("ProcessServiceStarted", 2, typeof (IServiceStarted<IProcessService>), e => e != null, new StateEventInfo(2, Context.Actor.Events.ServiceStarted), new SourceType(typeof(IProcessService))),
+
+                },
+                typeof(ISystemProcessStarted),
+                processInfo:new StateCommandInfo(2,Context.Process.Commands.StartProcess ),
+                action: ProcessActions.StartProcess),
+            new ComplexEventAction(
+                
                 key:"201",
                 processId:2,
                 events:new List<IProcessExpectedEvent>
@@ -59,8 +82,8 @@ namespace RevolutionData
                     new ProcessExpectedEvent (key: "ProcessStarted",
                                               processId: 2,
                                               eventPredicate: e => e != null,
-                                              eventType: typeof (ISystemProcessCompleted),
-                                              processInfo: new StateEventInfo(1,Context.Process.Events.ProcessCompleted),
+                                              eventType: typeof (ISystemProcessStarted),
+                                              processInfo: new StateEventInfo(2,Context.Process.Events.ProcessCompleted),
                                               expectedSourceType:new SourceType(typeof(IComplexEventService)))
                     
                 },

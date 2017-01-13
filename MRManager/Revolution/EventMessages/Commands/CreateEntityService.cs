@@ -14,6 +14,9 @@ namespace EventMessages
         {
             ActorType = actorType;
             Action = action;
+            ProcessInfo = processInfo;
         }
+
+        public new IStateCommandInfo ProcessInfo { get; }
     }
 }

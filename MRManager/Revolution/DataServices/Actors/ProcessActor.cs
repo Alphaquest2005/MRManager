@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
@@ -29,10 +30,10 @@ namespace DataServices.Actors
     public class ProcessActor : BaseActor<ProcessActor>, IProcessService
     {
         public ISystemProcess Process { get; }
-        
-       
-        private readonly List<IProcessSystemMessage> msgQue = new List<IProcessSystemMessage>(); 
-        private readonly IEnumerable<IComplexEventAction> _complexEvents = new List<IComplexEventAction>();
+
+
+        private ConcurrentQueue<IProcessSystemMessage> msgQue = new ConcurrentQueue<IProcessSystemMessage>();
+        private ReadOnlyCollection<IComplexEventAction> _complexEvents;
         public ConcurrentDictionary<Type, IProcessStateMessage<IEntityId>> ProcessStateMessages { get; }= new ConcurrentDictionary<Type, IProcessStateMessage<IEntityId>>();
 
 
@@ -40,39 +41,63 @@ namespace DataServices.Actors
         public ProcessActor(ISystemProcess process)
         {
             Process = process;
-            EventMessageBus.Current.GetEvent<IProcessStateMessage<IEntityId>>(Source).Subscribe(x => SaveStateMessages(x));
-            EventMessageBus.Current.GetEvent<IRequestProcessState>(Source).Subscribe(x => HandleRequestState(x));
-            EventMessageBus.Current.GetEvent<IRequestProcessLog>(Source).Subscribe(x => HandleProcessLogRequest(x));
-            EventMessageBus.Current.GetEvent<IComplexEventLogCreated>(Source).Buffer(TimeSpan.FromSeconds((double) EventTimeOut.ShortWait)).Subscribe(x => HandleComplexEventLog(x));
+            EventMessageBus.Current.GetEvent<IProcessStateMessage<IEntityId>>(Source).Where(x => x.Process.Id == process.Id).Subscribe(x => SaveStateMessages(x));
+            EventMessageBus.Current.GetEvent<IRequestProcessState>(Source).Where(x => x.Process.Id == process.Id).Subscribe(x => HandleRequestState(x));
+            EventMessageBus.Current.GetEvent<IRequestProcessLog>(Source).Where(x => x.Process.Id == process.Id).Subscribe(x => HandleProcessLogRequest(x));
+            EventMessageBus.Current.GetEvent<IComplexEventLogCreated>(Source).Where(x => x.Process.Id == process.Id).Subscribe(x => HandleComplexEventLog(x));
+
+            EventMessageBus.Current.GetEvent<IServiceStarted<IComplexEventService>>(Source).Where(x => x.Process.Id == process.Id).Subscribe(x => NotifyServiceStarted(x));
+
             Command<IProcessSystemMessage>(z => HandleProcessEvents(z));
             if (Processes.ProcessComplexEvents.Any(x => x.ProcessId == process.Id))
             {
                
-                _complexEvents = Processes.ProcessComplexEvents.Where(x => x.ProcessId == process.Id);
+                _complexEvents = new ReadOnlyCollection<IComplexEventAction>(Processes.ProcessComplexEvents.Where(x => x.ProcessId == process.Id).ToList());
                 StartActors(_complexEvents);
             }
             // start actor for each complex event
-            
-            Publish(new ServiceStarted<IProcessService>(this,new StateEventInfo(process.Id, RevolutionData.Context.Actor.Events.ServiceStarted), process, Source));
-            
 
             // start actor for each complex event
 
         }
-
-        private void HandleComplexEventLog(IList<IComplexEventLogCreated> complexEventLogs)
+        ConcurrentQueue<IServiceStarted<IComplexEventService>> startedComplexEventServices = new ConcurrentQueue<IServiceStarted<IComplexEventService>>();
+        private void NotifyServiceStarted(IServiceStarted<IComplexEventService> service)
         {
-            var logs = new List<IComplexEventLog>(OutMessages.CreatEventLogs(Source));
-            logs.AddRange(complexEventLogs.SelectMany(x => x.EventLog).ToList());
+            startedComplexEventServices.Enqueue(service);
+            if (startedComplexEventServices.Count != _complexEvents.Count()) return;
+            Publish(new ServiceStarted<IProcessService>(this,new StateEventInfo(Process.Id, RevolutionData.Context.Actor.Events.ServiceStarted), Process, Source));
+            startedComplexEventServices = new ConcurrentQueue<IServiceStarted<IComplexEventService>>();
+        }
 
-            var msg = new ProcessLogCreated(logs.OrderBy(x => x.Time), new StateEventInfo(Process.Id, RevolutionData.Context.Process.Events.LogCreated), Process, Source);
+
+        ConcurrentQueue<IComplexEventLogCreated> complexEventLogs = new ConcurrentQueue<IComplexEventLogCreated>();
+        private void HandleComplexEventLog(IComplexEventLogCreated complexEventLog)
+        {
+            complexEventLogs.Enqueue(complexEventLog);
+            if (complexEventLogs.Count != _complexEvents.Count()) return;
+
+            var msg = CreateProcessLog();
             Publish(msg);
+            complexEventLogs = new ConcurrentQueue<IComplexEventLogCreated>();
+        }
+
+        private ProcessLogCreated CreateProcessLog()
+        {
+            //var logs = new List<IComplexEventLog>(OutMessages.CreatEventLogs(Source));
+            //logs.AddRange(complexEventLogs.SelectMany(x => x.EventLog).ToList());
+
+             var logs = new List<IComplexEventLog>(msgQue.ToImmutableList().CreatEventLogs(Source));
+
+            var msg = new ProcessLogCreated(logs.OrderBy(x => x.Time),
+                new StateEventInfo(Process.Id, RevolutionData.Context.Process.Events.LogCreated), Process, Source);
+            return msg;
         }
 
         private void HandleProcessLogRequest(IRequestProcessLog requestProcessLog)
         {
             //Request logs from ComplexEventActors
-            var msg = new RequestComplexEventLog(new StateCommandInfo(Process.Id, RevolutionData.Context.Process.Commands.CreateComplexEventLog), Process,Source);
+           // var msg = new RequestComplexEventLog(new StateCommandInfo(Process.Id, RevolutionData.Context.Process.Commands.CreateComplexEventLog), Process,Source);
+            var msg = CreateProcessLog();
             Publish(msg);
         }
 
@@ -99,12 +124,11 @@ namespace DataServices.Actors
                 var inMsg = new CreateComplexEventService(new ComplexEventService(cp, Process, Source),new StateCommandInfo(Process.Id, RevolutionData.Context.Actor.Commands.StartService), Process, Source);
                 try
                 {
-                    var outMsg = CreateComplexEventService.Invoke(inMsg);
-                    Publish(outMsg);
+                    CreateComplexEventService.Invoke(inMsg);
                 }
                 catch (Exception ex)
                 {
-                   PublishProcesError(inMsg, ex, typeof(IComplexEventServiceCreated));
+                   PublishProcesError(inMsg, ex, typeof(IServiceStarted<IComplexEventService>));
                 }
             }
         }
@@ -117,18 +141,18 @@ namespace DataServices.Actors
             
             // send out Process State Events
 
-            msgQue.Add(pe);
+            msgQue.Enqueue(pe);
            
         }
 
 
         public IActorRef ActorRef => this.Self;
-                private Func<ICreateComplexEventService, IProcessSystemMessage> CreateComplexEventService = inMsg =>
+                private Action<ICreateComplexEventService> CreateComplexEventService = inMsg =>
         {
             var childActor =
                 Context.ActorOf(
                     Props.Create<ComplexEventActor>(inMsg.ComplexEventService.ComplexEventAction,
-                        inMsg.ComplexEventService.Process),
+                        inMsg.Process),
                     "ComplexEventActor:-" + inMsg.ComplexEventService.ComplexEventAction.Key.GetSafeActorName());
             EventMessageBus.Current.GetEvent<IProcessSystemMessage>(inMsg.Source)
                 .Where(
@@ -136,7 +160,7 @@ namespace DataServices.Actors
                         x.Process.Id == inMsg.Process.Id &&
                         x.MachineInfo.MachineName == inMsg.Process.MachineInfo.MachineName)
                 .Subscribe(x => childActor.Tell(x));
-            return new ComplexEventServiceCreated(inMsg.ComplexEventService,new StateEventInfo(inMsg.Process.Id, RevolutionData.Context.Actor.Events.ServiceStarted), inMsg.Process, inMsg.Source);
+            
         };
     }
 

@@ -52,7 +52,7 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source)
                 .Subscribe(x => Debugger.Log(0, "Test", x.Exception.Message + ":-:" + x.Exception.StackTrace));
             var msg = new GetEntityViewWithChanges<ISignInInfo>(1, new Dictionary<string, dynamic>() { { "Usersignin", "joe" } }, new StateCommandInfo(testProcess.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), testProcess, Source);
-            msg.GetEntity();
+            msg.GetEntityViewWithChanges();
             Thread.Sleep(2);
             Assert.IsNotNull(signonInfo);
         }

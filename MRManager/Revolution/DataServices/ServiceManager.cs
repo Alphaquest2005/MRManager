@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
@@ -28,7 +29,7 @@ namespace DataServices.Actors
             =>
                 new Source(Guid.NewGuid(),"ServiceManager", new SourceType(typeof(IServiceManager)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
-        static List<IActorRef> supervisors = new List<IActorRef>();
+        static ConcurrentQueue<IActorRef> supervisors = new ConcurrentQueue<IActorRef>();
 
 
         public ServiceManager(Assembly dbContextAssembly, Assembly entityAssembly)
@@ -51,8 +52,9 @@ namespace DataServices.Actors
                 EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source).Where(x => x.Process.Id == 1)//only start up process
                     .Subscribe(x =>
                     {
-                        EventMessageBus.Current.Publish(new ServiceStarted<IServiceManager>(this,new StateEventInfo(systemProcess.Id, RevolutionData.Context.Actor.Events.ServiceStarted), systemProcess,Source), Source);
                         HandleProcessStarted(x.Process, systemStartedMsg);
+                        EventMessageBus.Current.Publish(new ServiceStarted<IServiceManager>(this,new StateEventInfo(systemProcess.Id, RevolutionData.Context.Actor.Events.ServiceStarted), systemProcess,Source), Source);
+                        
                     });
                 
             }
@@ -72,7 +74,7 @@ namespace DataServices.Actors
             var child = Context.Child("ViewModelSupervisor");
             if (!Equals(child, ActorRefs.Nobody)) return;
 
-            supervisors.Add(Context.ActorOf(Props.Create<ViewModelSupervisor>(systemProcess),
+            supervisors.Enqueue(Context.ActorOf(Props.Create<ViewModelSupervisor>(systemProcess),
                 "ViewModelSupervisor"));
             foreach (var s in supervisors)
             {
@@ -119,7 +121,7 @@ namespace DataServices.Actors
             var specificListType = genericListType.MakeGenericType(classType);
             try
             {
-                supervisors.Add(Context.ActorOf(Props.Create(specificListType, process),
+                supervisors.Enqueue(Context.ActorOf(Props.Create(specificListType, process),
                     string.Format(actorName, classType.Name)));
             }
             catch (Exception ex)
@@ -141,7 +143,7 @@ namespace DataServices.Actors
             var specificListType = genericListType.MakeGenericType(classType);
             try
             {
-                supervisors.Add(Context.ActorOf(Props.Create(specificListType, process),
+                supervisors.Enqueue(Context.ActorOf(Props.Create(specificListType, process),
                     string.Format(actorName, classType.Name)));
             }
             catch (Exception ex)

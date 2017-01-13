@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using SystemInterfaces;
+using SystemMessages;
 using Actor.Interfaces;
 using EventAggregator;
 using EventMessages;
@@ -31,15 +32,16 @@ namespace DataServices.Actors
             this.WhenAny(x => x.InMessages, x => x.Value.Count).Timeout(TimeSpan.FromSeconds((double) EventTimeOut.LongWait)).Subscribe(x => ExecuteAction(),z => OnTimeOut());
             EventMessageBus.Current.GetEvent<IRequestComplexEventLog>(Source).Subscribe(x => handleComplexEventLogRequest());
 
+            Publish(new ServiceStarted<IComplexEventService>(this, new StateEventInfo(Process.Id, RevolutionData.Context.Actor.Events.ServiceStarted), Process, Source));
         }
 
         private void handleComplexEventLogRequest()
         {
             var xlogs = ComplexEventAction.Events.CreatEventLogs(InMessages.ToDictionary(x => x.Key, x => x.Value), Source);
-            //var ologs = OutMessages.CreatEventLogs(Source);
+            var ologs = OutMessages.CreatEventLogs(Source);
             var res = new List<IComplexEventLog>();
             res.AddRange(xlogs);
-            //res.AddRange(ologs);
+            res.AddRange(ologs);
 
             var msg = new ComplexEventLogCreated(res,new StateEventInfo(Process.Id, RevolutionData.Context.Process.Events.ComplexEventLogCreated), Process, Source);
             Publish(msg);
@@ -65,22 +67,26 @@ namespace DataServices.Actors
 
         private void CheckEvent(IProcessExpectedEvent expectedEvent, IProcessSystemMessage message)
         {
+            //todo: good implimentation of Railway pattern chain execution with error handling
            if(!expectedEvent.EventPredicate.Invoke(message)) return;
             expectedEvent.Validate(message);
             InMessages.AddOrUpdate(expectedEvent.Key, message, (k,v) => message);
             ExecuteAction();
+            
         }
 
         private void ExecuteAction()
         {
            // if (!ComplexEventAction.Events.All(z => z.Raised())) return;
-            if (InMessages.Count != ComplexEventAction.Events.Count) return;
+            
+            if (InMessages.Count() != ComplexEventAction.Events.Count) return;
             var inMsg = new ExecuteComplexEventAction(ComplexEventAction.Action, new ComplexEventParameters(this, InMessages.ToDictionary(x => x.Key, x => x.Value as object)),new StateCommandInfo(Process.Id, RevolutionData.Context.Actor.Commands.CreateAction), Process, Source);
             Publish(inMsg);
             try
             {
                 var outMsg = ComplexEventAction.Action.Action.Invoke(inMsg.ComplexEventParameters);
                 Publish(outMsg);
+                InMessages.Clear();
             }
             catch (Exception ex)
             {

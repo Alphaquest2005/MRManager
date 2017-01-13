@@ -34,10 +34,19 @@ namespace DataServices.Actors
 
         private void HandleProcessViews(IProcessSystemMessage pe)
         {
-            foreach (var v in ProcessViewModels.ProcessViewModelInfos.Where(x => x.ProcessId == pe.Process.Id))
+            try
             {
-               PublishViewModel(v, pe);
+                foreach (var v in ProcessViewModels.ProcessViewModelInfos.Where(x => x.ProcessId == pe.Process.Id))
+                {
+                    PublishViewModel(v, pe);
+                }
             }
+            catch (Exception ex)
+            {
+                //todo: need  to fix this
+                PublishProcesError(pe, ex, pe.GetType());
+            }
+
         }
 
         public void PublishViewModel(IViewModelInfo viewModelInfo, IProcessSystemMessage pe)

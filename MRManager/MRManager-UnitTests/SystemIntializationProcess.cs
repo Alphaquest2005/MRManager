@@ -52,7 +52,7 @@ namespace MRManager_UnitTests
             StartSystem();
             
             
-            Thread.Sleep(TimeSpan.FromSeconds(30));
+            Thread.Sleep(TimeSpan.FromSeconds(60));
 
             Process1Asserts();
             Process2Asserts();
@@ -152,7 +152,7 @@ namespace MRManager_UnitTests
 
         private void RegisterProcess1Events()
         {
-            EventMessageBus.Current.GetEvent<IProcessLogCreated>(Source).Subscribe(x => ProcessLogs.Add(x));
+            EventMessageBus.Current.GetEvent<IProcessLogCreated>(Source).Subscribe(x => ProcessLogs = x);
             EventMessageBus.Current.GetEvent<IComplexEventLogCreated>(Source).Subscribe(x => ComplextEventLogs.Add(x));
             EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source).Subscribe(x => EventFailures.Add(x));
             EventMessageBus.Current.GetEvent<IServiceStarted<IServiceManager>>(Source).Subscribe(x => serviceManagerStarted = x);
@@ -169,11 +169,11 @@ namespace MRManager_UnitTests
 
         private List<IComplexEventLogCreated> ComplextEventLogs = new List<IComplexEventLogCreated>();
 
-        private List<IProcessLogCreated> ProcessLogs = new List<IProcessLogCreated>();
+        private IProcessLogCreated ProcessLogs = null;
 
         private void Process1Asserts()
         {
-            Assert.IsTrue(EventFailures.Count == 0 && ProcessLogs.Count == 0 && ComplextEventLogs.Count == 0);
+            Assert.IsTrue(EventFailures.Count == 0 && ProcessLogs == null && ComplextEventLogs.Count == 0);
             Assert.IsNotNull(processStarted);
             Assert.IsNotNull(viewModelSupervisorStarted);
             Assert.IsNotNull(processServiceActorStarted);

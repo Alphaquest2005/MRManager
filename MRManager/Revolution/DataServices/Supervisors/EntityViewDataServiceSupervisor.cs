@@ -22,7 +22,7 @@ namespace DataServices.Actors
         public ISystemSource Source => new Source(Guid.NewGuid(), $"EntityViewSupervisor:<{typeof(TEntityView).GetFriendlyName()}>",new SourceType(typeof(EntityViewDataServiceSupervisor<TEntityView>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
         private static readonly Action<IGetEntityViewById<TEntityView>> GetEntityByIdAction = (x) => x.GetEntity();
-        private static readonly Action<IGetEntityViewWithChanges<TEntityView>> GetEntityWithChangesAction = (x) => x.GetEntity();
+        private static readonly Action<IGetEntityViewWithChanges<TEntityView>> GetEntityWithChangesAction = (x) => x.GetEntityViewWithChanges();
 
         //private static readonly Action<ISystemSource, ILoadEntitySet<TEntity>> LoadEntitySet = (s, x) => x.LoadEntitySet();
         //private static readonly Action<ISystemSource, ILoadEntitySetWithFilter<TEntity>> LoadEntitySetWithFilter = (s, x) => x.LoadEntitySet();
@@ -50,14 +50,23 @@ namespace DataServices.Actors
 
         public EntityViewDataServiceSupervisor(ISystemProcess process)
         {
-            foreach (var itm in entityEvents)
+            try
             {
-               this.GetType()
-                        .GetMethod("CreateEntityViewActor")
-                        .MakeGenericMethod(itm.Key)
-                        .Invoke(this, new object[] {itm.Value, process});
+                 foreach (var itm in entityEvents)
+                            {
+                               this.GetType()
+                                        .GetMethod("CreateEntityViewActor")
+                                        .MakeGenericMethod(itm.Key)
+                                        .Invoke(this, new object[] {itm.Value, process});
                
+                            }
             }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+           
 
         }
 

@@ -2,7 +2,7 @@
 {
     public enum EventTimeOut
     {
-        ShortWait = 3,
-        LongWait = 10
+        ShortWait = 5,
+        LongWait = 20
     }
 }

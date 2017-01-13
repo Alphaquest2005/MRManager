@@ -12,7 +12,7 @@ namespace DataServices.Actors
     {
     }
 
-    public class EntityViewDataServiceActor<TService>: BaseActor<EntityViewDataServiceActor<TService>>, IEntityViewDataServiceActor<TService>
+    public class EntityViewDataServiceActor<TService>: BaseActor<EntityViewDataServiceActor<TService>>, IEntityViewDataServiceActor<TService> where TService:IProcessSystemMessage
     {
         private Action<TService> Action { get; }
        
@@ -30,7 +30,16 @@ namespace DataServices.Actors
         {
             //TODO:Implement Logging
           // Persist(msg, x => { });//x => Action.Invoke(DbContext, Source, x)
-           Action.Invoke(msg);
+            try
+            {
+                Action.Invoke(msg);
+            }
+            catch (Exception ex)
+            {
+                
+               PublishProcesError(msg,ex, typeof(TService));
+            }
+           
         }
     }
 }

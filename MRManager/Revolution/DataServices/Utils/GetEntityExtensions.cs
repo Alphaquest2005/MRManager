@@ -30,7 +30,7 @@ namespace DataServices.Actors
             EntityViewDataContext<TEntityView>.GetEntityById(msg);
         }
 
-        public static void GetEntity<TEntityView>(this IGetEntityViewWithChanges<TEntityView> msg) where TEntityView : IEntityId
+        public static void GetEntityViewWithChanges<TEntityView>(this IGetEntityViewWithChanges<TEntityView> msg) where TEntityView : IEntityId
         {
 
             EntityViewDataContext<TEntityView>.GetEntityWithChanges(msg);

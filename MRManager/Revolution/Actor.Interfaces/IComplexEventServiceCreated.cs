@@ -7,9 +7,9 @@ using SystemInterfaces;
 
 namespace Actor.Interfaces
 {
-    [InheritedExport]
-    public interface IComplexEventServiceCreated : IProcessSystemMessage
-    {
-        IComplexEventService Service { get; set; }
-    }
+    //[InheritedExport]
+    //public interface IComplexEventServiceCreated : IProcessSystemMessage
+    //{
+    //    IComplexEventService Service { get; set; }
+    //}
 }

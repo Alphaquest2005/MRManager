@@ -27,10 +27,7 @@ namespace DataServices.Actors
         private static readonly Action<ISystemSource, ILoadEntitySetWithFilter<TEntity>> LoadEntitySetWithFilter = (s, x) => x.LoadEntitySet();
         private static readonly Action<ISystemSource, ILoadEntitySetWithFilterWithIncludes<TEntity>> LoadEntitySetWithFilterWithIncludes = (s, x) => x.LoadEntitySet();
 
-        //TODO: Add EntityViews
-        //private static readonly Action<ISystemSource, LoadEntityView<TEntity>> LoadEntityView = (s, x) => LoadEntityView(s, x);
-        //private static readonly Action<ISystemSource, LoadEntityViewWithFilter<TEntity>> LoadEntityViewWithFilter = (s, x) => x.LoadEntityView(s);
-
+        
         readonly Dictionary<Type, object> entityEvents =
             new Dictionary<Type, object>()
             {
@@ -44,8 +41,6 @@ namespace DataServices.Actors
                 //{typeof (LoadEntitySetWithFilter<TEntity>), LoadEntitySetWithFilter},
                 //{typeof (LoadEntitySetWithFilterWithIncludes<TEntity>), LoadEntitySetWithFilterWithIncludes},
 
-                //{typeof (LoadEntityView<TEntity>), LoadEntityView},
-                //{typeof (LoadEntityViewWithFilter<TEntity>), LoadEntityViewWithFilter},
             };
 
         public EntityDataServiceSupervisor(ISystemProcess process)
@@ -76,12 +71,8 @@ namespace DataServices.Actors
             }
             catch (Exception ex)
             {
-                new ProcessEventFailure(failedEventType: msg.GetType(),
-               failedEventMessage: msg,
-               expectedEventType: typeof(ServiceStarted<>),
-               exception: ex,
-               source: Source, processInfo: new StateEventInfo(msg.Process.Id, RevolutionData.Context.Process.Events.Error));
-                
+                //ToDo: This seems like a good way... getting the expected event type 
+                PublishProcesError(msg, ex, msg.ProcessInfo.State.ExpectedEvent.GetType());
             }
             
         }
