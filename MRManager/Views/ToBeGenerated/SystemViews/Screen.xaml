@@ -34,8 +34,8 @@
                 <TextBox Text="{Binding Usersignin, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBox Background="#FF30AC14" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
                 <Button Command="{Binding Commands[ValidateUserInfo]}" Content="Login" />
-                <TextBlock Text="{Binding State.Value.StateInfo.Status}" />
-                <TextBlock Text="{Binding State.Value.StateInfo.Notes}" />
+                <TextBlock Text="{Binding State.Value.StateInfo.State.Status}" />
+                <TextBlock Text="{Binding State.Value.StateInfo.State.Notes}" />
                 <Image Source="{Binding Image}" />
             </StackPanel>
         </DataTemplate>

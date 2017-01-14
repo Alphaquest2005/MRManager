@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
+using System.Reactive.Linq;
 using System.Windows;
 using SystemInterfaces;
 using EventMessages;
@@ -190,7 +191,7 @@ namespace RevolutionData
                                                     v => v.ChangeTracking.Values.Contains(nameof(v.State.Value.Entity.Usersignin))
                                                     
                                             },
-                                subject:s => s.Commands.GetValueOrNull("ValidateUserInfo").AsObservable(),
+                                subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
                                
                                 messageData:s => new ViewEventCommandParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView),s.Process,s.Source)),
 

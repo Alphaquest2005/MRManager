@@ -26,7 +26,7 @@ namespace MRManager_UnitTests
 
         private void handlelog(IComplexEventLogCreated complexEventLogCreated)
         {
-            throw new NotImplementedException();
+            Assert.IsNotNull(complexEventLogCreated);
         }
     }
 }
