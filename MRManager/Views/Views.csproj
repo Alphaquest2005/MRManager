@@ -39,21 +39,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ToBeGenerated\Model\AddressCitiesListView.xaml.cs">
@@ -99,14 +85,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataTemplates\DataTemplates.csproj">
-      <Project>{2f8bef84-3c02-48a4-a576-fbf41e3fffdd}</Project>
-      <Name>DataTemplates</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DesignTimeData\DesignTimeData.csproj">
-      <Project>{e7ec52dc-8650-4cf0-bcab-ed8a9473d2cf}</Project>
-      <Name>DesignTimeData</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EFEntities\EF.Entities.csproj">
       <Project>{FAD2A8C8-A1B4-4A3C-8E37-0388C0E3733C}</Project>
       <Name>EF.Entities</Name>

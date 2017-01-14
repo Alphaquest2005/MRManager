@@ -57,7 +57,7 @@ namespace MRManager_UnitTests
             StartSystem();
             
             
-            Thread.Sleep(TimeSpan.FromSeconds(180));
+            Thread.Sleep(TimeSpan.FromSeconds(15));
 
             Process1Asserts();
             Process2Asserts();
@@ -141,7 +141,7 @@ namespace MRManager_UnitTests
         private IProcessSystemMessage screenViewModelCreated;
         private IProcessSystemMessage screenViewModelLoadedInMainWindowViewModel;
         private IProcessSystemMessage processCompleted;
-        private IProcessSystemMessage mainWindowViewModelCreated;
+       // private IProcessSystemMessage mainWindowViewModelCreated;
         private IProcessSystemMessage process2Started;
         private IViewModelCreated<ILoginViewModel> LoginViewModelCreated;
         private IViewModelLoaded<IScreenModel, IViewModel> LoginViewModelLoadedInMScreenViewModel;

@@ -12,6 +12,7 @@ using CommonMessages;
 using EventAggregator;
 using EventMessages;
 using JB.Collections.Reactive;
+using JB.ExtensionMethods;
 using JB.Reactive.ExtensionMethods;
 using ReactiveUI;
 using RevolutionEntities.Process;
@@ -28,16 +29,18 @@ namespace Core.Common.UI
             foreach (var itm in viewModel.CommandInfo)
             {
                 var subject = itm.Subject.Invoke(viewModel);
-                var publishMessage = CreateCommandMessageAction(viewModel, itm);
+                
 
-                if(subject.GetType() == typeof(IObservable<ReactiveCommand<IViewModel, Unit>>))
+                if(subject.GetType() == Observable.Empty<ReactiveCommand<IViewModel, Unit>>().GetType())
                 {
+                    var publishMessage = CreateCommandMessageAction<IViewModel>(viewModel, itm);
                     var cmd = ReactiveCommand.Create(publishMessage);//,itm.CommandPredicate.Invoke(viewModel)
 
                     viewModel.Commands.Add(itm.Key, cmd);
                 }
                 else
                 {
+                    var publishMessage = CreateCommandMessageAction<dynamic>(viewModel, itm);
                     subject.Where(x => itm.CommandPredicate.All(z => z.Invoke(viewModel)))
                      .Subscribe(publishMessage);
                 }
@@ -96,9 +99,9 @@ namespace Core.Common.UI
             return publishMessage;
         }
 
-        private static Action<dynamic> CreateCommandMessageAction(IViewModel viewModel, IViewModelEventCommand<IViewModel, IEvent> itm)
+        private static Action<TResult> CreateCommandMessageAction<TResult>(IViewModel viewModel, IViewModelEventCommand<IViewModel, IEvent> itm)
         {
-            Action<dynamic> publishMessage = x =>
+            Action<TResult> publishMessage = x =>
             {
                 var param = itm.MessageData.Invoke(viewModel);
                 var paramArray = param.Params.ToList();

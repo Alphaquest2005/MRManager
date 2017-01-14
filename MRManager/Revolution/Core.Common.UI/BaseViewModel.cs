@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reactive;
 using SystemInterfaces;
 using Common;
 using CommonMessages;
@@ -36,7 +37,7 @@ namespace Core.Common.UI
         public Type Orientation { get; }
         public Type ViewModelType { get; }
 
-        public Dictionary<string, dynamic> Commands { get; } = new Dictionary<string, dynamic>();
+        public Dictionary<string, ReactiveCommand<IViewModel, Unit>> Commands { get; } = new Dictionary<string, ReactiveCommand<IViewModel, Unit>>();
 
         public ISystemProcess Process { get; set; }
         public string Name { get; }

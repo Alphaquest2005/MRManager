@@ -12,6 +12,7 @@ using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
 using ViewMessages;
 using ViewModel.Interfaces;
+using Utilities;
 
 namespace RevolutionData
 {
@@ -189,7 +190,7 @@ namespace RevolutionData
                                                     v => v.ChangeTracking.Values.Contains(nameof(v.State.Value.Entity.Usersignin))
                                                     
                                             },
-                                subject:s => ((ReactiveCommand<IViewModel, Unit>) s.Commands["ValidateUserInfo"]).AsObservable(),
+                                subject:s => s.Commands.GetValueOrNull("ValidateUserInfo").AsObservable(),
                                
                                 messageData:s => new ViewEventCommandParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView),s.Process,s.Source)),
 

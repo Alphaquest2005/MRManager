@@ -142,7 +142,7 @@ namespace MRManager_UnitTests
                 {
                     new ViewEventCommand<LoginViewModel, EntityChanges<IUserSignIn>>("ValidateUserInfo",
                         
-                        subject: (s) => ((ReactiveCommand<IViewModel, Unit>) s.Commands["ValidateUserInfo"]).AsObservable(),
+                        subject: (s) => s.Commands["ValidateUserInfo"].AsObservable(),
                         commandPredicate: new List<Func<LoginViewModel, bool>>()
                         {
                             (v) => v.ChangeTracking.Keys.Count > 2,
