@@ -25,4 +25,25 @@ namespace RevolutionEntities.ViewModels
 
         Type ViewModelType { get; }
     }
+
+    public class EventCommand<TViewModel, TEvent> : IViewModelEventCommand<TViewModel, TEvent> where TViewModel : IViewModel where TEvent : IEvent
+    {
+        public EventCommand(string key, Func<TViewModel, IObservable<dynamic>> subject, IEnumerable<Func<TViewModel, bool>> commandPredicate, Func<TViewModel, IViewEventCommandParameter> messageData)
+        {
+            EventType = typeof(TEvent);
+            Subject = subject;
+            CommandPredicate = commandPredicate;
+            MessageData = messageData;
+            Key = key;
+            ViewModelType = typeof(TViewModel);
+        }
+
+        public string Key { get; }
+        public Type EventType { get; }
+        public Func<TViewModel, IObservable<dynamic>> Subject { get; }
+        public IEnumerable<Func<TViewModel, bool>> CommandPredicate { get; }
+        public Func<TViewModel, IViewEventCommandParameter> MessageData { get; }
+
+        Type ViewModelType { get; }
+    }
 }

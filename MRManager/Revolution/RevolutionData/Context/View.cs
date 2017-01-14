@@ -13,7 +13,8 @@ namespace RevolutionData.Context
         public class Commands
         {
            // public static IStateCommand CreateViewModel => new StateCommand("CreateViewModel","Create View Model", Events.ViewModelCreated);
-            
+
+            public static IStateCommand ChangeEntity => new StateCommand("ChangeEntity", "Change Entity");
         }
         public class Events
         {

@@ -43,6 +43,7 @@ namespace DataServices.Actors
         {
             get
             {
+
                 var path = Context.Self.Path.ToStringWithUid();
                 var res =  path.Substring(path.LastIndexOf("#") + 1);
                 return "Actor-" + typeof (T).GetFriendlyName() + "-" + res;

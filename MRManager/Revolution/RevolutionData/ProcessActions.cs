@@ -14,24 +14,30 @@ namespace RevolutionData
 {
     public static class ProcessActions
     {
-        public static IProcessAction StartProcess = new ProcessAction(
+        public static IProcessAction StartProcess => new ProcessAction(
                         action: cp => new SystemProcessStarted(
                             new StateEventInfo(cp.Actor.Process.Id, Context.Process.Events.ProcessStarted),
                             cp.Actor.Process, cp.Actor.Source),
                         processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.StartProcess),
                         expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
-        public static IProcessAction CompleteProcess = new ProcessAction(
+        public static IProcessAction CompleteProcess => new ProcessAction(
                         action: cp => new SystemProcessCompleted(new StateEventInfo(cp.Actor.Process.Id, Context.Process.Events.ProcessCompleted),cp.Actor.Process, cp.Actor.Source),
                         processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.CompleteProcess),
                         expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
-        public static IProcessAction ShutActorDown = new ProcessAction(
-                        action: cp => new ActorTerminated(cp.Actor, new StateEventInfo(cp.Actor.Process.Id, Context.Actor.Events.ActorTerminated), cp.Actor.Process, cp.Actor.Source),//actor.ActorRef().GracefulStop(TimeSpan.FromSeconds(10)),TODO: figure out way to close actor without messing up command not working),
-                        processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Actor.Commands.TerminateActor),
+        public static IProcessAction ShutActorDown => new ProcessAction(
+                        action: cp =>
+                        {
+                           // ((dynamic)cp.Actor).ActorRef().GracefulStop(TimeSpan.FromSeconds(5));//,TODO: figure out way to close actor without messing up command not working),
+                            return new ActorTerminated(cp.Actor,
+                                new StateEventInfo(cp.Actor.Process.Id, Context.Actor.Events.ActorStopped),
+                                cp.Actor.Process, cp.Actor.Source);
+                        },//
+                        processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Actor.Commands.StopActor),
                         expectedSourceType: new SourceType(typeof (IComplexEventService)));
 
-        public static IProcessAction IntializeSigninProcessState = new ProcessAction(
+        public static IProcessAction IntializeSigninProcessState => new ProcessAction(
                         action: cp =>
                         {
                              var ps = new ProcessState<ISignInInfo>(
@@ -49,7 +55,7 @@ namespace RevolutionData
                         },
                         processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.CreateState),// take shortcut cud be IntialState
                         expectedSourceType: new SourceType(typeof(IComplexEventService)));
-        public static IProcessAction UserNameFound = new ProcessAction(
+        public static IProcessAction UserNameFound => new ProcessAction(
                         action: cp =>
                         {
                             var ps = new ProcessState<ISignInInfo>(cp.Actor.Process.Id, cp.Messages["UserNameFound"].Entity, new StateInfo(cp.Actor.Process.Id, "WelcomeUser", $"Welcome {cp.Messages["UserNameFound"].Entity.Usersignin}", "Please Enter your Password"));
@@ -59,7 +65,7 @@ namespace RevolutionData
                         expectedSourceType:new SourceType(typeof(IComplexEventService))
                         );
 
-        public static IProcessAction SetProcessStatetoValidatedUser = new ProcessAction(
+        public static IProcessAction SetProcessStatetoValidatedUser => new ProcessAction(
                         action: cp =>
                         {
                             var ps = new ProcessState<ISignInInfo>(cp.Actor.Process.Id, cp.Messages["ValidatedUser"].Entity, new StateInfo(cp.Actor.Process.Id, "UserValidated",$"User: {cp.Messages["ValidatedUser"].Entity.Usersignin} Validated", "User Validated"));

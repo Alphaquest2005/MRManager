@@ -9,8 +9,15 @@ namespace ViewModel.Interfaces
         object[] Params { get; }
         ISystemProcess Process { get; }
         ISource Source { get; }
-        IProcessStateInfo ProcessInfo { get; }
+        IStateEventInfo ProcessInfo { get; }
     }
 
-  
+    [InheritedExport]
+    public interface IViewEventCommandParameter
+    {
+        object[] Params { get; }
+        ISystemProcess Process { get; }
+        ISource Source { get; }
+        IStateCommandInfo ProcessInfo { get; }
+    }
 }

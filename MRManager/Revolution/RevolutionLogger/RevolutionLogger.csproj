@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{31E6B370-01F0-4489-832F-436CB97A6718}</ProjectGuid>
+    <ProjectGuid>{C868CD42-B7D3-4C2D-B4A8-6BF0E94BD620}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EventAggregator</RootNamespace>
-    <AssemblyName>EventAggregator</AssemblyName>
+    <RootNamespace>RevolutionLogger</RootNamespace>
+    <AssemblyName>RevolutionLogger</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -25,12 +25,16 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\MRManager\bin\Debug\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.7.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\MRManager\packages\log4net.2.0.7\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,31 +43,16 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventMessageBus.cs" />
+    <Compile Include="InvalidLogException.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="LoggingInitializationException.cs" />
+    <Compile Include="LoggingLevel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="project.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CommonMessages\CommonMessages.csproj">
-      <Project>{77007560-89dc-4e1f-9313-ae064a048ad4}</Project>
-      <Name>CommonMessages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RevolutionLogger\RevolutionLogger.csproj">
-      <Project>{c868cd42-b7d3-4c2d-b4a8-6bf0e94bd620}</Project>
-      <Name>RevolutionLogger</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SystemInterfaces\SystemInterfaces.csproj">
-      <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>
-      <Name>SystemInterfaces</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

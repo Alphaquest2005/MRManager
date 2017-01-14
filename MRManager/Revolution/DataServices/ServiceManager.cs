@@ -51,7 +51,7 @@ namespace DataServices.Actors
                     .Subscribe(x =>
                     {
                         HandleProcessStarted(x.Process, systemStartedMsg);
-                        EventMessageBus.Current.Publish(new ServiceStarted<IServiceManager>(this,new StateEventInfo(systemProcess.Id, RevolutionData.Context.Actor.Events.ServiceStarted), systemProcess,Source), Source);
+                        EventMessageBus.Current.Publish(new ServiceStarted<IServiceManager>(this,new StateEventInfo(systemProcess.Id, RevolutionData.Context.Actor.Events.ActorStarted), systemProcess,Source), Source);
                         
                     });
 

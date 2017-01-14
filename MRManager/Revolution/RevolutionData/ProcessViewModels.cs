@@ -159,14 +159,7 @@ namespace RevolutionData
 
                 }, new List<IViewModelEventPublication<IViewModel, IEvent>>
                 {
-                    new ViewEventPublication<ILoginViewModel, GetEntityViewWithChanges<ISignInInfo>>(
-                        key:"UserName",
-                        subject:v => v.ChangeTracking.DictionaryChanges,
-                        subjectPredicate: new List<Func<ILoginViewModel, bool>>
-                                            {
-                                                v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Usersignin)) && v.ChangeTracking.Keys.Count == 1
-                                            },
-                        messageData: s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView),s.Process,s.Source)),
+                   
 
 
                      new ViewEventPublication<ILoginViewModel, ViewStateLoaded<ILoginViewModel,IProcessState<ISignInInfo>>>(
@@ -179,12 +172,26 @@ namespace RevolutionData
                          messageData:s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source))
                 }, new List<IViewModelEventCommand<IViewModel,IEvent>>
                 {
+                   
+                     new ViewEventCommand<ILoginViewModel, GetEntityViewWithChanges<ISignInInfo>>(
+                        key:"UserName",
+                        subject:v => v.ChangeTracking.DictionaryChanges,
+                        commandPredicate: new List<Func<ILoginViewModel, bool>>
+                                            {
+                                                v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Usersignin)) && v.ChangeTracking.Keys.Count == 1
+                                            },
+                        messageData: s => new ViewEventCommandParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView),s.Process,s.Source)),
+
                     new ViewEventCommand<ILoginViewModel, GetEntityViewWithChanges<ISignInInfo>>(
                                 key:"ValidateUserInfo",
-                                commandPredicate: v => v.ChangeTracking.WhenAny(x => x.Keys,x => x.Value.Contains(nameof(v.State.Value.Entity.Usersignin))),
+                                commandPredicate:new List<Func<ILoginViewModel, bool>>
+                                            {
+                                                    v => v.ChangeTracking.Values.Contains(nameof(v.State.Value.Entity.Usersignin))
+                                                    
+                                            },
                                 subject:s => ((ReactiveCommand<IViewModel, Unit>) s.Commands["ValidateUserInfo"]).AsObservable(),
-                                subjectPredicate: new List<Func<ILoginViewModel, bool>> { v => true },
-                                messageData:s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateEventInfo(s.Process.Id, Context.EntityView.Events.EntityViewFound),s.Process,s.Source)),
+                               
+                                messageData:s => new ViewEventCommandParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView),s.Process,s.Source)),
 
                     
 

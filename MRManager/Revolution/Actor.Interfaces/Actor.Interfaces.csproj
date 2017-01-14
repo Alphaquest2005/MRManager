@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICreateProcessActor.cs" />
     <Compile Include="IActorTerminated.cs" />
     <Compile Include="ICreateEntityService.cs" />
     <Compile Include="ICreateEntityViewService.cs" />

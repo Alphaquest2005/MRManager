@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Reactive.Linq;
 using SystemInterfaces;
@@ -20,19 +21,20 @@ namespace DataServices.Actors
 
     public class ComplexEventActor : BaseActor<ComplexEventActor>, IComplexEventService
     {
-        public ComplexEventActor(IComplexEventAction complexEventAction, ISystemProcess process)
+        public ComplexEventActor(ICreateComplexEventService msg)
         {
-            ComplexEventAction = complexEventAction;
-            Process = process;
-            foreach (var e in complexEventAction.Events)
+            ComplexEventAction = msg.ComplexEventService.ComplexEventAction;
+            Process = msg.ComplexEventService.Process;
+            ActorId = msg.ComplexEventService.ActorId;
+            foreach (var e in msg.ComplexEventService.ComplexEventAction.Events)
             {
                 this.GetType().GetMethod("WireEvents").MakeGenericMethod(e.EventType).Invoke(this, new object[] {e});
             }
             //Todo: make time out configurable
-            this.WhenAny(x => x.InMessages, x => x.Value.Count).Subscribe(x => ExecuteAction());//,z => OnTimeOut());//.Timeout(TimeSpan.FromSeconds((double) EventTimeOut.LongWait))
+           // this.WhenAny(x => x.InMessages, x => x.Value.Count).Subscribe(x => ExecuteAction(InMessages.ToImmutableDictionary()));//,z => OnTimeOut());//.Timeout(TimeSpan.FromSeconds((double) EventTimeOut.LongWait))
             EventMessageBus.Current.GetEvent<IRequestComplexEventLog>(Source).Subscribe(x => handleComplexEventLogRequest());
 
-            Publish(new ServiceStarted<IComplexEventService>(this, new StateEventInfo(Process.Id, RevolutionData.Context.Actor.Events.ServiceStarted), Process, Source));
+            Publish(new ServiceStarted<IComplexEventService>(this, new StateEventInfo(Process.Id, RevolutionData.Context.Actor.Events.ActorStarted), Process, Source));
         }
 
         private void handleComplexEventLogRequest()
@@ -62,7 +64,9 @@ namespace DataServices.Actors
 
         public void WireEvents<TEvent>(IProcessExpectedEvent expectedEvent) where TEvent : IProcessSystemMessage
         {
-            EventMessageBus.Current.GetEvent<TEvent>(Source).Where(x => x.GetType().GetInterfaces().Any(z => z == expectedEvent.EventType)).Subscribe(x => CheckEvent(expectedEvent,x));
+            EventMessageBus.Current.GetEvent<TEvent>(Source)
+                .Where(x => x.Process.Id == Process.Id)
+                .Where(x => x.GetType().GetInterfaces().Any(z => z == expectedEvent.EventType)).Subscribe(x => CheckEvent(expectedEvent,x));
         }
 
         private void CheckEvent(IProcessExpectedEvent expectedEvent, IProcessSystemMessage message)
@@ -72,16 +76,15 @@ namespace DataServices.Actors
             expectedEvent.Validate(message);
             InMessages.AddOrUpdate(expectedEvent.Key, message, (k,v) => message);
             if (InMessages.Count() != ComplexEventAction.Events.Count) return;
-            ExecuteAction();
+            ExecuteAction(InMessages.ToImmutableDictionary(x => x.Key, x => x.Value as object));
             InMessages.Clear();
         }
 
-        private void ExecuteAction()
+        private void ExecuteAction(ImmutableDictionary<string, object> msgs)
         {
            // if (!ComplexEventAction.Events.All(z => z.Raised())) return;
             
-            
-            var inMsg = new ExecuteComplexEventAction(ComplexEventAction.Action, new ComplexEventParameters(this, InMessages.ToDictionary(x => x.Key, x => x.Value as object)),new StateCommandInfo(Process.Id, RevolutionData.Context.Actor.Commands.CreateAction), Process, Source);
+            var inMsg = new ExecuteComplexEventAction(ComplexEventAction.Action, new ComplexEventParameters(this, msgs),new StateCommandInfo(Process.Id, RevolutionData.Context.Actor.Commands.CreateAction), Process, Source);
             
             Publish(inMsg);
             try
@@ -98,6 +101,7 @@ namespace DataServices.Actors
         }
 
 
+        public string ActorId { get; }
         public IComplexEventAction ComplexEventAction { get; }
         public ISystemProcess Process { get;  }
         private readonly ConcurrentDictionary<string, IProcessSystemMessage> InMessages = new ConcurrentDictionary<string, IProcessSystemMessage>(); 

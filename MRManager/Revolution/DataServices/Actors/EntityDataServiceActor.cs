@@ -14,15 +14,15 @@ namespace DataServices.Actors
 
     public class EntityDataServiceActor<TService>: BaseActor<EntityDataServiceActor<TService>>, IEntityDataServiceActor<TService> where TService:IProcessSystemMessage
     {
-        private Action<TService> Action { get; }
+        private Action<ISystemSource,TService> Action { get; }
        
       
         
-        public EntityDataServiceActor(Action<TService> action, ISystemProcess process) 
+        public EntityDataServiceActor(ICreateEntityService msg) 
         {
-            Action = action;
+            Action = (Action<ISystemSource,TService>)msg.Action;
             Command<TService>(m => HandledEvent(m));
-            EventMessageBus.Current.Publish(new ServiceStarted<IEntityDataServiceActor<TService>>(this,new StateEventInfo(process.Id, RevolutionData.Context.Actor.Events.ServiceStarted), process,Source), Source);
+            EventMessageBus.Current.Publish(new ServiceStarted<IEntityDataServiceActor<TService>>(this,new StateEventInfo(msg.Process.Id, RevolutionData.Context.Actor.Events.ActorStarted), msg.Process,Source), Source);
         }
 
 
@@ -32,7 +32,7 @@ namespace DataServices.Actors
             // Persist(msg, x => { });//x => Action.Invoke(DbContext, Source, x)
             try
             {
-                Action.Invoke(msg);
+                Action.Invoke(Source,msg);
             }
             catch (Exception ex)
             {

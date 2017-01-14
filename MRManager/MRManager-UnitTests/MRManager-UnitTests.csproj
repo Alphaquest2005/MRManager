@@ -183,6 +183,10 @@
       <Project>{c827930a-0d05-4ee2-b9ac-db1cf5144e16}</Project>
       <Name>RevolutionEntities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Revolution\RevolutionLogger\RevolutionLogger.csproj">
+      <Project>{c868cd42-b7d3-4c2d-b4a8-6bf0e94bd620}</Project>
+      <Name>RevolutionLogger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Revolution\SystemInterfaces\SystemInterfaces.csproj">
       <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>
       <Name>SystemInterfaces</Name>

@@ -18,11 +18,11 @@ namespace DataServices.Actors
        
       
         
-        public EntityViewDataServiceActor(Action<TService> action, ISystemProcess process) 
+        public EntityViewDataServiceActor(ICreateEntityViewService msg) 
         {
-            Action = action;
+            Action = (Action<TService>) msg.Action;
             Command<TService>(m => HandledEvent(m));
-            EventMessageBus.Current.Publish(new ServiceStarted<IEntityViewDataServiceActor<TService>>(this,new StateEventInfo(process.Id, RevolutionData.Context.Actor.Events.ServiceStarted), process,Source), Source);
+            EventMessageBus.Current.Publish(new ServiceStarted<IEntityViewDataServiceActor<TService>>(this,new StateEventInfo(msg.Process.Id, RevolutionData.Context.Actor.Events.ActorStarted), msg.Process,Source), Source);
         }
 
         

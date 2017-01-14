@@ -20,7 +20,7 @@ namespace DataServices.Actors
             Command<LoadViewModel>(x => HandleProcessViews(x));
             //EventMessageBus.Current.GetEvent<LoadViewModel<IViewModelInfo>>(source).Subscribe(HandleProcessViews);
 
-            EventMessageBus.Current.Publish(new ServiceStarted<IViewModelService>(this,new StateEventInfo(process.Id, RevolutionData.Context.Actor.Events.ServiceStarted), process, Source), Source);
+            EventMessageBus.Current.Publish(new ServiceStarted<IViewModelService>(this,new StateEventInfo(process.Id, RevolutionData.Context.Actor.Events.ActorStarted), process, Source), Source);
         }
 
         private void HandleProcessViews(ILoadViewModel pe)

@@ -129,6 +129,7 @@ namespace MRManager_UnitTests
             dynamicViewModel.Commands["ValidateUserInfo"].Execute();
             // var id = dynamicViewModel.GetValue("Id");
             Assert.AreEqual(5, dynamicViewModel.Id);
+            
         }
 
         private static LoginViewModel CreateLoginViewModel()
@@ -140,15 +141,14 @@ namespace MRManager_UnitTests
                 eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>(), commandInfo: new List<IViewModelEventCommand<IViewModel,IEvent>>()
                 {
                     new ViewEventCommand<LoginViewModel, EntityChanges<IUserSignIn>>("ValidateUserInfo",
-                        v =>
-                            v.ChangeTracking.WhenAny(x => x.Keys,
-                                x => x.Value.Contains(nameof(IUserSignIn.Password)) && x.Value.Contains(nameof(IUserSignIn.Username))), 
+                        
                         subject: (s) => ((ReactiveCommand<IViewModel, Unit>) s.Commands["ValidateUserInfo"]).AsObservable(),
-                        subjectPredicate: new List<Func<LoginViewModel, bool>>()
+                        commandPredicate: new List<Func<LoginViewModel, bool>>()
                         {
-                            (v) => v.ChangeTracking.Keys.Count > 2
+                            (v) => v.ChangeTracking.Keys.Count > 2,
+                            v => v.ChangeTracking.Values.Contains(nameof(IUserSignIn.Password)) && v.ChangeTracking.Values.Contains(nameof(IUserSignIn.Username)), 
                         },
-                        messageData: s => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateEventInfo(s.Process.Id, RevolutionData.Context.View.Events.EntityChanged),s.Process,s.Source))
+                        messageData: s => new ViewEventCommandParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, RevolutionData.Context.View.Commands.ChangeEntity),s.Process,s.Source))
                 }, orientation: typeof(IBodyViewModel));
             return viewModel;
         }

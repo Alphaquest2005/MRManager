@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Windows;
-using log4netWrapper;
+using RevolutionLogger;
 
 namespace Amoeba
 {

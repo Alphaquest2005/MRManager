@@ -29,7 +29,7 @@ namespace DataServices.Actors
 
             EventMessageBus.Current.GetEvent<ISystemProcessStarted>(Source).Subscribe(x => HandleProcessViews(x));
             Receive<ISystemStarted>(x => HandleProcessViews(x));
-             EventMessageBus.Current.Publish(new ServiceStarted<IViewModelSupervisor>(this,new StateEventInfo(process.Id, RevolutionData.Context.Actor.Events.ServiceStarted), process, Source), Source);
+             EventMessageBus.Current.Publish(new ServiceStarted<IViewModelSupervisor>(this,new StateEventInfo(process.Id, RevolutionData.Context.Actor.Events.ActorStarted), process, Source), Source);
         }
 
         private void HandleProcessViews(IProcessSystemMessage pe)

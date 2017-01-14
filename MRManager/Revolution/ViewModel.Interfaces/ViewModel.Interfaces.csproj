@@ -53,7 +53,6 @@
     <Compile Include="IViewModelEvent.cs" />
     <Compile Include="IViewModelLoaded.cs" />
     <Compile Include="IAutoViewModel.cs" />
-    <Compile Include="IViewModelEventCommand.cs" />
     <Compile Include="IViewModel.cs" />
     <Compile Include="IViewModelEventSubscription.cs" />
     <Compile Include="IViewModelEventPublication.cs" />

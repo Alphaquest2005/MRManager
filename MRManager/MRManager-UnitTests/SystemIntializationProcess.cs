@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,6 +24,8 @@ using Utilities;
 using ViewMessages;
 using ViewModel.Interfaces;
 using ViewModels;
+using RevolutionLogger;
+
 
 
 
@@ -35,7 +38,8 @@ namespace MRManager_UnitTests
         public ISystemSource Source => new Source(Guid.NewGuid(), "TestCase" + typeof(SystemIntializationProcess).GetFriendlyName(),new SourceType(typeof(SystemIntializationProcess)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         private static void StartSystem()
         {
-
+            if (File.Exists("MRManager-TEST-Logs.xml")) File.Delete("MRManager-TEST-Logs.xml");
+            Logger.Initialize();
             var t = new MRManagerDBContext().GetType().Assembly;
             var x = new EFEntity<IEntity>().GetType().Assembly;
             BootStrapper.BootStrapper.Instance.StartUp(t, x);
@@ -53,7 +57,7 @@ namespace MRManager_UnitTests
             StartSystem();
             
             
-            Thread.Sleep(TimeSpan.FromSeconds(30));
+            Thread.Sleep(TimeSpan.FromSeconds(180));
 
             Process1Asserts();
             Process2Asserts();

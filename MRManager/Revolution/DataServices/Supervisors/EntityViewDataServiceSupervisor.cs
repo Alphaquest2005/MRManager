@@ -73,14 +73,14 @@ namespace DataServices.Actors
         public void CreateEntityViewActor<TEvent>(object action, ISystemProcess process) where TEvent : IMessage
         {
             Type actorType = typeof(EntityViewDataServiceActor<>).MakeGenericType(typeof(TEvent));
-            var inMsg = new CreateEntityViewService(actorType, action, new StateCommandInfo(process.Id, RevolutionData.Context.Actor.Commands.StartService), process,Source);
+            var inMsg = new CreateEntityViewService(actorType, action, new StateCommandInfo(process.Id, RevolutionData.Context.Actor.Commands.StartActor), process,Source);
             EventMessageBus.Current.Publish(inMsg, Source);
             /// Create Actor Per Event
             try
             {
                
                 
-                _childActor = Context.ActorOf(Props.Create(inMsg.ActorType, inMsg.Action, inMsg.Process).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
+                _childActor = Context.ActorOf(Props.Create(inMsg.ActorType, inMsg).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
                             "EntityViewDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
 
                     EventMessageBus.Current.GetEvent<TEvent>(Source).Subscribe(x => _childActor.Tell(x));

@@ -27,7 +27,7 @@ namespace RevolutionData
                 "100",
                 1, new List<IProcessExpectedEvent>
                 {
-                    new ProcessExpectedEvent ("ProcessServiceStarted", 1, typeof (IServiceStarted<IProcessService>), e => e != null, new StateEventInfo(1, Context.Actor.Events.ServiceStarted), new SourceType(typeof(IProcessService))),
+                    new ProcessExpectedEvent ("ProcessServiceStarted", 1, typeof (IServiceStarted<IProcessService>), e => e != null, new StateEventInfo(1, Context.Actor.Events.ActorStarted), new SourceType(typeof(IProcessService))),
                     
                 },
                 typeof(ISystemProcessStarted),
@@ -61,13 +61,13 @@ namespace RevolutionData
                 }, 
                 expectedMessageType: typeof(ISystemProcessTerminated),
                 action: ProcessActions.ShutActorDown,
-                processInfo:new StateCommandInfo(1,Context.Actor.Commands.TerminateActor )),
+                processInfo:new StateCommandInfo(1,Context.Actor.Commands.StopActor )),
 
             new ComplexEventAction(
                 "200",
                 2, new List<IProcessExpectedEvent>
                 {
-                    new ProcessExpectedEvent ("ProcessServiceStarted", 2, typeof (IServiceStarted<IProcessService>), e => e != null, new StateEventInfo(2, Context.Actor.Events.ServiceStarted), new SourceType(typeof(IProcessService))),
+                    new ProcessExpectedEvent ("ProcessServiceStarted", 2, typeof (IServiceStarted<IProcessService>), e => e != null, new StateEventInfo(2, Context.Actor.Events.ActorStarted), new SourceType(typeof(IProcessService))),
 
                 },
                 typeof(ISystemProcessStarted),
@@ -83,7 +83,7 @@ namespace RevolutionData
                                               processId: 2,
                                               eventPredicate: e => e != null,
                                               eventType: typeof (ISystemProcessStarted),
-                                              processInfo: new StateEventInfo(2,Context.Process.Events.ProcessCompleted),
+                                              processInfo: new StateEventInfo(2,Context.Process.Events.ProcessStarted),
                                               expectedSourceType:new SourceType(typeof(IComplexEventService)))
                     
                 },

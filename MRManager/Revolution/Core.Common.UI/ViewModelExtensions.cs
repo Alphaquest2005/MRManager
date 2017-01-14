@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text;
@@ -26,11 +27,22 @@ namespace Core.Common.UI
 
             foreach (var itm in viewModel.CommandInfo)
             {
-                var publishMessage = CreatePublishMessageAction(viewModel, itm);
+                var subject = itm.Subject.Invoke(viewModel);
+                var publishMessage = CreateCommandMessageAction(viewModel, itm);
 
-                var cmd = ReactiveCommand.Create(publishMessage);//,itm.CommandPredicate.Invoke(viewModel)
+                if(subject.GetType() == typeof(IObservable<ReactiveCommand<IViewModel, Unit>>))
+                {
+                    var cmd = ReactiveCommand.Create(publishMessage);//,itm.CommandPredicate.Invoke(viewModel)
 
-                viewModel.Commands.Add(itm.Key, cmd);
+                    viewModel.Commands.Add(itm.Key, cmd);
+                }
+                else
+                {
+                    subject.Where(x => itm.CommandPredicate.All(z => z.Invoke(viewModel)))
+                     .Subscribe(publishMessage);
+                }
+
+                
 
                 //var subject = itm.Subject.Invoke(viewModel);
 
@@ -79,6 +91,23 @@ namespace Core.Common.UI
                 var concreteEvent = BootStrapper.BootStrapper.Container.GetExportedTypes(itm.EventType).FirstOrDefault();
                 //TODO: Replace MEF with Good IOC container - can't do <,>
                 var msg = (ProcessSystemMessage) Activator.CreateInstance(concreteEvent??itm.EventType, paramArray.ToArray());
+                EventMessageBus.Current.Publish(msg, viewModel.Source);
+            };
+            return publishMessage;
+        }
+
+        private static Action<dynamic> CreateCommandMessageAction(IViewModel viewModel, IViewModelEventCommand<IViewModel, IEvent> itm)
+        {
+            Action<dynamic> publishMessage = x =>
+            {
+                var param = itm.MessageData.Invoke(viewModel);
+                var paramArray = param.Params.ToList();
+                paramArray.Add(param.ProcessInfo);
+                paramArray.Add(param.Process);
+                paramArray.Add(param.Source);
+                var concreteEvent = BootStrapper.BootStrapper.Container.GetExportedTypes(itm.EventType).FirstOrDefault();
+                //TODO: Replace MEF with Good IOC container - can't do <,>
+                var msg = (ProcessSystemMessage)Activator.CreateInstance(concreteEvent ?? itm.EventType, paramArray.ToArray());
                 EventMessageBus.Current.Publish(msg, viewModel.Source);
             };
             return publishMessage;

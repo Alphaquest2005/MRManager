@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
 using SystemInterfaces;
-using log4netWrapper;
+using RevolutionLogger;
 
 namespace EventAggregator
 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SystemInterfaces;
@@ -8,10 +9,7 @@ using SystemInterfaces;
 namespace Actor.Interfaces
 {
     [InheritedExport]
-    public interface IComplexEventService: IService<IComplexEventService>
+    public interface ICreateProcessActor : IProcessSystemMessage
     {
-        string ActorId { get; }
-        IComplexEventAction ComplexEventAction { get; }
-        ISystemProcess Process { get; }
     }
 }

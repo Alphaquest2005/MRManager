@@ -9,6 +9,7 @@ using Akka.Actor;
 using CommonMessages;
 using EventAggregator;
 using EventMessages;
+using EventMessages.Commands;
 using RevolutionData;
 using RevolutionEntities.Process;
 using Utilities;
@@ -38,14 +39,14 @@ namespace DataServices.Actors
 
         private void CreateProcesses(IProcessSystemMessage se, IEnumerable<IProcessInfo> processSteps)
         {
-            foreach (var inMsg in processSteps.Select(p => new StartSystemProcess(new StateCommandInfo(p.Id, RevolutionData.Context.Process.Commands.StartProcess), new SystemProcess(new Process(p.Id, p.ParentProcessId, p.Name, p.Description, p.Symbol, se.User), Source.MachineInfo),Source)))
+            foreach (var inMsg in processSteps.Select(p => new CreateProcessActor(new StateCommandInfo(p.Id, RevolutionData.Context.Actor.Commands.CreateActor), new SystemProcess(new Process(p.Id, p.ParentProcessId, p.Name, p.Description, p.Symbol, se.User), Source.MachineInfo),Source)))
             {
 
                 try
                 {
                     EventMessageBus.Current.Publish(inMsg, Source);
 
-                    var childActor = Context.ActorOf(Props.Create<ProcessActor>(inMsg.Process), "ProcessActor-" + inMsg.Process.Name.GetSafeActorName());
+                    var childActor = Context.ActorOf(Props.Create<ProcessActor>(inMsg), "ProcessActor-" + inMsg.Process.Name.GetSafeActorName());
                     EventMessageBus.Current.GetEvent<IProcessSystemMessage>(Source)
                         .Where(x => x.Process.Id == inMsg.Process.Id && x.MachineInfo.MachineName == inMsg.MachineInfo.MachineName)
                         .Subscribe(x => childActor.Tell(x));
@@ -69,5 +70,6 @@ namespace DataServices.Actors
             }
         }
     }
+
 
 }

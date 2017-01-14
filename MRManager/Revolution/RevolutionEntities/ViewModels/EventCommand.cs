@@ -5,14 +5,14 @@ using ViewModel.Interfaces;
 
 namespace RevolutionEntities.ViewModels
 {
-    public class ViewModelEventCommand<TViewModel,TEvent>:EventPublication<TViewModel,TEvent>, IViewModelEventCommand<TViewModel, IEvent> where TViewModel : IViewModel where TEvent : IEvent
+    public class ViewModelEventCommand<TViewModel,TEvent>:EventCommand<TViewModel,TEvent>, IViewModelEventCommand<TViewModel, IEvent> where TViewModel : IViewModel where TEvent : IEvent
     {
-        public ViewModelEventCommand(string key, Func<TViewModel, IObservable<bool>> commandPredicate, Func<TViewModel, IObservable<dynamic>> subject, IEnumerable<Func<TViewModel, bool>> subjectPredicate, Func<TViewModel, IViewEventPublicationParameter> messageData) : base(key, subject, subjectPredicate, messageData)
+        public ViewModelEventCommand(string key, Func<TViewModel, IObservable<dynamic>> subject, IEnumerable<Func<TViewModel, bool>> commandPredicate, Func<TViewModel, IViewEventCommandParameter> messageData) : base(key, subject, commandPredicate, messageData)
         {
-            CommandPredicate = commandPredicate;
+            
         }
 
 
-        public Func<TViewModel, IObservable<bool>> CommandPredicate { get; }
+        
     }
 }

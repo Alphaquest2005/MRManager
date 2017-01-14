@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using SystemInterfaces;
 using Actor.Interfaces;
 
@@ -6,7 +7,7 @@ namespace RevolutionEntities.Process
 {
     public class ComplexEventParameters : IComplexEventParameters
     {
-        public ComplexEventParameters(IComplexEventService actor, Dictionary<string, dynamic> messages)
+        public ComplexEventParameters(IComplexEventService actor, ImmutableDictionary<string, dynamic> messages)
         {
             Actor = actor;
             Messages = messages;
@@ -14,7 +15,7 @@ namespace RevolutionEntities.Process
         }
 
         public IComplexEventService Actor { get; }
-        public Dictionary<string, dynamic> Messages { get; }
+        public ImmutableDictionary<string, dynamic> Messages { get; }
      
     }
 }

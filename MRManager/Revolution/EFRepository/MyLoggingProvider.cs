@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
-using log4netWrapper;
+using RevolutionLogger;
 
 namespace EFRepository
 {
