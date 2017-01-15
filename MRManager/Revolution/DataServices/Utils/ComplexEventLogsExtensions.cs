@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using SystemInterfaces;
 using Common;
+using Newtonsoft.Json;
 using RevolutionEntities.Process;
 using Utilities;
+using JsonSerializer = Utilities.JsonSerializer;
 
 namespace DataServices.Utils
 {
@@ -27,14 +29,14 @@ namespace DataServices.Utils
                             sourceName: xevent.Source.SourceName,
                             source: xevent.Source.SourceType.Source_Type.GetFriendlyName(),
                             expectedSource: source.SourceType.Source_Type.GetFriendlyName(),
-                            message: ""
+                            message: JsonSerializer.JsonSerialize(xevent.GetDerivedProperties())//(xevent.GetDerivedProperties()
                             // ToDo: Check out circular differnece
                             //new JavaScriptSerializer().Serialize(new
                             //{
                             //    d = xevent.GetDerivedProperties()
                             //})
                             ,
-                            processInfo: new JavaScriptSerializer().Serialize(xevent.ProcessInfo)))
+                            processInfo: JsonSerializer.JsonSerialize(xevent.ProcessInfo)))
                     .Cast<IComplexEventLog>()
                     .ToList();
             }
@@ -59,8 +61,8 @@ namespace DataServices.Utils
                             sourceName: inMessages.ContainsKey(xevent.Key) ? inMessages[xevent.Key].Source.SourceName:"",
                             source: inMessages.ContainsKey(xevent.Key) ? inMessages[xevent.Key].Source.SourceType.Source_Type.GetFriendlyName(): "",
                             expectedSource: xevent.ExpectedSourceType.Source_Type.GetFriendlyName(),
-                            message:"",// new JavaScriptSerializer().Serialize(inMessages[xevent.Key]),
-                            processInfo: new JavaScriptSerializer().Serialize(xevent.ProcessInfo)))
+                            message: JsonSerializer.JsonSerialize(xevent),// new JavaScriptSerializer().Serialize(inMessages[xevent.Key]),
+                            processInfo: JsonSerializer.JsonSerialize(xevent.ProcessInfo)))
                     .Cast<IComplexEventLog>()
                     .ToList();
             }

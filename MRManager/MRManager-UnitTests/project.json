@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "Newtonsoft.Json": "9.0.2-beta1",
     "Remotion.Linq": "2.2.0-alpha-001",
     "System.Interactive.Async": "3.1.1"
   },

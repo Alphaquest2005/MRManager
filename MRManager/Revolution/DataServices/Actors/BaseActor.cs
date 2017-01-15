@@ -10,6 +10,7 @@ using Common;
 using CommonMessages;
 using EventAggregator;
 using EventMessages;
+using Newtonsoft.Json;
 using RevolutionEntities.Process;
 using Utilities;
 
@@ -39,6 +40,7 @@ namespace DataServices.Actors
             EventMessageBus.Current.Publish(msg, Source);
             OutMessages = OutMessages.Add(msg);
         }
+        [JsonIgnore]
         public override string PersistenceId
         {
             get

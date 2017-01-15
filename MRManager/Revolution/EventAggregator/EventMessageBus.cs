@@ -2,6 +2,7 @@
 using System.Diagnostics.Contracts;
 using SystemInterfaces;
 using RevolutionLogger;
+using Newtonsoft.Json;
 
 namespace EventAggregator
 {
@@ -26,7 +27,7 @@ namespace EventAggregator
         public void Publish<TEvent>(TEvent sampleEvent, ISource sender) where TEvent : IMessage
         {
             Contract.Requires(sender != null || sampleEvent != null);
-            Logger.Log(LoggingLevel.Info, "Sender:" + sender.SourceName + " | PublishEvent : " + typeof(TEvent));
+            Logger.Log(LoggingLevel.Info, $"Sender:{sender.SourceName} | PublishEvent : {typeof(TEvent)} | Message : {JsonConvert.SerializeObject(sampleEvent.GetDerivedProperties(), Formatting.Indented, new JsonSerializerSettings() {ReferenceLoopHandling = ReferenceLoopHandling.Ignore})}");
             ea.Publish(sampleEvent);
         }
     }

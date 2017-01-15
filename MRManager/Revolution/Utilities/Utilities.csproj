@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="BoxingSafeConverter.cs" />
     <Compile Include="ActorExtensions.cs" />
+    <Compile Include="JsonSerializer.cs" />
     <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="GenericContractTypeMapping.cs" />
     <Compile Include="FuncExtensions.cs" />
