@@ -12,7 +12,7 @@ namespace Actor.Interfaces
     {
         ISystemProcess Process { get; }
         ConcurrentDictionary<Type, IProcessStateMessage<IEntityId>> ProcessStateMessages { get; }
-        //IActorRef ActorRef { get; }
+        IActorRef ActorRef { get; }
         
     }
 }

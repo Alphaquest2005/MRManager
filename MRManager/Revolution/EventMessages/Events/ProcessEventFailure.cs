@@ -17,7 +17,7 @@ namespace EventMessages
         {
             FailedEventType = failedEventType;
             //TODO: need to implement serialization
-            FailedEventMessage = failedEventMessage;
+            //FailedEventMessage = failedEventMessage;
             ExpectedEventType = expectedEventType;
             Exception = exception;
             

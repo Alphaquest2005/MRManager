@@ -3,7 +3,6 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Reflection;
 using System.Web.Script.Serialization;
-using Newtonsoft.Json;
 
 namespace SystemInterfaces
 {
@@ -16,10 +15,10 @@ namespace SystemInterfaces
 
     public static class IProcessSystemMessageExtensions
     {
-        public static Dictionary<string, string> GetDerivedProperties(this IMessage msg)
+        public static Dictionary<string, string> GetDerivedProperties(this IProcessSystemMessage msg)
         {
-            FieldInfo[] fields = msg.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
-            return fields.ToDictionary(f => f.Name, f => JsonConvert.SerializeObject(f.GetValue(msg)));
+            FieldInfo[] fields = msg.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+            return fields.ToDictionary(f => f.Name, f => new JavaScriptSerializer().Serialize(f.GetValue(msg)));
         } 
     }
 }

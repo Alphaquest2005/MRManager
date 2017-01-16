@@ -54,9 +54,6 @@ namespace MRManager_UnitTests
             RegisterProcess1Events();
             RegisterProcess2Events();
 
-            EventMessageBus.Current.GetEvent<ISystemProcessStarted>(Source).Subscribe(x => startedProcesses.Enqueue(x));
-
-
             StartSystem();
             
             
@@ -64,14 +61,6 @@ namespace MRManager_UnitTests
 
             Process1Asserts();
             Process2Asserts();
-
-            foreach (var p in startedProcesses.ToArray())
-            {
-                EventMessageBus.Current.Publish(new RequestProcessLog(new StateCommandInfo(p.Process.Id, RevolutionData.Context.Process.Commands.CreateLog),p.Process,Source ),Source );
-            }
-
-            Thread.Sleep(TimeSpan.FromSeconds(5));
-            Assert.IsTrue(ProcessLogs.Count == startedProcesses.Count);
         }
 
         private IProcessSystemMessage process2ServiceActorStarted;
@@ -120,8 +109,6 @@ namespace MRManager_UnitTests
                     });
             EventMessageBus.Current.GetEvent<IUserValidated>(Source).Subscribe(x => userValidated = x);
 
-            
-
         }
 
         private void Process2Asserts()
@@ -140,8 +127,8 @@ namespace MRManager_UnitTests
             Assert.IsNotNull(UserNameEntityChanges);
             Assert.IsNotNull(userFound);
             Assert.IsNotNull(userValidated);
+            
 
-            Assert.IsTrue(EventFailures.Count == 0 && ProcessLogs.IsEmpty && ComplextEventLogs.Count == 0);
 
 
         }
@@ -165,7 +152,6 @@ namespace MRManager_UnitTests
         private IUserValidated userValidated;
         private IServiceStarted<IEntityViewDataServiceActor<IGetEntityViewWithChanges<ISignInInfo>>> getEntityChangesActor;
         private ConcurrentQueue<IProcessEventFailure> EventFailures = new ConcurrentQueue<IProcessEventFailure>();
-        private ConcurrentQueue<ISystemProcessStarted> startedProcesses = new ConcurrentQueue<ISystemProcessStarted>();
         private IViewStateLoaded<ILoginViewModel, IProcessState<ISignInInfo>> viewLoadedState;
 
 
