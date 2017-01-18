@@ -144,10 +144,10 @@
     <Compile Include="Generated Expressions\Entity Expressions\VitalSigns.cs" />
     <Compile Include="Generated Expressions\Entity Expressions\Weight.cs" />
     <Compile Include="Generated Expressions\Entity Expressions\ZipCodes.cs" />
-    <Compile Include="Generated Expressions\EntityView Expressions\SignInInfo.cs" />
     <Compile Include="Generated Expressions\Function Expressions\AutoFunctions.cs" />
     <Compile Include="PersonSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignInInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EFEntities\EF.Entities.csproj">
@@ -170,6 +170,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Generated Expressions\EntityView Expressions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

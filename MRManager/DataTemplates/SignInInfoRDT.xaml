@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
+                    xmlns:converters="clr-namespace:Converters;assembly=Converters"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+                    mc:Ignorable="d">
+
+    <DataTemplate DataType="{x:Type viewModels:SigninViewModel}">
+        <StackPanel Width="500"
+                    Height="500"
+                    Background="#FF142695">
+            <TextBox Text="{Binding Usersignin, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Background="#FF30AC14" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Command="{Binding Commands[ValidateUserInfo]}" Content="Login" />
+            <TextBlock Text="{Binding State.Value.StateInfo.State.Status}" />
+            <TextBlock Text="{Binding State.Value.StateInfo.State.Notes}" />
+            <Image Source="{Binding Image}" />
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>

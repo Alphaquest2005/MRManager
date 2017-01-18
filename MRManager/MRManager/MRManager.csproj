@@ -97,6 +97,14 @@
       <Project>{e7ec52dc-8650-4cf0-bcab-ed8a9473d2cf}</Project>
       <Name>DesignTimeData</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Domain.Interfaces\Domain.Interfaces.csproj">
+      <Project>{e41cf673-fe71-4aae-a8fc-b571a36c1211}</Project>
+      <Name>Domain.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DomainMessages\DomainMessages.csproj">
+      <Project>{7ee26a5b-63e6-450e-b4bd-66d0205fb492}</Project>
+      <Name>DomainMessages</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EF.Mappings\EF.Mappings.csproj">
       <Project>{da54313c-4b98-49b1-a8f9-b5827f121886}</Project>
       <Name>EF.Mappings</Name>
@@ -153,6 +161,10 @@
       <Project>{320107b2-d414-434b-ae0d-4d9f18ff49b8}</Project>
       <Name>DataServices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Revolution\DynamicLinq\System.Linq.Dynamic\System.Linq.Dynamic.csproj">
+      <Project>{17c0d5de-c72d-4a06-a12c-445ebcf3b9ea}</Project>
+      <Name>System.Linq.Dynamic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Revolution\EFRepository\EFRepository.csproj">
       <Project>{415ddc8a-a74d-4afa-8fcb-2706a062a4fd}</Project>
       <Name>EFRepository</Name>
@@ -176,6 +188,10 @@
     <ProjectReference Include="..\Revolution\PropertyExtensions\PropertyExtensions.csproj">
       <Project>{a50703de-44b8-4dde-8227-a5ee1e39ee84}</Project>
       <Name>PropertyExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\RevolutionData\RevolutionData.csproj">
+      <Project>{959d7f6b-0426-452c-8962-c0f4dadbe3b4}</Project>
+      <Name>RevolutionData</Name>
     </ProjectReference>
     <ProjectReference Include="..\Revolution\RevolutionEntities\RevolutionEntities.csproj">
       <Project>{c827930a-0d05-4ee2-b9ac-db1cf5144e16}</Project>
