@@ -155,8 +155,8 @@ namespace RevolutionData
                 (
                 2, new List<IViewModelEventSubscription<IViewModel, IEvent>>
                 {
-                   new ViewEventSubscription<ILoginViewModel, IProcessStateMessage<ISignInInfo>>(
-                       2, e => e != null, new List<Func<ILoginViewModel, IProcessStateMessage<ISignInInfo>, bool>>(), (v,e) => v.State.Value = e.State
+                   new ViewEventSubscription<ISigninViewModel, IProcessStateMessage<ISignInInfo>>(
+                       2, e => e != null, new List<Func<ISigninViewModel, IProcessStateMessage<ISignInInfo>, bool>>(), (v,e) => v.State.Value = e.State
                        )
 
                 }, new List<IViewModelEventPublication<IViewModel, IEvent>>
@@ -164,10 +164,10 @@ namespace RevolutionData
                    
 
 
-                     new ViewEventPublication<ILoginViewModel, ViewStateLoaded<ILoginViewModel,IProcessState<ISignInInfo>>>(
+                     new ViewEventPublication<ISigninViewModel, ViewStateLoaded<ISigninViewModel,IProcessState<ISignInInfo>>>(
                          key:"ILoginModelViewStateLoaded", 
                          subject:v => v.State,
-                         subjectPredicate:new List<Func<ILoginViewModel, bool>>
+                         subjectPredicate:new List<Func<ISigninViewModel, bool>>
                                              {
                                                  v => v.State != null
                                              },
@@ -175,18 +175,18 @@ namespace RevolutionData
                 }, new List<IViewModelEventCommand<IViewModel,IEvent>>
                 {
                    
-                     new ViewEventCommand<ILoginViewModel, GetEntityViewWithChanges<ISignInInfo>>(
+                     new ViewEventCommand<ISigninViewModel, GetEntityViewWithChanges<ISignInInfo>>(
                         key:"UserName",
                         subject:v => v.ChangeTracking.DictionaryChanges,
-                        commandPredicate: new List<Func<ILoginViewModel, bool>>
+                        commandPredicate: new List<Func<ISigninViewModel, bool>>
                                             {
                                                 v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Usersignin)) && v.ChangeTracking.Keys.Count == 1
                                             },
                         messageData: s => new ViewEventCommandParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView),s.Process,s.Source)),
 
-                    new ViewEventCommand<ILoginViewModel, GetEntityViewWithChanges<ISignInInfo>>(
+                    new ViewEventCommand<ISigninViewModel, GetEntityViewWithChanges<ISignInInfo>>(
                                 key:"ValidateUserInfo",
-                                commandPredicate:new List<Func<ILoginViewModel, bool>>
+                                commandPredicate:new List<Func<ISigninViewModel, bool>>
                                             {
                                                     v => v.ChangeTracking.Values.Contains(nameof(v.State.Value.Entity.Usersignin))
                                                     
@@ -197,7 +197,7 @@ namespace RevolutionData
 
                     
 
-                }, typeof(ILoginViewModel), typeof(IBodyViewModel))
+                }, typeof(ISigninViewModel), typeof(IBodyViewModel))
 
             //////////////////////////////////////Entity ViewModels ///////////////////////////////////////////////
 

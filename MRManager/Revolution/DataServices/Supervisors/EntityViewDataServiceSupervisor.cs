@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using SystemInterfaces;
 using SystemMessages;
 using Akka.Actor;
@@ -16,7 +17,7 @@ using ViewMessages;
 
 namespace DataServices.Actors
 {
-    public class EntityViewDataServiceSupervisor<TEntityView> : ReceiveActor, IProcessSource where TEntityView : IEntityId
+    public class EntityViewDataServiceSupervisor<TEntityView> : ReceiveActor, IProcessSource where TEntityView : IEntityView
 //where TEntity : class, IEntity where TEntityView:IEntityView<TEntity>
     {
         public ISystemSource Source => new Source(Guid.NewGuid(), $"EntityViewSupervisor:<{typeof(TEntityView).GetFriendlyName()}>",new SourceType(typeof(EntityViewDataServiceSupervisor<TEntityView>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
@@ -48,7 +49,7 @@ namespace DataServices.Actors
                 //{typeof (LoadEntityViewWithFilter<TEntity>), LoadEntityViewWithFilter},
             };
 
-        public EntityViewDataServiceSupervisor(ISystemProcess process)
+        public EntityViewDataServiceSupervisor(ISystemProcess process, IProcessSystemMessage msg)
         {
             try
             {
@@ -57,7 +58,7 @@ namespace DataServices.Actors
                                this.GetType()
                                         .GetMethod("CreateEntityViewActor")
                                         .MakeGenericMethod(itm.Key)
-                                        .Invoke(this, new object[] {itm.Value, process});
+                                        .Invoke(this, new object[] {itm.Value, process, msg});
                
                             }
             }
@@ -70,7 +71,7 @@ namespace DataServices.Actors
 
         }
 
-        public void CreateEntityViewActor<TEvent>(object action, ISystemProcess process) where TEvent : IMessage
+        public void CreateEntityViewActor<TEvent>(object action, ISystemProcess process, IProcessSystemMessage msg) where TEvent : IMessage
         {
             Type actorType = typeof(EntityViewDataServiceActor<>).MakeGenericType(typeof(TEvent));
             var inMsg = new CreateEntityViewService(actorType, action, new StateCommandInfo(process.Id, RevolutionData.Context.Actor.Commands.StartActor), process,Source);
@@ -84,6 +85,8 @@ namespace DataServices.Actors
                             "EntityViewDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
 
                     EventMessageBus.Current.GetEvent<TEvent>(Source).Subscribe(x => _childActor.Tell(x));
+               // Thread.Sleep(TimeSpan.FromMilliseconds(50));
+                _childActor.Tell(msg);
             }
             catch (Exception ex)
             {

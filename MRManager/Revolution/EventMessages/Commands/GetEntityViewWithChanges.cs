@@ -6,7 +6,7 @@ using CommonMessages;
 namespace EventMessages
 {
     [Export]
-    public class GetEntityViewWithChanges<TView> : ProcessSystemMessage, IGetEntityViewWithChanges<TView>
+    public class GetEntityViewWithChanges<TView> : ProcessSystemMessage, IGetEntityViewWithChanges<TView> where TView : IEntityView
     {
         public GetEntityViewWithChanges(int entityId, Dictionary<string, dynamic> changes, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {

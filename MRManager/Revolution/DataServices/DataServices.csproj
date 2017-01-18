@@ -50,6 +50,8 @@
     <Compile Include="Actors\ComplexEventActor.cs" />
     <Compile Include="Actors\ViewModelActor.cs" />
     <Compile Include="Supervisors\BaseSupervisor.cs" />
+    <Compile Include="Supervisors\EntityViewDataServiceManager.cs" />
+    <Compile Include="Supervisors\EntityDataServiceManager.cs" />
     <Compile Include="Supervisors\EntityViewDataServiceSupervisor.cs" />
     <Compile Include="Supervisors\ProcessSupervisor.cs" />
     <Compile Include="Supervisors\ViewModelSupervisor.cs" />

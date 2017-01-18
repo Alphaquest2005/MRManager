@@ -5,7 +5,7 @@ using CommonMessages;
 namespace EventMessages
 {
     [Export]
-    public class GetEntityViewById<TView> : ProcessSystemMessage, IGetEntityViewById<TView>
+    public class GetEntityViewById<TView> : ProcessSystemMessage, IGetEntityViewById<TView> where TView : IEntityView
     {
         public int EntityId { get; }
 

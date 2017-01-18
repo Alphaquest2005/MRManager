@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 namespace SystemInterfaces
 {
     [InheritedExport]
-    public interface ILoadEntitySetWithFilter<T> : IProcessSystemMessage where T : IEntity
+    public interface ILoadEntitySetWithFilter<TEntity> : IProcessSystemMessage, IEntityRequest<TEntity> where TEntity : IEntity
     {
-        List<Expression<Func<T, bool>>> Filter { get; }
+        List<Expression<Func<TEntity, bool>>> Filter { get; }
     }
 }

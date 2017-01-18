@@ -39,12 +39,12 @@ namespace BootStrapper
 
         public static BootStrapper Instance { get; }
 
-        public void StartUp(Assembly dbContextAssembly, Assembly entityAssembly)
+        public void StartUp(Assembly dbContextAssembly, Assembly entityAssembly, bool autoRun)
         {
             try
             {
                 var x = Container.GetExport<IActorBackBone>().Value;
-                x.Intialize(dbContextAssembly, entityAssembly);
+                x.Intialize(dbContextAssembly, entityAssembly, autoRun);
             }
             catch (Exception)
             {

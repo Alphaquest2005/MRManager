@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDataRequest.cs" />
+    <Compile Include="IEntityViewRequest.cs" />
     <Compile Include="IStartSystemProcess.cs" />
     <Compile Include="IProcessStateUpddated.cs" />
     <Compile Include="IRequestProcessLog.cs" />

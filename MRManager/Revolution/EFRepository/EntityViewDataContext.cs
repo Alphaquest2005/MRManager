@@ -10,7 +10,7 @@ using Entity.Expressions;
 namespace EFRepository
 {
 
-    public class EntityViewDataContext<TEntityView> : EF7DataContextBase where TEntityView:IEntityId
+    public class EntityViewDataContext<TEntityView> : EF7DataContextBase where TEntityView:IEntityView
     {
        public static Type TEntity { get;  }
         public static Type EntityType { get; }

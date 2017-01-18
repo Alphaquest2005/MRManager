@@ -18,12 +18,12 @@ namespace ActorBackBone
         public static ActorSystem System { get; private set; }
 
 
-        public void Intialize(Assembly dbContextAssembly, Assembly entityAssembly)
+        public void Intialize(Assembly dbContextAssembly, Assembly entityAssembly, bool autoRun)
         {
              try
             {
                 System = ActorSystem.Create("System");
-                System.ActorOf(Props.Create<ServiceManager>(dbContextAssembly, entityAssembly),"ServiceManager");
+                System.ActorOf(Props.Create<ServiceManager>(dbContextAssembly, entityAssembly, autoRun),"ServiceManager");
                 Instance = this;
             }
             catch (Exception)

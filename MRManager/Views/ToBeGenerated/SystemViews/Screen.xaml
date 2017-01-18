@@ -27,7 +27,7 @@
             </Style.Triggers>
         </Style>
 
-        <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
+        <DataTemplate DataType="{x:Type viewModels:SigninViewModel}">
             <StackPanel Width="500"
                         Height="500"
                         Background="#FF142695">

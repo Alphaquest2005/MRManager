@@ -17,9 +17,9 @@ namespace ViewModels
 {
 
     [Export]
-    public class LoginViewModel : DynamicViewModel<ObservableViewModel<ISignInInfo>>, ILoginViewModel
+    public class SigninViewModel : DynamicViewModel<ObservableViewModel<ISignInInfo>>, ISigninViewModel
     {
-        public LoginViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableViewModel<ISignInInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
+        public SigninViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableViewModel<ISignInInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
             Validator = this.Instance.Validator;
             State = this.Instance.State;

@@ -37,7 +37,7 @@ namespace MRManager_UnitTests
         public void InitalizeObserveableWithNoSubscriptions()
         {
            
-            dynamic viewModel = new LoginViewModel(process: _testProcess,
+            dynamic viewModel = new SigninViewModel(process: _testProcess,
                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
@@ -54,13 +54,13 @@ namespace MRManager_UnitTests
         {
             EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(Source)
                 .Subscribe(x => handleEntityChanges(x));
-            dynamic viewModel = new LoginViewModel(process: _testProcess,
+            dynamic viewModel = new SigninViewModel(process: _testProcess,
                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
-                   new ViewEventPublication<LoginViewModel, EntityChanges<ISignInInfo>>(
+                   new ViewEventPublication<SigninViewModel, EntityChanges<ISignInInfo>>(
                        subject: (s) => s.ChangeTracking.DictionaryChanges,
-                       subjectPredicate: new List<Func<LoginViewModel, bool>>(),
+                       subjectPredicate: new List<Func<SigninViewModel, bool>>(),
                        messageData: (s) => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id, s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateEventInfo(s.Process.Id, RevolutionData.Context.View.Events.EntityChanged), s.Process, s.Source ), key: "Entity Changes")
                }, commandInfo: new List<IViewModelEventCommand<IViewModel,IEvent>>(), orientation: typeof(IBodyViewModel));
 
@@ -77,13 +77,13 @@ namespace MRManager_UnitTests
         {
             EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(Source)
                 .Subscribe(x => handleEntityChanges(x));
-            dynamic viewModel = new LoginViewModel(process: _testProcess,
+            dynamic viewModel = new SigninViewModel(process: _testProcess,
                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
-                   new ViewEventPublication<LoginViewModel, EntityChanges<ISignInInfo>>(
+                   new ViewEventPublication<SigninViewModel, EntityChanges<ISignInInfo>>(
                        subject: (s) => s.ChangeTracking.DictionaryChanges,
-                       subjectPredicate: new List<Func<LoginViewModel, bool>>()
+                       subjectPredicate: new List<Func<SigninViewModel, bool>>()
                        {
                            v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Usersignin))
                        },
@@ -134,19 +134,19 @@ namespace MRManager_UnitTests
             
         }
 
-        private static LoginViewModel CreateLoginViewModel()
+        private static SigninViewModel CreateLoginViewModel()
         {
             
-            var viewModel = new LoginViewModel(
+            var viewModel = new SigninViewModel(
                 process: _testProcess,
                 eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                 eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>(),
                 commandInfo: new List<IViewModelEventCommand<IViewModel,IEvent>>()
                 {
-                    new ViewEventCommand<LoginViewModel, EntityChanges<ISignInInfo>>("ValidateUserInfo",
+                    new ViewEventCommand<SigninViewModel, EntityChanges<ISignInInfo>>("ValidateUserInfo",
                         
                         subject: (s) => s.Commands.GetValueOrNull("ValidateUserInfo").AsObservable(),
-                        commandPredicate: new List<Func<LoginViewModel, bool>>()
+                        commandPredicate: new List<Func<SigninViewModel, bool>>()
                         {
                             (v) => v.ChangeTracking.Keys.Count > 2,
                             v => v.ChangeTracking.Values.Contains(nameof(ISignInInfo.Password)) && v.ChangeTracking.Values.Contains(nameof(ISignInInfo.Usersignin)), 

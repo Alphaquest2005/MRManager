@@ -73,6 +73,7 @@
     <Compile Include="ObservableViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DynamicViewModelTests.cs" />
+    <Compile Include="Process-02-SignOn.cs" />
     <Compile Include="SystemIntializationProcess.cs" />
     <Compile Include="DbContextUnitTest.cs" />
     <Compile Include="Development.cs" />

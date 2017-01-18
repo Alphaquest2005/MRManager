@@ -18,7 +18,7 @@ namespace MRManager
 			InitializeComponent();
 			var t = new MRManagerDBContext().GetType().Assembly;
 			var x = new EFEntity<IEntity>().GetType().Assembly;
-			BootStrapper.BootStrapper.Instance.StartUp(t ,x );
+			BootStrapper.BootStrapper.Instance.StartUp(t ,x, true);
 			
 		}
         private void BackBtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

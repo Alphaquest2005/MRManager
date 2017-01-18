@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using SystemInterfaces;
 using SystemMessages;
 using Akka.Actor;
@@ -14,7 +15,7 @@ using ViewMessages;
 
 namespace DataServices.Actors
 {
-    public class EntityDataServiceSupervisor<TEntity> : BaseSupervisor<TEntity> where TEntity : class, IEntity
+    public class EntityDataServiceSupervisor<TEntity> : BaseSupervisor<EntityDataServiceSupervisor<TEntity>> where TEntity : class, IEntity
     {
 
         private static readonly Action<ICreateEntity<TEntity>> CreateAction = ( x) => x.CreateEntity();
@@ -43,36 +44,39 @@ namespace DataServices.Actors
 
             };
 
-        public EntityDataServiceSupervisor(ISystemProcess process)
+        public EntityDataServiceSupervisor(ISystemProcess process, IProcessSystemMessage msg)
         {
             foreach (var itm in entityEvents)
             {
               this.GetType()
                         .GetMethod("CreateEntityActor")
                         .MakeGenericMethod(itm.Key)
-                        .Invoke(this, new object[] {itm.Value, process});
+                        .Invoke(this, new object[] {itm.Value, process, msg});
             }
 
         }
 
-        public void CreateEntityActor<TEvent>(object action, ISystemProcess process) where TEvent : IMessage
+        public void CreateEntityActor<TEvent>(object action, ISystemProcess process, IProcessSystemMessage msg) where TEvent : IMessage
         {
             /// Create Actor Per Event
             Type actorType = typeof(EntityDataServiceActor<>).MakeGenericType(typeof(TEvent));
-            var msg = new CreateEntityService(actorType,action, new StateCommandInfo(process.Id, RevolutionData.Context.Actor.Commands.StartActor),process,Source );
+            var inMsg = new CreateEntityService(actorType,action, new StateCommandInfo(process.Id, RevolutionData.Context.Actor.Commands.StartActor),process,Source );
             try
             {
                 
                     
-                    _childActor = Context.ActorOf(Props.Create(actorType, msg).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
+                    _childActor = Context.ActorOf(Props.Create(actorType, inMsg).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
                             "EntityDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
 
                     EventMessageBus.Current.GetEvent<TEvent>(Source).Subscribe(x => _childActor.Tell(x));
+                //Thread.Sleep(TimeSpan.FromMilliseconds(50));
+                _childActor.Tell(msg);
+
             }
             catch (Exception ex)
             {
                 //ToDo: This seems like a good way... getting the expected event type 
-                PublishProcesError(msg, ex, msg.ProcessInfo.State.ExpectedEvent.GetType());
+                PublishProcesError(inMsg, ex, inMsg.ProcessInfo.State.ExpectedEvent.GetType());
             }
             
         }

@@ -4,7 +4,7 @@ using System.ComponentModel.Composition;
 namespace SystemInterfaces
 {
     [InheritedExport]
-    public interface IUpdateEntity<TEntity> : IProcessSystemMessage where TEntity : IEntity
+    public interface IUpdateEntity<out TEntity> : IProcessSystemMessage, IEntityRequest<TEntity> where TEntity : IEntity
     {
         Dictionary<string, object> Changes { get; }
         int EntityId { get; }

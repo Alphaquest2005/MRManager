@@ -36,36 +36,47 @@ namespace MRManager_UnitTests
     {
 
         public static ISystemSource Source => new Source(Guid.NewGuid(), "TestCase" + typeof(SystemIntializationProcess).GetFriendlyName(),new SourceType(typeof(SystemIntializationProcess)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
-        private static bool started;
-
-        public static void StartSystem()
+        public void StartSystem()
         {
-            if (started) return;
-            started = true;
             if (File.Exists("MRManager-TEST-Logs.xml")) File.Delete("MRManager-TEST-Logs.xml");
             Logger.Initialize();
             var t = new MRManagerDBContext().GetType().Assembly;
             var x = new EFEntity<IEntity>().GetType().Assembly;
             BootStrapper.BootStrapper.Instance.StartUp(t, x, false);
             var mainWindow = MainWindowViewModel.Instance;
-           
+
         }
 
 
-        // Decide not to Continuous Test Class cuz instaniation and testing to coupled
         [TestMethod]
-        public void SystemTest()
+        public void SystemIntialization()
         {
             RegisterProcess1Events();
-           
             StartSystem();
-            
-            
-            Thread.Sleep(TimeSpan.FromSeconds(15));
-
+            Thread.Sleep(TimeSpan.FromSeconds(30));
             Process1Asserts();
-           
+            AssertProcessLogs();
         }
+
+
+        public static void AssertProcessLogs()
+        {
+            foreach (var p in startedProcesses.ToArray())
+            {
+                EventMessageBus.Current.Publish(
+                    new RequestProcessLog(
+                        new StateCommandInfo(p.Process.Id, RevolutionData.Context.Process.Commands.CreateLog), p.Process, Source),
+                    Source);
+            }
+
+            Thread.Sleep(TimeSpan.FromSeconds(5));
+            Assert.IsTrue(ProcessLogs.Count == startedProcesses.Count);
+        }
+
+        private IProcessSystemMessage process2ServiceActorStarted;
+
+
+       
 
 
 
@@ -77,21 +88,15 @@ namespace MRManager_UnitTests
         private static IProcessSystemMessage screenViewModelLoadedInMainWindowViewModel;
         private static IProcessSystemMessage processCompleted;
        // private IProcessSystemMessage mainWindowViewModelCreated;
-        private IProcessSystemMessage process2Started;
-        private IViewModelCreated<ISigninViewModel> LoginViewModelCreated;
-        private IViewModelLoaded<IScreenModel, IViewModel> LoginViewModelLoadedInMScreenViewModel;
-        private IRequestProcessState process2StateRequest;
-        private List<IProcessStateMessage<ISignInInfo>> process2StateMessageList = new List<IProcessStateMessage<ISignInInfo>>();
-        private IGetEntityViewWithChanges<ISignInInfo> UserNameEntityChanges;
-        private IEntityViewWithChangesFound<ISignInInfo> userFound;
-        private IUserValidated userValidated;
-        private IServiceStarted<IEntityViewDataServiceActor<IGetEntityViewWithChanges<ISignInInfo>>> getEntityChangesActor;
-        private static ConcurrentQueue<IProcessEventFailure> EventFailures = new ConcurrentQueue<IProcessEventFailure>();
-        private IViewStateLoaded<ISigninViewModel, IProcessState<ISignInInfo>> viewLoadedState;
+
+        public static ConcurrentQueue<IProcessEventFailure> EventFailures = new ConcurrentQueue<IProcessEventFailure>();
+        private static ConcurrentQueue<ISystemProcessStarted> startedProcesses = new ConcurrentQueue<ISystemProcessStarted>();
+    
 
 
         public static void RegisterProcess1Events()
         {
+            EventMessageBus.Current.GetEvent<ISystemProcessStarted>(Source).Subscribe(x => startedProcesses.Enqueue(x));
             EventMessageBus.Current.GetEvent<IProcessLogCreated>(Source).Subscribe(x => ProcessLogs.Enqueue(x));
             EventMessageBus.Current.GetEvent<IComplexEventLogCreated>(Source).Subscribe(x => ComplextEventLogs.Enqueue(x));
             EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source).Subscribe(x => EventFailures.Enqueue(x));
@@ -107,10 +112,9 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(Source).Where(procesPredicate).Subscribe(x => processCompleted = x);
         }
 
-        private static ConcurrentQueue<IComplexEventLogCreated> ComplextEventLogs = new ConcurrentQueue<IComplexEventLogCreated>();
+        public static ConcurrentQueue<IComplexEventLogCreated> ComplextEventLogs = new ConcurrentQueue<IComplexEventLogCreated>();
 
-        private static ConcurrentQueue<IProcessLogCreated> ProcessLogs =new ConcurrentQueue<IProcessLogCreated>();
-       
+        public static ConcurrentQueue<IProcessLogCreated> ProcessLogs =new ConcurrentQueue<IProcessLogCreated>();
 
         public static void Process1Asserts()
         {

@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reactive.Linq;
 using System.Reflection;
 using SystemInterfaces;
@@ -32,7 +33,7 @@ namespace DataServices.Actors
         
 
 
-        public ServiceManager(Assembly dbContextAssembly, Assembly entityAssembly)
+        public ServiceManager(Assembly dbContextAssembly, Assembly entityAssembly, bool autoRun)
         {
             try
             {
@@ -50,13 +51,23 @@ namespace DataServices.Actors
                 EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source).Where(x => x.Process.Id == 1)//only start up process
                     .Subscribe(x =>
                     {
-                        HandleProcessStarted(x.Process, systemStartedMsg);
+                        var child = Context.Child("ViewModelSupervisor");
+                        if (!Equals(child, ActorRefs.Nobody)) return;
+
+                        Context.ActorOf(Props.Create<EntityDataServiceManager>(), "EntityDataServiceManager");
+                        Context.ActorOf(Props.Create<EntityViewDataServiceManager>(), "EntityViewDataServiceManager");
+
+                        Context.ActorOf(Props.Create<ViewModelSupervisor>(systemProcess), "ViewModelSupervisor")
+                            .Tell(systemStartedMsg);
+
                         EventMessageBus.Current.Publish(new ServiceStarted<IServiceManager>(this,new StateEventInfo(systemProcess.Id, RevolutionData.Context.Actor.Events.ActorStarted), systemProcess,Source), Source);
                         
                     });
 
-                var processSup = Context.ActorOf(Props.Create<ProcessSupervisor>(), "ProcessSupervisor");
+                var processSup = Context.ActorOf(Props.Create<ProcessSupervisor>(autoRun), "ProcessSupervisor");
                 processSup.Tell(systemStartedMsg);
+
+
 
 
             }
@@ -69,90 +80,6 @@ namespace DataServices.Actors
                     source: Source, processInfo: new StateEventInfo(1, RevolutionData.Context.Process.Events.Error)), Source);
 
             }
-        }
-
-        private void HandleProcessStarted(ISystemProcess systemProcess, SystemStarted systemStartedMsg)
-        {
-            var child = Context.Child("ViewModelSupervisor");
-            if (!Equals(child, ActorRefs.Nobody)) return;
-
-            Context.ActorOf(Props.Create<ViewModelSupervisor>(systemProcess), "ViewModelSupervisor")
-                .Tell(systemStartedMsg);
-            
-
-            
-            var actorList = new Dictionary<string, Type>()
-            {
-                {"{0}EntityDataServiceSupervisor", typeof (EntityDataServiceSupervisor<>)},
-                {"{0}EntityViewDataServiceSupervisor", typeof (EntityViewDataServiceSupervisor<>)},
-            };
-
-            foreach (var itm in actorList)
-            {
-                foreach (var c in EF7DataContextBase.EntityTypes.Where(x => x.GetInterfaces().Any(z => z == typeof(IEntity) ) && x.Name.Contains("Persons")))
-                {
-                    CreateEntityActors(c, itm.Value, itm.Key, systemProcess, systemStartedMsg);
-                }
-            }
-
-            var viewActorList = new Dictionary<string, Type>()
-            {
-                {"{0}EntityViewDataServiceSupervisor", typeof (EntityViewDataServiceSupervisor<>)},
-            };
-
-            foreach (var itm in viewActorList)
-            {
-                foreach (var c in EF7DataContextBase.EntityTypes.Where(x => x.GetInterfaces().Any(z => z.IsGenericType && z.GetGenericTypeDefinition() == typeof(IEntityView<>)) && x.Name.Contains("SignInInfo")))
-                {
-                    CreateEntityViewActors(c, itm.Value, itm.Key, systemProcess, systemStartedMsg);
-                }
-            }
-
-
-            //EventMessageBus.Current.Publish(systemStartedMsg, Source);
-        }
-
-        private void CreateEntityActors(Type c, Type genericListType, string actorName,
-            ISystemProcess process, IProcessSystemMessage systemStartedmsg)
-        {
-
-            var classType = c.GetInterfaces().FirstOrDefault(x => x.Name.Contains(c.Name.Substring(c.Name.LastIndexOf('.')+1)));
-            var specificListType = genericListType.MakeGenericType(classType);
-            try
-            {
-                Context.ActorOf(Props.Create(specificListType, process),string.Format(actorName, classType.Name));
-            }
-            catch (Exception ex)
-            {
-
-                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: systemStartedmsg.GetType(),
-                    failedEventMessage: systemStartedmsg,
-                    expectedEventType: typeof (ServiceStarted<>).MakeGenericType(specificListType),
-                    exception: ex,
-                    source: Source, processInfo: new StateEventInfo(systemStartedmsg.Process.Id, RevolutionData.Context.Process.Events.Error)), Source);
-            }
-
-        }
-
-        private void CreateEntityViewActors(Type c, Type genericListType, string actorName, ISystemProcess process, IProcessSystemMessage systemStartedmsg)
-        {
-
-            var classType = c.GetInterfaces().FirstOrDefault(x => x.Name.Contains(c.Name.Substring(c.Name.LastIndexOf('.') + 1)));
-            var specificListType = genericListType.MakeGenericType(classType);
-            try
-            {
-                Context.ActorOf(Props.Create(specificListType, process),string.Format(actorName, classType.Name));
-            }
-            catch (Exception ex)
-            {
-
-                EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: systemStartedmsg.GetType(),
-                    failedEventMessage: systemStartedmsg,
-                    expectedEventType: typeof(ServiceStarted<>).MakeGenericType(specificListType),
-                    exception: ex,
-                    source: Source, processInfo: new StateEventInfo(systemStartedmsg.Process.Id, RevolutionData.Context.Process.Events.Error)), Source);
-            }
-
         }
 
         public string UserId => this.Source.SourceName;

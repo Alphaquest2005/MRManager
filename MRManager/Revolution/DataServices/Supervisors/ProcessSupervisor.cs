@@ -20,26 +20,28 @@ namespace DataServices.Actors
     {
         
 
-        public ProcessSupervisor()
+        public ProcessSupervisor(bool autoRun)
         {
-            EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(Source).Subscribe(x => HandleProcessCompleted(x));
-            Receive<ISystemStarted>(x => HandleProcessViews(x));
+            EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(Source).Where(x => autoRun).Subscribe(x => StartParentProcess(x));
+            EventMessageBus.Current.GetEvent<IStartSystemProcess>(Source).Where(x => !autoRun).Subscribe(x => StartProcess(x.ProcessToBeStartedId,x.User));
+            Receive<ISystemStarted>(x => StartProcess(x.Process.Id,x.User ));
         }
 
-        private void HandleProcessCompleted(ISystemProcessCompleted se)
+        private void StartParentProcess(ISystemProcessCompleted se)
         {
             var processSteps = Processes.ProcessInfos.Where(x => x.ParentProcessId == se.Process.Id);
-            CreateProcesses(se, processSteps);
+            CreateProcesses(se.User, processSteps);
         }
-        private void HandleProcessViews(ISystemStarted se)
+        
+        private void StartProcess(int processId, IUser user)
         {
-            var processSteps = Processes.ProcessInfos.Where(x => x.Id == se.Process.Id);
-            CreateProcesses(se, processSteps);
+            var processSteps = Processes.ProcessInfos.Where(x => x.Id == processId);
+            CreateProcesses(user, processSteps);
         }
 
-        private void CreateProcesses(IProcessSystemMessage se, IEnumerable<IProcessInfo> processSteps)
+        private void CreateProcesses(IUser user, IEnumerable<IProcessInfo> processSteps)
         {
-            foreach (var inMsg in processSteps.Select(p => new CreateProcessActor(new StateCommandInfo(p.Id, RevolutionData.Context.Actor.Commands.CreateActor), new SystemProcess(new Process(p.Id, p.ParentProcessId, p.Name, p.Description, p.Symbol, se.User), Source.MachineInfo),Source)))
+            foreach (var inMsg in processSteps.Select(p => new CreateProcessActor(new StateCommandInfo(p.Id, RevolutionData.Context.Actor.Commands.CreateActor), new SystemProcess(new Process(p.Id, p.ParentProcessId, p.Name, p.Description, p.Symbol, user), Source.MachineInfo),Source)))
             {
 
                 try

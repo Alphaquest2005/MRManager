@@ -9,7 +9,7 @@ using ViewModelInterfaces;
 namespace ViewModel.Interfaces
 {
     [InheritedExport]
-    public interface ILoginViewModel: IEntityViewModel<ISignInInfo>
+    public interface ISigninViewModel: IEntityViewModel<ISignInInfo>
     {
     }
 }
