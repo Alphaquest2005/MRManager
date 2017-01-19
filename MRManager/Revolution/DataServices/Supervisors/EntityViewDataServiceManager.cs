@@ -39,7 +39,7 @@ namespace DataServices.Actors
                     .GetInterfaces()
                     .FirstOrDefault(x => x.GetInterfaces().Any(z => z.IsGenericType && z.GetGenericTypeDefinition() == typeof(IEntityViewRequest<>))).GenericTypeArguments[0];
             
-           
+           // var c = EF7DataContextBase.EntityTypes.FirstOrDefault(x => x.GetInterfaces().Any(z => z.IsGenericType && z.GetGenericTypeDefinition() == typeof(IEntityView<>)) && x.Name.Contains("SignInInfo"));
 
             CreateEntityViewActors(classType, typeof(EntityViewDataServiceSupervisor<>), "{0}EntityViewDataServiceSupervisor", entityRequest.Process, entityRequest);
             
@@ -49,7 +49,7 @@ namespace DataServices.Actors
         {
             var child = ctx.Child(string.Format(actorName, classType.Name));
             if (!Equals(child, ActorRefs.Nobody)) return;
-            
+            // var classType = c.GetInterfaces().FirstOrDefault(x => x.Name.Contains(c.Name.Substring(c.Name.LastIndexOf('.') + 1)));
             var specificListType = genericListType.MakeGenericType(classType);
             try
             {
