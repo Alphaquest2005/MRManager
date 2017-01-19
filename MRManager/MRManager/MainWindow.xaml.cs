@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using SystemInterfaces;
 using Core.Common.UI;
@@ -16,10 +17,14 @@ namespace MRManager
 		public MainWindow()
 		{
 			InitializeComponent();
-			var t = new MRManagerDBContext().GetType().Assembly;
-			var x = new EFEntity<IEntity>().GetType().Assembly;
-			BootStrapper.BootStrapper.Instance.StartUp(t ,x, true);
-			
+		    Task.Run(() =>
+		    {
+		        var t = new MRManagerDBContext().GetType().Assembly;
+		        var x = new EFEntity<IEntity>().GetType().Assembly;
+		        BootStrapper.BootStrapper.Instance.StartUp(t, x, true);
+		    });
+
+
 		}
         private void BackBtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

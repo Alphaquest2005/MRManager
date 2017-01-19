@@ -46,7 +46,9 @@ namespace DataServices.Actors
                 if (processInfo == null) return;
                 var systemProcess = new SystemProcess(new Process(processInfo, new Agent("System")), machineInfo);
                 var systemStartedMsg = new SystemStarted(new StateEventInfo(systemProcess.Id, RevolutionData.Context.Process.Events.ProcessStarted), systemProcess, Source);
-               
+
+                Context.ActorOf(Props.Create<EntityDataServiceManager>(), "EntityDataServiceManager").Tell(systemStartedMsg);
+                Context.ActorOf(Props.Create<EntityViewDataServiceManager>(), "EntityViewDataServiceManager").Tell(systemStartedMsg);
 
                 EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source).Where(x => x.Process.Id == 1)//only start up process
                     .Subscribe(x =>
@@ -54,8 +56,7 @@ namespace DataServices.Actors
                         var child = Context.Child("ViewModelSupervisor");
                         if (!Equals(child, ActorRefs.Nobody)) return;
 
-                        Context.ActorOf(Props.Create<EntityDataServiceManager>(), "EntityDataServiceManager");
-                        Context.ActorOf(Props.Create<EntityViewDataServiceManager>(), "EntityViewDataServiceManager");
+
 
                         Context.ActorOf(Props.Create<ViewModelSupervisor>(systemProcess), "ViewModelSupervisor")
                             .Tell(systemStartedMsg);

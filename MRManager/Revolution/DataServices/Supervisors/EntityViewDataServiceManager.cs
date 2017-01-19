@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
+using System.Windows;
 using SystemInterfaces;
 using SystemMessages;
 using Akka.Actor;
+using Akka.Actor.Dsl;
 using Akka.IO;
 using Akka.Routing;
 using CommonMessages;
@@ -20,13 +22,18 @@ namespace DataServices.Actors
 {
     public class EntityViewDataServiceManager : BaseSupervisor<EntityViewDataServiceManager>
     {
+        private IUntypedActorContext ctx = null;
         public EntityViewDataServiceManager()
         {
+            //Hack:for some fuckup reason context is lost
+            ctx = Context;
             EventMessageBus.Current.GetEvent<IProcessSystemMessage>(Source).Where(x => x is IEntityViewRequest).Subscribe(x => handleEntityRequest((IEntityViewRequest)x));
+           
         }
 
         private void handleEntityRequest(IEntityViewRequest entityRequest)
         {
+            
             var classType =
                 entityRequest.GetType()
                     .GetInterfaces()
@@ -40,13 +47,15 @@ namespace DataServices.Actors
 
         private void CreateEntityViewActors(Type classType, Type genericListType, string actorName, ISystemProcess process, IProcessSystemMessage msg)
         {
-
-           // var classType = c.GetInterfaces().FirstOrDefault(x => x.Name.Contains(c.Name.Substring(c.Name.LastIndexOf('.') + 1)));
+            var child = ctx.Child(string.Format(actorName, classType.Name));
+            if (!Equals(child, ActorRefs.Nobody)) return;
+            // var classType = c.GetInterfaces().FirstOrDefault(x => x.Name.Contains(c.Name.Substring(c.Name.LastIndexOf('.') + 1)));
             var specificListType = genericListType.MakeGenericType(classType);
             try
             {
-                Context.ActorOf(Props.Create(specificListType, process, msg), string.Format(actorName, classType.Name));
-                
+
+                ctx.ActorOf(Props.Create(specificListType, process, msg), string.Format(actorName, classType.Name));
+
             }
             catch (Exception ex)
             {
