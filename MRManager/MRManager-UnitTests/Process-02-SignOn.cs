@@ -53,7 +53,7 @@ namespace MRManager_UnitTests
             
             
             
-            Thread.Sleep(TimeSpan.FromSeconds(30));
+            Thread.Sleep(TimeSpan.FromSeconds(15));
 
             Process2Asserts();
         }
@@ -103,6 +103,7 @@ namespace MRManager_UnitTests
                         userFound = x;
                     });
             EventMessageBus.Current.GetEvent<IUserValidated>(Source).Subscribe(x => userValidated = x);
+            EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(Source).Where(x => x.Process.Id == 2).Subscribe(x => process2Completed = x);
 
         }
 
@@ -122,17 +123,14 @@ namespace MRManager_UnitTests
             Assert.IsNotNull(UserNameEntityChanges);
             Assert.IsNotNull(userFound);
             Assert.IsNotNull(userValidated);
+            Assert.IsNotNull(process2Completed);
+
 
         }
 
 
-        private IProcessSystemMessage serviceManagerStarted;
-        private IProcessSystemMessage processServiceActorStarted;
-        private IProcessSystemMessage viewModelSupervisorStarted;
-        private IProcessSystemMessage processStarted;
-        private IProcessSystemMessage screenViewModelCreated;
-        private IProcessSystemMessage screenViewModelLoadedInMainWindowViewModel;
-        private IProcessSystemMessage processCompleted;
+
+        private IProcessSystemMessage process2Completed;
        // private IProcessSystemMessage mainWindowViewModelCreated;
         private IProcessSystemMessage process2Started;
         private IViewModelCreated<ISigninViewModel> LoginViewModelCreated;

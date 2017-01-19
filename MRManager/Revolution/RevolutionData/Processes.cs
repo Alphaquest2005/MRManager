@@ -128,9 +128,19 @@ namespace RevolutionData
                 },
                 expectedMessageType:typeof(IUserValidated),
                 processInfo:new StateCommandInfo(2, Context.Domain.Commands.PublishDomainEvent),
-                action: ProcessActions.UserValidated)
-            
-           
+                action: ProcessActions.UserValidated),
+
+
+            new ComplexEventAction(
+                "205",
+                2, new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent ("ValidatedUser", 2, typeof (IUserValidated), e => e != null, new StateEventInfo(2, Context.Domain.Events.DomainEventPublished), new SourceType(typeof(IComplexEventService))),
+                    
+                },
+                typeof(ISystemProcessCompleted),
+                processInfo:new StateCommandInfo(2,Context.Process.Commands.CompleteProcess ),
+                action: ProcessActions.CompleteProcess),
         };
 
         
