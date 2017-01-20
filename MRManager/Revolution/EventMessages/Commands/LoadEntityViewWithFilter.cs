@@ -5,9 +5,9 @@ using CommonMessages;
 
 namespace EventMessages
 {
-    public class LoadEntityViewWithFilter<T> : ProcessSystemMessage
+    public class LoadEntityViewSetWithFilter<T> : ProcessSystemMessage
     {
-        public LoadEntityViewWithFilter(Expression<Func<T, bool>> filter, Expression func, Type viewType, Type viewDbType, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
+        public LoadEntityViewSetWithFilter(Expression<Func<T, bool>> filter, Expression func, Type viewType, Type viewDbType, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             
             try

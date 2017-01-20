@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reactive.Linq;
 using SystemInterfaces;
@@ -22,15 +23,15 @@ namespace DataServices.Actors
 
         public ProcessSupervisor(bool autoRun)
         {
-            EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(Source).Where(x => autoRun).Subscribe(x => StartParentProcess(x));
-            EventMessageBus.Current.GetEvent<IStartSystemProcess>(Source).Where(x => !autoRun).Subscribe(x => StartProcess(x.ProcessToBeStartedId,x.User));
+            EventMessageBus.Current.GetEvent<IStartSystemProcess>(Source).Where(x => autoRun && x.ProcessToBeStartedId == Processes.NullProcess).Subscribe(x => StartParentProcess(x.Process.Id, x.User));
+            EventMessageBus.Current.GetEvent<IStartSystemProcess>(Source).Where(x => !autoRun && x.ProcessToBeStartedId != Processes.NullProcess).Subscribe(x => StartProcess(x.ProcessToBeStartedId,x.User));
             Receive<ISystemStarted>(x => StartProcess(x.Process.Id,x.User ));
         }
 
-        private void StartParentProcess(ISystemProcessCompleted se)
+        private void StartParentProcess(int processId, IUser user)
         {
-            var processSteps = Processes.ProcessInfos.Where(x => x.ParentProcessId == se.Process.Id);
-            CreateProcesses(se.User, processSteps);
+            var processSteps = Processes.ProcessInfos.Where(x => x.ParentProcessId == processId);
+            CreateProcesses(user, processSteps);
         }
         
         private void StartProcess(int processId, IUser user)
@@ -47,17 +48,13 @@ namespace DataServices.Actors
                 try
                 {
                     EventMessageBus.Current.Publish(inMsg, Source);
+                    if(Processes.ProcessComplexEvents.All(x => x.ProcessId != inMsg.Process.Id)) throw new ApplicationException($"No Complex Events were created for this process:{inMsg.Process.Id}-{inMsg.Process.Name}");
+                    
 
                     var childActor = Context.ActorOf(Props.Create<ProcessActor>(inMsg), "ProcessActor-" + inMsg.Process.Name.GetSafeActorName());
                     EventMessageBus.Current.GetEvent<IProcessSystemMessage>(Source)
                         .Where(x => x.Process.Id == inMsg.Process.Id && x.MachineInfo.MachineName == inMsg.MachineInfo.MachineName)
                         .Subscribe(x => childActor.Tell(x));
-
-                   
-                    //actor Won't instantiate fast enough to catch eventbus publish
-                    // i waiting for Process Actor to Say its Running before telling everyone process stated... Actor before process logic
-                    //EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source)
-                    //    .Subscribe(x => EventMessageBus.Current.Publish(outMsg, Source));
 
                 }
                 catch (Exception ex)

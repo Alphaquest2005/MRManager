@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="Process\Agent.cs" />
     <Compile Include="Process\ComplexEventLog.cs" />
     <Compile Include="Process\ProcessExpectedEventInfo.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Process\ProcessInfo.cs" />
     <Compile Include="Process\ProcessStateInfo.cs" />
     <Compile Include="Process\ProcessSystemMessageExtensions.cs" />
+    <Compile Include="Process\SourceType.cs" />
     <Compile Include="Process\State.cs" />
     <Compile Include="Process\StateCommandInfo.cs" />
     <Compile Include="Process\StateEventInfo.cs" />
@@ -77,6 +79,10 @@
     <ProjectReference Include="..\Actor.Interfaces\Actor.Interfaces.csproj">
       <Project>{8b10c72d-9f33-4290-b562-44cf1f718fa5}</Project>
       <Name>Actor.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BootStrapper\BootStrapper.csproj">
+      <Project>{5dfeea8b-baba-4544-bf36-0a76a0d10c1b}</Project>
+      <Name>BootStrapper</Name>
     </ProjectReference>
     <ProjectReference Include="..\CommonMessages\CommonMessages.csproj">
       <Project>{77007560-89dc-4e1f-9313-ae064a048ad4}</Project>

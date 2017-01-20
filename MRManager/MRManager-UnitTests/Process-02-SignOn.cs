@@ -1,32 +1,19 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO;
 using System.Reactive.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using SystemInterfaces;
 using Actor.Interfaces;
-using Common;
-using CommonMessages;
-using DataEntites;
 using DataServices.Actors;
 using Domain.Interfaces;
-using EF.DBContexts;
-using EF.Entities;
 using EventAggregator;
 using EventMessages;
 using Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RevolutionEntities;
 using RevolutionEntities.Process;
-using StartUp.Messages;
-using Utilities;
-using ViewMessages;
 using ViewModel.Interfaces;
-using ViewModels;
-using RevolutionLogger;
-
-
 
 
 namespace MRManager_UnitTests
@@ -53,7 +40,7 @@ namespace MRManager_UnitTests
             
             
             
-            Thread.Sleep(TimeSpan.FromSeconds(30));
+            Thread.Sleep(TimeSpan.FromSeconds(15));
 
             Process2Asserts();
         }
@@ -63,6 +50,9 @@ namespace MRManager_UnitTests
 
         private void RegisterProcess2Events()
         {
+            EventMessageBus.Current.GetEvent<IProcessLogCreated>(Source).Subscribe(x => ProcessLogs.Enqueue(x));
+            EventMessageBus.Current.GetEvent<IComplexEventLogCreated>(Source).Subscribe(x => ComplextEventLogs.Enqueue(x));
+            EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source).Subscribe(x => EventFailures.Enqueue(x));
 
             Func<IProcessSystemMessage, bool> processPredicate = x => x.Process.Id == 2;
             
@@ -103,12 +93,13 @@ namespace MRManager_UnitTests
                         userFound = x;
                     });
             EventMessageBus.Current.GetEvent<IUserValidated>(Source).Subscribe(x => userValidated = x);
+            EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(Source).Where(x => x.Process.Id == 2).Subscribe(x => process2Completed = x);
 
         }
 
         private void Process2Asserts()
         {
-            Assert.IsTrue(EventFailures.Count == 0);
+            Assert.IsTrue(EventFailures.Count == 0 && ProcessLogs.IsEmpty && ComplextEventLogs.Count == 0);
             Assert.IsNotNull(process2ServiceActorStarted);
             Assert.IsNotNull(process2Started);
             Assert.IsNotNull(LoginViewModelCreated);
@@ -122,17 +113,13 @@ namespace MRManager_UnitTests
             Assert.IsNotNull(UserNameEntityChanges);
             Assert.IsNotNull(userFound);
             Assert.IsNotNull(userValidated);
+            Assert.IsNotNull(process2Completed);
 
         }
 
 
-        private IProcessSystemMessage serviceManagerStarted;
-        private IProcessSystemMessage processServiceActorStarted;
-        private IProcessSystemMessage viewModelSupervisorStarted;
-        private IProcessSystemMessage processStarted;
-        private IProcessSystemMessage screenViewModelCreated;
-        private IProcessSystemMessage screenViewModelLoadedInMainWindowViewModel;
-        private IProcessSystemMessage processCompleted;
+
+        private IProcessSystemMessage process2Completed;
        // private IProcessSystemMessage mainWindowViewModelCreated;
         private IProcessSystemMessage process2Started;
         private IViewModelCreated<ISigninViewModel> LoginViewModelCreated;

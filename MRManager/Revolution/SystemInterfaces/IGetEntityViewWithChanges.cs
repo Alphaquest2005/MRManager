@@ -9,4 +9,13 @@ namespace SystemInterfaces
         Dictionary<string, object> Changes { get; }
         int EntityId { get; }
     }
+
+
+    
+
+    [InheritedExport]
+    public interface ILoadEntityViewSetWithChanges<out TEntityView> : IProcessSystemMessage, IEntityViewRequest<TEntityView> where TEntityView : IEntityView
+    {
+        Dictionary<string, object> Changes { get; }
+    }
 }

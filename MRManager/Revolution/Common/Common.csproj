@@ -51,10 +51,10 @@
     <Compile Include="Expando\PropertyBag.cs" />
     <Compile Include="Expando\SerializationUtils.cs" />
     <Compile Include="Expando\Utilities.cs" />
-    <Compile Include="NullEntity.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source.cs" />
+    <Compile Include="SourceType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BootStrapper\BootStrapper.csproj">

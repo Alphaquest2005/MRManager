@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System.Collections.Generic;
+using System.ComponentModel.Composition;
 
 namespace SystemInterfaces
 {
@@ -15,4 +16,12 @@ namespace SystemInterfaces
     {
        TEntity Entity { get; }
     }
+
+    [InheritedExport]
+    public interface IProcessStateList<out TEntity> : IProcessState<TEntity> where TEntity : IEntityId
+    {
+        IEnumerable<TEntity> EntitySet { get; }
+        IEnumerable<TEntity> SelectedEntities { get; }
+    }
+
 }

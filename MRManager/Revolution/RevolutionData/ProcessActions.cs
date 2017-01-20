@@ -1,23 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using SystemInterfaces;
 using SystemMessages;
 using Actor.Interfaces;
 using Common;
-using DataEntites;
 using DomainMessages;
 using EventMessages;
 using EventMessages.Events;
 using Interfaces;
+using RevolutionEntities;
 using RevolutionEntities.Process;
 
 namespace RevolutionData
 {
     public static class ProcessActions
     {
-        public static IProcessAction StartProcess => new ProcessAction(
+        public static IProcessAction ProcessStarted => new ProcessAction(
                         action: cp => new SystemProcessStarted(
                             new StateEventInfo(cp.Actor.Process.Id, Context.Process.Events.ProcessStarted),
                             cp.Actor.Process, cp.Actor.Source),
+                        processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.StartProcess),
+                        expectedSourceType: new SourceType(typeof(IComplexEventService)));
+
+        public static IProcessAction StartProcess => new ProcessAction(
+                        action: cp => new StartSystemProcess(Processes.NullProcess,//HACK: to keep this generic, the process that was used to create action will be used
+                            new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.StartProcess),
+                            cp.Actor.Process, cp.Actor.Source), 
                         processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.StartProcess),
                         expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
@@ -51,6 +59,23 @@ namespace RevolutionData
                                 return new UpdateProcessState<ISignInInfo>(ps,
                                     new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState),
                                     cp.Actor.Process, cp.Actor.Source);
+
+                        },
+                        processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.CreateState),// take shortcut cud be IntialState
+                        expectedSourceType: new SourceType(typeof(IComplexEventService)));
+
+        public static IProcessAction IntializePatientInfoSummaryProcessState => new ProcessAction(
+                        action: cp =>
+                        {
+                            var ps = new ProcessStateList<IPatientInfo>(
+                                   processId: cp.Actor.Process.Id,
+                                   entity: NullEntity<IPatientInfo>.Instance,
+                                   entitySet: new List<IPatientInfo>(),
+                                   selectedEntities: new List<IPatientInfo>(),
+                                   stateInfo: new StateInfo(cp.Actor.Process.Id,new State(name: "Empty list", status: "Empty List", notes:"")));
+                            return new UpdateProcessState<IPatientInfo>(ps,
+                                new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState),
+                                cp.Actor.Process, cp.Actor.Source);
 
                         },
                         processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.CreateState),// take shortcut cud be IntialState

@@ -6,6 +6,7 @@ using System.Reactive.Linq;
 using System.Windows;
 using SystemInterfaces;
 using EventMessages;
+using EventMessages.Events;
 using Interfaces;
 using JB.Reactive.ExtensionMethods;
 using ReactiveUI;
@@ -76,19 +77,23 @@ namespace RevolutionData
                             Application.Current.Dispatcher.Invoke(() => s.HeaderViewModels.Add(e.ViewModel));
                         }
                     }),
-                    new ViewEventSubscription<IScreenModel, IViewModelCreated<IViewModel>>(1, e => e != null, new List<Func<IScreenModel, IViewModelCreated<IViewModel>, bool>>
+                    new ViewEventSubscription<IScreenModel, IViewModelCreated<IViewModel>>(
+                        1,
+                        e => e != null,
+                        new List<Func<IScreenModel, IViewModelCreated<IViewModel>, bool>>
                         {
                             (s, e) => s.Process.Id != e.ViewModel.Process.Id && e.ViewModel.Orientation == typeof(ILeftViewModel)
-                        }, (s, e) =>
+                        },
+                        (s, e) =>
                         {
-                             if (Application.Current == null)
-                        {
-                            s.LeftViewModels.Add(e.ViewModel);
-                        }
-                        else
-                        {
-                            Application.Current.Dispatcher.Invoke(() => s.LeftViewModels.Add(e.ViewModel));
-                        }
+                            if (Application.Current == null)
+                            {
+                                s.LeftViewModels.Add(e.ViewModel);
+                            }
+                            else
+                            {
+                                Application.Current.Dispatcher.Invoke(() => s.LeftViewModels.Add(e.ViewModel));
+                            }
                         }),
                     new ViewEventSubscription<IScreenModel, IViewModelCreated<IViewModel>>(1, e => e != null, new List<Func<IScreenModel, IViewModelCreated<IViewModel>, bool>>
                         {
@@ -143,7 +148,45 @@ namespace RevolutionData
                                              {
                                                  v => v.BodyViewModels.LastOrDefault() != null
                                              },
-                        messageData:s => new ViewEventPublicationParameter(new object[] {s, s.BodyViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.BodyViewModels.Last().Process,s.Source))
+                        messageData:s => new ViewEventPublicationParameter(new object[] {s, s.BodyViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.BodyViewModels.Last().Process,s.Source)),
+
+                    new ViewEventPublication<IScreenModel, ViewModelLoaded<IScreenModel,IViewModel>>(
+                         key:"ScreenModelLeft",
+                         subject:v => v.LeftViewModels.CollectionChanges,
+                         subjectPredicate:new List<Func<IScreenModel, bool>>
+                                             {
+                                                 v => v.LeftViewModels.LastOrDefault() != null
+                                             },
+                        messageData:s => new ViewEventPublicationParameter(new object[] {s, s.LeftViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.LeftViewModels.Last().Process,s.Source)),
+
+                    new ViewEventPublication<IScreenModel, ViewModelLoaded<IScreenModel,IViewModel>>(
+                         key:"ScreenModelHeader",
+                         subject:v => v.HeaderViewModels.CollectionChanges,
+                         subjectPredicate:new List<Func<IScreenModel, bool>>
+                                             {
+                                                 v => v.HeaderViewModels.LastOrDefault() != null
+                                             },
+                        messageData:s => new ViewEventPublicationParameter(new object[] {s, s.HeaderViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.HeaderViewModels.Last().Process,s.Source)),
+
+                    new ViewEventPublication<IScreenModel, ViewModelLoaded<IScreenModel,IViewModel>>(
+                         key:"ScreenModelRight",
+                         subject:v => v.RightViewModels.CollectionChanges,
+                         subjectPredicate:new List<Func<IScreenModel, bool>>
+                                             {
+                                                 v => v.RightViewModels.LastOrDefault() != null
+                                             },
+                        messageData:s => new ViewEventPublicationParameter(new object[] {s, s.RightViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.RightViewModels.Last().Process,s.Source)),
+
+                    new ViewEventPublication<IScreenModel, ViewModelLoaded<IScreenModel,IViewModel>>(
+                         key:"ScreenModelFooter",
+                         subject:v => v.FooterViewModels.CollectionChanges,
+                         subjectPredicate:new List<Func<IScreenModel, bool>>
+                                             {
+                                                 v => v.FooterViewModels.LastOrDefault() != null
+                                             },
+                        messageData:s => new ViewEventPublicationParameter(new object[] {s, s.FooterViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.FooterViewModels.Last().Process,s.Source)),
+
+
                 },
                 new List<IViewModelEventCommand<IViewModel, IEvent>>(),
                 typeof(IScreenModel),
@@ -197,105 +240,53 @@ namespace RevolutionData
 
                     
 
-                }, typeof(ISigninViewModel), typeof(IBodyViewModel))
-
-            //////////////////////////////////////Entity ViewModels ///////////////////////////////////////////////
+                }, typeof(ISigninViewModel), typeof(IBodyViewModel)),
 
 
-            //new WriteEntityViewModelInfo<IAddressCities>(
-            //    processId: 3,
-            //    viewModelType: typeof (WriteEntityViewModel<IAddressCities>),
-            //    createEntityAction: () => new AddressCities()
-            //    {
-            //        CityId = CacheViewModel<ICities>.Instance.CurrentEntity.Id,
-            //        Id = CacheViewModel<IAddresses>.Instance.CurrentEntity.Id,
-            //        RowState = DataInterfaces.RowState.Added
-            //    },
-            //    createNullEntityAction: () => new AddressCities() {Id = EntityStates.NullEntity},
-            //    viewModelEventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>
-            //    {
-            //        new ViewEventSubscription<WriteEntityViewModel<IAddressCities>, CurrentEntityChanged<ICities>>(
-            //            processId: 3,
-            //            eventPredicate: (e) => e.EntityId != EntityStates.NullEntity,
-            //            actionPredicate: new List<Func<WriteEntityViewModel<IAddressCities>, CurrentEntityChanged<ICities>, bool>>
-            //            {
-            //                (s, e) => s.CurrentEntity.Id != e.EntityId
-            //            },
-            //            action: (s, e) =>
-            //                s.FilterExpression =
-            //                    new List<Expression<Func<IAddressCities, bool>>>() {x => x.CityId == e.EntityId}),
+
+            //////////////////////////////////////Patient Info ///////////////////////////////////////////////
 
 
-            //        new ViewEventSubscription<WriteEntityViewModel<IAddressCities>, CurrentEntityChanged<IAddresses>>(
-            //            processId: 3,
-            //            eventPredicate: (e) => e.EntityId != EntityStates.NullEntity,
-            //            actionPredicate: new List<Func<WriteEntityViewModel<IAddressCities>, CurrentEntityChanged<IAddresses>, bool>>
-            //            {
-            //                (s, e) => s.CurrentEntity.Id != e.EntityId
-            //            },
-            //            action: (s, e) =>
-            //                s.FilterExpression =
-            //                    new List<Expression<Func<IAddressCities, bool>>>() {x => x.Id == e.EntityId})
-            //    },
-            //    viewModelEventPublications:new List<IViewModelEventPublication<IViewModel, IEvent>>(),
-            //    viewModelCommands: new List<IViewModelEventCommand<IViewModel, IEvent>>()),
-            //new ReadEntityViewModelInfo<IAddressCities>(processId: 3,
-            //    viewModelType: typeof (CacheViewModel<IAddressCities>),
-            //    viewModelEventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>
-            //    {
-            //        new ViewEventSubscription<CacheViewModel<IAddressCities>, EntitySetLoaded<IAddressCities>>(
-            //            processId: 3,
-            //            eventPredicate: (e) => e != null,
-            //            actionPredicate: new List<Func<CacheViewModel<IAddressCities>, EntitySetLoaded<IAddressCities>, bool>>
-            //            {
-            //                (s, e) => s.Process.Id == e.Process.Id
-            //            },
-            //            action: (s, e) => s.HandleEntitySetLoaded(e.Entities)),
-            //        new ViewEventSubscription<CacheViewModel<IAddressCities>, CurrentEntityUpdated<IAddressCities>>(
-            //            processId: 3,
-            //            eventPredicate: (e) => e != null,
-            //            actionPredicate: new List<Func<CacheViewModel<IAddressCities>, CurrentEntityUpdated<IAddressCities>, bool>>
-            //            {
-            //                (s, e) => s.Process.Id == e.Process.Id
-            //            },
-            //            action: (s, e) => s.HandleCurrentEntityUpdated(e.Entity)),
-            //        new ViewEventSubscription<CacheViewModel<IAddressCities>, CurrentEntityChanged<IAddressCities>>(
-            //            processId: 3,
-            //            eventPredicate: (e) => e != null,
-            //            actionPredicate: new List<Func<CacheViewModel<IAddressCities>, CurrentEntityChanged<IAddressCities>, bool>>
-            //            {
-            //                (s, e) => s.Process.Id == e.Process.Id
-            //            },
-            //            action: (s, e) => s.HandleCurrentEntityChanged(e.EntityId)),
-            //        new ViewEventSubscription<CacheViewModel<IAddressCities>, ServiceStarted<LoadEntitySet<IAddressCities>>>(
-            //            processId:3,
-            //            eventPredicate: (e) => e != null,
-            //            actionPredicate: new List<Func<CacheViewModel<IAddressCities>, ServiceStarted<LoadEntitySet<IAddressCities>>, bool>>
-            //            {
-            //                (s, e) => s.Process.Id == e.Process.Id
-            //            },
-            //            action: (s, e) => EventMessageBus.Current.Publish(new LoadEntitySet<IAddressCities>(e.Process,s.MsgSource), s.MsgSource)),
-            //        new ViewEventSubscription<CacheViewModel<IAddressCities>, EntityCreated<IAddressCities>>(
-            //            processId: 3,
-            //            eventPredicate: (e) => e != null,
-            //            actionPredicate: new List<Func<CacheViewModel<IAddressCities>, EntityCreated<IAddressCities>, bool>>
-            //            {
-            //                (s, e) => s.Process.Id == e.Process.Id
-            //            },
-            //            action: (s, e) => s.HandleEntityCreated(e.Entity)),
-            //        new ViewEventSubscription<CacheViewModel<IAddressCities>, EntityDeleted<IAddressCities>>(
-            //            processId: 3,
-            //            eventPredicate: (e) => e != null,
-            //            actionPredicate: new List<Func<CacheViewModel<IAddressCities>, EntityDeleted<IAddressCities>, bool>>
-            //            {
-            //                (s, e) => s.Process.Id == e.Process.Id
-            //            },
-            //            action: (s, e) => s.HandleEntityDeleted(e.EntityId)),
-                
-            //    },
-            //    viewModelEventPublications:new List<IViewModelEventPublication<IViewModel, IEvent>>(),
-            //    viewModelCommands:new List<IViewModelEventCommand<IViewModel, IEvent>>()),
-       
+           new ViewModelInfo
+                (
+                3, new List<IViewModelEventSubscription<IViewModel, IEvent>>
+                {
+                   new ViewEventSubscription<IPatientSummaryListViewModel, IProcessStateMessage<IPatientInfo>>(
+                       3, e => e != null, new List<Func<IPatientSummaryListViewModel, IProcessStateMessage<IPatientInfo>, bool>>(), (v,e) => v.State.Value = (IProcessStateList<IPatientInfo>) e.State
+                       )
+
+                },
+                new List<IViewModelEventPublication<IViewModel, IEvent>>
+                {
+                    new ViewEventPublication<IPatientSummaryListViewModel, CurrentEntityChanged<IPatientInfo>>(
+                         key:"CurrentEntityChanged",
+                         subject:v => v.WhenAnyValue(z => z.CurrentEntity),
+                         subjectPredicate:new List<Func<IPatientSummaryListViewModel, bool>>{},
+                         messageData:s => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source))
+                },
+                new List<IViewModelEventCommand<IViewModel,IEvent>>
+                {
+
+                    
+                    new ViewEventCommand<IPatientSummaryListViewModel, LoadEntityViewSetWithChanges<IPatientInfo>>(
+                                key:"Search",
+                                commandPredicate:new List<Func<IPatientSummaryListViewModel, bool>>
+                                            {
+                                                    v => v.ChangeTracking.Values.Count > 0
+
+                                            },
+                                subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+
+                                messageData:s => new ViewEventCommandParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.LoadEntityViewSetWithChanges),s.Process,s.Source)),
+
+
+
+                },
+                typeof(IPatientSummaryListViewModel),
+                typeof(ILeftViewModel))
+
         };
     }
+
+
 }

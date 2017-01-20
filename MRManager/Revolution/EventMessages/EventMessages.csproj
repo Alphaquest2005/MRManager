@@ -83,6 +83,7 @@
     <Compile Include="Commands\CreateLog.cs" />
     <Compile Include="Commands\CreateEntityService.cs" />
     <Compile Include="Events\ActorTerminated.cs" />
+    <Compile Include="Events\CurrentEntityChanged.cs" />
     <Compile Include="Events\ProcessStateUpddated.cs" />
     <Compile Include="Commands\CreateEntityViewService.cs" />
     <Compile Include="Events\ProcessLogCreated.cs" />

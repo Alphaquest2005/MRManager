@@ -3,25 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using SystemInterfaces;
-using DataEntites;
+
 
 using FluentValidation;
 using FluentValidation.Results;
 using JB.Collections.Reactive;
 using Reactive.Bindings;
 using ReactiveUI;
+using RevolutionEntities;
 using ValidationSets;
 using ViewModel.Interfaces;
-using ViewModelInterfaces;
 
 
 namespace Core.Common.UI
 {
-    public partial class ObservableListViewModel<TEntity> : BaseViewModel<ObservableListViewModel<TEntity>> where TEntity:IEntity
+    public partial class ObservableListViewModel<TEntity> : BaseViewModel<ObservableListViewModel<TEntity>> where TEntity: IEntityId
     {
         protected AbstractValidator<TEntity> Validator { get; }
         protected ValidationResult ValidationResults = new ValidationResult();
@@ -33,7 +32,21 @@ namespace Core.Common.UI
             Validator = new EntityValidator<TEntity>();
         }
 
-        
+        private ReactiveProperty<IProcessStateList<TEntity>> _state = new ReactiveProperty<IProcessStateList<TEntity>>();
+        public ReactiveProperty<IProcessStateList<TEntity>> State
+        {
+            get { return _state; }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _state, value);
+                CurrentEntity.Value = _state.Value.Entity;
+                EntitySet = new ObservableList<TEntity>(_state.Value.EntitySet.ToList());
+                SelectedEntities = new ObservableList<TEntity>(_state.Value.SelectedEntities.ToList());
+
+                // must broad cast event to handle simultanious events per single event IE continue chaining events
+
+            }
+        }
 
         private ReactiveProperty<TEntity> _currentEntity = new ReactiveProperty<TEntity>(NullEntity<TEntity>.Instance);
         public ReactiveProperty<TEntity> CurrentEntity
@@ -55,6 +68,7 @@ namespace Core.Common.UI
             set
             {
                 this.RaiseAndSetIfChanged(ref _entitySet, value);
+                
             }
         }
 
@@ -68,6 +82,7 @@ namespace Core.Common.UI
             set
             {
                 this.RaiseAndSetIfChanged(ref _selectedEntities, value);
+               
             }
         }
 

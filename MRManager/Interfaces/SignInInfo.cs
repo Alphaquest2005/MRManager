@@ -11,8 +11,8 @@ using SystemInterfaces;
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface ISignInInfo:IEntityView<IUserSignIn>
-	{
+	public partial interface ISignInInfo:IEntityView<IUserSignIn>, IUser
+    {
 		Byte[] Medias { get;}
 		string Usersignin { get;}
 		string Password { get;}
@@ -20,4 +20,15 @@ namespace Interfaces
 
 
 	}
+
+    [InheritedExport]
+    public partial interface IPatientInfo : IEntityView<IPersons_Patient>
+    {
+        string Email { get; }
+        string PhoneNumber { get; }
+        string Country { get; }
+        DateTime? DateOfBirth { get; }
+        int? CountryId { get; }
+        string Sexed { get; }
+    }
 }

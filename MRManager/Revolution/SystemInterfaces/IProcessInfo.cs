@@ -11,6 +11,7 @@ namespace SystemInterfaces
         string Name { get; }
         string Description { get; }
         string Symbol { get; }
+        string UserId { get; }
     }
 
     public interface IProcessInfo<TEntity>:IProcessInfo where TEntity:IEntityId

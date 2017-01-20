@@ -11,12 +11,14 @@ namespace RevolutionData
 {
     public static class Processes
     {
+        public const int NullProcess = -1;
+
         public static readonly IEnumerable<IProcessInfo> ProcessInfos = new List<IProcessInfo>
         {
             //new Process(0,0, "Uknown Process", "Unknown Process", "Unknown"),
-            new ProcessInfo(1, 0, "Starting System", "Prepare system for Intial Use", "Start"),
-            new ProcessInfo<ISignInInfo>(2, 1, "User SignOn", "User Login", "User"),
-            new ProcessInfo<ISignInInfo>(3, 2, "Load User Screen", "User Screen", "UserScreen")
+            new ProcessInfo(1, 0, "Starting System", "Prepare system for Intial Use", "Start","System"),
+            new ProcessInfo<ISignInInfo>(2, 1, "User SignOn", "User Login", "User","System"),
+            new ProcessInfo<ISignInInfo>(3, 2, "Load User Screen", "User Screen", "UserScreen", "joe")
         };
 
 
@@ -32,7 +34,7 @@ namespace RevolutionData
                 },
                 typeof(ISystemProcessStarted),
                 processInfo:new StateCommandInfo(1,Context.Process.Commands.StartProcess ),
-                action: ProcessActions.StartProcess),
+                action: ProcessActions.ProcessStarted),
 
             new ComplexEventAction(
                 "101",
@@ -72,7 +74,7 @@ namespace RevolutionData
                 },
                 typeof(ISystemProcessStarted),
                 processInfo:new StateCommandInfo(2,Context.Process.Commands.StartProcess ),
-                action: ProcessActions.StartProcess),
+                action: ProcessActions.ProcessStarted),
             new ComplexEventAction(
                 
                 key:"201",
@@ -128,9 +130,59 @@ namespace RevolutionData
                 },
                 expectedMessageType:typeof(IUserValidated),
                 processInfo:new StateCommandInfo(2, Context.Domain.Commands.PublishDomainEvent),
-                action: ProcessActions.UserValidated)
-            
-           
+                action: ProcessActions.UserValidated),
+
+            new ComplexEventAction(
+                "205",
+                2, new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent ("ValidatedUser", 2, typeof (IUserValidated), e => e != null, new StateEventInfo(2, Context.User.Events.UserFound), new SourceType(typeof(IComplexEventService))),
+                    
+                },
+                typeof(ISystemProcessCompleted),
+                processInfo:new StateCommandInfo(2,Context.Process.Commands.CompleteProcess ),
+                action: ProcessActions.CompleteProcess),
+
+             new ComplexEventAction(
+                "206",
+                2, new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent ("ProcessCompleted", 2, typeof (ISystemProcessCompleted), e => e != null, new StateEventInfo(2, Context.Process.Events.ProcessCompleted), new SourceType(typeof(IComplexEventService))),
+
+                },
+                typeof(ISystemProcessStarted),
+                processInfo:new StateCommandInfo(2,Context.Process.Commands.StartProcess ),
+                action: ProcessActions.StartProcess),
+
+             new ComplexEventAction(
+                "300",
+                3, new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent ("ProcessServiceStarted", 3, typeof (IServiceStarted<IProcessService>), e => e != null, new StateEventInfo(3, Context.Actor.Events.ActorStarted), new SourceType(typeof(IProcessService))),
+
+                },
+                typeof(ISystemProcessStarted),
+                processInfo:new StateCommandInfo(3,Context.Process.Commands.StartProcess ),
+                action: ProcessActions.ProcessStarted),
+
+            new ComplexEventAction(
+
+                key:"301",
+                processId:3,
+                events:new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent (key: "ProcessStarted",
+                                              processId: 3,
+                                              eventPredicate: e => e != null,
+                                              eventType: typeof (ISystemProcessStarted),
+                                              processInfo: new StateEventInfo(3,Context.Process.Events.ProcessStarted),
+                                              expectedSourceType:new SourceType(typeof(IComplexEventService)))
+
+                },
+                expectedMessageType:typeof(IProcessStateMessage<ISignInInfo>),
+                action:ProcessActions.IntializePatientInfoSummaryProcessState,
+                processInfo:new StateCommandInfo(3, Context.Process.Commands.CreateState)),
+
         };
 
         

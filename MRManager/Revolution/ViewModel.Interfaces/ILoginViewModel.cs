@@ -12,4 +12,9 @@ namespace ViewModel.Interfaces
     public interface ISigninViewModel: IEntityViewModel<ISignInInfo>
     {
     }
+
+    [InheritedExport]
+    public interface IPatientSummaryListViewModel : IEntityListViewModel<IPatientInfo>
+    {
+    }
 }

@@ -13,11 +13,14 @@ namespace RevolutionData.Context
         public class Commands
         {
             public static IStateCommand GetEntityView => new StateCommand("GetEntityView", "Get Entity View Item", Events.EntityViewFound );
+            public static IStateCommand LoadEntityViewSetWithChanges = new StateCommand("LoadEntityViewSetWithChanges", "Load EntityView Set with Changes", Events.EntityViewSetLoaded );
         }
 
         public class Events
         {
             public static IStateEvent EntityViewFound => new StateEvent("EntityViewFound", "Entity View Item Found", "");
+
+            public static IStateEvent EntityViewSetLoaded => new StateEvent("EntityViewSetLoaded", "Entity ViewSet Loaded", "");
         }
     }
 }

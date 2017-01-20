@@ -24,5 +24,17 @@ namespace EF.Entities
 
         public BitmapImage Image => Medias.ConvertByteToImage();
 
+
+        public string UserId => Usersignin;
 	}
+
+    public partial class PatientInfo : EntityView<IPersons_Patient>, IPatientInfo
+    {
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Country { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public int? CountryId { get; set; }
+        public string Sexed { get; set; }
+    }
 }

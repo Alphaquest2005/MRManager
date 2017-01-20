@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Threading;
 using SystemInterfaces;
 using Common;
-using CommonMessages;
 using DataServices.Actors;
 using EF.Entities;
 using EventAggregator;

@@ -17,4 +17,15 @@ namespace EventMessages
         public Dictionary<string, dynamic> Changes { get; }
         public int EntityId { get; }
     }
+
+    [Export]
+    public class LoadEntityViewSetWithChanges<TView> : ProcessSystemMessage, ILoadEntityViewSetWithChanges<TView> where TView : IEntityView
+    {
+        public LoadEntityViewSetWithChanges( Dictionary<string, dynamic> changes, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo, process, source)
+        {
+            Changes = changes;
+        }
+
+        public Dictionary<string, dynamic> Changes { get; }
+    }
 }

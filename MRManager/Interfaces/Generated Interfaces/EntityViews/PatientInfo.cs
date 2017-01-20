@@ -10,17 +10,17 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-	[InheritedExport]
-	public partial interface IPatientInfo:IEntity  
-	{
-		string Email { get;}
-		string PhoneNumber { get;}
-		string Country { get;}
-		DateTime? DateOfBirth { get;}
-		int? CountryId { get;}
-		string Sexed { get;}
+	//[InheritedExport]
+	//public partial interface IPatientInfo
+	//{
+	//	string Email { get;}
+	//	string PhoneNumber { get;}
+	//	string Country { get;}
+	//	DateTime? DateOfBirth { get;}
+	//	int? CountryId { get;}
+	//	string Sexed { get;}
 
 
 
-	}
+	//}
 }

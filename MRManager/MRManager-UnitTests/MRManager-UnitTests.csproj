@@ -69,6 +69,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Process-03-PatientInfo.cs" />
     <Compile Include="SingleThreadTaskScheduler.cs" />
     <Compile Include="ObservableViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

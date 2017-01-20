@@ -1,4 +1,5 @@
-﻿using SystemInterfaces;
+﻿using System.Collections.Generic;
+using SystemInterfaces;
 
 namespace RevolutionEntities.Process
 {
@@ -38,5 +39,20 @@ namespace RevolutionEntities.Process
         }
 
         public TEntity Entity { get; }
+    }
+
+    public class ProcessStateList<TEntity> : ProcessState, IProcessStateList<TEntity> where TEntity : IEntityId
+    {
+        public ProcessStateList(int processId, IProcessStateInfo stateInfo, TEntity entity, IEnumerable<TEntity> entitySet, IEnumerable<TEntity> selectedEntities) : base(processId, stateInfo)
+        {
+            Entity = entity;
+            EntitySet = entitySet;
+            SelectedEntities = selectedEntities;
+        }
+
+        public TEntity Entity { get; }
+        public IEnumerable<TEntity> EntitySet { get; }
+        public IEnumerable<TEntity> SelectedEntities { get; }
+        
     }
 }

@@ -1,15 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using CommonMessages;
-using EF.DBContexts;
-using EF.Entities;
-using Entity.Expressions;
-using EventAggregator;
-using EventMessages;
-using Expressions;
-using Interfaces;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MRManager_UnitTests
 {

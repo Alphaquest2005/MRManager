@@ -2,6 +2,7 @@
 
 namespace RevolutionEntities.Process
 {
+
     public class MachineInfo : IMachineInfo
     {
         public MachineInfo(string machineName, int processors)
@@ -12,5 +13,5 @@ namespace RevolutionEntities.Process
 
         public string MachineName { get; }
         public int Processors { get; }
-     }
+    }
 }
