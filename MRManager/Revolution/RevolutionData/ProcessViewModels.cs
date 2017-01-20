@@ -258,6 +258,15 @@ namespace RevolutionData
                 },
                 new List<IViewModelEventPublication<IViewModel, IEvent>>
                 {
+                    new ViewEventPublication<IPatientSummaryListViewModel, ViewStateLoaded<IPatientSummaryListViewModel,IProcessStateList<IPatientInfo>>>(
+                         key:"ILoginModelViewStateLoaded",
+                         subject:v => v.State,
+                         subjectPredicate:new List<Func<IPatientSummaryListViewModel, bool>>
+                                             {
+                                                 v => v.State != null
+                                             },
+                         messageData:s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
+
                     new ViewEventPublication<IPatientSummaryListViewModel, CurrentEntityChanged<IPatientInfo>>(
                          key:"CurrentEntityChanged",
                          subject:v => v.WhenAnyValue(z => z.CurrentEntity),

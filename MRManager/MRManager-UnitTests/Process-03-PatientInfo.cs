@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
@@ -69,7 +70,11 @@ namespace MRManager_UnitTests
             });
             EventMessageBus.Current.GetEvent<IRequestProcessState>(Source).Where(x => x.Process.Id == 3).Subscribe(x => process3StateRequest = x);
 
-            EventMessageBus.Current.GetEvent<IViewStateLoaded<IPatientSummaryListViewModel, IProcessStateList<IPatientInfo>>>(Source).Where(x => x.Process.Id == 3).Subscribe(x => EntitySetLoaded = x);
+            EventMessageBus.Current.GetEvent<IProcessStateMessage<IPatientInfo>>(Source).Where(x => x.Process.Id == 3).Subscribe(x => processStateMessageList.Add(x));
+
+            EventMessageBus.Current.GetEvent<IViewStateLoaded<IPatientSummaryListViewModel, IProcessState<IPatientInfo>>>(Source).Where(x => x.Process.Id == 3).Subscribe(x => InitialViewStateLoaded = x);
+
+         
 
         }
 
@@ -81,6 +86,8 @@ namespace MRManager_UnitTests
             Assert.IsNotNull(PatientSummaryListViewModelCreated);
             Assert.IsNotNull(process3StateRequest); 
             Assert.IsNotNull(PatientSummaryViewModelLoadedInMScreenViewModel);
+            Assert.IsTrue(processStateMessageList.Count > 0);
+            Assert.IsNotNull(InitialViewStateLoaded);
             
 
         }
@@ -96,7 +103,8 @@ namespace MRManager_UnitTests
         private IViewModelLoaded<IScreenModel, IViewModel> PatientSummaryViewModelLoadedInMScreenViewModel;
         private IRequestProcessState process3StateRequest;
         
-        private IViewStateLoaded<IPatientSummaryListViewModel, IProcessStateList<IPatientInfo>> EntitySetLoaded;
+        private IViewStateLoaded<IPatientSummaryListViewModel, IProcessState<IPatientInfo>> InitialViewStateLoaded;
+        private List<IProcessStateMessage<IPatientInfo>> processStateMessageList = new List<IProcessStateMessage<IPatientInfo>>();
     }
 
 

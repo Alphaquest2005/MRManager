@@ -183,6 +183,18 @@ namespace RevolutionData
                 action:ProcessActions.IntializePatientInfoSummaryProcessState,
                 processInfo:new StateCommandInfo(3, Context.Process.Commands.CreateState)),
 
+             new ComplexEventAction(
+                key:"302",
+                processId:2,
+                events:new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent<IEntitySetLoaded<IPatientInfo>> (
+                        "EntityViewSet", 2, e => e.Entity != null, expectedSourceType: new SourceType(typeof(IEntityViewRepository)), processInfo: new StateEventInfo(2, Context.User.Events.UserNameFound))
+                },
+                expectedMessageType:typeof(IProcessStateMessage<ISignInInfo>),
+                action: ProcessActions.UserNameFound,
+                processInfo: new StateCommandInfo(2, Context.Process.Commands.UpdateState)),
+
         };
 
         

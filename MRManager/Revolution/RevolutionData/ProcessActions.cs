@@ -65,20 +65,8 @@ namespace RevolutionData
                         expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
         public static IProcessAction IntializePatientInfoSummaryProcessState => new ProcessAction(
-                        action: cp =>
-                        {
-                            var ps = new ProcessStateList<IPatientInfo>(
-                                   processId: cp.Actor.Process.Id,
-                                   entity: NullEntity<IPatientInfo>.Instance,
-                                   entitySet: new List<IPatientInfo>(),
-                                   selectedEntities: new List<IPatientInfo>(),
-                                   stateInfo: new StateInfo(cp.Actor.Process.Id,new State(name: "Empty list", status: "Empty List", notes:"")));
-                            return new UpdateProcessState<IPatientInfo>(ps,
-                                new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState),
-                                cp.Actor.Process, cp.Actor.Source);
-
-                        },
-                        processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.CreateState),// take shortcut cud be IntialState
+                        action: cp => new LoadEntityViewSetWithChanges<IPatientInfo>(new Dictionary<string, dynamic>(),new StateCommandInfo(3, Context.EntityView.Commands.LoadEntityViewSetWithChanges), cp.Actor.Process, cp.Actor.Source),
+                        processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.EntityView.Commands.LoadEntityViewSetWithChanges),// take shortcut cud be IntialState
                         expectedSourceType: new SourceType(typeof(IComplexEventService)));
         public static IProcessAction UserNameFound => new ProcessAction(
                         action: cp =>
