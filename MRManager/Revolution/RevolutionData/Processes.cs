@@ -90,7 +90,7 @@ namespace RevolutionData
                     
                 },
                 expectedMessageType:typeof(IProcessStateMessage<ISignInInfo>),
-                action:ProcessActions.IntializeSigninProcessState,
+                action:ProcessActions.SignIn.IntializeSigninProcessState,
                 processInfo:new StateCommandInfo(2, Context.Process.Commands.CreateState)),
             new ComplexEventAction(
                 key:"202",
@@ -101,7 +101,7 @@ namespace RevolutionData
                         "UserNameFound", 2, e => e.Entity != null && e.Changes.Count == 1 && e.Changes.ContainsKey(nameof(ISignInInfo.Usersignin)), expectedSourceType: new SourceType(typeof(IEntityViewRepository)), processInfo: new StateEventInfo(2, Context.User.Events.UserNameFound))
                 },
                 expectedMessageType:typeof(IProcessStateMessage<ISignInInfo>),
-                action: ProcessActions.UserNameFound,
+                action: ProcessActions.SignIn.UserNameFound,
                 processInfo: new StateCommandInfo(2, Context.Process.Commands.UpdateState)),
             new ComplexEventAction(
                 key:"203",
@@ -115,7 +115,7 @@ namespace RevolutionData
                                                         key: "ValidatedUser")
                 },
                 expectedMessageType: typeof(IProcessStateMessage<ISignInInfo>),
-                action: ProcessActions.SetProcessStatetoValidatedUser,
+                action: ProcessActions.SignIn.SetProcessStatetoValidatedUser,
                 processInfo: new StateCommandInfo(2, Context.Process.Commands.UpdateState)),
             new ComplexEventAction(
                 key:"204",
@@ -130,7 +130,7 @@ namespace RevolutionData
                 },
                 expectedMessageType:typeof(IUserValidated),
                 processInfo:new StateCommandInfo(2, Context.Domain.Commands.PublishDomainEvent),
-                action: ProcessActions.UserValidated),
+                action: ProcessActions.SignIn.UserValidated),
 
             new ComplexEventAction(
                 "205",
@@ -180,20 +180,21 @@ namespace RevolutionData
 
                 },
                 expectedMessageType:typeof(IProcessStateMessage<ISignInInfo>),
-                action:ProcessActions.IntializePatientInfoSummaryProcessState,
+                action:ProcessActions.PatientInfo.IntializePatientInfoSummaryProcessState,
                 processInfo:new StateCommandInfo(3, Context.Process.Commands.CreateState)),
 
              new ComplexEventAction(
                 key:"302",
-                processId:2,
+                processId:3,
                 events:new List<IProcessExpectedEvent>
                 {
-                    new ProcessExpectedEvent<IEntitySetLoaded<IPatientInfo>> (
-                        "EntityViewSet", 2, e => e.Entity != null, expectedSourceType: new SourceType(typeof(IEntityViewRepository)), processInfo: new StateEventInfo(2, Context.User.Events.UserNameFound))
+                    new ProcessExpectedEvent<IEntityViewSetWithChangesLoaded<IPatientInfo>> (
+                        "EntityViewSet", 3, e => e.EntitySet != null, expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
+                        processInfo: new StateEventInfo(2, Context.EntityView.Events.EntityViewSetLoaded))
                 },
                 expectedMessageType:typeof(IProcessStateMessage<ISignInInfo>),
-                action: ProcessActions.UserNameFound,
-                processInfo: new StateCommandInfo(2, Context.Process.Commands.UpdateState)),
+                action: ProcessActions.PatientInfo.UpdatePatientInfoState,
+                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState)),
 
         };
 

@@ -11,4 +11,10 @@ namespace SystemInterfaces
     {
         IProcessState<TEntity> State { get; }
     }
+
+    [InheritedExport]
+    public interface IProcessStateListMessage<out TEntity> : IProcessSystemMessage where TEntity : IEntityId
+    {
+        IProcessStateList<TEntity> State { get; }
+    }
 }

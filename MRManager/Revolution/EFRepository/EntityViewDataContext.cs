@@ -49,6 +49,14 @@ namespace EFRepository
                   .Invoke(null, new object[] { msg });
         }
 
+        public static void LoadEntityViewSetWithChanges(ILoadEntityViewSetWithChanges<TEntityView> msg)
+        {
+
+            typeof(EntityViewRepository<,,,,>).MakeGenericType(typeof(TEntityView), ViewType, TEntity, EntityType, ctxType)
+                  .GetMethod("LoadEntityViewSetWithChanges")
+                  .Invoke(null, new object[] { msg });
+        }
+
 
         //public static void GetEntityView<TView, TViewDBEntity>(Expression<Func<TEntity, bool>> filter, Expression query)
         //{

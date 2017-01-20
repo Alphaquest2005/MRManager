@@ -251,15 +251,17 @@ namespace RevolutionData
                 (
                 3, new List<IViewModelEventSubscription<IViewModel, IEvent>>
                 {
-                   new ViewEventSubscription<IPatientSummaryListViewModel, IProcessStateMessage<IPatientInfo>>(
-                       3, e => e != null, new List<Func<IPatientSummaryListViewModel, IProcessStateMessage<IPatientInfo>, bool>>(), (v,e) => v.State.Value = (IProcessStateList<IPatientInfo>) e.State
-                       )
+                   new ViewEventSubscription<IPatientSummaryListViewModel, IProcessStateListMessage<IPatientInfo>>(
+                       3,
+                       e => e != null,
+                       new List<Func<IPatientSummaryListViewModel, IProcessStateListMessage<IPatientInfo>, bool>>(),
+                       (v,e) => v.State.Value = e.State),
 
                 },
                 new List<IViewModelEventPublication<IViewModel, IEvent>>
                 {
                     new ViewEventPublication<IPatientSummaryListViewModel, ViewStateLoaded<IPatientSummaryListViewModel,IProcessStateList<IPatientInfo>>>(
-                         key:"ILoginModelViewStateLoaded",
+                         key:"IPatientInfoViewStateLoaded",
                          subject:v => v.State,
                          subjectPredicate:new List<Func<IPatientSummaryListViewModel, bool>>
                                              {

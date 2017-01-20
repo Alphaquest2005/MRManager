@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IEntityViewSetWithChangesLoaded.cs" />
     <Compile Include="ICurrentEntityChanged.cs" />
     <Compile Include="IDataRequest.cs" />
     <Compile Include="IEntityViewRequest.cs" />

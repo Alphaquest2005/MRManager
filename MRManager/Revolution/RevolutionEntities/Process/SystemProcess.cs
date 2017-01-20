@@ -43,7 +43,7 @@ namespace RevolutionEntities.Process
 
     public class ProcessStateList<TEntity> : ProcessState, IProcessStateList<TEntity> where TEntity : IEntityId
     {
-        public ProcessStateList(int processId, IProcessStateInfo stateInfo, TEntity entity, IEnumerable<TEntity> entitySet, IEnumerable<TEntity> selectedEntities) : base(processId, stateInfo)
+        public ProcessStateList(int processId, TEntity entity, IEnumerable<TEntity> entitySet, IEnumerable<TEntity> selectedEntities, IProcessStateInfo stateInfo) : base(processId, stateInfo)
         {
             Entity = entity;
             EntitySet = entitySet;

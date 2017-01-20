@@ -25,5 +25,18 @@ namespace Entity.Expressions
 				Usersignin = x.Username,
 				Password = x.Password,
 			};
-	}
+
+        public static Expression<Func<Persons_Patient, PatientInfo>> PatientInfoExpression { get; } =
+
+        x => new PatientInfo()
+        {
+            Id = x.Id,
+            Country = x.PersonCountryOfResidence.Select(x1 => x1.Countries.Name).FirstOrDefault(),
+            CountryId = x.CountryId,
+            DateOfBirth = x.DateOfBirth,
+            Email = x.Persons.PersonEmailAddress.FirstOrDefault().Email,
+            PhoneNumber = x.Persons.PersonPhoneNumbers.FirstOrDefault().PhoneNumber,
+            Sexed = x.Sex.Name
+        };
+    }
 }

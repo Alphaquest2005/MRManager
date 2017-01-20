@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;
 using System.Linq.Dynamic;
 using Common;
+using EventMessages.Events;
 using MoreLinq;
 using RevolutionData.Context;
 using RevolutionEntities.Process;
@@ -62,6 +63,32 @@ namespace EFRepository
                     var res = ctx.Set<TDbEntity>().Select(exp).Distinct().Where(whereStr).DistinctBy(x => x.Id).FirstOrDefault(x => x.Id == msg.EntityId);//
                    
                     EventMessageBus.Current.Publish(new EntityViewWithChangesFound<TView>((TView)(object)res,msg.Changes,new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
+                }
+            }
+            catch (Exception ex)
+            {
+                PublishProcesError(msg, ex, typeof(IEntityViewLoaded<TView>));
+            }
+
+        }
+
+        public static void LoadEntityViewSetWithChanges(ILoadEntityViewSetWithChanges<TView> msg)
+        {
+            try
+            {
+                var exp = FindExpressionClass.FindExpression<TDbEntity, TDbView>();
+                using (var ctx = new TDbContext())
+                {
+                    // ReSharper disable once ReplaceWithSingleCallToFirstOrDefault cuz EF7 bugging LEAVE JUST SO
+                    var whereStr = msg.Changes.Aggregate("", (str, itm) => str + ($"{itm.Key} == \"{itm.Value}\" &&"));
+                    whereStr = whereStr.TrimEnd('&');
+                    IQueryable<TDbView> res;
+                    res = string.IsNullOrEmpty(whereStr) 
+                        ? ctx.Set<TDbEntity>().Select(exp).Distinct() 
+                        : ctx.Set<TDbEntity>().Select(exp).Distinct().Where(whereStr);
+                    
+
+                    EventMessageBus.Current.Publish(new EntityViewSetWithChangesLoaded<TView>(res.Select(x => (TView)(object)x).ToList(), msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
                 }
             }
             catch (Exception ex)
@@ -179,4 +206,6 @@ namespace EFRepository
         //    }
         //}
     }
+
+
 }

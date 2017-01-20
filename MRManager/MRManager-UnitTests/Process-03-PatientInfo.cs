@@ -70,9 +70,11 @@ namespace MRManager_UnitTests
             });
             EventMessageBus.Current.GetEvent<IRequestProcessState>(Source).Where(x => x.Process.Id == 3).Subscribe(x => process3StateRequest = x);
 
-            EventMessageBus.Current.GetEvent<IProcessStateMessage<IPatientInfo>>(Source).Where(x => x.Process.Id == 3).Subscribe(x => processStateMessageList.Add(x));
+            EventMessageBus.Current.GetEvent<IProcessStateListMessage<IPatientInfo>>(Source).Where(x => x.Process.Id == 3).Subscribe(x => processStateMessageList.Add(x));
 
-            EventMessageBus.Current.GetEvent<IViewStateLoaded<IPatientSummaryListViewModel, IProcessState<IPatientInfo>>>(Source).Where(x => x.Process.Id == 3).Subscribe(x => InitialViewStateLoaded = x);
+            EventMessageBus.Current.GetEvent<IEntityViewSetWithChangesLoaded<IPatientInfo>>(Source).Where(x => x.Process.Id == 3).Subscribe(x => EntityViewSetLoaded = x);
+
+            EventMessageBus.Current.GetEvent<IViewStateLoaded<IPatientSummaryListViewModel, IProcessStateList<IPatientInfo>>>(Source).Where(x => x.Process.Id == 3).Subscribe(x => InitialViewStateLoaded = x);
 
          
 
@@ -86,9 +88,10 @@ namespace MRManager_UnitTests
             Assert.IsNotNull(PatientSummaryListViewModelCreated);
             Assert.IsNotNull(process3StateRequest); 
             Assert.IsNotNull(PatientSummaryViewModelLoadedInMScreenViewModel);
-            Assert.IsTrue(processStateMessageList.Count > 0);
             Assert.IsNotNull(InitialViewStateLoaded);
-            
+            Assert.IsNotNull(EntityViewSetLoaded);
+            Assert.IsTrue(processStateMessageList.Count > 0);
+
 
         }
 
@@ -104,7 +107,8 @@ namespace MRManager_UnitTests
         private IRequestProcessState process3StateRequest;
         
         private IViewStateLoaded<IPatientSummaryListViewModel, IProcessState<IPatientInfo>> InitialViewStateLoaded;
-        private List<IProcessStateMessage<IPatientInfo>> processStateMessageList = new List<IProcessStateMessage<IPatientInfo>>();
+        private List<IProcessStateListMessage<IPatientInfo>> processStateMessageList = new List<IProcessStateListMessage<IPatientInfo>>();
+        private IEntityViewSetWithChangesLoaded<IPatientInfo> EntityViewSetLoaded;
     }
 
 

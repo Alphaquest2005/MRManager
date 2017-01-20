@@ -24,29 +24,19 @@ namespace DataServices.Actors
 
         private static readonly Action<IGetEntityViewById<TEntityView>> GetEntityByIdAction = (x) => x.GetEntity();
         private static readonly Action<IGetEntityViewWithChanges<TEntityView>> GetEntityWithChangesAction = (x) => x.GetEntityViewWithChanges();
+        private static readonly Action<ILoadEntityViewSetWithChanges<TEntityView>> LoadEntityViewSetWithChangesAction = (x) => x.LoadEntityViewSetWithChanges();
 
-        //private static readonly Action<ISystemSource, ILoadEntitySet<TEntity>> LoadEntitySet = (s, x) => x.LoadEntitySet();
-        //private static readonly Action<ISystemSource, ILoadEntitySetWithFilter<TEntity>> LoadEntitySetWithFilter = (s, x) => x.LoadEntitySet();
-        //private static readonly Action<ISystemSource, ILoadEntitySetWithFilterWithIncludes<TEntity>> LoadEntitySetWithFilterWithIncludes = (s, x) => x.LoadEntitySet();
-
-        //TODO: Add EntityViews
-        //private static readonly Action<ISystemSource, LoadEntityView<TEntity>> LoadEntityView = (s, x) => LoadEntityView(s, x);
-        //private static readonly Action<ISystemSource, LoadEntityViewWithFilter<TEntity>> LoadEntityViewWithFilter = (s, x) => x.LoadEntityView(s);
+       
 
         readonly Dictionary<Type, object> entityEvents =
             new Dictionary<Type, object>()
             {
                 
-                //{typeof (GetEntityById<TEntity>), GetEntityByIdAction},
+                
                 {typeof (IGetEntityViewById<TEntityView>), GetEntityByIdAction},
                 {typeof (IGetEntityViewWithChanges<TEntityView>), GetEntityWithChangesAction},
+                {typeof (ILoadEntityViewSetWithChanges<TEntityView>), LoadEntityViewSetWithChangesAction},
 
-                //{typeof (LoadEntitySet<TEntity>), LoadEntitySet},
-                //{typeof (LoadEntitySetWithFilter<TEntity>), LoadEntitySetWithFilter},
-                //{typeof (LoadEntitySetWithFilterWithIncludes<TEntity>), LoadEntitySetWithFilterWithIncludes},
-
-                //{typeof (LoadEntityView<TEntity>), LoadEntityView},
-                //{typeof (LoadEntityViewWithFilter<TEntity>), LoadEntityViewWithFilter},
             };
 
         public EntityViewDataServiceSupervisor(ISystemProcess process, IProcessSystemMessage msg)
