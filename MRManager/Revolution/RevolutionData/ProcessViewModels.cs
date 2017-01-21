@@ -231,7 +231,7 @@ namespace RevolutionData
                                 key:"ValidateUserInfo",
                                 commandPredicate:new List<Func<ISigninViewModel, bool>>
                                             {
-                                                   // v => v.ChangeTracking.Keys.Contains(nameof(ISignInInfo.Usersignin))
+                                                   v => v.ChangeTracking.Keys.Contains(nameof(ISignInInfo.Usersignin))
                                                     
                                             },
                                 subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),

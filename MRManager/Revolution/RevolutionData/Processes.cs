@@ -48,9 +48,19 @@ namespace RevolutionData
                 processInfo:new StateCommandInfo(1,Context.Process.Commands.CompleteProcess ),
                 action: ProcessActions.CompleteProcess),
 
+           new ComplexEventAction(
+                "102",
+                1, new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent ("ProcessCompleted", 1, typeof (ISystemProcessCompleted), e => e != null, new StateEventInfo(1, Context.Process.Events.ProcessCompleted), new SourceType(typeof(IComplexEventService))),
+
+                },
+                typeof(ISystemProcessStarted),
+                processInfo:new StateCommandInfo(1,Context.Process.Commands.StartProcess),
+                action: ProcessActions.StartProcess),
 
             new ComplexEventAction(
-                key:"102",
+                key:"103",
                 processId:1,
                 events: new List<IProcessExpectedEvent>
                 {

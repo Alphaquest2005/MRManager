@@ -47,7 +47,7 @@ namespace ViewModels
                   ProcessViewModels.ProcessViewModelInfos.FirstOrDefault().Orientation)
         {
             this.WireEvents();
-
+            EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source).Subscribe(x => { });
         }
 
 
