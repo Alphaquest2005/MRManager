@@ -23,7 +23,7 @@ namespace DataServices.Actors
         public ISystemSource Source => new Source(Guid.NewGuid(), $"EntityViewSupervisor:<{typeof(TEntityView).GetFriendlyName()}>",new SourceType(typeof(EntityViewDataServiceSupervisor<TEntityView>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
         private static readonly Action<IGetEntityViewById<TEntityView>> GetEntityByIdAction = (x) => x.GetEntity();
-        private static readonly Action<IGetEntityViewWithChanges<TEntityView>> GetEntityWithChangesAction = (x) => x.GetEntityViewWithChanges();
+        private static readonly Action<IGetEntityViewWithChanges<TEntityView>> GetEntityViewWithChangesAction = (x) => x.GetEntityViewWithChanges();
         private static readonly Action<ILoadEntityViewSetWithChanges<TEntityView>> LoadEntityViewSetWithChangesAction = (x) => x.LoadEntityViewSetWithChanges();
 
        
@@ -34,7 +34,7 @@ namespace DataServices.Actors
                 
                 
                 {typeof (IGetEntityViewById<TEntityView>), GetEntityByIdAction},
-                {typeof (IGetEntityViewWithChanges<TEntityView>), GetEntityWithChangesAction},
+                {typeof (IGetEntityViewWithChanges<TEntityView>), GetEntityViewWithChangesAction},
                 {typeof (ILoadEntityViewSetWithChanges<TEntityView>), LoadEntityViewSetWithChangesAction},
 
             };
@@ -74,7 +74,7 @@ namespace DataServices.Actors
                 _childActor = Context.ActorOf(Props.Create(inMsg.ActorType, inMsg).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
                             "EntityViewDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
 
-                    EventMessageBus.Current.GetEvent<TEvent>(Source).Subscribe(x => _childActor.Tell(x));
+               //     EventMessageBus.Current.GetEvent<TEvent>(Source).Subscribe(x => _childActor.Tell(x));
                // Thread.Sleep(TimeSpan.FromMilliseconds(50));
                 _childActor.Tell(msg);
             }

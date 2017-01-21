@@ -72,11 +72,19 @@ namespace MRManager_UnitTests
 
             EventMessageBus.Current.GetEvent<IProcessStateListMessage<IPatientInfo>>(Source).Where(x => x.Process.Id == 3).Subscribe(x => processStateMessageList.Add(x));
 
-            EventMessageBus.Current.GetEvent<IEntityViewSetWithChangesLoaded<IPatientInfo>>(Source).Where(x => x.Process.Id == 3).Subscribe(x => EntityViewSetLoaded = x);
+            EventMessageBus.Current.GetEvent<IEntityViewSetWithChangesLoaded<IPatientInfo>>(Source).Where(x => x.Process.Id == 3 && x.Changes.Count == 0).Subscribe(x => EntityViewSetLoaded_without_Changes = x);
+
+            EventMessageBus.Current.GetEvent<IEntityViewSetWithChangesLoaded<IPatientInfo>>(Source).Where(x => x.Process.Id == 3 && x.Changes.Count == 2).Subscribe(x => EntityViewSetLoaded_WithChanges = x);
 
             EventMessageBus.Current.GetEvent<IViewStateLoaded<IPatientSummaryListViewModel, IProcessStateList<IPatientInfo>>>(Source).Where(x => x.Process.Id == 3).Subscribe(x => InitialViewStateLoaded = x);
 
-         
+            EventMessageBus.Current.GetEvent<IViewStateLoaded<IPatientSummaryListViewModel, IProcessStateList<IPatientInfo>>>(Source).Where(x => x.Process.Id == 3 && x.State != null && x.State.EntitySet.Any()).Subscribe(
+                x =>
+                {
+                    ((dynamic)PatientSummaryListViewModelCreated.ViewModel).Email = "joe";
+                    ((dynamic)PatientSummaryListViewModelCreated.ViewModel).PhoneNumber = "8243";
+                    ((dynamic)PatientSummaryListViewModelCreated.ViewModel).Commands["Search"].Execute();
+                });
 
         }
 
@@ -89,8 +97,9 @@ namespace MRManager_UnitTests
             Assert.IsNotNull(process3StateRequest); 
             Assert.IsNotNull(PatientSummaryViewModelLoadedInMScreenViewModel);
             Assert.IsNotNull(InitialViewStateLoaded);
-            Assert.IsNotNull(EntityViewSetLoaded);
-            Assert.IsTrue(processStateMessageList.Count > 0);
+            Assert.IsNotNull(EntityViewSetLoaded_without_Changes);
+            Assert.IsNotNull(EntityViewSetLoaded_WithChanges);
+            Assert.IsTrue(processStateMessageList.Count == 2);
 
 
         }
@@ -108,7 +117,8 @@ namespace MRManager_UnitTests
         
         private IViewStateLoaded<IPatientSummaryListViewModel, IProcessState<IPatientInfo>> InitialViewStateLoaded;
         private List<IProcessStateListMessage<IPatientInfo>> processStateMessageList = new List<IProcessStateListMessage<IPatientInfo>>();
-        private IEntityViewSetWithChangesLoaded<IPatientInfo> EntityViewSetLoaded;
+        private IEntityViewSetWithChangesLoaded<IPatientInfo> EntityViewSetLoaded_without_Changes;
+        private IEntityViewSetWithChangesLoaded<IPatientInfo> EntityViewSetLoaded_WithChanges;
     }
 
 

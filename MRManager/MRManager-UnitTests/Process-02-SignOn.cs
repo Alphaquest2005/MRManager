@@ -79,6 +79,8 @@ namespace MRManager_UnitTests
             
             EventMessageBus.Current.GetEvent<IGetEntityViewWithChanges<ISignInInfo>>(Source).Subscribe(x => UserNameEntityChanges = x);
 
+            EventMessageBus.Current.GetEvent<IGetEntityViewWithChanges<ISignInInfo>>(Source).Subscribe(x => GetEntityViewWithChanges.Enqueue(x));
+
             EventMessageBus.Current.GetEvent<IEntityViewWithChangesFound<ISignInInfo>>(Source).Where(x => x.Process.Id == 2 && x.Entity.Usersignin == "joe" && x.Changes.Count == 1).Subscribe(
                 x =>
                 {
@@ -112,6 +114,7 @@ namespace MRManager_UnitTests
             Assert.IsNotNull(viewLoadedState);
             Assert.IsNotNull(UserNameEntityChanges);
             Assert.IsNotNull(userFound);
+            Assert.IsTrue(GetEntityViewWithChanges.Count == 2);
             Assert.IsNotNull(userValidated);
             Assert.IsNotNull(process2Completed);
 
@@ -131,6 +134,7 @@ namespace MRManager_UnitTests
         private IUserValidated userValidated;
         private IServiceStarted<IEntityViewDataServiceActor<IGetEntityViewWithChanges<ISignInInfo>>> getEntityChangesActor;
         private ConcurrentQueue<IProcessEventFailure> EventFailures = new ConcurrentQueue<IProcessEventFailure>();
+        private ConcurrentQueue<IGetEntityViewWithChanges<ISignInInfo>> GetEntityViewWithChanges = new ConcurrentQueue<IGetEntityViewWithChanges<ISignInInfo>>();
         private IViewStateLoaded<ISigninViewModel, IProcessState<ISignInInfo>> viewLoadedState;
 
 

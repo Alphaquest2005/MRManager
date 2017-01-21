@@ -67,7 +67,7 @@ namespace EFRepository
             }
             catch (Exception ex)
             {
-                PublishProcesError(msg, ex, typeof(IEntityViewLoaded<TView>));
+                PublishProcesError(msg, ex, typeof(IEntityViewWithChangesFound<TView>));
             }
 
         }

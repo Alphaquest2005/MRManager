@@ -223,7 +223,7 @@ namespace RevolutionData
                         subject:v => v.ChangeTracking.DictionaryChanges,
                         commandPredicate: new List<Func<ISigninViewModel, bool>>
                                             {
-                                                v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Usersignin)) && v.ChangeTracking.Keys.Count == 1
+                                                v => v.ChangeTracking.Keys.Contains(nameof(ISignInInfo.Usersignin)) && v.ChangeTracking.Keys.Count == 1
                                             },
                         messageData: s => new ViewEventCommandParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView),s.Process,s.Source)),
 
@@ -231,7 +231,7 @@ namespace RevolutionData
                                 key:"ValidateUserInfo",
                                 commandPredicate:new List<Func<ISigninViewModel, bool>>
                                             {
-                                                    v => v.ChangeTracking.Values.Contains(nameof(v.State.Value.Entity.Usersignin))
+                                                   // v => v.ChangeTracking.Keys.Contains(nameof(ISignInInfo.Usersignin))
                                                     
                                             },
                                 subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
@@ -288,7 +288,7 @@ namespace RevolutionData
                                             },
                                 subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
 
-                                messageData:s => new ViewEventCommandParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.LoadEntityViewSetWithChanges),s.Process,s.Source)),
+                                messageData:s => new ViewEventCommandParameter(new object[] {s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.LoadEntityViewSetWithChanges),s.Process,s.Source)),
 
 
 
