@@ -21,19 +21,21 @@ namespace RevolutionEntities.Process
 
     public class ProcessState : IProcessState
     {
-        public ProcessState(int processId, IProcessStateInfo stateInfo)
+        public ProcessState(ISystemProcess process, IProcessStateInfo stateInfo)
         {
             StateInfo = stateInfo;
-            ProcessId = processId;
+            Process = process;
+            ProcessId = process.Id;
         }
 
         public int ProcessId { get; }
         public IProcessStateInfo StateInfo { get; }
+        public ISystemProcess Process { get; }
     }
 
     public class ProcessState<TEntity> :ProcessState, IProcessState<TEntity> where TEntity : IEntityId
     {
-        public ProcessState(int processId, TEntity entity, IStateInfo info) : base(processId, info)
+        public ProcessState(ISystemProcess process, TEntity entity, IStateInfo info) : base(process, info)
         {
             Entity = entity;
         }
@@ -43,7 +45,7 @@ namespace RevolutionEntities.Process
 
     public class ProcessStateList<TEntity> : ProcessState, IProcessStateList<TEntity> where TEntity : IEntityId
     {
-        public ProcessStateList(int processId, TEntity entity, IEnumerable<TEntity> entitySet, IEnumerable<TEntity> selectedEntities, IProcessStateInfo stateInfo) : base(processId, stateInfo)
+        public ProcessStateList(ISystemProcess process, TEntity entity, IEnumerable<TEntity> entitySet, IEnumerable<TEntity> selectedEntities, IProcessStateInfo stateInfo) : base(process, stateInfo)
         {
             Entity = entity;
             EntitySet = entitySet;

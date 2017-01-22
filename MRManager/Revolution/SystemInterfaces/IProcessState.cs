@@ -8,7 +8,9 @@ namespace SystemInterfaces
     {
         int ProcessId { get; }
         IProcessStateInfo StateInfo { get; }
-        
+
+        ISystemProcess Process { get; }
+
     }
 
     [InheritedExport]
@@ -22,6 +24,7 @@ namespace SystemInterfaces
     {
         IEnumerable<TEntity> EntitySet { get; }
         IEnumerable<TEntity> SelectedEntities { get; }
+        
     }
 
 }

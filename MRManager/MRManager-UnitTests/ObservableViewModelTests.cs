@@ -21,9 +21,13 @@ namespace MRManager_UnitTests
     [TestClass]
     public class ObservableViewModelTests:IProcessSource
     {
-        private static readonly ProcessState<ISignInInfo> ProcessState = new ProcessState<ISignInInfo>(1, new SignInInfo() { Id = 5, Usersignin = "Joe", Password = "Test"}, new StateInfo(1,"Test Name", "Test status",""));
-        private static readonly SystemProcess _testProcess= new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")),new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        private static readonly ProcessState<ISignInInfo> ProcessState;
+        private static readonly SystemProcess TestProcess= new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")),new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
+        static ObservableViewModelTests()
+        {
+            ProcessState = new ProcessState<ISignInInfo>(TestProcess, new SignInInfo() { Id = 5, Usersignin = "Joe", Password = "Test" }, new StateInfo(1, "Test Name", "Test status", ""));
+        }
        
     
         public ISystemSource Source => new Source(Guid.NewGuid(), $"EntityRepository:<{typeof(ObservableViewModelTests).GetFriendlyName()}>",new SourceType(typeof(ObservableViewModelTests)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
@@ -32,7 +36,7 @@ namespace MRManager_UnitTests
         public void InitalizeObserveableWithNoSubscriptions()
         {
            
-            dynamic viewModel = new SigninViewModel(process: _testProcess,
+            dynamic viewModel = new SigninViewModel(process: TestProcess,
                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
@@ -49,7 +53,7 @@ namespace MRManager_UnitTests
         {
             EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(Source)
                 .Subscribe(x => handleEntityChanges(x));
-            dynamic viewModel = new SigninViewModel(process: _testProcess,
+            dynamic viewModel = new SigninViewModel(process: TestProcess,
                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
@@ -72,7 +76,7 @@ namespace MRManager_UnitTests
         {
             EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(Source)
                 .Subscribe(x => handleEntityChanges(x));
-            dynamic viewModel = new SigninViewModel(process: _testProcess,
+            dynamic viewModel = new SigninViewModel(process: TestProcess,
                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
@@ -133,7 +137,7 @@ namespace MRManager_UnitTests
         {
             
             var viewModel = new SigninViewModel(
-                process: _testProcess,
+                process: TestProcess,
                 eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                 eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>(),
                 commandInfo: new List<IViewModelEventCommand<IViewModel,IEvent>>()

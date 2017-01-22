@@ -238,6 +238,9 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="OrderedTest1.orderedtest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="project.json" />
   </ItemGroup>
   <Choose>

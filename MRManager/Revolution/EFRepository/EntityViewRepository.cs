@@ -27,7 +27,12 @@ namespace EFRepository
     public class EntityViewRepository<TView,TDbView, TEntity, TDbEntity, TDbContext>:BaseRepository<EntityViewRepository<TView, TDbView, TEntity, TDbEntity, TDbContext>>, IEntityViewRepository where TDbView:class, IEntityId where TDbEntity : class,IEntity where TDbContext : DbContext, new() where TEntity : class, IEntity where TView : IEntityView<TEntity>
     {
 
-        
+      private static Dictionary<Type, Func<string, KeyValuePair<string, object>, string>> IMatchTypeFunctions = new Dictionary<Type, Func<string, KeyValuePair<string, object>, string>>()
+      {
+          {typeof(IExactMatch), (str, itm) => str + $"{itm.Key} == \"{itm.Value}\" &&" },
+          {typeof(IPartialMatch), (str, itm) => str + $"{itm.Key}.Contains(\"{itm.Value}\") &&" }
+      };
+
         public static void GetEntityById(IGetEntityViewById<TView>  msg)
         {
             try
@@ -72,7 +77,7 @@ namespace EFRepository
 
         }
 
-        public static void LoadEntityViewSetWithChanges(ILoadEntityViewSetWithChanges<TView> msg)
+        public static void LoadEntityViewSetWithChanges(ILoadEntityViewSetWithChanges<TView, IMatchType> msg)
         {
             try
             {
@@ -80,7 +85,8 @@ namespace EFRepository
                 using (var ctx = new TDbContext())
                 {
                     // ReSharper disable once ReplaceWithSingleCallToFirstOrDefault cuz EF7 bugging LEAVE JUST SO
-                    var whereStr = msg.Changes.Aggregate("", (str, itm) => str + ($"{itm.Key} == \"{itm.Value}\" &&"));
+                    var matchtype = msg.GetType().GenericTypeArguments[1];
+                    var whereStr = msg.Changes.Aggregate("", IMatchTypeFunctions[matchtype]);
                     whereStr = whereStr.TrimEnd('&');
                     IQueryable<TDbView> res;
                     res = string.IsNullOrEmpty(whereStr) 

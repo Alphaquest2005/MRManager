@@ -157,12 +157,12 @@ namespace RevolutionData
                 "206",
                 2, new List<IProcessExpectedEvent>
                 {
-                    new ProcessExpectedEvent ("ProcessCompleted", 2, typeof (ISystemProcessCompleted), e => e != null, new StateEventInfo(2, Context.Process.Events.ProcessCompleted), new SourceType(typeof(IComplexEventService))),
+                    new ProcessExpectedEvent ("ValidatedUser", 2, typeof (IUserValidated), e => e != null, new StateEventInfo(2, Context.User.Events.UserFound), new SourceType(typeof(IComplexEventService))),
 
                 },
                 typeof(ISystemProcessStarted),
                 processInfo:new StateCommandInfo(2,Context.Process.Commands.StartProcess ),
-                action: ProcessActions.StartProcess),
+                action: ProcessActions.StartProcessWithValidatedUser),
 
              new ComplexEventAction(
                 "300",

@@ -279,7 +279,7 @@ namespace RevolutionData
                 {
 
                     
-                    new ViewEventCommand<IPatientSummaryListViewModel, LoadEntityViewSetWithChanges<IPatientInfo>>(
+                    new ViewEventCommand<IPatientSummaryListViewModel, LoadEntityViewSetWithChanges<IPatientInfo,IPartialMatch>>(
                                 key:"Search",
                                 commandPredicate:new List<Func<IPatientSummaryListViewModel, bool>>
                                             {
@@ -291,7 +291,7 @@ namespace RevolutionData
                                 messageData: s =>
                                 {
                                     //ToDo: bad practise
-                                    if (((dynamic) s).Field != "" && ((dynamic) s).Value != "")
+                                    if (!string.IsNullOrEmpty(((dynamic)s).Field) && !string.IsNullOrEmpty(((dynamic) s).Value))
                                     {
                                         s.ChangeTracking.AddOrUpdate(((dynamic) s).Field, ((dynamic) s).Value);
                                     }

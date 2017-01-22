@@ -35,9 +35,11 @@ namespace DataServices.Actors
             EntityViewDataContext<TEntityView>.GetEntityWithChanges(msg);
         }
 
-        public static void LoadEntityViewSetWithChanges<TEntityView>(this ILoadEntityViewSetWithChanges<TEntityView> msg) where TEntityView : IEntityView
+        public static void LoadEntityViewSetWithChanges<TEntityView>(this ILoadEntityViewSetWithChanges<TEntityView,IMatchType> msg) where TEntityView : IEntityView
         {
             EntityViewDataContext<TEntityView>.LoadEntityViewSetWithChanges(msg);
         }
+
+
     }
 }

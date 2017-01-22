@@ -26,7 +26,7 @@ namespace MRManager_UnitTests
 
 
         [TestMethod]
-        public void SystemTest()
+        public void Process02()
         {
             RegisterProcess2Events();
 
@@ -96,7 +96,7 @@ namespace MRManager_UnitTests
                     });
             EventMessageBus.Current.GetEvent<IUserValidated>(Source).Subscribe(x => userValidated = x);
             EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(Source).Where(x => x.Process.Id == 2).Subscribe(x => process2Completed = x);
-
+            EventMessageBus.Current.GetEvent<ISystemProcessStarted>(Source).Where(x => x.Process.Id == 3).Subscribe(x => process3Started = x);
         }
 
         private void Process2Asserts()
@@ -117,6 +117,8 @@ namespace MRManager_UnitTests
             Assert.IsTrue(GetEntityViewWithChanges.Count == 2);
             Assert.IsNotNull(userValidated);
             Assert.IsNotNull(process2Completed);
+            Assert.IsNotNull(process3Started);
+            Assert.IsTrue(process3Started.Process.User.UserId == "joe");
 
         }
 
@@ -125,6 +127,7 @@ namespace MRManager_UnitTests
         private IProcessSystemMessage process2Completed;
        // private IProcessSystemMessage mainWindowViewModelCreated;
         private IProcessSystemMessage process2Started;
+        private IProcessSystemMessage process3Started;
         private IViewModelCreated<ISigninViewModel> LoginViewModelCreated;
         private IViewModelLoaded<IScreenModel, IViewModel> LoginViewModelLoadedInMScreenViewModel;
         private IRequestProcessState process2StateRequest;

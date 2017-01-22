@@ -37,6 +37,13 @@ namespace RevolutionData
                         processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.StartProcess),
                         expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
+        public static IProcessAction StartProcessWithValidatedUser => new ProcessAction(
+                       action: cp => new StartSystemProcess(Processes.NullProcess,//HACK: to keep this generic, the process that was used to create action will be used
+                           new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.StartProcess),
+                           new SystemProcess(Processes.ProcessInfos.FirstOrDefault(x => x.Id == cp.Actor.Process.Id), cp.Messages["ValidatedUser"].UserSignIn, cp.Actor.Process.MachineInfo), cp.Actor.Source),
+                       processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.StartProcess),
+                       expectedSourceType: new SourceType(typeof(IComplexEventService)));
+
         public static IProcessAction CompleteProcess => new ProcessAction(
                         action: cp => new SystemProcessCompleted(new StateEventInfo(cp.Actor.Process.Id, Context.Process.Events.ProcessCompleted),cp.Actor.Process, cp.Actor.Source),
                         processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.CompleteProcess),
@@ -59,13 +66,12 @@ namespace RevolutionData
                 action: cp =>
                 {
                     var ps = new ProcessState<ISignInInfo>(
-                        processId: cp.Actor.Process.Id,
+                        process: cp.Actor.Process,
                         entity: NullEntity<ISignInInfo>.Instance,
-                        info:
-                            new StateInfo(cp.Actor.Process.Id,
-                                new State(name: "AwaitUserName", status: "Waiting for User Name",
-                                    notes:
-                                        "Please Enter your User Name. If this is your First Time Login In please Contact the Receptionist for your user info.")));
+                        info: new StateInfo(cp.Actor.Process.Id,
+                            new State(name: "AwaitUserName", status: "Waiting for User Name",
+                                notes:
+                                    "Please Enter your User Name. If this is your First Time Login In please Contact the Receptionist for your user info.")));
                     return new UpdateProcessState<ISignInInfo>(ps,
                         new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState),
                         cp.Actor.Process, cp.Actor.Source);
@@ -78,7 +84,7 @@ namespace RevolutionData
             public static IProcessAction UserNameFound => new ProcessAction(
                 action: cp =>
                 {
-                    var ps = new ProcessState<ISignInInfo>(cp.Actor.Process.Id, cp.Messages["UserNameFound"].Entity,
+                    var ps = new ProcessState<ISignInInfo>(cp.Actor.Process, cp.Messages["UserNameFound"].Entity,
                         new StateInfo(cp.Actor.Process.Id, "WelcomeUser",
                             $"Welcome {cp.Messages["UserNameFound"].Entity.Usersignin}", "Please Enter your Password"));
                     return new UpdateProcessState<ISignInInfo>(ps,
@@ -92,7 +98,7 @@ namespace RevolutionData
             public static IProcessAction SetProcessStatetoValidatedUser => new ProcessAction(
                 action: cp =>
                 {
-                    var ps = new ProcessState<ISignInInfo>(cp.Actor.Process.Id, cp.Messages["ValidatedUser"].Entity,
+                    var ps = new ProcessState<ISignInInfo>(cp.Actor.Process, cp.Messages["ValidatedUser"].Entity,
                         new StateInfo(cp.Actor.Process.Id, "UserValidated",
                             $"User: {cp.Messages["ValidatedUser"].Entity.Usersignin} Validated", "User Validated"));
                     return new UpdateProcessState<ISignInInfo>(ps,
@@ -121,7 +127,7 @@ namespace RevolutionData
             public static IProcessAction IntializePatientInfoSummaryProcessState => new ProcessAction(
                 action:
                     cp =>
-                        new LoadEntityViewSetWithChanges<IPatientInfo>(new Dictionary<string, dynamic>(),
+                        new LoadEntityViewSetWithChanges<IPatientInfo,IExactMatch>(new Dictionary<string, dynamic>(),
                             new StateCommandInfo(3, Context.EntityView.Commands.LoadEntityViewSetWithChanges),
                             cp.Actor.Process, cp.Actor.Source),
                 processInfo:
@@ -137,7 +143,7 @@ namespace RevolutionData
                     cp =>
                     {
                        var ps = new ProcessStateList<IPatientInfo>(
-                            processId: 3,
+                            process: cp.Actor.Process,
                             entity: ((List<IPatientInfo>)cp.Messages["EntityViewSet"].EntitySet).FirstOrDefault(),
                             entitySet: cp.Messages["EntityViewSet"].EntitySet,
                             selectedEntities: new List<IPatientInfo>(),

@@ -49,7 +49,7 @@ namespace EFRepository
                   .Invoke(null, new object[] { msg });
         }
 
-        public static void LoadEntityViewSetWithChanges(ILoadEntityViewSetWithChanges<TEntityView> msg)
+        public static void LoadEntityViewSetWithChanges(ILoadEntityViewSetWithChanges<TEntityView, IMatchType> msg)
         {
 
             typeof(EntityViewRepository<,,,,>).MakeGenericType(typeof(TEntityView), ViewType, TEntity, EntityType, ctxType)

@@ -48,7 +48,7 @@ namespace MRManager_UnitTests
 
         // Decide not to Continuous Test Class cuz instaniation and testing to coupled
         [TestMethod]
-        public void SystemTest()
+        public void Process01()
         {
             RegisterProcess1Events();
            

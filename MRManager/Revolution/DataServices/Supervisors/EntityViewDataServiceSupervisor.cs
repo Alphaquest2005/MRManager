@@ -24,7 +24,7 @@ namespace DataServices.Actors
 
         private static readonly Action<IGetEntityViewById<TEntityView>> GetEntityByIdAction = (x) => x.GetEntity();
         private static readonly Action<IGetEntityViewWithChanges<TEntityView>> GetEntityViewWithChangesAction = (x) => x.GetEntityViewWithChanges();
-        private static readonly Action<ILoadEntityViewSetWithChanges<TEntityView>> LoadEntityViewSetWithChangesAction = (x) => x.LoadEntityViewSetWithChanges();
+        private static readonly Action<ILoadEntityViewSetWithChanges<TEntityView, IMatchType>> LoadEntityViewSetWithChangesAction = (x) => x.LoadEntityViewSetWithChanges();
 
        
 
@@ -35,7 +35,7 @@ namespace DataServices.Actors
                 
                 {typeof (IGetEntityViewById<TEntityView>), GetEntityByIdAction},
                 {typeof (IGetEntityViewWithChanges<TEntityView>), GetEntityViewWithChangesAction},
-                {typeof (ILoadEntityViewSetWithChanges<TEntityView>), LoadEntityViewSetWithChangesAction},
+                {typeof (ILoadEntityViewSetWithChanges<TEntityView, IMatchType>), LoadEntityViewSetWithChangesAction},
 
             };
         private IUntypedActorContext ctx = null;

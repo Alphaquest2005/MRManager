@@ -14,11 +14,21 @@ namespace SystemInterfaces
     
 
     [InheritedExport]
-    public interface ILoadEntityViewSetWithChanges<out TEntityView> : IProcessSystemMessage, IEntityViewRequest<TEntityView> where TEntityView : IEntityView
+    public interface ILoadEntityViewSetWithChanges<out TEntityView,out TMatchType> : IProcessSystemMessage, IEntityViewRequest<TEntityView> where TEntityView : IEntityView where TMatchType:IMatchType
     {
         Dictionary<string, object> Changes { get; }
     }
 
-    
-    
+    public interface IPartialMatch : IMatchType
+    {
+
+    }
+    public interface IExactMatch : IMatchType
+    {
+        
+    }
+
+    public interface IMatchType
+    {
+    }
 }

@@ -63,7 +63,7 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<IEntityViewSetWithChangesLoaded<ISignInInfo>>(Source).Subscribe(x => signonInfo = x);
             EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source)
                 .Subscribe(x => Debugger.Log(0, "Test", x.Exception.Message + ":-:" + x.Exception.StackTrace));
-            var msg = new LoadEntityViewSetWithChanges<ISignInInfo>(new Dictionary<string, dynamic>() { { "Usersignin", "joe" } }, new StateCommandInfo(testProcess.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), testProcess, Source);
+            var msg = new LoadEntityViewSetWithChanges<ISignInInfo,IExactMatch>(new Dictionary<string, dynamic>() { { "Usersignin", "joe" } }, new StateCommandInfo(testProcess.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), testProcess, Source);
             msg.LoadEntityViewSetWithChanges();
             Thread.Sleep(2);
             Assert.IsNotNull(signonInfo);
@@ -76,7 +76,7 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<IEntityViewSetWithChangesLoaded<IPatientInfo>>(Source).Subscribe(x => signonInfo = x);
             EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source)
                 .Subscribe(x => Debugger.Log(0, "Test", x.Exception.Message + ":-:" + x.Exception.StackTrace));
-            var msg = new LoadEntityViewSetWithChanges<IPatientInfo>(new Dictionary<string, dynamic>(), new StateCommandInfo(testProcess.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), testProcess, Source);
+            var msg = new LoadEntityViewSetWithChanges<IPatientInfo,IExactMatch>(new Dictionary<string, dynamic>(), new StateCommandInfo(testProcess.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), testProcess, Source);
             msg.LoadEntityViewSetWithChanges();
             Thread.Sleep(2);
             Assert.IsNotNull(signonInfo);

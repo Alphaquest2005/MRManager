@@ -19,7 +19,7 @@ namespace EventMessages
     }
 
     [Export]
-    public class LoadEntityViewSetWithChanges<TView> : ProcessSystemMessage, ILoadEntityViewSetWithChanges<TView> where TView : IEntityView
+    public class LoadEntityViewSetWithChanges<TView, TMatchType> : ProcessSystemMessage, ILoadEntityViewSetWithChanges<TView, TMatchType> where TView : IEntityView where TMatchType:IMatchType
     {
         public LoadEntityViewSetWithChanges( Dictionary<string, dynamic> changes, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo, process, source)
         {
