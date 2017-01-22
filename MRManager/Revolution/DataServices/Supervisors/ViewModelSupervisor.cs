@@ -19,12 +19,12 @@ namespace DataServices.Actors
     {
 
         private IActorRef _childActor;
-       
+        private IUntypedActorContext ctx = null;
 
         public ViewModelSupervisor(ISystemProcess process)
         {
-
-            _childActor = Context.ActorOf(Props.Create<ViewModelActor>(process).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
+            ctx = Context;
+            _childActor = ctx.ActorOf(Props.Create<ViewModelActor>(process).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
                     "ViewModelActorEntityActor");
 
             EventMessageBus.Current.GetEvent<ISystemProcessStarted>(Source).Subscribe(x => HandleProcessViews(x));

@@ -38,11 +38,12 @@ namespace DataServices.Actors
                 {typeof (ILoadEntityViewSetWithChanges<TEntityView>), LoadEntityViewSetWithChangesAction},
 
             };
-
+        private IUntypedActorContext ctx = null;
         public EntityViewDataServiceSupervisor(ISystemProcess process, IProcessSystemMessage msg)
         {
             try
             {
+                ctx = Context;
                  foreach (var itm in entityEvents)
                             {
                                this.GetType()
@@ -71,7 +72,7 @@ namespace DataServices.Actors
             {
                
                 
-                _childActor = Context.ActorOf(Props.Create(inMsg.ActorType, inMsg).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
+                _childActor = ctx.ActorOf(Props.Create(inMsg.ActorType, inMsg).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
                             "EntityViewDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
 
                //     EventMessageBus.Current.GetEvent<TEvent>(Source).Subscribe(x => _childActor.Tell(x));

@@ -43,9 +43,10 @@ namespace DataServices.Actors
                 //{typeof (LoadEntitySetWithFilterWithIncludes<TEntity>), LoadEntitySetWithFilterWithIncludes},
 
             };
-
+        private IUntypedActorContext ctx = null;
         public EntityDataServiceSupervisor(ISystemProcess process, IProcessSystemMessage msg)
         {
+            ctx = Context;
             foreach (var itm in entityEvents)
             {
               this.GetType()
@@ -65,7 +66,7 @@ namespace DataServices.Actors
             {
                 
                     
-                    _childActor = Context.ActorOf(Props.Create(actorType, inMsg).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
+                    _childActor = ctx.ActorOf(Props.Create(actorType, inMsg).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
                             "EntityDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
 
                     EventMessageBus.Current.GetEvent<TEvent>(Source).Subscribe(x => _childActor.Tell(x));

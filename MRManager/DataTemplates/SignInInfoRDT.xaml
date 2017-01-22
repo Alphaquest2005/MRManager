@@ -10,7 +10,7 @@
     <DataTemplate DataType="{x:Type viewModels:SigninViewModel}">
         <StackPanel Width="500"
                     Height="500"
-                    Background="#FF142695">
+                    Background="LightPink">
             <TextBox Text="{Binding Usersignin, UpdateSourceTrigger=PropertyChanged}" />
             <TextBox Background="#FF30AC14" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
             <Button Command="{Binding Commands[ValidateUserInfo]}" Content="Login" />

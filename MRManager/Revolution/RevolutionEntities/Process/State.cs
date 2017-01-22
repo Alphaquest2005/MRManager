@@ -4,7 +4,7 @@ namespace RevolutionEntities.Process
 {
     public struct State : IState
     {
-        public State(string status, string name, string notes)
+        public State(string name, string status, string notes)
         {
             Status = status;
             Name = name;

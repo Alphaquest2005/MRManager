@@ -28,4 +28,6 @@ namespace EventMessages
 
         public Dictionary<string, dynamic> Changes { get; }
     }
+
+
 }

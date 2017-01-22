@@ -19,8 +19,10 @@ namespace DataServices.Actors
 {
     public class EntityDataServiceManager : BaseSupervisor<EntityDataServiceManager>
     {
+        private IUntypedActorContext ctx = null;
         public EntityDataServiceManager()
         {
+            ctx = Context;
             EventMessageBus.Current.GetEvent<IProcessSystemMessage>(Source).Where(x => x is IEntityRequest).Subscribe(x => handleEntityRequest((IEntityRequest)x));
         }
 
@@ -42,7 +44,7 @@ namespace DataServices.Actors
             var specificListType = genericListType.MakeGenericType(classType);
             try
             {
-                Context.ActorOf(Props.Create(specificListType, process, msg), string.Format(actorName, classType.Name));
+                ctx.ActorOf(Props.Create(specificListType, process, msg), string.Format(actorName, classType.Name));
             }
             catch (Exception ex)
             {

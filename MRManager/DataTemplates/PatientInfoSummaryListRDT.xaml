@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
+                    xmlns:converters="clr-namespace:Converters;assembly=Converters"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+                    mc:Ignorable="d">
+
+    <DataTemplate DataType="{x:Type viewModels:PatientSummaryListViewModel}">
+        <StackPanel Background="LightPink">
+            <TextBlock Text="{Binding State.Value.StateInfo.State.Status, Mode=OneWay}" />
+            <ListBox ItemsSource="{Binding State.Value.EntitySet, Mode=OneWay}" SelectedItem="{Binding State.Value.Entity, Mode=OneWay}" />
+            <ComboBox x:Name="ComboBox"
+                      SelectedValue="{Binding Field,
+                                              UpdateSourceTrigger=PropertyChanged}"
+                      SelectedValuePath="Content">
+                <ComboBox.Items>
+                    <ComboBoxItem Content="Email" />
+                    <ComboBoxItem Content="PhoneNumber" />
+                </ComboBox.Items>
+            </ComboBox>
+            <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Command="{Binding Commands[Search], Mode=OneWay}" Content="Search" />
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>

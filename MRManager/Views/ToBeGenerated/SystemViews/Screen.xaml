@@ -27,35 +27,45 @@
             </Style.Triggers>
         </Style>
 
-        <!--<DataTemplate DataType="{x:Type viewModels:SigninViewModel}">
-            <StackPanel Width="500"
-                        Height="500"
-                        Background="LightPink">
-                <TextBox Text="{Binding Usersignin, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBox Background="#FF30AC14" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
-                <Button Command="{Binding Commands[ValidateUserInfo]}" Content="Login" />
-                <TextBlock Text="{Binding State.Value.StateInfo.State.Status}" />
-                <TextBlock Text="{Binding State.Value.StateInfo.State.Notes}" />
-                <Image Source="{Binding Image}" />
-            </StackPanel>
-        </DataTemplate>-->
-
 
     </UserControl.Resources>
 
-    <Grid x:Name="LayoutRoot"
-          Margin="0,0,0,0"
-          Background="{x:Null}"
-          DataContext="{Binding}">
+    <DockPanel x:Name="LayoutRoot"
+               Margin="0,0,0,0"
+               Background="{x:Null}"
+               DataContext="{Binding}"
+               LastChildFill="True">
 
-        <ContentControl Background="#FF5D7607" Content="{Binding LeftViewModels}" />
-        <ContentControl Background="#FF61D877" Content="{Binding HeaderViewModels}" />
-        <ContentControl Background="#FF618CD8" Content="{Binding RightViewModels}" />
-        <ContentControl Background="#FFD361D8" Content="{Binding FooterViewModels}" />
+        <ItemsControl Height="125"
+                      Background="#FF61D877"
+                      DockPanel.Dock="Top"
+                      ItemsSource="{Binding HeaderViewModels}" />
+        <ItemsControl Height="125"
+                      Background="#FFD361D8"
+                      DockPanel.Dock="Bottom"
+                      ItemsSource="{Binding FooterViewModels}" />
+        <ItemsControl Width="200"
+                      Background="#FF5D7607"
+                      DockPanel.Dock="Left"
+                      ItemsSource="{Binding LeftViewModels}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <ContentPresenter Content="{TemplateBinding Content}" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <ItemsControl Width="200"
+                      Background="#FF618CD8"
+                      DockPanel.Dock="Right"
+                      ItemsSource="{Binding RightViewModels}" />
+
         <coreui:SliderPanel x:Name="slider"
                             Grid.ColumnSpan="1"
                             Width="4000"
-                            Margin="0,125,0,0"
+                            Margin="0,0,0,0"
                             Background="#00B76767"
                             Orientation="Horizontal">
 
@@ -108,5 +118,5 @@
         </coreui:SliderPanel>
 
 
-    </Grid>
+    </DockPanel>
 </UserControl>

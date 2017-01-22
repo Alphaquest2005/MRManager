@@ -18,4 +18,7 @@ namespace SystemInterfaces
     {
         Dictionary<string, object> Changes { get; }
     }
+
+    
+    
 }

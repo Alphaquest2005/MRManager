@@ -19,11 +19,12 @@ namespace DataServices.Actors
 {
     public class ProcessSupervisor : BaseSupervisor<ProcessSupervisor>
     {
-        
+        private IUntypedActorContext ctx = null;
 
         public ProcessSupervisor(bool autoRun)
         {
-            EventMessageBus.Current.GetEvent<IStartSystemProcess>(Source).Where(x => autoRun && x.ProcessToBeStartedId == Processes.NullProcess).Subscribe(x => StartParentProcess(x.Process.Id, x.User));
+          ctx = Context;
+        EventMessageBus.Current.GetEvent<IStartSystemProcess>(Source).Where(x => autoRun && x.ProcessToBeStartedId == Processes.NullProcess).Subscribe(x => StartParentProcess(x.Process.Id, x.User));
             EventMessageBus.Current.GetEvent<IStartSystemProcess>(Source).Where(x => !autoRun && x.ProcessToBeStartedId != Processes.NullProcess).Subscribe(x => StartProcess(x.ProcessToBeStartedId,x.User));
             Receive<ISystemStarted>(x => StartProcess(x.Process.Id,x.User ));
         }
@@ -51,7 +52,7 @@ namespace DataServices.Actors
                     if(Processes.ProcessComplexEvents.All(x => x.ProcessId != inMsg.Process.Id)) throw new ApplicationException($"No Complex Events were created for this process:{inMsg.Process.Id}-{inMsg.Process.Name}");
                     
 
-                    var childActor = Context.ActorOf(Props.Create<ProcessActor>(inMsg), "ProcessActor-" + inMsg.Process.Name.GetSafeActorName());
+                    var childActor = ctx.ActorOf(Props.Create<ProcessActor>(inMsg), "ProcessActor-" + inMsg.Process.Name.GetSafeActorName());
                     EventMessageBus.Current.GetEvent<IProcessSystemMessage>(Source)
                         .Where(x => x.Process.Id == inMsg.Process.Id && x.MachineInfo.MachineName == inMsg.MachineInfo.MachineName)
                         .Subscribe(x => childActor.Tell(x));

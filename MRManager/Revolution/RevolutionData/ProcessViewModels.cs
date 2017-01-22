@@ -288,7 +288,20 @@ namespace RevolutionData
                                             },
                                 subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
 
-                                messageData:s => new ViewEventCommandParameter(new object[] {s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.LoadEntityViewSetWithChanges),s.Process,s.Source)),
+                                messageData: s =>
+                                {
+                                    //ToDo: bad practise
+                                    if (((dynamic) s).Field != "" && ((dynamic) s).Value != "")
+                                    {
+                                        s.ChangeTracking.AddOrUpdate(((dynamic) s).Field, ((dynamic) s).Value);
+                                    }
+
+                                    return new ViewEventCommandParameter(
+                                        new object[] {s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},
+                                        new StateCommandInfo(s.Process.Id,
+                                            Context.EntityView.Commands.LoadEntityViewSetWithChanges), s.Process,
+                                        s.Source);
+                                }),
 
 
 

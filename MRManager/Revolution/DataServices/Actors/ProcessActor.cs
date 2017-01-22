@@ -36,12 +36,12 @@ namespace DataServices.Actors
         private ConcurrentQueue<IProcessSystemMessage> msgQue = new ConcurrentQueue<IProcessSystemMessage>();
         private ReadOnlyCollection<IComplexEventAction> _complexEvents;
         public ConcurrentDictionary<Type, IProcessStateMessage<IEntityId>> ProcessStateMessages { get; }= new ConcurrentDictionary<Type, IProcessStateMessage<IEntityId>>();
-
+        private static IUntypedActorContext ctx = null;
 
 
         public ProcessActor(ICreateProcessActor msg)
         {
-
+            ctx = Context;
             Process = msg.Process;
             EventMessageBus.Current.GetEvent<IProcessStateMessage<IEntityId>>(Source)
                 .Where(x => x.Process.Id == msg.Process.Id)
@@ -161,7 +161,7 @@ namespace DataServices.Actors
             try
             {
                 var childActor =
-                    Context.ActorOf(
+                    ctx.ActorOf(
                         Props.Create<ComplexEventActor>(inMsg),
                         "ComplexEventActor:-" + inMsg.ComplexEventService.ActorId.GetSafeActorName());
                 EventMessageBus.Current.GetEvent<IProcessSystemMessage>(inMsg.Source)
