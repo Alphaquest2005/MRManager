@@ -38,5 +38,16 @@ namespace Entity.Expressions
             PhoneNumber = x.Persons.PersonPhoneNumbers.FirstOrDefault().PhoneNumber,
             Sexed = x.Sex.Name
         };
+
+        public static Expression<Func<Persons_Patient, List<PhoneNumbersInfo>>> PatientPhoneNumbersInfoExpression { get; } =
+
+                x => x.Persons.PersonPhoneNumbers.Select(z => new PhoneNumbersInfo()
+                {
+                    PersonId = x.Id,
+                    PhoneNumber = z.PhoneNumber,
+                    Type = z.PhoneTypes.Name
+                }).ToList();
     }
+
+
 }

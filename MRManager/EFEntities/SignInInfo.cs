@@ -37,4 +37,13 @@ namespace EF.Entities
         public int? CountryId { get; set; }
         public string Sexed { get; set; }
     }
+
+
+
+    public class PhoneNumbersInfo : EntityView<IPersons_Patient>, IPhoneNumbersInfo
+    {
+        public Int32 PersonId { get; set; }
+        public String PhoneNumber { get; set; }
+        public String Type { get; set; }
+    }
 }
