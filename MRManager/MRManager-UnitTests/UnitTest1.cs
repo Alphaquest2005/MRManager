@@ -4,6 +4,7 @@ using SystemInterfaces;
 using Common;
 using EventAggregator;
 using EventMessages;
+using EventMessages.Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RevolutionEntities.Process;
 using Utilities;

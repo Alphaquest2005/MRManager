@@ -10,6 +10,7 @@ using CommonMessages;
 using EFRepository;
 using EventAggregator;
 using EventMessages;
+using EventMessages.Events;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;

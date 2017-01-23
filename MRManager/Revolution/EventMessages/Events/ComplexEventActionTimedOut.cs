@@ -3,8 +3,7 @@ using SystemInterfaces;
 using Actor.Interfaces;
 using CommonMessages;
 
-
-namespace EventMessages
+namespace EventMessages.Events
 {
 
     public class ComplexEventActionTimedOut : ProcessSystemMessage, IComplexEventActionTimedOut

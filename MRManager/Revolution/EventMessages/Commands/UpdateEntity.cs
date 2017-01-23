@@ -3,7 +3,7 @@ using System.Diagnostics.Contracts;
 using SystemInterfaces;
 using CommonMessages;
 
-namespace EventMessages
+namespace EventMessages.Commands
 {
     public class UpdateEntity<TEntity> : ProcessSystemMessage, IUpdateEntity<TEntity> where TEntity : IEntity
     {

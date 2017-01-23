@@ -6,6 +6,7 @@ using Common;
 using EF.Entities;
 using EventAggregator;
 using EventMessages;
+using EventMessages.Events;
 using Interfaces;
 using JB.Reactive.ExtensionMethods;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

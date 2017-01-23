@@ -1,8 +1,7 @@
 ﻿using SystemInterfaces;
 using CommonMessages;
 
-
-namespace EventMessages
+namespace EventMessages.Events
 {
 
     public class UpdateProcessState<TEntity> : ProcessSystemMessage, IProcessStateMessage<TEntity> where TEntity : IEntityId
@@ -13,15 +12,5 @@ namespace EventMessages
         }
 
         public IProcessState<TEntity> State { get; }
-    }
-
-    public class UpdateProcessStateList<TEntity> : ProcessSystemMessage, IProcessStateListMessage<TEntity> where TEntity : IEntityId
-    {
-        public UpdateProcessStateList(IProcessStateList<TEntity> state, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo, process, source)
-        {
-            State = state;
-        }
-
-        public IProcessStateList<TEntity> State { get; }
     }
 }

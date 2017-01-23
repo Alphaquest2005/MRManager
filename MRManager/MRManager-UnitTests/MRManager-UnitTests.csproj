@@ -193,10 +193,6 @@
       <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>
       <Name>SystemInterfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Revolution\SystemMessages\SystemMessages.csproj">
-      <Project>{2c88291e-05eb-4be9-8b33-18f9d56cf928}</Project>
-      <Name>SystemMessages</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Revolution\UserControls\UserControls.csproj">
       <Project>{51a5da32-159c-4888-b6dd-798aeee70364}</Project>
       <Name>UserControls</Name>

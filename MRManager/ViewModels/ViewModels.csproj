@@ -105,10 +105,6 @@
       <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>
       <Name>SystemInterfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Revolution\SystemMessages\SystemMessages.csproj">
-      <Project>{2c88291e-05eb-4be9-8b33-18f9d56cf928}</Project>
-      <Name>SystemMessages</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Revolution\ViewMessages\ViewMessages.csproj">
       <Project>{eb1e2e94-d6fb-49df-8036-9bf910e3b7aa}</Project>
       <Name>ViewMessages</Name>

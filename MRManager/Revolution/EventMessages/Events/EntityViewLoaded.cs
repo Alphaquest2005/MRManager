@@ -2,8 +2,7 @@
 using SystemInterfaces;
 using CommonMessages;
 
-
-namespace EventMessages
+namespace EventMessages.Events
 {
 
     public class EntityViewLoaded<TView> : ProcessSystemMessage, IEntityViewLoaded<TView> where TView : IEntityView

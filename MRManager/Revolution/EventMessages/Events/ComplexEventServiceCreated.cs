@@ -1,8 +1,4 @@
-﻿using SystemInterfaces;
-using Actor.Interfaces;
-using CommonMessages;
-
-namespace EventMessages
+﻿namespace EventMessages.Events
 {
 
     //public class ComplexEventServiceCreated : ProcessSystemMessage, IComplexEventServiceCreated

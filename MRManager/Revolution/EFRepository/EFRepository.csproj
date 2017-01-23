@@ -109,10 +109,6 @@
       <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>
       <Name>SystemInterfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SystemMessages\SystemMessages.csproj">
-      <Project>{2c88291e-05eb-4be9-8b33-18f9d56cf928}</Project>
-      <Name>SystemMessages</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Utilities\Utilities.csproj">
       <Project>{0f9427b1-792e-4c35-97d8-22a9494ce28f}</Project>
       <Name>Utilities</Name>

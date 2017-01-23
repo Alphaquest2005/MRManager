@@ -5,14 +5,16 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Reactive.Linq;
 using SystemInterfaces;
-using SystemMessages;
 using Actor.Interfaces;
+using Akka.Actor;
 using EventAggregator;
 using EventMessages;
 using ReactiveUI;
 using RevolutionData;
 using RevolutionEntities.Process;
 using DataServices.Utils;
+using EventMessages.Commands;
+using EventMessages.Events;
 
 
 namespace DataServices.Actors
@@ -21,7 +23,7 @@ namespace DataServices.Actors
 
     public class ComplexEventActor : BaseActor<ComplexEventActor>, IComplexEventService
     {
-        public ComplexEventActor(ICreateComplexEventService msg)
+        public ComplexEventActor(ICreateComplexEventService msg) : base(msg.Process)
         {
             ComplexEventAction = msg.ComplexEventService.ComplexEventAction;
             Process = msg.ComplexEventService.Process;
@@ -31,7 +33,8 @@ namespace DataServices.Actors
                 this.GetType().GetMethod("WireEvents").MakeGenericMethod(e.EventType).Invoke(this, new object[] {e});
             }
             //Todo: make time out configurable
-           // this.WhenAny(x => x.InMessages, x => x.Value.Count).Subscribe(x => ExecuteAction(InMessages.ToImmutableDictionary()));//,z => OnTimeOut());//.Timeout(TimeSpan.FromSeconds((double) EventTimeOut.LongWait))
+            
+          
             EventMessageBus.Current.GetEvent<IRequestComplexEventLog>(Source).Subscribe(x => handleComplexEventLogRequest());
 
             Publish(new ServiceStarted<IComplexEventService>(this, new StateEventInfo(Process.Id, RevolutionData.Context.Actor.Events.ActorStarted), Process, Source));

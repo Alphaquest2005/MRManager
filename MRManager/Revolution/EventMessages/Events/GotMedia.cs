@@ -5,8 +5,7 @@ using SystemInterfaces;
 using CommonMessages;
 using Interfaces;
 
-
-namespace EventMessages
+namespace EventMessages.Events
 {
     
     public class GotMedia : ProcessSystemMessage

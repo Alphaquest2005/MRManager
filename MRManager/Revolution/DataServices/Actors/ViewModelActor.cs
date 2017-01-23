@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Linq;
+using System.Reactive.Linq;
 using SystemInterfaces;
-using SystemMessages;
 using Akka.Actor;
 using BootStrapper;
 using CommonMessages;
 using EventAggregator;
 using EventMessages;
+using EventMessages.Events;
+using RevolutionData;
 using RevolutionEntities.Process;
 using StartUp.Messages;
 using ViewMessages;
@@ -17,12 +19,12 @@ namespace DataServices.Actors
     public class ViewModelActor : BaseActor<ViewModelActor>, IViewModelService
     {
         private IUntypedActorContext ctx = null;
-        public ViewModelActor(ISystemProcess process)
+        public ViewModelActor(ISystemProcess process):base(process)
         {
             ctx = Context;
             Command<LoadViewModel>(x => HandleProcessViews(x));
-            //EventMessageBus.Current.GetEvent<LoadViewModel<IViewModelInfo>>(source).Subscribe(HandleProcessViews);
 
+            EventMessageBus.Current.GetEvent<ILoadViewModel>(Source).Subscribe(x => HandleProcessViews(x));
             EventMessageBus.Current.Publish(new ServiceStarted<IViewModelService>(this,new StateEventInfo(process.Id, RevolutionData.Context.Actor.Events.ActorStarted), process, Source), Source);
         }
 

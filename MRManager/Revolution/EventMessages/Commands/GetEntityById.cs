@@ -2,8 +2,7 @@
 using SystemInterfaces;
 using CommonMessages;
 
-
-namespace EventMessages
+namespace EventMessages.Commands
 {
     [Export]
     public class GetEntityById<T> : ProcessSystemMessage, IGetEntityById<T> where T : IEntity

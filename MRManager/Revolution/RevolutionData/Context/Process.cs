@@ -20,6 +20,7 @@ namespace RevolutionData.Context
             public static IStateCommand CreateLog => new StateCommand("CreateLog", "Create Process Log", Events.LogCreated);
             public static IStateCommand CreateComplexEventLog => new StateCommand("CreateComplexEventLog", "Create ComplexEvent Log", Events.ComplexEventLogCreated);
             public static IStateCommand PublishState => new StateCommand("RequestState", "Request Process State", Events.StatePublished);
+            public static IStateCommand CleanUpProcess => new StateCommand("Cleanup Process", "Clean up Process", Events.ProcessCleanedUp);
         }
 
         public class Events
@@ -32,6 +33,7 @@ namespace RevolutionData.Context
             public static IStateEvent Error => new StateEvent("Error", "Log Created", "");
             public static IStateEvent ComplexEventLogCreated => new StateEvent("ComplexEventLogCreated", "ComplexEvent Log Created", "");
             public static IStateEvent StatePublished => new StateEvent("StatePublished", "Process State Published", "");
+            public static IStateEvent ProcessCleanedUp => new StateEvent("ProcessCleanUp", "Process CleanUp", "", new StateCommand("CleanupProcess", "Cleanup Process"));
 
             //closed Loop
         }

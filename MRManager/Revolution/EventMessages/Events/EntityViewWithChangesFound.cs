@@ -3,7 +3,7 @@ using System.ComponentModel.Composition;
 using SystemInterfaces;
 using CommonMessages;
 
-namespace EventMessages
+namespace EventMessages.Events
 {
     [Export]
     public class EntityViewWithChangesFound<TView> : ProcessSystemMessage, IEntityViewWithChangesFound<TView> where TView:IEntityView

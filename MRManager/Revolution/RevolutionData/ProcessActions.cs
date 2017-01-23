@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using SystemInterfaces;
-using SystemMessages;
 using Actor.Interfaces;
 using Common;
 using System.Linq;
 using System.Reactive.Linq;
 using DomainMessages;
 using EventMessages;
+using EventMessages.Commands;
 using EventMessages.Events;
 using Interfaces;
 using RevolutionEntities;
 using RevolutionEntities.Process;
+using ViewModel.Interfaces;
 
 namespace RevolutionData
 {
@@ -49,18 +50,16 @@ namespace RevolutionData
                         processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.CompleteProcess),
                         expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
-        public static IProcessAction ShutActorDown => new ProcessAction(
-                        action: cp =>
-                        {
-                           // ((dynamic)cp.Actor).ActorRef().GracefulStop(TimeSpan.FromSeconds(5));//,TODO: figure out way to close actor without messing up command not working),
-                            return new ActorTerminated(cp.Actor,
-                                new StateEventInfo(cp.Actor.Process.Id, Context.Actor.Events.ActorStopped),
-                                cp.Actor.Process, cp.Actor.Source);
-                        },//
-                        processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Actor.Commands.StopActor),
-                        expectedSourceType: new SourceType(typeof (IComplexEventService)));
 
-       public class SignIn
+
+        public static IProcessAction CleanUpProcess => new ProcessAction(
+                        action: cp => new CleanUpSystemProcess(cp.Actor.Process.Id,new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.CleanUpProcess), cp.Actor.Process, cp.Actor.Source), 
+                        processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.CleanUpProcess),
+                        expectedSourceType: new SourceType(typeof(IComplexEventService)));
+
+       
+
+        public class SignIn
         {
             public static IProcessAction IntializeSigninProcessState => new ProcessAction(
                 action: cp =>

@@ -99,12 +99,16 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<IViewModelCreated<IScreenModel>>(Source).Where(procesPredicate).Subscribe(x => screenViewModelCreated = x);
             EventMessageBus.Current.GetEvent<IViewModelLoaded<IMainWindowViewModel, IScreenModel>>(Source).Subscribe(x => screenViewModelLoadedInMainWindowViewModel = x);
             EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(Source).Where(procesPredicate).Subscribe(x => processCompleted = x);
+            EventMessageBus.Current.GetEvent<IActorTerminated>(Source)
+                .Where(x => x.Process.Id == 1)
+                .Subscribe(x => processActor1Terminated = x);
         }
 
         private static ConcurrentQueue<IComplexEventLogCreated> ComplextEventLogs = new ConcurrentQueue<IComplexEventLogCreated>();
 
         private static ConcurrentQueue<IProcessLogCreated> ProcessLogs =new ConcurrentQueue<IProcessLogCreated>();
-       
+        private static IActorTerminated processActor1Terminated;
+
 
         public static void Process1Asserts()
         {
@@ -116,6 +120,9 @@ namespace MRManager_UnitTests
             Assert.IsNotNull(screenViewModelCreated);
             Assert.IsNotNull(screenViewModelLoadedInMainWindowViewModel);
             Assert.IsNotNull(processCompleted);
+            //TODO: Setup Controlled process for reasource clean up instead of uncontrolled broadcast and expect recievers to follow
+           // Assert.IsNotNull(processActor1Terminated);
+
         }
 
 

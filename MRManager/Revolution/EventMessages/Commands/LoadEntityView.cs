@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using SystemInterfaces;
 using CommonMessages;
 
-namespace EventMessages
+namespace EventMessages.Commands
 {
     public class LoadEntityView<TEntityView> : ProcessSystemMessage //where TEntityView:IEntityView<IEntity>
     {

@@ -8,6 +8,7 @@ using BootStrapper;
 using CommonMessages;
 using EventAggregator;
 using EventMessages;
+using EventMessages.Commands;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using ViewModel.Interfaces;

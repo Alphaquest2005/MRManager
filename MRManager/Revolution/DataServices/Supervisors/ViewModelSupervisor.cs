@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
 using SystemInterfaces;
-using SystemMessages;
 using Akka.Actor;
 using Akka.Routing;
 using CommonMessages;
 using EventAggregator;
+using EventMessages.Events;
 using RevolutionData;
 using RevolutionEntities.Process;
 using StartUp.Messages;
@@ -28,9 +28,13 @@ namespace DataServices.Actors
                     "ViewModelActorEntityActor");
 
             EventMessageBus.Current.GetEvent<ISystemProcessStarted>(Source).Subscribe(x => HandleProcessViews(x));
+            
             Receive<ISystemStarted>(x => HandleProcessViews(x));
              EventMessageBus.Current.Publish(new ServiceStarted<IViewModelSupervisor>(this,new StateEventInfo(process.Id, RevolutionData.Context.Actor.Events.ActorStarted), process, Source), Source);
         }
+
+       
+
 
         private void HandleProcessViews(IProcessSystemMessage pe)
         {
@@ -38,7 +42,11 @@ namespace DataServices.Actors
             {
                 foreach (var v in ProcessViewModels.ProcessViewModelInfos.Where(x => x.ProcessId == pe.Process.Id))
                 {
-                    PublishViewModel(v, pe);
+                    var msg = new LoadViewModel(v,new StateCommandInfo(pe.Process.Id, RevolutionData.Context.ViewModel.Commands.LoadViewModel), pe.Process, Source);
+                    //TODO: Some strange reason this thing not executing second time---process actor closed maybe
+                    //_childActor.Tell(msg);
+                    EventMessageBus.Current.Publish(msg, Source);
+                    
                 }
             }
             catch (Exception ex)
@@ -47,12 +55,6 @@ namespace DataServices.Actors
                 PublishProcesError(pe, ex, pe.GetType());
             }
 
-        }
-
-        public void PublishViewModel(IViewModelInfo viewModelInfo, IProcessSystemMessage pe)
-        {
-            var msg = new LoadViewModel(viewModelInfo,new StateCommandInfo(pe.Process.Id, RevolutionData.Context.ViewModel.Commands.LoadViewModel), pe.Process, Source);
-            _childActor.Tell(msg);
         }
     }
 

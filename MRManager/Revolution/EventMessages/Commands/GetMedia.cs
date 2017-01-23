@@ -4,7 +4,7 @@ using System.Linq;
 using SystemInterfaces;
 using CommonMessages;
 
-namespace EventMessages
+namespace EventMessages.Commands
 {
     
     public class GetMedia : ProcessSystemMessage

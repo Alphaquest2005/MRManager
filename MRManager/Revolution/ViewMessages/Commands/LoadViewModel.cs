@@ -16,16 +16,4 @@ namespace ViewMessages
 
         public IViewModelInfo ViewModelInfo { get;}
     }
-
-    [Export]
-    public class UnloadViewModel : ProcessSystemMessage
-    {
-        public UnloadViewModel(IViewModelInfo viewModelInfo, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
-        {
-            ViewModelInfo = viewModelInfo;
-
-        }
-
-        public IViewModelInfo ViewModelInfo { get; }
-    }
 }

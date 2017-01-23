@@ -77,21 +77,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Commands\CleanUpSystemProcess.cs" />
     <Compile Include="Commands\CreateProcessActor.cs" />
     <Compile Include="Commands\GetEntityViewById.cs" />
+    <Compile Include="Commands\LoadEntityViewSetWithChanges.cs" />
     <Compile Include="Commands\StartSystemProcess.cs" />
-    <Compile Include="Commands\CreateLog.cs" />
+    <Compile Include="Commands\RequestProcessLog.cs" />
     <Compile Include="Commands\CreateEntityService.cs" />
     <Compile Include="Events\ActorTerminated.cs" />
     <Compile Include="Events\EntityViewSetWithChangesLoaded.cs" />
     <Compile Include="Events\CurrentEntityChanged.cs" />
-    <Compile Include="Events\ProcessStateUpddated.cs" />
+    <Compile Include="Events\ProcessStateUpdated.cs" />
     <Compile Include="Commands\CreateEntityViewService.cs" />
     <Compile Include="Events\ProcessLogCreated.cs" />
     <Compile Include="Events\ComplexEventLogCreated.cs" />
     <Compile Include="Commands\RequestComplexEventLog.cs" />
     <Compile Include="Events\ComplexEventServiceCreated.cs" />
-    <Compile Include="Commands\CreateComplexEventActor.cs" />
+    <Compile Include="Commands\CreateComplexEventService.cs" />
     <Compile Include="Commands\ExecuteComplexEventAction.cs" />
     <Compile Include="Events\ComplexEventActionTimedOut.cs" />
     <Compile Include="Events\EntityFound.cs" />
@@ -101,7 +103,7 @@
     <Compile Include="Commands\GetEntityWithChanges.cs" />
     <Compile Include="Events\ProcessEventFailure.cs" />
     <Compile Include="Events\EntityViewLoaded.cs" />
-    <Compile Include="Commands\LoadEntityViewWithFilter.cs" />
+    <Compile Include="Commands\LoadEntityViewSetWithFilter.cs" />
     <Compile Include="Commands\LoadEntityView.cs" />
     <Compile Include="Commands\CreateEntity.cs" />
     <Compile Include="Events\EntityChanges.cs" />
@@ -114,7 +116,7 @@
     <Compile Include="Events\GotMedia.cs" />
     <Compile Include="Commands\GetMedia.cs" />
     <Compile Include="Commands\LoadEntitySetWithFilterWithIncludes.cs" />
-    <Compile Include="Events\ProcessStateMessage.cs" />
+    <Compile Include="Events\UpdateProcessState.cs" />
     <Compile Include="Commands\RequestProcessState.cs" />
     <Compile Include="Events\EntitySetWithFilterLoaded.cs" />
     <Compile Include="Events\EntityUpdated.cs" />
@@ -124,6 +126,12 @@
     <Compile Include="Commands\LoadEntityRange.cs" />
     <Compile Include="Commands\LoadEntitySetWithFilter.cs" />
     <Compile Include="Commands\LoadEntitySet.cs" />
+    <Compile Include="Events\ServiceStarted.cs" />
+    <Compile Include="Events\SystemProcessCleanedUp.cs" />
+    <Compile Include="Events\SystemProcessCompleted.cs" />
+    <Compile Include="Events\SystemProcessStarted.cs" />
+    <Compile Include="Events\SystemStarted.cs" />
+    <Compile Include="Events\UpdateProcessStateList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\UpdateEntity.cs" />
   </ItemGroup>

@@ -2,7 +2,7 @@
 using SystemInterfaces;
 using CommonMessages;
 
-namespace EventMessages
+namespace EventMessages.Events
 {
 
     public class ProcessEventFailure: ProcessSystemMessage, IProcessEventFailure

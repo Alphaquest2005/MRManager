@@ -9,11 +9,13 @@ using DataServices.Actors;
 using Domain.Interfaces;
 using EventAggregator;
 using EventMessages;
+using EventMessages.Commands;
 using Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RevolutionData;
 using RevolutionEntities;
 using RevolutionEntities.Process;
+using ViewMessages;
 using ViewModel.Interfaces;
 
 
@@ -98,6 +100,12 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<IUserValidated>(Source).Subscribe(x => userValidated = x);
             EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(Source).Where(x => x.Process.Id == 2).Subscribe(x => process2Completed = x);
             EventMessageBus.Current.GetEvent<IStartSystemProcess>(Source).Where(x => x.ProcessToBeStartedId == Processes.NullProcess).Subscribe(x => StartProcess3 = x);
+
+            ///////// Process Clean up ////////////////////
+
+            EventMessageBus.Current.GetEvent<ICleanUpSystemProcess>(Source).Where(x => x.ProcessToBeCleanedUpId == 2).Subscribe(x => CommandtoCleanupProcess2 = x);
+            
+            
         }
 
         private void Process2Asserts()
@@ -121,6 +129,9 @@ namespace MRManager_UnitTests
 
             
             Assert.IsNotNull(StartProcess3);
+
+            Assert.IsNotNull(CommandtoCleanupProcess2);
+            Assert.IsFalse(LoginViewModelLoadedInMScreenViewModel.LoadingViewModel.BodyViewModels.Contains(LoginViewModelLoadedInMScreenViewModel.ViewModel));
             
 
         }
@@ -149,12 +160,7 @@ namespace MRManager_UnitTests
         private ConcurrentQueue<IComplexEventLogCreated> ComplextEventLogs = new ConcurrentQueue<IComplexEventLogCreated>();
 
         private ConcurrentQueue<IProcessLogCreated> ProcessLogs =new ConcurrentQueue<IProcessLogCreated>();
-
-    
-
-
-
-
+        private ICleanUpSystemProcess CommandtoCleanupProcess2;
     }
 
 

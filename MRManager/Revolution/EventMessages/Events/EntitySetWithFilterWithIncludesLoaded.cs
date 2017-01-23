@@ -4,8 +4,7 @@ using System.Linq.Expressions;
 using SystemInterfaces;
 using CommonMessages;
 
-
-namespace EventMessages
+namespace EventMessages.Events
 {
   
 

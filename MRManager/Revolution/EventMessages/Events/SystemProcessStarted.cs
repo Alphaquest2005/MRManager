@@ -2,7 +2,7 @@
 using SystemInterfaces;
 using CommonMessages;
 
-namespace SystemMessages
+namespace EventMessages.Events
 {
   
     [Export]

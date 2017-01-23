@@ -5,6 +5,7 @@ using Common;
 using CommonMessages;
 using EventAggregator;
 using EventMessages;
+using EventMessages.Events;
 using RevolutionEntities.Process;
 using Utilities;
 

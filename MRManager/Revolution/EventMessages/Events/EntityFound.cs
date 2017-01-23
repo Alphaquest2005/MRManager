@@ -1,8 +1,7 @@
 using SystemInterfaces;
 using CommonMessages;
 
-
-namespace EventMessages
+namespace EventMessages.Events
 {
     public class EntityFound<T> : ProcessSystemMessage, IEntityFound<T> where T : IEntityId
     {

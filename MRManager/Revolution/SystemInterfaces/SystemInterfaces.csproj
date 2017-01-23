@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICleanUpSystemProcess.cs" />
     <Compile Include="IEntityViewSetWithChangesLoaded.cs" />
     <Compile Include="ICurrentEntityChanged.cs" />
     <Compile Include="IDataRequest.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="IStateCommandInfo.cs" />
     <Compile Include="IStateEventInfo.cs" />
     <Compile Include="IStateInfo.cs" />
+    <Compile Include="ISystemProcessCleanedUp.cs" />
     <Compile Include="ISystemProcessTerminated.cs" />
     <Compile Include="ISystemSource.cs" />
     <Compile Include="ISystemStarted.cs" />

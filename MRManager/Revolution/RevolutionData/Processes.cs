@@ -36,8 +36,10 @@ namespace RevolutionData
                 processInfo:new StateCommandInfo(1,Context.Process.Commands.StartProcess ),
                 action: ProcessActions.ProcessStarted),
 
+             
+
             new ComplexEventAction(
-                "101",
+                "102",
                 1, new List<IProcessExpectedEvent>
                 {
                     new ProcessExpectedEvent ("ProcessStarted", 1, typeof (ISystemProcessStarted), e => e != null, new StateEventInfo(1, Context.Process.Events.ProcessStarted), new SourceType(typeof(IProcessService))),
@@ -49,7 +51,7 @@ namespace RevolutionData
                 action: ProcessActions.CompleteProcess),
 
            new ComplexEventAction(
-                "102",
+                "103",
                 1, new List<IProcessExpectedEvent>
                 {
                     new ProcessExpectedEvent ("ProcessCompleted", 1, typeof (ISystemProcessCompleted), e => e != null, new StateEventInfo(1, Context.Process.Events.ProcessCompleted), new SourceType(typeof(IComplexEventService))),
@@ -60,20 +62,15 @@ namespace RevolutionData
                 action: ProcessActions.StartProcess),
 
             new ComplexEventAction(
-                key:"103",
-                processId:1,
-                events: new List<IProcessExpectedEvent>
+                "104",
+                1, new List<IProcessExpectedEvent>
                 {
-                    new ProcessExpectedEvent (key: "ProcessCompleted",
-                                              processId: 1,
-                                              eventPredicate: e => e != null,
-                                              eventType: typeof (ISystemProcessCompleted),
-                                              processInfo: new StateEventInfo(1,Context.Process.Events.ProcessCompleted),
-                                              expectedSourceType:new SourceType(typeof(IComplexEventService)))
-                }, 
-                expectedMessageType: typeof(ISystemProcessTerminated),
-                action: ProcessActions.ShutActorDown,
-                processInfo:new StateCommandInfo(1,Context.Actor.Commands.StopActor )),
+                    new ProcessExpectedEvent ("ProcessCompleted", 1, typeof (ISystemProcessCompleted), e => e != null, new StateEventInfo(1, Context.Process.Events.ProcessCompleted), new SourceType(typeof(IComplexEventService))),
+
+                },
+                typeof(ISystemProcessCleanedUp),
+                processInfo:new StateCommandInfo(1,Context.Process.Commands.CleanUpProcess ),
+                action: ProcessActions.CleanUpProcess),
 
             new ComplexEventAction(
                 "200",
@@ -163,6 +160,17 @@ namespace RevolutionData
                 typeof(ISystemProcessStarted),
                 processInfo:new StateCommandInfo(2,Context.Process.Commands.StartProcess ),
                 action: ProcessActions.StartProcessWithValidatedUser),
+
+            new ComplexEventAction(
+                "207",
+                2, new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent ("ProcessCompleted", 2, typeof (ISystemProcessCompleted), e => e != null, new StateEventInfo(2, Context.Process.Events.ProcessCompleted), new SourceType(typeof(IComplexEventService))),
+
+                },
+                typeof(ISystemProcessCleanedUp),
+                processInfo:new StateCommandInfo(2,Context.Process.Commands.CleanUpProcess ),
+                action: ProcessActions.CleanUpProcess),
 
              new ComplexEventAction(
                 "300",

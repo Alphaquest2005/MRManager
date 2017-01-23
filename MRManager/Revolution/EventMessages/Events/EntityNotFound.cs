@@ -1,8 +1,7 @@
 ﻿using SystemInterfaces;
 using CommonMessages;
 
-
-namespace EventMessages
+namespace EventMessages.Events
 {
     
     public class EntityNotFound<T> : ProcessSystemMessage where T : IEntity

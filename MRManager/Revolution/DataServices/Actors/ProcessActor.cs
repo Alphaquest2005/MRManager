@@ -9,13 +9,14 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using SystemInterfaces;
-using SystemMessages;
 using Actor.Interfaces;
 using Akka.Actor;
 using CommonMessages;
 using DataServices.Utils;
 using EventAggregator;
 using EventMessages;
+using EventMessages.Commands;
+using EventMessages.Events;
 using MoreLinq;
 using RevolutionData;
 using RevolutionEntities.Process;
@@ -30,19 +31,16 @@ namespace DataServices.Actors
 
     public class ProcessActor : BaseActor<ProcessActor>, IProcessService
     {
-        public ISystemProcess Process { get; }
-
-
+        
         private ConcurrentQueue<IProcessSystemMessage> msgQue = new ConcurrentQueue<IProcessSystemMessage>();
         private ReadOnlyCollection<IComplexEventAction> _complexEvents;
         public ConcurrentDictionary<Type, IProcessStateMessage<IEntityId>> ProcessStateMessages { get; }= new ConcurrentDictionary<Type, IProcessStateMessage<IEntityId>>();
         private static IUntypedActorContext ctx = null;
 
 
-        public ProcessActor(ICreateProcessActor msg)
+        public ProcessActor(ICreateProcessActor msg):base(msg.Process)
         {
             ctx = Context;
-            Process = msg.Process;
             EventMessageBus.Current.GetEvent<IProcessStateMessage<IEntityId>>(Source)
                 .Where(x => x.Process.Id == msg.Process.Id)
                 .Subscribe(x => SaveStateMessages(x));
@@ -59,6 +57,8 @@ namespace DataServices.Actors
             EventMessageBus.Current.GetEvent<IServiceStarted<IComplexEventService>>(Source)
                 .Where(x => x.Process.Id == msg.Process.Id)
                 .Subscribe(x => NotifyServiceStarted(x));
+
+            EventMessageBus.Current.GetEvent<ICleanUpSystemProcess>(Source).Where(x => x.ProcessToBeCleanedUpId == Process.Id).Subscribe(x => Self.GracefulStop(TimeSpan.FromSeconds((double)EventTimeOut.ShortWait)));
 
             Command<IProcessSystemMessage>(z => HandleProcessEvents(z));
 

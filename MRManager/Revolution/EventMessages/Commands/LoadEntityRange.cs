@@ -3,8 +3,7 @@ using System.ComponentModel;
 using SystemInterfaces;
 using CommonMessages;
 
-
-namespace EventMessages
+namespace EventMessages.Commands
 {
     public class LoadEntityRange<T> : ProcessSystemMessage where T : IEntity
     {

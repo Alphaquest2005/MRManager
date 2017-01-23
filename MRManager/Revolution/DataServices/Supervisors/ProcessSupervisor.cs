@@ -4,13 +4,13 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reactive.Linq;
 using SystemInterfaces;
-using SystemMessages;
 using Actor.Interfaces;
 using Akka.Actor;
 using CommonMessages;
 using EventAggregator;
 using EventMessages;
 using EventMessages.Commands;
+using EventMessages.Events;
 using RevolutionData;
 using RevolutionEntities.Process;
 using Utilities;
@@ -21,13 +21,18 @@ namespace DataServices.Actors
     {
         private IUntypedActorContext ctx = null;
 
+        //TODO: Track Actor Shutdown instead of just broadcast
+
         public ProcessSupervisor(bool autoRun)
         {
           ctx = Context;
+            
         EventMessageBus.Current.GetEvent<IStartSystemProcess>(Source).Where(x => autoRun && x.ProcessToBeStartedId == Processes.NullProcess).Subscribe(x => StartParentProcess(x.Process.Id, x.User));
             EventMessageBus.Current.GetEvent<IStartSystemProcess>(Source).Where(x => !autoRun && x.ProcessToBeStartedId != Processes.NullProcess).Subscribe(x => StartProcess(x.ProcessToBeStartedId,x.User));
             Receive<ISystemStarted>(x => StartProcess(x.Process.Id,x.User ));
         }
+
+     
 
         private void StartParentProcess(int processId, IUser user)
         {

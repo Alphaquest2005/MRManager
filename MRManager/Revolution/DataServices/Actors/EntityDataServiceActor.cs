@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Reactive.Linq;
 using SystemInterfaces;
-using SystemMessages;
 using Actor.Interfaces;
+using Akka.Actor;
 using CommonMessages;
 using EventAggregator;
+using EventMessages.Events;
+using RevolutionData;
 using RevolutionEntities.Process;
 
 namespace DataServices.Actors
@@ -18,10 +21,11 @@ namespace DataServices.Actors
        
       
         
-        public EntityDataServiceActor(ICreateEntityService msg) 
+        public EntityDataServiceActor(ICreateEntityService msg) : base(msg.Process)
         {
             Action = (Action<ISystemSource,TService>)msg.Action;
             Command<TService>(m => HandledEvent(m));
+            
             EventMessageBus.Current.Publish(new ServiceStarted<IEntityDataServiceActor<TService>>(this,new StateEventInfo(msg.Process.Id, RevolutionData.Context.Actor.Events.ActorStarted), msg.Process,Source), Source);
         }
 

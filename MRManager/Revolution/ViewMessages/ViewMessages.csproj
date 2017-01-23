@@ -47,6 +47,7 @@
     <Compile Include="Commands\CreateSummaryViewModel.cs" />
     <Compile Include="Commands\LoadEntityViewModel.cs" />
     <Compile Include="Commands\LoadViewModel.cs" />
+    <Compile Include="Commands\UnloadViewModel.cs" />
     <Compile Include="Events\ViewModelCreated.cs" />
     <Compile Include="ViewNav.cs" />
     <Compile Include="Commands\CreateViewModel.cs" />

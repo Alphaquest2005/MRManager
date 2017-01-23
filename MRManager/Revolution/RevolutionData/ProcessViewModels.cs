@@ -6,6 +6,7 @@ using System.Reactive.Linq;
 using System.Windows;
 using SystemInterfaces;
 using EventMessages;
+using EventMessages.Commands;
 using EventMessages.Events;
 using Interfaces;
 using JB.Reactive.ExtensionMethods;
@@ -137,7 +138,39 @@ namespace RevolutionData
                         {
                             Application.Current.Dispatcher.Invoke(() => s.BodyViewModels.Add(e.ViewModel));
                         }
-                        })
+                        }),
+
+                    new ViewEventSubscription<IScreenModel, ICleanUpSystemProcess>(
+                        1,
+                        e => e != null,
+                        new List<Func<IScreenModel, ICleanUpSystemProcess, bool>>{},
+                        (s, e) =>
+                        {
+                            if (Application.Current == null)
+                            {
+                                s.BodyViewModels.RemoveRange(s.BodyViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
+                                s.LeftViewModels.RemoveRange(s.LeftViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
+                                s.HeaderViewModels.RemoveRange(s.HeaderViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
+                                s.RightViewModels.RemoveRange(s.RightViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
+                                s.FooterViewModels.RemoveRange(s.FooterViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
+                            }
+                            else
+                            {
+                                Application.Current.Dispatcher.Invoke(() =>
+                                {
+                                    s.BodyViewModels.RemoveRange(s.BodyViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
+                                    s.BodyViewModels.Reset();
+                                    s.LeftViewModels.RemoveRange(s.LeftViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
+                                    s.LeftViewModels.Reset();
+                                    s.HeaderViewModels.RemoveRange(s.HeaderViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
+                                    s.HeaderViewModels.Reset();
+                                    s.RightViewModels.RemoveRange(s.RightViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
+                                    s.RightViewModels.Reset();
+                                    s.FooterViewModels.RemoveRange(s.FooterViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
+                                    s.FooterViewModels.Reset();
+                                });
+                            }
+                        }),
                 },
                 new List<IViewModelEventPublication<IViewModel, IEvent>>
                 {

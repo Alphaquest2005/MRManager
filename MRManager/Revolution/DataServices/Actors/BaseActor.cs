@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+using System.Reactive.Linq;
 using SystemInterfaces;
 using Actor.Interfaces;
+using Akka.Actor;
 using Akka.Persistence;
 using Common;
 using CommonMessages;
 using EventAggregator;
 using EventMessages;
+using EventMessages.Commands;
+using EventMessages.Events;
+using RevolutionData;
 using RevolutionEntities.Process;
 using Utilities;
 
@@ -19,7 +24,12 @@ namespace DataServices.Actors
     {
         public ISystemSource Source => new Source(Guid.NewGuid(), "PersistentActor" + typeof(T).GetFriendlyName(),new SourceType(typeof(BaseActor<T>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         public ImmutableList<IProcessSystemMessage> OutMessages = ImmutableList<IProcessSystemMessage>.Empty;
-
+        public ISystemProcess Process { get; }
+        public BaseActor(ISystemProcess process)
+        {
+            Process = process;
+            EventMessageBus.Current.GetEvent<ICleanUpSystemProcess>(Source).Where(x => x.ProcessToBeCleanedUpId == process.Id).Subscribe(x => Self.GracefulStop(TimeSpan.FromSeconds((double)EventTimeOut.ShortWait)));
+        }
         internal void PublishProcesError(IProcessSystemMessage msg, Exception ex, Type expectedMessageType)
         {
             var outMsg = new ProcessEventFailure(failedEventType: msg.GetType(),

@@ -2,7 +2,7 @@ using System.ComponentModel.Composition;
 using SystemInterfaces;
 using CommonMessages;
 
-namespace SystemMessages
+namespace EventMessages.Events
 {
     [Export]
     public class SystemProcessCompleted : ProcessSystemMessage, ISystemProcessCompleted

@@ -3,7 +3,7 @@ using SystemInterfaces;
 using Actor.Interfaces;
 using CommonMessages;
 
-namespace EventMessages
+namespace EventMessages.Commands
 {
     public class CreateEntityService : ProcessSystemMessage, ICreateEntityService
     {

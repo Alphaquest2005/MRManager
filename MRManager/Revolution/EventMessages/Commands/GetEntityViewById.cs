@@ -2,7 +2,7 @@ using System.ComponentModel.Composition;
 using SystemInterfaces;
 using CommonMessages;
 
-namespace EventMessages
+namespace EventMessages.Commands
 {
     [Export]
     public class GetEntityViewById<TView> : ProcessSystemMessage, IGetEntityViewById<TView> where TView : IEntityView

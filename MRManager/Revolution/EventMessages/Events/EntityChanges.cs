@@ -3,8 +3,7 @@ using System.Diagnostics.Contracts;
 using SystemInterfaces;
 using CommonMessages;
 
-
-namespace EventMessages
+namespace EventMessages.Events
 {
     
     public class EntityChanges<T> : ProcessSystemMessage where T : IEntityId

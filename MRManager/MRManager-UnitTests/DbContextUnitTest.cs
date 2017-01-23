@@ -8,6 +8,7 @@ using DataServices.Actors;
 using EF.Entities;
 using EventAggregator;
 using EventMessages;
+using EventMessages.Commands;
 using Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RevolutionEntities.Process;
