@@ -20,6 +20,7 @@ namespace EF.Mappings
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();	
 			entityBuilder.Property(t => t.Name).HasColumnName("Name").IsRequired().HasMaxLength(50);
 		//-------------------Navigation Properties -------------------------------//
+				entityBuilder.HasMany(x => x.PersonMaritalStatus).WithOne(p => p.MaritalStatus).HasForeignKey(c => c.MaritalStatusId).OnDelete(DeleteBehavior.Restrict);
 	
 				//----------------Parent Properties
 	

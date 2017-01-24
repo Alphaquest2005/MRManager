@@ -1,0 +1,51 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:Converters;assembly=Converters"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:interfaces="clr-namespace:Interfaces;assembly=Interfaces"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d">
+
+    <DataTemplate x:Key="PS-ForeignPhoneNumberInfoTpl" DataType="{x:Type interfaces:IForeignPhoneNumberInfo}">
+        <DataTemplate.Resources>
+            <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+        </DataTemplate.Resources>
+        <Grid Width="497" Height="Auto">
+
+
+            <TextBlock Width="Auto"
+                       Height="24"
+                       Margin="10,25,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="Phone Number"
+                       TextAlignment="Right" />
+            <TextBox Width="Auto"
+                     Height="24"
+                     MinWidth="75"
+                     Margin="150,25,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Text="{Binding Path=PhoneNumber,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=True}" />
+            <TextBlock Width="Auto"
+                       Height="24"
+                       Margin="10,50,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="Type"
+                       TextAlignment="Right" />
+            <TextBox Width="Auto"
+                     Height="24"
+                     MinWidth="75"
+                     Margin="150,50,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Text="{Binding Path=Type,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=True}" />
+
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

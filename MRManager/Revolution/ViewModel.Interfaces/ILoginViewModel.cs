@@ -16,5 +16,13 @@ namespace ViewModel.Interfaces
     [InheritedExport]
     public interface IPatientSummaryListViewModel : IEntityListViewModel<IPatientInfo>
     {
+         string Field { get; set; }
+         string Value { get; set; }
+    }
+
+    [InheritedExport]
+    public interface IPatientDetailsViewModel : IEntityViewModel<IPatientDetailsInfo>
+    {
+
     }
 }

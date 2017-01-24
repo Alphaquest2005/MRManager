@@ -12,7 +12,7 @@ using Interfaces;
 
 namespace Entity.Expressions
 {
-	public static partial class MediaExpressions
+	public static partial class PatientExpressions
 	{
 		public static IQueryable<Media> GetMediaById(this IQueryable<Media> query, int Id) => query.Where(x => x.Id == Id);
 

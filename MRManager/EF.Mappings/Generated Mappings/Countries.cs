@@ -22,6 +22,7 @@ namespace EF.Mappings
 		//-------------------Navigation Properties -------------------------------//
 				entityBuilder.HasMany(x => x.AddressCountries).WithOne(p => p.Countries).HasForeignKey(c => c.CountryId).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasMany(x => x.PersonCountryOfResidence).WithOne(p => p.Countries).HasForeignKey(c => c.CountryId).OnDelete(DeleteBehavior.Restrict);
+				entityBuilder.HasMany(x => x.Persons_Patient).WithOne(p => p.Countries).HasForeignKey(c => c.CountryId).OnDelete(DeleteBehavior.Restrict);
 	
 				//----------------Parent Properties
 	

@@ -29,6 +29,7 @@ namespace Core.Common.UI
         {
             //Leave the validation for client side input validation...
             Validator = new EntityValidator<TEntity>();
+            
         }
 
         

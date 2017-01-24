@@ -7,7 +7,7 @@
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
-    <DataTemplate DataType="{x:Type viewModels:PatientSummaryViewModel}">
+    <DataTemplate DataType="{x:Type viewModels:PatientDetailsViewModel}">
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
         </DataTemplate.Resources>
@@ -43,9 +43,8 @@
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="26"
-                               Text="{Binding Path=PatientName,
-                                              UpdateSourceTrigger=PropertyChanged,
-                                              ValidatesOnDataErrors=True}" />
+                               Text="{Binding State.Value.Entity.Name,
+                                              UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Width="120"
                                Height="24"
                                MinWidth="25"
@@ -53,10 +52,9 @@
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="20"
-                               Text="{Binding Path=Age,
+                               Text="{Binding State.Value.Entity.Age,
                                               StringFormat=0 years,
-                                              UpdateSourceTrigger=PropertyChanged,
-                                              ValidatesOnDataErrors=True}" />
+                                              UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Width="405"
                                Height="24"
                                MinWidth="75"
@@ -64,10 +62,9 @@
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="20"
-                               Text="{Binding Path=Address,
+                               Text="{Binding State.Value.Entity.Address,
                                               TargetNullValue='No Address',
-                                              UpdateSourceTrigger=PropertyChanged,
-                                              ValidatesOnDataErrors=True}" />
+                                              UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Width="159"
                                Height="24"
                                MinWidth="75"
@@ -75,10 +72,9 @@
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="20"
-                               Text="{Binding Path=PhoneNumber,
+                               Text="{Binding State.Value.Entity.PhoneNumber,
                                               TargetNullValue='No Phone Number',
-                                              UpdateSourceTrigger=PropertyChanged,
-                                              ValidatesOnDataErrors=True}" />
+                                              UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Width="Auto"
                                Height="24"
                                Margin="70,339,0,0"
@@ -97,9 +93,8 @@
                                FontSize="18"
                                FontWeight="Bold"
                                Foreground="#FFD77B6A"
-                               Text="{Binding Path=Allergies,
-                                              UpdateSourceTrigger=PropertyChanged,
-                                              ValidatesOnDataErrors=True}" />
+                               Text="{Binding State.Value.Entity.Allergies,
+                                              UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Width="Auto"
                                Height="24"
                                Margin="42,378,0,0"
@@ -115,9 +110,8 @@
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="18"
-                               Text="{Binding Path=BirthCountry,
-                                              UpdateSourceTrigger=PropertyChanged,
-                                              ValidatesOnDataErrors=True}" />
+                               Text="{Binding State.Value.Entity.BirthCountry,
+                                              UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Width="Auto"
                                Height="24"
                                Margin="120,407,0,0"
@@ -133,9 +127,8 @@
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="18"
-                               Text="{Binding Path=Job,
-                                              UpdateSourceTrigger=PropertyChanged,
-                                              ValidatesOnDataErrors=True}" />
+                               Text="{Binding State.Value.Entity.Job,
+                                              UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Width="Auto"
                                Height="24"
                                Margin="371,380,0,0"
@@ -152,9 +145,8 @@
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="18"
-                               Text="{Binding Path=Religion,
-                                              UpdateSourceTrigger=PropertyChanged,
-                                              ValidatesOnDataErrors=True}" />
+                               Text="{Binding State.Value.Entity.Religion,
+                                              UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Width="Auto"
                                Height="24"
                                MinWidth="75"
@@ -163,9 +155,8 @@
                                VerticalAlignment="Top"
                                FontSize="16"
                                FontWeight="Bold"
-                               Text="{Binding Path=Sex,
-                                              UpdateSourceTrigger=PropertyChanged,
-                                              ValidatesOnDataErrors=True}" />
+                               Text="{Binding State.Value.Entity.Sex,
+                                              UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Width="361"
                                Height="24"
                                MinWidth="75"
@@ -173,22 +164,21 @@
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="20"
-                               Text="{Binding Path=EmailAddress,
+                               Text="{Binding State.Value.Entity.EmailAddress,
                                               TargetNullValue='No Email Address',
-                                              UpdateSourceTrigger=PropertyChanged,
-                                              ValidatesOnDataErrors=True}" />
+                                              UpdateSourceTrigger=PropertyChanged}" />
                     <Border Margin="396,85,10.333,148.333"
                             Background="{x:Null}"
                             BorderBrush="#7FE6EA5D"
                             BorderThickness="3"
                             CornerRadius="5">
-                        <Image DataContext="{DynamicResource PatientSummaryInfoViewModelDataSource}" Source="{Binding PatientImage, IsAsync=True}" />
+                        <!--<Image Source="{Binding PatientImage, IsAsync=True}" />-->
 
                     </Border>
 
                 </Grid>
             </TabItem>
-            <TabItem Background="#4C09853D" Visibility="{Binding PatientPhoneNumbers, Converter={StaticResource NullVisibilityConverter}}">
+            <TabItem Background="#4C09853D" Visibility="{Binding State.Value.Entity.PhoneNumbers, Converter={StaticResource NullVisibilityConverter}}">
                 <TabItem.Header>
                     <Grid Width="200" Height="100">
                         <TextBlock Margin="0,0,0,72"
@@ -198,7 +188,7 @@
                             <LineBreak /><Run /></TextBlock>
                         <TextBlock Margin="0,78,0,0"
                                    FontSize="16"
-                                   Text="{Binding PatientPhoneNumbers.Count,
+                                   Text="{Binding State.Value.Entity.PhoneNumbers.Count,
                                                   StringFormat='0 Phone Numbers'}"
                                    TextWrapping="Wrap" />
                         <TextBlock Margin="0,28,10,0"
@@ -208,7 +198,7 @@
                                    TextAlignment="Center" />
                     </Grid>
                 </TabItem.Header>
-                <Grid>
+                <!--<Grid>
                     <TextBlock Width="Auto"
                                Height="24"
                                Margin="40,29,0,0"
@@ -222,7 +212,7 @@
                     <ListBox Height="Auto"
                              Margin="40,77,33.333,262"
                              ItemTemplate="{DynamicResource PS-PersonPhoneNumberInfoTpl}"
-                             ItemsSource="{Binding PatientPhoneNumbers}" />
+                             ItemsSource="{Binding PhoneNumbers}" />
                     <TextBlock Width="Auto"
                                Height="24"
                                Margin="40,262,0,0"
@@ -238,9 +228,9 @@
                              ItemTemplate="{DynamicResource PS-PersonAddressInfoTpl}"
                              ItemsSource="{Binding PatientAddressInfoes}" />
 
-                </Grid>
+                </Grid>-->
             </TabItem>
-            <TabItem DataContext="{DynamicResource PatientSummaryInfoViewModelDataSource}" Visibility="{Binding NextOfKinInfoes, Converter={StaticResource NullVisibilityConverter}}">
+            <TabItem Visibility="{Binding State.Value.Entity.NextOfKins, Converter={StaticResource NullVisibilityConverter}}">
                 <TabItem.Header>
                     <Grid Width="200" Height="100">
                         <TextBlock Margin="0,0,0,63"
@@ -257,15 +247,14 @@
                                    Margin="0,70,0,0"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Top"
-                                   DataContext="{DynamicResource PatientSummaryInfoViewModelDataSource}"
                                    FontSize="16"
                                    FontWeight="Bold"
-                                   Text="{Binding NextOfKinInfoes.Count,
+                                   Text="{Binding State.Value.Entity.NextOfKins.Count,
                                                   StringFormat=0 Next of Kin}"
                                    TextWrapping="Wrap" />
                     </Grid>
                 </TabItem.Header>
-                <Grid>
+                <!--<Grid>
                     <TextBlock Width="176"
                                Height="26"
                                Margin="10,10,0,0"
@@ -279,16 +268,12 @@
                                TextWrapping="WrapWithOverflow" />
                     <ListBox Height="Auto"
                              Margin="29,66,10.333,10"
-                             DataContext="{DynamicResource PatientSummaryInfoViewModelDataSource}"
                              ItemTemplate="{DynamicResource PS-NextOfKinInfoTpl}"
                              ItemsSource="{Binding NextOfKinInfoes}" />
 
-                </Grid>
+                </Grid>-->
             </TabItem>
-            <TabItem Background="#4C100163"
-                     DataContext="{DynamicResource PatientSummaryInfoViewModelDataSource}"
-                     Visibility="{Binding NonResidentPatientInfoes,
-                                          Converter={StaticResource NullVisibilityConverter}}">
+            <TabItem Background="#4C100163" Visibility="{Binding State.Value.Entity.NonResident, Converter={StaticResource NullVisibilityConverter}}">
 
                 <TabItem.Header>
                     <Grid Width="200" Height="100">
@@ -307,18 +292,16 @@
                                    Margin="0,70,0,0"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Top"
-                                   DataContext="{DynamicResource PatientSummaryInfoViewModelDataSource}"
                                    FontSize="16"
                                    FontWeight="Bold"
-                                   Text="{Binding NonResidentPatientInfoes.Type}"
+                                   Text="{Binding State.Value.Entity.NonResident.Type}"
                                    TextWrapping="Wrap" />
                     </Grid>
                 </TabItem.Header>
-                <Grid>
+                <!--<Grid>
                     <ContentControl Margin="10,0,0.333,309"
                                     Content="{Binding NonResidentPatientInfoes}"
-                                    ContentTemplate="{DynamicResource PS-NonResidentPatientInfoTpl}"
-                                    DataContext="{DynamicResource PatientSummaryInfoViewModelDataSource}" />
+                                    ContentTemplate="{DynamicResource PS-NonResidentPatientInfoTpl}" />
                     <TextBlock Width="92"
                                Height="85"
                                Margin="21,221,0,0"
@@ -332,9 +315,8 @@
                                TextWrapping="WrapWithOverflow" />
                     <ListBox Height="Auto"
                              Margin="128,221,10.333,162"
-                             DataContext="{DynamicResource PatientSummaryInfoViewModelDataSource}"
                              ItemTemplate="{DynamicResource PS-ForeignPhoneNumberInfoTpl}"
-                             ItemsSource="{Binding NonResidentPatientInfoes.ForeignPhoneNumberInfoes}" />
+                             ItemsSource="{Binding NonResident.ForeignPhoneNumberInfoes}" />
                     <TextBlock Width="97"
                                Height="64"
                                Margin="10,374,0,0"
@@ -350,11 +332,10 @@
 
                     <ListBox Height="Auto"
                              Margin="117,374,21.333,9"
-                             DataContext="{DynamicResource PatientSummaryInfoViewModelDataSource}"
                              ItemTemplate="{DynamicResource PS-ForeignAddressTpl}"
                              ItemsSource="{Binding NonResidentPatientInfoes.ForeignAddressInfoes}" />
 
-                </Grid>
+                </Grid>-->
             </TabItem>
 
         </TabControl>

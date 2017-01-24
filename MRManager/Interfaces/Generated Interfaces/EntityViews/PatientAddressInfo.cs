@@ -13,13 +13,13 @@ namespace Interfaces
 	[InheritedExport]
 	public partial interface IPatientAddressInfo:IEntity  
 	{
-		string City { get;}
-		string Country { get;}
-		string Parish { get;}
-		string State { get;}
-		string Addresstype { get;}
+		string City { get; set; }
+        string Country { get; set; }
+        string Parish { get; set; }
+        string State { get; set; }
+        string Addresstype { get; set; }
 
 
 
-	}
+    }
 }

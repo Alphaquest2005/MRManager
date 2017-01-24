@@ -159,6 +159,31 @@ namespace RevolutionData
                             Context.Process.Commands.UpdateState),
                 // take shortcut cud be IntialState
                 expectedSourceType: new SourceType(typeof(IComplexEventService)));
+
+            public static IProcessAction RequestPatientDetails => new ProcessAction(
+                action: cp => new GetEntityViewById<IPatientDetailsInfo>(cp.Messages["CurrentEntity"].Entity.Id,
+                                new StateCommandInfo(cp.Actor.Process.Id,Context.EntityView.Commands.GetEntityView),
+                                cp.Actor.Process, cp.Actor.Source),
+                processInfo: cp =>
+                        new StateCommandInfo(cp.Actor.Process.Id,
+                            Context.EntityView.Commands.GetEntityView),
+                // take shortcut cud be IntialState
+                expectedSourceType: new SourceType(typeof(IComplexEventService))
+
+                );
+
+            public static IProcessAction UpdatePatientDetailsState => new ProcessAction(
+                action: cp =>
+                {
+                    var ps = new ProcessState<IPatientDetailsInfo>(cp.Actor.Process, cp.Messages["PatientDetailsInfo"].Entity,
+                        new StateInfo(cp.Actor.Process.Id, "PatientDetailsFound",
+                            $"Patient Details for {cp.Messages["PatientDetailsInfo"].Entity.Name}", "Patient Info"));
+                    return new UpdateProcessState<IPatientDetailsInfo>(ps,
+                        new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState),
+                        cp.Actor.Process, cp.Actor.Source);
+                },
+                processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState),
+                expectedSourceType: new SourceType(typeof(IComplexEventService)));
         }
 
 

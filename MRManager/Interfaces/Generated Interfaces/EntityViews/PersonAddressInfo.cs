@@ -11,7 +11,7 @@ using SystemInterfaces;
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IPersonAddressInfo:IEntity  
+	public partial interface IPersonAddressInfo:IEntityView<IPersons_Patient>
 	{
 		string City { get;}
 		string Country { get;}

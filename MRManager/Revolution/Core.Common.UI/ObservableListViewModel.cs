@@ -48,7 +48,7 @@ namespace Core.Common.UI
             }
         }
 
-        private ReactiveProperty<TEntity> _currentEntity = new ReactiveProperty<TEntity>(NullEntity<TEntity>.Instance);
+       private ReactiveProperty<TEntity> _currentEntity = new ReactiveProperty<TEntity>(NullEntity<TEntity>.Instance);
         public ReactiveProperty<TEntity> CurrentEntity
         {
             get { return _currentEntity; }

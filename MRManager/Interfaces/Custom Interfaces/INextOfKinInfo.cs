@@ -10,13 +10,13 @@ namespace Interfaces
     {
         Int32 PatientId { get; }
         String Relationship { get; }
-        String PersonName { get; }
+        String Name { get; }
         String Address { get; }
         String PhoneNumber { get; }
         String Email { get; }
         Int32? MediaId { get; }
 
-        IList<IPersonAddressInfo> PersonAddressInfoes { get; }
-        IList<IPersonPhoneNumberInfo> PersonPhoneNumberInfoes { get; }
+        IList<IPersonAddressInfo> Addresses { get; }
+        IList<IPersonPhoneNumberInfo> PhoneNumbers { get; }
     }
 }

@@ -7,7 +7,7 @@
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
-    <DataTemplate DataType="{x:Type viewModels:InterviewInfo}">
+    <!--<DataTemplate DataType="{x:Type viewModels:InterviewInfo}">
 
         <Grid Width="Auto" Height="80">
             <Grid.Background>
@@ -43,5 +43,5 @@
 
         </Grid>
 
-    </DataTemplate>
+    </DataTemplate>-->
 </ResourceDictionary>

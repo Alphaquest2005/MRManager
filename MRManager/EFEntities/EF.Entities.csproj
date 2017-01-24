@@ -31,8 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="Custom\NextofKinInfo.cs" />
+    <Compile Include="Custom\ForeignAddressInfo.cs" />
+    <Compile Include="Custom\NonResidentInfo.cs" />
+    <Compile Include="Custom\PatientDetailsInfo.cs" />
+    <Compile Include="Custom\PatientInfo.cs" />
+    <Compile Include="Custom\PersonAddressInfo.cs" />
+    <Compile Include="Custom\PersonPhoneNumbersInfo.cs" />
     <Compile Include="EFEntity.cs" />
     <Compile Include="Generated Entities\AddressCities.cs" />
     <Compile Include="Generated Entities\AddressCountries.cs" />
@@ -54,7 +59,7 @@
     <Compile Include="Generated Entities\Components.cs" />
     <Compile Include="Generated Entities\Countries.cs" />
     <Compile Include="Generated Entities\DefaultImages.cs" />
-    <Compile Include="SignInInfo.cs" />
+    <Compile Include="Custom\SignInInfo.cs" />
     <Compile Include="Generated Entities\ExamDetailComponents.cs" />
     <Compile Include="Generated Entities\ExamDetails.cs" />
     <Compile Include="Generated Entities\ExamResults.cs" />
@@ -158,7 +163,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Generated Entities\Entity Views\" />
+    <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

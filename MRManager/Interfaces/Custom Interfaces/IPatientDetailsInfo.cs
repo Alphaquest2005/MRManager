@@ -22,7 +22,10 @@ namespace Interfaces
         String CountryOfResidence { get; }
         Int32? MediaId { get; }
 
-        IList<IPersonAddressInfo> PersonAddressInfoes { get; }
-        IList<IPersonPhoneNumberInfo> PersonPhoneNumberInfoes { get; }
+        IList<IPersonAddressInfo> Addresses { get; }
+        IList<IPersonPhoneNumberInfo> PhoneNumbers { get; }
+
+        INonResidentInfo NonResident { get; }
+        IList<INextOfKinInfo> NextOfKins { get; }
     }
 }

@@ -11,12 +11,12 @@ using SystemInterfaces;
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IPersonPhoneNumberInfo:IEntity  
+	public partial interface IPatientPhoneNumbers:IEntityView<IPersons_Patient>
 	{
-		string PhoneNumber { get;}
-		string Phonetype { get;}
+		string PhoneNumber { get; }
+        string Phonetype { get; }
 
 
 
-	}
+    }
 }

@@ -1,0 +1,90 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:Converters;assembly=Converters"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:interfaces="clr-namespace:Interfaces;assembly=Interfaces"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d">
+
+    <DataTemplate x:Key="PS-NextOfKinInfoTpl" DataType="{x:Type interfaces:INextOfKinInfo}">
+        <DataTemplate.Resources>
+            <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+        </DataTemplate.Resources>
+        <Grid Width="529">
+            <TextBlock Width="Auto"
+                       Height="24"
+                       MinWidth="75"
+                       Margin="10,29,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Text="{Binding Path=Relationship,
+                                      UpdateSourceTrigger=PropertyChanged,
+                                      ValidatesOnDataErrors=True}" />
+            <TextBlock Width="Auto"
+                       Height="24"
+                       MinWidth="75"
+                       Margin="145,0,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="18"
+                       Text="{Binding Path=PersonName,
+                                      TargetNullValue='Person Name',
+                                      UpdateSourceTrigger=PropertyChanged,
+                                      ValidatesOnDataErrors=True}" />
+            <TextBlock Width="Auto"
+                       Height="24"
+                       MinWidth="75"
+                       Margin="145,29,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="14"
+                       Text="{Binding Path=Address,
+                                      UpdateSourceTrigger=PropertyChanged,
+                                      ValidatesOnDataErrors=True}" />
+            <TextBlock Width="Auto"
+                       Height="24"
+                       MinWidth="75"
+                       Margin="145,58,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="14"
+                       Text="{Binding Path=PhoneNumber,
+                                      UpdateSourceTrigger=PropertyChanged,
+                                      ValidatesOnDataErrors=True}" />
+            <TextBlock Width="92"
+                       Height="85"
+                       Margin="38,109,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="#FFFFFF36"
+                       Text="Phone Number"
+                       TextAlignment="Right"
+                       TextWrapping="WrapWithOverflow" />
+            <ListBox Height="Auto"
+                     Margin="145,109,36,111"
+                     ItemTemplate="{DynamicResource PS-PersonPhoneNumberInfoTpl}"
+                     ItemsSource="{Binding PersonPhoneNumberInfoes}" />
+            <TextBlock Width="97"
+                       Height="91"
+                       Margin="33,235,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="#FFFFFF36"
+                       Text="Address"
+                       TextAlignment="Right"
+                       TextWrapping="WrapWithOverflow" />
+            <ListBox Height="Auto"
+                     Margin="145,235,36,10"
+                     ItemTemplate="{DynamicResource PS-PersonAddressInfoTpl}"
+                     ItemsSource="{Binding PersonAddressInfoes}" />
+
+
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

@@ -34,7 +34,7 @@ namespace RevolutionData.Context
             public static IStateEvent ComplexEventLogCreated => new StateEvent("ComplexEventLogCreated", "ComplexEvent Log Created", "");
             public static IStateEvent StatePublished => new StateEvent("StatePublished", "Process State Published", "");
             public static IStateEvent ProcessCleanedUp => new StateEvent("ProcessCleanUp", "Process CleanUp", "", new StateCommand("CleanupProcess", "Cleanup Process"));
-
+            public static IStateEvent CurrentEntityChanged => new StateEvent("CurrentEntityChanged", "Process Current Entity Changed", "");
             //closed Loop
         }
 

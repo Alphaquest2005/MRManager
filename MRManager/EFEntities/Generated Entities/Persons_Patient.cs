@@ -13,8 +13,8 @@ namespace EF.Entities
 {
 	public partial class Persons_Patient: BaseEntity, IPersons_Patient
 	{
-		public virtual DateTime DateOfBirth { get; set; }
 		public virtual int CountryId { get; set; }
+		public virtual DateTime DateOfBirth { get; set; }
 		public virtual int SexId { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
@@ -31,6 +31,7 @@ namespace EF.Entities
 				public virtual Persons_NonResidentPatient Persons_NonResidentPatient {get; set;}
 		
 			// ---------Parent Relationships
+				public virtual Countries Countries {get; set;}
 				public virtual Persons Persons {get; set;}
 				public virtual Sex Sex {get; set;}
 	

@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Generated ValidationSets\Entity Views\SignInInfo.cs" />
     <Compile Include="Generated ValidationSets\EntityValidator.cs" />
     <Compile Include="Generated ValidationSets\AddressCountries.cs" />
     <Compile Include="Generated ValidationSets\Addresses.cs" />
@@ -62,38 +61,6 @@
     <Compile Include="Generated ValidationSets\Components.cs" />
     <Compile Include="Generated ValidationSets\Countries.cs" />
     <Compile Include="Generated ValidationSets\DefaultImages.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\AddressInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\AddressLineInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\AllergiesInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\BloodPressureInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\CountryInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\ForeignAddressInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\ForeignPhoneNumberInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\HeightInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\InterviewInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\InterviewReponses.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\NonResidentPatientInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\ParishInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\PatientAddressInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\PatientCountryOfResidence.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\PatientInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\PatientJobInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\PatientPhoneNumbers.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\PatientResponseInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\PatientSummaryInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\PatientSyntomsInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\PatientVisitInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\PersonAddressInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\PersonInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\PersonNameInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\PersonPhoneNumberInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\PulseInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\RespirationInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\ResponseOptionInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\TemperatureInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\VitalsHistoryInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\VitalSignsInfo.cs" />
-    <Compile Include="Generated ValidationSets\Entity Views\WeightInfo.cs" />
     <Compile Include="Generated ValidationSets\ExamDetailComponents.cs" />
     <Compile Include="Generated ValidationSets\ExamDetails.cs" />
     <Compile Include="Generated ValidationSets\ExamResults.cs" />

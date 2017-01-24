@@ -17,6 +17,7 @@ namespace EF.Entities
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships
+				public virtual ICollection<PersonMaritalStatus> PersonMaritalStatus {get; set;}
 		
 			// ---------Parent Relationships
 	

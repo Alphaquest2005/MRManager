@@ -5,10 +5,10 @@ using SystemInterfaces;
 namespace Interfaces
 {
     [InheritedExport]
-    public interface IPersonPhoneNumbersInfo : IEntityView<IPersons_Patient>
+    public partial interface IPersonPhoneNumberInfo : IEntityView<IPersons_Patient>
     {
-        Int32 PersonId { get; set; }
-        String PhoneNumber { get; set; }
-        String Type { get; set; }
+        Int32 PersonId { get; }
+        
+        String Type { get;  }
     }
 }

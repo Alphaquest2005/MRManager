@@ -2,5 +2,13 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="SignInInfoRDT.xaml" />
         <ResourceDictionary Source="PatientInfoSummaryListRDT.xaml" />
+        <ResourceDictionary Source="PatientInfoSummaryRDT.xaml" />
+        <ResourceDictionary Source="PatientInfoRDT.xaml" />
+        <ResourceDictionary Source="PS-ForeignAddressInfoTpl.xaml" />
+        <ResourceDictionary Source="PS-ForeignPhoneNumberInfoTpl.xaml" />
+        <ResourceDictionary Source="PS-NextOfKinInfoTpl.xaml" />
+        <ResourceDictionary Source="PS-NonResidentPatientInfoTpl.xaml" />
+        <ResourceDictionary Source="PS-PersonPhoneNumberInfoTpl.xaml" />
+        <ResourceDictionary Source="PS-PersonAddressInfoTpl.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

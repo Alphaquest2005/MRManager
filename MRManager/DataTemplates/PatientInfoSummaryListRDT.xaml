@@ -11,7 +11,7 @@
         <StackPanel Background="LightPink">
             <TextBlock Text="{Binding State.Value.StateInfo.State.Status, Mode=OneWay}" />
             <TextBlock Text="{Binding State.Value.Process.User.UserId, Mode=OneWay}" />
-            <ListBox ItemsSource="{Binding State.Value.EntitySet, Mode=OneWay}" SelectedItem="{Binding State.Value.Entity, Mode=OneWay}" />
+            <ListBox ItemsSource="{Binding State.Value.EntitySet, Mode=OneWay}" SelectedItem="{Binding CurrentEntity.Value, Mode=TwoWay}" />
             <ComboBox x:Name="ComboBox"
                       SelectedValue="{Binding Field,
                                               UpdateSourceTrigger=PropertyChanged}"

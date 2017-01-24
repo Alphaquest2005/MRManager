@@ -44,7 +44,7 @@
                       Background="#FFD361D8"
                       DockPanel.Dock="Bottom"
                       ItemsSource="{Binding FooterViewModels}" />
-        <ItemsControl Width="200"
+        <ItemsControl Width="Auto"
                       Background="#FF5D7607"
                       DockPanel.Dock="Left"
                       ItemsSource="{Binding LeftViewModels}">

@@ -6,7 +6,7 @@ using SystemInterfaces;
 namespace Interfaces
 {
     [InheritedExport]
-    public partial interface INonResidentInfo : IEntity //  MREntitiesQS|NonResidentPatientInfo
+    public partial interface INonResidentInfo : IEntityView<IPersons_Patient>
     {
         String Type { get; }
         String BoatName { get; }
@@ -16,7 +16,7 @@ namespace Interfaces
         String School { get; }
         String HotelName { get; }
 
-        IList<IPersonAddressInfo> ForeignAddressInfoes { get; }
-        IList<IPersonPhoneNumberInfo> ForeignPhoneNumberInfoes { get; }
+        IList<IForeignAddressInfo> Addresses { get; }
+        IList<IPersonPhoneNumberInfo> PhoneNumbers { get; }
     }
 }

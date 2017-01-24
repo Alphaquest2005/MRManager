@@ -32,6 +32,7 @@ namespace ViewModels
 
         ReactiveProperty<IProcessState<IPatientInfo>> IEntityViewModel<IPatientInfo>.State => new ReactiveProperty<IProcessState<IPatientInfo>>(this.Instance.State.Value);
         public ReactiveProperty<IPatientInfo> CurrentEntity => this.Instance.CurrentEntity;
+
         public ObservableDictionary<string, dynamic> ChangeTracking => this.Instance.ChangeTracking;
         public ObservableList<IPatientInfo> EntitySet => this.Instance.EntitySet;
         public ObservableList<IPatientInfo> SelectedEntities => this.Instance.SelectedEntities;
