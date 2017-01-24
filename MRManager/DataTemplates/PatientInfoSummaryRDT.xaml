@@ -198,7 +198,7 @@
                                    TextAlignment="Center" />
                     </Grid>
                 </TabItem.Header>
-                <!--<Grid>
+                <Grid>
                     <TextBlock Width="Auto"
                                Height="24"
                                Margin="40,29,0,0"
@@ -212,7 +212,7 @@
                     <ListBox Height="Auto"
                              Margin="40,77,33.333,262"
                              ItemTemplate="{DynamicResource PS-PersonPhoneNumberInfoTpl}"
-                             ItemsSource="{Binding PhoneNumbers}" />
+                             ItemsSource="{Binding State.Value.Entity.PhoneNumbers}" />
                     <TextBlock Width="Auto"
                                Height="24"
                                Margin="40,262,0,0"
@@ -226,9 +226,9 @@
                     <ListBox Height="Auto"
                              Margin="40,310,33.333,29"
                              ItemTemplate="{DynamicResource PS-PersonAddressInfoTpl}"
-                             ItemsSource="{Binding PatientAddressInfoes}" />
+                             ItemsSource="{Binding State.Value.Entity.Addresses}" />
 
-                </Grid>-->
+                </Grid>
             </TabItem>
             <TabItem Visibility="{Binding State.Value.Entity.NextOfKins, Converter={StaticResource NullVisibilityConverter}}">
                 <TabItem.Header>
@@ -254,7 +254,7 @@
                                    TextWrapping="Wrap" />
                     </Grid>
                 </TabItem.Header>
-                <!--<Grid>
+                <Grid>
                     <TextBlock Width="176"
                                Height="26"
                                Margin="10,10,0,0"
@@ -269,9 +269,9 @@
                     <ListBox Height="Auto"
                              Margin="29,66,10.333,10"
                              ItemTemplate="{DynamicResource PS-NextOfKinInfoTpl}"
-                             ItemsSource="{Binding NextOfKinInfoes}" />
+                             ItemsSource="{Binding State.Value.Entity.NextOfKins}" />
 
-                </Grid>-->
+                </Grid>
             </TabItem>
             <TabItem Background="#4C100163" Visibility="{Binding State.Value.Entity.NonResident, Converter={StaticResource NullVisibilityConverter}}">
 
@@ -298,9 +298,9 @@
                                    TextWrapping="Wrap" />
                     </Grid>
                 </TabItem.Header>
-                <!--<Grid>
+                <Grid>
                     <ContentControl Margin="10,0,0.333,309"
-                                    Content="{Binding NonResidentPatientInfoes}"
+                                    Content="{Binding State.Value.Entity.NonResident}"
                                     ContentTemplate="{DynamicResource PS-NonResidentPatientInfoTpl}" />
                     <TextBlock Width="92"
                                Height="85"
@@ -316,7 +316,7 @@
                     <ListBox Height="Auto"
                              Margin="128,221,10.333,162"
                              ItemTemplate="{DynamicResource PS-ForeignPhoneNumberInfoTpl}"
-                             ItemsSource="{Binding NonResident.ForeignPhoneNumberInfoes}" />
+                             ItemsSource="{Binding State.Value.Entity.NonResident.PhoneNumbers}" />
                     <TextBlock Width="97"
                                Height="64"
                                Margin="10,374,0,0"
@@ -333,9 +333,9 @@
                     <ListBox Height="Auto"
                              Margin="117,374,21.333,9"
                              ItemTemplate="{DynamicResource PS-ForeignAddressTpl}"
-                             ItemsSource="{Binding NonResidentPatientInfoes.ForeignAddressInfoes}" />
+                             ItemsSource="{Binding State.Value.Entity.NonResident.Addresses}" />
 
-                </Grid>-->
+                </Grid>
             </TabItem>
 
         </TabControl>

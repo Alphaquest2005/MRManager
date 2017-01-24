@@ -37,7 +37,7 @@ namespace Entity.Expressions
                 EmailAddress = x.Persons.PersonEmailAddress.FirstOrDefault().Email,
                 PhoneNumber = x.Persons.PersonPhoneNumbers.FirstOrDefault().PhoneNumber,
                 Sex = x.Sex.Name,
-                Address = string.Join(", ", x.Persons.PersonAddresses.Select(z => z.Addresses.AddressLines)),
+                Address = string.Join(", ", x.Persons.PersonAddresses.Select(z => z.Addresses.AddressLines).Select(q => q.Select(r => r.Name))),
                 Allergies = string.Join(", ", x.PatientAllergies),
                 BirthCountry = x.Countries.Name,
                 MaritalStatus = x.PersonMaritalStatus.Select(z => z.MaritalStatus.Name).LastOrDefault(),
@@ -64,9 +64,9 @@ namespace Entity.Expressions
                                                             Email = z.Persons.PersonEmailAddress.FirstOrDefault().Email,
                                                             PhoneNumber = z.Persons.PersonPhoneNumbers.FirstOrDefault().PhoneNumber,
 
-                                                            Address = string.Join(", ",z.Persons.PersonAddresses.Select(q => q.Addresses.AddressLines)),
+                    Address = string.Join(", ", z.Persons.PersonAddresses.Select(q => q.Addresses.AddressLines).Select(q => q.Select(r => r.Name))),
 
-                                                            Addresses = z.Persons.PersonAddresses.Select(q => new PersonAddressInfo()
+                    Addresses = z.Persons.PersonAddresses.Select(q => new PersonAddressInfo()
                                                             {
                                                                 Addresstype = q.AddressTypes.Name,
                                                                 City = q.Addresses.AddressCities.Cities.Name,
@@ -120,7 +120,7 @@ namespace Entity.Expressions
                     Email = x.Persons.PersonEmailAddress.FirstOrDefault().Email,
                     PhoneNumber = x.Persons.PersonPhoneNumbers.FirstOrDefault().PhoneNumber,
 
-                    Address = string.Join(", ", x.Persons.PersonAddresses.Select(z => z.Addresses.AddressLines)),
+                    Address = string.Join(", ", x.Persons.PersonAddresses.Select(z => z.Addresses.AddressLines).Select(q => q.Select( r => r.Name))),
 
                     Addresses = x.Persons.PersonAddresses.Select(z => new PersonAddressInfo()
                     {
