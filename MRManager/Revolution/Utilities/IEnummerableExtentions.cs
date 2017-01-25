@@ -9,6 +9,7 @@ namespace Utilities
         {
             if (item == null) return default(T);
             var res = source.SkipWhile(x => x.GetHashCode() != item.GetHashCode()).Skip(1).FirstOrDefault();
+            if (res == null) return item;
             return res;
         }
 
@@ -17,6 +18,7 @@ namespace Utilities
             if (item == null) return default(T);
             var lst = source.Reverse();
             var res = lst.SkipWhile(x => x.GetHashCode() != item.GetHashCode()).Skip(1).FirstOrDefault();
+            if (res == null) return item;
             return res;
         }
     }

@@ -470,12 +470,15 @@ namespace RevolutionData
 
                     new ViewEventCommand<IQuestionaireViewModel, CurrentEntityChanged<IPatientResponseInfo>>(
                                 key:"PreviousQuestion",
-                                commandPredicate:new List<Func<IQuestionaireViewModel, bool>>{},
+                                commandPredicate:new List<Func<IQuestionaireViewModel, bool>>
+                                {
+                                    v => v.EntitySet.IndexOf(v.CurrentEntity.Value) >= 0
+                                },
                                 subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
 
                                 messageData: s =>
                                 {
-                                    s.CurrentEntity.Value = s.State.Value.EntitySet.Next(s.CurrentEntity.Value);
+                                    s.CurrentEntity.Value = s.State.Value.EntitySet.Previous(s.CurrentEntity.Value);
 
                                     return new ViewEventCommandParameter(
                                         new object[] {s.CurrentEntity.Value},
@@ -486,12 +489,15 @@ namespace RevolutionData
 
                     new ViewEventCommand<IQuestionaireViewModel, CurrentEntityChanged<IPatientResponseInfo>>(
                                 key:"NextQuestion",
-                                commandPredicate:new List<Func<IQuestionaireViewModel, bool>>{},
+                                commandPredicate:new List<Func<IQuestionaireViewModel, bool>>
+                                {
+                                    v => v.EntitySet.IndexOf(v.CurrentEntity.Value) < v.EntitySet.Count
+                                },
                                 subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
 
                                 messageData: s =>
                                 {
-                                    s.CurrentEntity.Value = s.State.Value.EntitySet.Next(s.State.Value.Entity);
+                                    s.CurrentEntity.Value = s.State.Value.EntitySet.Next(s.CurrentEntity.Value);
 
                                     return new ViewEventCommandParameter(
                                         new object[] {s.CurrentEntity.Value},

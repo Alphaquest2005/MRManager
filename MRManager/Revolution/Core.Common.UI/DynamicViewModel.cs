@@ -33,6 +33,7 @@ namespace Core.Common.UI
             Instance = (TViewModel) base.Instance;
             Orientation = viewModel.Orientation;
             ViewModelType = typeof (TViewModel);
+            
         }
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)

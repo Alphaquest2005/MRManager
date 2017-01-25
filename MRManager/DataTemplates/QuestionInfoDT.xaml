@@ -10,7 +10,7 @@
     <DataTemplate DataType="{x:Type viewModels:QuestionaireViewModel}">
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
-            <Style TargetType="Button">
+            <!--<Style TargetType="Button">
                 <Setter Property="FontSize" Value="36" />
                 <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
                 <Setter Property="Background" Value="#00000000" />
@@ -248,7 +248,7 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-            </Style>
+            </Style>-->
         </DataTemplate.Resources>
         <Border BorderBrush="#FFECE8E8"
                 BorderThickness="1"
@@ -269,7 +269,7 @@
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Stretch"
                            FontSize="20"
-                           Text="{Binding State.Value.Entity.Question,
+                           Text="{Binding CurrentEntity.Value.Question,
                                           FallbackValue='Question',
                                           UpdateSourceTrigger=PropertyChanged,
                                           ValidatesOnDataErrors=True}"
@@ -311,7 +311,7 @@
                          VerticalAlignment="Top"
                          Background="#33FFFFFF"
                          ItemTemplate="{DynamicResource ResponseInfoDT}"
-                         ItemsSource="{Binding State.Value.Entity.ResponseOptions}" />
+                         ItemsSource="{Binding CurrentEntity.Value.ResponseOptions}" />
 
             </Grid>
         </Border>

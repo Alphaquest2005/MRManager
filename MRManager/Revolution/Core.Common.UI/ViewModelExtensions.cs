@@ -29,7 +29,7 @@ namespace Core.Common.UI
                 if(subject.GetType() == Observable.Empty<ReactiveCommand<IViewModel, Unit>>().GetType())
                 {
                     var publishMessage = CreateCommandMessageAction<IViewModel>(viewModel, itm);
-                    var cmd = ReactiveCommand.Create(publishMessage);//,itm.CommandPredicate.Invoke(viewModel)
+                    var cmd = ReactiveCommand.Create(publishMessage);//, viewModel.WhenAny(x => x, x => itm.CommandPredicate.All(z => z.Invoke(x.Value))) );
 
                     viewModel.Commands.Add(itm.Key, cmd);
                 }

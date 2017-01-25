@@ -30,6 +30,15 @@ namespace Core.Common.UI
         public ObservableListViewModel(List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process, Type orientation) : base(process,eventSubscriptions,eventPublications,commandInfo, orientation)
         {
             Validator = new EntityValidator<TEntity>();
+            State.WhenAnyValue(x => x.Value).Subscribe(x => UpdateLocalState(x));
+        }
+
+        private void UpdateLocalState(IProcessStateList<TEntity> state)
+        {
+            if (state == null) return;
+            CurrentEntity.Value = state.Entity;
+                EntitySet = new ObservableList<TEntity>(state.EntitySet.ToList());
+                SelectedEntities = new ObservableList<TEntity>(state.SelectedEntities.ToList());
         }
 
         private ReactiveProperty<IProcessStateList<TEntity>> _state = new ReactiveProperty<IProcessStateList<TEntity>>();
@@ -39,9 +48,7 @@ namespace Core.Common.UI
             set
             {
                 this.RaiseAndSetIfChanged(ref _state, value);
-                CurrentEntity.Value = _state.Value.Entity;
-                EntitySet = new ObservableList<TEntity>(_state.Value.EntitySet.ToList());
-                SelectedEntities = new ObservableList<TEntity>(_state.Value.SelectedEntities.ToList());
+                
 
                 // must broad cast event to handle simultanious events per single event IE continue chaining events
 
