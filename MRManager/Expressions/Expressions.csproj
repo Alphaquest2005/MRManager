@@ -147,7 +147,7 @@
     <Compile Include="Generated Expressions\Function Expressions\AutoFunctions.cs" />
     <Compile Include="PersonSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Custom\SignInInfo.cs" />
+    <Compile Include="Custom\PatientExpressions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EFEntities\EF.Entities.csproj">

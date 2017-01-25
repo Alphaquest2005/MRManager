@@ -373,7 +373,138 @@ namespace RevolutionData
                                 },
                 commands: new List<IViewModelEventCommand<IViewModel,IEvent>>{},
                 viewModelType: typeof(IPatientDetailsViewModel),
-                orientation: typeof(IBodyViewModel))
+                orientation: typeof(IBodyViewModel)),
+
+             //////////////////InterviewInfo List
+           new ViewModelInfo
+                (
+                3, new List<IViewModelEventSubscription<IViewModel, IEvent>>
+                {
+                   new ViewEventSubscription<IInterviewListViewModel, IProcessStateListMessage<IInterviewInfo>>(
+                       3,
+                       e => e != null,
+                       new List<Func<IInterviewListViewModel, IProcessStateListMessage<IInterviewInfo>, bool>>(),
+                       (v,e) => v.State.Value = e.State),
+
+                },
+                new List<IViewModelEventPublication<IViewModel, IEvent>>
+                {
+                    new ViewEventPublication<IInterviewListViewModel, ViewStateLoaded<IInterviewListViewModel,IProcessStateList<IInterviewInfo>>>(
+                         key:"IPatientInfoViewStateLoaded",
+                         subject:v => v.State,
+                         subjectPredicate:new List<Func<IInterviewListViewModel, bool>>
+                                             {
+                                                 v => v.State != null
+                                             },
+                         messageData:s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
+
+                    new ViewEventPublication<IInterviewListViewModel, CurrentEntityChanged<IInterviewInfo>>(
+                         key:"CurrentEntityChanged",
+                         subject:v => v.CurrentEntity,//.WhenAnyValue(x => x.Value),
+                         subjectPredicate:new List<Func<IInterviewListViewModel, bool>>{},
+                         messageData:s => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source))
+                },
+                new List<IViewModelEventCommand<IViewModel,IEvent>>
+                {
+
+
+                    new ViewEventCommand<IInterviewListViewModel, LoadEntityViewSetWithChanges<IInterviewInfo,IPartialMatch>>(
+                                key:"Search",
+                                commandPredicate:new List<Func<IInterviewListViewModel, bool>>
+                                            {
+                                                    v => v.ChangeTracking.Values.Count > 0
+
+                                            },
+                                subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+
+                                messageData: s =>
+                                {
+                                    //ToDo: bad practise
+                                    if (!string.IsNullOrEmpty(((dynamic)s).Field) && !string.IsNullOrEmpty(((dynamic) s).Value))
+                                    {
+                                        s.ChangeTracking.AddOrUpdate(((dynamic) s).Field, ((dynamic) s).Value);
+                                    }
+
+                                    return new ViewEventCommandParameter(
+                                        new object[] {s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},
+                                        new StateCommandInfo(s.Process.Id,
+                                            Context.EntityView.Commands.LoadEntityViewSetWithChanges), s.Process,
+                                        s.Source);
+                                }),
+
+
+
+                },
+                typeof(IInterviewListViewModel),
+                typeof(IBodyViewModel)),
+
+               //////////////////Qustionaire ViewModel List
+               /// 
+           new ViewModelInfo
+                (
+                3, new List<IViewModelEventSubscription<IViewModel, IEvent>>
+                {
+                   new ViewEventSubscription<IQuestionaireViewModel, IProcessStateListMessage<IPatientResponseInfo>>(
+                       3,
+                       e => e != null,
+                       new List<Func<IQuestionaireViewModel, IProcessStateListMessage<IPatientResponseInfo>, bool>>(),
+                       (v,e) => v.State.Value = e.State),
+
+                },
+                new List<IViewModelEventPublication<IViewModel, IEvent>>
+                {
+                    new ViewEventPublication<IQuestionaireViewModel, ViewStateLoaded<IQuestionaireViewModel,IProcessStateList<IPatientResponseInfo>>>(
+                         key:"IPatientResponseInfoViewStateLoaded",
+                         subject:v => v.State,
+                         subjectPredicate:new List<Func<IQuestionaireViewModel, bool>>
+                                             {
+                                                 v => v.State != null
+                                             },
+                         messageData:s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
+
+                    
+                },
+                new List<IViewModelEventCommand<IViewModel,IEvent>>
+                {
+
+
+                    new ViewEventCommand<IQuestionaireViewModel, CurrentEntityChanged<IPatientResponseInfo>>(
+                                key:"PreviousQuestion",
+                                commandPredicate:new List<Func<IQuestionaireViewModel, bool>>{},
+                                subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+
+                                messageData: s =>
+                                {
+                                    s.CurrentEntity.Value = s.State.Value.EntitySet.Next(s.CurrentEntity.Value);
+
+                                    return new ViewEventCommandParameter(
+                                        new object[] {s.CurrentEntity.Value},
+                                        new StateCommandInfo(s.Process.Id,
+                                            Context.Process.Commands.CurrentEntityChanged), s.Process,
+                                        s.Source);
+                                }),
+
+                    new ViewEventCommand<IQuestionaireViewModel, CurrentEntityChanged<IPatientResponseInfo>>(
+                                key:"NextQuestion",
+                                commandPredicate:new List<Func<IQuestionaireViewModel, bool>>{},
+                                subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+
+                                messageData: s =>
+                                {
+                                    s.CurrentEntity.Value = s.State.Value.EntitySet.Next(s.State.Value.Entity);
+
+                                    return new ViewEventCommandParameter(
+                                        new object[] {s.CurrentEntity.Value},
+                                        new StateCommandInfo(s.Process.Id,
+                                            Context.Process.Commands.CurrentEntityChanged), s.Process,
+                                        s.Source);
+                                }),
+
+
+
+                },
+                typeof(IQuestionaireViewModel),
+                typeof(IBodyViewModel)),
 
         };
     }

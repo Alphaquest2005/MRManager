@@ -4,36 +4,145 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:interfaces="clr-namespace:Interfaces;assembly=Interfaces"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    
                     mc:Ignorable="d">
 
     <DataTemplate x:Key="PS-ForeignAddressTpl" DataType="{x:Type interfaces:IForeignAddressInfo}">
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
         </DataTemplate.Resources>
-        <Grid Width="429" Height="Auto">
-            <TextBlock Width="109"
-                       Height="30"
-                       MinWidth="75"
-                       Margin="10,4,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       FontSize="20"
-                       FontWeight="Bold"
-                       Text="{Binding Path=AddressTypeName,
-                                      UpdateSourceTrigger=PropertyChanged,
-                                      ValidatesOnDataErrors=True}" />
-            <TextBlock Width="260"
-                       Height="Auto"
-                       MinWidth="75"
-                       Margin="159,10,0,0"
+        <Grid Width="497" Height="Auto">
+
+
+            <TextBlock Width="Auto"
+                       Height="24"
+                       Margin="10,25,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
-                       FontSize="18"
-                       Text="{Binding Path=Address,
-                                      UpdateSourceTrigger=PropertyChanged,
-                                      ValidatesOnDataErrors=True}"
-                       TextWrapping="WrapWithOverflow" />
-
+                       Text="Address"
+                       TextAlignment="Right" />
+            <TextBox Width="Auto"
+                     Height="24"
+                     MinWidth="75"
+                     Margin="150,25,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Text="{Binding Path=Address,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=True}" />
+            <TextBlock Width="Auto"
+                       Height="24"
+                       Margin="10,50,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="Addresslines"
+                       TextAlignment="Right" />
+            <TextBox Width="Auto"
+                     Height="24"
+                     MinWidth="75"
+                     Margin="150,50,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Text="{Binding Path=Addresslines,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=True}" />
+            <TextBlock Width="Auto"
+                       Height="24"
+                       Margin="10,75,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="City"
+                       TextAlignment="Right" />
+            <TextBox Width="Auto"
+                     Height="24"
+                     MinWidth="75"
+                     Margin="150,75,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Text="{Binding Path=City,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=True}" />
+            <TextBlock Width="Auto"
+                       Height="24"
+                       Margin="10,100,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="Parish"
+                       TextAlignment="Right" />
+            <TextBox Width="Auto"
+                     Height="24"
+                     MinWidth="75"
+                     Margin="150,100,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Text="{Binding Path=Parish,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=True}" />
+            <TextBlock Width="Auto"
+                       Height="24"
+                       Margin="10,125,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="State"
+                       TextAlignment="Right" />
+            <TextBox Width="Auto"
+                     Height="24"
+                     MinWidth="75"
+                     Margin="150,125,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Text="{Binding Path=State,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=True}" />
+            <TextBlock Width="Auto"
+                       Height="24"
+                       Margin="10,150,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="Zip Or Postal Code"
+                       TextAlignment="Right" />
+            <TextBox Width="Auto"
+                     Height="24"
+                     MinWidth="75"
+                     Margin="150,150,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Text="{Binding Path=ZipOrPostalCode,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=True}" />
+            <TextBlock Width="Auto"
+                       Height="24"
+                       Margin="10,175,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="Country"
+                       TextAlignment="Right" />
+            <TextBox Width="Auto"
+                     Height="24"
+                     MinWidth="75"
+                     Margin="150,175,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Text="{Binding Path=Country,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=True}" />
+            <TextBlock Width="Auto"
+                       Height="24"
+                       Margin="10,200,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="Address Type Name"
+                       TextAlignment="Right" />
+            <TextBox Width="Auto"
+                     Height="24"
+                     MinWidth="75"
+                     Margin="150,200,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Text="{Binding Path=AddressTypeName,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=True}" />
+            <StackPanel Margin="0,225,0,0" />
 
         </Grid>
     </DataTemplate>

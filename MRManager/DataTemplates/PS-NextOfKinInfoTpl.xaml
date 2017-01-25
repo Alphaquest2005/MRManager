@@ -2,12 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converters="clr-namespace:Converters;assembly=Converters"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                    xmlns:entities="clr-namespace:EF.Entities;assembly=EF.Entities"
                     xmlns:interfaces="clr-namespace:Interfaces;assembly=Interfaces"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="d">
 
-    <DataTemplate x:Key="PS-NextOfKinInfoTpl" DataType="{x:Type entities:NextOfKinInfo}">
+    <DataTemplate x:Key="PS-NextOfKinInfoTpl" DataType="{x:Type interfaces:INextOfKinInfo}">
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
         </DataTemplate.Resources>
@@ -20,7 +19,7 @@
                        VerticalAlignment="Top"
                        FontSize="18"
                        FontWeight="Bold"
-                       Text="{Binding Relationship,
+                       Text="{Binding Path=Relationship,
                                       UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Width="Auto"
                        Height="24"
@@ -29,7 +28,7 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="18"
-                       Text="{Binding Name,
+                       Text="{Binding Path=Name,
                                       TargetNullValue='Person Name',
                                       UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Width="Auto"
@@ -39,7 +38,7 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="14"
-                       Text="{Binding Address,
+                       Text="{Binding Path=Address,
                                       UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Width="Auto"
                        Height="24"
@@ -48,7 +47,7 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="14"
-                       Text="{Binding PhoneNumber,
+                       Text="{Binding Path=PhoneNumber,
                                       UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Width="92"
                        Height="85"
@@ -64,7 +63,7 @@
             <ListBox Height="Auto"
                      Margin="145,109,36,111"
                      ItemTemplate="{DynamicResource PS-PersonPhoneNumberInfoTpl}"
-                     ItemsSource="{Binding PhoneNumbers}" />
+                     ItemsSource="{Binding Path=PhoneNumbers}" />
             <TextBlock Width="97"
                        Height="91"
                        Margin="33,235,0,0"
@@ -79,7 +78,7 @@
             <ListBox Height="Auto"
                      Margin="145,235,36,10"
                      ItemTemplate="{DynamicResource PS-PersonAddressInfoTpl}"
-                     ItemsSource="{Binding Addresses}" />
+                     ItemsSource="{Binding Path=Addresses}" />
 
 
         </Grid>

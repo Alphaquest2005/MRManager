@@ -7,17 +7,14 @@
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
-    <!--<DataTemplate x:Key="ResponseInfoDT" DataType="{x:Type viewModels:ResponseOptionInfo}">
+    <DataTemplate x:Key="ResponseInfoDT" DataType="{x:Type Interfaces:IResponseOptionInfo}">
         <DataTemplate.Resources>
             <converters:StringVisibilityConverter x:Key="StringVisibilityConverter" />
             <converters:StringBooleanConverter x:Key="StringBooleanConverter" />
             <converters:StringDateConverter x:Key="StringDateConverter" />
         </DataTemplate.Resources>
         <Grid Width="Auto" Height="Auto">
-            <Grid Margin="0"
-                  Visibility="{Binding Type,
-                                       Converter={StaticResource StringVisibilityConverter},
-                                       ConverterParameter='TextBox'}">
+            <Grid Margin="0" Visibility="{Binding Type, Converter={StaticResource StringVisibilityConverter}, ConverterParameter='TextBox'}">
                 <TextBlock Width="303"
                            Height="24"
                            MinWidth="75"
@@ -42,7 +39,8 @@
                            Height="29"
                            Margin="147,0,0,0"
                            HorizontalAlignment="Left"
-                           VerticalAlignment="Top" Fill="#FFB8B8B8">
+                           VerticalAlignment="Top"
+                           Fill="#FFB8B8B8">
                     <Rectangle.Stroke>
                         <RadialGradientBrush>
                             <GradientStop Offset="0" Color="#FF071A85" />
@@ -72,7 +70,11 @@
 
 
             </Grid>
-            <Grid Margin="0" Visibility="{Binding Type, Converter={StaticResource StringVisibilityConverter}, ConverterParameter='DatePicker'}" d:IsHidden="True">
+            <Grid Margin="0"
+                  d:IsHidden="True"
+                  Visibility="{Binding Type,
+                                       Converter={StaticResource StringVisibilityConverter},
+                                       ConverterParameter='DatePicker'}">
                 <DatePicker Width="226"
                             Height="24"
                             MinWidth="75"
@@ -99,5 +101,5 @@
 
         </Grid>
 
-    </DataTemplate>-->
+    </DataTemplate>
 </ResourceDictionary>

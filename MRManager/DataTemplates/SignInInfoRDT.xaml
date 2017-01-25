@@ -16,8 +16,8 @@
             <Button Command="{Binding Commands[ValidateUserInfo]}" Content="Login" />
             <TextBlock Text="{Binding State.Value.StateInfo.State.Status}" />
             <TextBlock Text="{Binding State.Value.StateInfo.State.Notes}" />
-            <TextBlock Text="{Binding State.Value.Entity.Usersignin}" Background="#FFF9FF81" />
-            <Image Source="{Binding Image}"  />
+            <TextBlock Background="#FFF9FF81" Text="{Binding State.Value.Entity.Usersignin}" />
+            <Image Source="{Binding Image}" />
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

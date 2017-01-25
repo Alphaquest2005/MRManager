@@ -10,5 +10,9 @@
         <ResourceDictionary Source="PS-NonResidentPatientInfoTpl.xaml" />
         <ResourceDictionary Source="PS-PersonPhoneNumberInfoTpl.xaml" />
         <ResourceDictionary Source="PS-PersonAddressInfoTpl.xaml" />
+        <ResourceDictionary Source="InterviewListDT.xaml" />
+        <ResourceDictionary Source="InterviewListVDT.xaml" />
+        <ResourceDictionary Source="QuestionInfoDT.xaml"/>
+        <ResourceDictionary Source="ResponseInfoDT.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

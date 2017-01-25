@@ -7,12 +7,11 @@
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
-    <DataTemplate DataType="{x:Type viewModels:PatientSummaryListViewModel}">
+    <DataTemplate DataType="{x:Type viewModels:InterviewListViewModel}">
         <StackPanel Background="LightPink">
 
             <TextBlock Text="{Binding State.Value.StateInfo.State.Status, Mode=OneWay}" />
-            <TextBlock Text="{Binding State.Value.Process.User.UserId, Mode=OneWay}" />
-            <ListBox ItemTemplate="{DynamicResource PatientInfoTpl}"
+            <ListBox ItemTemplate="{DynamicResource InterviewInfoTpl}"
                      ItemsSource="{Binding State.Value.EntitySet,
                                            Mode=OneWay}"
                      SelectedItem="{Binding CurrentEntity.Value,
@@ -22,8 +21,8 @@
                                               UpdateSourceTrigger=PropertyChanged}"
                       SelectedValuePath="Content">
                 <ComboBox.Items>
-                    <ComboBoxItem Content="Email" />
-                    <ComboBoxItem Content="PhoneNumber" />
+                    <ComboBoxItem Content="Interview" />
+                    <ComboBoxItem Content="Category" />
                 </ComboBox.Items>
             </ComboBox>
             <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />

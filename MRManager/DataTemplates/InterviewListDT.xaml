@@ -4,10 +4,9 @@
                     xmlns:converters="clr-namespace:Converters;assembly=Converters"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
-    <!--<DataTemplate DataType="{x:Type viewModels:InterviewInfo}">
+    <DataTemplate x:Key="InterviewInfoTpl" DataType="{x:Type Interfaces:IInterviewInfo}">
 
         <Grid Width="Auto" Height="80">
             <Grid.Background>
@@ -22,7 +21,7 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="18.667"
-                       Text="{Binding Interview,
+                       Text="{Binding Path=Interview,
                                       Mode=OneWay}" />
             <TextBlock Width="264"
                        Height="27"
@@ -30,7 +29,7 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="16"
-                       Text="{Binding Category,
+                       Text="{Binding Path=Category,
                                       Mode=OneWay}" />
             <TextBlock Width="159"
                        Height="27"
@@ -38,10 +37,10 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="16"
-                       Text="{Binding Phase,
+                       Text="{Binding Path=Phase,
                                       Mode=OneWay}" />
 
         </Grid>
 
-    </DataTemplate>-->
+    </DataTemplate>
 </ResourceDictionary>

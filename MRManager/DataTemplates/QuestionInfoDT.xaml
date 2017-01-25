@@ -7,7 +7,7 @@
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
-    <!--<DataTemplate DataType="{x:Type viewModels:QuestionaireViewModel}">
+    <DataTemplate DataType="{x:Type viewModels:QuestionaireViewModel}">
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
             <Style TargetType="Button">
@@ -129,10 +129,12 @@
                                         <VisualState x:Name="Unfocused" />
                                         <VisualState x:Name="Focused">
                                             <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Duration="00:00:00.001" Storyboard.TargetName="InnerBorder" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)">
-                                            <SplineColorKeyFrame KeyTime="0" Value="#BF000000"/>
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
+                                                <ColorAnimationUsingKeyFrames Duration="00:00:00.001"
+                                                                              Storyboard.TargetName="InnerBorder"
+                                                                              Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)">
+                                                    <SplineColorKeyFrame KeyTime="0" Value="#BF000000" />
+                                                </ColorAnimationUsingKeyFrames>
+                                            </Storyboard>
                                         </VisualState>
                                     </VisualStateGroup>
                                     <VisualStateGroup x:Name="CommonStates">
@@ -196,12 +198,16 @@
                                         </VisualState>
                                         <VisualState x:Name="Disabled">
                                             <Storyboard>
-                                                <ColorAnimationUsingKeyFrames Duration="00:00:00.001" Storyboard.TargetName="White" Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
-                                            <SplineColorKeyFrame KeyTime="0" Value="#FFECECEC"/>
-                                        </ColorAnimationUsingKeyFrames>
-                                        <ColorAnimationUsingKeyFrames Duration="00:00:00.001" Storyboard.TargetName="White" Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
-                                            <SplineColorKeyFrame KeyTime="0" Value="#FFECECEC"/>
-                                        </ColorAnimationUsingKeyFrames>
+                                                <ColorAnimationUsingKeyFrames Duration="00:00:00.001"
+                                                                              Storyboard.TargetName="White"
+                                                                              Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                                    <SplineColorKeyFrame KeyTime="0" Value="#FFECECEC" />
+                                                </ColorAnimationUsingKeyFrames>
+                                                <ColorAnimationUsingKeyFrames Duration="00:00:00.001"
+                                                                              Storyboard.TargetName="White"
+                                                                              Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                                                    <SplineColorKeyFrame KeyTime="0" Value="#FFECECEC" />
+                                                </ColorAnimationUsingKeyFrames>
                                                 <DoubleAnimationUsingKeyFrames Duration="00:00:00.001"
                                                                                Storyboard.TargetName="Background"
                                                                                Storyboard.TargetProperty="(UIElement.Opacity)">
@@ -263,8 +269,8 @@
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Stretch"
                            FontSize="20"
-                           Text="{Binding Path=CurrentEntity.Description,
-                                          FallbackValue='Description',
+                           Text="{Binding State.Value.Entity.Question,
+                                          FallbackValue='Question',
                                           UpdateSourceTrigger=PropertyChanged,
                                           ValidatesOnDataErrors=True}"
                            TextWrapping="WrapWithOverflow" />
@@ -273,7 +279,7 @@
                         Margin="0,10,10,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
-                        Command="{Binding NextQuestion}"
+                        Command="{Binding Commands[NextQuestion]}"
                         Content=""
                         FontFamily="Segoe UI Symbol"
                         FontSize="36" />
@@ -282,7 +288,7 @@
                         Margin="12,9,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        Command="{Binding PreviousQuestion}"
+                        Command="{Binding Commands[PreviousQuestion]}"
                         Content="&#xE0AC;"
                         FontFamily="Segoe UI Symbol"
                         FontSize="36"
@@ -298,8 +304,16 @@
 
                 </Button>
 
+                <ListBox Width="528"
+                         Height="307"
+                         Margin="738,105,0,0"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Background="#33FFFFFF"
+                         ItemTemplate="{DynamicResource ResponseInfoDT}"
+                         ItemsSource="{Binding State.Value.Entity.ResponseOptions}" />
 
             </Grid>
         </Border>
-    </DataTemplate>-->
+    </DataTemplate>
 </ResourceDictionary>

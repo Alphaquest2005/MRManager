@@ -37,8 +37,8 @@ namespace Entity.Expressions
                 EmailAddress = x.Persons.PersonEmailAddress.FirstOrDefault().Email,
                 PhoneNumber = x.Persons.PersonPhoneNumbers.FirstOrDefault().PhoneNumber,
                 Sex = x.Sex.Name,
-                Address = string.Join(", ", x.Persons.PersonAddresses.Select(z => z.Addresses.AddressLines).Select(q => q.Select(r => r.Name))),
-                Allergies = string.Join(", ", x.PatientAllergies),
+                Address = string.Join(", ", x.Persons.PersonAddresses.SelectMany(z => z.PrimaryPersonAddress).SelectMany(u => u.PersonAddresses.Addresses.AddressLines).Select(h => h.Name)),
+                Allergies = string.Join(", ", x.PatientAllergies.Select(d => d.Allergies.Name)),
                 BirthCountry = x.Countries.Name,
                 MaritalStatus = x.PersonMaritalStatus.Select(z => z.MaritalStatus.Name).LastOrDefault(),
                 Addresses = x.Persons.PersonAddresses.Select(z => new PersonAddressInfo()
@@ -64,7 +64,7 @@ namespace Entity.Expressions
                                                             Email = z.Persons.PersonEmailAddress.FirstOrDefault().Email,
                                                             PhoneNumber = z.Persons.PersonPhoneNumbers.FirstOrDefault().PhoneNumber,
 
-                    Address = string.Join(", ", z.Persons.PersonAddresses.Select(q => q.Addresses.AddressLines).Select(q => q.Select(r => r.Name))),
+                    Address = string.Join(", ", z.Persons.PersonAddresses.SelectMany(s => s.PrimaryPersonAddress).SelectMany(u => u.PersonAddresses.Addresses.AddressLines).Select(h => h.Name)),
 
                     Addresses = z.Persons.PersonAddresses.Select(q => new PersonAddressInfo()
                                                             {
@@ -149,7 +149,7 @@ namespace Entity.Expressions
                         Email = x.Persons.PersonEmailAddress.FirstOrDefault().Email,
                         PhoneNumber = x.Persons.PersonPhoneNumbers.FirstOrDefault().PhoneNumber,
                         Sex = x.Sex.Name,
-                        Address = string.Join(", ", x.Persons.PersonAddresses.Select(z => z.Addresses.AddressLines)),
+                        Address = string.Join(", ", x.Persons.PersonAddresses.SelectMany(z => z.PrimaryPersonAddress).SelectMany(u => u.PersonAddresses.Addresses.AddressLines).Select(h => h.Name)),
                         BirthCountry = x.Countries.Name,
                         Name = string.Join(" ", x.Persons.PersonNames.Select(z => z.PersonName))
                     };
@@ -168,7 +168,7 @@ namespace Entity.Expressions
                 Addresses = x.Persons.PersonAddresses.Select(z => new ForeignAddressInfo()
                 {
                     Addresstype = z.AddressTypes.Name,
-                    Addresslines = string.Join(", ",z.Addresses.AddressLines),
+                    Addresslines = string.Join(", ",z.Addresses.AddressLines.Select(s => s.Name)),
                     City = z.Addresses.AddressCities.Cities.Name,
                     Country = z.Addresses.AddressCountries.Countries.Name,
                     Parish = z.Addresses.AddressParishes.Parishes.Name,
@@ -191,6 +191,47 @@ namespace Entity.Expressions
                     PhoneNumber = z.PhoneNumber,
                     Type = z.PhoneTypes.Name
                 }).ToList();
+
+        public static Expression<Func<Interviews, InterviewInfo>> InterviewInfoExpression { get; } =
+                    x =>  new InterviewInfo()
+                                            {
+                                                Id = x.Id,
+                                                Interview = x.Name,
+                                                Category =x.MedicalCategory.Category,
+                                                Phase = x.Phase.Name
+                                            };
+
+        public static Expression<Func<PatientResponses, PatientResponseInfo>> PatientResponseInfoExpression { get; } = 
+                    x => new PatientResponseInfo()
+                    {
+                        Id = x.Id,
+                        Category = x.Questions.Interviews.MedicalCategory.Category,
+                        Question = x.Questions.Description,
+                        Interview = x.Questions.Interviews.Name,
+                        PatientSyntomId = x.PatientSyntomId,
+                        InterviewId = x.Questions.InterviewId,
+                        PatientVisitId = x.PatientVisitId,
+                        QuestionId = x.QuestionId,
+                        PatientId = x.PatientVisit.PatientId,
+                        ResponseImages = x.ResponseImages.Select(z => new ResponseImage()
+                        {
+                            MediaId = z.MediaId,
+                            PatientResponseId = z.PatientResponseId,
+                            Media = z.Media.Value
+                        } as IResponseImage).ToList(),
+                        ResponseOptions = x.Response.Select(z => new ResponseOptionInfo()
+                        {
+                            Id = z.Id,
+                            Description = z.ResponseOptions.Description,
+                            QuestionId = z.ResponseOptions.QuestionId,
+                            Value = z.Value,
+                            PatientResponseId = z.PatientResponseId
+
+                        } as IResponseOptionInfo).ToList()
+
+                    }; 
+                 
+                     
     }
 
 

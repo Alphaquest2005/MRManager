@@ -5,26 +5,55 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
-                    xmlns:entities="clr-namespace:EF.Entities;assembly=EF.Entities"
                     mc:Ignorable="d">
 
-    <DataTemplate DataType="{x:Type entities:PatientInfo}">
+    <DataTemplate x:Key="PatientInfoTpl" DataType="{x:Type Interfaces:IPatientInfo}">
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
         </DataTemplate.Resources>
-        
-            <Grid Height="80" Width="469">
-                <Grid.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#33000000" Offset="0.907"/>
-                        <GradientStop Color="#19FFFFFF" Offset="0.069"/>
-                    </LinearGradientBrush>
-                </Grid.Background>
-                <TextBlock Text="{Binding Name, Mode=OneWay}" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="37" Width="264" FontSize="18.667"/>
-                <TextBlock Text="{Binding Address, Mode=OneWay}" Margin="10,52,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="264" FontSize="16"/>
-                <TextBlock Text="{Binding PhoneNumber, Mode=OneWay}" Margin="282,52,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="159" FontSize="16"/>
-                <TextBlock Text="{Binding Age, Mode=OneWay}" Margin="282,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="147" TextWrapping="NoWrap" FontSize="14" FontWeight="Bold"/>
-            </Grid>
+
+        <Grid Width="469" Height="80">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0.907" Color="#33000000" />
+                    <GradientStop Offset="0.069" Color="#19FFFFFF" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <TextBlock Width="264"
+                       Height="37"
+                       Margin="10,10,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="18.667"
+                       Text="{Binding Name,
+                                      Mode=OneWay}" />
+            <TextBlock Width="264"
+                       Height="27"
+                       Margin="10,52,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="16"
+                       Text="{Binding Address,
+                                      Mode=OneWay}" />
+            <TextBlock Width="159"
+                       Height="27"
+                       Margin="282,52,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="16"
+                       Text="{Binding PhoneNumber,
+                                      Mode=OneWay}" />
+            <TextBlock Width="147"
+                       Height="27"
+                       Margin="282,10,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Text="{Binding Age,
+                                      Mode=OneWay}"
+                       TextWrapping="NoWrap" />
+        </Grid>
 
     </DataTemplate>
 </ResourceDictionary>

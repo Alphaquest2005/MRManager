@@ -31,11 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Custom\InterviewInfo.cs" />
     <Compile Include="Custom\NextofKinInfo.cs" />
     <Compile Include="Custom\ForeignAddressInfo.cs" />
     <Compile Include="Custom\NonResidentInfo.cs" />
     <Compile Include="Custom\PatientDetailsInfo.cs" />
     <Compile Include="Custom\PatientInfo.cs" />
+    <Compile Include="Custom\PatientResponseInfo.cs" />
     <Compile Include="Custom\PersonAddressInfo.cs" />
     <Compile Include="Custom\PersonPhoneNumbersInfo.cs" />
     <Compile Include="EFEntity.cs" />

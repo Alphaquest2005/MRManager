@@ -21,6 +21,7 @@ namespace RevolutionData.Context
             public static IStateCommand CreateComplexEventLog => new StateCommand("CreateComplexEventLog", "Create ComplexEvent Log", Events.ComplexEventLogCreated);
             public static IStateCommand PublishState => new StateCommand("RequestState", "Request Process State", Events.StatePublished);
             public static IStateCommand CleanUpProcess => new StateCommand("Cleanup Process", "Clean up Process", Events.ProcessCleanedUp);
+            public static IStateCommand CurrentEntityChanged => new StateCommand("CurrentEntityChanged", "Process Current Entity Changed");
         }
 
         public class Events

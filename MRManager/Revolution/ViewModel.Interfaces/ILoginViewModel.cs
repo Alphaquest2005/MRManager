@@ -25,4 +25,17 @@ namespace ViewModel.Interfaces
     {
 
     }
+
+    [InheritedExport]
+    public interface IInterviewListViewModel : IEntityListViewModel<IInterviewInfo>
+    {
+        string Field { get; set; }
+        string Value { get; set; }
+    }
+
+    [InheritedExport]
+    public interface IQuestionaireViewModel : IEntityListViewModel<IPatientResponseInfo>
+    {
+       
+    }
 }

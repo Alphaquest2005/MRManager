@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="CacheViewModel.cs" />
     <Compile Include="PatientDetailsViewModel.cs" />
+    <Compile Include="InterviewListViewModel.cs" />
+    <Compile Include="QuestionaireViewModel.cs" />
     <Compile Include="PatientSummaryListViewModel.cs" />
     <Compile Include="LoginViewModel.cs" />
     <Compile Include="ReadEntityViewModel.cs" />

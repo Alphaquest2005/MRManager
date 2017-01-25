@@ -80,7 +80,17 @@ namespace DataServices.Actors
             InMessages.AddOrUpdate(expectedEvent.Key, message, (k,v) => message);
             if (InMessages.Count() != ComplexEventAction.Events.Count) return;
             ExecuteAction(InMessages.ToImmutableDictionary(x => x.Key, x => x.Value as object));
-            InMessages.Clear();
+            
+            if (ComplexEventAction.ActionTrigger == ActionTrigger.All)
+            {
+                InMessages.Clear();
+            }
+            else
+            {
+                IProcessSystemMessage msg;
+                InMessages.TryRemove(expectedEvent.Key,out msg);
+            }
+            
         }
 
         private void ExecuteAction(ImmutableDictionary<string, object> msgs)

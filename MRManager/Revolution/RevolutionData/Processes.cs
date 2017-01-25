@@ -242,6 +242,70 @@ namespace RevolutionData
                 action: ProcessActions.PatientInfo.UpdatePatientDetailsState,
                 processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState)),
 
+
+             /// Interview info
+             /// 
+              new ComplexEventAction(
+                key:"305",
+                processId:3,
+                events:new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent (key: "ProcessStarted",
+                                              processId: 3,
+                                              eventPredicate: e => e != null,
+                                              eventType: typeof (ISystemProcessStarted),
+                                              processInfo: new StateEventInfo(3,Context.Process.Events.ProcessStarted),
+                                              expectedSourceType:new SourceType(typeof(IComplexEventService)))
+
+                },
+                expectedMessageType:typeof(IProcessStateMessage<IInterviewInfo>),
+                action:ProcessActions.PatientInfo.IntializeInterviewInfoProcessState,
+                processInfo:new StateCommandInfo(3, Context.Process.Commands.CreateState)),
+
+             new ComplexEventAction(
+                key:"306",
+                processId:3,
+                events:new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent<IEntityViewSetWithChangesLoaded<IInterviewInfo>> (
+                        "EntityViewSet", 3, e => e.EntitySet != null, expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
+                        processInfo: new StateEventInfo(3, Context.EntityView.Events.EntityViewSetLoaded))
+                },
+                expectedMessageType:typeof(IProcessStateMessage<IInterviewInfo>),
+                action: ProcessActions.PatientInfo.UpdateInterviewInfoState,
+                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState)),
+
+             ///////// Patient Responses
+
+             new ComplexEventAction(
+                key:"307",
+                processId:3,
+                actionTrigger: ActionTrigger.Partial, 
+                events:new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent<ICurrentEntityChanged<IPatientInfo>> (
+                        "CurrentPatient", 3, e => e.Entity != null, expectedSourceType: new SourceType(typeof(IViewModel)),//todo: check this cuz it comes from viewmodel
+                        processInfo: new StateEventInfo(3, Context.Process.Events.CurrentEntityChanged)),
+                    new ProcessExpectedEvent<ICurrentEntityChanged<IInterviewInfo>> (
+                        "CurrentInterview", 3, e => e.Entity != null, expectedSourceType: new SourceType(typeof(IViewModel)),//todo: check this cuz it comes from viewmodel
+                        processInfo: new StateEventInfo(3, Context.Process.Events.CurrentEntityChanged))
+                },
+                expectedMessageType:typeof(IProcessStateMessage<IPatientResponseInfo>),
+                action: ProcessActions.PatientInfo.RequestPatientResponses,
+                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState)),
+
+             new ComplexEventAction(
+                key:"308",
+                processId:3,
+                events:new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent<IEntityViewSetWithChangesLoaded<IPatientResponseInfo>> (
+                        "EntityViewSet", 3, e => e.EntitySet != null, expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
+                        processInfo: new StateEventInfo(3, Context.EntityView.Events.EntityViewSetLoaded))
+                },
+                expectedMessageType:typeof(IProcessStateMessage<IPatientResponseInfo>),
+                action: ProcessActions.PatientInfo.UpdatePatientResponseState,
+                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState)),
         };
 
         

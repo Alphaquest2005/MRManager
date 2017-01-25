@@ -43,11 +43,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Custom Interfaces\ForeignAddressInfo.cs" />
+    <Compile Include="Custom Interfaces\IInterviewInfo.cs" />
     <Compile Include="Custom Interfaces\INextOfKinInfo.cs" />
     <Compile Include="Custom Interfaces\INonResidentInfo.cs" />
     <Compile Include="Custom Interfaces\IPatientDetailsInfo.cs" />
     <Compile Include="Custom Interfaces\IPatientInfo.cs" />
+    <Compile Include="Custom Interfaces\IPatientResponseInfo.cs" />
     <Compile Include="Custom Interfaces\IPersonPhoneNumbersInfo.cs" />
+    <Compile Include="Custom Interfaces\IResponseImage.cs" />
+    <Compile Include="Custom Interfaces\IResponseOptionInfo.cs" />
     <Compile Include="Generated Interfaces\AutoEntityViews\UserSignIn.cs" />
     <Compile Include="Custom Interfaces\ISignInInfo.cs" />
     <Compile Include="Generated Interfaces\UserSignIn.cs" />
@@ -176,7 +180,6 @@
     <Compile Include="Generated Interfaces\EntityViews\CountryInfo.cs" />
     <Compile Include="Generated Interfaces\EntityViews\ForeignPhoneNumberInfo.cs" />
     <Compile Include="Generated Interfaces\EntityViews\HeightInfo.cs" />
-    <Compile Include="Generated Interfaces\EntityViews\InterviewInfo.cs" />
     <Compile Include="Generated Interfaces\EntityViews\InterviewReponses.cs" />
     <Compile Include="Generated Interfaces\EntityViews\NonResidentPatientInfo.cs" />
     <Compile Include="Generated Interfaces\EntityViews\ParishInfo.cs" />
@@ -185,7 +188,6 @@
     <Compile Include="Generated Interfaces\EntityViews\PatientInfo.cs" />
     <Compile Include="Generated Interfaces\EntityViews\PatientJobInfo.cs" />
     <Compile Include="Generated Interfaces\EntityViews\IPatientPhoneNumbers.cs" />
-    <Compile Include="Generated Interfaces\EntityViews\PatientResponseInfo.cs" />
     <Compile Include="Generated Interfaces\EntityViews\PatientSummaryInfo.cs" />
     <Compile Include="Generated Interfaces\EntityViews\PatientSyntomsInfo.cs" />
     <Compile Include="Generated Interfaces\EntityViews\PatientVisitInfo.cs" />
@@ -194,7 +196,6 @@
     <Compile Include="Generated Interfaces\EntityViews\PersonNameInfo.cs" />
     <Compile Include="Generated Interfaces\EntityViews\PulseInfo.cs" />
     <Compile Include="Generated Interfaces\EntityViews\RespirationInfo.cs" />
-    <Compile Include="Generated Interfaces\EntityViews\ResponseOptionInfo.cs" />
     <Compile Include="Generated Interfaces\EntityViews\TemperatureInfo.cs" />
     <Compile Include="Generated Interfaces\EntityViews\VitalsHistoryInfo.cs" />
     <Compile Include="Generated Interfaces\EntityViews\VitalSignsInfo.cs" />

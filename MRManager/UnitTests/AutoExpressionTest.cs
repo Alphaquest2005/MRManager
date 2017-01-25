@@ -54,6 +54,19 @@ namespace UnitTests.Expressions
             var res = MRManagerDBContext.Instance.UserSignIn.Select(PatientExpressions.SignInInfoExpression).ToList();
             if (res.Any()) Debug.Assert(true);
         }
+        [TestMethod]
+        public void InterviewInfoExpressionGetData()
+        {
+            var res = MRManagerDBContext.Instance.Interviews.Select(PatientExpressions.InterviewInfoExpression).ToList();
+            if (res.Any()) Debug.Assert(true);
+        }
+
+        [TestMethod]
+        public void PatientResponseInfoExpressionGetData()
+        {
+            var res = MRManagerDBContext.Instance.PatientResponses.Select(PatientExpressions.PatientResponseInfoExpression).ToList();
+            if (res.Any()) Debug.Assert(true);
+        }
 
     }
 }

@@ -6,7 +6,7 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="d">
 
-    <DataTemplate x:Key="PS-NonResidentPatientInfoTpl" DataType="{x:Type interfaces:INonResidentPatientInfo}">
+    <DataTemplate x:Key="PS-NonResidentPatientInfoTpl" DataType="{x:Type interfaces:INonResidentInfo}">
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
         </DataTemplate.Resources>
