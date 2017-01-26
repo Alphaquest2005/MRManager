@@ -25,7 +25,7 @@ namespace EF.Entities
 				public virtual ICollection<PatientVisitVitalSigns> PatientVisitVitalSigns {get; set;}
 		
 			// ---------Parent Relationships
-				public virtual Persons_Patient Persons_Patient {get; set;}
+				public virtual Patients Patients {get; set;}
 				public virtual Persons_Doctor Persons_Doctor {get; set;}
 	
 

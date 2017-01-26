@@ -366,6 +366,7 @@
 ..\EF.Mappings\Generated Mappings\Components.cs
 ..\EF.Mappings\Generated Mappings\Countries.cs
 ..\EF.Mappings\Generated Mappings\DefaultImages.cs
+..\EF.Mappings\Generated Mappings\EntityAttributes.cs
 ..\EF.Mappings\Generated Mappings\ExamDetailComponents.cs
 ..\EF.Mappings\Generated Mappings\ExamDetails.cs
 ..\EF.Mappings\Generated Mappings\ExamResults.cs
@@ -399,6 +400,7 @@
 ..\EF.Mappings\Generated Mappings\PatientReligon.cs
 ..\EF.Mappings\Generated Mappings\PatientResponses.cs
 ..\EF.Mappings\Generated Mappings\PatientResults.cs
+..\EF.Mappings\Generated Mappings\Patients.cs
 ..\EF.Mappings\Generated Mappings\PatientSyntoms.cs
 ..\EF.Mappings\Generated Mappings\PatientVisit.cs
 ..\EF.Mappings\Generated Mappings\PatientVisitVitalSigns.cs
@@ -499,6 +501,7 @@
 ..\EFEntities\Generated Entities\Entity Views\VitalsHistoryInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\VitalSignsInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\WeightInfo.cs
+..\EFEntities\Generated Entities\EntityAttributes.cs
 ..\EFEntities\Generated Entities\ExamDetailComponents.cs
 ..\EFEntities\Generated Entities\ExamDetails.cs
 ..\EFEntities\Generated Entities\ExamResults.cs
@@ -530,6 +533,7 @@
 ..\EFEntities\Generated Entities\Generated AutoView Templates\ComponentsAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\CountriesAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\DefaultImagesAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\EntityAttributesAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\ExamDetailComponentsAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\ExamDetailsAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\ExamResults_AnioticFluidAutoView.cs
@@ -563,6 +567,7 @@
 ..\EFEntities\Generated Entities\Generated AutoView Templates\PatientReligonAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\PatientResponsesAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\PatientResultsAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\PatientsAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\PatientSyntomsAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\PatientVisitAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\PatientVisitVitalSignsAutoView.cs
@@ -630,6 +635,7 @@
 ..\EFEntities\Generated Entities\PatientReligon.cs
 ..\EFEntities\Generated Entities\PatientResponses.cs
 ..\EFEntities\Generated Entities\PatientResults.cs
+..\EFEntities\Generated Entities\Patients.cs
 ..\EFEntities\Generated Entities\PatientSyntoms.cs
 ..\EFEntities\Generated Entities\PatientVisit.cs
 ..\EFEntities\Generated Entities\PatientVisitVitalSigns.cs
@@ -712,6 +718,7 @@
 ..\Interfaces\Generated Interfaces\AutoEntityViews\Components.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\Countries.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\DefaultImages.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\EntityAttributes.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\ExamDetailComponents.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\ExamDetails.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\ExamResults.cs
@@ -745,6 +752,7 @@
 ..\Interfaces\Generated Interfaces\AutoEntityViews\PatientReligon.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\PatientResponses.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\PatientResults.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\Patients.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\PatientSyntoms.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\PatientVisit.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\PatientVisitVitalSigns.cs
@@ -799,6 +807,7 @@
 ..\Interfaces\Generated Interfaces\Components.cs
 ..\Interfaces\Generated Interfaces\Countries.cs
 ..\Interfaces\Generated Interfaces\DefaultImages.cs
+..\Interfaces\Generated Interfaces\EntityAttributes.cs
 ..\Interfaces\Generated Interfaces\EntityViews\AddressInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\AddressLineInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\AllergiesInfo.cs
@@ -822,11 +831,13 @@
 ..\Interfaces\Generated Interfaces\EntityViews\PatientVisitInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\PersonAddressInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\PersonInfo.cs
+..\Interfaces\Generated Interfaces\EntityViews\PersonMaritalStatusInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\PersonNameInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\PersonPhoneNumberInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\PulseInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\RespirationInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\ResponseOptionInfo.cs
+..\Interfaces\Generated Interfaces\EntityViews\SignInInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\TemperatureInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\VitalsHistoryInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\VitalSignsInfo.cs
@@ -864,6 +875,7 @@
 ..\Interfaces\Generated Interfaces\PatientReligon.cs
 ..\Interfaces\Generated Interfaces\PatientResponses.cs
 ..\Interfaces\Generated Interfaces\PatientResults.cs
+..\Interfaces\Generated Interfaces\Patients.cs
 ..\Interfaces\Generated Interfaces\PatientSyntoms.cs
 ..\Interfaces\Generated Interfaces\PatientVisit.cs
 ..\Interfaces\Generated Interfaces\PatientVisitVitalSigns.cs

@@ -55,6 +55,7 @@
     <Compile Include="Generated Mappings\Components.cs" />
     <Compile Include="Generated Mappings\Countries.cs" />
     <Compile Include="Generated Mappings\DefaultImages.cs" />
+    <Compile Include="Generated Mappings\EntityAttributes.cs" />
     <Compile Include="Generated Mappings\ExamDetailComponents.cs" />
     <Compile Include="Generated Mappings\ExamDetails.cs" />
     <Compile Include="Generated Mappings\ExamResults.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Generated Mappings\PatientReligon.cs" />
     <Compile Include="Generated Mappings\PatientResponses.cs" />
     <Compile Include="Generated Mappings\PatientResults.cs" />
+    <Compile Include="Generated Mappings\Patients.cs" />
     <Compile Include="Generated Mappings\PatientSyntoms.cs" />
     <Compile Include="Generated Mappings\PatientVisit.cs" />
     <Compile Include="Generated Mappings\PatientVisitVitalSigns.cs" />

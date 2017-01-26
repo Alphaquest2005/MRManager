@@ -26,7 +26,6 @@ namespace EF.Mappings
 				entityBuilder.HasMany(x => x.PatientAllergies).WithOne(p => p.Persons_Patient).HasForeignKey(c => c.PatientId).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasMany(x => x.PatientDoctor).WithOne(p => p.Persons_Patient).HasForeignKey(c => c.PatientId).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasMany(x => x.PatientReligon).WithOne(p => p.Persons_Patient).HasForeignKey(c => c.PersonId).OnDelete(DeleteBehavior.Restrict);
-				entityBuilder.HasMany(x => x.PatientVisit).WithOne(p => p.Persons_Patient).HasForeignKey(c => c.PatientId).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasMany(x => x.PersonCountryOfResidence).WithOne(p => p.Persons_Patient).HasForeignKey(c => c.PersonId).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasMany(x => x.PersonJob).WithOne(p => p.Persons_Patient).HasForeignKey(c => c.PersonId).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasMany(x => x.PersonMaritalStatus).WithOne(p => p.Persons_Patient).HasForeignKey(c => c.PersonId).OnDelete(DeleteBehavior.Restrict);

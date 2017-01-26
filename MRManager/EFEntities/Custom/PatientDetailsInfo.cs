@@ -4,9 +4,10 @@ using Interfaces;
 
 namespace EF.Entities
 {
-    public partial class PatientDetailsInfo : EntityView<IPersons_Patient>, IPatientDetailsInfo
+    public partial class PatientDetailsInfo : EntityView<IPatients>, IPatientDetailsInfo
     {
         public string Name { get; set; }
+        public string IdNumber { get; set; }
         public int? Age { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }

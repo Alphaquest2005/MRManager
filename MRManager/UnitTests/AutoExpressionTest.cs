@@ -68,5 +68,12 @@ namespace UnitTests.Expressions
             if (res.Any()) Debug.Assert(true);
         }
 
+        [TestMethod]
+        public void PulledPatientDetailsExpressionGetData()
+        {
+            var res = MRManagerDBContext.Instance.Patients.Select(PulledExpressions.PatientDetailsInfoExpression).ToList();
+            if (res.Any()) Debug.Assert(true);
+        }
+
     }
 }

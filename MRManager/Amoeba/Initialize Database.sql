@@ -33,6 +33,14 @@ SET IDENTITY_INSERT Entities ON;
 	insert into Entities(id,EntityName,EntitySetName) values (0,'Unspecified Entity', 'Unspecified EntitySet')
 SET IDENTITY_INSERT Entities off; 
 
+SET IDENTITY_INSERT PatientVisit ON; 
+	insert into PatientVisit(id,PatientId,DateOfVisit,DoctorId) values (0,0,'1/1/1900',0)
+SET IDENTITY_INSERT PatientVisit off; 
+
+SET IDENTITY_INSERT EntityAttributes ON; 
+	insert into EntityAttributes(id, Entity,Attribute, [type]) values (0,'unspecified','unspecified','unspecified')
+SET IDENTITY_INSERT EntityAttributes off; 
+
 set identity_insert Media on
 
 INSERT INTO Media(value, MediaTypeId, Id)

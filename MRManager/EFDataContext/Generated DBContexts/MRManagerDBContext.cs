@@ -32,6 +32,7 @@ namespace EF.DBContexts
 		public DbSet<Components> Components { get; set; }
 		public DbSet<Countries> Countries { get; set; }
 		public DbSet<DefaultImages> DefaultImages { get; set; }
+		public DbSet<EntityAttributes> EntityAttributes { get; set; }
 		public DbSet<ExamDetailComponents> ExamDetailComponents { get; set; }
 		public DbSet<ExamDetails> ExamDetails { get; set; }
 		public DbSet<ExamResults> ExamResults { get; set; }
@@ -65,6 +66,7 @@ namespace EF.DBContexts
 		public DbSet<PatientReligon> PatientReligon { get; set; }
 		public DbSet<PatientResponses> PatientResponses { get; set; }
 		public DbSet<PatientResults> PatientResults { get; set; }
+		public DbSet<Patients> Patients { get; set; }
 		public DbSet<PatientSyntoms> PatientSyntoms { get; set; }
 		public DbSet<PatientVisit> PatientVisit { get; set; }
 		public DbSet<PatientVisitVitalSigns> PatientVisitVitalSigns { get; set; }
@@ -138,6 +140,7 @@ namespace EF.DBContexts
 				ComponentsMap.Map(modelBuilder.Entity<Components>());
 				CountriesMap.Map(modelBuilder.Entity<Countries>());
 				DefaultImagesMap.Map(modelBuilder.Entity<DefaultImages>());
+				EntityAttributesMap.Map(modelBuilder.Entity<EntityAttributes>());
 				ExamDetailComponentsMap.Map(modelBuilder.Entity<ExamDetailComponents>());
 				ExamDetailsMap.Map(modelBuilder.Entity<ExamDetails>());
 				ExamResultsMap.Map(modelBuilder.Entity<ExamResults>());
@@ -171,6 +174,7 @@ namespace EF.DBContexts
 				PatientReligonMap.Map(modelBuilder.Entity<PatientReligon>());
 				PatientResponsesMap.Map(modelBuilder.Entity<PatientResponses>());
 				PatientResultsMap.Map(modelBuilder.Entity<PatientResults>());
+				PatientsMap.Map(modelBuilder.Entity<Patients>());
 				PatientSyntomsMap.Map(modelBuilder.Entity<PatientSyntoms>());
 				PatientVisitMap.Map(modelBuilder.Entity<PatientVisit>());
 				PatientVisitVitalSignsMap.Map(modelBuilder.Entity<PatientVisitVitalSigns>());

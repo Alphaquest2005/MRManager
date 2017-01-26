@@ -3,7 +3,7 @@ using Interfaces;
 
 namespace EF.Entities
 {
-    public partial class PatientInfo : EntityView<IPersons_Patient>, IPatientInfo
+    public partial class PatientInfo : EntityView<IPatients>, IPatientInfo
     {
         public string Name { get; set; }
         public string Address { get; set; }

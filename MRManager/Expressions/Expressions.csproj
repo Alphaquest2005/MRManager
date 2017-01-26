@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoFunctions.cs" />
+    <Compile Include="Custom\PulledExpressions.cs" />
     <Compile Include="FindExpression.cs" />
     <Compile Include="PersonSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -22,7 +22,6 @@ namespace EF.Entities
 				public virtual ICollection<PatientAllergies> PatientAllergies {get; set;}
 				public virtual ICollection<PatientDoctor> PatientDoctor {get; set;}
 				public virtual ICollection<PatientReligon> PatientReligon {get; set;}
-				public virtual ICollection<PatientVisit> PatientVisit {get; set;}
 				public virtual ICollection<PersonCountryOfResidence> PersonCountryOfResidence {get; set;}
 				public virtual ICollection<PersonJob> PersonJob {get; set;}
 				public virtual ICollection<PersonMaritalStatus> PersonMaritalStatus {get; set;}

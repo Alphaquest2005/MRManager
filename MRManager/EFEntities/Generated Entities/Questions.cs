@@ -13,6 +13,7 @@ namespace EF.Entities
 {
 	public partial class Questions: BaseEntity, IQuestions
 	{
+		public virtual int EntityAttribute { get; set; }
 		public virtual int InterviewId { get; set; }
 		public virtual string Description { get; set; }
 
@@ -22,6 +23,7 @@ namespace EF.Entities
 				public virtual ICollection<ResponseOptions> ResponseOptions {get; set;}
 		
 			// ---------Parent Relationships
+				public virtual EntityAttributes EntityAttributes {get; set;}
 				public virtual Interviews Interviews {get; set;}
 	
 

@@ -6,9 +6,10 @@ using SystemInterfaces;
 namespace Interfaces
 {
     [InheritedExport]
-    public partial interface IPatientDetailsInfo : IEntityView<IPersons_Patient>
+    public partial interface IPatientDetailsInfo : IEntityView<IPatients>
     {
         String Name { get; }
+        string IdNumber { get; }
         Int32? Age { get; }
         String Address { get; }
         String PhoneNumber { get; }

@@ -28,7 +28,7 @@ namespace EF.Mappings
 				entityBuilder.HasMany(x => x.PatientVisitVitalSigns).WithOne(p => p.PatientVisit).HasForeignKey(c => c.PatientVisitId).OnDelete(DeleteBehavior.Restrict);
 	
 				//----------------Parent Properties
-				//entityBuilder.HasOne(p => p.Persons_Patient).WithMany(p => p.PatientVisit).HasForeignKey(c => c.PatientId).OnDelete(DeleteBehavior.Restrict);
+				//entityBuilder.HasOne(p => p.Patients).WithMany(p => p.PatientVisit).HasForeignKey(c => c.PatientId).OnDelete(DeleteBehavior.Restrict);
 				//entityBuilder.HasOne(p => p.Persons_Doctor).WithMany(p => p.PatientVisit).HasForeignKey(c => c.DoctorId).OnDelete(DeleteBehavior.Restrict);
 	
 		}
