@@ -11,16 +11,12 @@
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
         </DataTemplate.Resources>
-        <TabControl Margin="0,50,0,0"
-                    d:DesignWidth="800"
+        <TabControl x:Name="ViewPatientInfo" Margin="0,50,0,0"
+                    d:DesignWidth="1000"
+                    Width="1000"
                     Background="#7FFFFFFF"
                     TabStripPlacement="Left">
-            <TabControl.RenderTransform>
-                <ScaleTransform CenterX="50"
-                                CenterY="50"
-                                ScaleX=".75"
-                                ScaleY=".75" />
-            </TabControl.RenderTransform>
+           
             <TabItem Background="#7FFFFFFF">
                 <TabItem.Header>
                     <Grid Width="200" Height="100">

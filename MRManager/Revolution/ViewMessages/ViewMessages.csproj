@@ -49,7 +49,7 @@
     <Compile Include="Commands\LoadViewModel.cs" />
     <Compile Include="Commands\UnloadViewModel.cs" />
     <Compile Include="Events\ViewModelCreated.cs" />
-    <Compile Include="ViewNav.cs" />
+    <Compile Include="NavigateToView.cs" />
     <Compile Include="Commands\CreateViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Events\SummaryViewModelCreated.cs" />

@@ -10,7 +10,7 @@
     <DataTemplate DataType="{x:Type viewModels:QuestionaireViewModel}">
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
-            <!--<Style TargetType="Button">
+            <Style TargetType="Button">
                 <Setter Property="FontSize" Value="36" />
                 <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
                 <Setter Property="Background" Value="#00000000" />
@@ -139,7 +139,7 @@
                                     </VisualStateGroup>
                                     <VisualStateGroup x:Name="CommonStates">
                                         <VisualStateGroup.Transitions>
-                                            <VisualTransition GeneratedDuration="00:00:00.3000000" />
+                                            <!--<VisualTransition GeneratedDuration="00:00:00.3000000" />-->
                                             <VisualTransition From="MouseOver"
                                                               GeneratedDuration="00:00:00"
                                                               To="Pressed" />
@@ -248,15 +248,17 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-            </Style>-->
+            </Style>
         </DataTemplate.Resources>
-        <Border BorderBrush="#FFECE8E8"
+        <Border x:Name="ViewPatientResponses"
+                BorderBrush="#FFECE8E8"
+                Width="600"
                 BorderThickness="1"
                 CornerRadius="45.25">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                     <GradientStop Offset="1" Color="#7BB8B8B8" />
-                    <GradientStop Color="#7FFFFFFF" />
+                    <GradientStop Color="#4DFFFFFF" />
                 </LinearGradientBrush>
             </Border.Background>
             <Grid Width="Auto"
@@ -265,7 +267,7 @@
                 <TextBlock Width="Auto"
                            Height="60"
                            MinWidth="75"
-                           Margin="121,19,105,19"
+                           Margin="112,18,112.333,420"
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Stretch"
                            FontSize="20"
@@ -304,11 +306,11 @@
 
                 </Button>
 
-                <ListBox Width="528"
-                         Height="307"
-                         Margin="738,105,0,0"
-                         HorizontalAlignment="Left"
-                         VerticalAlignment="Top"
+                <ListBox Width="Auto"
+                         Height="Auto"
+                         Margin="58,107,52.333,32"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch"
                          Background="#33FFFFFF"
                          ItemTemplate="{DynamicResource ResponseInfoDT}"
                          ItemsSource="{Binding CurrentEntity.Value.ResponseOptions}" />

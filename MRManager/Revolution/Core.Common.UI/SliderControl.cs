@@ -401,13 +401,12 @@ namespace Core.Common.UI
         {
             var slid = this;
             if (slidcontents == null) return;
-            //if (slidcontents.IsExpanded == false) return;
+           
 
             var sp = (FrameworkElement)slid.Parent;
 
 
-            //if (slidcontents.Children != null)
-            //{
+           
                var exp = slidcontents;
 
                 if (slid.Orientation == "Horizontal")
@@ -438,7 +437,7 @@ namespace Core.Common.UI
 
                 ppctl = slidcontents.Name;
                 pctl.Push(slidcontents.Name);
-            //}
+            
         }
 
         public string Orientation { get; set; }

@@ -16,7 +16,7 @@
     <UserControl.Resources>
 
 
-        <System:Double x:Key="ExpHeadFontSize">16</System:Double>
+        <System:Double x:Key="ExpHeadFontSize">12</System:Double>
         <Style x:Key="ExpHeadStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="#FFECF9A7" />
             <Style.Triggers>
@@ -36,19 +36,15 @@
                DataContext="{Binding}"
                LastChildFill="True">
 
-        <ItemsControl Height="125"
-                      Background="#FF61D877"
+        <ItemsControl Height="Auto"
+                      MaxHeight="125"
                       DockPanel.Dock="Top"
-                      ItemsSource="{Binding HeaderViewModels}" />
-        <ItemsControl Height="75"
-                      Background="#FFD361D8"
-                      DockPanel.Dock="Bottom"
-                      ItemsSource="{Binding FooterViewModels}" />
-        <ItemsControl Width="Auto"
-                      Background="#FF5D7607"
-                      DockPanel.Dock="Left"
-                      ItemsSource="{Binding LeftViewModels}">
-
+                      ItemsSource="{Binding HeaderViewModels}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -57,72 +53,120 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        <ItemsControl Height="Auto"
+                      MinHeight="0"
+                      MaxHeight="75"
+                      DockPanel.Dock="Bottom"
+                      ItemsSource="{Binding FooterViewModels}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0">
+                        <ContentPresenter Margin="0" Content="{TemplateBinding Content}" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ItemsControl Margin="5"
+                      DockPanel.Dock="Left"
+                      ItemsSource="{Binding LeftViewModels}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0">
+                        <ContentPresenter Margin="0" Content="{TemplateBinding Content}" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
         <ItemsControl Width="Auto"
-                      Background="#FF618CD8"
+                      Margin="5"
                       DockPanel.Dock="Right"
-                      ItemsSource="{Binding RightViewModels}" />
+                      ItemsSource="{Binding RightViewModels}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <ContentPresenter Content="{TemplateBinding Content}" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Grid Width="Auto">
 
-        <coreui:SliderPanel x:Name="slider"
-                            Grid.ColumnSpan="1"
-                            Width="4000"
-                            Margin="0,0,0,0"
-                            Background="#00B76767"
-                            Orientation="Horizontal">
+            <coreui:SliderPanel x:Name="slider"
+                Width="4000"
+                Margin="0,0,0,0"
+                Background="#00B76767"
+                Orientation="Horizontal">
 
-            <ItemsControl Margin="0"
-                          Background="#4CFFFFFF"
-                          ItemsSource="{Binding BodyViewModels}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Expander Width="1000"
-                                  Height="550"
-                                  Margin="300,010,0,0"
-                                  HorizontalAlignment="Left"
-                                  VerticalAlignment="Top"
-                                  ExpandDirection="Right"
-                                  IsExpanded="True"
-                                  Tag="{Binding ViewName}">
-                            <Expander.Header>
-                                <Grid Height="550" MouseEnter="BringIntoView">
-                                    <!--<Grid.RenderTransform>
+                <ItemsControl Margin="0" ItemsSource="{Binding BodyViewModels}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Expander Width="Auto"
+                                Height="550"
+                                Margin="100,010,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                ExpandDirection="Right"
+                                IsExpanded="True"
+                                Tag="{Binding ViewName}">
+                                <Expander.Header>
+                                    <Grid Height="550" MouseEnter="BringIntoView">
+                                        <!--<Grid.RenderTransform>
                                         <ScaleTransform ScaleX=".75" ScaleY=".75" CenterX="50" CenterY="50" />
                                     </Grid.RenderTransform>-->
-                                    <TextBlock Width="55"
-                                               Height="63"
-                                               Margin="0,10,23,0"
-                                               HorizontalAlignment="Right"
-                                               VerticalAlignment="Top"
-                                               FontFamily="Segoe UI Symbol"
-                                               FontSize="40"
-                                               Style="{DynamicResource ExpHeadStyle}"
-                                               Text="{Binding Symbol}" />
-                                    <TextBlock Width="77"
-                                               Height="72"
-                                               Margin="0,0,12.6,417"
-                                               HorizontalAlignment="Right"
-                                               VerticalAlignment="Bottom"
-                                               FontSize="{DynamicResource ExpHeadFontSize}"
-                                               FontWeight="Bold"
-                                               RenderTransformOrigin="0.535,1.32"
-                                               Style="{DynamicResource ExpHeadStyle}"
-                                               Text="{Binding Description}"
-                                               TextAlignment="Center"
-                                               TextWrapping="Wrap" />
+                                        <TextBlock Width="55"
+                                            Height="63"
+                                            Margin="0,10,23,0"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            FontFamily="Segoe UI Symbol"
+                                            FontSize="28"
+                                            Style="{DynamicResource ExpHeadStyle}"
+                                            Text="{Binding ViewName}" />
+                                        <TextBlock Width="77"
+                                            Height="72"
+                                            Margin="0,0,12.6,417"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Bottom"
+                                            FontSize="{DynamicResource ExpHeadFontSize}"
+                                            FontWeight="Bold"
+                                            RenderTransformOrigin="0.535,1.32"
+                                            Style="{DynamicResource ExpHeadStyle}"
+                                            Text="{Binding Description}"
+                                            TextAlignment="Center"
+                                            TextWrapping="Wrap" />
 
-                                </Grid>
-                            </Expander.Header>
-                            <ContentPresenter Content="{TemplateBinding Content}" />
-                        </Expander>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </coreui:SliderPanel>
+                                    </Grid>
+                                </Expander.Header>
+                                <ContentPresenter Content="{TemplateBinding Content}" />
+                            </Expander>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </coreui:SliderPanel>
+
+
+        </Grid>
 
 
     </DockPanel>

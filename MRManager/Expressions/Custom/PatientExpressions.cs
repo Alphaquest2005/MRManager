@@ -225,6 +225,7 @@ namespace Entity.Expressions
                             Description = z.ResponseOptions.Description,
                             QuestionId = z.ResponseOptions.QuestionId,
                             Value = z.Value,
+                            Type = z.ResponseOptions.Type,
                             PatientResponseId = z.PatientResponseId
 
                         } as IResponseOptionInfo).ToList()

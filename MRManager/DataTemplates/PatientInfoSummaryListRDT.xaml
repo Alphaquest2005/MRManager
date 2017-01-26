@@ -8,16 +8,21 @@
                     mc:Ignorable="d">
 
     <DataTemplate DataType="{x:Type viewModels:PatientSummaryListViewModel}">
-        <StackPanel Background="LightPink">
+        <Grid Margin="0" Background="#4CFFFFFF">
 
-            <TextBlock Text="{Binding State.Value.StateInfo.State.Status, Mode=OneWay}" />
-            <TextBlock Text="{Binding State.Value.Process.User.UserId, Mode=OneWay}" />
-            <ListBox ItemTemplate="{DynamicResource PatientInfoTpl}"
+            
+            <ListBox Margin="10,65,10,63"
+                     ItemTemplate="{DynamicResource PatientInfoTpl}"
                      ItemsSource="{Binding State.Value.EntitySet,
                                            Mode=OneWay}"
                      SelectedItem="{Binding CurrentEntity.Value,
                                             Mode=TwoWay}" />
             <ComboBox x:Name="ComboBox"
+                      Width="78"
+                      Height="26"
+                      Margin="10,30,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
                       SelectedValue="{Binding Field,
                                               UpdateSourceTrigger=PropertyChanged}"
                       SelectedValuePath="Content">
@@ -26,8 +31,19 @@
                     <ComboBoxItem Content="PhoneNumber" />
                 </ComboBox.Items>
             </ComboBox>
-            <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
-            <Button Command="{Binding Commands[Search], Mode=OneWay}" Content="Search" />
-        </StackPanel>
+            <TextBox Margin="93,30,41,0"
+                     VerticalAlignment="Top"
+                     Text="{Binding Value,
+                                    UpdateSourceTrigger=PropertyChanged}" Height="26" />
+            <Button Width="26"
+                    Margin="0,30,10,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Command="{Binding Commands[Search],
+                                      Mode=OneWay}"
+                    Content=""
+                    FontFamily="Segoe UI Symbol"
+                    FontSize="10" Height="25" />
+        </Grid>
     </DataTemplate>
 </ResourceDictionary>

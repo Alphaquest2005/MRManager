@@ -12,7 +12,8 @@
         <ResourceDictionary Source="PS-PersonAddressInfoTpl.xaml" />
         <ResourceDictionary Source="InterviewListDT.xaml" />
         <ResourceDictionary Source="InterviewListVDT.xaml" />
-        <ResourceDictionary Source="QuestionInfoDT.xaml"/>
-        <ResourceDictionary Source="ResponseInfoDT.xaml"/>
+        <ResourceDictionary Source="QuestionInfoDT.xaml" />
+        <ResourceDictionary Source="ResponseInfoDT.xaml" />
+        <ResourceDictionary Source="HeaderVDT.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

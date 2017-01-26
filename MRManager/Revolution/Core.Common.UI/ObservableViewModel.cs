@@ -92,4 +92,11 @@ namespace Core.Common.UI
 
     }
 
-}
+    public class ObservableViewModel : BaseViewModel<ObservableViewModel>
+    {
+        public ObservableViewModel(List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process, Type orientation) : base(process, eventSubscriptions, eventPublications, commandInfo, orientation)
+        {
+        }
+    }
+
+    }

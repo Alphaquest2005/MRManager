@@ -33,9 +33,9 @@ namespace ViewModels
         public ObservableCollection<IViewModel> BodyViewModels { get; } = new ObservableCollection<IViewModel>();
         public ObservableCollection<IViewModel> FooterViewModels { get; } = new ObservableCollection<IViewModel>();
 
-	    
+        public dynamic Slider { get; set; }
 
-	   
+
 
 
 

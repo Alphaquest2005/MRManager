@@ -46,9 +46,10 @@
                    Margin="116,0,0,0"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
+                   Style="{DynamicResource TextButtonStyle}"
                    FontFamily="Segoe UI Light"
                    FontSize="48"
-                   Text="Test"
+                   Text="App Name"
                    TextWrapping="Wrap" />
         <Border Grid.ColumnSpan="2"
                 Height="55"

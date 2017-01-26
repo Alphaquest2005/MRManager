@@ -30,11 +30,17 @@ namespace Views
                 
                 EventMessageBus.Current.GetEvent<IViewModelCreated<IScreenModel>>(Source).Subscribe(x =>
                 {
-                    Application.Current.Dispatcher.Invoke(() => { this.DataContext = x.ViewModel; });
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        this.DataContext = x.ViewModel;
+                        x.ViewModel.Slider = this.slider;
+                    });
                 });
 
+			    
 
-            }
+
+			}
 			catch (Exception)
 			{
 				throw;

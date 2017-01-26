@@ -41,6 +41,7 @@
     <Compile Include="Custom\PersonAddressInfo.cs" />
     <Compile Include="Custom\PersonPhoneNumbersInfo.cs" />
     <Compile Include="EFEntity.cs" />
+    <Compile Include="Custom\SignInInfo.cs" />
     <Compile Include="Generated Entities\AddressCities.cs" />
     <Compile Include="Generated Entities\AddressCountries.cs" />
     <Compile Include="Generated Entities\Addresses.cs" />
@@ -61,7 +62,6 @@
     <Compile Include="Generated Entities\Components.cs" />
     <Compile Include="Generated Entities\Countries.cs" />
     <Compile Include="Generated Entities\DefaultImages.cs" />
-    <Compile Include="Custom\SignInInfo.cs" />
     <Compile Include="Generated Entities\ExamDetailComponents.cs" />
     <Compile Include="Generated Entities\ExamDetails.cs" />
     <Compile Include="Generated Entities\ExamResults.cs" />

@@ -14,14 +14,14 @@
             <converters:StringDateConverter x:Key="StringDateConverter" />
         </DataTemplate.Resources>
         <Grid Width="Auto" Height="Auto">
-            <Grid Margin="0" Visibility="{Binding Type, Converter={StaticResource StringVisibilityConverter}, ConverterParameter='TextBox'}">
+            <Grid Margin="0" Visibility="{Binding Path=Type, Converter={StaticResource StringVisibilityConverter}, ConverterParameter='TextBox'}">
                 <TextBlock Width="303"
                            Height="24"
                            MinWidth="75"
                            Margin="157,5,0,0"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top"
-                           Text="{Binding Value,
+                           Text="{Binding Path=Value,
                                           FallbackValue=Value,
                                           UpdateSourceTrigger=PropertyChanged,
                                           ValidatesOnDataErrors=True}" />
@@ -31,7 +31,7 @@
                            Margin="0,5,0,0"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top"
-                           Text="{Binding Description,
+                           Text="{Binding Path=Description,
                                           FallbackValue=Description,
                                           UpdateSourceTrigger=PropertyChanged,
                                           ValidatesOnDataErrors=True}" />
@@ -52,7 +52,7 @@
             </Grid>
             <Grid Margin="0"
                   d:IsHidden="True"
-                  Visibility="{Binding Type,
+                  Visibility="{Binding Path=Type,
                                        Converter={StaticResource StringVisibilityConverter},
                                        ConverterParameter='CheckBox'}">
                 <CheckBox Width="440"
@@ -61,8 +61,8 @@
                           Margin="10,0,0,0"
                           HorizontalAlignment="Left"
                           VerticalAlignment="Top"
-                          Content="{Binding Description}"
-                          IsChecked="{Binding Value,
+                          Content="{Binding Path=Description}"
+                          IsChecked="{Binding Path=Value,
                                               Converter={StaticResource StringBooleanConverter},
                                               FallbackValue=Value,
                                               UpdateSourceTrigger=PropertyChanged,
@@ -72,7 +72,7 @@
             </Grid>
             <Grid Margin="0"
                   d:IsHidden="True"
-                  Visibility="{Binding Type,
+                  Visibility="{Binding Path=Type,
                                        Converter={StaticResource StringVisibilityConverter},
                                        ConverterParameter='DatePicker'}">
                 <DatePicker Width="226"
@@ -81,7 +81,7 @@
                             Margin="234,5,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            SelectedDate="{Binding Value,
+                            SelectedDate="{Binding Path=Value,
                                                    Converter={StaticResource StringDateConverter},
                                                    FallbackValue=Value,
                                                    UpdateSourceTrigger=PropertyChanged,
@@ -92,7 +92,7 @@
                            Margin="0,5,0,0"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top"
-                           Text="{Binding Description,
+                           Text="{Binding Path=Description,
                                           FallbackValue=Description,
                                           UpdateSourceTrigger=PropertyChanged,
                                           ValidatesOnDataErrors=True}" />

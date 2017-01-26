@@ -4,7 +4,7 @@ namespace RevolutionEntities.Process
 {
     public struct State : IState
     {
-        public State(string name, string status, string notes)
+        public State(  string name, string status, string notes)
         {
             Status = status;
             Name = name;
@@ -18,7 +18,7 @@ namespace RevolutionEntities.Process
 
     public struct StateEvent : IStateEvent
     {
-        public StateEvent(string status, string name, string notes, IStateCommand expectedCommand = null) 
+        public StateEvent(string name, string status, string notes, IStateCommand expectedCommand = null) 
         {
             ExpectedCommand = expectedCommand;
             Status = status;
@@ -35,7 +35,7 @@ namespace RevolutionEntities.Process
     public struct StateCommand : IStateCommand
     {
        
-        public StateCommand(string status, string name, IStateEvent expectedEvent = null)
+        public StateCommand(string name, string status, IStateEvent expectedEvent = null)
         {
             ExpectedEvent = expectedEvent;
             Status = status;

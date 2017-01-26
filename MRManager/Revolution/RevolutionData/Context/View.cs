@@ -15,6 +15,7 @@ namespace RevolutionData.Context
            // public static IStateCommand CreateViewModel => new StateCommand("CreateViewModel","Create View Model", Events.ViewModelCreated);
 
             public static IStateCommand ChangeEntity => new StateCommand("ChangeEntity", "Change Entity");
+            public static IStateCommand NavigateToView { get; private set; }
         }
         public class Events
         {

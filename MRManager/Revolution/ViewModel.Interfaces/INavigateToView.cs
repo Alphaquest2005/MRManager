@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
+using SystemInterfaces;
 
 namespace ViewModel.Interfaces
 {
     [InheritedExport]
-    public interface IScreenModel : IScreenLayoutViewModel
+    public interface INavigateToView:IProcessSystemMessage
     {
-        dynamic Slider { get; set; }
+        string View { get; }
     }
 }

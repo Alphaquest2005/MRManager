@@ -8,16 +8,39 @@
                     mc:Ignorable="d">
 
     <DataTemplate DataType="{x:Type viewModels:SigninViewModel}">
-        <StackPanel Width="500"
-                    Height="500"
-                    Background="LightPink">
-            <TextBox Text="{Binding Usersignin, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox Background="#FF30AC14" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
-            <Button Command="{Binding Commands[ValidateUserInfo]}" Content="Login" />
-            <TextBlock Text="{Binding State.Value.StateInfo.State.Status}" />
-            <TextBlock Text="{Binding State.Value.StateInfo.State.Notes}" />
-            <TextBlock Background="#FFF9FF81" Text="{Binding State.Value.Entity.Usersignin}" />
-            <Image Source="{Binding Image}" />
-        </StackPanel>
+        <Grid Width="500"
+              Height="300"
+              Background="#4CFDFDFD">
+            <TextBox Height="19"
+                     Margin="87,66,36,0"
+                     VerticalAlignment="Top"
+                     Text="{Binding Usersignin,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Height="19"
+                     Margin="87,90,36,0"
+                     VerticalAlignment="Top"
+                     Background="#99C6D8C2"
+                     Text="{Binding Password,
+                                    UpdateSourceTrigger=PropertyChanged}" Foreground="{x:Null}" SelectionBrush="{x:Null}" />
+            <Button Width="177"
+                    Margin="0,135,36,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Command="{Binding Commands[ValidateUserInfo]}"
+                    Content="Login" />
+            <TextBlock Height="33"
+                       Margin="10,167,10,0"
+                       VerticalAlignment="Top"
+                       Text="{Binding State.Value.StateInfo.State.Notes}" />
+            <TextBlock Margin="7,17,10,267"
+                       VerticalAlignment="Top"
+                       Text="{Binding State.Value.StateInfo.State.Status}" />
+            <Image Width="65"
+                   Height="57"
+                   Margin="10,59,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Source="{Binding Image}" />
+        </Grid>
     </DataTemplate>
 </ResourceDictionary>
