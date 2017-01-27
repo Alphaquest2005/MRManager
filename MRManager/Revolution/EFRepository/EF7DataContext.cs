@@ -62,6 +62,7 @@ namespace EFRepository
                 .Invoke(null, new object[] { msg});
         }
 
+
         public static void LoadEntitySet(ILoadEntitySet<TEntity> msg )
         {
             typeof(EntityRepository<,,>).MakeGenericType(typeof(TEntity),EntityType, ctxType)

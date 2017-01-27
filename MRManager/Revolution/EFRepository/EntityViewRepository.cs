@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;
 using System.Linq.Dynamic;
 using Common;
+using EF.DBContexts;
 using EventMessages.Events;
 using MoreLinq;
 using RevolutionData.Context;
@@ -33,7 +34,7 @@ namespace EFRepository
           {typeof(IPartialMatch), (str, itm) => str + $"{itm.Key}.Contains(\"{itm.Value}\") &&" }
       };
 
-        public static void GetEntityById(IGetEntityViewById<TView>  msg)
+        public static void GetEntityViewById(IGetEntityViewById<TView>  msg)
         {
             try
             {
@@ -54,7 +55,7 @@ namespace EFRepository
 
         }
 
-        public static void GetEntityWithChanges(IGetEntityViewWithChanges<TView> msg)
+        public static void GetEntityViewWithChanges(IGetEntityViewWithChanges<TView> msg)
         {
             try
             {
@@ -72,6 +73,32 @@ namespace EFRepository
             catch (Exception ex)
             {
                 PublishProcesError(msg, ex, typeof(IEntityViewWithChangesFound<TView>));
+            }
+
+        }
+
+        public static void UpdateEntityViewWithChanges(IUpdateEntityViewWithChanges<TView> msg)
+        {
+            try
+            {
+                var exp = FindExpressionClass.FindExpression<TDbEntity, TDbView>();
+                using (var ctx = new MRManagerDBContext())
+                {
+                    // update changes
+
+                    foreach (var change in msg.Changes)
+                    {
+                        
+                    }
+
+                    // retrieve whole item
+                    var res = ctx.Set<TDbEntity>().Select(exp).DistinctBy(x => x.Id).FirstOrDefault(x => x.Id == msg.EntityId);//
+                    EventMessageBus.Current.Publish(new EntityViewWithChangesUpdated<TView>((TView)(object)res, msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
+                }
+            }
+            catch (Exception ex)
+            {
+                PublishProcesError(msg, ex, typeof(IEntityViewWithChangesUpdated<TView>));
             }
 
         }

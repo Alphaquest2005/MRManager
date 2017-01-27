@@ -516,6 +516,33 @@ namespace RevolutionData
                                         s.Source);
                                 }),
 
+                     new ViewEventCommand<IQuestionaireViewModel, UpdateEntityViewWithChanges<IPatientResponseInfo>>(
+                        key:"SaveChanges",
+                        subject:v => v.ChangeTracking.DictionaryChanges,
+                        commandPredicate: new List<Func<IQuestionaireViewModel, bool>>
+                                            {
+                                                v => v.ChangeTracking.Count > 0
+                                            },
+                        messageData: s => new ViewEventCommandParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView),s.Process,s.Source)),
+
+                    new ViewEventCommand<IQuestionaireViewModel, ViewRowStateChanged<IPatientResponseInfo>>(
+                                key:"EditEntity",
+                                commandPredicate:new List<Func<IQuestionaireViewModel, bool>>
+                                {
+                                    v => v.CurrentEntity != null
+                                },
+                                subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+
+                                messageData: s =>
+                                {
+                                    s.RowState.Value = s.RowState.Value != RowState.Modified?RowState.Modified: RowState.Unchanged;
+
+                                    return new ViewEventCommandParameter(
+                                        new object[] {s,s.RowState.Value},
+                                        new StateCommandInfo(s.Process.Id,
+                                            Context.Process.Commands.CurrentEntityChanged), s.Process,
+                                        s.Source);
+                                }),
 
 
                 },

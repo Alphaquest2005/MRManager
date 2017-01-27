@@ -18,4 +18,22 @@ namespace EventMessages.Events
         public Dictionary<string, dynamic> Changes { get; }
 
     }
+    //TODO: Refactor cuz all that change is the operation add type to operation
+    //TODO: refactor seperate data and operation as types 
+
+    //    eg. public class EntityViewWithChanges<TView,TOperation> : ProcessSystemMessage, IEntityViewWithChangesUpdated<TView> where TView : IEntityView
+
+    [Export]
+    public class EntityViewWithChangesUpdated<TView> : ProcessSystemMessage, IEntityViewWithChangesUpdated<TView> where TView : IEntityView
+    {
+        public EntityViewWithChangesUpdated(TView entity, Dictionary<string, dynamic> changes, IStateEventInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo, process, source)
+        {
+            Entity = entity;
+            Changes = changes;
+        }
+
+        public TView Entity { get; set; }
+        public Dictionary<string, dynamic> Changes { get; }
+
+    }
 }

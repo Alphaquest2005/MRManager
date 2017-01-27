@@ -16,11 +16,16 @@ using ReactiveUI;
 using RevolutionEntities;
 using ValidationSets;
 using ViewModel.Interfaces;
+using ViewModelInterfaces;
 
 
 namespace Core.Common.UI
 {
-    public partial class ObservableListViewModel<TEntity> : BaseViewModel<ObservableListViewModel<TEntity>> where TEntity: IEntityId
+
+
+
+
+    public partial class ObservableListViewModel<TEntity> : BaseViewModel<ObservableListViewModel<TEntity>>, IEntityListViewModel<TEntity> where TEntity: IEntityId
     {
         protected AbstractValidator<TEntity> Validator { get; }
         protected ValidationResult ValidationResults = new ValidationResult();
@@ -41,29 +46,14 @@ namespace Core.Common.UI
                 SelectedEntities = new ObservableList<TEntity>(state.SelectedEntities.ToList());
         }
 
-        private ReactiveProperty<IProcessStateList<TEntity>> _state = new ReactiveProperty<IProcessStateList<TEntity>>();
-        public ReactiveProperty<IProcessStateList<TEntity>> State
-        {
-            get { return _state; }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _state, value);
-                
+        ReactiveProperty<IProcessState<TEntity>> IEntityViewModel<TEntity>.State => null;
+        
+        public ReactiveProperty<IProcessStateList<TEntity>> State => new ReactiveProperty<IProcessStateList<TEntity>>();
+        
 
-                // must broad cast event to handle simultanious events per single event IE continue chaining events
-
-            }
-        }
-
-       private ReactiveProperty<TEntity> _currentEntity = new ReactiveProperty<TEntity>(NullEntity<TEntity>.Instance);
-        public ReactiveProperty<TEntity> CurrentEntity
-        {
-            get { return _currentEntity; }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _currentEntity, value);
-            }
-        }
+       
+        public ReactiveProperty<TEntity> CurrentEntity=> new ReactiveProperty<TEntity>(NullEntity<TEntity>.Instance);
+        
        
         private ObservableList<TEntity> _entitySet = new ObservableList<TEntity>();
         public virtual ObservableList<TEntity> EntitySet
@@ -123,9 +113,13 @@ namespace Core.Common.UI
             }
             this.RaisePropertyChanged(property);
         }
+
+        
         public ObservableDictionary<string, dynamic> ChangeTracking { get; } = new ObservableDictionary<string, dynamic>();
 
-
+        
+        public ReactiveProperty<RowState> RowState => new ReactiveProperty<RowState>(SystemInterfaces.RowState.Unchanged);
+        
 
         public IEnumerable GetErrors(string propertyName)
         {
@@ -134,6 +128,8 @@ namespace Core.Common.UI
 
         public bool HasErrors => !ValidationResults.IsValid;
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+
 
 
     }

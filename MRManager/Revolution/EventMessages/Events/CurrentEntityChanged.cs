@@ -18,4 +18,6 @@ namespace EventMessages.Events
             Entity = entity;
         }
     }
+
+
 }

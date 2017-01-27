@@ -48,6 +48,7 @@
     <Compile Include="StringVisibilityConverter.cs" />
     <Compile Include="NullVisibilityConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="HasValueTypeVisiblityConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />

@@ -23,6 +23,7 @@ namespace ViewModelInterfaces
         ReactiveProperty<TEntity> CurrentEntity { get; }
         ObservableList<TEntity> EntitySet { get; }
         ObservableList<TEntity> SelectedEntities { get; }
+        ReactiveProperty<RowState> RowState { get;}
     }
 
 

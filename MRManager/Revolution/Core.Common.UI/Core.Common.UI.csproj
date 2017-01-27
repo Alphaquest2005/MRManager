@@ -58,10 +58,7 @@
     <Compile Include="DynamicViewModel.cs" />
     <Compile Include="ObservableListViewModel.cs" />
     <Compile Include="ObservableViewModel.cs" />
-    <Compile Include="BaseReadEntityViewModel.cs" />
     <Compile Include="BaseViewModel.cs" />
-    <Compile Include="BaseWriteEntityViewModel-CrudOps.cs" />
-    <Compile Include="BaseWriteEntityViewModel.cs" />
     <Compile Include="AppSlider.cs" />
     <Compile Include="CBSelectedItem.cs" />
     <Compile Include="Commands\CommandBehavior.cs" />

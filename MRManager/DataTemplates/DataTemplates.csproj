@@ -60,63 +60,67 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="InterviewListDT.xaml">
+    <Page Include="Custom\InterviewListDT.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="InterviewListVDT.xaml">
+    <Page Include="Custom\InterviewListVDT.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PatientInfoSummaryRDT.xaml">
+    <Page Include="Custom\PatientInfoSummaryRDT.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PatientInfoRDT.xaml">
+    <Page Include="Custom\PatientInfoRDT.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PatientInfoSummaryListRDT.xaml">
+    <Page Include="Custom\PatientInfoSummaryListRDT.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PS-ForeignAddressInfoTpl.xaml">
+    <Page Include="Custom\PS-ForeignAddressInfoTpl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PS-ForeignPhoneNumberInfoTpl.xaml">
+    <Page Include="Custom\PS-ForeignPhoneNumberInfoTpl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PS-NextOfKinInfoTpl.xaml">
+    <Page Include="Custom\PS-NextOfKinInfoTpl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PS-NonResidentPatientInfoTpl.xaml">
+    <Page Include="Custom\PS-NonResidentPatientInfoTpl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PS-PersonAddressInfoTpl.xaml">
+    <Page Include="Custom\PS-PersonAddressInfoTpl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PS-PersonPhoneNumberInfoTpl.xaml">
+    <Page Include="Custom\PS-PersonPhoneNumberInfoTpl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="QuestionInfoDT.xaml">
+    <Page Include="Custom\QuestionInfoDT.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ResponseInfoDT.xaml">
+    <Page Include="Custom\ResponseInfoWDT.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="HeaderVDT.xaml">
+    <Page Include="Custom\ResponseInfoRDT.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SignInInfoRDT.xaml">
+    <Page Include="Custom\HeaderVDT.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Custom\SignInInfoRDT.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -3,6 +3,7 @@
                     xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
                     xmlns:converters="clr-namespace:Converters;assembly=Converters"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
@@ -251,8 +252,8 @@
             </Style>
         </DataTemplate.Resources>
         <Border x:Name="ViewPatientResponses"
-                BorderBrush="#FFECE8E8"
                 Width="600"
+                BorderBrush="#FFECE8E8"
                 BorderThickness="1"
                 CornerRadius="45.25">
             <Border.Background>
@@ -313,7 +314,13 @@
                          VerticalAlignment="Stretch"
                          Background="#33FFFFFF"
                          ItemTemplate="{DynamicResource ResponseInfoDT}"
-                         ItemsSource="{Binding CurrentEntity.Value.ResponseOptions}" />
+                         ItemsSource="{Binding CurrentEntity.Value.ResponseOptions}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding EditEntity}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListBox>
 
             </Grid>
         </Border>

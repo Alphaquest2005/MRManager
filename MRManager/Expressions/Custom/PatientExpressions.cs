@@ -219,14 +219,14 @@ namespace Entity.Expressions
                             PatientResponseId = z.PatientResponseId,
                             Media = z.Media.Value
                         } as IResponseImage).ToList(),
-                        ResponseOptions = x.Response.Select(z => new ResponseOptionInfo()
+                        ResponseOptions = x.Questions.ResponseOptions.Select(z => new ResponseOptionInfo()
                         {
                             Id = z.Id,
-                            Description = z.ResponseOptions.Description,
-                            QuestionId = z.ResponseOptions.QuestionId,
-                            Value = z.Value,
-                            Type = z.ResponseOptions.Type,
-                            PatientResponseId = z.PatientResponseId
+                            Description = z.Description,
+                            QuestionId = z.QuestionId,
+                            Value = z.Response.Where(z2 => z2.PatientResponseId == x.Id).Select(z3 => z3.Value).FirstOrDefault(),
+                            Type = z.Type,
+                            PatientResponseId = x.Id
 
                         } as IResponseOptionInfo).ToList()
 

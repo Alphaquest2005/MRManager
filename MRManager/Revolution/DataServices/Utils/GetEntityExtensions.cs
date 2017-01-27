@@ -27,12 +27,17 @@ namespace DataServices.Actors
         public static void GetEntity<TEntityView>(this IGetEntityViewById<TEntityView> msg) where TEntityView : IEntityView
         {
 
-            EntityViewDataContext<TEntityView>.GetEntityById(msg);
+            EntityViewDataContext<TEntityView>.GetEntityViewById(msg);
         }
 
         public static void GetEntityViewWithChanges<TEntityView>(this IGetEntityViewWithChanges<TEntityView> msg) where TEntityView : IEntityView
         {
-            EntityViewDataContext<TEntityView>.GetEntityWithChanges(msg);
+            EntityViewDataContext<TEntityView>.GetEntityViewWithChanges(msg);
+        }
+
+        public static void UpdateEntityViewWithChanges<TEntityView>(this IUpdateEntityViewWithChanges<TEntityView> msg) where TEntityView : IEntityView
+        {
+            EntityViewDataContext<TEntityView>.UpdateEntityViewWithChanges(msg);
         }
 
         public static void LoadEntityViewSetWithChanges<TEntityView>(this ILoadEntityViewSetWithChanges<TEntityView,IMatchType> msg) where TEntityView : IEntityView

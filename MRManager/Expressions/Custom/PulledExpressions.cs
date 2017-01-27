@@ -13,27 +13,29 @@ using Interfaces;
 
 namespace Entity.Expressions
 {
-	public static partial class PulledExpressions
-	{
-        //TODO: Double check all data present
-		public static Expression<Func<UserSignIn, SignInInfo>> SignInInfoExpression { get; } =
-		
-			x => new SignInInfo()
-			{
-				Id = x.Id,
-				Medias = x.Persons.PersonMedia.Select(x2 => x2.Media).Select(x3 => x3.Value).FirstOrDefault(),
-				Usersignin = x.Username,
-				Password = x.Password,
-			};
+    public static class Entities
+    {
+        public const string Patient = "Patient";
+    }
 
+    public static class Patient
+    {
+        public const string Name = "Name";
+        public const string Birthdate = "BirthDate";
+        public const string EntityId = "Id";
+    }
+
+    public static partial class PulledExpressions
+	{
+       
         public static Expression<Func<Patients, PatientDetailsInfo>> PatientDetailsInfoExpression { get; } =
 
             x => new PatientDetailsInfo()
             {
                 Id = x.Id,
-                IdNumber = x.PatientVisit.SelectMany(x3 => x3.PatientResponses).Where(x2 => x2.Questions.EntityAttributes.Entity == "Patient" && x2.Questions.EntityAttributes.Attribute == "Id").SelectMany(x4 => x4.Response).Select(x5 => x5.Value).FirstOrDefault(),
-                Name = string.Join(" ", x.PatientVisit.SelectMany(x3 => x3.PatientResponses).Where(x2 => x2.Questions.EntityAttributes.Entity == "Patient" && x2.Questions.EntityAttributes.Attribute == "Name").SelectMany(x4 => x4.Response).Select(x5 => x5.Value)),
-                Age = DateTime.Now.Year - Convert.ToDateTime(x.PatientVisit.SelectMany(x3 => x3.PatientResponses).Where(x2 => x2.Questions.EntityAttributes.Entity == "Patient" && x2.Questions.EntityAttributes.Attribute == "BirthDate").SelectMany(x4 => x4.Response).Select(x5 => x5.Value).FirstOrDefault()).Year,
+                IdNumber = x.PatientVisit.SelectMany(x3 => x3.PatientResponses).Where(x2 => x2.Questions.EntityAttributes.Entity == Entities.Patient && x2.Questions.EntityAttributes.Attribute == Patient.EntityId).SelectMany(x4 => x4.Response).Select(x5 => x5.Value).FirstOrDefault(),
+                Name = string.Join(" ", x.PatientVisit.SelectMany(x3 => x3.PatientResponses).Where(x2 => x2.Questions.EntityAttributes.Entity == Entities.Patient && x2.Questions.EntityAttributes.Attribute == Patient.Name).SelectMany(x4 => x4.Response).Select(x5 => x5.Value)),
+                Age = DateTime.Now.Year - Convert.ToDateTime(x.PatientVisit.SelectMany(x3 => x3.PatientResponses).Where(x2 => x2.Questions.EntityAttributes.Entity == Entities.Patient && x2.Questions.EntityAttributes.Attribute == Patient.Birthdate).SelectMany(x4 => x4.Response).Select(x5 => x5.Value).FirstOrDefault()).Year,
                
             };
 
@@ -42,121 +44,11 @@ namespace Entity.Expressions
             x => new PatientInfo()
             {
                 Id = x.Id,
-                Name = string.Join(" ", x.PatientVisit.SelectMany(x3 => x3.PatientResponses).Where(x2 => x2.Questions.EntityAttributes.Entity == "Patient" && x2.Questions.EntityAttributes.Attribute == "Name").SelectMany(x4 => x4.Response).Select(x5 => x5.Value)),
-                Age = DateTime.Now.Year - Convert.ToDateTime(x.PatientVisit.SelectMany(x3 => x3.PatientResponses).Where(x2 => x2.Questions.EntityAttributes.Entity == "Patient" && x2.Questions.EntityAttributes.Attribute == "BirthDate").SelectMany(x4 => x4.Response).Select(x5 => x5.Value).FirstOrDefault()).Year,
+                Name = string.Join(" ", x.PatientVisit.SelectMany(x3 => x3.PatientResponses).Where(x2 => x2.Questions.EntityAttributes.Entity == Entities.Patient && x2.Questions.EntityAttributes.Attribute == Patient.Name).SelectMany(x4 => x4.Response).Select(x5 => x5.Value)),
+                Age = DateTime.Now.Year - Convert.ToDateTime(x.PatientVisit.SelectMany(x3 => x3.PatientResponses).Where(x2 => x2.Questions.EntityAttributes.Entity == Entities.Patient && x2.Questions.EntityAttributes.Attribute == Patient.Birthdate).SelectMany(x4 => x4.Response).Select(x5 => x5.Value).FirstOrDefault()).Year,
             };
 
-        public static Expression<Func<Persons_Patient, NextOfKinInfo>> NextOfKinInfoExpression { get; } =
-
-                x => new NextOfKinInfo()
-                {
-                    Id = x.Id,
-                    Name = string.Join(" ", x.Persons.PersonNames.Select(z => z.PersonName)),
-                   
-                    Email = x.Persons.PersonEmailAddress.FirstOrDefault().Email,
-                    PhoneNumber = x.Persons.PersonPhoneNumbers.FirstOrDefault().PhoneNumber,
-
-                    Address = string.Join(", ", x.Persons.PersonAddresses.Select(z => z.Addresses.AddressLines).Select(q => q.Select( r => r.Name))),
-
-                    Addresses = x.Persons.PersonAddresses.Select(z => new PersonAddressInfo()
-                    {
-                        Addresstype = z.AddressTypes.Name,
-                        City = z.Addresses.AddressCities.Cities.Name,
-                        Country = z.Addresses.AddressCountries.Countries.Name,
-                        Parish = z.Addresses.AddressParishes.Parishes.Name,
-                        State = z.Addresses.AddressStates.States.Name
-
-                    } as IPersonAddressInfo).ToList(),
-                    PhoneNumbers = x.Persons.PersonPhoneNumbers.Select(z => new PhoneNumbersInfo()
-                    {
-                        PersonId = x.Id,
-                        PhoneNumber = z.PhoneNumber,
-                        Type = z.PhoneTypes.Name
-                    } as IPersonPhoneNumberInfo).ToList(),
-                };
-
-
-  
-
-        public static Expression<Func<Persons_Patient, NonResidentInfo>> NonResidentInfoExpression { get; } =
-
-            x => new NonResidentInfo()
-            {
-                Id = x.Id,
-                BoatName = x.Persons_NonResidentPatient.BoatInfo.BoatName,
-                ArrivalDate = x.Persons_NonResidentPatient.Persons_ArrivalDepartureInfo.ArrivalDate,
-                DepartureDate = x.Persons_NonResidentPatient.Persons_ArrivalDepartureInfo.DepartureDate,
-                HotelName = x.Persons_NonResidentPatient.NonResidentHotelInfo.Organisations_Hotels.Organisations.Name,
-                MarinaList = x.Persons_NonResidentPatient.BoatInfo.MarinaList,
-                School = x.Persons_NonResidentPatient.StudentInfo.School,
-                Addresses = x.Persons.PersonAddresses.Select(z => new ForeignAddressInfo()
-                {
-                    Addresstype = z.AddressTypes.Name,
-                    Addresslines = string.Join(", ",z.Addresses.AddressLines.Select(s => s.Name)),
-                    City = z.Addresses.AddressCities.Cities.Name,
-                    Country = z.Addresses.AddressCountries.Countries.Name,
-                    Parish = z.Addresses.AddressParishes.Parishes.Name,
-                    State = z.Addresses.AddressStates.States.Name
-
-                } as IForeignAddressInfo).ToList(),
-                PhoneNumbers = x.Persons.PersonPhoneNumbers.Select(z => new PhoneNumbersInfo()
-                {
-                    PersonId = x.Id,
-                    PhoneNumber = z.PhoneNumber,
-                    Type = z.PhoneTypes.Name
-                } as IPersonPhoneNumberInfo).ToList(),
-            };
-
-        public static Expression<Func<Persons_Patient, List<PhoneNumbersInfo>>> PatientPhoneNumbersInfoExpression { get; } =
-
-                x => x.Persons.PersonPhoneNumbers.Select(z => new PhoneNumbersInfo()
-                {
-                    PersonId = x.Id,
-                    PhoneNumber = z.PhoneNumber,
-                    Type = z.PhoneTypes.Name
-                }).ToList();
-
-        public static Expression<Func<Interviews, InterviewInfo>> InterviewInfoExpression { get; } =
-                    x =>  new InterviewInfo()
-                                            {
-                                                Id = x.Id,
-                                                Interview = x.Name,
-                                                Category =x.MedicalCategory.Category,
-                                                Phase = x.Phase.Name
-                                            };
-
-        public static Expression<Func<PatientResponses, PatientResponseInfo>> PatientResponseInfoExpression { get; } = 
-                    x => new PatientResponseInfo()
-                    {
-                        Id = x.Id,
-                        Category = x.Questions.Interviews.MedicalCategory.Category,
-                        Question = x.Questions.Description,
-                        Interview = x.Questions.Interviews.Name,
-                        PatientSyntomId = x.PatientSyntomId,
-                        InterviewId = x.Questions.InterviewId,
-                        PatientVisitId = x.PatientVisitId,
-                        QuestionId = x.QuestionId,
-                        PatientId = x.PatientVisit.PatientId,
-                        ResponseImages = x.ResponseImages.Select(z => new ResponseImage()
-                        {
-                            MediaId = z.MediaId,
-                            PatientResponseId = z.PatientResponseId,
-                            Media = z.Media.Value
-                        } as IResponseImage).ToList(),
-                        ResponseOptions = x.Response.Select(z => new ResponseOptionInfo()
-                        {
-                            Id = z.Id,
-                            Description = z.ResponseOptions.Description,
-                            QuestionId = z.ResponseOptions.QuestionId,
-                            Value = z.Value,
-                            Type = z.ResponseOptions.Type,
-                            PatientResponseId = z.PatientResponseId
-
-                        } as IResponseOptionInfo).ToList()
-
-                    }; 
-                 
-                     
+       
     }
 
 

@@ -33,19 +33,27 @@ namespace EFRepository
         
 
 
-        public static void GetEntityById(IGetEntityViewById<TEntityView> msg)
+        public static void GetEntityViewById(IGetEntityViewById<TEntityView> msg)
         {
             
             typeof(EntityViewRepository<,,,,>).MakeGenericType(typeof(TEntityView),ViewType,TEntity, EntityType, ctxType)
-                  .GetMethod("GetEntityById")
+                  .GetMethod("GetEntityViewById")
                   .Invoke(null, new object[] { msg });
         }
 
-        public static void GetEntityWithChanges(IGetEntityViewWithChanges<TEntityView> msg)
+        public static void GetEntityViewWithChanges(IGetEntityViewWithChanges<TEntityView> msg)
         {
 
             typeof(EntityViewRepository<,,,,>).MakeGenericType(typeof(TEntityView), ViewType, TEntity, EntityType, ctxType)
-                  .GetMethod("GetEntityWithChanges")
+                  .GetMethod("GetEntityViewWithChanges")
+                  .Invoke(null, new object[] { msg });
+        }
+
+        public static void UpdateEntityViewWithChanges(IUpdateEntityViewWithChanges<TEntityView> msg)
+        {
+
+            typeof(EntityViewRepository<,,,,>).MakeGenericType(typeof(TEntityView), ViewType, TEntity, EntityType, ctxType)
+                  .GetMethod("UpdateEntityViewWithChanges")
                   .Invoke(null, new object[] { msg });
         }
 
@@ -58,24 +66,6 @@ namespace EFRepository
         }
 
 
-        //public static void GetEntityView<TView, TViewDBEntity>(Expression<Func<TEntity, bool>> filter, Expression query)
-        //{
-        //    try
-        //    {
-        //        var rep = new EntityViewRepository<TEntity, TView, TViewDBEntity>();
-
-        //        rep.GetType()
-        //            .GetMethod("GetEntityView")
-        //            .MakeGenericMethod(ctxType, EntityType)
-        //            .Invoke(rep, new object[] { filter, query });
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
-
-
+      
     }
 }

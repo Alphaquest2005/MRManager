@@ -10,7 +10,12 @@ namespace SystemInterfaces
         int EntityId { get; }
     }
 
-
+    [InheritedExport]
+    public interface IUpdateEntityViewWithChanges<out TEntityView> : IProcessSystemMessage, IEntityViewRequest<TEntityView> where TEntityView : IEntityView
+    {
+        Dictionary<string, object> Changes { get; }
+        int EntityId { get; }
+    }
     
 
     [InheritedExport]

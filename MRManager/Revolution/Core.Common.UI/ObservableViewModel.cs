@@ -18,6 +18,7 @@ using ViewModelInterfaces;
 
 namespace Core.Common.UI
 {
+
     public partial class ObservableViewModel<TEntity> : BaseViewModel<ObservableViewModel<TEntity>> , IEntityViewModel<TEntity> where TEntity:IEntityId
     {
         public AbstractValidator<TEntity> Validator { get; }

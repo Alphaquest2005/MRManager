@@ -25,5 +25,6 @@ namespace RevolutionEntities.ViewModels
         public Type Orientation { get; }
     }
 
-    
+
+
 }
