@@ -3,6 +3,7 @@
                     xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
                     xmlns:converters="clr-namespace:Converters;assembly=Converters"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:dataInterfaces="clr-namespace:SystemInterfaces;assembly=SystemInterfaces"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
@@ -250,6 +251,37 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <Style x:Key="ResponseOptionDT"
+                   BasedOn="{StaticResource ThemeListBoxItem}"
+                   TargetType="{x:Type ListBoxItem}">
+
+                <!--  Default Template  -->
+                <Setter Property="ContentTemplate" Value="{DynamicResource ResponseInfoRDT}" />
+                <Setter Property="Height" Value="Auto"/>
+
+                <!--  Triggers to change Template  -->
+                <Style.Triggers>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding RowState}" Value="{x:Static dataInterfaces:RowState.Added}" />
+                            <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsSelected}" Value="True" />
+                        </MultiDataTrigger.Conditions>
+                        <MultiDataTrigger.Setters>
+                            <Setter Property="ContentTemplate" Value="{DynamicResource ResponseInfoWDT}" />
+                        </MultiDataTrigger.Setters>
+                    </MultiDataTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding RowState}" Value="{x:Static dataInterfaces:RowState.Modified}" />
+                            <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsSelected}" Value="True" />
+                        </MultiDataTrigger.Conditions>
+                        <MultiDataTrigger.Setters>
+                            <Setter Property="ContentTemplate" Value="{DynamicResource ResponseInfoWDT}" />
+                        </MultiDataTrigger.Setters>
+                    </MultiDataTrigger>
+                </Style.Triggers>
+            </Style>
         </DataTemplate.Resources>
         <Border x:Name="ViewPatientResponses"
                 Width="600"
@@ -313,11 +345,11 @@
                          HorizontalAlignment="Stretch"
                          VerticalAlignment="Stretch"
                          Background="#33FFFFFF"
-                         ItemTemplate="{DynamicResource ResponseInfoDT}"
+                         ItemContainerStyle="{StaticResource ResponseOptionDT}"
                          ItemsSource="{Binding CurrentEntity.Value.ResponseOptions}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
-                            <i:InvokeCommandAction Command="{Binding EditEntity}" />
+                            <i:InvokeCommandAction Command="{Binding Commands[EditEntity]}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ListBox>

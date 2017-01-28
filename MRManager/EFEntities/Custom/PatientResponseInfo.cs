@@ -14,6 +14,8 @@ namespace EF.Entities
         public string Interview { get; set; }
         public string Category { get; set; }
         public IList<IResponseOptionInfo> ResponseOptions { get; set; }
+        public IList<IResponseOptionInfo> Responses { get; set; }
+
         public IList<IResponseImage> ResponseImages { get; set; }
         public int PatientId { get; set; }
     }

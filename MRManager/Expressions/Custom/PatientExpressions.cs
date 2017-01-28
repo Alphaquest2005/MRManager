@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Common.DataEntites;
+using MoreLinq;
 using EF.Entities;
 using Interfaces;
 
@@ -201,7 +202,7 @@ namespace Entity.Expressions
                                                 Phase = x.Phase.Name
                                             };
 
-        public static Expression<Func<PatientResponses, PatientResponseInfo>> PatientResponseInfoExpression { get; } = 
+        public static Expression<Func<PatientResponses, PatientResponseInfo>> PatientResponseInfoExpression { get; } =
                     x => new PatientResponseInfo()
                     {
                         Id = x.Id,
@@ -224,15 +225,43 @@ namespace Entity.Expressions
                             Id = z.Id,
                             Description = z.Description,
                             QuestionId = z.QuestionId,
-                            Value = z.Response.Where(z2 => z2.PatientResponseId == x.Id).Select(z3 => z3.Value).FirstOrDefault(),
+                            ResponseId = (int?)(z.Response.Any() ? z.Response.Where(x1 => x1.PatientResponseId == x.Id).Select(x2 => x2.Id).First(): 0),
+                            Value = z.Response.Any() ? z.Response.Where(x1 => x1.PatientResponseId == x.Id).Select(x2 => x2.Value).First():null ,//
                             Type = z.Type,
+                            PatientResponseId = x.Id
+
+                        } as IResponseOptionInfo).ToList(),
+                        Responses = x.Response.Select(z => new ResponseOptionInfo()
+                        {
+                            Id = z.Id,
+                            Description = z.ResponseOptions.Description,
+                            QuestionId = z.ResponseOptions.QuestionId,
+                            ResponseId = z.Id,
+                            Value = z.Value,//
+                            Type = z.ResponseOptions.Type,
                             PatientResponseId = x.Id
 
                         } as IResponseOptionInfo).ToList()
 
-                    }; 
-                 
-                     
+                    };
+
+        //public static Expression<Func<PatientResponses, object>> PatientResponseInfoExpression { get; } =
+        //    x => new
+        //    {
+        //       ResponseOptions = x.Questions.ResponseOptions.Select(z => new 
+        //        {
+        //            Id = x.Id,
+        //            Description = z.Description,
+        //            QuestionId = z.QuestionId,
+        //            Value = z.Response.Any()? z.Response.Where(x1 => x1.PatientResponseId == x.Id).Select(x2 => x2.Value).First(): null,//
+        //            Type = z.Type,
+        //                    //PatientResponseId = x == null?0:x.Id
+
+        //                }).ToList()
+
+        //    };
+
+
     }
 
 

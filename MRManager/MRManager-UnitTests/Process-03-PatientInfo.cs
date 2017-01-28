@@ -80,12 +80,12 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<IViewStateLoaded<IPatientSummaryListViewModel, IProcessStateList<IPatientInfo>>>(Source).Where(x => x.Process.Id == 3).Subscribe(x => InitialViewStateLoaded = x);
 
             EventMessageBus.Current.GetEvent<IViewStateLoaded<IPatientSummaryListViewModel, IProcessStateList<IPatientInfo>>>(Source).Where(x => x.Process.Id == 3 
-                                        && x.State != null && x.State.EntitySet.Any() 
+                                      //  && x.State != null && x.State.EntitySet.Any() 
                                         && processStateMessageList.Count == 1).Subscribe(
                 x =>
                 {
-                    ((dynamic)PatientSummaryListViewModelCreated.ViewModel).Email = "jose";
-                    ((dynamic)PatientSummaryListViewModelCreated.ViewModel).PhoneNumber = "8243";
+                    ((dynamic)PatientSummaryListViewModelCreated.ViewModel).Name = "lisa";
+                    ((dynamic)PatientSummaryListViewModelCreated.ViewModel).Age = "27";
                     ((dynamic)PatientSummaryListViewModelCreated.ViewModel).Commands["Search"].Execute();
                 });
 

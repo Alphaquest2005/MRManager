@@ -36,6 +36,7 @@ namespace ViewModels
         public ObservableDictionary<string, dynamic> ChangeTracking => this.Instance.ChangeTracking;
         public ObservableList<IInterviewInfo> EntitySet => this.Instance.EntitySet;
         public ObservableList<IInterviewInfo> SelectedEntities => this.Instance.SelectedEntities;
+        public ReactiveProperty<RowState> RowState => this.Instance.RowState;
 
 
         public string Field { get; set; }

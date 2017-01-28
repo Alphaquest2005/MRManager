@@ -25,7 +25,7 @@ namespace Core.Common.UI
 
 
 
-    public partial class ObservableListViewModel<TEntity> : BaseViewModel<ObservableListViewModel<TEntity>>, IEntityListViewModel<TEntity> where TEntity: IEntityId
+    public partial class ObservableListViewModel<TEntity> : BaseViewModel<ObservableListViewModel<TEntity>>, IEntityListViewModel<TEntity> where TEntity: IEntityId//
     {
         protected AbstractValidator<TEntity> Validator { get; }
         protected ValidationResult ValidationResults = new ValidationResult();
@@ -46,15 +46,31 @@ namespace Core.Common.UI
                 SelectedEntities = new ObservableList<TEntity>(state.SelectedEntities.ToList());
         }
 
-        ReactiveProperty<IProcessState<TEntity>> IEntityViewModel<TEntity>.State => null;
         
-        public ReactiveProperty<IProcessStateList<TEntity>> State => new ReactiveProperty<IProcessStateList<TEntity>>();
         
+        ReactiveProperty<IProcessState<TEntity>> IEntityViewModel<TEntity>.State
+        {
+            get { return new ReactiveProperty<IProcessState<TEntity>>(_state.Value); }
+        }
 
-       
-        public ReactiveProperty<TEntity> CurrentEntity=> new ReactiveProperty<TEntity>(NullEntity<TEntity>.Instance);
-        
-       
+        //HACK:NEVER USER THIS IMPLEMENTATION - FOR SOME FUCKED UP REASON IT NOT RAISING CHANGE NOTIFICATIONS EVEN IF YOU NEVER CALL THE SETTER....
+        // public ReactiveProperty<IProcessStateList<TEntity>> State => new ReactiveProperty<IProcessStateList<TEntity>>();
+
+        private ReactiveProperty<IProcessStateList<TEntity>> _state = new ReactiveProperty<IProcessStateList<TEntity>>();
+        public ReactiveProperty<IProcessStateList<TEntity>> State
+        {
+            get { return _state; }
+            set { this.RaiseAndSetIfChanged(ref _state, value);}
+        }
+
+        private ReactiveProperty<TEntity> _currentEntity = new ReactiveProperty<TEntity>(NullEntity<TEntity>.Instance);
+        public ReactiveProperty<TEntity> CurrentEntity
+        {
+            get { return _currentEntity; }
+            set { this.RaiseAndSetIfChanged(ref _currentEntity, value); }
+        }
+
+
         private ObservableList<TEntity> _entitySet = new ObservableList<TEntity>();
         public virtual ObservableList<TEntity> EntitySet
         {
@@ -70,6 +86,8 @@ namespace Core.Common.UI
         }
 
         private ObservableList<TEntity> _selectedEntities = new ObservableList<TEntity>();
+        
+
         public ObservableList<TEntity> SelectedEntities
         {
             get

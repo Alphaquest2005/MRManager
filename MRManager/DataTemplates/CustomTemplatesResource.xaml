@@ -1,19 +1,20 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="SignInInfoRDT.xaml" />
-        <ResourceDictionary Source="PatientInfoSummaryListRDT.xaml" />
-        <ResourceDictionary Source="PatientInfoSummaryRDT.xaml" />
-        <ResourceDictionary Source="PatientInfoRDT.xaml" />
-        <ResourceDictionary Source="PS-ForeignAddressInfoTpl.xaml" />
-        <ResourceDictionary Source="PS-ForeignPhoneNumberInfoTpl.xaml" />
-        <ResourceDictionary Source="PS-NextOfKinInfoTpl.xaml" />
-        <ResourceDictionary Source="PS-NonResidentPatientInfoTpl.xaml" />
-        <ResourceDictionary Source="PS-PersonPhoneNumberInfoTpl.xaml" />
-        <ResourceDictionary Source="PS-PersonAddressInfoTpl.xaml" />
-        <ResourceDictionary Source="InterviewListDT.xaml" />
-        <ResourceDictionary Source="InterviewListVDT.xaml" />
-        <ResourceDictionary Source="QuestionInfoDT.xaml" />
-        <ResourceDictionary Source="ResponseInfoDT.xaml" />
-        <ResourceDictionary Source="HeaderVDT.xaml" />
+        <ResourceDictionary Source="Custom/SignInInfoRDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientInfoSummaryListRDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientInfoSummaryRDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientInfoRDT.xaml" />
+        <ResourceDictionary Source="Custom/PS-ForeignAddressInfoTpl.xaml" />
+        <ResourceDictionary Source="Custom/PS-ForeignPhoneNumberInfoTpl.xaml" />
+        <ResourceDictionary Source="Custom/PS-NextOfKinInfoTpl.xaml" />
+        <ResourceDictionary Source="Custom/PS-NonResidentPatientInfoTpl.xaml" />
+        <ResourceDictionary Source="Custom/PS-PersonPhoneNumberInfoTpl.xaml" />
+        <ResourceDictionary Source="Custom/PS-PersonAddressInfoTpl.xaml" />
+        <ResourceDictionary Source="Custom/InterviewListDT.xaml" />
+        <ResourceDictionary Source="Custom/InterviewListVDT.xaml" />
+        <ResourceDictionary Source="Custom/QuestionInfoDT.xaml" />
+        <ResourceDictionary Source="Custom/ResponseInfoRDT.xaml" />
+        <ResourceDictionary Source="Custom/ResponseInfoWDT.xaml" />
+        <ResourceDictionary Source="Custom/HeaderVDT.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
