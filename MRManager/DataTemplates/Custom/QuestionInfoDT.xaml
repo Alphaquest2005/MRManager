@@ -317,7 +317,7 @@
                          VerticalAlignment="Stretch"
                          Background="#33FFFFFF"
                          
-                         ItemsSource="{Binding CurrentEntity.Value.ResponseOptions}">
+                         ItemsSource="{Binding ChangeTrackingList}">
                     
                     <ListBox.ItemContainerStyle>
                         <Style  TargetType="{x:Type ListBoxItem}">

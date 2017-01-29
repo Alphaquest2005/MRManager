@@ -14,4 +14,13 @@ namespace Interfaces
         String Description { get; }
         String Type { get; }
     }
+
+    [InheritedExport]
+    public partial interface IResponseInfo : IEntityView<IResponse>
+    {
+        int PatientResponseId { get; }
+        int ResponseOptionId { get; }
+        String Value { get; }
+        
+    }
 }

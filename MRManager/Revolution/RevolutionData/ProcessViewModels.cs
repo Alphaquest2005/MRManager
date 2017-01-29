@@ -10,6 +10,7 @@ using EventMessages.Commands;
 using EventMessages.Events;
 using Interfaces;
 using JB.Reactive.ExtensionMethods;
+using MoreLinq;
 using Reactive.Bindings;
 using ReactiveUI;
 using RevolutionEntities.Process;
@@ -517,14 +518,15 @@ namespace RevolutionData
                                         s.Source);
                                 }),
 
-                     new ViewEventCommand<IQuestionaireViewModel, UpdateEntityViewWithChanges<IPatientResponseInfo>>(
+                     new ViewEventCommand<IQuestionaireViewModel, UpdateEntityViewWithChanges<IResponseInfo>>(
                         key:"SaveChanges",
                         subject:v => v.ChangeTracking.DictionaryChanges,
                         commandPredicate: new List<Func<IQuestionaireViewModel, bool>>
                                             {
-                                                v => v.ChangeTracking.Count > 0
+                                                v => v.ChangeTracking.Count == 2
                                             },
-                        messageData: s => new ViewEventCommandParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView),s.Process,s.Source)),
+                        //TODO: Make a type to capture this info... i killing it here
+                        messageData: s => new ViewEventCommandParameter(new object[] {s.ChangeTracking.First().Value,s.ChangeTracking.TakeLast(1).ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView),s.Process,s.Source)),
 
                     new ViewEventCommand<IQuestionaireViewModel, ViewRowStateChanged<IPatientResponseInfo>>(
                                 key:"EditEntity",

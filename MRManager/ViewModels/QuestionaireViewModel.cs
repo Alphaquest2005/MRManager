@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Windows;
 using SystemInterfaces;
 using Core.Common.UI;
 using EF.Entities;
@@ -10,6 +11,7 @@ using FluentValidation;
 using Interfaces;
 using JB.Collections.Reactive;
 using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using ValidationSets;
@@ -33,12 +35,37 @@ namespace ViewModels
                     process, orientation))
         {
             this.WireEvents();
-            this.WhenAny(x => x.RowState.Value, x => x.Value).Subscribe(x => test(x));
+            this.WhenAnyValue(x => x.CurrentEntity.Value).Subscribe(x => UpdateChangeCollectionList(x));
+            
+           
         }
 
-        private void test(RowState reactiveProperty)
+        private void updateChangeTracking(IObservedChange<IResponseOptionInfo, string> change)
         {
-           // throw new NotImplementedException();
+            ChangeTracking.AddOrUpdate(nameof(IResponseInfo.Id), change.Sender.ResponseId);
+            ChangeTracking.AddOrUpdate(nameof(IResponseInfo.Value), change.Value);
+        }
+
+        private void UpdateChangeCollectionList(IPatientResponseInfo patientResponseInfo)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                ChangeTrackingList.Clear();
+                if (patientResponseInfo?.ResponseOptions == null) return;
+                ChangeTrackingList.AddRange(patientResponseInfo.ResponseOptions);
+                foreach (var itm in ChangeTrackingList)
+                {
+                    itm.ObservableForProperty(x =>x.Value).Subscribe(x => updateChangeTracking(x));
+                }
+            });
+
+        }
+        //AutoProperty Fucking up i really don't jnow why
+        private ObservableBindingList<IResponseOptionInfo> _changeTrackingList = new ObservableBindingList<IResponseOptionInfo>();
+        public ObservableBindingList<IResponseOptionInfo> ChangeTrackingList
+        {
+            get { return _changeTrackingList; }
+            set { _changeTrackingList = value; }
         }
 
 

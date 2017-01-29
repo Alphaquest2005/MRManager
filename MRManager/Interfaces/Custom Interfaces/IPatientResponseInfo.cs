@@ -17,7 +17,6 @@ namespace Interfaces
         String Category { get; }
 
         IList<IResponseOptionInfo> ResponseOptions { get; }
-        IList<IResponseOptionInfo> Responses { get; }
         IList<IResponseImage> ResponseImages { get; }
         int PatientId { get; }
     }

@@ -3,17 +3,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using SystemInterfaces;
 using Common.Dynamic;
+using ReactiveUI;
 
 namespace Common.DataEntites
 {
    
-    public abstract class EntityView<TEntity> : IEntityView<TEntity> where TEntity: IEntity
+    public abstract class EntityView<TEntity> :ReactiveObject, IEntityView<TEntity> where TEntity: IEntity
     {
         public Type EntityType => typeof(TEntity);
 
-        public int Id { get; set; }
+        private int _id;
+        public int Id
+        {
+            get { return _id; }
+            set { this.RaiseAndSetIfChanged(ref _id, value); }
+        }
 
         private readonly Guid _entityGuid = Guid.NewGuid();
+        
 
         public override bool Equals(object obj)
         {

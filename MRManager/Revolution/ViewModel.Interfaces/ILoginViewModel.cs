@@ -4,6 +4,7 @@ using System.ComponentModel.Composition;
 using System.Text;
 using System.Threading.Tasks;
 using Interfaces;
+using JB.Collections.Reactive;
 using ViewModelInterfaces;
 
 namespace ViewModel.Interfaces
@@ -36,6 +37,6 @@ namespace ViewModel.Interfaces
     [InheritedExport]
     public interface IQuestionaireViewModel : IEntityListViewModel<IPatientResponseInfo>
     {
-       
+        ObservableBindingList<IResponseOptionInfo> ChangeTrackingList { get; }
     }
 }

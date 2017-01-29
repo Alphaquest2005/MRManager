@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Common.DataEntites;
 using Interfaces;
+using ReactiveUI;
 
 namespace EF.Entities
 {
@@ -14,26 +15,37 @@ namespace EF.Entities
         public string Interview { get; set; }
         public string Category { get; set; }
         public IList<IResponseOptionInfo> ResponseOptions { get; set; }
-        public IList<IResponseOptionInfo> Responses { get; set; }
-
+        
         public IList<IResponseImage> ResponseImages { get; set; }
         public int PatientId { get; set; }
     }
 
-    public partial class ResponseOptionInfo : BaseEntity, IResponseOptionInfo
+    public partial class ResponseOptionInfo : EntityView<IResponseOptions>, IResponseOptionInfo
     {
-        public int? ResponseId { get; set; }
-        public int? PatientResponseId { get; set; }
-        public string Value { get; set; }
+        private int? _responseId;
+        private int? _patientResponseId;
+        private string _value;
+
+        public int? ResponseId
+        {
+            get { return _responseId; }
+            set { this.RaiseAndSetIfChanged(ref _responseId,value); }
+        }
+
+        public int? PatientResponseId
+        {
+            get { return _patientResponseId; }
+            set { this.RaiseAndSetIfChanged(ref _patientResponseId, value); }
+        }
+
+        public string Value
+        {
+            get { return _value; }
+            set { this.RaiseAndSetIfChanged(ref _value, value); }
+        }
+
         public int QuestionId { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
-    }
-
-    public partial class ResponseImage : BaseEntity, IResponseImage
-    {
-        public int MediaId { get; set; }
-        public int PatientResponseId { get; set; }
-        public byte[] Media { get; set; }
     }
 }

@@ -73,7 +73,8 @@
         </ItemsControl>
         <ItemsControl Margin="5"
                       DockPanel.Dock="Left"
-                      ItemsSource="{Binding LeftViewModels}">
+                      ItemsSource="{Binding LeftViewModels}" >
+            
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid />
