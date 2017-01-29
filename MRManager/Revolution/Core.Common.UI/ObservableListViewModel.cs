@@ -29,13 +29,14 @@ namespace Core.Common.UI
     {
         protected AbstractValidator<TEntity> Validator { get; }
         protected ValidationResult ValidationResults = new ValidationResult();
-        protected static ObservableViewModel<TEntity> _instance = null;
-        public static ObservableViewModel<TEntity> Instance => _instance;
+        protected static ObservableListViewModel<TEntity> _instance = null;
+        public static ObservableListViewModel<TEntity> Instance => _instance;
 
         public ObservableListViewModel(List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process, Type orientation) : base(process,eventSubscriptions,eventPublications,commandInfo, orientation)
         {
             Validator = new EntityValidator<TEntity>();
             State.WhenAnyValue(x => x.Value).Subscribe(x => UpdateLocalState(x));
+            _instance = this;
         }
 
         private void UpdateLocalState(IProcessStateList<TEntity> state)
@@ -135,9 +136,13 @@ namespace Core.Common.UI
         
         public ObservableDictionary<string, dynamic> ChangeTracking { get; } = new ObservableDictionary<string, dynamic>();
 
-        
-        public ReactiveProperty<RowState> RowState => new ReactiveProperty<RowState>(SystemInterfaces.RowState.Unchanged);
-        
+        private ReactiveProperty<SystemInterfaces.RowState> _rowState = new ReactiveProperty<SystemInterfaces.RowState>(SystemInterfaces.RowState.Unchanged);
+        public ReactiveProperty<SystemInterfaces.RowState> RowState
+        {
+            get { return _rowState; }
+            set { this.RaiseAndSetIfChanged(ref _rowState, value); }
+        }
+
 
         public IEnumerable GetErrors(string propertyName)
         {

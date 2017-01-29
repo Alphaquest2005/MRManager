@@ -14,9 +14,8 @@
             <converters:StringDateConverter x:Key="StringDateConverter" />
         </DataTemplate.Resources>
         <Grid Width="Auto" Height="Auto">
-            <TextBlock FontSize="22" Text="WRITE" />
             <Grid Margin="0" Visibility="{Binding Path=Type, Converter={StaticResource StringVisibilityConverter}, ConverterParameter='TextBox'}">
-                <TextBlock Width="303"
+                <TextBox Width="303"
                            Height="24"
                            MinWidth="75"
                            Margin="157,5,0,0"

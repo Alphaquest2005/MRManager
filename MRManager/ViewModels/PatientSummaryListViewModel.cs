@@ -27,19 +27,21 @@ namespace ViewModels
         }
 
         
-        public ReactiveProperty<IProcessStateList<IPatientInfo>> State => this.Instance.State;
+        public ReactiveProperty<IProcessStateList<IPatientInfo>> State => this.ViewModel.State;
 
 
-        ReactiveProperty<IProcessState<IPatientInfo>> IEntityViewModel<IPatientInfo>.State => new ReactiveProperty<IProcessState<IPatientInfo>>(this.Instance.State.Value);
-        public ReactiveProperty<IPatientInfo> CurrentEntity => this.Instance.CurrentEntity;
+        ReactiveProperty<IProcessState<IPatientInfo>> IEntityViewModel<IPatientInfo>.State => new ReactiveProperty<IProcessState<IPatientInfo>>(this.ViewModel.State.Value);
+        public ReactiveProperty<IPatientInfo> CurrentEntity => this.ViewModel.CurrentEntity;
 
-        public ObservableDictionary<string, dynamic> ChangeTracking => this.Instance.ChangeTracking;
-        public ObservableList<IPatientInfo> EntitySet => this.Instance.EntitySet;
-        public ObservableList<IPatientInfo> SelectedEntities => this.Instance.SelectedEntities;
-        public ReactiveProperty<RowState> RowState => this.Instance.RowState;
+        public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
+        public ObservableList<IPatientInfo> EntitySet => this.ViewModel.EntitySet;
+        public ObservableList<IPatientInfo> SelectedEntities => this.ViewModel.SelectedEntities;
+        
 
 
         public string Field { get; set; }
         public string Value { get; set; }
+
+        
     }
 }

@@ -23,6 +23,8 @@ namespace ViewModel.Interfaces
         Dictionary<string, ReactiveCommand<IViewModel, Unit>> Commands { get; }
         List<IViewModelEventCommand<IViewModel, IEvent>> CommandInfo { get; }
 
+        ReactiveProperty<SystemInterfaces.RowState> RowState { get; }
+
         Type Orientation { get; }
         Type ViewModelType { get; }
     }

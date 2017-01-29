@@ -24,8 +24,8 @@ namespace ViewModels
             this.WireEvents();
         }
 
-        public AbstractValidator<ISignInInfo> Validator => this.Instance.Validator;
-        public ReactiveProperty<IProcessState<ISignInInfo>> State => this.Instance.State;
-        public ObservableDictionary<string, dynamic> ChangeTracking => this.Instance.ChangeTracking;
+        public AbstractValidator<ISignInInfo> Validator => this.ViewModel.Validator;
+        public ReactiveProperty<IProcessState<ISignInInfo>> State => this.ViewModel.State;
+        public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
     }
 }

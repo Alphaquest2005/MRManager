@@ -27,19 +27,21 @@ namespace ViewModels
         }
 
         
-        public ReactiveProperty<IProcessStateList<IInterviewInfo>> State => this.Instance.State;
+        public ReactiveProperty<IProcessStateList<IInterviewInfo>> State => this.ViewModel.State;
 
 
-        ReactiveProperty<IProcessState<IInterviewInfo>> IEntityViewModel<IInterviewInfo>.State => new ReactiveProperty<IProcessState<IInterviewInfo>>(this.Instance.State.Value);
-        public ReactiveProperty<IInterviewInfo> CurrentEntity => this.Instance.CurrentEntity;
+        ReactiveProperty<IProcessState<IInterviewInfo>> IEntityViewModel<IInterviewInfo>.State => new ReactiveProperty<IProcessState<IInterviewInfo>>(this.ViewModel.State.Value);
+        public ReactiveProperty<IInterviewInfo> CurrentEntity => this.ViewModel.CurrentEntity;
 
-        public ObservableDictionary<string, dynamic> ChangeTracking => this.Instance.ChangeTracking;
-        public ObservableList<IInterviewInfo> EntitySet => this.Instance.EntitySet;
-        public ObservableList<IInterviewInfo> SelectedEntities => this.Instance.SelectedEntities;
-        public ReactiveProperty<RowState> RowState => this.Instance.RowState;
+        public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
+        public ObservableList<IInterviewInfo> EntitySet => this.ViewModel.EntitySet;
+        public ObservableList<IInterviewInfo> SelectedEntities => this.ViewModel.SelectedEntities;
+    
 
 
         public string Field { get; set; }
         public string Value { get; set; }
+
+        
     }
 }

@@ -6,6 +6,7 @@ using System.Reactive;
 using SystemInterfaces;
 using Common;
 using Common.Dynamic;
+using Reactive.Bindings;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using Utilities;
@@ -18,7 +19,10 @@ namespace Core.Common.UI
     public class DynamicViewModel<TViewModel> : Expando, IDynamicViewModel<TViewModel> where TViewModel:IViewModel
     {
         public ISystemSource Source => new Source(Guid.NewGuid(), "DynamicViewModel:" + typeof(TViewModel).GetFriendlyName(),new SourceType(typeof(DynamicViewModel<TViewModel>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
-        public new TViewModel Instance { get; }
+        public TViewModel ViewModel { get; }
+
+        protected static DynamicViewModel<TViewModel> _instance = null;
+        public new static DynamicViewModel<TViewModel> Instance => _instance;
         public DynamicViewModel(TViewModel viewModel) : base(viewModel)
         {
             Contract.Requires(viewModel != null);
@@ -30,11 +34,16 @@ namespace Core.Common.UI
             Process = viewModel.Process;
             Description = viewModel.Description;
             Symbol = viewModel.Symbol;
-            Instance = (TViewModel) base.Instance;
+            ViewModel = (TViewModel) base.Instance;
             Orientation = viewModel.Orientation;
             ViewModelType = typeof (TViewModel);
+            RowState = viewModel.RowState;
+            _instance = this;
             
+
         }
+
+        public ReactiveProperty<SystemInterfaces.RowState> RowState { get; }
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {

@@ -21,8 +21,8 @@ namespace ViewModels
 
 
         
-       public ReactiveProperty<IProcessState<IPatientDetailsInfo>> State => this.Instance.State;
-        public ObservableDictionary<string, dynamic> ChangeTracking => this.Instance.ChangeTracking;
+       public ReactiveProperty<IProcessState<IPatientDetailsInfo>> State => this.ViewModel.State;
+        public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
 
     }
 }

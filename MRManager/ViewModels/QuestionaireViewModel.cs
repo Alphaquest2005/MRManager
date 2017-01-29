@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using SystemInterfaces;
@@ -21,22 +22,36 @@ namespace ViewModels
     [Export]
     public class QuestionaireViewModel : DynamicViewModel<ObservableListViewModel<IPatientResponseInfo>>, IQuestionaireViewModel
     {
-        public QuestionaireViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IPatientResponseInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
+
+
+        public QuestionaireViewModel(ISystemProcess process,
+            List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions,
+            List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications,
+            List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
+            : base(
+                new ObservableListViewModel<IPatientResponseInfo>(eventSubscriptions, eventPublications, commandInfo,
+                    process, orientation))
         {
-           this.WireEvents();
+            this.WireEvents();
+            this.WhenAny(x => x.RowState.Value, x => x.Value).Subscribe(x => test(x));
         }
 
+        private void test(RowState reactiveProperty)
+        {
+           // throw new NotImplementedException();
+        }
+
+
+        public ReactiveProperty<IProcessStateList<IPatientResponseInfo>> State => this.ViewModel.State;
+
+
+        ReactiveProperty<IProcessState<IPatientResponseInfo>> IEntityViewModel<IPatientResponseInfo>.State => new ReactiveProperty<IProcessState<IPatientResponseInfo>>(this.ViewModel.State.Value);
+        public ReactiveProperty<IPatientResponseInfo> CurrentEntity => this.ViewModel.CurrentEntity;
+
+        public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
+        public ObservableList<IPatientResponseInfo> EntitySet => this.ViewModel.EntitySet;
+        public ObservableList<IPatientResponseInfo> SelectedEntities => this.ViewModel.SelectedEntities;
         
-        public ReactiveProperty<IProcessStateList<IPatientResponseInfo>> State => this.Instance.State;
-
-
-        ReactiveProperty<IProcessState<IPatientResponseInfo>> IEntityViewModel<IPatientResponseInfo>.State => new ReactiveProperty<IProcessState<IPatientResponseInfo>>(this.Instance.State.Value);
-        public ReactiveProperty<IPatientResponseInfo> CurrentEntity => this.Instance.CurrentEntity;
-
-        public ObservableDictionary<string, dynamic> ChangeTracking => this.Instance.ChangeTracking;
-        public ObservableList<IPatientResponseInfo> EntitySet => this.Instance.EntitySet;
-        public ObservableList<IPatientResponseInfo> SelectedEntities => this.Instance.SelectedEntities;
-        public ReactiveProperty<RowState> RowState => this.Instance.RowState;
 
 
         public string Field { get; set; }

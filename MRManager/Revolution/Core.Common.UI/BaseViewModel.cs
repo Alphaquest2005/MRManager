@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reactive;
 using SystemInterfaces;
 using Common;
+using Reactive.Bindings;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using Utilities;
@@ -31,6 +32,7 @@ namespace Core.Common.UI
         public List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get;}
         public List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; }
         public List<IViewModelEventCommand<IViewModel, IEvent>> CommandInfo { get; }
+        public ReactiveProperty<RowState> RowState { get; }
         public Type Orientation { get; }
         public Type ViewModelType { get; }
 

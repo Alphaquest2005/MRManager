@@ -10,6 +10,7 @@ using EventMessages.Commands;
 using EventMessages.Events;
 using Interfaces;
 using JB.Reactive.ExtensionMethods;
+using Reactive.Bindings;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
@@ -535,7 +536,7 @@ namespace RevolutionData
 
                                 messageData: s =>
                                 {
-                                    s.RowState.Value = s.RowState.Value != RowState.Modified?RowState.Modified: RowState.Unchanged;
+                                    s.RowState.Value = s.RowState.Value != RowState.Modified?RowState.Modified: RowState.Unchanged;//new ReactiveProperty<RowState>(rowstate != RowState.Modified?RowState.Modified: RowState.Unchanged);
 
                                     return new ViewEventCommandParameter(
                                         new object[] {s,s.RowState.Value},

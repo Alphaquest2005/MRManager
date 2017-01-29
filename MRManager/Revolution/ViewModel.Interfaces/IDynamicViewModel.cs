@@ -9,6 +9,6 @@ namespace ViewModel.Interfaces
     [InheritedExport]
     public interface IDynamicViewModel<out TViewModel> : IViewModel where TViewModel : IViewModel
     {
-        TViewModel Instance { get; }
+        TViewModel ViewModel { get; }
     }
 }

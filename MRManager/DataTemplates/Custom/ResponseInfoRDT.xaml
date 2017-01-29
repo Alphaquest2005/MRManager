@@ -17,12 +17,8 @@
         <Grid Width="Auto" Height="Auto">
 
             <Grid Margin="0">
-                <Grid.Visibility>
-                    <MultiBinding Converter="{StaticResource ValueTypeVisiblityConverter}" ConverterParameter="TextBox">
-                        <Binding Path="Type" />
-                        <Binding Path="Value" />
-                    </MultiBinding>
-                </Grid.Visibility>
+                
+                
                 <TextBlock Width="303"
                            Height="24"
                            MinWidth="75"
@@ -49,6 +45,12 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top"
                            Fill="#FFB8B8B8">
+                    <Rectangle.Visibility>
+                        <MultiBinding Converter="{StaticResource ValueTypeVisiblityConverter}" ConverterParameter="TextBox">
+                            <Binding Path="Type" />
+                            <Binding Path="Value" />
+                        </MultiBinding>
+                    </Rectangle.Visibility>
                     <Rectangle.Stroke>
                         <RadialGradientBrush>
                             <GradientStop Offset="0" Color="#FF071A85" />
@@ -58,7 +60,7 @@
                 </Rectangle>
 
             </Grid>
-            <Grid Margin="0" d:IsHidden="True">
+            <!--<Grid Margin="0" d:IsHidden="True">
                 <Grid.Visibility>
                     <MultiBinding Converter="{StaticResource ValueTypeVisiblityConverter}" ConverterParameter="CheckBox">
                         <Binding Path="Type" />
@@ -70,6 +72,7 @@
                           MinWidth="75"
                           Margin="10,0,0,0"
                           HorizontalAlignment="Left"
+                          IsEnabled="False"
                           VerticalAlignment="Top"
                           Content="{Binding Path=Description}"
                           IsChecked="{Binding Path=Value,
@@ -92,6 +95,7 @@
                             MinWidth="75"
                             Margin="234,5,0,0"
                             HorizontalAlignment="Left"
+                            IsEnabled="False"
                             VerticalAlignment="Top"
                             SelectedDate="{Binding Path=Value,
                                                    Converter={StaticResource StringDateConverter},
@@ -109,7 +113,7 @@
                                           UpdateSourceTrigger=PropertyChanged,
                                           ValidatesOnDataErrors=True}" />
 
-            </Grid>
+            </Grid>-->
 
         </Grid>
 
