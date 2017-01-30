@@ -49,7 +49,7 @@
                    Style="{DynamicResource TextButtonStyle}"
                    FontFamily="Segoe UI Light"
                    FontSize="48"
-                   Text="App Name"
+                   Text="SAMS MR Manager"
                    TextWrapping="Wrap" />
         <Border Grid.ColumnSpan="2"
                 Height="55"

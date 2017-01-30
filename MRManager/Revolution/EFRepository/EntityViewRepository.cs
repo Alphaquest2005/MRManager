@@ -25,7 +25,7 @@ using Source = Common.Source;
 
 namespace EFRepository
 {
-    public class EntityViewRepository<TView,TDbView, TEntity, TDbEntity, TDbContext>:BaseRepository<EntityViewRepository<TView, TDbView, TEntity, TDbEntity, TDbContext>>, IEntityViewRepository where TDbView:class, IEntityId where TDbEntity : class,IEntity where TDbContext : DbContext, new() where TEntity : class, IEntity where TView : IEntityView<TEntity>
+    public class EntityViewRepository<TView,TDbView, TEntity, TDbEntity, TDbContext>:BaseRepository<EntityViewRepository<TView, TDbView, TEntity, TDbEntity, TDbContext>>, IEntityViewRepository where TDbView:class, IEntityId where TDbEntity : class,IEntity, new() where TDbContext : DbContext, new() where TEntity : class, IEntity where TView : IEntityView<TEntity>
     {
 
       private static Dictionary<Type, Func<string, KeyValuePair<string, object>, string>> IMatchTypeFunctions = new Dictionary<Type, Func<string, KeyValuePair<string, object>, string>>()
@@ -85,7 +85,17 @@ namespace EFRepository
                 using (var ctx = new TDbContext())
                 {
                     // ReSharper disable once ReplaceWithSingleCallToFirstOrDefault cuz EF7 bugging LEAVE JUST SO
-                    var res = ctx.Set<TDbEntity>().FirstOrDefault(x => x.Id == msg.EntityId);//
+                    TDbEntity res;//
+                    if (msg.EntityId == 0)
+                    {
+                        res = new TDbEntity();
+                        ctx.Set<TDbEntity>().Add(res);
+                    }
+                    else
+                    {
+                       res = ctx.Set<TDbEntity>().FirstOrDefault(x => x.Id == msg.EntityId); 
+                    }
+                    
                     res.ApplyChanges(msg.Changes);
                     ctx.SaveChanges(true);
                     //TODO: retrieve whole item

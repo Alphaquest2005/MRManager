@@ -248,7 +248,7 @@ namespace Entity.Expressions
                                 ? z.Response.Where(x1 => x1.PatientResponseId == x.Id).Select(x2 => x2.Id).First()
                                 : 0),
                     Value =
-                        z.Response.Any()
+                            z.Response.Any()
                             ? z.Response.Where(x1 => x1.PatientResponseId == x.Id).Select(x2 => x2.Value).First()
                             : null, //
                     Type = z.Type,

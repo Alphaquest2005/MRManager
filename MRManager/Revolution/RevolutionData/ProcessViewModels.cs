@@ -523,10 +523,45 @@ namespace RevolutionData
                         subject:v => v.ChangeTracking.DictionaryChanges,
                         commandPredicate: new List<Func<IQuestionaireViewModel, bool>>
                                             {
-                                                v => v.ChangeTracking.Count == 2
+                                                v => v.ChangeTracking.Count == 2 
+                                                        && v.ChangeTracking.ContainsKey(nameof(IResponseInfo.Id)) 
+                                                        && v.ChangeTracking[nameof(IResponseInfo.Id)] != 0
                                             },
                         //TODO: Make a type to capture this info... i killing it here
-                        messageData: s => new ViewEventCommandParameter(new object[] {s.ChangeTracking.First().Value,s.ChangeTracking.TakeLast(1).ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView),s.Process,s.Source)),
+                        messageData: s =>
+                        {
+                           var msg = new ViewEventCommandParameter(
+                                new object[]
+                                {
+                                    s.ChangeTracking.First().Value,
+                                    s.ChangeTracking.TakeLast(1).ToDictionary(x => x.Key, x => x.Value)
+                                },
+                                new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
+                                s.Source);
+                            s.ChangeTracking.Clear();
+                            return msg;
+                        }),
+                      new ViewEventCommand<IQuestionaireViewModel, UpdateEntityViewWithChanges<IResponseInfo>>(
+                        key:"CreateEntity",
+                        subject:v => v.ChangeTracking.DictionaryChanges,
+                        commandPredicate: new List<Func<IQuestionaireViewModel, bool>>
+                                            {
+                                                v => v.ChangeTracking.Count == 4 && v.ChangeTracking.ContainsKey(nameof(IResponseInfo.Id))
+                                                        && v.ChangeTracking[nameof(IResponseInfo.Id)] == 0
+                                            },
+                        //TODO: Make a type to capture this info... i killing it here
+                        messageData: s =>
+                        {
+                            var msg = new ViewEventCommandParameter(
+                                new object[]
+                                {
+                                    s.ChangeTracking.First().Value,
+                                    s.ChangeTracking.Skip(1).ToDictionary(x => x.Key, x => x.Value)
+                                },
+                                new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,s.Source);
+                            s.ChangeTracking.Clear();
+                            return msg;
+                        }),
 
                     new ViewEventCommand<IQuestionaireViewModel, ViewRowStateChanged<IPatientResponseInfo>>(
                                 key:"EditEntity",

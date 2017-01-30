@@ -42,8 +42,18 @@ namespace ViewModels
 
         private void updateChangeTracking(IObservedChange<IResponseOptionInfo, string> change)
         {
-            ChangeTracking.AddOrUpdate(nameof(IResponseInfo.Id), change.Sender.ResponseId);
-            ChangeTracking.AddOrUpdate(nameof(IResponseInfo.Value), change.Value);
+            if (change.Sender.ResponseId != 0)
+            {
+                ChangeTracking.AddOrUpdate(nameof(IResponseInfo.Id), change.Sender.ResponseId);
+                ChangeTracking.AddOrUpdate(nameof(IResponseInfo.Value), change.Value);
+            }
+            else
+            {
+                ChangeTracking.AddOrUpdate(nameof(IResponseInfo.Id), change.Sender.ResponseId);
+                ChangeTracking.AddOrUpdate(nameof(IResponseInfo.PatientResponseId), change.Sender.PatientResponseId);
+                ChangeTracking.AddOrUpdate(nameof(IResponseInfo.ResponseOptionId), change.Sender.Id);
+                ChangeTracking.AddOrUpdate(nameof(IResponseInfo.Value), change.Value);
+            }
         }
 
         private void UpdateChangeCollectionList(IPatientResponseInfo patientResponseInfo)
