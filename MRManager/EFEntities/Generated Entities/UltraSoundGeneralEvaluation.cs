@@ -14,9 +14,9 @@ namespace EF.Entities
 	public partial class UltraSoundGeneralEvaluation: BaseEntity, IUltraSoundGeneralEvaluation
 	{
 		public virtual string CardiaActivity { get; set; }
-		public virtual string Placenta { get; set; }
 		public virtual string CordVessels { get; set; }
 		public virtual string FetalMovements { get; set; }
+		public virtual string Placenta { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships

@@ -215,7 +215,7 @@ namespace Entity.Expressions
             {
                 Id = x.Id,
                 Interview = x.Name,
-                Category = x.MedicalCategory.Category,
+                Category = x.MedicalCategory.Name,
                 Phase = x.Phase.Name
             };
 
@@ -223,7 +223,7 @@ namespace Entity.Expressions
             x => new PatientResponseInfo()
             {
                 Id = x.Id,
-                Category = x.Questions.Interviews.MedicalCategory.Category,
+                Category = x.Questions.Interviews.MedicalCategory.Name,
                 Question = x.Questions.Description,
                 Interview = x.Questions.Interviews.Name,
                 PatientSyntomId = x.PatientSyntomId,
@@ -268,6 +268,21 @@ namespace Entity.Expressions
                 Value = x.Value
             };
 
+
+       public static Expression<Func<Questions, QuestionInfo>> QuestionInfoInfoExpression { get; } =
+            x => new QuestionInfo()
+            {
+                Id = x.Id,
+                InterviewId = x.InterviewId,
+                Description = x.Description,    
+                EntityAttributeId = x.EntityAttributeId,
+                Interview = x.Interviews.Name,
+                Phase = x.Interviews.Phase.Name,
+                Category = x.Interviews.MedicalCategory.Name,
+                Entity = x.EntityAttributes.Entity,
+                Attribute = x.EntityAttributes.Attribute,
+                Type = x.EntityAttributes.Type
+            };
 
         //public static Expression<Func<PatientResponses, object>> PatientResponseInfoExpression { get; } =
         //    x => new

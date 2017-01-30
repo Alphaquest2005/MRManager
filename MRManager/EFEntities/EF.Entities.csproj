@@ -40,8 +40,10 @@
     <Compile Include="Custom\PatientResponseInfo.cs" />
     <Compile Include="Custom\PersonAddressInfo.cs" />
     <Compile Include="Custom\PersonPhoneNumbersInfo.cs" />
+    <Compile Include="Custom\QuestionInfo.cs" />
     <Compile Include="Custom\Response.cs" />
     <Compile Include="Custom\ResponseImage.cs" />
+    <Compile Include="Custom\ResponseOptionInfo.cs" />
     <Compile Include="EFEntity.cs" />
     <Compile Include="Custom\SignInInfo.cs" />
     <Compile Include="Generated Entities\AddressCities.cs" />

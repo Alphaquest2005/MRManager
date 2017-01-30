@@ -14,8 +14,8 @@ namespace Interfaces
 	[InheritedExport]
 	public partial interface IMediaTypes:IEntity  
 	{
-		string MediaTypeName { get;}
 		string FileExtension { get;}
+		string MediaTypeName { get;}
 
 
 

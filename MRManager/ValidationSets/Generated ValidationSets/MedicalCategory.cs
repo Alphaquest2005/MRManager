@@ -16,7 +16,7 @@ namespace ValidationSets
 		{
 			CascadeMode = CascadeMode.Continue;
 			RuleFor(x => x.Id).NotNull();
-			RuleFor(x => x.Category).NotNull();
+			RuleFor(x => x.Name).NotNull();
 		}
 	}
 }

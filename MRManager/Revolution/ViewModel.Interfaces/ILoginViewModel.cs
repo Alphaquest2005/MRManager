@@ -39,4 +39,10 @@ namespace ViewModel.Interfaces
     {
         ObservableBindingList<IResponseOptionInfo> ChangeTrackingList { get; }
     }
+
+    [InheritedExport]
+    public interface IQuestionListViewModel : IEntityListViewModel<IQuestionInfo>
+    {
+        ObservableBindingList<IQuestionInfo> ChangeTrackingList { get; }
+    }
 }

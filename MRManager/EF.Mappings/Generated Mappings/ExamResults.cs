@@ -21,10 +21,10 @@ namespace EF.Mappings
 			entityBuilder.Property(t => t.ExamDetailsId).HasColumnName("ExamDetailsId").IsRequired();
 			entityBuilder.Property(t => t.PatientResultsId).HasColumnName("PatientResultsId").IsRequired();
 		//-------------------Navigation Properties -------------------------------//
-				entityBuilder.HasOne(p => p.ExamResults_AnioticFluid).WithOne(p => p.ExamResults).HasForeignKey<ExamResults_AnioticFluid>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
-				entityBuilder.HasMany(x => x.ExamResults_FetalDates).WithOne(p => p.ExamResults).HasForeignKey(c => c.ExamResultsId).OnDelete(DeleteBehavior.Restrict);
-				entityBuilder.HasMany(x => x.ExamResults_SimpleValues).WithOne(p => p.ExamResults).HasForeignKey(c => c.ExamResultsId).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasOne(p => p.ExamResults_UmbilicalArtery).WithOne(p => p.ExamResults).HasForeignKey<ExamResults_UmbilicalArtery>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
+				entityBuilder.HasOne(p => p.ExamResults_AnioticFluid).WithOne(p => p.ExamResults).HasForeignKey<ExamResults_AnioticFluid>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
+				entityBuilder.HasMany(x => x.ExamResults_SimpleValues).WithOne(p => p.ExamResults).HasForeignKey(c => c.ExamResultsId).OnDelete(DeleteBehavior.Restrict);
+				entityBuilder.HasMany(x => x.ExamResults_FetalDates).WithOne(p => p.ExamResults).HasForeignKey(c => c.ExamResultsId).OnDelete(DeleteBehavior.Restrict);
 	
 				//----------------Parent Properties
 				//entityBuilder.HasOne(p => p.ExamDetails).WithMany(p => p.ExamResults).HasForeignKey(c => c.ExamDetailsId).OnDelete(DeleteBehavior.Restrict);

@@ -13,17 +13,17 @@ namespace EF.Entities
 {
 	public partial class Interviews: BaseEntity, IInterviews
 	{
+		public virtual int MedicalCategoryId { get; set; }
 		public virtual string Name { get; set; }
 		public virtual int PhaseId { get; set; }
-		public virtual int MedicalCategoryId { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships
 				public virtual ICollection<Questions> Questions {get; set;}
 		
 			// ---------Parent Relationships
-				public virtual Phase Phase {get; set;}
 				public virtual MedicalCategory MedicalCategory {get; set;}
+				public virtual Phase Phase {get; set;}
 	
 
 	}

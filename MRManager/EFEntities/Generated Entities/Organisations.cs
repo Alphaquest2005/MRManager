@@ -13,16 +13,16 @@ namespace EF.Entities
 {
 	public partial class Organisations: BaseEntity, IOrganisations
 	{
-		public virtual string Name { get; set; }
 		public virtual Byte[] EntryTimeStamp { get; set; }
+		public virtual string Name { get; set; }
 		public virtual string VATNumber { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships
 				public virtual ICollection<OrganisationAddress> OrganisationAddress {get; set;}
 				public virtual ICollection<OrganisationPhoneNumbers> OrganisationPhoneNumbers {get; set;}
-				public virtual Organisations_Companys Organisations_Companys {get; set;}
 				public virtual Organisations_Hotels Organisations_Hotels {get; set;}
+				public virtual Organisations_Companys Organisations_Companys {get; set;}
 				public virtual ICollection<PersonJob> PersonJob {get; set;}
 		
 			// ---------Parent Relationships

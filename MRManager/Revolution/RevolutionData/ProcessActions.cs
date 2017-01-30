@@ -225,6 +225,8 @@ namespace RevolutionData
                 // take shortcut cud be IntialState
                 expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
+            // patient response
+
             public static IProcessAction RequestPatientResponses => new ProcessAction(
                 action:
                     cp =>
@@ -264,6 +266,60 @@ namespace RevolutionData
                     // take shortcut cud be IntialState
                     expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
+            ////// QuestionList actions
+            /// 
+            public static IProcessAction IntializeQuestionListProcessState => new ProcessAction(
+           action:
+                   cp =>
+                       new LoadEntityViewSetWithChanges<IQuestionInfo, IExactMatch>(new Dictionary<string, dynamic>(),
+                           new StateCommandInfo(3, Context.EntityView.Commands.LoadEntityViewSetWithChanges),
+                           cp.Actor.Process, cp.Actor.Source),
+               processInfo:
+                   cp =>
+                       new StateCommandInfo(cp.Actor.Process.Id,
+                           Context.EntityView.Commands.LoadEntityViewSetWithChanges),
+               // take shortcut cud be IntialState
+               expectedSourceType: new SourceType(typeof(IComplexEventService)));
+
+
+            public static IProcessAction UpdateQuestionListState => new ProcessAction(
+                action:
+                    cp =>
+                    {
+                        var ps = new ProcessStateList<IQuestionInfo>(
+                             process: cp.Actor.Process,
+                             entity: ((List<IQuestionInfo>)cp.Messages["EntityViewSet"].EntitySet).FirstOrDefault(),
+                             entitySet: cp.Messages["EntityViewSet"].EntitySet,
+                             selectedEntities: new List<IQuestionInfo>(),
+                             stateInfo: new StateInfo(3, new State("Loaded IQuestionInfo Data", "Loaded QuestionList Data", "")));
+                        return new UpdateProcessStateList<IQuestionInfo>(
+                                    state: ps,
+                                    process: cp.Actor.Process,
+                                    processInfo: new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState),
+                                    source: cp.Actor.Source);
+                    },
+                processInfo:
+                    cp =>
+                        new StateCommandInfo(cp.Actor.Process.Id,
+                            Context.Process.Commands.UpdateState),
+                // take shortcut cud be IntialState
+                expectedSourceType: new SourceType(typeof(IComplexEventService)));
+
+            public static IProcessAction RequestQuestionList => new ProcessAction(
+                action:
+                    cp =>
+                        new LoadEntityViewSetWithChanges<IQuestionInfo, IExactMatch>(new Dictionary<string, dynamic>()
+                                    {
+                                        {nameof(IQuestionInfo.InterviewId), cp.Messages["CurrentInterview"].Entity.Id },
+                                    },
+                            new StateCommandInfo(3, Context.EntityView.Commands.LoadEntityViewSetWithChanges),
+                            cp.Actor.Process, cp.Actor.Source),
+                processInfo:
+                    cp =>
+                        new StateCommandInfo(cp.Actor.Process.Id,
+                            Context.EntityView.Commands.LoadEntityViewSetWithChanges),
+                // take shortcut cud be IntialState
+                expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
         }
 

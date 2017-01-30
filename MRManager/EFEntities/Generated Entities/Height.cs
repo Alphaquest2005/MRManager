@@ -13,8 +13,8 @@ namespace EF.Entities
 {
 	public partial class Height: BaseEntity, IHeight
 	{
-		public virtual double Value { get; set; }
 		public virtual int UnitId { get; set; }
+		public virtual double Value { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships

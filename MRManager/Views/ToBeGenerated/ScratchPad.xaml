@@ -4,72 +4,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Views.ToBeGenerated"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Width="501"
              d:DesignHeight="359"
-             d:DesignWidth="403"
              mc:Ignorable="d">
-    <Border BorderBrush="#FFECE8E8"
-            BorderThickness="1"
-            CornerRadius="45.25">
-        <Border.Background>
-            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                <GradientStop Offset="1" Color="#7BB8B8B8" />
-                <GradientStop Color="#4DFFFFFF" />
-            </LinearGradientBrush>
-        </Border.Background>
-        <Grid Width="Auto"
-              Height="Auto"
-              Margin="-1.333,-0.333,0,0.333">
-            <TextBlock Width="Auto"
-                       Height="60"
-                       MinWidth="75"
-                       Margin="112,18,112.333,420"
-                       HorizontalAlignment="Stretch"
-                       VerticalAlignment="Stretch"
-                       FontSize="20"
-                       Text="{Binding CurrentEntity.Value.Question,
-                                      FallbackValue='Question',
-                                      UpdateSourceTrigger=PropertyChanged,
-                                      ValidatesOnDataErrors=True}"
-                       TextWrapping="WrapWithOverflow" />
-            <Button Width="73"
-                    Height="78"
-                    Margin="0,10,10,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Command="{Binding Commands[NextQuestion]}"
-                    Content=""
-                    FontFamily="Segoe UI Symbol"
-                    FontSize="36" />
-            <Button Width="79"
-                    Height="81"
-                    Margin="12,9,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Command="{Binding Commands[PreviousQuestion]}"
-                    Content="&#xE0AC;"
-                    FontFamily="Segoe UI Symbol"
-                    FontSize="36"
-                    RenderTransformOrigin="0.5,0.5">
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="-1" ScaleY="1" />
-                        <SkewTransform AngleX="0" AngleY="0" />
-                        <RotateTransform Angle="0" />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </Button.RenderTransform>
-
-            </Button>
-
-            <ListBox Width="Auto"
-                     Height="Auto"
-                     Margin="58,107,52.333,32"
-                     HorizontalAlignment="Stretch"
-                     VerticalAlignment="Stretch"
-                     Background="#33FFFFFF"
-                     ItemTemplate="{DynamicResource ResponseInfoDT}"
-                     ItemsSource="{Binding CurrentEntity.Value.ResponseOptions}" />
-
-        </Grid>
-    </Border>
+    
 </UserControl>

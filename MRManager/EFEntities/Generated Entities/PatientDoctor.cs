@@ -13,15 +13,15 @@ namespace EF.Entities
 {
 	public partial class PatientDoctor: BaseEntity, IPatientDoctor
 	{
-		public virtual int PatientId { get; set; }
 		public virtual int DoctorId { get; set; }
+		public virtual int PatientId { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships
 		
 			// ---------Parent Relationships
-				public virtual Persons_Patient Persons_Patient {get; set;}
 				public virtual Persons_Doctor Persons_Doctor {get; set;}
+				public virtual Persons_Patient Persons_Patient {get; set;}
 	
 
 	}

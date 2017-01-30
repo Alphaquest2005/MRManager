@@ -14,16 +14,16 @@ namespace EF.Entities
 	public partial class PersonJob: BaseEntity, IPersonJob
 	{
 		public virtual int OccupationId { get; set; }
-		public virtual int PersonId { get; set; }
 		public virtual int OrganisationId { get; set; }
+		public virtual int PersonId { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships
 		
 			// ---------Parent Relationships
 				public virtual Occupations Occupations {get; set;}
-				public virtual Persons_Patient Persons_Patient {get; set;}
 				public virtual Organisations Organisations {get; set;}
+				public virtual Persons_Patient Persons_Patient {get; set;}
 	
 
 	}

@@ -18,13 +18,13 @@ namespace EF.Mappings
 			entityBuilder.ToTable("PatientDoctor", "dbo");
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();	
-			entityBuilder.Property(t => t.PatientId).HasColumnName("PatientId").IsRequired();
 			entityBuilder.Property(t => t.DoctorId).HasColumnName("DoctorId").IsRequired();
+			entityBuilder.Property(t => t.PatientId).HasColumnName("PatientId").IsRequired();
 		//-------------------Navigation Properties -------------------------------//
 	
 				//----------------Parent Properties
-				//entityBuilder.HasOne(p => p.Persons_Patient).WithMany(p => p.PatientDoctor).HasForeignKey(c => c.PatientId).OnDelete(DeleteBehavior.Restrict);
 				//entityBuilder.HasOne(p => p.Persons_Doctor).WithMany(p => p.PatientDoctor).HasForeignKey(c => c.DoctorId).OnDelete(DeleteBehavior.Restrict);
+				//entityBuilder.HasOne(p => p.Persons_Patient).WithMany(p => p.PatientDoctor).HasForeignKey(c => c.PatientId).OnDelete(DeleteBehavior.Restrict);
 	
 		}
 	}

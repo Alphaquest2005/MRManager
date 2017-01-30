@@ -15,8 +15,8 @@ namespace Interfaces
 	public partial interface IPersonJob:IEntity  
 	{
 		int OccupationId { get;}
-		int PersonId { get;}
 		int OrganisationId { get;}
+		int PersonId { get;}
 
 
 

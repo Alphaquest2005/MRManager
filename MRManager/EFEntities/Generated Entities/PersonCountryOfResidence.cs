@@ -14,8 +14,8 @@ namespace EF.Entities
 	public partial class PersonCountryOfResidence: BaseEntity, IPersonCountryOfResidence
 	{
 		public virtual int CountryId { get; set; }
-		public virtual int PersonId { get; set; }
 		public virtual DateTime Date { get; set; }
+		public virtual int PersonId { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships

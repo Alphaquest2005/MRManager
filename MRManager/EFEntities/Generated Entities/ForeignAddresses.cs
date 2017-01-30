@@ -14,16 +14,16 @@ namespace EF.Entities
 	public partial class ForeignAddresses: BaseEntity, IForeignAddresses
 	{
 		public virtual int AddressId { get; set; }
-		public virtual int PersonId { get; set; }
 		public virtual int AddressTypeId { get; set; }
+		public virtual int PersonId { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships
 		
 			// ---------Parent Relationships
 				public virtual Addresses Addresses {get; set;}
-				public virtual Persons_NonResidentPatient Persons_NonResidentPatient {get; set;}
 				public virtual AddressTypes AddressTypes {get; set;}
+				public virtual Persons_NonResidentPatient Persons_NonResidentPatient {get; set;}
 	
 
 	}

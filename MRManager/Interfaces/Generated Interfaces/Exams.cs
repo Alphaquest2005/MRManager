@@ -14,9 +14,9 @@ namespace Interfaces
 	[InheritedExport]
 	public partial interface IExams:IEntity  
 	{
+		string Describtion { get;}
 		int ExamTypeId { get;}
 		string Name { get;}
-		string Describtion { get;}
 
 
 

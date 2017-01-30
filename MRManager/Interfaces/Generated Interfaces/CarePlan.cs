@@ -14,8 +14,8 @@ namespace Interfaces
 	[InheritedExport]
 	public partial interface ICarePlan:IEntity  
 	{
-		string Name { get;}
 		string Diagnosis { get;}
+		string Name { get;}
 
 
 

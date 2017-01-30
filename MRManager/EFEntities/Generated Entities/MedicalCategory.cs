@@ -13,7 +13,7 @@ namespace EF.Entities
 {
 	public partial class MedicalCategory: BaseEntity, IMedicalCategory
 	{
-		public virtual string Category { get; set; }
+		public virtual string Name { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships

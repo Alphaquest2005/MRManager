@@ -13,16 +13,16 @@ namespace EF.Entities
 {
 	public partial class PatientSyntoms: BaseEntity, IPatientSyntoms
 	{
-		public virtual int SyntomId { get; set; }
 		public virtual int PatientVisitId { get; set; }
+		public virtual int SyntomId { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships
 				public virtual ICollection<PatientResponses> PatientResponses {get; set;}
 		
 			// ---------Parent Relationships
-				public virtual Syntoms Syntoms {get; set;}
 				public virtual PatientVisit PatientVisit {get; set;}
+				public virtual Syntoms Syntoms {get; set;}
 	
 
 	}

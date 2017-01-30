@@ -18,13 +18,13 @@ namespace EF.Mappings
 			entityBuilder.ToTable("AddressCities", "dbo");
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").ValueGeneratedNever();	
-			entityBuilder.Property(t => t.Id).HasColumnName("Id").IsRequired();
 			entityBuilder.Property(t => t.CityId).HasColumnName("CityId").IsRequired();
+			entityBuilder.Property(t => t.Id).HasColumnName("Id").IsRequired();
 		//-------------------Navigation Properties -------------------------------//
 	
 				//----------------Parent Properties
-				//entityBuilder.HasOne(p => p.Addresses).WithOne(p => p.AddressCities).HasForeignKey<Addresses>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
 				//entityBuilder.HasOne(p => p.Cities).WithMany(p => p.AddressCities).HasForeignKey(c => c.CityId).OnDelete(DeleteBehavior.Restrict);
+				//entityBuilder.HasOne(p => p.Addresses).WithOne(p => p.AddressCities).HasForeignKey<Addresses>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
 	
 		}
 	}

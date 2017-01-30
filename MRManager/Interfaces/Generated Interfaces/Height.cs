@@ -14,8 +14,8 @@ namespace Interfaces
 	[InheritedExport]
 	public partial interface IHeight:IEntity  
 	{
-		double Value { get;}
 		int UnitId { get;}
+		double Value { get;}
 
 
 

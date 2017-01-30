@@ -14,8 +14,8 @@ namespace Interfaces
 	[InheritedExport]
 	public partial interface IOrganisations:IEntity  
 	{
-		string Name { get;}
 		Byte[] EntryTimeStamp { get;}
+		string Name { get;}
 		string VATNumber { get;}
 
 

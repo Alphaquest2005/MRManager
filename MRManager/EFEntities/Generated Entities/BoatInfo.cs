@@ -14,8 +14,8 @@ namespace EF.Entities
 	public partial class BoatInfo: BaseEntity, IBoatInfo
 	{
 		public virtual string BoatName { get; set; }
-		public virtual string MarinaList { get; set; }
 		public virtual string Comments { get; set; }
+		public virtual string MarinaList { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships

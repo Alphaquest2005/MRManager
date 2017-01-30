@@ -15,8 +15,8 @@ namespace Interfaces
 	public partial interface IForeignAddresses:IEntity  
 	{
 		int AddressId { get;}
-		int PersonId { get;}
 		int AddressTypeId { get;}
+		int PersonId { get;}
 
 
 

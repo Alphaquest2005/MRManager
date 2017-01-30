@@ -14,8 +14,8 @@ namespace Interfaces
 	[InheritedExport]
 	public partial interface IPatientDoctor:IEntity  
 	{
-		int PatientId { get;}
 		int DoctorId { get;}
+		int PatientId { get;}
 
 
 

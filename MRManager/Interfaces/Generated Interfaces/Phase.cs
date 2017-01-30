@@ -14,8 +14,8 @@ namespace Interfaces
 	[InheritedExport]
 	public partial interface IPhase:IEntity  
 	{
-		string Name { get;}
 		string Code { get;}
+		string Name { get;}
 
 
 

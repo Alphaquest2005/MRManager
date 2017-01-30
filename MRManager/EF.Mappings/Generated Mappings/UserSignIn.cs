@@ -18,9 +18,9 @@ namespace EF.Mappings
 			entityBuilder.ToTable("UserSignIn", "dbo");
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").ValueGeneratedNever();	
-			entityBuilder.Property(t => t.Username).HasColumnName("Username").IsRequired().HasMaxLength(50);
-			entityBuilder.Property(t => t.Username).HasColumnName("Username").IsRequired().HasMaxLength(50);
 			entityBuilder.Property(t => t.Password).HasColumnName("Password").IsRequired().HasMaxLength(50);
+			entityBuilder.Property(t => t.Username).HasColumnName("Username").IsRequired().HasMaxLength(50);
+			entityBuilder.Property(t => t.Username).HasColumnName("Username").IsRequired().HasMaxLength(50);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").IsRequired();
 		//-------------------Navigation Properties -------------------------------//
 	

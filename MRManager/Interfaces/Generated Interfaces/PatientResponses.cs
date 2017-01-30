@@ -15,8 +15,8 @@ namespace Interfaces
 	public partial interface IPatientResponses:IEntity  
 	{
 		int PatientSyntomId { get;}
-		int QuestionId { get;}
 		int PatientVisitId { get;}
+		int QuestionId { get;}
 
 
 

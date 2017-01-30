@@ -14,8 +14,8 @@ namespace Interfaces
 	[InheritedExport]
 	public partial interface IEntityAttributes:IEntity  
 	{
-		string Entity { get;}
 		string Attribute { get;}
+		string Entity { get;}
 		string Type { get;}
 
 

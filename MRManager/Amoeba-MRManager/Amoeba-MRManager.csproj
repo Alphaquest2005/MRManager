@@ -494,6 +494,7 @@
 ..\EFEntities\Generated Entities\Entity Views\PersonNameInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\PersonPhoneNumberInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\PulseInfo.cs
+..\EFEntities\Generated Entities\Entity Views\QuestionInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\RespirationInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\ResponseOptionInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\SignInInfo.cs
@@ -835,6 +836,7 @@
 ..\Interfaces\Generated Interfaces\EntityViews\PersonNameInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\PersonPhoneNumberInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\PulseInfo.cs
+..\Interfaces\Generated Interfaces\EntityViews\QuestionInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\RespirationInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\ResponseOptionInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\SignInInfo.cs

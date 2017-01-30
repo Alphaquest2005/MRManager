@@ -14,8 +14,8 @@ namespace Interfaces
 	[InheritedExport]
 	public partial interface IMedia:IEntity  
 	{
-		Byte[] Value { get;}
 		int MediaTypeId { get;}
+		Byte[] Value { get;}
 
 
 

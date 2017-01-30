@@ -14,7 +14,7 @@ namespace Interfaces
 	[InheritedExport]
 	public partial interface IMedicalCategory:IEntity  
 	{
-		string Category { get;}
+		string Name { get;}
 
 
 

@@ -19,10 +19,10 @@ namespace EF.Entities
 			// ---------Child Relationships
 				public virtual AddressCities AddressCities {get; set;}
 				public virtual AddressCountries AddressCountries {get; set;}
-				public virtual ICollection<AddressLines> AddressLines {get; set;}
-				public virtual AddressParishes AddressParishes {get; set;}
-				public virtual AddressStates AddressStates {get; set;}
 				public virtual AddressZipCodes AddressZipCodes {get; set;}
+				public virtual ICollection<AddressLines> AddressLines {get; set;}
+				public virtual AddressStates AddressStates {get; set;}
+				public virtual AddressParishes AddressParishes {get; set;}
 				public virtual ICollection<ForeignAddresses> ForeignAddresses {get; set;}
 				public virtual ICollection<OrganisationAddress> OrganisationAddress {get; set;}
 				public virtual ICollection<PersonAddresses> PersonAddresses {get; set;}

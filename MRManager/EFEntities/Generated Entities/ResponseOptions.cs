@@ -15,6 +15,7 @@ namespace EF.Entities
 	{
 		public virtual int QuestionId { get; set; }
 		public virtual string Description { get; set; }
+		public virtual int ResponseNumber { get; set; }
 		public virtual string Type { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//

@@ -14,8 +14,8 @@ namespace Interfaces
 	[InheritedExport]
 	public partial interface IUserSignIn:IEntity  
 	{
-		string Username { get;}
 		string Password { get;}
+		string Username { get;}
 
 
 

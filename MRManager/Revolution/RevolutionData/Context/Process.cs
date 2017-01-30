@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SystemInterfaces;
+using Actor.Interfaces;
 using RevolutionEntities.Process;
 
 namespace RevolutionData.Context
@@ -22,6 +23,7 @@ namespace RevolutionData.Context
             public static IStateCommand PublishState => new StateCommand("RequestState", "Request Process State", Events.StatePublished);
             public static IStateCommand CleanUpProcess => new StateCommand("Cleanup Process", "Clean up Process", Events.ProcessCleanedUp);
             public static IStateCommand CurrentEntityChanged => new StateCommand("CurrentEntityChanged", "Process Current Entity Changed");
+            public static IStateCommand ChangeCurrentEntity => new StateCommand("ChangeCurrentEntity", "Change Process CurrentEntity", Events.CurrentEntityChanged);
         }
 
         public class Events

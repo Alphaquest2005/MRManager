@@ -10,11 +10,14 @@
         <ResourceDictionary Source="Custom/PS-NonResidentPatientInfoTpl.xaml" />
         <ResourceDictionary Source="Custom/PS-PersonPhoneNumberInfoTpl.xaml" />
         <ResourceDictionary Source="Custom/PS-PersonAddressInfoTpl.xaml" />
-        <ResourceDictionary Source="Custom/InterviewListDT.xaml" />
+        <ResourceDictionary Source="Custom/InterviewInfoDT.xaml" />
         <ResourceDictionary Source="Custom/InterviewListVDT.xaml" />
-        <ResourceDictionary Source="Custom/QuestionInfoDT.xaml" />
-        <ResourceDictionary Source="Custom/ResponseInfoRDT.xaml" />
-        <ResourceDictionary Source="Custom/ResponseInfoWDT.xaml" />
+        <ResourceDictionary Source="Custom/QuestionInfoRDT.xaml" />
+        <ResourceDictionary Source="Custom/QuestionInfoWDT.xaml" />
+        <ResourceDictionary Source="Custom/QuestionaireVDT.xaml" />
+        <ResourceDictionary Source="Custom/QuestionListVDT.xaml" />
+        <ResourceDictionary Source="Custom/ResponseOptionRDT.xaml" />
+        <ResourceDictionary Source="Custom/ResponseOptionWDT.xaml" />
         <ResourceDictionary Source="Custom/HeaderVDT.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

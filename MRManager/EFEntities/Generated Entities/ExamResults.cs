@@ -18,10 +18,10 @@ namespace EF.Entities
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships
-				public virtual ExamResults_AnioticFluid ExamResults_AnioticFluid {get; set;}
-				public virtual ICollection<ExamResults_FetalDates> ExamResults_FetalDates {get; set;}
-				public virtual ICollection<ExamResults_SimpleValues> ExamResults_SimpleValues {get; set;}
 				public virtual ExamResults_UmbilicalArtery ExamResults_UmbilicalArtery {get; set;}
+				public virtual ExamResults_AnioticFluid ExamResults_AnioticFluid {get; set;}
+				public virtual ICollection<ExamResults_SimpleValues> ExamResults_SimpleValues {get; set;}
+				public virtual ICollection<ExamResults_FetalDates> ExamResults_FetalDates {get; set;}
 		
 			// ---------Parent Relationships
 				public virtual ExamDetails ExamDetails {get; set;}

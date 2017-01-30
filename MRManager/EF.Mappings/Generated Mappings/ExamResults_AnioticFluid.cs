@@ -19,8 +19,8 @@ namespace EF.Mappings
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").ValueGeneratedNever();	
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").IsRequired();
-			entityBuilder.Property(t => t.MVP).HasColumnName("MVP").IsRequired();
 			entityBuilder.Property(t => t.AFI).HasColumnName("AFI").IsRequired();
+			entityBuilder.Property(t => t.MVP).HasColumnName("MVP").IsRequired();
 			entityBuilder.Property(t => t.Q1).HasColumnName("Q1").IsRequired();
 			entityBuilder.Property(t => t.Q2).HasColumnName("Q2").IsRequired();
 			entityBuilder.Property(t => t.Q3).HasColumnName("Q3").IsRequired();

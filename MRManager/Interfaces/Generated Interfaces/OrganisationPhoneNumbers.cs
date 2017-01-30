@@ -14,9 +14,9 @@ namespace Interfaces
 	[InheritedExport]
 	public partial interface IOrganisationPhoneNumbers:IEntity  
 	{
+		int OrganisationId { get;}
 		string PhoneNumber { get;}
 		int PhoneTypeId { get;}
-		int OrganisationId { get;}
 
 
 

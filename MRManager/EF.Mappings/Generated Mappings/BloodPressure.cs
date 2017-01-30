@@ -18,9 +18,9 @@ namespace EF.Mappings
 			entityBuilder.ToTable("BloodPressure", "Vitals");
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").ValueGeneratedNever();	
+			entityBuilder.Property(t => t.Diastolic).HasColumnName("Diastolic").IsRequired();
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").IsRequired();
 			entityBuilder.Property(t => t.Systolic).HasColumnName("Systolic").IsRequired();
-			entityBuilder.Property(t => t.Diastolic).HasColumnName("Diastolic").IsRequired();
 			entityBuilder.Property(t => t.UnitId).HasColumnName("UnitId").IsRequired();
 		//-------------------Navigation Properties -------------------------------//
 	

@@ -1,0 +1,78 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
+                    xmlns:converters="clr-namespace:Converters;assembly=Converters"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d">
+
+    <DataTemplate x:Key="QuestionInfoRDT" DataType="{x:Type Interfaces:IQuestionInfo}">
+
+        <Grid Width="Auto" Margin="0">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0.907" Color="#33000000" />
+                    <GradientStop Offset="0.069" Color="#19FFFFFF" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <TextBlock Width="267"
+                       Height="66"
+                       Margin="54,10,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="18.667"
+                       Text="{Binding Path=Description,
+                                      Mode=OneWay}" />
+            <TextBlock Width="159"
+                       Height="27"
+                       Margin="326,49,-21,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="16"
+                       Text="{Binding Path=Category,
+                                      Mode=OneWay}" />
+            <TextBlock Width="159"
+                       Height="27"
+                       Margin="326,81,-21,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="16"
+                       Text="{Binding Path=Phase,
+                                      Mode=OneWay}" />
+            <TextBlock Width="159"
+                       Height="27"
+                       Margin="326,17,-21,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="16"
+                       Text="{Binding Interview,
+                                      Mode=OneWay}" />
+            <TextBlock Width="118"
+                       Height="27"
+                       Margin="54,81,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="16"
+                       Text="{Binding Entity,
+                                      Mode=OneWay}" />
+            <TextBlock Width="118"
+                       Height="27"
+                       Margin="187,81,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="16"
+                       Text="{Binding Attribute,
+                                      Mode=OneWay}" />
+            <TextBlock Width="39"
+                       Height="43"
+                       Margin="10,33,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="18.667"
+                       Text="{Binding QuestionNumber,
+                                      Mode=OneWay}" />
+
+        </Grid>
+
+    </DataTemplate>
+</ResourceDictionary>

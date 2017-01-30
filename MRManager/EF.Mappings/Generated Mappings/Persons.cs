@@ -26,11 +26,11 @@ namespace EF.Mappings
 				entityBuilder.HasMany(x => x.PersonNames).WithOne(p => p.Persons).HasForeignKey(c => c.PersonId).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasMany(x => x.PersonPhoneNumbers).WithOne(p => p.Persons).HasForeignKey(c => c.PersonId).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasOne(p => p.Persons_Doctor).WithOne(p => p.Persons).HasForeignKey<Persons_Doctor>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
-				entityBuilder.HasOne(p => p.Persons_EmergencyContact).WithOne(p => p.Persons).HasForeignKey<Persons_EmergencyContact>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
-				entityBuilder.HasOne(p => p.Persons_NextOfKin).WithOne(p => p.Persons).HasForeignKey<Persons_NextOfKin>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
-				entityBuilder.HasOne(p => p.Persons_Patient).WithOne(p => p.Persons).HasForeignKey<Persons_Patient>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasOne(p => p.UserSignIn).WithOne(p => p.Persons).HasForeignKey<UserSignIn>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
+				entityBuilder.HasOne(p => p.Persons_Patient).WithOne(p => p.Persons).HasForeignKey<Persons_Patient>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasMany(x => x.VitalSigns).WithOne(p => p.Persons).HasForeignKey(c => c.ReaderId).OnDelete(DeleteBehavior.Restrict);
+				entityBuilder.HasOne(p => p.Persons_NextOfKin).WithOne(p => p.Persons).HasForeignKey<Persons_NextOfKin>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
+				entityBuilder.HasOne(p => p.Persons_EmergencyContact).WithOne(p => p.Persons).HasForeignKey<Persons_EmergencyContact>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
 	
 				//----------------Parent Properties
 	

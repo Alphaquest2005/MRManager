@@ -13,6 +13,7 @@ namespace Interfaces
         Int32 QuestionId { get; }
         String Description { get; }
         String Type { get; }
+        int ResponseNumber { get; }
     }
 
     [InheritedExport]

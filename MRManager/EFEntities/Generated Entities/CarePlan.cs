@@ -13,13 +13,13 @@ namespace EF.Entities
 {
 	public partial class CarePlan: BaseEntity, ICarePlan
 	{
-		public virtual string Name { get; set; }
 		public virtual string Diagnosis { get; set; }
+		public virtual string Name { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships
-				public virtual ICollection<CarePlanDetails> CarePlanDetails {get; set;}
 				public virtual ICollection<ResponseSuggestions_CarePlans> ResponseSuggestions_CarePlans {get; set;}
+				public virtual ICollection<CarePlanDetails> CarePlanDetails {get; set;}
 		
 			// ---------Parent Relationships
 	

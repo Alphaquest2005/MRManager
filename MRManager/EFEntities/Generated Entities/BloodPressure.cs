@@ -13,8 +13,8 @@ namespace EF.Entities
 {
 	public partial class BloodPressure: BaseEntity, IBloodPressure
 	{
-		public virtual int Systolic { get; set; }
 		public virtual int Diastolic { get; set; }
+		public virtual int Systolic { get; set; }
 		public virtual int UnitId { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//

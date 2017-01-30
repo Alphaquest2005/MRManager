@@ -16,6 +16,7 @@ namespace Interfaces
 	{
 		int QuestionId { get;}
 		string Description { get;}
+		int ResponseNumber { get;}
 		string Type { get;}
 
 

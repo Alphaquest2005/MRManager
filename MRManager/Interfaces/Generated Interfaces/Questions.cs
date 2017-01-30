@@ -14,9 +14,10 @@ namespace Interfaces
 	[InheritedExport]
 	public partial interface IQuestions:IEntity  
 	{
-		int EntityAttribute { get;}
-		int InterviewId { get;}
+		int EntityAttributeId { get;}
 		string Description { get;}
+		int InterviewId { get;}
+		int QuestionNumber { get;}
 
 
 

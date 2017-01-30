@@ -19,8 +19,8 @@ namespace EF.Entities
 			// ---------Child Relationships
 		
 			// ---------Parent Relationships
-				public virtual Addresses Addresses {get; set;}
 				public virtual Countries Countries {get; set;}
+				public virtual Addresses Addresses {get; set;}
 	
 
 	}

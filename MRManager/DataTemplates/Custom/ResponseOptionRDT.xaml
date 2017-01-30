@@ -1,0 +1,77 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
+                    xmlns:converters="clr-namespace:Converters;assembly=Converters"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+                    mc:Ignorable="d">
+
+    <DataTemplate x:Key="ResponseOptionRDT" DataType="{x:Type Interfaces:IResponseOptionInfo}">
+        <DataTemplate.Resources>
+            <converters:StringVisibilityConverter x:Key="StringVisibilityConverter" />
+            <converters:StringBooleanConverter x:Key="StringBooleanConverter" />
+            <converters:StringDateConverter x:Key="StringDateConverter" />
+            <converters:HasValueTypeVisiblityConverter x:Key="ValueTypeVisiblityConverter" />
+        </DataTemplate.Resources>
+        <Grid Width="Auto" Height="Auto">
+
+            <Grid Margin="0">
+
+
+                <TextBlock Width="219"
+                           MinWidth="75"
+                           Margin="272,5,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Text="{Binding Path=Value,
+                                          FallbackValue=Value,
+                                          UpdateSourceTrigger=PropertyChanged,
+                                          ValidatesOnDataErrors=True}"
+                           TextWrapping="Wrap" />
+                <TextBlock Width="195"
+                           MinWidth="75"
+                           Margin="65,5,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Text="{Binding Path=Description,
+                                          FallbackValue=Description,
+                                          UpdateSourceTrigger=PropertyChanged,
+                                          ValidatesOnDataErrors=True}"
+                           TextWrapping="Wrap" />
+                <Rectangle Width="2"
+                           Height="29"
+                           Margin="265,5,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Fill="#FFB8B8B8">
+                    <Rectangle.Visibility>
+                        <MultiBinding Converter="{StaticResource ValueTypeVisiblityConverter}" ConverterParameter="TextBox">
+                            <Binding Path="Type" />
+                            <Binding Path="Value" />
+                        </MultiBinding>
+                    </Rectangle.Visibility>
+                    <Rectangle.Stroke>
+                        <RadialGradientBrush>
+                            <GradientStop Offset="0" Color="#FF071A85" />
+                            <GradientStop Offset="1" />
+                        </RadialGradientBrush>
+                    </Rectangle.Stroke>
+                </Rectangle>
+                <TextBlock Width="35"
+                           Height="33"
+                           MinWidth="20"
+                           Margin="10,5,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontWeight="Bold"
+                           Text="{Binding ResponseNumber,
+                                          UpdateSourceTrigger=PropertyChanged,
+                                          ValidatesOnDataErrors=True}"
+                           TextAlignment="Center" />
+
+            </Grid>
+        </Grid>
+
+    </DataTemplate>
+</ResourceDictionary>

@@ -18,11 +18,11 @@ namespace EF.Mappings
 			entityBuilder.ToTable("BoatInfo", "dbo");
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").ValueGeneratedNever();	
-			entityBuilder.Property(t => t.Id).HasColumnName("Id").IsRequired();
 			entityBuilder.Property(t => t.BoatName).HasColumnName("BoatName").IsRequired().HasMaxLength(50);
 			entityBuilder.Property(t => t.BoatName).HasColumnName("BoatName").IsRequired().HasMaxLength(50);
-			entityBuilder.Property(t => t.MarinaList).HasColumnName("MarinaList").IsRequired().HasMaxLength(50);
 			entityBuilder.Property(t => t.Comments).HasColumnName("Comments").IsRequired().HasMaxLength(Int32.MaxValue);
+			entityBuilder.Property(t => t.Id).HasColumnName("Id").IsRequired();
+			entityBuilder.Property(t => t.MarinaList).HasColumnName("MarinaList").IsRequired().HasMaxLength(50);
 		//-------------------Navigation Properties -------------------------------//
 	
 				//----------------Parent Properties

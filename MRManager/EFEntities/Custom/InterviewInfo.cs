@@ -1,4 +1,5 @@
-﻿using Common.DataEntites;
+﻿using SystemInterfaces;
+using Common.DataEntites;
 using Interfaces;
 
 namespace EF.Entities
@@ -9,4 +10,6 @@ namespace EF.Entities
         public string Category { get; set; }
         public string Phase { get; set; }
     }
+
+
 }

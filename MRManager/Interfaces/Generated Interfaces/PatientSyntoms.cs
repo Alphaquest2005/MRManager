@@ -14,8 +14,8 @@ namespace Interfaces
 	[InheritedExport]
 	public partial interface IPatientSyntoms:IEntity  
 	{
-		int SyntomId { get;}
 		int PatientVisitId { get;}
+		int SyntomId { get;}
 
 
 
