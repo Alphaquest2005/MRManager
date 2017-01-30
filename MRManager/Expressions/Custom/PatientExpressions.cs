@@ -237,7 +237,7 @@ namespace Entity.Expressions
                     PatientResponseId = z.PatientResponseId,
                     Media = z.Media.Value
                 } as IResponseImage).ToList(),
-                ResponseOptions = x.Questions.ResponseOptions.Select(z => new ResponseOptionInfo()
+                ResponseOptions = x.Questions.ResponseOptions.OrderBy(z => z.ResponseNumber).Select(z => new ResponseOptionInfo()
                 {
                     Id = z.Id,
                     Description = z.Description,
@@ -252,7 +252,8 @@ namespace Entity.Expressions
                             ? z.Response.Where(x1 => x1.PatientResponseId == x.Id).Select(x2 => x2.Value).First()
                             : null, //
                     Type = z.Type,
-                    PatientResponseId = x.Id
+                    PatientResponseId = x.Id,
+                    ResponseNumber = z.ResponseNumber
 
                 } as IResponseOptionInfo).ToList(),
 
@@ -281,7 +282,9 @@ namespace Entity.Expressions
                 Category = x.Interviews.MedicalCategory.Name,
                 Entity = x.EntityAttributes.Entity,
                 Attribute = x.EntityAttributes.Attribute,
-                Type = x.EntityAttributes.Type
+                Type = x.EntityAttributes.Type,
+                QuestionNumber = x.QuestionNumber
+
             };
 
         //public static Expression<Func<PatientResponses, object>> PatientResponseInfoExpression { get; } =

@@ -725,7 +725,48 @@ namespace RevolutionData
                                         s.Source);
                                 }),
 
+                    new ViewEventCommand<IQuestionListViewModel, ViewRowStateChanged<IQuestionInfo>>(
+                                key:"EditEntity",
+                                commandPredicate:new List<Func<IQuestionListViewModel, bool>>
+                                {
+                                    v => v.CurrentEntity != null
+                                },
+                                subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
 
+                                messageData: s =>
+                                {
+                                    s.RowState.Value = s.RowState.Value != RowState.Modified?RowState.Modified: RowState.Unchanged;//new ReactiveProperty<RowState>(rowstate != RowState.Modified?RowState.Modified: RowState.Unchanged);
+
+                                    return new ViewEventCommandParameter(
+                                        new object[] {s,s.RowState.Value},
+                                        new StateCommandInfo(s.Process.Id,
+                                            Context.Process.Commands.CurrentEntityChanged), s.Process,
+                                        s.Source);
+                                }),
+
+                    new ViewEventCommand<IQuestionListViewModel, UpdateEntityViewWithChanges<IQuestionInfo>>(
+                        key:"SaveQuestion",
+                        subject:v => v.ChangeTracking.DictionaryChanges,
+                        commandPredicate: new List<Func<IQuestionListViewModel, bool>>
+                                            {
+                                                v => v.ChangeTracking.Count == 2
+                                                        && v.ChangeTracking.ContainsKey(nameof(IQuestionInfo.Description))
+                                                        && v.ChangeTracking[nameof(IQuestionInfo.Id)] != 0
+                                            },
+                        //TODO: Make a type to capture this info... i killing it here
+                        messageData: s =>
+                        {
+                           var msg = new ViewEventCommandParameter(
+                                new object[]
+                                {
+                                    s.ChangeTracking.First().Value,
+                                    s.ChangeTracking.TakeLast(1).ToDictionary(x => x.Key, x => x.Value)
+                                },
+                                new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
+                                s.Source);
+                            s.ChangeTracking.Clear();
+                            return msg;
+                        }),
 
                 },
                 typeof(IQuestionListViewModel),

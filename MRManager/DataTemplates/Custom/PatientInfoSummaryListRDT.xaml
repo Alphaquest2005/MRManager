@@ -10,7 +10,7 @@
     <DataTemplate DataType="{x:Type viewModels:PatientSummaryListViewModel}">
         <Grid Margin="0" Background="#4CFFFFFF">
 
-            
+
             <ListBox Margin="10,65,10,63"
                      ItemTemplate="{DynamicResource PatientInfoTpl}"
                      ItemsSource="{Binding State.Value.EntitySet,
@@ -31,11 +31,13 @@
                     <ComboBoxItem Content="PhoneNumber" />
                 </ComboBox.Items>
             </ComboBox>
-            <TextBox Margin="93,30,41,0"
+            <TextBox Height="26"
+                     Margin="93,30,41,0"
                      VerticalAlignment="Top"
                      Text="{Binding Value,
-                                    UpdateSourceTrigger=PropertyChanged}" Height="26" />
+                                    UpdateSourceTrigger=PropertyChanged}" />
             <Button Width="26"
+                    Height="25"
                     Margin="0,30,10,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
@@ -43,7 +45,7 @@
                                       Mode=OneWay}"
                     Content=""
                     FontFamily="Segoe UI Symbol"
-                    FontSize="10" Height="25" />
+                    FontSize="10" />
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

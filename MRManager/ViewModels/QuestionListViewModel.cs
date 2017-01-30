@@ -43,7 +43,7 @@ namespace ViewModels
             {
                 ChangeTrackingList.Clear();
                 if (!entitySet.Any()) return;
-                ChangeTrackingList.AddRange(entitySet);
+                ChangeTrackingList.AddRange(entitySet.OrderBy(z => z.QuestionNumber));
                 foreach (var itm in ChangeTrackingList)
                 {
                     itm.ObservableForProperty(x => x).Subscribe(x => updateChangeTracking(x));

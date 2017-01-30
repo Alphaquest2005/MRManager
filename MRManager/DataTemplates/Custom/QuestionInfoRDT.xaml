@@ -15,62 +15,48 @@
                     <GradientStop Offset="0.069" Color="#19FFFFFF" />
                 </LinearGradientBrush>
             </Grid.Background>
-            <TextBlock Width="267"
-                       Height="66"
-                       Margin="54,10,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="18.667"
-                       Text="{Binding Path=Description,
-                                      Mode=OneWay}" />
-            <TextBlock Width="159"
-                       Height="27"
-                       Margin="326,49,-21,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="16"
-                       Text="{Binding Path=Category,
-                                      Mode=OneWay}" />
-            <TextBlock Width="159"
-                       Height="27"
-                       Margin="326,81,-21,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="16"
-                       Text="{Binding Path=Phase,
-                                      Mode=OneWay}" />
-            <TextBlock Width="159"
-                       Height="27"
-                       Margin="326,17,-21,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="16"
-                       Text="{Binding Interview,
-                                      Mode=OneWay}" />
+            <TextBlock Width="437"
+                   Height="48"
+                   Margin="54,10,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   FontSize="18.667"
+                   Text="{Binding Path=Description,
+                                  Mode=OneWay}" />
+
             <TextBlock Width="118"
-                       Height="27"
-                       Margin="54,81,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="16"
-                       Text="{Binding Entity,
-                                      Mode=OneWay}" />
+                   Height="27"
+                   Margin="54,81,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   FontSize="16"
+                   Text="{Binding Entity,
+                                  Mode=OneWay}" />
             <TextBlock Width="118"
-                       Height="27"
-                       Margin="187,81,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="16"
-                       Text="{Binding Attribute,
-                                      Mode=OneWay}" />
+                   Height="27"
+                   Margin="200,81,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   FontSize="16"
+                   Text="{Binding Attribute,
+                                  Mode=OneWay}" />
             <TextBlock Width="39"
-                       Height="43"
-                       Margin="10,33,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="18.667"
-                       Text="{Binding QuestionNumber,
-                                      Mode=OneWay}" />
+                   Height="43"
+                   Margin="10,24,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   FontSize="18.667"
+                   Text="{Binding QuestionNumber,
+                                  Mode=OneWay}" />
+            <TextBlock Width="118"
+                   Height="27"
+                   Margin="340,81,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   FontSize="16"
+                   Text="{Binding Type,
+                                  Mode=OneWay}" />
+
 
         </Grid>
 

@@ -19,8 +19,9 @@
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
                      Background="#33FFFFFF"
-                     SelectedItem="{Binding CurrentEntity.Value, Mode=TwoWay}"
-                     ItemsSource="{Binding ChangeTrackingList}">
+                     ItemsSource="{Binding ChangeTrackingList}"
+                     SelectedItem="{Binding CurrentEntity.Value,
+                                            Mode=TwoWay}">
 
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}">
@@ -34,7 +35,7 @@
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding Path=RowState.Value}" Value="{x:Static systemInterfaces:RowState.Added}" />
+                                    <Condition Binding="{Binding Path=RowState.Value, Source={x:Static viewModels:QuestionListViewModel.Instance}}" Value="{x:Static systemInterfaces:RowState.Added}" />
                                     <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsSelected}" Value="True" />
                                 </MultiDataTrigger.Conditions>
                                 <MultiDataTrigger.Setters>
@@ -44,7 +45,7 @@
                             </MultiDataTrigger>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding Path=RowState.Value}" Value="{x:Static systemInterfaces:RowState.Modified}" />
+                                    <Condition Binding="{Binding Path=RowState.Value, Source={x:Static viewModels:QuestionListViewModel.Instance}}" Value="{x:Static systemInterfaces:RowState.Modified}" />
                                     <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsSelected}" Value="True" />
                                 </MultiDataTrigger.Conditions>
                                 <MultiDataTrigger.Setters>
