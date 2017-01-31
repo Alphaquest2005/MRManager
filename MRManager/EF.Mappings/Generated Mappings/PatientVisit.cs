@@ -15,7 +15,7 @@ namespace EF.Mappings
 	{
 		public static void Map(EntityTypeBuilder<PatientVisit> entityBuilder)
 		{
-			entityBuilder.ToTable("PatientVisit", "dbo");
+			entityBuilder.ToTable("PatientVisit", "Interview");
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();	
 			entityBuilder.Property(t => t.DateOfVisit).HasColumnName("DateOfVisit").IsRequired();

@@ -12,10 +12,10 @@ using SystemInterfaces;
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IPhase:IEntity  
+	public partial interface ISyntomMedicalSystems:IEntity  
 	{
-		string Name { get;}
-		string Code { get;}
+		int MedicalSystemId { get;}
+		int SyntomId { get;}
 
 
 

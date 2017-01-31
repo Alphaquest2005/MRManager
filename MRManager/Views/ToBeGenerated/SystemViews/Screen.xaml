@@ -124,7 +124,7 @@
                         <DataTemplate>
                             <Expander Width="Auto"
                                 Height="550"
-                                Margin="100,010,0,0"
+                                Margin="20,010,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 ExpandDirection="Right"

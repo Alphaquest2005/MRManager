@@ -47,4 +47,16 @@ namespace ViewModel.Interfaces
         ObservableBindingList<IQuestionInfo> ChangeTrackingList { get; }
         IInterviewInfo CurrentInterview { get; set; }
     }
+
+    [InheritedExport]
+    public interface IPatientVisitViewModel : IEntityListViewModel<IPatientVisitInfo>
+    {
+        IPatientInfo CurrentPatient { get; set; }
+    }
+
+    [InheritedExport]
+    public interface IPatientSyntomViewModel : IEntityListViewModel<IPatientSyntomInfo>
+    {
+        IPatientVisitInfo CurrentPatientVisit { get; set; }
+    }
 }

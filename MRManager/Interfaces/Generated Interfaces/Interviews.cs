@@ -14,8 +14,8 @@ namespace Interfaces
 	[InheritedExport]
 	public partial interface IInterviews:IEntity  
 	{
-		int MedicalCategoryId { get;}
 		string Name { get;}
+		int MedicalCategoryId { get;}
 		int PhaseId { get;}
 
 

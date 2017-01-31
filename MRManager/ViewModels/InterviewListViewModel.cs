@@ -42,6 +42,6 @@ namespace ViewModels
         public string Field { get; set; }
         public string Value { get; set; }
 
-        
+        public IPatientSyntomInfo CurrentPatientSyntomInfo { get; set; }
     }
 }

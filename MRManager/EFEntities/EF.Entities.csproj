@@ -38,6 +38,8 @@
     <Compile Include="Custom\PatientDetailsInfo.cs" />
     <Compile Include="Custom\PatientInfo.cs" />
     <Compile Include="Custom\PatientResponseInfo.cs" />
+    <Compile Include="Custom\PatientSyntomInfo.cs" />
+    <Compile Include="Custom\PatientVisitInfo.cs" />
     <Compile Include="Custom\PersonAddressInfo.cs" />
     <Compile Include="Custom\PersonPhoneNumbersInfo.cs" />
     <Compile Include="Custom\QuestionInfo.cs" />
@@ -45,6 +47,7 @@
     <Compile Include="Custom\Response.cs" />
     <Compile Include="Custom\ResponseImage.cs" />
     <Compile Include="Custom\ResponseOptionInfo.cs" />
+    <Compile Include="Custom\SyntomMedicalSystemInfo.cs" />
     <Compile Include="EFEntity.cs" />
     <Compile Include="Custom\SignInInfo.cs" />
     <Compile Include="Generated Entities\AddressCities.cs" />
@@ -86,6 +89,8 @@
     <Compile Include="Generated Entities\Media.cs" />
     <Compile Include="Generated Entities\MediaTypes.cs" />
     <Compile Include="Generated Entities\MedicalCategory.cs" />
+    <Compile Include="Generated Entities\MedicalSystemInterviews.cs" />
+    <Compile Include="Generated Entities\MedicalSystems.cs" />
     <Compile Include="Generated Entities\NonResidentCompanyInfo.cs" />
     <Compile Include="Generated Entities\NonResidentHotelInfo.cs" />
     <Compile Include="Generated Entities\Occupations.cs" />
@@ -139,6 +144,7 @@
     <Compile Include="Generated Entities\Sex.cs" />
     <Compile Include="Generated Entities\States.cs" />
     <Compile Include="Generated Entities\StudentInfo.cs" />
+    <Compile Include="Generated Entities\SyntomMedicalSystems.cs" />
     <Compile Include="Generated Entities\Syntoms.cs" />
     <Compile Include="Generated Entities\Temperature.cs" />
     <Compile Include="Generated Entities\UltraSoundGeneralEvaluation.cs" />

@@ -51,6 +51,8 @@ namespace EF.DBContexts
 		public DbSet<Media> Media { get; set; }
 		public DbSet<MediaTypes> MediaTypes { get; set; }
 		public DbSet<MedicalCategory> MedicalCategory { get; set; }
+		public DbSet<MedicalSystemInterviews> MedicalSystemInterviews { get; set; }
+		public DbSet<MedicalSystems> MedicalSystems { get; set; }
 		public DbSet<NonResidentCompanyInfo> NonResidentCompanyInfo { get; set; }
 		public DbSet<NonResidentHotelInfo> NonResidentHotelInfo { get; set; }
 		public DbSet<Occupations> Occupations { get; set; }
@@ -104,6 +106,7 @@ namespace EF.DBContexts
 		public DbSet<Sex> Sex { get; set; }
 		public DbSet<States> States { get; set; }
 		public DbSet<StudentInfo> StudentInfo { get; set; }
+		public DbSet<SyntomMedicalSystems> SyntomMedicalSystems { get; set; }
 		public DbSet<Syntoms> Syntoms { get; set; }
 		public DbSet<Temperature> Temperature { get; set; }
 		public DbSet<UltraSoundGeneralEvaluation> UltraSoundGeneralEvaluation { get; set; }
@@ -159,6 +162,8 @@ namespace EF.DBContexts
 				MediaMap.Map(modelBuilder.Entity<Media>());
 				MediaTypesMap.Map(modelBuilder.Entity<MediaTypes>());
 				MedicalCategoryMap.Map(modelBuilder.Entity<MedicalCategory>());
+				MedicalSystemInterviewsMap.Map(modelBuilder.Entity<MedicalSystemInterviews>());
+				MedicalSystemsMap.Map(modelBuilder.Entity<MedicalSystems>());
 				NonResidentCompanyInfoMap.Map(modelBuilder.Entity<NonResidentCompanyInfo>());
 				NonResidentHotelInfoMap.Map(modelBuilder.Entity<NonResidentHotelInfo>());
 				OccupationsMap.Map(modelBuilder.Entity<Occupations>());
@@ -212,6 +217,7 @@ namespace EF.DBContexts
 				SexMap.Map(modelBuilder.Entity<Sex>());
 				StatesMap.Map(modelBuilder.Entity<States>());
 				StudentInfoMap.Map(modelBuilder.Entity<StudentInfo>());
+				SyntomMedicalSystemsMap.Map(modelBuilder.Entity<SyntomMedicalSystems>());
 				SyntomsMap.Map(modelBuilder.Entity<Syntoms>());
 				TemperatureMap.Map(modelBuilder.Entity<Temperature>());
 				UltraSoundGeneralEvaluationMap.Map(modelBuilder.Entity<UltraSoundGeneralEvaluation>());

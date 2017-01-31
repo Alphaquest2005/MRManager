@@ -11,20 +11,17 @@ using Interfaces;
 
 namespace EF.Entities
 {
-	public partial class Interviews: BaseEntity, IInterviews
+	public partial class MedicalSystemInterviews: BaseEntity, IMedicalSystemInterviews
 	{
-		public virtual string Name { get; set; }
-		public virtual int MedicalCategoryId { get; set; }
-		public virtual int PhaseId { get; set; }
+		public virtual int InterviewId { get; set; }
+		public virtual int MedicalSystemId { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships
-				public virtual ICollection<MedicalSystemInterviews> MedicalSystemInterviews {get; set;}
-				public virtual ICollection<Questions> Questions {get; set;}
 		
 			// ---------Parent Relationships
-				public virtual MedicalCategory MedicalCategory {get; set;}
-				public virtual Phase Phase {get; set;}
+				public virtual Interviews Interviews {get; set;}
+				public virtual MedicalSystems MedicalSystems {get; set;}
 	
 
 	}

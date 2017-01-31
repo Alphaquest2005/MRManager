@@ -52,7 +52,7 @@
     <Compile Include="IDynamicViewModel.cs" />
     <Compile Include="ILoadViewModel.cs" />
     <Compile Include="IMainWindowViewModel.cs" />
-    <Compile Include="ILoginViewModel.cs" />
+    <Compile Include="Custom\ILoginViewModel.cs" />
     <Compile Include="IViewModelEvent.cs" />
     <Compile Include="IViewModelLoaded.cs" />
     <Compile Include="IAutoViewModel.cs" />

@@ -19,10 +19,10 @@ namespace EF.DBContexts
 
 		static MRManagerDBContext()
 		{
-			//if (System.ComponentModel.LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
-			//Instance.Database.EnsureDeleted();
-			//Instance.Database.EnsureCreated();
-			//CreateSeedData();
+			if (System.ComponentModel.LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
+			Instance.Database.EnsureDeleted();
+			Instance.Database.EnsureCreated();
+			CreateSeedData();
 		}
 
 		private static void CreateSeedData()
@@ -36,14 +36,14 @@ namespace EF.DBContexts
 					SET IDENTITY_INSERT dbo.Addresses OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.AddressTypes ON
-						Insert Into dbo.AddressTypes (Id,Name) Values('4','Home')
 						Insert Into dbo.AddressTypes (Id,Name) Values('0','Unspecified')
+						Insert Into dbo.AddressTypes (Id,Name) Values('4','Home')
 					SET IDENTITY_INSERT dbo.AddressTypes OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.Allergies ON
+						Insert Into dbo.Allergies (Id,Name) Values('1','Milk')
 						Insert Into dbo.Allergies (Id,Name) Values('0','Unspecified')
 						Insert Into dbo.Allergies (Id,Name) Values('2','Asprin')
-						Insert Into dbo.Allergies (Id,Name) Values('1','Milk')
 					SET IDENTITY_INSERT dbo.Allergies OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Interview.CarePlan ON
@@ -51,8 +51,8 @@ namespace EF.DBContexts
 					SET IDENTITY_INSERT Interview.CarePlan OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.Cities ON
-						Insert Into dbo.Cities (Id,Name) Values('1','St. Geroge''s')
 						Insert Into dbo.Cities (Id,Name) Values('0','Unspecified')
+						Insert Into dbo.Cities (Id,Name) Values('1','St. Geroge''s')
 						Insert Into dbo.Cities (Id,Name) Values('3','New York')
 					SET IDENTITY_INSERT dbo.Cities OFF");
 				Instance.Database.ExecuteSqlCommand(@"
@@ -63,10 +63,10 @@ namespace EF.DBContexts
 					SET IDENTITY_INSERT dbo.Countries OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.EntityAttributes ON
-						Insert Into dbo.EntityAttributes (Attribute,Entity,Id,Type) Values('unspecified','unspecified','0','unspecified')
 						Insert Into dbo.EntityAttributes (Attribute,Entity,Id,Type) Values('Name','Patient','1','string')
 						Insert Into dbo.EntityAttributes (Attribute,Entity,Id,Type) Values('BirthDate','Patient','3','date')
 						Insert Into dbo.EntityAttributes (Attribute,Entity,Id,Type) Values('Id','Patient','4','string')
+						Insert Into dbo.EntityAttributes (Attribute,Entity,Id,Type) Values('unspecified','unspecified','0','unspecified')
 					SET IDENTITY_INSERT dbo.EntityAttributes OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Diagnostics.Exams ON
@@ -74,20 +74,25 @@ namespace EF.DBContexts
 					SET IDENTITY_INSERT Diagnostics.Exams OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.MaritalStatus ON
-						Insert Into dbo.MaritalStatus (Name,Id) Values('Unspecified','0')
 						Insert Into dbo.MaritalStatus (Name,Id) Values('Divorced','1')
+						Insert Into dbo.MaritalStatus (Name,Id) Values('Unspecified','0')
 					SET IDENTITY_INSERT dbo.MaritalStatus OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.MediaTypes ON
-						Insert Into dbo.MediaTypes (Id,FileExtension,MediaTypeName) Values('1','jpg,png','Image')
 						Insert Into dbo.MediaTypes (Id,FileExtension,MediaTypeName) Values('2','mov','Video')
+						Insert Into dbo.MediaTypes (Id,FileExtension,MediaTypeName) Values('1','jpg,png','Image')
 					SET IDENTITY_INSERT dbo.MediaTypes OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Interview.MedicalCategory ON
-						Insert Into Interview.MedicalCategory (Id,Name) Values('2','General')
-						Insert Into Interview.MedicalCategory (Id,Name) Values('1','Optical')
-						Insert Into Interview.MedicalCategory (Id,Name) Values('3','Personal')
+						Insert Into Interview.MedicalCategory (Name,Id) Values('Optical','1')
+						Insert Into Interview.MedicalCategory (Name,Id) Values('Personal','3')
+						Insert Into Interview.MedicalCategory (Name,Id) Values('General','2')
 					SET IDENTITY_INSERT Interview.MedicalCategory OFF");
+				Instance.Database.ExecuteSqlCommand(@"
+					SET IDENTITY_INSERT Interview.MedicalSystems ON
+						Insert Into Interview.MedicalSystems (Id,Name) Values('1','Patient')
+						Insert Into Interview.MedicalSystems (Id,Name) Values('2','Optical')
+					SET IDENTITY_INSERT Interview.MedicalSystems OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.Occupations ON
 						Insert Into dbo.Occupations (Id,Name) Values('0','Unspecified')
@@ -95,35 +100,35 @@ namespace EF.DBContexts
 					SET IDENTITY_INSERT dbo.Occupations OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.Organisations ON
-						Insert Into dbo.Organisations (Id,EntryTimeStamp,Name,VATNumber) Values('0',cast((select Value from AmoebaDB.dbo.TestValues where Id = 67791) as varbinary(max)),'Unspecified','0')
-						Insert Into dbo.Organisations (Id,EntryTimeStamp,Name,VATNumber) Values('3',cast((select Value from AmoebaDB.dbo.TestValues where Id = 67799) as varbinary(max)),'Spice Inn Hotel','123')
-						Insert Into dbo.Organisations (Id,EntryTimeStamp,Name,VATNumber) Values('2',cast((select Value from AmoebaDB.dbo.TestValues where Id = 67795) as varbinary(max)),'Insight Software','0')
+						Insert Into dbo.Organisations (Id,EntryTimeStamp,Name,VATNumber) Values('2',cast((select Value from AmoebaDB.dbo.TestValues where Id = 68750) as varbinary(max)),'Insight Software','0')
+						Insert Into dbo.Organisations (Id,EntryTimeStamp,Name,VATNumber) Values('0',cast((select Value from AmoebaDB.dbo.TestValues where Id = 68746) as varbinary(max)),'Unspecified','0')
+						Insert Into dbo.Organisations (Id,EntryTimeStamp,Name,VATNumber) Values('3',cast((select Value from AmoebaDB.dbo.TestValues where Id = 68754) as varbinary(max)),'Spice Inn Hotel','123')
 					SET IDENTITY_INSERT dbo.Organisations OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.Parishes ON
-						Insert Into dbo.Parishes (Name,Id) Values('Unspecified','0')
 						Insert Into dbo.Parishes (Name,Id) Values('St. David''s','2')
 						Insert Into dbo.Parishes (Name,Id) Values('St. George','1')
+						Insert Into dbo.Parishes (Name,Id) Values('Unspecified','0')
 					SET IDENTITY_INSERT dbo.Parishes OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Interview.Patients ON
-						Insert Into Interview.Patients (EntryDateTime,Id) Values(cast((select Value from AmoebaDB.dbo.TestValues where Id = 67589) as varbinary(max)),'1')
+						Insert Into Interview.Patients (EntryDateTime,Id) Values(cast((select Value from AmoebaDB.dbo.TestValues where Id = 69111) as varbinary(max)),'1')
 					SET IDENTITY_INSERT Interview.Patients OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.Persons ON
-						Insert Into dbo.Persons (Id,EntryDateTine) Values('1004','Jun  5 2016 12:00AM')
 						Insert Into dbo.Persons (Id,EntryDateTine) Values('1001','Jun  5 2016  9:18PM')
 						Insert Into dbo.Persons (Id,EntryDateTine) Values('4','Jun  5 2016  9:18PM')
+						Insert Into dbo.Persons (Id,EntryDateTine) Values('1004','Jun  5 2016 12:00AM')
 						Insert Into dbo.Persons (Id,EntryDateTine) Values('3','Jun  5 2016  9:18PM')
 						Insert Into dbo.Persons (Id,EntryDateTine) Values('1','Jun  5 2016  9:18PM')
 						Insert Into dbo.Persons (Id,EntryDateTine) Values('0','Jun  5 2016  9:18PM')
 					SET IDENTITY_INSERT dbo.Persons OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Interview.Phase ON
-						Insert Into Interview.Phase (Id,Code,Name) Values('1003','PPI','Patient Personal Info')
-						Insert Into Interview.Phase (Id,Code,Name) Values('1002','PH','Patient History')
-						Insert Into Interview.Phase (Id,Code,Name) Values('2','PI','Present Illness')
-						Insert Into Interview.Phase (Id,Code,Name) Values('1','CC','Chief Complaint')
+						Insert Into Interview.Phase (Name,Id,Code) Values('Chief Complaint','1','CC')
+						Insert Into Interview.Phase (Name,Id,Code) Values('Present Illness','2','PI')
+						Insert Into Interview.Phase (Name,Id,Code) Values('Patient History','1002','PH')
+						Insert Into Interview.Phase (Name,Id,Code) Values('Patient Personal Info','1003','PPI')
 					SET IDENTITY_INSERT Interview.Phase OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.PhoneTypes ON
@@ -132,19 +137,19 @@ namespace EF.DBContexts
 					SET IDENTITY_INSERT dbo.PhoneTypes OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Diagnostics.ResultFieldNames ON
+						Insert Into Diagnostics.ResultFieldNames (Id,Name) Values('6','Pregnacy Type')
 						Insert Into Diagnostics.ResultFieldNames (Id,Name) Values('7','Number of Fetues')
 						Insert Into Diagnostics.ResultFieldNames (Id,Name) Values('1','Indication')
 						Insert Into Diagnostics.ResultFieldNames (Id,Name) Values('2','General History')
 						Insert Into Diagnostics.ResultFieldNames (Id,Name) Values('3','Past Surgical History')
 						Insert Into Diagnostics.ResultFieldNames (Id,Name) Values('4','OB History')
 						Insert Into Diagnostics.ResultFieldNames (Id,Name) Values('5','Risk Factors')
-						Insert Into Diagnostics.ResultFieldNames (Id,Name) Values('6','Pregnacy Type')
 					SET IDENTITY_INSERT Diagnostics.ResultFieldNames OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.Sex ON
-						Insert Into dbo.Sex (Name,Id) Values('Female','2')
 						Insert Into dbo.Sex (Name,Id) Values('Male','1')
 						Insert Into dbo.Sex (Name,Id) Values('Unspecified','0')
+						Insert Into dbo.Sex (Name,Id) Values('Female','2')
 					SET IDENTITY_INSERT dbo.Sex OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.States ON
@@ -157,12 +162,12 @@ namespace EF.DBContexts
 					SET IDENTITY_INSERT Interview.Syntoms OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.Units ON
+						Insert Into dbo.Units (Id,Description,Name,ShortName) Values('1','12 inches make 1 foot','Inches','in.')
+						Insert Into dbo.Units (Id,Description,Name,ShortName) Values('2','Beats per minute','Bpm','bpm')
 						Insert Into dbo.Units (Id,Description,Name,ShortName) Values('6','Systolic / Diatolic','Systolic/Dia','Sys/Dia')
 						Insert Into dbo.Units (Id,Description,Name,ShortName) Values('5','Pounds','Lbs','lbs')
 						Insert Into dbo.Units (Id,Description,Name,ShortName) Values('4','Breaths Per Minute','bpm','bpm')
 						Insert Into dbo.Units (Id,Description,Name,ShortName) Values('3','Temperature','Fahrenheit','ºF')
-						Insert Into dbo.Units (Id,Description,Name,ShortName) Values('2','Beats per minute','Bpm','bpm')
-						Insert Into dbo.Units (Id,Description,Name,ShortName) Values('1','12 inches make 1 foot','Inches','in.')
 					SET IDENTITY_INSERT dbo.Units OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.ZipCodes ON
@@ -180,12 +185,12 @@ namespace EF.DBContexts
 ");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.AddressLines ON
-						Insert Into dbo.AddressLines (Name,AddressId,Id) Values('Grand Anse','3','5')
 						Insert Into dbo.AddressLines (Name,AddressId,Id) Values('Unspecified','0','0')
 						Insert Into dbo.AddressLines (Name,AddressId,Id) Values('Old Westerhall','1','1')
 						Insert Into dbo.AddressLines (Name,AddressId,Id) Values('Flat Bush','2','2')
 						Insert Into dbo.AddressLines (Name,AddressId,Id) Values('43rd Apt# 5','2','3')
 						Insert Into dbo.AddressLines (Name,AddressId,Id) Values('Limes','3','4')
+						Insert Into dbo.AddressLines (Name,AddressId,Id) Values('Grand Anse','3','5')
 					SET IDENTITY_INSERT dbo.AddressLines OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 						Insert Into dbo.AddressStates (Id,StateId) Values('2','1')
@@ -198,9 +203,9 @@ namespace EF.DBContexts
 			//No test data for OrganisationAddress
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.PersonAddresses ON
-						Insert Into dbo.PersonAddresses (AddressId,AddressTypeId,Id,PersonId) Values('0','0','0','0')
 						Insert Into dbo.PersonAddresses (AddressId,AddressTypeId,Id,PersonId) Values('1','4','1','1')
 						Insert Into dbo.PersonAddresses (AddressId,AddressTypeId,Id,PersonId) Values('3','4','2','4')
+						Insert Into dbo.PersonAddresses (AddressId,AddressTypeId,Id,PersonId) Values('0','0','0','0')
 					SET IDENTITY_INSERT dbo.PersonAddresses OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 						Insert Into dbo.PrimaryPersonAddress (PersonAddressesId,Id) Values('1','1')
@@ -212,8 +217,8 @@ namespace EF.DBContexts
 ");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.PatientAllergies ON
-						Insert Into dbo.PatientAllergies (AllergyId,Id,PatientId) Values('2','3','1')
 						Insert Into dbo.PatientAllergies (AllergyId,Id,PatientId) Values('1','2','1')
+						Insert Into dbo.PatientAllergies (AllergyId,Id,PatientId) Values('2','3','1')
 					SET IDENTITY_INSERT dbo.PatientAllergies OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Interview.CarePlanDetails ON
@@ -233,15 +238,12 @@ namespace EF.DBContexts
 					SET IDENTITY_INSERT dbo.PersonCountryOfResidence OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Interview.Interviews ON
-						Insert Into Interview.Interviews (Id,MedicalCategoryId,Name,PhaseId) Values('1004','3','Personal Information','1003')
-						Insert Into Interview.Interviews (Id,MedicalCategoryId,Name,PhaseId) Values('3','1','New Patient Optical','1')
-						Insert Into Interview.Interviews (Id,MedicalCategoryId,Name,PhaseId) Values('1003','2','Previous Medical Care','1002')
+						Insert Into Interview.Interviews (Name,Id,MedicalCategoryId,PhaseId) Values('Personal Information','1004','3','1003')
+						Insert Into Interview.Interviews (Name,Id,MedicalCategoryId,PhaseId) Values('New Patient Optical','3','1','1')
+						Insert Into Interview.Interviews (Name,Id,MedicalCategoryId,PhaseId) Values('Previous Medical Care','1003','2','1002')
 					SET IDENTITY_INSERT Interview.Interviews OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Interview.Questions ON
-						Insert Into Interview.Questions (EntityAttributeId,Description,Id,InterviewId,QuestionNumber) Values('4','Patients Identification Number','31','1004','1')
-						Insert Into Interview.Questions (EntityAttributeId,Description,Id,InterviewId,QuestionNumber) Values('3','What is your Birthdate','30','1004','4')
-						Insert Into Interview.Questions (EntityAttributeId,Description,Id,InterviewId,QuestionNumber) Values('1','What is Your Last Name','29','1004','3')
 						Insert Into Interview.Questions (EntityAttributeId,Description,Id,InterviewId,QuestionNumber) Values('1','What is Your First Name','27','1004','2')
 						Insert Into Interview.Questions (EntityAttributeId,Description,Id,InterviewId,QuestionNumber) Values('0','Are you under a physicians care or have you been during the past 5 years, including hospitalization, and surgery?','26','1003','1')
 						Insert Into Interview.Questions (EntityAttributeId,Description,Id,InterviewId,QuestionNumber) Values('0','Is the symptom/problem getting better or worse?','25','3','7')
@@ -250,33 +252,15 @@ namespace EF.DBContexts
 						Insert Into Interview.Questions (EntityAttributeId,Description,Id,InterviewId,QuestionNumber) Values('0','Is this symptom/problem constant or occasional?','22','3','4')
 						Insert Into Interview.Questions (EntityAttributeId,Description,Id,InterviewId,QuestionNumber) Values('0','When was the onset?','21','3','3')
 						Insert Into Interview.Questions (EntityAttributeId,Description,Id,InterviewId,QuestionNumber) Values('0','Which Eye?','20','3','2')
+						Insert Into Interview.Questions (EntityAttributeId,Description,Id,InterviewId,QuestionNumber) Values('3','What is your Birthdate','30','1004','4')
+						Insert Into Interview.Questions (EntityAttributeId,Description,Id,InterviewId,QuestionNumber) Values('1','What is Your Last Name','29','1004','3')
+						Insert Into Interview.Questions (EntityAttributeId,Description,Id,InterviewId,QuestionNumber) Values('4','Patients Identification Number','31','1004','1')
 						Insert Into Interview.Questions (EntityAttributeId,Description,Id,InterviewId,QuestionNumber) Values('0','Have you had any Change in vision?','4','3','1')
 					SET IDENTITY_INSERT Interview.Questions OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Interview.ResponseOptions ON
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('31','Identification #','45','1','TextBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('4','Redness, with no discharge?','41','0','CheckBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('27','Name','42','1','TextBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('29','Name','43','1','TextBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('30','BirthDate','44','1','DatePicker')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('22','Occasional','22','6','CheckBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('23','Yes','23','7','CheckBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('23','No','24','8','CheckBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('23','Patient Comments','25','1','TextBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('24','Yes','26','1','CheckBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('24','No','27','2','CheckBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('25','Yes','29','3','CheckBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('25','No','30','4','CheckBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('25','Patient Comments','33','5','TextBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('24','Patient Comments','34','0','TextBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('22','Patient Comments','35','0','TextBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('21','Patient Comments','36','0','TextBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('20','Patient Comments','37','0','TextBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('26','Yes','38','0','CheckBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('26','No','39','0','CheckBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('26','Patient Comments','40','0','TextBox')
-						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('4','Patient''s words','1','1','TextBox')
 						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('4','Blurring/cloudy vision?','4','2','CheckBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('4','Patient''s words','1','1','TextBox')
 						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('4','Double vision?','5','3','CheckBox')
 						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('4','Distorted vision?','6','4','CheckBox')
 						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('4','Rainbows?','7','5','CheckBox')
@@ -294,6 +278,27 @@ namespace EF.DBContexts
 						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('20','OU','19','3','CheckBox')
 						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('21','Date','20','4','DatePicker')
 						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('22','Constant','21','5','CheckBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('22','Occasional','22','6','CheckBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('23','Yes','23','7','CheckBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('23','No','24','8','CheckBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('23','Patient Comments','25','1','TextBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('24','Yes','26','1','CheckBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('24','No','27','2','CheckBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('25','Yes','29','3','CheckBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('30','BirthDate','44','1','DatePicker')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('31','Identification #','45','1','TextBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('26','Patient Comments','40','0','TextBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('4','Redness, with no discharge?','41','0','CheckBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('27','Name','42','1','TextBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('29','Name','43','1','TextBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('25','No','30','4','CheckBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('25','Patient Comments','33','5','TextBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('24','Patient Comments','34','0','TextBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('22','Patient Comments','35','0','TextBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('21','Patient Comments','36','0','TextBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('20','Patient Comments','37','0','TextBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('26','Yes','38','0','CheckBox')
+						Insert Into Interview.ResponseOptions (QuestionId,Description,Id,ResponseNumber,Type) Values('26','No','39','0','CheckBox')
 					SET IDENTITY_INSERT Interview.ResponseOptions OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 						Insert Into Interview.ResponseSuggestions (Id) Values('13')
@@ -312,25 +317,25 @@ namespace EF.DBContexts
 						Insert Into Diagnostics.ExamDetails (Id,ExamId,Section) Values('5','1','General Evaluation')
 						Insert Into Diagnostics.ExamDetails (Id,ExamId,Section) Values('4','1','Dating')
 						Insert Into Diagnostics.ExamDetails (Id,ExamId,Section) Values('3','1','Pregnancy')
-						Insert Into Diagnostics.ExamDetails (Id,ExamId,Section) Values('1','1','Indication')
 						Insert Into Diagnostics.ExamDetails (Id,ExamId,Section) Values('2','1','History')
+						Insert Into Diagnostics.ExamDetails (Id,ExamId,Section) Values('1','1','Indication')
 					SET IDENTITY_INSERT Diagnostics.ExamDetails OFF");
 			//No test data for Components
 			//No test data for ExamDetailComponents
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.PersonMaritalStatus ON
-						Insert Into dbo.PersonMaritalStatus (MaritalStatusId,Id,PersonId) Values('1','3','1')
 						Insert Into dbo.PersonMaritalStatus (MaritalStatusId,Id,PersonId) Values('0','2','0')
+						Insert Into dbo.PersonMaritalStatus (MaritalStatusId,Id,PersonId) Values('1','3','1')
 					SET IDENTITY_INSERT dbo.PersonMaritalStatus OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.Media ON
-						Insert Into dbo.Media (Id,MediaTypeId,Value) Values('4','1',cast((select Value from AmoebaDB.dbo.TestValues where Id = 68074) as varbinary(max)))
-						Insert Into dbo.Media (Id,MediaTypeId,Value) Values('5','1',cast((select Value from AmoebaDB.dbo.TestValues where Id = 68078) as varbinary(max)))
-						Insert Into dbo.Media (Id,MediaTypeId,Value) Values('6','1',cast((select Value from AmoebaDB.dbo.TestValues where Id = 68082) as varbinary(max)))
-						Insert Into dbo.Media (Id,MediaTypeId,Value) Values('0','1',cast((select Value from AmoebaDB.dbo.TestValues where Id = 68086) as varbinary(max)))
-						Insert Into dbo.Media (Id,MediaTypeId,Value) Values('1','1',cast((select Value from AmoebaDB.dbo.TestValues where Id = 68062) as varbinary(max)))
-						Insert Into dbo.Media (Id,MediaTypeId,Value) Values('2','2',cast((select Value from AmoebaDB.dbo.TestValues where Id = 68066) as varbinary(max)))
-						Insert Into dbo.Media (Id,MediaTypeId,Value) Values('3','1',cast((select Value from AmoebaDB.dbo.TestValues where Id = 68070) as varbinary(max)))
+						Insert Into dbo.Media (Id,MediaTypeId,Value) Values('1','1',cast((select Value from AmoebaDB.dbo.TestValues where Id = 68999) as varbinary(max)))
+						Insert Into dbo.Media (Id,MediaTypeId,Value) Values('2','2',cast((select Value from AmoebaDB.dbo.TestValues where Id = 69003) as varbinary(max)))
+						Insert Into dbo.Media (Id,MediaTypeId,Value) Values('3','1',cast((select Value from AmoebaDB.dbo.TestValues where Id = 69007) as varbinary(max)))
+						Insert Into dbo.Media (Id,MediaTypeId,Value) Values('4','1',cast((select Value from AmoebaDB.dbo.TestValues where Id = 69011) as varbinary(max)))
+						Insert Into dbo.Media (Id,MediaTypeId,Value) Values('5','1',cast((select Value from AmoebaDB.dbo.TestValues where Id = 69015) as varbinary(max)))
+						Insert Into dbo.Media (Id,MediaTypeId,Value) Values('6','1',cast((select Value from AmoebaDB.dbo.TestValues where Id = 69019) as varbinary(max)))
+						Insert Into dbo.Media (Id,MediaTypeId,Value) Values('0','1',cast((select Value from AmoebaDB.dbo.TestValues where Id = 69023) as varbinary(max)))
 					SET IDENTITY_INSERT dbo.Media OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.DefaultImages ON
@@ -341,6 +346,17 @@ namespace EF.DBContexts
 					SET IDENTITY_INSERT dbo.PersonMedia ON
 						Insert Into dbo.PersonMedia (MediaId,Id,PersonId) Values('1','2','1')
 					SET IDENTITY_INSERT dbo.PersonMedia OFF");
+				Instance.Database.ExecuteSqlCommand(@"
+					SET IDENTITY_INSERT Interview.MedicalSystemInterviews ON
+						Insert Into Interview.MedicalSystemInterviews (InterviewId,Id,MedicalSystemId) Values('1003','3','2')
+						Insert Into Interview.MedicalSystemInterviews (InterviewId,Id,MedicalSystemId) Values('1004','1','1')
+						Insert Into Interview.MedicalSystemInterviews (InterviewId,Id,MedicalSystemId) Values('3','2','2')
+					SET IDENTITY_INSERT Interview.MedicalSystemInterviews OFF");
+				Instance.Database.ExecuteSqlCommand(@"
+					SET IDENTITY_INSERT Interview.SyntomMedicalSystems ON
+						Insert Into Interview.SyntomMedicalSystems (MedicalSystemId,Id,SyntomId) Values('1','1','1')
+						Insert Into Interview.SyntomMedicalSystems (MedicalSystemId,Id,SyntomId) Values('2','2','2')
+					SET IDENTITY_INSERT Interview.SyntomMedicalSystems OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.PersonJob ON
 						Insert Into dbo.PersonJob (OccupationId,Id,OrganisationId,PersonId) Values('1','1','2','1')
@@ -357,26 +373,26 @@ namespace EF.DBContexts
 ");
 			//No test data for Organisations_Companys
 				Instance.Database.ExecuteSqlCommand(@"
-						Insert Into dbo.Persons_Doctor (Id,Code) Values('0','000')
 						Insert Into dbo.Persons_Doctor (Id,Code) Values('1001','523')
+						Insert Into dbo.Persons_Doctor (Id,Code) Values('0','000')
 ");
 				Instance.Database.ExecuteSqlCommand(@"
-					SET IDENTITY_INSERT dbo.PatientVisit ON
-						Insert Into dbo.PatientVisit (Id,DateOfVisit,DoctorId,PatientId) Values('2','2016-01-01','1001','1')
-					SET IDENTITY_INSERT dbo.PatientVisit OFF");
+					SET IDENTITY_INSERT Interview.PatientVisit ON
+						Insert Into Interview.PatientVisit (Id,DateOfVisit,DoctorId,PatientId) Values('2','2016-01-01','1001','1')
+					SET IDENTITY_INSERT Interview.PatientVisit OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Interview.PatientSyntoms ON
-						Insert Into Interview.PatientSyntoms (Id,PatientVisitId,SyntomId) Values('1','2','1')
-						Insert Into Interview.PatientSyntoms (Id,PatientVisitId,SyntomId) Values('2','2','2')
+						Insert Into Interview.PatientSyntoms (Id,PatientVisitId,Priority,Status,SyntomId) Values('1','2','0','Open','1')
+						Insert Into Interview.PatientSyntoms (Id,PatientVisitId,Priority,Status,SyntomId) Values('2','2','1','Open','2')
 					SET IDENTITY_INSERT Interview.PatientSyntoms OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Interview.PatientResponses ON
-						Insert Into Interview.PatientResponses (Id,PatientSyntomId,PatientVisitId,QuestionId) Values('1','1','2','4')
+						Insert Into Interview.PatientResponses (Id,PatientSyntomId,PatientVisitId,QuestionId) Values('5','1','2','30')
 						Insert Into Interview.PatientResponses (Id,PatientSyntomId,PatientVisitId,QuestionId) Values('6','1','2','31')
+						Insert Into Interview.PatientResponses (Id,PatientSyntomId,PatientVisitId,QuestionId) Values('1','1','2','4')
 						Insert Into Interview.PatientResponses (Id,PatientSyntomId,PatientVisitId,QuestionId) Values('2','2','2','21')
 						Insert Into Interview.PatientResponses (Id,PatientSyntomId,PatientVisitId,QuestionId) Values('3','1','2','27')
 						Insert Into Interview.PatientResponses (Id,PatientSyntomId,PatientVisitId,QuestionId) Values('4','1','2','29')
-						Insert Into Interview.PatientResponses (Id,PatientSyntomId,PatientVisitId,QuestionId) Values('5','1','2','30')
 					SET IDENTITY_INSERT Interview.PatientResponses OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Interview.Response ON
@@ -392,8 +408,8 @@ namespace EF.DBContexts
 					SET IDENTITY_INSERT Interview.Response OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Interview.ResponseImages ON
-						Insert Into Interview.ResponseImages (MediaId,Id,PatientResponseId) Values('6','2','2')
 						Insert Into Interview.ResponseImages (MediaId,Id,PatientResponseId) Values('5','1','2')
+						Insert Into Interview.ResponseImages (MediaId,Id,PatientResponseId) Values('6','2','2')
 					SET IDENTITY_INSERT Interview.ResponseImages OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Diagnostics.PatientResults ON
@@ -401,11 +417,11 @@ namespace EF.DBContexts
 					SET IDENTITY_INSERT Diagnostics.PatientResults OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Diagnostics.ExamResults ON
+						Insert Into Diagnostics.ExamResults (ExamDetailsId,Id,PatientResultsId) Values('3','3','3')
+						Insert Into Diagnostics.ExamResults (ExamDetailsId,Id,PatientResultsId) Values('4','4','3')
+						Insert Into Diagnostics.ExamResults (ExamDetailsId,Id,PatientResultsId) Values('5','5','3')
 						Insert Into Diagnostics.ExamResults (ExamDetailsId,Id,PatientResultsId) Values('1','1','3')
 						Insert Into Diagnostics.ExamResults (ExamDetailsId,Id,PatientResultsId) Values('2','2','3')
-						Insert Into Diagnostics.ExamResults (ExamDetailsId,Id,PatientResultsId) Values('3','3','3')
-						Insert Into Diagnostics.ExamResults (ExamDetailsId,Id,PatientResultsId) Values('5','5','3')
-						Insert Into Diagnostics.ExamResults (ExamDetailsId,Id,PatientResultsId) Values('4','4','3')
 					SET IDENTITY_INSERT Diagnostics.ExamResults OFF");
 			//No test data for ExamResults_UmbilicalArtery
 			//No test data for ExamResults_AnioticFluid
@@ -413,19 +429,19 @@ namespace EF.DBContexts
 					SET IDENTITY_INSERT Diagnostics.ExamResults_SimpleValues ON
 						Insert Into Diagnostics.ExamResults_SimpleValues (ExamResultsId,Id,PatientResultsId,ResultFieldId,Value) Values('1','1','3','1','Diabeties Mellitus')
 						Insert Into Diagnostics.ExamResults_SimpleValues (ExamResultsId,Id,PatientResultsId,ResultFieldId,Value) Values('1','2','3','1','Left Multicystic Dyplastic Kidney')
-						Insert Into Diagnostics.ExamResults_SimpleValues (ExamResultsId,Id,PatientResultsId,ResultFieldId,Value) Values('3','18','3','6','Singleton Pregnancy')
 						Insert Into Diagnostics.ExamResults_SimpleValues (ExamResultsId,Id,PatientResultsId,ResultFieldId,Value) Values('2','4','3','2','Blood Group: Rh Negative')
 						Insert Into Diagnostics.ExamResults_SimpleValues (ExamResultsId,Id,PatientResultsId,ResultFieldId,Value) Values('2','6','3','3','Appendectomy 1991')
+						Insert Into Diagnostics.ExamResults_SimpleValues (ExamResultsId,Id,PatientResultsId,ResultFieldId,Value) Values('3','18','3','6','Singleton Pregnancy')
+						Insert Into Diagnostics.ExamResults_SimpleValues (ExamResultsId,Id,PatientResultsId,ResultFieldId,Value) Values('3','19','3','7','1')
 						Insert Into Diagnostics.ExamResults_SimpleValues (ExamResultsId,Id,PatientResultsId,ResultFieldId,Value) Values('2','8','3','3','Right Oophorectomy, 2002')
 						Insert Into Diagnostics.ExamResults_SimpleValues (ExamResultsId,Id,PatientResultsId,ResultFieldId,Value) Values('2','14','3','4','Gravida:3')
 						Insert Into Diagnostics.ExamResults_SimpleValues (ExamResultsId,Id,PatientResultsId,ResultFieldId,Value) Values('2','15','3','4','Para:1')
 						Insert Into Diagnostics.ExamResults_SimpleValues (ExamResultsId,Id,PatientResultsId,ResultFieldId,Value) Values('2','17','3','5','Preterm Delivery in Previous Pregnancy')
-						Insert Into Diagnostics.ExamResults_SimpleValues (ExamResultsId,Id,PatientResultsId,ResultFieldId,Value) Values('3','19','3','7','1')
 					SET IDENTITY_INSERT Diagnostics.ExamResults_SimpleValues OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT Diagnostics.ExamResults_FetalDates ON
-						Insert Into Diagnostics.ExamResults_FetalDates (Id,Details,EstimatedDays,ExamResultsId,Method,PatientResultsId,StartDate) Values('4','Cycle: Irregular Cycle','213','4','LMP','3','2015-08-25')
 						Insert Into Diagnostics.ExamResults_FetalDates (Id,Details,EstimatedDays,ExamResultsId,Method,PatientResultsId,StartDate) Values('5','GA: 6w + 6d, by PCP Ultrasound','205','4','External Assessment','3','2013-10-20')
+						Insert Into Diagnostics.ExamResults_FetalDates (Id,Details,EstimatedDays,ExamResultsId,Method,PatientResultsId,StartDate) Values('4','Cycle: Irregular Cycle','213','4','LMP','3','2015-08-25')
 					SET IDENTITY_INSERT Diagnostics.ExamResults_FetalDates OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 						Insert Into Diagnostics.AssignedDating (ExamResultsId,Id) Values('4','4')
@@ -445,25 +461,25 @@ namespace EF.DBContexts
 					SET IDENTITY_INSERT dbo.PersonEmailAddress OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.PersonNames ON
-						Insert Into dbo.PersonNames (Id,PersonId,PersonName) Values('14','1004','Grace')
-						Insert Into dbo.PersonNames (Id,PersonId,PersonName) Values('15','1004','John')
-						Insert Into dbo.PersonNames (Id,PersonId,PersonName) Values('10','3','Jonali')
-						Insert Into dbo.PersonNames (Id,PersonId,PersonName) Values('11','3','St. Louis')
 						Insert Into dbo.PersonNames (Id,PersonId,PersonName) Values('12','4','Neilani')
 						Insert Into dbo.PersonNames (Id,PersonId,PersonName) Values('13','4','Jeremiah')
+						Insert Into dbo.PersonNames (Id,PersonId,PersonName) Values('14','1004','Grace')
+						Insert Into dbo.PersonNames (Id,PersonId,PersonName) Values('15','1004','John')
 						Insert Into dbo.PersonNames (Id,PersonId,PersonName) Values('4','0','John')
 						Insert Into dbo.PersonNames (Id,PersonId,PersonName) Values('5','0','Doe')
 						Insert Into dbo.PersonNames (Id,PersonId,PersonName) Values('6','1','Joseph')
 						Insert Into dbo.PersonNames (Id,PersonId,PersonName) Values('7','1','Bartholomew')
 						Insert Into dbo.PersonNames (Id,PersonId,PersonName) Values('8','1001','Lutz')
 						Insert Into dbo.PersonNames (Id,PersonId,PersonName) Values('9','1001','Amechi')
+						Insert Into dbo.PersonNames (Id,PersonId,PersonName) Values('10','3','Jonali')
+						Insert Into dbo.PersonNames (Id,PersonId,PersonName) Values('11','3','St. Louis')
 					SET IDENTITY_INSERT dbo.PersonNames OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 					SET IDENTITY_INSERT dbo.PersonPhoneNumbers ON
-						Insert Into dbo.PersonPhoneNumbers (Id,PersonId,PhoneNumber,PhoneTypeId) Values('4','4','4095656','1')
 						Insert Into dbo.PersonPhoneNumbers (Id,PersonId,PhoneNumber,PhoneTypeId) Values('0','0','00000000','0')
 						Insert Into dbo.PersonPhoneNumbers (Id,PersonId,PhoneNumber,PhoneTypeId) Values('1','1','4058243','1')
 						Insert Into dbo.PersonPhoneNumbers (Id,PersonId,PhoneNumber,PhoneTypeId) Values('3','3','4564724','1')
+						Insert Into dbo.PersonPhoneNumbers (Id,PersonId,PhoneNumber,PhoneTypeId) Values('4','4','4095656','1')
 					SET IDENTITY_INSERT dbo.PersonPhoneNumbers OFF");
 				Instance.Database.ExecuteSqlCommand(@"
 						Insert Into dbo.PrimaryPersonPhoneNumber (PersonPhoneNumberId,Id) Values('1','1')

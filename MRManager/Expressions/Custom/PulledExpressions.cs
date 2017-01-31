@@ -26,17 +26,43 @@ namespace Entity.Expressions
     }
 
     public static partial class PulledExpressions
-	{
-       
+    {
+
         public static Expression<Func<Patients, PatientDetailsInfo>> PatientDetailsInfoExpression { get; } =
 
             x => new PatientDetailsInfo()
             {
                 Id = x.Id,
-                IdNumber = x.PatientVisit.SelectMany(x3 => x3.PatientResponses).Where(x2 => x2.Questions.EntityAttributes.Entity == Entities.Patient && x2.Questions.EntityAttributes.Attribute == Patient.EntityId).SelectMany(x4 => x4.Response).Select(x5 => x5.Value).FirstOrDefault(),
-                Name = string.Join(" ", x.PatientVisit.SelectMany(x3 => x3.PatientResponses).Where(x2 => x2.Questions.EntityAttributes.Entity == Entities.Patient && x2.Questions.EntityAttributes.Attribute == Patient.Name).SelectMany(x4 => x4.Response).Select(x5 => x5.Value)),
-                Age = DateTime.Now.Year - Convert.ToDateTime(x.PatientVisit.SelectMany(x3 => x3.PatientResponses).Where(x2 => x2.Questions.EntityAttributes.Entity == Entities.Patient && x2.Questions.EntityAttributes.Attribute == Patient.Birthdate).SelectMany(x4 => x4.Response).Select(x5 => x5.Value).FirstOrDefault()).Year,
-               
+                IdNumber =
+                    x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                        .Where(
+                            x2 =>
+                                x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                                x2.Questions.EntityAttributes.Attribute == Patient.EntityId)
+                        .SelectMany(x4 => x4.Response)
+                        .Select(x5 => x5.Value)
+                        .FirstOrDefault(),
+                Name =
+                    string.Join(" ",
+                        x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                            .Where(
+                                x2 =>
+                                    x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                                    x2.Questions.EntityAttributes.Attribute == Patient.Name)
+                            .SelectMany(x4 => x4.Response)
+                            .Select(x5 => x5.Value)),
+                Age =
+                    DateTime.Now.Year -
+                    Convert.ToDateTime(
+                        x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                            .Where(
+                                x2 =>
+                                    x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                                    x2.Questions.EntityAttributes.Attribute == Patient.Birthdate)
+                            .SelectMany(x4 => x4.Response)
+                            .Select(x5 => x5.Value)
+                            .FirstOrDefault()).Year,
+
             };
 
         public static Expression<Func<Patients, PatientInfo>> PatientInfoExpression { get; } =
@@ -44,11 +70,59 @@ namespace Entity.Expressions
             x => new PatientInfo()
             {
                 Id = x.Id,
-                Name = string.Join(" ", x.PatientVisit.SelectMany(x3 => x3.PatientResponses).Where(x2 => x2.Questions.EntityAttributes.Entity == Entities.Patient && x2.Questions.EntityAttributes.Attribute == Patient.Name).SelectMany(x4 => x4.Response).Select(x5 => x5.Value)),
-                Age = DateTime.Now.Year - Convert.ToDateTime(x.PatientVisit.SelectMany(x3 => x3.PatientResponses).Where(x2 => x2.Questions.EntityAttributes.Entity == Entities.Patient && x2.Questions.EntityAttributes.Attribute == Patient.Birthdate).SelectMany(x4 => x4.Response).Select(x5 => x5.Value).FirstOrDefault()).Year,
+                Name =
+                    string.Join(" ",
+                        x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                            .Where(
+                                x2 =>
+                                    x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                                    x2.Questions.EntityAttributes.Attribute == Patient.Name)
+                            .SelectMany(x4 => x4.Response)
+                            .Select(x5 => x5.Value)),
+                Age =
+                    DateTime.Now.Year -
+                    Convert.ToDateTime(
+                        x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                            .Where(
+                                x2 =>
+                                    x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                                    x2.Questions.EntityAttributes.Attribute == Patient.Birthdate)
+                            .SelectMany(x4 => x4.Response)
+                            .Select(x5 => x5.Value)
+                            .FirstOrDefault()).Year,
             };
 
-       
+        public static Expression<Func<PatientVisit, PatientVisitInfo>> PatientVistInfoExpression { get; } =
+            x => new PatientVisitInfo()
+            {
+                Id = x.Id,
+                PatientId = x.PatientId,
+                DateOfVisit = x.DateOfVisit,
+                AttendingDoctor = string.Join(" ", x.Persons_Doctor.Persons.PersonNames.Select(z => z.PersonName)),
+                PatientSyntoms = x.PatientSyntoms.Select(z => new PatientSyntomInfo()
+                {
+                    Id = z.Id,
+                    Syntom = z.Syntoms.Name,
+                    Priority = z.Priority,
+                    Status = z.Status,
+                    Systems = z.Syntoms.SyntomMedicalSystems.Select(s => new SyntomMedicalSystemInfo()
+                    {
+                        MedicalSystemId = s.MedicalSystemId,
+                        System = s.MedicalSystems.Name,
+                        Interviews = s.MedicalSystems.MedicalSystemInterviews.Select(i => new InterviewInfo()
+                        {
+                            Id = i.Id,
+                            Interview = i.Interviews.Name,
+                            Category = i.Interviews.MedicalCategory.Name,
+                            Phase = i.Interviews.Phase.Name
+                        } as IInterviewInfo).ToList()
+                    } as ISyntomMedicalSystemInfo).ToList(),
+                } as IPatientSyntomInfo).ToList()
+            };
+
+
+
+
     }
 
 

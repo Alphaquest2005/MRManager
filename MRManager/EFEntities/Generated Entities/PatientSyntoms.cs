@@ -14,6 +14,8 @@ namespace EF.Entities
 	public partial class PatientSyntoms: BaseEntity, IPatientSyntoms
 	{
 		public virtual int PatientVisitId { get; set; }
+		public virtual int Priority { get; set; }
+		public virtual string Status { get; set; }
 		public virtual int SyntomId { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//

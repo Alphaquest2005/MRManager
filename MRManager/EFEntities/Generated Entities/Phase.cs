@@ -13,8 +13,8 @@ namespace EF.Entities
 {
 	public partial class Phase: BaseEntity, IPhase
 	{
-		public virtual string Code { get; set; }
 		public virtual string Name { get; set; }
+		public virtual string Code { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships

@@ -49,6 +49,8 @@
     <Compile Include="Custom Interfaces\IPatientDetailsInfo.cs" />
     <Compile Include="Custom Interfaces\IPatientInfo.cs" />
     <Compile Include="Custom Interfaces\IPatientResponseInfo.cs" />
+    <Compile Include="Custom Interfaces\IPatientSyntomInfo.cs" />
+    <Compile Include="Custom Interfaces\IPatientVisitInfo.cs" />
     <Compile Include="Custom Interfaces\IPersonAddressInfo.cs" />
     <Compile Include="Custom Interfaces\IPersonPhoneNumbersInfo.cs" />
     <Compile Include="Custom Interfaces\IQuestionResponseOptionInfo.cs" />
@@ -56,8 +58,12 @@
     <Compile Include="Custom Interfaces\IResponseImage.cs" />
     <Compile Include="Custom Interfaces\IResponseOptionInfo.cs" />
     <Compile Include="Custom Interfaces\ISignInInfo.cs" />
+    <Compile Include="Custom Interfaces\ISyntomMedicalSystemInfo.cs" />
     <Compile Include="Generated Interfaces\EntityAttributes.cs" />
+    <Compile Include="Generated Interfaces\MedicalSystemInterviews.cs" />
+    <Compile Include="Generated Interfaces\MedicalSystems.cs" />
     <Compile Include="Generated Interfaces\Patients.cs" />
+    <Compile Include="Generated Interfaces\SyntomMedicalSystems.cs" />
     <Compile Include="Generated Interfaces\UserSignIn.cs" />
     <Compile Include="IPersons.cs" />
     <Compile Include="Generated Interfaces\AddressCities.cs" />

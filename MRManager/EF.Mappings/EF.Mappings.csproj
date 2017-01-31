@@ -74,6 +74,8 @@
     <Compile Include="Generated Mappings\Media.cs" />
     <Compile Include="Generated Mappings\MediaTypes.cs" />
     <Compile Include="Generated Mappings\MedicalCategory.cs" />
+    <Compile Include="Generated Mappings\MedicalSystemInterviews.cs" />
+    <Compile Include="Generated Mappings\MedicalSystems.cs" />
     <Compile Include="Generated Mappings\NonResidentCompanyInfo.cs" />
     <Compile Include="Generated Mappings\NonResidentHotelInfo.cs" />
     <Compile Include="Generated Mappings\Occupations.cs" />
@@ -127,6 +129,7 @@
     <Compile Include="Generated Mappings\Sex.cs" />
     <Compile Include="Generated Mappings\States.cs" />
     <Compile Include="Generated Mappings\StudentInfo.cs" />
+    <Compile Include="Generated Mappings\SyntomMedicalSystems.cs" />
     <Compile Include="Generated Mappings\Syntoms.cs" />
     <Compile Include="Generated Mappings\Temperature.cs" />
     <Compile Include="Generated Mappings\UltraSoundGeneralEvaluation.cs" />

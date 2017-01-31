@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using SystemInterfaces;
 using Common.DataEntites;
 using Interfaces;
 
@@ -14,4 +17,6 @@ namespace EF.Entities
         public string Email { get; set; }
         public int? MediaId { get; set; }
     }
+
+    
 }

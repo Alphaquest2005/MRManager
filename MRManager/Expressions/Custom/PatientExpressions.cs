@@ -301,7 +301,7 @@ namespace Entity.Expressions
                                         Id = z.Id,
                                         Description = z.Description,
                                         QuestionId = z.QuestionId,
-                                        
+                                        ResponseId = 0,
                                         Type = z.Type,
                                        
                                         ResponseNumber = z.ResponseNumber

@@ -21,6 +21,7 @@ namespace EF.Mappings
 			entityBuilder.Property(t => t.Name).HasColumnName("Name").IsRequired().HasMaxLength(50);
 		//-------------------Navigation Properties -------------------------------//
 				entityBuilder.HasMany(x => x.PatientSyntoms).WithOne(p => p.Syntoms).HasForeignKey(c => c.SyntomId).OnDelete(DeleteBehavior.Restrict);
+				entityBuilder.HasMany(x => x.SyntomMedicalSystems).WithOne(p => p.Syntoms).HasForeignKey(c => c.SyntomId).OnDelete(DeleteBehavior.Restrict);
 	
 				//----------------Parent Properties
 	
