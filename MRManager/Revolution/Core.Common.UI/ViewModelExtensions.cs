@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -20,7 +21,7 @@ namespace Core.Common.UI
     {
         public static void WireEvents(this IViewModel viewModel)
         {
-
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             foreach (var itm in viewModel.CommandInfo)
             {
                 var subject = itm.Subject.Invoke(viewModel);

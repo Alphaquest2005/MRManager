@@ -106,7 +106,7 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<IEntityUpdated<IPersons>>(Source).Subscribe(x => updatedPerson = x);
             EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source)
                 .Subscribe(x => Debugger.Log(0, "Test", x.Exception.Message + ":-:" + x.Exception.StackTrace));
-            var msg = new UpdateEntity<IPersons>(createdPerson.Entity.Id, new Dictionary<string, dynamic>() {{"Name", "TestJoe"}}, new StateCommandInfo(testProcess.Id, RevolutionData.Context.Entity.Commands.UpdateEntity),
+            var msg = new UpdateEntityWithChanges<IPersons>(createdPerson.Entity.Id, new Dictionary<string, dynamic>() {{"Name", "TestJoe"}}, new StateCommandInfo(testProcess.Id, RevolutionData.Context.Entity.Commands.UpdateEntity),
                 testProcess, Source);
             msg.UpdateEntity();
             Thread.Sleep(2);

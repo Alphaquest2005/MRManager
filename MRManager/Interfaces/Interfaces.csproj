@@ -51,6 +51,7 @@
     <Compile Include="Custom Interfaces\IPatientResponseInfo.cs" />
     <Compile Include="Custom Interfaces\IPersonAddressInfo.cs" />
     <Compile Include="Custom Interfaces\IPersonPhoneNumbersInfo.cs" />
+    <Compile Include="Custom Interfaces\IQuestionResponseOptionInfo.cs" />
     <Compile Include="Custom Interfaces\IQuestionsInfo.cs" />
     <Compile Include="Custom Interfaces\IResponseImage.cs" />
     <Compile Include="Custom Interfaces\IResponseOptionInfo.cs" />

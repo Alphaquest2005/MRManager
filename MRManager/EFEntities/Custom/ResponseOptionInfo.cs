@@ -13,6 +13,7 @@ namespace EF.Entities
         private string _type;
         private string _description;
         private int _questionId;
+        private int _patientId;
 
         public int? ResponseId
         {
@@ -54,6 +55,12 @@ namespace EF.Entities
         {
             get { return _responseNumber; }
             set { this.RaiseAndSetIfChanged(ref _responseNumber,value); }
+        }
+
+        public int PatientId
+        {
+            get { return _patientId; }
+            set { this.RaiseAndSetIfChanged(ref _patientId, value); }
         }
     }
 }

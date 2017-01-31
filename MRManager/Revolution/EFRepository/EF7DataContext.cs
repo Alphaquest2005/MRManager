@@ -42,7 +42,7 @@ namespace EFRepository
             
         }
 
-        public static void Update(IUpdateEntity<TEntity> msg )
+        public static void Update(IUpdateEntityWithChanges<TEntity> msg )
         {
             typeof(EntityRepository<,,>).MakeGenericType(typeof(TEntity),EntityType, ctxType)
                  .GetMethod("Update")

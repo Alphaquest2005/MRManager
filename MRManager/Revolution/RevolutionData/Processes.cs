@@ -283,14 +283,11 @@ namespace RevolutionData
                 actionTrigger: ActionTrigger.Partial, 
                 events:new List<IProcessExpectedEvent>
                 {
-                    new ProcessExpectedEvent<ICurrentEntityChanged<IPatientInfo>> (
-                        "CurrentPatient", 3, e => e.Entity != null, expectedSourceType: new SourceType(typeof(IViewModel)),//todo: check this cuz it comes from viewmodel
-                        processInfo: new StateEventInfo(3, Context.Process.Events.CurrentEntityChanged)),
                     new ProcessExpectedEvent<ICurrentEntityChanged<IInterviewInfo>> (
                         "CurrentInterview", 3, e => e.Entity != null, expectedSourceType: new SourceType(typeof(IViewModel)),//todo: check this cuz it comes from viewmodel
                         processInfo: new StateEventInfo(3, Context.Process.Events.CurrentEntityChanged))
                 },
-                expectedMessageType:typeof(IProcessStateMessage<IPatientResponseInfo>),
+                expectedMessageType:typeof(IProcessStateMessage<IQuestionResponseOptionInfo>),
                 action: ProcessActions.PatientInfo.RequestPatientResponses,
                 processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState)),
 
@@ -299,11 +296,11 @@ namespace RevolutionData
                 processId:3,
                 events:new List<IProcessExpectedEvent>
                 {
-                    new ProcessExpectedEvent<IEntityViewSetWithChangesLoaded<IPatientResponseInfo>> (
+                    new ProcessExpectedEvent<IEntityViewSetWithChangesLoaded<IQuestionResponseOptionInfo>> (
                         "EntityViewSet", 3, e => e.EntitySet != null, expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
                         processInfo: new StateEventInfo(3, Context.EntityView.Events.EntityViewSetLoaded))
                 },
-                expectedMessageType:typeof(IProcessStateMessage<IPatientResponseInfo>),
+                expectedMessageType:typeof(IProcessStateMessage<IQuestionResponseOptionInfo>),
                 action: ProcessActions.PatientInfo.UpdatePatientResponseState,
                 processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState)),
 

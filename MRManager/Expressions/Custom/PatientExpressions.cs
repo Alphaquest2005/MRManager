@@ -287,22 +287,43 @@ namespace Entity.Expressions
 
             };
 
-        //public static Expression<Func<PatientResponses, object>> PatientResponseInfoExpression { get; } =
-        //    x => new
-        //    {
-        //       ResponseOptions = x.Questions.ResponseOptions.Select(z => new 
-        //        {
-        //            Id = x.Id,
-        //            Description = z.Description,
-        //            QuestionId = z.QuestionId,
-        //            Value = z.Response.Any()? z.Response.Where(x1 => x1.PatientResponseId == x.Id).Select(x2 => x2.Value).First(): null,//
-        //            Type = z.Type,
-        //                    //PatientResponseId = x == null?0:x.Id
+        public static Expression<Func<Questions, QuestionResponseOptionInfo>> QuestionResponseOptionsExpression { get; } =
+          (q) => new QuestionResponseOptionInfo()
+          {
+                Id = q.Id,
+                Category = q.Interviews.MedicalCategory.Name,
+                Question = q.Description,
+                Interview = q.Interviews.Name,
+                InterviewId = q.InterviewId,
+                ResponseOptions = q.ResponseOptions
+                                    .Select(z => new ResponseOptionInfo()
+                                    {
+                                        Id = z.Id,
+                                        Description = z.Description,
+                                        QuestionId = z.QuestionId,
+                                        
+                                        Type = z.Type,
+                                       
+                                        ResponseNumber = z.ResponseNumber
+                                    } as IResponseOptionInfo).ToList(),
+                 PatientResponses = q.PatientResponses.SelectMany(pr => pr.Response).Select(z => new ResponseOptionInfo()
+                 {
+                     PatientResponseId = z.Id,
+                     PatientId = z.PatientResponses.PatientVisit.PatientId,
+                     Id = z.ResponseOptionId,
+                     Description = z.ResponseOptions.Description,
+                     QuestionId = z.ResponseOptions.QuestionId,
+                     ResponseId = z.Id,
+                     Value = z.Value,
+                     Type = z.ResponseOptions.Type
+                 } as IResponseOptionInfo).ToList()
 
-        //                }).ToList()
 
-        //    };
 
+
+
+
+          };
 
     }
 

@@ -133,7 +133,7 @@
     <Compile Include="Events\SystemStarted.cs" />
     <Compile Include="Events\UpdateProcessStateList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Commands\UpdateEntity.cs" />
+    <Compile Include="Commands\UpdateEntityWithChanges.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Interfaces\Interfaces.csproj">

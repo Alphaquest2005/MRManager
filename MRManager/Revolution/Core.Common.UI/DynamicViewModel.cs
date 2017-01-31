@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.Contracts;
 using System.Dynamic;
 using System.Reactive;
@@ -26,6 +27,7 @@ namespace Core.Common.UI
         public DynamicViewModel(TViewModel viewModel) : base(viewModel)
         {
             Contract.Requires(viewModel != null);
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             Name = viewModel.Name;
             CommandInfo = viewModel.CommandInfo;
             Commands = viewModel.Commands;

@@ -41,6 +41,7 @@
     <Compile Include="Custom\PersonAddressInfo.cs" />
     <Compile Include="Custom\PersonPhoneNumbersInfo.cs" />
     <Compile Include="Custom\QuestionInfo.cs" />
+    <Compile Include="Custom\QuestionResponseOptionInfo.cs" />
     <Compile Include="Custom\Response.cs" />
     <Compile Include="Custom\ResponseImage.cs" />
     <Compile Include="Custom\ResponseOptionInfo.cs" />

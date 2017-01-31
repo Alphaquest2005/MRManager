@@ -7,13 +7,14 @@ namespace Interfaces
     [InheritedExport]
     public partial interface IResponseOptionInfo : IEntityView<IResponseOptions>
     {
-        Int32? ResponseId { get; }
-        Int32? PatientResponseId { get; }
-        String Value { get; }
+        Int32? ResponseId { get; set; }
+        Int32? PatientResponseId { get; set; }
+        String Value { get; set; }
         Int32 QuestionId { get; }
         String Description { get; }
         String Type { get; }
         int ResponseNumber { get; }
+        int PatientId { get; }
     }
 
     [InheritedExport]

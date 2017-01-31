@@ -40,7 +40,7 @@ namespace EFRepository
             }
         }
 
-        public static void Update(IUpdateEntity<TEntity> msg)
+        public static void Update(IUpdateEntityWithChanges<TEntity> msg)
         {
             try
             {

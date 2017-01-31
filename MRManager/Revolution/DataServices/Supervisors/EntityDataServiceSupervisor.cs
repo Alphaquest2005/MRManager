@@ -20,7 +20,7 @@ namespace DataServices.Actors
 
         private static readonly Action<ICreateEntity<TEntity>> CreateAction = ( x) => x.CreateEntity();
         private static readonly Action<IDeleteEntity<TEntity>> DeleteAction = (x) => x.DeleteEntity();
-        private static readonly Action<IUpdateEntity<TEntity>> UpdateAction = (x) => x.UpdateEntity();
+        private static readonly Action<IUpdateEntityWithChanges<TEntity>> UpdateAction = (x) => x.UpdateEntity();
         private static readonly Action<IGetEntityById<TEntity>> GetEntityByIdAction = (x) => x.GetEntity();
         private static readonly Action<ISystemSource, IGetEntityWithChanges<TEntity>> GetEntityWithChangesAction = (s, x) => x.GetEntity();
 

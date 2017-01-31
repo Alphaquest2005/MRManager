@@ -5,12 +5,12 @@ using CommonMessages;
 
 namespace EventMessages.Commands
 {
-    public class UpdateEntity<TEntity> : ProcessSystemMessage, IUpdateEntity<TEntity> where TEntity : IEntity
+    public class UpdateEntityWithChanges<TEntity> : ProcessSystemMessage, IUpdateEntityWithChanges<TEntity> where TEntity : IEntity
     {
         public Dictionary<string, dynamic> Changes { get; }
         public int EntityId { get; }
 
-        public UpdateEntity(int entityId, Dictionary<string, dynamic> changes, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
+        public UpdateEntityWithChanges(int entityId, Dictionary<string, dynamic> changes, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             Contract.Requires(changes.Count > 0);
             EntityId = entityId;

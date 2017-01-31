@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reactive;
 using SystemInterfaces;
 using Common;
@@ -17,6 +18,7 @@ namespace Core.Common.UI
         public ISystemSource Source => new Source(Guid.NewGuid(), "ViewModel:" + typeof(TViewModel).GetFriendlyName(),new SourceType(typeof(BaseViewModel<TViewModel>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         protected BaseViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
         {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             Process = process;
             EventSubscriptions = eventSubscriptions;
             EventPublications = eventPublications;

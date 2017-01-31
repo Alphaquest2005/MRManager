@@ -75,5 +75,12 @@ namespace UnitTests.Expressions
             if (res.Any()) Debug.Assert(true);
         }
 
+        [TestMethod]
+        public void QuestionResponseOptionsExpressionExpressionGetData()
+        {
+            var res = MRManagerDBContext.Instance.Questions.Select(PatientExpressions.QuestionResponseOptionsExpression).ToList();
+            if (res.Any()) Debug.Assert(true);
+        }
+
     }
 }

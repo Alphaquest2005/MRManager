@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
+using System.Windows.Data;
 using SystemInterfaces;
 using Core.Common.UI;
 using EF.Entities;
@@ -22,7 +23,7 @@ namespace ViewModels
 {
 
     [Export]
-    public class QuestionaireViewModel : DynamicViewModel<ObservableListViewModel<IPatientResponseInfo>>, IQuestionaireViewModel
+    public class QuestionaireViewModel : DynamicViewModel<ObservableListViewModel<IQuestionResponseOptionInfo>>, IQuestionaireViewModel
     {
 
 
@@ -31,7 +32,7 @@ namespace ViewModels
             List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications,
             List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
             : base(
-                new ObservableListViewModel<IPatientResponseInfo>(eventSubscriptions, eventPublications, commandInfo,
+                new ObservableListViewModel<IQuestionResponseOptionInfo>(eventSubscriptions, eventPublications, commandInfo,
                     process, orientation))
         {
             this.WireEvents();
@@ -56,22 +57,70 @@ namespace ViewModels
             }
         }
 
-        private void UpdateChangeCollectionList(IPatientResponseInfo patientResponseInfo)
+        private void UpdateChangeCollectionList(IQuestionResponseOptionInfo patientResponseInfo)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
                 ChangeTrackingList.Clear();
-                if (patientResponseInfo?.ResponseOptions == null) return;
-                ChangeTrackingList.AddRange(patientResponseInfo.ResponseOptions);
+                if (patientResponseInfo == null) return;
+                var resLst = new List<IResponseOptionInfo>();
+                BindingOperations.EnableCollectionSynchronization(resLst, lockObject);
+               
+                if (patientResponseInfo?.ResponseOptions != null)
+                {
+
+                    resLst.AddRange(patientResponseInfo.ResponseOptions);
+                    if (CurrentPatient != null)
+                    {
+                        foreach (
+                            var itm in patientResponseInfo.PatientResponses.Where(x => x.PatientId == CurrentPatient.Id)
+                            )
+                        {
+                           var res =  resLst.First(x => x.Id == itm.Id);
+                            res.Value = itm.Value;
+                            res.ResponseId = itm.ResponseId;
+                            res.PatientResponseId = itm.Id;
+
+                        }
+                    }
+                    
+                }
+                
+
+                resLst.Add(new ResponseOptionInfo()
+                                {
+                                    Id = 0,
+                                    Description = "Edit to Create New Response Option",
+                                    QuestionId = patientResponseInfo.Id,
+                                    Type = "TextBox"
+                                });
+                
+                ChangeTrackingList.AddRange(resLst);
+               
                 foreach (var itm in ChangeTrackingList)
                 {
                     itm.ObservableForProperty(x =>x.Value).Subscribe(x => updateChangeTracking(x));
                 }
+                
             });
 
         }
+
+        public IPatientInfo CurrentPatient
+        {
+            get { return _currentPatient; }
+            set
+            {
+                _currentPatient = value;
+                UpdateChangeCollectionList(CurrentEntity.Value);
+            }
+        }
+
         //AutoProperty Fucking up i really don't jnow why
         private ObservableBindingList<IResponseOptionInfo> _changeTrackingList = new ObservableBindingList<IResponseOptionInfo>();
+        private readonly object lockObject = new object();
+        private IPatientInfo _currentPatient;
+
         public ObservableBindingList<IResponseOptionInfo> ChangeTrackingList
         {
             get { return _changeTrackingList; }
@@ -79,15 +128,15 @@ namespace ViewModels
         }
 
 
-        public ReactiveProperty<IProcessStateList<IPatientResponseInfo>> State => this.ViewModel.State;
+        public ReactiveProperty<IProcessStateList<IQuestionResponseOptionInfo>> State => this.ViewModel.State;
 
 
-        ReactiveProperty<IProcessState<IPatientResponseInfo>> IEntityViewModel<IPatientResponseInfo>.State => new ReactiveProperty<IProcessState<IPatientResponseInfo>>(this.ViewModel.State.Value);
-        public ReactiveProperty<IPatientResponseInfo> CurrentEntity => this.ViewModel.CurrentEntity;
+        ReactiveProperty<IProcessState<IQuestionResponseOptionInfo>> IEntityViewModel<IQuestionResponseOptionInfo>.State => new ReactiveProperty<IProcessState<IQuestionResponseOptionInfo>>(this.ViewModel.State.Value);
+        public ReactiveProperty<IQuestionResponseOptionInfo> CurrentEntity => this.ViewModel.CurrentEntity;
 
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
-        public ObservableList<IPatientResponseInfo> EntitySet => this.ViewModel.EntitySet;
-        public ObservableList<IPatientResponseInfo> SelectedEntities => this.ViewModel.SelectedEntities;
+        public ObservableList<IQuestionResponseOptionInfo> EntitySet => this.ViewModel.EntitySet;
+        public ObservableList<IQuestionResponseOptionInfo> SelectedEntities => this.ViewModel.SelectedEntities;
         
 
 

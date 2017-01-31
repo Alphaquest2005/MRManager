@@ -105,6 +105,7 @@ namespace Core.Common.UI
 
         public dynamic GetValue([CallerMemberName] string property = "UnspecifiedProperty")
         {
+            if (CurrentEntity.Value == null) return null;
             var prop =  CurrentEntity.Value.GetType().GetProperty(property, BindingFlags.Public | BindingFlags.Instance);
             if(prop == null) return null;
             return ChangeTracking.ContainsKey(property)

@@ -35,14 +35,16 @@ namespace ViewModel.Interfaces
     }
 
     [InheritedExport]
-    public interface IQuestionaireViewModel : IEntityListViewModel<IPatientResponseInfo>
+    public interface IQuestionaireViewModel : IEntityListViewModel<IQuestionResponseOptionInfo>
     {
         ObservableBindingList<IResponseOptionInfo> ChangeTrackingList { get; }
+        IPatientInfo CurrentPatient { get; set; }
     }
 
     [InheritedExport]
     public interface IQuestionListViewModel : IEntityListViewModel<IQuestionInfo>
     {
         ObservableBindingList<IQuestionInfo> ChangeTrackingList { get; }
+        IInterviewInfo CurrentInterview { get; set; }
     }
 }

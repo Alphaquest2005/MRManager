@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
@@ -12,6 +13,7 @@ using JB.Collections.Reactive;
 using Reactive.Bindings;
 using ReactiveUI;
 using RevolutionEntities.Process;
+using Utilities;
 using ValidationSets;
 using ViewModel.Interfaces;
 using ViewModelInterfaces;
@@ -24,32 +26,113 @@ namespace ViewModels
     {
         private ObservableBindingList<IQuestionInfo> _changeTrackingList = new ObservableBindingList<IQuestionInfo>();
         private ObservableList<IQuestionInfo> _entitySet;
+        private IInterviewInfo _currentInterview;
 
         public QuestionListViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IQuestionInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
-           this.WireEvents();
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
+            this.WireEvents();
             _entitySet = this.ViewModel.EntitySet;
             Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => UpdateChangeCollectionList(x));
         }
 
-        private void updateChangeTracking(IObservedChange<IQuestionInfo, IQuestionInfo> change)
-        {
-           
-        }
 
         private void UpdateChangeCollectionList(ObservableList<IQuestionInfo> entitySet)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
                 ChangeTrackingList.Clear();
-                if (!entitySet.Any()) return;
-                ChangeTrackingList.AddRange(entitySet.OrderBy(z => z.QuestionNumber));
-                foreach (var itm in ChangeTrackingList)
+                
+                if (entitySet.Any())
                 {
-                    itm.ObservableForProperty(x => x).Subscribe(x => updateChangeTracking(x));
+                    var resLst = entitySet.OrderBy(z => z.QuestionNumber).ToList();
+                    var currentInterviewId = entitySet.First().InterviewId;
+                    resLst.Add(new QuestionInfo()
+                    {
+                        Id = 0,
+                        Description = "Edit to Create New Question",
+                        EntityAttributeId = 0,
+                        InterviewId = currentInterviewId,
+                        Attribute = "Unspecified",
+                        Entity = "Unspecified",
+                        Type = "TextBox"
+                    });
+                    ChangeTrackingList.AddRange(resLst);
+
                 }
+                RegisterChangeTrackingList();
             });
 
+        }
+
+        private void RegisterChangeTrackingList()
+        {
+            foreach (var itm in ChangeTrackingList)
+            {
+                itm.ObservableForProperty(x => x.Description).Subscribe(x => updateDescription(x));
+                itm.ObservableForProperty(x => x.Entity).Subscribe(x => updateEntity(x));
+                itm.ObservableForProperty(x => x.Attribute).Subscribe(x => updateAttribute(x));
+                itm.ObservableForProperty(x => x.Type).Subscribe(x => updateType(x));
+            }
+        }
+
+        private void updateType(IObservedChange<IQuestionInfo, string> typeChange)
+        {
+            if (typeChange.Sender.Entity != "Unspecified")
+            {
+                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.EntityAttributeId), typeChange.Sender.EntityAttributeId);
+                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Type), typeChange.Value);
+            }
+            else
+            {
+                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Type), typeChange.Value);
+            }
+        }
+
+        private void updateAttribute(IObservedChange<IQuestionInfo, string> attributeChange)
+        {
+            if (attributeChange.Sender.Entity != "Unspecified")
+            {
+                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.EntityAttributeId), attributeChange.Sender.EntityAttributeId);
+                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Attribute), attributeChange.Value);
+            }
+            else
+            {
+                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Attribute), attributeChange.Value);
+            }
+        }
+
+        private void updateEntity(IObservedChange<IQuestionInfo, string> entityChange)
+        {
+            if (entityChange.Sender.EntityAttributeId != 0)
+            {
+                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.EntityAttributeId), entityChange.Sender.EntityAttributeId);
+                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Entity), entityChange.Value);
+            }
+            else
+            {
+                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.EntityAttributeId), entityChange.Sender.EntityAttributeId);
+                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Entity), entityChange.Value);
+                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Attribute), entityChange.Sender.Attribute);
+            }
+        }
+
+        private void updateDescription(IObservedChange<IQuestionInfo, string> descriptionChange)
+        {
+            if (descriptionChange.Sender.Id != 0)
+            {
+                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Id), descriptionChange.Sender.Id);
+                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Description), descriptionChange.Value);
+            }
+            else
+            {
+                //add question
+                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Id), descriptionChange.Sender.Id);
+                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Description), descriptionChange.Value);
+                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.InterviewId), CurrentInterview.Id);
+
+            }
+           
         }
 
         public ReactiveProperty<IProcessStateList<IQuestionInfo>> State => this.ViewModel.State;
@@ -68,7 +151,32 @@ namespace ViewModels
 
     
         public ObservableList<IQuestionInfo> SelectedEntities => this.ViewModel.SelectedEntities;
-    
+
+        public IInterviewInfo CurrentInterview
+        {
+            get { return _currentInterview; }
+            set
+            {
+                _currentInterview = value;
+                if (!ChangeTrackingList.Any())
+                {
+                    ChangeTrackingList.Add(new QuestionInfo()
+                    {
+                        Id = 0,
+                        Description = "Edit to Create New Question",
+                        EntityAttributeId = 0,
+                        InterviewId = _currentInterview.Id,
+                        Attribute = "Unspecified",
+                        Entity = "Unspecified",
+                        Type = "TextBox"
+                    });
+
+                    RegisterChangeTrackingList();
+                }
+
+            }
+        }
+
 
         public ObservableBindingList<IQuestionInfo> ChangeTrackingList
         {

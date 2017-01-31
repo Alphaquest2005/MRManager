@@ -230,10 +230,10 @@ namespace RevolutionData
             public static IProcessAction RequestPatientResponses => new ProcessAction(
                 action:
                     cp =>
-                        new LoadEntityViewSetWithChanges<IPatientResponseInfo, IExactMatch>(new Dictionary<string, dynamic>()
+                        new LoadEntityViewSetWithChanges<IQuestionResponseOptionInfo, IExactMatch>(new Dictionary<string, dynamic>()
                                     {
-                                        {nameof(IPatientResponseInfo.InterviewId), cp.Messages["CurrentInterview"].Entity.Id },
-                                        {nameof(IPatientResponseInfo.PatientId), cp.Messages["CurrentPatient"].Entity.Id }
+                                        {nameof(IQuestionResponseOptionInfo.InterviewId), cp.Messages["CurrentInterview"].Entity.Id },
+                                       
                                     },
                             new StateCommandInfo(3, Context.EntityView.Commands.LoadEntityViewSetWithChanges),
                             cp.Actor.Process, cp.Actor.Source),
@@ -247,13 +247,13 @@ namespace RevolutionData
                     action:
                         cp =>
                         {
-                            var ps = new ProcessStateList<IPatientResponseInfo>(
+                            var ps = new ProcessStateList<IQuestionResponseOptionInfo>(
                                  process: cp.Actor.Process,
-                                 entity: ((List<IPatientResponseInfo>)cp.Messages["EntityViewSet"].EntitySet).FirstOrDefault(),
+                                 entity: ((List<IQuestionResponseOptionInfo>)cp.Messages["EntityViewSet"].EntitySet).FirstOrDefault(),
                                  entitySet: cp.Messages["EntityViewSet"].EntitySet,
-                                 selectedEntities: new List<IPatientResponseInfo>(),
-                                 stateInfo: new StateInfo(3, new State("Loaded IPatientResponseInfo Data", "IPatientResponseInfo", "")));
-                            return new UpdateProcessStateList<IPatientResponseInfo>(
+                                 selectedEntities: new List<IQuestionResponseOptionInfo>(),
+                                 stateInfo: new StateInfo(3, new State("Loaded IQuestionResponseOptionInfo Data", "IQuestionResponseOptionInfo", "")));
+                            return new UpdateProcessStateList<IQuestionResponseOptionInfo>(
                                         state: ps,
                                         process: cp.Actor.Process,
                                         processInfo: new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState),

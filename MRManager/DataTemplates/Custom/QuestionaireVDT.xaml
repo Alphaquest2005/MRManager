@@ -276,7 +276,7 @@
                            VerticalAlignment="Stretch"
                            FontSize="20"
                            Text="{Binding CurrentEntity.Value.Question,
-                                          FallbackValue='Question',
+                                          FallbackValue='No Patient Response',
                                           UpdateSourceTrigger=PropertyChanged,
                                           ValidatesOnDataErrors=True}"
                            TextWrapping="WrapWithOverflow" />
