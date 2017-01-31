@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Interfaces;
 using JB.Collections.Reactive;
+using Reactive.Bindings;
 using ViewModelInterfaces;
 
 namespace ViewModel.Interfaces
@@ -32,8 +33,8 @@ namespace ViewModel.Interfaces
     {
         string Field { get; set; }
         string Value { get; set; }
-        IPatientSyntomInfo CurrentPatientSyntom { get; set; }
-        ISyntomMedicalSystemInfo CurrentMedicalSystem { get; set; }
+        ReactiveProperty<IPatientSyntomInfo> CurrentPatientSyntom { get;  }
+        ReactiveProperty<ISyntomMedicalSystemInfo> CurrentMedicalSystem { get; }
     }
 
     [InheritedExport]

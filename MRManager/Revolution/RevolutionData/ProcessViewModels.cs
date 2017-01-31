@@ -28,13 +28,16 @@ namespace RevolutionData
             MainWindowViewModelInfo.MainWindowViewModel,
             ScreenViewModelInfo.ScreenViewModel,
             SigninViewModelInfo.SigninViewModel,
+            HeaderViewModelInfo.HeaderViewModel,
             PatientSummaryListViewModelInfo.PatientSummaryListViewModel,
             PatientDetailsViewModelInfo.PatientDetailsViewModel,
-            InterviewListViewModelInfo.InterviewListViewModel,
-            HeaderViewModelInfo.HeaderViewModel,
-            QuestionListViewModelInfo.QuestionListViewModel,
-            QuestionaireViewModelInfo.QuestionairenaireViewViewModel,
             PatientVisitViewModelInfo.PatientVisitViewModel,
+            PatientSyntomViewModelInfo.PatientSyntomViewModel,
+            InterviewListViewModelInfo.InterviewListViewModel,
+            QuestionaireViewModelInfo.QuestionairenaireViewViewModel,
+            QuestionListViewModelInfo.QuestionListViewModel,
+            
+
         };
     }
 

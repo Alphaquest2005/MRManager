@@ -194,8 +194,8 @@ namespace RevolutionData
 
 
             
-            InterviewListViewModelInfo.ComplexActions.IntializeInterviewInfoProcessState,
-            InterviewListViewModelInfo.ComplexActions.UpdateInterviewInfoState,
+            //InterviewListViewModelInfo.ComplexActions.IntializeInterviewInfoProcessState,
+            //InterviewListViewModelInfo.ComplexActions.UpdateInterviewInfoState,
 
              
 
@@ -205,6 +205,11 @@ namespace RevolutionData
           
             QuestionListViewModelInfo.ComplexActions.UpdateQuestionListState,
             QuestionListViewModelInfo.ComplexActions.RequestQuestionList,
+
+            PatientVisitViewModelInfo.ComplexActions.RequestData,
+            PatientVisitViewModelInfo.ComplexActions.UpdateState,
+
+            
         };
     }
 

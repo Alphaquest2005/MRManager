@@ -107,11 +107,14 @@ namespace EF.DBContexts
 		public DbSet<States> States { get; set; }
 		public DbSet<StudentInfo> StudentInfo { get; set; }
 		public DbSet<SyntomMedicalSystems> SyntomMedicalSystems { get; set; }
+		public DbSet<SyntomPriority> SyntomPriority { get; set; }
 		public DbSet<Syntoms> Syntoms { get; set; }
+		public DbSet<SyntomStatus> SyntomStatus { get; set; }
 		public DbSet<Temperature> Temperature { get; set; }
 		public DbSet<UltraSoundGeneralEvaluation> UltraSoundGeneralEvaluation { get; set; }
 		public DbSet<Units> Units { get; set; }
 		public DbSet<UserSignIn> UserSignIn { get; set; }
+		public DbSet<VisitType> VisitType { get; set; }
 		public DbSet<VitalSigns> VitalSigns { get; set; }
 		public DbSet<Weight> Weight { get; set; }
 		public DbSet<ZipCodes> ZipCodes { get; set; }
@@ -218,11 +221,14 @@ namespace EF.DBContexts
 				StatesMap.Map(modelBuilder.Entity<States>());
 				StudentInfoMap.Map(modelBuilder.Entity<StudentInfo>());
 				SyntomMedicalSystemsMap.Map(modelBuilder.Entity<SyntomMedicalSystems>());
+				SyntomPriorityMap.Map(modelBuilder.Entity<SyntomPriority>());
 				SyntomsMap.Map(modelBuilder.Entity<Syntoms>());
+				SyntomStatusMap.Map(modelBuilder.Entity<SyntomStatus>());
 				TemperatureMap.Map(modelBuilder.Entity<Temperature>());
 				UltraSoundGeneralEvaluationMap.Map(modelBuilder.Entity<UltraSoundGeneralEvaluation>());
 				UnitsMap.Map(modelBuilder.Entity<Units>());
 				UserSignInMap.Map(modelBuilder.Entity<UserSignIn>());
+				VisitTypeMap.Map(modelBuilder.Entity<VisitType>());
 				VitalSignsMap.Map(modelBuilder.Entity<VitalSigns>());
 				WeightMap.Map(modelBuilder.Entity<Weight>());
 				ZipCodesMap.Map(modelBuilder.Entity<ZipCodes>());

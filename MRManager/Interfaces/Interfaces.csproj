@@ -64,7 +64,10 @@
     <Compile Include="Generated Interfaces\MedicalSystems.cs" />
     <Compile Include="Generated Interfaces\Patients.cs" />
     <Compile Include="Generated Interfaces\SyntomMedicalSystems.cs" />
+    <Compile Include="Generated Interfaces\SyntomPriority.cs" />
+    <Compile Include="Generated Interfaces\SyntomStatus.cs" />
     <Compile Include="Generated Interfaces\UserSignIn.cs" />
+    <Compile Include="Generated Interfaces\VisitType.cs" />
     <Compile Include="IPersons.cs" />
     <Compile Include="Generated Interfaces\AddressCities.cs" />
     <Compile Include="Generated Interfaces\AddressCountries.cs" />

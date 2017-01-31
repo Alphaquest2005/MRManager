@@ -69,8 +69,13 @@ namespace ViewModels
             set
             {
                 _currentPatientVisit = value;
-                EntitySet.Clear();
-                EntitySet.AddRange(_currentPatientVisit.PatientSyntoms);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    EntitySet.Clear();
+                    EntitySet.AddRange(_currentPatientVisit.PatientSyntoms);
+                    EntitySet.Reset();
+                });
+                
             }
         }
     }

@@ -49,9 +49,6 @@
     <Compile Include="ToBeGenerated\Model\AddressCitiesListView.xaml.cs">
       <DependentUpon>AddressCitiesListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ToBeGenerated\ScratchPad.xaml.cs">
-      <DependentUpon>ScratchPad.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ToBeGenerated\Summary\SummaryListView_AutoGen.xaml.cs">
       <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
     </Compile>
@@ -147,10 +144,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="ToBeGenerated\Model\AddressCitiesListView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ToBeGenerated\ScratchPad.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

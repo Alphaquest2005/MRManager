@@ -19,5 +19,12 @@
         <ResourceDictionary Source="Custom/ResponseOptionRDT.xaml" />
         <ResourceDictionary Source="Custom/ResponseOptionWDT.xaml" />
         <ResourceDictionary Source="Custom/HeaderVDT.xaml" />
+        <ResourceDictionary Source="Custom/SystemInfoDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientSyntomInfoDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientSyntomListVDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientVisitInfoDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientVisitListVDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientSyntomListVDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientSyntomInfoDT.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -12,12 +12,9 @@ using SystemInterfaces;
 namespace Interfaces
 {
 	[InheritedExport]
-	public partial interface IPatientVisit:IEntity  
+	public partial interface ISyntomPriority:IEntity  
 	{
-		DateTime DateOfVisit { get;}
-		int DoctorId { get;}
-		int PatientId { get;}
-		int VisitTypeId { get;}
+		string Name { get;}
 
 
 

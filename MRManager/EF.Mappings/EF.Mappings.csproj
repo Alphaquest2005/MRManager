@@ -130,11 +130,14 @@
     <Compile Include="Generated Mappings\States.cs" />
     <Compile Include="Generated Mappings\StudentInfo.cs" />
     <Compile Include="Generated Mappings\SyntomMedicalSystems.cs" />
+    <Compile Include="Generated Mappings\SyntomPriority.cs" />
     <Compile Include="Generated Mappings\Syntoms.cs" />
+    <Compile Include="Generated Mappings\SyntomStatus.cs" />
     <Compile Include="Generated Mappings\Temperature.cs" />
     <Compile Include="Generated Mappings\UltraSoundGeneralEvaluation.cs" />
     <Compile Include="Generated Mappings\Units.cs" />
     <Compile Include="Generated Mappings\UserSignIn.cs" />
+    <Compile Include="Generated Mappings\VisitType.cs" />
     <Compile Include="Generated Mappings\VitalSigns.cs" />
     <Compile Include="Generated Mappings\Weight.cs" />
     <Compile Include="Generated Mappings\ZipCodes.cs" />

@@ -98,13 +98,14 @@ namespace Entity.Expressions
                 Id = x.Id,
                 PatientId = x.PatientId,
                 DateOfVisit = x.DateOfVisit,
+                Purpose = x.VisitType.Name,
                 AttendingDoctor = string.Join(" ", x.Persons_Doctor.Persons.PersonNames.Select(z => z.PersonName)),
                 PatientSyntoms = x.PatientSyntoms.Select(z => new PatientSyntomInfo()
                 {
                     Id = z.Id,
                     Syntom = z.Syntoms.Name,
-                    Priority = z.Priority,
-                    Status = z.Status,
+                    Priority = z.SyntomPriority.Name,
+                    Status = z.SyntomStatus.Name,
                     Systems = z.Syntoms.SyntomMedicalSystems.Select(s => new SyntomMedicalSystemInfo()
                     {
                         MedicalSystemId = s.MedicalSystemId,

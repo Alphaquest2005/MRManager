@@ -32,7 +32,7 @@ namespace RevolutionData
                     3,
                     e => e?.Entity != null,
                     new List<Func<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>, bool>>(),
-                    (v,e) => v.CurrentPatientSyntom = e.Entity),
+                    (v,e) => v.CurrentPatientSyntom.Value = e.Entity),
 
             },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
