@@ -42,5 +42,36 @@ namespace RevolutionData
             commands: new List<IViewModelEventCommand<IViewModel,IEvent>>{},
             viewModelType: typeof(IPatientDetailsViewModel),
             orientation: typeof(IBodyViewModel));
+
+        public static class ComplexActions
+        {
+            public static readonly ComplexEventAction UpdatePatientDetailsState = new ComplexEventAction(
+                key: "304",
+                processId: 3,
+                events: new List<IProcessExpectedEvent>
+                {
+                new ProcessExpectedEvent<IEntityFound<IPatientDetailsInfo>> (processId: 3,
+                    eventPredicate: e => e.Entity != null,
+                    processInfo: new StateEventInfo(3, Context.EntityView.Events.EntityViewFound),
+                    expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
+                    key: "PatientDetailsInfo")
+                },
+                expectedMessageType: typeof(IProcessStateMessage<IPatientDetailsInfo>),
+                action: ProcessActions.PatientInfo.UpdatePatientDetailsState,
+                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState));
+
+            public static readonly ComplexEventAction RequestPatientDetails = new ComplexEventAction(
+                key: "303",
+                processId: 3,
+                events: new List<IProcessExpectedEvent>
+                {
+                new ProcessExpectedEvent<ICurrentEntityChanged<IPatientInfo>> (
+                    "CurrentEntity", 3, e => e.Entity != null, expectedSourceType: new SourceType(typeof(IViewModel)),//todo: check this cuz it comes from viewmodel
+                    processInfo: new StateEventInfo(2, Context.Process.Events.CurrentEntityChanged))
+                },
+                expectedMessageType: typeof(IProcessStateMessage<IPatientDetailsInfo>),
+                action: ProcessActions.PatientInfo.RequestPatientDetails,
+                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState));
+        }
     }
 }

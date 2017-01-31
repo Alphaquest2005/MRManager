@@ -21,6 +21,9 @@ namespace ViewModels
     [Export]
     public class InterviewListViewModel : DynamicViewModel<ObservableListViewModel<IInterviewInfo>>, IInterviewListViewModel
     {
+        private IPatientSyntomInfo _currentPatientSyntom;
+        private ISyntomMedicalSystemInfo _currentMedicalSystem;
+
         public InterviewListViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IInterviewInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
            this.WireEvents();
@@ -42,6 +45,25 @@ namespace ViewModels
         public string Field { get; set; }
         public string Value { get; set; }
 
-        public IPatientSyntomInfo CurrentPatientSyntomInfo { get; set; }
+        public IPatientSyntomInfo CurrentPatientSyntom
+        {
+            get { return _currentPatientSyntom; }
+            set
+            {
+                _currentPatientSyntom = value;
+                
+            }
+        }
+
+        public ISyntomMedicalSystemInfo CurrentMedicalSystem
+        {
+            get { return _currentMedicalSystem; }
+            set
+            {
+                _currentMedicalSystem = value;
+                EntitySet.Clear();
+                EntitySet.AddRange(_currentMedicalSystem.Interviews);
+            }
+        }
     }
 }

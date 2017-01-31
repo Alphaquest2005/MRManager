@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using SystemInterfaces;
+using Actor.Interfaces;
 using EventMessages.Commands;
 using EventMessages.Events;
 using Interfaces;
@@ -78,5 +79,39 @@ namespace RevolutionData
             },
             typeof(IPatientSummaryListViewModel),
             typeof(IBodyViewModel));
+
+        public static class ComplexActions
+        {
+            public static readonly ComplexEventAction UpdatePatientInfoState = new ComplexEventAction(
+                key: "302",
+                processId: 3,
+                events: new List<IProcessExpectedEvent>
+                {
+                new ProcessExpectedEvent<IEntityViewSetWithChangesLoaded<IPatientInfo>> (
+                    "EntityViewSet", 3, e => e.EntitySet != null, expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
+                    processInfo: new StateEventInfo(2, Context.EntityView.Events.EntityViewSetLoaded))
+                },
+                expectedMessageType: typeof(IProcessStateMessage<IPatientInfo>),
+                action: ProcessActions.PatientInfo.UpdatePatientInfoState,
+                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState));
+
+            public static readonly ComplexEventAction IntializePatientInfoSummaryProcessState = new ComplexEventAction(
+
+                key: "301",
+                processId: 3,
+                events: new List<IProcessExpectedEvent>
+                {
+                new ProcessExpectedEvent (key: "ProcessStarted",
+                    processId: 3,
+                    eventPredicate: e => e != null,
+                    eventType: typeof (ISystemProcessStarted),
+                    processInfo: new StateEventInfo(3,Context.Process.Events.ProcessStarted),
+                    expectedSourceType:new SourceType(typeof(IComplexEventService)))
+
+                },
+                expectedMessageType: typeof(IProcessStateMessage<IPatientInfo>),
+                action: ProcessActions.PatientInfo.IntializePatientInfoSummaryProcessState,
+                processInfo: new StateCommandInfo(3, Context.Process.Commands.CreateState));
+        }
     }
 }

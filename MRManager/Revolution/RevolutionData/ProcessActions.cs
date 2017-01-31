@@ -121,6 +121,8 @@ namespace RevolutionData
 
         }
 
+        
+
         public class PatientInfo
         {
             public static IProcessAction IntializePatientInfoSummaryProcessState => new ProcessAction(
@@ -187,43 +189,7 @@ namespace RevolutionData
 
 
             ////// Interview Info
-            /// 
-             public static IProcessAction IntializeInterviewInfoProcessState => new ProcessAction(
-            action:
-                    cp =>
-                        new LoadEntityViewSetWithChanges<IInterviewInfo, IExactMatch>(new Dictionary<string, dynamic>(),
-                            new StateCommandInfo(3, Context.EntityView.Commands.LoadEntityViewSetWithChanges),
-                            cp.Actor.Process, cp.Actor.Source),
-                processInfo:
-                    cp =>
-                        new StateCommandInfo(cp.Actor.Process.Id,
-                            Context.EntityView.Commands.LoadEntityViewSetWithChanges),
-                // take shortcut cud be IntialState
-                expectedSourceType: new SourceType(typeof (IComplexEventService)));
 
-
-            public static IProcessAction UpdateInterviewInfoState => new ProcessAction(
-                action:
-                    cp =>
-                    {
-                        var ps = new ProcessStateList<IInterviewInfo>(
-                             process: cp.Actor.Process,
-                             entity: ((List<IInterviewInfo>)cp.Messages["EntityViewSet"].EntitySet).FirstOrDefault(),
-                             entitySet: cp.Messages["EntityViewSet"].EntitySet,
-                             selectedEntities: new List<IInterviewInfo>(),
-                             stateInfo: new StateInfo(3, new State("Loaded IInterviewInfo Data", "LoadedIInterviewData", "")));
-                        return new UpdateProcessStateList<IInterviewInfo>(
-                                    state: ps,
-                                    process: cp.Actor.Process,
-                                    processInfo: new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState),
-                                    source: cp.Actor.Source);
-                    },
-                processInfo:
-                    cp =>
-                        new StateCommandInfo(cp.Actor.Process.Id,
-                            Context.Process.Commands.UpdateState),
-                // take shortcut cud be IntialState
-                expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
             // patient response
 

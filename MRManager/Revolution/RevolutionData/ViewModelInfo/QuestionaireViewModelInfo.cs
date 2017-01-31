@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using SystemInterfaces;
+using Actor.Interfaces;
 using EventMessages.Commands;
 using EventMessages.Events;
 using Interfaces;
@@ -163,5 +164,36 @@ namespace RevolutionData
             },
             typeof(IQuestionaireViewModel),
             typeof(IBodyViewModel));
+
+
+        public static class ComplexActions
+        {
+            public static readonly ComplexEventAction UpdatePatientResponseState = new ComplexEventAction(
+                key: "308",
+                processId: 3,
+                events: new List<IProcessExpectedEvent>
+                {
+                new ProcessExpectedEvent<IEntityViewSetWithChangesLoaded<IQuestionResponseOptionInfo>> (
+                    "EntityViewSet", 3, e => e.EntitySet != null, expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
+                    processInfo: new StateEventInfo(3, Context.EntityView.Events.EntityViewSetLoaded))
+                },
+                expectedMessageType: typeof(IProcessStateMessage<IQuestionResponseOptionInfo>),
+                action: ProcessActions.PatientInfo.UpdatePatientResponseState,
+                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState));
+
+            public static readonly ComplexEventAction RequestPatientResponses = new ComplexEventAction(
+                key: "307",
+                processId: 3,
+                actionTrigger: ActionTrigger.Partial,
+                events: new List<IProcessExpectedEvent>
+                {
+                new ProcessExpectedEvent<ICurrentEntityChanged<IInterviewInfo>> (
+                    "CurrentInterview", 3, e => e.Entity != null, expectedSourceType: new SourceType(typeof(IViewModel)),//todo: check this cuz it comes from viewmodel
+                    processInfo: new StateEventInfo(3, Context.Process.Events.CurrentEntityChanged))
+                },
+                expectedMessageType: typeof(IProcessStateMessage<IQuestionResponseOptionInfo>),
+                action: ProcessActions.PatientInfo.RequestPatientResponses,
+                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState));
+        }
     }
 }

@@ -9,6 +9,8 @@ using ViewModel.Interfaces;
 
 namespace RevolutionData
 {
+    
+
     public static class Processes
     {
         public const int NullProcess = -1;
@@ -183,159 +185,27 @@ namespace RevolutionData
                 processInfo:new StateCommandInfo(3,Context.Process.Commands.StartProcess ),
                 action: ProcessActions.ProcessStarted),
 
-            new ComplexEventAction(
-
-                key:"301",
-                processId:3,
-                events:new List<IProcessExpectedEvent>
-                {
-                    new ProcessExpectedEvent (key: "ProcessStarted",
-                                              processId: 3,
-                                              eventPredicate: e => e != null,
-                                              eventType: typeof (ISystemProcessStarted),
-                                              processInfo: new StateEventInfo(3,Context.Process.Events.ProcessStarted),
-                                              expectedSourceType:new SourceType(typeof(IComplexEventService)))
-
-                },
-                expectedMessageType:typeof(IProcessStateMessage<IPatientInfo>),
-                action:ProcessActions.PatientInfo.IntializePatientInfoSummaryProcessState,
-                processInfo:new StateCommandInfo(3, Context.Process.Commands.CreateState)),
-
-             new ComplexEventAction(
-                key:"302",
-                processId:3,
-                events:new List<IProcessExpectedEvent>
-                {
-                    new ProcessExpectedEvent<IEntityViewSetWithChangesLoaded<IPatientInfo>> (
-                        "EntityViewSet", 3, e => e.EntitySet != null, expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
-                        processInfo: new StateEventInfo(2, Context.EntityView.Events.EntityViewSetLoaded))
-                },
-                expectedMessageType:typeof(IProcessStateMessage<IPatientInfo>),
-                action: ProcessActions.PatientInfo.UpdatePatientInfoState,
-                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState)),
-
-             new ComplexEventAction(
-                key:"303",
-                processId:3,
-                events:new List<IProcessExpectedEvent>
-                {
-                    new ProcessExpectedEvent<ICurrentEntityChanged<IPatientInfo>> (
-                        "CurrentEntity", 3, e => e.Entity != null, expectedSourceType: new SourceType(typeof(IViewModel)),//todo: check this cuz it comes from viewmodel
-                        processInfo: new StateEventInfo(2, Context.Process.Events.CurrentEntityChanged))
-                },
-                expectedMessageType:typeof(IProcessStateMessage<IPatientDetailsInfo>),
-                action: ProcessActions.PatientInfo.RequestPatientDetails,
-                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState)),
-
-             new ComplexEventAction(
-                key:"304",
-                processId: 3,
-                events: new List<IProcessExpectedEvent>
-                {
-                    new ProcessExpectedEvent<IEntityFound<IPatientDetailsInfo>> (processId: 3,
-                                                        eventPredicate: e => e.Entity != null,
-                                                        processInfo: new StateEventInfo(3, Context.EntityView.Events.EntityViewFound),
-                                                        expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
-                                                        key: "PatientDetailsInfo")
-                },
-                expectedMessageType: typeof(IProcessStateMessage<IPatientDetailsInfo>),
-                action: ProcessActions.PatientInfo.UpdatePatientDetailsState,
-                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState)),
+            PatientSummaryListViewModelInfo.ComplexActions.IntializePatientInfoSummaryProcessState,
+            PatientSummaryListViewModelInfo.ComplexActions.UpdatePatientInfoState,
 
 
-             /// Interview info
-             /// 
-              new ComplexEventAction(
-                key:"305",
-                processId:3,
-                events:new List<IProcessExpectedEvent>
-                {
-                    new ProcessExpectedEvent (key: "ProcessStarted",
-                                              processId: 3,
-                                              eventPredicate: e => e != null,
-                                              eventType: typeof (ISystemProcessStarted),
-                                              processInfo: new StateEventInfo(3,Context.Process.Events.ProcessStarted),
-                                              expectedSourceType:new SourceType(typeof(IComplexEventService)))
+            PatientDetailsViewModelInfo.ComplexActions.RequestPatientDetails,
+            PatientDetailsViewModelInfo.ComplexActions.UpdatePatientDetailsState,
 
-                },
-                expectedMessageType:typeof(IProcessStateMessage<IInterviewInfo>),
-                action:ProcessActions.PatientInfo.IntializeInterviewInfoProcessState,
-                processInfo:new StateCommandInfo(3, Context.Process.Commands.CreateState)),
 
-             new ComplexEventAction(
-                key:"306",
-                processId:3,
-                events:new List<IProcessExpectedEvent>
-                {
-                    new ProcessExpectedEvent<IEntityViewSetWithChangesLoaded<IInterviewInfo>> (
-                        "EntityViewSet", 3, e => e.EntitySet != null, expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
-                        processInfo: new StateEventInfo(3, Context.EntityView.Events.EntityViewSetLoaded))
-                },
-                expectedMessageType:typeof(IProcessStateMessage<IInterviewInfo>),
-                action: ProcessActions.PatientInfo.UpdateInterviewInfoState,
-                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState)),
+            
+            InterviewListViewModelInfo.ComplexActions.IntializeInterviewInfoProcessState,
+            InterviewListViewModelInfo.ComplexActions.UpdateInterviewInfoState,
 
-             ///////// Patient Responses
-
-             new ComplexEventAction(
-                key:"307",
-                processId:3,
-                actionTrigger: ActionTrigger.Partial, 
-                events:new List<IProcessExpectedEvent>
-                {
-                    new ProcessExpectedEvent<ICurrentEntityChanged<IInterviewInfo>> (
-                        "CurrentInterview", 3, e => e.Entity != null, expectedSourceType: new SourceType(typeof(IViewModel)),//todo: check this cuz it comes from viewmodel
-                        processInfo: new StateEventInfo(3, Context.Process.Events.CurrentEntityChanged))
-                },
-                expectedMessageType:typeof(IProcessStateMessage<IQuestionResponseOptionInfo>),
-                action: ProcessActions.PatientInfo.RequestPatientResponses,
-                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState)),
-
-             new ComplexEventAction(
-                key:"308",
-                processId:3,
-                events:new List<IProcessExpectedEvent>
-                {
-                    new ProcessExpectedEvent<IEntityViewSetWithChangesLoaded<IQuestionResponseOptionInfo>> (
-                        "EntityViewSet", 3, e => e.EntitySet != null, expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
-                        processInfo: new StateEventInfo(3, Context.EntityView.Events.EntityViewSetLoaded))
-                },
-                expectedMessageType:typeof(IProcessStateMessage<IQuestionResponseOptionInfo>),
-                action: ProcessActions.PatientInfo.UpdatePatientResponseState,
-                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState)),
-
-              /// QuestionList
-             /// 
              
 
-             new ComplexEventAction(
-                key:"310",
-                processId:3,
-                events:new List<IProcessExpectedEvent>
-                {
-                    new ProcessExpectedEvent<IEntityViewSetWithChangesLoaded<IQuestionInfo>> (
-                        "EntityViewSet", 3, e => e.EntitySet != null, expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
-                        processInfo: new StateEventInfo(3, Context.EntityView.Events.EntityViewSetLoaded))
-                },
-                expectedMessageType:typeof(IProcessStateMessage<IQuestionInfo>),
-                action: ProcessActions.PatientInfo.UpdateQuestionListState,
-                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState)),
+            QuestionaireViewModelInfo.ComplexActions.RequestPatientResponses,
+            QuestionaireViewModelInfo.ComplexActions.UpdatePatientResponseState,
 
-             new ComplexEventAction(
-                key:"311",
-                processId:3,
-                actionTrigger: ActionTrigger.Partial,
-                events:new List<IProcessExpectedEvent>
-                {       new ProcessExpectedEvent<ICurrentEntityChanged<IInterviewInfo>> (
-                            "CurrentInterview", 3, e => e.Entity != null, expectedSourceType: new SourceType(typeof(IViewModel)),//todo: check this cuz it comes from viewmodel
-                            processInfo: new StateEventInfo(3, Context.Process.Events.CurrentEntityChanged))
-                },
-                expectedMessageType:typeof(IProcessStateMessage<IPatientResponseInfo>),
-                action: ProcessActions.PatientInfo.RequestQuestionList,
-                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState)),
+          
+            QuestionListViewModelInfo.ComplexActions.UpdateQuestionListState,
+            QuestionListViewModelInfo.ComplexActions.RequestQuestionList,
         };
-
-        
     }
 
 

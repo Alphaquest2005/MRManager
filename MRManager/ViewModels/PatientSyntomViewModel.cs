@@ -26,7 +26,8 @@ namespace ViewModels
     {
         private ObservableBindingList<IPatientSyntomInfo> _changeTrackingList = new ObservableBindingList<IPatientSyntomInfo>();
         private ObservableList<IPatientSyntomInfo> _entitySet;
-       
+        private IPatientVisitInfo _currentPatientVisit;
+
 
         public PatientSyntomViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IPatientSyntomInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
@@ -62,6 +63,15 @@ namespace ViewModels
             set { _changeTrackingList = value; }
         }
 
-        public IPatientVisitInfo CurrentPatientVisit { get; set; }
+        public IPatientVisitInfo CurrentPatientVisit
+        {
+            get { return _currentPatientVisit; }
+            set
+            {
+                _currentPatientVisit = value;
+                EntitySet.Clear();
+                EntitySet.AddRange(_currentPatientVisit.PatientSyntoms);
+            }
+        }
     }
 }

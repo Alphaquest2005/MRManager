@@ -32,6 +32,8 @@ namespace ViewModel.Interfaces
     {
         string Field { get; set; }
         string Value { get; set; }
+        IPatientSyntomInfo CurrentPatientSyntom { get; set; }
+        ISyntomMedicalSystemInfo CurrentMedicalSystem { get; set; }
     }
 
     [InheritedExport]

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using SystemInterfaces;
+using Actor.Interfaces;
 using EventMessages.Commands;
 using EventMessages.Events;
 using Interfaces;
@@ -26,6 +27,12 @@ namespace RevolutionData
                     e => e != null,
                     new List<Func<IInterviewListViewModel, IProcessStateListMessage<IInterviewInfo>, bool>>(),
                     (v,e) => v.State.Value = e.State),
+
+                new ViewEventSubscription<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>>(
+                    3,
+                    e => e?.Entity != null,
+                    new List<Func<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>, bool>>(),
+                    (v,e) => v.CurrentPatientSyntom = e.Entity),
 
             },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
@@ -78,5 +85,78 @@ namespace RevolutionData
             },
             typeof(IInterviewListViewModel),
             typeof(IBodyViewModel));
+
+        public static class ComplexActions
+        {
+            public static readonly ComplexEventAction UpdateInterviewInfoState = new ComplexEventAction(
+                key: "306",
+                processId: 3,
+                events: new List<IProcessExpectedEvent>
+                {
+                new ProcessExpectedEvent<IEntityViewSetWithChangesLoaded<IInterviewInfo>> (
+                    "EntityViewSet", 3, e => e.EntitySet != null, expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
+                    processInfo: new StateEventInfo(3, Context.EntityView.Events.EntityViewSetLoaded))
+                },
+                expectedMessageType: typeof(IProcessStateMessage<IInterviewInfo>),
+                action: ProcessActions.UpdateInterviewInfoState,
+                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState));
+
+            public static readonly ComplexEventAction IntializeInterviewInfoProcessState = new ComplexEventAction(
+                key: "305",
+                processId: 3,
+                events: new List<IProcessExpectedEvent>
+                {
+                new ProcessExpectedEvent (key: "ProcessStarted",
+                    processId: 3,
+                    eventPredicate: e => e != null,
+                    eventType: typeof (ISystemProcessStarted),
+                    processInfo: new StateEventInfo(3,Context.Process.Events.ProcessStarted),
+                    expectedSourceType:new SourceType(typeof(IComplexEventService)))
+
+                },
+                expectedMessageType: typeof(IProcessStateMessage<IInterviewInfo>),
+                action: ProcessActions.IntializeInterviewInfoProcessState,
+                processInfo: new StateCommandInfo(3, Context.Process.Commands.CreateState));
+        }
+
+        public class ProcessActions
+        {
+            /// 
+            public static IProcessAction IntializeInterviewInfoProcessState => new ProcessAction(
+                action:
+                    cp =>
+                        new LoadEntityViewSetWithChanges<IInterviewInfo, IExactMatch>(new Dictionary<string, dynamic>(),
+                            new StateCommandInfo(3, Context.EntityView.Commands.LoadEntityViewSetWithChanges),
+                            cp.Actor.Process, cp.Actor.Source),
+                processInfo:
+                    cp =>
+                        new StateCommandInfo(cp.Actor.Process.Id,
+                            Context.EntityView.Commands.LoadEntityViewSetWithChanges),
+                // take shortcut cud be IntialState
+                expectedSourceType: new SourceType(typeof(IComplexEventService)));
+
+            public static IProcessAction UpdateInterviewInfoState => new ProcessAction(
+                action:
+                    cp =>
+                    {
+                        var ps = new ProcessStateList<IInterviewInfo>(
+                            process: cp.Actor.Process,
+                            entity: ((List<IInterviewInfo>)cp.Messages["EntityViewSet"].EntitySet).FirstOrDefault(),
+                            entitySet: cp.Messages["EntityViewSet"].EntitySet,
+                            selectedEntities: new List<IInterviewInfo>(),
+                            stateInfo: new StateInfo(3, new State("Loaded IInterviewInfo Data", "LoadedIInterviewData", "")));
+                        return new UpdateProcessStateList<IInterviewInfo>(
+                            state: ps,
+                            process: cp.Actor.Process,
+                            processInfo: new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState),
+                            source: cp.Actor.Source);
+                    },
+                processInfo:
+                    cp =>
+                        new StateCommandInfo(cp.Actor.Process.Id,
+                            Context.Process.Commands.UpdateState),
+                // take shortcut cud be IntialState
+                expectedSourceType: new SourceType(typeof(IComplexEventService)));
+        }
     }
 }
