@@ -71,9 +71,14 @@ namespace ViewModels
                 _currentPatientVisit = value;
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    var res =new  List<IPatientSyntomInfo>();
+                    if(_currentPatientVisit.PatientSyntoms!= null) res = _currentPatientVisit.PatientSyntoms.ToList();
+                    
+                    res.Add(new PatientSyntomInfo() { Syntom = "Create New..." });
                     EntitySet.Clear();
-                    EntitySet.AddRange(_currentPatientVisit.PatientSyntoms);
+                    EntitySet.AddRange(res);
                     EntitySet.Reset();
+                    CurrentEntity.Value = EntitySet.FirstOrDefault();
                 });
                 
             }

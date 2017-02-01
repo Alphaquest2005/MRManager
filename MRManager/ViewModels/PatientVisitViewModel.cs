@@ -33,11 +33,25 @@ namespace ViewModels
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             this.WireEvents();
             _entitySet = this.ViewModel.EntitySet;
-           
+
+            Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => addNewRow(x));
+        }
+        private void addNewRow(ObservableList<IPatientVisitInfo> observableList)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                EntitySet.Clear();
+                if(!observableList.Any()) return;
+                var res = observableList.ToList();
+                res.Add(new PatientVisitInfo() { Purpose = "Create New..." });
+                
+                EntitySet.AddRange(res);
+                EntitySet.Reset();
+                CurrentEntity.Value = EntitySet.FirstOrDefault();
+            });
         }
 
 
-       
         public ReactiveProperty<IProcessStateList<IPatientVisitInfo>> State => this.ViewModel.State;
 
 

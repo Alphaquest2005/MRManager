@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Windows;
 using SystemInterfaces;
 using Core.Common.UI;
 using EF.Entities;
@@ -24,9 +25,28 @@ namespace ViewModels
         public PatientSummaryListViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IPatientInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
            this.WireEvents();
+            _entitySet = this.ViewModel.EntitySet;
+            
+           Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => addNewRow(x));
         }
 
+        private void addNewRow(ObservableList<IPatientInfo> observableList)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var res = observableList.ToList();
+                res.Add(new PatientInfo() { Name = "Create New..." });
+                EntitySet.Clear();
+                EntitySet.AddRange(res);
+                EntitySet.Reset();
+                CurrentEntity.Value = EntitySet.FirstOrDefault();
+            });
+        }
+
+
         
+
+
         public ReactiveProperty<IProcessStateList<IPatientInfo>> State => this.ViewModel.State;
 
 
@@ -34,7 +54,15 @@ namespace ViewModels
         public ReactiveProperty<IPatientInfo> CurrentEntity => this.ViewModel.CurrentEntity;
 
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
-        public ObservableList<IPatientInfo> EntitySet => this.ViewModel.EntitySet;
+
+        private ObservableList<IPatientInfo> _entitySet;
+
+        public ObservableList<IPatientInfo> EntitySet
+        {
+            get { return _entitySet; }
+            set { _entitySet = value; }
+        }
+
         public ObservableList<IPatientInfo> SelectedEntities => this.ViewModel.SelectedEntities;
         
 

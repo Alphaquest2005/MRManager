@@ -13,7 +13,7 @@
 
             <ListBox Margin="10,65,10,63"
                      ItemTemplate="{DynamicResource PatientVisitInfoTpl}"
-                     ItemsSource="{Binding State.Value.EntitySet,
+                     ItemsSource="{Binding EntitySet,
                                            Mode=OneWay}"
                      SelectedItem="{Binding CurrentEntity.Value,
                                             Mode=TwoWay}" />

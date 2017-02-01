@@ -112,7 +112,7 @@ namespace Entity.Expressions
                         System = s.MedicalSystems.Name,
                         Interviews = s.MedicalSystems.MedicalSystemInterviews.Select(i => new InterviewInfo()
                         {
-                            Id = i.Id,
+                            Id = i.InterviewId,
                             Interview = i.Interviews.Name,
                             Category = i.Interviews.MedicalCategory.Name,
                             Phase = i.Interviews.Phase.Name

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using SystemInterfaces;
 
 
@@ -85,6 +86,8 @@ namespace Core.Common.UI
                 
             }
         }
+
+        
 
         private ObservableList<TEntity> _selectedEntities = new ObservableList<TEntity>();
         
