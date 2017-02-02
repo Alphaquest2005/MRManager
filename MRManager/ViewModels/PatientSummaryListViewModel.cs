@@ -34,9 +34,9 @@ namespace ViewModels
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
+                EntitySet.Clear();
                 var res = observableList.ToList();
                 res.Add(new PatientInfo() { Name = "Create New..." });
-                EntitySet.Clear();
                 EntitySet.AddRange(res);
                 EntitySet.Reset();
                 CurrentEntity.Value = EntitySet.FirstOrDefault();

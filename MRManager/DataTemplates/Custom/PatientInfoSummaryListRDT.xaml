@@ -3,7 +3,9 @@
                     xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
                     xmlns:converters="clr-namespace:Converters;assembly=Converters"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:systemInterfaces="clr-namespace:SystemInterfaces;assembly=SystemInterfaces"
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
@@ -11,12 +13,7 @@
         <Grid Margin="0" Background="#4CFFFFFF">
 
 
-            <ListBox Margin="10,65,10,63"
-                     ItemTemplate="{DynamicResource PatientInfoTpl}"
-                     ItemsSource="{Binding EntitySet,
-                                           Mode=OneWay}"
-                     SelectedItem="{Binding CurrentEntity.Value,
-                                            Mode=TwoWay}" />
+
             <ComboBox x:Name="ComboBox"
                       Width="78"
                       Height="26"
@@ -46,6 +43,51 @@
                     Content=""
                     FontFamily="Segoe UI Symbol"
                     FontSize="10" />
+
+            <ListBox Margin="10,65,10,63"
+                     ItemsSource="{Binding EntitySet,
+                                           Mode=OneWay}"
+                     SelectedItem="{Binding CurrentEntity.Value,
+                                            Mode=TwoWay}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+
+                        <!--  Default Template  -->
+                        <Setter Property="ContentTemplate" Value="{DynamicResource PatientInfoRDT}" />
+                        <Setter Property="Height" Value="Auto" />
+                        <!--<Setter Property="Visibility" Value="{Binding Value, Converter={StaticResource NullVisibilityConverter}}"/>-->
+
+                        <!--  Triggers to change Template  -->
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=RowState.Value, Source={x:Static viewModels:PatientSummaryListViewModel.Instance}}" Value="{x:Static systemInterfaces:RowState.Added}" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsSelected}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.Setters>
+                                    <Setter Property="ContentTemplate" Value="{DynamicResource PatientInfoWDT}" />
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </MultiDataTrigger.Setters>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=RowState.Value, Source={x:Static viewModels:PatientSummaryListViewModel.Instance}}" Value="{x:Static systemInterfaces:RowState.Modified}" />
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsSelected}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.Setters>
+                                    <Setter Property="ContentTemplate" Value="{DynamicResource PatientInfoWDT}" />
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </MultiDataTrigger.Setters>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding Commands[EditEntity]}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListBox>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

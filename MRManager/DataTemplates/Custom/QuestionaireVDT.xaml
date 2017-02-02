@@ -33,7 +33,7 @@
                            VerticalAlignment="Stretch"
                            FontSize="20"
                            Text="{Binding CurrentEntity.Value.Question,
-                                          FallbackValue='No Patient Response',
+                                          FallbackValue='No Questions',
                                           UpdateSourceTrigger=PropertyChanged,
                                           ValidatesOnDataErrors=True}"
                            TextWrapping="WrapWithOverflow" />
@@ -73,7 +73,6 @@
                          HorizontalAlignment="Stretch"
                          VerticalAlignment="Stretch"
                          Background="#33FFFFFF"
-                         
                          ItemsSource="{Binding ChangeTrackingList}">
 
                     <ListBox.ItemContainerStyle>

@@ -30,7 +30,7 @@ namespace RevolutionData
 
                 new ViewEventSubscription<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>>(
                     3,
-                    e => e?.Entity != null,
+                    e => e != null,
                     new List<Func<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>, bool>>(),
                     (v,e) => v.CurrentPatientSyntom.Value = e.Entity),
 
@@ -77,6 +77,25 @@ namespace RevolutionData
                             new object[] {s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},
                             new StateCommandInfo(s.Process.Id,
                                 Context.EntityView.Commands.LoadEntityViewSetWithChanges), s.Process,
+                            s.Source);
+                    }),
+
+                new ViewEventCommand<IInterviewListViewModel, ViewRowStateChanged<IInterviewInfo>>(
+                    key:"EditEntity",
+                    commandPredicate:new List<Func<IInterviewListViewModel, bool>>
+                    {
+                        v => v.CurrentEntity != null
+                    },
+                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+
+                    messageData: s =>
+                    {
+                        s.RowState.Value = s.RowState.Value != RowState.Modified?RowState.Modified: RowState.Unchanged;//new ReactiveProperty<RowState>(rowstate != RowState.Modified?RowState.Modified: RowState.Unchanged);
+
+                        return new ViewEventCommandParameter(
+                            new object[] {s,s.RowState.Value},
+                            new StateCommandInfo(s.Process.Id,
+                                Context.Process.Commands.CurrentEntityChanged), s.Process,
                             s.Source);
                     }),
 

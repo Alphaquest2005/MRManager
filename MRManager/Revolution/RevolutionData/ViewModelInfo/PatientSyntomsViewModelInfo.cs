@@ -28,7 +28,7 @@ namespace RevolutionData
                     (v,e) => v.State.Value = e.State),
                 new ViewEventSubscription<IPatientSyntomViewModel, ICurrentEntityChanged<IPatientVisitInfo>>(
                     3,
-                    e => e?.Entity != null,
+                    e => e != null,
                     new List<Func<IPatientSyntomViewModel, ICurrentEntityChanged<IPatientVisitInfo>, bool>>(),
                     (v,e) => v.CurrentPatientVisit = e.Entity),
             },
@@ -77,7 +77,24 @@ namespace RevolutionData
                             s.Source);
                     }),
 
+                new ViewEventCommand<IPatientSyntomViewModel, ViewRowStateChanged<IPatientSyntomInfo>>(
+                    key:"EditEntity",
+                    commandPredicate:new List<Func<IPatientSyntomViewModel, bool>>
+                    {
+                        v => v.CurrentEntity != null
+                    },
+                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
 
+                    messageData: s =>
+                    {
+                        s.RowState.Value = s.RowState.Value != RowState.Modified?RowState.Modified: RowState.Unchanged;//new ReactiveProperty<RowState>(rowstate != RowState.Modified?RowState.Modified: RowState.Unchanged);
+
+                        return new ViewEventCommandParameter(
+                            new object[] {s,s.RowState.Value},
+                            new StateCommandInfo(s.Process.Id,
+                                Context.Process.Commands.CurrentEntityChanged), s.Process,
+                            s.Source);
+                    }),
 
             },
             typeof(IPatientSyntomViewModel),

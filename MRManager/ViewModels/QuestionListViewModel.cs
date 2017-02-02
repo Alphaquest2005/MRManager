@@ -158,22 +158,24 @@ namespace ViewModels
             set
             {
                 _currentInterview = value;
-                if (!ChangeTrackingList.Any())
+                if (_currentInterview == null)
                 {
-                    ChangeTrackingList.Add(new QuestionInfo()
-                    {
-                        Id = 0,
-                        Description = "Edit to Create New Question",
-                        EntityAttributeId = 0,
-                        InterviewId = _currentInterview.Id,
-                        Attribute = "Unspecified",
-                        Entity = "Unspecified",
-                        Type = "TextBox"
-                    });
-
-                    RegisterChangeTrackingList();
+                    ChangeTrackingList.Clear();
+                    return;
                 }
+                if (ChangeTrackingList.Any()) return;
+                ChangeTrackingList.Add(new QuestionInfo()
+                {
+                    Id = 0,
+                    Description = "Edit to Create New Question",
+                    EntityAttributeId = 0,
+                    InterviewId = _currentInterview.Id,
+                    Attribute = "Unspecified",
+                    Entity = "Unspecified",
+                    Type = "TextBox"
+                });
 
+                RegisterChangeTrackingList();
             }
         }
 

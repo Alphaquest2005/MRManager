@@ -6,7 +6,7 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="d">
 
-    <DataTemplate x:Key="PatientVisitInfoTpl" DataType="{x:Type Interfaces:IPatientVisitInfo}">
+    <DataTemplate x:Key="InterviewInfoRDT" DataType="{x:Type Interfaces:IInterviewInfo}">
 
         <Grid Width="Auto" Height="80">
             <Grid.Background>
@@ -15,31 +15,30 @@
                     <GradientStop Offset="0.069" Color="#19FFFFFF" />
                 </LinearGradientBrush>
             </Grid.Background>
-            <TextBlock Width="351"
+            <TextBlock Width="264"
                        Height="37"
                        Margin="10,10,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="18.667"
-                       Text="{Binding Purpose,
+                       Text="{Binding Path=Interview,
                                       Mode=OneWay}" />
-            <TextBlock Width="125"
-                       Height="27"
-                       Margin="366,10,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="16"
-                       Text="{Binding AttendingDoctor,
-                                      Mode=OneWay}" />
-            <TextBlock Width="481"
+            <TextBlock Width="264"
                        Height="27"
                        Margin="10,52,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="16"
-                       Text="{Binding DateOfVisit,
-                                      Mode=OneWay,
-                                      StringFormat=D}" />
+                       Text="{Binding Path=Category,
+                                      Mode=OneWay}" />
+            <TextBlock Width="159"
+                       Height="27"
+                       Margin="282,52,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="16"
+                       Text="{Binding Path=Phase,
+                                      Mode=OneWay}" />
 
         </Grid>
 

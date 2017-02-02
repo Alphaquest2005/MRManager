@@ -7,7 +7,7 @@
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
-    <DataTemplate x:Key="PatientInfoTpl" DataType="{x:Type Interfaces:IPatientInfo}">
+    <DataTemplate x:Key="PatientInfoRDT" DataType="{x:Type Interfaces:IPatientInfo}">
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
         </DataTemplate.Resources>

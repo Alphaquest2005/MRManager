@@ -108,6 +108,7 @@ namespace Entity.Expressions
                     Status = z.SyntomStatus.Name,
                     Systems = z.Syntoms.SyntomMedicalSystems.Select(s => new SyntomMedicalSystemInfo()
                     {
+                        Id = s.Id,
                         MedicalSystemId = s.MedicalSystemId,
                         System = s.MedicalSystems.Name,
                         Interviews = s.MedicalSystems.MedicalSystemInterviews.Select(i => new InterviewInfo()

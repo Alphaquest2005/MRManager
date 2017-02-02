@@ -22,6 +22,7 @@
                      VerticalAlignment="Top"
                      FontSize="18.667"
                      Text="{Binding Path=Description,
+                                    FallbackValue=Description,
                                     Mode=TwoWay}" />
             <TextBox Width="118"
                      Height="27"
@@ -30,6 +31,7 @@
                      VerticalAlignment="Top"
                      FontSize="16"
                      Text="{Binding Entity,
+                                    FallbackValue=Entity,
                                     Mode=OneWay}" />
             <TextBox Width="158"
                      Height="27"
@@ -38,6 +40,7 @@
                      VerticalAlignment="Top"
                      FontSize="16"
                      Text="{Binding Attribute,
+                                    FallbackValue=Attribute,
                                     Mode=TwoWay}" />
             <TextBlock Width="39"
                        Height="43"
@@ -46,6 +49,7 @@
                        VerticalAlignment="Top"
                        FontSize="18.667"
                        Text="{Binding QuestionNumber,
+                                      FallbackValue=QuestionNumber,
                                       Mode=OneWay}" />
 
             <ComboBox Width="118"
@@ -55,6 +59,7 @@
                       VerticalAlignment="Top"
                       FontSize="16"
                       SelectedValue="{Binding Type,
+                                              FallbackValue=Type,
                                               Mode=TwoWay}">
                 <ComboBox.Items>
                     <ComboBoxItem Content="TextBox" />

@@ -1,0 +1,63 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
+                    xmlns:converters="clr-namespace:Converters;assembly=Converters"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+                    mc:Ignorable="d">
+
+    <DataTemplate x:Key="PatientInfoWDT" DataType="{x:Type Interfaces:IPatientInfo}">
+        <DataTemplate.Resources>
+            <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+        </DataTemplate.Resources>
+
+        <Grid Width="469" Height="80">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0.907" Color="#33000000" />
+                    <GradientStop Offset="0.069" Color="#19FFFFFF" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <TextBox Width="264"
+                     Height="37"
+                     Margin="10,10,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     FontSize="18.667"
+                     Text="{Binding Name,
+                                    FallbackValue=Name,
+                                    Mode=OneWay}" />
+            <TextBox Width="264"
+                     Height="27"
+                     Margin="10,52,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     FontSize="16"
+                     Text="{Binding Address,
+                                    FallbackValue=Address,
+                                    Mode=OneWay}" />
+            <TextBox Width="159"
+                     Height="27"
+                     Margin="282,52,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     FontSize="16"
+                     Text="{Binding PhoneNumber,
+                                    FallbackValue=PhoneNumber,
+                                    Mode=OneWay}" />
+            <TextBox Width="147"
+                     Height="27"
+                     Margin="282,10,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     FontSize="14"
+                     FontWeight="Bold"
+                     Text="{Binding Age,
+                                    FallbackValue=Age,
+                                    Mode=OneWay}"
+                     TextWrapping="NoWrap" />
+        </Grid>
+
+    </DataTemplate>
+</ResourceDictionary>

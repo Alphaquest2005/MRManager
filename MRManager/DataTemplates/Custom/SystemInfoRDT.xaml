@@ -6,7 +6,7 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="d">
 
-    <DataTemplate x:Key="PatientSyntomInfoTpl" DataType="{x:Type Interfaces:IPatientSyntomInfo}">
+    <DataTemplate x:Key="SystemInfoRDT" DataType="{x:Type Interfaces:ISyntomMedicalSystemInfo}">
 
         <Grid Width="Auto" Height="80">
             <Grid.Background>
@@ -15,30 +15,30 @@
                     <GradientStop Offset="0.069" Color="#19FFFFFF" />
                 </LinearGradientBrush>
             </Grid.Background>
-            <TextBlock Width="351"
+            <TextBlock Width="192"
                        Height="37"
                        Margin="10,10,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="18.667"
-                       Text="{Binding Syntom,
+                       Text="{Binding System,
                                       Mode=OneWay}" />
-            <TextBlock Width="125"
-                       Height="27"
-                       Margin="366,10,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="16"
-                       Text="{Binding Priority,
-                                      Mode=OneWay}" />
-            <TextBlock Width="481"
-                       Height="27"
+            <TextBlock Width="26"
+                       Height="22"
                        Margin="10,52,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="16"
-                       Text="{Binding Status,
-                                      Mode=OneWay}" />
+                       Text="{Binding Interviews.Count,
+                                      Mode=OneWay}"
+                       TextAlignment="Right" />
+            <TextBlock Width="130"
+                       Height="22"
+                       Margin="41,52,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="Interviews"
+                       TextWrapping="Wrap" />
 
         </Grid>
 

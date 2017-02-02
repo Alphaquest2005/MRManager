@@ -34,14 +34,19 @@ namespace ViewModels
             this.WhenAnyValue(x => x.CurrentPatientSyntom.Value).Subscribe(x => addSystems(x));
         }
 
-        private void addSystems(IPatientSyntomInfo reactiveProperty)
+        private void addSystems(IPatientSyntomInfo patientSyntom)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
                 Systems.Clear();
-                if (reactiveProperty == null) return;
+                if (patientSyntom == null || patientSyntom.Id == 0)
+                {
+                    CurrentMedicalSystem.Value = null;
+                    return;
+                }
+                    
                 var res = new List<ISyntomMedicalSystemInfo>();
-                if (reactiveProperty?.Systems != null) res = reactiveProperty.Systems.ToList();
+                if (patientSyntom?.Systems != null) res = patientSyntom.Systems.ToList();
                 res.Add(new SyntomMedicalSystemInfo() { System = "Create New..." });
                 Systems.AddRange(res);
                 Systems.Reset();
@@ -51,11 +56,15 @@ namespace ViewModels
 
         private void systemChange(ISyntomMedicalSystemInfo syntomMedicalSystemInfo)
         {
-            if (CurrentMedicalSystem.Value == null) return;
+           
              Application.Current.Dispatcher.Invoke(() =>
                 {
                     EntitySet.Clear();
-                    if (CurrentMedicalSystem.Value == null) return;
+                    if (CurrentMedicalSystem.Value == null || CurrentMedicalSystem.Value.Id == 0)
+                    {
+                        CurrentEntity.Value = null;
+                        return;
+                    }
                     var res = new List<IInterviewInfo>();
                     if(CurrentMedicalSystem.Value.Interviews != null) res = CurrentMedicalSystem.Value.Interviews.ToList();
                     res.Add(new InterviewInfo() { Interview = "Create New..." });

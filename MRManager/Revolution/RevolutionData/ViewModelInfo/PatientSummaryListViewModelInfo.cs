@@ -74,7 +74,24 @@ namespace RevolutionData
                             s.Source);
                     }),
 
+                new ViewEventCommand<IPatientSummaryListViewModel, ViewRowStateChanged<IPatientInfo>>(
+                    key:"EditEntity",
+                    commandPredicate:new List<Func<IPatientSummaryListViewModel, bool>>
+                    {
+                        v => v.CurrentEntity != null
+                    },
+                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
 
+                    messageData: s =>
+                    {
+                        s.RowState.Value = s.RowState.Value != RowState.Modified?RowState.Modified: RowState.Unchanged;//new ReactiveProperty<RowState>(rowstate != RowState.Modified?RowState.Modified: RowState.Unchanged);
+
+                        return new ViewEventCommandParameter(
+                            new object[] {s,s.RowState.Value},
+                            new StateCommandInfo(s.Process.Id,
+                                Context.Process.Commands.CurrentEntityChanged), s.Process,
+                            s.Source);
+                    }),
 
             },
             typeof(IPatientSummaryListViewModel),

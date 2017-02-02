@@ -41,7 +41,10 @@ namespace ViewModels
             Application.Current.Dispatcher.Invoke(() =>
             {
                 EntitySet.Clear();
-                if(!observableList.Any()) return;
+                
+                CurrentEntity.Value = null;
+
+                if (!observableList.Any()) return;
                 var res = observableList.ToList();
                 res.Add(new PatientVisitInfo() { Purpose = "Create New..." });
                 

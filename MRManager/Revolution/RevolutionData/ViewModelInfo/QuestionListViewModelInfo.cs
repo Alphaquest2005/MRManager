@@ -31,7 +31,7 @@ namespace RevolutionData
 
                 new ViewEventSubscription<IQuestionListViewModel, ICurrentEntityChanged<IInterviewInfo>>(
                     3,
-                    e => e?.Entity != null,
+                    e => e != null,
                     new List<Func<IQuestionListViewModel, ICurrentEntityChanged<IInterviewInfo>, bool>>(),
                     (v,e) => v.CurrentInterview = e.Entity),
 

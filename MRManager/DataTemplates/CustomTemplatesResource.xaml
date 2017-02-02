@@ -4,13 +4,15 @@
         <ResourceDictionary Source="Custom/PatientInfoSummaryListRDT.xaml" />
         <ResourceDictionary Source="Custom/PatientInfoSummaryRDT.xaml" />
         <ResourceDictionary Source="Custom/PatientInfoRDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/PS-ForeignAddressInfoTpl.xaml" />
         <ResourceDictionary Source="Custom/PS-ForeignPhoneNumberInfoTpl.xaml" />
         <ResourceDictionary Source="Custom/PS-NextOfKinInfoTpl.xaml" />
         <ResourceDictionary Source="Custom/PS-NonResidentPatientInfoTpl.xaml" />
         <ResourceDictionary Source="Custom/PS-PersonPhoneNumberInfoTpl.xaml" />
         <ResourceDictionary Source="Custom/PS-PersonAddressInfoTpl.xaml" />
-        <ResourceDictionary Source="Custom/InterviewInfoDT.xaml" />
+        <ResourceDictionary Source="Custom/InterviewInfoRDT.xaml" />
+        <ResourceDictionary Source="Custom/InterviewInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/InterviewListVDT.xaml" />
         <ResourceDictionary Source="Custom/QuestionInfoRDT.xaml" />
         <ResourceDictionary Source="Custom/QuestionInfoWDT.xaml" />
@@ -19,12 +21,16 @@
         <ResourceDictionary Source="Custom/ResponseOptionRDT.xaml" />
         <ResourceDictionary Source="Custom/ResponseOptionWDT.xaml" />
         <ResourceDictionary Source="Custom/HeaderVDT.xaml" />
-        <ResourceDictionary Source="Custom/SystemInfoDT.xaml" />
-        <ResourceDictionary Source="Custom/PatientSyntomInfoDT.xaml" />
+        <ResourceDictionary Source="Custom/SystemInfoRDT.xaml" />
+        <ResourceDictionary Source="Custom/SystemInfoWDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientSyntomInfoRDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientSyntomInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/PatientSyntomListVDT.xaml" />
-        <ResourceDictionary Source="Custom/PatientVisitInfoDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientVisitInfoRDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientVisitInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/PatientVisitListVDT.xaml" />
         <ResourceDictionary Source="Custom/PatientSyntomListVDT.xaml" />
-        <ResourceDictionary Source="Custom/PatientSyntomInfoDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientSyntomInfoRDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientSyntomInfoWDT.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
