@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
 using SystemInterfaces;
@@ -43,7 +44,8 @@ namespace DataServices.Actors
             try
             {
                 var concreteVM = BootStrapper.BootStrapper.Container.GetExportedTypes<TViewModel>().FirstOrDefault();
-                var vm =(TViewModel) Activator.CreateInstance( concreteVM/*vmInfo.ViewModelInfo.ViewModelType*/, new object[] {vmInfo.Process, vmInfo.ViewModelInfo.Subscriptions, vmInfo.ViewModelInfo.Publications, vmInfo.ViewModelInfo.Commands, vmInfo.ViewModelInfo.Orientation });
+                
+                var vm =(TViewModel) Activator.CreateInstance( concreteVM, new object[] {vmInfo.Process, vmInfo.ViewModelInfo.Subscriptions, vmInfo.ViewModelInfo.Publications, vmInfo.ViewModelInfo.Commands, vmInfo.ViewModelInfo.Orientation });
                 EventMessageBus.Current.Publish(new ViewModelCreated<TViewModel>(vm, new StateEventInfo(vmInfo.Process.Id, RevolutionData.Context.ViewModel.Events.ViewModelCreated), vmInfo.Process, Source), Source);
                 EventMessageBus.Current.Publish(new ViewModelCreated<IViewModel>(vm, new StateEventInfo(vmInfo.Process.Id, RevolutionData.Context.ViewModel.Events.ViewModelCreated), vmInfo.Process, Source), Source);
                 //dynamic dvm = new DynamicViewModel<TViewModel>(vm);
@@ -51,6 +53,7 @@ namespace DataServices.Actors
             }
             catch (Exception ex)
             {
+                Debugger.Break();
                 EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: typeof(ILoadViewModel),
                                                                         failedEventMessage: vmInfo,
                                                                         expectedEventType: typeof(IViewModelCreated<IDynamicViewModel<TViewModel>>),

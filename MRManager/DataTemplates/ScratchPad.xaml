@@ -20,8 +20,9 @@
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    FontSize="18.667"
-                   Text="{Binding System,
-                                  Mode=OneWay}" />
+                   Text="{Binding Text, RelativeSource={RelativeSource Self}}" Foreground="#FFC5BCBC" >
+            
+        </TextBlock>
         <TextBlock Width="26"
                    Height="22"
                    Margin="10,52,0,0"
@@ -37,7 +38,7 @@
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Text="Interviews"
-                   TextWrapping="Wrap" />
+                   TextWrapping="Wrap" Foreground="#FFEAE1E1" />
 
     </Grid>
 </UserControl>

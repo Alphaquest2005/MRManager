@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reactive.Linq;
@@ -14,6 +15,7 @@ using EventMessages.Events;
 using RevolutionData;
 using RevolutionEntities.Process;
 using Utilities;
+using Process = RevolutionEntities.Process.Process;
 
 namespace DataServices.Actors
 {
@@ -65,6 +67,7 @@ namespace DataServices.Actors
                 }
                 catch (Exception ex)
                 {
+                    Debugger.Break();
                     EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: inMsg.GetType(),
                                                                         failedEventMessage: inMsg,
                                                                         expectedEventType: typeof(SystemProcessStarted),

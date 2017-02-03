@@ -18,9 +18,10 @@ using ViewModel.Interfaces;
 namespace ViewModels
 {
 
-    [Export]
+    [Export(typeof(IScreenModel))]
     public partial class ScreenModel : BaseViewModel<ScreenModel>, IScreenModel
     {
+        [ImportingConstructor]
 	    public ScreenModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(process, eventSubscriptions, eventPublications,commandInfo, orientation)
         {
             this.WireEvents();
@@ -32,6 +33,7 @@ namespace ViewModels
         public ObservableCollection<IViewModel> RightViewModels { get; } = new ObservableCollection<IViewModel>();
         public ObservableCollection<IViewModel> BodyViewModels { get; } = new ObservableCollection<IViewModel>();
         public ObservableCollection<IViewModel> FooterViewModels { get; } = new ObservableCollection<IViewModel>();
+        public ObservableCollection<IViewModel> CacheViewModels { get; } = new ObservableCollection<IViewModel>();
 
         public dynamic Slider { get; set; }
 

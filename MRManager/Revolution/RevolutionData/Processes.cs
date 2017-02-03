@@ -209,7 +209,11 @@ namespace RevolutionData
             PatientVisitViewModelInfo.ComplexActions.RequestData,
             PatientVisitViewModelInfo.ComplexActions.UpdateState,
 
-            
+            EntityCacheViewModelInfo<ISyntomStatus>.ComplexActions.IntializeCache(3),
+            EntityCacheViewModelInfo<IVisitType>.ComplexActions.IntializeCache(3),
+            EntityCacheViewModelInfo<IPhase>.ComplexActions.IntializeCache(3),
+            EntityCacheViewModelInfo<IMedicalCategory>.ComplexActions.IntializeCache(3),
+            EntityViewCacheViewModelInfo<IDoctorInfo>.ComplexActions.IntializeCache(3)
         };
     }
 

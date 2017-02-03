@@ -23,6 +23,7 @@
                      FontSize="18.667"
                      Text="{Binding Path=Description,
                                     FallbackValue=Description,
+                                    TargetNullValue=Description,
                                     Mode=TwoWay}" />
             <TextBox Width="118"
                      Height="27"
@@ -32,7 +33,8 @@
                      FontSize="16"
                      Text="{Binding Entity,
                                     FallbackValue=Entity,
-                                    Mode=OneWay}" />
+                                    TargetNullValue=Entity,
+                                    Mode=TwoWay}" />
             <TextBox Width="158"
                      Height="27"
                      Margin="177,75,0,0"
@@ -41,6 +43,7 @@
                      FontSize="16"
                      Text="{Binding Attribute,
                                     FallbackValue=Attribute,
+                                    TargetNullValue=Attribute,
                                     Mode=TwoWay}" />
             <TextBlock Width="39"
                        Height="43"
@@ -50,7 +53,8 @@
                        FontSize="18.667"
                        Text="{Binding QuestionNumber,
                                       FallbackValue=QuestionNumber,
-                                      Mode=OneWay}" />
+                                      TargetNullValue=QuestionNumber,
+                                      Mode=TwoWay}" />
 
             <ComboBox Width="118"
                       Height="27"
@@ -60,6 +64,7 @@
                       FontSize="16"
                       SelectedValue="{Binding Type,
                                               FallbackValue=Type,
+                                              TargetNullValue=Address,
                                               Mode=TwoWay}">
                 <ComboBox.Items>
                     <ComboBoxItem Content="TextBox" />

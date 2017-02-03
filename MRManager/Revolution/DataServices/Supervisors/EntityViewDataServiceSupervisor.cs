@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using SystemInterfaces;
 using Akka.Actor;
@@ -84,6 +85,7 @@ namespace DataServices.Actors
             }
             catch (Exception ex)
             {
+                Debugger.Break();
                 EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: inMsg.GetType(),
                         failedEventMessage: inMsg,
                         expectedEventType: typeof(ServiceStarted<>),

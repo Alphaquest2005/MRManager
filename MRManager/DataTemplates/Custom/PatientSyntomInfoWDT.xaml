@@ -23,25 +23,36 @@
                      FontSize="18.667"
                      Text="{Binding Syntom,
                                     FallbackValue=Syntom,
-                                    Mode=OneWay}" />
-            <TextBox Width="125"
+                                    TargetNullValue=Syntom,
+                                    Mode=TwoWay}" />
+            <ComboBox Width="125"
                      Height="27"
                      Margin="366,10,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      FontSize="16"
-                     Text="{Binding Priority,
+                     SelectedValue="{Binding Priority,
                                     FallbackValue=Priority,
-                                    Mode=OneWay}" />
-            <TextBox Width="481"
+                                    TargetNullValue=Priority,
+                                    Mode=TwoWay}" >
+                <ComboBoxItem Content="Low"/>
+                <ComboBoxItem Content="Medium"/>
+                <ComboBoxItem Content="High"/>
+            </ComboBox>
+            <ComboBox Width="481"
                      Height="27"
                      Margin="10,52,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      FontSize="16"
-                     Text="{Binding Status,
+                     SelectedValue="{Binding Status,
                                     FallbackValue=Status,
-                                    Mode=OneWay}" />
+                                    TargetNullValue=Status,
+                                    Mode=TwoWay}" >
+                <ComboBoxItem Content="Open"/>
+                <ComboBoxItem Content="Closed"/>
+                <ComboBoxItem Content="Awaiting Results"/>
+            </ComboBox>
 
         </Grid>
 

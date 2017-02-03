@@ -4,6 +4,7 @@
                     xmlns:converters="clr-namespace:Converters;assembly=Converters"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     mc:Ignorable="d">
 
     <DataTemplate x:Key="PatientVisitInfoWDT" DataType="{x:Type Interfaces:IPatientVisitInfo}">
@@ -22,26 +23,29 @@
                      VerticalAlignment="Top"
                      FontSize="18.667"
                      Text="{Binding Purpose,
-                                    FallbackValue=Purpose,
-                                    Mode=OneWay}" />
-            <TextBox Width="125"
+                                    FallbackValue=Purpose,TargetNullValue=Purpose,
+                                    Mode=TwoWay}" />
+            <ComboBox Width="125"
                      Height="27"
                      Margin="366,10,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      FontSize="16"
-                     Text="{Binding AttendingDoctor,
-                                    FallbackValue=AttendingDoctor,
-                                    Mode=OneWay}" />
-            <TextBox Width="481"
+                     SelectedValue="{Binding AttendingDoctor,
+                                    FallbackValue=AttendingDoctor,TargetNullValue=AttendingDoctor,
+                                    Mode=TwoWay}">
+                <ComboBoxItem Content="Lutz Amechi"/>
+                <ComboBoxItem Content="Dr. Dragon"/>
+            </ComboBox>
+            <DatePicker Width="481"
                      Height="27"
                      Margin="10,52,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      FontSize="16"
+                     SelectedDate="{x:Static sys:DateTime.Now}"   
                      Text="{Binding DateOfVisit,
-                                    FallbackValue=DateOfVisit,
-                                    Mode=OneWay,
+                                    Mode=TwoWay,
                                     StringFormat=D}" />
 
         </Grid>

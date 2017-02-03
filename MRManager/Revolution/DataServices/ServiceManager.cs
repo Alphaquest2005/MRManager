@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reactive.Linq;
@@ -17,6 +18,7 @@ using EventMessages.Events;
 using RevolutionData;
 using RevolutionEntities.Process;
 using StartUp.Messages;
+using Process = RevolutionEntities.Process.Process;
 
 
 namespace DataServices.Actors
@@ -74,6 +76,7 @@ namespace DataServices.Actors
             }
             catch (Exception ex)
             {
+                Debugger.Break();
                 EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: typeof(ServiceStarted<IServiceManager>),
                     failedEventMessage: null,
                     expectedEventType: typeof(ServiceStarted<IServiceManager>),

@@ -102,6 +102,21 @@ namespace RevolutionData
                     }
                 }),
 
+                new ViewEventSubscription<IScreenModel, IViewModelCreated<IViewModel>>(1, e => e != null, new List<Func<IScreenModel, IViewModelCreated<IViewModel>, bool>>
+                {
+                    (s, e) => s.Process.Id != e.ViewModel.Process.Id && e.ViewModel.Orientation == typeof(ICacheViewModel)
+                }, (s, e) =>
+                {
+                    if (Application.Current == null)
+                    {
+                        s.CacheViewModels.Add(e.ViewModel);
+                    }
+                    else
+                    {
+                        Application.Current.Dispatcher.Invoke(() => s.CacheViewModels.Add(e.ViewModel));
+                    }
+                }),
+
                 new ViewEventSubscription<IScreenModel, ICleanUpSystemProcess>(
                     1,
                     e => e != null,
@@ -115,6 +130,7 @@ namespace RevolutionData
                             s.HeaderViewModels.RemoveRange(s.HeaderViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
                             s.RightViewModels.RemoveRange(s.RightViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
                             s.FooterViewModels.RemoveRange(s.FooterViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
+                            s.CacheViewModels.RemoveRange(s.FooterViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
                         }
                         else
                         {
@@ -130,6 +146,8 @@ namespace RevolutionData
                                 s.RightViewModels.Reset();
                                 s.FooterViewModels.RemoveRange(s.FooterViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
                                 s.FooterViewModels.Reset();
+                                s.CacheViewModels.RemoveRange(s.CacheViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
+                                s.CacheViewModels.Reset();
                             });
                         }
                     }),
@@ -180,6 +198,15 @@ namespace RevolutionData
                         v => v.FooterViewModels.LastOrDefault() != null
                     },
                     messageData:s => new ViewEventPublicationParameter(new object[] {s, s.FooterViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.FooterViewModels.Last().Process,s.Source)),
+
+                 new ViewEventPublication<IScreenModel, ViewModelLoaded<IScreenModel,IViewModel>>(
+                    key:"ScreenModelCache",
+                    subject:v => v.CacheViewModels.CollectionChanges,
+                    subjectPredicate:new List<Func<IScreenModel, bool>>
+                    {
+                        v => v.CacheViewModels.LastOrDefault() != null
+                    },
+                    messageData:s => new ViewEventPublicationParameter(new object[] {s, s.CacheViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.FooterViewModels.Last().Process,s.Source)),
 
 
             },

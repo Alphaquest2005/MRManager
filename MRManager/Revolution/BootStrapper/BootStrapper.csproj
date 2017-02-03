@@ -63,6 +63,10 @@
       <Project>{31E6B370-01F0-4489-832F-436CB97A6718}</Project>
       <Name>EventAggregator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MefGeneric-master\MEFGeneric Preview 9\src\ComponentModel.Composition.Hosting.Extension\ComponentModel.Composition.Hosting.Extension.csproj">
+      <Project>{0cc9e320-7e0a-4d77-adbd-021ff590bd06}</Project>
+      <Name>ComponentModel.Composition.Hosting.Extension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SystemInterfaces\SystemInterfaces.csproj">
       <Project>{5058d323-23ef-4ee9-9e33-9c1fff3ae524}</Project>
       <Name>SystemInterfaces</Name>

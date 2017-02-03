@@ -90,6 +90,16 @@ namespace Entity.Expressions
                             .SelectMany(x4 => x4.Response)
                             .Select(x5 => x5.Value)
                             .FirstOrDefault()).Year,
+                BirthDate = 
+                    Convert.ToDateTime(
+                        x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                            .Where(
+                                x2 =>
+                                    x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                                    x2.Questions.EntityAttributes.Attribute == Patient.Birthdate)
+                            .SelectMany(x4 => x4.Response)
+                            .Select(x5 => x5.Value)
+                            .FirstOrDefault()),
             };
 
         public static Expression<Func<PatientVisit, PatientVisitInfo>> PatientVistInfoExpression { get; } =

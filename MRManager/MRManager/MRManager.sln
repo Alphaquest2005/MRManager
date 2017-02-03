@@ -113,6 +113,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Interfaces", "..\Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevolutionLogger", "..\Revolution\RevolutionLogger\RevolutionLogger.csproj", "{C868CD42-B7D3-4C2D-B4A8-6BF0E94BD620}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentModel.Composition.Hosting.Extension", "..\Revolution\MefGeneric-master\MEFGeneric Preview 9\src\ComponentModel.Composition.Hosting.Extension\ComponentModel.Composition.Hosting.Extension.csproj", "{0CC9E320-7E0A-4D77-ADBD-021FF590BD06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -499,6 +501,14 @@ Global
 		{C868CD42-B7D3-4C2D-B4A8-6BF0E94BD620}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C868CD42-B7D3-4C2D-B4A8-6BF0E94BD620}.Release|x86.ActiveCfg = Release|Any CPU
 		{C868CD42-B7D3-4C2D-B4A8-6BF0E94BD620}.Release|x86.Build.0 = Release|Any CPU
+		{0CC9E320-7E0A-4D77-ADBD-021FF590BD06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CC9E320-7E0A-4D77-ADBD-021FF590BD06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CC9E320-7E0A-4D77-ADBD-021FF590BD06}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0CC9E320-7E0A-4D77-ADBD-021FF590BD06}.Debug|x86.Build.0 = Debug|Any CPU
+		{0CC9E320-7E0A-4D77-ADBD-021FF590BD06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CC9E320-7E0A-4D77-ADBD-021FF590BD06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CC9E320-7E0A-4D77-ADBD-021FF590BD06}.Release|x86.ActiveCfg = Release|Any CPU
+		{0CC9E320-7E0A-4D77-ADBD-021FF590BD06}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -549,5 +559,6 @@ Global
 		{7EE26A5B-63E6-450E-B4BD-66D0205FB492} = {C396B2B2-5608-4CB3-92B7-653C0333E82E}
 		{E41CF673-FE71-4AAE-A8FC-B571A36C1211} = {C396B2B2-5608-4CB3-92B7-653C0333E82E}
 		{C868CD42-B7D3-4C2D-B4A8-6BF0E94BD620} = {F520993E-61D9-4D25-8CC1-6A778784E768}
+		{0CC9E320-7E0A-4D77-ADBD-021FF590BD06} = {F520993E-61D9-4D25-8CC1-6A778784E768}
 	EndGlobalSection
 EndGlobal

@@ -22,8 +22,8 @@
                      VerticalAlignment="Top"
                      FontSize="18.667"
                      Text="{Binding System,
-                                    FallbackValue=System,
-                                    Mode=OneWay}" />
+                                    FallbackValue=System,TargetNullValue=System,
+                                    Mode=TwoWay}" />
 
 
         </Grid>

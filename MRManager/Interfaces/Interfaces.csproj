@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Custom Interfaces\ForeignAddressInfo.cs" />
+    <Compile Include="Custom Interfaces\IDoctorInfo.cs" />
     <Compile Include="Custom Interfaces\IInterviewInfo.cs" />
     <Compile Include="Custom Interfaces\INextOfKinInfo.cs" />
     <Compile Include="Custom Interfaces\INonResidentInfo.cs" />

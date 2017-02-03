@@ -317,13 +317,15 @@ namespace Entity.Expressions
                      Value = z.Value,
                      Type = z.ResponseOptions.Type
                  } as IResponseOptionInfo).ToList()
-
-
-
-
-
-
           };
+
+        public static Expression<Func<Persons_Doctor, DoctorInfo>> DoctorInfoExpression { get; } =
+                        x => new DoctorInfo()
+                        {
+                            Id = x.Id,
+                            Name = string.Join(" ", x.Persons.PersonNames.Select(z => z.PersonName)),
+                            Code = x.Code
+                        };
 
     }
 

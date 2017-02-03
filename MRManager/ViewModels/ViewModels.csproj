@@ -45,7 +45,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CacheViewModel.cs" />
+    <Compile Include="EntityCacheViewModel.cs" />
+    <Compile Include="EntityViewCacheViewModel.cs" />
     <Compile Include="HeaderViewModel.cs" />
     <Compile Include="PatientSyntomViewModel.cs" />
     <Compile Include="PatientVisitViewModel.cs" />

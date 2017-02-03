@@ -21,9 +21,9 @@ namespace BootStrapper
                         Path.GetDirectoryName(
                             Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().Location).Path)),
                         "*.dll");
-                GenericCatalog genericCatalog = new GenericCatalog(catalog);
+                var genericCatalog = new System.ComponentModel.Composition.Hosting.Extension.GenericCatalog(catalog);
                 Container = new CompositionContainer(genericCatalog);
-                DirectoryContainer = new CompositionContainer(catalog);
+                
             }
             catch (Exception)
             {
@@ -35,8 +35,7 @@ namespace BootStrapper
 
         }
 
-        public static CompositionContainer DirectoryContainer { get;  }
-
+        
         public static BootStrapper Instance { get; }
 
         public void StartUp(Assembly dbContextAssembly, Assembly entityAssembly, bool autoRun)

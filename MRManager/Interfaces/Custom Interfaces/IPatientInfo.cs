@@ -15,5 +15,6 @@ namespace Interfaces
         String BirthCountry { get; }
         String Email { get; }
         Int32? MediaId { get; }
+        DateTime BirthDate { get; }
     }
 }

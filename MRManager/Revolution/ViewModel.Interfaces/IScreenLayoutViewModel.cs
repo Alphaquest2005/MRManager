@@ -14,5 +14,6 @@ namespace ViewModel.Interfaces
         ObservableCollection<IViewModel> RightViewModels { get; }
         ObservableCollection<IViewModel> FooterViewModels { get; }
         ObservableCollection<IViewModel> BodyViewModels { get;}
+        ObservableCollection<IViewModel> CacheViewModels { get; }
     }
 }

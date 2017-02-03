@@ -173,6 +173,10 @@
       <Project>{d60875a3-0de2-409d-86a0-f540224d054c}</Project>
       <Name>LinqSpecs</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Revolution\MefGeneric-master\MEFGeneric Preview 9\src\ComponentModel.Composition.Hosting.Extension\ComponentModel.Composition.Hosting.Extension.csproj">
+      <Project>{0cc9e320-7e0a-4d77-adbd-021ff590bd06}</Project>
+      <Name>ComponentModel.Composition.Hosting.Extension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Revolution\PropertyExtensions\PropertyExtensions.csproj">
       <Project>{a50703de-44b8-4dde-8227-a5ee1e39ee84}</Project>
       <Name>PropertyExtensions</Name>

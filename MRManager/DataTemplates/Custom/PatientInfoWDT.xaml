@@ -5,11 +5,23 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     mc:Ignorable="d">
 
     <DataTemplate x:Key="PatientInfoWDT" DataType="{x:Type Interfaces:IPatientInfo}">
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+            <Style TargetType="{x:Type TextBox}">
+                <Style.Triggers>
+                    <Trigger Property="Text" Value="{x:Null}">
+                        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+
+                    </Trigger>
+                    <Trigger Property="IsFocused" Value="True">
+                        <Setter Property="Text" Value=""/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </DataTemplate.Resources>
 
         <Grid Width="469" Height="80">
@@ -26,8 +38,8 @@
                      VerticalAlignment="Top"
                      FontSize="18.667"
                      Text="{Binding Name,
-                                    FallbackValue=Name,
-                                    Mode=OneWay}" />
+                                    FallbackValue=Name, TargetNullValue=Name,
+                                    Mode=TwoWay}" />
             <TextBox Width="264"
                      Height="27"
                      Margin="10,52,0,0"
@@ -35,8 +47,10 @@
                      VerticalAlignment="Top"
                      FontSize="16"
                      Text="{Binding Address,
-                                    FallbackValue=Address,
-                                    Mode=OneWay}" />
+                                    FallbackValue=Address, TargetNullValue=Address,
+                                    Mode=TwoWay}" >
+                
+            </TextBox>
             <TextBox Width="159"
                      Height="27"
                      Margin="282,52,0,0"
@@ -44,19 +58,19 @@
                      VerticalAlignment="Top"
                      FontSize="16"
                      Text="{Binding PhoneNumber,
-                                    FallbackValue=PhoneNumber,
-                                    Mode=OneWay}" />
-            <TextBox Width="147"
+                                    FallbackValue=PhoneNumber,TargetNullValue=PhoneNumber,
+                                    Mode=TwoWay}" />
+            <DatePicker Width="147"
                      Height="27"
                      Margin="282,10,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      FontSize="14"
                      FontWeight="Bold"
-                     Text="{Binding Age,
-                                    FallbackValue=Age,
-                                    Mode=OneWay}"
-                     TextWrapping="NoWrap" />
+                    SelectedDate="{x:Static sys:DateTime.Now}"
+                     Text="{Binding BirthDate,                                    
+                                    Mode=TwoWay}"
+                      />
         </Grid>
 
     </DataTemplate>

@@ -22,7 +22,7 @@
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
                          Text="{Binding Path=Value,
-                                        FallbackValue=Value,
+                                        FallbackValue=Value,TargetNullValue=Value,
                                         UpdateSourceTrigger=PropertyChanged,
                                         ValidatesOnDataErrors=True}" />
                 <TextBlock Width="136"
@@ -32,7 +32,7 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top"
                            Text="{Binding Path=Description,
-                                          FallbackValue=Description,
+                                          FallbackValue=Description,TargetNullValue=Description,
                                           UpdateSourceTrigger=PropertyChanged,
                                           ValidatesOnDataErrors=True}" />
                 <Rectangle Width="2"
