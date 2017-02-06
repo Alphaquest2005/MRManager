@@ -4,7 +4,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-    [InheritedExport]
+    
     public partial interface IResponseOptionInfo : IEntityView<IResponseOptions>
     {
         Int32? ResponseId { get; set; }
@@ -17,7 +17,7 @@ namespace Interfaces
         int PatientId { get; }
     }
 
-    [InheritedExport]
+    
     public partial interface IResponseInfo : IEntityView<IResponse>
     {
         int PatientResponseId { get; }

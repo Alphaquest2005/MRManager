@@ -4,6 +4,7 @@ using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.ComponentModel.Composition.ReflectionModel;
 using System.Linq;
+using EventAggregator;
 
 namespace BootStrapper
 {
@@ -19,12 +20,14 @@ namespace BootStrapper
         private static Type ComposablePartExportType<T>(ComposablePartDefinition part)
         {
 
-            if (part.ExportDefinitions.Any(
-                def => def.Metadata.ContainsKey("ExportTypeIdentity") &&
-                       def.Metadata["ExportTypeIdentity"].Equals(typeof(T).FullName)))
+            if (part.ExportDefinitions.Any(def => def.Metadata.ContainsKey("ExportTypeIdentity") 
+                    && def.Metadata["ExportTypeIdentity"].Equals(typeof(T).FullName)
+                    ))
             {
                 return ReflectionModelServices.GetPartType(part).Value;
             }
+           
+            
             return null;
         }
        

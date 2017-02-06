@@ -7,7 +7,7 @@ using SystemInterfaces;
 
 namespace ViewModel.Interfaces
 {
-    [InheritedExport]
+    
     public interface ILoadViewModel : IProcessSystemMessage
     {
         IViewModelInfo ViewModelInfo { get; }

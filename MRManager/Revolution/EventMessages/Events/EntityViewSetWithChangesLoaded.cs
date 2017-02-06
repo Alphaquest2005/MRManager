@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,10 @@ using CommonMessages;
 
 namespace EventMessages.Events
 {
-
+    [Export(typeof(IEntityViewSetWithChangesLoaded<>))]
     public class EntityViewSetWithChangesLoaded<TView>:ProcessSystemMessage, IEntityViewSetWithChangesLoaded<TView> where TView: IEntityView
     {
+        public EntityViewSetWithChangesLoaded() { }
         public List<TView> EntitySet { get; }
         public Dictionary<string, object> Changes { get; }
 

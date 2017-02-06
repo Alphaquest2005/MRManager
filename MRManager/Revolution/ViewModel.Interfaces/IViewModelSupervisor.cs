@@ -8,7 +8,7 @@ using StartUp.Messages;
 
 namespace ViewModel.Interfaces
 {
-    [InheritedExport]
+    
     public interface IViewModelSupervisor : IService<IViewModelSupervisor>
     {
     }

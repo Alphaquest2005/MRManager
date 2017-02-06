@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using Common.DataEntites;
 using Interfaces;
 using ReactiveUI;
 
 namespace EF.Entities
 {
+    [Export(typeof(IPatientVisitInfo))]
     public class PatientVisitInfo : EntityView<IPatientVisit>, IPatientVisitInfo
     {
         private int _patientId;

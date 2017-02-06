@@ -11,7 +11,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-	[InheritedExport]
+	
 	public partial interface IPersons_ArrivalDepartureInfo:IEntity  
 	{
 		DateTime ArrivalDate { get;}

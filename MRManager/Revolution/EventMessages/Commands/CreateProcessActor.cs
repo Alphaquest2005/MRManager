@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,10 +10,11 @@ using Actor.Interfaces;
 
 namespace EventMessages.Commands
 {
-   
 
+    [Export(typeof(ICreateProcessActor))]
     public class CreateProcessActor:ProcessSystemMessage, ICreateProcessActor
     {
+        public CreateProcessActor() { }
         public CreateProcessActor(IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source):base(processInfo,process, source)
         {
            

@@ -5,9 +5,10 @@ using ViewModel.Interfaces;
 
 namespace ViewMessages
 {
-    [Export]
+    [Export(typeof(IViewModelCreated<>))]
     public class ViewModelCreated<TViewModel> : ProcessSystemMessage, IViewModelCreated<TViewModel>
     {
+        public ViewModelCreated() { }
         [ImportingConstructor]
         public ViewModelCreated(TViewModel viewModel, IStateEventInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {

@@ -31,8 +31,14 @@ namespace ConsoleApplication1
 			container.GetExportedValueOrDefault<IUMC<string>>();
 			container.GetExportedValueOrDefault<IUMC<int>>();
 
-			container.GetExportedValueOrDefault<IUMC<IEntity<IId>>>().Say();
-			container.GetExportedValueOrDefault<IUMC<string>>().Say();
+            var res = container.GetExportedValueOrDefault<IEntityCacheViewModel<IVisitType>>();
+
+            container.GetExportedValueOrDefault<IUMC<IEntity<IId>>>().Say();
+
+
+             container.GetExportedValueOrDefault<IUMC<IEntity<IId>>>().Say();
+
+            container.GetExportedValueOrDefault<IUMC<string>>().Say();
 
 			container.GetExportedValue<ITwoInterface<int, string>>().Say();
 			container.GetExportedValue<ITwoInterface<string, int>>().Say();
@@ -45,6 +51,24 @@ namespace ConsoleApplication1
 
 		}
 	}
+
+    public interface IVisitType : IEntity
+    {
+    }
+
+    public interface IEntityCacheViewModel<T> where T : IEntity
+    {
+    }
+
+    [Export(typeof(IEntityCacheViewModel<>))]
+    public class ViewModel<TEntity> : IEntityCacheViewModel<TEntity> where TEntity : IEntity
+    {
+
+    }
+
+    public interface IEntity
+    {
+    }
 
     internal interface IEntity<TId> where TId:IId
     {
@@ -74,28 +98,28 @@ namespace ConsoleApplication1
 		void Say();
 	}
 
-	[Export(typeof(IUMC<>))]
-	public class UMC<T> : IUMC<T>
-	{
-		[ImportingConstructor]
-		public UMC(TEMP temp)
-		{
-			if (temp == null) throw new NullReferenceException("temp");
-		}
+    [Export(typeof(IUMC<>))]
+    public class UMC<T> : IUMC<T>
+    {
+        [ImportingConstructor]
+        public UMC(TEMP temp)
+        {
+            if (temp == null) throw new NullReferenceException("temp");
+        }
 
-		#region IUMC<T> 멤버
+        #region IUMC<T> 멤버
 
-		public void Say()
-		{
-			Console.WriteLine(typeof(T).FullName);
-		}
+        public void Say()
+        {
+            Console.WriteLine(typeof(T).FullName);
+        }
 
-		#endregion
-	}
-	#endregion
+        #endregion
+    }
+    #endregion
 
-	#region ITwoInterface<T1,T2>
-	public interface ITwoInterface<T1, T2>
+    #region ITwoInterface<T1,T2>
+    public interface ITwoInterface<T1, T2>
 	{
 		void Say();
 	}

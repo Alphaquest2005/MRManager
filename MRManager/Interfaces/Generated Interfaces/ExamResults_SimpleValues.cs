@@ -11,7 +11,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-	[InheritedExport]
+	
 	public partial interface IExamResults_SimpleValues:IEntity  
 	{
 		int ExamResultsId { get;}

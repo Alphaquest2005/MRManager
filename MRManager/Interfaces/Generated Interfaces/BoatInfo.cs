@@ -11,7 +11,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-	[InheritedExport]
+	
 	public partial interface IBoatInfo:IEntity  
 	{
 		string BoatName { get;}

@@ -3,7 +3,7 @@ using System.ComponentModel.Composition;
 
 namespace SystemInterfaces
 {
-    [InheritedExport]
+    
     public interface IProcessInfo
     {
         int Id { get; }

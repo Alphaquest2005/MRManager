@@ -4,7 +4,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-    [InheritedExport]
+    
     public interface IQuestionResponseOptionInfo : IEntityView<IQuestions>
     {
         string Category { get;  }

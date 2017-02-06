@@ -33,7 +33,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-	[InheritedExport]
+	
 	public partial interface I<#= Entity.Name #>AutoView:IEntity  
 	{
 <#+

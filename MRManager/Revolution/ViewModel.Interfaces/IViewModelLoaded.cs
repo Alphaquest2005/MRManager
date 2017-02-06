@@ -8,7 +8,7 @@ using ViewModelInterfaces;
 
 namespace ViewModel.Interfaces
 {
-    [InheritedExport]
+    
     public interface IViewModelLoaded<out TLoadingViewModel, TViewModel> : IProcessSystemMessage, IViewModelEvent<TViewModel>
     {
         TLoadingViewModel LoadingViewModel { get; }

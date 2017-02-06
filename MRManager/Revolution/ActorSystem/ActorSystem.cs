@@ -9,7 +9,7 @@ using DataServices.Actors;
 
 namespace ActorBackBone
 {
-    [Export]
+    [Export(typeof(IActorBackBone))]
     public class ActorBackBone: IActorBackBone
     {
         //ToDo:Get rid of private setter

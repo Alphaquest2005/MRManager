@@ -1,12 +1,14 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using SystemInterfaces;
 using CommonMessages;
 
 namespace EventMessages.Events
 {
-
+    [Export(typeof(IProcessEventFailure))]
     public class ProcessEventFailure: ProcessSystemMessage, IProcessEventFailure
     {
+        public ProcessEventFailure() { }
         public Type FailedEventType { get; set; }
         public IProcessSystemMessage FailedEventMessage { get; set; }
         public Type ExpectedEventType { get; set; }

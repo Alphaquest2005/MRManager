@@ -18,7 +18,7 @@ using ViewModel.Interfaces;
 
 namespace RevolutionData
 {
-    [Export]
+    
     public class EntityViewCacheViewModelInfo<TView> where TView : IEntityView
     {
         public static ViewModelInfo CacheViewModel(int processId)

@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IEntityNotFound.cs" />
+    <Compile Include="IEntityChanges.cs" />
+    <Compile Include="IFailedMessageData.cs" />
     <Compile Include="ICleanUpSystemProcess.cs" />
     <Compile Include="IEntityViewSetWithChangesLoaded.cs" />
     <Compile Include="ICurrentEntityChanged.cs" />

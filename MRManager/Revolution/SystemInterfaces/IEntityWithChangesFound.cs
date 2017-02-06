@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemInterfaces
 {
-    [InheritedExport]
+    
     public interface IEntityWithChangesFound<TEntity>:IProcessSystemMessage where TEntity : IEntity
     {
         TEntity Entity { get; set; }

@@ -5,6 +5,7 @@ using Actor.Interfaces;
 using Common;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Windows;
 using DomainMessages;
 using EventMessages;
 using EventMessages.Commands;
@@ -57,7 +58,32 @@ namespace RevolutionData
                         processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.CleanUpProcess),
                         expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
-       
+        public static IProcessAction DisplayError => new ProcessAction(
+                        action: cp =>
+                        {
+                            MessageBox.Show(cp.Messages["ProcessEventError"].Exception.Message + "-----" +
+                                            cp.Messages["ProcessEventError"].Exception.StackTrace);
+
+                            
+                            return new FailedMessageData(cp, new StateEventInfo(cp.Actor.Process.Id,Context.Process.Events.Error), cp.Actor.Process,cp.Actor.Source);
+                        }, 
+                        processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.Error),
+                        expectedSourceType: new SourceType(typeof(IComplexEventService)));
+        public static IProcessAction ShutDownApplication => new ProcessAction(
+                        action: cp =>
+                        {
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                    MessageBox.Show(cp.Messages["ProcessEventError"].Exception.Message + "-----" +
+                                            cp.Messages["ProcessEventError"].Exception.StackTrace);
+                                        Application.Current?.Shutdown();
+                            
+                            });
+                            return null;
+                        },
+                        processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.Error),
+                        expectedSourceType: new SourceType(typeof(IComplexEventService)));
+
 
         public class SignIn
         {

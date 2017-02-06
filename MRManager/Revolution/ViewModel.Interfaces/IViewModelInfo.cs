@@ -5,7 +5,7 @@ using SystemInterfaces;
 
 namespace ViewModel.Interfaces
 {
-    [InheritedExport]
+    
     public interface IViewModelInfo
     {
         int ProcessId { get; }

@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace ViewModel.Interfaces
 {
-    [InheritedExport]
+    
     public interface IScreenModel : IScreenLayoutViewModel
     {
         dynamic Slider { get; set; }

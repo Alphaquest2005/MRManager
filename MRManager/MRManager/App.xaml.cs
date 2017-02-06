@@ -11,8 +11,7 @@ namespace Amoeba
 	{
 		public App()
 		{
-			if (File.Exists("MRManager-Logs.xml")) File.Delete("MRManager-Logs.xml");
-			Logger.Initialize();
+			
 		}
 	}
 }

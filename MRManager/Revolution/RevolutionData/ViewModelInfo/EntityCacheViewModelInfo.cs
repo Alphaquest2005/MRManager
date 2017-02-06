@@ -14,7 +14,7 @@ using ViewModel.Interfaces;
 namespace RevolutionData
 {
 
-    [Export]
+    
     public class EntityCacheViewModelInfo<TEntity> where TEntity : IEntity
     {
         
@@ -61,10 +61,12 @@ namespace RevolutionData
                 },
                 publications: new List<IViewModelEventPublication<IViewModel, IEvent>> {},
                 commands: new List<IViewModelEventCommand<IViewModel, IEvent>> {},
-                viewModelType: typeof (IEntityCacheViewModel<TEntity>),
-                orientation: typeof (IEntityCacheViewModel<TEntity>));
+                viewModelType: typeof(IEntityCacheViewModel<TEntity>),
+                orientation: typeof (ICacheViewModel));
         }
 
+
+       
         private static void UpdateEntitySet(IEntityCacheViewModel<TEntity> cacheViewModel,
             IEntityUpdated<TEntity> msg)
         {

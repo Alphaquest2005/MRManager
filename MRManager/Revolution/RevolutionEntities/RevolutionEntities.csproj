@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="NullEntity.cs" />
     <Compile Include="Process\Agent.cs" />
     <Compile Include="Process\ComplexEventLog.cs" />
     <Compile Include="Process\ProcessExpectedEventInfo.cs" />

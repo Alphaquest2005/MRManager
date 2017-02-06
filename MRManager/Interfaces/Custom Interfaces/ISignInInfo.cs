@@ -9,7 +9,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-	[InheritedExport]
+	
 	public partial interface ISignInInfo:IEntityView<IUserSignIn>, IUser
     {
 		Byte[] Medias { get;}

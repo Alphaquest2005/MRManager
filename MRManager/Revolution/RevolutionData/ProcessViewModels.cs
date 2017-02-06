@@ -37,11 +37,11 @@ namespace RevolutionData
             QuestionaireViewModelInfo.QuestionairenaireViewViewModel,
             QuestionListViewModelInfo.QuestionListViewModel,
             EntityCacheViewModelInfo<ISyntomPriority>.CacheViewModel(3),
-            EntityCacheViewModelInfo<ISyntomStatus>.CacheViewModel(3),
-            EntityCacheViewModelInfo<IVisitType>.CacheViewModel(3),
-            EntityCacheViewModelInfo<IPhase>.CacheViewModel(3),
-            EntityCacheViewModelInfo<IMedicalCategory>.CacheViewModel(3),
-            EntityViewCacheViewModelInfo<IDoctorInfo>.CacheViewModel(3)
+            ////EntityCacheViewModelInfo<ISyntomStatus>.CacheViewModel(3),
+            ////EntityCacheViewModelInfo<IVisitType>.CacheViewModel(3),
+            ////EntityCacheViewModelInfo<IPhase>.CacheViewModel(3),
+            ////EntityCacheViewModelInfo<IMedicalCategory>.CacheViewModel(3),
+            //EntityViewCacheViewModelInfo<IDoctorInfo>.CacheViewModel(3)
         };
 
         public static readonly List<IViewModelInfo> ProcessCache = new List<IViewModelInfo>

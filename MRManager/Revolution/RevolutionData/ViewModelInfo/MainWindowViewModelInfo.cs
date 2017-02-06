@@ -36,7 +36,7 @@ namespace RevolutionData
             },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
             {
-                new ViewEventPublication<IMainWindowViewModel, ViewModelLoaded<IMainWindowViewModel, IScreenModel>>(
+                new ViewEventPublication<IMainWindowViewModel, IViewModelLoaded<IMainWindowViewModel, IScreenModel>>(
                     key:"ScreenModelinViewModel",
                     subject: v => v.BodyViewModels.CollectionChanges,
                     subjectPredicate: new List<Func<IMainWindowViewModel, bool>>

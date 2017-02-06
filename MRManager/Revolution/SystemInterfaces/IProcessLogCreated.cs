@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SystemInterfaces
 {
-    [InheritedExport]
+    
     public interface IProcessLogCreated:IProcessSystemMessage
     {
         IEnumerable<IComplexEventLog> EventLogs { get; }

@@ -5,7 +5,7 @@ using CommonMessages;
 
 namespace EventMessages.Events
 {
-    [Export]
+    
     public class EntityWithChangesFound<TEntity> : ProcessSystemMessage, IEntityWithChangesFound<TEntity> where TEntity : IEntity
     {
         public EntityWithChangesFound(TEntity entity, Dictionary<string, dynamic> changes, IStateEventInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)

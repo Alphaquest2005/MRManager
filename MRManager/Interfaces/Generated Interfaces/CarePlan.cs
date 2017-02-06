@@ -11,7 +11,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-	[InheritedExport]
+	
 	public partial interface ICarePlan:IEntity  
 	{
 		string Diagnosis { get;}

@@ -7,7 +7,7 @@ using SystemInterfaces;
 
 namespace Actor.Interfaces
 {
-    [InheritedExport]
+    
     public interface ICreateEntityService : IProcessSystemMessage
     {
         Type ActorType { get; }

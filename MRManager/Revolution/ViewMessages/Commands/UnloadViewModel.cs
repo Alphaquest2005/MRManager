@@ -5,9 +5,10 @@ using ViewModel.Interfaces;
 
 namespace ViewMessages
 {
-    [Export]
+    [Export(typeof(IUnloadViewModel))]
     public class UnloadViewModel : ProcessSystemMessage, IUnloadViewModel
     {
+        public UnloadViewModel() { }
         public UnloadViewModel(IViewModelInfo viewModelInfo, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             ViewModelInfo = viewModelInfo;

@@ -5,7 +5,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-    [InheritedExport]
+    
     public partial interface INonResidentInfo : IEntityView<IPersons_Patient>
     {
         String Type { get; }

@@ -6,7 +6,8 @@ using CommonMessages;
 
 namespace EventMessages.Commands
 {
-    
+   
+
     public class GetMedia : ProcessSystemMessage
     {
         public List<int> MediaIdList { get; }

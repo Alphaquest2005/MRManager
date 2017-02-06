@@ -3,7 +3,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-    [InheritedExport]
+    
     public interface IPersonAddressInfo : IEntityView<IPersons_Patient>
     {
         string City { get; set; }

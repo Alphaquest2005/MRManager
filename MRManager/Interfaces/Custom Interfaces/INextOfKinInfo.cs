@@ -5,7 +5,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-    [InheritedExport]
+    
     public partial interface INextOfKinInfo : IEntityView<IPersons_Patient>
     {
         Int32 PatientId { get; }

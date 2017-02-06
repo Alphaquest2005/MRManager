@@ -7,7 +7,7 @@ using Reactive.Bindings;
 
 namespace ViewModel.Interfaces
 {
-    [InheritedExport]
+    
     public interface IMainWindowViewModel : IScreenLayoutViewModel
     {
         ReactiveProperty<IScreenModel> ScreenModel { get; }

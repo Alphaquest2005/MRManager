@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Reflection;
@@ -60,5 +61,24 @@ namespace BootStrapper
         }
 
         public static CompositionContainer Container { get;  }
+    }
+
+    public static class CompositionContainerExtensions
+    {
+        public static dynamic GetExportedType(this CompositionContainer container, Type type)
+        {
+            try
+            {
+                return container.GetType().GetMethod("GetExportedValueOrDefault", new Type[] { }).MakeGenericMethod(type.GetGenericTypeDefinition().MakeGenericType(type.GenericTypeArguments)).Invoke(container, new object[] { })?.GetType();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
+
+
+        }
     }
 }

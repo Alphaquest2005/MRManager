@@ -1,3 +1,4 @@
+using System.ComponentModel.Composition;
 using SystemInterfaces;
 using Common.DataEntites;
 using Interfaces;
@@ -5,6 +6,7 @@ using ReactiveUI;
 
 namespace EF.Entities
 {
+    [Export(typeof(IQuestionInfo))]
     public partial class QuestionInfo : EntityView<IQuestions>, IQuestionInfo
     {
         private int _interviewId;

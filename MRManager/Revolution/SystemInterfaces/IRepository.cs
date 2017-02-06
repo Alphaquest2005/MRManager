@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace SystemInterfaces
 {
-    [InheritedExport]
+    
     public interface IRepository
     {
         
     }
 
-    [InheritedExport]
+    
     public interface IEntityRepository:IRepository
     {
         
     }
 
-    [InheritedExport]
+    
     public interface IEntityViewRepository:IRepository
     {
         

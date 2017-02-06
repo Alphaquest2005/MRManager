@@ -5,13 +5,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using Common.DataEntites;
 using EF.Entities;
 using Interfaces;
 
 namespace EF.Entities
 {
-	public partial class ResponseInfo: EntityView<IResponse>
+    [Export(typeof(IResponseInfo))]
+    public partial class ResponseInfo: EntityView<IResponse>, IResponseInfo
 	{
 		public virtual int PatientResponseId { get; set; }
 		public virtual int ResponseOptionId { get; set; }

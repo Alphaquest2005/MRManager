@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SystemInterfaces
 {
-    [InheritedExport]
+    
     public interface IEntitySetLoaded<TEntity>:IProcessSystemMessage where TEntity : IEntity
     {
         IList<TEntity> Entities { get; }

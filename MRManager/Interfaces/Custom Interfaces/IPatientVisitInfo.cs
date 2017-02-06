@@ -5,7 +5,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-    [InheritedExport]
+    
     public interface IPatientVisitInfo : IEntityView<IPatientVisit>
     {
         int PatientId { get; set; }

@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using Common.DataEntites;
 using Interfaces;
 
 namespace EF.Entities
 {
+    [Export(typeof(IPatientResponseInfo))]
     public partial class PatientResponseInfo : EntityView<IPatientResponses>, IPatientResponseInfo
     {
         public int PatientVisitId { get; set; }

@@ -1,8 +1,10 @@
+using System.ComponentModel.Composition;
 using Common.DataEntites;
 using Interfaces;
 
 namespace EF.Entities
 {
+    [Export(typeof(IPersonAddressInfo))]
     public class PersonAddressInfo : EntityView<IPersons_Patient>, IPersonAddressInfo
     {
         public string City { get; set; }

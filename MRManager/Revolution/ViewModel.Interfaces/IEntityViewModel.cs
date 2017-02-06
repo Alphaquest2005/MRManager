@@ -8,7 +8,7 @@ using ViewModel.Interfaces;
 
 namespace ViewModelInterfaces
 {
-    [InheritedExport]
+    
     public interface IEntityViewModel<TEntity>: IViewModel where TEntity:IEntityId
     {
         ReactiveProperty<IProcessState<TEntity>> State { get; }
@@ -16,7 +16,7 @@ namespace ViewModelInterfaces
 
     }
 
-    [InheritedExport]
+    
     public interface IEntityListViewModel<TEntity> : IEntityViewModel<TEntity> where TEntity : IEntityId
     {
         new ReactiveProperty<IProcessStateList<TEntity>> State { get; }

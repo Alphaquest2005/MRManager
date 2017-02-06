@@ -9,8 +9,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Reactive;
 using SystemInterfaces;
 using Core.Common.UI;
+using Reactive.Bindings;
+using ReactiveUI;
 using ViewModel.Interfaces;
 using ViewModelInterfaces;
 
@@ -19,11 +22,15 @@ namespace ViewModels
     [Export(typeof(IEntityCacheViewModel<>))]
     public class EntityCacheViewModel<TEntity> : ObservableListViewModel<TEntity>, IEntityCacheViewModel<TEntity> where TEntity : IEntity
     {
-        [ImportingConstructor]
+        public EntityCacheViewModel() { }
+       
         public EntityCacheViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(eventSubscriptions, eventPublications, commandInfo, process, orientation)
         {
             this.WireEvents();
         }
 
     }
+
+    
+
 }

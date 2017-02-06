@@ -7,7 +7,7 @@
 
 //namespace DataInterfaces
 //{
-//    [InheritedExport]
+//    
 //    public partial interface IMedia : IEntity
 //    {
 

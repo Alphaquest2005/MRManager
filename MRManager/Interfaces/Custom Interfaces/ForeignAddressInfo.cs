@@ -10,7 +10,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-	[InheritedExport]
+	
 	public partial interface IForeignAddressInfo:IEntityView<IPersons_Patient>
 	{
         string Address { get; }

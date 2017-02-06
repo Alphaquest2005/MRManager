@@ -115,6 +115,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevolutionLogger", "..\Revo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComponentModel.Composition.Hosting.Extension", "..\Revolution\MefGeneric-master\MEFGeneric Preview 9\src\ComponentModel.Composition.Hosting.Extension\ComponentModel.Composition.Hosting.Extension.csproj", "{0CC9E320-7E0A-4D77-ADBD-021FF590BD06}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication1", "..\WpfApplication1\WpfApplication1.csproj", "{3D3E52B5-7E97-4FB0-9136-7EEF36039EC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -509,6 +511,14 @@ Global
 		{0CC9E320-7E0A-4D77-ADBD-021FF590BD06}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0CC9E320-7E0A-4D77-ADBD-021FF590BD06}.Release|x86.ActiveCfg = Release|Any CPU
 		{0CC9E320-7E0A-4D77-ADBD-021FF590BD06}.Release|x86.Build.0 = Release|Any CPU
+		{3D3E52B5-7E97-4FB0-9136-7EEF36039EC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D3E52B5-7E97-4FB0-9136-7EEF36039EC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D3E52B5-7E97-4FB0-9136-7EEF36039EC7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3D3E52B5-7E97-4FB0-9136-7EEF36039EC7}.Debug|x86.Build.0 = Debug|Any CPU
+		{3D3E52B5-7E97-4FB0-9136-7EEF36039EC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D3E52B5-7E97-4FB0-9136-7EEF36039EC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D3E52B5-7E97-4FB0-9136-7EEF36039EC7}.Release|x86.ActiveCfg = Release|Any CPU
+		{3D3E52B5-7E97-4FB0-9136-7EEF36039EC7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

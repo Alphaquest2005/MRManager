@@ -12,7 +12,7 @@ namespace Actor.Interfaces
         Partial,
         All,
     }
-    [InheritedExport]
+    
     public interface IComplexEventAction : IComplexEvent
     {
         Type ExpectedMessageType { get; }

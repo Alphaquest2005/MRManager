@@ -5,7 +5,7 @@ namespace RevolutionEntities.ViewModels
 {
     public class ViewEventPublicationParameter :IViewEventPublicationParameter
     {
-        public ViewEventPublicationParameter(object[] @params, IStateEventInfo processInfo, ISystemProcess process, ISource source)
+        public ViewEventPublicationParameter(object[] @params, IStateEventInfo processInfo, ISystemProcess process, ISystemSource source)
         {
             Params = @params;
             Process = process;
@@ -15,13 +15,13 @@ namespace RevolutionEntities.ViewModels
 
         public object[] Params { get; }
         public ISystemProcess Process { get; }
-        public ISource Source { get; }
+        public ISystemSource Source { get; }
         public IStateEventInfo ProcessInfo { get; }
     }
 
     public class ViewEventCommandParameter : IViewEventCommandParameter
     {
-        public ViewEventCommandParameter(object[] @params, IStateCommandInfo processInfo, ISystemProcess process, ISource source)
+        public ViewEventCommandParameter(object[] @params, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source)
         {
             Params = @params;
             Process = process;
@@ -31,7 +31,7 @@ namespace RevolutionEntities.ViewModels
 
         public object[] Params { get; }
         public ISystemProcess Process { get; }
-        public ISource Source { get; }
+        public ISystemSource Source { get; }
         public IStateCommandInfo ProcessInfo { get; }
     }
 }

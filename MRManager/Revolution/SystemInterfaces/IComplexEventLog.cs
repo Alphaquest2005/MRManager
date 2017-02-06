@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace SystemInterfaces
 {
-    [InheritedExport]
+    
     public interface IRequestComplexEventLog : IProcessSystemMessage
     {
     }
 
-    [InheritedExport]
+    
     public interface IComplexEventLogCreated : IProcessSystemMessage
     {
         IEnumerable<IComplexEventLog> EventLog { get; }

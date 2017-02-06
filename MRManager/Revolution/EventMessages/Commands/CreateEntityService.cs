@@ -1,12 +1,15 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using SystemInterfaces;
 using Actor.Interfaces;
 using CommonMessages;
 
 namespace EventMessages.Commands
 {
+    [Export(typeof(ICreateEntityService))]
     public class CreateEntityService : ProcessSystemMessage, ICreateEntityService
     {
+        public CreateEntityService() { }
         public Type ActorType { get; }
         public object Action { get; }
 

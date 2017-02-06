@@ -2,7 +2,7 @@
 
 namespace SystemInterfaces
 {
-    [InheritedExport]
+    
     public interface ISystemProcessStarted : IProcessSystemMessage
     {
     }

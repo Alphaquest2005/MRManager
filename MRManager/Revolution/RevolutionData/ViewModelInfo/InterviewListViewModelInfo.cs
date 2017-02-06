@@ -22,10 +22,10 @@ namespace RevolutionData
             (
             3, new List<IViewModelEventSubscription<IViewModel, IEvent>>
             {
-                new ViewEventSubscription<IInterviewListViewModel, IProcessStateListMessage<IInterviewInfo>>(
+                new ViewEventSubscription<IInterviewListViewModel, IUpdateProcessStateList<IInterviewInfo>>(
                     3,
                     e => e != null,
-                    new List<Func<IInterviewListViewModel, IProcessStateListMessage<IInterviewInfo>, bool>>(),
+                    new List<Func<IInterviewListViewModel, IUpdateProcessStateList<IInterviewInfo>, bool>>(),
                     (v,e) => v.State.Value = e.State),
 
                 new ViewEventSubscription<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>>(
@@ -37,7 +37,7 @@ namespace RevolutionData
             },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
             {
-                new ViewEventPublication<IInterviewListViewModel, ViewStateLoaded<IInterviewListViewModel,IProcessStateList<IInterviewInfo>>>(
+                new ViewEventPublication<IInterviewListViewModel, IViewStateLoaded<IInterviewListViewModel,IProcessStateList<IInterviewInfo>>>(
                     key:"IPatientInfoViewStateLoaded",
                     subject:v => v.State,
                     subjectPredicate:new List<Func<IInterviewListViewModel, bool>>
@@ -46,7 +46,7 @@ namespace RevolutionData
                     },
                     messageData:s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
 
-                new ViewEventPublication<IInterviewListViewModel, CurrentEntityChanged<IInterviewInfo>>(
+                new ViewEventPublication<IInterviewListViewModel, ICurrentEntityChanged<IInterviewInfo>>(
                     key:"CurrentEntityChanged",
                     subject:v => v.CurrentEntity,//.WhenAnyValue(x => x.Value),
                     subjectPredicate:new List<Func<IInterviewListViewModel, bool>>{},
@@ -56,7 +56,7 @@ namespace RevolutionData
             {
 
 
-                new ViewEventCommand<IInterviewListViewModel, LoadEntityViewSetWithChanges<IInterviewInfo,IPartialMatch>>(
+                new ViewEventCommand<IInterviewListViewModel, ILoadEntityViewSetWithChanges<IInterviewInfo,IPartialMatch>>(
                     key:"Search",
                     commandPredicate:new List<Func<IInterviewListViewModel, bool>>
                     {
@@ -80,7 +80,7 @@ namespace RevolutionData
                             s.Source);
                     }),
 
-                new ViewEventCommand<IInterviewListViewModel, ViewRowStateChanged<IInterviewInfo>>(
+                new ViewEventCommand<IInterviewListViewModel, IViewRowStateChanged<IInterviewInfo>>(
                     key:"EditEntity",
                     commandPredicate:new List<Func<IInterviewListViewModel, bool>>
                     {

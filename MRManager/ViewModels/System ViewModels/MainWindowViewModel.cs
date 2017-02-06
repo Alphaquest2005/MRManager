@@ -24,7 +24,7 @@ using ViewModel.Interfaces;
 
 namespace ViewModels
 {
-    [Export]
+    
     public class MainWindowViewModel : BaseViewModel<MainWindowViewModel>, IMainWindowViewModel
     {
         private static readonly MainWindowViewModel instance;

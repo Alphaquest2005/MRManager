@@ -3,7 +3,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-    [InheritedExport]
+    
     public interface IQuestionInfo : IEntityView<IQuestions>
     {
         int InterviewId { get; }

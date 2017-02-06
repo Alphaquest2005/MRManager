@@ -24,10 +24,10 @@ namespace RevolutionData
             (
             3, new List<IViewModelEventSubscription<IViewModel, IEvent>>
             {
-                new ViewEventSubscription<IQuestionaireViewModel, IProcessStateListMessage<IQuestionResponseOptionInfo>>(
+                new ViewEventSubscription<IQuestionaireViewModel, IUpdateProcessStateList<IQuestionResponseOptionInfo>>(
                     3,
                     e => e != null,
-                    new List<Func<IQuestionaireViewModel, IProcessStateListMessage<IQuestionResponseOptionInfo>, bool>>(),
+                    new List<Func<IQuestionaireViewModel, IUpdateProcessStateList<IQuestionResponseOptionInfo>, bool>>(),
                     (v,e) => v.State.Value = e.State),
                 new ViewEventSubscription<IQuestionaireViewModel, ICurrentEntityChanged<IQuestionInfo>>(
                     3,
@@ -48,7 +48,7 @@ namespace RevolutionData
             },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
             {
-                new ViewEventPublication<IQuestionaireViewModel, ViewStateLoaded<IQuestionaireViewModel,IProcessStateList<IQuestionResponseOptionInfo>>>(
+                new ViewEventPublication<IQuestionaireViewModel, IViewStateLoaded<IQuestionaireViewModel,IProcessStateList<IQuestionResponseOptionInfo>>>(
                     key:"IPatientResponseInfoViewStateLoaded",
                     subject:v => v.State,
                     subjectPredicate:new List<Func<IQuestionaireViewModel, bool>>
@@ -63,7 +63,7 @@ namespace RevolutionData
             {
 
 
-                new ViewEventCommand<IQuestionaireViewModel, CurrentEntityChanged<IQuestionResponseOptionInfo>>(
+                new ViewEventCommand<IQuestionaireViewModel, ICurrentEntityChanged<IQuestionResponseOptionInfo>>(
                     key:"PreviousQuestion",
                     commandPredicate:new List<Func<IQuestionaireViewModel, bool>>
                     {
@@ -82,7 +82,7 @@ namespace RevolutionData
                             s.Source);
                     }),
 
-                new ViewEventCommand<IQuestionaireViewModel, CurrentEntityChanged<IQuestionResponseOptionInfo>>(
+                new ViewEventCommand<IQuestionaireViewModel, ICurrentEntityChanged<IQuestionResponseOptionInfo>>(
                     key:"NextQuestion",
                     commandPredicate:new List<Func<IQuestionaireViewModel, bool>>
                     {
@@ -101,7 +101,7 @@ namespace RevolutionData
                             s.Source);
                     }),
 
-                new ViewEventCommand<IQuestionaireViewModel, UpdateEntityViewWithChanges<IResponseInfo>>(
+                new ViewEventCommand<IQuestionaireViewModel, IUpdateEntityViewWithChanges<IResponseInfo>>(
                     key:"SaveChanges",
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IQuestionaireViewModel, bool>>
@@ -124,7 +124,7 @@ namespace RevolutionData
                         s.ChangeTracking.Clear();
                         return msg;
                     }),
-                new ViewEventCommand<IQuestionaireViewModel, UpdateEntityViewWithChanges<IResponseInfo>>(
+                new ViewEventCommand<IQuestionaireViewModel, IUpdateEntityViewWithChanges<IResponseInfo>>(
                     key:"CreateEntity",
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IQuestionaireViewModel, bool>>
@@ -146,7 +146,7 @@ namespace RevolutionData
                         return msg;
                     }),
 
-                new ViewEventCommand<IQuestionaireViewModel, ViewRowStateChanged<IQuestionResponseOptionInfo>>(
+                new ViewEventCommand<IQuestionaireViewModel, IViewRowStateChanged<IQuestionResponseOptionInfo>>(
                     key:"EditEntity",
                     commandPredicate:new List<Func<IQuestionaireViewModel, bool>>
                     {

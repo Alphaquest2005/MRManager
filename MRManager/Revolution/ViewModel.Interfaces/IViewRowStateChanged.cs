@@ -8,10 +8,15 @@ using SystemInterfaces;
 
 namespace ViewModel.Interfaces
 {
-    [InheritedExport]
+    
     public interface IViewRowStateChanged : IProcessSystemMessage
     {
         IViewModel ViewModel { get; }
         RowState RowState { get; }
+    }
+
+    public interface IViewRowStateChanged<TEntity> : IViewRowStateChanged where TEntity : IEntityId
+    {
+
     }
 }

@@ -5,7 +5,7 @@ using SystemInterfaces;
 
 namespace Actor.Interfaces
 {
-    [InheritedExport]
+    
     public interface IComplexEvent
     {
         string Key { get; }

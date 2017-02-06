@@ -29,7 +29,7 @@ namespace RevolutionData
                    
 
 
-                new ViewEventPublication<ISigninViewModel, ViewStateLoaded<ISigninViewModel,IProcessState<ISignInInfo>>>(
+                new ViewEventPublication<ISigninViewModel, IViewStateLoaded<ISigninViewModel,IProcessState<ISignInInfo>>>(
                     key:"ILoginModelViewStateLoaded", 
                     subject:v => v.State,
                     subjectPredicate:new List<Func<ISigninViewModel, bool>>
@@ -40,7 +40,7 @@ namespace RevolutionData
             }, new List<IViewModelEventCommand<IViewModel,IEvent>>
             {
                    
-                new ViewEventCommand<ISigninViewModel, GetEntityViewWithChanges<ISignInInfo>>(
+                new ViewEventCommand<ISigninViewModel, IGetEntityViewWithChanges<ISignInInfo>>(
                     key:"UserName",
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<ISigninViewModel, bool>>
@@ -49,7 +49,7 @@ namespace RevolutionData
                     },
                     messageData: s => new ViewEventCommandParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView),s.Process,s.Source)),
 
-                new ViewEventCommand<ISigninViewModel, GetEntityViewWithChanges<ISignInInfo>>(
+                new ViewEventCommand<ISigninViewModel, IGetEntityViewWithChanges<ISignInInfo>>(
                     key:"ValidateUserInfo",
                     commandPredicate:new List<Func<ISigninViewModel, bool>>
                     {

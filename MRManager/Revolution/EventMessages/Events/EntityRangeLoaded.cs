@@ -4,6 +4,7 @@ using CommonMessages;
 
 namespace EventMessages.Events
 {
+    
     public class EntityRangeLoaded<T> : ProcessSystemMessage where T : IEntity
     {
         public int OverAllCount { get;  }

@@ -2,7 +2,7 @@
 
 namespace ViewMessages
 {
-    [Export]
+    
     public class ViewMessageConst
    {
         private static readonly ViewMessageConst instance;

@@ -21,14 +21,14 @@ using ViewModelInterfaces;
 namespace ViewModels
 {
 
-    [Export]
+    [Export(typeof(IPatientSyntomViewModel))]
     public class PatientSyntomViewModel : DynamicViewModel<ObservableListViewModel<IPatientSyntomInfo>>, IPatientSyntomViewModel
     {
         private ObservableBindingList<IPatientSyntomInfo> _changeTrackingList = new ObservableBindingList<IPatientSyntomInfo>();
         private ObservableList<IPatientSyntomInfo> _entitySet;
         private IPatientVisitInfo _currentPatientVisit;
 
-
+        [ImportingConstructor]
         public PatientSyntomViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IPatientSyntomInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;

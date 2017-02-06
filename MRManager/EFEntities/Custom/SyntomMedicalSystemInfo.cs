@@ -7,6 +7,7 @@ using ReactiveUI;
 
 namespace EF.Entities
 {
+    [Export(typeof(ISyntomMedicalSystemInfo))]
     public class SyntomMedicalSystemInfo:EntityView<ISyntomMedicalSystems>, ISyntomMedicalSystemInfo
     {
         private int _medicalSystemId;

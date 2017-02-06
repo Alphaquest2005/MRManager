@@ -7,7 +7,7 @@ using SystemInterfaces;
 
 namespace Actor.Interfaces
 {
-    [InheritedExport]
+    
     public interface IExecuteComplexEventAction : IProcessSystemMessage
     {
         IProcessAction Action { get; }

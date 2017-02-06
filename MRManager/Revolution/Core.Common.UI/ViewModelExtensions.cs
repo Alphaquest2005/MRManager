@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -10,6 +11,7 @@ using CommonMessages;
 using EventAggregator;
 using EventMessages;
 using EventMessages.Commands;
+using EventMessages.Events;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using ViewModel.Interfaces;
@@ -87,9 +89,17 @@ namespace Core.Common.UI
                 paramArray.Add(param.ProcessInfo);
                 paramArray.Add(param.Process);
                 paramArray.Add(param.Source);
-                var concreteEvent = BootStrapper.BootStrapper.Container.GetExportedTypes(itm.EventType).FirstOrDefault();
+                var concreteEvent = BootStrapper.BootStrapper.Container.GetExportedTypes(itm.EventType).FirstOrDefault() ?? BootStrapper.BootStrapper.Container.GetExportedType(itm.EventType) ;
                 //TODO: Replace MEF with Good IOC container - can't do <,>
-                var msg = (ProcessSystemMessage) Activator.CreateInstance(concreteEvent??itm.EventType, paramArray.ToArray());
+                ProcessSystemMessage msg;
+                if (concreteEvent == null)
+                {
+                    msg = new ProcessEventFailure(itm.EventType, new FailedMessageData(itm, param.ProcessInfo, param.Process, param.Source), itm.EventType, new InvalidOperationException($"Type:{itm.EventType.Name} not found in MEF - consider adding export to type."), param.ProcessInfo, viewModel.Source);
+                }
+                else
+                {
+                    msg = (ProcessSystemMessage) Activator.CreateInstance(concreteEvent, paramArray.ToArray());
+                }
                 EventMessageBus.Current.Publish(msg, viewModel.Source);
             };
             return publishMessage;
@@ -104,9 +114,21 @@ namespace Core.Common.UI
                 paramArray.Add(param.ProcessInfo);
                 paramArray.Add(param.Process);
                 paramArray.Add(param.Source);
-                var concreteEvent = BootStrapper.BootStrapper.Container.GetExportedTypes(itm.EventType).FirstOrDefault();
+                var concreteEvent = BootStrapper.BootStrapper.Container.GetExportedTypes(itm.EventType).FirstOrDefault() ?? BootStrapper.BootStrapper.Container.GetExportedType(itm.EventType);
                 //TODO: Replace MEF with Good IOC container - can't do <,>
-                var msg = (ProcessSystemMessage)Activator.CreateInstance(concreteEvent ?? itm.EventType, paramArray.ToArray());
+                ProcessSystemMessage msg;
+                if (concreteEvent == null)
+                {
+                    msg = new ProcessEventFailure(itm.EventType,
+                            new FailedCommandData(itm, param.ProcessInfo, param.Process, param.Source), itm.EventType,
+                            new InvalidOperationException("Type not found in MEF - consider adding export to type."), new StateEventInfo(param.ProcessInfo.ProcessId,"Error","Error occured getting type","",param.ProcessInfo.State)
+                            , viewModel.Source);
+                }
+                else
+                {
+                    msg = (ProcessSystemMessage)Activator.CreateInstance(concreteEvent, paramArray.ToArray());
+                }
+                
                 EventMessageBus.Current.Publish(msg, viewModel.Source);
             };
             return publishMessage;

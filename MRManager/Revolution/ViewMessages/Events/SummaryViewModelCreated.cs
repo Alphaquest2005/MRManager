@@ -6,7 +6,7 @@
 
 //namespace ViewMessages
 //{
-//    [Export]
+//    
 //    public class SummaryViewModelCreated<T> : SystemProcessMessage, ISummaryViewModelCreated<T> where T : IEntity
 //    {
 //        [ImportingConstructor]

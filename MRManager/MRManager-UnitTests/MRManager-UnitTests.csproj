@@ -117,6 +117,10 @@
       <Project>{2ab54ce2-e09b-40b4-9cbf-184b3e770b0d}</Project>
       <Name>Expressions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MRManager\MRManager.csproj">
+      <Project>{83852b7c-5680-4695-9190-df230a6004a1}</Project>
+      <Name>MRManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Resources\Resources.csproj">
       <Project>{9ef43ee7-b520-42d9-a75e-2d2887fd234c}</Project>
       <Name>Resources</Name>

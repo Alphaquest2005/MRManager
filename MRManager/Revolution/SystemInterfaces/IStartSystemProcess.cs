@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SystemInterfaces
 {
-    [InheritedExport]
+    
     public interface IStartSystemProcess : IProcessSystemMessage
     {
         int ProcessToBeStartedId { get; }

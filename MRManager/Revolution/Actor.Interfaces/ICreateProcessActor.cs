@@ -8,7 +8,7 @@ using SystemInterfaces;
 
 namespace Actor.Interfaces
 {
-    [InheritedExport]
+    
     public interface ICreateProcessActor : IProcessSystemMessage
     {
     }

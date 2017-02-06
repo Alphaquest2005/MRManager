@@ -4,7 +4,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-    [InheritedExport]
+    
     public partial interface IPatientInfo : IEntityView<IPatients>
     {
         String Name { get; }

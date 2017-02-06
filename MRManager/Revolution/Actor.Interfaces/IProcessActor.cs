@@ -7,7 +7,7 @@ using StartUp.Messages;
 
 namespace Actor.Interfaces
 {
-    [InheritedExport]
+    
     public interface IProcessService:IAgent, IService<IProcessService>
     {
         ISystemProcess Process { get; }

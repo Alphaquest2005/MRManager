@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SystemInterfaces
 {
-    [InheritedExport]
+    
     public interface IState
     {
         string Name { get; }
@@ -15,13 +15,13 @@ namespace SystemInterfaces
         string Notes { get; }
     }
 
-    [InheritedExport]
+    
     public interface IStateEvent: IState
     {
         IStateCommand ExpectedCommand { get; }
     }
 
-    [InheritedExport]
+    
     public interface IStateCommand : IState
     {
        IStateEvent ExpectedEvent { get; }

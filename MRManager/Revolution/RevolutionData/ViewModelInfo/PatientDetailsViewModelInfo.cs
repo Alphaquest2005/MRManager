@@ -31,7 +31,7 @@ namespace RevolutionData
             },
             publications: new List<IViewModelEventPublication<IViewModel, IEvent>>
             {
-                new ViewEventPublication<IPatientDetailsViewModel, ViewStateLoaded<IPatientDetailsViewModel,IProcessState<IPatientDetailsInfo>>>(
+                new ViewEventPublication<IPatientDetailsViewModel, IViewStateLoaded<IPatientDetailsViewModel,IProcessState<IPatientDetailsInfo>>>(
                     key:"PatientDetailsViewStateLoaded",
                     subject:v => v.State,
                     subjectPredicate:new List<Func<IPatientDetailsViewModel, bool>>
@@ -44,7 +44,7 @@ namespace RevolutionData
             },
             commands: new List<IViewModelEventCommand<IViewModel,IEvent>>
             {
-                new ViewEventCommand<IPatientDetailsViewModel, ViewRowStateChanged<IPatientDetailsInfo>>(
+                new ViewEventCommand<IPatientDetailsViewModel, IViewRowStateChanged<IPatientDetailsInfo>>(
                     key:"EditEntity",
                     commandPredicate:new List<Func<IPatientDetailsViewModel, bool>>
                     {

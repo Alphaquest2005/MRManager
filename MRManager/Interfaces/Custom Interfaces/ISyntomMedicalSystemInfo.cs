@@ -4,7 +4,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-    [InheritedExport]
+    
     public interface ISyntomMedicalSystemInfo : IEntityView<ISyntomMedicalSystems>
     {
         int MedicalSystemId { get; set; }

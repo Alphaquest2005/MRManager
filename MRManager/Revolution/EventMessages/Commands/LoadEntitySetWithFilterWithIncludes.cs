@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Diagnostics.Contracts;
 using System.Linq.Expressions;
 using SystemInterfaces;
@@ -7,10 +8,12 @@ using CommonMessages;
 
 namespace EventMessages.Commands
 {
+    [Export(typeof(ILoadEntitySetWithFilterWithIncludes<>))]
 
 
     public class LoadEntitySetWithFilterWithIncludes<T> : ProcessSystemMessage, ILoadEntitySetWithFilterWithIncludes<T> where T : IEntity
     {
+        public LoadEntitySetWithFilterWithIncludes() { }
         public List<Expression<Func<T, bool>>> Filter { get; }
         public List<Expression<Func<T,dynamic>>> Includes { get; }
         

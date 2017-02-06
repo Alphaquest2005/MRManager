@@ -16,9 +16,10 @@ using ViewModelInterfaces;
 namespace ViewModels
 {
 
-    [Export]
+    [Export(typeof(IHeaderViewModel))]
     public class HeaderViewModel : DynamicViewModel<ObservableViewModel>, IHeaderViewModel
     {
+        [ImportingConstructor]
         public HeaderViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableViewModel(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
             this.WireEvents();

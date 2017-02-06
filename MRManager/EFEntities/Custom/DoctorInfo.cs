@@ -1,9 +1,11 @@
+using System.ComponentModel.Composition;
 using Common.DataEntites;
 using Interfaces;
 using ReactiveUI;
 
 namespace EF.Entities
 {
+    [Export(typeof(IDoctorInfo))]
     public class DoctorInfo : EntityView<IPersons_Doctor>, IDoctorInfo
     {
         private string _name;

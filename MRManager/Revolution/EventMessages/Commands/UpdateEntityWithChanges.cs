@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Diagnostics.Contracts;
 using SystemInterfaces;
 using CommonMessages;
 
 namespace EventMessages.Commands
 {
+    [Export(typeof(IUpdateEntityWithChanges<>))]
+
     public class UpdateEntityWithChanges<TEntity> : ProcessSystemMessage, IUpdateEntityWithChanges<TEntity> where TEntity : IEntity
     {
+        public UpdateEntityWithChanges() { }
         public Dictionary<string, dynamic> Changes { get; }
         public int EntityId { get; }
 

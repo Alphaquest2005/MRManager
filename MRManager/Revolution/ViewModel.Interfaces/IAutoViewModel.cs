@@ -8,7 +8,7 @@ using JB.Collections.Reactive;
 
 namespace ViewModel.Interfaces
 {
-    [InheritedExport]
+    
     public interface IAutoViewModel<T> where T : IEntity
     {
        // VirtualList<T> VirtualData { get; set; }

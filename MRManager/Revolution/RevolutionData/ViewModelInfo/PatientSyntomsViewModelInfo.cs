@@ -21,10 +21,10 @@ namespace RevolutionData
             (
             3, new List<IViewModelEventSubscription<IViewModel, IEvent>>
             {
-                new ViewEventSubscription<IPatientSyntomViewModel, IProcessStateListMessage<IPatientSyntomInfo>>(
+                new ViewEventSubscription<IPatientSyntomViewModel, IUpdateProcessStateList<IPatientSyntomInfo>>(
                     3,
                     e => e != null,
-                    new List<Func<IPatientSyntomViewModel, IProcessStateListMessage<IPatientSyntomInfo>, bool>>(),
+                    new List<Func<IPatientSyntomViewModel, IUpdateProcessStateList<IPatientSyntomInfo>, bool>>(),
                     (v,e) => v.State.Value = e.State),
                 new ViewEventSubscription<IPatientSyntomViewModel, ICurrentEntityChanged<IPatientVisitInfo>>(
                     3,
@@ -34,7 +34,7 @@ namespace RevolutionData
             },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
             {
-                new ViewEventPublication<IPatientSyntomViewModel, ViewStateLoaded<IPatientSyntomViewModel,IProcessStateList<IPatientSyntomInfo>>>(
+                new ViewEventPublication<IPatientSyntomViewModel, IViewStateLoaded<IPatientSyntomViewModel,IProcessStateList<IPatientSyntomInfo>>>(
                     key:"IPatientInfoViewStateLoaded",
                     subject:v => v.State,
                     subjectPredicate:new List<Func<IPatientSyntomViewModel, bool>>
@@ -43,7 +43,7 @@ namespace RevolutionData
                     },
                     messageData:s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
 
-                new ViewEventPublication<IPatientSyntomViewModel, CurrentEntityChanged<IPatientSyntomInfo>>(
+                new ViewEventPublication<IPatientSyntomViewModel, ICurrentEntityChanged<IPatientSyntomInfo>>(
                     key:"CurrentEntityChanged",
                     subject:v => v.CurrentEntity,//.WhenAnyValue(x => x.Value),
                     subjectPredicate:new List<Func<IPatientSyntomViewModel, bool>>{},
@@ -53,7 +53,7 @@ namespace RevolutionData
             {
 
 
-                new ViewEventCommand<IPatientSyntomViewModel, LoadEntityViewSetWithChanges<IPatientSyntomInfo,IPartialMatch>>(
+                new ViewEventCommand<IPatientSyntomViewModel, ILoadEntityViewSetWithChanges<IPatientSyntomInfo,IPartialMatch>>(
                     key:"Search",
                     commandPredicate:new List<Func<IPatientSyntomViewModel, bool>>
                     {
@@ -77,7 +77,7 @@ namespace RevolutionData
                             s.Source);
                     }),
 
-                new ViewEventCommand<IPatientSyntomViewModel, ViewRowStateChanged<IPatientSyntomInfo>>(
+                new ViewEventCommand<IPatientSyntomViewModel, IViewRowStateChanged<IPatientSyntomInfo>>(
                     key:"EditEntity",
                     commandPredicate:new List<Func<IPatientSyntomViewModel, bool>>
                     {

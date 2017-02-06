@@ -22,16 +22,16 @@ namespace RevolutionData
             (
             3, new List<IViewModelEventSubscription<IViewModel, IEvent>>
             {
-                new ViewEventSubscription<IPatientSummaryListViewModel, IProcessStateListMessage<IPatientInfo>>(
+                new ViewEventSubscription<IPatientSummaryListViewModel, IUpdateProcessStateList<IPatientInfo>>(
                     3,
                     e => e != null,
-                    new List<Func<IPatientSummaryListViewModel, IProcessStateListMessage<IPatientInfo>, bool>>(),
+                    new List<Func<IPatientSummaryListViewModel, IUpdateProcessStateList<IPatientInfo>, bool>>(),
                     (v,e) => v.State.Value = e.State),
 
             },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
             {
-                new ViewEventPublication<IPatientSummaryListViewModel, ViewStateLoaded<IPatientSummaryListViewModel,IProcessStateList<IPatientInfo>>>(
+                new ViewEventPublication<IPatientSummaryListViewModel, IViewStateLoaded<IPatientSummaryListViewModel,IProcessStateList<IPatientInfo>>>(
                     key:"IPatientInfoViewStateLoaded",
                     subject:v => v.State,
                     subjectPredicate:new List<Func<IPatientSummaryListViewModel, bool>>
@@ -40,7 +40,7 @@ namespace RevolutionData
                     },
                     messageData:s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
 
-                new ViewEventPublication<IPatientSummaryListViewModel, CurrentEntityChanged<IPatientInfo>>(
+                new ViewEventPublication<IPatientSummaryListViewModel, ICurrentEntityChanged<IPatientInfo>>(
                     key:"CurrentEntityChanged",
                     subject:v => v.CurrentEntity,//.WhenAnyValue(x => x.Value),
                     subjectPredicate:new List<Func<IPatientSummaryListViewModel, bool>>{},
@@ -50,7 +50,7 @@ namespace RevolutionData
             {
 
 
-                new ViewEventCommand<IPatientSummaryListViewModel, LoadEntityViewSetWithChanges<IPatientInfo,IPartialMatch>>(
+                new ViewEventCommand<IPatientSummaryListViewModel, ILoadEntityViewSetWithChanges<IPatientInfo,IPartialMatch>>(
                     key:"Search",
                     commandPredicate:new List<Func<IPatientSummaryListViewModel, bool>>
                     {
@@ -74,7 +74,7 @@ namespace RevolutionData
                             s.Source);
                     }),
 
-                new ViewEventCommand<IPatientSummaryListViewModel, ViewRowStateChanged<IPatientInfo>>(
+                new ViewEventCommand<IPatientSummaryListViewModel, IViewRowStateChanged<IPatientInfo>>(
                     key:"EditEntity",
                     commandPredicate:new List<Func<IPatientSummaryListViewModel, bool>>
                     {

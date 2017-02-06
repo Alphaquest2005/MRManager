@@ -7,7 +7,7 @@ using SystemInterfaces;
 
 namespace Actor.Interfaces
 {
-    [InheritedExport]
+    
     public interface IComplexEventService: IService<IComplexEventService>
     {
         string ActorId { get; }

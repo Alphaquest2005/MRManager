@@ -7,10 +7,11 @@ namespace EventMessages.Commands
 {
 
 
-    [Export]
+    [Export(typeof(IDeleteEntity<>))]
+
     public class DeleteEntity<TEntity> : ProcessSystemMessage, IDeleteEntity<TEntity> where TEntity : IEntity
     {
-       
+       public DeleteEntity() { }
         public DeleteEntity(int entityId, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             Contract.Requires(entityId > 0);

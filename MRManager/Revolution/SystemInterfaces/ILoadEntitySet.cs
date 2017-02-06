@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemInterfaces
 {
-    [InheritedExport]
+    
     public interface ILoadEntitySet<out TEntity> : IProcessSystemMessage, IEntityRequest<TEntity> where TEntity:IEntity
     {
     }

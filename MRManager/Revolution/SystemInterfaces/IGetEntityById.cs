@@ -4,7 +4,7 @@ using System.Runtime.InteropServices.ComTypes;
 namespace SystemInterfaces
 {
     
-    [InheritedExport]
+    
     public interface IGetEntityById<out TEntity>:IProcessSystemMessage, IEntityRequest<TEntity> where TEntity:IEntity
     {
        // void Create(int entityId);

@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace SystemInterfaces
 {
-    [InheritedExport]
+    
     public interface IEntityViewWithChangesFound<TView> : IProcessSystemMessage
     {
         TView Entity { get; set; }
         Dictionary<string, object> Changes { get; }
     }
 
-    [InheritedExport]
+    
     public interface IEntityViewWithChangesUpdated<TView> : IProcessSystemMessage
     {
         TView Entity { get; set; }

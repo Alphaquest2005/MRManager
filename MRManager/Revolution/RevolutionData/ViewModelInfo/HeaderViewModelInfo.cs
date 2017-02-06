@@ -26,7 +26,7 @@ namespace RevolutionData
             {
 
 
-                new ViewEventCommand<IHeaderViewModel, NavigateToView>(
+                new ViewEventCommand<IHeaderViewModel, INavigateToView>(
                     key:"ViewHome",
                     commandPredicate:new List<Func<IHeaderViewModel, bool>>{},
                     subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
@@ -40,7 +40,7 @@ namespace RevolutionData
                             s.Source);
                     }),
 
-                new ViewEventCommand<IHeaderViewModel, NavigateToView>(
+                new ViewEventCommand<IHeaderViewModel, INavigateToView>(
                     key:"ViewPatientInfo",
                     commandPredicate:new List<Func<IHeaderViewModel, bool>>{},
                     subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
@@ -53,7 +53,7 @@ namespace RevolutionData
                                 Context.View.Commands.NavigateToView), s.Process,
                             s.Source);
                     }),
-                new ViewEventCommand<IHeaderViewModel, NavigateToView>(
+                new ViewEventCommand<IHeaderViewModel, INavigateToView>(
                     key:"ViewVitals",
                     commandPredicate:new List<Func<IHeaderViewModel, bool>>{},
                     subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
@@ -67,7 +67,7 @@ namespace RevolutionData
                             s.Source);
                     }),
 
-                new ViewEventCommand<IHeaderViewModel, NavigateToView>(
+                new ViewEventCommand<IHeaderViewModel, INavigateToView>(
                     key:"ViewPatientResponses",
                     commandPredicate:new List<Func<IHeaderViewModel, bool>>{},
                     subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),

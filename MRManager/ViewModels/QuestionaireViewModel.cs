@@ -22,11 +22,11 @@ using ViewModelInterfaces;
 namespace ViewModels
 {
 
-    [Export]
+    [Export(typeof(IQuestionaireViewModel))]
     public class QuestionaireViewModel : DynamicViewModel<ObservableListViewModel<IQuestionResponseOptionInfo>>, IQuestionaireViewModel
     {
 
-
+        [ImportingConstructor]
         public QuestionaireViewModel(ISystemProcess process,
             List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions,
             List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications,

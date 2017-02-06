@@ -4,7 +4,7 @@
 
 //namespace ViewModelInterfaces
 //{
-//    [InheritedExport]
+//    
 //    public interface ISummaryViewModel<T>:IEntityViewModel<> where T:IEntity
 //    {
        

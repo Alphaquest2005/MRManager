@@ -11,7 +11,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-	[InheritedExport]
+	
 	public partial interface IPersonAddresses:IEntity  
 	{
 		int AddressId { get;}

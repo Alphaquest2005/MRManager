@@ -2,7 +2,7 @@
 
 namespace SystemInterfaces
 {
-    [InheritedExport]
+    
     public interface IStateEventInfo : IProcessStateInfo
     {
         new IStateEvent State { get; }

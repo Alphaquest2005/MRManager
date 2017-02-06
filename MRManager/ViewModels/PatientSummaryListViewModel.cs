@@ -19,9 +19,10 @@ using ViewModelInterfaces;
 namespace ViewModels
 {
 
-    [Export]
+    [Export(typeof(IPatientSummaryListViewModel))]
     public class PatientSummaryListViewModel : DynamicViewModel<ObservableListViewModel<IPatientInfo>>, IPatientSummaryListViewModel
     {
+        [ImportingConstructor]
         public PatientSummaryListViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IPatientInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
            this.WireEvents();

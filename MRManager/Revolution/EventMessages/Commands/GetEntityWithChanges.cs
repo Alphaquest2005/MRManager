@@ -5,9 +5,11 @@ using CommonMessages;
 
 namespace EventMessages.Commands
 {
-    [Export]
+    [Export(typeof(IGetEntityWithChanges<>))]
+
     public class GetEntityWithChanges<TEntity> : ProcessSystemMessage, IGetEntityWithChanges<TEntity> where TEntity : IEntity
     {
+        public GetEntityWithChanges() { }
         public GetEntityWithChanges(int entityId, Dictionary<string, dynamic> changes, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             Changes = changes;

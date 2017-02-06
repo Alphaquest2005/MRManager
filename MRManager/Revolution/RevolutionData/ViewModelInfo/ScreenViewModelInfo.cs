@@ -17,10 +17,10 @@ namespace RevolutionData
             1,
             new List<IViewModelEventSubscription<IViewModel, IEvent>>
             {
-                new ViewEventSubscription<IScreenModel, NavigateToView>(
+                new ViewEventSubscription<IScreenModel, INavigateToView>(
                     1,
                     e => e != null,
-                    new List<Func<IScreenModel, NavigateToView, bool>>{},
+                    new List<Func<IScreenModel, INavigateToView, bool>>{},
                     (s, e) =>
                     {
                         s.Slider.BringIntoView(e.View);
@@ -154,7 +154,7 @@ namespace RevolutionData
             },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
             {
-                new ViewEventPublication<IScreenModel, ViewModelLoaded<IScreenModel,IViewModel>>(
+                new ViewEventPublication<IScreenModel, IViewModelLoaded<IScreenModel,IViewModel>>(
                     key:"ScreenModelBody",
                     subject:v => v.BodyViewModels.CollectionChanges,
                     subjectPredicate:new List<Func<IScreenModel, bool>>
@@ -163,7 +163,7 @@ namespace RevolutionData
                     },
                     messageData:s => new ViewEventPublicationParameter(new object[] {s, s.BodyViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.BodyViewModels.Last().Process,s.Source)),
 
-                new ViewEventPublication<IScreenModel, ViewModelLoaded<IScreenModel,IViewModel>>(
+                new ViewEventPublication<IScreenModel, IViewModelLoaded<IScreenModel,IViewModel>>(
                     key:"ScreenModelLeft",
                     subject:v => v.LeftViewModels.CollectionChanges,
                     subjectPredicate:new List<Func<IScreenModel, bool>>
@@ -172,7 +172,7 @@ namespace RevolutionData
                     },
                     messageData:s => new ViewEventPublicationParameter(new object[] {s, s.LeftViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.LeftViewModels.Last().Process,s.Source)),
 
-                new ViewEventPublication<IScreenModel, ViewModelLoaded<IScreenModel,IViewModel>>(
+                new ViewEventPublication<IScreenModel, IViewModelLoaded<IScreenModel,IViewModel>>(
                     key:"ScreenModelHeader",
                     subject:v => v.HeaderViewModels.CollectionChanges,
                     subjectPredicate:new List<Func<IScreenModel, bool>>
@@ -181,7 +181,7 @@ namespace RevolutionData
                     },
                     messageData:s => new ViewEventPublicationParameter(new object[] {s, s.HeaderViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.HeaderViewModels.Last().Process,s.Source)),
 
-                new ViewEventPublication<IScreenModel, ViewModelLoaded<IScreenModel,IViewModel>>(
+                new ViewEventPublication<IScreenModel, IViewModelLoaded<IScreenModel,IViewModel>>(
                     key:"ScreenModelRight",
                     subject:v => v.RightViewModels.CollectionChanges,
                     subjectPredicate:new List<Func<IScreenModel, bool>>
@@ -190,7 +190,7 @@ namespace RevolutionData
                     },
                     messageData:s => new ViewEventPublicationParameter(new object[] {s, s.RightViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.RightViewModels.Last().Process,s.Source)),
 
-                new ViewEventPublication<IScreenModel, ViewModelLoaded<IScreenModel,IViewModel>>(
+                new ViewEventPublication<IScreenModel, IViewModelLoaded<IScreenModel,IViewModel>>(
                     key:"ScreenModelFooter",
                     subject:v => v.FooterViewModels.CollectionChanges,
                     subjectPredicate:new List<Func<IScreenModel, bool>>
@@ -199,14 +199,14 @@ namespace RevolutionData
                     },
                     messageData:s => new ViewEventPublicationParameter(new object[] {s, s.FooterViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.FooterViewModels.Last().Process,s.Source)),
 
-                 new ViewEventPublication<IScreenModel, ViewModelLoaded<IScreenModel,IViewModel>>(
+                 new ViewEventPublication<IScreenModel, IViewModelLoaded<IScreenModel,IViewModel>>(
                     key:"ScreenModelCache",
                     subject:v => v.CacheViewModels.CollectionChanges,
                     subjectPredicate:new List<Func<IScreenModel, bool>>
                     {
                         v => v.CacheViewModels.LastOrDefault() != null
                     },
-                    messageData:s => new ViewEventPublicationParameter(new object[] {s, s.CacheViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.FooterViewModels.Last().Process,s.Source)),
+                    messageData:s => new ViewEventPublicationParameter(new object[] {s, s.CacheViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded),s.CacheViewModels.Last().Process,s.Source)),
 
 
             },

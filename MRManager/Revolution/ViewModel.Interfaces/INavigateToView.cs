@@ -8,7 +8,7 @@ using SystemInterfaces;
 
 namespace ViewModel.Interfaces
 {
-    [InheritedExport]
+    
     public interface INavigateToView:IProcessSystemMessage
     {
         string View { get; }

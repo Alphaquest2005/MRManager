@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using SystemInterfaces;
 using Core.Common.UI;
 using EF.DBContexts;
 using EF.Entities;
+using RevolutionLogger;
 using Application = System.Windows.Application;
 
 namespace MRManager
@@ -17,7 +19,9 @@ namespace MRManager
 		public MainWindow()
 		{
 			InitializeComponent();
-		    Task.Run(() =>
+            if (File.Exists("MRManager-Logs.xml")) File.Delete("MRManager-Logs.xml");
+            Logger.Initialize();
+            Task.Run(() =>
 		    {
 		        var t = new MRManagerDBContext().GetType().Assembly;
 		        var x = new EFEntity<IEntity>().GetType().Assembly;

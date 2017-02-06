@@ -2,7 +2,7 @@
 
 namespace ViewModel.Interfaces
 {
-    [InheritedExport]
+    
     public interface IViewModelEvent<T>
     {
 

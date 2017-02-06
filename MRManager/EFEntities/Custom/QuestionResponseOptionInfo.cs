@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using Common.DataEntites;
 using Interfaces;
 using ReactiveUI;
 
 namespace EF.Entities
 {
+    [Export(typeof(IQuestionResponseOptionInfo))]
     public class QuestionResponseOptionInfo : EntityView<IQuestions>, IQuestionResponseOptionInfo
     {
         private string _category;

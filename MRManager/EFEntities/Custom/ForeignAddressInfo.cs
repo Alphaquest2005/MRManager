@@ -1,10 +1,13 @@
+using System.ComponentModel.Composition;
 using Common.DataEntites;
 using Interfaces;
 
 namespace EF.Entities
 {
+    [Export(typeof(IForeignAddressInfo))]
     public class ForeignAddressInfo : EntityView<IPersons_Patient>, IForeignAddressInfo
     {
+        
         public string Address { get; set; }
         public string Addresslines { get; set; }
         public string City { get; set; }

@@ -7,7 +7,7 @@ using SystemInterfaces;
 
 namespace ViewModel.Interfaces
 {
-    [InheritedExport]
+    
     public interface IViewModelEventPublication<in TViewModel, in TEvent> : IEventPublication where TViewModel : IViewModel where TEvent : IEvent
     {
         // int ProcessId { get; }
@@ -18,7 +18,7 @@ namespace ViewModel.Interfaces
 
     }
 
-    [InheritedExport]
+    
     public interface IViewModelEventCommand<in TViewModel, in TEvent> : IEventPublication where TViewModel : IViewModel where TEvent : IEvent
     {
         // int ProcessId { get; }

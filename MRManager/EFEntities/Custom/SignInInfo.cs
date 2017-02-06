@@ -14,7 +14,8 @@ using Utilities;
 
 namespace EF.Entities
 {
-	[Export]
+	
+    [Export(typeof(ISignInInfo))]
 	public partial class SignInInfo: EntityView<IUserSignIn>, ISignInInfo
 	{
 		public Byte[] Medias { get; set; }

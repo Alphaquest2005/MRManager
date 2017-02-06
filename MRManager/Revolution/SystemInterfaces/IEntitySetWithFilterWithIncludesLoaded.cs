@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SystemInterfaces
 {
-    [InheritedExport]
+    
     public interface IEntitySetWithFilterWithIncludesLoaded<T> : IProcessSystemMessage where T : IEntity
     {
         IList<T> Entities { get; }

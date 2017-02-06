@@ -66,8 +66,6 @@
     <Compile Include="IViewModelInfo.cs" />
     <Compile Include="IEntityViewModelInfo.cs" />
     <Compile Include="IHeaderViewModel.cs" />
-    <Compile Include="ICreateSummaryViewModel.cs" />
-    <Compile Include="ICreateViewModel.cs" />
     <Compile Include="ILeftView.cs" />
     <Compile Include="IStartViewModelFactory.cs" />
     <Compile Include="IStartViewModelLocator.cs" />

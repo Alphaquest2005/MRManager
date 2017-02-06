@@ -71,7 +71,7 @@ namespace MRManager_UnitTests
             });
             EventMessageBus.Current.GetEvent<IRequestProcessState>(Source).Where(x => x.Process.Id == 3).Subscribe(x => process3StateRequest = x);
 
-            EventMessageBus.Current.GetEvent<IProcessStateListMessage<IPatientInfo>>(Source).Where(x => x.Process.Id == 3).Subscribe(x => processStateMessageList.Add(x));
+            EventMessageBus.Current.GetEvent<IUpdateProcessStateList<IPatientInfo>>(Source).Where(x => x.Process.Id == 3).Subscribe(x => processStateMessageList.Add(x));
 
             EventMessageBus.Current.GetEvent<IEntityViewSetWithChangesLoaded<IPatientInfo>>(Source).Where(x => x.Process.Id == 3 && x.Changes.Count == 0).Subscribe(x => EntityViewSetLoaded_without_Changes = x);
 
@@ -119,7 +119,7 @@ namespace MRManager_UnitTests
         private IRequestProcessState process3StateRequest;
         
         private IViewStateLoaded<IPatientSummaryListViewModel, IProcessState<IPatientInfo>> InitialViewStateLoaded;
-        private List<IProcessStateListMessage<IPatientInfo>> processStateMessageList = new List<IProcessStateListMessage<IPatientInfo>>();
+        private List<IUpdateProcessStateList<IPatientInfo>> processStateMessageList = new List<IUpdateProcessStateList<IPatientInfo>>();
         private IEntityViewSetWithChangesLoaded<IPatientInfo> EntityViewSetLoaded_without_Changes;
         private IEntityViewSetWithChangesLoaded<IPatientInfo> EntityViewSetLoaded_WithChanges;
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemInterfaces
 {
-    [InheritedExport]
+    
     public interface IRequestProcessState : IProcessSystemMessage
     {
     }

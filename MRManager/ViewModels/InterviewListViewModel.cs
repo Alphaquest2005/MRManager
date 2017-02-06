@@ -19,7 +19,7 @@ using ViewModelInterfaces;
 namespace ViewModels
 {
 
-    [Export]
+    [Export(typeof(IInterviewListViewModel))]
     public class InterviewListViewModel : DynamicViewModel<ObservableListViewModel<IInterviewInfo>>, IInterviewListViewModel
     {
         private ReactiveProperty<IPatientSyntomInfo> _currentPatientSyntom = new ReactiveProperty<IPatientSyntomInfo>();
@@ -27,6 +27,7 @@ namespace ViewModels
         private ReactiveProperty<ISyntomMedicalSystemInfo> _currentSystem= new ReactiveProperty<ISyntomMedicalSystemInfo>();
         private ObservableList<ISyntomMedicalSystemInfo> _systems = new ObservableList<ISyntomMedicalSystemInfo>();
 
+        [ImportingConstructor]
         public InterviewListViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IInterviewInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
            this.WireEvents();

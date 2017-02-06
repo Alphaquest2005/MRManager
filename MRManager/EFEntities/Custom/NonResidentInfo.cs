@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using Common.DataEntites;
 using Interfaces;
 
 namespace EF.Entities
 {
+    [Export(typeof(INonResidentInfo))]
     public class NonResidentInfo : EntityView<IPersons_Patient>, INonResidentInfo
     {
         public string Type { get; set; }

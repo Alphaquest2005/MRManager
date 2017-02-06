@@ -1,10 +1,13 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using System.Linq.Expressions;
 using SystemInterfaces;
 using CommonMessages;
 
 namespace EventMessages.Commands
 {
+    
+
     public class LoadEntityViewSetWithFilter<T> : ProcessSystemMessage
     {
         public LoadEntityViewSetWithFilter(Expression<Func<T, bool>> filter, Expression func, Type viewType, Type viewDbType, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)

@@ -1,9 +1,13 @@
-﻿using SystemInterfaces;
+﻿using System.ComponentModel.Composition;
+using SystemInterfaces;
 
 namespace CommonMessages
 {
+    [Export(typeof(IProcessSystemMessage))]
     public class ProcessSystemMessage : SystemMessage, IProcessSystemMessage
     {
+        public ProcessSystemMessage() {}
+
         public ProcessSystemMessage(IProcessStateInfo processInfo,ISystemProcess process, ISystemSource source) : base(source.MachineInfo,source)
         {
             Process = process;

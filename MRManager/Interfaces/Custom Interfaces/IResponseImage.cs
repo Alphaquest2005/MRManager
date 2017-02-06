@@ -4,7 +4,7 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-    [InheritedExport]
+    
     public partial interface IResponseImage : IEntity
     {
         Int32 MediaId { get; }

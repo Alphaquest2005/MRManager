@@ -2,7 +2,7 @@
 
 namespace ViewModelInterfaces
 {
-    [InheritedExport]
+    
     public interface IViewModelLocator
     {
         void Intialize();

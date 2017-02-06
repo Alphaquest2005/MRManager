@@ -21,13 +21,13 @@ using ViewModelInterfaces;
 namespace ViewModels
 {
 
-    [Export]
+    [Export(typeof(IQuestionListViewModel))]
     public class QuestionListViewModel : DynamicViewModel<ObservableListViewModel<IQuestionInfo>>, IQuestionListViewModel
     {
         private ObservableBindingList<IQuestionInfo> _changeTrackingList = new ObservableBindingList<IQuestionInfo>();
         private ObservableList<IQuestionInfo> _entitySet;
         private IInterviewInfo _currentInterview;
-
+        [ImportingConstructor]
         public QuestionListViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IQuestionInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;

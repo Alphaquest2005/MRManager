@@ -10,7 +10,7 @@ using ReactiveUI;
 
 namespace ViewModel.Interfaces
 {
-    [InheritedExport]
+    
     public interface IViewModel:IProcessSource
     {
         string Name { get; }
