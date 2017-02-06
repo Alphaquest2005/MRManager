@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDoctorInfoCacheViewModel.cs" />
     <Compile Include="ICacheViewModel.cs" />
     <Compile Include="IViewRowStateChanged.cs" />
     <Compile Include="INavigateToView.cs" />

@@ -208,9 +208,17 @@
       <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>
       <Name>SystemInterfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Revolution\Utilities\Utilities.csproj">
+      <Project>{0f9427b1-792e-4c35-97d8-22a9494ce28f}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Revolution\ViewModel.Interfaces\ViewModel.Interfaces.csproj">
       <Project>{2f936e24-723e-4e7a-b21c-d6f618c74651}</Project>
       <Name>ViewModel.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\XamlGenericTypeExtension\XamlGenericTypeExtension.csproj">
+      <Project>{dc325a78-b3ca-4717-89c6-28fc15a385d7}</Project>
+      <Name>XamlGenericTypeExtension</Name>
     </ProjectReference>
     <ProjectReference Include="..\ViewModels\ViewModels.csproj">
       <Project>{db1e7bd6-7fe0-4cdd-8b6d-edbb0d156b41}</Project>

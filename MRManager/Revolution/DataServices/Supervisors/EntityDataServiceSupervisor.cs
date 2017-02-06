@@ -18,10 +18,10 @@ namespace DataServices.Actors
     public class EntityDataServiceSupervisor<TEntity> : BaseSupervisor<EntityDataServiceSupervisor<TEntity>> where TEntity : class, IEntity
     {
 
-        private static readonly Action<ICreateEntity<TEntity>> CreateAction = ( x) => x.CreateEntity();
-        private static readonly Action<IDeleteEntity<TEntity>> DeleteAction = (x) => x.DeleteEntity();
-        private static readonly Action<IUpdateEntityWithChanges<TEntity>> UpdateAction = (x) => x.UpdateEntity();
-        private static readonly Action<IGetEntityById<TEntity>> GetEntityByIdAction = (x) => x.GetEntity();
+        private static readonly Action<ISystemSource, ICreateEntity<TEntity>> CreateAction = (s, x) => x.CreateEntity();
+        private static readonly Action<ISystemSource, IDeleteEntity<TEntity>> DeleteAction = (s, x) => x.DeleteEntity();
+        private static readonly Action<ISystemSource, IUpdateEntityWithChanges<TEntity>> UpdateAction = (s, x) => x.UpdateEntity();
+        private static readonly Action<ISystemSource, IGetEntityById<TEntity>> GetEntityByIdAction = (s, x) => x.GetEntity();
         private static readonly Action<ISystemSource, IGetEntityWithChanges<TEntity>> GetEntityWithChangesAction = (s, x) => x.GetEntity();
 
         private static readonly Action<ISystemSource, ILoadEntitySet<TEntity>> LoadEntitySet = (s, x) => x.LoadEntitySet();
@@ -32,15 +32,15 @@ namespace DataServices.Actors
         readonly Dictionary<Type, object> entityEvents =
             new Dictionary<Type, object>()
             {
-                //{typeof (CreateEntity<TEntity>), CreateAction},
-                //{typeof (DeleteEntity<TEntity>), DeleteAction},
-                //{typeof (EntityChanges<TEntity>), UpdateAction},
-                //{typeof (GetEntityById<TEntity>), GetEntityByIdAction},
+                {typeof (ICreateEntity<TEntity>), CreateAction},
+                {typeof (IDeleteEntity<TEntity>), DeleteAction},
+                {typeof (IUpdateEntityWithChanges<TEntity>), UpdateAction},
+                {typeof (IGetEntityById<TEntity>), GetEntityByIdAction},
                 {typeof (IGetEntityWithChanges<TEntity>), GetEntityWithChangesAction},
 
-                //{typeof (LoadEntitySet<TEntity>), LoadEntitySet},
-                //{typeof (LoadEntitySetWithFilter<TEntity>), LoadEntitySetWithFilter},
-                //{typeof (LoadEntitySetWithFilterWithIncludes<TEntity>), LoadEntitySetWithFilterWithIncludes},
+                {typeof (ILoadEntitySet<TEntity>), LoadEntitySet},
+                {typeof (ILoadEntitySetWithFilter<TEntity>), LoadEntitySetWithFilter},
+                {typeof (ILoadEntitySetWithFilterWithIncludes<TEntity>), LoadEntitySetWithFilterWithIncludes},
 
             };
         private IUntypedActorContext ctx = null;

@@ -107,14 +107,18 @@ namespace Entity.Expressions
             {
                 Id = x.Id,
                 PatientId = x.PatientId,
+                DoctorId = x.DoctorId,
                 DateOfVisit = x.DateOfVisit,
                 Purpose = x.VisitType.Name,
+                VisitTypeId = x.VisitTypeId,
                 AttendingDoctor = string.Join(" ", x.Persons_Doctor.Persons.PersonNames.Select(z => z.PersonName)),
                 PatientSyntoms = x.PatientSyntoms.Select(z => new PatientSyntomInfo()
                 {
                     Id = z.Id,
                     Syntom = z.Syntoms.Name,
                     Priority = z.SyntomPriority.Name,
+                    PriorityId = z.PriorityId,
+                    StatusId = z.StatusId,
                     Status = z.SyntomStatus.Name,
                     Systems = z.Syntoms.SyntomMedicalSystems.Select(s => new SyntomMedicalSystemInfo()
                     {
@@ -126,6 +130,8 @@ namespace Entity.Expressions
                             Id = i.InterviewId,
                             Interview = i.Interviews.Name,
                             Category = i.Interviews.MedicalCategory.Name,
+                            CategoryId = i.Interviews.MedicalCategoryId,
+                            PhaseId = i.Interviews.PhaseId,
                             Phase = i.Interviews.Phase.Name
                         } as IInterviewInfo).ToList()
                     } as ISyntomMedicalSystemInfo).ToList(),

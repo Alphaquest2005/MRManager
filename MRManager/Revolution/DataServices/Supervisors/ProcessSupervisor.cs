@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
@@ -55,11 +56,13 @@ namespace DataServices.Actors
 
                 try
                 {
+                    var actorName = "ProcessActor-" + inMsg.Process.Name.GetSafeActorName();
+                    if (!Equals(ctx.Child(actorName), ActorRefs.Nobody)) return;
                     EventMessageBus.Current.Publish(inMsg, Source);
                     if(Processes.ProcessComplexEvents.All(x => x.ProcessId != inMsg.Process.Id)) throw new ApplicationException($"No Complex Events were created for this process:{inMsg.Process.Id}-{inMsg.Process.Name}");
                     
 
-                    var childActor = ctx.ActorOf(Props.Create<ProcessActor>(inMsg), "ProcessActor-" + inMsg.Process.Name.GetSafeActorName());
+                    var childActor = ctx.ActorOf(Props.Create<ProcessActor>(inMsg), actorName);
                     EventMessageBus.Current.GetEvent<IProcessSystemMessage>(Source)
                         .Where(x => x.Process.Id == inMsg.Process.Id && x.MachineInfo.MachineName == inMsg.MachineInfo.MachineName)
                         .Subscribe(x => childActor.Tell(x));

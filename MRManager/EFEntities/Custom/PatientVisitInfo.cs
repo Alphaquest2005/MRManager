@@ -15,6 +15,8 @@ namespace EF.Entities
         private string _attendingDoctor;
         private IList<IPatientSyntomInfo> _patientSyntoms;
         private string _purpose;
+        private int _doctorId;
+        private int _visitTypeId;
 
         public int PatientId
         {
@@ -34,6 +36,12 @@ namespace EF.Entities
             set { this.RaiseAndSetIfChanged(ref _attendingDoctor, value); }
         }
 
+        public int DoctorId
+        {
+            get { return _doctorId; }
+            set { this.RaiseAndSetIfChanged(ref _doctorId, value); }
+        }
+
         public IList<IPatientSyntomInfo> PatientSyntoms
         {
             get { return _patientSyntoms; }
@@ -44,6 +52,12 @@ namespace EF.Entities
         {
             get { return _purpose; }
             set { this.RaiseAndSetIfChanged(ref _purpose, value); }
+        }
+
+        public int VisitTypeId
+        {
+            get { return _visitTypeId; }
+            set { this.RaiseAndSetIfChanged(ref _visitTypeId, value); }
         }
     }
 }

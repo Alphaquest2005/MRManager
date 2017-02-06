@@ -11,8 +11,8 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-	
-	public partial interface IMedicalCategory:IEntity  
+    [InheritedExport]
+    public partial interface IMedicalCategory:IEntity  
 	{
 		string Name { get;}
 

@@ -10,5 +10,8 @@ namespace Interfaces
         String Interview { get; }
         String Category { get; }
         String Phase { get; }
+        int PhaseId { get; }
+        int CategoryId { get; }
+
     }
 }

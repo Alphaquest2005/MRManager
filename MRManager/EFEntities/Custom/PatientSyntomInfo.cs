@@ -13,6 +13,8 @@ namespace EF.Entities
         private string _priority;
         private string _status;
         private IList<ISyntomMedicalSystemInfo> _systems;
+        private int _priorityId;
+        private int _statusId;
 
         public string Syntom
         {
@@ -30,6 +32,18 @@ namespace EF.Entities
         {
             get { return _status; }
             set { this.RaiseAndSetIfChanged(ref _status, value); }
+        }
+
+        public int PriorityId
+        {
+            get { return _priorityId; }
+            set { this.RaiseAndSetIfChanged(ref _priorityId, value); }
+        }
+
+        public int StatusId
+        {
+            get { return _statusId; }
+            set { this.RaiseAndSetIfChanged(ref _statusId, value); }
         }
 
         public IList<ISyntomMedicalSystemInfo> Systems

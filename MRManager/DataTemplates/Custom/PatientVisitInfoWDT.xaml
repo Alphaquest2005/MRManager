@@ -4,7 +4,10 @@
                     xmlns:converters="clr-namespace:Converters;assembly=Converters"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:nbs="urn:nbs-wpf-generic"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:utils="clr-namespace:Utilities;assembly=Utilities"
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
     <DataTemplate x:Key="PatientVisitInfoWDT" DataType="{x:Type Interfaces:IPatientVisitInfo}">
@@ -16,37 +19,45 @@
                     <GradientStop Offset="0.069" Color="#19FFFFFF" />
                 </LinearGradientBrush>
             </Grid.Background>
-            <TextBox Width="351"
-                     Height="37"
-                     Margin="10,10,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     FontSize="18.667"
-                     Text="{Binding Purpose,
-                                    FallbackValue=Purpose,TargetNullValue=Purpose,
-                                    Mode=TwoWay}" />
+            <ComboBox Width="351"
+                      Height="37"
+                      Margin="10,10,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      DisplayMemberPath="Name"
+                      FontSize="18.667"
+                      ItemsSource="{Binding Source={x:Static Member=viewModels:VisitTypeCacheViewModel.Instance},
+                                            Path=EntitySet,
+                                            UpdateSourceTrigger=PropertyChanged,
+                                            Mode=OneWay,
+                                            IsAsync=True}"
+                      SelectedValue="{Binding VisitTypeId}"
+                      SelectedValuePath="Id" />
             <ComboBox Width="125"
-                     Height="27"
-                     Margin="366,10,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     FontSize="16"
-                     SelectedValue="{Binding AttendingDoctor,
-                                    FallbackValue=AttendingDoctor,TargetNullValue=AttendingDoctor,
-                                    Mode=TwoWay}">
-                <ComboBoxItem Content="Lutz Amechi"/>
-                <ComboBoxItem Content="Dr. Dragon"/>
-            </ComboBox>
+                      Height="27"
+                      Margin="366,10,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      DisplayMemberPath="Name"
+                      FontSize="16"
+                      ItemsSource="{Binding Source={x:Static Member=viewModels:DoctorInfoCacheViewModel.Instance},
+                                            Path=EntitySet,
+                                            UpdateSourceTrigger=PropertyChanged,
+                                            Mode=OneWay,
+                                            IsAsync=True}"
+                      SelectedValue="{Binding DoctorId}"
+                      SelectedValuePath="Id" />
+
             <DatePicker Width="481"
-                     Height="27"
-                     Margin="10,52,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     FontSize="16"
-                     SelectedDate="{x:Static sys:DateTime.Now}"   
-                     Text="{Binding DateOfVisit,
-                                    Mode=TwoWay,
-                                    StringFormat=D}" />
+                        Height="27"
+                        Margin="10,52,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="16"
+                        SelectedDate="{x:Static sys:DateTime.Now}"
+                        Text="{Binding DateOfVisit,
+                                       Mode=TwoWay,
+                                       StringFormat=D}" />
 
         </Grid>
 

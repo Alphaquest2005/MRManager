@@ -11,8 +11,8 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-	
-	public partial interface IVisitType:IEntity  
+    [InheritedExport]
+    public partial interface IVisitType:IEntity  
 	{
 		string Name { get;}
 

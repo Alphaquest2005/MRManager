@@ -4,6 +4,7 @@
                     xmlns:converters="clr-namespace:Converters;assembly=Converters"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
     <DataTemplate x:Key="InterviewInfoWDT" DataType="{x:Type Interfaces:IInterviewInfo}">
@@ -22,34 +23,37 @@
                      VerticalAlignment="Top"
                      FontSize="18.667"
                      Text="{Binding Path=Interview,
-                                    FallbackValue=Interview,TargetNullValue=Interview,
+                                    FallbackValue=Interview,
+                                    TargetNullValue=Interview,
                                     Mode=TwoWay}" />
             <ComboBox Width="264"
-                     Height="27"
-                     Margin="10,52,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     FontSize="16"
-                     SelectedValue="{Binding Path=Category,
-                                    FallbackValue=Category,TargetNullValue=Category,
-                                    Mode=TwoWay}" >
-                <ComboBoxItem Content="Personal Info"/>
-                <ComboBoxItem Content="Medical Category 2"/>
-                <ComboBoxItem Content="Medical Category 3"/>
-            </ComboBox>
+                      Height="27"
+                      Margin="10,52,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      DisplayMemberPath="Name"
+                      FontSize="16"
+                      ItemsSource="{Binding Source={x:Static Member=viewModels:MedicalCategoryCacheViewModel.Instance},
+                                            Path=EntitySet,
+                                            UpdateSourceTrigger=PropertyChanged,
+                                            Mode=OneWay,
+                                            IsAsync=True}"
+                      SelectedValue="{Binding CategoryId}"
+                      SelectedValuePath="Id" />
             <ComboBox Width="159"
-                     Height="27"
-                     Margin="282,52,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     FontSize="16"
-                     SelectedValue="{Binding Path=Phase,
-                                    FallbackValue=Phase,TargetNullValue=Phase,
-                                    Mode=TwoWay}" >
-                <ComboBoxItem Content="Personal"/>
-                <ComboBoxItem Content="Phase 2"/>
-                <ComboBoxItem Content="Phase 3"/>
-            </ComboBox>
+                      Height="27"
+                      Margin="282,52,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      DisplayMemberPath="Name"
+                      FontSize="16"
+                      ItemsSource="{Binding Source={x:Static Member=viewModels:PhaseCacheViewModel.Instance},
+                                            Path=EntitySet,
+                                            UpdateSourceTrigger=PropertyChanged,
+                                            Mode=OneWay,
+                                            IsAsync=True}"
+                      SelectedValue="{Binding PhaseId}"
+                      SelectedValuePath="Id" />
 
         </Grid>
 

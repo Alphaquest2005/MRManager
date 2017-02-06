@@ -4,6 +4,7 @@
                     xmlns:converters="clr-namespace:Converters;assembly=Converters"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
     <DataTemplate x:Key="PatientSyntomInfoWDT" DataType="{x:Type Interfaces:IPatientSyntomInfo}">
@@ -26,33 +27,33 @@
                                     TargetNullValue=Syntom,
                                     Mode=TwoWay}" />
             <ComboBox Width="125"
-                     Height="27"
-                     Margin="366,10,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     FontSize="16"
-                     SelectedValue="{Binding Priority,
-                                    FallbackValue=Priority,
-                                    TargetNullValue=Priority,
-                                    Mode=TwoWay}" >
-                <ComboBoxItem Content="Low"/>
-                <ComboBoxItem Content="Medium"/>
-                <ComboBoxItem Content="High"/>
-            </ComboBox>
+                      Height="27"
+                      Margin="366,10,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      DisplayMemberPath="Name"
+                      FontSize="16"
+                      ItemsSource="{Binding Source={x:Static Member=viewModels:SyntomPriorityCacheViewModel.Instance},
+                                            Path=EntitySet,
+                                            UpdateSourceTrigger=PropertyChanged,
+                                            Mode=OneWay,
+                                            IsAsync=True}"
+                      SelectedValue="{Binding PriorityId}"
+                      SelectedValuePath="Id" />
             <ComboBox Width="481"
-                     Height="27"
-                     Margin="10,52,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     FontSize="16"
-                     SelectedValue="{Binding Status,
-                                    FallbackValue=Status,
-                                    TargetNullValue=Status,
-                                    Mode=TwoWay}" >
-                <ComboBoxItem Content="Open"/>
-                <ComboBoxItem Content="Closed"/>
-                <ComboBoxItem Content="Awaiting Results"/>
-            </ComboBox>
+                      Height="27"
+                      Margin="10,52,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      DisplayMemberPath="Name"
+                      FontSize="16"
+                      ItemsSource="{Binding Source={x:Static Member=viewModels:SyntomStatusCacheViewModel.Instance},
+                                            Path=EntitySet,
+                                            UpdateSourceTrigger=PropertyChanged,
+                                            Mode=OneWay,
+                                            IsAsync=True}"
+                      SelectedValue="{Binding StatusId}"
+                      SelectedValuePath="Id" />
 
         </Grid>
 
