@@ -4,7 +4,10 @@ using System.ComponentModel.Composition;
 using SystemInterfaces;
 using Core.Common.UI;
 using Interfaces;
+using JB.Collections.Reactive;
+using Reactive.Bindings;
 using ViewModel.Interfaces;
+using ViewModelInterfaces;
 
 namespace ViewModels
 {
@@ -30,5 +33,27 @@ namespace ViewModels
             this.WireEvents();
         }
 
+    }
+
+    [Export(typeof(IEntityViewCacheViewModel<ISyntomMedicalSystemInfo>))]
+    public class SystemInfoCacheViewModel : DynamicViewModel<ObservableListViewModel<ISyntomMedicalSystemInfo>>, IEntityViewCacheViewModel<ISyntomMedicalSystemInfo>
+    {
+        public SystemInfoCacheViewModel() { }
+        public SystemInfoCacheViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<ISyntomMedicalSystemInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
+        {
+            this.WireEvents();
+        }
+
+        ReactiveProperty<IProcessState<ISyntomMedicalSystemInfo>> IEntityViewModel<ISyntomMedicalSystemInfo>.State {
+            get; }
+
+        public ReactiveProperty<ISyntomMedicalSystemInfo> CurrentEntity => this.ViewModel.CurrentEntity;
+        public ObservableList<ISyntomMedicalSystemInfo> EntitySet => this.ViewModel.EntitySet;
+        public ObservableList<ISyntomMedicalSystemInfo> SelectedEntities => this.ViewModel.SelectedEntities;
+
+        ReactiveProperty<IProcessStateList<ISyntomMedicalSystemInfo>> IEntityListViewModel<ISyntomMedicalSystemInfo>.
+            State => this.ViewModel.State;
+
+        public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
     }
 }

@@ -4,11 +4,14 @@
                     xmlns:converters="clr-namespace:Converters;assembly=Converters"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
-    <DataTemplate x:Key="SystemInfoWDT" DataType="{x:Type Interfaces:ISyntomMedicalSystemInfo}">
+    <DataTemplate x:Key="SystemInfoWDT">
 
-        <Grid Width="Auto" Height="80">
+        <Grid Width="Auto"
+              Height="80"
+              DataContext="{Binding Source={x:Static viewModels:SystemInfoCacheViewModel.Instance}}">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                     <GradientStop Offset="0.907" Color="#33000000" />
@@ -22,8 +25,10 @@
                      VerticalAlignment="Top"
                      FontSize="18.667"
                      Text="{Binding System,
-                                    FallbackValue=System,TargetNullValue=System,
-                                    Mode=TwoWay}" />
+                                    FallbackValue=System,
+                                    TargetNullValue=System,
+                                    Mode=TwoWay,
+                                    UpdateSourceTrigger=PropertyChanged}" />
 
 
         </Grid>

@@ -50,7 +50,13 @@ namespace RevolutionData
                     key:"CurrentEntityChanged",
                     subject:v => v.CurrentEntity,//.WhenAnyValue(x => x.Value),
                     subjectPredicate:new List<Func<IInterviewListViewModel, bool>>{},
-                    messageData:s => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source))
+                    messageData:s => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
+
+                new ViewEventPublication<IInterviewListViewModel, ICurrentEntityChanged<ISyntomMedicalSystemInfo>>(
+                    key:"CurrentSystemChanged",
+                    subject:v => v.CurrentMedicalSystem,//.WhenAnyValue(x => x.Value),
+                    subjectPredicate:new List<Func<IInterviewListViewModel, bool>>{},
+                    messageData:s => new ViewEventPublicationParameter(new object[] {s.CurrentMedicalSystem.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
             },
             new List<IViewModelEventCommand<IViewModel,IEvent>>
             {

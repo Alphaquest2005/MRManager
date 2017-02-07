@@ -10,9 +10,11 @@
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
-    <DataTemplate x:Key="PatientVisitInfoWDT" DataType="{x:Type Interfaces:IPatientVisitInfo}">
+    <DataTemplate x:Key="PatientVisitInfoWDT">
 
-        <Grid Width="Auto" Height="80">
+        <Grid Width="Auto"
+              Height="80"
+              DataContext="{Binding Source={x:Static viewModels:PatientVisitViewModel.Instance}}">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                     <GradientStop Offset="0.907" Color="#33000000" />
@@ -31,7 +33,8 @@
                                             UpdateSourceTrigger=PropertyChanged,
                                             Mode=OneWay,
                                             IsAsync=True}"
-                      SelectedValue="{Binding VisitTypeId}"
+                      SelectedValue="{Binding VisitTypeId,
+                                              UpdateSourceTrigger=PropertyChanged}"
                       SelectedValuePath="Id" />
             <ComboBox Width="125"
                       Height="27"
@@ -45,7 +48,8 @@
                                             UpdateSourceTrigger=PropertyChanged,
                                             Mode=OneWay,
                                             IsAsync=True}"
-                      SelectedValue="{Binding DoctorId}"
+                      SelectedValue="{Binding DoctorId,
+                                              UpdateSourceTrigger=PropertyChanged}"
                       SelectedValuePath="Id" />
 
             <DatePicker Width="481"
@@ -54,10 +58,12 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         FontSize="16"
-                        SelectedDate="{x:Static sys:DateTime.Now}"
-                        Text="{Binding DateOfVisit,
-                                       Mode=TwoWay,
-                                       StringFormat=D}" />
+                        SelectedDate="{Binding DateOfVisit,
+                                               Mode=TwoWay,
+                                               FallbackValue={x:Static sys:DateTime.Now},
+                                               TargetNullValue={x:Static sys:DateTime.Now},
+                                               StringFormat=D,
+                                               UpdateSourceTrigger=PropertyChanged}" />
 
         </Grid>
 

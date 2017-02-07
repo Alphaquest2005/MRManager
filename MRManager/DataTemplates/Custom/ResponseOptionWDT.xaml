@@ -7,13 +7,13 @@
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
-    <DataTemplate x:Key="ResponseOptionWDT" DataType="{x:Type Interfaces:IResponseOptionInfo}">
+    <DataTemplate x:Key="ResponseOptionWDT">
         <DataTemplate.Resources>
             <converters:StringVisibilityConverter x:Key="StringVisibilityConverter" />
             <converters:StringBooleanConverter x:Key="StringBooleanConverter" />
             <converters:StringDateConverter x:Key="StringDateConverter" />
         </DataTemplate.Resources>
-        <Grid Width="Auto" Height="Auto">
+        <Grid Width="Auto" Height="Auto" DataContext="{Binding Source={x:Static viewModels:QuestionaireViewModel.Instance}}">
             <Grid Margin="0" Visibility="{Binding Path=Type, Converter={StaticResource StringVisibilityConverter}, ConverterParameter='TextBox'}">
                 <TextBox Width="303"
                          Height="24"

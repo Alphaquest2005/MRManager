@@ -13,9 +13,9 @@ namespace ViewModel.Interfaces
     
     public interface IViewModel:IProcessSource
     {
-        string Name { get; }
-        string Symbol { get; }
-        string Description { get; }
+        string ViewName { get; }
+        string ViewSymbol { get; }
+        string ViewDescription { get; }
         ISystemProcess Process { get; }
         
         List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get; }

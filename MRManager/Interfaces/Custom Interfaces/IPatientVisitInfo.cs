@@ -8,12 +8,12 @@ namespace Interfaces
     
     public interface IPatientVisitInfo : IEntityView<IPatientVisit>
     {
-        int PatientId { get; set; }
-        DateTime DateOfVisit { get; set; }
-        string AttendingDoctor { get; set; }
-        int DoctorId { get; set; }
-        IList<IPatientSyntomInfo> PatientSyntoms { get; set; }
-        string Purpose { get; set; }
+        int PatientId { get; }
+        DateTime DateOfVisit { get;  }
+        string AttendingDoctor { get;  }
+        int DoctorId { get;  }
+        IList<IPatientSyntomInfo> PatientSyntoms { get;  }
+        string Purpose { get; }
         int VisitTypeId { get; }
     }
 }

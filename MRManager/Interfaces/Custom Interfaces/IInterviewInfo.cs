@@ -13,5 +13,9 @@ namespace Interfaces
         int PhaseId { get; }
         int CategoryId { get; }
 
+        string System { get; }
+        int SystemId { get; }
+        
+
     }
 }

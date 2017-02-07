@@ -8,16 +8,13 @@ using ReactiveUI;
 namespace Common.DataEntites
 {
    
-    public abstract class EntityView<TEntity> :ReactiveObject, IEntityView<TEntity> where TEntity: IEntity
+    public abstract class EntityView<TEntity>: IEntityView<TEntity> where TEntity: IEntity
     {
         public Type EntityType => typeof(TEntity);
 
         private int _id;
-        public int Id
-        {
-            get { return _id; }
-            set { this.RaiseAndSetIfChanged(ref _id, value); }
-        }
+        public int Id { get; set; }
+        
 
         private readonly Guid _entityGuid = Guid.NewGuid();
         

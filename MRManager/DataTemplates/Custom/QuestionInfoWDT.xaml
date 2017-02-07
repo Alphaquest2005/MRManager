@@ -4,11 +4,14 @@
                     xmlns:converters="clr-namespace:Converters;assembly=Converters"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
-    <DataTemplate x:Key="QuestionInfoWDT" DataType="{x:Type Interfaces:IQuestionInfo}">
+    <DataTemplate x:Key="QuestionInfoWDT">
 
-        <Grid Width="Auto" Margin="0">
+        <Grid Width="Auto"
+              Margin="0"
+              DataContext="{Binding Source={x:Static viewModels:QuestionListViewModel.Instance}}">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                     <GradientStop Offset="0.907" Color="#33000000" />
@@ -24,7 +27,8 @@
                      Text="{Binding Path=Description,
                                     FallbackValue=Description,
                                     TargetNullValue=Description,
-                                    Mode=TwoWay}" />
+                                    Mode=TwoWay,
+                                    UpdateSourceTrigger=PropertyChanged}" />
             <TextBox Width="118"
                      Height="27"
                      Margin="54,75,0,0"
@@ -34,7 +38,8 @@
                      Text="{Binding Entity,
                                     FallbackValue=Entity,
                                     TargetNullValue=Entity,
-                                    Mode=TwoWay}" />
+                                    Mode=TwoWay,
+                                    UpdateSourceTrigger=PropertyChanged}" />
             <TextBox Width="158"
                      Height="27"
                      Margin="177,75,0,0"
@@ -44,7 +49,8 @@
                      Text="{Binding Attribute,
                                     FallbackValue=Attribute,
                                     TargetNullValue=Attribute,
-                                    Mode=TwoWay}" />
+                                    Mode=TwoWay,
+                                    UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Width="39"
                        Height="43"
                        Margin="10,10,0,0"
@@ -54,8 +60,9 @@
                        Text="{Binding QuestionNumber,
                                       FallbackValue=QuestionNumber,
                                       TargetNullValue=QuestionNumber,
-                                      Mode=TwoWay}" />
-
+                                      Mode=TwoWay,
+                                      UpdateSourceTrigger=PropertyChanged}" />
+            <!--  TODO:convert this to database list  -->
             <ComboBox Width="118"
                       Height="27"
                       Margin="340,75,0,0"
@@ -65,7 +72,8 @@
                       SelectedValue="{Binding Type,
                                               FallbackValue=Type,
                                               TargetNullValue=Address,
-                                              Mode=TwoWay}">
+                                              Mode=TwoWay,
+                                              UpdateSourceTrigger=PropertyChanged}">
                 <ComboBox.Items>
                     <ComboBoxItem Content="TextBox" />
                     <ComboBoxItem Content="CheckBox" />

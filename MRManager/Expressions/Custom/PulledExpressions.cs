@@ -132,7 +132,10 @@ namespace Entity.Expressions
                             Category = i.Interviews.MedicalCategory.Name,
                             CategoryId = i.Interviews.MedicalCategoryId,
                             PhaseId = i.Interviews.PhaseId,
-                            Phase = i.Interviews.Phase.Name
+                            Phase = i.Interviews.Phase.Name,
+                            SystemId = s.MedicalSystemId,
+                            System = s.MedicalSystems.Name,
+                           
                         } as IInterviewInfo).ToList()
                     } as ISyntomMedicalSystemInfo).ToList(),
                 } as IPatientSyntomInfo).ToList()

@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Custom Interfaces\ForeignAddressInfo.cs" />
     <Compile Include="Custom Interfaces\IDoctorInfo.cs" />
+    <Compile Include="Custom Interfaces\IForeignPhoneNumberInfo.cs" />
     <Compile Include="Custom Interfaces\IInterviewInfo.cs" />
     <Compile Include="Custom Interfaces\INextOfKinInfo.cs" />
     <Compile Include="Custom Interfaces\INonResidentInfo.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Custom Interfaces\IQuestionResponseOptionInfo.cs" />
     <Compile Include="Custom Interfaces\IQuestionsInfo.cs" />
     <Compile Include="Custom Interfaces\IResponseImage.cs" />
+    <Compile Include="Custom Interfaces\IResponseInfo.cs" />
     <Compile Include="Custom Interfaces\IResponseOptionInfo.cs" />
     <Compile Include="Custom Interfaces\ISignInInfo.cs" />
     <Compile Include="Custom Interfaces\ISyntomMedicalSystemInfo.cs" />

@@ -27,9 +27,9 @@ namespace Core.Common.UI
             CommandInfo = commandInfo;
             Orientation = orientation;
             ViewModelType = typeof(TViewModel);
-            Name = process.Name;
-            Description = process.Description;
-            Symbol = process.Symbol;
+            ViewName = process.Name;
+            ViewDescription = process.Description;
+            ViewSymbol = process.Symbol;
         }
 
         
@@ -43,9 +43,9 @@ namespace Core.Common.UI
         public Dictionary<string, ReactiveCommand<IViewModel, Unit>> Commands { get; } = new Dictionary<string, ReactiveCommand<IViewModel, Unit>>();
 
         public ISystemProcess Process { get; set; }
-        public string Name { get; }
-        public string Symbol { get; }
-        public string Description { get; }
+        public string ViewName { get; }
+        public string ViewSymbol { get; }
+        public string ViewDescription { get; }
 
     }
 }

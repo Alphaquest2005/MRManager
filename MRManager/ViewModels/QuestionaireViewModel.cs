@@ -63,13 +63,13 @@ namespace ViewModels
             {
                 ChangeTrackingList.Clear();
                 if (patientResponseInfo == null) return;
-                var resLst = new List<IResponseOptionInfo>();
+                var resLst = new List<ResponseOptionInfo>();
                 BindingOperations.EnableCollectionSynchronization(resLst, lockObject);
                
                 if (patientResponseInfo?.ResponseOptions != null)
                 {
 
-                    resLst.AddRange(patientResponseInfo.ResponseOptions);
+                    resLst.AddRange(patientResponseInfo.ResponseOptions.Select(x => (ResponseOptionInfo)x ));
                     if (CurrentPatient != null)
                     {
                         foreach (
@@ -97,10 +97,7 @@ namespace ViewModels
                 
                 ChangeTrackingList.AddRange(resLst);
                
-                foreach (var itm in ChangeTrackingList)
-                {
-                    itm.ObservableForProperty(x =>x.Value).Subscribe(x => updateChangeTracking(x));
-                }
+                
                 
             });
 

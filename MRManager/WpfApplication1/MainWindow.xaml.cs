@@ -91,9 +91,9 @@ namespace WpfApplication1
     public class ViewModel<TEntity> : IEntityCacheViewModel<TEntity> where TEntity : IEntity
     {
         public ISystemSource Source { get; }
-        public string Name { get; }
-        public string Symbol { get; }
-        public string Description { get; }
+        public string ViewName { get; }
+        public string ViewSymbol { get; }
+        public string ViewDescription { get; }
         public ISystemProcess Process { get; }
         public List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get; }
         public List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; }

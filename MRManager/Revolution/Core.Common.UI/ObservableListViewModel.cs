@@ -41,6 +41,8 @@ namespace Core.Common.UI
         {
             Validator = new EntityValidator<TEntity>();
             State.WhenAnyValue(x => x.Value).Subscribe(x => UpdateLocalState(x));
+            CurrentEntity.WhenAnyValue(x => x.Value).Subscribe(x => ChangeTracking.Clear());
+
             _instance = this;
         }
 

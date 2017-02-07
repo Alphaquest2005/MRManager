@@ -56,7 +56,11 @@ namespace RevolutionData
                                 Application.Current.Dispatcher.Invoke(() => UpdateEntitySet(v, e));
                             }
                         }),
-
+                    new ViewEventSubscription<IEntityCacheViewModel<TEntity>, ICurrentEntityChanged<TEntity>>(
+                            3,
+                            e => e != null,
+                            new List<Func<IEntityCacheViewModel<TEntity>, ICurrentEntityChanged<TEntity>, bool>>(),
+                            (v,e) => v.CurrentEntity.Value = e.Entity),
 
                 },
                 publications: new List<IViewModelEventPublication<IViewModel, IEvent>> {},

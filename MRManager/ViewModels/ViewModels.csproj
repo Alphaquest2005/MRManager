@@ -56,10 +56,7 @@
     <Compile Include="QuestionaireViewModel.cs" />
     <Compile Include="PatientSummaryListViewModel.cs" />
     <Compile Include="SigninViewModel.cs" />
-    <Compile Include="ReadEntityViewModel.cs" />
-    <Compile Include="SummaryViewModel.cs" />
     <Compile Include="System ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="WriteEntityViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenModel.cs" />
   </ItemGroup>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Windows;
 using SystemInterfaces;
 using Core.Common.UI;
@@ -31,9 +32,13 @@ namespace ViewModels
         public InterviewListViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IInterviewInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
            this.WireEvents();
-            CurrentMedicalSystem.WhenAnyValue(x => x.Value).Subscribe(x => systemChange(x));
+            CurrentMedicalSystem.WhenAnyValue(x => x.Value).DistinctUntilChanged().Subscribe(x => systemChange(x));
+            
             this.WhenAnyValue(x => x.CurrentPatientSyntom.Value).Subscribe(x => addSystems(x));
+           
         }
+
+        
 
         private void addSystems(IPatientSyntomInfo patientSyntom)
         {
@@ -51,7 +56,7 @@ namespace ViewModels
                 res.Add(new SyntomMedicalSystemInfo() { System = "Create New..." });
                 Systems.AddRange(res);
                 Systems.Reset();
-                CurrentMedicalSystem.Value = Systems.FirstOrDefault();
+                if(CurrentMedicalSystem.Value != Systems.FirstOrDefault()) CurrentMedicalSystem.Value = Systems.FirstOrDefault();
             });
         }
 
@@ -66,12 +71,14 @@ namespace ViewModels
                         CurrentEntity.Value = null;
                         return;
                     }
+                    
                     var res = new List<IInterviewInfo>();
                     if(CurrentMedicalSystem.Value.Interviews != null) res = CurrentMedicalSystem.Value.Interviews.ToList();
                     res.Add(new InterviewInfo() { Interview = "Create New..." });
                     EntitySet.AddRange(res);
                     EntitySet.Reset();
                     CurrentEntity.Value = EntitySet.FirstOrDefault();
+                    
                 });
         }
 
@@ -111,7 +118,8 @@ namespace ViewModels
             set
             {
                 _currentMedicalSystem = value;
-               
+                
+
             }
         }
 

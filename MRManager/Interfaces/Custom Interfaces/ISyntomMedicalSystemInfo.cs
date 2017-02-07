@@ -7,8 +7,8 @@ namespace Interfaces
     
     public interface ISyntomMedicalSystemInfo : IEntityView<ISyntomMedicalSystems>
     {
-        int MedicalSystemId { get; set; }
-        string System { get; set; }
-        IList<IInterviewInfo> Interviews { get; set; }
+        int MedicalSystemId { get; }
+        string System { get;  }
+        IList<IInterviewInfo> Interviews { get;  }
     }
 }

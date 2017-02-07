@@ -60,21 +60,12 @@ namespace ViewModels
                     ChangeTrackingList.AddRange(resLst);
 
                 }
-                RegisterChangeTrackingList();
+               
             });
 
         }
 
-        private void RegisterChangeTrackingList()
-        {
-            foreach (var itm in ChangeTrackingList)
-            {
-                itm.ObservableForProperty(x => x.Description).Subscribe(x => updateDescription(x));
-                itm.ObservableForProperty(x => x.Entity).Subscribe(x => updateEntity(x));
-                itm.ObservableForProperty(x => x.Attribute).Subscribe(x => updateAttribute(x));
-                itm.ObservableForProperty(x => x.Type).Subscribe(x => updateType(x));
-            }
-        }
+       
 
         private void updateType(IObservedChange<IQuestionInfo, string> typeChange)
         {
@@ -175,7 +166,7 @@ namespace ViewModels
                     Type = "TextBox"
                 });
 
-                RegisterChangeTrackingList();
+               
             }
         }
 

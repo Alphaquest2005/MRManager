@@ -8,6 +8,7 @@ using Actor.Interfaces;
 using EventMessages.Commands;
 using EventMessages.Events;
 using Interfaces;
+using MoreLinq;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
@@ -91,6 +92,31 @@ namespace RevolutionData
                             new StateCommandInfo(s.Process.Id,
                                 Context.Process.Commands.CurrentEntityChanged), s.Process,
                             s.Source);
+                    }),
+
+                new ViewEventCommand<IPatientSummaryListViewModel, IUpdateEntityViewWithChanges<IPatientInfo>>(
+                    key:"SaveName",
+                    subject:v => v.ChangeTracking.DictionaryChanges,
+                    commandPredicate: new List<Func<IPatientSummaryListViewModel, bool>>
+                    {
+                        v => v.ChangeTracking.Count == 1
+                             && v.ChangeTracking.ContainsKey(nameof(IPatientInfo.Name))
+                             && ((dynamic)v)[nameof(IPatientInfo.Id)] != 0
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: s =>
+                    {
+                         
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                ((dynamic)s).Id,
+                                s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                            },
+                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
+                            s.Source);
+                        s.ChangeTracking.Clear();
+                        return msg;
                     }),
 
             },

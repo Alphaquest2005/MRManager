@@ -60,6 +60,12 @@ namespace RevolutionData
                             }
                         }),
 
+                     new ViewEventSubscription<IEntityViewCacheViewModel<TView>, ICurrentEntityChanged<TView>>(
+                            3,
+                            e => e != null,
+                            new List<Func<IEntityViewCacheViewModel<TView>, ICurrentEntityChanged<TView>, bool>>(),
+                            (v,e) => v.CurrentEntity.Value = e.Entity),
+
 
                 },
                 publications: new List<IViewModelEventPublication<IViewModel, IEvent>> {},

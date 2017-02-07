@@ -29,14 +29,14 @@ namespace Core.Common.UI
         {
             Contract.Requires(viewModel != null);
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
-            Name = viewModel.Name;
+            ViewName = viewModel.ViewName;
             CommandInfo = viewModel.CommandInfo;
             Commands = viewModel.Commands;
             EventPublications = viewModel.EventPublications;
             EventSubscriptions = viewModel.EventSubscriptions;
             Process = viewModel.Process;
-            Description = viewModel.Description;
-            Symbol = viewModel.Symbol;
+            ViewDescription = viewModel.ViewDescription;
+            ViewSymbol = viewModel.ViewSymbol;
             ViewModel = (TViewModel) base.Instance;
             Orientation = viewModel.Orientation;
             ViewModelType = typeof (TViewModel);
@@ -63,9 +63,9 @@ namespace Core.Common.UI
             return true;
         }
 
-        public string Name { get; } 
-        public string Symbol { get; }
-        public string Description { get; }
+        public string ViewName { get; } 
+        public string ViewSymbol { get; }
+        public string ViewDescription { get; }
         public ISystemProcess Process { get; }
         public List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get; }
         public List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; }
