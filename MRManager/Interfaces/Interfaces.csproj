@@ -63,13 +63,18 @@
     <Compile Include="Custom Interfaces\ISignInInfo.cs" />
     <Compile Include="Custom Interfaces\ISyntomMedicalSystemInfo.cs" />
     <Compile Include="Generated Interfaces\EntityAttributes.cs" />
+    <Compile Include="Generated Interfaces\MedicalCategory.cs" />
     <Compile Include="Generated Interfaces\MedicalSystemInterviews.cs" />
     <Compile Include="Generated Interfaces\MedicalSystems.cs" />
     <Compile Include="Generated Interfaces\Patients.cs" />
+    <Compile Include="Generated Interfaces\Phase.cs" />
     <Compile Include="Generated Interfaces\SyntomMedicalSystems.cs" />
+    <Compile Include="Custom Interfaces\SyntomPriority.cs" />
+    <Compile Include="Custom Interfaces\SyntomStatus.cs" />
     <Compile Include="Generated Interfaces\SyntomPriority.cs" />
     <Compile Include="Generated Interfaces\SyntomStatus.cs" />
     <Compile Include="Generated Interfaces\UserSignIn.cs" />
+    <Compile Include="Custom Interfaces\VisitType.cs" />
     <Compile Include="Generated Interfaces\VisitType.cs" />
     <Compile Include="IPersons.cs" />
     <Compile Include="Generated Interfaces\AddressCities.cs" />
@@ -109,7 +114,7 @@
     <Compile Include="Generated Interfaces\MarketingMedium.cs" />
     <Compile Include="Generated Interfaces\Media.cs" />
     <Compile Include="Generated Interfaces\MediaTypes.cs" />
-    <Compile Include="Generated Interfaces\MedicalCategory.cs" />
+    <Compile Include="Custom Interfaces\MedicalCategory.cs" />
     <Compile Include="Generated Interfaces\NonResidentCompanyInfo.cs" />
     <Compile Include="Generated Interfaces\NonResidentHotelInfo.cs" />
     <Compile Include="Generated Interfaces\Occupations.cs" />
@@ -144,7 +149,7 @@
     <Compile Include="Generated Interfaces\Persons_NonResidentPatient.cs" />
     <Compile Include="Generated Interfaces\Persons_Nurses.cs" />
     <Compile Include="Generated Interfaces\Persons_Patient.cs" />
-    <Compile Include="Generated Interfaces\Phase.cs" />
+    <Compile Include="Custom Interfaces\Phase.cs" />
     <Compile Include="Generated Interfaces\PhoneTypes.cs" />
     <Compile Include="Generated Interfaces\PrimaryPersonAddress.cs" />
     <Compile Include="Generated Interfaces\PrimaryPersonPhoneNumber.cs" />

@@ -18,12 +18,7 @@ namespace Entity.Expressions
         public const string Patient = "Patient";
     }
 
-    public static class Patient
-    {
-        public const string Name = "Name";
-        public const string Birthdate = "BirthDate";
-        public const string EntityId = "Id";
-    }
+   
 
     public static partial class PulledExpressions
     {
@@ -38,7 +33,7 @@ namespace Entity.Expressions
                         .Where(
                             x2 =>
                                 x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                                x2.Questions.EntityAttributes.Attribute == Patient.EntityId)
+                                x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.IdNumber))
                         .SelectMany(x4 => x4.Response)
                         .Select(x5 => x5.Value)
                         .FirstOrDefault(),
@@ -48,7 +43,7 @@ namespace Entity.Expressions
                             .Where(
                                 x2 =>
                                     x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                                    x2.Questions.EntityAttributes.Attribute == Patient.Name)
+                                    x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Name))
                             .SelectMany(x4 => x4.Response)
                             .Select(x5 => x5.Value)),
                 Age =
@@ -58,10 +53,28 @@ namespace Entity.Expressions
                             .Where(
                                 x2 =>
                                     x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                                    x2.Questions.EntityAttributes.Attribute == Patient.Birthdate)
+                                    x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.BirthDate))
                             .SelectMany(x4 => x4.Response)
                             .Select(x5 => x5.Value)
                             .FirstOrDefault()).Year,
+                PhoneNumber = x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                        .Where(
+                            x2 =>
+                                x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                                x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.PhoneNumber))
+                        .SelectMany(x4 => x4.Response)
+                        .Select(x5 => x5.Value)
+                        .FirstOrDefault(),
+
+                Address = x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                        .Where(
+                            x2 =>
+                                x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                                x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Address))
+                        .SelectMany(x4 => x4.Response)
+                        .Select(x5 => x5.Value)
+                        .FirstOrDefault(),
+
 
             };
 
@@ -76,7 +89,7 @@ namespace Entity.Expressions
                             .Where(
                                 x2 =>
                                     x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                                    x2.Questions.EntityAttributes.Attribute == Patient.Name)
+                                    x2.Questions.EntityAttributes.Attribute == nameof(IPatientInfo.Name))
                             .SelectMany(x4 => x4.Response)
                             .Select(x5 => x5.Value)),
                 Age =
@@ -86,7 +99,7 @@ namespace Entity.Expressions
                             .Where(
                                 x2 =>
                                     x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                                    x2.Questions.EntityAttributes.Attribute == Patient.Birthdate)
+                                    x2.Questions.EntityAttributes.Attribute == nameof(IPatientInfo.BirthDate))
                             .SelectMany(x4 => x4.Response)
                             .Select(x5 => x5.Value)
                             .FirstOrDefault()).Year,
@@ -96,10 +109,27 @@ namespace Entity.Expressions
                             .Where(
                                 x2 =>
                                     x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                                    x2.Questions.EntityAttributes.Attribute == Patient.Birthdate)
+                                    x2.Questions.EntityAttributes.Attribute == nameof(IPatientInfo.BirthDate))
                             .SelectMany(x4 => x4.Response)
                             .Select(x5 => x5.Value)
                             .FirstOrDefault()),
+                Address = x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                        .Where(
+                            x2 =>
+                                x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                                x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Address))
+                        .SelectMany(x4 => x4.Response)
+                        .Select(x5 => x5.Value)
+                        .FirstOrDefault(),
+
+                PhoneNumber = x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                        .Where(
+                            x2 =>
+                                x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                                x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.PhoneNumber))
+                        .SelectMany(x4 => x4.Response)
+                        .Select(x5 => x5.Value)
+                        .FirstOrDefault(),
             };
 
         public static Expression<Func<PatientVisit, PatientVisitInfo>> PatientVistInfoExpression { get; } =

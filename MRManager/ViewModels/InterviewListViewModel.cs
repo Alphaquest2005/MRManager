@@ -66,7 +66,7 @@ namespace ViewModels
              Application.Current.Dispatcher.Invoke(() =>
                 {
                     EntitySet.Clear();
-                    if (CurrentMedicalSystem.Value == null || CurrentMedicalSystem.Value.Id == 0)
+                    if (CurrentMedicalSystem.Value == null)
                     {
                         CurrentEntity.Value = null;
                         return;

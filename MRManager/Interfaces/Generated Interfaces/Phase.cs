@@ -11,8 +11,8 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-    [InheritedExport]
-    public partial interface IPhase:IEntity  
+	
+	public partial interface IPhase:IEntity  
 	{
 		string Name { get;}
 		string Code { get;}

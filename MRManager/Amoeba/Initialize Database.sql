@@ -41,6 +41,30 @@ SET IDENTITY_INSERT EntityAttributes ON;
 	insert into EntityAttributes(id, Entity,Attribute, [type]) values (0,'unspecified','unspecified','unspecified')
 SET IDENTITY_INSERT EntityAttributes off; 
 
+SET IDENTITY_INSERT Interview.MedicalCategory ON; 
+	insert into Interview.MedicalCategory(Id,[Name] ) values (0,'unspecified')
+SET IDENTITY_INSERT Interview.MedicalCategory off; 
+
+SET IDENTITY_INSERT Interview.Phase ON; 
+	insert into Interview.Phase(Id,[Name], Code ) values (0,'unspecified', 'xxx')
+SET IDENTITY_INSERT Interview.Phase off; 
+
+SET IDENTITY_INSERT Interview.Interviews ON; 
+	insert into Interview.Interviews(Id,[Name],MedicalCategoryId,PhaseId ) values (0,'unspecified',0,0)
+SET IDENTITY_INSERT Interview.Interviews off; 
+
+SET IDENTITY_INSERT Interview.SyntomStatus ON; 
+	insert into Interview.SyntomStatus(Id,[Name]) values (0,'unspecified')
+SET IDENTITY_INSERT Interview.SyntomStatus off;
+
+SET IDENTITY_INSERT Interview.Syntoms ON; 
+	insert into Interview.Syntoms(Id,[Name]) values (0,'unspecified')
+SET IDENTITY_INSERT Interview.Syntoms off;
+
+SET IDENTITY_INSERT Interview.SyntomPriority ON; 
+	insert into Interview.SyntomPriority(Id,[Name]) values (0,'unspecified')
+SET IDENTITY_INSERT Interview.SyntomPriority off;
+
 set identity_insert Media on
 
 INSERT INTO Media(value, MediaTypeId, Id)

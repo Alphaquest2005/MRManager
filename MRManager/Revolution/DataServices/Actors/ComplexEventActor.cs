@@ -78,7 +78,7 @@ namespace DataServices.Actors
            if(!expectedEvent.EventPredicate.Invoke(message)) return;
             expectedEvent.Validate(message);
             InMessages.AddOrUpdate(expectedEvent.Key, message, (k,v) => message);
-            if (InMessages.Count() != ComplexEventAction.Events.Count) return;
+            if (ComplexEventAction.ActionTrigger != ActionTrigger.Any && InMessages.Count() != ComplexEventAction.Events.Count) return;
             ExecuteAction(InMessages.ToImmutableDictionary(x => x.Key, x => x.Value as object));
             
             if (ComplexEventAction.ActionTrigger == ActionTrigger.All)

@@ -69,7 +69,16 @@ namespace BootStrapper
         {
             try
             {
-                return container.GetType().GetMethod("GetExportedValueOrDefault", new Type[] { }).MakeGenericMethod(type.GetGenericTypeDefinition().MakeGenericType(type.GenericTypeArguments)).Invoke(container, new object[] { })?.GetType();
+                if (type.IsGenericType)
+                    return
+                        container.GetType()
+                            .GetMethod("GetExportedValueOrDefault", new Type[] {})
+                            .MakeGenericMethod(type.GetGenericTypeDefinition()
+                                .MakeGenericType(type.GenericTypeArguments))
+                            .Invoke(container, new object[] {})?
+                            .GetType();
+
+                return container.GetType().GetMethod("GetExportedValueOrDefault", new Type[] { }).MakeGenericMethod(type).Invoke(container, new object[] { })?.GetType();
             }
             catch (Exception)
             {

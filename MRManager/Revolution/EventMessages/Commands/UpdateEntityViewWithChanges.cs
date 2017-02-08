@@ -9,6 +9,7 @@ namespace EventMessages.Commands
     
     public class UpdateEntityViewWithChanges<TView> : ProcessSystemMessage, IUpdateEntityViewWithChanges<TView> where TView : IEntityView
     {
+
         public UpdateEntityViewWithChanges() { }
         public UpdateEntityViewWithChanges(int entityId, Dictionary<string, dynamic> changes, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {

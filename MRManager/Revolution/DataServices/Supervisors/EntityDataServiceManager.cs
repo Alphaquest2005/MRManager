@@ -42,7 +42,8 @@ namespace DataServices.Actors
 
         private void CreateEntityActors(Type classType, Type genericListType, string actorName, ISystemProcess process, IProcessSystemMessage msg)
         {
-            
+            var child = ctx.Child(string.Format(actorName, classType.Name));
+            if (!Equals(child, ActorRefs.Nobody)) return;
             var specificListType = genericListType.MakeGenericType(classType);
             try
             {

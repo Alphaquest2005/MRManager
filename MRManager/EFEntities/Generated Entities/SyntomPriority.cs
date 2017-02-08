@@ -11,7 +11,6 @@ using Interfaces;
 
 namespace EF.Entities
 {
-    
 	public partial class SyntomPriority: BaseEntity, ISyntomPriority
 	{
 		public virtual string Name { get; set; }

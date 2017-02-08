@@ -28,5 +28,6 @@ namespace Interfaces
 
         INonResidentInfo NonResident { get; }
         IList<INextOfKinInfo> NextOfKins { get; }
+        DateTime BirthDate { get; }
     }
 }

@@ -11,12 +11,9 @@ using SystemInterfaces;
 
 namespace Interfaces
 {
-	
-	public partial interface ISyntomPriority:IEntity  
+    [InheritedExport]
+    public partial interface ISyntomStatus:IEntity  
 	{
-		string Name { get;}
-
-
-
+		
 	}
 }

@@ -85,6 +85,7 @@
     <Compile Include="Commands\RequestProcessLog.cs" />
     <Compile Include="Commands\CreateEntityService.cs" />
     <Compile Include="Commands\UpdateEntityViewWithChanges.cs" />
+    <Compile Include="Commands\UpdatePulledEntityWithChanges.cs" />
     <Compile Include="Events\ActorTerminated.cs" />
     <Compile Include="Events\EntityViewSetWithChangesLoaded.cs" />
     <Compile Include="Events\CurrentEntityChanged.cs" />

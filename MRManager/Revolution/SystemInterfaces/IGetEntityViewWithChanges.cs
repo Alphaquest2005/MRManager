@@ -4,14 +4,14 @@ using System.ComponentModel.Composition;
 namespace SystemInterfaces
 {
     
-    public interface IGetEntityViewWithChanges<out TEntityView> : IProcessSystemMessage, IEntityViewRequest<TEntityView> where TEntityView : IEntityView
+    public interface IGetEntityViewWithChanges<out TEntityView> : IEntityViewRequest<TEntityView> where TEntityView : IEntityView
     {
         Dictionary<string, object> Changes { get; }
         int EntityId { get; }
     }
 
     
-    public interface IUpdateEntityViewWithChanges<out TEntityView> : IProcessSystemMessage, IEntityViewRequest<TEntityView> where TEntityView : IEntityView
+    public interface IUpdateEntityViewWithChanges<out TEntityView> : IEntityViewRequest<TEntityView> where TEntityView : IEntityView
     {
         Dictionary<string, object> Changes { get; }
         int EntityId { get; }
@@ -19,7 +19,7 @@ namespace SystemInterfaces
     
 
     
-    public interface ILoadEntityViewSetWithChanges<out TEntityView,out TMatchType> : IProcessSystemMessage, IEntityViewRequest<TEntityView> where TEntityView : IEntityView where TMatchType:IMatchType
+    public interface ILoadEntityViewSetWithChanges<out TEntityView,out TMatchType> : IEntityViewRequest<TEntityView> where TEntityView : IEntityView where TMatchType:IMatchType
     {
         Dictionary<string, object> Changes { get; }
     }

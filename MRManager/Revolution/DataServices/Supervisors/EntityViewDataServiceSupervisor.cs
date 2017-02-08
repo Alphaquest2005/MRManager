@@ -29,6 +29,8 @@ namespace DataServices.Actors
         private static readonly Action<IUpdateEntityViewWithChanges<TEntityView>> UpdateEntityViewWithChangesAction = (x) => x.UpdateEntityViewWithChanges();
         private static readonly Action<ILoadEntityViewSetWithChanges<TEntityView, IMatchType>> LoadEntityViewSetWithChangesAction = (x) => x.LoadEntityViewSetWithChanges();
 
+        
+
        
 
         readonly Dictionary<Type, object> entityEvents =
@@ -40,6 +42,7 @@ namespace DataServices.Actors
                 {typeof (IGetEntityViewWithChanges<TEntityView>), GetEntityViewWithChangesAction},
                 {typeof (IUpdateEntityViewWithChanges<TEntityView>), UpdateEntityViewWithChangesAction},
                 {typeof (ILoadEntityViewSetWithChanges<TEntityView, IMatchType>), LoadEntityViewSetWithChangesAction},
+                
 
             };
         private IUntypedActorContext ctx = null;

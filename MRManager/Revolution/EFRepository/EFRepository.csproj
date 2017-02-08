@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseRepository.cs" />
+    <Compile Include="PulledEntityDataContext.cs" />
     <Compile Include="EF7DataContextBase.cs" />
     <Compile Include="EntityRepository.cs" />
     <Compile Include="EntityViewDataContext.cs" />

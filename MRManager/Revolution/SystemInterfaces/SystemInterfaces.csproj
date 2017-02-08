@@ -96,6 +96,7 @@
     <Compile Include="ISystemProcessStarted.cs" />
     <Compile Include="IMedia.cs" />
     <Compile Include="IUpdateEntity.cs" />
+    <Compile Include="IUpdatePulledEntityWithChanges.cs" />
     <Compile Include="RowState.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IGetEntityById.cs" />

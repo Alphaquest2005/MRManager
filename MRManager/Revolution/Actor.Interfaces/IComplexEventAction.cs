@@ -11,6 +11,7 @@ namespace Actor.Interfaces
     {
         Partial,
         All,
+        Any
     }
     
     public interface IComplexEventAction : IComplexEvent

@@ -28,6 +28,7 @@ namespace RevolutionData
                     e => e != null,
                     new List<Func<IPatientSummaryListViewModel, IUpdateProcessStateList<IPatientInfo>, bool>>(),
                     (v,e) => v.State.Value = e.State),
+                
 
             },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
@@ -94,23 +95,23 @@ namespace RevolutionData
                             s.Source);
                     }),
 
-                new ViewEventCommand<IPatientSummaryListViewModel, IUpdateEntityViewWithChanges<IPatientInfo>>(
+                new ViewEventCommand<IPatientSummaryListViewModel, IUpdatePulledEntityWithChanges<IPatients>>(
                     key:"SaveName",
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IPatientSummaryListViewModel, bool>>
                     {
                         v => v.ChangeTracking.Count == 1
-                             && v.ChangeTracking.ContainsKey(nameof(IPatientInfo.Name))
+                             && v.ChangeTracking.First().Value != null
                              && ((dynamic)v)[nameof(IPatientInfo.Id)] != 0
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>
                     {
-                         
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
                                 ((dynamic)s).Id,
+                                "Patient",
                                 s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
                             },
                             new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
@@ -142,6 +143,7 @@ namespace RevolutionData
 
                 key: "301",
                 processId: 3,
+                actionTrigger: ActionTrigger.Any, 
                 events: new List<IProcessExpectedEvent>
                 {
                 new ProcessExpectedEvent (key: "ProcessStarted",
@@ -149,12 +151,22 @@ namespace RevolutionData
                     eventPredicate: e => e != null,
                     eventType: typeof (ISystemProcessStarted),
                     processInfo: new StateEventInfo(3,Context.Process.Events.ProcessStarted),
+                    expectedSourceType:new SourceType(typeof(IComplexEventService))),
+
+                new ProcessExpectedEvent (key: "PatientUpdated",
+                    processId: 3,
+                    eventPredicate: e => e != null,
+                    eventType: typeof (IEntityUpdated<IPatients>),
+                    processInfo: new StateEventInfo(3,Context.Entity.Events.EntityUpdated),
                     expectedSourceType:new SourceType(typeof(IComplexEventService)))
+
 
                 },
                 expectedMessageType: typeof(IProcessStateMessage<IPatientInfo>),
                 action: ProcessActions.PatientInfo.IntializePatientInfoSummaryProcessState,
                 processInfo: new StateCommandInfo(3, Context.Process.Commands.CreateState));
+
+            
         }
     }
 }

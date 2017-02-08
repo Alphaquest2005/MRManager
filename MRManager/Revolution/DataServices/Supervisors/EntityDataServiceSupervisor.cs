@@ -28,7 +28,9 @@ namespace DataServices.Actors
         private static readonly Action<ISystemSource, ILoadEntitySetWithFilter<TEntity>> LoadEntitySetWithFilter = (s, x) => x.LoadEntitySet();
         private static readonly Action<ISystemSource, ILoadEntitySetWithFilterWithIncludes<TEntity>> LoadEntitySetWithFilterWithIncludes = (s, x) => x.LoadEntitySet();
 
-        
+        private static readonly Action<ISystemSource, IUpdatePulledEntityWithChanges<TEntity>> UpdatePulledEntityWtihChangesAction = (s, x) => x.UpdatePulledEntityWithChanges();
+
+
         readonly Dictionary<Type, object> entityEvents =
             new Dictionary<Type, object>()
             {
@@ -41,6 +43,7 @@ namespace DataServices.Actors
                 {typeof (ILoadEntitySet<TEntity>), LoadEntitySet},
                 {typeof (ILoadEntitySetWithFilter<TEntity>), LoadEntitySetWithFilter},
                 {typeof (ILoadEntitySetWithFilterWithIncludes<TEntity>), LoadEntitySetWithFilterWithIncludes},
+                {typeof(IUpdatePulledEntityWithChanges<TEntity>), UpdatePulledEntityWtihChangesAction}
 
             };
         private IUntypedActorContext ctx = null;

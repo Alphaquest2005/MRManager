@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using Common.DataEntites;
@@ -26,6 +27,7 @@ namespace EF.Entities
         public IList<IPersonPhoneNumberInfo> PhoneNumbers { get; set; }
         public INonResidentInfo NonResident { get; set; }
         public IList<INextOfKinInfo> NextOfKins { get; set; }
+        public DateTime BirthDate { get; set; }
     }
 
 
