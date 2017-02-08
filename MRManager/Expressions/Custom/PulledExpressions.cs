@@ -29,7 +29,7 @@ namespace Entity.Expressions
             {
                 Id = x.Id,
                 IdNumber =
-                    x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                    x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                         .Where(
                             x2 =>
                                 x2.Questions.EntityAttributes.Entity == Entities.Patient &&
@@ -39,7 +39,7 @@ namespace Entity.Expressions
                         .FirstOrDefault(),
                 Name =
                     string.Join(" ",
-                        x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                        x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                             .Where(
                                 x2 =>
                                     x2.Questions.EntityAttributes.Entity == Entities.Patient &&
@@ -49,7 +49,7 @@ namespace Entity.Expressions
                 Age =
                     DateTime.Now.Year -
                     Convert.ToDateTime(
-                        x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                        x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                             .Where(
                                 x2 =>
                                     x2.Questions.EntityAttributes.Entity == Entities.Patient &&
@@ -57,7 +57,7 @@ namespace Entity.Expressions
                             .SelectMany(x4 => x4.Response)
                             .Select(x5 => x5.Value)
                             .FirstOrDefault()).Year,
-                PhoneNumber = x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                PhoneNumber = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                         .Where(
                             x2 =>
                                 x2.Questions.EntityAttributes.Entity == Entities.Patient &&
@@ -66,7 +66,7 @@ namespace Entity.Expressions
                         .Select(x5 => x5.Value)
                         .FirstOrDefault(),
 
-                Address = x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                Address = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                         .Where(
                             x2 =>
                                 x2.Questions.EntityAttributes.Entity == Entities.Patient &&
@@ -85,7 +85,7 @@ namespace Entity.Expressions
                 Id = x.Id,
                 Name =
                     string.Join(" ",
-                        x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                        x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                             .Where(
                                 x2 =>
                                     x2.Questions.EntityAttributes.Entity == Entities.Patient &&
@@ -95,7 +95,7 @@ namespace Entity.Expressions
                 Age =
                     DateTime.Now.Year -
                     Convert.ToDateTime(
-                        x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                        x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                             .Where(
                                 x2 =>
                                     x2.Questions.EntityAttributes.Entity == Entities.Patient &&
@@ -105,7 +105,7 @@ namespace Entity.Expressions
                             .FirstOrDefault()).Year,
                 BirthDate = 
                     Convert.ToDateTime(
-                        x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                        x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                             .Where(
                                 x2 =>
                                     x2.Questions.EntityAttributes.Entity == Entities.Patient &&
@@ -113,7 +113,7 @@ namespace Entity.Expressions
                             .SelectMany(x4 => x4.Response)
                             .Select(x5 => x5.Value)
                             .FirstOrDefault()),
-                Address = x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                Address = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                         .Where(
                             x2 =>
                                 x2.Questions.EntityAttributes.Entity == Entities.Patient &&
@@ -122,7 +122,7 @@ namespace Entity.Expressions
                         .Select(x5 => x5.Value)
                         .FirstOrDefault(),
 
-                PhoneNumber = x.PatientVisit.SelectMany(x3 => x3.PatientResponses)
+                PhoneNumber = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                         .Where(
                             x2 =>
                                 x2.Questions.EntityAttributes.Entity == Entities.Patient &&

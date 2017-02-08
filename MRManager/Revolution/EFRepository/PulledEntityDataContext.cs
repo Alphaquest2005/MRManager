@@ -119,11 +119,11 @@ namespace EFRepository
                         var response = patientResponses.Response.FirstOrDefault(x => x.ResponseOptions == responseOptions);
                         if (response == null)
                         {
-                            response = new Response()
+                            response = ctx.Response.Add(new Response()
                             {
                                 PatientResponses = patientResponses,
                                 ResponseOptions = responseOptions,
-                            };
+                            }).Entity;
                             question.PatientResponses.Add(patientResponses);
                         }
                        
