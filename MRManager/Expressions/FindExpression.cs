@@ -15,7 +15,9 @@ namespace Expressions
                 .Where(t => t
                     .GetMethods(
                         ).Any(m => m.ReturnType == typeof(Expression<Func<TEntity, TView>>)));
-            return (Expression<Func<TEntity,TView >>) types.First().GetMethods().First(x => x.ReturnType == typeof(Expression<Func<TEntity, TView>>)).Invoke(null, null);
+            var lst = types as IList<Type> ?? types.ToList();
+            if(!lst.Any()) throw new ApplicationException($"No Expression for {typeof(TEntity).Name} and {typeof(TView).Name} Found");
+            return (Expression<Func<TEntity,TView >>)lst.First().GetMethods().First(x => x.ReturnType == typeof(Expression<Func<TEntity, TView>>)).Invoke(null, null);
             
         }
     }

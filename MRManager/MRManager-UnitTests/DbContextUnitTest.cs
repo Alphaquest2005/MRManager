@@ -51,7 +51,7 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<IEntityViewWithChangesFound<ISignInInfo>>(Source).Subscribe(x => signonInfo = x);
             EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source)
                 .Subscribe(x => Debugger.Log(0, "Test", x.Exception.Message + ":-:" + x.Exception.StackTrace));
-            var msg = new GetEntityViewWithChanges<ISignInInfo>(1, new Dictionary<string, dynamic>() { { "Usersignin", "joe" } }, new StateCommandInfo(testProcess.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), testProcess, Source);
+            var msg = new GetEntityViewWithChanges<ISignInInfo>(new Dictionary<string, dynamic>() { { "Usersignin", "joe" } }, new StateCommandInfo(testProcess.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), testProcess, Source);
             msg.GetEntityViewWithChanges();
             Thread.Sleep(2);
             Assert.IsNotNull(signonInfo);
@@ -134,7 +134,7 @@ namespace MRManager_UnitTests
                 .Subscribe(x => updatedPerson = x);
             EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source)
                 .Subscribe(x => Debugger.Log(0, "Test", x.Exception.Message + ":-:" + x.Exception.StackTrace));
-            var msg = new GetEntityWithChanges<IPersons>(createdPerson.Entity.Id, new Dictionary<string, dynamic>() {{"Name", "TestJoe"}}, new StateCommandInfo(testProcess.Id, RevolutionData.Context.Entity.Commands.FindEntity),
+            var msg = new GetEntityWithChanges<IPersons>(new Dictionary<string, dynamic>() {{"Name", "TestJoe"}}, new StateCommandInfo(testProcess.Id, RevolutionData.Context.Entity.Commands.FindEntity),
                 testProcess, Source);
             msg.GetEntity();
             Thread.Sleep(3);

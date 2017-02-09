@@ -142,36 +142,36 @@ namespace Entity.Expressions
                 Purpose = x.VisitType.Name,
                 VisitTypeId = x.VisitTypeId,
                 AttendingDoctor = string.Join(" ", x.Persons_Doctor.Persons.PersonNames.Select(z => z.PersonName)),
-                PatientSyntoms = x.PatientSyntoms.Select(z => new PatientSyntomInfo()
-                {
-                    Id = z.Id,
-                    SyntomName = z.Syntoms.Name,
-                    SyntomId = z.SyntomId,
-                    Syntom = z.Syntoms,
-                    Priority = z.SyntomPriority.Name,
-                    PatientVisitId = z.PatientVisitId,
-                    PriorityId = z.PriorityId,
-                    StatusId = z.StatusId,
-                    Status = z.SyntomStatus.Name,
-                    Systems = z.Syntoms.SyntomMedicalSystems.Select(s => new SyntomMedicalSystemInfo()
-                    {
-                        Id = s.Id,
-                        MedicalSystemId = s.MedicalSystemId,
-                        System = s.MedicalSystems.Name,
-                        Interviews = s.MedicalSystems.MedicalSystemInterviews.Select(i => new InterviewInfo()
-                        {
-                            Id = i.InterviewId,
-                            Interview = i.Interviews.Name,
-                            Category = i.Interviews.MedicalCategory.Name,
-                            CategoryId = i.Interviews.MedicalCategoryId,
-                            PhaseId = i.Interviews.PhaseId,
-                            Phase = i.Interviews.Phase.Name,
-                            SystemId = s.MedicalSystemId,
-                            System = s.MedicalSystems.Name,
+                //PatientSyntoms = x.PatientSyntoms.Select(z => new PatientSyntomInfo()
+                //{
+                //    Id = z.Id,
+                //    SyntomName = z.Syntoms.Name,
+                //    SyntomId = z.SyntomId,
+                //    Syntom = z.Syntoms,
+                //    Priority = z.SyntomPriority.Name,
+                //    PatientVisitId = z.PatientVisitId,
+                //    PriorityId = z.PriorityId,
+                //    StatusId = z.StatusId,
+                //    Status = z.SyntomStatus.Name,
+                //    Systems = z.Syntoms.SyntomMedicalSystems.Select(s => new SyntomMedicalSystemInfo()
+                //    {
+                //        Id = s.Id,
+                //        MedicalSystemId = s.MedicalSystemId,
+                //        System = s.MedicalSystems.Name,
+                //        Interviews = s.MedicalSystems.MedicalSystemInterviews.Select(i => new InterviewInfo()
+                //        {
+                //            Id = i.InterviewId,
+                //            Interview = i.Interviews.Name,
+                //            Category = i.Interviews.MedicalCategory.Name,
+                //            CategoryId = i.Interviews.MedicalCategoryId,
+                //            PhaseId = i.Interviews.PhaseId,
+                //            Phase = i.Interviews.Phase.Name,
+                //            SystemId = s.MedicalSystemId,
+                //            System = s.MedicalSystems.Name,
                            
-                        } as IInterviewInfo).ToList()
-                    } as ISyntomMedicalSystemInfo).ToList(),
-                } as IPatientSyntomInfo).ToList()
+                //        } as IInterviewInfo).ToList()
+                //    } as ISyntomMedicalSystemInfo).ToList(),
+                //} as IPatientSyntomInfo).ToList()
             };
 
 

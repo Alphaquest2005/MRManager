@@ -4,6 +4,7 @@ using SystemInterfaces;
 using Actor.Interfaces;
 using Common;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reactive.Linq;
 using System.Windows;
 using DomainMessages;
@@ -13,6 +14,7 @@ using EventMessages.Events;
 using Interfaces;
 using RevolutionEntities;
 using RevolutionEntities.Process;
+using Utilities;
 using ViewModel.Interfaces;
 
 namespace RevolutionData
@@ -84,6 +86,99 @@ namespace RevolutionData
                         processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.Error),
                         expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
+        public static IProcessAction UpdateEntityViewState<TEntityView>() where TEntityView : IEntityView
+        {
+            return new ProcessAction(
+                action:
+                    cp =>
+                    {
+                        var ps = new ProcessState<TEntityView>(
+                             process: cp.Actor.Process,
+                             entity: cp.Messages["EntityView"].Entity,
+                             info: new StateInfo(cp.Actor.Process.Id, new State($"Loaded {typeof(TEntityView).Name} Data", $"Loaded{typeof(TEntityView).Name}", "")));
+                        return new UpdateProcessState<TEntityView>(
+                                    state: ps,
+                                    process: cp.Actor.Process,
+                                    processInfo: new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState),
+                                    source: cp.Actor.Source);
+                    },
+                processInfo:
+                    cp =>
+                        new StateCommandInfo(cp.Actor.Process.Id,
+                            Context.Process.Commands.UpdateState),
+                // take shortcut cud be IntialState
+                expectedSourceType: new SourceType(typeof(IComplexEventService)));
+        }
+
+        public static IProcessAction UpdateEntityViewStateList<TEntityView>() where TEntityView : IEntityView
+        {
+            return new ProcessAction(
+                action:
+                    cp =>
+                    {
+                        var ps = new ProcessStateList<TEntityView>(
+                             process: cp.Actor.Process,
+                             entity: ((List<TEntityView>)cp.Messages["EntityViewSet"].EntitySet).FirstOrDefault(),
+                             entitySet: cp.Messages["EntityViewSet"].EntitySet,
+                             selectedEntities: new List<TEntityView>(),
+                             stateInfo: new StateInfo(cp.Actor.Process.Id, new State($"Loaded {typeof(TEntityView).Name} Data", $"Loaded{typeof(TEntityView).Name}", "")));
+                        return new UpdateProcessStateList<TEntityView>(
+                                    state: ps,
+                                    process: cp.Actor.Process,
+                                    processInfo: new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState),
+                                    source: cp.Actor.Source);
+                    },
+                processInfo:
+                    cp =>
+                        new StateCommandInfo(cp.Actor.Process.Id,
+                            Context.Process.Commands.UpdateState),
+                // take shortcut cud be IntialState
+                expectedSourceType: new SourceType(typeof(IComplexEventService)));
+        }
+
+        public static IProcessAction RequestState<TEntityView>(Expression<Func<TEntityView, object>> property) where TEntityView : IEntityView
+        {
+            return new ProcessAction(
+                action: cp =>
+                {
+
+                    var key = default(TEntityView).GetMemberName(property);
+                    var value = cp.Messages["CurrentEntity"].Entity.Id;
+                    var changes = new Dictionary<string, dynamic>() { { key, value } };
+                    return new GetEntityViewWithChanges<TEntityView>(changes,
+                         new StateCommandInfo(cp.Actor.Process.Id, Context.EntityView.Commands.GetEntityView),
+                         cp.Actor.Process, cp.Actor.Source);
+                },
+                processInfo: cp =>
+                    new StateCommandInfo(cp.Actor.Process.Id,
+                        Context.EntityView.Commands.GetEntityView),
+                // take shortcut cud be IntialState
+                expectedSourceType: new SourceType(typeof(IComplexEventService))
+
+                );
+        }
+
+        public static IProcessAction RequestStateList<TEntityView>(Expression<Func<TEntityView, object>> property ) where TEntityView : IEntityView
+        {
+            return new ProcessAction(
+                action: cp =>
+                {
+                    
+                    var key = default(TEntityView).GetMemberName(property);
+                    var value = cp.Messages["CurrentEntity"].Entity.Id;
+                    var changes = new Dictionary<string, dynamic>() { {key,value} };
+                   return new LoadEntityViewSetWithChanges<TEntityView, IExactMatch>(changes,
+                        new StateCommandInfo(cp.Actor.Process.Id, Context.EntityView.Commands.GetEntityView),
+                        cp.Actor.Process, cp.Actor.Source);
+                },
+                processInfo: cp =>
+                    new StateCommandInfo(cp.Actor.Process.Id,
+                        Context.EntityView.Commands.GetEntityView),
+                // take shortcut cud be IntialState
+                expectedSourceType: new SourceType(typeof (IComplexEventService))
+
+                );
+        }
 
         public class SignIn
         {
@@ -189,30 +284,9 @@ namespace RevolutionData
                 // take shortcut cud be IntialState
                 expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
-            public static IProcessAction RequestPatientDetails => new ProcessAction(
-                action: cp => new GetEntityViewById<IPatientDetailsInfo>(cp.Messages["CurrentEntity"].Entity.Id,
-                                new StateCommandInfo(cp.Actor.Process.Id,Context.EntityView.Commands.GetEntityView),
-                                cp.Actor.Process, cp.Actor.Source),
-                processInfo: cp =>
-                        new StateCommandInfo(cp.Actor.Process.Id,
-                            Context.EntityView.Commands.GetEntityView),
-                // take shortcut cud be IntialState
-                expectedSourceType: new SourceType(typeof(IComplexEventService))
+           
 
-                );
-
-            public static IProcessAction UpdatePatientDetailsState => new ProcessAction(
-                action: cp =>
-                {
-                    var ps = new ProcessState<IPatientDetailsInfo>(cp.Actor.Process, cp.Messages["PatientDetailsInfo"].Entity,
-                        new StateInfo(cp.Actor.Process.Id, "PatientDetailsFound",
-                            $"Patient Details for {cp.Messages["PatientDetailsInfo"].Entity.Name}", "Patient Info"));
-                    return new UpdateProcessState<IPatientDetailsInfo>(ps,
-                        new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState),
-                        cp.Actor.Process, cp.Actor.Source);
-                },
-                processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState),
-                expectedSourceType: new SourceType(typeof(IComplexEventService)));
+           
 
 
             ////// Interview Info

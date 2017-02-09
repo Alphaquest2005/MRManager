@@ -33,7 +33,7 @@
                                             IsAsync=True}"
                       
                       SelectedValuePath="Id"
-                      SelectedValue="{Binding SyntomId, UpdateSourceTrigger=LostFocus}"
+                      
                       Text="{Binding SyntomName,
                                      FallbackValue=Syntom,
                                      TargetNullValue=Syntom,

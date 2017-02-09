@@ -7,7 +7,7 @@ namespace SystemInterfaces
     public interface IGetEntityViewWithChanges<out TEntityView> : IEntityViewRequest<TEntityView> where TEntityView : IEntityView
     {
         Dictionary<string, object> Changes { get; }
-        int EntityId { get; }
+        
     }
 
     

@@ -59,8 +59,7 @@ namespace EFRepository
 
                     
                     entity.ApplyChanges(msg.Changes);
-                    ctx.Set<TDBEntity>().Update(entity);
-
+                   
                     ctx.SaveChanges(true);
                     EventMessageBus.Current.Publish(new EntityUpdated<TEntity>((TEntity)(object)entity,new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntityUpdated), msg.Process, Source), Source);
                 }

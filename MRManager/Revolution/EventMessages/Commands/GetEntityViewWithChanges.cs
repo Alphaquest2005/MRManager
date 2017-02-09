@@ -10,13 +10,12 @@ namespace EventMessages.Commands
     public class GetEntityViewWithChanges<TView> : ProcessSystemMessage, IGetEntityViewWithChanges<TView> where TView : IEntityView
     {
         public GetEntityViewWithChanges() { }
-        public GetEntityViewWithChanges(int entityId, Dictionary<string, dynamic> changes, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
+        public GetEntityViewWithChanges( Dictionary<string, dynamic> changes, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {
             Changes = changes;
-            EntityId = entityId;
+            
         }
 
         public Dictionary<string, dynamic> Changes { get; }
-        public int EntityId { get; }
     }
 }

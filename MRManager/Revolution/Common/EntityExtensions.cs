@@ -8,7 +8,7 @@ namespace Common
 {
     public static class EntityExtensions
     {
-        public static T ApplyChanges<T>(this T entity, Dictionary < string, dynamic > changeTracking) where T:IEntity
+        public static T ApplyChanges<T>(this T entity, Dictionary < string, dynamic > changeTracking) where T:IEntityId
         {
             
             foreach (var change in changeTracking)
@@ -20,7 +20,7 @@ namespace Common
 
 
         
-        public static T ApplyChanges<T>(this T entity, T changedEntity) where T : IEntity
+        public static T ApplyChanges<T>(this T entity, dynamic changedEntity) where T : IEntityId
         {
 
             foreach (var prop in changedEntity.GetType().GetProperties())
