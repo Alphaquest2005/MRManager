@@ -82,7 +82,7 @@ namespace ViewModels
                     }
                      if(_currentPatientVisit.PatientSyntoms != null) res = _currentPatientVisit.PatientSyntoms.ToList();
                     
-                    res.Add(new PatientSyntomInfo() { Syntom = "Create New..." });
+                    res.Add(new PatientSyntomInfo() { SyntomName = "Create New..." });
                     
                     EntitySet.AddRange(res);
                     EntitySet.Reset();

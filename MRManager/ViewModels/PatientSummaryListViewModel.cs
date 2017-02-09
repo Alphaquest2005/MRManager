@@ -65,7 +65,7 @@ namespace ViewModels
         }
 
         public ObservableList<IPatientInfo> SelectedEntities => this.ViewModel.SelectedEntities;
-        
+        public ObservableBindingList<IPatientInfo> ChangeTrackingList => this.ViewModel.ChangeTrackingList;
 
 
         public string Field { get; set; }

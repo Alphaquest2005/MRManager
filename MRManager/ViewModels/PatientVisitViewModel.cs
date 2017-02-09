@@ -24,7 +24,7 @@ namespace ViewModels
     [Export(typeof(IPatientVisitViewModel))]
     public class PatientVisitViewModel : DynamicViewModel<ObservableListViewModel<IPatientVisitInfo>>, IPatientVisitViewModel
     {
-        private ObservableBindingList<IPatientVisitInfo> _changeTrackingList = new ObservableBindingList<IPatientVisitInfo>();
+        
         private ObservableList<IPatientVisitInfo> _entitySet;
 
         [ImportingConstructor]
@@ -71,13 +71,8 @@ namespace ViewModels
 
     
         public ObservableList<IPatientVisitInfo> SelectedEntities => this.ViewModel.SelectedEntities;
+        public ObservableBindingList<IPatientVisitInfo> ChangeTrackingList => this.ViewModel.ChangeTrackingList;
 
-
-        public ObservableBindingList<IPatientVisitInfo> ChangeTrackingList
-        {
-            get { return _changeTrackingList; }
-            set { _changeTrackingList = value; }
-        }
 
         public IPatientInfo CurrentPatient { get; set; }
     }

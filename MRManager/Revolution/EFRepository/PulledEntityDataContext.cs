@@ -26,7 +26,7 @@ namespace EFRepository
 
        
 
-        public static void UpdatePulledEntityWithChanges<TEntity>(IUpdatePulledEntityWithChanges<TEntity> msg) where TEntity : IEntity
+        public static void UpdatePulledEntityWithChanges<TEntity>(IUpdatePatientEntityWithChanges<TEntity> msg) where TEntity : IEntity
         {
 
             using (var ctx = new MRManagerDBContext())
@@ -69,6 +69,7 @@ namespace EFRepository
                                     Attribute = change.Key,
                                     Type = DefaultType
                                 },
+                                InterviewId = ctx.Interviews.First(x => x.Name == msg.InterviewName).Id,
                                 ResponseOptions = new List<ResponseOptions>(),
                                 PatientResponses = new List<PatientResponses>()
 
@@ -92,12 +93,12 @@ namespace EFRepository
                         }
 
                         var patientSyntom =
-                            ctx.PatientSyntoms.Include(x => x.PatientVisit).FirstOrDefault(x => x.PatientVisit == patientVisit && x.SyntomId == 0) ??
+                            ctx.PatientSyntoms.Include(x => x.PatientVisit).FirstOrDefault(x => x.PatientVisit == patientVisit && x.Syntoms.Name == msg.SyntomName) ??
                             ctx.PatientSyntoms.Add(new PatientSyntoms()
                             {
                                 PatientVisit = patientVisit,
                                 StatusId = 0,
-                                SyntomId = 0,
+                                SyntomId = ctx.Syntoms.First(x => x.Name == msg.SyntomName).Id,
                                 PriorityId = 0,
                             }).Entity;
 

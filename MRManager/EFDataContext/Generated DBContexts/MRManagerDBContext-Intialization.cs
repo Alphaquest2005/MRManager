@@ -19,11 +19,11 @@ namespace EF.DBContexts
 
 		static MRManagerDBContext()
 		{
-			//if (System.ComponentModel.LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
-			//Instance.Database.EnsureDeleted();
-			//Instance.Database.EnsureCreated();
-			//CreateSeedData();
-		}
+            //if (System.ComponentModel.LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
+            //Instance.Database.EnsureDeleted();
+            //Instance.Database.EnsureCreated();
+            //CreateSeedData();
+        }
 
 		private static void CreateSeedData()
 		{

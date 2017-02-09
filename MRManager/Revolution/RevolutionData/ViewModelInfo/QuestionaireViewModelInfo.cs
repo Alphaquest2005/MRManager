@@ -34,11 +34,13 @@ namespace RevolutionData
                     e => e?.Entity != null,
                     new List<Func<IQuestionaireViewModel, ICurrentEntityChanged<IQuestionInfo>, bool>>(),
                     (v,e) => v.CurrentEntity.Value = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id)),
-                new ViewEventSubscription<IQuestionaireViewModel, ICurrentEntityChanged<IPatientInfo>>(
+
+                new ViewEventSubscription<IQuestionaireViewModel, ICurrentEntityChanged<IPatientVisitInfo>>(
                     3,
                     e => e?.Entity != null,
-                    new List<Func<IQuestionaireViewModel, ICurrentEntityChanged<IPatientInfo>, bool>>(),
-                    (v,e) => v.CurrentPatient = e.Entity),
+                    new List<Func<IQuestionaireViewModel, ICurrentEntityChanged<IPatientVisitInfo>, bool>>(),
+                    (v,e) => v.CurrentPatientVisit = e.Entity),
+
                 new ViewEventSubscription<IQuestionaireViewModel, ICurrentEntityChanged<IInterviewInfo>>(
                     3,
                     e => e.Entity == null,

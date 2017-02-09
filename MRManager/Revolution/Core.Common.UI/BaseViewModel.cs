@@ -30,6 +30,7 @@ namespace Core.Common.UI
             ViewName = process.Name;
             ViewDescription = process.Description;
             ViewSymbol = process.Symbol;
+            RowState = new ReactiveProperty<RowState>(SystemInterfaces.RowState.Loaded);
         }
 
         

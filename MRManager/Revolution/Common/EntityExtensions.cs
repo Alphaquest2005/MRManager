@@ -13,7 +13,7 @@ namespace Common
             
             foreach (var change in changeTracking)
             {
-                entity.GetType().GetProperty(change.Key).SetValue(entity,change.Value);
+                entity.GetType().GetProperty(change.Key)?.SetValue(entity,change.Value);
             }
             return entity;
         }

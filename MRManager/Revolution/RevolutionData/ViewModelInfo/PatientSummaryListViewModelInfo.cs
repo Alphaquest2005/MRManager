@@ -95,14 +95,14 @@ namespace RevolutionData
                             s.Source);
                     }),
 
-                new ViewEventCommand<IPatientSummaryListViewModel, IUpdatePulledEntityWithChanges<IPatients>>(
-                    key:"SaveName",
+                new ViewEventCommand<IPatientSummaryListViewModel, IUpdatePatientEntityWithChanges<IPatients>>(
+                    key:"SavePatientInfo",
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IPatientSummaryListViewModel, bool>>
                     {
                         v => v.ChangeTracking.Count == 1
                              && v.ChangeTracking.First().Value != null
-                             && ((dynamic)v)[nameof(IPatientInfo.Id)] != 0
+                             && v.CurrentEntity.Value.Id != 0
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>
@@ -112,11 +112,13 @@ namespace RevolutionData
                             {
                                 ((dynamic)s).Id,
                                 "Patient",
+                                "General",
+                                "Personal Information",
                                 s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
                             },
                             new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
                             s.Source);
-                        s.ChangeTracking.Clear();
+                        
                         return msg;
                     }),
 

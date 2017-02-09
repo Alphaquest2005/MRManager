@@ -31,6 +31,31 @@ namespace RevolutionData
                     e => e != null,
                     new List<Func<IPatientSyntomViewModel, ICurrentEntityChanged<IPatientVisitInfo>, bool>>(),
                     (v,e) => v.CurrentPatientVisit = e.Entity),
+                new ViewEventSubscription<IPatientSyntomViewModel, IEntityViewWithChangesUpdated<IPatientSyntomInfo>>(
+                    3,
+                    e => e != null,
+                    new List<Func<IPatientSyntomViewModel, IEntityViewWithChangesUpdated<IPatientSyntomInfo>, bool>>(),
+                    (v, e) =>
+                    {
+
+                       var f = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
+                        if (v.CurrentEntity.Value.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
+                        if (f == null)
+                        {
+                            v.EntitySet.Insert(v.EntitySet.Count() - 1,e.Entity);
+
+                        }
+                        else
+                        {
+                            //f = e.Entity;
+                            var idx = v.EntitySet.IndexOf(f);
+                            v.EntitySet.Remove(f);
+                            v.EntitySet.Insert(idx, e.Entity);
+                            v.EntitySet.Reset();
+                        }
+
+
+                    }),
             },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
             {
@@ -94,6 +119,84 @@ namespace RevolutionData
                             new StateCommandInfo(s.Process.Id,
                                 Context.Process.Commands.CurrentEntityChanged), s.Process,
                             s.Source);
+                    }),
+
+                new ViewEventCommand<IPatientSyntomViewModel, IUpdateEntityWithChanges<IPatientSyntoms>>(
+                    key:"CreatePatientSyntom",
+                    subject:v => v.ChangeTracking.DictionaryChanges,
+                    commandPredicate: new List<Func<IPatientSyntomViewModel, bool>>
+                    {
+                        v => v.ChangeTracking.Count == 5 && v.CurrentEntity.Value.Id == 0
+
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: v =>
+                    {
+                        v.ChangeTracking.Add(nameof(IPatientSyntomInfo.PatientVisitId), v.CurrentPatientVisit.Id);
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                v.CurrentEntity.Value.Id,
+                                v.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                            },
+                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            v.Source);
+                        v.ChangeTracking.Clear();
+                        return msg;
+                    }),
+
+                new ViewEventCommand<IPatientSyntomViewModel, IUpdateEntityViewWithChanges<IPatientSyntomInfo>>(
+                    key:"EditPatientSyntom",
+                    subject:v => v.ChangeTracking.DictionaryChanges,
+                    commandPredicate: new List<Func<IPatientSyntomViewModel, bool>>
+                    {
+                        v => v.ChangeTracking.Count == 1 && v.CurrentEntity.Value.Id != 0
+
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: v =>
+                    {
+                        v.ChangeTracking.Add(nameof(IPatientSyntomInfo.PatientVisitId), v.CurrentPatientVisit.Id);
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                v.CurrentEntity.Value.Id,
+                                v.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                            },
+                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            v.Source);
+                        v.ChangeTracking.Clear();
+                        return msg;
+                    }),
+                 new ViewEventCommand<IPatientSyntomViewModel, IUpdateEntityWithChanges<ISyntoms>>(
+                    key:"CreateSyntom",
+                    subject:v => v.ChangeTracking.DictionaryChanges,
+                    commandPredicate: new List<Func<IPatientSyntomViewModel, bool>>
+                    {
+                        v => v.ChangeTracking.Count == 1
+                        && v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.SyntomName))
+                        && (v.CurrentEntity.Value.Syntom == null || v.CurrentEntity.Value.Syntom?.Id == 0)
+                        //&& v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.SyntomId))
+                        //&& string.IsNullOrEmpty(v.ChangeTracking[nameof(IPatientSyntomInfo.SyntomId)])
+
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: v =>
+                    {
+                        
+                        var val = v.ChangeTracking[nameof(IPatientSyntomInfo.SyntomName)];
+                        v.ChangeTracking.Remove(nameof(IPatientSyntomInfo.SyntomName));
+                        v.ChangeTracking.Add(nameof(ISyntoms.Name),val);
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                0,
+                                v.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                            },
+                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            v.Source);
+                        v.ChangeTracking.Clear();
+                        return msg;
                     }),
 
             },

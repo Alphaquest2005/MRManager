@@ -92,6 +92,7 @@ namespace ViewModels
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
         public ObservableList<IInterviewInfo> EntitySet => this.ViewModel.EntitySet;
         public ObservableList<IInterviewInfo> SelectedEntities => this.ViewModel.SelectedEntities;
+        public ObservableBindingList<IInterviewInfo> ChangeTrackingList => this.ViewModel.ChangeTrackingList;
 
         public ObservableList<ISyntomMedicalSystemInfo> Systems
         {

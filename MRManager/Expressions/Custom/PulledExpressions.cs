@@ -145,8 +145,11 @@ namespace Entity.Expressions
                 PatientSyntoms = x.PatientSyntoms.Select(z => new PatientSyntomInfo()
                 {
                     Id = z.Id,
-                    Syntom = z.Syntoms.Name,
+                    SyntomName = z.Syntoms.Name,
+                    SyntomId = z.SyntomId,
+                    Syntom = z.Syntoms,
                     Priority = z.SyntomPriority.Name,
+                    PatientVisitId = z.PatientVisitId,
                     PriorityId = z.PriorityId,
                     StatusId = z.StatusId,
                     Status = z.SyntomStatus.Name,

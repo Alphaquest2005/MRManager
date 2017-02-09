@@ -309,6 +309,7 @@ namespace Entity.Expressions
                  PatientResponses = q.PatientResponses.SelectMany(pr => pr.Response).Select(z => new ResponseOptionInfo()
                  {
                      PatientResponseId = z.Id,
+                     PatientVisitId = z.PatientResponses.PatientVisit.Id,
                      PatientId = z.PatientResponses.PatientVisit.PatientId,
                      Id = z.ResponseOptionId,
                      Description = z.ResponseOptions.Description,

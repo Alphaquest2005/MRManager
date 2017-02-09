@@ -50,6 +50,7 @@ namespace ViewModels
         public ReactiveProperty<ISyntomMedicalSystemInfo> CurrentEntity => this.ViewModel.CurrentEntity;
         public ObservableList<ISyntomMedicalSystemInfo> EntitySet => this.ViewModel.EntitySet;
         public ObservableList<ISyntomMedicalSystemInfo> SelectedEntities => this.ViewModel.SelectedEntities;
+        public ObservableBindingList<ISyntomMedicalSystemInfo> ChangeTrackingList => this.ViewModel.ChangeTrackingList;
 
         ReactiveProperty<IProcessStateList<ISyntomMedicalSystemInfo>> IEntityListViewModel<ISyntomMedicalSystemInfo>.
             State => this.ViewModel.State;

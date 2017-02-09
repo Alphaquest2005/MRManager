@@ -16,5 +16,6 @@ namespace EF.Entities
         public string Type { get; set; }
         public int ResponseNumber { get; set; }
         public int PatientId { get; set; }
+        public int PatientVisitId { get; set; }
     }
 }

@@ -41,7 +41,7 @@ namespace ViewModel.Interfaces
     public interface IQuestionaireViewModel : IEntityListViewModel<IQuestionResponseOptionInfo>
     {
         ObservableBindingList<IResponseOptionInfo> ChangeTrackingList { get; }
-        IPatientInfo CurrentPatient { get; set; }
+        IPatientVisitInfo CurrentPatientVisit { get; set; }
     }
 
     

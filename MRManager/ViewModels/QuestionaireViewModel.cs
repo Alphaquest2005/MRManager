@@ -70,10 +70,10 @@ namespace ViewModels
                 {
 
                     resLst.AddRange(patientResponseInfo.ResponseOptions.Select(x => (ResponseOptionInfo)x ));
-                    if (CurrentPatient != null)
+                    if (CurrentPatientVisit != null)
                     {
                         foreach (
-                            var itm in patientResponseInfo.PatientResponses.Where(x => x.PatientId == CurrentPatient.Id)
+                            var itm in patientResponseInfo.PatientResponses.Where(x => x.PatientVisitId == CurrentPatientVisit.Id)
                             )
                         {
                            var res =  resLst.First(x => x.Id == itm.Id);
@@ -103,12 +103,12 @@ namespace ViewModels
 
         }
 
-        public IPatientInfo CurrentPatient
+        public IPatientVisitInfo CurrentPatientVisit
         {
-            get { return _currentPatient; }
+            get { return _currentPatientVisit; }
             set
             {
-                _currentPatient = value;
+                _currentPatientVisit = value;
                 UpdateChangeCollectionList(CurrentEntity.Value);
             }
         }
@@ -116,7 +116,7 @@ namespace ViewModels
         //AutoProperty Fucking up i really don't jnow why
         private ObservableBindingList<IResponseOptionInfo> _changeTrackingList = new ObservableBindingList<IResponseOptionInfo>();
         private readonly object lockObject = new object();
-        private IPatientInfo _currentPatient;
+        private IPatientVisitInfo _currentPatientVisit;
 
         public ObservableBindingList<IResponseOptionInfo> ChangeTrackingList
         {
@@ -134,7 +134,9 @@ namespace ViewModels
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
         public ObservableList<IQuestionResponseOptionInfo> EntitySet => this.ViewModel.EntitySet;
         public ObservableList<IQuestionResponseOptionInfo> SelectedEntities => this.ViewModel.SelectedEntities;
-        
+
+        ObservableBindingList<IQuestionResponseOptionInfo> IEntityListViewModel<IQuestionResponseOptionInfo>.
+            ChangeTrackingList => this.ViewModel.ChangeTrackingList;
 
 
         public string Field { get; set; }

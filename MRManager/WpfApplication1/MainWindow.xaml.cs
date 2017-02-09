@@ -99,7 +99,7 @@ namespace WpfApplication1
         public List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; }
         public Dictionary<string, ReactiveCommand<IViewModel, Unit>> Commands { get; }
         public List<IViewModelEventCommand<IViewModel, IEvent>> CommandInfo { get; }
-        ReactiveProperty<RowState> IEntityListViewModel<TEntity>.RowState { get; }
+        public ObservableBindingList<TEntity> ChangeTrackingList { get; }
         public ObservableList<TEntity> SelectedEntities { get; }
         ReactiveProperty<RowState> IViewModel.RowState { get; }
         public Type Orientation { get; }

@@ -27,8 +27,38 @@ namespace RevolutionData
                     e => e != null,
                     new List<Func<IPatientVisitViewModel, IUpdateProcessStateList<IPatientVisitInfo>, bool>>(),
                     (v,e) => v.State.Value = e.State),
+                new ViewEventSubscription<IPatientVisitViewModel, ICurrentEntityChanged<IPatientInfo>>(
+                    3,
+                    e => e != null,
+                    new List<Func<IPatientVisitViewModel, ICurrentEntityChanged<IPatientInfo>, bool>>(),
+                    (v,e) => v.CurrentPatient = e.Entity),
+                new ViewEventSubscription<IPatientVisitViewModel, IEntityViewWithChangesUpdated<IPatientVisitInfo>>(
+                    3,
+                    e => e != null,
+                    new List<Func<IPatientVisitViewModel, IEntityViewWithChangesUpdated<IPatientVisitInfo>, bool>>(),
+                    (v, e) =>
+                    {
 
-                
+                       var f = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
+                        if (v.CurrentEntity.Value.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
+                        if (f == null)
+                        {
+                            v.EntitySet.Insert(v.EntitySet.Count() - 1,e.Entity);
+
+                        }
+                        else
+                        {
+                            //f = e.Entity;
+                            var idx = v.EntitySet.IndexOf(f);
+                            v.EntitySet.Remove(f);
+                            v.EntitySet.Insert(idx, e.Entity);
+                            v.EntitySet.Reset();
+                        }
+
+                       
+                    }),
+
+
             },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
             {
@@ -92,6 +122,54 @@ namespace RevolutionData
                             new StateCommandInfo(s.Process.Id,
                                 Context.Process.Commands.CurrentEntityChanged), s.Process,
                             s.Source);
+                    }),
+
+                new ViewEventCommand<IPatientVisitViewModel, IUpdateEntityViewWithChanges<IPatientVisitInfo>>(
+                    key:"CreatePatientVisit",
+                    subject:v => v.ChangeTracking.DictionaryChanges,
+                    commandPredicate: new List<Func<IPatientVisitViewModel, bool>>
+                    {
+                        v => v.ChangeTracking.Count == 3 && v.CurrentEntity.Value.Id == 0
+
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: v =>
+                    {
+                        v.ChangeTracking.Add(nameof(IPatientVisitInfo.PatientId), v.CurrentPatient.Id);
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                v.CurrentEntity.Value.Id,
+                                v.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                            },
+                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            v.Source);
+                        v.ChangeTracking.Clear();
+                        return msg;
+                    }),
+
+                new ViewEventCommand<IPatientVisitViewModel, IUpdateEntityViewWithChanges<IPatientVisitInfo>>(
+                    key:"EditPatientVisit",
+                    subject:v => v.ChangeTracking.DictionaryChanges,
+                    commandPredicate: new List<Func<IPatientVisitViewModel, bool>>
+                    {
+                        v => v.ChangeTracking.Count == 1 && v.CurrentEntity.Value.Id != 0
+
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: v =>
+                    {
+                        v.ChangeTracking.Add(nameof(IPatientVisitInfo.PatientId), v.CurrentPatient.Id);
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                v.CurrentEntity.Value.Id,
+                                v.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                            },
+                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            v.Source);
+                        v.ChangeTracking.Clear();
+                        return msg;
                     }),
 
             },

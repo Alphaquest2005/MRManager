@@ -146,11 +146,14 @@ namespace Core.Common.UI
         
         public ObservableDictionary<string, dynamic> ChangeTracking { get; } = new ObservableDictionary<string, dynamic>();
 
-        private ReactiveProperty<SystemInterfaces.RowState> _rowState = new ReactiveProperty<SystemInterfaces.RowState>(SystemInterfaces.RowState.Unchanged);
-        public ReactiveProperty<SystemInterfaces.RowState> RowState
+        private ObservableBindingList<TEntity> _changeTrackingList = new ObservableBindingList<TEntity>();
+
+        
+
+        public ObservableBindingList<TEntity> ChangeTrackingList
         {
-            get { return _rowState; }
-            set { this.RaiseAndSetIfChanged(ref _rowState, value); }
+            get { return _changeTrackingList; }
+            set { _changeTrackingList = value; }
         }
 
 

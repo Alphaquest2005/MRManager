@@ -28,7 +28,7 @@ namespace DataServices.Actors
         private static readonly Action<ISystemSource, ILoadEntitySetWithFilter<TEntity>> LoadEntitySetWithFilter = (s, x) => x.LoadEntitySet();
         private static readonly Action<ISystemSource, ILoadEntitySetWithFilterWithIncludes<TEntity>> LoadEntitySetWithFilterWithIncludes = (s, x) => x.LoadEntitySet();
 
-        private static readonly Action<ISystemSource, IUpdatePulledEntityWithChanges<TEntity>> UpdatePulledEntityWtihChangesAction = (s, x) => x.UpdatePulledEntityWithChanges();
+        private static readonly Action<ISystemSource, IUpdatePatientEntityWithChanges<TEntity>> UpdatePulledEntityWtihChangesAction = (s, x) => x.UpdatePulledEntityWithChanges();
 
 
         readonly Dictionary<Type, object> entityEvents =
@@ -43,7 +43,7 @@ namespace DataServices.Actors
                 {typeof (ILoadEntitySet<TEntity>), LoadEntitySet},
                 {typeof (ILoadEntitySetWithFilter<TEntity>), LoadEntitySetWithFilter},
                 {typeof (ILoadEntitySetWithFilterWithIncludes<TEntity>), LoadEntitySetWithFilterWithIncludes},
-                {typeof(IUpdatePulledEntityWithChanges<TEntity>), UpdatePulledEntityWtihChangesAction}
+                {typeof(IUpdatePatientEntityWithChanges<TEntity>), UpdatePulledEntityWtihChangesAction}
 
             };
         private IUntypedActorContext ctx = null;
@@ -72,8 +72,8 @@ namespace DataServices.Actors
                     _childActor = ctx.ActorOf(Props.Create(actorType, inMsg).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
                             "EntityDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
 
-                    EventMessageBus.Current.GetEvent<TEvent>(Source).Subscribe(x => _childActor.Tell(x));
-                //Thread.Sleep(TimeSpan.FromMilliseconds(50));
+                   // EventMessageBus.Current.GetEvent<TEvent>(Source).Subscribe(x => _childActor.Tell(x));
+              
                 _childActor.Tell(msg);
 
             }

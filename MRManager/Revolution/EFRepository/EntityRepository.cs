@@ -19,7 +19,7 @@ using Utilities;
 
 namespace EFRepository
 {
-    public class EntityRepository<TEntity,TDBEntity, TDBContext>:BaseRepository<EntityRepository<TEntity,TDBEntity, TDBContext>> where TEntity:IEntity where TDBContext : DbContext, new() where TDBEntity:class, IEntity
+    public class EntityRepository<TEntity,TDBEntity, TDBContext>:BaseRepository<EntityRepository<TEntity,TDBEntity, TDBContext>> where TEntity:IEntity where TDBContext : DbContext, new() where TDBEntity:class, IEntity, new()
     {
 
         public static void Create(ICreateEntity<TEntity> msg )
@@ -46,7 +46,18 @@ namespace EFRepository
             {
                 using (var ctx = new TDBContext())
                 {
-                    var entity = ctx.Set<TDBEntity>().First(x => x.Id == msg.EntityId);
+                    TDBEntity entity;//
+                    if (msg.EntityId == 0)
+                    {
+                        entity = new TDBEntity();
+                        ctx.Set<TDBEntity>().Add(entity);
+                    }
+                    else
+                    {
+                        entity = ctx.Set<TDBEntity>().FirstOrDefault(x => x.Id == msg.EntityId);
+                    }
+
+                    
                     entity.ApplyChanges(msg.Changes);
                     ctx.Set<TDBEntity>().Update(entity);
 

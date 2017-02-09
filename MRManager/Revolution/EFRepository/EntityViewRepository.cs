@@ -81,7 +81,7 @@ namespace EFRepository
         {
             try
             {
-                //var exp = FindExpressionClass.FindExpression<TDbEntity, TDbView>();
+                var exp = FindExpressionClass.FindExpression<TDbEntity, TDbView>();
                 using (var ctx = new TDbContext())
                 {
                     // ReSharper disable once ReplaceWithSingleCallToFirstOrDefault cuz EF7 bugging LEAVE JUST SO
@@ -99,8 +99,8 @@ namespace EFRepository
                     res.ApplyChanges(msg.Changes);
                     ctx.SaveChanges(true);
                     //TODO: retrieve whole item
-                    //var res = ctx.Set<TDbEntity>().Select(exp).DistinctBy(x => x.Id).FirstOrDefault(x => x.Id == msg.EntityId);//
-                    //EventMessageBus.Current.Publish(new EntityViewWithChangesUpdated<TView>((TView)(object)res, msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
+                    var ures = ctx.Set<TDbEntity>().Select(exp).DistinctBy(x => x.Id).FirstOrDefault(x => x.Id == res.Id);//
+                    EventMessageBus.Current.Publish(new EntityViewWithChangesUpdated<TView>((TView)(object)ures, msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
                 }
             }
             catch (Exception ex)

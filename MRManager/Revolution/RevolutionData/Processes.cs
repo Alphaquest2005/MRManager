@@ -230,6 +230,8 @@ namespace RevolutionData
             PatientVisitViewModelInfo.ComplexActions.RequestData,
             PatientVisitViewModelInfo.ComplexActions.UpdateState,
 
+            EntityCacheViewModelInfo<ISyntomPriority>.ComplexActions.IntializeCache(3),
+            EntityCacheViewModelInfo<ISyntoms>.ComplexActions.IntializeCache(3),
             EntityCacheViewModelInfo<ISyntomStatus>.ComplexActions.IntializeCache(3),
             EntityCacheViewModelInfo<IVisitType>.ComplexActions.IntializeCache(3),
             EntityCacheViewModelInfo<IPhase>.ComplexActions.IntializeCache(3),

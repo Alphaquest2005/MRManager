@@ -21,7 +21,7 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="18.667"
-                       Text="{Binding Syntom,
+                       Text="{Binding SyntomName,
                                       Mode=OneWay}" />
             <TextBlock Width="125"
                        Height="27"

@@ -45,7 +45,7 @@ namespace DataServices.Actors
             EntityViewDataContext<TEntityView>.LoadEntityViewSetWithChanges(msg);
         }
 
-        public static void UpdatePulledEntityWithChanges<TEntity>(this IUpdatePulledEntityWithChanges<TEntity> msg) where TEntity : IEntity
+        public static void UpdatePulledEntityWithChanges<TEntity>(this IUpdatePatientEntityWithChanges<TEntity> msg) where TEntity : IEntity
         {
             PulledEntityDataContext.UpdatePulledEntityWithChanges(msg);
         }

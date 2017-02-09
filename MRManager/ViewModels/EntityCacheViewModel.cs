@@ -57,6 +57,18 @@ namespace ViewModels
 
     }
 
+    [Export(typeof(IEntityCacheViewModel<ISyntoms>))]
+    public class SyntomCacheViewModel : ObservableListViewModel<ISyntoms>, IEntityCacheViewModel<ISyntoms>
+    {
+        public SyntomCacheViewModel() { }
+
+        public SyntomCacheViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(eventSubscriptions, eventPublications, commandInfo, process, orientation)
+        {
+            this.WireEvents();
+        }
+
+    }
+
     [Export(typeof(IEntityCacheViewModel<IVisitType>))]
     public class VisitTypeCacheViewModel : ObservableListViewModel<IVisitType>, IEntityCacheViewModel<IVisitType>
     {

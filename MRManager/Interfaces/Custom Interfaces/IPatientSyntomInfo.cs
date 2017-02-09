@@ -7,11 +7,14 @@ namespace Interfaces
     
     public interface IPatientSyntomInfo : IEntityView<IPatientSyntoms>
     {
-        string Syntom { get;  }
+        int SyntomId { get; }
+        string SyntomName { get;  }
+        ISyntoms Syntom { get; }
         string Priority { get;  }
         string Status { get; }
         int PriorityId { get;  }
         int StatusId { get;  }
         IList<ISyntomMedicalSystemInfo> Systems { get; }
+        int PatientVisitId { get; }
     }
 }

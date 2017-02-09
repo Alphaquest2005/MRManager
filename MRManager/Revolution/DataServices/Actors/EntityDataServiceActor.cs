@@ -25,7 +25,8 @@ namespace DataServices.Actors
         {
             Action = (Action<ISystemSource,TService>)msg.Action;
             Command<TService>(m => HandledEvent(m));
-            
+
+            EventMessageBus.Current.GetEvent<TService>(Source).Subscribe(x => HandledEvent(x));
             EventMessageBus.Current.Publish(new ServiceStarted<IEntityDataServiceActor<TService>>(this,new StateEventInfo(msg.Process.Id, RevolutionData.Context.Actor.Events.ActorStarted), msg.Process,Source), Source);
         }
 

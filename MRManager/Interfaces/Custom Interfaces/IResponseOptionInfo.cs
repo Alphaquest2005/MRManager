@@ -15,5 +15,6 @@ namespace Interfaces
         String Type { get; }
         int ResponseNumber { get; }
         int PatientId { get; }
+        int PatientVisitId { get; }
     }
 }
