@@ -222,18 +222,20 @@ namespace RevolutionData
             ComplexActions.RequestStateList<IPatientVisitInfo, IPatientSyntomInfo>(3, x => x.PatientVisitId),
              ComplexActions.RequestStateList<ISyntoms, IPatientSyntomInfo>(3, x => x.SyntomId),
             ComplexActions.UpdateStateList<IPatientSyntomInfo>(3),
+            PatientSyntomViewModelInfo.ComplexActions.UpdatePatientInfo,
 
             ComplexActions.RequestStateList<IPatientSyntomInfo, ISyntomMedicalSystemInfo>(3, x => x.MedicalSystemId),
             
             ComplexActions.UpdateStateList<ISyntomMedicalSystemInfo>(3),
 
+            
           
 
 
             
             //InterviewListViewModelInfo.ComplexActions.IntializeInterviewInfoProcessState,
             //InterviewListViewModelInfo.ComplexActions.UpdateInterviewInfoState,
-            PatientSyntomViewModelInfo.ComplexActions.UpdatePatientInfo,
+            
              
 
             QuestionaireViewModelInfo.ComplexActions.RequestPatientResponses,
@@ -348,11 +350,11 @@ namespace RevolutionData
                             //todo: check this cuz it comes from viewmodel
                             processInfo: new StateEventInfo(processId, Context.Entity.Events.EntityFound)),
                        
-                        new ProcessExpectedEvent<IEntityUpdated<TCurrentEntity>>(
-                            "CurrentEntity", processId, e => e.Entity != null,
-                            expectedSourceType: new SourceType(typeof (IViewModel)),
-                            //todo: check this cuz it comes from viewmodel
-                            processInfo: new StateEventInfo(processId, Context.Entity.Events.EntityUpdated))
+                        //new ProcessExpectedEvent<IEntityUpdated<TCurrentEntity>>(
+                        //    "CurrentEntity", processId, e => e.Entity != null,
+                        //    expectedSourceType: new SourceType(typeof (IViewModel)),
+                        //    //todo: check this cuz it comes from viewmodel
+                        //    processInfo: new StateEventInfo(processId, Context.Entity.Events.EntityUpdated))
                     },
                     expectedMessageType: typeof(IProcessStateMessage<TEntityView>),
                     action: ProcessActions.RequestStateList(property),

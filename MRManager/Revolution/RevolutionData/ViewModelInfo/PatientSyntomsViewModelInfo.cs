@@ -35,6 +35,7 @@ namespace RevolutionData
                     new List<Func<IPatientSyntomViewModel, ICurrentEntityChanged<IPatientVisitInfo>, bool>>(),
                     (v,e) => v.CurrentPatientVisit = e.Entity),
 
+                
 
                 new ViewEventSubscription<IPatientSyntomViewModel, IEntityFound<IPatientSyntomInfo>>(
                     3,
@@ -95,6 +96,38 @@ namespace RevolutionData
                         });
 
                     }),
+
+                new ViewEventSubscription<IPatientSyntomViewModel, IEntityViewWithChangesUpdated<IPatientSyntomInfo>>(
+                    3,
+                    e => e != null,
+                    new List<Func<IPatientSyntomViewModel, IEntityViewWithChangesUpdated<IPatientSyntomInfo>, bool>>(),
+                    (v, e) =>
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+
+
+                       var f = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
+                        if (v.CurrentEntity.Value.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
+                        if (f == null)
+                        {
+                            v.EntitySet.Insert(v.EntitySet.Count() - 1,e.Entity);
+                                v.EntitySet.Reset();
+                        }
+                        else
+                        {
+                            //f = e.Entity;
+                            var idx = v.EntitySet.IndexOf(f);
+                            v.EntitySet.Remove(f);
+                            v.EntitySet.Insert(idx, e.Entity);
+                            v.EntitySet.Reset();
+                        }
+                        v.RowState.Value = RowState.Unchanged;
+                        });
+
+                    }),
+
+
             },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
             {
@@ -196,8 +229,8 @@ namespace RevolutionData
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IPatientSyntomViewModel, bool>>
                     {
-                        v => v.ChangeTracking.Count() == 2
-                         &&((!v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.Syntom)))
+                        v => v.ChangeTracking.Any()
+                         &&((!v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.Syntom)) && !v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.SyntomName)))
                             || (v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.Syntom))
                                 && v.ChangeTracking[nameof(IPatientSyntomInfo.Syntom)] != null))
                         && v.CurrentEntity.Value.Id != 0
@@ -208,7 +241,7 @@ namespace RevolutionData
                     {
                         var res = v.ChangeTracking;
                         res.Add(nameof(IPatientSyntomInfo.PatientVisitId), v.CurrentPatientVisit.Id);
-                        if (res.ContainsKey(nameof(IPatientSyntomInfo.Syntom)))
+                        if (res.ContainsKey(nameof(IPatientSyntomInfo.SyntomName)))
                             res.Remove(nameof(IPatientSyntomInfo.SyntomName));
                         if (res.ContainsKey(nameof(IPatientSyntomInfo.Syntom)))
                         {
@@ -234,12 +267,7 @@ namespace RevolutionData
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IPatientSyntomViewModel, bool>>
                     {
-                        v => v.ChangeTracking.Count == 2
-                        && v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.SyntomName)) && v.ChangeTracking[nameof(IPatientSyntomInfo.Syntom)] != null
-                        && v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.Syntom)) && v.ChangeTracking[nameof(IPatientSyntomInfo.Syntom)] == null
-                        //&& v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.SyntomId))
-                        //&& string.IsNullOrEmpty(v.ChangeTracking[nameof(IPatientSyntomInfo.SyntomId)])
-
+                        v => v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.SyntomName)) && v.ChangeTracking[nameof(IPatientSyntomInfo.SyntomName)] != ""
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: v =>
@@ -253,12 +281,11 @@ namespace RevolutionData
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
-                                0,
                                 res.ToDictionary(x => x.Key, x => x.Value)
                             },
                             new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
                             v.Source);
-                        v.ChangeTracking.Clear();
+                        
                         return msg;
                     }),
 
@@ -285,15 +312,16 @@ namespace RevolutionData
 
             public static IProcessAction GetPatientSyntom => new ProcessAction(
                 action: cp => new GetEntityViewById<IPatientSyntomInfo>(cp.Messages["UpdatedPatientSyntom"].Entity.Id,
-                                new StateCommandInfo(cp.Actor.Process.Id, Context.EntityView.Commands.GetEntityView),
-                                cp.Actor.Process, cp.Actor.Source),
+                    new StateCommandInfo(cp.Actor.Process.Id, Context.EntityView.Commands.GetEntityView),
+                    cp.Actor.Process, cp.Actor.Source),
                 processInfo: cp =>
-                        new StateCommandInfo(cp.Actor.Process.Id,
-                            Context.EntityView.Commands.GetEntityView),
+                    new StateCommandInfo(cp.Actor.Process.Id,
+                        Context.EntityView.Commands.GetEntityView),
                 // take shortcut cud be IntialState
                 expectedSourceType: new SourceType(typeof(IComplexEventService))
 
                 );
         }
+
     }
 }

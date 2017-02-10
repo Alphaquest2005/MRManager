@@ -34,6 +34,7 @@ namespace ViewModels
             this.WireEvents();
             _entitySet = this.ViewModel.EntitySet;
             Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => addNewRow(x));
+            
         }
         private void addNewRow(ObservableList<IPatientSyntomInfo> observableList)
         {
