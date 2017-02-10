@@ -25,61 +25,46 @@ namespace ViewModels
     {
         private ReactiveProperty<IPatientSyntomInfo> _currentPatientSyntom = new ReactiveProperty<IPatientSyntomInfo>();
         private ReactiveProperty<ISyntomMedicalSystemInfo> _currentMedicalSystem = new ReactiveProperty<ISyntomMedicalSystemInfo>();
-        private ReactiveProperty<ISyntomMedicalSystemInfo> _currentSystem= new ReactiveProperty<ISyntomMedicalSystemInfo>();
-        private ObservableList<ISyntomMedicalSystemInfo> _systems = new ObservableList<ISyntomMedicalSystemInfo>();
+        private ReactiveProperty<ObservableList<ISyntomMedicalSystemInfo>> _systems = new ReactiveProperty<ObservableList<ISyntomMedicalSystemInfo>>(new ObservableBindingList<ISyntomMedicalSystemInfo>());
 
         [ImportingConstructor]
         public InterviewListViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IInterviewInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
            this.WireEvents();
-            CurrentMedicalSystem.WhenAnyValue(x => x.Value).DistinctUntilChanged().Subscribe(x => systemChange(x));
-            
-            this.WhenAnyValue(x => x.CurrentPatientSyntom.Value).Subscribe(x => addSystems(x));
            
+            
+            this.WhenAnyValue(x => x.Systems.Value).Subscribe(x => addSystems(x));
+            this.WhenAnyValue(x => x.CurrentMedicalSystem.Value).Where(x => x != null).Subscribe(x => addNewRow(x.Interviews));
         }
 
         
 
-        private void addSystems(IPatientSyntomInfo patientSyntom)
+        private void addSystems(ObservableList<ISyntomMedicalSystemInfo> observableList)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                Systems.Clear();
-                if (patientSyntom == null || patientSyntom.Id == 0)
-                {
-                    CurrentMedicalSystem.Value = null;
-                    return;
-                }
-                    
-                var res = new List<ISyntomMedicalSystemInfo>();
-                if (patientSyntom?.Systems != null) res = patientSyntom.Systems.ToList();
-                res.Add(new SyntomMedicalSystemInfo() { System = "Create New..." });
-                Systems.AddRange(res);
-                Systems.Reset();
-                if(CurrentMedicalSystem.Value != Systems.FirstOrDefault()) CurrentMedicalSystem.Value = Systems.FirstOrDefault();
+                Systems.Value.Add(new SyntomMedicalSystemInfo() { System = "Create New..." });
+                Systems.Value.Reset();
+                CurrentMedicalSystem.Value = Systems.Value.FirstOrDefault();
             });
         }
 
-        private void systemChange(ISyntomMedicalSystemInfo syntomMedicalSystemInfo)
+        private void addNewRow(IList<IInterviewInfo> observableList)
         {
-           
-             Application.Current.Dispatcher.Invoke(() =>
-                {
-                    EntitySet.Clear();
-                    if (CurrentMedicalSystem.Value == null)
-                    {
-                        CurrentEntity.Value = null;
-                        return;
-                    }
-                    
-                    var res = new List<IInterviewInfo>();
-                    if(CurrentMedicalSystem.Value.Interviews != null) res = CurrentMedicalSystem.Value.Interviews.ToList();
-                    res.Add(new InterviewInfo() { Interview = "Create New..." });
-                    EntitySet.AddRange(res);
-                    EntitySet.Reset();
-                    CurrentEntity.Value = EntitySet.FirstOrDefault();
-                    
-                });
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                EntitySet.Clear();
+
+                CurrentEntity.Value = null;
+
+                if (observableList == null || !observableList.Any()) return;
+                var res = observableList.ToList();
+                res.Add(new InterviewInfo() { Interview = "Create New..." });
+
+                EntitySet.AddRange(res);
+                EntitySet.Reset();
+                CurrentEntity.Value = EntitySet.FirstOrDefault();
+            });
         }
 
 
@@ -92,12 +77,15 @@ namespace ViewModels
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
         public ObservableList<IInterviewInfo> EntitySet => this.ViewModel.EntitySet;
         public ObservableList<IInterviewInfo> SelectedEntities => this.ViewModel.SelectedEntities;
-        public ObservableBindingList<IInterviewInfo> ChangeTrackingList => this.ViewModel.ChangeTrackingList;
+       
 
-        public ObservableList<ISyntomMedicalSystemInfo> Systems
+        public ReactiveProperty<ObservableList<ISyntomMedicalSystemInfo>> Systems
         {
             get { return _systems; }
-            set { _systems = value; }
+            set
+            {
+                _systems = value;
+            }
         }
 
         public string Field { get; set; }

@@ -135,8 +135,7 @@ namespace ViewModels
         public ObservableList<IQuestionResponseOptionInfo> EntitySet => this.ViewModel.EntitySet;
         public ObservableList<IQuestionResponseOptionInfo> SelectedEntities => this.ViewModel.SelectedEntities;
 
-        ObservableBindingList<IQuestionResponseOptionInfo> IEntityListViewModel<IQuestionResponseOptionInfo>.
-            ChangeTrackingList => this.ViewModel.ChangeTrackingList;
+        
 
 
         public string Field { get; set; }

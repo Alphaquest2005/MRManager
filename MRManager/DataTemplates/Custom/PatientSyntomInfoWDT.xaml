@@ -31,21 +31,19 @@
                                             UpdateSourceTrigger=PropertyChanged,
                                             Mode=OneWay,
                                             IsAsync=True}"
-                      
+                      SelectedItem="{Binding Syntom, UpdateSourceTrigger=PropertyChanged}"
                       SelectedValuePath="Id"
-                      
                       Text="{Binding SyntomName,
                                      FallbackValue=Syntom,
                                      TargetNullValue=Syntom,
                                      Mode=TwoWay,
-                                     UpdateSourceTrigger=LostFocus}"
-                      SelectedItem="{Binding Syntom,
-                                              UpdateSourceTrigger=LostFocus}" />
+                                     UpdateSourceTrigger=PropertyChanged}" />
             <ComboBox Width="125"
                       Height="27"
                       Margin="366,10,0,0"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Top"
+                      converters:XamlExtensions.UpdateSourceOnKey="Enter"
                       DisplayMemberPath="Name"
                       FontSize="16"
                       ItemsSource="{Binding Source={x:Static Member=viewModels:SyntomPriorityCacheViewModel.Instance},
@@ -61,6 +59,7 @@
                       Margin="10,52,0,0"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Top"
+                      converters:XamlExtensions.UpdateSourceOnKey="Enter"
                       DisplayMemberPath="Name"
                       FontSize="16"
                       ItemsSource="{Binding Source={x:Static Member=viewModels:SyntomStatusCacheViewModel.Instance},

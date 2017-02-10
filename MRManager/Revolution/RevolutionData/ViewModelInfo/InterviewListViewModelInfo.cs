@@ -8,6 +8,7 @@ using Actor.Interfaces;
 using EventMessages.Commands;
 using EventMessages.Events;
 using Interfaces;
+using JB.Collections.Reactive;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
@@ -22,17 +23,14 @@ namespace RevolutionData
             (
             3, new List<IViewModelEventSubscription<IViewModel, IEvent>>
             {
-                new ViewEventSubscription<IInterviewListViewModel, IUpdateProcessStateList<IInterviewInfo>>(
+                new ViewEventSubscription<IInterviewListViewModel, IUpdateProcessStateList<ISyntomMedicalSystemInfo>>(
                     3,
                     e => e != null,
-                    new List<Func<IInterviewListViewModel, IUpdateProcessStateList<IInterviewInfo>, bool>>(),
-                    (v,e) => v.State.Value = e.State),
-
-                new ViewEventSubscription<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>>(
-                    3,
-                    e => e != null,
-                    new List<Func<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>, bool>>(),
-                    (v,e) => v.CurrentPatientSyntom.Value = e.Entity),
+                    new List<Func<IInterviewListViewModel, IUpdateProcessStateList<ISyntomMedicalSystemInfo>, bool>>(),
+                    (v, e) =>
+                    {
+                       v.Systems.Value = new ObservableList<ISyntomMedicalSystemInfo>(e.State.EntitySet.ToList());
+                    }),
 
             },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
@@ -52,11 +50,11 @@ namespace RevolutionData
                     subjectPredicate:new List<Func<IInterviewListViewModel, bool>>{},
                     messageData:s => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
 
-                new ViewEventPublication<IInterviewListViewModel, ICurrentEntityChanged<ISyntomMedicalSystemInfo>>(
-                    key:"CurrentSystemChanged",
-                    subject:v => v.CurrentMedicalSystem,//.WhenAnyValue(x => x.Value),
-                    subjectPredicate:new List<Func<IInterviewListViewModel, bool>>{},
-                    messageData:s => new ViewEventPublicationParameter(new object[] {s.CurrentMedicalSystem.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
+                //new ViewEventPublication<IInterviewListViewModel, ICurrentEntityChanged<ISyntomMedicalSystemInfo>>(
+                //    key:"CurrentSystemChanged",
+                //    subject:v => v.CurrentMedicalSystem,//.WhenAnyValue(x => x.Value),
+                //    subjectPredicate:new List<Func<IInterviewListViewModel, bool>>{},
+                //    messageData:s => new ViewEventPublicationParameter(new object[] {s.CurrentMedicalSystem.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
             },
             new List<IViewModelEventCommand<IViewModel,IEvent>>
             {

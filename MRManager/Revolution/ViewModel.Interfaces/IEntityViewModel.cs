@@ -23,7 +23,7 @@ namespace ViewModelInterfaces
         ReactiveProperty<TEntity> CurrentEntity { get; }
         ObservableList<TEntity> EntitySet { get; }
         ObservableList<TEntity> SelectedEntities { get; }
-        ObservableBindingList<TEntity> ChangeTrackingList { get; }
+        
     }
 
 

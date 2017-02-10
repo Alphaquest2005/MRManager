@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemInterfaces
 {
-    public interface IEntityUpdated<out TEntity> : IProcessSystemMessage where TEntity : IEntity
+    public interface IEntityUpdated<out TEntity> : IProcessSystemMessage where TEntity : IEntityId
     {
         TEntity Entity { get; }
     }

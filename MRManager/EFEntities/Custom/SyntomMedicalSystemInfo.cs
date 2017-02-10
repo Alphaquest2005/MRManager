@@ -12,6 +12,7 @@ namespace EF.Entities
     {
         public int MedicalSystemId { get; set; }
         public string System { get; set; }
+        public string SyntomName { get; set; }
         public IList<IInterviewInfo> Interviews { get; set; }
     }
 }

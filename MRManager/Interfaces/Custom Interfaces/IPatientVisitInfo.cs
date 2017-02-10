@@ -12,7 +12,6 @@ namespace Interfaces
         DateTime DateOfVisit { get;  }
         string AttendingDoctor { get;  }
         int DoctorId { get;  }
-        IList<IPatientSyntomInfo> PatientSyntoms { get;  }
         string Purpose { get; }
         int VisitTypeId { get; }
     }

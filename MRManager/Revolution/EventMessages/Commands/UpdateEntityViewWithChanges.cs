@@ -20,4 +20,19 @@ namespace EventMessages.Commands
         public Dictionary<string, dynamic> Changes { get; }
         public int EntityId { get; }
     }
+
+    [Export(typeof(IAddEntityViewWithChanges<>))]
+
+    public class AddEntityViewWithChanges<TView> : ProcessSystemMessage, IAddEntityViewWithChanges<TView> where TView : IEntityView
+    {
+
+        public AddEntityViewWithChanges() { }
+        public AddEntityViewWithChanges(Dictionary<string, dynamic> changes, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo, process, source)
+        {
+            Changes = changes;
+        }
+
+        public Dictionary<string, dynamic> Changes { get; }
+        
+    }
 }

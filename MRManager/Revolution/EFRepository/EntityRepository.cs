@@ -71,6 +71,37 @@ namespace EFRepository
 
         }
 
+        public static void Add(IAddEntityWithChanges<TEntity> msg)
+        {
+            try
+            {
+                using (var ctx = new TDBContext())
+                {
+                    TDBEntity entity;//
+                    var whereStr = msg.Changes.Aggregate("", (str, itm) => str + ($"{itm.Key} == \"{itm.Value}\" &&"));
+                    whereStr = whereStr.TrimEnd('&');
+                    if (string.IsNullOrEmpty(whereStr)) return;
+                    entity = ctx.Set<TDBEntity>().Where(whereStr).FirstOrDefault();
+
+                    if (entity != null) return;
+
+                    
+                        entity = new TDBEntity();
+                        ctx.Set<TDBEntity>().Add(entity);
+                   
+                    entity.ApplyChanges(msg.Changes);
+
+                    ctx.SaveChanges(true);
+                    EventMessageBus.Current.Publish(new EntityUpdated<TEntity>((TEntity)(object)entity, new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntityUpdated), msg.Process, Source), Source);
+                }
+            }
+            catch (Exception ex)
+            {
+                PublishProcesError(msg, ex, typeof(IEntityUpdated<TEntity>));
+            }
+
+        }
+
         public static void Delete(IDeleteEntity<TEntity> msg )
         {
             try
@@ -124,7 +155,7 @@ namespace EFRepository
                     var whereStr = msg.Changes.Aggregate("", (str, itm) => str + ($"{itm.Key} == \"{itm.Value}\" &&"));
                     whereStr = whereStr.TrimEnd('&');
                     if (string.IsNullOrEmpty(whereStr)) return;
-                    var p = ctx.Set<TDBEntity>().Where(whereStr).First();
+                    var p = ctx.Set<TDBEntity>().Where(whereStr).FirstOrDefault();
                     EventMessageBus.Current.Publish(new EntityWithChangesFound<TEntity>((TEntity)(object)p, msg.Changes, new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntityFound), msg.Process, Source), Source);
 
                 }

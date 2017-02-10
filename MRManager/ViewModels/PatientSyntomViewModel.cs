@@ -24,9 +24,8 @@ namespace ViewModels
     [Export(typeof(IPatientSyntomViewModel))]
     public class PatientSyntomViewModel : DynamicViewModel<ObservableListViewModel<IPatientSyntomInfo>>, IPatientSyntomViewModel
     {
-        private ObservableBindingList<IPatientSyntomInfo> _changeTrackingList = new ObservableBindingList<IPatientSyntomInfo>();
+        
         private ObservableList<IPatientSyntomInfo> _entitySet;
-        private IPatientVisitInfo _currentPatientVisit;
 
         [ImportingConstructor]
         public PatientSyntomViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IPatientSyntomInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
@@ -34,11 +33,27 @@ namespace ViewModels
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             this.WireEvents();
             _entitySet = this.ViewModel.EntitySet;
-           
+            Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => addNewRow(x));
+        }
+        private void addNewRow(ObservableList<IPatientSyntomInfo> observableList)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                EntitySet.Clear();
+
+                CurrentEntity.Value = null;
+
+                
+                var res = observableList.ToList();
+                res.Add(new PatientSyntomInfo() { SyntomName = "Create New..." });
+
+                EntitySet.AddRange(res);
+                EntitySet.Reset();
+                CurrentEntity.Value = EntitySet.FirstOrDefault();
+            });
         }
 
 
-       
         public ReactiveProperty<IProcessStateList<IPatientSyntomInfo>> State => this.ViewModel.State;
 
 
@@ -56,40 +71,8 @@ namespace ViewModels
     
         public ObservableList<IPatientSyntomInfo> SelectedEntities => this.ViewModel.SelectedEntities;
 
+        
 
-        public ObservableBindingList<IPatientSyntomInfo> ChangeTrackingList
-        {
-            get { return _changeTrackingList; }
-            set { _changeTrackingList = value; }
-        }
-
-        public IPatientVisitInfo CurrentPatientVisit
-        {
-            get { return _currentPatientVisit; }
-            set
-            {
-                _currentPatientVisit = value;
-
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    EntitySet.Clear();
-                    
-                    var res =new  List<IPatientSyntomInfo>();
-                    if (_currentPatientVisit == null || _currentPatientVisit.Id ==0)
-                    {
-                        CurrentEntity.Value = null;
-                        return;
-                    }
-                     if(_currentPatientVisit.PatientSyntoms != null) res = _currentPatientVisit.PatientSyntoms.ToList();
-                    
-                    res.Add(new PatientSyntomInfo() { SyntomName = "Create New..." });
-                    
-                    EntitySet.AddRange(res);
-                    EntitySet.Reset();
-                    CurrentEntity.Value = EntitySet.FirstOrDefault();
-                });
-                
-            }
-        }
+        public IPatientVisitInfo CurrentPatientVisit { get; set; }
     }
 }

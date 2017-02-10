@@ -16,6 +16,5 @@ namespace Interfaces
         string System { get; }
         int SystemId { get; }
         
-
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Windows;
 using SystemInterfaces;
 using Actor.Interfaces;
 using EventMessages.Commands;
@@ -27,9 +28,13 @@ namespace RevolutionData
                     e => e != null,
                     new List<Func<IPatientSyntomViewModel, IUpdateProcessStateList<IPatientSyntomInfo>, bool>>(),
                     (v,e) => v.State.Value = e.State),
-                
 
-                
+                new ViewEventSubscription<IPatientSyntomViewModel, ICurrentEntityChanged<IPatientVisitInfo>>(
+                    3,
+                    e => e != null,
+                    new List<Func<IPatientSyntomViewModel, ICurrentEntityChanged<IPatientVisitInfo>, bool>>(),
+                    (v,e) => v.CurrentPatientVisit = e.Entity),
+
 
                 new ViewEventSubscription<IPatientSyntomViewModel, IEntityFound<IPatientSyntomInfo>>(
                     3,
@@ -37,13 +42,16 @@ namespace RevolutionData
                     new List<Func<IPatientSyntomViewModel, IEntityFound<IPatientSyntomInfo>, bool>>(),
                     (v, e) =>
                     {
-
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            
+                        
                        var f = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
                         if (v.CurrentEntity.Value.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
                         if (f == null)
                         {
                             v.EntitySet.Insert(v.EntitySet.Count() - 1,e.Entity);
-
+                            v.EntitySet.Reset();
                         }
                         else
                         {
@@ -53,7 +61,38 @@ namespace RevolutionData
                             v.EntitySet.Insert(idx, e.Entity);
                             v.EntitySet.Reset();
                         }
+                        v.RowState.Value = RowState.Unchanged;
+                        });
 
+                    }),
+
+                new ViewEventSubscription<IPatientSyntomViewModel, IEntityViewWithChangesFound<IPatientSyntomInfo>>(
+                    3,
+                    e => e != null,
+                    new List<Func<IPatientSyntomViewModel, IEntityViewWithChangesFound<IPatientSyntomInfo>, bool>>(),
+                    (v, e) =>
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+
+
+                       var f = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
+                        if (v.CurrentEntity.Value.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
+                        if (f == null)
+                        {
+                            v.EntitySet.Insert(v.EntitySet.Count() - 1,e.Entity);
+                                v.EntitySet.Reset();
+                        }
+                        else
+                        {
+                            //f = e.Entity;
+                            var idx = v.EntitySet.IndexOf(f);
+                            v.EntitySet.Remove(f);
+                            v.EntitySet.Insert(idx, e.Entity);
+                            v.EntitySet.Reset();
+                        }
+                        v.RowState.Value = RowState.Unchanged;
+                        });
 
                     }),
             },
@@ -135,15 +174,16 @@ namespace RevolutionData
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: v =>
                     {
-                        v.ChangeTracking.Add(nameof(IPatientSyntomInfo.PatientVisitId), v.CurrentPatientVisit.Id);
-                        var syntomId = v.ChangeTracking[nameof(IPatientSyntomInfo.Syntom)].Id;
-                        v.ChangeTracking.Remove(nameof(IPatientSyntomInfo.Syntom));
-                        v.ChangeTracking.Add(nameof(IPatientSyntomInfo.SyntomId), syntomId);
+                        var res = v.ChangeTracking;
+                        res.Add(nameof(IPatientSyntomInfo.PatientVisitId), v.CurrentPatientVisit.Id);
+                        var syntomId = res[nameof(IPatientSyntomInfo.Syntom)].Id;
+                        res.Remove(nameof(IPatientSyntomInfo.Syntom));
+                        res.Add(nameof(IPatientSyntomInfo.SyntomId), syntomId);
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
                                 v.CurrentEntity.Value.Id,
-                                v.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                                res.ToDictionary(x => x.Key, x => x.Value)
                             },
                             new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
                             v.Source);
@@ -156,31 +196,46 @@ namespace RevolutionData
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IPatientSyntomViewModel, bool>>
                     {
-                        v => v.ChangeTracking.Count(x => x.Value != null) == 1 && v.CurrentEntity.Value.Id != 0
+                        v => v.ChangeTracking.Count() == 2
+                         &&((!v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.Syntom)))
+                            || (v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.Syntom))
+                                && v.ChangeTracking[nameof(IPatientSyntomInfo.Syntom)] != null))
+                        && v.CurrentEntity.Value.Id != 0
 
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: v =>
                     {
-                        v.ChangeTracking.Add(nameof(IPatientSyntomInfo.PatientVisitId), v.CurrentPatientVisit.Id);
+                        var res = v.ChangeTracking;
+                        res.Add(nameof(IPatientSyntomInfo.PatientVisitId), v.CurrentPatientVisit.Id);
+                        if (res.ContainsKey(nameof(IPatientSyntomInfo.Syntom)))
+                            res.Remove(nameof(IPatientSyntomInfo.SyntomName));
+                        if (res.ContainsKey(nameof(IPatientSyntomInfo.Syntom)))
+                        {
+
+                            var syntomId = v.ChangeTracking[nameof(IPatientSyntomInfo.Syntom)].Id;
+                            res.Remove(nameof(IPatientSyntomInfo.Syntom));
+                            res.Add(nameof(IPatientSyntomInfo.SyntomId), syntomId);
+                        }
+
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
                                 v.CurrentEntity.Value.Id,
-                                v.ChangeTracking.Where(x => x.Value != null).ToDictionary(x => x.Key, x => x.Value)
+                                res.Where(x => x.Value != null).ToDictionary(x => x.Key, x => x.Value)
                             },
                             new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
                             v.Source);
                         v.ChangeTracking.Clear();
                         return msg;
                     }),
-                 new ViewEventCommand<IPatientSyntomViewModel, IUpdateEntityWithChanges<ISyntoms>>(
+                 new ViewEventCommand<IPatientSyntomViewModel, IAddEntityWithChanges<ISyntoms>>(
                     key:"CreateSyntom",
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IPatientSyntomViewModel, bool>>
                     {
                         v => v.ChangeTracking.Count == 2
-                        && v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.SyntomName))
+                        && v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.SyntomName)) && v.ChangeTracking[nameof(IPatientSyntomInfo.Syntom)] != null
                         && v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.Syntom)) && v.ChangeTracking[nameof(IPatientSyntomInfo.Syntom)] == null
                         //&& v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.SyntomId))
                         //&& string.IsNullOrEmpty(v.ChangeTracking[nameof(IPatientSyntomInfo.SyntomId)])
@@ -189,17 +244,17 @@ namespace RevolutionData
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: v =>
                     {
-                        
-                        var val = v.ChangeTracking[nameof(IPatientSyntomInfo.SyntomName)];
-                        v.ChangeTracking.Remove(nameof(IPatientSyntomInfo.SyntomName));
-                        
-                        
-                        v.ChangeTracking.Add(nameof(ISyntoms.Name),val);
+                        var res = v.ChangeTracking;
+
+                        var val = res[nameof(IPatientSyntomInfo.SyntomName)];
+                        res.Clear();
+
+                        res.Add(nameof(ISyntoms.Name),val);
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
                                 0,
-                                v.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                                res.ToDictionary(x => x.Key, x => x.Value)
                             },
                             new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
                             v.Source);

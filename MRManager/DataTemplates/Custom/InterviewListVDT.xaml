@@ -14,7 +14,7 @@
 
             <ListBox Margin="10,33,10,262"
                      ItemTemplate="{DynamicResource SystemInfoTpl}"
-                     ItemsSource="{Binding Systems,
+                     ItemsSource="{Binding Systems.Value,
                                            Mode=OneWay}"
                      SelectedItem="{Binding CurrentMedicalSystem.Value,
                                             Mode=TwoWay}">

@@ -174,8 +174,42 @@ namespace Entity.Expressions
                 //} as IPatientSyntomInfo).ToList()
             };
 
+        public static Expression<Func<PatientSyntoms, PatientSyntomInfo>> PatientSyntomInfoExpression { get; } =
+            z => new PatientSyntomInfo()
+            {
+                Id = z.Id,
+                SyntomName = z.Syntoms.Name,
+                SyntomId = z.SyntomId,
+                Syntom = z.Syntoms,
+                Priority = z.SyntomPriority.Name,
+                PatientVisitId = z.PatientVisitId,
+                PriorityId = z.PriorityId,
+                StatusId = z.StatusId,
+                Status = z.SyntomStatus.Name,
+            };
 
+        public static Expression<Func<SyntomMedicalSystems, SyntomMedicalSystemInfo>> SyntomMedicalSystemInfoExpression { get; } =
+            z => new SyntomMedicalSystemInfo()
+            {
+                Id = z.SyntomId,
+                SyntomName = z.Syntoms.Name,
+                MedicalSystemId = z.MedicalSystemId,
+                System = z.MedicalSystems.Name,
+                Interviews = z.MedicalSystems.MedicalSystemInterviews.Select(i => new InterviewInfo()
+                {
+                    Id = i.InterviewId,
+                    Interview = i.Interviews.Name,
+                    Category = i.Interviews.MedicalCategory.Name,
+                    CategoryId = i.Interviews.MedicalCategoryId,
+                    PhaseId = i.Interviews.PhaseId,
+                    Phase = i.Interviews.Phase.Name,
+                    SystemId = z.MedicalSystemId,
+                    System = z.MedicalSystems.Name,
 
+                } as IInterviewInfo).ToList()
+            };
+
+     
 
     }
 

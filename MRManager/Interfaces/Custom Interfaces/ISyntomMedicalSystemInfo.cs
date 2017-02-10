@@ -9,6 +9,8 @@ namespace Interfaces
     {
         int MedicalSystemId { get; }
         string System { get;  }
-        IList<IInterviewInfo> Interviews { get;  }
+        string SyntomName { get; }
+        IList<IInterviewInfo> Interviews { get; }
+
     }
 }

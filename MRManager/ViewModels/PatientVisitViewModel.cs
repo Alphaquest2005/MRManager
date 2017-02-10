@@ -58,7 +58,7 @@ namespace ViewModels
         public ReactiveProperty<IProcessStateList<IPatientVisitInfo>> State => this.ViewModel.State;
 
 
-        ReactiveProperty<IProcessState<IPatientVisitInfo>> IEntityViewModel<IPatientVisitInfo>.State => new ReactiveProperty<IProcessState<IPatientVisitInfo>>(this.ViewModel.State.Value);
+        ReactiveProperty<IProcessState<IPatientVisitInfo>> IEntityViewModel<IPatientVisitInfo>.State => new ReactiveProperty<IProcessState<IPatientVisitInfo>>(this.ViewModel.State.Value, ReactivePropertyMode.DistinctUntilChanged);
         public ReactiveProperty<IPatientVisitInfo> CurrentEntity => this.ViewModel.CurrentEntity;
 
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;

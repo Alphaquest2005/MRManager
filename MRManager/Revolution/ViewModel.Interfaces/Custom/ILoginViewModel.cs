@@ -35,6 +35,7 @@ namespace ViewModel.Interfaces
         string Value { get; set; }
         ReactiveProperty<IPatientSyntomInfo> CurrentPatientSyntom { get;  }
         ReactiveProperty<ISyntomMedicalSystemInfo> CurrentMedicalSystem { get; }
+        ReactiveProperty<ObservableList<ISyntomMedicalSystemInfo>> Systems { get; }
     }
 
     

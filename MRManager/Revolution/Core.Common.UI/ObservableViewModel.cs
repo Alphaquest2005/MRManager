@@ -35,7 +35,7 @@ namespace Core.Common.UI
 
         
 
-        private ReactiveProperty<IProcessState<TEntity>> _state = new ReactiveProperty<IProcessState<TEntity>>() ;
+        private ReactiveProperty<IProcessState<TEntity>> _state = new ReactiveProperty<IProcessState<TEntity>>(null, ReactivePropertyMode.DistinctUntilChanged) ;
         public ReactiveProperty<IProcessState<TEntity>> State
         {
             get { return _state; }

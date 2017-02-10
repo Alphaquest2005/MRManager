@@ -77,7 +77,8 @@
                         FontSize="14"
                         FontWeight="Bold"
                         SelectedDate="{Binding BirthDate,
-                                       Mode=TwoWay, TargetNullValue={x:Static sys:DateTime.Now}}"/>
+                                               Mode=TwoWay,
+                                               TargetNullValue={x:Static sys:DateTime.Now}}" />
         </Grid>
 
     </DataTemplate>

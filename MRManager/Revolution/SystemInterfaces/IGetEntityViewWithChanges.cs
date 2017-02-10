@@ -16,9 +16,14 @@ namespace SystemInterfaces
         Dictionary<string, object> Changes { get; }
         int EntityId { get; }
     }
-    
 
-    
+    public interface IAddEntityViewWithChanges<out TEntityView> : IEntityViewRequest<TEntityView> where TEntityView : IEntityView
+    {
+        Dictionary<string, object> Changes { get; }
+    }
+
+
+
     public interface ILoadEntityViewSetWithChanges<out TEntityView,out TMatchType> : IEntityViewRequest<TEntityView> where TEntityView : IEntityView where TMatchType:IMatchType
     {
         Dictionary<string, object> Changes { get; }

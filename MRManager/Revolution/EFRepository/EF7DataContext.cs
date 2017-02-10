@@ -49,6 +49,13 @@ namespace EFRepository
                  .Invoke(null, new object[] { msg});
         }
 
+        public static void Add(IAddEntityWithChanges<TEntity> msg)
+        {
+            typeof(EntityRepository<,,>).MakeGenericType(typeof(TEntity), EntityType, ctxType)
+                 .GetMethod("Add")
+                 .Invoke(null, new object[] { msg });
+        }
+
         public static void GetEntityById(IGetEntityById<TEntity> msg )
         {
             typeof(EntityRepository<,,>).MakeGenericType(typeof(TEntity),EntityType, ctxType)

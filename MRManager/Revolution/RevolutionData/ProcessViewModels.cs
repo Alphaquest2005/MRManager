@@ -36,7 +36,7 @@ namespace RevolutionData
             InterviewListViewModelInfo.InterviewListViewModel,
             QuestionaireViewModelInfo.QuestionairenaireViewViewModel,
             QuestionListViewModelInfo.QuestionListViewModel,
-             EntityCacheViewModelInfo<ISyntomPriority>.CacheViewModel(3),
+            EntityCacheViewModelInfo<ISyntomPriority>.CacheViewModel(3),
             EntityCacheViewModelInfo<ISyntomStatus>.CacheViewModel(3),
             EntityCacheViewModelInfo<ISyntoms>.CacheViewModel(3),
             EntityCacheViewModelInfo<IVisitType>.CacheViewModel(3),
