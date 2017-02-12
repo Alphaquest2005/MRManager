@@ -33,7 +33,10 @@ namespace RevolutionData
                     3,
                     e => e != null,
                     new List<Func<IPatientSyntomViewModel, ICurrentEntityChanged<IPatientVisitInfo>, bool>>(),
-                    (v,e) => v.CurrentPatientVisit = e.Entity),
+                    (v, e) =>
+                    {
+                        v.CurrentPatientVisit.Value = e.Entity;
+                    }),
 
                 
 
@@ -208,7 +211,7 @@ namespace RevolutionData
                     messageData: v =>
                     {
                         var res = v.ChangeTracking;
-                        res.Add(nameof(IPatientSyntomInfo.PatientVisitId), v.CurrentPatientVisit.Id);
+                        res.Add(nameof(IPatientSyntomInfo.PatientVisitId), v.CurrentPatientVisit.Value.Id);
                         var syntomId = res[nameof(IPatientSyntomInfo.Syntom)].Id;
                         res.Remove(nameof(IPatientSyntomInfo.Syntom));
                         res.Add(nameof(IPatientSyntomInfo.SyntomId), syntomId);
@@ -240,7 +243,7 @@ namespace RevolutionData
                     messageData: v =>
                     {
                         var res = v.ChangeTracking;
-                        res.Add(nameof(IPatientSyntomInfo.PatientVisitId), v.CurrentPatientVisit.Id);
+                        res.Add(nameof(IPatientSyntomInfo.PatientVisitId), v.CurrentPatientVisit.Value.Id);
                         if (res.ContainsKey(nameof(IPatientSyntomInfo.SyntomName)))
                             res.Remove(nameof(IPatientSyntomInfo.SyntomName));
                         if (res.ContainsKey(nameof(IPatientSyntomInfo.Syntom)))
@@ -295,32 +298,7 @@ namespace RevolutionData
 
         public class ComplexActions
         {
-            public static IComplexEventAction UpdatePatientInfo = new ComplexEventAction(
-                key: "UpdatePatientSyntom",
-                processId: 3,
-                events: new List<IProcessExpectedEvent>
-                {
-                new ProcessExpectedEvent<IEntityUpdated<IPatientSyntoms>> (processId: 3,
-                    eventPredicate: e => e.Entity != null,
-                    processInfo: new StateEventInfo(3, Context.Entity.Events.EntityUpdated),
-                    expectedSourceType: new SourceType(typeof(IEntityRepository)),
-                    key: "UpdatedPatientSyntom")
-                },
-                expectedMessageType: typeof(IProcessStateMessage<IPatientDetailsInfo>),
-                action: GetPatientSyntom,
-                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState));
-
-            public static IProcessAction GetPatientSyntom => new ProcessAction(
-                action: cp => new GetEntityViewById<IPatientSyntomInfo>(cp.Messages["UpdatedPatientSyntom"].Entity.Id,
-                    new StateCommandInfo(cp.Actor.Process.Id, Context.EntityView.Commands.GetEntityView),
-                    cp.Actor.Process, cp.Actor.Source),
-                processInfo: cp =>
-                    new StateCommandInfo(cp.Actor.Process.Id,
-                        Context.EntityView.Commands.GetEntityView),
-                // take shortcut cud be IntialState
-                expectedSourceType: new SourceType(typeof(IComplexEventService))
-
-                );
+           
         }
 
     }

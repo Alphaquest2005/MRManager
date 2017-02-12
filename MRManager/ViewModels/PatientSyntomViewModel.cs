@@ -33,26 +33,53 @@ namespace ViewModels
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             this.WireEvents();
             _entitySet = this.ViewModel.EntitySet;
-            Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => addNewRow(x));
-            
+           // Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => addNewRow(x));
+            this.WhenAnyValue(x => x.CurrentPatientVisit.Value).Subscribe(x => insertNewRow());
+
         }
-        private void addNewRow(ObservableList<IPatientSyntomInfo> observableList)
+
+        private void insertNewRow()
         {
+
+
             Application.Current.Dispatcher.Invoke(() =>
             {
+                var res = Instance.ViewModel.EntitySet.ToList();
                 EntitySet.Clear();
-
-                CurrentEntity.Value = null;
-
-                
-                var res = observableList.ToList();
-                res.Add(new PatientSyntomInfo() { SyntomName = "Create New..." });
-
+                if (CurrentPatientVisit != null &&
+                    (CurrentPatientVisit.Value?.Id != 0 &&
+                     CurrentPatientVisit.Value?.DateOfVisit.Date == DateTime.Today.Date))
+                {
+                    res.Add(new PatientSyntomInfo() {SyntomName = "Create New..."});
+                }
                 EntitySet.AddRange(res);
                 EntitySet.Reset();
                 CurrentEntity.Value = EntitySet.FirstOrDefault();
             });
+
         }
+
+        //private void addNewRow(ObservableList<IPatientSyntomInfo> observableList)
+        //{
+        //    Application.Current.Dispatcher.Invoke(() =>
+        //    {
+               
+        //        EntitySet.Clear();
+
+        //        CurrentEntity.Value = null;
+
+                
+        //        var res = observableList.ToList();
+        //        if (CurrentPatientVisit.Value != null && (CurrentPatientVisit.Value?.Id != 0 && CurrentPatientVisit.Value?.DateOfVisit.Date == DateTime.Today.Date))
+        //        {
+        //           res.Add(new PatientSyntomInfo() { SyntomName = "Create New..." });
+        //        } 
+
+        //        EntitySet.AddRange(res);
+        //        EntitySet.Reset();
+        //        CurrentEntity.Value = EntitySet.FirstOrDefault();
+        //    });
+        //}
 
 
         public ReactiveProperty<IProcessStateList<IPatientSyntomInfo>> State => this.ViewModel.State;
@@ -74,6 +101,6 @@ namespace ViewModels
 
         
 
-        public IPatientVisitInfo CurrentPatientVisit { get; set; }
+        public ReactiveProperty<IPatientVisitInfo> CurrentPatientVisit { get; set; } = new ReactiveProperty<IPatientVisitInfo>(new PatientVisitInfo());
     }
 }

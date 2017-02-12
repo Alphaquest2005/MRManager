@@ -158,14 +158,14 @@ namespace RevolutionData
                 );
         }
 
-        public static IProcessAction RequestStateList<TEntityView>(Expression<Func<TEntityView, object>> property ) where TEntityView : IEntityView
+        public static IProcessAction RequestStateList<TCurrentEntity, TEntityView>( Expression<Func<TCurrentEntity, object>> currentProperty, Expression<Func<TEntityView, object>> viewProperty) where TEntityView : IEntityView
         {
             return new ProcessAction(
                 action: cp =>
                 {
                     
-                    var key = default(TEntityView).GetMemberName(property);
-                    var value = cp.Messages["CurrentEntity"].Entity.Id;
+                    var key = default(TEntityView).GetMemberName(viewProperty);
+                    var value = currentProperty.Compile().Invoke(cp.Messages["CurrentEntity"].Entity);
                     var changes = new Dictionary<string, dynamic>() { {key,value} };
                    return new LoadEntityViewSetWithChanges<TEntityView, IExactMatch>(changes,
                         new StateCommandInfo(cp.Actor.Process.Id, Context.EntityView.Commands.GetEntityView),

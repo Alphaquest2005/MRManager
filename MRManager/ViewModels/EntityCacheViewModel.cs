@@ -105,4 +105,16 @@ namespace ViewModels
 
     }
 
+    [Export(typeof(IEntityCacheViewModel<IMedicalSystems>))]
+    public class MedicalSystemsCacheViewModel : ObservableListViewModel<IMedicalSystems>, IEntityCacheViewModel<IMedicalSystems>
+    {
+        public MedicalSystemsCacheViewModel() { }
+
+        public MedicalSystemsCacheViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(eventSubscriptions, eventPublications, commandInfo, process, orientation)
+        {
+            this.WireEvents();
+        }
+
+    }
+
 }

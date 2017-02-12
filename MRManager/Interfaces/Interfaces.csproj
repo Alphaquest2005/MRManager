@@ -62,6 +62,8 @@
     <Compile Include="Custom Interfaces\IResponseOptionInfo.cs" />
     <Compile Include="Custom Interfaces\ISignInInfo.cs" />
     <Compile Include="Custom Interfaces\ISyntomMedicalSystemInfo.cs" />
+    <Compile Include="Custom Interfaces\MedicalSystemInterviews.cs" />
+    <Compile Include="Custom Interfaces\MedicalSystems.cs" />
     <Compile Include="Custom Interfaces\Syntoms.cs" />
     <Compile Include="Generated Interfaces\EntityAttributes.cs" />
     <Compile Include="Generated Interfaces\MedicalCategory.cs" />

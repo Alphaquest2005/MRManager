@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using SystemInterfaces;
 using Actor.Interfaces;
 using Domain.Interfaces;
+using EventMessages.Commands;
 using Interfaces;
 using RevolutionEntities.Process;
 using StartUp.Messages;
@@ -216,18 +217,19 @@ namespace RevolutionData
             ComplexActions.RequestState<IPatientInfo, IPatientDetailsInfo>(3, x => x.Id),
             ComplexActions.UpdateState<IPatientDetailsInfo>(3),
 
-            ComplexActions.RequestStateList<IPatientInfo, IPatientVisitInfo>(3, x => x.PatientId),
+            ComplexActions.RequestStateList<IPatientInfo, IPatientVisitInfo>(3, c => c.Id,x => x.PatientId),
             ComplexActions.UpdateStateList<IPatientVisitInfo>(3),
 
-            ComplexActions.RequestStateList<IPatientVisitInfo, IPatientSyntomInfo>(3, x => x.PatientVisitId),
-             ComplexActions.RequestStateList<ISyntoms, IPatientSyntomInfo>(3, x => x.SyntomId),
+            ComplexActions.RequestStateList<IPatientVisitInfo, IPatientSyntomInfo>(3,c => c.Id, x => x.PatientVisitId),
+            ComplexActions.RequestStateList<ISyntoms, IPatientSyntomInfo>(3,c => c.Id, x => x.SyntomId),
             ComplexActions.UpdateStateList<IPatientSyntomInfo>(3),
-            PatientSyntomViewModelInfo.ComplexActions.UpdatePatientInfo,
+            ComplexActions.UpdateStateWhenDataChanges<IPatientSyntoms,IPatientSyntomInfo>(3),
 
-            ComplexActions.RequestStateList<IPatientSyntomInfo, ISyntomMedicalSystemInfo>(3, x => x.MedicalSystemId),
-            
+            ComplexActions.RequestStateList<IPatientSyntomInfo, ISyntomMedicalSystemInfo>(3,c => c.SyntomId, x => x.SyntomId),
+            //ComplexActions.RequestStateList<IInterviewInfo, ISyntomMedicalSystemInfo>(3,c => c.SystemId, x => x.MedicalSystemId),
             ComplexActions.UpdateStateList<ISyntomMedicalSystemInfo>(3),
-
+            ComplexActions.UpdateStateWhenDataChanges<ISyntomMedicalSystems,ISyntomMedicalSystemInfo>(3),
+            ComplexActions.UpdateStateWhenDataChanges<IInterviews,IInterviewInfo>(3),
             
           
 
@@ -254,6 +256,8 @@ namespace RevolutionData
             EntityCacheViewModelInfo<IVisitType>.ComplexActions.IntializeCache(3),
             EntityCacheViewModelInfo<IPhase>.ComplexActions.IntializeCache(3),
             EntityCacheViewModelInfo<IMedicalCategory>.ComplexActions.IntializeCache(3),
+            EntityCacheViewModelInfo<IMedicalSystems>.ComplexActions.IntializeCache(3),
+
             EntityViewCacheViewModelInfo<IDoctorInfo>.ComplexActions.IntializeCache(3)
         };
 
@@ -331,7 +335,7 @@ namespace RevolutionData
                     action: ProcessActions.UpdateEntityViewStateList<TEntityView>(),
                     processInfo: new StateCommandInfo(processId, Context.Process.Commands.UpdateState));
             }
-            public static ComplexEventAction RequestStateList<TCurrentEntity,TEntityView>(int processId, Expression<Func<TEntityView, dynamic>> property) where TEntityView : IEntityView where TCurrentEntity:IEntityId
+            public static ComplexEventAction RequestStateList<TCurrentEntity,TEntityView>(int processId, Expression<Func<TCurrentEntity, object>> currentProperty, Expression<Func<TEntityView, object>> viewProperty) where TEntityView : IEntityView where TCurrentEntity:IEntityId
             {
                 return new ComplexEventAction(
                     key: $"303-{typeof(TCurrentEntity).GetFriendlyName()}-{typeof(TEntityView).GetFriendlyName()}",
@@ -357,8 +361,42 @@ namespace RevolutionData
                         //    processInfo: new StateEventInfo(processId, Context.Entity.Events.EntityUpdated))
                     },
                     expectedMessageType: typeof(IProcessStateMessage<TEntityView>),
-                    action: ProcessActions.RequestStateList(property),
+                    action: ProcessActions.RequestStateList(currentProperty,viewProperty),
                     processInfo: new StateCommandInfo(processId, Context.Process.Commands.UpdateState));
+            }
+
+            public static IComplexEventAction UpdateStateWhenDataChanges<TEntity, TView>(int processId) where TEntity : IEntityId where TView : IEntityView
+            {
+                return new ComplexEventAction(
+                    key: $"Update{typeof(TEntity).Name}-{typeof(TView).Name}",
+                    processId: 3,
+                    events: new List<IProcessExpectedEvent>
+                    {
+                        new ProcessExpectedEvent<IEntityUpdated<TEntity>>(processId: processId,
+                            eventPredicate: e => e.Entity != null,
+                            processInfo: new StateEventInfo(processId, Context.Entity.Events.EntityUpdated),
+                            expectedSourceType: new SourceType(typeof (IEntityRepository)),
+                            key: "UpdatedEntity")
+                    },
+                    expectedMessageType: typeof(IProcessStateMessage<TView>),
+                    action: GetView<TView>(),
+                    processInfo: new StateCommandInfo(processId, Context.Process.Commands.UpdateState));
+            }
+
+            public static IProcessAction GetView<TView>() where TView : IEntityView
+            {
+                return new ProcessAction(
+                    action:
+                        cp => new GetEntityViewById<TView>(cp.Messages["UpdatedEntity"].Entity.Id,
+                            new StateCommandInfo(cp.Actor.Process.Id, Context.EntityView.Commands.GetEntityView),
+                            cp.Actor.Process, cp.Actor.Source),
+                    processInfo: cp =>
+                        new StateCommandInfo(cp.Actor.Process.Id,
+                            Context.EntityView.Commands.GetEntityView),
+                    // take shortcut cud be IntialState
+                    expectedSourceType: new SourceType(typeof(IComplexEventService))
+
+                    );
             }
         }
     }

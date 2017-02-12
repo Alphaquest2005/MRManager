@@ -14,5 +14,6 @@ namespace EF.Entities
         public string System { get; set; }
         public string SyntomName { get; set; }
         public IList<IInterviewInfo> Interviews { get; set; }
+        public int SyntomId { get; set; }
     }
 }

@@ -42,7 +42,7 @@ namespace RevolutionData
             EntityCacheViewModelInfo<IVisitType>.CacheViewModel(3),
             EntityCacheViewModelInfo<IPhase>.CacheViewModel(3),
             EntityCacheViewModelInfo<IMedicalCategory>.CacheViewModel(3),
-
+            EntityCacheViewModelInfo<IMedicalSystems>.CacheViewModel(3),
 
             EntityViewCacheViewModelInfo<IDoctorInfo>.CacheViewModel(3),
             EntityViewCacheViewModelInfo<ISyntomMedicalSystemInfo>.CacheViewModel(3),

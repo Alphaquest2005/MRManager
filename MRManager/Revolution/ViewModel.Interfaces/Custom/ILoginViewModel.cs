@@ -36,6 +36,7 @@ namespace ViewModel.Interfaces
         ReactiveProperty<IPatientSyntomInfo> CurrentPatientSyntom { get;  }
         ReactiveProperty<ISyntomMedicalSystemInfo> CurrentMedicalSystem { get; }
         ReactiveProperty<ObservableList<ISyntomMedicalSystemInfo>> Systems { get; }
+        ReactiveProperty<IMedicalSystems> SelectedMedicalSystem { get; }
     }
 
     
@@ -61,6 +62,6 @@ namespace ViewModel.Interfaces
     
     public interface IPatientSyntomViewModel : IEntityListViewModel<IPatientSyntomInfo>
     {
-        IPatientVisitInfo CurrentPatientVisit { get; set; }
+        ReactiveProperty<IPatientVisitInfo> CurrentPatientVisit { get; set; }
     }
 }

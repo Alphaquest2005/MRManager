@@ -23,8 +23,9 @@ namespace ViewModels
     [Export(typeof(IInterviewListViewModel))]
     public class InterviewListViewModel : DynamicViewModel<ObservableListViewModel<IInterviewInfo>>, IInterviewListViewModel
     {
-        private ReactiveProperty<IPatientSyntomInfo> _currentPatientSyntom = new ReactiveProperty<IPatientSyntomInfo>();
-        private ReactiveProperty<ISyntomMedicalSystemInfo> _currentMedicalSystem = new ReactiveProperty<ISyntomMedicalSystemInfo>();
+        private ReactiveProperty<IPatientSyntomInfo> _currentPatientSyntom = new ReactiveProperty<IPatientSyntomInfo>(new PatientSyntomInfo());
+        private ReactiveProperty<ISyntomMedicalSystemInfo> _currentMedicalSystem = new ReactiveProperty<ISyntomMedicalSystemInfo>(new SyntomMedicalSystemInfo());
+        private ReactiveProperty<IMedicalSystems> _selectedMedicalSystem = new ReactiveProperty<IMedicalSystems>(new MedicalSystems());
         private ReactiveProperty<ObservableList<ISyntomMedicalSystemInfo>> _systems = new ReactiveProperty<ObservableList<ISyntomMedicalSystemInfo>>(new ObservableBindingList<ISyntomMedicalSystemInfo>());
 
         [ImportingConstructor]
@@ -35,6 +36,8 @@ namespace ViewModels
             
             this.WhenAnyValue(x => x.Systems.Value).Subscribe(x => addSystems(x));
             this.WhenAnyValue(x => x.CurrentMedicalSystem.Value).Where(x => x != null).Subscribe(x => addNewRow(x.Interviews));
+            this.WhenAnyValue(x => x.SelectedMedicalSystem.Value).Subscribe(x => { });
+            this.WhenAnyValue(x => x.CurrentMedicalSystem.Value.MedicalSystemId).Subscribe(x => { });
         }
 
         
@@ -57,8 +60,8 @@ namespace ViewModels
 
                 CurrentEntity.Value = null;
 
-                if (observableList == null || !observableList.Any()) return;
-                var res = observableList.ToList();
+                //if (observableList == null || !observableList.Any()) return;
+                var res = observableList?.ToList()?? new List<IInterviewInfo>();
                 res.Add(new InterviewInfo() { Interview = "Create New..." });
 
                 EntitySet.AddRange(res);
@@ -112,6 +115,10 @@ namespace ViewModels
             }
         }
 
-      
+        public ReactiveProperty<IMedicalSystems> SelectedMedicalSystem
+        {
+            get { return _selectedMedicalSystem; }
+            set { _selectedMedicalSystem = value; }
+        }
     }
 }

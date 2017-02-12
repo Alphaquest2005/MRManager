@@ -104,9 +104,7 @@ namespace RevolutionData
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IQuestionListViewModel, bool>>
                     {
-                        v => v.ChangeTracking.Count == 2
-                             && v.ChangeTracking.ContainsKey(nameof(IQuestionInfo.Description))
-                             && v.ChangeTracking[nameof(IQuestionInfo.Id)] != 0
+                        v => v.CurrentEntity.Value.Id != 0
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>
@@ -114,8 +112,8 @@ namespace RevolutionData
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
-                                s.ChangeTracking.First().Value,
-                                s.ChangeTracking.TakeLast(1).ToDictionary(x => x.Key, x => x.Value)
+                                s.CurrentEntity.Value.Id,
+                                s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
                             },
                             new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
                             s.Source);
@@ -123,46 +121,24 @@ namespace RevolutionData
                         return msg;
                     }),
 
-                new ViewEventCommand<IQuestionListViewModel, IUpdateEntityViewWithChanges<IQuestionInfo>>(
-                    key:"UpdateQuestion",
-                    subject:v => v.ChangeTracking.DictionaryChanges,
-                    commandPredicate: new List<Func<IQuestionListViewModel, bool>>
-                    {
-                        v => v.ChangeTracking.Count == 2
-                             && v.ChangeTracking.ContainsKey(nameof(IQuestionInfo.Description))
-                             && v.ChangeTracking[nameof(IQuestionInfo.Id)] != 0
-                    },
-                    //TODO: Make a type to capture this info... i killing it here
-                    messageData: s =>
-                    {
-                        var msg = new ViewEventCommandParameter(
-                            new object[]
-                            {
-                                s.ChangeTracking.First().Value,
-                                s.ChangeTracking.Skip(1).ToDictionary(x => x.Key, x => x.Value)
-                            },
-                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
-                            s.Source);
-                        s.ChangeTracking.Clear();
-                        return msg;
-                    }),
-
+               
                 new ViewEventCommand<IQuestionListViewModel, IUpdateEntityViewWithChanges<IQuestionInfo>>(
                     key:"CreateQuestion",
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IQuestionListViewModel, bool>>
                     {
-                        v => v.ChangeTracking.Count > 1
-                             && v.ChangeTracking[nameof(IQuestionInfo.Id)] == 0
+                        v => v.ChangeTracking.Count == 4
+                             && v.CurrentEntity.Value.Id == 0
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>
                     {
+                        s.ChangeTracking.Add(nameof(IQuestionInfo.InterviewId), s.CurrentInterview.Id);
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
-                                s.ChangeTracking.First().Value,
-                                s.ChangeTracking.Skip(1).ToDictionary(x => x.Key, x => x.Value)
+                                s.CurrentEntity.Value.Id,
+                                s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
                             },
                             new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
                             s.Source);

@@ -191,7 +191,8 @@ namespace Entity.Expressions
         public static Expression<Func<SyntomMedicalSystems, SyntomMedicalSystemInfo>> SyntomMedicalSystemInfoExpression { get; } =
             z => new SyntomMedicalSystemInfo()
             {
-                Id = z.SyntomId,
+                Id = z.Id,
+                SyntomId = z.SyntomId,
                 SyntomName = z.Syntoms.Name,
                 MedicalSystemId = z.MedicalSystemId,
                 System = z.MedicalSystems.Name,

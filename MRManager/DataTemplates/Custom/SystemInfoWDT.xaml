@@ -18,17 +18,25 @@
                     <GradientStop Offset="0.069" Color="#19FFFFFF" />
                 </LinearGradientBrush>
             </Grid.Background>
-            <TextBox Width="192"
-                     Height="37"
-                     Margin="10,10,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     FontSize="18.667"
-                     Text="{Binding System,
-                                    FallbackValue=System,
-                                    TargetNullValue=System,
-                                    Mode=TwoWay,
-                                    UpdateSourceTrigger=PropertyChanged}" />
+            <ComboBox Width="192"
+                      Height="37"
+                      Margin="10,10,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      DisplayMemberPath="Name"
+                      FontSize="18.667"
+                      ItemsSource="{Binding Source={x:Static Member=viewModels:MedicalSystemsCacheViewModel.Instance},
+                                            Path=EntitySet,
+                                            UpdateSourceTrigger=PropertyChanged,
+                                            Mode=OneWay,
+                                            IsAsync=True}"
+                       SelectedItem ="{Binding SelectedMedicalSystem.Value, Source={x:Static Member=viewModels:InterviewListViewModel.Instance},
+                                             UpdateSourceTrigger=PropertyChanged}"
+                      
+                      SelectedValue ="{Binding CurrentMedicalSystem.Value.MedicalSystemId, Source={x:Static Member=viewModels:InterviewListViewModel.Instance},
+                                             UpdateSourceTrigger=PropertyChanged}"
+                      
+                      SelectedValuePath="Id" />
 
 
         </Grid>

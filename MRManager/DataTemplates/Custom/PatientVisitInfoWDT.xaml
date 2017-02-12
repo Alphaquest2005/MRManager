@@ -26,8 +26,9 @@
                       Margin="10,10,0,0"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Top"
-                      DisplayMemberPath="Name"
+                      
                       FontSize="18.667"
+                      DisplayMemberPath="Name"
                       ItemsSource="{Binding Source={x:Static Member=viewModels:VisitTypeCacheViewModel.Instance},
                                             Path=EntitySet,
                                             UpdateSourceTrigger=PropertyChanged,

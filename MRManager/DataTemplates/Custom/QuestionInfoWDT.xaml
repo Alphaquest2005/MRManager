@@ -28,7 +28,7 @@
                                     FallbackValue=Description,
                                     TargetNullValue=Description,
                                     Mode=TwoWay,
-                                    UpdateSourceTrigger=PropertyChanged}" />
+                                    UpdateSourceTrigger=LostFocus}" />
             <TextBox Width="118"
                      Height="27"
                      Margin="54,75,0,0"
@@ -39,7 +39,7 @@
                                     FallbackValue=Entity,
                                     TargetNullValue=Entity,
                                     Mode=TwoWay,
-                                    UpdateSourceTrigger=PropertyChanged}" />
+                                    UpdateSourceTrigger=LostFocus}" />
             <TextBox Width="158"
                      Height="27"
                      Margin="177,75,0,0"
@@ -50,7 +50,7 @@
                                     FallbackValue=Attribute,
                                     TargetNullValue=Attribute,
                                     Mode=TwoWay,
-                                    UpdateSourceTrigger=PropertyChanged}" />
+                                    UpdateSourceTrigger=LostFocus}" />
             <TextBlock Width="39"
                        Height="43"
                        Margin="10,10,0,0"

@@ -64,7 +64,10 @@ namespace RevolutionData
 
                 },
                 publications: new List<IViewModelEventPublication<IViewModel, IEvent>> {},
-                commands: new List<IViewModelEventCommand<IViewModel, IEvent>> {},
+                commands: new List<IViewModelEventCommand<IViewModel, IEvent>>
+                {
+                    
+                },
                 viewModelType: typeof(IEntityCacheViewModel<TEntity>),
                 orientation: typeof (ICacheViewModel));
         }
