@@ -2,6 +2,8 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Custom/SignInInfoRDT.xaml" />
         <ResourceDictionary Source="Custom/PatientDetailsInfoVDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientDetailsInfoRDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientDetailsInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/PatientSummaryInfoListVDT.xaml" />
         <ResourceDictionary Source="Custom/PatientSummaryInfoRDT.xaml" />
         <ResourceDictionary Source="Custom/PatientSummaryInfoWDT.xaml" />

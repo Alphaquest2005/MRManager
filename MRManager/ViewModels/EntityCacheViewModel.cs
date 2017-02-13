@@ -129,4 +129,16 @@ namespace ViewModels
 
     }
 
+    [Export(typeof(IEntityCacheViewModel<ISex>))]
+    public class SexCacheViewModel : ObservableListViewModel<ISex>, IEntityCacheViewModel<ISex>
+    {
+        public SexCacheViewModel() { }
+
+        public SexCacheViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(eventSubscriptions, eventPublications, commandInfo, process, orientation)
+        {
+            this.WireEvents();
+        }
+
+    }
+
 }

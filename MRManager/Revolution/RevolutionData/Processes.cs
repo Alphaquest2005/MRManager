@@ -259,6 +259,7 @@ namespace RevolutionData
             EntityCacheViewModelInfo<IMedicalCategory>.ComplexActions.IntializeCache(3),
             EntityCacheViewModelInfo<IMedicalSystems>.ComplexActions.IntializeCache(3),
             EntityCacheViewModelInfo<IQuestionResponseTypes>.ComplexActions.IntializeCache(3),
+            EntityCacheViewModelInfo<ISex>.ComplexActions.IntializeCache(3),
 
             EntityViewCacheViewModelInfo<IDoctorInfo>.ComplexActions.IntializeCache(3)
         };

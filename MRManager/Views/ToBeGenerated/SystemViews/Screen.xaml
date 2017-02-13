@@ -11,6 +11,7 @@
              xmlns:views="clr-namespace:Views"
              d:DesignHeight="640"
              d:DesignWidth="10000"
+             Focusable="True"
              TextOptions.TextRenderingMode="ClearType"
              mc:Ignorable="d">
     <UserControl.Resources>
@@ -32,12 +33,14 @@
 
     <DockPanel x:Name="LayoutRoot"
                Margin="0,0,0,0"
+               Focusable="True"
                Background="{x:Null}"
                DataContext="{Binding}"
                LastChildFill="True">
 
         <ItemsControl Height="Auto"
                       MaxHeight="125"
+                      Focusable="True"
                       DockPanel.Dock="Top"
                       ItemsSource="{Binding HeaderViewModels}">
             <ItemsControl.ItemsPanel>
@@ -55,6 +58,7 @@
         </ItemsControl>
         <ItemsControl Height="Auto"
                       MinHeight="0"
+                      Focusable="True"
                       MaxHeight="75"
                       DockPanel.Dock="Bottom"
                       ItemsSource="{Binding FooterViewModels}">
@@ -72,6 +76,7 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
         <ItemsControl Margin="5"
+                      Focusable="True"
                       DockPanel.Dock="Left"
                       ItemsSource="{Binding LeftViewModels}" >
             
@@ -91,6 +96,7 @@
 
         <ItemsControl Width="Auto"
                       Margin="5"
+                      Focusable="True"
                       DockPanel.Dock="Right"
                       ItemsSource="{Binding RightViewModels}">
             <ItemsControl.ItemsPanel>
@@ -110,8 +116,10 @@
 
             <coreui:SliderPanel x:Name="slider"
                 Width="10000"
+                Focusable="True"
                 Margin="0,0,0,0"
                 Background="#00B76767"
+                               
                 Orientation="Horizontal">
 
                 <ItemsControl Margin="0" ItemsSource="{Binding BodyViewModels}">
@@ -126,12 +134,13 @@
                                 Height="550"
                                 Margin="20,010,0,0"
                                 HorizontalAlignment="Left"
+                                Focusable="True"
                                 VerticalAlignment="Top"
                                 ExpandDirection="Right"
                                 IsExpanded="True"
                                 Tag="{Binding ViewName}">
                                 <Expander.Header>
-                                    <Grid Height="550" MouseEnter="BringIntoView">
+                                    <Grid Height="550" Focusable="True" MouseEnter="BringIntoView">
                                         <!--<Grid.RenderTransform>
                                         <ScaleTransform ScaleX=".75" ScaleY=".75" CenterX="50" CenterY="50" />
                                     </Grid.RenderTransform>-->
@@ -159,7 +168,7 @@
 
                                     </Grid>
                                 </Expander.Header>
-                                <ContentPresenter Content="{TemplateBinding Content}" />
+                                <ContentPresenter Focusable="True" Content="{TemplateBinding Content}" />
                             </Expander>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

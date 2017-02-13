@@ -65,6 +65,7 @@
     <Compile Include="Custom Interfaces\MedicalSystemInterviews.cs" />
     <Compile Include="Custom Interfaces\MedicalSystems.cs" />
     <Compile Include="Custom Interfaces\QuestionResponseTypes.cs" />
+    <Compile Include="Custom Interfaces\Sex.cs" />
     <Compile Include="Custom Interfaces\Syntoms.cs" />
     <Compile Include="Generated Interfaces\EntityAttributes.cs" />
     <Compile Include="Generated Interfaces\MedicalCategory.cs" />

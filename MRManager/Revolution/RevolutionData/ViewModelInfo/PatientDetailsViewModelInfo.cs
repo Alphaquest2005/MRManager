@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Windows;
 using SystemInterfaces;
 using Interfaces;
 using ReactiveUI;
@@ -25,9 +27,13 @@ namespace RevolutionData
                     processId: 3,
                     eventPredicate: e => e != null,
                     actionPredicate: new List<Func<IPatientDetailsViewModel, IProcessStateMessage<IPatientDetailsInfo>, bool>>(),
-                    action: (v, e) => v.State.Value = e.State),
-                                   
+                    action: (v, e) =>
+                    {
+                        v.State.Value = e.State;
+                        v.RowState.Value = RowState.Unchanged;
+                    }),
 
+                 
             },
             publications: new List<IViewModelEventPublication<IViewModel, IEvent>>
             {
@@ -62,6 +68,34 @@ namespace RevolutionData
                                 Context.Process.Commands.CurrentEntityChanged), s.Process,
                             s.Source);
                     }),
+
+                new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityWithChanges<IPatients>>(
+                    key:"SavePatientDetailsInfo",
+                    subject:v => v.ChangeTracking.DictionaryChanges,
+                    commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
+                    {
+                        v => v.ChangeTracking.Count == 1
+                             && v.ChangeTracking.First().Value != null
+                             && v.State.Value.Entity.Id != 0
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: s =>
+                    {
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                ((dynamic)s).Id,
+                                "Patient",
+                                "General",
+                                "Personal Information",
+                                s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                            },
+                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
+                            s.Source);
+                        s.ChangeTracking.Clear();
+                        return msg;
+                    }),
+
             },
             viewModelType: typeof(IPatientDetailsViewModel),
             orientation: typeof(IBodyViewModel));

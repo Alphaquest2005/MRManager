@@ -70,7 +70,15 @@ namespace Core.Common.UI
             if (State.Value.Entity.GetType().GetProperty(property, BindingFlags.Public |BindingFlags.SetProperty| BindingFlags.Instance) == null) return;
             if (!ChangeTracking.ContainsKey(property))
             {
-                ChangeTracking.AddOrUpdate(property, value);
+                //Hack: fix this
+                try
+                {
+                    ChangeTracking.AddOrUpdate(property, value);
+                }
+                catch
+                {
+                }
+                
             }
             else
             {
