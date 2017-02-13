@@ -14,10 +14,10 @@ namespace Interfaces
 	
 	public partial interface IPatientSyntoms:IEntity  
 	{
+		int SyntomId { get;}
 		int PatientVisitId { get;}
 		int PriorityId { get;}
 		int StatusId { get;}
-		int SyntomId { get;}
 
 
 

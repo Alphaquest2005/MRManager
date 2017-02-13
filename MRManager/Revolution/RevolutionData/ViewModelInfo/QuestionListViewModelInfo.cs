@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Windows;
 using SystemInterfaces;
 using Actor.Interfaces;
 using EventMessages.Commands;
@@ -35,7 +36,51 @@ namespace RevolutionData
                     new List<Func<IQuestionListViewModel, ICurrentEntityChanged<IInterviewInfo>, bool>>(),
                     (v,e) => v.CurrentInterview = e.Entity),
 
-            },
+                new ViewEventSubscription<IQuestionListViewModel, IEntityUpdated<IEntityAttributes>>(
+                    3,
+                    e => e != null,
+                    new List<Func<IQuestionListViewModel, IEntityUpdated<IEntityAttributes>, bool>>(),
+                    (v,e) => v.ChangeTracking.Add(nameof(IQuestionInfo.EntityAttributeId), e.Entity.Id)),
+
+                new ViewEventSubscription<IQuestionListViewModel, IEntityViewWithChangesUpdated<IQuestionInfo>>(
+                    3,
+                    e => e != null,
+                    new List<Func<IQuestionListViewModel, IEntityViewWithChangesUpdated<IQuestionInfo>, bool>>(),
+                    (v, e) =>
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+
+
+                            var f = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
+                            if (v.CurrentEntity.Value.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
+                            if (f == null)
+                            {
+                                if (v.EntitySet.Any())
+                                {
+                                    v.EntitySet.Insert(v.EntitySet.Count() - 1, e.Entity);
+                                }
+                                else
+                                {
+                                    v.EntitySet.Add(e.Entity);
+                                }
+                                v.EntitySet.Reset();
+                            }
+                            else
+                            {
+                                //f = e.Entity;
+                                var idx = v.EntitySet.IndexOf(f);
+                                v.EntitySet.Remove(f);
+                                v.EntitySet.Insert(idx, e.Entity);
+                                v.EntitySet.Reset();
+                            }
+                            v.RowState.Value = RowState.Unchanged;
+                        });
+                         }),
+
+
+
+                    },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
             {
                 new ViewEventPublication<IQuestionListViewModel, IViewStateLoaded<IQuestionListViewModel,IProcessStateList<IQuestionInfo>>>(
@@ -104,7 +149,9 @@ namespace RevolutionData
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IQuestionListViewModel, bool>>
                     {
-                        v => v.CurrentEntity.Value.Id != 0
+                        v => v.CurrentEntity?.Value?.Id != 0 && 
+                                (v.ChangeTracking.ContainsKey(nameof(IQuestionInfo.Description)) 
+                                    || v.ChangeTracking.ContainsKey(nameof(IQuestionInfo.EntityAttributeId)))
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>
@@ -138,7 +185,8 @@ namespace RevolutionData
                             new object[]
                             {
                                 s.CurrentEntity.Value.Id,
-                                s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                                s.ChangeTracking.Where(x => x.Key == nameof(IQuestionInfo.Description)
+                                            || x.Key == nameof(IQuestionInfo.InterviewId) || x.Key == nameof(IQuestionInfo.EntityAttributeId)).ToDictionary(x => x.Key, x => x.Value)
                             },
                             new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
                             s.Source);
@@ -146,27 +194,27 @@ namespace RevolutionData
                         return msg;
                     }),
 
-                new ViewEventCommand<IQuestionListViewModel, IUpdateEntityWithChanges<IEntityAttributes>>(
+                new ViewEventCommand<IQuestionListViewModel, IAddOrGetEntityWithChanges<IEntityAttributes>>(
                     key:"UpdateEnityAttribute",
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IQuestionListViewModel, bool>>
                     {
-                        v => v.ChangeTracking.Count > 1
-                             && v.ChangeTracking.ContainsKey(nameof(IQuestionInfo.EntityAttributeId))
-                             && !v.ChangeTracking.ContainsKey(nameof(IQuestionInfo.Id))
+                        v => v.ChangeTracking.ContainsKey(nameof(IQuestionInfo.Entity))
+                             && v.ChangeTracking.ContainsKey(nameof(IQuestionInfo.Attribute))
                     },
                     //TODO: Make a type to capture this info... i killing it here
-                    messageData: s =>
+                    messageData: v =>
                     {
+                        
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
-                                s.ChangeTracking.First().Value,
-                                s.ChangeTracking.Skip(1).ToDictionary(x => x.Key, x => x.Value)
+                                v.ChangeTracking.Where(x => x.Key == nameof(IQuestionInfo.Entity) 
+                                            || x.Key == nameof(IQuestionInfo.Attribute)).ToDictionary(x => x.Key, x => x.Value)
                             },
-                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
-                            s.Source);
-                        s.ChangeTracking.Clear();
+                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            v.Source);
+                         
                         return msg;
                     }),
 

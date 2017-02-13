@@ -14,8 +14,8 @@ namespace Interfaces
 	
 	public partial interface IUserSignIn:IEntity  
 	{
-		string Password { get;}
 		string Username { get;}
+		string Password { get;}
 
 
 

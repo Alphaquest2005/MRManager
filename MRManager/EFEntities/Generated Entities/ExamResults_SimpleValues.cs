@@ -14,9 +14,9 @@ namespace EF.Entities
 	public partial class ExamResults_SimpleValues: BaseEntity, IExamResults_SimpleValues
 	{
 		public virtual int ExamResultsId { get; set; }
-		public virtual int PatientResultsId { get; set; }
 		public virtual int ResultFieldId { get; set; }
 		public virtual string Value { get; set; }
+		public virtual int PatientResultsId { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships

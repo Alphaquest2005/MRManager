@@ -427,6 +427,7 @@
 ..\EF.Mappings\Generated Mappings\PrimaryPersonAddress.cs
 ..\EF.Mappings\Generated Mappings\PrimaryPersonPhoneNumber.cs
 ..\EF.Mappings\Generated Mappings\Pulse.cs
+..\EF.Mappings\Generated Mappings\QuestionResponseTypes.cs
 ..\EF.Mappings\Generated Mappings\Questions.cs
 ..\EF.Mappings\Generated Mappings\Religons.cs
 ..\EF.Mappings\Generated Mappings\Respiration.cs
@@ -501,7 +502,6 @@
 ..\EFEntities\Generated Entities\Entity Views\PulseInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\QuestionInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\RespirationInfo.cs
-..\EFEntities\Generated Entities\Entity Views\ResponseOptionInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\SignInInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\TemperatureInfo.cs
 ..\EFEntities\Generated Entities\Entity Views\VitalsHistoryInfo.cs
@@ -600,6 +600,7 @@
 ..\EFEntities\Generated Entities\Generated AutoView Templates\PrimaryPersonAddressAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\PrimaryPersonPhoneNumberAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\PulseAutoView.cs
+..\EFEntities\Generated Entities\Generated AutoView Templates\QuestionResponseTypesAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\QuestionsAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\ReligonsAutoView.cs
 ..\EFEntities\Generated Entities\Generated AutoView Templates\RespirationAutoView.cs
@@ -674,6 +675,7 @@
 ..\EFEntities\Generated Entities\PrimaryPersonAddress.cs
 ..\EFEntities\Generated Entities\PrimaryPersonPhoneNumber.cs
 ..\EFEntities\Generated Entities\Pulse.cs
+..\EFEntities\Generated Entities\QuestionResponseTypes.cs
 ..\EFEntities\Generated Entities\Questions.cs
 ..\EFEntities\Generated Entities\Religons.cs
 ..\EFEntities\Generated Entities\Respiration.cs
@@ -797,6 +799,7 @@
 ..\Interfaces\Generated Interfaces\AutoEntityViews\PrimaryPersonAddress.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\PrimaryPersonPhoneNumber.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\Pulse.cs
+..\Interfaces\Generated Interfaces\AutoEntityViews\QuestionResponseTypes.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\Questions.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\Religons.cs
 ..\Interfaces\Generated Interfaces\AutoEntityViews\Respiration.cs
@@ -860,7 +863,6 @@
 ..\Interfaces\Generated Interfaces\EntityViews\PulseInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\QuestionInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\RespirationInfo.cs
-..\Interfaces\Generated Interfaces\EntityViews\ResponseOptionInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\SignInInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\TemperatureInfo.cs
 ..\Interfaces\Generated Interfaces\EntityViews\VitalsHistoryInfo.cs
@@ -926,6 +928,7 @@
 ..\Interfaces\Generated Interfaces\PrimaryPersonAddress.cs
 ..\Interfaces\Generated Interfaces\PrimaryPersonPhoneNumber.cs
 ..\Interfaces\Generated Interfaces\Pulse.cs
+..\Interfaces\Generated Interfaces\QuestionResponseTypes.cs
 ..\Interfaces\Generated Interfaces\Questions.cs
 ..\Interfaces\Generated Interfaces\Religons.cs
 ..\Interfaces\Generated Interfaces\Respiration.cs

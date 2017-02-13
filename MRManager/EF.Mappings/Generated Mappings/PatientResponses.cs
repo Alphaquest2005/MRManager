@@ -19,16 +19,16 @@ namespace EF.Mappings
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();	
 			entityBuilder.Property(t => t.PatientSyntomId).HasColumnName("PatientSyntomId").IsRequired();
-			entityBuilder.Property(t => t.PatientVisitId).HasColumnName("PatientVisitId").IsRequired();
 			entityBuilder.Property(t => t.QuestionId).HasColumnName("QuestionId").IsRequired();
+			entityBuilder.Property(t => t.PatientVisitId).HasColumnName("PatientVisitId").IsRequired();
 		//-------------------Navigation Properties -------------------------------//
 				entityBuilder.HasMany(x => x.Response).WithOne(p => p.PatientResponses).HasForeignKey(c => c.PatientResponseId).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasMany(x => x.ResponseImages).WithOne(p => p.PatientResponses).HasForeignKey(c => c.PatientResponseId).OnDelete(DeleteBehavior.Restrict);
 	
 				//----------------Parent Properties
 				//entityBuilder.HasOne(p => p.PatientSyntoms).WithMany(p => p.PatientResponses).HasForeignKey(c => c.PatientSyntomId).OnDelete(DeleteBehavior.Restrict);
-				//entityBuilder.HasOne(p => p.PatientVisit).WithMany(p => p.PatientResponses).HasForeignKey(c => c.PatientVisitId).OnDelete(DeleteBehavior.Restrict);
 				//entityBuilder.HasOne(p => p.Questions).WithMany(p => p.PatientResponses).HasForeignKey(c => c.QuestionId).OnDelete(DeleteBehavior.Restrict);
+				//entityBuilder.HasOne(p => p.PatientVisit).WithMany(p => p.PatientResponses).HasForeignKey(c => c.PatientVisitId).OnDelete(DeleteBehavior.Restrict);
 	
 		}
 	}

@@ -14,8 +14,8 @@ namespace Interfaces
 	
 	public partial interface IBloodPressure:IEntity  
 	{
-		int Diastolic { get;}
 		int Systolic { get;}
+		int Diastolic { get;}
 		int UnitId { get;}
 
 

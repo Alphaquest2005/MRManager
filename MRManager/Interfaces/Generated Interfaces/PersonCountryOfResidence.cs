@@ -15,8 +15,8 @@ namespace Interfaces
 	public partial interface IPersonCountryOfResidence:IEntity  
 	{
 		int CountryId { get;}
-		DateTime Date { get;}
 		int PersonId { get;}
+		DateTime Date { get;}
 
 
 

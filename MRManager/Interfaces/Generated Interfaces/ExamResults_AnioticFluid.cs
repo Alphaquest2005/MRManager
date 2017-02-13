@@ -14,8 +14,8 @@ namespace Interfaces
 	
 	public partial interface IExamResults_AnioticFluid:IEntity  
 	{
-		double AFI { get;}
 		double MVP { get;}
+		double AFI { get;}
 		double Q1 { get;}
 		double Q2 { get;}
 		double Q3 { get;}

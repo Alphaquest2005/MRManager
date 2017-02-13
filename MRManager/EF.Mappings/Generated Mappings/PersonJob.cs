@@ -19,14 +19,14 @@ namespace EF.Mappings
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();	
 			entityBuilder.Property(t => t.OccupationId).HasColumnName("OccupationId").IsRequired();
-			entityBuilder.Property(t => t.OrganisationId).HasColumnName("OrganisationId").IsRequired();
 			entityBuilder.Property(t => t.PersonId).HasColumnName("PersonId").IsRequired();
+			entityBuilder.Property(t => t.OrganisationId).HasColumnName("OrganisationId").IsRequired();
 		//-------------------Navigation Properties -------------------------------//
 	
 				//----------------Parent Properties
 				//entityBuilder.HasOne(p => p.Occupations).WithMany(p => p.PersonJob).HasForeignKey(c => c.OccupationId).OnDelete(DeleteBehavior.Restrict);
-				//entityBuilder.HasOne(p => p.Organisations).WithMany(p => p.PersonJob).HasForeignKey(c => c.OrganisationId).OnDelete(DeleteBehavior.Restrict);
 				//entityBuilder.HasOne(p => p.Persons_Patient).WithMany(p => p.PersonJob).HasForeignKey(c => c.PersonId).OnDelete(DeleteBehavior.Restrict);
+				//entityBuilder.HasOne(p => p.Organisations).WithMany(p => p.PersonJob).HasForeignKey(c => c.OrganisationId).OnDelete(DeleteBehavior.Restrict);
 	
 		}
 	}

@@ -65,6 +65,14 @@ SET IDENTITY_INSERT Interview.SyntomPriority ON;
 	insert into Interview.SyntomPriority(Id,[Name]) values (0,'unspecified')
 SET IDENTITY_INSERT Interview.SyntomPriority off;
 
+SET IDENTITY_INSERT Interview.MedicalSystems ON; 
+	insert into Interview.MedicalSystems(Id,[Name]) values (0,'unspecified')
+SET IDENTITY_INSERT Interview.MedicalSystems off;
+
+SET IDENTITY_INSERT Interview.MedicalSystemInterviews ON; 
+	insert into Interview.MedicalSystemInterviews(Id,MedicalSystemId, InterviewId) values (0,0,0)
+SET IDENTITY_INSERT Interview.MedicalSystemInterviews off;
+
 set identity_insert Media on
 
 INSERT INTO Media(value, MediaTypeId, Id)

@@ -15,8 +15,8 @@ namespace Interfaces
 	public partial interface IBoatInfo:IEntity  
 	{
 		string BoatName { get;}
-		string Comments { get;}
 		string MarinaList { get;}
+		string Comments { get;}
 
 
 

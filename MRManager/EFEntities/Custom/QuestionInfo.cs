@@ -19,5 +19,6 @@ namespace EF.Entities
         public string Attribute { get; set; }
         public string Type { get; set; }
         public int QuestionNumber { get; set; }
+        public int QuestionResponseTypeId { get; set; }
     }
 }

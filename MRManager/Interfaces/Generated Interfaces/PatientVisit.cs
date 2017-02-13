@@ -14,9 +14,9 @@ namespace Interfaces
 	
 	public partial interface IPatientVisit:IEntity  
 	{
+		int PatientId { get;}
 		DateTime DateOfVisit { get;}
 		int DoctorId { get;}
-		int PatientId { get;}
 		int VisitTypeId { get;}
 
 

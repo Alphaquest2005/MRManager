@@ -19,9 +19,9 @@ namespace EF.Mappings
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").ValueGeneratedNever();	
 			entityBuilder.Property(t => t.CardiaActivity).HasColumnName("CardiaActivity").IsRequired().HasMaxLength(50);
+			entityBuilder.Property(t => t.Placenta).HasColumnName("Placenta").IsRequired().HasMaxLength(50);
 			entityBuilder.Property(t => t.CordVessels).HasColumnName("CordVessels").IsRequired().HasMaxLength(50);
 			entityBuilder.Property(t => t.FetalMovements).HasColumnName("FetalMovements").IsRequired().HasMaxLength(50);
-			entityBuilder.Property(t => t.Placenta).HasColumnName("Placenta").IsRequired().HasMaxLength(50);
 		//-------------------Navigation Properties -------------------------------//
 	
 				//----------------Parent Properties

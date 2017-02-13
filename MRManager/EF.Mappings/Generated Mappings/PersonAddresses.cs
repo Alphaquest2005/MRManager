@@ -19,15 +19,15 @@ namespace EF.Mappings
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();	
 			entityBuilder.Property(t => t.AddressId).HasColumnName("AddressId").IsRequired();
-			entityBuilder.Property(t => t.AddressTypeId).HasColumnName("AddressTypeId").IsRequired();
 			entityBuilder.Property(t => t.PersonId).HasColumnName("PersonId").IsRequired();
+			entityBuilder.Property(t => t.AddressTypeId).HasColumnName("AddressTypeId").IsRequired();
 		//-------------------Navigation Properties -------------------------------//
 				entityBuilder.HasMany(x => x.PrimaryPersonAddress).WithOne(p => p.PersonAddresses).HasForeignKey(c => c.PersonAddressesId).OnDelete(DeleteBehavior.Restrict);
 	
 				//----------------Parent Properties
 				//entityBuilder.HasOne(p => p.Addresses).WithMany(p => p.PersonAddresses).HasForeignKey(c => c.AddressId).OnDelete(DeleteBehavior.Restrict);
-				//entityBuilder.HasOne(p => p.AddressTypes).WithMany(p => p.PersonAddresses).HasForeignKey(c => c.AddressTypeId).OnDelete(DeleteBehavior.Restrict);
 				//entityBuilder.HasOne(p => p.Persons).WithMany(p => p.PersonAddresses).HasForeignKey(c => c.PersonId).OnDelete(DeleteBehavior.Restrict);
+				//entityBuilder.HasOne(p => p.AddressTypes).WithMany(p => p.PersonAddresses).HasForeignKey(c => c.AddressTypeId).OnDelete(DeleteBehavior.Restrict);
 	
 		}
 	}

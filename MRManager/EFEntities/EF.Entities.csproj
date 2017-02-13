@@ -132,6 +132,7 @@
     <Compile Include="Generated Entities\PrimaryPersonAddress.cs" />
     <Compile Include="Generated Entities\PrimaryPersonPhoneNumber.cs" />
     <Compile Include="Generated Entities\Pulse.cs" />
+    <Compile Include="Generated Entities\QuestionResponseTypes.cs" />
     <Compile Include="Generated Entities\Questions.cs" />
     <Compile Include="Generated Entities\Religons.cs" />
     <Compile Include="Generated Entities\Respiration.cs" />

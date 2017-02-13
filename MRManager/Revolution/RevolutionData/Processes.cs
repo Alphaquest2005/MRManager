@@ -246,6 +246,7 @@ namespace RevolutionData
           
             QuestionListViewModelInfo.ComplexActions.UpdateQuestionListState,
             QuestionListViewModelInfo.ComplexActions.RequestQuestionList,
+            
 
             //PatientVisitViewModelInfo.ComplexActions.RequestData,
             //PatientVisitViewModelInfo.ComplexActions.UpdateState,
@@ -257,6 +258,7 @@ namespace RevolutionData
             EntityCacheViewModelInfo<IPhase>.ComplexActions.IntializeCache(3),
             EntityCacheViewModelInfo<IMedicalCategory>.ComplexActions.IntializeCache(3),
             EntityCacheViewModelInfo<IMedicalSystems>.ComplexActions.IntializeCache(3),
+            EntityCacheViewModelInfo<IQuestionResponseTypes>.ComplexActions.IntializeCache(3),
 
             EntityViewCacheViewModelInfo<IDoctorInfo>.ComplexActions.IntializeCache(3)
         };

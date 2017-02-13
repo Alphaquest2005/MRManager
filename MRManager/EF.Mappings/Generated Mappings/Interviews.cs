@@ -19,15 +19,15 @@ namespace EF.Mappings
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();	
 			entityBuilder.Property(t => t.Name).HasColumnName("Name").IsRequired().HasMaxLength(50);
-			entityBuilder.Property(t => t.MedicalCategoryId).HasColumnName("MedicalCategoryId").IsRequired();
 			entityBuilder.Property(t => t.PhaseId).HasColumnName("PhaseId").IsRequired();
+			entityBuilder.Property(t => t.MedicalCategoryId).HasColumnName("MedicalCategoryId").IsRequired();
 		//-------------------Navigation Properties -------------------------------//
 				entityBuilder.HasMany(x => x.MedicalSystemInterviews).WithOne(p => p.Interviews).HasForeignKey(c => c.InterviewId).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasMany(x => x.Questions).WithOne(p => p.Interviews).HasForeignKey(c => c.InterviewId).OnDelete(DeleteBehavior.Restrict);
 	
 				//----------------Parent Properties
-				//entityBuilder.HasOne(p => p.MedicalCategory).WithMany(p => p.Interviews).HasForeignKey(c => c.MedicalCategoryId).OnDelete(DeleteBehavior.Restrict);
 				//entityBuilder.HasOne(p => p.Phase).WithMany(p => p.Interviews).HasForeignKey(c => c.PhaseId).OnDelete(DeleteBehavior.Restrict);
+				//entityBuilder.HasOne(p => p.MedicalCategory).WithMany(p => p.Interviews).HasForeignKey(c => c.MedicalCategoryId).OnDelete(DeleteBehavior.Restrict);
 	
 		}
 	}

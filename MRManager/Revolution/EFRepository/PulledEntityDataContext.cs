@@ -19,8 +19,8 @@ namespace EFRepository
 {
     public class PulledEntityDataContext : BaseRepository<PulledEntityDataContext>
     {
-        private const string DefaultResponseType = "TextBox";
-        public const string DefaultType = "string";
+        private const int DefaultResponseType = 1;
+        
         //Bring in all lookups with enums
         
 
@@ -33,7 +33,8 @@ namespace EFRepository
             {
                 try
                 {
-                    var entity = ctx.Patients.FirstOrDefault(x => x.Id == msg.EntityId);
+                    var entity = ctx.Patients.FirstOrDefault(x => x.Id == msg.EntityId) 
+                                 ?? ctx.Patients.Add(new Patients()).Entity;
 
                     foreach (var change in msg.Changes)
                     {
@@ -44,7 +45,7 @@ namespace EFRepository
                             ctx.PatientVisit.Add(new PatientVisit()
                             {
                                 VisitTypeId = ctx.VisitType.First(x => x.Name == "DataEntry").Id,
-                                PatientId = msg.EntityId,
+                                Patients = entity,
                                 DoctorId = 0,
                                 DateOfVisit = DateTime.Today.Date,
                             }).Entity;
@@ -67,7 +68,6 @@ namespace EFRepository
                                 {
                                     Entity = msg.EntityName,
                                     Attribute = change.Key,
-                                    Type = DefaultType
                                 },
                                 InterviewId = ctx.Interviews.First(x => x.Name == msg.InterviewName).Id,
                                 ResponseOptions = new List<ResponseOptions>(),
@@ -81,13 +81,13 @@ namespace EFRepository
                             question = questions.First();
                         }
 
-                        responseOptions = question.ResponseOptions.FirstOrDefault(x => x.Type == DefaultResponseType);
+                        responseOptions = question.ResponseOptions.FirstOrDefault(x => x.QuestionResponseTypeId == DefaultResponseType);
                         if (responseOptions == null)
                         {
                             responseOptions = new ResponseOptions()
                             {
                                 Description = change.Key,
-                                Type = DefaultResponseType
+                                QuestionResponseTypeId = DefaultResponseType
                             };
                             question.ResponseOptions.Add(responseOptions);
                         }

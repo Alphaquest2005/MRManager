@@ -251,7 +251,8 @@ namespace Entity.Expressions
                             z.Response.Any()
                             ? z.Response.Where(x1 => x1.PatientResponseId == x.Id).Select(x2 => x2.Value).First()
                             : null, //
-                    Type = z.Type,
+                    QuestionResponseTypeId = z.QuestionResponseTypeId,
+                    Type = z.QuestionResponseTypes.Name,
                     PatientResponseId = x.Id,
                     ResponseNumber = z.ResponseNumber
 
@@ -282,7 +283,6 @@ namespace Entity.Expressions
                 Category = x.Interviews.MedicalCategory.Name,
                 Entity = x.EntityAttributes.Entity,
                 Attribute = x.EntityAttributes.Attribute,
-                Type = x.EntityAttributes.Type,
                 QuestionNumber = x.QuestionNumber
 
             };
@@ -302,7 +302,8 @@ namespace Entity.Expressions
                                         Description = z.Description,
                                         QuestionId = z.QuestionId,
                                         ResponseId = 0,
-                                        Type = z.Type,
+                                        QuestionResponseTypeId = z.QuestionResponseTypeId,
+                                        Type = z.QuestionResponseTypes.Name,
                                        
                                         ResponseNumber = z.ResponseNumber
                                     } as IResponseOptionInfo).ToList(),
@@ -316,7 +317,8 @@ namespace Entity.Expressions
                      QuestionId = z.ResponseOptions.QuestionId,
                      ResponseId = z.Id,
                      Value = z.Value,
-                     Type = z.ResponseOptions.Type
+                     QuestionResponseTypeId = z.ResponseOptions.QuestionResponseTypeId,
+                     Type = z.ResponseOptions.QuestionResponseTypes.Name
                  } as IResponseOptionInfo).ToList()
           };
 

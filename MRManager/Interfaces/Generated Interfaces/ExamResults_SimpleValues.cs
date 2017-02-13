@@ -15,9 +15,9 @@ namespace Interfaces
 	public partial interface IExamResults_SimpleValues:IEntity  
 	{
 		int ExamResultsId { get;}
-		int PatientResultsId { get;}
 		int ResultFieldId { get;}
 		string Value { get;}
+		int PatientResultsId { get;}
 
 
 

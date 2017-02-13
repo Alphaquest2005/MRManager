@@ -36,8 +36,7 @@ namespace ViewModels
             
             this.WhenAnyValue(x => x.Systems.Value).Subscribe(x => addSystems(x));
             this.WhenAnyValue(x => x.CurrentMedicalSystem.Value).Where(x => x != null).Subscribe(x => addNewRow(x.Interviews));
-            this.WhenAnyValue(x => x.SelectedMedicalSystem.Value).Subscribe(x => { });
-            this.WhenAnyValue(x => x.CurrentMedicalSystem.Value.MedicalSystemId).Subscribe(x => { });
+            
         }
 
         

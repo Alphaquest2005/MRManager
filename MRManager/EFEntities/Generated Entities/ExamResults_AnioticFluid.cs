@@ -13,8 +13,8 @@ namespace EF.Entities
 {
 	public partial class ExamResults_AnioticFluid: BaseEntity, IExamResults_AnioticFluid
 	{
-		public virtual double AFI { get; set; }
 		public virtual double MVP { get; set; }
+		public virtual double AFI { get; set; }
 		public virtual double Q1 { get; set; }
 		public virtual double Q2 { get; set; }
 		public virtual double Q3 { get; set; }

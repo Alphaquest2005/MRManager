@@ -7,17 +7,9 @@ namespace Converters
 {
     public class StringVisibilityConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var res = parameter != null && (value != null && value.ToString() != parameter.ToString()) ? Visibility.Collapsed : Visibility.Visible;
-            return res;
-        }
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => parameter != null && value != null && value.ToString() == parameter.ToString() ? Visibility.Visible :Visibility.Collapsed;
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-            //throw new NotImplementedException();
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
     }
 
 

@@ -6,14 +6,14 @@ using CommonMessages;
 
 namespace EventMessages.Commands
 {
-    [Export(typeof(IAddEntityWithChanges<>))]
+    [Export(typeof(IAddOrGetEntityWithChanges<>))]
 
-    public class AddEntityWithChanges<TEntity> : ProcessSystemMessage, IAddEntityWithChanges<TEntity> where TEntity : IEntity
+    public class AddOrGetEntityWithChanges<TEntity> : ProcessSystemMessage, IAddOrGetEntityWithChanges<TEntity> where TEntity : IEntity
     {
-        public AddEntityWithChanges() { }
+        public AddOrGetEntityWithChanges() { }
         public Dictionary<string, dynamic> Changes { get; }
         
-        public AddEntityWithChanges(Dictionary<string, dynamic> changes, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo, process, source)
+        public AddOrGetEntityWithChanges(Dictionary<string, dynamic> changes, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo, process, source)
         {
             Contract.Requires(changes.Count > 0);
             Changes = changes;

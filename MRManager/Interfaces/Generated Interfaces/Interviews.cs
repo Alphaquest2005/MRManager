@@ -15,8 +15,8 @@ namespace Interfaces
 	public partial interface IInterviews:IEntity  
 	{
 		string Name { get;}
-		int MedicalCategoryId { get;}
 		int PhaseId { get;}
+		int MedicalCategoryId { get;}
 
 
 

@@ -15,8 +15,8 @@ namespace Interfaces
 	public partial interface IQuestions:IEntity  
 	{
 		int EntityAttributeId { get;}
-		string Description { get;}
 		int InterviewId { get;}
+		string Description { get;}
 		int QuestionNumber { get;}
 
 

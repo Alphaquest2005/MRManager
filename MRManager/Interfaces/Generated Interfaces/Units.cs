@@ -14,9 +14,9 @@ namespace Interfaces
 	
 	public partial interface IUnits:IEntity  
 	{
-		string Description { get;}
 		string Name { get;}
 		string ShortName { get;}
+		string Description { get;}
 
 
 

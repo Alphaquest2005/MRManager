@@ -14,8 +14,8 @@ namespace Interfaces
 	
 	public partial interface IMedia:IEntity  
 	{
-		int MediaTypeId { get;}
 		Byte[] Value { get;}
+		int MediaTypeId { get;}
 
 
 

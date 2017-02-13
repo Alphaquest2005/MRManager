@@ -14,8 +14,8 @@ namespace Interfaces
 	
 	public partial interface IOrganisations:IEntity  
 	{
-		Byte[] EntryTimeStamp { get;}
 		string Name { get;}
+		Byte[] EntryTimeStamp { get;}
 		string VATNumber { get;}
 
 

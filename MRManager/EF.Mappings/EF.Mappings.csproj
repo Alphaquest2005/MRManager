@@ -116,6 +116,7 @@
     <Compile Include="Generated Mappings\PrimaryPersonAddress.cs" />
     <Compile Include="Generated Mappings\PrimaryPersonPhoneNumber.cs" />
     <Compile Include="Generated Mappings\Pulse.cs" />
+    <Compile Include="Generated Mappings\QuestionResponseTypes.cs" />
     <Compile Include="Generated Mappings\Questions.cs" />
     <Compile Include="Generated Mappings\Religons.cs" />
     <Compile Include="Generated Mappings\Respiration.cs" />

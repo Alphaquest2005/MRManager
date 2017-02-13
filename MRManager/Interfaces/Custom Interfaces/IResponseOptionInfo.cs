@@ -9,6 +9,7 @@ namespace Interfaces
     {
         Int32? ResponseId { get;  }
         Int32? PatientResponseId { get; }
+        int QuestionResponseTypeId { get; }
         String Value { get; }
         Int32 QuestionId { get; }
         String Description { get; }

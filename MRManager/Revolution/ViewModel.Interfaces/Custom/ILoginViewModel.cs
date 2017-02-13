@@ -44,12 +44,12 @@ namespace ViewModel.Interfaces
     {
         ObservableBindingList<IResponseOptionInfo> ChangeTrackingList { get; }
         IPatientVisitInfo CurrentPatientVisit { get; set; }
+        ReactiveProperty<IResponseOptionInfo> CurrentResponseOption { get; }
     }
 
     
     public interface IQuestionListViewModel : IEntityListViewModel<IQuestionInfo>
     {
-        ObservableBindingList<IQuestionInfo> ChangeTrackingList { get; }
         IInterviewInfo CurrentInterview { get; set; }
     }
 

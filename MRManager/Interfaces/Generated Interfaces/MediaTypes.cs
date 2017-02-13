@@ -14,8 +14,8 @@ namespace Interfaces
 	
 	public partial interface IMediaTypes:IEntity  
 	{
-		string FileExtension { get;}
 		string MediaTypeName { get;}
+		string FileExtension { get;}
 
 
 

@@ -14,8 +14,8 @@ namespace Interfaces
 	
 	public partial interface IPatientDoctor:IEntity  
 	{
-		int DoctorId { get;}
 		int PatientId { get;}
+		int DoctorId { get;}
 
 
 

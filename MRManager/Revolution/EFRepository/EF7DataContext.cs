@@ -49,7 +49,7 @@ namespace EFRepository
                  .Invoke(null, new object[] { msg});
         }
 
-        public static void Add(IAddEntityWithChanges<TEntity> msg)
+        public static void Add(IAddOrGetEntityWithChanges<TEntity> msg)
         {
             typeof(EntityRepository<,,>).MakeGenericType(typeof(TEntity), EntityType, ctxType)
                  .GetMethod("Add")

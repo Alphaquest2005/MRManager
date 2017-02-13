@@ -13,9 +13,9 @@ namespace EF.Entities
 {
 	public partial class PatientVisit: BaseEntity, IPatientVisit
 	{
+		public virtual int PatientId { get; set; }
 		public virtual DateTime DateOfVisit { get; set; }
 		public virtual int DoctorId { get; set; }
-		public virtual int PatientId { get; set; }
 		public virtual int VisitTypeId { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
@@ -26,8 +26,8 @@ namespace EF.Entities
 				public virtual ICollection<PatientVisitVitalSigns> PatientVisitVitalSigns {get; set;}
 		
 			// ---------Parent Relationships
-				public virtual Persons_Doctor Persons_Doctor {get; set;}
 				public virtual Patients Patients {get; set;}
+				public virtual Persons_Doctor Persons_Doctor {get; set;}
 				public virtual VisitType VisitType {get; set;}
 	
 

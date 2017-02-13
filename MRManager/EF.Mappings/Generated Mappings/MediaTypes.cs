@@ -18,9 +18,9 @@ namespace EF.Mappings
 			entityBuilder.ToTable("MediaTypes", "dbo");
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();	
+			entityBuilder.Property(t => t.MediaTypeName).HasColumnName("MediaTypeName").IsRequired().HasMaxLength(50);
+			entityBuilder.Property(t => t.MediaTypeName).HasColumnName("MediaTypeName").IsRequired().HasMaxLength(50);
 			entityBuilder.Property(t => t.FileExtension).HasColumnName("FileExtension").IsRequired().HasMaxLength(50);
-			entityBuilder.Property(t => t.MediaTypeName).HasColumnName("MediaTypeName").IsRequired().HasMaxLength(50);
-			entityBuilder.Property(t => t.MediaTypeName).HasColumnName("MediaTypeName").IsRequired().HasMaxLength(50);
 		//-------------------Navigation Properties -------------------------------//
 				entityBuilder.HasMany(x => x.Media).WithOne(p => p.MediaTypes).HasForeignKey(c => c.MediaTypeId).OnDelete(DeleteBehavior.Restrict);
 	

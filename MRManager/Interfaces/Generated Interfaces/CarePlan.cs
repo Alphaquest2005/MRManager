@@ -14,8 +14,8 @@ namespace Interfaces
 	
 	public partial interface ICarePlan:IEntity  
 	{
-		string Diagnosis { get;}
 		string Name { get;}
+		string Diagnosis { get;}
 
 
 

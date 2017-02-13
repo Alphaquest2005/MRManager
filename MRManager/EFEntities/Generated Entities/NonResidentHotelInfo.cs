@@ -19,8 +19,8 @@ namespace EF.Entities
 			// ---------Child Relationships
 		
 			// ---------Parent Relationships
-				public virtual Organisations_Hotels Organisations_Hotels {get; set;}
 				public virtual Persons_NonResidentPatient Persons_NonResidentPatient {get; set;}
+				public virtual Organisations_Hotels Organisations_Hotels {get; set;}
 	
 
 	}

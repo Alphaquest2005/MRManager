@@ -14,12 +14,12 @@ namespace Interfaces
 	
 	public partial interface IExamResults_FetalDates:IEntity  
 	{
+		int ExamResultsId { get;}
+		DateTime StartDate { get;}
+		string Method { get;}
 		string Details { get;}
 		int EstimatedDays { get;}
-		int ExamResultsId { get;}
-		string Method { get;}
 		int PatientResultsId { get;}
-		DateTime StartDate { get;}
 
 
 

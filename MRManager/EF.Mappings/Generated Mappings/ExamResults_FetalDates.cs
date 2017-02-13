@@ -18,12 +18,12 @@ namespace EF.Mappings
 			entityBuilder.ToTable("ExamResults_FetalDates", "Diagnostics");
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();	
+			entityBuilder.Property(t => t.ExamResultsId).HasColumnName("ExamResultsId").IsRequired();
+			entityBuilder.Property(t => t.StartDate).HasColumnName("StartDate").IsRequired();
+			entityBuilder.Property(t => t.Method).HasColumnName("Method").IsRequired().HasMaxLength(50);
 			entityBuilder.Property(t => t.Details).HasColumnName("Details").IsRequired().HasMaxLength(Int32.MaxValue);
 			entityBuilder.Property(t => t.EstimatedDays).HasColumnName("EstimatedDays").IsRequired();
-			entityBuilder.Property(t => t.ExamResultsId).HasColumnName("ExamResultsId").IsRequired();
-			entityBuilder.Property(t => t.Method).HasColumnName("Method").IsRequired().HasMaxLength(50);
 			entityBuilder.Property(t => t.PatientResultsId).HasColumnName("PatientResultsId").IsRequired();
-			entityBuilder.Property(t => t.StartDate).HasColumnName("StartDate").IsRequired();
 		//-------------------Navigation Properties -------------------------------//
 				entityBuilder.HasOne(p => p.AssignedDating).WithOne(p => p.ExamResults_FetalDates).HasForeignKey<AssignedDating>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
 	

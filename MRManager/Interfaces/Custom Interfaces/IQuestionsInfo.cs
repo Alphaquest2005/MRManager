@@ -15,6 +15,7 @@ namespace Interfaces
         string Entity { get; }
         string Attribute { get; }
         string Type { get; }
+        int QuestionResponseTypeId { get; }
         int QuestionNumber { get; }
     }
 }

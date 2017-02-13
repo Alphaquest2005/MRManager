@@ -22,10 +22,10 @@ namespace EF.Mappings
 		//-------------------Navigation Properties -------------------------------//
 				entityBuilder.HasOne(p => p.AddressCities).WithOne(p => p.Addresses).HasForeignKey<AddressCities>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasOne(p => p.AddressCountries).WithOne(p => p.Addresses).HasForeignKey<AddressCountries>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
-				entityBuilder.HasOne(p => p.AddressZipCodes).WithOne(p => p.Addresses).HasForeignKey<AddressZipCodes>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasMany(x => x.AddressLines).WithOne(p => p.Addresses).HasForeignKey(c => c.AddressId).OnDelete(DeleteBehavior.Restrict);
-				entityBuilder.HasOne(p => p.AddressStates).WithOne(p => p.Addresses).HasForeignKey<AddressStates>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasOne(p => p.AddressParishes).WithOne(p => p.Addresses).HasForeignKey<AddressParishes>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
+				entityBuilder.HasOne(p => p.AddressStates).WithOne(p => p.Addresses).HasForeignKey<AddressStates>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
+				entityBuilder.HasOne(p => p.AddressZipCodes).WithOne(p => p.Addresses).HasForeignKey<AddressZipCodes>(c => c.Id).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasMany(x => x.ForeignAddresses).WithOne(p => p.Addresses).HasForeignKey(c => c.AddressId).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasMany(x => x.OrganisationAddress).WithOne(p => p.Addresses).HasForeignKey(c => c.AddressId).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasMany(x => x.PersonAddresses).WithOne(p => p.Addresses).HasForeignKey(c => c.AddressId).OnDelete(DeleteBehavior.Restrict);

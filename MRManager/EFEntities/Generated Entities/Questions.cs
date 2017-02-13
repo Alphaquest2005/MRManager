@@ -14,8 +14,8 @@ namespace EF.Entities
 	public partial class Questions: BaseEntity, IQuestions
 	{
 		public virtual int EntityAttributeId { get; set; }
-		public virtual string Description { get; set; }
 		public virtual int InterviewId { get; set; }
+		public virtual string Description { get; set; }
 		public virtual int QuestionNumber { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//

@@ -13,9 +13,9 @@ namespace EF.Entities
 {
 	public partial class Exams: BaseEntity, IExams
 	{
-		public virtual string Describtion { get; set; }
 		public virtual int ExamTypeId { get; set; }
 		public virtual string Name { get; set; }
+		public virtual string Describtion { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships

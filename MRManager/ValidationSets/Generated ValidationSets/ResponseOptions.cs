@@ -18,7 +18,7 @@ namespace ValidationSets
 			RuleFor(x => x.QuestionId).NotNull();
 			RuleFor(x => x.Description).NotNull();
 			RuleFor(x => x.Id).NotNull();
-			RuleFor(x => x.Type).NotNull();
+			RuleFor(x => x.QuestionResponseTypeId).NotNull();
 		}
 	}
 }

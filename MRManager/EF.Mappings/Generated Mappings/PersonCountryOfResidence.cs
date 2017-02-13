@@ -19,8 +19,8 @@ namespace EF.Mappings
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();	
 			entityBuilder.Property(t => t.CountryId).HasColumnName("CountryId").IsRequired();
-			entityBuilder.Property(t => t.Date).HasColumnName("Date").IsRequired();
 			entityBuilder.Property(t => t.PersonId).HasColumnName("PersonId").IsRequired();
+			entityBuilder.Property(t => t.Date).HasColumnName("Date").IsRequired();
 		//-------------------Navigation Properties -------------------------------//
 	
 				//----------------Parent Properties

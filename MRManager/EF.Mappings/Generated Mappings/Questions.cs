@@ -19,8 +19,8 @@ namespace EF.Mappings
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();	
 			entityBuilder.Property(t => t.EntityAttributeId).HasColumnName("EntityAttributeId").IsRequired();
-			entityBuilder.Property(t => t.Description).HasColumnName("Description").IsRequired().HasMaxLength(Int32.MaxValue);
 			entityBuilder.Property(t => t.InterviewId).HasColumnName("InterviewId").IsRequired();
+			entityBuilder.Property(t => t.Description).HasColumnName("Description").IsRequired().HasMaxLength(Int32.MaxValue);
 			entityBuilder.Property(t => t.QuestionNumber).HasColumnName("QuestionNumber").IsRequired();
 		//-------------------Navigation Properties -------------------------------//
 				entityBuilder.HasMany(x => x.PatientResponses).WithOne(p => p.Questions).HasForeignKey(c => c.QuestionId).OnDelete(DeleteBehavior.Restrict);

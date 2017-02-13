@@ -18,8 +18,8 @@ namespace EF.Entities
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships
 				public virtual ICollection<AddressCountries> AddressCountries {get; set;}
-				public virtual ICollection<Persons_Patient> Persons_Patient {get; set;}
 				public virtual ICollection<PersonCountryOfResidence> PersonCountryOfResidence {get; set;}
+				public virtual ICollection<Persons_Patient> Persons_Patient {get; set;}
 		
 			// ---------Parent Relationships
 	

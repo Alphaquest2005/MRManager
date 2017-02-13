@@ -41,21 +41,6 @@ namespace ViewModels
            
         }
 
-        private void updateChangeTracking(IObservedChange<IResponseOptionInfo, string> change)
-        {
-            if (change.Sender.ResponseId != 0)
-            {
-                ChangeTracking.AddOrUpdate(nameof(IResponseInfo.Id), change.Sender.ResponseId);
-                ChangeTracking.AddOrUpdate(nameof(IResponseInfo.Value), change.Value);
-            }
-            else
-            {
-                ChangeTracking.AddOrUpdate(nameof(IResponseInfo.Id), change.Sender.ResponseId);
-                ChangeTracking.AddOrUpdate(nameof(IResponseInfo.PatientResponseId), change.Sender.PatientResponseId);
-                ChangeTracking.AddOrUpdate(nameof(IResponseInfo.ResponseOptionId), change.Sender.Id);
-                ChangeTracking.AddOrUpdate(nameof(IResponseInfo.Value), change.Value);
-            }
-        }
 
         private void UpdateChangeCollectionList(IQuestionResponseOptionInfo patientResponseInfo)
         {
@@ -124,6 +109,8 @@ namespace ViewModels
             set { _changeTrackingList = value; }
         }
 
+        public ReactiveProperty<IResponseOptionInfo> CurrentResponseOption { get; } = new ReactiveProperty<IResponseOptionInfo>();
+
 
         public ReactiveProperty<IProcessStateList<IQuestionResponseOptionInfo>> State => this.ViewModel.State;
 
@@ -135,7 +122,7 @@ namespace ViewModels
         public ObservableList<IQuestionResponseOptionInfo> EntitySet => this.ViewModel.EntitySet;
         public ObservableList<IQuestionResponseOptionInfo> SelectedEntities => this.ViewModel.SelectedEntities;
 
-        
+        public ReactiveProperty<string> DataType { get; } = new ReactiveProperty<string>();
 
 
         public string Field { get; set; }

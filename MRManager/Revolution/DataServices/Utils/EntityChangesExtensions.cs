@@ -15,7 +15,7 @@ namespace DataServices.Actors
             EF7DataContext<TEntity>.Update(msg);
         }
 
-        public static void AddEntity<TEntity>(this IAddEntityWithChanges<TEntity> msg) where TEntity : class, IEntity
+        public static void AddEntity<TEntity>(this IAddOrGetEntityWithChanges<TEntity> msg) where TEntity : class, IEntity
         {
 
             EF7DataContext<TEntity>.Add(msg);

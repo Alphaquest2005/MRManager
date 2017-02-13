@@ -14,9 +14,8 @@ namespace Interfaces
 	
 	public partial interface IEntityAttributes:IEntity  
 	{
-		string Attribute { get;}
 		string Entity { get;}
-		string Type { get;}
+		string Attribute { get;}
 
 
 

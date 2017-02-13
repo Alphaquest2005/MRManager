@@ -71,7 +71,7 @@ namespace EFRepository
 
         }
 
-        public static void Add(IAddEntityWithChanges<TEntity> msg)
+        public static void Add(IAddOrGetEntityWithChanges<TEntity> msg)
         {
             try
             {
@@ -83,7 +83,11 @@ namespace EFRepository
                     if (string.IsNullOrEmpty(whereStr)) return;
                     entity = ctx.Set<TDBEntity>().Where(whereStr).FirstOrDefault();
 
-                    if (entity != null) return;
+                    if (entity != null)
+                    {
+                        EventMessageBus.Current.Publish(new EntityUpdated<TEntity>((TEntity)(object)entity, new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntityUpdated), msg.Process, Source), Source);
+                        return;
+                    }
 
                     
                         entity = new TDBEntity();

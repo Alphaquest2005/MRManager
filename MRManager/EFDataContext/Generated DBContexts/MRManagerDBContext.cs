@@ -93,6 +93,7 @@ namespace EF.DBContexts
 		public DbSet<PrimaryPersonAddress> PrimaryPersonAddress { get; set; }
 		public DbSet<PrimaryPersonPhoneNumber> PrimaryPersonPhoneNumber { get; set; }
 		public DbSet<Pulse> Pulse { get; set; }
+		public DbSet<QuestionResponseTypes> QuestionResponseTypes { get; set; }
 		public DbSet<Questions> Questions { get; set; }
 		public DbSet<Religons> Religons { get; set; }
 		public DbSet<Respiration> Respiration { get; set; }
@@ -207,6 +208,7 @@ namespace EF.DBContexts
 				PrimaryPersonAddressMap.Map(modelBuilder.Entity<PrimaryPersonAddress>());
 				PrimaryPersonPhoneNumberMap.Map(modelBuilder.Entity<PrimaryPersonPhoneNumber>());
 				PulseMap.Map(modelBuilder.Entity<Pulse>());
+				QuestionResponseTypesMap.Map(modelBuilder.Entity<QuestionResponseTypes>());
 				QuestionsMap.Map(modelBuilder.Entity<Questions>());
 				ReligonsMap.Map(modelBuilder.Entity<Religons>());
 				RespirationMap.Map(modelBuilder.Entity<Respiration>());

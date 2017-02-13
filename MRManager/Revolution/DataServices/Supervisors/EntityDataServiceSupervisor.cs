@@ -21,7 +21,7 @@ namespace DataServices.Actors
         private static readonly Action<ISystemSource, ICreateEntity<TEntity>> CreateAction = (s, x) => x.CreateEntity();
         private static readonly Action<ISystemSource, IDeleteEntity<TEntity>> DeleteAction = (s, x) => x.DeleteEntity();
         private static readonly Action<ISystemSource, IUpdateEntityWithChanges<TEntity>> UpdateAction = (s, x) => x.UpdateEntity();
-        private static readonly Action<ISystemSource, IAddEntityWithChanges<TEntity>> AddAction = (s, x) => x.AddEntity();
+        private static readonly Action<ISystemSource, IAddOrGetEntityWithChanges<TEntity>> AddAction = (s, x) => x.AddEntity();
         private static readonly Action<ISystemSource, IGetEntityById<TEntity>> GetEntityByIdAction = (s, x) => x.GetEntity();
         private static readonly Action<ISystemSource, IGetEntityWithChanges<TEntity>> GetEntityWithChangesAction = (s, x) => x.GetEntity();
 
@@ -38,7 +38,7 @@ namespace DataServices.Actors
                 {typeof (ICreateEntity<TEntity>), CreateAction},
                 {typeof (IDeleteEntity<TEntity>), DeleteAction},
                 {typeof (IUpdateEntityWithChanges<TEntity>), UpdateAction},
-                {typeof (IAddEntityWithChanges<TEntity>), AddAction},
+                {typeof (IAddOrGetEntityWithChanges<TEntity>), AddAction},
                 {typeof (IGetEntityById<TEntity>), GetEntityByIdAction},
                 {typeof (IGetEntityWithChanges<TEntity>), GetEntityWithChangesAction},
 

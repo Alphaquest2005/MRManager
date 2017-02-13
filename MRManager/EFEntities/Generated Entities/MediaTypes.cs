@@ -13,8 +13,8 @@ namespace EF.Entities
 {
 	public partial class MediaTypes: BaseEntity, IMediaTypes
 	{
-		public virtual string FileExtension { get; set; }
 		public virtual string MediaTypeName { get; set; }
+		public virtual string FileExtension { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships

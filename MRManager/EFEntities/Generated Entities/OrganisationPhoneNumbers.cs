@@ -13,16 +13,16 @@ namespace EF.Entities
 {
 	public partial class OrganisationPhoneNumbers: BaseEntity, IOrganisationPhoneNumbers
 	{
-		public virtual int OrganisationId { get; set; }
 		public virtual string PhoneNumber { get; set; }
 		public virtual int PhoneTypeId { get; set; }
+		public virtual int OrganisationId { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships
 		
 			// ---------Parent Relationships
-				public virtual Organisations Organisations {get; set;}
 				public virtual PhoneTypes PhoneTypes {get; set;}
+				public virtual Organisations Organisations {get; set;}
 	
 
 	}

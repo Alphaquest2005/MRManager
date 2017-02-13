@@ -12,10 +12,9 @@ using SystemInterfaces;
 namespace Interfaces
 {
 	
-	public partial interface IHeight:IEntity  
+	public partial interface IQuestionResponseTypes:IEntity  
 	{
-		double Value { get;}
-		int UnitId { get;}
+		string Name { get;}
 
 
 

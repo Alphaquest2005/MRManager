@@ -18,8 +18,8 @@ namespace EF.Mappings
 			entityBuilder.ToTable("Media", "dbo");
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();	
-			entityBuilder.Property(t => t.MediaTypeId).HasColumnName("MediaTypeId").IsRequired();
 			entityBuilder.Property(t => t.Value).HasColumnName("Value").ValueGeneratedOnAdd();
+			entityBuilder.Property(t => t.MediaTypeId).HasColumnName("MediaTypeId").IsRequired();
 		//-------------------Navigation Properties -------------------------------//
 				entityBuilder.HasMany(x => x.DefaultImages).WithOne(p => p.Media).HasForeignKey(c => c.MediaId).OnDelete(DeleteBehavior.Restrict);
 				entityBuilder.HasMany(x => x.PersonMedia).WithOne(p => p.Media).HasForeignKey(c => c.MediaId).OnDelete(DeleteBehavior.Restrict);

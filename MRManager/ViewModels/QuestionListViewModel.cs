@@ -41,90 +41,18 @@ namespace ViewModels
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                ChangeTrackingList.Clear();
-                
-                if (entitySet.Any())
-                {
-                    var resLst = entitySet.OrderBy(z => z.QuestionNumber).ToList();
-                    var currentInterviewId = entitySet.First().InterviewId;
-                    resLst.Add(new QuestionInfo()
-                    {
-                        Id = 0,
-                        Description = "Edit to Create New Question",
-                        EntityAttributeId = 0,
-                        InterviewId = currentInterviewId,
-                        Attribute = "Unspecified",
-                        Entity = "Unspecified",
-                        Type = "TextBox"
-                    });
-                    ChangeTrackingList.AddRange(resLst);
+                EntitySet.Clear();
+                var resLst = entitySet.OrderBy(z => z.QuestionNumber).ToList();
+                EntitySet.AddRange(resLst);
+                EntitySet.Reset();
 
-                }
-               
             });
 
         }
 
-       
 
-        private void updateType(IObservedChange<IQuestionInfo, string> typeChange)
-        {
-            if (typeChange.Sender.Entity != "Unspecified")
-            {
-                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.EntityAttributeId), typeChange.Sender.EntityAttributeId);
-                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Type), typeChange.Value);
-            }
-            else
-            {
-                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Type), typeChange.Value);
-            }
-        }
 
-        private void updateAttribute(IObservedChange<IQuestionInfo, string> attributeChange)
-        {
-            if (attributeChange.Sender.Entity != "Unspecified")
-            {
-                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.EntityAttributeId), attributeChange.Sender.EntityAttributeId);
-                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Attribute), attributeChange.Value);
-            }
-            else
-            {
-                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Attribute), attributeChange.Value);
-            }
-        }
 
-        private void updateEntity(IObservedChange<IQuestionInfo, string> entityChange)
-        {
-            if (entityChange.Sender.EntityAttributeId != 0)
-            {
-                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.EntityAttributeId), entityChange.Sender.EntityAttributeId);
-                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Entity), entityChange.Value);
-            }
-            else
-            {
-                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.EntityAttributeId), entityChange.Sender.EntityAttributeId);
-                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Entity), entityChange.Value);
-                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Attribute), entityChange.Sender.Attribute);
-            }
-        }
-
-        private void updateDescription(IObservedChange<IQuestionInfo, string> descriptionChange)
-        {
-            if (descriptionChange.Sender.Id != 0)
-            {
-                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Id), descriptionChange.Sender.Id);
-                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Description), descriptionChange.Value);
-            }
-            else
-            {
-                //add question
-                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Id), descriptionChange.Sender.Id);
-                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.Description), descriptionChange.Value);
-                ChangeTracking.AddOrUpdate(nameof(IQuestionInfo.InterviewId), CurrentInterview.Id);
-
-            }
-           
-        }
 
         public ReactiveProperty<IProcessStateList<IQuestionInfo>> State => this.ViewModel.State;
 
@@ -151,11 +79,11 @@ namespace ViewModels
                 _currentInterview = value;
                 if (_currentInterview == null)
                 {
-                    ChangeTrackingList.Clear();
+                    EntitySet.Clear();
                     return;
                 }
-                if (ChangeTrackingList.Any()) return;
-                ChangeTrackingList.Add(new QuestionInfo()
+                
+                EntitySet.Add(new QuestionInfo()
                 {
                     Id = 0,
                     Description = "Edit to Create New Question",
@@ -165,16 +93,12 @@ namespace ViewModels
                     Entity = "Unspecified",
                     Type = "TextBox"
                 });
+                EntitySet.Reset();
 
                
             }
         }
 
 
-        public ObservableBindingList<IQuestionInfo> ChangeTrackingList
-        {
-            get { return _changeTrackingList; }
-            set { _changeTrackingList = value; }
-        }
     }
 }

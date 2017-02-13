@@ -14,10 +14,10 @@ namespace Interfaces
 	
 	public partial interface IResponseOptions:IEntity  
 	{
+		int QuestionResponseTypeId { get;}
 		int QuestionId { get;}
 		string Description { get;}
 		int ResponseNumber { get;}
-		string Type { get;}
 
 
 

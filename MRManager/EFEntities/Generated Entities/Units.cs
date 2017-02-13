@@ -13,9 +13,9 @@ namespace EF.Entities
 {
 	public partial class Units: BaseEntity, IUnits
 	{
-		public virtual string Description { get; set; }
 		public virtual string Name { get; set; }
 		public virtual string ShortName { get; set; }
+		public virtual string Description { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships

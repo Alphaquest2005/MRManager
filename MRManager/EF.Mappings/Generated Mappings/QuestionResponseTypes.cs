@@ -11,18 +11,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EF.Mappings
 {
-	public class CarePlanMap
+	public class QuestionResponseTypesMap
 	{
-		public static void Map(EntityTypeBuilder<CarePlan> entityBuilder)
+		public static void Map(EntityTypeBuilder<QuestionResponseTypes> entityBuilder)
 		{
-			entityBuilder.ToTable("CarePlan", "Interview");
+			entityBuilder.ToTable("QuestionResponseTypes", "Interview");
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").UseSqlServerIdentityColumn();	
 			entityBuilder.Property(t => t.Name).HasColumnName("Name").IsRequired().HasMaxLength(50);
-			entityBuilder.Property(t => t.Diagnosis).HasColumnName("Diagnosis").IsRequired().HasMaxLength(Int32.MaxValue);
 		//-------------------Navigation Properties -------------------------------//
-				entityBuilder.HasMany(x => x.CarePlanDetails).WithOne(p => p.CarePlan).HasForeignKey(c => c.CarePlanId).OnDelete(DeleteBehavior.Restrict);
-				entityBuilder.HasMany(x => x.ResponseSuggestions_CarePlans).WithOne(p => p.CarePlan).HasForeignKey(c => c.CarePlanId).OnDelete(DeleteBehavior.Restrict);
+				entityBuilder.HasMany(x => x.ResponseOptions).WithOne(p => p.QuestionResponseTypes).HasForeignKey(c => c.QuestionResponseTypeId).OnDelete(DeleteBehavior.Restrict);
 	
 				//----------------Parent Properties
 	

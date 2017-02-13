@@ -13,9 +13,8 @@ namespace EF.Entities
 {
 	public partial class EntityAttributes: BaseEntity, IEntityAttributes
 	{
-		public virtual string Attribute { get; set; }
 		public virtual string Entity { get; set; }
-		public virtual string Type { get; set; }
+		public virtual string Attribute { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships

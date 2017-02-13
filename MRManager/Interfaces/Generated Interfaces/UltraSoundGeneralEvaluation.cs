@@ -15,9 +15,9 @@ namespace Interfaces
 	public partial interface IUltraSoundGeneralEvaluation:IEntity  
 	{
 		string CardiaActivity { get;}
+		string Placenta { get;}
 		string CordVessels { get;}
 		string FetalMovements { get;}
-		string Placenta { get;}
 
 
 

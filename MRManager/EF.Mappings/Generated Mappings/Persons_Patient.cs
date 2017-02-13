@@ -19,8 +19,8 @@ namespace EF.Mappings
 			entityBuilder.HasKey(t => t.Id);
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").ValueGeneratedNever();	
 			entityBuilder.Property(t => t.CountryId).HasColumnName("CountryId").IsRequired();
-			entityBuilder.Property(t => t.DateOfBirth).HasColumnName("DateOfBirth").IsRequired();
 			entityBuilder.Property(t => t.Id).HasColumnName("Id").IsRequired();
+			entityBuilder.Property(t => t.DateOfBirth).HasColumnName("DateOfBirth").IsRequired();
 			entityBuilder.Property(t => t.SexId).HasColumnName("SexId").IsRequired();
 		//-------------------Navigation Properties -------------------------------//
 				entityBuilder.HasMany(x => x.PatientAllergies).WithOne(p => p.Persons_Patient).HasForeignKey(c => c.PatientId).OnDelete(DeleteBehavior.Restrict);

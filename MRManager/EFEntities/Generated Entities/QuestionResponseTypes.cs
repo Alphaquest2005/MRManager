@@ -11,19 +11,15 @@ using Interfaces;
 
 namespace EF.Entities
 {
-	public partial class ForeignAddresses: BaseEntity, IForeignAddresses
+	public partial class QuestionResponseTypes: BaseEntity, IQuestionResponseTypes
 	{
-		public virtual int AddressId { get; set; }
-		public virtual int PersonId { get; set; }
-		public virtual int AddressTypeId { get; set; }
+		public virtual string Name { get; set; }
 
 		//-------------------Navigation Properties -------------------------------//
 			// ---------Child Relationships
+				public virtual ICollection<ResponseOptions> ResponseOptions {get; set;}
 		
 			// ---------Parent Relationships
-				public virtual Addresses Addresses {get; set;}
-				public virtual Persons_NonResidentPatient Persons_NonResidentPatient {get; set;}
-				public virtual AddressTypes AddressTypes {get; set;}
 	
 
 	}

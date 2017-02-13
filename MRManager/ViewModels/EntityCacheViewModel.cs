@@ -117,4 +117,16 @@ namespace ViewModels
 
     }
 
+    [Export(typeof(IEntityCacheViewModel<IQuestionResponseTypes>))]
+    public class QuestionResponseTypeCacheViewModel : ObservableListViewModel<IQuestionResponseTypes>, IEntityCacheViewModel<IQuestionResponseTypes>
+    {
+        public QuestionResponseTypeCacheViewModel() { }
+
+        public QuestionResponseTypeCacheViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(eventSubscriptions, eventPublications, commandInfo, process, orientation)
+        {
+            this.WireEvents();
+        }
+
+    }
+
 }

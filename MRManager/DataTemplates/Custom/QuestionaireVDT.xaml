@@ -73,7 +73,8 @@
                          HorizontalAlignment="Stretch"
                          VerticalAlignment="Stretch"
                          Background="#33FFFFFF"
-                         ItemsSource="{Binding ChangeTrackingList}">
+                         ItemsSource="{Binding ChangeTrackingList}"
+                         SelectedItem="{Binding CurrentResponseOption.Value}">
 
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="{x:Type ListBoxItem}">

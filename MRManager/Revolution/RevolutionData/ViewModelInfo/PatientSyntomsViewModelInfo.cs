@@ -38,7 +38,7 @@ namespace RevolutionData
                         v.CurrentPatientVisit.Value = e.Entity;
                     }),
 
-                
+
 
                 new ViewEventSubscription<IPatientSyntomViewModel, IEntityFound<IPatientSyntomInfo>>(
                     3,
@@ -48,8 +48,8 @@ namespace RevolutionData
                     {
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            
-                        
+
+
                        var f = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
                         if (v.CurrentEntity.Value.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
                         if (f == null)
@@ -265,7 +265,7 @@ namespace RevolutionData
                         v.ChangeTracking.Clear();
                         return msg;
                     }),
-                 new ViewEventCommand<IPatientSyntomViewModel, IAddEntityWithChanges<ISyntoms>>(
+                 new ViewEventCommand<IPatientSyntomViewModel, IAddOrGetEntityWithChanges<ISyntoms>>(
                     key:"CreateSyntom",
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IPatientSyntomViewModel, bool>>
