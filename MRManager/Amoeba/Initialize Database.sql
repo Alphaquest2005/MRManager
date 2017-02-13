@@ -73,6 +73,10 @@ SET IDENTITY_INSERT Interview.MedicalSystemInterviews ON;
 	insert into Interview.MedicalSystemInterviews(Id,MedicalSystemId, InterviewId) values (0,0,0)
 SET IDENTITY_INSERT Interview.MedicalSystemInterviews off;
 
+SET IDENTITY_INSERT Interview.QuestionResponseTypes ON; 
+	insert into Interview.QuestionResponseTypes(Id,[Name]) values (0,'Text')
+SET IDENTITY_INSERT Interview.QuestionResponseTypes off;
+
 set identity_insert Media on
 
 INSERT INTO Media(value, MediaTypeId, Id)

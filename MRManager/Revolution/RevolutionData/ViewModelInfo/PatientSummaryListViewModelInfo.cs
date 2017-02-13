@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Windows;
 using SystemInterfaces;
 using Actor.Interfaces;
 using EventMessages.Commands;
@@ -28,7 +29,36 @@ namespace RevolutionData
                     e => e != null,
                     new List<Func<IPatientSummaryListViewModel, IUpdateProcessStateList<IPatientInfo>, bool>>(),
                     (v,e) => v.State.Value = e.State),
-                
+
+                new ViewEventSubscription<IPatientSummaryListViewModel, IEntityFound<IPatientInfo>>(
+                    3,
+                    e => e != null,
+                    new List<Func<IPatientSummaryListViewModel, IEntityFound<IPatientInfo>, bool>>(),
+                    (v, e) =>
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+
+
+                       var f = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
+                        if (v.CurrentEntity.Value.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
+                        if (f == null)
+                        {
+                            v.EntitySet.Insert(v.EntitySet.Count() - 1,e.Entity);
+                            v.EntitySet.Reset();
+                        }
+                        else
+                        {
+                            //f = e.Entity;
+                            var idx = v.EntitySet.IndexOf(f);
+                            v.EntitySet.Remove(f);
+                            v.EntitySet.Insert(idx, e.Entity);
+                            v.EntitySet.Reset();
+                        }
+                        v.RowState.Value = RowState.Unchanged;
+                        });
+
+                    }),
 
             },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
@@ -118,7 +148,7 @@ namespace RevolutionData
                             },
                             new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
                             s.Source);
-                        
+                        s.ChangeTracking.Clear();
                         return msg;
                     }),
 
@@ -144,7 +174,7 @@ namespace RevolutionData
                             },
                             new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
                             s.Source);
-
+                        s.ChangeTracking.Clear();
                         return msg;
                     }),
 
@@ -181,12 +211,12 @@ namespace RevolutionData
                     processInfo: new StateEventInfo(3,Context.Process.Events.ProcessStarted),
                     expectedSourceType:new SourceType(typeof(IComplexEventService))),
 
-                new ProcessExpectedEvent (key: "PatientUpdated",
-                    processId: 3,
-                    eventPredicate: e => e != null,
-                    eventType: typeof (IEntityUpdated<IPatients>),
-                    processInfo: new StateEventInfo(3,Context.Entity.Events.EntityUpdated),
-                    expectedSourceType:new SourceType(typeof(IComplexEventService)))
+                //new ProcessExpectedEvent (key: "PatientUpdated",
+                //    processId: 3,
+                //    eventPredicate: e => e != null,
+                //    eventType: typeof (IEntityUpdated<IPatients>),
+                //    processInfo: new StateEventInfo(3,Context.Entity.Events.EntityUpdated),
+                //    expectedSourceType:new SourceType(typeof(IComplexEventService)))
 
 
                 },

@@ -60,7 +60,6 @@
                      Margin="282,52,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
-                     converters:XamlExtensions.UpdateSourceOnKey="Enter"
                      FontSize="16"
                      Text="{Binding PhoneNumber,
                                     FallbackValue=PhoneNumber,

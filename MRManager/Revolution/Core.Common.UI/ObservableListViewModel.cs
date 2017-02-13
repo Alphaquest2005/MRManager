@@ -134,7 +134,15 @@ namespace Core.Common.UI
             if (CurrentEntity.Value.GetType().GetProperty(property, BindingFlags.Public |BindingFlags.SetProperty| BindingFlags.Instance) == null) return;
             if (!ChangeTracking.ContainsKey(property))
             {
-                ChangeTracking.AddOrUpdate(property, value);
+                //HACK: doing this shit cuz jbcollection generating some error long after add no control to prevent error
+                try
+                {
+                    ChangeTracking.AddOrUpdate(property, value);
+                }
+                catch
+                {
+                }
+
             }
             else
             {

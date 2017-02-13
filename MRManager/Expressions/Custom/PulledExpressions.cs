@@ -38,14 +38,14 @@ namespace Entity.Expressions
                         .Select(x5 => x5.Value)
                         .FirstOrDefault(),
                 Name =
-                    string.Join(" ",
+                    
                         x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                             .Where(
                                 x2 =>
                                     x2.Questions.EntityAttributes.Entity == Entities.Patient &&
                                     x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Name))
                             .SelectMany(x4 => x4.Response)
-                            .Select(x5 => x5.Value)),
+                            .Select(x5 => x5.Value).FirstOrDefault(),
                 Age =
                     DateTime.Now.Year -
                     Convert.ToDateTime(
@@ -84,14 +84,14 @@ namespace Entity.Expressions
             {
                 Id = x.Id,
                 Name =
-                    string.Join(" ",
+                    
                         x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                             .Where(
                                 x2 =>
                                     x2.Questions.EntityAttributes.Entity == Entities.Patient &&
                                     x2.Questions.EntityAttributes.Attribute == nameof(IPatientInfo.Name))
                             .SelectMany(x4 => x4.Response)
-                            .Select(x5 => x5.Value)),
+                            .Select(x5 => x5.Value).FirstOrDefault(),
                 Age =
                     DateTime.Now.Year -
                     Convert.ToDateTime(

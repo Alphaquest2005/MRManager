@@ -181,7 +181,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Background="#4C09853D" Visibility="{Binding State.Value.Entity.PhoneNumbers, Converter={StaticResource NullVisibilityConverter}}">
+            <TabItem Background="#4C09853D">
                 <TabItem.Header>
                     <Grid Width="200" Height="100">
                         <TextBlock Margin="0,0,0,72"
@@ -233,7 +233,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Visibility="{Binding State.Value.Entity.NextOfKins, Converter={StaticResource NullVisibilityConverter}}">
+            <TabItem >
                 <TabItem.Header>
                     <Grid Width="200" Height="100">
                         <TextBlock Margin="0,0,0,63"
@@ -276,7 +276,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Background="#4C100163" Visibility="{Binding State.Value.Entity.NonResident, Converter={StaticResource NullVisibilityConverter}}">
+            <TabItem Background="#4C100163" >
 
                 <TabItem.Header>
                     <Grid Width="200" Height="100">

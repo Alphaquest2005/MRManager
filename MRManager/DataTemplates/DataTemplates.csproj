@@ -67,7 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Custom\PatientInfoWDT.xaml">
+    <Page Include="Custom\PatientSummaryInfoWDT.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -123,15 +123,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Custom\PatientInfoSummaryRDT.xaml">
+    <Page Include="Custom\PatientDetailsInfoVDT.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Custom\PatientInfoRDT.xaml">
+    <Page Include="Custom\PatientSummaryInfoRDT.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Custom\PatientInfoSummaryListRDT.xaml">
+    <Page Include="Custom\PatientSummaryInfoListVDT.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
