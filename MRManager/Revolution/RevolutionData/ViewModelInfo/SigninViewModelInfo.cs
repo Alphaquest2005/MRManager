@@ -21,7 +21,12 @@ namespace RevolutionData
             2, new List<IViewModelEventSubscription<IViewModel, IEvent>>
             {
                 new ViewEventSubscription<ISigninViewModel, IProcessStateMessage<ISignInInfo>>(
-                    2, e => e != null, new List<Func<ISigninViewModel, IProcessStateMessage<ISignInInfo>, bool>>(), (v,e) => v.State.Value = e.State
+                    2, e => e != null, new List<Func<ISigninViewModel, IProcessStateMessage<ISignInInfo>, bool>>(),
+                    (v, e) =>
+                    {
+                        if(v.State.Value == e.State) return;
+                        v.State.Value = e.State;
+                    }
                     )
 
             }, new List<IViewModelEventPublication<IViewModel, IEvent>>

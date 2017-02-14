@@ -28,7 +28,11 @@ namespace RevolutionData
                     3,
                     e => e != null,
                     new List<Func<IPatientSummaryListViewModel, IUpdateProcessStateList<IPatientInfo>, bool>>(),
-                    (v,e) => v.State.Value = e.State),
+                    (v, e) =>
+                    {
+                        if (v.State.Value == e.State) return;
+                        v.State.Value = e.State;
+                    }),
 
                 new ViewEventSubscription<IPatientSummaryListViewModel, IEntityFound<IPatientInfo>>(
                     3,

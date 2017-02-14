@@ -30,7 +30,13 @@ namespace DataServices.Actors
             EventMessageBus.Current.GetEvent<ISystemProcessStarted>(Source).Subscribe(x => HandleProcessViews(x));
             
             Receive<ISystemStarted>(x => HandleProcessViews(x));
-             EventMessageBus.Current.Publish(new ServiceStarted<IViewModelSupervisor>(this,new StateEventInfo(process.Id, RevolutionData.Context.Actor.Events.ActorStarted), process, Source), Source);
+
+            EventMessageBus.Current.GetEvent<IServiceStarted<IViewModelService>>(Source).Subscribe(x =>
+            {
+                EventMessageBus.Current.Publish(new ServiceStarted<IViewModelSupervisor>(this,new StateEventInfo(process.Id, RevolutionData.Context.Actor.Events.ActorStarted), process, Source), Source);
+            });
+
+             
         }
 
        

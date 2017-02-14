@@ -27,7 +27,11 @@ namespace RevolutionData
                     3,
                     e => e != null,
                     new List<Func<IPatientSyntomViewModel, IUpdateProcessStateList<IPatientSyntomInfo>, bool>>(),
-                    (v,e) => v.State.Value = e.State),
+                    (v,e) =>
+                    {
+                        if (v.State.Value == e.State) return;
+                        v.State.Value = e.State;
+                    }),
 
                 new ViewEventSubscription<IPatientSyntomViewModel, ICurrentEntityChanged<IPatientVisitInfo>>(
                     3,
@@ -35,6 +39,7 @@ namespace RevolutionData
                     new List<Func<IPatientSyntomViewModel, ICurrentEntityChanged<IPatientVisitInfo>, bool>>(),
                     (v, e) =>
                     {
+                        if (v.CurrentPatientVisit.Value == e.Entity) return;
                         v.CurrentPatientVisit.Value = e.Entity;
                     }),
 

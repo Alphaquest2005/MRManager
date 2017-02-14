@@ -28,18 +28,31 @@ namespace RevolutionData
                     3,
                     e => e != null,
                     new List<Func<IQuestionaireViewModel, IUpdateProcessStateList<IQuestionResponseOptionInfo>, bool>>(),
-                    (v,e) => v.State.Value = e.State),
+                    (v,e) => 
+                    {
+                        if (v.State.Value == e.State) return;
+                        v.State.Value = e.State;
+                    }),
                 new ViewEventSubscription<IQuestionaireViewModel, ICurrentEntityChanged<IQuestionInfo>>(
                     3,
                     e => e?.Entity != null,
                     new List<Func<IQuestionaireViewModel, ICurrentEntityChanged<IQuestionInfo>, bool>>(),
-                    (v,e) => v.CurrentEntity.Value = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id)),
+                    (v, e) =>
+                    {
+                        if (v.CurrentEntity.Value == v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id)) return;
+                        v.CurrentEntity.Value = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
+                        
+                    }),
 
                 new ViewEventSubscription<IQuestionaireViewModel, ICurrentEntityChanged<IPatientVisitInfo>>(
                     3,
                     e => e?.Entity != null,
                     new List<Func<IQuestionaireViewModel, ICurrentEntityChanged<IPatientVisitInfo>, bool>>(),
-                    (v,e) => v.CurrentPatientVisit = e.Entity),
+                    (v, e) =>
+                    {
+                        if (v.CurrentPatientVisit == e.Entity) return;
+                        v.CurrentPatientVisit = e.Entity;
+                    }),
 
                 new ViewEventSubscription<IQuestionaireViewModel, ICurrentEntityChanged<IInterviewInfo>>(
                     3,

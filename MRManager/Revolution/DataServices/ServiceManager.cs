@@ -18,6 +18,7 @@ using EventMessages.Events;
 using RevolutionData;
 using RevolutionEntities.Process;
 using StartUp.Messages;
+using ViewModel.Interfaces;
 using Process = RevolutionEntities.Process.Process;
 
 
@@ -49,8 +50,7 @@ namespace DataServices.Actors
                 var systemProcess = new SystemProcess(new Process(processInfo, new Agent("System")), machineInfo);
                 var systemStartedMsg = new SystemStarted(new StateEventInfo(systemProcess.Id, RevolutionData.Context.Process.Events.ProcessStarted), systemProcess, Source);
 
-                Context.ActorOf(Props.Create<EntityDataServiceManager>(), "EntityDataServiceManager").Tell(systemStartedMsg);
-                Context.ActorOf(Props.Create<EntityViewDataServiceManager>(), "EntityViewDataServiceManager").Tell(systemStartedMsg);
+                
 
                 EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source).Where(x => x.Process.Id == 1)//only start up process
                     .Subscribe(x =>
@@ -60,17 +60,23 @@ namespace DataServices.Actors
 
 
 
-                        Context.ActorOf(Props.Create<ViewModelSupervisor>(systemProcess), "ViewModelSupervisor")
-                            .Tell(systemStartedMsg);
+                        var viewsup = Context.ActorOf(Props.Create<ViewModelSupervisor>(systemProcess),
+                            "ViewModelSupervisor");
+
+                        EventMessageBus.Current.GetEvent<IServiceStarted<IViewModelSupervisor>>(Source)
+                            .Subscribe(q =>
+                            {
+                                viewsup.Tell(systemStartedMsg);
+                            });
+                            
 
                         EventMessageBus.Current.Publish(new ServiceStarted<IServiceManager>(this,new StateEventInfo(systemProcess.Id, RevolutionData.Context.Actor.Events.ActorStarted), systemProcess,Source), Source);
                         
                     });
 
-                var processSup = Context.ActorOf(Props.Create<ProcessSupervisor>(autoRun), "ProcessSupervisor");
-                processSup.Tell(systemStartedMsg);
-
-
+                Context.ActorOf(Props.Create<ProcessSupervisor>(autoRun), "ProcessSupervisor").Tell(systemStartedMsg);
+                Context.ActorOf(Props.Create<EntityDataServiceManager>(), "EntityDataServiceManager").Tell(systemStartedMsg);
+                Context.ActorOf(Props.Create<EntityViewDataServiceManager>(), "EntityViewDataServiceManager").Tell(systemStartedMsg);
 
 
             }

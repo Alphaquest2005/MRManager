@@ -26,12 +26,20 @@ namespace RevolutionData
                     3,
                     e => e != null,
                     new List<Func<IPatientVisitViewModel, IUpdateProcessStateList<IPatientVisitInfo>, bool>>(),
-                    (v,e) => v.State.Value = e.State),
+                    (v,e) => 
+                    {
+                        if (v.State.Value == e.State) return;
+                        v.State.Value = e.State;
+                    }),
                 new ViewEventSubscription<IPatientVisitViewModel, ICurrentEntityChanged<IPatientInfo>>(
                     3,
                     e => e != null,
                     new List<Func<IPatientVisitViewModel, ICurrentEntityChanged<IPatientInfo>, bool>>(),
-                    (v,e) => v.CurrentPatient = e.Entity),
+                    (v, e) =>
+                    {
+                        if (v.CurrentPatient == e.Entity) return;
+                        v.CurrentPatient = e.Entity;
+                    }),
                 new ViewEventSubscription<IPatientVisitViewModel, IEntityViewWithChangesUpdated<IPatientVisitInfo>>(
                     3,
                     e => e != null,

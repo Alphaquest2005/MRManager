@@ -29,6 +29,7 @@ namespace RevolutionData
                     actionPredicate: new List<Func<IPatientDetailsViewModel, IProcessStateMessage<IPatientDetailsInfo>, bool>>(),
                     action: (v, e) =>
                     {
+                        if (v.State.Value == e.State) return;
                         v.State.Value = e.State;
                         v.RowState.Value = RowState.Unchanged;
                     }),

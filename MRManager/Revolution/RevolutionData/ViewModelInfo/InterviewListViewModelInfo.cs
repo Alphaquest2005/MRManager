@@ -32,6 +32,7 @@ namespace RevolutionData
                     new List<Func<IInterviewListViewModel, IUpdateProcessStateList<ISyntomMedicalSystemInfo>, bool>>(),
                     (v, e) =>
                     {
+                        if(!v.Systems.Value.SequenceEqual(e.State.EntitySet.ToList()))
                        v.Systems.Value = new ObservableList<ISyntomMedicalSystemInfo>(e.State.EntitySet.ToList());
                     }),
 
@@ -39,7 +40,7 @@ namespace RevolutionData
                     3,
                     e => e != null,
                     new List<Func<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>, bool>>(),
-                    (v,e) => v.CurrentPatientSyntom.Value = e.Entity),
+                    (v, e) => { if (v.CurrentPatientSyntom.Value != e.Entity) v.CurrentPatientSyntom.Value = e.Entity; }),
 
 
                 new ViewEventSubscription<IInterviewListViewModel, IEntityViewWithChangesUpdated<ISyntomMedicalSystemInfo>>(
