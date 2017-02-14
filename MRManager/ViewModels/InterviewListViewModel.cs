@@ -45,28 +45,20 @@ namespace ViewModels
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
+                if (Systems.Value.FirstOrDefault(x => x.Id == 0) != null) return;
                 Systems.Value.Add(new SyntomMedicalSystemInfo() { System = "Create New..." });
-                Systems.Value.Reset();
-                CurrentMedicalSystem.Value = Systems.Value.FirstOrDefault();
+                
             });
         }
 
         private void addNewRow(IList<IInterviewInfo> observableList)
         {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                EntitySet.Clear();
-
-                CurrentEntity.Value = null;
-
-                //if (observableList == null || !observableList.Any()) return;
-                var res = observableList?.ToList()?? new List<IInterviewInfo>();
+            if (observableList?.FirstOrDefault(x => x.Id == 0) != null) return;
+            var res = observableList?.ToList()?? new List<IInterviewInfo>();
                 res.Add(new InterviewInfo() { Interview = "Create New..." });
 
-                EntitySet.AddRange(res);
-                EntitySet.Reset();
-                CurrentEntity.Value = EntitySet.FirstOrDefault();
-            });
+                this.ViewModel.EntitySet = new ObservableList<IInterviewInfo>(res);
+                OnPropertyChanged(nameof(EntitySet));
         }
 
 

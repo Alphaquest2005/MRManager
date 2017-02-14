@@ -351,12 +351,12 @@ namespace RevolutionData
                             expectedSourceType: new SourceType(typeof (IViewModel)),
                             //todo: check this cuz it comes from viewmodel
                             processInfo: new StateEventInfo(processId, Context.Process.Events.CurrentEntityChanged)),
-                        new ProcessExpectedEvent<IEntityFound<TCurrentEntity>>(
-                            "CurrentEntity", processId, e => e.Entity != null,
-                            expectedSourceType: new SourceType(typeof (IViewModel)),
-                            //todo: check this cuz it comes from viewmodel
-                            processInfo: new StateEventInfo(processId, Context.Entity.Events.EntityFound)),
-                       
+                        //new ProcessExpectedEvent<IEntityFound<TCurrentEntity>>(
+                        //    "CurrentEntity", processId, e => e.Entity != null,
+                        //    expectedSourceType: new SourceType(typeof (IViewModel)),
+                        //    //todo: check this cuz it comes from viewmodel
+                        //    processInfo: new StateEventInfo(processId, Context.Entity.Events.EntityFound)),
+
                         //new ProcessExpectedEvent<IEntityUpdated<TCurrentEntity>>(
                         //    "CurrentEntity", processId, e => e.Entity != null,
                         //    expectedSourceType: new SourceType(typeof (IViewModel)),

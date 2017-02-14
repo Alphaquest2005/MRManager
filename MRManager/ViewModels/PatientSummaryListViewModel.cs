@@ -26,22 +26,18 @@ namespace ViewModels
         public PatientSummaryListViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IPatientInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
            this.WireEvents();
-            _entitySet = this.ViewModel.EntitySet;
-            
            Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => addNewRow(x));
         }
 
         private void addNewRow(ObservableList<IPatientInfo> observableList)
         {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                EntitySet.Clear();
+
+            if (this.ViewModel.EntitySet.FirstOrDefault(x => x.Id == 0) != null) return;
                 var res = observableList.ToList();
                 res.Add(new PatientInfo() { Name = "Create New..." });
-                EntitySet.AddRange(res);
-                EntitySet.Reset();
-                CurrentEntity.Value = EntitySet.FirstOrDefault();
-            });
+                this.ViewModel.EntitySet = new ObservableList<IPatientInfo>(res);
+               OnPropertyChanged(nameof(EntitySet));
+           
         }
 
 
@@ -56,13 +52,7 @@ namespace ViewModels
 
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
 
-        private ObservableList<IPatientInfo> _entitySet;
-
-        public ObservableList<IPatientInfo> EntitySet
-        {
-            get { return _entitySet; }
-            set { _entitySet = value; }
-        }
+        public ObservableList<IPatientInfo> EntitySet => this.ViewModel.EntitySet;
 
         public ObservableList<IPatientInfo> SelectedEntities => this.ViewModel.SelectedEntities;
         public ObservableBindingList<IPatientInfo> ChangeTrackingList => this.ViewModel.ChangeTrackingList;

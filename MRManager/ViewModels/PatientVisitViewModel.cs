@@ -25,33 +25,22 @@ namespace ViewModels
     public class PatientVisitViewModel : DynamicViewModel<ObservableListViewModel<IPatientVisitInfo>>, IPatientVisitViewModel
     {
         
-        private ObservableList<IPatientVisitInfo> _entitySet;
+       
 
         [ImportingConstructor]
         public PatientVisitViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IPatientVisitInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             this.WireEvents();
-            _entitySet = this.ViewModel.EntitySet;
-
+            
             Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => addNewRow(x));
         }
         private void addNewRow(ObservableList<IPatientVisitInfo> observableList)
         {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                EntitySet.Clear();
-                
-                CurrentEntity.Value = null;
-
-                if (!observableList.Any()) return;
-                var res = observableList.ToList();
-                res.Add(new PatientVisitInfo() { Purpose = "Create New..." });
-                
-                EntitySet.AddRange(res);
-                EntitySet.Reset();
-                CurrentEntity.Value = EntitySet.FirstOrDefault();
-            });
+            if (this.ViewModel.EntitySet.FirstOrDefault(x => x.Id == 0) != null) return;
+            this.ViewModel.EntitySet.Add(new PatientVisitInfo() { Purpose = "Create New..." });
+                OnPropertyChanged(nameof(EntitySet));
+           
         }
 
 
@@ -63,11 +52,8 @@ namespace ViewModels
 
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
 
-        public ObservableList<IPatientVisitInfo> EntitySet
-        {
-            get { return _entitySet; }
-            set { _entitySet = value; }
-        }
+        public ObservableList<IPatientVisitInfo> EntitySet => this.ViewModel.EntitySet;
+        
 
     
         public ObservableList<IPatientVisitInfo> SelectedEntities => this.ViewModel.SelectedEntities;

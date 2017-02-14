@@ -62,6 +62,6 @@ namespace ViewModel.Interfaces
     
     public interface IPatientSyntomViewModel : IEntityListViewModel<IPatientSyntomInfo>
     {
-        ReactiveProperty<IPatientVisitInfo> CurrentPatientVisit { get; set; }
+        ReactiveProperty<IPatientVisitInfo> CurrentPatientVisit { get; }
     }
 }

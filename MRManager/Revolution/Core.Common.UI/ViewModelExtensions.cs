@@ -76,7 +76,7 @@ namespace Core.Common.UI
                     .Subscribe(publishMessage);
             }
 
-           EventMessageBus.Current.Publish(new RequestProcessState(new StateCommandInfo(viewModel.Process.Id, RevolutionData.Context.Process.Commands.PublishState), viewModel.Process, viewModel.Source), viewModel.Source);
+           //EventMessageBus.Current.Publish(new RequestProcessState(new StateCommandInfo(viewModel.Process.Id, RevolutionData.Context.Process.Commands.PublishState), viewModel.Process, viewModel.Source), viewModel.Source);
 
         }
 

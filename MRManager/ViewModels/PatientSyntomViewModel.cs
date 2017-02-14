@@ -25,63 +25,34 @@ namespace ViewModels
     public class PatientSyntomViewModel : DynamicViewModel<ObservableListViewModel<IPatientSyntomInfo>>, IPatientSyntomViewModel
     {
         
-        private ObservableList<IPatientSyntomInfo> _entitySet;
-
+       
         [ImportingConstructor]
         public PatientSyntomViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IPatientSyntomInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             this.WireEvents();
-            _entitySet = this.ViewModel.EntitySet;
-           // Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => addNewRow(x));
+            
+            Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => OnPropertyChanged(nameof(EntitySet)));
             this.WhenAnyValue(x => x.CurrentPatientVisit.Value).Subscribe(x => insertNewRow());
 
         }
 
         private void insertNewRow()
         {
-
-
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                var res = Instance.ViewModel.EntitySet.ToList();
-                EntitySet.Clear();
+                if (this.ViewModel.EntitySet.FirstOrDefault(x => x.Id == 0) != null) return;
                 if (CurrentPatientVisit != null &&
                     (CurrentPatientVisit.Value?.Id != 0 &&
                      CurrentPatientVisit.Value?.DateOfVisit.Date == DateTime.Today.Date))
                 {
-                    res.Add(new PatientSyntomInfo() {SyntomName = "Create New..."});
+                
+                this.ViewModel.EntitySet.Add(new PatientSyntomInfo() {SyntomName = "Create New..."});
+                    OnPropertyChanged(nameof(EntitySet));
                 }
-                EntitySet.AddRange(res);
-                EntitySet.Reset();
-                CurrentEntity.Value = EntitySet.FirstOrDefault();
-            });
+
 
         }
 
-        //private void addNewRow(ObservableList<IPatientSyntomInfo> observableList)
-        //{
-        //    Application.Current.Dispatcher.Invoke(() =>
-        //    {
-               
-        //        EntitySet.Clear();
-
-        //        CurrentEntity.Value = null;
-
-                
-        //        var res = observableList.ToList();
-        //        if (CurrentPatientVisit.Value != null && (CurrentPatientVisit.Value?.Id != 0 && CurrentPatientVisit.Value?.DateOfVisit.Date == DateTime.Today.Date))
-        //        {
-        //           res.Add(new PatientSyntomInfo() { SyntomName = "Create New..." });
-        //        } 
-
-        //        EntitySet.AddRange(res);
-        //        EntitySet.Reset();
-        //        CurrentEntity.Value = EntitySet.FirstOrDefault();
-        //    });
-        //}
-
-
+       
         public ReactiveProperty<IProcessStateList<IPatientSyntomInfo>> State => this.ViewModel.State;
 
 
@@ -90,17 +61,13 @@ namespace ViewModels
 
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
 
-        public ObservableList<IPatientSyntomInfo> EntitySet
-        {
-            get { return _entitySet; }
-            set { _entitySet = value; }
-        }
+        public ObservableList<IPatientSyntomInfo> EntitySet => this.ViewModel.EntitySet;
 
     
         public ObservableList<IPatientSyntomInfo> SelectedEntities => this.ViewModel.SelectedEntities;
 
         
 
-        public ReactiveProperty<IPatientVisitInfo> CurrentPatientVisit { get; set; } = new ReactiveProperty<IPatientVisitInfo>(new PatientVisitInfo());
+        public ReactiveProperty<IPatientVisitInfo> CurrentPatientVisit { get; } = new ReactiveProperty<IPatientVisitInfo>(new PatientVisitInfo());
     }
 }

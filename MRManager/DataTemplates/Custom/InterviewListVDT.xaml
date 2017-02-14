@@ -13,7 +13,7 @@
         <Grid Width="500" Margin="0">
 
             <ListBox Margin="10,33,10,262"
-                     
+                     IsSynchronizedWithCurrentItem="True"
                      ItemTemplate="{DynamicResource SystemInfoTpl}"
                      ItemsSource="{Binding Systems.Value,
                                            Mode=OneWay}"
@@ -62,7 +62,7 @@
                         <i:InvokeCommandAction Command="{Binding Commands[EditEntity]}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                
+
             </ListBox>
 
             <TextBlock Width="178"
@@ -84,6 +84,7 @@
 
             <ListBox Margin="10,133,10,17"
                      ItemTemplate="{DynamicResource InterviewInfoTpl}"
+                     IsSynchronizedWithCurrentItem="True"
                      ItemsSource="{Binding EntitySet,
                                            Mode=OneWay}"
                      SelectedItem="{Binding CurrentEntity.Value,

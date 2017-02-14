@@ -49,9 +49,11 @@ namespace Core.Common.UI
         private void UpdateLocalState(IProcessStateList<TEntity> state)
         {
             if (state == null) return;
-            CurrentEntity.Value = state.Entity;
-                EntitySet = new ObservableList<TEntity>(state.EntitySet.ToList());
-                SelectedEntities = new ObservableList<TEntity>(state.SelectedEntities.ToList());
+            //CurrentEntity.Value = state.Entity;
+            EntitySet = new ObservableList<TEntity>(state.EntitySet.ToList());
+                
+            
+               if (!SelectedEntities.SequenceEqual(state.SelectedEntities.ToList())) SelectedEntities = new ObservableList<TEntity>(state.SelectedEntities.ToList());
         }
 
         
@@ -71,7 +73,7 @@ namespace Core.Common.UI
             set { this.RaiseAndSetIfChanged(ref _state, value);}
         }
 
-        private ReactiveProperty<TEntity> _currentEntity = new ReactiveProperty<TEntity>(NullEntity<TEntity>.Instance);
+        private ReactiveProperty<TEntity> _currentEntity = new ReactiveProperty<TEntity>(NullEntity<TEntity>.Instance,ReactivePropertyMode.DistinctUntilChanged);
         public ReactiveProperty<TEntity> CurrentEntity
         {
             get { return _currentEntity; }
@@ -88,7 +90,7 @@ namespace Core.Common.UI
             }
             set
             {
-                this.RaiseAndSetIfChanged(ref _entitySet, value);
+               this.RaiseAndSetIfChanged(ref _entitySet, value);
                 
             }
         }

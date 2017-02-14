@@ -45,6 +45,7 @@
                     FontSize="10" />
 
             <ListBox Margin="10,65,10,63"
+                     IsSynchronizedWithCurrentItem="True"
                      ItemsSource="{Binding EntitySet,
                                            Mode=OneWay}"
                      SelectedItem="{Binding CurrentEntity.Value,
