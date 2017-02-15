@@ -301,10 +301,7 @@ namespace RevolutionData
             typeof(IPatientSyntomViewModel),
             typeof(IBodyViewModel));
 
-        public class ComplexActions
-        {
-           
-        }
+      
 
     }
 }

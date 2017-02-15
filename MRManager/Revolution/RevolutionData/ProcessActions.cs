@@ -86,6 +86,23 @@ namespace RevolutionData
                         processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.Error),
                         expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
+        public static IProcessAction IntializeProcessState<TEntityView>() where TEntityView : IEntityView
+        {
+            return new ProcessAction(
+                action:
+                    cp =>
+                        new LoadEntityViewSetWithChanges<TEntityView, IExactMatch>(new Dictionary<string, dynamic>(),
+                            new StateCommandInfo(cp.Actor.Process.Id,
+                                Context.EntityView.Commands.LoadEntityViewSetWithChanges),
+                            cp.Actor.Process, cp.Actor.Source),
+                processInfo:
+                    cp =>
+                        new StateCommandInfo(cp.Actor.Process.Id,
+                            Context.EntityView.Commands.LoadEntityViewSetWithChanges),
+                // take shortcut cud be IntialState
+                expectedSourceType: new SourceType(typeof (IComplexEventService)));
+        }
+
         public static IProcessAction UpdateEntityViewState<TEntityView>() where TEntityView : IEntityView
         {
             return new ProcessAction(

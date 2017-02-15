@@ -210,8 +210,9 @@ namespace RevolutionData
                 processInfo:new StateCommandInfo(3,Context.Process.Commands.StartProcess ),
                 action: ProcessActions.ProcessStarted),
 
-            PatientSummaryListViewModelInfo.ComplexActions.IntializePatientInfoSummaryProcessState,
-            PatientSummaryListViewModelInfo.ComplexActions.UpdatePatientInfoState,
+            ComplexActions.IntializeProcessState<IPatientInfo>(3),
+            ComplexActions.UpdateStateList<IPatientInfo>(3),
+            
 
 
             ComplexActions.RequestState<IPatientInfo, IPatientDetailsInfo>(3, x => x.Id),
@@ -226,30 +227,21 @@ namespace RevolutionData
             ComplexActions.UpdateStateWhenDataChanges<IPatientSyntoms,IPatientSyntomInfo>(3),
 
             ComplexActions.RequestStateList<IPatientSyntomInfo, ISyntomMedicalSystemInfo>(3,c => c.SyntomId, x => x.SyntomId),
-            //ComplexActions.RequestStateList<IInterviewInfo, ISyntomMedicalSystemInfo>(3,c => c.SystemId, x => x.MedicalSystemId),
+            
             ComplexActions.UpdateStateList<ISyntomMedicalSystemInfo>(3),
             ComplexActions.UpdateStateWhenDataChanges<ISyntomMedicalSystems,ISyntomMedicalSystemInfo>(3),
             ComplexActions.UpdateStateWhenDataChanges<IInterviews,IInterviewInfo>(3),
-            
-          
 
 
-            
-            //InterviewListViewModelInfo.ComplexActions.IntializeInterviewInfoProcessState,
-            //InterviewListViewModelInfo.ComplexActions.UpdateInterviewInfoState,
-            
-             
+            ComplexActions.RequestStateList<IInterviewInfo, IQuestionResponseOptionInfo>(3,c => c.Id, x => x.InterviewId),
+            ComplexActions.UpdateStateList<IQuestionResponseOptionInfo>(3),
+            ComplexActions.UpdateStateWhenDataChanges<IQuestions,IQuestionResponseOptionInfo>(3),
 
-            QuestionaireViewModelInfo.ComplexActions.RequestPatientResponses,
-            QuestionaireViewModelInfo.ComplexActions.UpdatePatientResponseState,
 
-          
-            QuestionListViewModelInfo.ComplexActions.UpdateQuestionListState,
-            QuestionListViewModelInfo.ComplexActions.RequestQuestionList,
-            
+             ComplexActions.RequestStateList<IInterviewInfo, IQuestionInfo>(3,c => c.Id, x => x.InterviewId),
+            ComplexActions.UpdateStateList<IQuestionInfo>(3),
+            ComplexActions.UpdateStateWhenDataChanges<IQuestions,IQuestionInfo>(3),
 
-            //PatientVisitViewModelInfo.ComplexActions.RequestData,
-            //PatientVisitViewModelInfo.ComplexActions.UpdateState,
 
             EntityCacheViewModelInfo<ISyntomPriority>.ComplexActions.IntializeCache(3),
             EntityCacheViewModelInfo<ISyntoms>.ComplexActions.IntializeCache(3),
@@ -266,10 +258,32 @@ namespace RevolutionData
 
         public static class ComplexActions
         {
+            public static ComplexEventAction IntializeProcessState<TEntityView>(int processId) where TEntityView : IEntityView
+            {
+                return new ComplexEventAction(
+
+                    key: $"InitalizeProcessState-{typeof(TEntityView).GetFriendlyName()}",
+                    processId: processId,
+                    events: new List<IProcessExpectedEvent>
+                    {
+                        new ProcessExpectedEvent(key: "ProcessStarted",
+                            processId: processId,
+                            eventPredicate: e => e != null,
+                            eventType: typeof (ISystemProcessStarted),
+                            processInfo: new StateEventInfo(processId, Context.Process.Events.ProcessStarted),
+                            expectedSourceType: new SourceType(typeof (IComplexEventService))),
+                        
+                    },
+                    expectedMessageType: typeof (IProcessStateMessage<TEntityView>),
+                    action: ProcessActions.IntializeProcessState<TEntityView>(),
+                    processInfo: new StateCommandInfo(processId, Context.Process.Commands.CreateState));
+            }
+
+
             public static ComplexEventAction UpdateState<TEntityView>(int processId) where TEntityView : IEntityView
             {
                 return new ComplexEventAction(
-                    key: $"304-{typeof(TEntityView).GetFriendlyName()}",
+                    key: $"UpdateState-{typeof(TEntityView).GetFriendlyName()}",
                     processId: processId,
                     actionTrigger: ActionTrigger.Any, 
                     events: new List<IProcessExpectedEvent>
@@ -294,7 +308,7 @@ namespace RevolutionData
             public static ComplexEventAction RequestState<TCurrentEntity, TEntityView>(int processId, Expression<Func<TEntityView, dynamic>> property) where TEntityView : IEntityView where TCurrentEntity : IEntityId
             {
                 return new ComplexEventAction(
-                    key: $"303-{typeof(TEntityView).GetFriendlyName()}",
+                    key: $"RequestState-{typeof(TEntityView).GetFriendlyName()}",
                     processId: processId,
                     actionTrigger: ActionTrigger.Any, 
                     events: new List<IProcessExpectedEvent>
@@ -326,7 +340,7 @@ namespace RevolutionData
             public static ComplexEventAction UpdateStateList<TEntityView>(int processId) where TEntityView : IEntityView
             {
                 return new ComplexEventAction(
-                    key: $"304-{typeof(TEntityView).GetFriendlyName()}",
+                    key: $"UpdateStateList-{typeof(TEntityView).GetFriendlyName()}",
                     processId: processId,
                     events: new List<IProcessExpectedEvent>
                     {
@@ -341,7 +355,7 @@ namespace RevolutionData
             public static ComplexEventAction RequestStateList<TCurrentEntity,TEntityView>(int processId, Expression<Func<TCurrentEntity, object>> currentProperty, Expression<Func<TEntityView, object>> viewProperty) where TEntityView : IEntityView where TCurrentEntity:IEntityId
             {
                 return new ComplexEventAction(
-                    key: $"303-{typeof(TCurrentEntity).GetFriendlyName()}-{typeof(TEntityView).GetFriendlyName()}",
+                    key: $"RequestStateList-{typeof(TCurrentEntity).GetFriendlyName()}-{typeof(TEntityView).GetFriendlyName()}",
                     processId: processId,
                     actionTrigger: ActionTrigger.Any, 
                     events: new List<IProcessExpectedEvent>

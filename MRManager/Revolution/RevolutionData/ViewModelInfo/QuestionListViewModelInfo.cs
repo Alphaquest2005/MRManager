@@ -232,34 +232,5 @@ namespace RevolutionData
             typeof(IQuestionListViewModel),
             typeof(IBodyViewModel));
 
-
-        public static class ComplexActions
-        {
-            public static readonly ComplexEventAction UpdateQuestionListState = new ComplexEventAction(
-                key: "310",
-                processId: 3,
-                events: new List<IProcessExpectedEvent>
-                {
-                new ProcessExpectedEvent<IEntityViewSetWithChangesLoaded<IQuestionInfo>> (
-                    "EntityViewSet", 3, e => e.EntitySet != null, expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
-                    processInfo: new StateEventInfo(3, Context.EntityView.Events.EntityViewSetLoaded))
-                },
-                expectedMessageType: typeof(IProcessStateMessage<IQuestionInfo>),
-                action: ProcessActions.PatientInfo.UpdateQuestionListState,
-                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState));
-
-            public static readonly ComplexEventAction RequestQuestionList = new ComplexEventAction(
-                key: "311",
-                processId: 3,
-                actionTrigger: ActionTrigger.Partial,
-                events: new List<IProcessExpectedEvent>
-                {       new ProcessExpectedEvent<ICurrentEntityChanged<IInterviewInfo>> (
-                "CurrentInterview", 3, e => e.Entity != null, expectedSourceType: new SourceType(typeof(IViewModel)),//todo: check this cuz it comes from viewmodel
-                processInfo: new StateEventInfo(3, Context.Process.Events.CurrentEntityChanged))
-                },
-                expectedMessageType: typeof(IProcessStateMessage<IPatientResponseInfo>),
-                action: ProcessActions.PatientInfo.RequestQuestionList,
-                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState));
-        }
     }
 }

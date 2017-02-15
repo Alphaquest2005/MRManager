@@ -116,6 +116,25 @@ namespace RevolutionData
                             s.Source);
                     }),
 
+                new ViewEventCommand<IQuestionaireViewModel, IViewRowStateChanged<IQuestionResponseOptionInfo>>(
+                    key:"EditEntity",
+                    commandPredicate:new List<Func<IQuestionaireViewModel, bool>>
+                    {
+                        v => v.CurrentEntity != null
+                    },
+                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+
+                    messageData: s =>
+                    {
+                        s.RowState.Value = s.RowState.Value != RowState.Modified?RowState.Modified: RowState.Unchanged;//new ReactiveProperty<RowState>(rowstate != RowState.Modified?RowState.Modified: RowState.Unchanged);
+
+                        return new ViewEventCommandParameter(
+                            new object[] {s,s.RowState.Value},
+                            new StateCommandInfo(s.Process.Id,
+                                Context.Process.Commands.CurrentEntityChanged), s.Process,
+                            s.Source);
+                    }),
+
                 new ViewEventCommand<IQuestionaireViewModel, IUpdateEntityViewWithChanges<IResponseInfo>>(
                     key:"SaveChanges",
                     subject:v => v.ChangeTracking.DictionaryChanges,
@@ -140,7 +159,7 @@ namespace RevolutionData
                         return msg;
                     }),
                 new ViewEventCommand<IQuestionaireViewModel, IUpdateEntityViewWithChanges<IResponseInfo>>(
-                    key:"CreateEntity",
+                    key:"CreateResponseOption",
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IQuestionaireViewModel, bool>>
                     {
@@ -161,24 +180,7 @@ namespace RevolutionData
                         return msg;
                     }),
 
-                new ViewEventCommand<IQuestionaireViewModel, IViewRowStateChanged<IQuestionResponseOptionInfo>>(
-                    key:"EditEntity",
-                    commandPredicate:new List<Func<IQuestionaireViewModel, bool>>
-                    {
-                        v => v.CurrentEntity != null
-                    },
-                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
-
-                    messageData: s =>
-                    {
-                        s.RowState.Value = s.RowState.Value != RowState.Modified?RowState.Modified: RowState.Unchanged;//new ReactiveProperty<RowState>(rowstate != RowState.Modified?RowState.Modified: RowState.Unchanged);
-
-                        return new ViewEventCommandParameter(
-                            new object[] {s,s.RowState.Value},
-                            new StateCommandInfo(s.Process.Id,
-                                Context.Process.Commands.CurrentEntityChanged), s.Process,
-                            s.Source);
-                    }),
+                
 
 
             },
@@ -186,77 +188,5 @@ namespace RevolutionData
             typeof(IBodyViewModel));
 
 
-        public static class ComplexActions
-        {
-            public static readonly ComplexEventAction UpdatePatientResponseState = new ComplexEventAction(
-                key: "308",
-                processId: 3,
-                events: new List<IProcessExpectedEvent>
-                {
-                new ProcessExpectedEvent<IEntityViewSetWithChangesLoaded<IQuestionResponseOptionInfo>> (
-                    "EntityViewSet", 3, e => e.EntitySet != null, expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
-                    processInfo: new StateEventInfo(3, Context.EntityView.Events.EntityViewSetLoaded))
-                },
-                expectedMessageType: typeof(IProcessStateMessage<IQuestionResponseOptionInfo>),
-                action: ProcessActions.UpdatePatientResponseState,
-                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState));
-
-            public static readonly ComplexEventAction RequestPatientResponses = new ComplexEventAction(
-                key: "307",
-                processId: 3,
-                actionTrigger: ActionTrigger.Partial,
-                events: new List<IProcessExpectedEvent>
-                {
-                new ProcessExpectedEvent<ICurrentEntityChanged<IInterviewInfo>> (
-                    "CurrentInterview", 3, e => e.Entity != null, expectedSourceType: new SourceType(typeof(IViewModel)),//todo: check this cuz it comes from viewmodel
-                    processInfo: new StateEventInfo(3, Context.Process.Events.CurrentEntityChanged))
-                },
-                expectedMessageType: typeof(IProcessStateMessage<IQuestionResponseOptionInfo>),
-                action: ProcessActions.RequestPatientResponses,
-                processInfo: new StateCommandInfo(3, Context.Process.Commands.UpdateState));
-        }
-
-        public class ProcessActions
-        {
-            public static IProcessAction RequestPatientResponses => new ProcessAction(
-                action:
-                    cp =>
-                        new LoadEntityViewSetWithChanges<IQuestionResponseOptionInfo, IExactMatch>(new Dictionary<string, dynamic>()
-                        {
-                            {nameof(IQuestionResponseOptionInfo.InterviewId), cp.Messages["CurrentInterview"].Entity.Id },
-
-                        },
-                            new StateCommandInfo(3, Context.EntityView.Commands.LoadEntityViewSetWithChanges),
-                            cp.Actor.Process, cp.Actor.Source),
-                processInfo:
-                    cp =>
-                        new StateCommandInfo(cp.Actor.Process.Id,
-                            Context.EntityView.Commands.LoadEntityViewSetWithChanges),
-                // take shortcut cud be IntialState
-                expectedSourceType: new SourceType(typeof(IComplexEventService)));
-
-            public static IProcessAction UpdatePatientResponseState => new ProcessAction(
-                action:
-                    cp =>
-                    {
-                        var ps = new ProcessStateList<IQuestionResponseOptionInfo>(
-                            process: cp.Actor.Process,
-                            entity: ((List<IQuestionResponseOptionInfo>)cp.Messages["EntityViewSet"].EntitySet).FirstOrDefault(),
-                            entitySet: cp.Messages["EntityViewSet"].EntitySet,
-                            selectedEntities: new List<IQuestionResponseOptionInfo>(),
-                            stateInfo: new StateInfo(3, new State("Loaded IQuestionResponseOptionInfo Data", "IQuestionResponseOptionInfo", "")));
-                        return new UpdateProcessStateList<IQuestionResponseOptionInfo>(
-                            state: ps,
-                            process: cp.Actor.Process,
-                            processInfo: new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState),
-                            source: cp.Actor.Source);
-                    },
-                processInfo:
-                    cp =>
-                        new StateCommandInfo(cp.Actor.Process.Id,
-                            Context.Process.Commands.UpdateState),
-                // take shortcut cud be IntialState
-                expectedSourceType: new SourceType(typeof(IComplexEventService)));
-        }
     }
 }
