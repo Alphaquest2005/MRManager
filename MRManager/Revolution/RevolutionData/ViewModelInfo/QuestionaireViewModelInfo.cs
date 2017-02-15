@@ -5,6 +5,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using SystemInterfaces;
 using Actor.Interfaces;
+using EF.Entities;
 using EventMessages.Commands;
 using EventMessages.Events;
 using Interfaces;
@@ -31,16 +32,17 @@ namespace RevolutionData
                     (v,e) => 
                     {
                         if (v.State.Value == e.State) return;
-                        v.State.Value = e.State;
+                        v.Questions = e.State.EntitySet.ToList();
                     }),
+               
                 new ViewEventSubscription<IQuestionaireViewModel, ICurrentEntityChanged<IQuestionInfo>>(
                     3,
                     e => e?.Entity != null,
                     new List<Func<IQuestionaireViewModel, ICurrentEntityChanged<IQuestionInfo>, bool>>(),
                     (v, e) =>
                     {
-                        if (v.CurrentEntity.Value == v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id)) return;
-                        v.CurrentEntity.Value = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
+                        if (v.CurrentQuestion.Value == v.Questions.FirstOrDefault(x => x.Id == e.Entity.Id)) return;
+                        v.CurrentQuestion.Value = v.Questions.FirstOrDefault(x => x.Id == e.Entity.Id);
                         
                     }),
 
@@ -53,12 +55,57 @@ namespace RevolutionData
                         if (v.CurrentPatientVisit == e.Entity) return;
                         v.CurrentPatientVisit = e.Entity;
                     }),
-
-                new ViewEventSubscription<IQuestionaireViewModel, ICurrentEntityChanged<IInterviewInfo>>(
+                new ViewEventSubscription<IQuestionaireViewModel, ICurrentEntityChanged<IPatientSyntomInfo>>(
                     3,
-                    e => e.Entity == null,
-                    new List<Func<IQuestionaireViewModel, ICurrentEntityChanged<IInterviewInfo>, bool>>(),
-                    (v,e) => v.CurrentEntity.Value = null),
+                    e => e?.Entity != null,
+                    new List<Func<IQuestionaireViewModel, ICurrentEntityChanged<IPatientSyntomInfo>, bool>>(),
+                    (v, e) =>
+                    {
+                        if (v.CurrentPatientSyntom == e.Entity) return;
+                        v.CurrentPatientSyntom = e.Entity;
+                    }),
+
+                new ViewEventSubscription<IQuestionaireViewModel, IEntityUpdated<IResponseOptions>>(
+                    3,
+                    e => e?.Entity != null,
+                    new List<Func<IQuestionaireViewModel, IEntityUpdated<IResponseOptions>, bool>>(),
+                    (v, e) =>
+                    {
+                        if (v.CurrentEntity.Value.Id == e.Entity.Id) return;
+                        v.ChangeTracking.Add(nameof(IResponseInfo.ResponseOptionId), e.Entity.Id);
+                    }),
+
+                new ViewEventSubscription<IQuestionaireViewModel, IEntityUpdated<IPatientResponses>>(
+                    3,
+                    e => e?.Entity != null,
+                    new List<Func<IQuestionaireViewModel, IEntityUpdated<IPatientResponses>, bool>>(),
+                    (v, e) =>
+                    {
+                        if (v.CurrentEntity.Value.PatientResponseId == e.Entity.Id) return;
+                        v.ChangeTracking.Add(nameof(IResponseOptionInfo.PatientResponseId), e.Entity.Id);
+                    }),
+
+                new ViewEventSubscription<IQuestionaireViewModel, IEntityViewWithChangesFound<IResponseOptionInfo>>(
+                    3,
+                    e => e?.Entity != null,
+                    new List<Func<IQuestionaireViewModel, IEntityViewWithChangesFound<IResponseOptionInfo>, bool>>(),
+                    (v, e) =>
+                    {
+                        var itm = v.CurrentQuestion.Value.PatientResponses.FirstOrDefault(x => x.ResponseId == e.Entity.PatientResponseId);
+                        if (itm == null)
+                        {
+                            v.CurrentQuestion.Value.PatientResponses.Add(e.Entity);
+                        }
+                        else
+                        {
+                            var idx = v.CurrentQuestion.Value.PatientResponses.IndexOf(itm);
+                            v.CurrentQuestion.Value.PatientResponses.Remove(itm);
+                            v.CurrentQuestion.Value.PatientResponses.Insert(idx, e.Entity);
+                            
+                        }
+                        
+                    }),
+
 
             },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
@@ -82,16 +129,16 @@ namespace RevolutionData
                     key:"PreviousQuestion",
                     commandPredicate:new List<Func<IQuestionaireViewModel, bool>>
                     {
-                        v => v.EntitySet.IndexOf(v.CurrentEntity.Value) >= 0
+                        v => v.Questions.IndexOf(v.CurrentQuestion.Value) >= 0
                     },
                     subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
 
                     messageData: s =>
                     {
-                        s.CurrentEntity.Value = s.State.Value.EntitySet.Previous(s.CurrentEntity.Value);
+                        s.CurrentQuestion.Value = s.Questions.Previous(s.CurrentQuestion.Value);
 
                         return new ViewEventCommandParameter(
-                            new object[] {s.CurrentEntity.Value},
+                            new object[] {s.CurrentQuestion.Value},
                             new StateCommandInfo(s.Process.Id,
                                 Context.Process.Commands.CurrentEntityChanged), s.Process,
                             s.Source);
@@ -101,22 +148,22 @@ namespace RevolutionData
                     key:"NextQuestion",
                     commandPredicate:new List<Func<IQuestionaireViewModel, bool>>
                     {
-                        v => v.EntitySet.IndexOf(v.CurrentEntity.Value) < v.EntitySet.Count
+                        v => v.Questions.IndexOf(v.CurrentQuestion.Value) < v.Questions.Count
                     },
                     subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
 
                     messageData: s =>
                     {
-                        s.CurrentEntity.Value = s.State.Value.EntitySet.Next(s.CurrentEntity.Value);
+                        s.CurrentQuestion.Value = s.Questions.Next(s.CurrentQuestion.Value);
 
                         return new ViewEventCommandParameter(
-                            new object[] {s.CurrentEntity.Value},
+                            new object[] {s.CurrentQuestion.Value},
                             new StateCommandInfo(s.Process.Id,
                                 Context.Process.Commands.CurrentEntityChanged), s.Process,
                             s.Source);
                     }),
 
-                new ViewEventCommand<IQuestionaireViewModel, IViewRowStateChanged<IQuestionResponseOptionInfo>>(
+                new ViewEventCommand<IQuestionaireViewModel, IViewRowStateChanged<IResponseOptionInfo>>(
                     key:"EditEntity",
                     commandPredicate:new List<Func<IQuestionaireViewModel, bool>>
                     {
@@ -134,15 +181,13 @@ namespace RevolutionData
                                 Context.Process.Commands.CurrentEntityChanged), s.Process,
                             s.Source);
                     }),
-
                 new ViewEventCommand<IQuestionaireViewModel, IUpdateEntityViewWithChanges<IResponseInfo>>(
-                    key:"SaveChanges",
+                    key:"UpdateChanges",
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IQuestionaireViewModel, bool>>
                     {
-                        v => v.ChangeTracking.Count == 2 
-                             && v.ChangeTracking.ContainsKey(nameof(IResponseInfo.Id)) 
-                             && v.ChangeTracking[nameof(IResponseInfo.Id)] != 0
+                        v => v.ChangeTracking.ContainsKey(nameof(IResponseInfo.Value))
+                             && v.CurrentEntity.Value.Id != 0 && v.CurrentEntity.Value.PatientResponseId.GetValueOrDefault() != 0
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>
@@ -150,33 +195,96 @@ namespace RevolutionData
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
-                                s.ChangeTracking.First().Value,
-                                s.ChangeTracking.TakeLast(1).ToDictionary(x => x.Key, x => x.Value)
+                                s.CurrentEntity.Value.ResponseId.GetValueOrDefault(),
+                                s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
                             },
                             new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
                             s.Source);
                         s.ChangeTracking.Clear();
                         return msg;
                     }),
-                new ViewEventCommand<IQuestionaireViewModel, IUpdateEntityViewWithChanges<IResponseInfo>>(
-                    key:"CreateResponseOption",
+                new ViewEventCommand<IQuestionaireViewModel, IUpdateEntityWithChanges<IResponse>>(
+                    key:"SaveResponse",
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IQuestionaireViewModel, bool>>
                     {
-                        v => v.ChangeTracking.Count == 4 && v.ChangeTracking.ContainsKey(nameof(IResponseInfo.Id))
-                             && v.ChangeTracking[nameof(IResponseInfo.Id)] == 0
+                        v => v.ChangeTracking.ContainsKey(nameof(IResponseInfo.Value))
+                            && v.ChangeTracking.ContainsKey(nameof(IResponseInfo.PatientResponseId))
+                            &&(v.ChangeTracking.ContainsKey(nameof(IResponseInfo.ResponseOptionId)) || v.CurrentEntity.Value.Id != 0)
+                        && v.CurrentEntity.Value.PatientResponseId.GetValueOrDefault()  == 0
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>
                     {
+                        var res = s.ChangeTracking;
+                        if (s.CurrentEntity.Value.Id != 0)
+                            res.Add(nameof(IResponseInfo.ResponseOptionId), s.CurrentEntity.Value.Id);
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
-                                s.ChangeTracking.First().Value,
-                                s.ChangeTracking.Skip(1).ToDictionary(x => x.Key, x => x.Value)
+                                0,
+                                res.ToDictionary(x => x.Key, x => x.Value)
+                            },
+                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
+                            s.Source);
+                        s.ChangeTracking.Clear();
+                        return msg;
+                    }),
+
+                new ViewEventCommand<IQuestionaireViewModel, IUpdateEntityWithChanges<IPatientResponses>>(
+                    key:"CreatePatientResponse",
+                    subject:v => v.ChangeTracking.DictionaryChanges,
+                    commandPredicate: new List<Func<IQuestionaireViewModel, bool>>
+                    {
+                        v => v.ChangeTracking.ContainsKey(nameof(IResponseInfo.Value))
+                            && !v.ChangeTracking.ContainsKey(nameof(IPatientResponses.PatientSyntomId)) // prevent resending
+                            && v.CurrentEntity.Value.PatientResponseId.GetValueOrDefault() == 0
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: s =>
+                    {
+
+                        if(!s.ChangeTracking.ContainsKey(nameof(IPatientResponses.QuestionId)))
+                                s.ChangeTracking.Add(nameof(IPatientResponses.QuestionId), s.CurrentQuestion.Value.Id);
+                        s.ChangeTracking.Add(nameof(IPatientResponses.PatientVisitId), s.CurrentPatientVisit.Id);
+                        s.ChangeTracking.Add(nameof(IPatientResponses.PatientSyntomId), s.CurrentPatientSyntom.Id);
+
+                        
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                s.CurrentEntity.Value.PatientResponseId.GetValueOrDefault(),
+                                s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                            },
+                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
+                            s.Source);
+                        
+                        return msg;
+                    }),
+                new ViewEventCommand<IQuestionaireViewModel, IUpdateEntityWithChanges<IResponseOptions>>(
+                    key:"CreateResponseOption",
+                    subject:v => v.ChangeTracking.DictionaryChanges,
+                    commandPredicate: new List<Func<IQuestionaireViewModel, bool>>
+                    {
+                        v => v.ChangeTracking.ContainsKey(nameof(IResponseOptions.Description)) 
+                              && v.CurrentEntity.Value.Id == 0
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: s =>
+                    {
+                        var res = s.ChangeTracking;
+                        res.Add(nameof(IResponseOptions.QuestionId), s.CurrentQuestion.Value.Id);
+                        if (!res.ContainsKey(nameof(IResponseOptions.QuestionResponseTypeId)))
+                            res.Add(nameof(IResponseOptions.QuestionResponseTypeId),
+                                s.CurrentEntity.Value.QuestionResponseTypeId);
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                s.CurrentEntity.Value.Id,
+                                res.ToDictionary(x => x.Key, x => x.Value)
                             },
                             new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,s.Source);
-                        s.ChangeTracking.Clear();
+                        //s.ChangeTracking.Clear();
                         return msg;
                     }),
 

@@ -23,7 +23,7 @@ namespace ViewModels
 {
 
     [Export(typeof(IQuestionaireViewModel))]
-    public class QuestionaireViewModel : DynamicViewModel<ObservableListViewModel<IQuestionResponseOptionInfo>>, IQuestionaireViewModel
+    public class QuestionaireViewModel : DynamicViewModel<ObservableListViewModel<IResponseOptionInfo>>, IQuestionaireViewModel
     {
 
         [ImportingConstructor]
@@ -32,11 +32,11 @@ namespace ViewModels
             List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications,
             List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
             : base(
-                new ObservableListViewModel<IQuestionResponseOptionInfo>(eventSubscriptions, eventPublications, commandInfo,
+                new ObservableListViewModel<IResponseOptionInfo>(eventSubscriptions, eventPublications, commandInfo,
                     process, orientation))
         {
             this.WireEvents();
-            this.WhenAnyValue(x => x.CurrentEntity.Value).Subscribe(x => UpdateChangeCollectionList(x));
+            this.WhenAnyValue(x => x.CurrentQuestion.Value).Subscribe(x => UpdateChangeCollectionList(x));
             
            
         }
@@ -44,10 +44,10 @@ namespace ViewModels
 
         private void UpdateChangeCollectionList(IQuestionResponseOptionInfo patientResponseInfo)
         {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                ChangeTrackingList.Clear();
+            
+                
                 if (patientResponseInfo == null) return;
+                
                 var resLst = new List<ResponseOptionInfo>();
                 BindingOperations.EnableCollectionSynchronization(resLst, lockObject);
                
@@ -77,55 +77,63 @@ namespace ViewModels
                                     Id = 0,
                                     Description = "Edit to Create New Response Option",
                                     QuestionId = patientResponseInfo.Id,
-                                    Type = "TextBox"
+                                    QuestionResponseTypeId = 1
                                 });
                 
-                ChangeTrackingList.AddRange(resLst);
-               
-                
-                
-            });
+                this.ViewModel.EntitySet = new ObservableList<IResponseOptionInfo>(resLst.Select(x => (IResponseOptionInfo)x).ToList());
+                OnPropertyChanged(nameof(EntitySet));
 
         }
 
+        public IList<IQuestionResponseOptionInfo> Questions
+        {
+            get { return _questions; }
+            set
+            {
+                _questions = value; 
+                OnPropertyChanged();
+            }
+        }
+
+        private IPatientVisitInfo _currentPatientVisit;
         public IPatientVisitInfo CurrentPatientVisit
         {
             get { return _currentPatientVisit; }
             set
             {
                 _currentPatientVisit = value;
-                UpdateChangeCollectionList(CurrentEntity.Value);
+                UpdateChangeCollectionList(CurrentQuestion.Value);
+            }
+        }
+        private IPatientSyntomInfo _currentPatientSyntom;
+        public IPatientSyntomInfo CurrentPatientSyntom
+        {
+            get { return _currentPatientSyntom; }
+            set
+            {
+                _currentPatientSyntom = value;
             }
         }
 
-        //AutoProperty Fucking up i really don't jnow why
-        private ObservableBindingList<IResponseOptionInfo> _changeTrackingList = new ObservableBindingList<IResponseOptionInfo>();
+        public ReactiveProperty<IQuestionResponseOptionInfo> CurrentQuestion { get; } = new ReactiveProperty<IQuestionResponseOptionInfo>();
+
+        
         private readonly object lockObject = new object();
-        private IPatientVisitInfo _currentPatientVisit;
-
-        public ObservableBindingList<IResponseOptionInfo> ChangeTrackingList
-        {
-            get { return _changeTrackingList; }
-            set { _changeTrackingList = value; }
-        }
-
-        public ReactiveProperty<IResponseOptionInfo> CurrentResponseOption { get; } = new ReactiveProperty<IResponseOptionInfo>();
+        private IList<IQuestionResponseOptionInfo> _questions = new ObservableList<IQuestionResponseOptionInfo>();
+        
 
 
-        public ReactiveProperty<IProcessStateList<IQuestionResponseOptionInfo>> State => this.ViewModel.State;
+        public ReactiveProperty<IProcessStateList<IResponseOptionInfo>> State => this.ViewModel.State;
 
 
-        ReactiveProperty<IProcessState<IQuestionResponseOptionInfo>> IEntityViewModel<IQuestionResponseOptionInfo>.State => new ReactiveProperty<IProcessState<IQuestionResponseOptionInfo>>(this.ViewModel.State.Value);
-        public ReactiveProperty<IQuestionResponseOptionInfo> CurrentEntity => this.ViewModel.CurrentEntity;
+        ReactiveProperty<IProcessState<IResponseOptionInfo>> IEntityViewModel<IResponseOptionInfo>.State => new ReactiveProperty<IProcessState<IResponseOptionInfo>>(this.ViewModel.State.Value);
+        public ReactiveProperty<IResponseOptionInfo> CurrentEntity => this.ViewModel.CurrentEntity;
 
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
-        public ObservableList<IQuestionResponseOptionInfo> EntitySet => this.ViewModel.EntitySet;
-        public ObservableList<IQuestionResponseOptionInfo> SelectedEntities => this.ViewModel.SelectedEntities;
+        public ObservableList<IResponseOptionInfo> EntitySet => this.ViewModel.EntitySet;
+        public ObservableList<IResponseOptionInfo> SelectedEntities => this.ViewModel.SelectedEntities;
 
-        public ReactiveProperty<string> DataType { get; } = new ReactiveProperty<string>();
-
-
-        public string Field { get; set; }
-        public string Value { get; set; }
+        public ReactiveProperty<IQuestionResponseTypes> DataType { get; } = new ReactiveProperty<IQuestionResponseTypes>();
+        
     }
 }

@@ -40,11 +40,13 @@ namespace ViewModel.Interfaces
     }
 
     
-    public interface IQuestionaireViewModel : IEntityListViewModel<IQuestionResponseOptionInfo>
+    public interface IQuestionaireViewModel : IEntityListViewModel<IResponseOptionInfo>
     {
-        ObservableBindingList<IResponseOptionInfo> ChangeTrackingList { get; }
+        IList<IQuestionResponseOptionInfo> Questions { get; set; }
         IPatientVisitInfo CurrentPatientVisit { get; set; }
-        ReactiveProperty<IResponseOptionInfo> CurrentResponseOption { get; }
+        IPatientSyntomInfo CurrentPatientSyntom { get; set; }
+        ReactiveProperty<IQuestionResponseOptionInfo> CurrentQuestion { get; }
+        ReactiveProperty<IQuestionResponseTypes> DataType { get; }
     }
 
     

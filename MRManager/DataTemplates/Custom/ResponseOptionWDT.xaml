@@ -13,14 +13,14 @@
             <converters:StringBooleanConverter x:Key="StringBooleanConverter" />
             <converters:StringDateConverter x:Key="StringDateConverter" />
         </DataTemplate.Resources>
-        <Grid Width="Auto" Height="Auto" DataContext="{Binding CurrentResponseOption.Value, Source={x:Static viewModels:QuestionaireViewModel.Instance}}">
-            <ComboBox Width="144"
+        <Grid Width="Auto"
+              Height="Auto"
+              DataContext="{Binding Source={x:Static viewModels:QuestionaireViewModel.Instance}}">
+            <ComboBox Width="134"
                       Height="27"
-                      HorizontalAlignment="Left"
+                      Margin="0,9,41,0"
+                      HorizontalAlignment="Right"
                       VerticalAlignment="Top"
-                      Visibility="{Binding Path=Id,
-                                       Converter={StaticResource StringVisibilityConverter},
-                                       ConverterParameter='0'}"
                       DisplayMemberPath="Name"
                       FontSize="16"
                       ItemsSource="{Binding Source={x:Static Member=viewModels:QuestionResponseTypeCacheViewModel.Instance},
@@ -30,9 +30,25 @@
                                             IsAsync=True}"
                       SelectedValue="{Binding QuestionResponseTypeId,
                                               UpdateSourceTrigger=PropertyChanged}"
-                      Text="{Binding DataType.Value, Source={x:Static viewModels:QuestionaireViewModel.Instance} ,UpdateSourceTrigger=PropertyChanged}"
-                      SelectedValuePath="Id" Margin="18,9,0,0" />
-            <Grid Margin="0,41,0,0" Visibility="{Binding Path=DataType.Value, Source={x:Static viewModels:QuestionaireViewModel.Instance} , Converter={StaticResource StringVisibilityConverter}, ConverterParameter='Text'}">
+                      SelectedValuePath="Id"
+                      SelectedItem="{Binding DataType.Value,
+                                     Source={x:Static viewModels:QuestionaireViewModel.Instance},
+                                     UpdateSourceTrigger=PropertyChanged}"
+                      Visibility="{Binding Path=Id,
+                                           Converter={StaticResource StringVisibilityConverter},
+                                           ConverterParameter='0'}" />
+            <TextBox Width="35"
+                     Height="24"
+                     MinWidth="10"
+                     Margin="10,12,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Text="{Binding ResponseNumber,
+                                    FallbackValue=Description,
+                                    TargetNullValue=Description,
+                                    UpdateSourceTrigger=LostFocus,
+                                    ValidatesOnDataErrors=True}" />
+            <Grid Margin="0,41,0,0" Visibility="{Binding Path=DataType.Value.Name, Source={x:Static viewModels:QuestionaireViewModel.Instance}, Converter={StaticResource StringVisibilityConverter}, ConverterParameter='Text'}">
                 <TextBox Width="303"
                          Height="24"
                          MinWidth="75"
@@ -40,19 +56,21 @@
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
                          Text="{Binding Path=Value,
-                                        FallbackValue=Value,TargetNullValue=Value,
+                                        FallbackValue=Value,
+                                        TargetNullValue=Value,
                                         UpdateSourceTrigger=LostFocus,
                                         ValidatesOnDataErrors=True}" />
                 <TextBox Width="136"
-                           Height="24"
-                           MinWidth="75"
-                           Margin="0,5,0,0"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
-                           Text="{Binding Path=Description,
-                                          FallbackValue=Description,TargetNullValue=Description,
-                                          UpdateSourceTrigger=LostFocus,
-                                          ValidatesOnDataErrors=True}" />
+                         Height="24"
+                         MinWidth="75"
+                         Margin="0,5,0,0"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Text="{Binding Path=Description,
+                                        FallbackValue=Description,
+                                        TargetNullValue=Description,
+                                        UpdateSourceTrigger=LostFocus,
+                                        ValidatesOnDataErrors=True}" />
                 <Rectangle Width="2"
                            Height="29"
                            Margin="147,0,0,0"
@@ -70,7 +88,8 @@
             </Grid>
             <Grid Margin="0,41,0,0"
                   d:IsHidden="True"
-                  Visibility="{Binding Path=DataType.Value, Source={x:Static viewModels:QuestionaireViewModel.Instance} ,
+                  Visibility="{Binding Path=DataType.Value.Name,
+                                       Source={x:Static viewModels:QuestionaireViewModel.Instance},
                                        Converter={StaticResource StringVisibilityConverter},
                                        ConverterParameter='True/False'}">
                 <CheckBox Width="440"
@@ -90,7 +109,8 @@
             </Grid>
             <Grid Margin="0,41,0,0"
                   d:IsHidden="True"
-                  Visibility="{Binding Path=DataType.Value, Source={x:Static viewModels:QuestionaireViewModel.Instance} ,
+                  Visibility="{Binding Path=DataType.Value.Name,
+                                       Source={x:Static viewModels:QuestionaireViewModel.Instance},
                                        Converter={StaticResource StringVisibilityConverter},
                                        ConverterParameter='Date'}">
                 <DatePicker Width="226"
@@ -116,6 +136,7 @@
                                           ValidatesOnDataErrors=True}" />
 
             </Grid>
+
 
         </Grid>
 

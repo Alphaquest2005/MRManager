@@ -224,23 +224,22 @@ namespace RevolutionData
             ComplexActions.RequestStateList<IPatientVisitInfo, IPatientSyntomInfo>(3,c => c.Id, x => x.PatientVisitId),
             ComplexActions.RequestStateList<ISyntoms, IPatientSyntomInfo>(3,c => c.Id, x => x.SyntomId),
             ComplexActions.UpdateStateList<IPatientSyntomInfo>(3),
-            ComplexActions.UpdateStateWhenDataChanges<IPatientSyntoms,IPatientSyntomInfo>(3),
+            ComplexActions.UpdateStateWhenDataChanges<IPatientSyntoms,IPatientSyntomInfo>(3, c => c.Id, v => v.Id),
 
             ComplexActions.RequestStateList<IPatientSyntomInfo, ISyntomMedicalSystemInfo>(3,c => c.SyntomId, x => x.SyntomId),
-            
             ComplexActions.UpdateStateList<ISyntomMedicalSystemInfo>(3),
-            ComplexActions.UpdateStateWhenDataChanges<ISyntomMedicalSystems,ISyntomMedicalSystemInfo>(3),
-            ComplexActions.UpdateStateWhenDataChanges<IInterviews,IInterviewInfo>(3),
+            ComplexActions.UpdateStateWhenDataChanges<ISyntomMedicalSystems,ISyntomMedicalSystemInfo>(3, c => c.Id, v => v.Id),
+            ComplexActions.UpdateStateWhenDataChanges<IInterviews,IInterviewInfo>(3, c => c.Id, v => v.Id),
 
 
             ComplexActions.RequestStateList<IInterviewInfo, IQuestionResponseOptionInfo>(3,c => c.Id, x => x.InterviewId),
             ComplexActions.UpdateStateList<IQuestionResponseOptionInfo>(3),
-            ComplexActions.UpdateStateWhenDataChanges<IQuestions,IQuestionResponseOptionInfo>(3),
+            ComplexActions.UpdateStateWhenDataChanges<IQuestions,IQuestionResponseOptionInfo>(3, c => c.Id, v => v.Id),
+            ComplexActions.UpdateStateWhenDataChanges<IResponse,IResponseOptionInfo>(3, c => c.ResponseOptionId, v => v.Id),
 
-
-             ComplexActions.RequestStateList<IInterviewInfo, IQuestionInfo>(3,c => c.Id, x => x.InterviewId),
+            ComplexActions.RequestStateList<IInterviewInfo, IQuestionInfo>(3,c => c.Id, x => x.InterviewId),
             ComplexActions.UpdateStateList<IQuestionInfo>(3),
-            ComplexActions.UpdateStateWhenDataChanges<IQuestions,IQuestionInfo>(3),
+            ComplexActions.UpdateStateWhenDataChanges<IQuestions,IQuestionInfo>(3, c => c.Id, v => v.Id),
 
 
             EntityCacheViewModelInfo<ISyntomPriority>.ComplexActions.IntializeCache(3),
@@ -365,24 +364,14 @@ namespace RevolutionData
                             expectedSourceType: new SourceType(typeof (IViewModel)),
                             //todo: check this cuz it comes from viewmodel
                             processInfo: new StateEventInfo(processId, Context.Process.Events.CurrentEntityChanged)),
-                        //new ProcessExpectedEvent<IEntityFound<TCurrentEntity>>(
-                        //    "CurrentEntity", processId, e => e.Entity != null,
-                        //    expectedSourceType: new SourceType(typeof (IViewModel)),
-                        //    //todo: check this cuz it comes from viewmodel
-                        //    processInfo: new StateEventInfo(processId, Context.Entity.Events.EntityFound)),
-
-                        //new ProcessExpectedEvent<IEntityUpdated<TCurrentEntity>>(
-                        //    "CurrentEntity", processId, e => e.Entity != null,
-                        //    expectedSourceType: new SourceType(typeof (IViewModel)),
-                        //    //todo: check this cuz it comes from viewmodel
-                        //    processInfo: new StateEventInfo(processId, Context.Entity.Events.EntityUpdated))
+                        
                     },
                     expectedMessageType: typeof(IProcessStateMessage<TEntityView>),
                     action: ProcessActions.RequestStateList(currentProperty,viewProperty),
                     processInfo: new StateCommandInfo(processId, Context.Process.Commands.UpdateState));
             }
 
-            public static IComplexEventAction UpdateStateWhenDataChanges<TEntity, TView>(int processId) where TEntity : IEntityId where TView : IEntityView
+            public static IComplexEventAction UpdateStateWhenDataChanges<TEntity, TView>(int processId, Expression<Func<TEntity, object>> currentProperty, Expression<Func<TView, object>> viewProperty) where TEntity : IEntityId where TView : IEntityView
             {
                 return new ComplexEventAction(
                     key: $"Update{typeof(TEntity).Name}-{typeof(TView).Name}",
@@ -396,17 +385,24 @@ namespace RevolutionData
                             key: "UpdatedEntity")
                     },
                     expectedMessageType: typeof(IProcessStateMessage<TView>),
-                    action: GetView<TView>(),
+                    action: GetView(currentProperty, viewProperty),
                     processInfo: new StateCommandInfo(processId, Context.Process.Commands.UpdateState));
             }
 
-            public static IProcessAction GetView<TView>() where TView : IEntityView
+            public static IProcessAction GetView<TEntity,TView>(Expression<Func<TEntity, object>> currentProperty, Expression<Func<TView, object>> viewProperty) where TView : IEntityView
             {
                 return new ProcessAction(
                     action:
-                        cp => new GetEntityViewById<TView>(cp.Messages["UpdatedEntity"].Entity.Id,
-                            new StateCommandInfo(cp.Actor.Process.Id, Context.EntityView.Commands.GetEntityView),
-                            cp.Actor.Process, cp.Actor.Source),
+                        cp =>
+                        {
+                            var key = default(TView).GetMemberName(viewProperty);
+                            var value = currentProperty.Compile().Invoke(cp.Messages["CurrentEntity"].Entity);
+                            var changes = new Dictionary<string, dynamic>() { { key, value } };
+
+                            return new GetEntityViewWithChanges<TView>(changes,
+                                new StateCommandInfo(cp.Actor.Process.Id, Context.EntityView.Commands.GetEntityView),
+                                cp.Actor.Process, cp.Actor.Source);
+                        },
                     processInfo: cp =>
                         new StateCommandInfo(cp.Actor.Process.Id,
                             Context.EntityView.Commands.GetEntityView),

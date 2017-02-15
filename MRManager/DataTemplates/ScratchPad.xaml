@@ -7,6 +7,4 @@
              xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
              Width="501"
              d:DesignHeight="359"
-             mc:Ignorable="d">
-
-</UserControl>
+             mc:Ignorable="d" />

@@ -32,7 +32,7 @@
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Stretch"
                            FontSize="20"
-                           Text="{Binding CurrentEntity.Value.Question,
+                           Text="{Binding CurrentQuestion.Value.Question,
                                           FallbackValue='No Questions',
                                           UpdateSourceTrigger=PropertyChanged,
                                           ValidatesOnDataErrors=True}"
@@ -73,8 +73,8 @@
                          HorizontalAlignment="Stretch"
                          VerticalAlignment="Stretch"
                          Background="#33FFFFFF"
-                         ItemsSource="{Binding ChangeTrackingList}"
-                         SelectedItem="{Binding CurrentResponseOption.Value}">
+                         ItemsSource="{Binding EntitySet}"
+                         SelectedItem="{Binding CurrentEntity.Value}">
 
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="{x:Type ListBoxItem}">
