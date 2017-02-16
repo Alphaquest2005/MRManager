@@ -164,12 +164,12 @@ namespace DataServices.Actors
                     ctx.ActorOf(
                         Props.Create<ComplexEventActor>(inMsg),
                         "ComplexEventActor:-" + inMsg.ComplexEventService.ActorId.GetSafeActorName());
-                EventMessageBus.Current.GetEvent<IProcessSystemMessage>(inMsg.Source)
-                    .Where(
-                        x =>
-                            x.Process.Id == inMsg.Process.Id &&
-                            x.MachineInfo.MachineName == inMsg.Process.MachineInfo.MachineName)
-                    .Subscribe(x => childActor.Tell(x));
+                //EventMessageBus.Current.GetEvent<IProcessSystemMessage>(inMsg.Source)
+                //    .Where(
+                //        x =>
+                //            x.Process.Id == inMsg.Process.Id &&
+                //            x.MachineInfo.MachineName == inMsg.Process.MachineInfo.MachineName)
+                //    .Subscribe(x => childActor.Tell(x));
             }
             catch (Exception)
             {
