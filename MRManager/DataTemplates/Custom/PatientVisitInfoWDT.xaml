@@ -33,9 +33,9 @@
                                             UpdateSourceTrigger=PropertyChanged,
                                             Mode=OneWay,
                                             IsAsync=True}"
-                      SelectedValue="{Binding Sex,
+                      SelectedValue="{Binding VisitTypeId,
                                               UpdateSourceTrigger=PropertyChanged}"
-                      SelectedValuePath="Name" />
+                      SelectedValuePath="Id" />
             <ComboBox Width="125"
                       Height="27"
                       Margin="366,10,0,0"

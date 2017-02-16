@@ -164,7 +164,7 @@ namespace EFRepository
 
                     var res = ctx.Set<Patients>().Select(exp).DistinctBy(x => x.Id).FirstOrDefault(x => x.Id == entity.Id);//
                     //Todo: replace this with proper event using Entityfound cuz aint want to create new event for entityviewupdated
-                    EventMessageBus.Current.Publish(new EntityFound<PatientInfo>((PatientInfo)(object)res, new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntityUpdated), msg.Process, Source), Source);
+                    EventMessageBus.Current.Publish(new EntityViewWithChangesUpdated<IPatientInfo>((IPatientInfo)(object)res, msg.Changes ,new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntityUpdated), msg.Process, Source), Source);
 
                     
                 }

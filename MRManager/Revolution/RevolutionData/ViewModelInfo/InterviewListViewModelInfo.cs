@@ -73,10 +73,10 @@ namespace RevolutionData
 
                     }),
 
-                new ViewEventSubscription<IInterviewListViewModel, IEntityFound<ISyntomMedicalSystemInfo>>(
+                new ViewEventSubscription<IInterviewListViewModel, IEntityViewWithChangesFound<ISyntomMedicalSystemInfo>>(
                     3,
                     e => e != null,
-                    new List<Func<IInterviewListViewModel, IEntityFound<ISyntomMedicalSystemInfo>, bool>>(),
+                    new List<Func<IInterviewListViewModel, IEntityViewWithChangesFound<ISyntomMedicalSystemInfo>, bool>>(),
                     (v, e) =>
                     {
                         Application.Current.Dispatcher.Invoke(() =>
@@ -135,10 +135,10 @@ namespace RevolutionData
 
                     }),
 
-                new ViewEventSubscription<IInterviewListViewModel, IEntityFound<IInterviewInfo>>(
+                new ViewEventSubscription<IInterviewListViewModel, IEntityViewWithChangesFound<IInterviewInfo>>(
                     3,
                     e => e != null,
-                    new List<Func<IInterviewListViewModel, IEntityFound<IInterviewInfo>, bool>>(),
+                    new List<Func<IInterviewListViewModel, IEntityViewWithChangesFound<IInterviewInfo>, bool>>(),
                     (v, e) =>
                     {
                         Application.Current.Dispatcher.Invoke(() =>

@@ -105,7 +105,7 @@ namespace RevolutionData
                             //v.CurrentQuestion.Value.ResponseOptions.Insert(idx, e.Entity);
                             itm.Description = e.Entity.Description;
                         }
-                        
+                        v.RowState.Value = RowState.Unchanged;
                     }),
 
                 new ViewEventSubscription<IQuestionaireViewModel, IEntityViewWithChangesUpdated<IResponseOptionInfo>>(
@@ -126,7 +126,7 @@ namespace RevolutionData
                             v.CurrentQuestion.Value.PatientResponses.Insert(idx, e.Entity);
 
                         }
-
+                        v.RowState.Value = RowState.Unchanged;
                     }),
 
                 new ViewEventSubscription<IQuestionaireViewModel, IEntityViewWithChangesFound<IQuestionResponseOptionInfo>>(
@@ -140,10 +140,17 @@ namespace RevolutionData
 
 
                        var f = v.Questions.FirstOrDefault(x => x.Id == e.Entity.Id);
-                        if (v.CurrentQuestion.Value.Id == e.Entity.Id) v.CurrentQuestion.Value = e.Entity;
+                        if (v.CurrentQuestion.Value == null || v.CurrentQuestion.Value.Id == e.Entity.Id) v.CurrentQuestion.Value = e.Entity;
                         if (f == null)
                         {
-                            v.Questions.Insert(v.Questions.Count() - 1,e.Entity);
+                            if (v.Questions.Any())
+                            {
+                                v.Questions.Insert(v.Questions.Count() - 1,e.Entity);
+                            }
+                            else
+                            {
+                                v.Questions.Add(e.Entity);
+                            }
                             v.Questions.Reset();
                         }
                         else

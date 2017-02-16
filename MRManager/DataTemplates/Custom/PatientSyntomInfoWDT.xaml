@@ -32,6 +32,7 @@
                                             Mode=OneWay,
                                             IsAsync=True}"
                       SelectedItem="{Binding Syntom, UpdateSourceTrigger=LostFocus}"
+                      SelectedValue="{Binding SymtomId, UpdateSourceTrigger=PropertyChanged}"
                       SelectedValuePath="Id"
                       Text="{Binding SyntomName,
                                      FallbackValue=Syntom,

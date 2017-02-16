@@ -45,10 +45,10 @@ namespace RevolutionData
 
 
 
-                new ViewEventSubscription<IPatientSyntomViewModel, IEntityFound<IPatientSyntomInfo>>(
+                new ViewEventSubscription<IPatientSyntomViewModel, IEntityViewWithChangesFound<IPatientSyntomInfo>>(
                     3,
                     e => e != null,
-                    new List<Func<IPatientSyntomViewModel, IEntityFound<IPatientSyntomInfo>, bool>>(),
+                    new List<Func<IPatientSyntomViewModel, IEntityViewWithChangesFound<IPatientSyntomInfo>, bool>>(),
                     (v, e) =>
                     {
                         Application.Current.Dispatcher.Invoke(() =>

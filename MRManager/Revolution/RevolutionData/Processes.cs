@@ -217,9 +217,11 @@ namespace RevolutionData
 
             ComplexActions.RequestState<IPatientInfo, IPatientDetailsInfo>(3, x => x.Id),
             ComplexActions.UpdateState<IPatientDetailsInfo>(3),
+            ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,IPatientDetailsInfo>(3, c => c.Id, v => v.Id),
 
             ComplexActions.RequestStateList<IPatientInfo, IPatientVisitInfo>(3, c => c.Id,x => x.PatientId),
             ComplexActions.UpdateStateList<IPatientVisitInfo>(3),
+            ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,IPatientVisitInfo>(3, c => c.Id, v => v.PatientId),
 
             ComplexActions.RequestStateList<IPatientVisitInfo, IPatientSyntomInfo>(3,c => c.Id, x => x.PatientVisitId),
             ComplexActions.RequestStateList<ISyntoms, IPatientSyntomInfo>(3,c => c.Id, x => x.SyntomId),
@@ -234,7 +236,7 @@ namespace RevolutionData
 
             ComplexActions.RequestStateList<IInterviewInfo, IQuestionResponseOptionInfo>(3,c => c.Id, x => x.InterviewId),
             ComplexActions.UpdateStateList<IQuestionResponseOptionInfo>(3),
-            ComplexActions.UpdateStateWhenDataChanges<IQuestions,IQuestionResponseOptionInfo>(3, c => c.Id, v => v.Id),
+            ComplexActions.UpdateStateWhenDataChanges<IQuestionInfo,IQuestionResponseOptionInfo>(3, c => c.Id, v => v.Id),
             ComplexActions.UpdateStateWhenDataChanges<IResponseInfo,IQuestionResponseOptionInfo>(3, c => c.QuestionId, v => v.Id),
             ComplexActions.UpdateStateWhenDataChanges<IResponseOptions,IQuestionResponseOptionInfo>(3, c => c.QuestionId, v => v.Id),
             

@@ -62,8 +62,8 @@ namespace RevolutionData
                             v.EntitySet.Insert(idx, e.Entity);
                             v.EntitySet.Reset();
                         }
+                        v.RowState.Value = RowState.Unchanged;
 
-                       
                     }),
 
 

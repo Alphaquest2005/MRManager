@@ -34,10 +34,10 @@ namespace RevolutionData
                         v.State.Value = e.State;
                     }),
 
-                new ViewEventSubscription<IPatientSummaryListViewModel, IEntityFound<IPatientInfo>>(
+                new ViewEventSubscription<IPatientSummaryListViewModel, IEntityViewWithChangesUpdated<IPatientInfo>>(
                     3,
                     e => e != null,
-                    new List<Func<IPatientSummaryListViewModel, IEntityFound<IPatientInfo>, bool>>(),
+                    new List<Func<IPatientSummaryListViewModel, IEntityViewWithChangesUpdated<IPatientInfo>, bool>>(),
                     (v, e) =>
                     {
                         Application.Current.Dispatcher.Invoke(() =>
@@ -45,7 +45,7 @@ namespace RevolutionData
 
 
                        var f = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
-                        if (v.CurrentEntity.Value.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
+                        if (v.CurrentEntity.Value?.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
                         if (f == null)
                         {
                             v.EntitySet.Insert(v.EntitySet.Count() - 1,e.Entity);

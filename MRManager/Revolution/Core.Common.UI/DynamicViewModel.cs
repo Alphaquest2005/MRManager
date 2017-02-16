@@ -51,7 +51,9 @@ namespace Core.Common.UI
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
             base.InvokeMethod(this, "GetValue", new object[] { binder.Name }, out result);
-            if (result == null) return base.TryGetMember(binder, out result);
+            if (result != null) return true;
+            var res = base.TryGetMember(binder, out result);
+            if(res == false) throw new InvalidOperationException($"Property not found{binder.Name}");
             return true;
         }
 
@@ -59,7 +61,9 @@ namespace Core.Common.UI
         {
             object result = null;
             base.InvokeMethod(this, "SetValue", new object[] { value, binder.Name }, out result);
-            if (result == null) return base.TrySetMember(binder, value);
+            if (result != null) return true;
+            var res = base.TrySetMember(binder, value);
+            if(res == false) throw new InvalidOperationException($"Property not found{binder.Name}");
             return true;
         }
 
