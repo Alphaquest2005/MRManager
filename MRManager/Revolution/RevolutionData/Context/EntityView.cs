@@ -21,6 +21,7 @@ namespace RevolutionData.Context
             public static IStateEvent EntityViewFound => new StateEvent("EntityViewFound", "Entity View Item Found", "");
 
             public static IStateEvent EntityViewSetLoaded => new StateEvent("EntityViewSetLoaded", "Entity ViewSet Loaded", "");
+            public static IStateEvent EntityViewUpdated => new StateEvent("EntityViewUpdated", "Entity View Updated", "");
         }
     }
 }

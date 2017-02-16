@@ -18,5 +18,6 @@ namespace EF.Entities
 		public virtual int PatientResponseId { get; set; }
 		public virtual int ResponseOptionId { get; set; }
 		public virtual string Value { get; set; }
+        public int QuestionId { get; set; }
 	}
 }

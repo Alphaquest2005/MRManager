@@ -235,8 +235,9 @@ namespace RevolutionData
             ComplexActions.RequestStateList<IInterviewInfo, IQuestionResponseOptionInfo>(3,c => c.Id, x => x.InterviewId),
             ComplexActions.UpdateStateList<IQuestionResponseOptionInfo>(3),
             ComplexActions.UpdateStateWhenDataChanges<IQuestions,IQuestionResponseOptionInfo>(3, c => c.Id, v => v.Id),
-            ComplexActions.UpdateStateWhenDataChanges<IResponse,IResponseOptionInfo>(3, c => c.ResponseOptionId, v => v.Id),
-            ComplexActions.UpdateStateWhenDataChanges<IResponseOptions,IResponseOptionInfo>(3, c => c.Id, v => v.Id),
+            ComplexActions.UpdateStateWhenDataChanges<IResponseInfo,IQuestionResponseOptionInfo>(3, c => c.QuestionId, v => v.Id),
+            ComplexActions.UpdateStateWhenDataChanges<IResponseOptions,IQuestionResponseOptionInfo>(3, c => c.QuestionId, v => v.Id),
+            
 
             ComplexActions.RequestStateList<IInterviewInfo, IQuestionInfo>(3,c => c.Id, x => x.InterviewId),
             ComplexActions.UpdateStateList<IQuestionInfo>(3),
@@ -377,13 +378,21 @@ namespace RevolutionData
                 return new ComplexEventAction(
                     key: $"Update{typeof(TEntity).Name}-{typeof(TView).Name}",
                     processId: 3,
+                    actionTrigger:ActionTrigger.Any, 
                     events: new List<IProcessExpectedEvent>
                     {
                         new ProcessExpectedEvent<IEntityUpdated<TEntity>>(processId: processId,
                             eventPredicate: e => e.Entity != null,
                             processInfo: new StateEventInfo(processId, Context.Entity.Events.EntityUpdated),
                             expectedSourceType: new SourceType(typeof (IEntityRepository)),
-                            key: "UpdatedEntity")
+                            key: "UpdatedEntity"),
+                        new ProcessExpectedEvent<IEntityViewWithChangesUpdated<TEntity>>(processId: processId,
+                            eventPredicate: e => e.Entity != null,
+                            processInfo: new StateEventInfo(processId, Context.EntityView.Events.EntityViewUpdated),
+                            expectedSourceType: new SourceType(typeof (IEntityRepository)),
+                            key: "UpdatedEntity"),
+
+
                     },
                     expectedMessageType: typeof(IProcessStateMessage<TView>),
                     action: GetView(currentProperty, viewProperty),

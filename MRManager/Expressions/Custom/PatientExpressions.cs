@@ -267,6 +267,7 @@ namespace Entity.Expressions
                 Id = x.Id,
                 PatientResponseId = x.PatientResponseId,
                 ResponseOptionId = x.ResponseOptionId,
+                QuestionId = x.ResponseOptions.QuestionId,
                 Value = x.Value
             };
 

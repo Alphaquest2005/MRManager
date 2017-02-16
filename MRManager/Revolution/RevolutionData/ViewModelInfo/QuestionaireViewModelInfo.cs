@@ -73,7 +73,7 @@ namespace RevolutionData
                     new List<Func<IQuestionaireViewModel, IEntityUpdated<IResponseOptions>, bool>>(),
                     (v, e) =>
                     {
-                        if (v.CurrentEntity.Value.Id == e.Entity.Id) return;
+                        if (v.CurrentEntity?.Value?.Id == e.Entity.Id) return;
                         v.ChangeTracking.Add(nameof(IResponseInfo.ResponseOptionId), e.Entity.Id);
                     }),
 
@@ -93,18 +93,17 @@ namespace RevolutionData
                     new List<Func<IQuestionaireViewModel, IEntityViewWithChangesFound<IResponseOptionInfo>, bool>>(),
                     (v, e) =>
                     {
-
-                        var itm = v.CurrentQuestion.Value.ResponseOptions.FirstOrDefault(x => x.Id == e.Entity.Id);
+                        var itm = (ResponseOptionInfo)v.CurrentQuestion.Value.ResponseOptions.FirstOrDefault(x => x.Id == e.Entity.Id);
                         if (itm == null)
                         {
                             v.CurrentQuestion.Value.ResponseOptions.Add(e.Entity);
                         }
                         else
                         {
-                            var idx = v.CurrentQuestion.Value.ResponseOptions.IndexOf(itm);
-                            v.CurrentQuestion.Value.ResponseOptions.Remove(itm);
-                            v.CurrentQuestion.Value.ResponseOptions.Insert(idx, e.Entity);
-                            
+                            //var idx = v.CurrentQuestion.Value.ResponseOptions.TakeWhile(x => x.Id != e.Entity.Id).Count();
+                            //v.CurrentQuestion.Value.ResponseOptions.Remove(itm);
+                            //v.CurrentQuestion.Value.ResponseOptions.Insert(idx, e.Entity);
+                            itm.Description = e.Entity.Description;
                         }
                         
                     }),
@@ -130,10 +129,10 @@ namespace RevolutionData
 
                     }),
 
-                new ViewEventSubscription<IQuestionaireViewModel, IEntityFound<IQuestionResponseOptionInfo>>(
+                new ViewEventSubscription<IQuestionaireViewModel, IEntityViewWithChangesFound<IQuestionResponseOptionInfo>>(
                     3,
                     e => e != null,
-                    new List<Func<IQuestionaireViewModel, IEntityFound<IQuestionResponseOptionInfo>, bool>>(),
+                    new List<Func<IQuestionaireViewModel, IEntityViewWithChangesFound<IQuestionResponseOptionInfo>, bool>>(),
                     (v, e) =>
                     {
                         Application.Current.Dispatcher.Invoke(() =>
@@ -245,6 +244,7 @@ namespace RevolutionData
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>
                     {
+                        
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
@@ -256,7 +256,7 @@ namespace RevolutionData
                         s.ChangeTracking.Clear();
                         return msg;
                     }),
-                new ViewEventCommand<IQuestionaireViewModel, IUpdateEntityWithChanges<IResponse>>(
+                new ViewEventCommand<IQuestionaireViewModel, IUpdateEntityViewWithChanges<IResponseInfo>>(
                     key:"SaveResponse",
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IQuestionaireViewModel, bool>>
@@ -348,7 +348,7 @@ namespace RevolutionData
                     commandPredicate: new List<Func<IQuestionaireViewModel, bool>>
                     {
                         v => v.ChangeTracking.ContainsKey(nameof(IResponseOptions.Description))
-                               
+                               && !v.ChangeTracking.ContainsKey(nameof(IResponseOptions.QuestionResponseTypeId))
                               && v.CurrentEntity.Value.Id != 0
                     },
                     //TODO: Make a type to capture this info... i killing it here
@@ -366,7 +366,7 @@ namespace RevolutionData
                                 res.ToDictionary(x => x.Key, x => x.Value)
                             },
                             new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,s.Source);
-                        s.ChangeTracking.Clear();
+                        //s.ChangeTracking.Clear();
                         return msg;
                     }),
 

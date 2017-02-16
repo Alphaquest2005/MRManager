@@ -8,6 +8,7 @@ namespace Interfaces
         int PatientResponseId { get; }
         int ResponseOptionId { get; }
         String Value { get; }
-        
+        int QuestionId { get; }
+
     }
 }
