@@ -28,12 +28,12 @@
                                             UpdateSourceTrigger=PropertyChanged,
                                             Mode=OneWay,
                                             IsAsync=True}"
+                      SelectedItem="{Binding DataType.Value,
+                                             Source={x:Static viewModels:QuestionaireViewModel.Instance},
+                                             UpdateSourceTrigger=PropertyChanged}"
                       SelectedValue="{Binding QuestionResponseTypeId,
                                               UpdateSourceTrigger=PropertyChanged}"
                       SelectedValuePath="Id"
-                      SelectedItem="{Binding DataType.Value,
-                                     Source={x:Static viewModels:QuestionaireViewModel.Instance},
-                                     UpdateSourceTrigger=PropertyChanged}"
                       Visibility="{Binding Path=Id,
                                            Converter={StaticResource StringVisibilityConverter},
                                            ConverterParameter='0'}" />
@@ -87,23 +87,29 @@
 
             </Grid>
             <Grid Margin="0,41,0,0"
-                  d:IsHidden="True"
+                  d:IsHidden="true"
                   Visibility="{Binding Path=DataType.Value.Name,
                                        Source={x:Static viewModels:QuestionaireViewModel.Instance},
                                        Converter={StaticResource StringVisibilityConverter},
                                        ConverterParameter='True/False'}">
-                <CheckBox Width="440"
-                          Height="29"
-                          MinWidth="75"
-                          Margin="10,0,0,0"
+                <CheckBox Width="17"
+                          Height="15"
+                          Margin="10,10,0,0"
                           HorizontalAlignment="Left"
                           VerticalAlignment="Top"
-                          Content="{Binding Path=Description}"
                           IsChecked="{Binding Path=Value,
                                               Converter={StaticResource StringBooleanConverter},
                                               FallbackValue=Value,
                                               UpdateSourceTrigger=PropertyChanged,
-                                              ValidatesOnDataErrors=True}" />
+                                              ValidatesOnDataErrors=True}"
+                          RenderTransformOrigin="0.63,1.326" />
+                <TextBox Height="25"
+                         Margin="40,10,10,0"
+                         VerticalAlignment="Top"
+                         Text="{Binding Path=Description,
+                                        UpdateSourceTrigger=LostFocus,
+                                        TargetNullValue=Enter Description}"
+                         TextWrapping="Wrap" />
 
 
             </Grid>

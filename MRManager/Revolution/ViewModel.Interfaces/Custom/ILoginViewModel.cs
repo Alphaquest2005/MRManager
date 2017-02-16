@@ -42,7 +42,7 @@ namespace ViewModel.Interfaces
     
     public interface IQuestionaireViewModel : IEntityListViewModel<IResponseOptionInfo>
     {
-        IList<IQuestionResponseOptionInfo> Questions { get; set; }
+        ObservableList<IQuestionResponseOptionInfo> Questions { get; set; }
         IPatientVisitInfo CurrentPatientVisit { get; set; }
         IPatientSyntomInfo CurrentPatientSyntom { get; set; }
         ReactiveProperty<IQuestionResponseOptionInfo> CurrentQuestion { get; }

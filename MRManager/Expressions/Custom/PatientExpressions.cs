@@ -330,6 +330,40 @@ namespace Entity.Expressions
                             Code = x.Code
                         };
 
+
+        public static Expression<Func<Response, ResponseOptionInfo>> ResponseOptionInfoExpression { get; } =
+                        x => new ResponseOptionInfo()
+                        {
+                            Id = x.ResponseOptionId,
+                            Description = x.ResponseOptions.Description,
+                            PatientId = x.PatientResponses.PatientVisit.PatientId,
+                            PatientResponseId = x.PatientResponseId,
+                            PatientVisitId = x.PatientResponses.PatientVisitId,
+                            QuestionId = x.ResponseOptions.QuestionId,
+                            QuestionResponseTypeId = x.ResponseOptions.QuestionResponseTypeId,
+                            ResponseId = x.Id,
+                            ResponseNumber = x.ResponseOptions.ResponseNumber,
+                            Type = x.ResponseOptions.QuestionResponseTypes.Name,
+                            Value = x.Value
+                        };
+
+        public static Expression<Func<ResponseOptions, ResponseOptionInfo>> ResponseOptionInfo1Expression { get; } =
+                        x => new ResponseOptionInfo()
+                        {
+                            Id = x.Id,
+                            Description = x.Description,
+                           // PatientId = x.PatientResponses.PatientVisit.PatientId,
+                           // PatientResponseId = x.PatientResponseId,
+                           // PatientVisitId = x.,
+                            QuestionId = x.QuestionId,
+                            QuestionResponseTypeId = x.QuestionResponseTypeId,
+                            ResponseId = x.Id,
+                            ResponseNumber = x.ResponseNumber,
+                            Type = x.QuestionResponseTypes.Name,
+                            //Value = x.Value
+                        };
+
+
     }
 
 

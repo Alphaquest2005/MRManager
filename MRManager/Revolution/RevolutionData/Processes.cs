@@ -236,6 +236,7 @@ namespace RevolutionData
             ComplexActions.UpdateStateList<IQuestionResponseOptionInfo>(3),
             ComplexActions.UpdateStateWhenDataChanges<IQuestions,IQuestionResponseOptionInfo>(3, c => c.Id, v => v.Id),
             ComplexActions.UpdateStateWhenDataChanges<IResponse,IResponseOptionInfo>(3, c => c.ResponseOptionId, v => v.Id),
+            ComplexActions.UpdateStateWhenDataChanges<IResponseOptions,IResponseOptionInfo>(3, c => c.Id, v => v.Id),
 
             ComplexActions.RequestStateList<IInterviewInfo, IQuestionInfo>(3,c => c.Id, x => x.InterviewId),
             ComplexActions.UpdateStateList<IQuestionInfo>(3),
@@ -396,7 +397,7 @@ namespace RevolutionData
                         cp =>
                         {
                             var key = default(TView).GetMemberName(viewProperty);
-                            var value = currentProperty.Compile().Invoke(cp.Messages["CurrentEntity"].Entity);
+                            var value = currentProperty.Compile().Invoke(cp.Messages["UpdatedEntity"].Entity);
                             var changes = new Dictionary<string, dynamic>() { { key, value } };
 
                             return new GetEntityViewWithChanges<TView>(changes,

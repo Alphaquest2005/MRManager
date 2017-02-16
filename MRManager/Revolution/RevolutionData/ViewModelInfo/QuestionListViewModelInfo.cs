@@ -160,7 +160,8 @@ namespace RevolutionData
                     {
                         v => v.CurrentEntity?.Value?.Id != 0 && 
                                 (v.ChangeTracking.ContainsKey(nameof(IQuestionInfo.Description)) 
-                                    || v.ChangeTracking.ContainsKey(nameof(IQuestionInfo.EntityAttributeId)))
+                                    || (v.ChangeTracking.ContainsKey(nameof(IQuestionInfo.EntityAttributeId)) 
+                                            &&  v.CurrentEntity?.Value?.EntityAttributeId != v.ChangeTracking[nameof(IQuestionInfo.EntityAttributeId)]))
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>
@@ -204,12 +205,13 @@ namespace RevolutionData
                     }),
 
                 new ViewEventCommand<IQuestionListViewModel, IAddOrGetEntityWithChanges<IEntityAttributes>>(
-                    key:"UpdateEnityAttribute",
+                    key:"AddEnityAttribute",
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IQuestionListViewModel, bool>>
                     {
                         v => v.ChangeTracking.ContainsKey(nameof(IQuestionInfo.Entity))
                              && v.ChangeTracking.ContainsKey(nameof(IQuestionInfo.Attribute))
+                             && v.CurrentEntity.Value.EntityAttributeId == 0
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: v =>
@@ -226,7 +228,30 @@ namespace RevolutionData
                          
                         return msg;
                     }),
+                new ViewEventCommand<IQuestionListViewModel, IUpdateEntityWithChanges<IEntityAttributes>>(
+                    key:"UpdateAttribute",
+                    subject:v => v.ChangeTracking.DictionaryChanges,
+                    commandPredicate: new List<Func<IQuestionListViewModel, bool>>
+                    {
+                        v => v.CurrentEntity.Value?.EntityAttributeId != 0
+                             && (v.ChangeTracking.ContainsKey(nameof(IQuestionInfo.Attribute)) || v.ChangeTracking.ContainsKey(nameof(IQuestionInfo.Entity)))
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: v =>
+                    {
 
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                v.CurrentEntity.Value.EntityAttributeId,
+                                v.ChangeTracking.Where(x => x.Key == nameof(IQuestionInfo.Entity)
+                                            || x.Key == nameof(IQuestionInfo.Attribute)).ToDictionary(x => x.Key, x => x.Value)
+                            },
+                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            v.Source);
+                        v.ChangeTracking.Clear();
+                        return msg;
+                    }),
 
             },
             typeof(IQuestionListViewModel),

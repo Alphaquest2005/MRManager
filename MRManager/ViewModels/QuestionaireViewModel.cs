@@ -85,7 +85,7 @@ namespace ViewModels
 
         }
 
-        public IList<IQuestionResponseOptionInfo> Questions
+        public ObservableList<IQuestionResponseOptionInfo> Questions
         {
             get { return _questions; }
             set
@@ -119,7 +119,7 @@ namespace ViewModels
 
         
         private readonly object lockObject = new object();
-        private IList<IQuestionResponseOptionInfo> _questions = new ObservableList<IQuestionResponseOptionInfo>();
+        private ObservableList<IQuestionResponseOptionInfo> _questions = new ObservableList<IQuestionResponseOptionInfo>();
         
 
 

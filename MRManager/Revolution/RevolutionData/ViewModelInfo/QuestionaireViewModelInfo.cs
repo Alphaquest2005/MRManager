@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Windows;
 using SystemInterfaces;
 using Actor.Interfaces;
 using EF.Entities;
 using EventMessages.Commands;
 using EventMessages.Events;
 using Interfaces;
+using JB.Collections.Reactive;
 using MoreLinq;
 using ReactiveUI;
 using RevolutionEntities.Process;
@@ -32,7 +34,7 @@ namespace RevolutionData
                     (v,e) => 
                     {
                         if (v.State.Value == e.State) return;
-                        v.Questions = e.State.EntitySet.ToList();
+                        v.Questions = new ObservableList<IQuestionResponseOptionInfo>(e.State.EntitySet.ToList());
                     }),
                
                 new ViewEventSubscription<IQuestionaireViewModel, ICurrentEntityChanged<IQuestionInfo>>(
@@ -91,6 +93,28 @@ namespace RevolutionData
                     new List<Func<IQuestionaireViewModel, IEntityViewWithChangesFound<IResponseOptionInfo>, bool>>(),
                     (v, e) =>
                     {
+
+                        var itm = v.CurrentQuestion.Value.ResponseOptions.FirstOrDefault(x => x.Id == e.Entity.Id);
+                        if (itm == null)
+                        {
+                            v.CurrentQuestion.Value.ResponseOptions.Add(e.Entity);
+                        }
+                        else
+                        {
+                            var idx = v.CurrentQuestion.Value.ResponseOptions.IndexOf(itm);
+                            v.CurrentQuestion.Value.ResponseOptions.Remove(itm);
+                            v.CurrentQuestion.Value.ResponseOptions.Insert(idx, e.Entity);
+                            
+                        }
+                        
+                    }),
+
+                new ViewEventSubscription<IQuestionaireViewModel, IEntityViewWithChangesUpdated<IResponseOptionInfo>>(
+                    3,
+                    e => e?.Entity != null,
+                    new List<Func<IQuestionaireViewModel, IEntityViewWithChangesUpdated<IResponseOptionInfo>, bool>>(),
+                    (v, e) =>
+                    {
                         var itm = v.CurrentQuestion.Value.PatientResponses.FirstOrDefault(x => x.ResponseId == e.Entity.PatientResponseId);
                         if (itm == null)
                         {
@@ -101,11 +125,40 @@ namespace RevolutionData
                             var idx = v.CurrentQuestion.Value.PatientResponses.IndexOf(itm);
                             v.CurrentQuestion.Value.PatientResponses.Remove(itm);
                             v.CurrentQuestion.Value.PatientResponses.Insert(idx, e.Entity);
-                            
+
                         }
-                        
+
                     }),
 
+                new ViewEventSubscription<IQuestionaireViewModel, IEntityFound<IQuestionResponseOptionInfo>>(
+                    3,
+                    e => e != null,
+                    new List<Func<IQuestionaireViewModel, IEntityFound<IQuestionResponseOptionInfo>, bool>>(),
+                    (v, e) =>
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+
+
+                       var f = v.Questions.FirstOrDefault(x => x.Id == e.Entity.Id);
+                        if (v.CurrentQuestion.Value.Id == e.Entity.Id) v.CurrentQuestion.Value = e.Entity;
+                        if (f == null)
+                        {
+                            v.Questions.Insert(v.Questions.Count() - 1,e.Entity);
+                            v.Questions.Reset();
+                        }
+                        else
+                        {
+                            //f = e.Entity;
+                            var idx = v.Questions.IndexOf(f);
+                            v.Questions.Remove(f);
+                            v.Questions.Insert(idx, e.Entity);
+                            v.Questions.Reset();
+                        }
+                        v.RowState.Value = RowState.Unchanged;
+                        });
+
+                    }),
 
             },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
@@ -267,6 +320,7 @@ namespace RevolutionData
                     commandPredicate: new List<Func<IQuestionaireViewModel, bool>>
                     {
                         v => v.ChangeTracking.ContainsKey(nameof(IResponseOptions.Description)) 
+                               && !v.ChangeTracking.ContainsKey(nameof(IResponseOptions.QuestionId))
                               && v.CurrentEntity.Value.Id == 0
                     },
                     //TODO: Make a type to capture this info... i killing it here
@@ -288,7 +342,35 @@ namespace RevolutionData
                         return msg;
                     }),
 
-                
+                new ViewEventCommand<IQuestionaireViewModel, IUpdateEntityWithChanges<IResponseOptions>>(
+                    key:"UpdateResponseOption",
+                    subject:v => v.ChangeTracking.DictionaryChanges,
+                    commandPredicate: new List<Func<IQuestionaireViewModel, bool>>
+                    {
+                        v => v.ChangeTracking.ContainsKey(nameof(IResponseOptions.Description))
+                               
+                              && v.CurrentEntity.Value.Id != 0
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: s =>
+                    {
+                        var res = s.ChangeTracking;
+                        
+                        if (!res.ContainsKey(nameof(IResponseOptions.QuestionResponseTypeId)))
+                            res.Add(nameof(IResponseOptions.QuestionResponseTypeId),
+                                s.CurrentEntity.Value.QuestionResponseTypeId);
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                s.CurrentEntity.Value.Id,
+                                res.ToDictionary(x => x.Key, x => x.Value)
+                            },
+                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,s.Source);
+                        s.ChangeTracking.Clear();
+                        return msg;
+                    }),
+
+
 
 
             },
