@@ -6,10 +6,11 @@ namespace Interfaces
     
     public interface IPersonAddressInfo : IEntityView<IPersons_Patient>
     {
-        string City { get; set; }
-        string Country { get; set; }
-        string Parish { get; set; }
-        string State { get; set; }
-        string Addresstype { get; set; }
+        string AddressLines { get; }
+        string City { get;  }
+        string Country { get;  }
+        string Parish { get; }
+        string State { get;  }
+        string AddressType { get; }
     }
 }

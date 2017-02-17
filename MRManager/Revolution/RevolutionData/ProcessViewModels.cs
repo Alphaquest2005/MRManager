@@ -34,8 +34,9 @@ namespace RevolutionData
             PatientVisitViewModelInfo.PatientVisitViewModel,
             PatientSyntomViewModelInfo.PatientSyntomViewModel,
             InterviewListViewModelInfo.InterviewListViewModel,
-            QuestionaireViewModelInfo.QuestionairenaireViewViewModel,
             QuestionListViewModelInfo.QuestionListViewModel,
+            QuestionaireViewModelInfo.QuestionairenaireViewViewModel,
+            
             EntityCacheViewModelInfo<ISyntomPriority>.CacheViewModel(3),
             EntityCacheViewModelInfo<ISyntomStatus>.CacheViewModel(3),
             EntityCacheViewModelInfo<ISyntoms>.CacheViewModel(3),

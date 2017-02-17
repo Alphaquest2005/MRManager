@@ -15,7 +15,7 @@ namespace Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return null;
+            return ((DateTime)value).ToShortDateString();
             //throw new NotImplementedException();
         }
     }

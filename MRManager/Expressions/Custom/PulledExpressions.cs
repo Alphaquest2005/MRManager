@@ -145,9 +145,86 @@ namespace Entity.Expressions
                         .Select(x5 => x5.Value)
                         .FirstOrDefault(),
 
-               
+                PhoneNumbers = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                        .Where(
+                            x2 =>
+                                x2.Questions.EntityAttributes.Entity == "Contact" &&
+                                x2.Questions.EntityAttributes.Attribute == "PhoneNumber")
+                        .SelectMany(x4 => x4.Response).Where(x6 => x6.ResponseOptions.QuestionResponseTypes.Name == "Text")
+                        .Select(x5 => new PhoneNumbersInfo()
+                        {
+                            Id = x5.Id,
+                            PersonId = x.Id,
+                            PhoneNumber = x5.Value,
+                            Type = x5.ResponseOptions.Description
+                        } as IPersonPhoneNumberInfo).ToList(),
 
+                Addresses = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                        .Where(
+                            x2 =>
+                                x2.Questions.EntityAttributes.Entity == "Contact" &&
+                                x2.Questions.EntityAttributes.Attribute == "Address")
+                        .GroupBy(x6 => x6.QuestionId)
+                        .Select(x5 => new PersonAddressInfo()
+                        {
+                            Id = x5.Key,
+                            AddressType = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Address Type")
+                                                .Select(x6 => x6.Value).FirstOrDefault(),
+                            Parish = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Parish")
+                                                .Select(x6 => x6.Value).FirstOrDefault(),
+                            AddressLines = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "AddressLine")
+                                                .Select(x6 => x6.Value).FirstOrDefault(),
+                            City = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "City")
+                                                .Select(x6 => x6.Value).FirstOrDefault(),
+                            State = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "State")
+                                                .Select(x6 => x6.Value).FirstOrDefault(),
+                            Country = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Country")
+                                                .Select(x6 => x6.Value).FirstOrDefault(),
 
+                        } as IPersonAddressInfo).ToList(),
+
+                NextOfKins = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                        .Where(
+                            x2 =>
+                                x2.Questions.EntityAttributes.Entity == "Patient" &&
+                                x2.Questions.EntityAttributes.Attribute == "NextOfKin")
+                        .GroupBy(x6 => x6.QuestionId)
+                        .Select(x5 => new NextOfKinInfo()
+                        {
+                            Id = x5.Key,
+                            Relationship = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Relationship")
+                                                .Select(x6 => x6.Value).FirstOrDefault(),
+                            Name = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Name")
+                                                .Select(x6 => x6.Value).FirstOrDefault(),
+                            Address = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Address")
+                                                .Select(x6 => x6.Value).FirstOrDefault(),
+                            PhoneNumber = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "PhoneNumber")
+                                                .Select(x6 => x6.Value).FirstOrDefault(),
+
+                        } as INextOfKinInfo).ToList(),
+
+                NonResident = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                        .Where(
+                            x2 =>
+                                x2.Questions.EntityAttributes.Entity == "NonResident" )
+                        .GroupBy(x6 => x6.Questions.EntityAttributes.Entity)
+                        .Select(x5 => new NonResidentInfo()
+                        {
+                            Id = x.Id,
+                            Type = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Type")
+                                                .Select(x6 => x6.Value).FirstOrDefault(),
+                            BoatName = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Boat Name")
+                                                .Select(x6 => x6.Value).FirstOrDefault(),
+                            Marina = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Marina")
+                                                .Select(x6 => x6.Value).FirstOrDefault(),
+                            School = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "School Name")
+                                                .Select(x6 => x6.Value).FirstOrDefault(),
+                            DepartureDate = Convert.ToDateTime(x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Departure Date")
+                                                        
+                                                .Select(x6 => x6.Value).FirstOrDefault()),
+                            ArrivalDate = Convert.ToDateTime(x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Arrival Date")
+                                                .Select(x6 => x6.Value).FirstOrDefault()),
+                        } as INonResidentInfo).FirstOrDefault(),
             };
 
         public static Expression<Func<Patients, PatientInfo>> PatientInfoExpression { get; } =

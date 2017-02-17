@@ -49,7 +49,7 @@
                        FontSize="14"
                        Text="{Binding Path=PhoneNumber,
                                       UpdateSourceTrigger=PropertyChanged}" />
-            <TextBlock Width="92"
+            <!--<TextBlock Width="92"
                        Height="85"
                        Margin="38,109,0,0"
                        HorizontalAlignment="Left"
@@ -78,7 +78,7 @@
             <ListBox Height="Auto"
                      Margin="145,235,36,10"
                      ItemTemplate="{DynamicResource PS-PersonAddressInfoTpl}"
-                     ItemsSource="{Binding Path=Addresses}" />
+                     ItemsSource="{Binding Path=Addresses}" />-->
 
 
         </Grid>

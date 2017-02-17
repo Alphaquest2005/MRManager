@@ -327,6 +327,7 @@ namespace RevolutionData
                     commandPredicate: new List<Func<IQuestionaireViewModel, bool>>
                     {
                         v => v.ChangeTracking.ContainsKey(nameof(IResponseOptions.Description)) 
+                                && v.ChangeTracking[nameof(IResponseOptions.Description)] != ""
                                && !v.ChangeTracking.ContainsKey(nameof(IResponseOptions.QuestionId))
                               && v.CurrentEntity.Value.Id == 0
                     },

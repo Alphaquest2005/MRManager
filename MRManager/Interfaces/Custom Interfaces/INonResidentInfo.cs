@@ -10,7 +10,7 @@ namespace Interfaces
     {
         String Type { get; }
         String BoatName { get; }
-        String MarinaList { get; }
+        String Marina { get; }
         DateTime? ArrivalDate { get; }
         DateTime? DepartureDate { get; }
         String School { get; }

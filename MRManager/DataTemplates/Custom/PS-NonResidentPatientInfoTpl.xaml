@@ -28,7 +28,7 @@
                        Text="{Binding Path=Type,
                                       UpdateSourceTrigger=PropertyChanged,
                                       ValidatesOnDataErrors=True}" />
-            <StackPanel Margin="10,50,246,-4.333" Orientation="Vertical">
+            <StackPanel Margin="10,50,246,0" Orientation="Vertical">
                 <Grid Width="Auto"
                       Height="49"
                       Margin="0,0,-124.667,0"
@@ -63,7 +63,7 @@
                                Margin="140,25,10,100"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
-                               Text="{Binding MarinaList,
+                               Text="{Binding Marina,
                                               UpdateSourceTrigger=PropertyChanged,
                                               ValidatesOnDataErrors=True}" />
                 </Grid>

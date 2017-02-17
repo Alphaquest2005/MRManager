@@ -11,7 +11,7 @@ namespace EF.Entities
     {
         public string Type { get; set; }
         public string BoatName { get; set; }
-        public string MarinaList { get; set; }
+        public string Marina { get; set; }
         public DateTime? ArrivalDate { get; set; }
         public DateTime? DepartureDate { get; set; }
         public string School { get; set; }

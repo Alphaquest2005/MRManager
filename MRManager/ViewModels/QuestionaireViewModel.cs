@@ -44,9 +44,13 @@ namespace ViewModels
 
         private void UpdateChangeCollectionList(IQuestionResponseOptionInfo patientResponseInfo)
         {
-            
-                
-                if (patientResponseInfo == null) return;
+
+
+            if (patientResponseInfo == null)
+            {
+                if (EntitySet.Any()) EntitySet.Clear();
+                return;
+            }
                 
                 var resLst = new List<ResponseOptionInfo>();
                 BindingOperations.EnableCollectionSynchronization(resLst, lockObject);

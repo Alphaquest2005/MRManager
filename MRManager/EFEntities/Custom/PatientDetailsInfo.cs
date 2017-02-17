@@ -28,6 +28,7 @@ namespace EF.Entities
         public INonResidentInfo NonResident { get; set; }
         public IList<INextOfKinInfo> NextOfKins { get; set; }
         public DateTime BirthDate { get; set; }
+        
     }
 
 

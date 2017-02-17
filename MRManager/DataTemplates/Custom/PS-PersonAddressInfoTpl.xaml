@@ -42,7 +42,7 @@
                      Margin="150,50,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
-                     Text="{Binding Path=Addresslines,
+                     Text="{Binding Path=AddressLines,
                                     UpdateSourceTrigger=PropertyChanged,
                                     ValidatesOnDataErrors=True}" />
             <TextBlock Width="Auto"
@@ -130,7 +130,7 @@
                        Margin="10,200,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
-                       Text="Address Type Name"
+                       Text="Address Type"
                        TextAlignment="Right" />
             <TextBox Width="Auto"
                      Height="24"
@@ -138,7 +138,7 @@
                      Margin="150,200,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
-                     Text="{Binding Path=AddressTypeName,
+                     Text="{Binding Path=AddressType,
                                     UpdateSourceTrigger=PropertyChanged,
                                     ValidatesOnDataErrors=True}" />
             <StackPanel Margin="0,225,0,0" />

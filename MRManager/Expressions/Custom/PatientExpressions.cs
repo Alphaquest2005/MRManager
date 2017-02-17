@@ -48,7 +48,7 @@ namespace Entity.Expressions
                 MaritalStatus = x.PersonMaritalStatus.Select(z => z.MaritalStatus.Name).LastOrDefault(),
                 Addresses = x.Persons.PersonAddresses.Select(z => new PersonAddressInfo()
                 {
-                    Addresstype = z.AddressTypes.Name,
+                    AddressType = z.AddressTypes.Name,
                     City = z.Addresses.AddressCities.Cities.Name,
                     Country = z.Addresses.AddressCountries.Countries.Name,
                     Parish = z.Addresses.AddressParishes.Parishes.Name,
@@ -77,7 +77,7 @@ namespace Entity.Expressions
 
                     Addresses = z.Persons.PersonAddresses.Select(q => new PersonAddressInfo()
                     {
-                        Addresstype = q.AddressTypes.Name,
+                        AddressType = q.AddressTypes.Name,
                         City = q.Addresses.AddressCities.Cities.Name,
                         Country = q.Addresses.AddressCountries.Countries.Name,
                         Parish = q.Addresses.AddressParishes.Parishes.Name,
@@ -99,7 +99,7 @@ namespace Entity.Expressions
                     DepartureDate = x.Persons_NonResidentPatient.Persons_ArrivalDepartureInfo.DepartureDate,
                     HotelName =
                         x.Persons_NonResidentPatient.NonResidentHotelInfo.Organisations_Hotels.Organisations.Name,
-                    MarinaList = x.Persons_NonResidentPatient.BoatInfo.MarinaList,
+                    Marina = x.Persons_NonResidentPatient.BoatInfo.MarinaList,
                     School = x.Persons_NonResidentPatient.StudentInfo.School,
                     Addresses = x.Persons.PersonAddresses.Select(z => new ForeignAddressInfo()
                     {
@@ -137,7 +137,7 @@ namespace Entity.Expressions
 
                 Addresses = x.Persons.PersonAddresses.Select(z => new PersonAddressInfo()
                 {
-                    Addresstype = z.AddressTypes.Name,
+                    AddressType = z.AddressTypes.Name,
                     City = z.Addresses.AddressCities.Cities.Name,
                     Country = z.Addresses.AddressCountries.Countries.Name,
                     Parish = z.Addresses.AddressParishes.Parishes.Name,
@@ -180,7 +180,7 @@ namespace Entity.Expressions
                 ArrivalDate = x.Persons_NonResidentPatient.Persons_ArrivalDepartureInfo.ArrivalDate,
                 DepartureDate = x.Persons_NonResidentPatient.Persons_ArrivalDepartureInfo.DepartureDate,
                 HotelName = x.Persons_NonResidentPatient.NonResidentHotelInfo.Organisations_Hotels.Organisations.Name,
-                MarinaList = x.Persons_NonResidentPatient.BoatInfo.MarinaList,
+                Marina = x.Persons_NonResidentPatient.BoatInfo.MarinaList,
                 School = x.Persons_NonResidentPatient.StudentInfo.School,
                 Addresses = x.Persons.PersonAddresses.Select(z => new ForeignAddressInfo()
                 {

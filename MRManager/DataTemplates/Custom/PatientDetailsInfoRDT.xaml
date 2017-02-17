@@ -7,16 +7,16 @@
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
-    <DataTemplate x:Key="PatientDetailsInfoRDT" >
+    <DataTemplate x:Key="PatientDetailsInfoRDT">
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
         </DataTemplate.Resources>
         <TabControl x:Name="ViewPatientInfo"
                     Width="1000"
                     Margin="0,50,0,0"
-                    DataContext="{Binding Source={x:Static viewModels:PatientDetailsViewModel.Instance}}"
                     d:DesignWidth="1000"
                     Background="#7FFFFFFF"
+                    DataContext="{Binding Source={x:Static viewModels:PatientDetailsViewModel.Instance}}"
                     TabStripPlacement="Left">
 
             <TabItem Background="#7FFFFFFF">
@@ -234,7 +234,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem >
+            <TabItem>
                 <TabItem.Header>
                     <Grid Width="200" Height="100">
                         <TextBlock Margin="0,0,0,63"
@@ -277,7 +277,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Background="#4C100163" >
+            <TabItem Background="#4C100163">
 
                 <TabItem.Header>
                     <Grid Width="200" Height="100">
@@ -303,10 +303,10 @@
                     </Grid>
                 </TabItem.Header>
                 <Grid>
-                    <ContentControl Margin="10,0,0.333,309"
+                    <ContentControl Margin="10,0,0.333,300"
                                     Content="{Binding State.Value.Entity.NonResident}"
                                     ContentTemplate="{DynamicResource PS-NonResidentPatientInfoTpl}" />
-                    <TextBlock Width="92"
+                    <!--<TextBlock Width="92"
                                Height="85"
                                Margin="21,221,0,0"
                                HorizontalAlignment="Left"
@@ -337,7 +337,7 @@
                     <ListBox Height="Auto"
                              Margin="117,374,21.333,9"
                              ItemTemplate="{DynamicResource PS-ForeignAddressTpl}"
-                             ItemsSource="{Binding State.Value.Entity.NonResident.Addresses}" />
+                             ItemsSource="{Binding State.Value.Entity.NonResident.Addresses}" />-->
 
                 </Grid>
             </TabItem>
