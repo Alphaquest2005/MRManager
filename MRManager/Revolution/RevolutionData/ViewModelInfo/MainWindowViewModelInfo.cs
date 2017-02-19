@@ -28,10 +28,10 @@ namespace RevolutionData
                 }
                 else
                 {
-                    Application.Current.Dispatcher.Invoke(() =>
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                     {
                         s.BodyViewModels.Add(e.ViewModel);
-                    });
+                    }));
                 }
             })
             },

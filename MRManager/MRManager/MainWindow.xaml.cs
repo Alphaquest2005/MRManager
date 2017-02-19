@@ -21,6 +21,9 @@ namespace MRManager
 			InitializeComponent();
             if (File.Exists("MRManager-Logs.xml")) File.Delete("MRManager-Logs.xml");
             Logger.Initialize();
+
+            Logger.Log(LoggingLevel.Info, $"The UI Thread is:{Application.Current.Dispatcher.Thread.ManagedThreadId}");
+
             Task.Run(() =>
 		    {
 		        var t = new MRManagerDBContext().GetType().Assembly;

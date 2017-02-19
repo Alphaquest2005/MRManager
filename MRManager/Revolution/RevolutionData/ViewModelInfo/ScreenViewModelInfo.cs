@@ -39,7 +39,7 @@ namespace RevolutionData
                     }
                     else
                     {
-                        Application.Current.Dispatcher.Invoke(() => s.HeaderViewModels.Add(e.ViewModel));
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() => s.HeaderViewModels.Add(e.ViewModel)));
                     }
                 }),
                 new ViewEventSubscription<IScreenModel, IViewModelCreated<IViewModel>>(
@@ -57,7 +57,7 @@ namespace RevolutionData
                         }
                         else
                         {
-                            Application.Current.Dispatcher.Invoke(() => s.LeftViewModels.Add(e.ViewModel));
+                            Application.Current.Dispatcher.BeginInvoke(new Action(() => s.LeftViewModels.Add(e.ViewModel)));
                         }
                     }),
                 new ViewEventSubscription<IScreenModel, IViewModelCreated<IViewModel>>(1, e => e != null, new List<Func<IScreenModel, IViewModelCreated<IViewModel>, bool>>
@@ -71,7 +71,7 @@ namespace RevolutionData
                     }
                     else
                     {
-                        Application.Current.Dispatcher.Invoke(() => s.RightViewModels.Add(e.ViewModel));
+                       Application.Current.Dispatcher.BeginInvoke(new Action(() => s.RightViewModels.Add(e.ViewModel)));
                     }
                 }),
                 new ViewEventSubscription<IScreenModel, IViewModelCreated<IViewModel>>(
@@ -86,7 +86,7 @@ namespace RevolutionData
                         }
                         else
                         {
-                            Application.Current.Dispatcher.Invoke(() => s.FooterViewModels.Add(e.ViewModel));
+                            Application.Current.Dispatcher.BeginInvoke(new Action(() => s.FooterViewModels.Add(e.ViewModel)));
                         }
                     }),
                 new ViewEventSubscription<IScreenModel, IViewModelCreated<IViewModel>>(1, e => e != null, new List<Func<IScreenModel, IViewModelCreated<IViewModel>, bool>>
@@ -100,7 +100,7 @@ namespace RevolutionData
                     }
                     else
                     {
-                        Application.Current.Dispatcher.Invoke(() => s.BodyViewModels.Add(e.ViewModel));
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() => s.BodyViewModels.Add(e.ViewModel)));
                     }
                 }),
 
@@ -115,7 +115,7 @@ namespace RevolutionData
                     }
                     else
                     {
-                        Application.Current.Dispatcher.Invoke(() => s.CacheViewModels.Add(e.ViewModel));
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() => s.CacheViewModels.Add(e.ViewModel)));
                     }
                 }),
 
@@ -136,7 +136,7 @@ namespace RevolutionData
                         }
                         else
                         {
-                            Application.Current.Dispatcher.Invoke(() =>
+                            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                             {
                                 s.BodyViewModels.RemoveRange(s.BodyViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
                                 s.BodyViewModels.Reset();
@@ -150,7 +150,7 @@ namespace RevolutionData
                                 s.FooterViewModels.Reset();
                                 s.CacheViewModels.RemoveRange(s.CacheViewModels.Where(x => x.Process.Id == e.ProcessToBeCleanedUpId));
                                 s.CacheViewModels.Reset();
-                            });
+                            }));
                         }
                     }),
             },

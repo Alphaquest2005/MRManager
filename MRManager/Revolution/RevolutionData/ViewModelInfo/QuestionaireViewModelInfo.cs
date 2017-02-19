@@ -137,7 +137,7 @@ namespace RevolutionData
                     new List<Func<IQuestionaireViewModel, IEntityViewWithChangesFound<IQuestionResponseOptionInfo>, bool>>(),
                     (v, e) =>
                     {
-                        Application.Current.Dispatcher.Invoke(() =>
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                         {
 
 
@@ -164,7 +164,7 @@ namespace RevolutionData
                             v.Questions.Reset();
                         }
                         v.RowState.Value = RowState.Unchanged;
-                        });
+                        }));
 
                     }),
 

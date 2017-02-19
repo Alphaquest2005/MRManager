@@ -102,7 +102,8 @@ namespace DataServices.Actors
             Publish(inMsg);
             try
             {
-                var outMsg = ComplexEventAction.Action.Action.Invoke(inMsg.ComplexEventParameters);
+                var asyncRes = ComplexEventAction.Action.Action.BeginInvoke(inMsg.ComplexEventParameters,null,null);
+                var outMsg = ComplexEventAction.Action.Action.EndInvoke(asyncRes);
                 Publish(outMsg);
                 
             }

@@ -38,7 +38,7 @@ namespace RevolutionData
                             }
                             else
                             {
-                                Application.Current.Dispatcher.Invoke(() => ReloadEntitySet(v, e));
+                                Application.Current.Dispatcher.BeginInvoke(new Action(() => ReloadEntitySet(v, e)));
                             }
                         }),
 
@@ -54,7 +54,7 @@ namespace RevolutionData
                             }
                             else
                             {
-                                Application.Current.Dispatcher.Invoke(() => UpdateEntitySet(v, e));
+                                Application.Current.Dispatcher.BeginInvoke(new Action(() => UpdateEntitySet(v, e)));
                             }
                         }),
                     new ViewEventSubscription<IEntityCacheViewModel<TEntity>, ICurrentEntityChanged<TEntity>>(

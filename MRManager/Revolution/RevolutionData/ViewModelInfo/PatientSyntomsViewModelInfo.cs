@@ -53,7 +53,7 @@ namespace RevolutionData
                     new List<Func<IPatientSyntomViewModel, IEntityViewWithChangesFound<IPatientSyntomInfo>, bool>>(),
                     (v, e) =>
                     {
-                        Application.Current.Dispatcher.Invoke(() =>
+                       Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                         {
 
 
@@ -73,7 +73,7 @@ namespace RevolutionData
                             v.EntitySet.Reset();
                         }
                         v.RowState.Value = RowState.Unchanged;
-                        });
+                        }));
 
                     }),
 
@@ -83,7 +83,7 @@ namespace RevolutionData
                     new List<Func<IPatientSyntomViewModel, IEntityViewWithChangesFound<IPatientSyntomInfo>, bool>>(),
                     (v, e) =>
                     {
-                        Application.Current.Dispatcher.Invoke(() =>
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                         {
 
 
@@ -103,7 +103,7 @@ namespace RevolutionData
                             v.EntitySet.Reset();
                         }
                         v.RowState.Value = RowState.Unchanged;
-                        });
+                        }));
 
                     }),
 
@@ -113,7 +113,7 @@ namespace RevolutionData
                     new List<Func<IPatientSyntomViewModel, IEntityViewWithChangesUpdated<IPatientSyntomInfo>, bool>>(),
                     (v, e) =>
                     {
-                        Application.Current.Dispatcher.Invoke(() =>
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                         {
 
 
@@ -133,7 +133,7 @@ namespace RevolutionData
                             v.EntitySet.Reset();
                         }
                         v.RowState.Value = RowState.Unchanged;
-                        });
+                        }));
 
                     }),
 

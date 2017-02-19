@@ -78,8 +78,9 @@ namespace RevolutionData
                 processInfo:new StateCommandInfo(1,Context.Process.Commands.CleanUpProcess ),
                 action: ProcessActions.CleanUpProcess),
 
+            
             //new ComplexEventAction(
-            //    "105",
+            //    "106",
             //    1, new List<IProcessExpectedEvent>
             //    {
             //        new ProcessExpectedEvent ("ProcessEventError", 1, typeof (IProcessEventFailure), e => e != null, new StateEventInfo(1, Context.Process.Events.Error), new SourceType(typeof(IComplexEventService))),
@@ -87,17 +88,7 @@ namespace RevolutionData
             //    },
             //    typeof(IProcessEventFailure),
             //    processInfo:new StateCommandInfo(1,Context.Process.Commands.Error ),
-            //    action: ProcessActions.DisplayError),
-            new ComplexEventAction(
-                "106",
-                1, new List<IProcessExpectedEvent>
-                {
-                    new ProcessExpectedEvent ("ProcessEventError", 1, typeof (IProcessEventFailure), e => e != null, new StateEventInfo(1, Context.Process.Events.Error), new SourceType(typeof(IComplexEventService))),
-
-                },
-                typeof(IProcessEventFailure),
-                processInfo:new StateCommandInfo(1,Context.Process.Commands.Error ),
-                action: ProcessActions.ShutDownApplication),
+            //    action: ProcessActions.ShutDownApplication),
 
             new ComplexEventAction(
                 "200",

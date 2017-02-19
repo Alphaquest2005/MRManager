@@ -42,7 +42,7 @@ namespace RevolutionData
                     new List<Func<IPatientSummaryListViewModel, IEntityViewWithChangesUpdated<IPatientInfo>, bool>>(),
                     (v, e) =>
                     {
-                        Application.Current.Dispatcher.Invoke(() =>
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                         {
 
 
@@ -62,7 +62,7 @@ namespace RevolutionData
                             v.EntitySet.Reset();
                         }
                         v.RowState.Value = RowState.Unchanged;
-                        });
+                        }));
 
                     }),
 

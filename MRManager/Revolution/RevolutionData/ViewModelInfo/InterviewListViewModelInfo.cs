@@ -51,7 +51,7 @@ namespace RevolutionData
                     new List<Func<IInterviewListViewModel, IEntityViewWithChangesUpdated<ISyntomMedicalSystemInfo>, bool>>(),
                     (v, e) =>
                     {
-                        Application.Current.Dispatcher.Invoke(() =>
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                         {
 
 
@@ -71,7 +71,7 @@ namespace RevolutionData
                             v.Systems.Value.Reset();
                         }
                         v.RowState.Value = RowState.Unchanged;
-                        });
+                        }));
 
                     }),
 
@@ -81,7 +81,7 @@ namespace RevolutionData
                     new List<Func<IInterviewListViewModel, IEntityViewWithChangesFound<ISyntomMedicalSystemInfo>, bool>>(),
                     (v, e) =>
                     {
-                        Application.Current.Dispatcher.Invoke(() =>
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                         {
 
 
@@ -101,7 +101,7 @@ namespace RevolutionData
                             v.Systems.Value.Reset();
                         }
                         v.RowState.Value = RowState.Unchanged;
-                        });
+                        }));
 
                     }),
 
@@ -113,7 +113,7 @@ namespace RevolutionData
                     new List<Func<IInterviewListViewModel, IEntityViewWithChangesUpdated<IInterviewInfo>, bool>>(),
                     (v, e) =>
                     {
-                        Application.Current.Dispatcher.Invoke(() =>
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                         {
 
 
@@ -133,7 +133,7 @@ namespace RevolutionData
                             v.EntitySet.Reset();
                         }
                         v.RowState.Value = RowState.Unchanged;
-                        });
+                        }));
 
                     }),
 
@@ -143,7 +143,7 @@ namespace RevolutionData
                     new List<Func<IInterviewListViewModel, IEntityViewWithChangesFound<IInterviewInfo>, bool>>(),
                     (v, e) =>
                     {
-                        Application.Current.Dispatcher.Invoke(() =>
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                         {
 
 
@@ -171,7 +171,7 @@ namespace RevolutionData
                             v.EntitySet.Reset();
                         }
                         v.RowState.Value = RowState.Unchanged;
-                        });
+                        }));
 
                     }),
             },

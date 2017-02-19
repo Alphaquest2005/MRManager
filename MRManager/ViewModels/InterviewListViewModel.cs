@@ -43,12 +43,12 @@ namespace ViewModels
 
         private void addSystems(ObservableList<ISyntomMedicalSystemInfo> observableList)
         {
-            Application.Current.Dispatcher.Invoke(() =>
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 if (Systems.Value.FirstOrDefault(x => x.Id == 0) != null) return;
                 Systems.Value.Add(new SyntomMedicalSystemInfo() { System = "Create New..." });
                 
-            });
+            }));
         }
 
         private void addNewRow(IList<IInterviewInfo> observableList)
