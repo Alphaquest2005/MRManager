@@ -12,6 +12,8 @@ namespace Core.Common.UI
 {
     public class SliderPanel : Panel, INotifyPropertyChanged
     {
+        private const int NavPadding = 100;
+
         public SliderPanel()
         {
             MouseLeftButtonDown += new MouseButtonEventHandler(SliderPanel_MouseLeftButtonDown);
@@ -332,48 +334,13 @@ namespace Core.Common.UI
                 ctl = pctl.Pop();
             }
             //if (ctl == ppctl && pctl.Count > 0) 
-            MoveTo(ctl);
+            BringIntoView(ctl);
         }
 
         static string ppctl = "";
         private double navWidth = 25;
         private double navHeight = 40;
-        public void MoveTo(string ctl)
-        {
-            //var slid = this;
-
-            //Expander slidcontents;
-            //if (ctl == "ReportBRD")
-            //{
-            //    var mainsales = Common.FindChild<Grid>(slid, "MainSalesContents");
-            //    slidcontents = Common.FindChild<Expander>(mainsales, ctl);
-            //}
-            //else
-            //{
-            //    slidcontents = Common.FindChild<Expander>(slid, ctl);
-            //}
-
-
-            //if (slidcontents == null)
-            //{
-            //    MessageBox.Show("Control Not Found:" + ctl);
-            //    return;
-            //}
-
-            //if (Orientation == "Horizontal")
-            //{
-            //    var sl = slidcontents.TransformToAncestor(slid.Parent as Visual).Transform(new Point(0, 0)).X * -1;
-            //    slid.MoveControls(sl + navWidth);
-            //}
-            //else
-            //{
-            //    var sl = slidcontents.TransformToAncestor(slid.Parent as Visual).Transform(new Point(0, 0)).Y * -1;
-            //    slid.MoveControls(sl + navHeight);
-            //}
-            //slidcontents.IsExpanded = true;
-            //ppctl = ctl;
-            //pctl.Push(ctl);
-        }
+       
 
         public void BringIntoView(string ctl)
         {
@@ -414,7 +381,7 @@ namespace Core.Common.UI
                     var sl = slidcontents.TransformToAncestor(slid.Parent as Visual).Transform(new Point(0, 0)).X * -1;
                     if (sl * -1 > (sp.ActualWidth - exp.ActualWidth) && sp.ActualWidth > exp.ActualWidth)
                     {
-                        slid.MoveControls(sl + sp.ActualWidth - exp.ActualWidth);
+                        slid.MoveControls(sl + sp.ActualWidth - exp.ActualWidth - (NavPadding));
                     }
                     if (sl * -1 < 0 || sp.ActualWidth < exp.ActualWidth)
                     {

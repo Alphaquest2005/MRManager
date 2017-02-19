@@ -10,7 +10,7 @@
                     mc:Ignorable="d">
 
     <DataTemplate DataType="{x:Type viewModels:PatientSummaryListViewModel}">
-        <Grid Margin="0" Background="#4CFFFFFF">
+        <Grid Margin="0" Background="#4CFFFFFF" x:Name="ViewPatientSummary">
 
 
 

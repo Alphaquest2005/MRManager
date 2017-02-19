@@ -11,7 +11,7 @@
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
         </DataTemplate.Resources>
-        <TabControl x:Name="ViewPatientInfo"
+        <TabControl 
                     Width="1000"
                     Margin="0,50,0,0"
                     d:DesignWidth="1000"

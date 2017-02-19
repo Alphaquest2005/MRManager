@@ -74,55 +74,66 @@ namespace RevolutionData
                     commandPredicate:new List<Func<IFooterViewModel, bool>>{},
                     subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
 
-                    messageData: s =>
-                    {
-                        return new ViewEventCommandParameter(
-                            new object[] {ViewMessageConst.Instance.ViewHome},
-                            new StateCommandInfo(s.Process.Id,
-                                Context.View.Commands.NavigateToView), s.Process,
-                            s.Source);
-                    }),
+                    messageData: s => new ViewEventCommandParameter(
+                        new object[] {ViewMessageConst.Instance.ViewHome},
+                        new StateCommandInfo(s.Process.Id,
+                            Context.View.Commands.NavigateToView), s.Process,
+                        s.Source)),
 
                 new ViewEventCommand<IFooterViewModel, INavigateToView>(
-                    key:"ViewPatientInfo",
+                    key:"ViewPatientSummary",
                     commandPredicate:new List<Func<IFooterViewModel, bool>>{},
                     subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
 
-                    messageData: s =>
-                    {
-                        return new ViewEventCommandParameter(
-                            new object[] {ViewMessageConst.Instance.ViewPatientInfo},
-                            new StateCommandInfo(s.Process.Id,
-                                Context.View.Commands.NavigateToView), s.Process,
-                            s.Source);
-                    }),
+                    messageData: s => new ViewEventCommandParameter(
+                        new object[] {ViewMessageConst.Instance.ViewPatientSummary},
+                        new StateCommandInfo(s.Process.Id,
+                            Context.View.Commands.NavigateToView), s.Process,
+                        s.Source)),
+
                 new ViewEventCommand<IFooterViewModel, INavigateToView>(
-                    key:"ViewVitals",
+                    key:"ViewPatientVisit",
                     commandPredicate:new List<Func<IFooterViewModel, bool>>{},
                     subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
 
-                    messageData: s =>
-                    {
-                        return new ViewEventCommandParameter(
-                            new object[] {ViewMessageConst.Instance.ViewVitals},
-                            new StateCommandInfo(s.Process.Id,
-                                Context.View.Commands.NavigateToView), s.Process,
-                            s.Source);
-                    }),
+                    messageData: s => new ViewEventCommandParameter(
+                        new object[] {ViewMessageConst.Instance.ViewPatientVisit},
+                        new StateCommandInfo(s.Process.Id,
+                            Context.View.Commands.NavigateToView), s.Process,
+                        s.Source)),
+
+                new ViewEventCommand<IFooterViewModel, INavigateToView>(
+                    key:"ViewPatientSyntom",
+                    commandPredicate:new List<Func<IFooterViewModel, bool>>{},
+                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+
+                    messageData: s => new ViewEventCommandParameter(
+                        new object[] {ViewMessageConst.Instance.ViewPatientSyntom},
+                        new StateCommandInfo(s.Process.Id,
+                            Context.View.Commands.NavigateToView), s.Process,
+                        s.Source)),
+
+                new ViewEventCommand<IFooterViewModel, INavigateToView>(
+                    key:"ViewInterview",
+                    commandPredicate:new List<Func<IFooterViewModel, bool>>{},
+                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+
+                    messageData: s => new ViewEventCommandParameter(
+                        new object[] {ViewMessageConst.Instance.ViewInterview},
+                        new StateCommandInfo(s.Process.Id,
+                            Context.View.Commands.NavigateToView), s.Process,
+                        s.Source)),
 
                 new ViewEventCommand<IFooterViewModel, INavigateToView>(
                     key:"ViewPatientResponses",
                     commandPredicate:new List<Func<IFooterViewModel, bool>>{},
                     subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
 
-                    messageData: s =>
-                    {
-                        return new ViewEventCommandParameter(
-                            new object[] {ViewMessageConst.Instance.ViewPatientResponses},
-                            new StateCommandInfo(s.Process.Id,
-                                Context.View.Commands.NavigateToView), s.Process,
-                            s.Source);
-                    }),
+                    messageData: s => new ViewEventCommandParameter(
+                        new object[] {ViewMessageConst.Instance.ViewPatientResponses},
+                        new StateCommandInfo(s.Process.Id,
+                            Context.View.Commands.NavigateToView), s.Process,
+                        s.Source)),
                    
 
 

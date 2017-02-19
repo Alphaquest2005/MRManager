@@ -16,9 +16,12 @@ namespace ViewMessages
         {
             get { return instance; }
         }
-        public string ViewVitals => "ViewVitals";
-        public string ViewPatientInfo => "ViewPatientInfo";
+        public string ViewHome => "ViewHome";
+        public string ViewPatientSummary => "ViewPatientSummary";
+        public string ViewPatientVisit => "ViewPatientVisit";
+        public string ViewPatientSyntom => "ViewPatientSyntom";
+        public string ViewInterview => "ViewInterview";
         public string ViewPatientResponses => "ViewPatientResponses";
-       public string ViewHome => "ViewHome";
+       
    }
 }

@@ -10,7 +10,7 @@
                     mc:Ignorable="d">
 
     <DataTemplate DataType="{x:Type viewModels:InterviewListViewModel}">
-        <Grid Width="500" Margin="0">
+        <Grid Width="500" Margin="0" x:Name="ViewInterview">
 
             <ListBox Margin="10,33,10,262"
                      IsSynchronizedWithCurrentItem="True"
