@@ -65,6 +65,7 @@
     <Compile Include="Context\Actor.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="ViewModelInfo\EntityCacheViewModelInfo.cs" />
+    <Compile Include="ViewModelInfo\FooterViewModelInfo.cs" />
     <Compile Include="ViewModelInfo\HeaderViewModelInfo.cs" />
     <Compile Include="ViewModelInfo\EntityViewCacheViewModelInfo.cs" />
     <Compile Include="ViewModelInfo\InterviewListViewModelInfo.cs" />

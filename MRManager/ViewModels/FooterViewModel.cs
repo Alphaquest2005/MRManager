@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using SystemInterfaces;
+using Core.Common.UI;
+using EF.Entities;
+using FluentValidation;
+using Interfaces;
+using JB.Collections.Reactive;
+using Reactive.Bindings;
+using ReactiveUI;
+using ValidationSets;
+using ViewModel.Interfaces;
+using ViewModelInterfaces;
+
+namespace ViewModels
+{
+
+    [Export(typeof(IFooterViewModel))]
+    public class FooterViewModel : DynamicViewModel<ObservableViewModel>, IFooterViewModel
+    {
+        [ImportingConstructor]
+        public FooterViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableViewModel(eventSubscriptions, eventPublications, commandInfo, process, orientation))
+        {
+            this.WireEvents();
+        }
+
+        
+        public ReactiveProperty<IPatientInfo> CurrentPatient { get; } = new ReactiveProperty<IPatientInfo>();
+        public ReactiveProperty<IPatientVisitInfo> CurrentPatientVisit { get; } = new ReactiveProperty<IPatientVisitInfo>();
+        public ReactiveProperty<IPatientSyntomInfo> CurrentPatientSyntom { get; } = new ReactiveProperty<IPatientSyntomInfo>();
+        public ReactiveProperty<IInterviewInfo> CurrentInterview { get; } = new ReactiveProperty<IInterviewInfo>();
+    }
+}

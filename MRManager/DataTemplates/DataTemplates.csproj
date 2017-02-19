@@ -51,6 +51,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Custom\SummaryInterviewInfoDT.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Custom\SummaryPatientSyntomInfoDT.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Custom\SummaryPatientVisitInfoDT.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Custom\SummaryPatientInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CustomTemplatesResource.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -60,6 +76,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="AllEntityViewDataTemplatesResource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Custom\FooterVDT.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

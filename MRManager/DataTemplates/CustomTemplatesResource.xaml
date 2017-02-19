@@ -23,6 +23,7 @@
         <ResourceDictionary Source="Custom/ResponseOptionRDT.xaml" />
         <ResourceDictionary Source="Custom/ResponseOptionWDT.xaml" />
         <ResourceDictionary Source="Custom/HeaderVDT.xaml" />
+        <ResourceDictionary Source="Custom/FooterVDT.xaml" />
         <ResourceDictionary Source="Custom/SystemInfoRDT.xaml" />
         <ResourceDictionary Source="Custom/SystemInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/PatientSyntomInfoRDT.xaml" />
@@ -34,5 +35,10 @@
         <ResourceDictionary Source="Custom/PatientSyntomListVDT.xaml" />
         <ResourceDictionary Source="Custom/PatientSyntomInfoRDT.xaml" />
         <ResourceDictionary Source="Custom/PatientSyntomInfoWDT.xaml" />
+
+        <ResourceDictionary Source="Custom/SummaryPatientInfo.xaml" />
+        <ResourceDictionary Source="Custom/SummaryPatientVisitInfoDT.xaml" />
+        <ResourceDictionary Source="Custom/SummaryPatientSyntomInfoDT.xaml" />
+        <ResourceDictionary Source="Custom/SummaryInterviewInfoDT.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

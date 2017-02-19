@@ -1,0 +1,88 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
+                    xmlns:converters="clr-namespace:Converters;assembly=Converters"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+                    mc:Ignorable="d">
+
+    <DataTemplate x:Key="SummaryPatientInfoDT" DataType="{x:Type Interfaces:IPatientInfo}">
+        <DataTemplate.Resources>
+            <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+        </DataTemplate.Resources>
+        <Border
+                Height="Auto"
+                Margin="5"
+                VerticalAlignment="Center"
+                BorderThickness="2,2,2,2" Background="{x:Null}" BorderBrush="#99F5F5F5">
+            <Grid Width="Auto" Height="100">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        
+                        <GradientStop Offset="0.065" Color="#4CFFFFFF" />
+                        <GradientStop Color="#C1FFFFFF" Offset="0.92"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <TextBlock Width="180"
+                       Height="19"
+                       Margin="109,12,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="16"
+                       Text="{Binding Name,
+                                      Mode=OneWay}" />
+                <TextBlock Width="105"
+                       Height="18"
+                       Margin="109,36,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="13"
+                       Text="{Binding Address,
+                                      Mode=OneWay}" />
+                <TextBlock Width="80"
+                       Height="23"
+                       Margin="109,59,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="13"
+                       Text="{Binding PhoneNumber,
+                                      Mode=OneWay}" />
+                <TextBlock Width="42"
+                       Height="18"
+                       Margin="247,36,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="13"
+                       FontWeight="Bold"
+                       Text="{Binding Age,
+                                      Mode=OneWay}"
+                       TextWrapping="NoWrap" />
+                <TextBlock Width="68"
+                       Height="50"
+                       Margin="10,17,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontFamily="Segoe UI Symbol"
+                       FontSize="36"
+                       Style="{DynamicResource TextButtonStyle}"
+                       Text=""
+                       TextAlignment="Center"
+                       TextWrapping="Wrap" />
+                <TextBlock Width="71"
+                       Height="28"
+                       Margin="7,72,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="20"
+                       Style="{DynamicResource TextButtonStyle}"
+                       Text="Patient"
+                       TextAlignment="Center" />
+
+
+            </Grid>
+        </Border>
+
+
+    </DataTemplate>
+</ResourceDictionary>

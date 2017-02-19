@@ -32,16 +32,16 @@
     </UserControl.Resources>
 
     <DockPanel x:Name="LayoutRoot"
-               Margin="0,0,0,0"
-               Focusable="True"
+               Margin="0,-90,0,0"
                Background="{x:Null}"
                DataContext="{Binding}"
+               Focusable="True"
                LastChildFill="True">
 
         <ItemsControl Height="Auto"
                       MaxHeight="125"
-                      Focusable="True"
                       DockPanel.Dock="Top"
+                      Focusable="True"
                       ItemsSource="{Binding HeaderViewModels}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -58,9 +58,8 @@
         </ItemsControl>
         <ItemsControl Height="Auto"
                       MinHeight="0"
-                      Focusable="True"
-                      MaxHeight="75"
                       DockPanel.Dock="Bottom"
+                      Focusable="True"
                       ItemsSource="{Binding FooterViewModels}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -76,10 +75,10 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
         <ItemsControl Margin="5"
-                      Focusable="True"
                       DockPanel.Dock="Left"
-                      ItemsSource="{Binding LeftViewModels}" >
-            
+                      Focusable="True"
+                      ItemsSource="{Binding LeftViewModels}">
+
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Grid />
@@ -96,8 +95,8 @@
 
         <ItemsControl Width="Auto"
                       Margin="5"
-                      Focusable="True"
                       DockPanel.Dock="Right"
+                      Focusable="True"
                       ItemsSource="{Binding RightViewModels}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -115,12 +114,11 @@
         <Grid Width="Auto">
 
             <coreui:SliderPanel x:Name="slider"
-                Width="10000"
-                Focusable="True"
-                Margin="0,0,0,0"
-                Background="#00B76767"
-                               
-                Orientation="Horizontal">
+                                Width="10000"
+                                Margin="0,0,0,0"
+                                Background="#00B76767"
+                                Focusable="True"
+                                Orientation="Horizontal">
 
                 <ItemsControl Margin="0" ItemsSource="{Binding BodyViewModels}">
                     <ItemsControl.ItemsPanel>
@@ -131,44 +129,46 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Expander Width="Auto"
-                                Height="550"
-                                Margin="20,010,0,0"
-                                HorizontalAlignment="Left"
-                                Focusable="True"
-                                VerticalAlignment="Top"
-                                ExpandDirection="Right"
-                                IsExpanded="True"
-                                Tag="{Binding ViewName}">
+                                      Height="550"
+                                      Margin="20,010,0,0"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Top"
+                                      ExpandDirection="Right"
+                                      Focusable="True"
+                                      IsExpanded="True"
+                                      Tag="{Binding ViewName}">
                                 <Expander.Header>
-                                    <Grid Height="550" Focusable="True" MouseEnter="BringIntoView">
+                                    <Grid Height="550"
+                                          Focusable="True"
+                                          MouseEnter="BringIntoView">
                                         <!--<Grid.RenderTransform>
                                         <ScaleTransform ScaleX=".75" ScaleY=".75" CenterX="50" CenterY="50" />
                                     </Grid.RenderTransform>-->
                                         <TextBlock Width="55"
-                                            Height="63"
-                                            Margin="0,10,23,0"
-                                            HorizontalAlignment="Right"
-                                            VerticalAlignment="Top"
-                                            FontFamily="Segoe UI Symbol"
-                                            FontSize="28"
-                                            Style="{DynamicResource ExpHeadStyle}"
-                                            Text="{Binding ViewName}" />
+                                                   Height="63"
+                                                   Margin="0,10,23,0"
+                                                   HorizontalAlignment="Right"
+                                                   VerticalAlignment="Top"
+                                                   FontFamily="Segoe UI Symbol"
+                                                   FontSize="28"
+                                                   Style="{DynamicResource ExpHeadStyle}"
+                                                   Text="{Binding ViewName}" />
                                         <TextBlock Width="77"
-                                            Height="72"
-                                            Margin="0,0,12.6,417"
-                                            HorizontalAlignment="Right"
-                                            VerticalAlignment="Bottom"
-                                            FontSize="{DynamicResource ExpHeadFontSize}"
-                                            FontWeight="Bold"
-                                            RenderTransformOrigin="0.535,1.32"
-                                            Style="{DynamicResource ExpHeadStyle}"
-                                            Text="{Binding Description}"
-                                            TextAlignment="Center"
-                                            TextWrapping="Wrap" />
+                                                   Height="72"
+                                                   Margin="0,0,12.6,417"
+                                                   HorizontalAlignment="Right"
+                                                   VerticalAlignment="Bottom"
+                                                   FontSize="{DynamicResource ExpHeadFontSize}"
+                                                   FontWeight="Bold"
+                                                   RenderTransformOrigin="0.535,1.32"
+                                                   Style="{DynamicResource ExpHeadStyle}"
+                                                   Text="{Binding Description}"
+                                                   TextAlignment="Center"
+                                                   TextWrapping="Wrap" />
 
                                     </Grid>
                                 </Expander.Header>
-                                <ContentPresenter Focusable="True" Content="{TemplateBinding Content}" />
+                                <ContentPresenter Content="{TemplateBinding Content}" Focusable="True" />
                             </Expander>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

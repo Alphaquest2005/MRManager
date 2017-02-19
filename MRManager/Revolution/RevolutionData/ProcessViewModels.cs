@@ -29,6 +29,7 @@ namespace RevolutionData
             ScreenViewModelInfo.ScreenViewModel,
             SigninViewModelInfo.SigninViewModel,
             HeaderViewModelInfo.HeaderViewModel,
+            FooterViewModelInfo.FooterViewModel,
             PatientSummaryListViewModelInfo.PatientSummaryListViewModel,
             PatientDetailsViewModelInfo.PatientDetailsViewModel,
             PatientVisitViewModelInfo.PatientVisitViewModel,

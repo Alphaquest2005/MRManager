@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+                    mc:Ignorable="d">
+
+    <DataTemplate DataType="{x:Type viewModels:FooterViewModel}">
+
+        <Grid>
+            
+            <StackPanel Orientation="Horizontal" Width="Auto" HorizontalAlignment="Center">
+                <ContentControl Content="{Binding CurrentPatient.Value}" ContentTemplate="{DynamicResource SummaryPatientInfoDT}" />
+                <ContentControl Content="{Binding CurrentPatientVisit.Value}" ContentTemplate="{DynamicResource SummaryPatientVisitInfoDT}" />
+                <ContentControl Content="{Binding CurrentPatientSyntom.Value}" ContentTemplate="{DynamicResource SummaryPatientSyntomInfoDT}" />
+                <ContentControl Content="{Binding CurrentInterview.Value}" ContentTemplate="{DynamicResource SummaryInterviewInfoDT}" />
+
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>
