@@ -7,46 +7,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:systemInterfaces="clr-namespace:SystemInterfaces;assembly=SystemInterfaces"
              xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+             xmlns:converters="clr-namespace:Converters;assembly=Converters"
              Width="1000"
-             Height="321.731"
+             Height="533.731"
              mc:Ignorable="d">
-    <Grid Width="500"
-              Height="300"
-              Background="#4CFDFDFD">
-        <TextBox Height="38"
-                 FontSize="20"
-                     Margin="90,82,33,0"
-                    VerticalAlignment="Top"
-                     Text="{Binding Usersignin,
-                                    UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Height="43"
-                     FontSize="20"
-                     Margin="90,125,33,0"
-                     VerticalAlignment="Top"
-                     Background="#99C6D8C2"
-                     Text="{Binding Password,
-                                    UpdateSourceTrigger=PropertyChanged}" Foreground="{x:Null}" SelectionBrush="{x:Null}" />
-        <Button Width="131"
-                    Margin="0,173,33,0"
-                    FontSize="20"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Command="{Binding Commands[ValidateUserInfo]}"
-                    Content="Login" Height="40" />
-        <TextBlock Height="72"
-                       Margin="13,218,20,0"
-                        FontSize="20"
-                       VerticalAlignment="Top"
-                       Text="{Binding State.Value.StateInfo.State.Notes}" />
-        <TextBlock Margin="7,17,10,0"
-                       VerticalAlignment="Top"
-                       Text="{Binding State.Value.StateInfo.State.Status}" Height="60"
-                    FontSize="30"/>
-        <Image Width="65"
-                   Height="57"
-                   Margin="13,94,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Source="{Binding Image}" />
-    </Grid>
+
 </UserControl>

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using SystemInterfaces;
 using Actor.Interfaces;
@@ -96,11 +97,10 @@ namespace RevolutionData
 
         /// 
         public static IProcessAction IntializeCacheAction => new ProcessAction(
-            action:
-                cp =>
-                    new LoadEntitySet<TEntity>(
+            action: async cp =>
+                    await Task.Run(() => new LoadEntitySet<TEntity>(
                         new StateCommandInfo(3, Context.EntityView.Commands.LoadEntityViewSetWithChanges),
-                        cp.Actor.Process, cp.Actor.Source),
+                        cp.Actor.Process, cp.Actor.Source)),
             processInfo:
                 cp =>
                     new StateCommandInfo(cp.Actor.Process.Id,

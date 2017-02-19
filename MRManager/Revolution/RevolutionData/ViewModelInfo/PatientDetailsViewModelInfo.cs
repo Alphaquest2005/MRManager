@@ -30,12 +30,23 @@ namespace RevolutionData
                     actionPredicate: new List<Func<IPatientDetailsViewModel, IProcessStateMessage<IPatientDetailsInfo>, bool>>(),
                     action: (v, e) =>
                     {
-                        if (v.State.Value == e.State) return;
+                        if (v.CurrentPatient.Id != e.State.Entity.Id) return;
+                        if (v.State.Value?.Entity?.EntryDateTime >= e.State.Entity.EntryDateTime) return;
                         v.State.Value = e.State;
                         v.RowState.Value = RowState.Unchanged;
                     }),
 
-                 
+                new ViewEventSubscription<IPatientDetailsViewModel, ICurrentEntityChanged<IPatientInfo>>(
+                    3,
+                    e => e != null,
+                    new List<Func<IPatientDetailsViewModel, ICurrentEntityChanged<IPatientInfo>, bool>>(),
+                    (v, e) =>
+                    {
+                        v.CurrentPatient = e.Entity;
+                        v.State.Value = null;
+                    }),
+
+
             },
             publications: new List<IViewModelEventPublication<IViewModel, IEvent>>
             {
@@ -72,13 +83,13 @@ namespace RevolutionData
                     }),
 
                 new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityWithChanges<IPatients>>(
-                    key:"SavePatientDetailsInfo",
-                    subject:v => v.ChangeTracking.DictionaryChanges,
+                    key:"SavePatientDetails",
+                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
                     commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
                     {
-                        v => v.ChangeTracking.Count == 1
-                             && v.ChangeTracking.First().Value != null
-                             && v.State.Value.Entity.Id != 0
+                        //v => v.ChangeTracking.Count == 1
+                        //     && v.ChangeTracking.First().Value != null
+                        //     && v.State.Value.Entity.Id != 0
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>

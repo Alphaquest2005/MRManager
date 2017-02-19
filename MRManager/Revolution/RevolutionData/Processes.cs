@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using SystemInterfaces;
 using Actor.Interfaces;
 using Domain.Interfaces;
@@ -398,15 +399,15 @@ namespace RevolutionData
             {
                 return new ProcessAction(
                     action:
-                        cp =>
+                        async cp =>
                         {
                             var key = default(TView).GetMemberName(viewProperty);
                             var value = currentProperty.Compile().Invoke(cp.Messages["UpdatedEntity"].Entity);
                             var changes = new Dictionary<string, dynamic>() { { key, value } };
 
-                            return new GetEntityViewWithChanges<TView>(changes,
+                            return await Task.Run(() => new GetEntityViewWithChanges<TView>(changes,
                                 new StateCommandInfo(cp.Actor.Process.Id, Context.EntityView.Commands.GetEntityView),
-                                cp.Actor.Process, cp.Actor.Source);
+                                cp.Actor.Process, cp.Actor.Source));
                         },
                     processInfo: cp =>
                         new StateCommandInfo(cp.Actor.Process.Id,

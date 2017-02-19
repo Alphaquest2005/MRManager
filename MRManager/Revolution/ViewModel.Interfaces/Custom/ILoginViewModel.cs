@@ -25,7 +25,7 @@ namespace ViewModel.Interfaces
     
     public interface IPatientDetailsViewModel : IEntityViewModel<IPatientDetailsInfo>
     {
-
+        IPatientInfo CurrentPatient { get; set; }
     }
 
     

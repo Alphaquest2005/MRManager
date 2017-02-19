@@ -10,6 +10,7 @@ namespace Common.DataEntites
     public abstract class BaseEntity : IEntity
     {
         public virtual int Id { get; set; }
+        public virtual DateTime EntryDateTime { get; private set; } = DateTime.Now;
 
         [IgnoreDataMember]
         [NotMapped]

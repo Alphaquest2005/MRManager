@@ -13,7 +13,7 @@ namespace ViewModelInterfaces
     {
         ReactiveProperty<IProcessState<TEntity>> State { get; }
         ObservableDictionary<string, dynamic> ChangeTracking { get; }
-
+        
     }
 
     

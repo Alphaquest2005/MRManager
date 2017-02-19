@@ -16,12 +16,12 @@
                     Width="1000"
                     Margin="0,50,0,0"
                     Focusable="True"
+                    Background="#4CF9F8F8"
                     d:DesignWidth="1000"
-                    Background="#FF81E278"
                     DataContext="{Binding Source={x:Static viewModels:PatientDetailsViewModel.Instance}}"
                     TabStripPlacement="Left">
 
-            <TabItem Background="#7FFFFFFF" Focusable="True">
+            <TabItem  Background="#4CF9F8F8" Focusable="True">
                 <TabItem.Header>
                     <Grid Width="200" Height="100">
                         <TextBlock Margin="0,0,0,72"
@@ -45,7 +45,7 @@
                     <TextBox Width="425"
                              Height="42"
                              MinWidth="75"
-                             Margin="10,5,0,0"
+                             Margin="14,16,0,0"
                              converters:XamlExtensions.UpdateSourceOnKey="Enter"
                              HorizontalAlignment="Left"
                              VerticalAlignment="Top"
@@ -54,19 +54,19 @@
                                             FallbackValue=Name,
                                             TargetNullValue=Name,
                                             UpdateSourceTrigger=LostFocus}" />
-                    <DatePicker Width="120"
-                                Height="24"
+                    <DatePicker Width="361"
+                                Height="38"
                                 MinWidth="25"
-                                Margin="447,5,0,0"
+                                Margin="14,168,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 FontSize="20"
                                 SelectedDate="{Binding BirthDate,
                                                        UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBox Width="405"
+                    <TextBox Width="365"
                              Height="24"
                              MinWidth="75"
-                             Margin="14,47,0,0"
+                             Margin="14,72,0,0"
                              HorizontalAlignment="Left"
                              converters:XamlExtensions.UpdateSourceOnKey="Enter"
                              VerticalAlignment="Top"
@@ -77,7 +77,7 @@
                     <TextBox Width="159"
                              Height="24"
                              MinWidth="75"
-                             Margin="14,76,0,0"
+                             Margin="14,101,0,0"
                              HorizontalAlignment="Left"
                              converters:XamlExtensions.UpdateSourceOnKey="Enter"
                              VerticalAlignment="Top"
@@ -87,17 +87,17 @@
                                             UpdateSourceTrigger=LostFocus}" />
                     <TextBlock Width="Auto"
                                Height="24"
-                               Margin="70,339,0,0"
+                               Margin="40,360,0,0"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="18"
                                FontWeight="Bold"
                                Text="Allergies"
                                TextAlignment="Right" />
-                    <TextBox Width="218"
+                    <TextBox Width="321"
                              Height="24"
                              MinWidth="75"
-                             Margin="148,339,0,0"
+                             Margin="118,360,0,0"
                              HorizontalAlignment="Left"
                              converters:XamlExtensions.UpdateSourceOnKey="Enter"
                              VerticalAlignment="Top"
@@ -109,7 +109,7 @@
                                             UpdateSourceTrigger=LostFocus}" />
                     <TextBlock Width="Auto"
                                Height="24"
-                               Margin="42,378,0,0"
+                               Margin="12,399,0,0"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="18"
@@ -118,7 +118,7 @@
                     <TextBox Width="123"
                                Height="24"
                                MinWidth="75"
-                               Margin="152,378,0,0"
+                               Margin="122,399,0,0"
                                HorizontalAlignment="Left"
                                converters:XamlExtensions.UpdateSourceOnKey="Enter"
                                VerticalAlignment="Top"
@@ -128,7 +128,7 @@
                                               UpdateSourceTrigger=LostFocus}" />
                     <TextBlock Width="Auto"
                                Height="24"
-                               Margin="120,407,0,0"
+                               Margin="90,428,0,0"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="18"
@@ -137,7 +137,7 @@
                     <TextBox Width="317"
                                Height="24"
                                MinWidth="75"
-                               Margin="152,407,0,0"
+                               Margin="122,428,0,0"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="18"
@@ -146,7 +146,7 @@
                                               UpdateSourceTrigger=LostFocus}" />
                     <TextBlock Width="Auto"
                                Height="24"
-                               Margin="371,380,0,0"
+                               Margin="250,400,0,0"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="18"
@@ -156,7 +156,7 @@
                     <TextBox Width="108"
                                Height="24"
                                MinWidth="75"
-                               Margin="440,380,0,0"
+                               Margin="331,399,0,0"
                                HorizontalAlignment="Left"
                               converters:XamlExtensions.UpdateSourceOnKey="Enter"
                                VerticalAlignment="Top"
@@ -166,7 +166,7 @@
                     <ComboBox Width="Auto"
                                Height="24"
                                MinWidth="75"
-                               Margin="447,34,0,0"
+                               Margin="536,16,0,0"
                                HorizontalAlignment="Left"
                                converters:XamlExtensions.UpdateSourceOnKey="Enter"
                                VerticalAlignment="Top"
@@ -184,7 +184,7 @@
                     <TextBox Width="361"
                                Height="24"
                                MinWidth="75"
-                               Margin="17,105,0,0"
+                               Margin="14,130,0,0"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="20"
@@ -199,8 +199,9 @@
                         <!--<Image Source="{Binding PatientImage, IsAsync=True}" />-->
 
                     </Border>
+                    <Button Content="Save" Command="{Binding Commands[SavePatientDetails]}" HorizontalAlignment="Left" Height="41" Margin="673,411,0,0" VerticalAlignment="Top" Width="97"/>
 
-                  
+
                 </Grid>
             </TabItem>
             <TabItem Background="#4C09853D">

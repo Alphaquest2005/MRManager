@@ -16,7 +16,7 @@
 
 
 
-            <ComboBox x:Name="ComboBox"
+            <!--<ComboBox x:Name="ComboBox"
                       Width="78"
                       Height="26"
                       Margin="10,30,0,0"
@@ -44,7 +44,7 @@
                                       Mode=OneWay}"
                     Content=""
                     FontFamily="Segoe UI Symbol"
-                    FontSize="10" />
+                    FontSize="10" />-->
 
             <ListBox Margin="10,65,10,10"
                      IsSynchronizedWithCurrentItem="True"

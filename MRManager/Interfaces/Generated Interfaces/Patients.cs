@@ -14,7 +14,7 @@ namespace Interfaces
 	
 	public partial interface IPatients:IEntity  
 	{
-		Byte[] EntryDateTime { get;}
+		
 
 
 

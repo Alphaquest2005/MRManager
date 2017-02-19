@@ -12,9 +12,10 @@ namespace Common.DataEntites
     {
         public Type EntityType => typeof(TEntity);
 
-        private int _id;
+       
         public int Id { get; set; }
-        
+        public DateTime EntryDateTime { get; private set; } = DateTime.Now;
+
 
         private readonly Guid _entityGuid = Guid.NewGuid();
         

@@ -30,5 +30,6 @@ namespace Interfaces
         IList<INextOfKinInfo> NextOfKins { get; }
         
         DateTime BirthDate { get; }
+        
     }
 }
