@@ -13,9 +13,7 @@ namespace ViewModel.Interfaces
     
     public interface IViewModel:IProcessSource
     {
-        string ViewName { get; }
-        string ViewSymbol { get; }
-        string ViewDescription { get; }
+        IViewInfo ViewInfo { get; }
         ISystemProcess Process { get; }
         
         List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get; }
@@ -23,7 +21,7 @@ namespace ViewModel.Interfaces
         Dictionary<string, ReactiveCommand<IViewModel, Unit>> Commands { get; }
         List<IViewModelEventCommand<IViewModel, IEvent>> CommandInfo { get; }
 
-        ReactiveProperty<SystemInterfaces.RowState> RowState { get; }
+        ReactiveProperty<RowState> RowState { get; }
 
         Type Orientation { get; }
         Type ViewModelType { get; }

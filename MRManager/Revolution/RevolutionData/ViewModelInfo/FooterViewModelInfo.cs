@@ -21,6 +21,7 @@ namespace RevolutionData
         public static readonly ViewModelInfo FooterViewModel = new ViewModelInfo
             (
             3,
+            new ViewInfo("Footer","",""), 
             new List<IViewModelEventSubscription<IViewModel, IEvent>>
             {
                 new ViewEventSubscription<IFooterViewModel, ICurrentEntityChanged<IPatientInfo>>(

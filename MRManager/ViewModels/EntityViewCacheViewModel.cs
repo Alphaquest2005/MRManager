@@ -28,7 +28,7 @@ namespace ViewModels
     public class DoctorInfoCacheViewModel : ObservableListViewModel<IDoctorInfo>, IEntityViewCacheViewModel<IDoctorInfo>
     {
         public DoctorInfoCacheViewModel() { }
-        public DoctorInfoCacheViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(eventSubscriptions, eventPublications, commandInfo, process, orientation)
+        public DoctorInfoCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation)
         {
             this.WireEvents();
         }
@@ -39,7 +39,7 @@ namespace ViewModels
     public class SystemInfoCacheViewModel : DynamicViewModel<ObservableListViewModel<ISyntomMedicalSystemInfo>>, IEntityViewCacheViewModel<ISyntomMedicalSystemInfo>
     {
         public SystemInfoCacheViewModel() { }
-        public SystemInfoCacheViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<ISyntomMedicalSystemInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
+        public SystemInfoCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<ISyntomMedicalSystemInfo>(viewInfo,eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
             this.WireEvents();
         }

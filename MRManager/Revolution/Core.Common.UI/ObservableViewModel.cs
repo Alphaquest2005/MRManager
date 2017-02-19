@@ -11,6 +11,7 @@ using FluentValidation.Results;
 using JB.Collections.Reactive;
 using Reactive.Bindings;
 using ReactiveUI;
+using RevolutionData.Context;
 using ValidationSets;
 using ViewModel.Interfaces;
 using ViewModelInterfaces;
@@ -26,7 +27,7 @@ namespace Core.Common.UI
         protected static ObservableViewModel<TEntity> _instance = null;
         public static ObservableViewModel<TEntity> Instance => _instance;
 
-        public ObservableViewModel(List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process, Type orientation) : base(process,eventSubscriptions,eventPublications,commandInfo, orientation)
+        public ObservableViewModel(IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process, Type orientation) : base(process, viewInfo,eventSubscriptions,eventPublications,commandInfo, orientation)
         {
             //Leave the validation for client side input validation...
             Validator = new EntityValidator<TEntity>();
@@ -103,7 +104,7 @@ namespace Core.Common.UI
 
     public class ObservableViewModel : BaseViewModel<ObservableViewModel>
     {
-        public ObservableViewModel(List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process, Type orientation) : base(process, eventSubscriptions, eventPublications, commandInfo, orientation)
+        public ObservableViewModel(IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process, Type orientation) : base(process, viewInfo, eventSubscriptions, eventPublications, commandInfo, orientation)
         {
         }
     }

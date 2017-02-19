@@ -15,6 +15,7 @@ namespace RevolutionData
         public static readonly ViewModelInfo MainWindowViewModel = new ViewModelInfo
             (
             0,// set to zero to prevent ViewActorInializing this view
+            new ViewInfo("MainWindowViewModel", "", ""),
             new List<IViewModelEventSubscription<IViewModel, IEvent>>
             {   new ViewEventSubscription<IMainWindowViewModel, IViewModelCreated<IScreenModel>>(1, e => e != null, new List<Func<IMainWindowViewModel, IViewModelCreated<IScreenModel>, bool>>
             {

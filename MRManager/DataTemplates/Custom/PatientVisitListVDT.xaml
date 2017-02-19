@@ -13,7 +13,7 @@
         <Grid MinWidth="400" Margin="0" x:Name="ViewPatientVisit">
 
 
-            <ListBox Margin="10,65,10,63"
+            <ListBox Margin="10"
                      ItemTemplate="{DynamicResource PatientVisitInfoTpl}"
                      IsSynchronizedWithCurrentItem="True"
                      ItemsSource="{Binding EntitySet,

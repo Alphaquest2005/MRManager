@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
@@ -21,7 +21,9 @@ namespace RevolutionData
     {
         public static ViewModelInfo PatientSyntomViewModel = new ViewModelInfo
             (
-            3, new List<IViewModelEventSubscription<IViewModel, IEvent>>
+            3,
+            new ViewInfo("PatientSyntom", "", "Patient Syntoms"),
+            new List<IViewModelEventSubscription<IViewModel, IEvent>>
             {
                 new ViewEventSubscription<IPatientSyntomViewModel, IUpdateProcessStateList<IPatientSyntomInfo>>(
                     3,

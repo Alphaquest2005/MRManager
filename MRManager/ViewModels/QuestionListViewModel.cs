@@ -29,12 +29,9 @@ namespace ViewModels
         private IInterviewInfo _currentInterview;
 
         [ImportingConstructor]
-        public QuestionListViewModel(ISystemProcess process,
-            List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions,
-            List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications,
-            List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
+        public QuestionListViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
             : base(
-                new ObservableListViewModel<IQuestionInfo>(eventSubscriptions, eventPublications, commandInfo, process,
+                new ObservableListViewModel<IQuestionInfo>(viewInfo, eventSubscriptions, eventPublications, commandInfo, process,
                     orientation))
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;

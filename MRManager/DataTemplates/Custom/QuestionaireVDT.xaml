@@ -24,7 +24,7 @@
             </Border.Background>
             <Grid Width="Auto"
                   Height="Auto"
-                  Margin="-1.333,-0.333,0,0.333">
+                  Margin="10">
                 <TextBlock Width="Auto"
                            Height="60"
                            MinWidth="75"

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
@@ -18,7 +18,9 @@ namespace RevolutionData
     {
         public static ViewModelInfo SigninViewModel = new ViewModelInfo
             (
-            2, new List<IViewModelEventSubscription<IViewModel, IEvent>>
+            2,
+            new ViewInfo("", "", ""),
+            new List<IViewModelEventSubscription<IViewModel, IEvent>>
             {
                 new ViewEventSubscription<ISigninViewModel, IProcessStateMessage<ISignInInfo>>(
                     2, e => e != null, new List<Func<ISigninViewModel, IProcessStateMessage<ISignInInfo>, bool>>(),

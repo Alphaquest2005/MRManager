@@ -26,6 +26,7 @@ namespace RevolutionData
             return new ViewModelInfo
                 (
                 processId: processId,
+                viewInfo: new ViewInfo($"{typeof(TView).Name}CacheViewModel", "", ""),
                 subscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>
                 {
                     new ViewEventSubscription<IEntityViewCacheViewModel<TView>, IEntityViewSetWithChangesLoaded<TView>>(

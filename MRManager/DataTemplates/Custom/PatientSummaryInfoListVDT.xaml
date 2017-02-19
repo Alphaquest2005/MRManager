@@ -10,7 +10,9 @@
                     mc:Ignorable="d">
 
     <DataTemplate DataType="{x:Type viewModels:PatientSummaryListViewModel}">
-        <Grid Margin="0" Background="#4CFFFFFF" x:Name="ViewPatientSummary">
+        <Grid x:Name="ViewPatientSummary"
+              Margin="10"
+              Background="#4CFFFFFF">
 
 
 
@@ -44,7 +46,7 @@
                     FontFamily="Segoe UI Symbol"
                     FontSize="10" />
 
-            <ListBox Margin="10,65,10,63"
+            <ListBox Margin="10,65,10,10"
                      IsSynchronizedWithCurrentItem="True"
                      ItemsSource="{Binding EntitySet,
                                            Mode=OneWay}"
@@ -89,6 +91,7 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ListBox>
+            
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

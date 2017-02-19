@@ -20,7 +20,7 @@ namespace ViewModels
     public class SigninViewModel : DynamicViewModel<ObservableViewModel<ISignInInfo>>, ISigninViewModel
     {
         [ImportingConstructor]
-        public SigninViewModel(ISystemProcess process,  List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableViewModel<ISignInInfo>(eventSubscriptions, eventPublications, commandInfo, process, orientation))
+        public SigninViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableViewModel<ISignInInfo>(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
             this.WireEvents();
         }

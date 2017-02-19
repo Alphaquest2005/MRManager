@@ -13,7 +13,7 @@
         </DataTemplate.Resources>
         <TabControl 
                     Width="1000"
-                    Margin="0,50,0,0"
+                    Margin="10"
                     d:DesignWidth="1000"
                     Background="#7FFFFFFF"
                     DataContext="{Binding Source={x:Static viewModels:PatientDetailsViewModel.Instance}}"

@@ -20,6 +20,7 @@ namespace RevolutionData
         public static readonly ViewModelInfo HeaderViewModel = new ViewModelInfo
             (
             3,
+            new ViewInfo("HeaderViewModel", "", ""),
             new List<IViewModelEventSubscription<IViewModel, IEvent>>{},
             new List<IViewModelEventPublication<IViewModel, IEvent>>{},
             new List<IViewModelEventCommand<IViewModel,IEvent>>

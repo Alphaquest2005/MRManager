@@ -8,68 +8,70 @@
 
     <DataTemplate x:Key="SummaryPatientSyntomInfoDT" DataType="{x:Type Interfaces:IPatientSyntomInfo}">
 
-        <Border
-                Height="Auto"
+        <Border Height="Auto"
                 Margin="5"
                 VerticalAlignment="Center"
-                BorderThickness="2,2,2,2" Background="{x:Null}" BorderBrush="#99F5F5F5">
+                Background="{x:Null}"
+                BorderBrush="#99F5F5F5"
+                BorderThickness="2,2,2,2">
             <Grid Width="Auto" Height="100">
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
 
                         <GradientStop Offset="0.065" Color="#4CFFFFFF" />
-                        <GradientStop Color="#C1FFFFFF" Offset="0.92"/>
+                        <GradientStop Offset="0.92" Color="#C1FFFFFF" />
                     </LinearGradientBrush>
                 </Grid.Background>
                 <TextBlock Width="180"
-                       Height="27"
-                       Margin="100,17,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="16"
-                       Text="{Binding SyntomName,
-                                      Mode=OneWay}" />
-            <TextBlock Width="70"
-                       Height="27"
-                       Margin="210,53,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="13"
-                       Text="{Binding Priority,
-                                      Mode=OneWay}" />
-            <TextBlock Width="105"
-                       Height="27"
-                       Margin="100,53,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="13"
-                       Text="{Binding Status,
-                                      Mode=OneWay}" />
+                           Height="27"
+                           Margin="100,17,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontSize="16"
+                           Text="{Binding SyntomName,
+                                          Mode=OneWay}" />
+                <TextBlock Width="70"
+                           Height="27"
+                           Margin="210,53,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontSize="13"
+                           Text="{Binding Priority,
+                                          Mode=OneWay}" />
+                <TextBlock Width="105"
+                           Height="27"
+                           Margin="100,53,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontSize="13"
+                           Text="{Binding Status,
+                                          Mode=OneWay}" />
 
 
-            <TextBlock Width="68"
-                       Height="50"
-                       Margin="10,17,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontFamily="Segoe UI Symbol"
-                       FontSize="36"
-                       Style="{DynamicResource TextButtonStyle}"
-                       Text=""
-                       TextAlignment="Center"
-                       TextWrapping="Wrap" />
-            <TextBlock Width="71"
-                       Height="28"
-                       Margin="7,72,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="20"
-                       Style="{DynamicResource TextButtonStyle}"
-                       Text="Syntom"
-                       TextAlignment="Center" />
+                <TextBlock Width="68"
+                           Height="50"
+                           Margin="10,17,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontFamily="Segoe UI Symbol"
+                           FontSize="36"
+                           Style="{DynamicResource TextButtonStyle}"
+                           Text=""
+                           TextAlignment="Center"
+                           TextWrapping="Wrap" />
+                <TextBlock Width="71"
+                           Height="28"
+                           Margin="7,72,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontSize="20"
+                           Style="{DynamicResource TextButtonStyle}"
+                           Text="Syntom"
+                           TextAlignment="Center" />
 
 
-        </Grid></Border>
+            </Grid>
+        </Border>
 
     </DataTemplate>
 </ResourceDictionary>

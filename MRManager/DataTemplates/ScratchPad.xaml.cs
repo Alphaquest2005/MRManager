@@ -24,5 +24,10 @@ namespace Views.ToBeGenerated
         {
             InitializeComponent();
         }
+
+        private void BringIntoView(object sender, MouseEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -8,75 +8,77 @@
 
     <DataTemplate x:Key="SummaryInterviewInfoDT" DataType="{x:Type Interfaces:IInterviewInfo}">
 
-        <Border
-                Height="Auto"
+        <Border Height="Auto"
                 Margin="5"
                 VerticalAlignment="Center"
-                BorderThickness="2,2,2,2" Background="{x:Null}" BorderBrush="#99F5F5F5">
+                Background="{x:Null}"
+                BorderBrush="#99F5F5F5"
+                BorderThickness="2,2,2,2">
             <Grid Width="Auto" Height="100">
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
 
                         <GradientStop Offset="0.065" Color="#4CFFFFFF" />
-                        <GradientStop Color="#C1FFFFFF" Offset="0.92"/>
+                        <GradientStop Offset="0.92" Color="#C1FFFFFF" />
                     </LinearGradientBrush>
                 </Grid.Background>
                 <TextBlock Width="180"
-                       Height="26"
-                       Margin="110,10,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="18.667"
-                       Text="{Binding Path=Interview,
-                                      Mode=OneWay}" />
-            <TextBlock Width="98"
-                       Height="18"
-                       Margin="110,72,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="13"
-                       Text="{Binding Path=Category,
-                                      Mode=OneWay}" />
-            <TextBlock Width="180"
-                       Height="22"
-                       Margin="110,45,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="13"
-                       FontWeight="Bold"
-                       Text="{Binding Path=System,
-                                      Mode=OneWay}" />
-            <TextBlock Width="77"
-                       Height="18"
-                       Margin="213,72,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="13"
-                       Text="{Binding Path=Phase,
-                                      Mode=OneWay}" />
-            <TextBlock Width="68"
-                       Height="50"
-                       Margin="10,17,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontFamily="Segoe UI Symbol"
-                       FontSize="36"
-                       Style="{DynamicResource TextButtonStyle}"
-                       Text=""
-                       TextAlignment="Center"
-                       TextWrapping="Wrap" />
-            <TextBlock Width="71"
-                       Height="28"
-                       Margin="7,72,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="20"
-                       Style="{DynamicResource TextButtonStyle}"
-                       Text="Interview"
-                       TextAlignment="Center" />
+                           Height="26"
+                           Margin="110,10,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontSize="18.667"
+                           Text="{Binding Path=Interview,
+                                          Mode=OneWay}" />
+                <TextBlock Width="98"
+                           Height="18"
+                           Margin="110,72,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontSize="13"
+                           Text="{Binding Path=Category,
+                                          Mode=OneWay}" />
+                <TextBlock Width="180"
+                           Height="22"
+                           Margin="110,45,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontSize="13"
+                           FontWeight="Bold"
+                           Text="{Binding Path=System,
+                                          Mode=OneWay}" />
+                <TextBlock Width="77"
+                           Height="18"
+                           Margin="213,72,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontSize="13"
+                           Text="{Binding Path=Phase,
+                                          Mode=OneWay}" />
+                <TextBlock Width="68"
+                           Height="50"
+                           Margin="10,17,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontFamily="Segoe UI Symbol"
+                           FontSize="36"
+                           Style="{DynamicResource TextButtonStyle}"
+                           Text=""
+                           TextAlignment="Center"
+                           TextWrapping="Wrap" />
+                <TextBlock Width="71"
+                           Height="28"
+                           Margin="7,72,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontSize="20"
+                           Style="{DynamicResource TextButtonStyle}"
+                           Text="Interview"
+                           TextAlignment="Center" />
 
 
-        </Grid></Border>
+            </Grid>
+        </Border>
 
     </DataTemplate>
 </ResourceDictionary>

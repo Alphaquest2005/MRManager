@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
@@ -22,7 +22,9 @@ namespace RevolutionData
     {
         public static readonly ViewModelInfo QuestionListViewModel = new ViewModelInfo
             (
-            3, new List<IViewModelEventSubscription<IViewModel, IEvent>>
+            3,
+            new ViewInfo("QuestionList", "", "Questions"),
+            new List<IViewModelEventSubscription<IViewModel, IEvent>>
             {
                 new ViewEventSubscription<IQuestionListViewModel, IUpdateProcessStateList<IQuestionInfo>>(
                     3,

@@ -17,8 +17,9 @@ namespace Core.Common.UI
     {
         public ISystemSource Source => new Source(Guid.NewGuid(), "ViewModel:" + typeof(TViewModel).GetFriendlyName(),new SourceType(typeof(BaseViewModel<TViewModel>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
-        public BaseViewModel() { }
-        protected BaseViewModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
+        public BaseViewModel(){}
+
+        protected BaseViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             Process = process;
@@ -26,10 +27,9 @@ namespace Core.Common.UI
             EventPublications = eventPublications;
             CommandInfo = commandInfo;
             Orientation = orientation;
+            ViewInfo = viewInfo;
             ViewModelType = typeof(TViewModel);
-            ViewName = process.Name;
-            ViewDescription = process.Description;
-            ViewSymbol = process.Symbol;
+            
             RowState = new ReactiveProperty<RowState>(SystemInterfaces.RowState.Loaded);
         }
 
@@ -43,10 +43,9 @@ namespace Core.Common.UI
 
         public Dictionary<string, ReactiveCommand<IViewModel, Unit>> Commands { get; } = new Dictionary<string, ReactiveCommand<IViewModel, Unit>>();
 
+        public IViewInfo ViewInfo { get; }
         public ISystemProcess Process { get; set; }
-        public string ViewName { get; }
-        public string ViewSymbol { get; }
-        public string ViewDescription { get; }
+        
 
     }
 }

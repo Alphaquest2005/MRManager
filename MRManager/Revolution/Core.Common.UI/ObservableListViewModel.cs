@@ -37,7 +37,7 @@ namespace Core.Common.UI
 
         public ObservableListViewModel() { }
 
-        public ObservableListViewModel(List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process, Type orientation) : base(process,eventSubscriptions,eventPublications,commandInfo, orientation)
+        public ObservableListViewModel(IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process, Type orientation) : base(process,viewInfo,eventSubscriptions,eventPublications,commandInfo, orientation)
         {
             Validator = new EntityValidator<TEntity>();
             State.WhenAnyValue(x => x.Value).Subscribe(x => UpdateLocalState(x));

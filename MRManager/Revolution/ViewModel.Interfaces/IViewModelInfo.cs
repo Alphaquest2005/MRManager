@@ -9,6 +9,7 @@ namespace ViewModel.Interfaces
     public interface IViewModelInfo
     {
         int ProcessId { get; }
+        IViewInfo ViewInfo { get; }
         List<IViewModelEventSubscription<IViewModel, IEvent>> Subscriptions { get; }
 
         List<IViewModelEventPublication<IViewModel, IEvent>> Publications { get; }
@@ -18,5 +19,11 @@ namespace ViewModel.Interfaces
         Type Orientation { get; }
         
     }
-   
+
+    public interface IViewInfo
+    {
+        string Name { get; }
+        string Symbol { get; }
+        string Description { get; }
+    }
 }

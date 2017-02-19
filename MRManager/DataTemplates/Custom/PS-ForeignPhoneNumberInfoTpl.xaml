@@ -20,7 +20,7 @@
                        VerticalAlignment="Top"
                        Text="Phone Number"
                        TextAlignment="Right" />
-            <TextBox Width="Auto"
+            <TextBlock Width="Auto"
                      Height="24"
                      MinWidth="75"
                      Margin="150,25,0,0"
@@ -36,7 +36,7 @@
                        VerticalAlignment="Top"
                        Text="Type"
                        TextAlignment="Right" />
-            <TextBox Width="Auto"
+            <TextBlock Width="Auto"
                      Height="24"
                      MinWidth="75"
                      Margin="150,50,0,0"

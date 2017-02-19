@@ -22,7 +22,7 @@ namespace ViewModels
     public partial class ScreenModel : BaseViewModel<ScreenModel>, IScreenModel
     {
         [ImportingConstructor]
-	    public ScreenModel(ISystemProcess process, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(process, eventSubscriptions, eventPublications,commandInfo, orientation)
+	    public ScreenModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(process,viewInfo, eventSubscriptions, eventPublications,commandInfo, orientation)
         {
             this.WireEvents();
         }

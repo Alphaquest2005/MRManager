@@ -136,7 +136,7 @@
                                       ExpandDirection="Right"
                                       Focusable="True"
                                       IsExpanded="True"
-                                      Tag="{Binding ViewName}">
+                                      Tag="{Binding ViewInfo.Symbol}">
                                 <Expander.Header>
                                     <Grid Height="550"
                                           Focusable="True"
@@ -152,7 +152,7 @@
                                                    FontFamily="Segoe UI Symbol"
                                                    FontSize="28"
                                                    Style="{DynamicResource ExpHeadStyle}"
-                                                   Text="{Binding ViewName}" />
+                                                   Text="{Binding ViewInfo.Symbol}" />
                                         <TextBlock Width="77"
                                                    Height="72"
                                                    Margin="0,0,12.6,417"
@@ -162,13 +162,25 @@
                                                    FontWeight="Bold"
                                                    RenderTransformOrigin="0.535,1.32"
                                                    Style="{DynamicResource ExpHeadStyle}"
-                                                   Text="{Binding Description}"
+                                                   Text="{Binding ViewInfo.Description}"
                                                    TextAlignment="Center"
                                                    TextWrapping="Wrap" />
 
                                     </Grid>
                                 </Expander.Header>
-                                <ContentPresenter Content="{TemplateBinding Content}" Focusable="True" />
+                                <Grid>
+                                    <TextBlock Width="271"
+                       Height="28"
+                       Margin="4,5,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="20"
+                       Style="{DynamicResource TextButtonStyle}"
+                       Text="{Binding ViewInfo.Description}"
+                       TextWrapping="Wrap" />
+                                    <ContentPresenter Content="{TemplateBinding Content}" Focusable="True" Margin="0,38,0,0" />
+                                </Grid>
+
                             </Expander>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

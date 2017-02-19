@@ -15,7 +15,7 @@
 
             <ListBox Width="Auto"
                      Height="Auto"
-                     Margin="0,100,0,32"
+                     Margin="10"
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
                      Background="#33FFFFFF"

@@ -15,6 +15,8 @@ namespace RevolutionData
         public static ViewModelInfo ScreenViewModel = new ViewModelInfo
             (
             1,
+            new ViewInfo("ScreenViewModel", "", ""),
+
             new List<IViewModelEventSubscription<IViewModel, IEvent>>
             {
                 new ViewEventSubscription<IScreenModel, INavigateToView>(

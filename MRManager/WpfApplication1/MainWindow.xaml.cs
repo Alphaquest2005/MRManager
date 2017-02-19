@@ -94,6 +94,7 @@ namespace WpfApplication1
         public string ViewName { get; }
         public string ViewSymbol { get; }
         public string ViewDescription { get; }
+        public IViewInfo ViewInfo { get; }
         public ISystemProcess Process { get; }
         public List<IViewModelEventSubscription<IViewModel, IEvent>> EventSubscriptions { get; }
         public List<IViewModelEventPublication<IViewModel, IEvent>> EventPublications { get; }

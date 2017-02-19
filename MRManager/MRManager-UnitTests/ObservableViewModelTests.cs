@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using SystemInterfaces;
 using Common;
 using EF.Entities;
@@ -38,6 +39,7 @@ namespace MRManager_UnitTests
         {
            
             dynamic viewModel = new SigninViewModel(process: TestProcess,
+                viewInfo:new ViewInfo("","",""), 
                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
@@ -55,6 +57,7 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(Source)
                 .Subscribe(x => handleEntityChanges(x));
             dynamic viewModel = new SigninViewModel(process: TestProcess,
+                viewInfo: new ViewInfo("", "", ""),
                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
@@ -78,6 +81,7 @@ namespace MRManager_UnitTests
             EventMessageBus.Current.GetEvent<EntityChanges<ISignInInfo>>(Source)
                 .Subscribe(x => handleEntityChanges(x));
             dynamic viewModel = new SigninViewModel(process: TestProcess,
+                viewInfo: new ViewInfo("", "", ""),
                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
@@ -139,6 +143,7 @@ namespace MRManager_UnitTests
             
             var viewModel = new SigninViewModel(
                 process: TestProcess,
+                viewInfo: new ViewInfo("", "", ""),
                 eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                 eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>(),
                 commandInfo: new List<IViewModelEventCommand<IViewModel,IEvent>>()

@@ -27,12 +27,9 @@ namespace ViewModels
     {
 
         [ImportingConstructor]
-        public QuestionaireViewModel(ISystemProcess process,
-            List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions,
-            List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications,
-            List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
+        public QuestionaireViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
             : base(
-                new ObservableListViewModel<IResponseOptionInfo>(eventSubscriptions, eventPublications, commandInfo,
+                new ObservableListViewModel<IResponseOptionInfo>(viewInfo, eventSubscriptions, eventPublications, commandInfo,
                     process, orientation))
         {
             this.WireEvents();
