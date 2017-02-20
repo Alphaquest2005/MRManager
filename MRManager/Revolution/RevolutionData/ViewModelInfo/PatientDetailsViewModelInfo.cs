@@ -30,7 +30,7 @@ namespace RevolutionData
                     actionPredicate: new List<Func<IPatientDetailsViewModel, IProcessStateMessage<IPatientDetailsInfo>, bool>>(),
                     action: (v, e) =>
                     {
-                        if (v.CurrentPatient.Id != e.State.Entity.Id) return;
+                        if (v.CurrentPatient != null && v.CurrentPatient?.Id != e.State.Entity.Id) return;
                         if (v.State.Value?.Entity?.EntryDateTime >= e.State.Entity.EntryDateTime) return;
                         v.State.Value = e.State;
                         v.RowState.Value = RowState.Unchanged;
@@ -45,6 +45,8 @@ namespace RevolutionData
                         v.CurrentPatient = e.Entity;
                         v.State.Value = null;
                     }),
+
+               
 
 
             },
@@ -87,9 +89,8 @@ namespace RevolutionData
                     subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
                     commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
                     {
-                        //v => v.ChangeTracking.Count == 1
-                        //     && v.ChangeTracking.First().Value != null
-                        //     && v.State.Value.Entity.Id != 0
+                        v => v.ChangeTracking.Count >= 1
+                             && v.State.Value.Entity.Id != 0
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>
@@ -106,6 +107,8 @@ namespace RevolutionData
                             new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
                             s.Source);
                         s.ChangeTracking.Clear();
+                        s.State.Value = null;
+                        
                         return msg;
                     }),
 

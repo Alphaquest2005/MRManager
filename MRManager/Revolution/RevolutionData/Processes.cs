@@ -325,7 +325,12 @@ namespace RevolutionData
                             "CurrentEntity", processId, e => e.Entity != null,
                             expectedSourceType: new SourceType(typeof (IViewModel)),
                             //todo: check this cuz it comes from viewmodel
-                            processInfo: new StateEventInfo(processId, Context.Entity.Events.EntityUpdated))
+                            processInfo: new StateEventInfo(processId, Context.Entity.Events.EntityUpdated)),
+                        new ProcessExpectedEvent<IEntityViewWithChangesFound<TCurrentEntity>>(
+                            "CurrentEntity", processId, e => e.Entity != null,
+                            expectedSourceType: new SourceType(typeof (IViewModel)),
+                            //todo: check this cuz it comes from viewmodel
+                            processInfo: new StateEventInfo(processId, Context.EntityView.Events.EntityViewFound))
                     },
                     expectedMessageType: typeof(IProcessStateMessage<TEntityView>),
                     action: ProcessActions.RequestState(property),

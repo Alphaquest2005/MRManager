@@ -3,25 +3,26 @@
                     xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
                     xmlns:converters="clr-namespace:Converters;assembly=Converters"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
-                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
                     mc:Ignorable="d">
 
-    <DataTemplate x:Key="PatientDetailsInfoWDT" >
+    <DataTemplate x:Key="PatientDetailsInfoWDT">
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
         </DataTemplate.Resources>
         <TabControl x:Name="ViewPatientInfo"
                     Width="1000"
                     Margin="0,50,0,0"
-                    Focusable="True"
-                    Background="#4CF9F8F8"
                     d:DesignWidth="1000"
+                    Background="#4CF9F8F8"
                     DataContext="{Binding Source={x:Static viewModels:PatientDetailsViewModel.Instance}}"
+                    Focusable="True"
                     TabStripPlacement="Left">
 
-            <TabItem  Background="#4CF9F8F8" Focusable="True">
+            <TabItem Background="#4CF9F8F8" Focusable="True">
                 <TabItem.Header>
                     <Grid Width="200" Height="100">
                         <TextBlock Margin="0,0,0,72"
@@ -46,10 +47,10 @@
                              Height="42"
                              MinWidth="75"
                              Margin="14,16,0,0"
-                             converters:XamlExtensions.UpdateSourceOnKey="Enter"
                              HorizontalAlignment="Left"
                              VerticalAlignment="Top"
-                             FontSize="26"
+                             converters:XamlExtensions.UpdateSourceOnKey="Enter"
+                             FontSize="20"
                              Text="{Binding Name,
                                             FallbackValue=Name,
                                             TargetNullValue=Name,
@@ -60,28 +61,28 @@
                                 Margin="14,168,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
-                                FontSize="20"
-                                SelectedDate="{Binding BirthDate,
+                                FontSize="14"
+                                SelectedDate="{Binding BirthDate, TargetNullValue={x:Static system:DateTime.Now},
                                                        UpdateSourceTrigger=PropertyChanged}" />
                     <TextBox Width="365"
                              Height="24"
                              MinWidth="75"
                              Margin="14,72,0,0"
                              HorizontalAlignment="Left"
-                             converters:XamlExtensions.UpdateSourceOnKey="Enter"
                              VerticalAlignment="Top"
-                             FontSize="20"
+                             converters:XamlExtensions.UpdateSourceOnKey="Enter"
+                             FontSize="14"
                              Text="{Binding Address,
                                             TargetNullValue='No Address',
-                                            UpdateSourceTrigger=LostFocus}"/>
+                                            UpdateSourceTrigger=LostFocus}" />
                     <TextBox Width="159"
                              Height="24"
                              MinWidth="75"
                              Margin="14,101,0,0"
                              HorizontalAlignment="Left"
-                             converters:XamlExtensions.UpdateSourceOnKey="Enter"
                              VerticalAlignment="Top"
-                             FontSize="20"
+                             converters:XamlExtensions.UpdateSourceOnKey="Enter"
+                             FontSize="14"
                              Text="{Binding PhoneNumber,
                                             TargetNullValue='No Phone Number',
                                             UpdateSourceTrigger=LostFocus}" />
@@ -99,9 +100,9 @@
                              MinWidth="75"
                              Margin="118,360,0,0"
                              HorizontalAlignment="Left"
-                             converters:XamlExtensions.UpdateSourceOnKey="Enter"
                              VerticalAlignment="Top"
-                             FontSize="18"
+                             converters:XamlExtensions.UpdateSourceOnKey="Enter"
+                             FontSize="14"
                              FontWeight="Bold"
                              Foreground="#FFD77B6A"
                              Text="{Binding Allergies,
@@ -116,16 +117,16 @@
                                Text="Birth Country"
                                TextAlignment="Right" />
                     <TextBox Width="123"
-                               Height="24"
-                               MinWidth="75"
-                               Margin="122,399,0,0"
-                               HorizontalAlignment="Left"
-                               converters:XamlExtensions.UpdateSourceOnKey="Enter"
-                               VerticalAlignment="Top"
-                               FontSize="18"
-                               Text="{Binding BirthCountry,
-                                                FallbackValue='Birth Country',
-                                              UpdateSourceTrigger=LostFocus}" />
+                             Height="24"
+                             MinWidth="75"
+                             Margin="122,399,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             converters:XamlExtensions.UpdateSourceOnKey="Enter"
+                             FontSize="14"
+                             Text="{Binding BirthCountry,
+                                            FallbackValue='Birth Country',
+                                            UpdateSourceTrigger=LostFocus}" />
                     <TextBlock Width="Auto"
                                Height="24"
                                Margin="90,428,0,0"
@@ -135,15 +136,15 @@
                                Text="Job"
                                TextAlignment="Right" />
                     <TextBox Width="317"
-                               Height="24"
-                               MinWidth="75"
-                               Margin="122,428,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="18"
-                              converters:XamlExtensions.UpdateSourceOnKey="Enter"
-                               Text="{Binding Job,
-                                              UpdateSourceTrigger=LostFocus}" />
+                             Height="24"
+                             MinWidth="75"
+                             Margin="122,428,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             converters:XamlExtensions.UpdateSourceOnKey="Enter"
+                             FontSize="14"
+                             Text="{Binding Job,
+                                            UpdateSourceTrigger=LostFocus}" />
                     <TextBlock Width="Auto"
                                Height="24"
                                Margin="250,400,0,0"
@@ -154,25 +155,25 @@
                                Text="Religion"
                                TextAlignment="Right" />
                     <TextBox Width="108"
-                               Height="24"
-                               MinWidth="75"
-                               Margin="331,399,0,0"
-                               HorizontalAlignment="Left"
-                              converters:XamlExtensions.UpdateSourceOnKey="Enter"
-                               VerticalAlignment="Top"
-                               FontSize="18"
-                               Text="{Binding Religion,
-                                              UpdateSourceTrigger=LostFocus}" />
+                             Height="24"
+                             MinWidth="75"
+                             Margin="331,399,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             converters:XamlExtensions.UpdateSourceOnKey="Enter"
+                             FontSize="14"
+                             Text="{Binding Religion,
+                                            UpdateSourceTrigger=LostFocus}" />
                     <ComboBox Width="Auto"
-                               Height="24"
-                               MinWidth="75"
-                               Margin="536,16,0,0"
-                               HorizontalAlignment="Left"
-                               converters:XamlExtensions.UpdateSourceOnKey="Enter"
-                               VerticalAlignment="Top"
-                               FontSize="16"
-                               FontWeight="Bold"
-                                DisplayMemberPath="Name"
+                              Height="24"
+                              MinWidth="75"
+                              Margin="536,16,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              converters:XamlExtensions.UpdateSourceOnKey="Enter"
+                              DisplayMemberPath="Name"
+                              FontSize="16"
+                              FontWeight="Bold"
                               ItemsSource="{Binding Source={x:Static Member=viewModels:SexCacheViewModel.Instance},
                                                     Path=EntitySet,
                                                     UpdateSourceTrigger=PropertyChanged,
@@ -182,15 +183,15 @@
                                                       UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="Name" />
                     <TextBox Width="361"
-                               Height="24"
-                               MinWidth="75"
-                               Margin="14,130,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="20"
-                               Text="{Binding EmailAddress,
-                                              TargetNullValue='No Email Address',
-                                              UpdateSourceTrigger=LostFocus}" />
+                             Height="24"
+                             MinWidth="75"
+                             Margin="14,130,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             FontSize="14"
+                             Text="{Binding EmailAddress,
+                                            TargetNullValue='No Email Address',
+                                            UpdateSourceTrigger=LostFocus}" />
                     <Border Margin="396,85,10.333,148.333"
                             Background="{x:Null}"
                             BorderBrush="#7FE6EA5D"
@@ -199,170 +200,18 @@
                         <!--<Image Source="{Binding PatientImage, IsAsync=True}" />-->
 
                     </Border>
-                    <Button Content="Save" Command="{Binding Commands[SavePatientDetails]}" HorizontalAlignment="Left" Height="41" Margin="673,411,0,0" VerticalAlignment="Top" Width="97"/>
+                    <Button Width="97"
+                            Height="41"
+                            Margin="673,411,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding Commands[SavePatientDetails]}"
+                            Content="Save" />
 
 
                 </Grid>
             </TabItem>
-            <TabItem Background="#4C09853D">
-                <TabItem.Header>
-                    <Grid Width="200" Height="100">
-                        <TextBlock Margin="0,0,0,72"
-                                   FontSize="20"
-                                   FontWeight="Bold"
-                                   TextAlignment="left"><Run Text="Contact Info..." />
-                            <LineBreak /><Run /></TextBlock>
-                        <TextBlock Margin="0,78,0,0"
-                                   FontSize="16"
-                                   Text="{Binding State.Value.Entity.PhoneNumbers.Count,
-                                                  StringFormat='0 Phone Numbers'}"
-                                   TextWrapping="Wrap" />
-                        <TextBlock Margin="0,28,10,0"
-                                   FontFamily="Segoe UI Symbol"
-                                   FontSize="36"
-                                   Text="/"
-                                   TextAlignment="Center" />
-                    </Grid>
-                </TabItem.Header>
-                <Grid>
-                    <TextBlock Width="Auto"
-                               Height="24"
-                               Margin="40,29,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="18"
-                               FontWeight="Bold"
-                               Foreground="#FFFFFF36"
-                               Text="Phone Numbers"
-                               TextAlignment="Right" />
-                    <ListBox Height="Auto"
-                             Margin="40,77,33.333,262"
-                             ItemTemplate="{DynamicResource PS-PersonPhoneNumberInfoTpl}"
-                             ItemsSource="{Binding State.Value.Entity.PhoneNumbers}" />
-                    <TextBlock Width="Auto"
-                               Height="24"
-                               Margin="40,262,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="18"
-                               FontWeight="Bold"
-                               Foreground="#FFFFFF36"
-                               Text="Addresses"
-                               TextAlignment="Right" />
-                    <ListBox Height="Auto"
-                             Margin="40,310,33.333,29"
-                             ItemTemplate="{DynamicResource PS-PersonAddressInfoTpl}"
-                             ItemsSource="{Binding State.Value.Entity.Addresses}" />
 
-                </Grid>
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <Grid Width="200" Height="100">
-                        <TextBlock Margin="0,0,0,63"
-                                   FontSize="18"
-                                   FontWeight="Bold"
-                                   Text="Next of kin..." />
-                        <TextBlock Margin="0,24,0,30"
-                                   FontFamily="Segoe UI Symbol"
-                                   FontSize="36"
-                                   Text=""
-                                   TextAlignment="Center" />
-                        <TextBlock Width="200"
-                                   Height="30"
-                                   Margin="0,70,0,0"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Top"
-                                   FontSize="16"
-                                   FontWeight="Bold"
-                                   Text="{Binding State.Value.Entity.NextOfKins.Count,
-                                                  StringFormat=0 Next of Kin}"
-                                   TextWrapping="Wrap" />
-                    </Grid>
-                </TabItem.Header>
-                <Grid>
-                    <TextBlock Width="176"
-                               Height="26"
-                               Margin="10,10,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="18"
-                               FontWeight="Bold"
-                               Foreground="#FFFFFF36"
-                               Text="Next of Kin Details"
-                               TextAlignment="Right"
-                               TextWrapping="WrapWithOverflow" />
-                    <ListBox Height="Auto"
-                             Margin="29,66,10.333,10"
-                             ItemTemplate="{DynamicResource PS-NextOfKinInfoTpl}"
-                             ItemsSource="{Binding State.Value.Entity.NextOfKins}" />
-
-                </Grid>
-            </TabItem>
-            <TabItem Background="#4C100163">
-
-                <TabItem.Header>
-                    <Grid Width="200" Height="100">
-                        <TextBlock Margin="0,0,0,63"
-                                   FontSize="18"
-                                   FontWeight="Bold"
-                                   Text="Non-Resident Info..." />
-                        <TextBlock Margin="0,24,0,30"
-                                   FontFamily="Segoe UI Symbol"
-                                   FontSize="36"
-                                   Text=""
-                                   TextAlignment="Center" />
-                        <TextBlock x:Name="textBlock"
-                                   Width="200"
-                                   Height="30"
-                                   Margin="0,70,0,0"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Top"
-                                   FontSize="16"
-                                   FontWeight="Bold"
-                                   Text="{Binding State.Value.Entity.NonResident.Type}"
-                                   TextWrapping="Wrap" />
-                    </Grid>
-                </TabItem.Header>
-                <Grid>
-                    <ContentControl Margin="10,0,0.333,309"
-                                    Content="{Binding State.Value.Entity.NonResident}"
-                                    ContentTemplate="{DynamicResource PS-NonResidentPatientInfoTpl}" />
-                    <TextBlock Width="92"
-                               Height="85"
-                               Margin="21,221,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="18"
-                               FontWeight="Bold"
-                               Foreground="#FFFFFF36"
-                               Text="Foreign Phone Number"
-                               TextAlignment="Right"
-                               TextWrapping="WrapWithOverflow" />
-                    <ListBox Height="Auto"
-                             Margin="128,221,10.333,162"
-                             ItemTemplate="{DynamicResource PS-ForeignPhoneNumberInfoTpl}"
-                             ItemsSource="{Binding State.Value.Entity.NonResident.PhoneNumbers}" />
-                    <TextBlock Width="97"
-                               Height="64"
-                               Margin="10,374,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="18"
-                               FontWeight="Bold"
-                               Foreground="#FFFFFF36"
-                               Text="Foreign Address"
-                               TextAlignment="Right"
-                               TextWrapping="WrapWithOverflow" />
-
-
-                    <ListBox Height="Auto"
-                             Margin="117,374,21.333,9"
-                             ItemTemplate="{DynamicResource PS-ForeignAddressTpl}"
-                             ItemsSource="{Binding State.Value.Entity.NonResident.Addresses}" />
-
-                </Grid>
-            </TabItem>
 
         </TabControl>
 

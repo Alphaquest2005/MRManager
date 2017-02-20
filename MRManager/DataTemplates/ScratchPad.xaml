@@ -1,15 +1,52 @@
 ﻿<UserControl x:Class="Views.ToBeGenerated.ScratchPad"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:Converters;assembly=Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:Views.ToBeGenerated"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:systemInterfaces="clr-namespace:SystemInterfaces;assembly=SystemInterfaces"
              xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
-             xmlns:converters="clr-namespace:Converters;assembly=Converters"
              Width="1000"
              Height="533.731"
              mc:Ignorable="d">
-
+    <Grid Width="Auto"
+          Height="49"
+          Margin="0,0,0,0"
+          Visibility="{Binding BoatName,
+                               Converter={StaticResource NullVisibilityConverter}}">
+        <TextBlock Width="Auto"
+                   Height="24"
+                   Margin="0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="Boat Name"
+                   TextAlignment="Right" />
+        <TextBlock Width="181"
+                   Height="24"
+                   MinWidth="75"
+                   Margin="140,0,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="{Binding BoatName,
+                                  UpdateSourceTrigger=PropertyChanged,
+                                  ValidatesOnDataErrors=True}" />
+        <TextBlock Width="Auto"
+                   Height="24"
+                   Margin="0,25,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="Marina "
+                   TextAlignment="Right" />
+        <TextBlock Width="181"
+                   Height="24"
+                   MinWidth="75"
+                   Margin="140,25,10,100"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="{Binding Marina,
+                                  UpdateSourceTrigger=PropertyChanged,
+                                  ValidatesOnDataErrors=True}" Background="#FFCB9A9A" />
+    </Grid>
 </UserControl>
