@@ -212,6 +212,18 @@ namespace RevolutionData
             ComplexActions.RequestState<IPatientInfo, IPatientDetailsInfo>(3, x => x.Id),
             ComplexActions.UpdateState<IPatientDetailsInfo>(3),
             ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,IPatientDetailsInfo>(3, c => c.Id, v => v.Id),
+            ComplexActions.RequestState<IPatientInfo, IPatientAddressesInfo>(3, x => x.Id),
+            ComplexActions.UpdateState<IPatientAddressesInfo>(3),
+            ComplexActions.RequestState<IPatientInfo, IPatientPhoneNumbersInfo>(3, x => x.Id),
+            ComplexActions.UpdateState<IPatientPhoneNumbersInfo>(3),
+            ComplexActions.RequestState<IPatientInfo, IPatientNextOfKinsInfo>(3, x => x.Id),
+            ComplexActions.UpdateState<IPatientNextOfKinsInfo>(3),
+            ComplexActions.RequestState<IPatientInfo, INonResidentInfo>(3, x => x.Id),
+            ComplexActions.UpdateState<INonResidentInfo>(3),
+
+
+
+
 
             ComplexActions.RequestStateList<IPatientInfo, IPatientVisitInfo>(3, c => c.Id,x => x.PatientId),
             ComplexActions.UpdateStateList<IPatientVisitInfo>(3),

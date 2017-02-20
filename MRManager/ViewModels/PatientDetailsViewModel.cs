@@ -14,6 +14,11 @@ namespace ViewModels
     [Export(typeof(IPatientDetailsViewModel))]
     public class PatientDetailsViewModel : DynamicViewModel<ObservableViewModel<IPatientDetailsInfo>>, IPatientDetailsViewModel
     {
+        private IList<IPersonAddressInfo> _addresses;
+        private IList<IPersonPhoneNumberInfo> _phoneNumbers;
+        private IList<INextOfKinInfo> _nextOfKins;
+        private INonResidentInfo _nonResidentInfo;
+
         [ImportingConstructor]
         public PatientDetailsViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableViewModel<IPatientDetailsInfo>(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation))
         {
@@ -26,5 +31,33 @@ namespace ViewModels
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
 
         public IPatientInfo CurrentPatient { get; set; }
+
+        public IList<IPersonAddressInfo> Addresses
+        {
+            get { return _addresses; }
+            set
+            {
+                _addresses = value; 
+                OnPropertyChanged();
+            }
+        }
+
+        public IList<IPersonPhoneNumberInfo> PhoneNumbers
+        {
+            get { return _phoneNumbers; }
+            set { _phoneNumbers = value; OnPropertyChanged(); }
+        }
+
+        public IList<INextOfKinInfo> NextOfKins
+        {
+            get { return _nextOfKins; }
+            set { _nextOfKins = value; OnPropertyChanged(); }
+        }
+
+        public INonResidentInfo NonResidentInfo
+        {
+            get { return _nonResidentInfo; }
+            set { _nonResidentInfo = value; OnPropertyChanged(); }
+        }
     }
 }

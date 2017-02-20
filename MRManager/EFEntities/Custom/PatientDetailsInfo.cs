@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using SystemInterfaces;
 using Common.DataEntites;
 using Interfaces;
 
@@ -23,13 +24,32 @@ namespace EF.Entities
         public string MaritalStatus { get; set; }
         public string CountryOfResidence { get; set; }
         public int? MediaId { get; set; }
-        public IList<IPersonAddressInfo> Addresses { get; set; }
-        public IList<IPersonPhoneNumberInfo> PhoneNumbers { get; set; }
-        public INonResidentInfo NonResident { get; set; }
-        public IList<INextOfKinInfo> NextOfKins { get; set; }
+        //public IList<IPersonAddressInfo> Addresses { get; set; }
+        //public IList<IPersonPhoneNumberInfo> PhoneNumbers { get; set; }
+        //public INonResidentInfo NonResident { get; set; }
+        //public IList<INextOfKinInfo> NextOfKins { get; set; }
         public DateTime BirthDate { get; set; }
         
     }
 
+    [Export(typeof(IPatientAddressesInfo))]
+    public class PatientAddressesInfo : EntityView<IPatients>, IPatientAddressesInfo
+    {
+        public IList<IPersonAddressInfo> Addresses { get; set; }
+    }
 
+    [Export(typeof(IPatientNextOfKinsInfo))]
+    public class PatientNextOfKinsInfo : EntityView<IPatients>, IPatientNextOfKinsInfo
+    {
+        
+        public IList<INextOfKinInfo> NextOfKins { get; set; }
+    }
+
+    [Export(typeof(IPatientPhoneNumbersInfo))]
+    public class PatientPhoneNumbersInfo: EntityView<IPatients>, IPatientPhoneNumbersInfo
+    {
+        public IList<IPersonPhoneNumberInfo> PhoneNumbers { get; set; }
+    }
+
+   
 }

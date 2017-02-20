@@ -23,13 +23,28 @@ namespace Interfaces
         String CountryOfResidence { get; }
         Int32? MediaId { get; }
 
-        IList<IPersonAddressInfo> Addresses { get; }
-        IList<IPersonPhoneNumberInfo> PhoneNumbers { get; }
+        //IList<IPersonAddressInfo> Addresses { get; }
+        //IList<IPersonPhoneNumberInfo> PhoneNumbers { get; }
 
-        INonResidentInfo NonResident { get; }
-        IList<INextOfKinInfo> NextOfKins { get; }
+        //INonResidentInfo NonResident { get; }
+        //IList<INextOfKinInfo> NextOfKins { get; }
         
         DateTime BirthDate { get; }
         
+    }
+
+    public interface IPatientAddressesInfo : IEntityView<IPatients>
+    {
+        IList<IPersonAddressInfo> Addresses { get; }
+    }
+
+    public interface IPatientNextOfKinsInfo : IEntityView<IPatients>
+    {
+        IList<INextOfKinInfo> NextOfKins { get; }
+    }
+
+    public interface IPatientPhoneNumbersInfo : IEntityView<IPatients>
+    {
+        IList<IPersonPhoneNumberInfo> PhoneNumbers { get; }
     }
 }

@@ -66,8 +66,16 @@ namespace EFRepository
                     var whereStr = msg.Changes.Aggregate("", (str, itm) => str + ($"{itm.Key} == \"{itm.Value}\" &&"));
                     whereStr = whereStr.TrimEnd('&');
                     if (string.IsNullOrEmpty(whereStr)) return;
-                    var res = ctx.Set<TDbEntity>().Select(exp).Distinct().Where(whereStr).DistinctBy(x => x.Id).FirstOrDefault();//
-                    EventMessageBus.Current.Publish(new EntityViewWithChangesFound<TView>((TView)(object)res,msg.Changes,new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
+                    var res = ctx.Set<TDbEntity>().Select(exp).Distinct().Where(x => x != null).Where(whereStr).DistinctBy(x => x.Id).FirstOrDefault();//
+                    if (res != null)
+                    {
+                        EventMessageBus.Current.Publish(new EntityViewWithChangesFound<TView>((TView)(object)res, msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
+                    }
+                    else
+                    {
+                        // not found
+                    }
+                    
                 }
             }
             catch (Exception ex)

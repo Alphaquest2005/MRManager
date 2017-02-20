@@ -5,6 +5,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows;
 using SystemInterfaces;
+using EF.Entities;
 using Interfaces;
 using ReactiveUI;
 using RevolutionEntities.Process;
@@ -36,6 +37,58 @@ namespace RevolutionData
                         v.RowState.Value = RowState.Unchanged;
                     }),
 
+                new ViewEventSubscription
+                    <IPatientDetailsViewModel,
+                        IProcessStateMessage<IPatientAddressesInfo>>(
+                    processId: 3,
+                    eventPredicate: e => e != null,
+                    actionPredicate: new List<Func<IPatientDetailsViewModel, IProcessStateMessage<IPatientAddressesInfo>, bool>>(),
+                    action: (v, e) =>
+                    {
+                        if (v.CurrentPatient != null && v.CurrentPatient?.Id != e.State.Entity.Id) return;
+                        v.Addresses = e.State.Entity.Addresses;
+                       
+                    }),
+
+                new ViewEventSubscription
+                    <IPatientDetailsViewModel,
+                        IProcessStateMessage<IPatientPhoneNumbersInfo>>(
+                    processId: 3,
+                    eventPredicate: e => e != null,
+                    actionPredicate: new List<Func<IPatientDetailsViewModel, IProcessStateMessage<IPatientPhoneNumbersInfo>, bool>>(),
+                    action: (v, e) =>
+                    {
+                        if (v.CurrentPatient != null && v.CurrentPatient?.Id != e.State.Entity.Id) return;
+                        v.PhoneNumbers = e.State.Entity.PhoneNumbers;
+
+                    }),
+
+                new ViewEventSubscription
+                    <IPatientDetailsViewModel,
+                        IProcessStateMessage<IPatientNextOfKinsInfo>>(
+                    processId: 3,
+                    eventPredicate: e => e != null,
+                    actionPredicate: new List<Func<IPatientDetailsViewModel, IProcessStateMessage<IPatientNextOfKinsInfo>, bool>>(),
+                    action: (v, e) =>
+                    {
+                        if (v.CurrentPatient != null && v.CurrentPatient?.Id != e.State.Entity.Id) return;
+                        v.NextOfKins = e.State.Entity.NextOfKins;
+
+                    }),
+
+                new ViewEventSubscription
+                    <IPatientDetailsViewModel,
+                        IProcessStateMessage<INonResidentInfo>>(
+                    processId: 3,
+                    eventPredicate: e => e != null,
+                    actionPredicate: new List<Func<IPatientDetailsViewModel, IProcessStateMessage<INonResidentInfo>, bool>>(),
+                    action: (v, e) =>
+                    {
+                        if (v.CurrentPatient != null && v.CurrentPatient?.Id != e.State.Entity.Id) return;
+                        v.NonResidentInfo = e.State.Entity;
+
+                    }),
+
                 new ViewEventSubscription<IPatientDetailsViewModel, ICurrentEntityChanged<IPatientInfo>>(
                     3,
                     e => e != null,
@@ -43,6 +96,10 @@ namespace RevolutionData
                     (v, e) =>
                     {
                         v.CurrentPatient = e.Entity;
+                        v.Addresses = null;
+                        v.PhoneNumbers = null;
+                        v.NextOfKins = null;
+                        v.NonResidentInfo = null;
                         v.State.Value = null;
                     }),
 

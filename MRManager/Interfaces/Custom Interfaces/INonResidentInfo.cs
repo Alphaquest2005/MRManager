@@ -6,7 +6,7 @@ using SystemInterfaces;
 namespace Interfaces
 {
     
-    public partial interface INonResidentInfo : IEntityView<IPersons_Patient>
+    public partial interface INonResidentInfo : IEntityView<IPatients>
     {
         String Type { get; }
         String BoatName { get; }

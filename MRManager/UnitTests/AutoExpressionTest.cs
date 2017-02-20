@@ -28,12 +28,7 @@ namespace UnitTests.Expressions
             var res = MRManagerDBContext.Instance.Persons_Patient.Select(PatientExpressions.NonResidentInfoExpression).ToList();
             if (res.Any()) Debug.Assert(true);
         }
-        [TestMethod]
-        public void PatientDetailsInfoExpressionGetData()
-        {
-            var res = MRManagerDBContext.Instance.Persons_Patient.Select(PatientExpressions.PatientDetailsInfoExpression).ToList();
-            if (res.Any()) Debug.Assert(true);
-        }
+       
         [TestMethod]
         public void PatientInfoExpressionGetData()
         {
@@ -86,6 +81,13 @@ namespace UnitTests.Expressions
         public void PatientVistInfoExpressionGetData()
         {
             var res = MRManagerDBContext.Instance.PatientVisit.Select(PulledExpressions.PatientVistInfoExpression).ToList();
+            if (res.Any()) Debug.Assert(true);
+        }
+
+        [TestMethod]
+        public void PulledPatientNonResidentExpressionGetData()
+        {
+            var res = MRManagerDBContext.Instance.Patients.Select(PulledExpressions.PatientNonResidentInfoExpression).ToList();
             if (res.Any()) Debug.Assert(true);
         }
     }

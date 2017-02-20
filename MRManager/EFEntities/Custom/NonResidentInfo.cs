@@ -7,7 +7,7 @@ using Interfaces;
 namespace EF.Entities
 {
     [Export(typeof(INonResidentInfo))]
-    public class NonResidentInfo : EntityView<IPersons_Patient>, INonResidentInfo
+    public class NonResidentInfo : EntityView<IPatients>, INonResidentInfo
     {
         public string Type { get; set; }
         public string BoatName { get; set; }

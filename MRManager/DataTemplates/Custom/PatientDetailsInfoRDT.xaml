@@ -215,7 +215,7 @@
                     <ListBox Height="Auto"
                              Margin="40,77,33.333,262"
                              ItemTemplate="{DynamicResource PS-PersonPhoneNumberInfoTpl}"
-                             ItemsSource="{Binding State.Value.Entity.PhoneNumbers}" />
+                             ItemsSource="{Binding PhoneNumbers}" />
                     <TextBlock Width="Auto"
                                Height="24"
                                Margin="40,262,0,0"
@@ -229,7 +229,7 @@
                     <ListBox Height="Auto"
                              Margin="40,310,33.333,29"
                              ItemTemplate="{DynamicResource PS-PersonAddressInfoTpl}"
-                             ItemsSource="{Binding State.Value.Entity.Addresses}" />
+                             ItemsSource="{Binding Addresses}" />
 
                 </Grid>
             </TabItem>
@@ -252,7 +252,7 @@
                                    VerticalAlignment="Top"
                                    FontSize="16"
                                    FontWeight="Bold"
-                                   Text="{Binding State.Value.Entity.NextOfKins.Count,
+                                   Text="{Binding NextOfKins.Count,
                                                   StringFormat=0 Next of Kin}"
                                    TextWrapping="Wrap" />
                     </Grid>
@@ -272,7 +272,7 @@
                     <ListBox Height="Auto"
                              Margin="29,66,10.333,10"
                              ItemTemplate="{DynamicResource PS-NextOfKinInfoTpl}"
-                             ItemsSource="{Binding State.Value.Entity.NextOfKins}" />
+                             ItemsSource="{Binding NextOfKins}" />
 
                 </Grid>
             </TabItem>
@@ -297,13 +297,13 @@
                                    VerticalAlignment="Top"
                                    FontSize="16"
                                    FontWeight="Bold"
-                                   Text="{Binding State.Value.Entity.NonResident.Type}"
+                                   Text="{Binding NonResidentInfo.Type}"
                                    TextWrapping="Wrap" />
                     </Grid>
                 </TabItem.Header>
                 <Grid>
                     <ContentControl Margin="10,0,0.333,300"
-                                    Content="{Binding State.Value.Entity.NonResident}"
+                                    Content="{Binding NonResidentInfo}"
                                     ContentTemplate="{DynamicResource PS-NonResidentPatientInfoTpl}" />
                     <!--<TextBlock Width="92"
                                Height="85"
