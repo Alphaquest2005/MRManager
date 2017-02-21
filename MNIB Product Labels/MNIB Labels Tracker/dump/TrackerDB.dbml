@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MNIBTrackerDB" Class="TrackerDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ALPHAQUEST-PC\SQLEXPRESS2012;Initial Catalog=MNIBTrackerDB;Integrated Security=True" SettingsObjectName="MNIB_Labels_Tracker.Properties.Settings" SettingsPropertyName="MNIBTrackerDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Locations" Member="Locations">
+    <Type Name="Location">
+      <Column Name="LocationCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Categories" Member="Categories">
+    <Type Name="Category">
+      <Column Name="CategoryCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DailySalesDetails" Member="DailySalesDetails">
+    <Type Name="DailySalesDetail">
+      <Column Name="InvoiceNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LotNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LocationCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CustomerNo" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Unit" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="TrackedQuantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TrackedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CATEG_COD" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SUBCAT_COD" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="PurchaseOrderDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DailyTransfersOut" Member="DailyTransfersOuts">
+    <Type Name="DailyTransfersOut">
+      <Column Name="TransferNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="TransferDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LotNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LocationCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="ToLocation" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Unit" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="TrackedQuantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TrackedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CATEG_COD" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SUBCAT_COD" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="PurchaseOrderDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DailyTransfersRecieved" Member="DailyTransfersRecieveds">
+    <Type Name="DailyTransfersRecieved">
+      <Column Name="TransferNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="TransferDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LotNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LocationCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="FromLocation" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Unit" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="TrackedQuantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TrackedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CATEG_COD" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SUBCAT_COD" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(11) NOT NULL" CanBeNull="false" />
+      <Column Name="PurchaseOrderDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TransferDailyDetails" Member="TransferDailyDetails">
+    <Type Name="TransferDailyDetail">
+      <Column Name="TransferNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="LineNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ItemNumber" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(15,4) NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Cost" Type="System.Decimal" DbType="Decimal(15,4)" CanBeNull="true" />
+      <Column Name="TransferDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FromLocation" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="ToLocation" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Category" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SubCategory" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DailyPODetails" Member="DailyPODetails">
+    <Type Name="DailyPODetail">
+      <Column Name="PONumber" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="PODate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LotNumber" Type="System.String" DbType="VarChar(26)" CanBeNull="true" />
+      <Column Name="LocationCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="VendorNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Unit" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="TrackedQuantity" Type="System.Decimal" DbType="Decimal(15,4) NOT NULL" CanBeNull="false" />
+      <Column Name="TrackedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Category" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SubCategory" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(9) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReconDailyTransfers" Member="ReconDailyTransfers">
+    <Type Name="ReconDailyTransfer">
+      <Column Name="TransferNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LotNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TrackedQty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TransactionQty" Type="System.Decimal" DbType="Decimal(38,4)" CanBeNull="true" />
+      <Column Name="TransferDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PurchaseOrderDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Variance" Type="System.Decimal" DbType="Decimal(38,4)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReconDailySales" Member="ReconDailySales">
+    <Type Name="ReconDailySale">
+      <Column Name="InvoiceNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LotNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TrackedQty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TransactionQty" Type="System.Decimal" DbType="Decimal(38,4)" CanBeNull="true" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PurchaseOrderDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Variance" Type="System.Decimal" DbType="Decimal(38,4)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UnknownGunTransactions" Member="UnknownGunTransactions">
+    <Type Name="UnknownGunTransaction">
+      <Column Name="TransactionNo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LotNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TransactionDetails" Member="TransactionDetails">
+    <Type Name="TransactionDetail">
+      <Column Name="TransactionNo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LotNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DailyReturns" Member="DailyReturns">
+    <Type Name="DailyReturn">
+      <Column Name="ReturnNumber" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="ReturnDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LotNumber" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="LocationCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="VendorNo" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="RefPONumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="TrackedQuantity" Type="System.Decimal" DbType="Decimal(15,4) NOT NULL" CanBeNull="false" />
+      <Column Name="TrackedDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Category" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SubCategory" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PurchaseReturns" Member="PurchaseReturns">
+    <Type Name="PurchaseReturn">
+      <Column Name="ReturnNumber" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="ReturnDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Vendor" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="VendorNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Location" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="LocationCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="REF" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PurchaseReturnsDetails" Member="PurchaseReturnsDetails">
+    <Type Name="PurchaseReturnsDetail">
+      <Column Name="LotNumber" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="ReturnNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="LineNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ItemNumber" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(15,4) NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Cost" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="CATEG_COD" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SUBCAT_COD" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="LocationCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="ReturnDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="VendorName" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PurchaseOrderDetails" Member="PurchaseOrderDetails">
+    <Type Name="PurchaseOrderDetail">
+      <Column Name="LotNumber" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="PurchaseOrderNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="LineNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ItemNumber" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(15,4) NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Cost" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="CATEG_COD" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SUBCAT_COD" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="LocationCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="PurchaseOrderDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="VendorName" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GunData" Member="GunDatas">
+    <Type Name="GunData">
+      <Column Name="TransactionNo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LotNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PurchaseOrderDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="CATEG_COD" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SUBCAT_COD" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExportData" Member="ExportDatas">
+    <Type Name="ExportData">
+      <Column Name="ReceiptDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="ReceiptNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Harvester" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ProductDescription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LineNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Weight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

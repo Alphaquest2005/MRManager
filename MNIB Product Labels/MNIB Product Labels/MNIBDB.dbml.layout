@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="MNIBDB">
+  <DataContextMoniker Name="/MNIBDBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="6c1a2d87-d872-4468-92dc-392982be1cbc" absoluteBounds="1.125, 0.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/MNIBDBDataContext/PurchaseOrder" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b1f24350-36a0-40d0-8b83-a8080afbe936" absoluteBounds="1.1399999999999997, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="322cfefb-b3e6-4310-8cb1-f2fbbcb79aba" absoluteBounds="4.25, 0.875, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/MNIBDBDataContext/PurchaseOrderDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="28d4a5a7-d7a6-415a-9c95-6bcbc2bdaa13" absoluteBounds="4.265, 1.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.125 : 1.47679768880208); (4.25 : 1.47679768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MNIBDBDataContext/PurchaseOrder/PurchaseOrder_PurchaseOrderDetail" />
+      <nodes>
+        <classShapeMoniker Id="6c1a2d87-d872-4468-92dc-392982be1cbc" />
+        <classShapeMoniker Id="322cfefb-b3e6-4310-8cb1-f2fbbcb79aba" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

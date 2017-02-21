@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MNIBLabelsDB" Class="MNIBLabelsDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ALPHAQUEST-PC\SQLEXPRESS2012;Initial Catalog=MNIBLabelsDB;Integrated Security=True" SettingsObjectName="SaveCSV.Properties.Settings" SettingsPropertyName="MNIBLabelsDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.TransactionDetails" Member="TransactionDetails">
+    <Type Name="TransactionDetail">
+      <Column Name="TransactionNo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LotNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

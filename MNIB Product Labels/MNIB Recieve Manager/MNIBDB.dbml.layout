@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 12.5, 8.5" name="MNIBDB">
+  <DataContextMoniker Name="/MNIBDBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="0bb0bba0-30e7-4563-88e2-71d0b91cb5c5" absoluteBounds="3.75, 0.75, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/MNIBDBDataContext/Item" />
+      <nestedChildShapes>
+        <elementListCompartment Id="651b2cdb-502c-4a9f-b4b1-b81e4f505f1b" absoluteBounds="3.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c661df6c-7ae5-44f7-8278-0e1629c4ec0f" absoluteBounds="3.75, 2.75, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/MNIBDBDataContext/Box" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6040e5d4-10bd-46f0-95ef-aeafc8773704" absoluteBounds="3.7649999999999997, 3.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9c43e8a0-5379-447d-9e1b-0f24df3ec81d" absoluteBounds="6.75, 0.75, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/MNIBDBDataContext/Export" />
+      <nestedChildShapes>
+        <elementListCompartment Id="29031436-f73d-4dc3-a97c-6d7ab8b6a464" absoluteBounds="6.7650000000000006, 1.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="888d61c7-bc05-4815-8049-96ff0a6af8d5" absoluteBounds="0.5, 0.75, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/MNIBDBDataContext/Harvester" />
+      <nestedChildShapes>
+        <elementListCompartment Id="41b497a2-2c3a-48cf-b5a7-ebcab5d5b477" absoluteBounds="0.51500000000000012, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="125cb9a7-a413-4f5c-accd-26d771a37e13" absoluteBounds="6.625, 3.375, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/MNIBDBDataContext/ExportReportLine" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f34e3823-3eba-4856-8c0d-d7696741321f" absoluteBounds="6.64, 3.835, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2c9f3dd8-4940-4b9e-8ca1-ca1d3fa0d84e" absoluteBounds="0.75, 2.875, 2, 1.9631982421875">
+      <DataClassMoniker Name="/MNIBDBDataContext/Customer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="add2acb8-502d-4133-8081-f5ca7ec9614e" absoluteBounds="0.76500000000000012, 3.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="03e1d788-d26f-43ff-b6a3-82effc7b6fbc" absoluteBounds="10.25, 1.375, 2, 3.1170068359375">
+      <DataClassMoniker Name="/MNIBDBDataContext/ExportDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ff734027-5beb-403b-885e-b1880b6996af" absoluteBounds="10.265, 1.835, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

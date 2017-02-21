@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MNIBLabelsDB" Class="MNIBDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ALPHAQUEST-PC\SQLEXPRESS2012;Initial Catalog=MNIBLabelsDB;Integrated Security=True" SettingsObjectName="MNIB_Product_Labels.Properties.Settings" SettingsPropertyName="MNIBLabelsDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.PurchaseOrder" Member="PurchaseOrders">
+    <Type Name="PurchaseOrder">
+      <Column Name="PONumber" Type="System.String" DbType="VarChar(15) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PODate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Vendor" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="VendorNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Association Name="PurchaseOrder_PurchaseOrderDetail" Member="PurchaseOrderDetails" ThisKey="PONumber" OtherKey="PurchaseOrderNo" Type="PurchaseOrderDetail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PurchaseOrderDetails" Member="PurchaseOrderDetails">
+    <Type Name="PurchaseOrderDetail">
+      <Column Name="PurchaseOrderNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="LineNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ItemNumber" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(15,4) NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Cost" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Association Name="PurchaseOrder_PurchaseOrderDetail" Member="PurchaseOrder" ThisKey="PurchaseOrderNo" OtherKey="PONumber" Type="PurchaseOrder" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
