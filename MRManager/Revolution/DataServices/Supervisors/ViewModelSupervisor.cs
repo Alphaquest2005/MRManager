@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using SystemInterfaces;
 using Akka.Actor;
 using Akka.Routing;
@@ -18,14 +19,21 @@ namespace DataServices.Actors
     public class ViewModelSupervisor : BaseSupervisor<ViewModelSupervisor>, IViewModelSupervisor
     {
 
-        private IActorRef _childActor;
+        
         private IUntypedActorContext ctx = null;
 
         public ViewModelSupervisor(ISystemProcess process)
         {
             ctx = Context;
-            _childActor = ctx.ActorOf(Props.Create<ViewModelActor>(process).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
+            Task.Run(() =>
+            {
+                ctx.ActorOf(
+                    Props.Create<ViewModelActor>(process)
+                        .WithRouter(new RoundRobinPool(1,
+                            new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
                     "ViewModelActorEntityActor");
+            });
+            
 
             EventMessageBus.Current.GetEvent<ISystemProcessStarted>(Source).Subscribe(x => HandleProcessViews(x));
             

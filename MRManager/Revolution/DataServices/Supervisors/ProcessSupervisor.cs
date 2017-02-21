@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 using SystemInterfaces;
 using Actor.Interfaces;
 using Akka.Actor;
@@ -67,19 +68,14 @@ namespace DataServices.Actors
                     if(Processes.ProcessComplexEvents.All(x => x.ProcessId != inMsg.Process.Id)) throw new ApplicationException($"No Complex Events were created for this process:{inMsg.Process.Id}-{inMsg.Process.Name}");
                     
 
-                    var childActor = ctx.ActorOf(Props.Create<ProcessActor>(inMsg), actorName);
+                   Task.Run(() => { ctx.ActorOf(Props.Create<ProcessActor>(inMsg), actorName); });
 
-                    EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source)
-                        .Where(x => Equals(x.Service.ActorRef, childActor))
-                        .Subscribe(z =>
-                        {
-                            EventMessageBus.Current.GetEvent<IProcessSystemMessage>(Source)
-                                .Where(
-                                    x =>
-                                        x.Process.Id == inMsg.Process.Id &&
-                                        x.MachineInfo.MachineName == inMsg.MachineInfo.MachineName)
-                                .Subscribe(x => childActor.Tell(x));
-                        });
+                    //EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source)
+                    //    .Where(x => Equals(x.Service.ActorRef, childActor))
+                    //    .Subscribe(z =>
+                    //    {
+                            
+                    //    });
 
                     
 

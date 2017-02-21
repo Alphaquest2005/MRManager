@@ -60,10 +60,16 @@ namespace DataServices.Actors
 
             EventMessageBus.Current.GetEvent<ICleanUpSystemProcess>(Source).Where(x => x.ProcessToBeCleanedUpId == Process.Id).Subscribe(x => Self.GracefulStop(TimeSpan.FromSeconds((double)EventTimeOut.ShortWait)));
 
-            Command<IProcessSystemMessage>(z => HandleProcessEvents(z));
+            EventMessageBus.Current.GetEvent<IProcessSystemMessage>(Source)
+                                .Where(
+                                    x =>
+                                        x.Process.Id == Process.Id &&
+                                        x.MachineInfo.MachineName == Process.MachineInfo.MachineName)
+                                .Subscribe(z => HandleProcessEvents(z));
 
+           
             
-                _complexEvents =
+            _complexEvents =
                     new ReadOnlyCollection<IComplexEventAction>(
                         Processes.ProcessComplexEvents.Where(x => x.ProcessId == msg.Process.Id).ToList());
                 StartActors(_complexEvents);

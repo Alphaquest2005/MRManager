@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 using SystemInterfaces;
 using Akka.Actor;
 using Akka.Event;
@@ -47,7 +48,7 @@ namespace DataServices.Actors
             var specificListType = genericListType.MakeGenericType(classType);
             try
             {
-                ctx.ActorOf(Props.Create(specificListType, process, msg), string.Format(actorName, classType.Name));
+                Task.Run(() => { ctx.ActorOf(Props.Create(specificListType, process, msg), string.Format(actorName, classType.Name)); });
             }
             catch (Exception ex)
             {

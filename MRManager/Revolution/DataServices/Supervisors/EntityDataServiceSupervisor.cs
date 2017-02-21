@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using SystemInterfaces;
 using Akka.Actor;
 using Akka.IO;
@@ -70,10 +71,17 @@ namespace DataServices.Actors
             try
             {
                 // pass firstmsg as constructor parameter cuz Actor system can't tell
-                    
-                    _childActor = ctx.ActorOf(Props.Create(actorType, inMsg, msg).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
-                            "EntityDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
 
+                Task.Run(() =>
+                {
+                    ctx.ActorOf(
+                        Props.Create(actorType, inMsg, msg)
+                            .WithRouter(new RoundRobinPool(1,
+                                new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1,
+                                    Environment.ProcessorCount))),
+                        "EntityDataServiceActor-" +
+                        typeof (TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
+                });
                    // EventMessageBus.Current.GetEvent<TEvent>(Source).Subscribe(x => _childActor.Tell(x));
               
                 //_childActor.Tell(msg);

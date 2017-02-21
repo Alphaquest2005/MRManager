@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using SystemInterfaces;
 using Akka.Actor;
@@ -54,8 +55,8 @@ namespace DataServices.Actors
             var specificListType = genericListType.MakeGenericType(classType);
             try
             {
-
-                ctx.ActorOf(Props.Create(specificListType, process, msg), string.Format(actorName, classType.Name));
+                Task.Run(() => { ctx.ActorOf(Props.Create(specificListType, process, msg), string.Format(actorName, classType.Name)); });
+                
 
             }
             catch (Exception ex)

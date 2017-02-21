@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 using SystemInterfaces;
 using Akka.Actor;
 using Akka.IO;
@@ -77,12 +78,19 @@ namespace DataServices.Actors
             /// Create Actor Per Event
             try
             {
-               
-                
-                _childActor = ctx.ActorOf(Props.Create(inMsg.ActorType, inMsg, msg).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
-                            "EntityViewDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
 
-               
+
+                Task.Run(() =>
+                {
+                    ctx.ActorOf(
+                        Props.Create(inMsg.ActorType, inMsg, msg)
+                            .WithRouter(new RoundRobinPool(1,
+                                new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1,
+                                    Environment.ProcessorCount))),
+                        "EntityViewDataServiceActor-" +
+                        typeof (TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
+                });
+
                 //_childActor.Tell(msg);
             }
             catch (Exception ex)
