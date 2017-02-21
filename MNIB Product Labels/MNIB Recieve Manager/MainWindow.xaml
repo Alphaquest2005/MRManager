@@ -85,8 +85,7 @@
 							SelectedItem="{Binding CurrentExportDetail, Mode=TwoWay}"
 							MinWidth="300"
 							Margin="330,81,0,68.333"  ItemTemplate="{DynamicResource ListBoxItemTemplate}" SelectionChanged="ListBox_SelectionChanged" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Padding="5,0,0,0" Grid.Column="1" PreviewMouseDown="ListBox_PreviewMouseDown" />
-                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Harvester" VerticalAlignment="Top" Height="53" Margin="0,142,0,0" Width="130" FontSize="20" Foreground="#FF14520D" FontWeight="Bold" Grid.ColumnSpan="2"/>
-                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Sales Order#" VerticalAlignment="Top" Height="39" Margin="0,2,0,0" Width="130" FontSize="20" Foreground="#FF14520D" FontWeight="Bold" Grid.ColumnSpan="2"/>
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Transaction" VerticalAlignment="Top" Height="39" Margin="0,2,0,0" Width="130" FontSize="20" Foreground="#FF14520D" FontWeight="Bold" Grid.ColumnSpan="2"/>
                         <Border Margin="330,0,0,0" BorderBrush="#FF053006" BorderThickness="2" CornerRadius="5" VerticalAlignment="Top" Height="76" Grid.Column="1">
                             <Grid Margin="-2,-8,2,7.667">
                                 <TextBlock Text="Total Weight including Box:" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Height="57" Margin="10,15,0,0" Width="118" Foreground="#FF14520D" FontWeight="Bold" TextAlignment="Right" FontSize="16"/>
@@ -111,32 +110,47 @@
 							DisplayMemberPath="ProductDescription"
 							SelectedValuePath="ProductId"
 							Background="#FF5B5959" BorderBrush="#FFE7E1E1" FontSize="21.333" FontWeight="Bold" SelectionChanged="ProductComboBox_SelectionChanged" Grid.ColumnSpan="2"/>
-                        <ComboBox IsEditable="True" Margin="15,142,671,211.333" 
-							ItemsSource="{Binding Instance.Harvesters}" 
+                        <Grid x:Name="HavesterGrd" Grid.ColumnSpan="2" Margin="0,142,671,197.666" Visibility="Collapsed">
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Harvester" VerticalAlignment="Top" Height="53" Width="130" FontSize="20" Foreground="#FF14520D" FontWeight="Bold"/>
+                            <ComboBox x:Name="HavestorCbo" IsEditable="True" Margin="135,0,0,13.334" 
+                                ItemsSource="{Binding Instance.Harvesters}" 
         					
-							SelectedItem="{Binding CurrentHarvester, UpdateSourceTrigger=PropertyChanged}"
-							IsSynchronizedWithCurrentItem="True"
-							SelectedValuePath="HarvesterId"
-							DisplayMemberPath="Name" Background="#FF797979" BorderBrush="#FFE7E1E1" FontSize="21.333" FontWeight="Bold" Grid.Column="1" Focusable="False" SelectionChanged="HarvesterComboBox_SelectionChanged"/>
-                        <ComboBox IsEditable="True" Margin="15,2,671,351.333" 
-							ItemsSource="{Binding Instance.Customers}" 
-							SelectedItem="{Binding Customer}"      
-							IsSynchronizedWithCurrentItem="True"
-							SelectedValuePath="OrderNo"
-							DisplayMemberPath="OrderNo" Background="#FF5B5959" BorderBrush="#FFE7E1E1" FontSize="21.333" FontWeight="Bold" Grid.Column="1" />
+                                SelectedItem="{Binding CurrentHarvester, UpdateSourceTrigger=PropertyChanged}"
+                                IsSynchronizedWithCurrentItem="True"
+                                SelectedValuePath="HarvesterId"
+                                DisplayMemberPath="Name" Background="#FF797979" BorderBrush="#FFE7E1E1" FontSize="21.333" FontWeight="Bold" Focusable="False" SelectionChanged="HarvesterComboBox_SelectionChanged"/>
+                        </Grid>
+                        <ComboBox Margin="15,2,671,351.333"
+                             Text="{Binding TransactionType}"
+							 Background="#FF5B5959" BorderBrush="#FFE7E1E1" FontSize="21.333" FontWeight="Bold" Grid.Column="1" SelectionChanged="ComboBox_SelectionChanged" >
+                            <ComboBoxItem Content="Invoice"/>
+                            <ComboBoxItem Content="Transfer"/>
+                            <ComboBoxItem Content="Sales Order"/>
+                        </ComboBox>
 
                         <DatePicker SelectedDate="{Binding ExportDate, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Height="34" Margin="15,93,0,0" VerticalAlignment="Top" Width="246" FontSize="21.333" Grid.Column="1" SelectedDateChanged="DatePicker_OnSelectedDateChanged"/>
                         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Box/Crate" VerticalAlignment="Top" Height="35" Margin="0,289,0,0" Width="130" FontSize="20" Foreground="#FF14520D" FontWeight="Bold" Grid.ColumnSpan="2"/>
                         <ComboBox IsEditable="True"  Margin="15,286,671,70.333" 
 							ItemsSource="{Binding Instance.Boxes}" 
 							SelectedItem="{Binding Box}" 
+                            Background="#FF363535" Foreground="#FFFAFAFA"
 							SelectedValuePath="BoxId"
-							DisplayMemberPath="Description" Background="#FF5B5959" BorderBrush="#FFE7E1E1" FontSize="21.333" FontWeight="Bold" Grid.Column="1" />
+							DisplayMemberPath="Description"  BorderBrush="#FFE7E1E1" FontSize="21.333" FontWeight="Bold" Grid.Column="1" />
                         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Harvested Weight" VerticalAlignment="Top" Height="61" Margin="0,331,0,0" Width="140" FontSize="20" Foreground="#FF14520D" FontWeight="Bold" Grid.ColumnSpan="2"/>
                         <TextBox Text="{Binding TotalWeight, UpdateSourceTrigger=PropertyChanged}" x:Name="textBox_Copy" HorizontalAlignment="Left" Height="42" Margin="33,340,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="226" FontSize="21.333" Background="#FF363535" Foreground="#FFFAFAFA" Grid.Column="1" />
                         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Total Weight" VerticalAlignment="Top" Height="35" Margin="487,335,0,0" Width="196" FontSize="20" Foreground="#FF14520D" FontWeight="Bold" Grid.Column="1"/>
                         <TextBox Text="{Binding TotalBoxWeight, Mode=OneWay}" x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="42" Margin="696,334,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="236" FontSize="21.333" Background="#FF363535" Foreground="#FFFAFAFA" Grid.Column="1" />
                         <TextBlock Text="{Binding Customer.Info}" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Height="38" Margin="0,48,0,0" Width="381" FontSize="17.333" Foreground="#FF521107" Grid.ColumnSpan="2" TextAlignment="Right"/>
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Txn. Number" VerticalAlignment="Top" Height="39" Margin="0,47,0,0" Width="130" FontSize="20" Foreground="#FF14520D" FontWeight="Bold" Grid.ColumnSpan="2"/>
+                        <TextBox x:Name="TransactionTxt" Margin="15,47,671,304.666"
+                            Text="{Binding ExportNumber}"
+                            Background="#FF5B5959" BorderBrush="#FFE7E1E1" FontSize="21.333" FontWeight="Bold" Grid.Column="1" />
+                        <Grid x:Name="BarCodeGrd" Grid.ColumnSpan="2" Margin="0,142,671,207.666" Visibility="Collapsed" >
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Barcode" VerticalAlignment="Top" Height="39" Width="130" FontSize="20" Foreground="#FF14520D" FontWeight="Bold"/>
+                            <TextBox x:Name="BarcodeTxt" Margin="135,0,0,-0.666"
+                                Text="{Binding Barcode, Delay=3}"
+                                Background="#FF5B5959" BorderBrush="#FFE7E1E1" FontSize="21.333" FontWeight="Bold" />
+                        </Grid>
                     </Grid>
 
                     <Button Content="Print All" HorizontalAlignment="Right" Height="36" VerticalAlignment="Bottom" Width="125" FontSize="22" Click="PrintAll" Margin="0,0,0,-2.666" Visibility="Hidden"/>

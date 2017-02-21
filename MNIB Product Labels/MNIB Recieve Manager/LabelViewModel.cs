@@ -623,6 +623,8 @@ namespace MNIB_Distribution_Manager
         }
 
         RelayCommand _AmendExportDetailCmd;
+        private string _barcode;
+
         public ICommand AmendExportDetailCmd
         {
             get
@@ -636,6 +638,29 @@ namespace MNIB_Distribution_Manager
 
         }
         public Visibility InputBoxVisibility { get; set; }
+
+        public string Barcode
+        {
+            get { return _barcode; }
+            set
+            {
+                _barcode = value;
+                OnPropertyChanged(nameof(Barcode));
+                //Todo: Do Lookup
+                DoBarcodeLookup();
+
+            }
+        }
+
+        private void DoBarcodeLookup()
+        {
+            using (var ctx = new MNIBDBDataContext())
+            {
+                
+            }
+        }
+
+
         private void ViewInputBox()
         {
             InputBoxVisibility = Visibility.Visible;

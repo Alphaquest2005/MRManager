@@ -35,11 +35,21 @@ namespace MNIB_Distribution_Manager.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=Winserv;Initial Catalog=MNIBDistributionManager;user=sa;password=Coun" +
-            "terPoint8")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ALPHAQUEST-PC\\SQLEXPRESS2016;Initial Catalog=MNIBDistributionManager;" +
+            "user=sa;password=pa$$word")]
         public string MNIBDistributionManagerConnectionString {
             get {
                 return ((string)(this["MNIBDistributionManagerConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=winserv;Initial Catalog=MNIBTrackerDB;User ID=sa")]
+        public string MNIBLabelsDBConnectionString {
+            get {
+                return ((string)(this["MNIBLabelsDBConnectionString"]));
             }
         }
     }

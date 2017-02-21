@@ -69,14 +69,14 @@ namespace DataServices.Actors
             var inMsg = new CreateEntityService(actorType,action, new StateCommandInfo(process.Id, RevolutionData.Context.Actor.Commands.StartActor),process,Source );
             try
             {
-                
+                // pass firstmsg as constructor parameter cuz Actor system can't tell
                     
-                    _childActor = ctx.ActorOf(Props.Create(actorType, inMsg).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
+                    _childActor = ctx.ActorOf(Props.Create(actorType, inMsg, msg).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
                             "EntityDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
 
                    // EventMessageBus.Current.GetEvent<TEvent>(Source).Subscribe(x => _childActor.Tell(x));
               
-                _childActor.Tell(msg);
+                //_childActor.Tell(msg);
 
             }
             catch (Exception ex)

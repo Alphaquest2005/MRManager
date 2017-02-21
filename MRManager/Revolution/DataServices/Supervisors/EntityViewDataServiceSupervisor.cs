@@ -79,11 +79,11 @@ namespace DataServices.Actors
             {
                
                 
-                _childActor = ctx.ActorOf(Props.Create(inMsg.ActorType, inMsg).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
+                _childActor = ctx.ActorOf(Props.Create(inMsg.ActorType, inMsg, msg).WithRouter(new RoundRobinPool(1, new DefaultResizer(1, Environment.ProcessorCount, 1, .2, .3, .1, Environment.ProcessorCount))),
                             "EntityViewDataServiceActor-" + typeof(TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
 
                
-                _childActor.Tell(msg);
+                //_childActor.Tell(msg);
             }
             catch (Exception ex)
             {

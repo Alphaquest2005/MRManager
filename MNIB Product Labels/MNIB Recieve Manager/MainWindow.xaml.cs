@@ -248,5 +248,23 @@ namespace MNIB_Distribution_Manager
             
             if (im != null) im.SetCurrentExportDetailToNull();
         }
+
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Cast<ComboBoxItem>().FirstOrDefault(x => x.Content.ToString() == "Sales Order") != null)
+            {
+                HavesterGrd.Visibility = Visibility.Visible;
+                BarCodeGrd.Visibility = Visibility.Collapsed;
+                TransactionTxt.Focus();
+            }
+
+            else
+            {
+                HavesterGrd.Visibility = Visibility.Collapsed;
+                BarCodeGrd.Visibility = Visibility.Visible;
+                BarcodeTxt.Focus();
+            }
+        }
     }
 }
