@@ -468,14 +468,14 @@
                                  Text="{Binding TotalBoxWeight,
                                                 Mode=OneWay}"
                                  TextWrapping="Wrap" />
-                        <TextBox x:Name="TransactionTxt"
+                        <TextBox x:Name="ExportNumberTxt"
                                  Grid.Column="1"
                                  Margin="15,42,671,314.666"
                                  Background="#FF5B5959"
                                  BorderBrush="#FFE7E1E1"
                                  FontSize="21.333"
                                  FontWeight="Bold"
-                                 Text="{Binding ExportNumber, UpdateSourceTrigger=LostFocus}" />
+                                 Text="{Binding ExportNumber, UpdateSourceTrigger=LostFocus}" TextChanged="ExportNumberTxt_TextChanged" TargetUpdated="ExportNumberTxt_TargetUpdated" />
                         <ComboBox Grid.Column="1"
                                   Margin="15,118,671,239.666"
                                   Background="#FF5B5959"

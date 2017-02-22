@@ -282,7 +282,8 @@ namespace MNIB_Distribution_Manager
 
         public bool SetExport(MNIBDBDataContext ctx)
         {
-            
+            ResetExport();
+
             if ( Product == null )
             {
                // MessageBox.Show("Please elect Product");
@@ -306,7 +307,7 @@ namespace MNIB_Distribution_Manager
             {
                 if (string.IsNullOrEmpty(ExportNumber))
                 {
-                    MessageBox.Show("Please Enter ExportNumber");
+                   // MessageBox.Show("Please Enter ExportNumber");
                     return false;
                 }
                 srdetails = ctx.ExportDetails.Where(x => x.ReceiptNumber.StartsWith(ExportNumber.ToString()) &&
@@ -317,7 +318,7 @@ namespace MNIB_Distribution_Manager
             //if (sr.ExportId == Export?.ExportId) return true;
             if (srdetails.Any() )//
             {
-                ResetExport();
+                
 
                // if (!VeifyBoxWeight()) return false;
                 
@@ -568,6 +569,7 @@ namespace MNIB_Distribution_Manager
 
                 dt.Columns.Add("ExportDate");
                 dt.Columns.Add("ExportNumber");
+                dt.Columns.Add("TransactionType");
                 dt.Columns.Add("Harvester");
                 dt.Columns.Add("ProductNumber");
                 dt.Columns.Add("ProductDescription");
@@ -581,6 +583,7 @@ namespace MNIB_Distribution_Manager
                {
                    x.ExportDate.ToString("dd-MMM-yyyy"),
                    x.ExportNumber,
+                   x.SourceTransaction,
                    x.Harvester,
                    x.ProductNumber,
                    x.ProductDescription,
@@ -629,6 +632,7 @@ namespace MNIB_Distribution_Manager
                                                 .ThenBy(z => z.ProductDescription)
                                                 .Select(w => new DailySummary.ReportLine()
                                                 {
+                                                   TransactionType = w.SourceTransaction,
                                                    Customer = w.CustomerName,
                                                    OrderNo = w.TicketNo,
                                                    Harvester = w.Harvester,
@@ -772,12 +776,14 @@ namespace MNIB_Distribution_Manager
 
         public class ReportLine
         {
+            public string TransactionType { get; set; }
             public string Customer { get; set; }
             public string OrderNo { get; set; }
             public string Harvester { get; set; }
             public string Product { get; set; }
             public double Weight { get; set; }
             public string BarCode { get; set; }
+            
         }
 
         public class SummaryLine

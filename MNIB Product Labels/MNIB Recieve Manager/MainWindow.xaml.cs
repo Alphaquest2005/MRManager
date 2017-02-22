@@ -252,23 +252,40 @@ namespace MNIB_Distribution_Manager
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems.Cast<ComboBoxItem>().FirstOrDefault(x => x.Content.ToString() == "Sales Order") != null)
+            if (im.SourceTransaction == "Sales Order")
             {
                 HavesterGrd.Visibility = Visibility.Visible;
                 BarCodeGrd.Visibility = Visibility.Collapsed;
-                TransactionTxt.Focus();
+                ExportNumberTxt.Focus();
             }
 
             else
             {
                 HavesterGrd.Visibility = Visibility.Collapsed;
                 BarCodeGrd.Visibility = Visibility.Visible;
-                BarcodeTxt.Focus();
+                ExportNumberTxt.Focus();
             }
             im.ExportNumber = "";
             im.Barcode = "";
             im.Product = null;
             im.SetCurrentExportDetailToNull();
+        }
+
+        private void ExportNumberTxt_TextChanged(object sender, TextChangedEventArgs e)
+        {
+           
+        }
+
+        private void ExportNumberTxt_TargetUpdated(object sender, DataTransferEventArgs e)
+        {
+ if (im.SourceTransaction == "Sales Order")
+            {
+                HavestorCbo.Focus();
+            }
+            else
+            {
+                BarcodeTxt.Focus();
+            }
         }
     }
 }
