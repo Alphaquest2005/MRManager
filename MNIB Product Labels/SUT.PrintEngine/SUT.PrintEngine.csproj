@@ -33,18 +33,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Practices.Composite">
-      <HintPath>..\Lib\Microsoft\Microsoft.Practices.Composite.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Composite, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Microsoft.Practices.Composite.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Composite.Presentation">
       <HintPath>..\Lib\Microsoft\Microsoft.Practices.Composite.Presentation.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Composite.UnityExtensions">
-      <HintPath>..\Lib\Microsoft\Microsoft.Practices.Composite.UnityExtensions.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Composite.UnityExtensions, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Microsoft.Practices.Composite.UnityExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ObjectBuilder2">
-      <HintPath>..\Lib\Microsoft\Microsoft.Practices.ObjectBuilder2.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.Practices.ObjectBuilder2, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Microsoft.Practices.ObjectBuilder2.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore">
       <Private>True</Private>
@@ -194,7 +196,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controls\LoadScreen\loading.gif" />
+    <Content Include="Microsoft.Practices.Composite.dll" />
     <Content Include="Microsoft.Practices.Composite.Presentation.dll" />
+    <Content Include="Microsoft.Practices.Composite.UnityExtensions.dll" />
+    <Content Include="Microsoft.Practices.ObjectBuilder2.dll" />
     <Content Include="SUT.PrintEngine.App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
