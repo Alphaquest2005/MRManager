@@ -96,6 +96,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="project.json" />
     <None Include="TrackerDB.dbml.layout">
       <DependentUpon>TrackerDB.dbml</DependentUpon>
     </None>
