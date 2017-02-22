@@ -173,6 +173,7 @@
     <None Include="MNIBDB.dbml.views">
       <DependentUpon>MNIBDB.dbml</DependentUpon>
     </None>
+    <None Include="MNIBReceivingManagerDB-20170222.bak" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
