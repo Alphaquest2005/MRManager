@@ -194,6 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controls\LoadScreen\loading.gif" />
+    <Content Include="Microsoft.Practices.Composite.Presentation.dll" />
     <Content Include="SUT.PrintEngine.App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
