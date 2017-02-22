@@ -1,15 +1,27 @@
-﻿<Window
+﻿<Window x:Class="MNIB_Distribution_Manager.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:QS="clr-namespace:MNIB_Distribution_Manager"
-        
-        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="MNIB_Distribution_Manager.MainWindow"
-        
-        Title="MainWindow"  WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" WindowStyle="None"  WindowState="Maximized" AllowsTransparency="True" BorderBrush="#CC246807" BorderThickness="5" Height="545.333" Width="1175.333" Closing="Window_Closing" Loaded="Window_Loaded">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="MainWindow"
+        Width="1175.333"
+        Height="545.333"
+        AllowsTransparency="True"
+        BorderBrush="#CC246807"
+        BorderThickness="5"
+        Closing="Window_Closing"
+        Loaded="Window_Loaded"
+        ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        WindowStyle="None"
+        mc:Ignorable="d">
     <Window.Resources>
-        <x:Static Member="QS:LabelViewModel.Instance" x:Key="LabelViewModelDataSource" />
+        <x:Static x:Key="LabelViewModelDataSource" Member="QS:LabelViewModel.Instance" />
         <Style x:Key="TextButtonStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property= "Foreground" Value="#FF5E6701"/>
+            <Setter Property="Foreground" Value="#FF5E6701" />
             <Style.Triggers>
 
                 <Trigger Property="IsMouseOver" Value="True">
@@ -18,7 +30,7 @@
             </Style.Triggers>
         </Style>
         <Style x:Key="CloseButtonStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property= "Foreground" Value="#FFFE2B2B"/>
+            <Setter Property="Foreground" Value="#FFFE2B2B" />
             <Style.Triggers>
 
                 <Trigger Property="IsMouseOver" Value="True">
@@ -27,199 +39,712 @@
             </Style.Triggers>
         </Style>
         <DataTemplate x:Key="ListBoxItemTemplate" DataType="QS:ExportDetail">
-            <Grid  Height="45" Width="Auto" MinWidth="500" Background="#BFFFFFFF" HorizontalAlignment="Stretch">
+            <Grid Width="Auto"
+                  Height="45"
+                  MinWidth="500"
+                  HorizontalAlignment="Stretch"
+                  Background="#BFFFFFFF">
 
-                <TextBlock Text="{Binding LineNumber}" HorizontalAlignment="Stretch" TextWrapping="Wrap"  VerticalAlignment="Top" Margin="10,3,547.333,0" Height="30" Width="Auto" FontSize="14" Foreground="#FF3D5000"/>
-                <TextBlock Text="{Binding Weight, StringFormat=n2}" HorizontalAlignment="Right" TextWrapping="Wrap"  VerticalAlignment="Top" Margin="0,5,92,0" Height="25" Width="43" FontSize="14" Foreground="#FF3D5000" TextAlignment="Center"/>
-                <TextBlock Text="LBS" HorizontalAlignment="Right" TextWrapping="Wrap"  VerticalAlignment="Top" Margin="0,5,60,0" Height="25" Width="27" FontSize="14" Foreground="#FF3D5000"/>
-                <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap"  VerticalAlignment="Top" Margin="0,4,10.333,0" Height="25" Width="50" FontSize="14" Text="Print" Style="{DynamicResource TextButtonStyle}" TextAlignment="Center" FontWeight="Bold" MouseLeftButtonDown="TextBlock_MouseRightButtonDown" />
+                <TextBlock Width="Auto"
+                           Height="30"
+                           Margin="10,3,547.333,0"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Top"
+                           FontSize="14"
+                           Foreground="#FF3D5000"
+                           Text="{Binding LineNumber}"
+                           TextWrapping="Wrap" />
+                <TextBlock Width="43"
+                           Height="25"
+                           Margin="0,5,92,0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Top"
+                           FontSize="14"
+                           Foreground="#FF3D5000"
+                           Text="{Binding Weight,
+                                          StringFormat=n2}"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap" />
+                <TextBlock Width="27"
+                           Height="25"
+                           Margin="0,5,60,0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Top"
+                           FontSize="14"
+                           Foreground="#FF3D5000"
+                           Text="LBS"
+                           TextWrapping="Wrap" />
+                <TextBlock Width="50"
+                           Height="25"
+                           Margin="0,4,10.333,0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Top"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           MouseLeftButtonDown="TextBlock_MouseRightButtonDown"
+                           Style="{DynamicResource TextButtonStyle}"
+                           Text="Print"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap" />
                 <!--<TextBox Text="{Binding LabelQty, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Height="25" Margin="0,11,61,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="39" FontSize="14" TextAlignment="Center"/>-->
                 <!--<TextBlock Text="{Binding Barcode}" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Margin="10,11,0,0" Height="25" Width="Auto" FontSize="14" Foreground="#FF3D5000"/>-->
-                <TextBlock Text="{Binding ReceiptNumber}" HorizontalAlignment="Stretch" TextWrapping="Wrap"  VerticalAlignment="Top" Margin="337,4,140,0" Height="25" Width="Auto" FontSize="14" Foreground="#FF3D5000" TextAlignment="Right"/>
-                <TextBlock Text="{Binding CustomerInfo}" HorizontalAlignment="Stretch" TextWrapping="Wrap"  VerticalAlignment="Stretch" Margin="41,4,436.333,0" Height="Auto" Width="106" FontSize="14" Foreground="#FF3D5000"/>
-                <TextBlock Text="{Binding ProductDescription }" HorizontalAlignment="Stretch" TextWrapping="Wrap"  VerticalAlignment="Top" Margin="182,4,251.333,0" Height="41" Width="Auto" FontSize="14" Foreground="#FF3D5000"/>
+                <TextBlock Width="Auto"
+                           Height="25"
+                           Margin="337,4,140,0"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Top"
+                           FontSize="14"
+                           Foreground="#FF3D5000"
+                           Text="{Binding ReceiptNumber}"
+                           TextAlignment="Right"
+                           TextWrapping="Wrap" />
+                <TextBlock Width="106"
+                           Height="Auto"
+                           Margin="41,4,436.333,0"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Stretch"
+                           FontSize="14"
+                           Foreground="#FF3D5000"
+                           Text="{Binding CustomerInfo}"
+                           TextWrapping="Wrap" />
+                <TextBlock Width="Auto"
+                           Height="41"
+                           Margin="182,4,251.333,0"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Top"
+                           FontSize="14"
+                           Foreground="#FF3D5000"
+                           Text="{Binding ProductDescription}"
+                           TextWrapping="Wrap" />
 
             </Grid>
         </DataTemplate>
 
     </Window.Resources>
     <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF0C6801" Offset="0.98"/>
-            <GradientStop Color="#FFB2FF43"/>
+        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Offset="0.98" Color="#FF0C6801" />
+            <GradientStop Color="#FFB2FF43" />
         </LinearGradientBrush>
     </Window.Background>
 
     <Grid>
 
-        <Image Source="Vegetables.png" Stretch="UniformToFill"  Margin="35,210,25.333,0.333" >
+        <Image Margin="35,210,25.333,0.333"
+               Source="Vegetables.png"
+               Stretch="UniformToFill">
             <Image.OpacityMask>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#33000000" Offset="0"/>
-                    <GradientStop Color="White" Offset="0.823"/>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0" Color="#33000000" />
+                    <GradientStop Offset="0.823" Color="White" />
                 </LinearGradientBrush>
             </Image.OpacityMask>
         </Image>
 
 
         <Viewbox>
-            <Grid DataContext="{Binding Source={StaticResource LabelViewModelDataSource}}" Height="535" Width="1165" >
-                <Border Height="65" Margin="0,0,0,6" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" BorderThickness="2" Background="#4CFAFAFA"   >
+            <Grid Width="1165"
+                  Height="535"
+                  DataContext="{Binding Source={StaticResource LabelViewModelDataSource}}">
+                <Border Height="65"
+                        Margin="0,0,0,6"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Bottom"
+                        Background="#4CFAFAFA"
+                        BorderThickness="2">
                     <Border.Effect>
-                        <DropShadowEffect Color="Green"/>
+                        <DropShadowEffect Color="Green" />
                     </Border.Effect>
 
-                    <DockPanel HorizontalAlignment="Stretch" Margin="0.4,-1.6,0.4,-14.4" LastChildFill="False" x:Name="FooterBar" Height="76" Width="Auto" />
+                    <DockPanel x:Name="FooterBar"
+                               Width="Auto"
+                               Height="76"
+                               Margin="0.4,-1.6,0.4,-14.4"
+                               HorizontalAlignment="Stretch"
+                               LastChildFill="False" />
                 </Border>
                 <Grid Margin="57,79,25.333,25.333">
 
                     <Grid Width="1052.333" Margin="0,0,31,38.334">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30*"/>
-                            <ColumnDefinition Width="233*"/>
+                            <ColumnDefinition Width="30*" />
+                            <ColumnDefinition Width="233*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="130" FontSize="16" Foreground="#FF14520D" FontWeight="Bold" Grid.ColumnSpan="2" Margin="0,91,0,0"><Run Text="Date Harvested:"/><LineBreak/><Run/></TextBlock>
+                        <TextBlock Grid.ColumnSpan="2"
+                                   Width="130"
+                                   Height="30"
+                                   Margin="0,81,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   Foreground="#FF14520D"
+                                   TextWrapping="Wrap"><Run Text="Date Harvested:" />
+                            <LineBreak /><Run /></TextBlock>
+                        <TextBlock Grid.ColumnSpan="2"
+                                   Width="130"
+                                   Height="34"
+                                   Margin="0,2,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   Foreground="#FF14520D"
+                                   Text="Transaction"
+                                   TextWrapping="Wrap" />
+                        <ComboBox Grid.ColumnSpan="2"
+                                  Margin="0,226,671,125.333"
+                                  Background="#FF5B5959"
+                                  BorderBrush="#FFE7E1E1"
+                                  DisplayMemberPath="ProductDescription"
+                                  FontSize="21.333"
+                                  FontWeight="Bold"
+                                  IsEditable="True"
+                                  ItemsSource="{Binding Instance.Products}"
+                                  SelectedIndex="0"
+                                  SelectedItem="{Binding Product}"
+                                  SelectedValuePath="ProductId"
+                                  SelectionChanged="ProductComboBox_SelectionChanged" />
+                        <Grid x:Name="HavesterGrd"
+                              Grid.ColumnSpan="2"
+                              Margin="0,178,671,171.666"
+                              Visibility="Collapsed">
+                            <TextBlock Width="130"
+                                       Height="53"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       Foreground="#FF14520D"
+                                       Text="Harvester"
+                                       TextWrapping="Wrap" />
+                            <ComboBox x:Name="HavestorCbo"
+                                      Margin="135,0,0,13.334"
+                                      Background="#FF797979"
+                                      BorderBrush="#FFE7E1E1"
+                                      DisplayMemberPath="Name"
+                                      Focusable="False"
+                                      FontSize="21.333"
+                                      FontWeight="Bold"
+                                      IsEditable="True"
+                                      IsSynchronizedWithCurrentItem="True"
+                                      ItemsSource="{Binding Instance.Harvesters}"
+                                      SelectedItem="{Binding CurrentHarvester,
+                                                             UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedValuePath="HarvesterId"
+                                      SelectionChanged="HarvesterComboBox_SelectionChanged" />
+                        </Grid>
+                        <TextBlock Grid.ColumnSpan="2"
+                                   Width="130"
+                                   Height="35"
+                                   Margin="0,289,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   Foreground="#FF14520D"
+                                   Text="Box/Crate"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.ColumnSpan="2"
+                                   Width="140"
+                                   Height="61"
+                                   Margin="0,331,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   Foreground="#FF14520D"
+                                   Text="Harvested Weight"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.ColumnSpan="2"
+                                   Width="379"
+                                   Height="26"
+                                   Margin="0,152,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   FontSize="14"
+                                   Foreground="#FF521107"
+                                   Text="{Binding Customer.Info}"
+                                   TextAlignment="Right"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.ColumnSpan="2"
+                                   Width="130"
+                                   Height="34"
+                                   Margin="0,42,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   Foreground="#FF14520D"
+                                   Text="Txn. Number"
+                                   TextWrapping="Wrap" />
+                        <Grid x:Name="BarCodeGrd"
+                              Grid.ColumnSpan="2"
+                              Margin="0,178,671,171.666"
+                              Visibility="Collapsed">
+                            <TextBlock Width="130"
+                                       Height="39"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       Foreground="#FF14520D"
+                                       Text="Barcode"
+                                       TextWrapping="Wrap" />
+                            <TextBox x:Name="BarcodeTxt"
+                                     Margin="135,0,0,-0.666"
+                                     Background="#FF5B5959"
+                                     BorderBrush="#FFE7E1E1"
+                                     FontSize="21.333"
+                                     FontWeight="Bold"
+                                     Text="{Binding Barcode,
+                                                    Delay=300,
+                                                    UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                        <TextBlock Grid.ColumnSpan="2"
+                                   Width="130"
+                                   Height="34"
+                                   Margin="0,118,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   Foreground="#FF14520D"
+                                   Text="Customer"
+                                   TextWrapping="Wrap" />
                         <ListBox x:Name="ListBox"
-							ItemsSource="{Binding ExportDetails}"
-							SelectionMode="Single"
-							SelectedItem="{Binding CurrentExportDetail, Mode=TwoWay}"
-							MinWidth="300"
-							Margin="330,81,0,68.333"  ItemTemplate="{DynamicResource ListBoxItemTemplate}" SelectionChanged="ListBox_SelectionChanged" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" Width="Auto" Padding="5,0,0,0" Grid.Column="1" PreviewMouseDown="ListBox_PreviewMouseDown" />
-                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Transaction" VerticalAlignment="Top" Height="39" Margin="0,2,0,0" Width="130" FontSize="20" Foreground="#FF14520D" FontWeight="Bold" Grid.ColumnSpan="2"/>
-                        <Border Margin="330,0,0,0" BorderBrush="#FF053006" BorderThickness="2" CornerRadius="5" VerticalAlignment="Top" Height="76" Grid.Column="1">
+                                 Grid.Column="1"
+                                 Width="Auto"
+                                 MinWidth="300"
+                                 Margin="330,81,0,68.333"
+                                 HorizontalAlignment="Stretch"
+                                 HorizontalContentAlignment="Stretch"
+                                 ItemTemplate="{DynamicResource ListBoxItemTemplate}"
+                                 ItemsSource="{Binding ExportDetails}"
+                                 Padding="5,0,0,0"
+                                 PreviewMouseDown="ListBox_PreviewMouseDown"
+                                 SelectedItem="{Binding CurrentExportDetail,
+                                                        Mode=TwoWay}"
+                                 SelectionChanged="ListBox_SelectionChanged"
+                                 SelectionMode="Single" />
+                        <Border Grid.Column="1"
+                                Height="76"
+                                Margin="330,0,0,0"
+                                VerticalAlignment="Top"
+                                BorderBrush="#FF053006"
+                                BorderThickness="2"
+                                CornerRadius="5">
                             <Grid Margin="-2,-8,2,7.667">
-                                <TextBlock Text="Total Weight including Box:" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Height="57" Margin="10,15,0,0" Width="118" Foreground="#FF14520D" FontWeight="Bold" TextAlignment="Right" FontSize="16"/>
-                                <Button x:Name="button" Command="{Binding CreateExportDetailCmd}"  FontSize="80" HorizontalAlignment="Left" Height="55" Margin="445,10,0,0" VerticalAlignment="Top" Width="59" FontWeight="Bold" Background="{x:Null}" >
+                                <TextBlock Width="118"
+                                           Height="57"
+                                           Margin="10,15,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           FontSize="16"
+                                           FontWeight="Bold"
+                                           Foreground="#FF14520D"
+                                           Text="Total Weight including Box:"
+                                           TextAlignment="Right"
+                                           TextWrapping="Wrap" />
+                                <Button x:Name="button"
+                                        Width="59"
+                                        Height="55"
+                                        Margin="445,10,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Background="{x:Null}"
+                                        Command="{Binding CreateExportDetailCmd}"
+                                        FontSize="80"
+                                        FontWeight="Bold">
                                     <Image Source="Plus_sign.png" />
                                 </Button>
-                                <TextBox Text="{Binding Weight}" x:Name="textBox" HorizontalAlignment="Left" Height="42" Margin="133,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="286" FontSize="21.333" Background="#FF363535" Foreground="#FFFAFAFA"/>
-                                <Button x:Name="DeleteBtn"  FontSize="80" HorizontalAlignment="Left" Height="36" Margin="650,20,0,0" VerticalAlignment="Top" Width="38" FontWeight="Bold" Background="{x:Null}" Click="DeleteBtn_OnClick">
+                                <TextBox x:Name="textBox"
+                                         Width="286"
+                                         Height="42"
+                                         Margin="133,14,0,0"
+                                         HorizontalAlignment="Left"
+                                         VerticalAlignment="Top"
+                                         Background="#FF363535"
+                                         FontSize="21.333"
+                                         Foreground="#FFFAFAFA"
+                                         Text="{Binding Weight}"
+                                         TextWrapping="Wrap" />
+                                <Button x:Name="DeleteBtn"
+                                        Width="38"
+                                        Height="36"
+                                        Margin="650,20,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Background="{x:Null}"
+                                        Click="DeleteBtn_OnClick"
+                                        FontSize="80"
+                                        FontWeight="Bold">
                                     <Image Source="DeleteRed.png" />
                                 </Button>
-                                <Button x:Name="AmendBtn" Command="{Binding AmendExportDetailCmd}" FontSize="80" HorizontalAlignment="Left" Height="36" Margin="550,20,0,0" VerticalAlignment="Top" Width="38" FontWeight="Bold" Background="{x:Null}" Click="AmendBtn_OnClickBtn_OnClick">
+                                <Button x:Name="AmendBtn"
+                                        Width="38"
+                                        Height="36"
+                                        Margin="550,20,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Background="{x:Null}"
+                                        Click="AmendBtn_OnClickBtn_OnClick"
+                                        Command="{Binding AmendExportDetailCmd}"
+                                        FontSize="80"
+                                        FontWeight="Bold">
                                     <Image Source="Edit-icon.png" />
                                 </Button>
                             </Grid>
                         </Border>
-                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Product" VerticalAlignment="Top" Height="26" Margin="0,195,0,0" Width="130" FontSize="20" Foreground="#FF14520D" FontWeight="Bold" Grid.ColumnSpan="2"/>
-                        <ComboBox IsEditable="True"  Margin="0,226,671,125.333" 
-                        
-							ItemsSource="{Binding Instance.Products}" 
-							SelectedItem="{Binding Product}" 
-							SelectedIndex="0"
-							DisplayMemberPath="ProductDescription"
-							SelectedValuePath="ProductId"
-							Background="#FF5B5959" BorderBrush="#FFE7E1E1" FontSize="21.333" FontWeight="Bold" SelectionChanged="ProductComboBox_SelectionChanged" Grid.ColumnSpan="2"/>
-                        <Grid x:Name="HavesterGrd" Grid.ColumnSpan="2" Margin="0,142,671,197.666" Visibility="Collapsed">
-                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Harvester" VerticalAlignment="Top" Height="53" Width="130" FontSize="20" Foreground="#FF14520D" FontWeight="Bold"/>
-                            <ComboBox x:Name="HavestorCbo" IsEditable="True" Margin="135,0,0,13.334" 
-                                ItemsSource="{Binding Instance.Harvesters}" 
-        					
-                                SelectedItem="{Binding CurrentHarvester, UpdateSourceTrigger=PropertyChanged}"
-                                IsSynchronizedWithCurrentItem="True"
-                                SelectedValuePath="HarvesterId"
-                                DisplayMemberPath="Name" Background="#FF797979" BorderBrush="#FFE7E1E1" FontSize="21.333" FontWeight="Bold" Focusable="False" SelectionChanged="HarvesterComboBox_SelectionChanged"/>
-                        </Grid>
-                        <ComboBox Margin="15,2,671,351.333"
-                             Text="{Binding TransactionType}"
-							 Background="#FF5B5959" BorderBrush="#FFE7E1E1" FontSize="21.333" FontWeight="Bold" Grid.Column="1" SelectionChanged="ComboBox_SelectionChanged" >
-                            <ComboBoxItem Content="Invoice"/>
-                            <ComboBoxItem Content="Transfer"/>
-                            <ComboBoxItem Content="Sales Order"/>
+                        <ComboBox Grid.Column="1"
+                                  Margin="15,2,671,355.666"
+                                  Background="#FF5B5959"
+                                  BorderBrush="#FFE7E1E1"
+                                  FontSize="21.333"
+                                  FontWeight="Bold"
+                                  SelectionChanged="ComboBox_SelectionChanged"
+                                  Text="{Binding SourceTransaction}">
+                            <ComboBoxItem Content="Invoice" />
+                            <ComboBoxItem Content="Transfer" />
+                            <ComboBoxItem Content="Sales Order" />
                         </ComboBox>
 
-                        <DatePicker SelectedDate="{Binding ExportDate, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Height="34" Margin="15,93,0,0" VerticalAlignment="Top" Width="246" FontSize="21.333" Grid.Column="1" SelectedDateChanged="DatePicker_OnSelectedDateChanged"/>
-                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Box/Crate" VerticalAlignment="Top" Height="35" Margin="0,289,0,0" Width="130" FontSize="20" Foreground="#FF14520D" FontWeight="Bold" Grid.ColumnSpan="2"/>
-                        <ComboBox IsEditable="True"  Margin="15,286,671,70.333" 
-							ItemsSource="{Binding Instance.Boxes}" 
-							SelectedItem="{Binding Box}" 
-                            Background="#FF363535" Foreground="#FFFAFAFA"
-							SelectedValuePath="BoxId"
-							DisplayMemberPath="Description"  BorderBrush="#FFE7E1E1" FontSize="21.333" FontWeight="Bold" Grid.Column="1" />
-                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Harvested Weight" VerticalAlignment="Top" Height="61" Margin="0,331,0,0" Width="140" FontSize="20" Foreground="#FF14520D" FontWeight="Bold" Grid.ColumnSpan="2"/>
-                        <TextBox Text="{Binding TotalWeight, UpdateSourceTrigger=PropertyChanged}" x:Name="textBox_Copy" HorizontalAlignment="Left" Height="42" Margin="33,340,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="226" FontSize="21.333" Background="#FF363535" Foreground="#FFFAFAFA" Grid.Column="1" />
-                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Total Weight" VerticalAlignment="Top" Height="35" Margin="487,335,0,0" Width="196" FontSize="20" Foreground="#FF14520D" FontWeight="Bold" Grid.Column="1"/>
-                        <TextBox Text="{Binding TotalBoxWeight, Mode=OneWay}" x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="42" Margin="696,334,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="236" FontSize="21.333" Background="#FF363535" Foreground="#FFFAFAFA" Grid.Column="1" />
-                        <TextBlock Text="{Binding Customer.Info}" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Top" Height="38" Margin="0,48,0,0" Width="381" FontSize="17.333" Foreground="#FF521107" Grid.ColumnSpan="2" TextAlignment="Right"/>
-                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Txn. Number" VerticalAlignment="Top" Height="39" Margin="0,47,0,0" Width="130" FontSize="20" Foreground="#FF14520D" FontWeight="Bold" Grid.ColumnSpan="2"/>
-                        <TextBox x:Name="TransactionTxt" Margin="15,47,671,304.666"
-                            Text="{Binding ExportNumber}"
-                            Background="#FF5B5959" BorderBrush="#FFE7E1E1" FontSize="21.333" FontWeight="Bold" Grid.Column="1" />
-                        <Grid x:Name="BarCodeGrd" Grid.ColumnSpan="2" Margin="0,142,671,207.666" Visibility="Collapsed" >
-                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Barcode" VerticalAlignment="Top" Height="39" Width="130" FontSize="20" Foreground="#FF14520D" FontWeight="Bold"/>
-                            <TextBox x:Name="BarcodeTxt" Margin="135,0,0,-0.666"
-                                Text="{Binding Barcode, Delay=3}"
-                                Background="#FF5B5959" BorderBrush="#FFE7E1E1" FontSize="21.333" FontWeight="Bold" />
-                        </Grid>
+                        <DatePicker Grid.Column="1"
+                                    Width="246"
+                                    Height="30"
+                                    Margin="15,82,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    FontSize="21.333"
+                                    SelectedDate="{Binding ExportDate,
+                                                           UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedDateChanged="DatePicker_OnSelectedDateChanged" />
+                        <ComboBox Grid.Column="1"
+                                  Margin="15,286,671,70.333"
+                                  Background="#FF363535"
+                                  BorderBrush="#FFE7E1E1"
+                                  DisplayMemberPath="Description"
+                                  FontSize="21.333"
+                                  FontWeight="Bold"
+                                  
+                                  IsEditable="True"
+                                  ItemsSource="{Binding Instance.Boxes}"
+                                  SelectedItem="{Binding Box}"
+                                  SelectedValuePath="BoxId" />
+                        <TextBox x:Name="textBox_Copy"
+                                 Grid.Column="1"
+                                 Width="226"
+                                 Height="42"
+                                 Margin="33,340,0,0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 Background="#FF363535"
+                                 FontSize="21.333"
+                                 Foreground="#FFFAFAFA"
+                                 Text="{Binding TotalWeight,
+                                                UpdateSourceTrigger=PropertyChanged}"
+                                 TextWrapping="Wrap" />
+                        <TextBlock Grid.Column="1"
+                                   Width="196"
+                                   Height="35"
+                                   Margin="487,335,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   Foreground="#FF14520D"
+                                   Text="Total Weight"
+                                   TextWrapping="Wrap" />
+                        <TextBox x:Name="textBox_Copy1"
+                                 Grid.Column="1"
+                                 Width="236"
+                                 Height="42"
+                                 Margin="696,334,0,0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 Background="#FF363535"
+                                 FontSize="21.333"
+                                 Foreground="#FFFAFAFA"
+                                 Text="{Binding TotalBoxWeight,
+                                                Mode=OneWay}"
+                                 TextWrapping="Wrap" />
+                        <TextBox x:Name="TransactionTxt"
+                                 Grid.Column="1"
+                                 Margin="15,42,671,314.666"
+                                 Background="#FF5B5959"
+                                 BorderBrush="#FFE7E1E1"
+                                 FontSize="21.333"
+                                 FontWeight="Bold"
+                                 Text="{Binding ExportNumber, UpdateSourceTrigger=LostFocus}" />
+                        <ComboBox Grid.Column="1"
+                                  Margin="15,118,671,239.666"
+                                  Background="#FF5B5959"
+                                  BorderBrush="#FFE7E1E1"
+                                  DisplayMemberPath="CustomerName"
+                                  FontSize="21.333"
+                                  FontWeight="Bold"
+                                  ItemsSource="{Binding Instance.Customers}"
+                                  SelectedIndex="0"
+                                  SelectedItem="{Binding Customer}"
+                                  SelectedValuePath="CustomerNumber" />
                     </Grid>
 
-                    <Button Content="Print All" HorizontalAlignment="Right" Height="36" VerticalAlignment="Bottom" Width="125" FontSize="22" Click="PrintAll" Margin="0,0,0,-2.666" Visibility="Hidden"/>
-                    <Button Content="View Summary" HorizontalAlignment="Right" Height="36" VerticalAlignment="Bottom" Width="192" FontSize="22" Click="ViewSummary" Margin="0,0,32,-2.666"/>
+                    <Button Width="125"
+                            Height="36"
+                            Margin="0,0,0,-2.666"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Click="PrintAll"
+                            Content="Print All"
+                            FontSize="22"
+                            Visibility="Hidden" />
+                    <Button Width="192"
+                            Height="36"
+                            Margin="0,0,32,-2.666"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Click="ViewSummary"
+                            Content="View Summary"
+                            FontSize="22" />
                 </Grid>
             </Grid>
 
         </Viewbox>
 
-        <Grid x:Name="HeaderBar" Height="35" Margin="0,0,-0.49,0" VerticalAlignment="Top"  Background="#00000000" >
-            <Grid Background="#00000000" Margin="0,0,-0.177,-25" PreviewMouseLeftButtonDown="MoveWindow"/>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="MNIB Distribution Manager" VerticalAlignment="Top" Height="65" Margin="34,11,0,-41" Width="550" FontSize="36" Foreground="#FF14520D"/>
-            <TextBlock Text="&#xE10A;" Style="{StaticResource CloseButtonStyle}"  HorizontalAlignment="Right" Height="32" VerticalAlignment="Top" Width="35" FontFamily="Segoe UI Symbol" FontSize="24" Margin="0,3,0,0" MouseLeftButtonDown="CloseWindow" />
-            <TextBlock Text="&#xE155;" Style="{DynamicResource TextButtonStyle}"  HorizontalAlignment="Right" Height="32" VerticalAlignment="Top" Width="30" FontFamily="Segoe UI Symbol" FontSize="24" Margin="0,3,36.69,0" MouseLeftButtonDown="SwitchWindowState" />
-            <TextBlock Text="&#xE108;" Style="{DynamicResource TextButtonStyle}"  HorizontalAlignment="Right" Height="25" VerticalAlignment="Top" Width="30" FontFamily="Segoe UI Symbol" FontSize="24" Margin="0,10,66.69,0" MouseLeftButtonDown="MinimizeWindow" />
+        <Grid x:Name="HeaderBar"
+              Height="35"
+              Margin="0,0,-0.49,0"
+              VerticalAlignment="Top"
+              Background="#00000000">
+            <Grid Margin="0,0,-0.177,-25"
+                  Background="#00000000"
+                  PreviewMouseLeftButtonDown="MoveWindow" />
+            <TextBlock Width="550"
+                       Height="65"
+                       Margin="34,11,0,-41"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="36"
+                       Foreground="#FF14520D"
+                       Text="MNIB Distribution Manager"
+                       TextWrapping="Wrap" />
+            <TextBlock Width="35"
+                       Height="32"
+                       Margin="0,3,0,0"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                       FontFamily="Segoe UI Symbol"
+                       FontSize="24"
+                       MouseLeftButtonDown="CloseWindow"
+                       Style="{StaticResource CloseButtonStyle}"
+                       Text="&#xE10A;" />
+            <TextBlock Width="30"
+                       Height="32"
+                       Margin="0,3,36.69,0"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                       FontFamily="Segoe UI Symbol"
+                       FontSize="24"
+                       MouseLeftButtonDown="SwitchWindowState"
+                       Style="{DynamicResource TextButtonStyle}"
+                       Text="&#xE155;" />
+            <TextBlock Width="30"
+                       Height="25"
+                       Margin="0,10,66.69,0"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                       FontFamily="Segoe UI Symbol"
+                       FontSize="24"
+                       MouseLeftButtonDown="MinimizeWindow"
+                       Style="{DynamicResource TextButtonStyle}"
+                       Text="&#xE108;" />
 
 
         </Grid>
 
-        <!-- It's important that this is in the end of the XAML as it needs to be on top of everything else! -->
-        <Grid x:Name="ReportViewer" Visibility="Collapsed" >
-            <Grid Background="Black" Opacity="0.5"  PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown"  />
-            <Viewbox  Margin="100" >
-                <Grid  >
+        <!--  It's important that this is in the end of the XAML as it needs to be on top of everything else!  -->
+        <Grid x:Name="ReportViewer" Visibility="Collapsed">
+            <Grid Background="Black"
+                  Opacity="0.5"
+                  PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown" />
+            <Viewbox Margin="100">
+                <Grid>
 
-                    <ScrollViewer x:Name="ReportGrd" Margin="0,0,0,10"  Width="Auto" Height="400" CanContentScroll="True" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <Grid x:Name="DailyReportGD" HorizontalAlignment="Center" Height="Auto" VerticalAlignment="Top" Width="Auto" Background="White" MinWidth="816">
-                            <Grid HorizontalAlignment="Stretch" Height="38" Margin="40,97,0,0" VerticalAlignment="Top" Width="Auto"  Background="#FFD7D7D7">
-                                <TextBlock Text="{Binding TotalWeight, StringFormat=Total Weight \{0:n\}}" Margin="388,2,42,0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="346" Height="36" FontSize="21.333" Foreground="#FF353623"/>
-                                <TextBlock Text="{Binding ReportDate, StringFormat=D}" Margin="0,13,42,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14.667" Foreground="Black" Width="228" TextAlignment="Right"/>
+                    <ScrollViewer x:Name="ReportGrd"
+                                  Width="Auto"
+                                  Height="400"
+                                  Margin="0,0,0,10"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  CanContentScroll="True">
+                        <Grid x:Name="DailyReportGD"
+                              Width="Auto"
+                              Height="Auto"
+                              MinWidth="816"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Top"
+                              Background="White">
+                            <Grid Width="Auto"
+                                  Height="38"
+                                  Margin="40,97,0,0"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Top"
+                                  Background="#FFD7D7D7">
+                                <TextBlock Width="346"
+                                           Height="36"
+                                           Margin="388,2,42,0"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Top"
+                                           FontSize="21.333"
+                                           Foreground="#FF353623"
+                                           Text="{Binding TotalWeight,
+                                                          StringFormat=Total Weight \{0:n\}}"
+                                           TextAlignment="Right" />
+                                <TextBlock Width="228"
+                                           Margin="0,13,42,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           FontSize="14.667"
+                                           Foreground="Black"
+                                           Text="{Binding ReportDate,
+                                                          StringFormat=D}"
+                                           TextAlignment="Right" />
                             </Grid>
-                            <TextBlock HorizontalAlignment="Right" Height="31.8" Margin="460,65.2,42,0" TextWrapping="Wrap" Text="MNIB Export Report" VerticalAlignment="Top" Width="314" FontSize="25" TextAlignment="Right" Foreground="Black" Background="White"/>
+                            <TextBlock Width="314"
+                                       Height="31.8"
+                                       Margin="460,65.2,42,0"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Top"
+                                       Background="White"
+                                       FontSize="25"
+                                       Foreground="Black"
+                                       Text="MNIB Export Report"
+                                       TextAlignment="Right"
+                                       TextWrapping="Wrap" />
 
-                            <StackPanel Margin="40,140,42,10" Orientation="Vertical" Width="Auto">
-                                <TextBlock HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" Margin="0,15,0,15" FontSize="20" Foreground="#FF393939" TextAlignment="Left" Text="Exports Daily Summary Report"/>
-                                <DataGrid x:Name="GridData" HorizontalAlignment="Stretch"  Width="Auto" Margin="0" AlternatingRowBackground="#FFE6F0F4" RowBackground="White" GridLinesVisibility="None" VerticalAlignment="Top"  
-									ItemsSource="{Binding Lines, IsAsync=True}" AutoGenerateColumns="True" RowHeight="25"  ClipboardCopyMode="IncludeHeader" />
-                                <TextBlock HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="330" Margin="40,50,0,0" FontSize="14" Foreground="#FF393939" TextAlignment="Left" Text="Totals by Lot Number:"/>
-                                <DataGrid x:Name="SummaryData" HorizontalAlignment="Stretch"  Width="Auto" Margin="0" AlternatingRowBackground="#FFE6F0F4" RowBackground="White" GridLinesVisibility="None" VerticalAlignment="Top"  
-									ItemsSource="{Binding Summary, IsAsync=True}" AutoGenerateColumns="True" RowHeight="25"  ClipboardCopyMode="IncludeHeader" />
-                                <TextBlock HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="330" Margin="40,50,0,0" FontSize="14" Foreground="#FF393939" TextAlignment="Left" Text="Prepared By:.........................................................."/>
-                                <TextBlock HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="330" Margin="40,20,0,0" FontSize="14" Foreground="#FF393939" TextAlignment="Left" Text="Checked By:..........................................................."/>
+                            <StackPanel Width="Auto"
+                                        Margin="40,140,42,10"
+                                        Orientation="Vertical">
+                                <TextBlock Width="237"
+                                           Height="24"
+                                           Margin="0,15,0,15"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           FontSize="20"
+                                           Foreground="#FF393939"
+                                           Text="Exports Daily Summary Report"
+                                           TextAlignment="Left"
+                                           TextWrapping="Wrap" />
+                                <DataGrid x:Name="GridData"
+                                          Width="Auto"
+                                          Margin="0"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Top"
+                                          AlternatingRowBackground="#FFE6F0F4"
+                                          AutoGenerateColumns="True"
+                                          ClipboardCopyMode="IncludeHeader"
+                                          GridLinesVisibility="None"
+                                          ItemsSource="{Binding Lines,
+                                                                IsAsync=True}"
+                                          RowBackground="White"
+                                          RowHeight="25" />
+                                <TextBlock Width="330"
+                                           Height="24"
+                                           Margin="40,50,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           FontSize="14"
+                                           Foreground="#FF393939"
+                                           Text="Totals by Lot Number:"
+                                           TextAlignment="Left"
+                                           TextWrapping="Wrap" />
+                                <DataGrid x:Name="SummaryData"
+                                          Width="Auto"
+                                          Margin="0"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Top"
+                                          AlternatingRowBackground="#FFE6F0F4"
+                                          AutoGenerateColumns="True"
+                                          ClipboardCopyMode="IncludeHeader"
+                                          GridLinesVisibility="None"
+                                          ItemsSource="{Binding Summary,
+                                                                IsAsync=True}"
+                                          RowBackground="White"
+                                          RowHeight="25" />
+                                <TextBlock Width="330"
+                                           Height="24"
+                                           Margin="40,50,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           FontSize="14"
+                                           Foreground="#FF393939"
+                                           Text="Prepared By:.........................................................."
+                                           TextAlignment="Left"
+                                           TextWrapping="Wrap" />
+                                <TextBlock Width="330"
+                                           Height="24"
+                                           Margin="40,20,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           FontSize="14"
+                                           Foreground="#FF393939"
+                                           Text="Checked By:..........................................................."
+                                           TextAlignment="Left"
+                                           TextWrapping="Wrap" />
                             </StackPanel>
 
                         </Grid>
 
                     </ScrollViewer>
-                    <TextBlock HorizontalAlignment="Right" Height="30" Margin="0,0,20,-20" TextWrapping="Wrap" Text="Print &#xE1A5;" VerticalAlignment="Bottom" Width="95" FontSize="20" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="PrintReport" Foreground="#FFF0FF00" FontWeight="Bold"/>
+                    <TextBlock Width="95"
+                               Height="30"
+                               Margin="0,0,20,-20"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Bottom"
+                               FontFamily="Segoe UI Symbol"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="#FFF0FF00"
+                               MouseLeftButtonDown="PrintReport"
+                               Text="Print &#xE1A5;"
+                               TextWrapping="Wrap" />
                 </Grid>
             </Viewbox>
         </Grid>
 
-        <!-- It's important that this is in the end of the XAML as it needs to be on top of everything else! -->
-        <Grid x:Name="InputBox" Visibility="{Binding InputBoxVisibility, Source={StaticResource LabelViewModelDataSource}}" d:IsHidden="True">
-            <Grid Background="Black" Opacity="0.5"/>
-            <Border
-				MinWidth="250"
-				Background="Orange" 
-				BorderBrush="Black" 
-				BorderThickness="1" 
-				CornerRadius="0,55,0,55" 
-				HorizontalAlignment="Center" 
-				VerticalAlignment="Center">
+        <!--  It's important that this is in the end of the XAML as it needs to be on top of everything else!  -->
+        <Grid x:Name="InputBox"
+              d:IsHidden="True"
+              Visibility="{Binding InputBoxVisibility,
+                                   Source={StaticResource LabelViewModelDataSource}}">
+            <Grid Background="Black" Opacity="0.5" />
+            <Border MinWidth="250"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="Orange"
+                    BorderBrush="Black"
+                    BorderThickness="1"
+                    CornerRadius="0,55,0,55">
                 <StackPanel>
-                    <TextBlock Margin="5" Text="Input Box:" FontWeight="Bold" FontFamily="Cambria" />
-                    <PasswordBox MinWidth="150"  HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="InputTextBox"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="YesButton" Margin="5" Content="Yes" Background="{x:Null}" Click="YesButton_Click"/>
-                        <Button x:Name="NoButton" Margin="5" Content="No" Background="{x:Null}" Click="NoButton_Click" />
+                    <TextBlock Margin="5"
+                               FontFamily="Cambria"
+                               FontWeight="Bold"
+                               Text="Input Box:" />
+                    <PasswordBox x:Name="InputTextBox"
+                                 MinWidth="150"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center" />
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Button x:Name="YesButton"
+                                Margin="5"
+                                Background="{x:Null}"
+                                Click="YesButton_Click"
+                                Content="Yes" />
+                        <Button x:Name="NoButton"
+                                Margin="5"
+                                Background="{x:Null}"
+                                Click="NoButton_Click"
+                                Content="No" />
                     </StackPanel>
                 </StackPanel>
             </Border>

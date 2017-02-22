@@ -65,9 +65,9 @@ namespace MNIB_Distribution_Manager
            OnPropertyChanged(nameof(TotalBoxWeight));
         }
 
-        private int exportNumber;
+        private string exportNumber;
 
-        public int ExportNumber
+        public string ExportNumber
         {
             get { return exportNumber; }
             set
@@ -76,6 +76,7 @@ namespace MNIB_Distribution_Manager
                 {
                     exportNumber = value;
                     OnPropertyChanged(nameof(ExportNumber));
+                    SetExport(new MNIBDBDataContext());
                 }
             }
         }
@@ -257,7 +258,8 @@ namespace MNIB_Distribution_Manager
             rd.Weight = Weight - Box.Weight;
             rd.BoxWeight = Box.Weight;
             rd.CustomerInfo = Customer.Info;
-            rd.ReceiptNumber = CurrentHarvester.Intials + "-" + ExportDate.ToString("yyyyMMdd") + "-" +
+            rd.ReceiptNumber = SourceTransaction == "Sales Order"? CurrentHarvester.Intials + "-" + ExportDate.ToString("yyyyMMdd") + "-" +
+                               Export.ProductNumber + "-" + (rd.LineNumber).ToString(): ExportNumber + "-" + ExportDate.ToString("yyyyMMdd") + "-" +
                                Export.ProductNumber + "-" + (rd.LineNumber).ToString();
             return rd;
 
@@ -280,24 +282,49 @@ namespace MNIB_Distribution_Manager
 
         public bool SetExport(MNIBDBDataContext ctx)
         {
-            if (CurrentHarvester == null || Product == null || Customer == null)
+            
+            if ( Product == null )
             {
-                MessageBox.Show("Please Enter Harvester, Product and Customer");
+               // MessageBox.Show("Please elect Product");
                 return false;
             }
-            
-            var sr = ctx.Exports.FirstOrDefault(x => x.HarvesterId == CurrentHarvester.HarvesterId &&
-                                                      x.ProductNumber == Product.ProductId &&
-                                                      x.ExportDate == ExportDate);
+           
+
+            List<ExportDetail> srdetails;
+            if (SourceTransaction == "Sales Order")
+            {
+                if (CurrentHarvester == null)
+                {
+                    MessageBox.Show("Please Enter Harvester");
+                    return false;
+                }
+                srdetails = ctx.ExportDetails.Where(x => x.ReceiptNumber.StartsWith(CurrentHarvester.Intials) &&
+                                                         x.ReceiptNumber.Contains(Product.ProductId) &&
+                                                         x.ReceiptNumber.Contains(ExportDate.ToString("yyyyMMdd"))).ToList();
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(ExportNumber))
+                {
+                    MessageBox.Show("Please Enter ExportNumber");
+                    return false;
+                }
+                srdetails = ctx.ExportDetails.Where(x => x.ReceiptNumber.StartsWith(ExportNumber.ToString()) &&
+                                                         x.ReceiptNumber.Contains(Product.ProductId) &&
+                                                         x.ReceiptNumber.Contains(ExportDate.ToString("yyyyMMdd"))).ToList();
+            }
+
             //if (sr.ExportId == Export?.ExportId) return true;
-            if (sr != null )//
+            if (srdetails.Any() )//
             {
                 ResetExport();
 
                // if (!VeifyBoxWeight()) return false;
                 
-               ctx.ExportDetails.Where(x => x.ExportId == sr.ExportId).OrderByDescending(x => x.ExportDetailId).ToList().ForEach(x => ExportDetails.Add(x));
+               //ctx.ExportDetails.Where(x => x.ExportId == sr.ExportId).OrderByDescending(x => x.ExportDetailId).ToList().ForEach(x => ExportDetails.Add(x));
                 
+                srdetails.ForEach(x => ExportDetails.Add(x));
+                var sr = ctx.Exports.FirstOrDefault(x => x.ExportId == srdetails.First().ExportId);
                 Export = sr;
                 TotalWeight = (float) sr.TotalWeight;
                 OnPropertyChanged(nameof(TotalWeight));
@@ -328,7 +355,7 @@ namespace MNIB_Distribution_Manager
             Export = new Export()
             {
                 ExportDate = ExportDate,
-                HarvesterId = CurrentHarvester.HarvesterId,
+                SourceTransaction = SourceTransaction,
                 ProductNumber = Product.ProductId,
                 ProductDescription = Product.ProductDescription,
                 TotalWeight = TotalWeight
@@ -624,6 +651,7 @@ namespace MNIB_Distribution_Manager
 
         RelayCommand _AmendExportDetailCmd;
         private string _barcode;
+        private string _sourceTransaction;
 
         public ICommand AmendExportDetailCmd
         {
@@ -652,11 +680,31 @@ namespace MNIB_Distribution_Manager
             }
         }
 
+        public string SourceTransaction
+        {
+            get { return _sourceTransaction; }
+            set
+            {
+                _sourceTransaction = value;
+                OnPropertyChanged(nameof(SourceTransaction));
+            }
+        }
+
         private void DoBarcodeLookup()
         {
+            if (string.IsNullOrEmpty(Barcode)) return;
             using (var ctx = new MNIBDBDataContext())
             {
-                
+                var itm = ctx.PurchaseOrderDetails.FirstOrDefault(x => x.LotNumber.Replace("-", "") == Barcode);
+                if (itm != null)
+                {
+                   Instance.Product = Instance.Products.FirstOrDefault(x => x.ProductId == itm.ItemNumber);
+                    
+                }
+                else
+                {
+                    MessageBox.Show("Barcode Transaction Not Found! Please try again");
+                }
             }
         }
 

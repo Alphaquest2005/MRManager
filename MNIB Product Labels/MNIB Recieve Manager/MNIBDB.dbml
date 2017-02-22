@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MNIBDistributionManager" Class="MNIBDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=ALPHAQUEST-PC\SQLEXPRESS2012;Initial Catalog=MNIBDistributionManager;Integrated Security=True" SettingsObjectName="MNIB_Distribution_Manager.Properties.Settings" SettingsPropertyName="MNIBDistributionManagerConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ALPHAQUEST-PC\SQLEXPRESS2016;Initial Catalog=MNIBDistributionManager;Integrated Security=True" SettingsObjectName="MNIB_Distribution_Manager.Properties.Settings" SettingsPropertyName="MNIBDistributionManagerConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Items" Member="Items">
     <Type Name="Item">
       <Column Name="ProductDescription" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
@@ -13,16 +13,6 @@
       <Column Name="Weight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.Exports" Member="Exports">
-    <Type Name="Export">
-      <Column Name="ExportId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ExportDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="HarvesterId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ProductNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ProductDescription" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="TotalWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.Harvesters" Member="Harvesters">
     <Type Name="Harvester">
       <Column Name="HarvesterId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -30,20 +20,6 @@
       <Column Name="Intials" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="CanDelete" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Password" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.ExportReportLines" Member="ExportReportLines">
-    <Type Name="ExportReportLine">
-      <Column Name="ExportDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="ReceiptNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Harvester" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="CustomerName" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
-      <Column Name="ProductNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ProductDescription" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="LineNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Weight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="ExportNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="TicketNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.Customers" Member="Customers">
@@ -70,6 +46,40 @@
       <Column Name="CustomerInfo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="ProductDescription" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="OrderNo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PurchaseOrderDetails" Member="PurchaseOrderDetails">
+    <Type Name="PurchaseOrderDetail">
+      <Column Name="LotNumber" Type="System.String" DbType="VarChar(26)" CanBeNull="true" />
+      <Column Name="PurchaseOrderNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="LineNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ItemNumber" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Exports" Member="Exports">
+    <Type Name="Export">
+      <Column Name="ExportId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ExportDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="ProductNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ProductDescription" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="SourceTransaction" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExportReportLines" Member="ExportReportLines">
+    <Type Name="ExportReportLine">
+      <Column Name="ExportDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="SourceTransaction" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ReceiptNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="ProductNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ProductDescription" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LineNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Weight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ExportNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TicketNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Harvester" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

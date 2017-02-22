@@ -190,7 +190,7 @@ namespace MNIB_Distribution_Manager
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            im?.SetExport(new MNIBDBDataContext());
+            //im?.SetExport(new MNIBDBDataContext());
         }
 
         private void YesButton_Click(object sender, RoutedEventArgs e)
@@ -265,6 +265,10 @@ namespace MNIB_Distribution_Manager
                 BarCodeGrd.Visibility = Visibility.Visible;
                 BarcodeTxt.Focus();
             }
+            im.ExportNumber = "";
+            im.Barcode = "";
+            im.Product = null;
+            im.SetCurrentExportDetailToNull();
         }
     }
 }
