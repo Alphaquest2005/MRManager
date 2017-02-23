@@ -1,9 +1,10 @@
-﻿{
-  "dependencies": {},
+{
+  "dependencies": {
+  },
   "frameworks": {
     "net461": {}
   },
   "runtimes": {
-    "win": {}
+    "win-x64": {}
   }
 }
