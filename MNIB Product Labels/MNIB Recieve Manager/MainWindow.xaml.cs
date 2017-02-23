@@ -265,7 +265,7 @@ namespace MNIB_Distribution_Manager
                 BarCodeGrd.Visibility = Visibility.Visible;
                 ExportNumberTxt.Focus();
             }
-            im.ExportNumber = "";
+            im.TransactionNumber = "";
             im.Barcode = "";
             im.Product = null;
             im.SetCurrentExportDetailToNull();

@@ -26,8 +26,8 @@ namespace MNIB_Labels_Tracker.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=alphaquest-pc\\sqlexpress2012;Initial Catalog=MNIBTrackerDB;user=sa;pa" +
-            "ssword=pa$$word")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ALPHAQUEST-PC\\SQLEXPRESS2016;Initial Catalog=MNIBDistributionManager;" +
+            "user=sa;password=pa$$word")]
         public string MNIBLabelsDBConnectionString {
             get {
                 return ((string)(this["MNIBLabelsDBConnectionString"]));
@@ -37,22 +37,11 @@ namespace MNIB_Labels_Tracker.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=alphaquest-pc\\sqlexpress2012;Initial Catalog=MNIBTrackerDB;user=sa;pa" +
-            "ssword=pa$$word")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ALPHAQUEST-PC\\SQLEXPRESS2016;Initial Catalog=MNIBDistributionManager;" +
+            "user=sa;password=pa$$word")]
         public string MNIBTrackerDBConnectionString {
             get {
                 return ((string)(this["MNIBTrackerDBConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ALPHAQUEST-PC\\SQLEXPRESS2012;Initial Catalog=MNIBTrackerDB;Integrated" +
-            " Security=True")]
-        public string MNIBTrackerDBConnectionString1 {
-            get {
-                return ((string)(this["MNIBTrackerDBConnectionString1"]));
             }
         }
     }

@@ -54,10 +54,11 @@ namespace MNIB_Distribution_Manager
             ExportDetails.CollectionChanged += ExportDetailsOnCollectionChanged;
             InputBoxVisibility = Visibility.Collapsed;
 
-            Customers.Add(new Customer() {CustomerName = "MNIB Production", CustomerAddress = "MNIB Production", CustomerNumber = "MNIBPro", OrderNo = "Production", TicketNo = "Production" });
-            Customers.Add(new Customer() { CustomerName = "Pack House", CustomerAddress = "River Road, St. George's", CustomerNumber = "RRPH", OrderNo = "RRPH", TicketNo = "RRPH" });
-            Customers.Add(new Customer() { CustomerName = "MNIB SGU", CustomerAddress = "True Blue, St. George's", CustomerNumber = "MNIBSGU", OrderNo = "SGU", TicketNo = "SGU" });
-            Customers.Add(new Customer() { CustomerName = "MNIB Street Sales", CustomerAddress = "MNIB Street Sales", CustomerNumber = "MNIBStr", OrderNo = "Streets", TicketNo = "Streets" });
+            Customers.Add(new Customer() {CustomerName = "MNIB Production", CustomerAddress = "MNIB Production", CustomerNumber = "MNIBPro"});
+            Customers.Add(new Customer() { CustomerName = "Pack House", CustomerAddress = "River Road, St. George's", CustomerNumber = "RRPH" });
+            Customers.Add(new Customer() { CustomerName = "Grand Anse", CustomerAddress = "Grand Anse, St. George's", CustomerNumber = "VLGD" });
+            Customers.Add(new Customer() { CustomerName = "MNIB SGU", CustomerAddress = "True Blue, St. George's", CustomerNumber = "MNIBSGU" });
+            Customers.Add(new Customer() { CustomerName = "MNIB Street Sales", CustomerAddress = "MNIB Street Sales", CustomerNumber = "MNIBStr" });
         }
 
         private void ExportDetailsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
@@ -65,22 +66,67 @@ namespace MNIB_Distribution_Manager
            OnPropertyChanged(nameof(TotalBoxWeight));
         }
 
-        private string exportNumber;
+        private string _transactionNumber;
 
-        public string ExportNumber
+        public string TransactionNumber
         {
-            get { return exportNumber; }
+            get { return _transactionNumber; }
             set
             {
-                if (exportNumber != value)
+                if (_transactionNumber != value)
                 {
-                    exportNumber = value;
-                    OnPropertyChanged(nameof(ExportNumber));
+                    _transactionNumber = value;
+                    OnPropertyChanged(nameof(TransactionNumber));
+                    UpdateModel();
+                    UpdateWeight();
                     SetExport(new MNIBDBDataContext());
                 }
             }
         }
-      
+
+        private void UpdateModel()
+        {
+            if (string.IsNullOrEmpty(TransactionNumber)) return;
+            using (var ctx = new MNIBDBDataContext())
+            {
+                switch (SourceTransaction)
+                {
+                    case "Sales Order":
+                        var prn = ctx.ExportCustomers.FirstOrDefault(x => x.OrderNo == TransactionNumber);
+                        if (prn == null)
+                        {
+                            MessageBox.Show("Sales Order Not Found! Check Number and Try again.");
+                            return;
+                        }
+                        Instance.Customer = Instance.Customers.FirstOrDefault(x => x.CustomerNumber == prn.CustomerNumber);
+                        break;
+                    case "Invoice":
+                        var trns = ctx.InvoiceCustomerLkps.FirstOrDefault(x => x.InvoiceNo == TransactionNumber);
+                        if (trns == null)
+                        {
+                            MessageBox.Show("Invoice Not Found! Check Number and Try again.");
+                            return;
+                        }
+                        Instance.Customer = Instance.Customers.FirstOrDefault(x => x.CustomerNumber == trns.CustomerNo);
+                        break;
+                    case "Transfer":
+                        var trn = ctx.TransfersLkps.FirstOrDefault(x => x.TransferNo == TransactionNumber);
+                        if (trn == null)
+                        {
+                            MessageBox.Show("Transfer Not Found! Check Number and Try again.");
+                            return;
+                        }
+                        Instance.Customer = Instance.Customers.FirstOrDefault(x => x.CustomerNumber == trn.ToLocation);
+                        break;
+                    default:
+                        break;
+
+                }
+
+                
+            }
+        }
+
 
         private Item product;
 
@@ -93,7 +139,23 @@ namespace MNIB_Distribution_Manager
                 {
                     product = value;
                     OnPropertyChanged(nameof(Product));
+                    UpdateWeight();
                 }
+            }
+        }
+
+        private void UpdateWeight()
+        {
+            if (string.IsNullOrEmpty(TransactionNumber) || Product == null) return;
+            using (var ctx = new MNIBDBDataContext())
+            {
+                var netWeight = ctx.TransactionNetWeightLkps.FirstOrDefault(x => x.LotNumber == Barcode);
+                if (netWeight == null)
+                {
+                    MessageBox.Show("Transaction Net Weight Not Found! Check Number and Try again.");
+                    return;
+                }
+                Instance.TotalWeight = netWeight.NetQuantity.GetValueOrDefault();
             }
         }
 
@@ -158,9 +220,9 @@ namespace MNIB_Distribution_Manager
 
             }
         }
-        private float total;
+        private double total;
 
-        public float TotalWeight
+        public double TotalWeight
         {
             get { return total; }
             set
@@ -251,18 +313,29 @@ namespace MNIB_Distribution_Manager
             rd.ExportId = Export.ExportId;
             rd.ProductDescription = Product.ProductDescription;
             rd.LineNumber = ExportDetails.DefaultIfEmpty().Max(x =>  x?.LineNumber ?? 0) + 1;
-            rd.Barcode = ExportDetail.GetBarCode(Export.ExportId, rd.LineNumber);
+            rd.Barcode = GetBarCode(rd);
             rd.BoxId = Box.BoxId;
-            rd.TicketNo = Customer.TicketNo;
-            rd.OrderNo = Customer.OrderNo;
+            rd.TransactionNumber = TransactionNumber;
+            //rd.TicketNo = Customer.TicketNo;
+            //rd.OrderNo = Customer.OrderNo;
             rd.Weight = Weight - Box.Weight;
             rd.BoxWeight = Box.Weight;
             rd.CustomerInfo = Customer.Info;
-            rd.ReceiptNumber = SourceTransaction == "Sales Order"? CurrentHarvester.Intials + "-" + ExportDate.ToString("yyyyMMdd") + "-" +
-                               Export.ProductNumber + "-" + (rd.LineNumber).ToString(): ExportNumber + "-" + ExportDate.ToString("yyyyMMdd") + "-" +
-                               Export.ProductNumber + "-" + (rd.LineNumber).ToString();
+            rd.ReceiptNumber = GetReceiptNumber(rd);
             return rd;
 
+        }
+
+        private string GetReceiptNumber(ExportDetail rd)
+        {
+            return SourceTransaction == "Sales Order"? CurrentHarvester.Intials + "-" + ExportDate.ToString("yyyyMMdd") + "-" + Export.ProductNumber + "-" + (rd.LineNumber).ToString()
+                : TransactionNumber + "-" + Barcode + "-" + (rd.LineNumber).ToString();
+        }
+
+        private string GetBarCode(ExportDetail rd)
+        {
+            return ExportDetail.GetBarCode(GetReceiptNumber(rd));
+            
         }
 
         private bool CreateBoxChecks()
@@ -305,12 +378,12 @@ namespace MNIB_Distribution_Manager
             }
             else
             {
-                if (string.IsNullOrEmpty(ExportNumber))
+                if (string.IsNullOrEmpty(TransactionNumber))
                 {
                    // MessageBox.Show("Please Enter ExportNumber");
                     return false;
                 }
-                srdetails = ctx.ExportDetails.Where(x => x.ReceiptNumber.StartsWith(ExportNumber.ToString()) &&
+                srdetails = ctx.ExportDetails.Where(x => x.ReceiptNumber.StartsWith(TransactionNumber.ToString()) &&
                                                          x.ReceiptNumber.Contains(Product.ProductId) &&
                                                          x.ReceiptNumber.Contains(ExportDate.ToString("yyyyMMdd"))).ToList();
             }
@@ -418,6 +491,7 @@ namespace MNIB_Distribution_Manager
 
         public void Print(ExportDetail itm)
         {
+            if (Export.SourceTransaction != "Sales Order") return;
             try
             {
 
@@ -626,15 +700,15 @@ namespace MNIB_Distribution_Manager
             {
                 var ds = new DailySummary();
                 var res = ctx.ExportReportLines.Where(x => x.ExportDate == this.ExportDate)
-                                                .OrderBy(x => x.CustomerName)
-                                                .ThenBy(y => y.TicketNo)
+                                                .OrderBy(x => x.CustomerInfo)
+                                                .ThenBy(y => y.TransactionNumber)
                                                 .ThenBy(z => z.Harvester)
                                                 .ThenBy(z => z.ProductDescription)
                                                 .Select(w => new DailySummary.ReportLine()
                                                 {
                                                    TransactionType = w.SourceTransaction,
-                                                   Customer = w.CustomerName,
-                                                   OrderNo = w.TicketNo,
+                                                   Customer = w.CustomerInfo,
+                                                   TransactionNumber = w.TransactionNumber,
                                                    Harvester = w.Harvester,
                                                    Product = w.ProductDescription,
                                                    Weight = w.Weight,
@@ -778,7 +852,7 @@ namespace MNIB_Distribution_Manager
         {
             public string TransactionType { get; set; }
             public string Customer { get; set; }
-            public string OrderNo { get; set; }
+            public string TransactionNumber { get; set; }
             public string Harvester { get; set; }
             public string Product { get; set; }
             public double Weight { get; set; }

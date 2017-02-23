@@ -36,12 +36,12 @@ namespace MNIB_Distribution_Manager
     partial void InsertHarvester(Harvester instance);
     partial void UpdateHarvester(Harvester instance);
     partial void DeleteHarvester(Harvester instance);
-    partial void InsertExportDetail(ExportDetail instance);
-    partial void UpdateExportDetail(ExportDetail instance);
-    partial void DeleteExportDetail(ExportDetail instance);
     partial void InsertExport(Export instance);
     partial void UpdateExport(Export instance);
     partial void DeleteExport(Export instance);
+    partial void InsertExportDetail(ExportDetail instance);
+    partial void UpdateExportDetail(ExportDetail instance);
+    partial void DeleteExportDetail(ExportDetail instance);
     #endregion
 		
 		public MNIBDBDataContext() : 
@@ -98,22 +98,6 @@ namespace MNIB_Distribution_Manager
 			}
 		}
 		
-		public System.Data.Linq.Table<Customer> Customers
-		{
-			get
-			{
-				return this.GetTable<Customer>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ExportDetail> ExportDetails
-		{
-			get
-			{
-				return this.GetTable<ExportDetail>();
-			}
-		}
-		
 		public System.Data.Linq.Table<PurchaseOrderDetail> PurchaseOrderDetails
 		{
 			get
@@ -130,11 +114,59 @@ namespace MNIB_Distribution_Manager
 			}
 		}
 		
+		public System.Data.Linq.Table<TransfersLkp> TransfersLkps
+		{
+			get
+			{
+				return this.GetTable<TransfersLkp>();
+			}
+		}
+		
+		public System.Data.Linq.Table<InvoiceCustomerLkp> InvoiceCustomerLkps
+		{
+			get
+			{
+				return this.GetTable<InvoiceCustomerLkp>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Customer> Customers
+		{
+			get
+			{
+				return this.GetTable<Customer>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ExportCustomer> ExportCustomers
+		{
+			get
+			{
+				return this.GetTable<ExportCustomer>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ExportDetail> ExportDetails
+		{
+			get
+			{
+				return this.GetTable<ExportDetail>();
+			}
+		}
+		
 		public System.Data.Linq.Table<ExportReportLine> ExportReportLines
 		{
 			get
 			{
 				return this.GetTable<ExportReportLine>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TransactionNetWeightLkp> TransactionNetWeightLkps
+		{
+			get
+			{
+				return this.GetTable<TransactionNetWeightLkp>();
 			}
 		}
 	}
@@ -452,449 +484,6 @@ namespace MNIB_Distribution_Manager
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Customers")]
-	public partial class Customer
-	{
-		
-		private string _CustomerName;
-		
-		private string _CustomerAddress;
-		
-		private string _TicketNo;
-		
-		private string _CustomerNumber;
-		
-		private System.Nullable<System.DateTime> _TicketDate;
-		
-		private string _OrderNo;
-		
-		public Customer()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerName", DbType="VarChar(40)")]
-		public string CustomerName
-		{
-			get
-			{
-				return this._CustomerName;
-			}
-			set
-			{
-				if ((this._CustomerName != value))
-				{
-					this._CustomerName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerAddress", DbType="VarChar(76) NOT NULL", CanBeNull=false)]
-		public string CustomerAddress
-		{
-			get
-			{
-				return this._CustomerAddress;
-			}
-			set
-			{
-				if ((this._CustomerAddress != value))
-				{
-					this._CustomerAddress = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketNo", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
-		public string TicketNo
-		{
-			get
-			{
-				return this._TicketNo;
-			}
-			set
-			{
-				if ((this._TicketNo != value))
-				{
-					this._TicketNo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerNumber", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
-		public string CustomerNumber
-		{
-			get
-			{
-				return this._CustomerNumber;
-			}
-			set
-			{
-				if ((this._CustomerNumber != value))
-				{
-					this._CustomerNumber = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> TicketDate
-		{
-			get
-			{
-				return this._TicketDate;
-			}
-			set
-			{
-				if ((this._TicketDate != value))
-				{
-					this._TicketDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderNo", DbType="VarChar(15)")]
-		public string OrderNo
-		{
-			get
-			{
-				return this._OrderNo;
-			}
-			set
-			{
-				if ((this._OrderNo != value))
-				{
-					this._OrderNo = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ExportDetails")]
-	public partial class ExportDetail : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ExportDetailId;
-		
-		private int _ExportId;
-		
-		private double _Weight;
-		
-		private string _Barcode;
-		
-		private int _LineNumber;
-		
-		private string _ReceiptNumber;
-		
-		private int _BoxId;
-		
-		private string _TicketNo;
-		
-		private double _BoxWeight;
-		
-		private string _CustomerInfo;
-		
-		private string _ProductDescription;
-		
-		private string _OrderNo;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnExportDetailIdChanging(int value);
-    partial void OnExportDetailIdChanged();
-    partial void OnExportIdChanging(int value);
-    partial void OnExportIdChanged();
-    partial void OnWeightChanging(double value);
-    partial void OnWeightChanged();
-    partial void OnBarcodeChanging(string value);
-    partial void OnBarcodeChanged();
-    partial void OnLineNumberChanging(int value);
-    partial void OnLineNumberChanged();
-    partial void OnReceiptNumberChanging(string value);
-    partial void OnReceiptNumberChanged();
-    partial void OnBoxIdChanging(int value);
-    partial void OnBoxIdChanged();
-    partial void OnTicketNoChanging(string value);
-    partial void OnTicketNoChanged();
-    partial void OnBoxWeightChanging(double value);
-    partial void OnBoxWeightChanged();
-    partial void OnCustomerInfoChanging(string value);
-    partial void OnCustomerInfoChanged();
-    partial void OnProductDescriptionChanging(string value);
-    partial void OnProductDescriptionChanged();
-    partial void OnOrderNoChanging(string value);
-    partial void OnOrderNoChanged();
-    #endregion
-		
-		public ExportDetail()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExportDetailId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ExportDetailId
-		{
-			get
-			{
-				return this._ExportDetailId;
-			}
-			set
-			{
-				if ((this._ExportDetailId != value))
-				{
-					this.OnExportDetailIdChanging(value);
-					this.SendPropertyChanging();
-					this._ExportDetailId = value;
-					this.SendPropertyChanged("ExportDetailId");
-					this.OnExportDetailIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExportId", DbType="Int NOT NULL")]
-		public int ExportId
-		{
-			get
-			{
-				return this._ExportId;
-			}
-			set
-			{
-				if ((this._ExportId != value))
-				{
-					this.OnExportIdChanging(value);
-					this.SendPropertyChanging();
-					this._ExportId = value;
-					this.SendPropertyChanged("ExportId");
-					this.OnExportIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Weight", DbType="Float NOT NULL")]
-		public double Weight
-		{
-			get
-			{
-				return this._Weight;
-			}
-			set
-			{
-				if ((this._Weight != value))
-				{
-					this.OnWeightChanging(value);
-					this.SendPropertyChanging();
-					this._Weight = value;
-					this.SendPropertyChanged("Weight");
-					this.OnWeightChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Barcode", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Barcode
-		{
-			get
-			{
-				return this._Barcode;
-			}
-			set
-			{
-				if ((this._Barcode != value))
-				{
-					this.OnBarcodeChanging(value);
-					this.SendPropertyChanging();
-					this._Barcode = value;
-					this.SendPropertyChanged("Barcode");
-					this.OnBarcodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LineNumber", DbType="Int NOT NULL")]
-		public int LineNumber
-		{
-			get
-			{
-				return this._LineNumber;
-			}
-			set
-			{
-				if ((this._LineNumber != value))
-				{
-					this.OnLineNumberChanging(value);
-					this.SendPropertyChanging();
-					this._LineNumber = value;
-					this.SendPropertyChanged("LineNumber");
-					this.OnLineNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiptNumber", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string ReceiptNumber
-		{
-			get
-			{
-				return this._ReceiptNumber;
-			}
-			set
-			{
-				if ((this._ReceiptNumber != value))
-				{
-					this.OnReceiptNumberChanging(value);
-					this.SendPropertyChanging();
-					this._ReceiptNumber = value;
-					this.SendPropertyChanged("ReceiptNumber");
-					this.OnReceiptNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BoxId", DbType="Int NOT NULL")]
-		public int BoxId
-		{
-			get
-			{
-				return this._BoxId;
-			}
-			set
-			{
-				if ((this._BoxId != value))
-				{
-					this.OnBoxIdChanging(value);
-					this.SendPropertyChanging();
-					this._BoxId = value;
-					this.SendPropertyChanged("BoxId");
-					this.OnBoxIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketNo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string TicketNo
-		{
-			get
-			{
-				return this._TicketNo;
-			}
-			set
-			{
-				if ((this._TicketNo != value))
-				{
-					this.OnTicketNoChanging(value);
-					this.SendPropertyChanging();
-					this._TicketNo = value;
-					this.SendPropertyChanged("TicketNo");
-					this.OnTicketNoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BoxWeight", DbType="Float NOT NULL")]
-		public double BoxWeight
-		{
-			get
-			{
-				return this._BoxWeight;
-			}
-			set
-			{
-				if ((this._BoxWeight != value))
-				{
-					this.OnBoxWeightChanging(value);
-					this.SendPropertyChanging();
-					this._BoxWeight = value;
-					this.SendPropertyChanged("BoxWeight");
-					this.OnBoxWeightChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerInfo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string CustomerInfo
-		{
-			get
-			{
-				return this._CustomerInfo;
-			}
-			set
-			{
-				if ((this._CustomerInfo != value))
-				{
-					this.OnCustomerInfoChanging(value);
-					this.SendPropertyChanging();
-					this._CustomerInfo = value;
-					this.SendPropertyChanged("CustomerInfo");
-					this.OnCustomerInfoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductDescription", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string ProductDescription
-		{
-			get
-			{
-				return this._ProductDescription;
-			}
-			set
-			{
-				if ((this._ProductDescription != value))
-				{
-					this.OnProductDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._ProductDescription = value;
-					this.SendPropertyChanged("ProductDescription");
-					this.OnProductDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderNo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string OrderNo
-		{
-			get
-			{
-				return this._OrderNo;
-			}
-			set
-			{
-				if ((this._OrderNo != value))
-				{
-					this.OnOrderNoChanging(value);
-					this.SendPropertyChanging();
-					this._OrderNo = value;
-					this.SendPropertyChanged("OrderNo");
-					this.OnOrderNoChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PurchaseOrderDetails")]
 	public partial class PurchaseOrderDetail
 	{
@@ -1176,6 +765,578 @@ namespace MNIB_Distribution_Manager
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TransfersLkp")]
+	public partial class TransfersLkp
+	{
+		
+		private string _TransferNo;
+		
+		private System.Nullable<System.DateTime> _TransferDate;
+		
+		private string _FromLocation;
+		
+		private string _ToLocation;
+		
+		public TransfersLkp()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransferNo", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		public string TransferNo
+		{
+			get
+			{
+				return this._TransferNo;
+			}
+			set
+			{
+				if ((this._TransferNo != value))
+				{
+					this._TransferNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransferDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> TransferDate
+		{
+			get
+			{
+				return this._TransferDate;
+			}
+			set
+			{
+				if ((this._TransferDate != value))
+				{
+					this._TransferDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FromLocation", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string FromLocation
+		{
+			get
+			{
+				return this._FromLocation;
+			}
+			set
+			{
+				if ((this._FromLocation != value))
+				{
+					this._FromLocation = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ToLocation", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string ToLocation
+		{
+			get
+			{
+				return this._ToLocation;
+			}
+			set
+			{
+				if ((this._ToLocation != value))
+				{
+					this._ToLocation = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.InvoiceCustomerLkp")]
+	public partial class InvoiceCustomerLkp
+	{
+		
+		private string _InvoiceNo;
+		
+		private string _CustomerNo;
+		
+		public InvoiceCustomerLkp()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceNo", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		public string InvoiceNo
+		{
+			get
+			{
+				return this._InvoiceNo;
+			}
+			set
+			{
+				if ((this._InvoiceNo != value))
+				{
+					this._InvoiceNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerNo", DbType="VarChar(15)")]
+		public string CustomerNo
+		{
+			get
+			{
+				return this._CustomerNo;
+			}
+			set
+			{
+				if ((this._CustomerNo != value))
+				{
+					this._CustomerNo = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Customers")]
+	public partial class Customer
+	{
+		
+		private string _CustomerName;
+		
+		private string _CustomerAddress;
+		
+		private string _CustomerNumber;
+		
+		public Customer()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerName", DbType="VarChar(40)")]
+		public string CustomerName
+		{
+			get
+			{
+				return this._CustomerName;
+			}
+			set
+			{
+				if ((this._CustomerName != value))
+				{
+					this._CustomerName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerAddress", DbType="VarChar(76) NOT NULL", CanBeNull=false)]
+		public string CustomerAddress
+		{
+			get
+			{
+				return this._CustomerAddress;
+			}
+			set
+			{
+				if ((this._CustomerAddress != value))
+				{
+					this._CustomerAddress = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerNumber", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		public string CustomerNumber
+		{
+			get
+			{
+				return this._CustomerNumber;
+			}
+			set
+			{
+				if ((this._CustomerNumber != value))
+				{
+					this._CustomerNumber = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ExportCustomers")]
+	public partial class ExportCustomer
+	{
+		
+		private string _TicketNo;
+		
+		private string _CustomerNumber;
+		
+		private System.Nullable<System.DateTime> _TicketDate;
+		
+		private string _OrderNo;
+		
+		public ExportCustomer()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketNo", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		public string TicketNo
+		{
+			get
+			{
+				return this._TicketNo;
+			}
+			set
+			{
+				if ((this._TicketNo != value))
+				{
+					this._TicketNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerNumber", DbType="VarChar(15)")]
+		public string CustomerNumber
+		{
+			get
+			{
+				return this._CustomerNumber;
+			}
+			set
+			{
+				if ((this._CustomerNumber != value))
+				{
+					this._CustomerNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> TicketDate
+		{
+			get
+			{
+				return this._TicketDate;
+			}
+			set
+			{
+				if ((this._TicketDate != value))
+				{
+					this._TicketDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderNo", DbType="VarChar(15)")]
+		public string OrderNo
+		{
+			get
+			{
+				return this._OrderNo;
+			}
+			set
+			{
+				if ((this._OrderNo != value))
+				{
+					this._OrderNo = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ExportDetails")]
+	public partial class ExportDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ExportDetailId;
+		
+		private int _ExportId;
+		
+		private double _Weight;
+		
+		private string _Barcode;
+		
+		private int _LineNumber;
+		
+		private string _ReceiptNumber;
+		
+		private int _BoxId;
+		
+		private string _TransactionNumber;
+		
+		private double _BoxWeight;
+		
+		private string _CustomerInfo;
+		
+		private string _ProductDescription;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnExportDetailIdChanging(int value);
+    partial void OnExportDetailIdChanged();
+    partial void OnExportIdChanging(int value);
+    partial void OnExportIdChanged();
+    partial void OnWeightChanging(double value);
+    partial void OnWeightChanged();
+    partial void OnBarcodeChanging(string value);
+    partial void OnBarcodeChanged();
+    partial void OnLineNumberChanging(int value);
+    partial void OnLineNumberChanged();
+    partial void OnReceiptNumberChanging(string value);
+    partial void OnReceiptNumberChanged();
+    partial void OnBoxIdChanging(int value);
+    partial void OnBoxIdChanged();
+    partial void OnTransactionNumberChanging(string value);
+    partial void OnTransactionNumberChanged();
+    partial void OnBoxWeightChanging(double value);
+    partial void OnBoxWeightChanged();
+    partial void OnCustomerInfoChanging(string value);
+    partial void OnCustomerInfoChanged();
+    partial void OnProductDescriptionChanging(string value);
+    partial void OnProductDescriptionChanged();
+    #endregion
+		
+		public ExportDetail()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExportDetailId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ExportDetailId
+		{
+			get
+			{
+				return this._ExportDetailId;
+			}
+			set
+			{
+				if ((this._ExportDetailId != value))
+				{
+					this.OnExportDetailIdChanging(value);
+					this.SendPropertyChanging();
+					this._ExportDetailId = value;
+					this.SendPropertyChanged("ExportDetailId");
+					this.OnExportDetailIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExportId", DbType="Int NOT NULL")]
+		public int ExportId
+		{
+			get
+			{
+				return this._ExportId;
+			}
+			set
+			{
+				if ((this._ExportId != value))
+				{
+					this.OnExportIdChanging(value);
+					this.SendPropertyChanging();
+					this._ExportId = value;
+					this.SendPropertyChanged("ExportId");
+					this.OnExportIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Weight", DbType="Float NOT NULL")]
+		public double Weight
+		{
+			get
+			{
+				return this._Weight;
+			}
+			set
+			{
+				if ((this._Weight != value))
+				{
+					this.OnWeightChanging(value);
+					this.SendPropertyChanging();
+					this._Weight = value;
+					this.SendPropertyChanged("Weight");
+					this.OnWeightChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Barcode", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Barcode
+		{
+			get
+			{
+				return this._Barcode;
+			}
+			set
+			{
+				if ((this._Barcode != value))
+				{
+					this.OnBarcodeChanging(value);
+					this.SendPropertyChanging();
+					this._Barcode = value;
+					this.SendPropertyChanged("Barcode");
+					this.OnBarcodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LineNumber", DbType="Int NOT NULL")]
+		public int LineNumber
+		{
+			get
+			{
+				return this._LineNumber;
+			}
+			set
+			{
+				if ((this._LineNumber != value))
+				{
+					this.OnLineNumberChanging(value);
+					this.SendPropertyChanging();
+					this._LineNumber = value;
+					this.SendPropertyChanged("LineNumber");
+					this.OnLineNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiptNumber", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string ReceiptNumber
+		{
+			get
+			{
+				return this._ReceiptNumber;
+			}
+			set
+			{
+				if ((this._ReceiptNumber != value))
+				{
+					this.OnReceiptNumberChanging(value);
+					this.SendPropertyChanging();
+					this._ReceiptNumber = value;
+					this.SendPropertyChanged("ReceiptNumber");
+					this.OnReceiptNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BoxId", DbType="Int NOT NULL")]
+		public int BoxId
+		{
+			get
+			{
+				return this._BoxId;
+			}
+			set
+			{
+				if ((this._BoxId != value))
+				{
+					this.OnBoxIdChanging(value);
+					this.SendPropertyChanging();
+					this._BoxId = value;
+					this.SendPropertyChanged("BoxId");
+					this.OnBoxIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransactionNumber", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string TransactionNumber
+		{
+			get
+			{
+				return this._TransactionNumber;
+			}
+			set
+			{
+				if ((this._TransactionNumber != value))
+				{
+					this.OnTransactionNumberChanging(value);
+					this.SendPropertyChanging();
+					this._TransactionNumber = value;
+					this.SendPropertyChanged("TransactionNumber");
+					this.OnTransactionNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BoxWeight", DbType="Float NOT NULL")]
+		public double BoxWeight
+		{
+			get
+			{
+				return this._BoxWeight;
+			}
+			set
+			{
+				if ((this._BoxWeight != value))
+				{
+					this.OnBoxWeightChanging(value);
+					this.SendPropertyChanging();
+					this._BoxWeight = value;
+					this.SendPropertyChanged("BoxWeight");
+					this.OnBoxWeightChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerInfo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string CustomerInfo
+		{
+			get
+			{
+				return this._CustomerInfo;
+			}
+			set
+			{
+				if ((this._CustomerInfo != value))
+				{
+					this.OnCustomerInfoChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerInfo = value;
+					this.SendPropertyChanged("CustomerInfo");
+					this.OnCustomerInfoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductDescription", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string ProductDescription
+		{
+			get
+			{
+				return this._ProductDescription;
+			}
+			set
+			{
+				if ((this._ProductDescription != value))
+				{
+					this.OnProductDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._ProductDescription = value;
+					this.SendPropertyChanged("ProductDescription");
+					this.OnProductDescriptionChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ExportReportLines")]
 	public partial class ExportReportLine
 	{
@@ -1185,8 +1346,6 @@ namespace MNIB_Distribution_Manager
 		private string _SourceTransaction;
 		
 		private string _ReceiptNumber;
-		
-		private string _CustomerName;
 		
 		private string _ProductNumber;
 		
@@ -1198,9 +1357,11 @@ namespace MNIB_Distribution_Manager
 		
 		private string _ExportNumber;
 		
-		private string _TicketNo;
+		private string _TransactionNumber;
 		
 		private string _Harvester;
+		
+		private string _CustomerInfo;
 		
 		public ExportReportLine()
 		{
@@ -1250,22 +1411,6 @@ namespace MNIB_Distribution_Manager
 				if ((this._ReceiptNumber != value))
 				{
 					this._ReceiptNumber = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerName", DbType="VarChar(40)")]
-		public string CustomerName
-		{
-			get
-			{
-				return this._CustomerName;
-			}
-			set
-			{
-				if ((this._CustomerName != value))
-				{
-					this._CustomerName = value;
 				}
 			}
 		}
@@ -1350,23 +1495,23 @@ namespace MNIB_Distribution_Manager
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketNo", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
-		public string TicketNo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransactionNumber", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string TransactionNumber
 		{
 			get
 			{
-				return this._TicketNo;
+				return this._TransactionNumber;
 			}
 			set
 			{
-				if ((this._TicketNo != value))
+				if ((this._TransactionNumber != value))
 				{
-					this._TicketNo = value;
+					this._TransactionNumber = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Harvester", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Harvester", DbType="VarChar(50)")]
 		public string Harvester
 		{
 			get
@@ -1378,6 +1523,85 @@ namespace MNIB_Distribution_Manager
 				if ((this._Harvester != value))
 				{
 					this._Harvester = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerInfo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string CustomerInfo
+		{
+			get
+			{
+				return this._CustomerInfo;
+			}
+			set
+			{
+				if ((this._CustomerInfo != value))
+				{
+					this._CustomerInfo = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TransactionNetWeightLkp")]
+	public partial class TransactionNetWeightLkp
+	{
+		
+		private string _LotNumber;
+		
+		private string _ItemDescription;
+		
+		private System.Nullable<double> _NetQuantity;
+		
+		public TransactionNetWeightLkp()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LotNumber", DbType="VarChar(8000)")]
+		public string LotNumber
+		{
+			get
+			{
+				return this._LotNumber;
+			}
+			set
+			{
+				if ((this._LotNumber != value))
+				{
+					this._LotNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemDescription", DbType="VarChar(50)")]
+		public string ItemDescription
+		{
+			get
+			{
+				return this._ItemDescription;
+			}
+			set
+			{
+				if ((this._ItemDescription != value))
+				{
+					this._ItemDescription = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NetQuantity", DbType="Float")]
+		public System.Nullable<double> NetQuantity
+		{
+			get
+			{
+				return this._NetQuantity;
+			}
+			set
+			{
+				if ((this._NetQuantity != value))
+				{
+					this._NetQuantity = value;
 				}
 			}
 		}

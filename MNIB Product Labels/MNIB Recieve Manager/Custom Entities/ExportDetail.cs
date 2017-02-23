@@ -19,6 +19,14 @@ namespace MNIB_Distribution_Manager
             
         }
 
+        public static string GetBarCode(string txn)
+        {
+            var tz = new TransPreZeroConverter();
+            string val = null;
+            val = Convert.ToString(tz.Convert(txn, typeof(string), null, null));
+            return val;
+
+        }
 
     }
 }

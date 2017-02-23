@@ -426,7 +426,6 @@
                                   DisplayMemberPath="Description"
                                   FontSize="21.333"
                                   FontWeight="Bold"
-                                  
                                   IsEditable="True"
                                   ItemsSource="{Binding Instance.Boxes}"
                                   SelectedItem="{Binding Box}"
@@ -475,7 +474,10 @@
                                  BorderBrush="#FFE7E1E1"
                                  FontSize="21.333"
                                  FontWeight="Bold"
-                                 Text="{Binding ExportNumber, UpdateSourceTrigger=LostFocus}" TextChanged="ExportNumberTxt_TextChanged" TargetUpdated="ExportNumberTxt_TargetUpdated" />
+                                 TargetUpdated="ExportNumberTxt_TargetUpdated"
+                                 Text="{Binding TransactionNumber,
+                                                UpdateSourceTrigger=LostFocus}"
+                                 TextChanged="ExportNumberTxt_TextChanged" />
                         <ComboBox Grid.Column="1"
                                   Margin="15,118,671,239.666"
                                   Background="#FF5B5959"
@@ -483,8 +485,8 @@
                                   DisplayMemberPath="CustomerName"
                                   FontSize="21.333"
                                   FontWeight="Bold"
-                                  ItemsSource="{Binding Instance.Customers}"
                                   SelectedIndex="0"
+                                  ItemsSource="{Binding Instance.Customers}"
                                   SelectedItem="{Binding Customer}"
                                   SelectedValuePath="CustomerNumber" />
                     </Grid>
