@@ -13,13 +13,18 @@ namespace Common
             
             foreach (var change in changeTracking)
             {
-                entity.GetType().GetProperty(change.Key)?.SetValue(entity,change.Value);
+                ApplyChanges(entity, change);
             }
             return entity;
         }
 
+        public static void ApplyChanges<T>(this T entity, KeyValuePair<string, dynamic> change) where T : IEntityId
+        {
+            var prop = entity.GetType().GetProperty(change.Key);
+            prop?.SetValue(entity, Convert.ChangeType(change.Value, prop.PropertyType));
+        }
 
-        
+
         public static T ApplyChanges<T>(this T entity, dynamic changedEntity) where T : IEntityId
         {
 

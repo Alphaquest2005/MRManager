@@ -29,132 +29,132 @@ namespace Entity.Expressions
             x => new PatientDetailsInfo()
             {
                 Id = x.Id,
-                //IdNumber =
-                //    x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                //        .Where(
-                //            x2 =>
-                //                x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                //                x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.IdNumber))
-                //        .SelectMany(x4 => x4.Response)
-                //        .Select(x5 => x5.Value)
-                //        .FirstOrDefault(),
-                //Name =
+                IdNumber =
+                    x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                        .Where(
+                            x2 =>
+                                x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                                x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.IdNumber))
+                        .SelectMany(x4 => x4.Response)
+                        .Select(x5 => x5.Value)
+                        .FirstOrDefault(),
+                Name =
 
-                //    x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                //        .Where(
-                //            x2 =>
-                //                x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                //                x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Name))
-                //        .SelectMany(x4 => x4.Response)
-                //        .Select(x5 => x5.Value).FirstOrDefault(),
-                //Age =
-                //    DateTime.Now.Year -
-                //    Convert.ToDateTime(
-                //        x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                //            .Where(
-                //                x2 =>
-                //                    x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                //                    x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.BirthDate))
-                //            .SelectMany(x4 => x4.Response)
-                //            .Select(x5 => x5.Value)
-                //            .FirstOrDefault()).Year,
-                //BirthDate =
-                //    Convert.ToDateTime(
-                //        x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                //            .Where(
-                //                x2 =>
-                //                    x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                //                    x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.BirthDate))
-                //            .SelectMany(x4 => x4.Response)
-                //            .Select(x5 => x5.Value)
-                //            .FirstOrDefault()),
-                //PhoneNumber = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                //    .Where(
-                //        x2 =>
-                //            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                //            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.PhoneNumber))
-                //    .SelectMany(x4 => x4.Response)
-                //    .Select(x5 => x5.Value)
-                //    .FirstOrDefault(),
+                    x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                        .Where(
+                            x2 =>
+                                x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                                x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Name))
+                        .SelectMany(x4 => x4.Response)
+                        .Select(x5 => x5.Value).FirstOrDefault(),
+                Age =
+                    DateTime.Now.Year -
+                    Convert.ToDateTime(
+                        x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                            .Where(
+                                x2 =>
+                                    x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                                    x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.BirthDate))
+                            .SelectMany(x4 => x4.Response)
+                            .Select(x5 => x5.Value)
+                            .FirstOrDefault()).Year,
+                BirthDate =
+                    Convert.ToDateTime(
+                        x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                            .Where(
+                                x2 =>
+                                    x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                                    x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.BirthDate))
+                            .SelectMany(x4 => x4.Response)
+                            .Select(x5 => x5.Value)
+                            .FirstOrDefault()),
+                PhoneNumber = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.PhoneNumber))
+                    .SelectMany(x4 => x4.Response)
+                    .Select(x5 => x5.Value)
+                    .FirstOrDefault(),
 
-                //Address = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                //    .Where(
-                //        x2 =>
-                //            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                //            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Address))
-                //    .SelectMany(x4 => x4.Response)
-                //    .Select(x5 => x5.Value)
-                //    .FirstOrDefault(),
+                Address = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Address))
+                    .SelectMany(x4 => x4.Response)
+                    .Select(x5 => x5.Value)
+                    .FirstOrDefault(),
 
-                //EmailAddress = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                //    .Where(
-                //        x2 =>
-                //            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                //            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.EmailAddress))
-                //    .SelectMany(x4 => x4.Response)
-                //    .Select(x5 => x5.Value)
-                //    .FirstOrDefault(),
+                EmailAddress = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.EmailAddress))
+                    .SelectMany(x4 => x4.Response)
+                    .Select(x5 => x5.Value)
+                    .FirstOrDefault(),
 
-                //Allergies = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                //    .Where(
-                //        x2 =>
-                //            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                //            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Allergies))
-                //    .SelectMany(x4 => x4.Response)
-                //    .Select(x5 => x5.Value)
-                //    .FirstOrDefault(),
+                Allergies = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Allergies))
+                    .SelectMany(x4 => x4.Response)
+                    .Select(x5 => x5.Value)
+                    .FirstOrDefault(),
 
-                //Job = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                //    .Where(
-                //        x2 =>
-                //            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                //            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Job))
-                //    .SelectMany(x4 => x4.Response)
-                //    .Select(x5 => x5.Value)
-                //    .FirstOrDefault(),
+                Job = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Job))
+                    .SelectMany(x4 => x4.Response)
+                    .Select(x5 => x5.Value)
+                    .FirstOrDefault(),
 
-                //Religion = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                //    .Where(
-                //        x2 =>
-                //            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                //            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Religion))
-                //    .SelectMany(x4 => x4.Response)
-                //    .Select(x5 => x5.Value)
-                //    .FirstOrDefault(),
-                //BirthCountry = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                //    .Where(
-                //        x2 =>
-                //            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                //            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.BirthCountry))
-                //    .SelectMany(x4 => x4.Response)
-                //    .Select(x5 => x5.Value)
-                //    .FirstOrDefault(),
-                //CountryOfResidence = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                //    .Where(
-                //        x2 =>
-                //            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                //            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.CountryOfResidence))
-                //    .SelectMany(x4 => x4.Response)
-                //    .Select(x5 => x5.Value)
-                //    .FirstOrDefault(),
+                Religion = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Religion))
+                    .SelectMany(x4 => x4.Response)
+                    .Select(x5 => x5.Value)
+                    .FirstOrDefault(),
+                BirthCountry = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.BirthCountry))
+                    .SelectMany(x4 => x4.Response)
+                    .Select(x5 => x5.Value)
+                    .FirstOrDefault(),
+                CountryOfResidence = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.CountryOfResidence))
+                    .SelectMany(x4 => x4.Response)
+                    .Select(x5 => x5.Value)
+                    .FirstOrDefault(),
 
-                //MaritalStatus = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                //    .Where(
-                //        x2 =>
-                //            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                //            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.MaritalStatus))
-                //    .SelectMany(x4 => x4.Response)
-                //    .Select(x5 => x5.Value)
-                //    .FirstOrDefault(),
+                MaritalStatus = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.MaritalStatus))
+                    .SelectMany(x4 => x4.Response)
+                    .Select(x5 => x5.Value)
+                    .FirstOrDefault(),
 
-                //Sex = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                //    .Where(
-                //        x2 =>
-                //            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                //            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Sex))
-                //    .SelectMany(x4 => x4.Response)
-                //    .Select(x5 => x5.Value)
-                //    .FirstOrDefault(),
+                Sex = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Sex))
+                    .SelectMany(x4 => x4.Response)
+                    .Select(x5 => x5.Value)
+                    .FirstOrDefault(),
 
             };
 
@@ -373,8 +373,7 @@ namespace Entity.Expressions
                 //} as IInterviewInfo).ToList()
             };
 
-     
-
+       
     }
 
 

@@ -103,7 +103,16 @@ namespace RevolutionData
                         v.State.Value = null;
                     }),
 
-               
+                new ViewEventSubscription<IPatientDetailsViewModel, IEntityFound<IPatientDetailsInfo>>(
+                    3,
+                    e => e != null,
+                    new List<Func<IPatientDetailsViewModel, IEntityFound<IPatientDetailsInfo>, bool>>(),
+                    (v, e) =>
+                    {
+                        v.State.Value = new ProcessState<IPatientDetailsInfo>(e.Process,e.Entity, new StateInfo(e.ProcessInfo.ProcessId, e.ProcessInfo.State));
+                    }),
+
+
 
 
             },

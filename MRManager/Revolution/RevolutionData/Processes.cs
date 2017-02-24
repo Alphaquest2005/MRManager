@@ -209,7 +209,7 @@ namespace RevolutionData
             
 
 
-            ComplexActions.RequestState<IPatientInfo, IPatientDetailsInfo>(3, x => x.Id),
+            ComplexActions.RequestPulledState<IPatientInfo, IPatientDetailsInfo>(3,  "Patient"),
             ComplexActions.UpdateState<IPatientDetailsInfo>(3),
             ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,IPatientDetailsInfo>(3, c => c.Id, v => v.Id),
             ComplexActions.RequestState<IPatientInfo, IPatientAddressesInfo>(3, x => x.Id),
@@ -346,6 +346,41 @@ namespace RevolutionData
                     },
                     expectedMessageType: typeof(IProcessStateMessage<TEntityView>),
                     action: ProcessActions.RequestState(property),
+                    processInfo: new StateCommandInfo(processId, Context.Process.Commands.UpdateState));
+            }
+
+            public static ComplexEventAction RequestPulledState<TCurrentEntity, TEntityView>(int processId, string entityName) where TEntityView : IEntityView where TCurrentEntity : IEntityId
+            {
+                return new ComplexEventAction(
+                    key: $"RequestState-{typeof(TEntityView).GetFriendlyName()}",
+                    processId: processId,
+                    actionTrigger: ActionTrigger.Any,
+                    events: new List<IProcessExpectedEvent>
+                    {
+                        new ProcessExpectedEvent<ICurrentEntityChanged<TCurrentEntity>>(
+                            "CurrentEntity", processId, e => e.Entity != null,
+                            expectedSourceType: new SourceType(typeof (IViewModel)),
+                            //todo: check this cuz it comes from viewmodel
+                            processInfo: new StateEventInfo(processId, Context.Process.Events.CurrentEntityChanged)),
+
+                        new ProcessExpectedEvent<IEntityFound<TCurrentEntity>>(
+                            "CurrentEntity", processId, e => e.Entity != null,
+                            expectedSourceType: new SourceType(typeof (IViewModel)),
+                            //todo: check this cuz it comes from viewmodel
+                            processInfo: new StateEventInfo(processId, Context.Entity.Events.EntityFound)),
+                        new ProcessExpectedEvent<IEntityUpdated<TCurrentEntity>>(
+                            "CurrentEntity", processId, e => e.Entity != null,
+                            expectedSourceType: new SourceType(typeof (IViewModel)),
+                            //todo: check this cuz it comes from viewmodel
+                            processInfo: new StateEventInfo(processId, Context.Entity.Events.EntityUpdated)),
+                        new ProcessExpectedEvent<IEntityViewWithChangesFound<TCurrentEntity>>(
+                            "CurrentEntity", processId, e => e.Entity != null,
+                            expectedSourceType: new SourceType(typeof (IViewModel)),
+                            //todo: check this cuz it comes from viewmodel
+                            processInfo: new StateEventInfo(processId, Context.EntityView.Events.EntityViewFound))
+                    },
+                    expectedMessageType: typeof(IProcessStateMessage<TEntityView>),
+                    action: ProcessActions.RequestPulledState<TEntityView>(entityName),
                     processInfo: new StateCommandInfo(processId, Context.Process.Commands.UpdateState));
             }
 

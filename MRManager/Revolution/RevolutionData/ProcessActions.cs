@@ -173,6 +173,27 @@ namespace RevolutionData
                 );
         }
 
+        public static IProcessAction RequestPulledState<TEntityView>(string entityName) where TEntityView : IEntityView
+        {
+            return new ProcessAction(
+                action: async cp =>
+                {
+
+                    var value = cp.Messages["CurrentEntity"].Entity.Id;
+                    
+                    return await Task.Run(() => new GetEntityFromPatientResponse<TEntityView>(value,entityName,
+                         new StateCommandInfo(cp.Actor.Process.Id, Context.EntityView.Commands.GetEntityView),
+                         cp.Actor.Process, cp.Actor.Source));
+                },
+                processInfo: cp =>
+                    new StateCommandInfo(cp.Actor.Process.Id,
+                        Context.EntityView.Commands.GetEntityView),
+                // take shortcut cud be IntialState
+                expectedSourceType: new SourceType(typeof(IComplexEventService))
+
+                );
+        }
+
         public static IProcessAction RequestStateList<TCurrentEntity, TEntityView>( Expression<Func<TCurrentEntity, object>> currentProperty, Expression<Func<TEntityView, object>> viewProperty) where TEntityView : IEntityView
         {
             return new ProcessAction(

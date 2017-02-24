@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;
 using System.Linq.Dynamic;
+using BootStrapper;
 using Common;
 using EF.DBContexts;
 using EventMessages.Events;
@@ -25,7 +26,7 @@ using Source = Common.Source;
 
 namespace EFRepository
 {
-    public class EntityViewRepository<TView,TDbView, TEntity, TDbEntity, TDbContext>:BaseRepository<EntityViewRepository<TView, TDbView, TEntity, TDbEntity, TDbContext>>, IEntityViewRepository where TDbView:class, IEntityId where TDbEntity : class,IEntity, new() where TDbContext : DbContext, new() where TEntity : class, IEntity where TView : IEntityView<TEntity>
+    public class EntityViewRepository<TView,TDbView, TEntity, TDbEntity, TDbContext>:BaseRepository<EntityViewRepository<TView, TDbView, TEntity, TDbEntity, TDbContext>>, IEntityViewRepository where TDbView:class, IEntityId, new() where TDbEntity : class,IEntity, new() where TDbContext : DbContext, new() where TEntity : class, IEntity where TView : IEntityView<TEntity>
     {
 
       private static Dictionary<Type, Func<string, KeyValuePair<string, object>, string>> IMatchTypeFunctions = new Dictionary<Type, Func<string, KeyValuePair<string, object>, string>>()
@@ -53,6 +54,35 @@ namespace EFRepository
                 
             }
 
+        }
+
+        public static void GetEntityFromPatientResponse(IGetEntityFromPatientResponse<TView> msg) 
+        {
+            try
+            {
+                using (var ctx = new MRManagerDBContext())
+                {
+                    var res =
+                        ctx.PatientResponses.Where(x => x.PatientVisit.PatientId == msg.PatientId)
+                            .Where(x => x.Questions.EntityAttributes.Entity == msg.EntityName)
+                            .SelectMany(x => x.Response)
+                            .GroupBy(x => x.PatientResponses.Questions.EntityAttributes.Attribute)
+                            .Select(g => new KeyValuePair<string, dynamic>(g.Key, g.Any() ? g.First().Value : null))
+                            .ToList();
+                    TDbView p = new TDbView();//BootStrapper.BootStrapper.Container.GetExportedTypes(typeof (TView)).FirstOrDefault() ??
+                    //        BootStrapper.BootStrapper.Container.GetExportedType(typeof (TView));
+                    res.ForEach(x => p.ApplyChanges(x));
+                    EventMessageBus.Current.Publish(
+                        new EntityFound<TView>((TView) (object) p,
+                            new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source),
+                        Source);
+                }
+            }
+            catch (Exception ex)
+            {
+                PublishProcesError(msg, ex, typeof (IEntityFound<TView>));
+
+            }
         }
 
         public static void GetEntityViewWithChanges(IGetEntityViewWithChanges<TView> msg)

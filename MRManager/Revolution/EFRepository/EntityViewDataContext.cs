@@ -33,10 +33,18 @@ namespace EFRepository
         
 
 
-        public static void GetEntityViewById(IGetEntityViewById<TEntityView> msg)
+        public static void GetEntityFromPatientResponse(IGetEntityFromPatientResponse<TEntityView> msg)
         {
             
             typeof(EntityViewRepository<,,,,>).MakeGenericType(typeof(TEntityView),ViewType,TEntity, EntityType, ctxType)
+                  .GetMethod("GetEntityFromPatientResponse")
+                  .Invoke(null, new object[] { msg });
+        }
+
+        public static void GetEntityViewById(IGetEntityViewById<TEntityView> msg)
+        {
+
+            typeof(EntityViewRepository<,,,,>).MakeGenericType(typeof(TEntityView), ViewType, TEntity, EntityType, ctxType)
                   .GetMethod("GetEntityViewById")
                   .Invoke(null, new object[] { msg });
         }

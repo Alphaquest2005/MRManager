@@ -10,7 +10,7 @@ using SystemInterfaces;
 namespace Interfaces
 {
 	
-	public partial interface ISignInInfo:IEntityView<IUserSignIn>, IUser
+	public partial interface ISignInInfo:IEntityView<IUserSignIn>, IUser 
     {
 		Byte[] Medias { get;}
 		string Usersignin { get;}

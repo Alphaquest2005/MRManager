@@ -8,9 +8,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Dynamic;
+using Common;
 using EF.DBContexts;
+using EF.Entities;
 using Entity.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MoreLinq;
 
 namespace UnitTests.Expressions
 {
@@ -71,6 +74,24 @@ namespace UnitTests.Expressions
         {
             var res = MRManagerDBContext.Instance.UserSignIn.Select(PatientExpressions.SignInInfoExpression).Where("Usersignin = \"joe\"").ToList();
             if (res.Any()) Debug.Assert(true);
+           
+        }
+
+        [TestMethod]
+        public void RefactorPatientDetailsTest()
+        {
+            using (var ctx = new MRManagerDBContext())
+            {
+                var res =
+                    ctx.PatientResponses.Where(x => x.PatientVisit.PatientId == 1)
+                                        .Where(x => x.Questions.EntityAttributes.Entity == "Patient")
+                                        .SelectMany(x => x.Response)
+                                        .GroupBy(x => x.PatientResponses.Questions.EntityAttributes.Attribute)
+                                        .Select(g => new KeyValuePair<string, dynamic>(g.Key, g.Any()?g.First().Value:null)).ToList();
+                var p = new PatientDetailsInfo();
+                res.ForEach(x => p.ApplyChanges(x));
+                if (res != null) Debug.Assert(true);
+            }
         }
 
     }

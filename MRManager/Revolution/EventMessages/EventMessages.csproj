@@ -98,6 +98,7 @@
     <Compile Include="Commands\AddEntityWithChanges.cs" />
     <Compile Include="Commands\CleanUpSystemProcess.cs" />
     <Compile Include="Commands\CreateProcessActor.cs" />
+    <Compile Include="Commands\GetEntityFromPatientResponse.cs" />
     <Compile Include="Commands\GetEntityViewById.cs" />
     <Compile Include="Commands\LoadEntityViewSetWithChanges.cs" />
     <Compile Include="Commands\StartSystemProcess.cs" />
