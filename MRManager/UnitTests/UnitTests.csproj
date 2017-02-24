@@ -101,6 +101,10 @@
       <Project>{cb6d5fbc-0c13-437d-b4f3-a0ec4d5673b3}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Revolution\DynamicLinq\System.Linq.Dynamic\System.Linq.Dynamic.csproj">
+      <Project>{17c0d5de-c72d-4a06-a12c-445ebcf3b9ea}</Project>
+      <Name>System.Linq.Dynamic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Revolution\SystemInterfaces\SystemInterfaces.csproj">
       <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>
       <Name>SystemInterfaces</Name>

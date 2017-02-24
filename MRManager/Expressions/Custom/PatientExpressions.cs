@@ -28,95 +28,6 @@ namespace Entity.Expressions
             };
 
 
-        public static Expression<Func<Persons_Patient, NextOfKinInfo>> NextOfKinInfoExpression { get; } =
-
-            x => new NextOfKinInfo()
-            {
-                Id = x.Id,
-                Name = string.Join(" ", x.Persons.PersonNames.Select(z => z.PersonName)),
-
-                Email = x.Persons.PersonEmailAddress.FirstOrDefault().Email,
-                PhoneNumber = x.Persons.PersonPhoneNumbers.FirstOrDefault().PhoneNumber,
-
-                Address =
-                    string.Join(", ",
-                        x.Persons.PersonAddresses.Select(z => z.Addresses.AddressLines)
-                            .Select(q => q.Select(r => r.Name))),
-
-                Addresses = x.Persons.PersonAddresses.Select(z => new PersonAddressInfo()
-                {
-                    AddressType = z.AddressTypes.Name,
-                    City = z.Addresses.AddressCities.Cities.Name,
-                    Country = z.Addresses.AddressCountries.Countries.Name,
-                    Parish = z.Addresses.AddressParishes.Parishes.Name,
-                    State = z.Addresses.AddressStates.States.Name
-
-                } as IPersonAddressInfo).ToList(),
-                PhoneNumbers = x.Persons.PersonPhoneNumbers.Select(z => new PhoneNumbersInfo()
-                {
-                    PersonId = x.Id,
-                    PhoneNumber = z.PhoneNumber,
-                    Type = z.PhoneTypes.Name
-                } as IPersonPhoneNumberInfo).ToList(),
-            };
-
-
-        public static Expression<Func<Persons_Patient, PatientInfo>> PatientInfoExpression { get; } =
-
-            x => new PatientInfo()
-            {
-                Id = x.Id,
-                Age = DateTime.Now.Year - x.DateOfBirth.Year,
-                Email = x.Persons.PersonEmailAddress.FirstOrDefault().Email,
-                PhoneNumber = x.Persons.PersonPhoneNumbers.FirstOrDefault().PhoneNumber,
-                Sex = x.Sex.Name,
-                Address =
-                    string.Join(", ",
-                        x.Persons.PersonAddresses.SelectMany(z => z.PrimaryPersonAddress)
-                            .SelectMany(u => u.PersonAddresses.Addresses.AddressLines)
-                            .Select(h => h.Name)),
-                BirthCountry = x.Countries.Name,
-                Name = string.Join(" ", x.Persons.PersonNames.Select(z => z.PersonName))
-            };
-
-        public static Expression<Func<Persons_Patient, NonResidentInfo>> NonResidentInfoExpression { get; } =
-
-            x => new NonResidentInfo()
-            {
-                Id = x.Id,
-                BoatName = x.Persons_NonResidentPatient.BoatInfo.BoatName,
-                ArrivalDate = x.Persons_NonResidentPatient.Persons_ArrivalDepartureInfo.ArrivalDate,
-                DepartureDate = x.Persons_NonResidentPatient.Persons_ArrivalDepartureInfo.DepartureDate,
-                HotelName = x.Persons_NonResidentPatient.NonResidentHotelInfo.Organisations_Hotels.Organisations.Name,
-                Marina = x.Persons_NonResidentPatient.BoatInfo.MarinaList,
-                School = x.Persons_NonResidentPatient.StudentInfo.School,
-                Addresses = x.Persons.PersonAddresses.Select(z => new ForeignAddressInfo()
-                {
-                    Addresstype = z.AddressTypes.Name,
-                    Addresslines = string.Join(", ", z.Addresses.AddressLines.Select(s => s.Name)),
-                    City = z.Addresses.AddressCities.Cities.Name,
-                    Country = z.Addresses.AddressCountries.Countries.Name,
-                    Parish = z.Addresses.AddressParishes.Parishes.Name,
-                    State = z.Addresses.AddressStates.States.Name
-
-                } as IForeignAddressInfo).ToList(),
-                PhoneNumbers = x.Persons.PersonPhoneNumbers.Select(z => new PhoneNumbersInfo()
-                {
-                    PersonId = x.Id,
-                    PhoneNumber = z.PhoneNumber,
-                    Type = z.PhoneTypes.Name
-                } as IPersonPhoneNumberInfo).ToList(),
-            };
-
-        public static Expression<Func<Persons_Patient, List<PhoneNumbersInfo>>> PatientPhoneNumbersInfoExpression { get;
-        } =
-
-            x => x.Persons.PersonPhoneNumbers.Select(z => new PhoneNumbersInfo()
-            {
-                PersonId = x.Id,
-                PhoneNumber = z.PhoneNumber,
-                Type = z.PhoneTypes.Name
-            }).ToList();
 
         public static Expression<Func<Interviews, InterviewInfo>> InterviewInfoExpression { get; } =
             x => new InterviewInfo()
@@ -131,40 +42,40 @@ namespace Entity.Expressions
             x => new PatientResponseInfo()
             {
                 Id = x.Id,
-                Category = x.Questions.Interviews.MedicalCategory.Name,
-                Question = x.Questions.Description,
-                Interview = x.Questions.Interviews.Name,
-                PatientSyntomId = x.PatientSyntomId,
-                InterviewId = x.Questions.InterviewId,
-                PatientVisitId = x.PatientVisitId,
-                QuestionId = x.QuestionId,
-                PatientId = x.PatientVisit.PatientId,
-                ResponseImages = x.ResponseImages.Select(z => new ResponseImage()
-                {
-                    MediaId = z.MediaId,
-                    PatientResponseId = z.PatientResponseId,
-                    Media = z.Media.Value
-                } as IResponseImage).ToList(),
-                ResponseOptions = x.Questions.ResponseOptions.OrderBy(z => z.ResponseNumber).Select(z => new ResponseOptionInfo()
-                {
-                    Id = z.Id,
-                    Description = z.Description,
-                    QuestionId = z.QuestionId,
-                    ResponseId =
-                        (int?)
-                            (z.Response.Any()
-                                ? z.Response.Where(x1 => x1.PatientResponseId == x.Id).Select(x2 => x2.Id).First()
-                                : 0),
-                    Value =
-                            z.Response.Any()
-                            ? z.Response.Where(x1 => x1.PatientResponseId == x.Id).Select(x2 => x2.Value).First()
-                            : null, //
-                    QuestionResponseTypeId = z.QuestionResponseTypeId,
-                    Type = z.QuestionResponseTypes.Name,
-                    PatientResponseId = x.Id,
-                    ResponseNumber = z.ResponseNumber
+                //Category = x.Questions.Interviews.MedicalCategory.Name,
+                //Question = x.Questions.Description,
+                //Interview = x.Questions.Interviews.Name,
+                //PatientSyntomId = x.PatientSyntomId,
+                //InterviewId = x.Questions.InterviewId,
+                //PatientVisitId = x.PatientVisitId,
+                //QuestionId = x.QuestionId,
+                //PatientId = x.PatientVisit.PatientId,
+                //ResponseImages = x.ResponseImages.Select(z => new ResponseImage()
+                //{
+                //    MediaId = z.MediaId,
+                //    PatientResponseId = z.PatientResponseId,
+                //    Media = z.Media.Value
+                //} as IResponseImage).ToList(),
+                //ResponseOptions = x.Questions.ResponseOptions.OrderBy(z => z.ResponseNumber).Select(z => new ResponseOptionInfo()
+                //{
+                //    Id = z.Id,
+                //    Description = z.Description,
+                //    QuestionId = z.QuestionId,
+                //    ResponseId =
+                //        (int?)
+                //            (z.Response.Any()
+                //                ? z.Response.Where(x1 => x1.PatientResponseId == x.Id).Select(x2 => x2.Id).First()
+                //                : 0),
+                //    Value =
+                //            z.Response.Any()
+                //            ? z.Response.Where(x1 => x1.PatientResponseId == x.Id).Select(x2 => x2.Value).First()
+                //            : null, //
+                //    QuestionResponseTypeId = z.QuestionResponseTypeId,
+                //    Type = z.QuestionResponseTypes.Name,
+                //    PatientResponseId = x.Id,
+                //    ResponseNumber = z.ResponseNumber
 
-                } as IResponseOptionInfo).ToList(),
+                //} as IResponseOptionInfo).ToList(),
 
 
             };
@@ -185,7 +96,7 @@ namespace Entity.Expressions
             {
                 Id = x.Id,
                 InterviewId = x.InterviewId,
-                Description = x.Description,    
+                Description = x.Description,
                 EntityAttributeId = x.EntityAttributeId,
                 Interview = x.Interviews.Name,
                 Phase = x.Interviews.Phase.Name,
@@ -199,44 +110,44 @@ namespace Entity.Expressions
         public static Expression<Func<Questions, QuestionResponseOptionInfo>> QuestionResponseOptionsExpression { get; } =
           (q) => new QuestionResponseOptionInfo()
           {
-                Id = q.Id,
-                Category = q.Interviews.MedicalCategory.Name,
-                Question = q.Description,
-                Interview = q.Interviews.Name,
-                InterviewId = q.InterviewId,
-                ResponseOptions = q.ResponseOptions
-                                    .Select(z => new ResponseOptionInfo()
-                                    {
-                                        Id = z.Id,
-                                        Description = z.Description,
-                                        QuestionId = z.QuestionId,
-                                        ResponseId = 0,
-                                        QuestionResponseTypeId = z.QuestionResponseTypeId,
-                                        Type = z.QuestionResponseTypes.Name,
-                                       
-                                        ResponseNumber = z.ResponseNumber
-                                    } as IResponseOptionInfo).ToList(),
-                 PatientResponses = q.PatientResponses.SelectMany(pr => pr.Response).Select(z => new ResponseOptionInfo()
-                 {
-                     PatientResponseId = z.Id,
-                     PatientVisitId = z.PatientResponses.PatientVisit.Id,
-                     PatientId = z.PatientResponses.PatientVisit.PatientId,
-                     Id = z.ResponseOptionId,
-                     Description = z.ResponseOptions.Description,
-                     QuestionId = z.ResponseOptions.QuestionId,
-                     ResponseId = z.Id,
-                     Value = z.Value,
-                     QuestionResponseTypeId = z.ResponseOptions.QuestionResponseTypeId,
-                     Type = z.ResponseOptions.QuestionResponseTypes.Name
-                 } as IResponseOptionInfo).ToList()
+              Id = q.Id,
+              //Category = q.Interviews.MedicalCategory.Name,
+              //Question = q.Description,
+              //Interview = q.Interviews.Name,
+              //InterviewId = q.InterviewId,
+              //ResponseOptions = q.ResponseOptions
+              //                    .Select(z => new ResponseOptionInfo()
+              //                    {
+              //                        Id = z.Id,
+              //                        Description = z.Description,
+              //                        QuestionId = z.QuestionId,
+              //                        ResponseId = 0,
+              //                        QuestionResponseTypeId = z.QuestionResponseTypeId,
+              //                        Type = z.QuestionResponseTypes.Name,
+
+              //                        ResponseNumber = z.ResponseNumber
+              //                    } as IResponseOptionInfo).ToList(),
+              // PatientResponses = q.PatientResponses.SelectMany(pr => pr.Response).Select(z => new ResponseOptionInfo()
+              // {
+              //     PatientResponseId = z.Id,
+              //     PatientVisitId = z.PatientResponses.PatientVisit.Id,
+              //     PatientId = z.PatientResponses.PatientVisit.PatientId,
+              //     Id = z.ResponseOptionId,
+              //     Description = z.ResponseOptions.Description,
+              //     QuestionId = z.ResponseOptions.QuestionId,
+              //     ResponseId = z.Id,
+              //     Value = z.Value,
+              //     QuestionResponseTypeId = z.ResponseOptions.QuestionResponseTypeId,
+              //     Type = z.ResponseOptions.QuestionResponseTypes.Name
+              // } as IResponseOptionInfo).ToList()
           };
 
         public static Expression<Func<Persons_Doctor, DoctorInfo>> DoctorInfoExpression { get; } =
                         x => new DoctorInfo()
                         {
                             Id = x.Id,
-                            Name = string.Join(" ", x.Persons.PersonNames.Select(z => z.PersonName)),
-                            Code = x.Code
+                            //Name = string.Join(" ", x.Persons.PersonNames.Select(z => z.PersonName)),
+                            //Code = x.Code
                         };
 
 
@@ -261,15 +172,12 @@ namespace Entity.Expressions
                         {
                             Id = x.Id,
                             Description = x.Description,
-                           // PatientId = x.PatientResponses.PatientVisit.PatientId,
-                           // PatientResponseId = x.PatientResponseId,
-                           // PatientVisitId = x.,
                             QuestionId = x.QuestionId,
                             QuestionResponseTypeId = x.QuestionResponseTypeId,
                             ResponseId = x.Id,
                             ResponseNumber = x.ResponseNumber,
                             Type = x.QuestionResponseTypes.Name,
-                            //Value = x.Value
+
                         };
 
 

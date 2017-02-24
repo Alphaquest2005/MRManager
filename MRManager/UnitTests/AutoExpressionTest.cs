@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Dynamic;
 using EF.DBContexts;
 using Entity.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,32 +17,6 @@ namespace UnitTests.Expressions
 	[TestClass]
 	public class  AutoExpressionTests
 	{
-		[TestMethod]
-		public void NextOfKinInfoExpressionExpressionGetData()
-		{
-			var res = MRManagerDBContext.Instance.Persons_Patient.Select(PatientExpressions.NextOfKinInfoExpression).ToList();
-			if (res.Any()) Debug.Assert(true);
-		}
-        [TestMethod]
-        public void NonResidentInfoExpressionGetData()
-        {
-            var res = MRManagerDBContext.Instance.Persons_Patient.Select(PatientExpressions.NonResidentInfoExpression).ToList();
-            if (res.Any()) Debug.Assert(true);
-        }
-       
-        [TestMethod]
-        public void PatientInfoExpressionGetData()
-        {
-            var res = MRManagerDBContext.Instance.Persons_Patient.Select(PatientExpressions.PatientInfoExpression).ToList();
-            if (res.Any()) Debug.Assert(true);
-        }
-
-        [TestMethod]
-        public void PatientPhoneNumbersInfoExpressionGetData()
-        {
-            var res = MRManagerDBContext.Instance.Persons_Patient.Select(PatientExpressions.PatientPhoneNumbersInfoExpression).ToList();
-            if (res.Any()) Debug.Assert(true);
-        }
 
         [TestMethod]
         public void SignInInfoExpressionGetData()
@@ -90,5 +65,13 @@ namespace UnitTests.Expressions
             var res = MRManagerDBContext.Instance.Patients.Select(PulledExpressions.PatientNonResidentInfoExpression).ToList();
             if (res.Any()) Debug.Assert(true);
         }
+
+        [TestMethod]
+        public void DistinctTest()
+        {
+            var res = MRManagerDBContext.Instance.UserSignIn.Select(PatientExpressions.SignInInfoExpression).Where("Usersignin = \"joe\"").ToList();
+            if (res.Any()) Debug.Assert(true);
+        }
+
     }
 }

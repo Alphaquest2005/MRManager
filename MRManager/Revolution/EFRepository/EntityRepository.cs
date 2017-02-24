@@ -136,7 +136,7 @@ namespace EFRepository
             {
                 using (var ctx = new TDBContext())
                 {
-                    var p = ctx.Set<TDBEntity>().First(x => x.Id == msg.EntityId);
+                    var p = ctx.Set<TDBEntity>().AsNoTracking().First(x => x.Id == msg.EntityId);
                     EventMessageBus.Current.Publish(new EntityFound<TEntity>((TEntity)(object)p, new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntityFound), msg.Process, Source), Source);
                 }
             }
@@ -159,7 +159,7 @@ namespace EFRepository
                     var whereStr = msg.Changes.Aggregate("", (str, itm) => str + ($"{itm.Key} == \"{itm.Value}\" &&"));
                     whereStr = whereStr.TrimEnd('&');
                     if (string.IsNullOrEmpty(whereStr)) return;
-                    var p = ctx.Set<TDBEntity>().Where(whereStr).FirstOrDefault();
+                    var p = ctx.Set<TDBEntity>().AsNoTracking().Where(whereStr).FirstOrDefault();
                     EventMessageBus.Current.Publish(new EntityWithChangesFound<TEntity>((TEntity)(object)p, msg.Changes, new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntityFound), msg.Process, Source), Source);
 
                 }
@@ -183,7 +183,7 @@ namespace EFRepository
                     var loggerFactory = ctx.GetService<ILoggerFactory>();
                     loggerFactory.AddProvider(new MyLoggerProvider());
 
-                    IQueryable<TDBEntity> rres = ctx.Set<TDBEntity>();
+                    IQueryable<TDBEntity> rres = ctx.Set<TDBEntity>().AsNoTracking();
                     var res = rres.Select(x => (TEntity)(object)x).ToList(); //;
 
                     EventMessageBus.Current.Publish(new EntitySetLoaded<TEntity>(res,new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntitySetLoaded), msg.Process, Source), Source);
@@ -207,7 +207,7 @@ namespace EFRepository
                     loggerFactory.AddProvider(new MyLoggerProvider());
 
 
-                    IQueryable<TDBEntity> rres = ctx.Set<TDBEntity>();
+                    IQueryable<TDBEntity> rres = ctx.Set<TDBEntity>().AsNoTracking();
                     if (rres == null) return;
 
 
@@ -238,7 +238,7 @@ namespace EFRepository
 
                     var rIncludes = msg.Includes.Select(ExpressionConverter<TEntity>.ConvertExpressionType<TDBEntity, object>).ToList();
                     var rfilter = msg.Filter.Select(ExpressionConverter<TEntity>.ConvertExpressionType<TDBEntity, bool>).ToList();
-                    IQueryable<TDBEntity> rres = ctx.Set<TDBEntity>();
+                    IQueryable<TDBEntity> rres = ctx.Set<TDBEntity>().AsNoTracking();
                     if (rres == null) return;
 
 

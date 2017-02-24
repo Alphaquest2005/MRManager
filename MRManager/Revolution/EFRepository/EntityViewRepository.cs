@@ -42,7 +42,7 @@ namespace EFRepository
                 using (var ctx = new TDbContext())
                 {
                     // ReSharper disable once ReplaceWithSingleCallToFirstOrDefault cuz EF7 bugging LEAVE JUST SO
-                    var res = ctx.Set<TDbEntity>().Select(exp).DistinctBy(x => x.Id).FirstOrDefault(x => x.Id == msg.EntityId);//
+                    var res = ctx.Set<TDbEntity>().AsNoTracking().Select(exp).FirstOrDefault(x => x.Id == msg.EntityId);//
                     
                     EventMessageBus.Current.Publish(new EntityFound<TView>((TView)(object)res,new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
                 }
@@ -66,7 +66,7 @@ namespace EFRepository
                     var whereStr = msg.Changes.Aggregate("", (str, itm) => str + ($"{itm.Key} == \"{itm.Value}\" &&"));
                     whereStr = whereStr.TrimEnd('&');
                     if (string.IsNullOrEmpty(whereStr)) return;
-                    var res = ctx.Set<TDbEntity>().Select(exp).Distinct().Where(x => x != null).Where(whereStr).DistinctBy(x => x.Id).FirstOrDefault();//
+                    var res = ctx.Set<TDbEntity>().AsNoTracking().Select(exp).Where(whereStr).FirstOrDefault();//
                     if (res != null)
                     {
                         EventMessageBus.Current.Publish(new EntityViewWithChangesFound<TView>((TView)(object)res, msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
@@ -107,7 +107,7 @@ namespace EFRepository
                     res.ApplyChanges(msg.Changes);
                     ctx.SaveChanges(true);
                     //TODO: retrieve whole item
-                    var ures = ctx.Set<TDbEntity>().Select(exp).DistinctBy(x => x.Id).FirstOrDefault(x => x.Id == res.Id);//
+                    var ures = ctx.Set<TDbEntity>().Select(exp).FirstOrDefault(x => x.Id == res.Id);//
                     EventMessageBus.Current.Publish(new EntityViewWithChangesUpdated<TView>((TView)(object)ures, msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
                 }
             }
@@ -131,8 +131,8 @@ namespace EFRepository
                     whereStr = whereStr.TrimEnd('&');
                     IQueryable<TDbView> res;
                     res = string.IsNullOrEmpty(whereStr) 
-                        ? ctx.Set<TDbEntity>().Select(exp).Distinct() 
-                        : ctx.Set<TDbEntity>().Select(exp).Distinct().Where(whereStr);
+                        ? ctx.Set<TDbEntity>().AsNoTracking().Select(exp)
+                        : ctx.Set<TDbEntity>().AsNoTracking().Select(exp).Where(whereStr);
                     
 
                     EventMessageBus.Current.Publish(new EntityViewSetWithChangesLoaded<TView>(res.Select(x => (TView)(object)x).ToList(), msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
@@ -144,6 +144,9 @@ namespace EFRepository
             }
 
         }
+
+
+
         //public static List<TView> GetEntityView(Expression<Func<TEntity, bool>> filter,Expression<Func<TDBEntity, TDBEntity>> query) 
         //{
         //    try
