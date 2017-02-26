@@ -187,6 +187,23 @@ namespace UnitTests.Expressions
 
         }
 
+        [TestMethod]
+        public void RefactorNonResidentTest()
+        {
+            using (var ctx = new MRManagerDBContext())
+            {
+                var res =
+                    ctx.PatientResponses.Where(x => x.PatientVisit.PatientId == 1)
+                                        .Where(x => x.Questions.EntityAttributes.Entity == "NonResident")
+                                        .SelectMany(x => x.Response)
+                                        .GroupBy(x => x.PatientResponses.Questions.EntityAttributes.Attribute)
+                                        .Select(g => new KeyValuePair<string, dynamic>(g.Key, g.Any() ? g.First().Value : null)).ToList();
+                var p = new NonResidentInfo();
+                res.ForEach(x => p.ApplyChanges(x));
+                if (res != null) Debug.Assert(true);
+            }
+        }
+
     }
 
     public class SubEntitiesKeyPair

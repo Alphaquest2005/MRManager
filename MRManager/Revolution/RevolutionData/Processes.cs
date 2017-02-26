@@ -218,7 +218,7 @@ namespace RevolutionData
             ComplexActions.UpdateState<IPatientPhoneNumbersInfo>(3),
             ComplexActions.RequestState<IPatientInfo, IPatientNextOfKinsInfo>(3, x => x.Id),
             ComplexActions.UpdateState<IPatientNextOfKinsInfo>(3),
-            ComplexActions.RequestState<IPatientInfo, INonResidentInfo>(3, x => x.Id),
+            ComplexActions.RequestPulledState<IPatientInfo, INonResidentInfo>(3, "NonResident"),
             ComplexActions.UpdateState<INonResidentInfo>(3),
 
 

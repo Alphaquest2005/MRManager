@@ -42,40 +42,40 @@ namespace Entity.Expressions
             x => new PatientResponseInfo()
             {
                 Id = x.Id,
-                //Category = x.Questions.Interviews.MedicalCategory.Name,
-                //Question = x.Questions.Description,
-                //Interview = x.Questions.Interviews.Name,
-                //PatientSyntomId = x.PatientSyntomId,
-                //InterviewId = x.Questions.InterviewId,
-                //PatientVisitId = x.PatientVisitId,
-                //QuestionId = x.QuestionId,
-                //PatientId = x.PatientVisit.PatientId,
-                //ResponseImages = x.ResponseImages.Select(z => new ResponseImage()
-                //{
-                //    MediaId = z.MediaId,
-                //    PatientResponseId = z.PatientResponseId,
-                //    Media = z.Media.Value
-                //} as IResponseImage).ToList(),
-                //ResponseOptions = x.Questions.ResponseOptions.OrderBy(z => z.ResponseNumber).Select(z => new ResponseOptionInfo()
-                //{
-                //    Id = z.Id,
-                //    Description = z.Description,
-                //    QuestionId = z.QuestionId,
-                //    ResponseId =
-                //        (int?)
-                //            (z.Response.Any()
-                //                ? z.Response.Where(x1 => x1.PatientResponseId == x.Id).Select(x2 => x2.Id).First()
-                //                : 0),
-                //    Value =
-                //            z.Response.Any()
-                //            ? z.Response.Where(x1 => x1.PatientResponseId == x.Id).Select(x2 => x2.Value).First()
-                //            : null, //
-                //    QuestionResponseTypeId = z.QuestionResponseTypeId,
-                //    Type = z.QuestionResponseTypes.Name,
-                //    PatientResponseId = x.Id,
-                //    ResponseNumber = z.ResponseNumber
+                Category = x.Questions.Interviews.MedicalCategory.Name,
+                Question = x.Questions.Description,
+                Interview = x.Questions.Interviews.Name,
+                PatientSyntomId = x.PatientSyntomId,
+                InterviewId = x.Questions.InterviewId,
+                PatientVisitId = x.PatientVisitId,
+                QuestionId = x.QuestionId,
+                PatientId = x.PatientVisit.PatientId,
+                ResponseImages = x.ResponseImages.Select(z => new ResponseImage()
+                {
+                    MediaId = z.MediaId,
+                    PatientResponseId = z.PatientResponseId,
+                    Media = z.Media.Value
+                } as IResponseImage).ToList(),
+                ResponseOptions = x.Questions.ResponseOptions.OrderBy(z => z.ResponseNumber).Select(z => new ResponseOptionInfo()
+                {
+                    Id = z.Id,
+                    Description = z.Description,
+                    QuestionId = z.QuestionId,
+                    ResponseId =
+                        (int?)
+                            (z.Response.Any()
+                                ? z.Response.Where(x1 => x1.PatientResponseId == x.Id).Select(x2 => x2.Id).First()
+                                : 0),
+                    Value =
+                            z.Response.Any()
+                            ? z.Response.Where(x1 => x1.PatientResponseId == x.Id).Select(x2 => x2.Value).First()
+                            : null, //
+                    QuestionResponseTypeId = z.QuestionResponseTypeId,
+                    Type = z.QuestionResponseTypes.Name,
+                    PatientResponseId = x.Id,
+                    ResponseNumber = z.ResponseNumber
 
-                //} as IResponseOptionInfo).ToList(),
+                } as IResponseOptionInfo).ToList(),
 
 
             };
@@ -111,43 +111,43 @@ namespace Entity.Expressions
           (q) => new QuestionResponseOptionInfo()
           {
               Id = q.Id,
-              //Category = q.Interviews.MedicalCategory.Name,
-              //Question = q.Description,
-              //Interview = q.Interviews.Name,
-              //InterviewId = q.InterviewId,
-              //ResponseOptions = q.ResponseOptions
-              //                    .Select(z => new ResponseOptionInfo()
-              //                    {
-              //                        Id = z.Id,
-              //                        Description = z.Description,
-              //                        QuestionId = z.QuestionId,
-              //                        ResponseId = 0,
-              //                        QuestionResponseTypeId = z.QuestionResponseTypeId,
-              //                        Type = z.QuestionResponseTypes.Name,
+              Category = q.Interviews.MedicalCategory.Name,
+              Question = q.Description,
+              Interview = q.Interviews.Name,
+              InterviewId = q.InterviewId,
+              ResponseOptions = q.ResponseOptions
+                                  .Select(z => new ResponseOptionInfo()
+                                  {
+                                      Id = z.Id,
+                                      Description = z.Description,
+                                      QuestionId = z.QuestionId,
+                                      ResponseId = 0,
+                                      QuestionResponseTypeId = z.QuestionResponseTypeId,
+                                      Type = z.QuestionResponseTypes.Name,
 
-              //                        ResponseNumber = z.ResponseNumber
-              //                    } as IResponseOptionInfo).ToList(),
-              // PatientResponses = q.PatientResponses.SelectMany(pr => pr.Response).Select(z => new ResponseOptionInfo()
-              // {
-              //     PatientResponseId = z.Id,
-              //     PatientVisitId = z.PatientResponses.PatientVisit.Id,
-              //     PatientId = z.PatientResponses.PatientVisit.PatientId,
-              //     Id = z.ResponseOptionId,
-              //     Description = z.ResponseOptions.Description,
-              //     QuestionId = z.ResponseOptions.QuestionId,
-              //     ResponseId = z.Id,
-              //     Value = z.Value,
-              //     QuestionResponseTypeId = z.ResponseOptions.QuestionResponseTypeId,
-              //     Type = z.ResponseOptions.QuestionResponseTypes.Name
-              // } as IResponseOptionInfo).ToList()
+                                      ResponseNumber = z.ResponseNumber
+                                  } as IResponseOptionInfo).ToList(),
+              PatientResponses = q.PatientResponses.SelectMany(pr => pr.Response).Select(z => new ResponseOptionInfo()
+              {
+                  PatientResponseId = z.Id,
+                  PatientVisitId = z.PatientResponses.PatientVisit.Id,
+                  PatientId = z.PatientResponses.PatientVisit.PatientId,
+                  Id = z.ResponseOptionId,
+                  Description = z.ResponseOptions.Description,
+                  QuestionId = z.ResponseOptions.QuestionId,
+                  ResponseId = z.Id,
+                  Value = z.Value,
+                  QuestionResponseTypeId = z.ResponseOptions.QuestionResponseTypeId,
+                  Type = z.ResponseOptions.QuestionResponseTypes.Name
+              } as IResponseOptionInfo).ToList()
           };
 
         public static Expression<Func<Persons_Doctor, DoctorInfo>> DoctorInfoExpression { get; } =
                         x => new DoctorInfo()
                         {
                             Id = x.Id,
-                            //Name = string.Join(" ", x.Persons.PersonNames.Select(z => z.PersonName)),
-                            //Code = x.Code
+                            Name = string.Join(" ", x.Persons.PersonNames.Select(z => z.PersonName)),
+                            Code = x.Code
                         };
 
 
