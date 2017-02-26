@@ -73,7 +73,15 @@ namespace EFRepository
                   .Invoke(null, new object[] { msg });
         }
 
+        public static void LoadPulledEntityViewSetWithChanges(ILoadPulledEntityViewSetWithChanges<TEntityView, IMatchType> msg)
+        {
 
-      
+            typeof(EntityViewRepository<,,,,>).MakeGenericType(typeof(TEntityView), ViewType, TEntity, EntityType, ctxType)
+                  .GetMethod("LoadPulledEntityViewSetWithChanges")
+                  .Invoke(null, new object[] { msg });
+        }
+
+
+
     }
 }

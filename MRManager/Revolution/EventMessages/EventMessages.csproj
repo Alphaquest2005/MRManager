@@ -101,6 +101,7 @@
     <Compile Include="Commands\GetEntityFromPatientResponse.cs" />
     <Compile Include="Commands\GetEntityViewById.cs" />
     <Compile Include="Commands\LoadEntityViewSetWithChanges.cs" />
+    <Compile Include="Commands\LoadPulledEntityViewSetWithChanges.cs" />
     <Compile Include="Commands\StartSystemProcess.cs" />
     <Compile Include="Commands\RequestProcessLog.cs" />
     <Compile Include="Commands\CreateEntityService.cs" />

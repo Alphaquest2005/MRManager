@@ -87,11 +87,11 @@ namespace RevolutionData
                         processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.Error),
                         expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
-        public static IProcessAction IntializeProcessState<TEntityView>() where TEntityView : IEntityView
+        public static IProcessAction IntializePulledProcessState<TEntityView>(string entityName) where TEntityView : IEntityView
         {
             return new ProcessAction(
                 action: async cp =>
-                         await Task.Run(() => new LoadEntityViewSetWithChanges<TEntityView, IExactMatch>(new Dictionary<string, dynamic>(),
+                         await Task.Run(() => new LoadPulledEntityViewSetWithChanges<TEntityView, IExactMatch>(entityName,new Dictionary<string, dynamic>(),
                             new StateCommandInfo(cp.Actor.Process.Id,
                                 Context.EntityView.Commands.LoadEntityViewSetWithChanges),
                             cp.Actor.Process, cp.Actor.Source)),

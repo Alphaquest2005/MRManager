@@ -51,6 +51,11 @@ namespace DataServices.Actors
             EntityViewDataContext<TEntityView>.LoadEntityViewSetWithChanges(msg);
         }
 
+        public static void LoadPulledEntityViewSetWithChanges<TEntityView>(this ILoadPulledEntityViewSetWithChanges<TEntityView, IMatchType> msg) where TEntityView : IEntityView
+        {
+            EntityViewDataContext<TEntityView>.LoadPulledEntityViewSetWithChanges(msg);
+        }
+
         public static void UpdatePulledEntityWithChanges<TEntity>(this IUpdatePatientEntityWithChanges<TEntity> msg) where TEntity : IEntity
         {
             PulledEntityDataContext.UpdatePulledEntityWithChanges(msg);

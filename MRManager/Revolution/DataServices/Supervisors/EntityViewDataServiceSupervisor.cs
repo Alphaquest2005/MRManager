@@ -30,10 +30,11 @@ namespace DataServices.Actors
         private static readonly Action<IGetEntityViewWithChanges<TEntityView>> GetEntityViewWithChangesAction = (x) => x.GetEntityViewWithChanges();
         private static readonly Action<IUpdateEntityViewWithChanges<TEntityView>> UpdateEntityViewWithChangesAction = (x) => x.UpdateEntityViewWithChanges();
         private static readonly Action<ILoadEntityViewSetWithChanges<TEntityView, IMatchType>> LoadEntityViewSetWithChangesAction = (x) => x.LoadEntityViewSetWithChanges();
+        private static readonly Action<ILoadPulledEntityViewSetWithChanges<TEntityView, IMatchType>> LoadPulledEntityViewSetWithChangesAction = (x) => x.LoadPulledEntityViewSetWithChanges();
 
-        
 
-       
+
+
 
         readonly Dictionary<Type, object> entityEvents =
             new Dictionary<Type, object>()
@@ -44,7 +45,8 @@ namespace DataServices.Actors
                 {typeof (IGetEntityViewWithChanges<TEntityView>), GetEntityViewWithChangesAction},
                 {typeof (IUpdateEntityViewWithChanges<TEntityView>), UpdateEntityViewWithChangesAction},
                 {typeof (ILoadEntityViewSetWithChanges<TEntityView, IMatchType>), LoadEntityViewSetWithChangesAction},
-                
+                {typeof (ILoadPulledEntityViewSetWithChanges<TEntityView, IMatchType>), LoadPulledEntityViewSetWithChangesAction},
+
 
             };
         private IUntypedActorContext ctx = null;

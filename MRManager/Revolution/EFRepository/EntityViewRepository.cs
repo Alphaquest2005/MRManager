@@ -29,7 +29,14 @@ namespace EFRepository
     public class EntityViewRepository<TView,TDbView, TEntity, TDbEntity, TDbContext>:BaseRepository<EntityViewRepository<TView, TDbView, TEntity, TDbEntity, TDbContext>>, IEntityViewRepository where TDbView:class, IEntityId, new() where TDbEntity : class,IEntity, new() where TDbContext : DbContext, new() where TEntity : class, IEntity where TView : IEntityView<TEntity>
     {
 
-      private static Dictionary<Type, Func<string, KeyValuePair<string, object>, string>> IMatchTypeFunctions = new Dictionary<Type, Func<string, KeyValuePair<string, object>, string>>()
+      private static Dictionary<Type, Func<string, KeyValuePair<string, dynamic>, string>> IPulledMatchTypeFunctions = new Dictionary<Type, Func<string, KeyValuePair<string, object>, string>>()
+      {
+          {typeof(IExactMatch), (str, itm) => str + $"ResponseOptions.Questions.EntityAttributes.Attribute == \"{itm.Key}\" && Value == \"{itm.Value}\" &&" },
+          {typeof(IPartialMatch), (str, itm) => str + $"ResponseOptions.Questions.EntityAttributes.Attribute ==\"{itm.Key}\" && Value.Contains(\"{itm.Value}\") &&" }
+      };
+
+
+        private static Dictionary<Type, Func<string, KeyValuePair<string, object>, string>> IMatchTypeFunctions = new Dictionary<Type, Func<string, KeyValuePair<string, object>, string>>()
       {
           {typeof(IExactMatch), (str, itm) => str + $"{itm.Key} == \"{itm.Value}\" &&" },
           {typeof(IPartialMatch), (str, itm) => str + $"{itm.Key}.Contains(\"{itm.Value}\") &&" }
@@ -62,15 +69,15 @@ namespace EFRepository
             {
                 using (var ctx = new MRManagerDBContext())
                 {
+                    var props = typeof(TView).GetProperties().ToList();
                     var res =
                         ctx.PatientResponses.Where(x => x.PatientVisit.PatientId == msg.PatientId)
-                            .Where(x => x.Questions.EntityAttributes.Entity == msg.EntityName)
+                            .Where(x => x.Questions.EntityAttributes.Entity == msg.EntityName && props.Any(z => z.Name == x.Questions.EntityAttributes.Attribute))
                             .SelectMany(x => x.Response)
                             .GroupBy(x => x.PatientResponses.Questions.EntityAttributes.Attribute)
                             .Select(g => new KeyValuePair<string, dynamic>(g.Key, g.Any() ? g.First().Value : null))
                             .ToList();
-                    TDbView p = new TDbView();//BootStrapper.BootStrapper.Container.GetExportedTypes(typeof (TView)).FirstOrDefault() ??
-                    //        BootStrapper.BootStrapper.Container.GetExportedType(typeof (TView));
+                    TDbView p = new TDbView();
                     res.ForEach(x => p.ApplyChanges(x));
                     EventMessageBus.Current.Publish(
                         new EntityFound<TView>((TView) (object) p,
@@ -84,6 +91,59 @@ namespace EFRepository
 
             }
         }
+
+        public static void LoadPulledEntityViewSetWithChanges(ILoadPulledEntityViewSetWithChanges<TView, IMatchType> msg)
+        {
+            try
+            {
+                using (var ctx = new MRManagerDBContext())
+                {
+                    var props = typeof(TView).GetProperties().ToList();
+                    var matchtype = msg.GetType().GenericTypeArguments[1];
+                    var whereStr = msg.Changes.Aggregate("", IPulledMatchTypeFunctions[matchtype]);
+                    whereStr = whereStr.TrimEnd('&');
+                    
+                    var entities = string.IsNullOrEmpty(whereStr)
+                        ? ctx.PatientResponses
+                            .Where(
+                                x =>
+                                    x.Questions.EntityAttributes.Entity == msg.EntityName &&
+                                    props.Any(z => z.Name == x.Questions.EntityAttributes.Attribute))
+                            .GroupBy(x => new {x.PatientVisit.PatientId})
+                            .Select(g => new
+                            {
+                                Id = g.Key.PatientId,
+                                Changes = g.SelectMany(q => q.Response)
+                                    .GroupBy(w => w.PatientResponses.Questions.EntityAttributes.Attribute)
+                                    .Select(rg => new KeyValuePair<string, dynamic>(
+                                        rg.Key,
+                                        rg.Any() ? rg.First().Value : null)).ToList()
+                            }).ToList()
+                        : ctx.PatientResponses
+                            .Where(x =>x.Questions.EntityAttributes.Entity == msg.EntityName &&props.Any(z => z.Name == x.Questions.EntityAttributes.Attribute))
+                            .Where($"Response.Where({whereStr}).Any()")
+                            .GroupBy(x => new {x.PatientVisit.PatientId})
+                            .Select(g => new
+                            {
+                                Id = g.Key.PatientId,
+                                Changes = g.SelectMany(q => q.Response)
+                                    .GroupBy(w => w.PatientResponses.Questions.EntityAttributes.Attribute)
+                                    .Select(rg => new KeyValuePair<string, dynamic>(
+                                        rg.Key,
+                                        rg.Any() ? rg.First().Value : null)).ToList()
+                            }).ToList();
+                   var res = entities.Select(x => new TDbView() {Id = x.Id}.ApplyChanges(x.Changes)).ToList();
+
+                    EventMessageBus.Current.Publish(new EntityViewSetWithChangesLoaded<TView>(res.Select(x => (TView)(object)x).ToList(), msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
+                }
+            }
+            catch (Exception ex)
+            {
+                PublishProcesError(msg, ex, typeof(IEntityViewLoaded<TView>));
+            }
+
+        }
+
 
         public static void GetEntityViewWithChanges(IGetEntityViewWithChanges<TView> msg)
         {
@@ -174,6 +234,7 @@ namespace EFRepository
             }
 
         }
+
 
 
 

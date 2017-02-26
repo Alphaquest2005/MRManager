@@ -204,7 +204,7 @@ namespace RevolutionData
 
 
 
-            ComplexActions.IntializeProcessState<IPatientInfo>(3),
+            ComplexActions.IntializePulledProcessState<IPatientInfo>(3, "Patient"),
             ComplexActions.UpdateStateList<IPatientInfo>(3),
             
 
@@ -267,7 +267,7 @@ namespace RevolutionData
 
         public static class ComplexActions
         {
-            public static ComplexEventAction IntializeProcessState<TEntityView>(int processId) where TEntityView : IEntityView
+            public static ComplexEventAction IntializePulledProcessState<TEntityView>(int processId, string entityName) where TEntityView : IEntityView
             {
                 return new ComplexEventAction(
 
@@ -284,7 +284,7 @@ namespace RevolutionData
                         
                     },
                     expectedMessageType: typeof (IProcessStateMessage<TEntityView>),
-                    action: ProcessActions.IntializeProcessState<TEntityView>(),
+                    action: ProcessActions.IntializePulledProcessState<TEntityView>(entityName),
                     processInfo: new StateCommandInfo(processId, Context.Process.Commands.CreateState));
             }
 
@@ -395,7 +395,7 @@ namespace RevolutionData
                     {
                             new ProcessExpectedEvent<IEntityViewSetWithChangesLoaded<TEntityView>> (
                         "EntityViewSet",processId, e => e.EntitySet != null, expectedSourceType: new SourceType(typeof(IEntityViewRepository)),
-                        processInfo: new StateEventInfo(2, Context.EntityView.Events.EntityViewSetLoaded))
+                        processInfo: new StateEventInfo(processId, Context.EntityView.Events.EntityViewSetLoaded))
                     },
                     expectedMessageType: typeof(IProcessStateList<TEntityView>),
                     action: ProcessActions.UpdateEntityViewStateList<TEntityView>(),

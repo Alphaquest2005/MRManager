@@ -29,6 +29,12 @@ namespace SystemInterfaces
         Dictionary<string, object> Changes { get; }
     }
 
+    public interface ILoadPulledEntityViewSetWithChanges<out TEntityView, out TMatchType> : IEntityViewRequest<TEntityView> where TEntityView : IEntityView where TMatchType : IMatchType
+    {
+        Dictionary<string, dynamic> Changes { get; }
+        string EntityName { get; }
+    }
+
     public interface IPartialMatch : IMatchType
     {
 
