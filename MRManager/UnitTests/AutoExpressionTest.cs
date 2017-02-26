@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Dynamic;
@@ -204,8 +205,39 @@ namespace UnitTests.Expressions
             }
         }
 
-    }
+        [TestMethod]
+        public void ConvertToNullable()
+        {
+            var type = typeof (Nullable<DateTime>);
+            var s = "1/1/2011";
+            TypeConverter conv = TypeDescriptor.GetConverter(type);
+            var result = conv.ConvertFrom(s);
 
+            var res1 = test.ToNullable(s, type);
+
+
+            Assert.AreEqual(res1, result);
+        }
+
+	    
+
+	}
+        public static class test
+	    {
+	        public static dynamic ToNullable(this object s, Type type)
+	        {
+	            try
+	            {
+	                TypeConverter conv = TypeDescriptor.GetConverter(type);
+	                var result = conv.ConvertFrom(s);
+	                return result;
+	            }
+	            catch
+	            {
+	            }
+	            return null;
+	        }
+	    }
     public class SubEntitiesKeyPair
     {
         public int Id { get; set; }

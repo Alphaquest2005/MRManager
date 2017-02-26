@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using SystemInterfaces;
 using Common.Dynamic;
+using Utilities;
+
 
 
 namespace Common
@@ -25,8 +27,16 @@ namespace Common
 
         public static void ApplyChanges<T>(this T entity, KeyValuePair<string, dynamic> change) //where T : IEntityId
         {
-            var prop = entity.GetType().GetProperty(change.Key);
-            prop?.SetValue(entity, Convert.ChangeType(change.Value, prop.PropertyType));
+            var prop = entity.GetType().GetProperty(change.Key.Replace(" ",""));
+            if (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof (Nullable<>))
+            {
+                prop?.SetValue(entity, NullableExtensions.ToNullable(change.Value, prop.PropertyType));
+            }
+            else
+            {
+                prop?.SetValue(entity, Convert.ChangeType(change.Value, prop.PropertyType));
+            }
+                
         }
 
 

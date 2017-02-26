@@ -72,12 +72,12 @@ namespace EFRepository
                     var props = typeof(TView).GetProperties().ToList();
                     var res =
                         ctx.PatientResponses.Where(x => x.PatientVisit.PatientId == msg.PatientId)
-                            .Where(x => x.Questions.EntityAttributes.Entity == msg.EntityName && props.Any(z => z.Name == x.Questions.EntityAttributes.Attribute))
-                            .SelectMany(x => x.Response)
-                            .GroupBy(x => x.PatientResponses.Questions.EntityAttributes.Attribute)
+                            .Where(x => x.Questions.EntityAttributes.Entity == msg.EntityName)
+                            .SelectMany(x => x.Response).Where(z => z.Value != null && props.Any(q => q.Name.Replace(" ", "") == z.ResponseOptions.Description.Replace(" ", "")))
+                            .GroupBy(x => x.ResponseOptions.Description)
                             .Select(g => new KeyValuePair<string, dynamic>(g.Key, g.Any() ? g.First().Value : null))
                             .ToList();
-                    TDbView p = new TDbView();
+                    TDbView p = new TDbView() {Id = msg.PatientId};
                     res.ForEach(x => p.ApplyChanges(x));
                     EventMessageBus.Current.Publish(
                         new EntityFound<TView>((TView) (object) p,

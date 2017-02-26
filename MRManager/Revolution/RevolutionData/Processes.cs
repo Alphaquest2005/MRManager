@@ -306,6 +306,11 @@ namespace RevolutionData
                             eventPredicate: e => e.Entity != null,
                             processInfo: new StateEventInfo(processId, Context.Entity.Events.EntityFound),
                             expectedSourceType: new SourceType(typeof(IEntityRepository)),
+                            key: "EntityView"),
+                                   new ProcessExpectedEvent<IEntityFound<TEntityView>> (processId: processId,
+                            eventPredicate: e => e.Entity != null,
+                            processInfo: new StateEventInfo(processId, Context.Entity.Events.EntityFound),
+                            expectedSourceType: new SourceType(typeof(IEntityRepository)),
                             key: "EntityView")
                     },
                     expectedMessageType: typeof(IProcessStateMessage<TEntityView>),
