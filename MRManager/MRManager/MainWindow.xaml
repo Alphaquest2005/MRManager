@@ -6,8 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:Views;assembly=Views"
         Title="MainWindow"
-        Width="525"
-        Height="350"
+        Width="3000"
+        Height="3000"
         ResizeMode="CanResizeWithGrip"
         SizeToContent="WidthAndHeight"
         WindowState="Maximized"
@@ -20,92 +20,97 @@
         <x:Static x:Key="MainWindowViewModelDataSource" Member="automodels:MainWindowViewModel.Instance" />
     </Window.Resources>
 
+    <Grid>
 
-    <Grid x:Name="LayoutRoot" Background="#4C0E0475">
-        <views:Screen Margin="0,125,0,0"
-                      DataContext="{Binding ScreenModel,
-                                            Source={StaticResource MainWindowViewModelDataSource},
-                                            UpdateSourceTrigger=PropertyChanged}"
-                      DataContextChanged="Screen_DataContextChanged" />
-        <TextBlock x:Name="BackBtn"
-                   Width="70"
-                   Height="70"
-                   Margin="10,34,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Background="#00000000"
-                   FontFamily="Segoe UI Symbol"
-                   FontSize="48"
-                   MouseLeftButtonDown="BackBtn_MouseLeftButtonDown"
-                   Style="{DynamicResource TextButtonStyle}"
-                   Text="&#xE0C0;"
-                   TextAlignment="Center"
-                   TextWrapping="Wrap" />
-        <TextBlock Width="658"
-                   Height="70"
-                   Margin="116,0,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   FontFamily="Segoe UI Light"
-                   FontSize="48"
-                   Style="{DynamicResource TextButtonStyle}"
-                   Text="SAMS MR Manager"
-                   TextWrapping="Wrap" />
-        <Border
-                Height="1"
-                Margin="116,113,26,0"
-                VerticalAlignment="Top"
-                BorderThickness="0,0,0,1">
-            <Border.BorderBrush>
-                <LinearGradientBrush MappingMode="RelativeToBoundingBox" StartPoint="0.5,0" EndPoint="0.5,1">
-                    <GradientStop Offset="0.878" Color="#00000000" />
-                    <GradientStop Offset="1" Color="White" />
-                    <GradientStop Offset="1" Color="#7F0F326F" />
-                </LinearGradientBrush>
-            </Border.BorderBrush>
-            <Grid Margin="0,0,-0.6,0.2" />
-        </Border>
-        <Grid x:Name="HeaderBar"
-              Height="35"
-              Margin="0,0,-0.49,0"
-              VerticalAlignment="Top"
-              Background="#00000000">
 
-            <Grid Margin="0,0,-0.49,0"
-                  Background="#00000000"
-                  PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown_1" />
+        <Grid x:Name="LayoutRoot" Background="#4C0E0475">
+            <Viewbox Margin="0,125,0,0"
+                    Stretch="Uniform" StretchDirection="Both">
+                <views:Screen
+                        DataContext="{Binding ScreenModel, Source={StaticResource MainWindowViewModelDataSource}, UpdateSourceTrigger=PropertyChanged}"
+                        DataContextChanged="Screen_DataContextChanged" Height="875" Width="2000" />
+            </Viewbox>
+            <TextBlock x:Name="BackBtn"
+                    Width="70"
+                    Height="70"
+                    Margin="10,34,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Background="#00000000"
+                    FontFamily="Segoe UI Symbol"
+                    FontSize="48"
+                    MouseLeftButtonDown="BackBtn_MouseLeftButtonDown"
+                    Style="{DynamicResource TextButtonStyle}"
+                    Text="&#xE0C0;"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+            <TextBlock Width="658"
+                    Height="70"
+                    Margin="116,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Segoe UI Light"
+                    FontSize="48"
+                    Style="{DynamicResource TextButtonStyle}"
+                    Text="SAMS MR Manager"
+                    TextWrapping="Wrap" />
+            <Border
+                    Height="1"
+                    Margin="116,113,26,0"
+                    VerticalAlignment="Top"
+                    BorderThickness="0,0,0,1">
+                <Border.BorderBrush>
+                    <LinearGradientBrush MappingMode="RelativeToBoundingBox" StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="0.878" Color="#00000000" />
+                        <GradientStop Offset="1" Color="White" />
+                        <GradientStop Offset="1" Color="#7F0F326F" />
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <Grid Margin="0,0,-0.6,0.2" />
+            </Border>
+            <Grid x:Name="HeaderBar"
+                    Height="35"
+                    Margin="0,0,-0.49,0"
+                    VerticalAlignment="Top"
+                    Background="#00000000">
 
-            <TextBlock Width="35"
-                       Height="50"
-                       Margin="0,10,0.4,0"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Top"
-                       FontFamily="Segoe UI Symbol"
-                       FontSize="24"
-                       MouseLeftButtonDown="Button_Click_1"
-                       Style="{StaticResource CloseButtonStyle}"
-                       Text="&#xE10A;" />
-            <TextBlock Width="30"
-                       Height="32"
-                       Margin="0,8,39.69,-5"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Top"
-                       FontFamily="Segoe UI Symbol"
-                       FontSize="24"
-                       MouseLeftButtonDown="SwitchWindowState"
-                       Style="{DynamicResource TextButtonStyle}"
-                       Text="&#xE155;" />
-            <TextBlock Width="30"
-                       Height="25"
-                       Margin="0,16,69.69,-6"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Top"
-                       FontFamily="Segoe UI Symbol"
-                       FontSize="24"
-                       MouseLeftButtonDown="MinimizeWindow"
-                       Style="{DynamicResource TextButtonStyle}"
-                       Text="&#xE108;" />
+                <Grid Margin="0,0,-0.49,0"
+                        Background="#00000000"
+                        PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown_1" />
+
+                <TextBlock Width="35"
+                        Height="50"
+                        Margin="0,10,0.4,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        FontFamily="Segoe UI Symbol"
+                        FontSize="24"
+                        MouseLeftButtonDown="Button_Click_1"
+                        Style="{StaticResource CloseButtonStyle}"
+                        Text="&#xE10A;" />
+                <TextBlock Width="30"
+                        Height="32"
+                        Margin="0,8,39.69,-5"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        FontFamily="Segoe UI Symbol"
+                        FontSize="24"
+                        MouseLeftButtonDown="SwitchWindowState"
+                        Style="{DynamicResource TextButtonStyle}"
+                        Text="&#xE155;" />
+                <TextBlock Width="30"
+                        Height="25"
+                        Margin="0,16,69.69,-6"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        FontFamily="Segoe UI Symbol"
+                        FontSize="24"
+                        MouseLeftButtonDown="MinimizeWindow"
+                        Style="{DynamicResource TextButtonStyle}"
+                        Text="&#xE108;" />
+            </Grid>
         </Grid>
+
     </Grid>
 </Window>
 

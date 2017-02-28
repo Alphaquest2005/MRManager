@@ -30,11 +30,10 @@
 
 
     </UserControl.Resources>
-    <Viewbox Stretch="Uniform">
+   
     <DockPanel x:Name="LayoutRoot"
-               Margin="0,-90,0,0"
-               Width="2000"
-               Height="1000"
+               Margin="0,-90,0,50"
+               
                Background="{x:Null}"
                DataContext="{Binding}"
                Focusable="True"
@@ -196,5 +195,5 @@
 
 
     </DockPanel>
-    </Viewbox>
+   
 </UserControl>
