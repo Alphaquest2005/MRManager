@@ -30,7 +30,7 @@ namespace DataServices.Actors
     public class ServiceManager : ReceiveActor, IServiceManager
     {
 
-        public ISystemSource Source => new Source(Guid.NewGuid(),"ServiceManager", new SourceType(typeof(IServiceManager)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public ISystemSource Source { get; private set; }
 
         
 
@@ -47,7 +47,8 @@ namespace DataServices.Actors
                 var processInfo = Processes.ProcessInfos.FirstOrDefault(x => x.ParentProcessId == 0);
                 if (processInfo == null) return;
                 var systemProcess = new SystemProcess(new Process(processInfo, new Agent("System")), machineInfo);
-                var systemStartedMsg = new SystemStarted(new StateEventInfo(systemProcess.Id, RevolutionData.Context.Process.Events.ProcessStarted), systemProcess, Source);
+                Source = new Source(Guid.NewGuid(),"ServiceManager", new SourceType(typeof(IServiceManager)),systemProcess, machineInfo);
+                                    var systemStartedMsg = new SystemStarted(new StateEventInfo(systemProcess.Id, RevolutionData.Context.Process.Events.ProcessStarted), systemProcess, Source);
 
                 
 
@@ -59,8 +60,8 @@ namespace DataServices.Actors
 
                        await Task.Run(() =>ctx.ActorOf(Props.Create<ViewModelSupervisor>(systemProcess, systemStartedMsg),"ViewModelSupervisor")).ConfigureAwait(false);
                        
-                        await Task.Run(() => ctx.ActorOf(Props.Create<EntityDataServiceManager>(), "EntityDataServiceManager")).ConfigureAwait(false);
-                        await Task.Run(() =>ctx.ActorOf(Props.Create<EntityViewDataServiceManager>(), "EntityViewDataServiceManager")).ConfigureAwait(false);
+                        await Task.Run(() => ctx.ActorOf(Props.Create<EntityDataServiceManager>(systemProcess), "EntityDataServiceManager")).ConfigureAwait(false);
+                        await Task.Run(() =>ctx.ActorOf(Props.Create<EntityViewDataServiceManager>(systemProcess), "EntityViewDataServiceManager")).ConfigureAwait(false);
 
 
                         EventMessageBus.Current.Publish(

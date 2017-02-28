@@ -14,7 +14,7 @@ namespace MRManager_UnitTests
     [TestClass]
     public class UnitTest1
     {
-        public ISystemSource Source => new Source(Guid.NewGuid(), "TestCase" + typeof(UnitTest1).GetFriendlyName(), new SourceType(typeof(UnitTest1)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public ISystemSource Source => new Source(Guid.NewGuid(), "TestCase" + typeof(UnitTest1).GetFriendlyName(), new SourceType(typeof(UnitTest1)), new SystemProcess(new Process(1, 0, "Starting System", "Prepare system for Intial Use", "", new Agent("System")), new MachineInfo(Environment.MachineName, Environment.ProcessorCount)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         [TestMethod]
         public void TestMethod1()
         {

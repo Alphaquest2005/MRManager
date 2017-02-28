@@ -15,13 +15,14 @@ namespace Core.Common.UI
 {
     public abstract class BaseViewModel<TViewModel> : ReactiveObject, IViewModel
     {
-        public ISystemSource Source => new Source(Guid.NewGuid(), "ViewModel:" + typeof(TViewModel).GetFriendlyName(),new SourceType(typeof(BaseViewModel<TViewModel>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public ISystemSource Source { get; }
 
         public BaseViewModel(){}
 
         protected BaseViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
+            Source = new Source(Guid.NewGuid(), "ViewModel:" + typeof(TViewModel).GetFriendlyName(), new SourceType(typeof(BaseViewModel<TViewModel>)),process,process.MachineInfo);
             Process = process;
             EventSubscriptions = eventSubscriptions;
             EventPublications = eventPublications;

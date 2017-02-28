@@ -24,13 +24,13 @@ namespace RevolutionData
             {
                 if (Application.Current == null)
                 {
-                    s.BodyViewModels.Add(e.ViewModel);
+                    s.ScreenModel.Value = e.ViewModel;
                 }
                 else
                 {
                     Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        s.BodyViewModels.Add(e.ViewModel);
+                        s.ScreenModel.Value = e.ViewModel;
                     }));
                 }
             })
@@ -39,12 +39,12 @@ namespace RevolutionData
             {
                 new ViewEventPublication<IMainWindowViewModel, IViewModelLoaded<IMainWindowViewModel, IScreenModel>>(
                     key:"ScreenModelinViewModel",
-                    subject: v => v.BodyViewModels.CollectionChanges,
+                    subject: v => v.ScreenModel,
                     subjectPredicate: new List<Func<IMainWindowViewModel, bool>>
                     {
-                        v => v.BodyViewModels.LastOrDefault() != null
+                        v => v.ScreenModel.Value != null
                     },
-                    messageData: s => new ViewEventPublicationParameter(new object[] {s, s.BodyViewModels.Last()},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded), s.Process, s.Source ))
+                    messageData: s => new ViewEventPublicationParameter(new object[] {s, s.ScreenModel.Value},new StateEventInfo(s.Process.Id, Context.ViewModel.Events.ViewModelLoaded), s.Process, s.Source ))
             }, 
             new List<IViewModelEventCommand<IViewModel, IEvent>>(),
             typeof(IMainWindowViewModel),

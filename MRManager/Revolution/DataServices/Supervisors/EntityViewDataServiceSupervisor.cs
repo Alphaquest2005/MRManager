@@ -20,10 +20,10 @@ using ViewMessages;
 
 namespace DataServices.Actors
 {
-    public class EntityViewDataServiceSupervisor<TEntityView> : ReceiveActor, IProcessSource where TEntityView : IEntityView
+    public class EntityViewDataServiceSupervisor<TEntityView> : BaseSupervisor<EntityViewDataServiceSupervisor<TEntityView>> where TEntityView : IEntityView
         //where TEntity : class, IEntity where TEntityView:IEntityView<TEntity>
     {
-        public ISystemSource Source => new Source(Guid.NewGuid(), $"EntityViewSupervisor:<{typeof(TEntityView).GetFriendlyName()}>",new SourceType(typeof(EntityViewDataServiceSupervisor<TEntityView>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+       // public ISystemSource Source => new Source(Guid.NewGuid(), $"EntityViewSupervisor:<{typeof(TEntityView).GetFriendlyName()}>",new SourceType(typeof(EntityViewDataServiceSupervisor<TEntityView>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
         private static readonly Action<IGetEntityViewById<TEntityView>> GetEntityByIdAction = (x) => x.GetEntity();
         private static readonly Action<IGetEntityFromPatientResponse<TEntityView>> GetEntityFromPatientResponseAction = (x) => x.GetEntityFromPatientResponse();
@@ -50,7 +50,7 @@ namespace DataServices.Actors
 
             };
         private IUntypedActorContext ctx = null;
-        public EntityViewDataServiceSupervisor(ISystemProcess process, IProcessSystemMessage msg)
+        public EntityViewDataServiceSupervisor(ISystemProcess process, IProcessSystemMessage msg):base(process)
         {
             try
             {

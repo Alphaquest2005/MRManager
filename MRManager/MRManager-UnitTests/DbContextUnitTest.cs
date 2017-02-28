@@ -26,9 +26,9 @@ namespace MRManager_UnitTests
 
         protected ISystemSource Source
             =>
-                new Source(Guid.NewGuid(), typeof(DbContextUnitTest).GetFriendlyName(), new SourceType(typeof(DbContextUnitTest)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+                new Source(Guid.NewGuid(), typeof(DbContextUnitTest).GetFriendlyName(), new SourceType(typeof(DbContextUnitTest)), new SystemProcess(new Process(1, 0, "Starting System", "Prepare system for Intial Use", "", new Agent("System")), new MachineInfo(Environment.MachineName, Environment.ProcessorCount)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
-       static IEntityCreated<IPersons> createdPerson;
+        static IEntityCreated<IPersons> createdPerson;
 
         [TestMethod]
         public void EntityViewGetEntityById()

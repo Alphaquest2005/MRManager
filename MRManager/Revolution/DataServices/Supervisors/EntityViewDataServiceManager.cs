@@ -25,7 +25,7 @@ namespace DataServices.Actors
     public class EntityViewDataServiceManager : BaseSupervisor<EntityViewDataServiceManager>
     {
         private IUntypedActorContext ctx = null;
-        public EntityViewDataServiceManager()
+        public EntityViewDataServiceManager(ISystemProcess process) : base(process)
         {
             //Hack:for some fuckup reason context is lost
             ctx = Context;

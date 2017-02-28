@@ -52,13 +52,6 @@ namespace ViewModels
         }
 
 
-        public ObservableCollection<IViewModel> HeaderViewModels { get; } = new ObservableCollection<IViewModel>();
-        public ObservableCollection<IViewModel> LeftViewModels { get; } = new ObservableCollection<IViewModel>();
-        public ObservableCollection<IViewModel> RightViewModels { get; } = new ObservableCollection<IViewModel>();
-        public ObservableCollection<IViewModel> FooterViewModels { get; } = new ObservableCollection<IViewModel>();
-        public ObservableCollection<IViewModel> BodyViewModels { get; } = new ObservableCollection<IViewModel>();
-        public ObservableCollection<IViewModel> CacheViewModels { get; } = new ObservableCollection<IViewModel>();
-
         public ReactiveProperty<IScreenModel> ScreenModel { get; } = new ReactiveProperty<IScreenModel>(); 
 
         

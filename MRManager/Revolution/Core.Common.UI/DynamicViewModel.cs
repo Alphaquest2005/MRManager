@@ -21,7 +21,7 @@ namespace Core.Common.UI
     {
         public DynamicViewModel(){}
 
-        public ISystemSource Source => new Source(Guid.NewGuid(), "DynamicViewModel:" + typeof(TViewModel).GetFriendlyName(),new SourceType(typeof(DynamicViewModel<TViewModel>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public ISystemSource Source { get; }
         public TViewModel ViewModel { get; }
 
         protected static DynamicViewModel<TViewModel> _instance = null;
@@ -31,7 +31,7 @@ namespace Core.Common.UI
             ViewInfo = viewModel.ViewInfo;
             Contract.Requires(viewModel != null);
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
-            
+            Source = new Source(Guid.NewGuid(), "DynamicViewModel:" + typeof(TViewModel).GetFriendlyName(), new SourceType(typeof(DynamicViewModel<TViewModel>)),viewModel.Process,viewModel.Process.MachineInfo);
             CommandInfo = viewModel.CommandInfo;
             Commands = viewModel.Commands;
             EventPublications = viewModel.EventPublications;

@@ -18,7 +18,7 @@ namespace EventAggregator
         public IObservable<TEvent> GetEvent<TEvent>(ISource caller) where TEvent : IProcessSystemMessage
         {
             Contract.Requires(caller != null);
-            Logger.Log( LoggingLevel.Info ,$"Caller:{caller.SourceName} | GetEvent : {typeof(TEvent).Name}");
+            Logger.Log( LoggingLevel.Info ,$"Caller:{caller.SourceName} | GetEvent : {typeof(TEvent).Name}|| ProcessId-{caller.Process?.Id}");
             return ea.GetEvent<TEvent>();
         }
 
@@ -26,7 +26,7 @@ namespace EventAggregator
         public void Publish<TEvent>(TEvent sampleEvent, ISource sender) where TEvent : IProcessSystemMessage
         {
             Contract.Requires(sender != null || sampleEvent != null);
-            Logger.Log(LoggingLevel.Info, $"Sender:{sender.SourceName} | PublishEvent : {typeof(TEvent).Name}| ProcessInfo:{sampleEvent?.ProcessInfo?.State?.Status}");
+            Logger.Log(LoggingLevel.Info, $"Sender:{sender.SourceName} | PublishEvent : {typeof(TEvent).Name}| ProcessInfo:Status-{sampleEvent?.ProcessInfo?.State?.Status}|| ProcessId-{sampleEvent?.Process.Id}");
             ea.Publish(sampleEvent);
         }
     }

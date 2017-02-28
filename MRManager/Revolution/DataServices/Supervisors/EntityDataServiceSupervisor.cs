@@ -50,7 +50,7 @@ namespace DataServices.Actors
 
             };
         private IUntypedActorContext ctx = null;
-        public EntityDataServiceSupervisor(ISystemProcess process, IProcessSystemMessage msg)
+        public EntityDataServiceSupervisor(ISystemProcess process, IProcessSystemMessage msg) : base(process)
         {
             ctx = Context;
             foreach (var itm in entityEvents)

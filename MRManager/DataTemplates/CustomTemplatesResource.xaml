@@ -40,5 +40,7 @@
         <ResourceDictionary Source="Custom/SummaryPatientVisitInfoDT.xaml" />
         <ResourceDictionary Source="Custom/SummaryPatientSyntomInfoDT.xaml" />
         <ResourceDictionary Source="Custom/SummaryInterviewInfoDT.xaml" />
+
+        <ResourceDictionary Source="Custom/ScreenDT.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

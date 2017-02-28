@@ -23,7 +23,7 @@ namespace DataServices.Actors
     public class EntityDataServiceManager : BaseSupervisor<EntityDataServiceManager>
     {
         private IUntypedActorContext ctx = null;
-        public EntityDataServiceManager()
+        public EntityDataServiceManager(ISystemProcess process) : base(process)
         {
             ctx = Context;
             EventMessageBus.Current.GetEvent<IProcessSystemMessage>(Source).Where(x => x is IEntityRequest).Subscribe(x => handleEntityRequest((IEntityRequest)x));

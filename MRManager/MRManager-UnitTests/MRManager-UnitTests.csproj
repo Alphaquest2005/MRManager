@@ -251,10 +251,6 @@
       <Project>{db1e7bd6-7fe0-4cdd-8b6d-edbb0d156b41}</Project>
       <Name>ViewModels</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Views\Views.csproj">
-      <Project>{879c9901-cb5c-407a-8655-e3c3632c1d7b}</Project>
-      <Name>Views</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

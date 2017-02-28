@@ -15,58 +15,58 @@ using ViewModels;
 
 namespace Views
 {
-	public partial class Screen
-	{
-        public ISystemSource Source => new Source(Guid.NewGuid(), $"View:{typeof(Screen)}>",new SourceType(typeof(Screen)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+    public partial class Screen
+    {
+        //public ISystemSource Source => new Source(Guid.NewGuid(), $"View:{typeof(Screen)}>",new SourceType(typeof(Screen)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         public Screen()
-		{
-            
-			try
-			{
+        {
+
+            try
+            {
                 // Required to initialize variables
-                InitializeComponent();
-				AppSlider.Slider = this.slider;
-                //TODO: Figure out the proper way to bind and get this out xaml is not a source
-                
-                EventMessageBus.Current.GetEvent<IViewModelCreated<IScreenModel>>(Source).Subscribe(x =>
-                {
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        this.DataContext = x.ViewModel;
-                        x.ViewModel.Slider = this.slider;
-                    });
-                });
+                //InitializeComponent();
+                //AppSlider.Slider = this.slider;
+                ////TODO: Figure out the proper way to bind and get this out xaml is not a source
 
-			    
+                //EventMessageBus.Current.GetEvent<IViewModelCreated<IScreenModel>>(Source).Subscribe(x =>
+                //{
+                //    Application.Current.Dispatcher.Invoke(() =>
+                //    {
+                //        this.DataContext = x.ViewModel;
+                //        x.ViewModel.Slider = this.slider;
+                //    });
+                //});
 
 
-			}
-			catch (Exception)
-			{
-				throw;
-			}
-		}
 
-		
 
-		private void BringIntoView(object sender, MouseEventArgs e)
-		{
-			BringIntoView(sender);
-		}
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
-		private static void BringIntoView(object sender)
-		{
-			if (typeof(Expander).IsInstanceOfType(sender))
-			{
-				AppSlider.Slider.BringIntoView(((FrameworkElement)sender) as Expander);
-			}
-			else
-			{
-				Expander p = ((FrameworkElement)sender).Parent as Expander;
-				//  p.IsExpanded = true;
-				p.UpdateLayout();
-				AppSlider.Slider.BringIntoView(p);
-			}
-		}
-	}
+
+
+        private void BringIntoView(object sender, MouseEventArgs e)
+        {
+            BringIntoView(sender);
+        }
+
+        private static void BringIntoView(object sender)
+        {
+            if (typeof(Expander).IsInstanceOfType(sender))
+            {
+                AppSlider.Slider.BringIntoView(((FrameworkElement)sender) as Expander);
+            }
+            else
+            {
+                Expander p = ((FrameworkElement)sender).Parent as Expander;
+                //  p.IsExpanded = true;
+                p.UpdateLayout();
+                AppSlider.Slider.BringIntoView(p);
+            }
+        }
+    }
 }

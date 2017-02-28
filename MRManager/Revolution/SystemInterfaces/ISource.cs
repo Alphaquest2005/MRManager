@@ -9,6 +9,7 @@ namespace SystemInterfaces
         Guid SourceId { get; }
         string SourceName { get; } 
         ISourceType SourceType { get; }
+        ISystemProcess Process { get; }
     }
     
     public interface ISourceType

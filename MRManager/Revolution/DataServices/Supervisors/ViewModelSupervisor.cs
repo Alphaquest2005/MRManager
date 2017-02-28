@@ -22,7 +22,7 @@ namespace DataServices.Actors
         
         private IUntypedActorContext ctx = null;
 
-        public ViewModelSupervisor(ISystemProcess process, ISystemStarted firstMsg)
+        public ViewModelSupervisor(ISystemProcess process, ISystemStarted firstMsg) : base(process)
         {
             ctx = Context;
             Task.Run(() =>
