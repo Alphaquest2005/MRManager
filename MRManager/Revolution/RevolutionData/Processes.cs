@@ -36,7 +36,7 @@ namespace RevolutionData
                 "100",
                 1, new List<IProcessExpectedEvent>
                 {
-                    new ProcessExpectedEvent ("ProcessServiceStarted", 1, typeof (IServiceStarted<IProcessService>), e => e != null, new StateEventInfo(1, Context.Actor.Events.ActorStarted), new SourceType(typeof(IProcessService))),
+                    new ProcessExpectedEvent ("ServiceManagerStarted", 1, typeof (IServiceStarted<IServiceManager>), e => e != null, new StateEventInfo(1, Context.Actor.Events.ActorStarted), new SourceType(typeof(IServiceManager))),
                     
                 },
                 typeof(ISystemProcessStarted),

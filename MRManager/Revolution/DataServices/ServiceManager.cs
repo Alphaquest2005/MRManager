@@ -52,20 +52,26 @@ namespace DataServices.Actors
                 
 
                 EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source).Where(x => x.Process.Id == 1)//only start up process
-                    .Subscribe(x =>
+                    .Subscribe(async x =>
                     {
                         var child = Context.Child("ViewModelSupervisor");
                         if (!Equals(child, ActorRefs.Nobody)) return;
 
-                        Task.Run(() => ctx.ActorOf(Props.Create<ViewModelSupervisor>(systemProcess, systemStartedMsg),"ViewModelSupervisor"));
+                       await Task.Run(() =>ctx.ActorOf(Props.Create<ViewModelSupervisor>(systemProcess, systemStartedMsg),"ViewModelSupervisor")).ConfigureAwait(false);
+                       
+                        await Task.Run(() => ctx.ActorOf(Props.Create<EntityDataServiceManager>(), "EntityDataServiceManager")).ConfigureAwait(false);
+                        await Task.Run(() =>ctx.ActorOf(Props.Create<EntityViewDataServiceManager>(), "EntityViewDataServiceManager")).ConfigureAwait(false);
 
-                        EventMessageBus.Current.Publish(new ServiceStarted<IServiceManager>(this,new StateEventInfo(systemProcess.Id, RevolutionData.Context.Actor.Events.ActorStarted), systemProcess,Source), Source);
-                        
+
+                        EventMessageBus.Current.Publish(
+                            new ServiceStarted<IServiceManager>(this,
+                                new StateEventInfo(systemProcess.Id, RevolutionData.Context.Actor.Events.ActorStarted),
+                                systemProcess, Source), Source);
+
                     });
 
-                Task.Run(() => ctx.ActorOf(Props.Create<ProcessSupervisor>(autoRun,systemStartedMsg), "ProcessSupervisor"));
-                Task.Run(() => ctx.ActorOf(Props.Create<EntityDataServiceManager>(), "EntityDataServiceManager"));
-                Task.Run(() => ctx.ActorOf(Props.Create<EntityViewDataServiceManager>(), "EntityViewDataServiceManager"));
+                Task.Run(() =>ctx.ActorOf(Props.Create<ProcessSupervisor>(autoRun, systemStartedMsg),"ProcessSupervisor")).ConfigureAwait(false);
+                
 
 
             }
