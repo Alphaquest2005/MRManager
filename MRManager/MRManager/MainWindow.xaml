@@ -4,7 +4,6 @@
         xmlns:automodels="clr-namespace:ViewModels;assembly=ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:Views;assembly=Views"
         Title="MainWindow"
         Width="3000"
         Height="3000"

@@ -29,7 +29,7 @@
 
         <DockPanel x:Name="LayoutRoot"
                    Width="2000"
-                   Height="800"
+                   Height="950"
                    Margin="0,-90,0,50"
                    Background="{x:Null}"
                    DataContext="{Binding}"
@@ -114,6 +114,7 @@
                 <ui:SliderPanel x:Name="slider"
                                 Width="10000"
                                 Margin="0,0,0,0"
+                                ui:ExposeControl.As="{Binding Slider}"
                                 Background="#00B76767"
                                 Focusable="True"
                                 Orientation="Horizontal">

@@ -21,6 +21,8 @@ namespace ViewModels
     [Export(typeof(IScreenModel))]
     public partial class ScreenModel : BaseViewModel<ScreenModel>, IScreenModel
     {
+        private dynamic _slider;
+
         [ImportingConstructor]
 	    public ScreenModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(process,viewInfo, eventSubscriptions, eventPublications,commandInfo, orientation)
         {
@@ -35,12 +37,15 @@ namespace ViewModels
         public ObservableCollection<IViewModel> FooterViewModels { get; } = new ObservableCollection<IViewModel>();
         public ObservableCollection<IViewModel> CacheViewModels { get; } = new ObservableCollection<IViewModel>();
 
-        public dynamic Slider { get; set; }
-
-
-
-
-
+        public dynamic Slider
+        {
+            get { return _slider; }
+            set
+            {
+                _slider = value;
+                AppSlider.Slider = _slider;
+            }
+        }
     }
 
    
