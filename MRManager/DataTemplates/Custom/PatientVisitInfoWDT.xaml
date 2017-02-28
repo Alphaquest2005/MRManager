@@ -60,7 +60,6 @@
                         FontSize="16"
                         SelectedDate="{Binding DateOfVisit,
                                                Mode=TwoWay,
-                                               FallbackValue={x:Static sys:DateTime.Now},
                                                StringFormat=D,
                                                UpdateSourceTrigger=PropertyChanged}" />
 

@@ -11,7 +11,7 @@ namespace EF.Entities
     public class PatientVisitInfo : EntityView<IPatientVisit>, IPatientVisitInfo
     {
         public int PatientId { get; set; }
-        public DateTime DateOfVisit { get; set; }
+        public DateTime DateOfVisit { get; set; } = DateTime.Today;
         public string AttendingDoctor { get; set; }
         public int DoctorId { get; set; }
         public IList<IPatientSyntomInfo> PatientSyntoms { get; set; }

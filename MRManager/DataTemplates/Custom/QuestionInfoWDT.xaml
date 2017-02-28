@@ -20,7 +20,7 @@
             </Grid.Background>
             <TextBox Width="404"
                      Height="42"
-                     Margin="54,10,0,0"
+                     Margin="66,9,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      FontSize="18.667"
@@ -29,9 +29,9 @@
                                     TargetNullValue=Description,
                                     Mode=TwoWay,
                                     UpdateSourceTrigger=LostFocus}" />
-            <TextBox Width="118"
+            <TextBox Width="183"
                      Height="27"
-                     Margin="54,75,0,0"
+                     Margin="66,74,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      FontSize="16"
@@ -40,9 +40,9 @@
                                     TargetNullValue=Entity,
                                     Mode=TwoWay,
                                     UpdateSourceTrigger=LostFocus}" />
-            <TextBox Width="158"
+            <TextBox Width="216"
                      Height="27"
-                     Margin="177,75,0,0"
+                     Margin="254,74,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      FontSize="16"
@@ -51,9 +51,9 @@
                                     TargetNullValue=Attribute,
                                     Mode=TwoWay,
                                     UpdateSourceTrigger=LostFocus}" />
-            <TextBlock Width="39"
+            <TextBox Width="39"
                        Height="43"
-                       Margin="10,10,0,0"
+                       Margin="10,31,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="18.667"
@@ -62,25 +62,16 @@
                                       TargetNullValue=QuestionNumber,
                                       Mode=TwoWay,
                                       UpdateSourceTrigger=PropertyChanged}" />
-            <!--  TODO:convert this to database list  -->
-           
-            <TextBlock Width="118"
+            <TextBlock Width="216"
                        Height="22"
-                       Margin="340,53,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Text="Type"
-                       TextWrapping="Wrap" />
-            <TextBlock Width="158"
-                       Height="22"
-                       Margin="177,52,0,0"
+                       Margin="254,51,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Text="Attribute"
                        TextWrapping="Wrap" />
-            <TextBlock Width="118"
+            <TextBlock Width="183"
                        Height="22"
-                       Margin="54,53,0,0"
+                       Margin="66,52,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Text="Entity"

@@ -134,7 +134,7 @@ namespace EFRepository
                             }).ToList();
                    var res = entities.Select(x => new TDbView() {Id = x.Id}.ApplyChanges(x.Changes)).ToList();
 
-                    EventMessageBus.Current.Publish(new EntityViewSetWithChangesLoaded<TView>(res.Select(x => (TView)(object)x).ToList(), msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
+                    EventMessageBus.Current.Publish(new EntityViewSetWithChangesLoaded<TView>(res.OrderByDescending(x => x.Id).Select(x => (TView)(object)x).ToList(), msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
                 }
             }
             catch (Exception ex)
@@ -221,8 +221,8 @@ namespace EFRepository
                     whereStr = whereStr.TrimEnd('&');
                     IQueryable<TDbView> res;
                     res = string.IsNullOrEmpty(whereStr) 
-                        ? ctx.Set<TDbEntity>().AsNoTracking().Select(exp)
-                        : ctx.Set<TDbEntity>().AsNoTracking().Select(exp).Where(whereStr);
+                        ? ctx.Set<TDbEntity>().OrderByDescending(x => x.Id).AsNoTracking().Select(exp)
+                        : ctx.Set<TDbEntity>().OrderByDescending(x => x.Id).AsNoTracking().Select(exp).Where(whereStr);
                     
 
                     EventMessageBus.Current.Publish(new EntityViewSetWithChangesLoaded<TView>(res.Select(x => (TView)(object)x).ToList(), msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);

@@ -32,8 +32,8 @@ namespace ViewModels
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             this.WireEvents();
             
-            Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => OnPropertyChanged(nameof(EntitySet)));
-            this.WhenAnyValue(x => x.CurrentPatientVisit.Value).Subscribe(x => insertNewRow());
+            Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => insertNewRow());
+            //this.WhenAnyValue(x => x.CurrentPatientVisit.Value).Subscribe(x => );
 
         }
 
@@ -45,11 +45,11 @@ namespace ViewModels
                      CurrentPatientVisit.Value?.DateOfVisit.Date == DateTime.Today.Date))
                 {
                 
-                this.ViewModel.EntitySet.Add(new PatientSyntomInfo() {SyntomName = "Create New..."});
-                    OnPropertyChanged(nameof(EntitySet));
+                    this.ViewModel.EntitySet.Add(new PatientSyntomInfo() {SyntomName = "Create New..."});
+                    
                 }
 
-
+                OnPropertyChanged(nameof(EntitySet));
         }
 
        

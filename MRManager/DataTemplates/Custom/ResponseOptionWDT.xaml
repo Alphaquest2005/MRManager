@@ -5,6 +5,7 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
                     mc:Ignorable="d">
 
     <DataTemplate x:Key="ResponseOptionWDT">
@@ -52,7 +53,7 @@
                                     TargetNullValue=Description,
                                     UpdateSourceTrigger=LostFocus,
                                     ValidatesOnDataErrors=True}" />
-            <Grid Margin="0,41,0,0" Visibility="{Binding Path=QuestionResponseTypeId, Source={x:Static viewModels:QuestionaireViewModel.Instance}, Converter={StaticResource StringVisibilityConverter}, ConverterParameter='1'}">
+            <Grid Margin="0,41,0,0" Width="450" Visibility="{Binding Path=QuestionResponseTypeId, Source={x:Static viewModels:QuestionaireViewModel.Instance}, Converter={StaticResource StringVisibilityConverter}, ConverterParameter='1'}">
                 <TextBox Width="303"
                          Height="24"
                          MinWidth="75"
@@ -88,7 +89,7 @@
                 </Rectangle>
 
             </Grid>
-            <Grid Margin="0,41,0,0"
+            <Grid Margin="0,41,0,0" Width="450"
                   d:IsHidden="true"
                   Visibility="{Binding Path=QuestionResponseTypeId,
                                        Source={x:Static viewModels:QuestionaireViewModel.Instance},
@@ -114,7 +115,7 @@
 
 
             </Grid>
-            <Grid Margin="0,41,0,0"
+            <Grid Margin="0,41,0,0" Width="450"
                   d:IsHidden="True"
                   Visibility="{Binding Path=QuestionResponseTypeId,
                                        Source={x:Static viewModels:QuestionaireViewModel.Instance},
@@ -127,6 +128,8 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             SelectedDate="{Binding Path=Value,
+                                                    FallbackValue={x:Static system:DateTime.Now},
+                                                    TargetNullValue={x:Static system:DateTime.Now},
                                                    Converter={StaticResource StringDateConverter},
                                                    UpdateSourceTrigger=PropertyChanged,
                                                    ValidatesOnDataErrors=True}" />

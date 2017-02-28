@@ -184,9 +184,9 @@ namespace EFRepository
                     loggerFactory.AddProvider(new MyLoggerProvider());
 
                     IQueryable<TDBEntity> rres = ctx.Set<TDBEntity>().AsNoTracking();
-                    var res = rres.Select(x => (TEntity)(object)x).ToList(); //;
+                    var res = rres.OrderByDescending(x => x.Id).Select(x => (TEntity)(object)x).ToList(); //;
 
-                    EventMessageBus.Current.Publish(new EntitySetLoaded<TEntity>(res,new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntitySetLoaded), msg.Process, Source), Source);
+                    EventMessageBus.Current.Publish(new EntitySetLoaded<TEntity>(res, new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntitySetLoaded), msg.Process, Source), Source);
                 }
 
             }
@@ -215,7 +215,7 @@ namespace EFRepository
                     rres = rfilter?.Aggregate(rres, (current, s) => current.Where(s));
 
 
-                    var res = rres.Select(x => (TEntity)(object)x).ToList();
+                    var res = rres.OrderByDescending(x => x.Id).Select(x => (TEntity)(object)x).ToList();
                     EventMessageBus.Current.Publish(new EntitySetWithFilterLoaded<TEntity>(res, new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntitySetLoaded), msg.Process, Source), Source);
                 }
 
@@ -246,7 +246,7 @@ namespace EFRepository
 
                     rres = rfilter?.Aggregate(rres, (current, s) => current.Where(s));
 
-                    var res = rres.Select(x => (TEntity)(object)x).ToList();
+                    var res = rres.OrderByDescending(x => x.Id).Select(x => (TEntity)(object)x).ToList();
                     EventMessageBus.Current.Publish(new EntitySetWithFilterWithIncludesLoaded<TEntity>(res, msg.Includes, new StateEventInfo(msg.Process.Id, RevolutionData.Context.Entity.Events.EntitySetLoaded), msg.Process, Source), Source);
                 }
 
