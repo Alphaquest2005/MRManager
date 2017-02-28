@@ -25,7 +25,7 @@
 
         <Grid x:Name="LayoutRoot" Background="#4C0E0475">
             <Viewbox Margin="0,125,0,0"
-                    Stretch="Uniform" MinWidth="2000" MinHeight="2000" StretchDirection="Both">
+                    Stretch="Uniform"  StretchDirection="Both">
                 
                 <ContentControl  Content="{Binding ScreenModel.Value, Source={StaticResource MainWindowViewModelDataSource}, UpdateSourceTrigger=PropertyChanged}"/>
             </Viewbox>
