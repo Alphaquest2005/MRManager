@@ -25,9 +25,9 @@
 
         <Grid x:Name="LayoutRoot" Background="#4C0E0475">
             <Viewbox Margin="0,125,0,0"
-                    Stretch="Uniform" StretchDirection="Both">
+                    Stretch="Uniform" MinWidth="2000" MinHeight="2000" StretchDirection="Both">
                 
-                <ContentControl Content="{Binding ScreenModel.Value, Source={StaticResource MainWindowViewModelDataSource}, UpdateSourceTrigger=PropertyChanged}"/>
+                <ContentControl  Content="{Binding ScreenModel.Value, Source={StaticResource MainWindowViewModelDataSource}, UpdateSourceTrigger=PropertyChanged}"/>
             </Viewbox>
             <TextBlock x:Name="BackBtn"
                     Width="70"
