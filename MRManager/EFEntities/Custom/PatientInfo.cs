@@ -14,7 +14,7 @@ namespace EF.Entities
         public string Name { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
-        public int? Age { get; set; }
+        public int? Age => DateTime.Now.Year - BirthDate.Year;
         public string Sex { get; set; }
         public string BirthCountry { get; set; }
         public string Email { get; set; }

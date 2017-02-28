@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reactive.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using SystemInterfaces;
 using Actor.Interfaces;
 using Akka.Actor;
@@ -29,9 +30,7 @@ namespace DataServices.Actors
     public class ServiceManager : ReceiveActor, IServiceManager
     {
 
-        public ISystemSource Source
-            =>
-                new Source(Guid.NewGuid(),"ServiceManager", new SourceType(typeof(IServiceManager)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public ISystemSource Source => new Source(Guid.NewGuid(),"ServiceManager", new SourceType(typeof(IServiceManager)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
         
 
@@ -40,7 +39,7 @@ namespace DataServices.Actors
         {
             try
             {
-                
+                var ctx = Context;
                 var machineInfo =
                     MachineInfoData.MachineInfos.FirstOrDefault(
                         x => x.MachineName == Environment.MachineName && x.Processors == Environment.ProcessorCount);
@@ -58,25 +57,15 @@ namespace DataServices.Actors
                         var child = Context.Child("ViewModelSupervisor");
                         if (!Equals(child, ActorRefs.Nobody)) return;
 
-
-
-                        var viewsup = Context.ActorOf(Props.Create<ViewModelSupervisor>(systemProcess),
-                            "ViewModelSupervisor");
-
-                        EventMessageBus.Current.GetEvent<IServiceStarted<IViewModelSupervisor>>(Source)
-                            .Subscribe(q =>
-                            {
-                                viewsup.Tell(systemStartedMsg);
-                            });
-                            
+                        Task.Run(() => ctx.ActorOf(Props.Create<ViewModelSupervisor>(systemProcess, systemStartedMsg),"ViewModelSupervisor"));
 
                         EventMessageBus.Current.Publish(new ServiceStarted<IServiceManager>(this,new StateEventInfo(systemProcess.Id, RevolutionData.Context.Actor.Events.ActorStarted), systemProcess,Source), Source);
                         
                     });
 
-                Context.ActorOf(Props.Create<ProcessSupervisor>(autoRun), "ProcessSupervisor").Tell(systemStartedMsg);
-                Context.ActorOf(Props.Create<EntityDataServiceManager>(), "EntityDataServiceManager").Tell(systemStartedMsg);
-                Context.ActorOf(Props.Create<EntityViewDataServiceManager>(), "EntityViewDataServiceManager").Tell(systemStartedMsg);
+                Task.Run(() => ctx.ActorOf(Props.Create<ProcessSupervisor>(autoRun,systemStartedMsg), "ProcessSupervisor"));
+                Task.Run(() => ctx.ActorOf(Props.Create<EntityDataServiceManager>(), "EntityDataServiceManager"));
+                Task.Run(() => ctx.ActorOf(Props.Create<EntityViewDataServiceManager>(), "EntityViewDataServiceManager"));
 
 
             }

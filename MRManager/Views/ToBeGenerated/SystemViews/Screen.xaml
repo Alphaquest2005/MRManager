@@ -170,15 +170,17 @@
                                 </Expander.Header>
                                 <Grid>
                                     <TextBlock Width="271"
-                       Height="28"
-                       Margin="4,5,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="20"
-                       Style="{DynamicResource TextButtonStyle}"
-                       Text="{Binding ViewInfo.Description}"
-                       TextWrapping="Wrap" />
-                                    <ContentPresenter Content="{TemplateBinding Content}" Focusable="True" Margin="0,38,0,0" />
+                                               Height="28"
+                                               Margin="4,5,0,0"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Top"
+                                               FontSize="20"
+                                               Style="{DynamicResource TextButtonStyle}"
+                                               Text="{Binding ViewInfo.Description}"
+                                               TextWrapping="Wrap" />
+                                    <ContentPresenter Margin="0,38,0,0"
+                                                      Content="{TemplateBinding Content}"
+                                                      Focusable="True" />
                                 </Grid>
 
                             </Expander>

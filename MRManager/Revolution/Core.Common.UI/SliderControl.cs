@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using RevolutionLogger;
+
 
 namespace Core.Common.UI
 {
@@ -381,7 +383,7 @@ namespace Core.Common.UI
                     var sl = slidcontents.TransformToAncestor(slid.Parent as Visual).Transform(new Point(0, 0)).X * -1;
                     if (sl * -1 > (sp.ActualWidth - exp.ActualWidth) && sp.ActualWidth > exp.ActualWidth)
                     {
-                        slid.MoveControls(sl + sp.ActualWidth - exp.ActualWidth - (NavPadding));
+                         slid.MoveControls(sl + sp.ActualWidth - exp.ActualWidth - (NavPadding));
                     }
                     if (sl * -1 < 0 || sp.ActualWidth < exp.ActualWidth)
                     {

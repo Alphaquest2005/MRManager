@@ -28,6 +28,7 @@ namespace Common
         public static void ApplyChanges<T>(this T entity, KeyValuePair<string, dynamic> change) //where T : IEntityId
         {
             var prop = entity.GetType().GetProperty(change.Key.Replace(" ",""));
+            if (prop == null) return;
             if (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof (Nullable<>))
             {
                 prop?.SetValue(entity, NullableExtensions.ToNullable(change.Value, prop.PropertyType));

@@ -284,17 +284,7 @@ namespace Entity.Expressions
                                     x2.Questions.EntityAttributes.Attribute == nameof(IPatientInfo.Name))
                             .SelectMany(x4 => x4.Response)
                             .Select(x5 => x5.Value).FirstOrDefault(),
-                Age =
-                    DateTime.Now.Year -
-                    Convert.ToDateTime(
-                        x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                            .Where(
-                                x2 =>
-                                    x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                                    x2.Questions.EntityAttributes.Attribute == nameof(IPatientInfo.BirthDate))
-                            .SelectMany(x4 => x4.Response)
-                            .Select(x5 => x5.Value)
-                            .FirstOrDefault()).Year,
+               
                 BirthDate = 
                     Convert.ToDateTime(
                         x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)

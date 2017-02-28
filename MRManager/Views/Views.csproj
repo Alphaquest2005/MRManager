@@ -64,18 +64,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ToBeGenerated\Model\AddressCitiesListView.xaml.cs">
-      <DependentUpon>AddressCitiesListView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ToBeGenerated\Summary\SummaryListView_AutoGen.xaml.cs">
-      <DependentUpon>SummaryListView_AutoGen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ToBeGenerated\Summary\SummaryViewDetails_AutoGen.xaml.cs">
-      <DependentUpon>SummaryViewDetails_AutoGen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ToBeGenerated\Summary\SummaryView_AutoGen.xaml.cs">
-      <DependentUpon>SummaryView_AutoGen.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -161,22 +149,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ToBeGenerated\Model\AddressCitiesListView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ToBeGenerated\Summary\SummaryListView_AutoGen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ToBeGenerated\Summary\SummaryViewDetails_AutoGen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ToBeGenerated\Summary\SummaryView_AutoGen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="ToBeGenerated\SystemViews\Screen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

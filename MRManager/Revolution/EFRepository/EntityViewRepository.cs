@@ -71,7 +71,7 @@ namespace EFRepository
                 {
                     var props = typeof(TView).GetProperties().ToList();
                     var res =
-                        ctx.PatientResponses.Where(x => x.PatientVisit.PatientId == msg.PatientId)
+                        ctx.PatientResponses.OrderByDescending(x3 => x3.PatientVisitId).Where(x => x.PatientVisit.PatientId == msg.PatientId)
                             .Where(x => x.Questions.EntityAttributes.Entity == msg.EntityName)
                             .SelectMany(x => x.Response).Where(z => z.Value != null && props.Any(q => q.Name.Replace(" ", "") == z.ResponseOptions.Description.Replace(" ", "")))
                             .GroupBy(x => x.ResponseOptions.Description)
@@ -104,7 +104,7 @@ namespace EFRepository
                     whereStr = whereStr.TrimEnd('&');
                     
                     var entities = string.IsNullOrEmpty(whereStr)
-                        ? ctx.PatientResponses
+                        ? ctx.PatientResponses.OrderByDescending(x3 => x3.PatientVisitId)
                             .Where(
                                 x =>
                                     x.Questions.EntityAttributes.Entity == msg.EntityName &&

@@ -28,13 +28,12 @@ namespace DataServices.Actors
 
         //TODO: Track Actor Shutdown instead of just broadcast
 
-        public ProcessSupervisor(bool autoRun)
+        public ProcessSupervisor(bool autoRun, ISystemStarted firstMsg)
         {
-          ctx = Context;
-            
-        EventMessageBus.Current.GetEvent<IStartSystemProcess>(Source).Where(x => autoRun && x.ProcessToBeStartedId == Processes.NullProcess).Subscribe(x => StartParentProcess(x.Process.Id, x.User));
+            ctx = Context;
+            EventMessageBus.Current.GetEvent<IStartSystemProcess>(Source).Where(x => autoRun && x.ProcessToBeStartedId == Processes.NullProcess).Subscribe(x => StartParentProcess(x.Process.Id, x.User));
             EventMessageBus.Current.GetEvent<IStartSystemProcess>(Source).Where(x => !autoRun && x.ProcessToBeStartedId != Processes.NullProcess).Subscribe(x => StartProcess(x.ProcessToBeStartedId,x.User));
-           Receive<ISystemStarted>(x => StartProcess(x.Process.Id,x.User ));
+            StartProcess(firstMsg.Process.Id,firstMsg.User);
         }
 
      

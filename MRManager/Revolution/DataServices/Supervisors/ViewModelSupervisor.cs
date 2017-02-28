@@ -22,7 +22,7 @@ namespace DataServices.Actors
         
         private IUntypedActorContext ctx = null;
 
-        public ViewModelSupervisor(ISystemProcess process)
+        public ViewModelSupervisor(ISystemProcess process, ISystemStarted firstMsg)
         {
             ctx = Context;
             Task.Run(() =>
@@ -37,14 +37,12 @@ namespace DataServices.Actors
 
             EventMessageBus.Current.GetEvent<ISystemProcessStarted>(Source).Subscribe(x => HandleProcessViews(x));
             
-            Receive<ISystemStarted>(x => HandleProcessViews(x));
-
             EventMessageBus.Current.GetEvent<IServiceStarted<IViewModelService>>(Source).Subscribe(x =>
             {
                 EventMessageBus.Current.Publish(new ServiceStarted<IViewModelSupervisor>(this,new StateEventInfo(process.Id, RevolutionData.Context.Actor.Events.ActorStarted), process, Source), Source);
             });
 
-             
+            HandleProcessViews(firstMsg);
         }
 
        
