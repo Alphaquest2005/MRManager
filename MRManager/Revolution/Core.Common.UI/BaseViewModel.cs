@@ -46,6 +46,8 @@ namespace Core.Common.UI
 
         public IViewInfo ViewInfo { get; }
         public ISystemProcess Process { get; set; }
+
+        
         
 
     }

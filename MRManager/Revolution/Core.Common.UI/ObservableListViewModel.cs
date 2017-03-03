@@ -50,10 +50,14 @@ namespace Core.Common.UI
         {
             if (state == null) return;
             //CurrentEntity.Value = state.Entity;
-            EntitySet = new ObservableList<TEntity>(state.EntitySet.ToList());
-                
-            
-               if (!SelectedEntities.SequenceEqual(state.SelectedEntities.ToList())) SelectedEntities = new ObservableList<TEntity>(state.SelectedEntities.ToList());
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                EntitySet.Value = new ObservableList<TEntity>(state.EntitySet.ToList());
+                EntitySet.Value.Reset();
+
+                if (!SelectedEntities.Value.SequenceEqual(state.SelectedEntities.ToList()))
+                    SelectedEntities.Value = new ObservableList<TEntity>(state.SelectedEntities.ToList());
+            }));
         }
 
         
@@ -81,37 +85,13 @@ namespace Core.Common.UI
         }
 
 
-        private ObservableList<TEntity> _entitySet = new ObservableList<TEntity>();
-        public virtual ObservableList<TEntity> EntitySet
+        public virtual ReactiveProperty<ObservableList<TEntity>> EntitySet
         {
-            get
-            {
-                return _entitySet;
-            }
-            set
-            {
-               this.RaiseAndSetIfChanged(ref _entitySet, value);
-                
-            }
+            get { return _entitySet; }
         }
 
-        
 
-        private ObservableList<TEntity> _selectedEntities = new ObservableList<TEntity>();
-        
-
-        public ObservableList<TEntity> SelectedEntities
-        {
-            get
-            {
-                return _selectedEntities;
-            }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _selectedEntities, value);
-               
-            }
-        }
+        public ReactiveProperty<ObservableList<TEntity>> SelectedEntities => new ReactiveProperty<ObservableList<TEntity>>(new ObservableList<TEntity>());
 
 
         public dynamic GetValue([CallerMemberName] string property = "UnspecifiedProperty")
@@ -155,10 +135,14 @@ namespace Core.Common.UI
 
         
         public ObservableDictionary<string, dynamic> ChangeTracking { get; } = new ObservableDictionary<string, dynamic>();
+        public void NotifyPropertyChanged(string propertyName)
+        {
+            this.RaisePropertyChanged(propertyName);
+        }
 
         private ObservableBindingList<TEntity> _changeTrackingList = new ObservableBindingList<TEntity>();
+        private readonly ReactiveProperty<ObservableList<TEntity>> _entitySet = new ReactiveProperty<ObservableList<TEntity>>(new ObservableList<TEntity>());
 
-        
 
         public ObservableBindingList<TEntity> ChangeTrackingList
         {

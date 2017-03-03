@@ -79,19 +79,19 @@ namespace RevolutionData
         private static void UpdateEntitySet(IEntityCacheViewModel<TEntity> cacheViewModel,
             IEntityUpdated<TEntity> msg)
         {
-            var existingEntity = cacheViewModel.EntitySet.FirstOrDefault(x => x.Id == msg.Entity.Id);
-            if (existingEntity != null) cacheViewModel.EntitySet.Remove(existingEntity);
+            var existingEntity = cacheViewModel.EntitySet.Value.FirstOrDefault(x => x.Id == msg.Entity.Id);
+            if (existingEntity != null) cacheViewModel.EntitySet.Value.Remove(existingEntity);
 
-            cacheViewModel.EntitySet.Add(msg.Entity);
-            cacheViewModel.EntitySet.Reset();
+            cacheViewModel.EntitySet.Value.Add(msg.Entity);
+            cacheViewModel.EntitySet.Value.Reset();
 
         }
 
         private static void ReloadEntitySet(IEntityCacheViewModel<TEntity> v, IEntitySetLoaded<TEntity> e)
         {
-            v.EntitySet.Clear();
-            v.EntitySet.AddRange(e.Entities);
-            v.EntitySet.Reset();
+            v.EntitySet.Value.Clear();
+            v.EntitySet.Value.AddRange(e.Entities);
+            v.EntitySet.Value.Reset();
         }
 
 

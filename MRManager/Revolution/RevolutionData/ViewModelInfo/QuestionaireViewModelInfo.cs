@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows;
+using System.Windows.Data;
 using SystemInterfaces;
 using Actor.Interfaces;
 using EF.Entities;
@@ -47,7 +48,7 @@ namespace RevolutionData
                     {
                         if (v.CurrentQuestion.Value == v.Questions.FirstOrDefault(x => x.Id == e.Entity.Id)) return;
                         v.CurrentQuestion.Value = v.Questions.FirstOrDefault(x => x.Id == e.Entity.Id);
-                        
+                        UpdateQuestionResponse(v);
                     }),
 
                 new ViewEventSubscription<IQuestionaireViewModel, ICurrentEntityChanged<IPatientVisitInfo>>(
@@ -58,6 +59,7 @@ namespace RevolutionData
                     {
                         if (v.CurrentPatientVisit == e.Entity) return;
                         v.CurrentPatientVisit = e.Entity;
+                        UpdateQuestionResponse(v);
                     }),
                 new ViewEventSubscription<IQuestionaireViewModel, ICurrentEntityChanged<IPatientSyntomInfo>>(
                     3,
@@ -178,7 +180,23 @@ namespace RevolutionData
                     {
                         v => v.State != null
                     },
-                    messageData:s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
+                    messageData:s =>
+                    {
+                        if (s.CurrentQuestion?.Value == null)
+                        {
+                            if (s.EntitySet.Value.Any()) s.EntitySet.Value.Clear();
+
+                        }
+                        else
+                        {
+
+                            UpdateQuestionResponse(s);
+                        }
+
+                        return new ViewEventPublicationParameter(new object[] {s, s.State.Value},
+                            new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded), s.Process,
+                            s.Source);
+                    }),
 
                     
             },
@@ -387,6 +405,43 @@ namespace RevolutionData
             typeof(IQuestionaireViewModel),
             typeof(IBodyViewModel));
 
+        private static void UpdateQuestionResponse(IQuestionaireViewModel s)
+        {
+            var resLst = new List<ResponseOptionInfo>();
 
+            if (s.CurrentQuestion?.Value?.ResponseOptions != null)
+            {
+                resLst.AddRange(s.CurrentQuestion.Value.ResponseOptions.Select(x => (ResponseOptionInfo) x));
+                if (s.CurrentPatientVisit != null)
+                {
+                    foreach (
+                        var itm in
+                            s.CurrentQuestion.Value.PatientResponses.Where(
+                                x => x.PatientVisitId == s.CurrentPatientVisit.Id)
+                        )
+                    {
+                        var res = resLst.First(x => x.Id == itm.Id);
+                        res.Value = itm.Value;
+                        res.ResponseId = itm.ResponseId;
+                        res.PatientResponseId = itm.Id;
+                    }
+                }
+            }
+            if (s.CurrentQuestion?.Value == null) return;
+            
+                resLst.Add(new ResponseOptionInfo()
+                {
+                    Id = 0,
+                    Description = "Edit to Create New Response Option",
+                    QuestionId = s.CurrentQuestion.Value.Id,
+                    QuestionResponseTypeId = 1
+                });
+
+                s.EntitySet.Value =
+                    new ObservableList<IResponseOptionInfo>(
+                        resLst.Select(x => (IResponseOptionInfo) x).ToList());
+                s.NotifyPropertyChanged(nameof(s.EntitySet));
+            
+        }
     }
 }

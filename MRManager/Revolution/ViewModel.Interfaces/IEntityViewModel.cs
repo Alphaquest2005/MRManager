@@ -13,7 +13,9 @@ namespace ViewModelInterfaces
     {
         ReactiveProperty<IProcessState<TEntity>> State { get; }
         ObservableDictionary<string, dynamic> ChangeTracking { get; }
-        
+
+        void NotifyPropertyChanged(string propertyName);
+
     }
 
     
@@ -21,8 +23,8 @@ namespace ViewModelInterfaces
     {
         new ReactiveProperty<IProcessStateList<TEntity>> State { get; }
         ReactiveProperty<TEntity> CurrentEntity { get; }
-        ObservableList<TEntity> EntitySet { get; }
-        ObservableList<TEntity> SelectedEntities { get; }
+        ReactiveProperty<ObservableList<TEntity>> EntitySet { get; }
+        ReactiveProperty<ObservableList<TEntity>> SelectedEntities { get; }
         
     }
 

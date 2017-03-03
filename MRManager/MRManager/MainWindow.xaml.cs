@@ -29,7 +29,7 @@ namespace MRManager
 		        var t = new MRManagerDBContext().GetType().Assembly;
 		        var x = new EFEntity<IEntity>().GetType().Assembly;
 		        BootStrapper.BootStrapper.Instance.StartUp(t, x, true);
-		    });
+		    }).ConfigureAwait(false);
 
 
 		}

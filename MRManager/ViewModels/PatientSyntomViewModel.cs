@@ -32,25 +32,25 @@ namespace ViewModels
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             this.WireEvents();
             
-            Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => insertNewRow());
+            //Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => insertNewRow());
             //this.WhenAnyValue(x => x.CurrentPatientVisit.Value).Subscribe(x => );
 
         }
 
-        private void insertNewRow()
-        {
-                if (this.ViewModel.EntitySet.FirstOrDefault(x => x.Id == 0) != null) return;
-                if (CurrentPatientVisit != null &&
-                    (CurrentPatientVisit.Value?.Id != 0 &&
-                     CurrentPatientVisit.Value?.DateOfVisit.Date == DateTime.Today.Date))
-                {
+        //private void insertNewRow()
+        //{
+        //        if (this.ViewModel?.EntitySet?.Value?.FirstOrDefault(x => x.Id == 0) != null) return;
+        //        if (CurrentPatientVisit != null &&
+        //            (CurrentPatientVisit.Value?.Id != 0 &&
+        //             CurrentPatientVisit.Value?.DateOfVisit.Date == DateTime.Today.Date))
+        //        {
                 
-                    this.ViewModel.EntitySet.Add(new PatientSyntomInfo() {SyntomName = "Create New..."});
+        //            this.ViewModel.EntitySet.Value.Add(new PatientSyntomInfo() {SyntomName = "Create New..."});
                     
-                }
+        //        }
 
-                OnPropertyChanged(nameof(EntitySet));
-        }
+        //        OnPropertyChanged(nameof(EntitySet));
+        //}
 
        
         public ReactiveProperty<IProcessStateList<IPatientSyntomInfo>> State => this.ViewModel.State;
@@ -61,10 +61,10 @@ namespace ViewModels
 
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
 
-        public ObservableList<IPatientSyntomInfo> EntitySet => this.ViewModel.EntitySet;
+        public ReactiveProperty<ObservableList<IPatientSyntomInfo>> EntitySet => this.ViewModel.EntitySet;
 
     
-        public ObservableList<IPatientSyntomInfo> SelectedEntities => this.ViewModel.SelectedEntities;
+        public ReactiveProperty<ObservableList<IPatientSyntomInfo>> SelectedEntities => this.ViewModel.SelectedEntities;
 
         
 

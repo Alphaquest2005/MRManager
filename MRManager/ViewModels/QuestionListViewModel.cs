@@ -37,36 +37,36 @@ namespace ViewModels
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             this.WireEvents();
 
-            Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => UpdateChangeCollectionList(x));
+            //Instance.ViewModel.WhenAnyValue(x => x.EntitySet.Value).Subscribe(x => UpdateChangeCollectionList(x));
         }
 
 
-        private void UpdateChangeCollectionList(ObservableList<IQuestionInfo> entitySet)
-        {
+        //private void UpdateChangeCollectionList(ObservableList<IQuestionInfo> entitySet)
+        //{
 
-            if (_currentInterview == null)
-            {
-                this.ViewModel.EntitySet.Clear();
-            }
-            else
-            {
-                if (this.ViewModel.EntitySet.FirstOrDefault(x => x.Id == 0) != null) return;
-                var res = entitySet.OrderBy(z => z.QuestionNumber).ToList();
-                res.Add(new QuestionInfo()
-                {
-                    Id = 0,
-                    Description = "Edit to Create New Question",
-                    EntityAttributeId = 0,
-                    InterviewId = _currentInterview.Id,
-                    Attribute = "Unspecified",
-                    Entity = "Unspecified",
-                    Type = "TextBox"
-                });
-                this.ViewModel.EntitySet = new ObservableList<IQuestionInfo>(res);
-            }
-            OnPropertyChanged(nameof(EntitySet));
+        //    if (_currentInterview == null)
+        //    {
+        //        this.ViewModel.EntitySet.Value.Clear();
+        //    }
+        //    else
+        //    {
+        //        if (this.ViewModel?.EntitySet?.Value?.FirstOrDefault(x => x.Id == 0) != null) return;
+        //        var res = entitySet.OrderBy(z => z.QuestionNumber).ToList();
+        //        res.Add(new QuestionInfo()
+        //        {
+        //            Id = 0,
+        //            Description = "Edit to Create New Question",
+        //            EntityAttributeId = 0,
+        //            InterviewId = _currentInterview.Id,
+        //            Attribute = "Unspecified",
+        //            Entity = "Unspecified",
+        //            Type = "TextBox"
+        //        });
+        //        this.ViewModel.EntitySet.Value = new ObservableList<IQuestionInfo>(res);
+        //    }
+        //    OnPropertyChanged(nameof(EntitySet));
 
-        }
+        //}
 
 
 
@@ -82,10 +82,10 @@ namespace ViewModels
 
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
 
-        public ObservableList<IQuestionInfo> EntitySet => this.ViewModel.EntitySet;
+        public ReactiveProperty<ObservableList<IQuestionInfo>> EntitySet => this.ViewModel.EntitySet;
 
 
-        public ObservableList<IQuestionInfo> SelectedEntities => this.ViewModel.SelectedEntities;
+        public ReactiveProperty<ObservableList<IQuestionInfo>> SelectedEntities => this.ViewModel.SelectedEntities;
 
         public IInterviewInfo CurrentInterview
         {

@@ -12,6 +12,7 @@ using ReactiveUI;
 using RevolutionEntities.Process;
 using Utilities;
 using ViewModel.Interfaces;
+using ViewModelInterfaces;
 
 namespace Core.Common.UI
 {
@@ -42,7 +43,7 @@ namespace Core.Common.UI
             ViewModelType = typeof (TViewModel);
             RowState = viewModel.RowState;
             _instance = this;
-            
+          
 
         }
 
@@ -65,6 +66,11 @@ namespace Core.Common.UI
             var res = base.TrySetMember(binder, value);
             if(res == false) throw new InvalidOperationException($"Property not found{binder.Name}");
             return true;
+        }
+
+        public void NotifyPropertyChanged(string property)
+        {
+            this.OnPropertyChanged(property);
         }
 
         public string ViewName { get; } 

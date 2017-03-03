@@ -48,8 +48,8 @@ namespace ViewModels
             get; }
 
         public ReactiveProperty<ISyntomMedicalSystemInfo> CurrentEntity => this.ViewModel.CurrentEntity;
-        public ObservableList<ISyntomMedicalSystemInfo> EntitySet => this.ViewModel.EntitySet;
-        public ObservableList<ISyntomMedicalSystemInfo> SelectedEntities => this.ViewModel.SelectedEntities;
+        public ReactiveProperty<ObservableList<ISyntomMedicalSystemInfo>> EntitySet => this.ViewModel.EntitySet;
+        public ReactiveProperty<ObservableList<ISyntomMedicalSystemInfo>> SelectedEntities => this.ViewModel.SelectedEntities;
         public ObservableBindingList<ISyntomMedicalSystemInfo> ChangeTrackingList => this.ViewModel.ChangeTrackingList;
 
         ReactiveProperty<IProcessStateList<ISyntomMedicalSystemInfo>> IEntityListViewModel<ISyntomMedicalSystemInfo>.

@@ -60,6 +60,7 @@ namespace DataServices.Actors
 
             EventMessageBus.Current.GetEvent<ICleanUpSystemProcess>(Source).Where(x => x.ProcessToBeCleanedUpId == Process.Id).Subscribe(x => Self.GracefulStop(TimeSpan.FromSeconds((double)EventTimeOut.ShortWait)));
 
+            EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source).Where(x => x.Process.Id == msg.Process.Id).Subscribe(q => {
             EventMessageBus.Current.GetEvent<IProcessSystemMessage>(Source)
                                 .Where(
                                     x =>
@@ -67,7 +68,8 @@ namespace DataServices.Actors
                                         x.MachineInfo.MachineName == Process.MachineInfo.MachineName)
                                 .Subscribe(z => HandleProcessEvents(z));
 
-           
+            })
+            ;
             
             _complexEvents =
                     new ReadOnlyCollection<IComplexEventAction>(

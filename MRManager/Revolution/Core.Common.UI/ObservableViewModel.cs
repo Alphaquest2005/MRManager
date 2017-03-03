@@ -88,7 +88,10 @@ namespace Core.Common.UI
             this.RaisePropertyChanged(property);
         }
         public ObservableDictionary<string, dynamic> ChangeTracking { get; } = new ObservableDictionary<string, dynamic>();
-
+        public void NotifyPropertyChanged(string propertyName)
+        {
+            this.RaisePropertyChanged(propertyName);
+        }
 
 
         public IEnumerable GetErrors(string propertyName)

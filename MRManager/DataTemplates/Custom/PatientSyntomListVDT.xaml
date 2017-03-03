@@ -16,7 +16,7 @@
             <ListBox Margin="10"
                      ItemTemplate="{DynamicResource PatientSyntomInfoTpl}"
                      IsSynchronizedWithCurrentItem="True"
-                     ItemsSource="{Binding EntitySet,
+                     ItemsSource="{Binding EntitySet.Value,
                                            Mode=OneWay}"
                      SelectedItem="{Binding CurrentEntity.Value,
                                             Mode=TwoWay}">

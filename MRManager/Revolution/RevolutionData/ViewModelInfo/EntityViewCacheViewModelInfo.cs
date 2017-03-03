@@ -79,19 +79,19 @@ namespace RevolutionData
         private static void UpdateEntitySet(IEntityViewCacheViewModel<TView> cacheViewModel,
             IEntityViewWithChangesUpdated<TView> msg)
         {
-            var existingEntity = cacheViewModel.EntitySet.FirstOrDefault(x => x.Id == msg.Entity.Id);
-            if (existingEntity != null) cacheViewModel.EntitySet.Remove(existingEntity);
+            var existingEntity = cacheViewModel.EntitySet.Value.FirstOrDefault(x => x.Id == msg.Entity.Id);
+            if (existingEntity != null) cacheViewModel.EntitySet.Value.Remove(existingEntity);
 
-            cacheViewModel.EntitySet.Add(msg.Entity);
-            cacheViewModel.EntitySet.Reset();
+            cacheViewModel.EntitySet.Value.Add(msg.Entity);
+            cacheViewModel.EntitySet.Value.Reset();
 
         }
 
         private static void ReloadEntitySet(IEntityViewCacheViewModel<TView> v, IEntityViewSetWithChangesLoaded<TView> e)
         {
-            v.EntitySet.Clear();
-            v.EntitySet.AddRange(e.EntitySet);
-            v.EntitySet.Reset();
+            v.EntitySet.Value.Clear();
+            v.EntitySet.Value.AddRange(e.EntitySet);
+            v.EntitySet.Value.Reset();
         }
 
         public static class ComplexActions

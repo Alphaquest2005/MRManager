@@ -59,5 +59,7 @@ namespace ViewModels
             get { return _nonResidentInfo; }
             set { _nonResidentInfo = value; OnPropertyChanged(); }
         }
+
+        
     }
 }
