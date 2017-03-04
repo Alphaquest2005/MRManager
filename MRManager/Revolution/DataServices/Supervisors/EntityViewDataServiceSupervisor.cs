@@ -55,14 +55,14 @@ namespace DataServices.Actors
             try
             {
                 ctx = Context;
-                 foreach (var itm in entityEvents)
-                            {
-                               this.GetType()
-                                        .GetMethod("CreateEntityViewActor")
-                                        .MakeGenericMethod(itm.Key)
-                                        .Invoke(this, new object[] {itm.Value, process, msg});
-               
-                            }
+                Parallel.ForEach(entityEvents, new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }, (itm) =>
+                {
+                    this.GetType()
+                        .GetMethod("CreateEntityViewActor")
+                        .MakeGenericMethod(itm.Key)
+                        .Invoke(this, new object[] {itm.Value, process, msg});
+
+                });
             }
             catch (Exception)
             {

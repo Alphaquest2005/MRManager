@@ -29,37 +29,13 @@ namespace ViewModels
         private ReactiveProperty<ObservableList<ISyntomMedicalSystemInfo>> _systems = new ReactiveProperty<ObservableList<ISyntomMedicalSystemInfo>>(new ObservableBindingList<ISyntomMedicalSystemInfo>());
 
         [ImportingConstructor]
-        public InterviewListViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IInterviewInfo>(viewInfo,eventSubscriptions, eventPublications, commandInfo, process, orientation))
+        public InterviewListViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(new ObservableListViewModel<IInterviewInfo>(viewInfo,eventSubscriptions, eventPublications, commandInfo, process, orientation, priority))
         {
            this.WireEvents();
-         
-            //this.WhenAnyValue(x => x.CurrentMedicalSystem.Value).Where(x => x != null).Subscribe(x => addNewRow(x.Interviews));
-            
         }
 
-        
 
-        //private void addSystems(ObservableList<ISyntomMedicalSystemInfo> observableList)
-        //{
-        //    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-        //    {
-        //        if (Systems.Value.FirstOrDefault(x => x.Id == 0) != null) return;
-        //        Systems.Value.Add(new SyntomMedicalSystemInfo() { System = "Create New..." });
-                
-        //    }));
-        //}
-
-        //private void addNewRow(IList<IInterviewInfo> observableList)
-        //{
-        //    if (observableList?.FirstOrDefault(x => x.Id == 0) != null) return;
-        //    var res = observableList?.ToList()?? new List<IInterviewInfo>();
-        //        res.Add(new InterviewInfo() { Interview = "Create New..." });
-
-        //        this.ViewModel.EntitySet = new ObservableList<IInterviewInfo>(res);
-        //        OnPropertyChanged(nameof(EntitySet));
-        //}
-
-
+        IEntityListViewModel<IInterviewInfo> IEntityListViewModel<IInterviewInfo>.Instance => (IEntityListViewModel<IInterviewInfo>) InterviewListViewModel.Instance;
         public ReactiveProperty<IProcessStateList<IInterviewInfo>> State => this.ViewModel.State;
 
 

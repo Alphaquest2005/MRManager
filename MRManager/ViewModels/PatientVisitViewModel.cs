@@ -28,16 +28,16 @@ namespace ViewModels
        
 
         [ImportingConstructor]
-        public PatientVisitViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IPatientVisitInfo>(viewInfo,eventSubscriptions, eventPublications, commandInfo, process, orientation))
+        public PatientVisitViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(new ObservableListViewModel<IPatientVisitInfo>(viewInfo,eventSubscriptions, eventPublications, commandInfo, process, orientation, priority))
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             this.WireEvents();
             
             
         }
-        
 
 
+        IEntityListViewModel<IPatientVisitInfo> IEntityListViewModel<IPatientVisitInfo>.Instance => (IEntityListViewModel<IPatientVisitInfo>) PatientVisitViewModel.Instance;
         public ReactiveProperty<IProcessStateList<IPatientVisitInfo>> State => this.ViewModel.State;
 
 

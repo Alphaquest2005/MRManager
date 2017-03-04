@@ -22,55 +22,24 @@ namespace ViewModels
 {
 
     [Export(typeof (IQuestionListViewModel))]
-    public class QuestionListViewModel : DynamicViewModel<ObservableListViewModel<IQuestionInfo>>,
-        IQuestionListViewModel
+    public class QuestionListViewModel : DynamicViewModel<ObservableListViewModel<IQuestionInfo>>,IQuestionListViewModel
     {
 
         private IInterviewInfo _currentInterview;
 
         [ImportingConstructor]
-        public QuestionListViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
+        public QuestionListViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority)
             : base(
                 new ObservableListViewModel<IQuestionInfo>(viewInfo, eventSubscriptions, eventPublications, commandInfo, process,
-                    orientation))
+                    orientation, priority))
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             this.WireEvents();
 
-            //Instance.ViewModel.WhenAnyValue(x => x.EntitySet.Value).Subscribe(x => UpdateChangeCollectionList(x));
         }
 
 
-        //private void UpdateChangeCollectionList(ObservableList<IQuestionInfo> entitySet)
-        //{
-
-        //    if (_currentInterview == null)
-        //    {
-        //        this.ViewModel.EntitySet.Value.Clear();
-        //    }
-        //    else
-        //    {
-        //        if (this.ViewModel?.EntitySet?.Value?.FirstOrDefault(x => x.Id == 0) != null) return;
-        //        var res = entitySet.OrderBy(z => z.QuestionNumber).ToList();
-        //        res.Add(new QuestionInfo()
-        //        {
-        //            Id = 0,
-        //            Description = "Edit to Create New Question",
-        //            EntityAttributeId = 0,
-        //            InterviewId = _currentInterview.Id,
-        //            Attribute = "Unspecified",
-        //            Entity = "Unspecified",
-        //            Type = "TextBox"
-        //        });
-        //        this.ViewModel.EntitySet.Value = new ObservableList<IQuestionInfo>(res);
-        //    }
-        //    OnPropertyChanged(nameof(EntitySet));
-
-        //}
-
-
-
-
+        IEntityListViewModel<IQuestionInfo> IEntityListViewModel<IQuestionInfo>.Instance => (IEntityListViewModel<IQuestionInfo>) QuestionListViewModel.Instance;
 
         public ReactiveProperty<IProcessStateList<IQuestionInfo>> State => this.ViewModel.State;
 

@@ -45,7 +45,8 @@ namespace ViewModels
                   ProcessViewModels.ProcessViewModelInfos.FirstOrDefault().Subscriptions,
                   ProcessViewModels.ProcessViewModelInfos.FirstOrDefault().Publications,
                   ProcessViewModels.ProcessViewModelInfos.FirstOrDefault().Commands,
-                  ProcessViewModels.ProcessViewModelInfos.FirstOrDefault().Orientation)
+                  ProcessViewModels.ProcessViewModelInfos.FirstOrDefault().Orientation,
+                  ProcessViewModels.ProcessViewModelInfos.FirstOrDefault().Priority)
         {
             this.WireEvents();
             EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source).Subscribe(x => { });

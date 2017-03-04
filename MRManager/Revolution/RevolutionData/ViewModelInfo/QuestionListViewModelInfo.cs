@@ -104,31 +104,7 @@ namespace RevolutionData
                     },
                     messageData:s =>
                     {
-                         Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                         {
-                              if (s.CurrentInterview == null)
-                                {
-                                    s.EntitySet.Value.Clear();
-                                }
-                                else
-                                {
-                                    if (s.EntitySet?.Value?.FirstOrDefault(x => x.Id == 0) != null) return;
-                                    //var res = entitySet.OrderBy(z => z.QuestionNumber).ToList();
-                                    s.EntitySet.Value.Add(new QuestionInfo()
-
-                                    {
-                                        Id = 0,
-                                        Description = "Edit to Create New Question",
-                                        EntityAttributeId = 0,
-                                        InterviewId = s.CurrentInterview.Id,
-                                        Attribute = "Unspecified",
-                                        Entity = "Unspecified",
-                                        Type = "TextBox"
-                                    });
-                                    
-                                }
-                                s.NotifyPropertyChanged(nameof(s.EntitySet));
-                         }));
+                         
                         return new ViewEventPublicationParameter(new object[] {s, s.State.Value},
                             new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded), s.Process,
                             s.Source);
@@ -138,7 +114,38 @@ namespace RevolutionData
                     key:"CurrentEntityChanged",
                     subject:v => v.CurrentEntity,//.WhenAnyValue(x => x.Value),
                     subjectPredicate:new List<Func<IQuestionListViewModel, bool>>{},
-                    messageData:s => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source))
+                    messageData:s =>
+                    {
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                         {
+                              if (s.CurrentInterview == null)
+                                {
+                                    s.EntitySet.Value.Clear();
+                                }
+                                else
+                                {
+                                    if (s.EntitySet?.Value?.FirstOrDefault(x => x.Id == 0) == null)
+                                    {
+                                        //var res = entitySet.OrderBy(z => z.QuestionNumber).ToList();
+                                        s.EntitySet.Value.Add(new QuestionInfo()
+
+                                        {
+                                            Id = 0,
+                                            Description = "Edit to Create New Question",
+                                            EntityAttributeId = 0,
+                                            InterviewId = s.CurrentInterview.Id,
+                                            Attribute = "Unspecified",
+                                            Entity = "Unspecified",
+                                            Type = "TextBox"
+                                        });
+                                    }
+                                }
+                                s.NotifyPropertyChanged(nameof(s.EntitySet));
+                         }));
+                        return new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value},
+                            new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded), s.Process,
+                            s.Source);
+                    })
             },
             new List<IViewModelEventCommand<IViewModel,IEvent>>
             {
@@ -288,7 +295,7 @@ namespace RevolutionData
 
             },
             typeof(IQuestionListViewModel),
-            typeof(IBodyViewModel));
+            typeof(IBodyViewModel),5);
 
     }
 }

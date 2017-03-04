@@ -7,12 +7,13 @@ namespace RevolutionEntities.ViewModels
 {
     public class ViewModelInfo : IViewModelInfo
     {
-        public ViewModelInfo(int processId, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> subscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> publications, List<IViewModelEventCommand<IViewModel, IEvent>> commands, Type viewModelType, Type orientation)
+        public ViewModelInfo(int processId, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> subscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> publications, List<IViewModelEventCommand<IViewModel, IEvent>> commands, Type viewModelType, Type orientation, int priority)
         {
             ProcessId = processId;
             Subscriptions = subscriptions;
             ViewModelType = viewModelType;
             Orientation = orientation;
+            Priority = priority;
             ViewInfo = viewInfo;
             Commands = commands;
             Publications = publications;
@@ -25,6 +26,7 @@ namespace RevolutionEntities.ViewModels
         public List<IViewModelEventCommand<IViewModel, IEvent>> Commands { get; }
         public Type ViewModelType { get; }
         public Type Orientation { get; }
+        public int Priority { get; }
     }
 
     public class ViewInfo : IViewInfo

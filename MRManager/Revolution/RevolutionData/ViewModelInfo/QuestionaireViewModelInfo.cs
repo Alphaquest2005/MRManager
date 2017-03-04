@@ -182,16 +182,16 @@ namespace RevolutionData
                     },
                     messageData:s =>
                     {
-                        if (s.CurrentQuestion?.Value == null)
-                        {
-                            if (s.EntitySet.Value.Any()) s.EntitySet.Value.Clear();
+                        //if (s.CurrentQuestion?.Value == null)
+                        //{
+                        //    if (s.EntitySet.Value.Any()) s.EntitySet.Value.Clear();
 
-                        }
-                        else
-                        {
+                        //}
+                        //else
+                        //{
 
-                            UpdateQuestionResponse(s);
-                        }
+                        //    UpdateQuestionResponse(s);
+                        //}
 
                         return new ViewEventPublicationParameter(new object[] {s, s.State.Value},
                             new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded), s.Process,
@@ -403,7 +403,7 @@ namespace RevolutionData
 
             },
             typeof(IQuestionaireViewModel),
-            typeof(IBodyViewModel));
+            typeof(IBodyViewModel),6);
 
         private static void UpdateQuestionResponse(IQuestionaireViewModel s)
         {

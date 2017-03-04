@@ -75,6 +75,6 @@ namespace RevolutionData
 
             },
             typeof(IHeaderViewModel),
-            typeof(IHeaderViewModel));
+            typeof(IHeaderViewModel), 0);
     }
 }

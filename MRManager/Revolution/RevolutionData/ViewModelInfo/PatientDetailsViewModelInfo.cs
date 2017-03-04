@@ -180,7 +180,8 @@ namespace RevolutionData
 
             },
             viewModelType: typeof(IPatientDetailsViewModel),
-            orientation: typeof(IBodyViewModel));
+            orientation: typeof(IBodyViewModel),
+            priority:1);
 
        
     }

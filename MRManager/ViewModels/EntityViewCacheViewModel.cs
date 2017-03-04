@@ -28,7 +28,7 @@ namespace ViewModels
     public class DoctorInfoCacheViewModel : ObservableListViewModel<IDoctorInfo>, IEntityViewCacheViewModel<IDoctorInfo>
     {
         public DoctorInfoCacheViewModel() { }
-        public DoctorInfoCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation)
+        public DoctorInfoCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation, priority)
         {
             this.WireEvents();
         }
@@ -39,10 +39,13 @@ namespace ViewModels
     public class SystemInfoCacheViewModel : DynamicViewModel<ObservableListViewModel<ISyntomMedicalSystemInfo>>, IEntityViewCacheViewModel<ISyntomMedicalSystemInfo>
     {
         public SystemInfoCacheViewModel() { }
-        public SystemInfoCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<ISyntomMedicalSystemInfo>(viewInfo,eventSubscriptions, eventPublications, commandInfo, process, orientation))
+        public SystemInfoCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(new ObservableListViewModel<ISyntomMedicalSystemInfo>(viewInfo,eventSubscriptions, eventPublications, commandInfo, process, orientation, priority))
         {
             this.WireEvents();
         }
+
+
+        IEntityListViewModel<ISyntomMedicalSystemInfo> IEntityListViewModel<ISyntomMedicalSystemInfo>.Instance => (IEntityListViewModel<ISyntomMedicalSystemInfo>) SystemInfoCacheViewModel.Instance;
 
         ReactiveProperty<IProcessState<ISyntomMedicalSystemInfo>> IEntityViewModel<ISyntomMedicalSystemInfo>.State {
             get; }

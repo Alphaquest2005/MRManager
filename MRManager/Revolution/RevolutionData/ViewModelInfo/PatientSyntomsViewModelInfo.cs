@@ -319,7 +319,7 @@ namespace RevolutionData
 
             },
             typeof(IPatientSyntomViewModel),
-            typeof(IBodyViewModel));
+            typeof(IBodyViewModel),3);
 
       
 

@@ -8,7 +8,9 @@ namespace ViewModel.Interfaces
     
     public interface IViewModelInfo
     {
+        
         int ProcessId { get; }
+
         IViewInfo ViewInfo { get; }
         List<IViewModelEventSubscription<IViewModel, IEvent>> Subscriptions { get; }
 
@@ -17,6 +19,7 @@ namespace ViewModel.Interfaces
         List<IViewModelEventCommand<IViewModel, IEvent>> Commands { get; }
         Type ViewModelType { get; }
         Type Orientation { get; }
+        int Priority { get; }
         
     }
 

@@ -73,7 +73,8 @@ namespace RevolutionData
                 publications: new List<IViewModelEventPublication<IViewModel, IEvent>> {},
                 commands: new List<IViewModelEventCommand<IViewModel, IEvent>> {},
                 viewModelType: typeof (IEntityViewCacheViewModel<TView>),
-                orientation: typeof (ICacheViewModel));
+                orientation: typeof (ICacheViewModel),
+                priority:0);
         }
 
         private static void UpdateEntitySet(IEntityViewCacheViewModel<TView> cacheViewModel,

@@ -9,11 +9,11 @@ namespace ViewModel.Interfaces
     
     public interface IScreenLayoutViewModel: IViewModel
     {
-        ObservableCollection<IViewModel> HeaderViewModels { get; }
-        ObservableCollection<IViewModel> LeftViewModels { get; }
-        ObservableCollection<IViewModel> RightViewModels { get; }
-        ObservableCollection<IViewModel> FooterViewModels { get; }
-        ObservableCollection<IViewModel> BodyViewModels { get;}
-        ObservableCollection<IViewModel> CacheViewModels { get; }
+        ObservableList<IViewModel> HeaderViewModels { get; }
+        ObservableList<IViewModel> LeftViewModels { get; }
+        ObservableList<IViewModel> RightViewModels { get; }
+        ObservableList<IViewModel> FooterViewModels { get; }
+        ObservableList<IViewModel> BodyViewModels { get;}
+        ObservableList<IViewModel> CacheViewModels { get; }
     }
 }

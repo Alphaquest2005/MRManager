@@ -52,14 +52,16 @@ namespace DataServices.Actors
         {
             try
             {
-                foreach (var v in ProcessViewModels.ProcessViewModelInfos.Where(x => x.ProcessId == pe.Process.Id))
-                {
-                    var msg = new LoadViewModel(v,new StateCommandInfo(pe.Process.Id, RevolutionData.Context.ViewModel.Commands.LoadViewModel), pe.Process, Source);
-                    //TODO: Some strange reason this thing not executing second time---process actor closed maybe
-                    //_childActor.Tell(msg);
-                    EventMessageBus.Current.Publish(msg, Source);
-                    
-                }
+                Parallel.ForEach(ProcessViewModels.ProcessViewModelInfos.Where(x => x.ProcessId == pe.Process.Id),new ParallelOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount},
+                    (v) =>
+                    {
+                        var msg = new LoadViewModel(v,
+                            new StateCommandInfo(pe.Process.Id, RevolutionData.Context.ViewModel.Commands.LoadViewModel),
+                            pe.Process, Source);
+                        
+                        EventMessageBus.Current.Publish(msg, Source);
+
+                    });
             }
             catch (Exception ex)
             {

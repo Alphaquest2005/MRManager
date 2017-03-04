@@ -69,6 +69,6 @@ namespace RevolutionData
 
                     
 
-            }, typeof(ISigninViewModel), typeof(IBodyViewModel));
+            }, typeof(ISigninViewModel), typeof(IBodyViewModel), 0);
     }
 }

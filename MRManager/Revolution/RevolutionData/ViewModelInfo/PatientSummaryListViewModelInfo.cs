@@ -35,8 +35,11 @@ namespace RevolutionData
                     new List<Func<IPatientSummaryListViewModel, IUpdateProcessStateList<IPatientInfo>, bool>>(),
                     (v, e) =>
                     {
-                        if (v.State.Value == e.State) return;
-                        v.State.Value = e.State;
+                        
+                            if (v.Instance.State.Value == e.State) return;
+                            v.Instance.State.Value = e.State;
+
+                        
                     }),
 
                 new ViewEventSubscription<IPatientSummaryListViewModel, IEntityViewWithChangesUpdated<IPatientInfo>>(
@@ -81,12 +84,9 @@ namespace RevolutionData
                     },
                     messageData:s =>
                     {
-                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                        {
-                            s.EntitySet.Value.Add(new PatientInfo() {Name = "Create New..."});
-                            s.NotifyPropertyChanged(nameof(s.EntitySet));
-                        }));
-
+                        
+                            
+                        
 
                        return new ViewEventPublicationParameter(new object[] {s, s.State.Value},
                             new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded), s.Process,
@@ -97,7 +97,17 @@ namespace RevolutionData
                     key:"CurrentEntityChanged",
                     subject:v => v.CurrentEntity,
                     subjectPredicate:new List<Func<IPatientSummaryListViewModel, bool>>{},
-                    messageData:s => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
+                    messageData:s =>
+                    {
+                        if (s.Instance.EntitySet.Value.FirstOrDefault(x => x.Id == 0) == null)
+                        {
+                            s.Instance.EntitySet.Value.Add(new PatientInfo() {Name = "Create New..."});
+                            s.Instance.NotifyPropertyChanged(nameof(s.EntitySet));
+                        }
+                        return  new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value},
+                            new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded), s.Process,
+                            s.Source);
+                    }),
 
                
             },
@@ -203,7 +213,7 @@ namespace RevolutionData
 
             },
             typeof(IPatientSummaryListViewModel),
-            typeof(IBodyViewModel));
+            typeof(IBodyViewModel), 0);
 
 
     }

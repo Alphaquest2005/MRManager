@@ -54,42 +54,48 @@ namespace DataServices.Actors
 
         private void CreateProcesses(IUser user, IEnumerable<IProcessInfo> processSteps)
         {
-            foreach (var inMsg in processSteps.Select(p => new CreateProcessActor(new StateCommandInfo(p.Id, RevolutionData.Context.Actor.Commands.CreateActor), new SystemProcess(new Process(p.Id, p.ParentProcessId, p.Name, p.Description, p.Symbol, user), Source.MachineInfo),Source)))
-            {
-
-                try
+            Parallel.ForEach(
+                processSteps.Select(
+                    p =>
+                        new CreateProcessActor(
+                            new StateCommandInfo(p.Id, RevolutionData.Context.Actor.Commands.CreateActor),
+                            new SystemProcess(
+                                new Process(p.Id, p.ParentProcessId, p.Name, p.Description, p.Symbol, user),
+                                Source.MachineInfo), Source)), new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount },
+                (inMsg) =>
                 {
-                    var actorName = "ProcessActor-" + inMsg.Process.Name.GetSafeActorName();
-                    if (!existingProcessActors.TryAdd(actorName, actorName)) return;
 
-                    //if (!Equals(ctx.Child(actorName), ActorRefs.Nobody)) return;
-                    EventMessageBus.Current.Publish(inMsg, Source);
-                    if(Processes.ProcessComplexEvents.All(x => x.ProcessId != inMsg.Process.Id)) throw new ApplicationException($"No Complex Events were created for this process:{inMsg.Process.Id}-{inMsg.Process.Name}");
-                    
+                    try
+                    {
+                        var actorName = "ProcessActor-" + inMsg.Process.Name.GetSafeActorName();
+                        if (!existingProcessActors.TryAdd(actorName, actorName)) return;
 
-                   Task.Run(() => { ctx.ActorOf(Props.Create<ProcessActor>(inMsg), actorName); });
 
-                    //EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source)
-                    //    .Where(x => Equals(x.Service.ActorRef, childActor))
-                    //    .Subscribe(z =>
-                    //    {
-                            
-                    //    });
+                        EventMessageBus.Current.Publish(inMsg, Source);
+                        if (Processes.ProcessComplexEvents.All(x => x.ProcessId != inMsg.Process.Id))
+                            throw new ApplicationException(
+                                $"No Complex Events were created for this process:{inMsg.Process.Id}-{inMsg.Process.Name}");
 
-                    
 
-                }
-                catch (Exception ex)
-                {
-                    Debugger.Break();
-                    EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: inMsg.GetType(),
-                                                                        failedEventMessage: inMsg,
-                                                                        expectedEventType: typeof(SystemProcessStarted),
-                                                                        exception: ex,
-                                                                        source: Source, processInfo: new StateEventInfo(inMsg.Process.Id, RevolutionData.Context.Process.Events.Error)), Source);
-                }
-                
-            }
+                        Task.Run(() => { ctx.ActorOf(Props.Create<ProcessActor>(inMsg), actorName); })
+                            .ConfigureAwait(false);
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Debugger.Break();
+                        EventMessageBus.Current.Publish(new ProcessEventFailure(failedEventType: inMsg.GetType(),
+                            failedEventMessage: inMsg,
+                            expectedEventType: typeof (SystemProcessStarted),
+                            exception: ex,
+                            source: Source,
+                            processInfo:
+                                new StateEventInfo(inMsg.Process.Id, RevolutionData.Context.Process.Events.Error)),
+                            Source);
+                    }
+
+                });
         }
     }
 

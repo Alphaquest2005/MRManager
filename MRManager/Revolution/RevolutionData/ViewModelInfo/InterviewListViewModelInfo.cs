@@ -403,7 +403,7 @@ namespace RevolutionData
 
             },
             typeof(IInterviewListViewModel),
-            typeof(IBodyViewModel));
+            typeof(IBodyViewModel),4);
 
 
     }

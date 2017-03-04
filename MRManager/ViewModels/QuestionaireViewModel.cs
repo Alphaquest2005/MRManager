@@ -25,12 +25,13 @@ namespace ViewModels
     [Export(typeof(IQuestionaireViewModel))]
     public class QuestionaireViewModel : DynamicViewModel<ObservableListViewModel<IResponseOptionInfo>>, IQuestionaireViewModel
     {
+        IEntityListViewModel<IResponseOptionInfo> IEntityListViewModel<IResponseOptionInfo>.Instance => (IEntityListViewModel<IResponseOptionInfo>) QuestionaireViewModel.Instance;
 
         [ImportingConstructor]
-        public QuestionaireViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
+        public QuestionaireViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority)
             : base(
                 new ObservableListViewModel<IResponseOptionInfo>(viewInfo, eventSubscriptions, eventPublications, commandInfo,
-                    process, orientation))
+                    process, orientation, priority))
         {
             this.WireEvents();
            
@@ -73,9 +74,9 @@ namespace ViewModels
         
         
         private ObservableList<IQuestionResponseOptionInfo> _questions = new ObservableList<IQuestionResponseOptionInfo>();
+
+
         
-
-
         public ReactiveProperty<IProcessStateList<IResponseOptionInfo>> State => this.ViewModel.State;
 
 

@@ -25,5 +25,6 @@ namespace ViewModel.Interfaces
 
         Type Orientation { get; }
         Type ViewModelType { get; }
+        int Priority { get; }
     }
 }

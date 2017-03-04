@@ -21,6 +21,7 @@ namespace ViewModelInterfaces
     
     public interface IEntityListViewModel<TEntity> : IEntityViewModel<TEntity> where TEntity : IEntityId
     {
+        IEntityListViewModel<TEntity> Instance { get; }
         new ReactiveProperty<IProcessStateList<TEntity>> State { get; }
         ReactiveProperty<TEntity> CurrentEntity { get; }
         ReactiveProperty<ObservableList<TEntity>> EntitySet { get; }

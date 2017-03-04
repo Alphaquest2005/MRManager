@@ -141,6 +141,6 @@ namespace RevolutionData
 
             },
             typeof(IFooterViewModel),
-            typeof(IFooterViewModel));
+            typeof(IFooterViewModel), 0);
     }
 }

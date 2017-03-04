@@ -8,6 +8,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using SystemInterfaces;
 using Actor.Interfaces;
 using Akka.Actor;
@@ -60,16 +61,17 @@ namespace DataServices.Actors
 
             EventMessageBus.Current.GetEvent<ICleanUpSystemProcess>(Source).Where(x => x.ProcessToBeCleanedUpId == Process.Id).Subscribe(x => Self.GracefulStop(TimeSpan.FromSeconds((double)EventTimeOut.ShortWait)));
 
-            EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source).Where(x => x.Process.Id == msg.Process.Id).Subscribe(q => {
-            EventMessageBus.Current.GetEvent<IProcessSystemMessage>(Source)
-                                .Where(
-                                    x =>
-                                        x.Process.Id == Process.Id &&
-                                        x.MachineInfo.MachineName == Process.MachineInfo.MachineName)
-                                .Subscribe(z => HandleProcessEvents(z));
+            EventMessageBus.Current.GetEvent<IServiceStarted<IProcessService>>(Source)
+                .Where(x => x.Process.Id == msg.Process.Id)
+                .Subscribe(q => {
+                                    EventMessageBus.Current.GetEvent<IProcessSystemMessage>(Source)
+                                                        .Where(
+                                                            x =>
+                                                                x.Process.Id == Process.Id &&
+                                                                x.MachineInfo.MachineName == Process.MachineInfo.MachineName)
+                                                        .Subscribe(z => HandleProcessEvents(z));
 
-            })
-            ;
+                                });
             
             _complexEvents =
                     new ReadOnlyCollection<IComplexEventAction>(
@@ -135,9 +137,10 @@ namespace DataServices.Actors
         private void StartActors(IEnumerable<IComplexEventAction> complexEvents)
         {
             Contract.Requires(complexEvents.Any() && complexEvents != null);
-            foreach (var cp in complexEvents)
+            Parallel.ForEach(complexEvents, new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount },(cp) =>
             {
-                var inMsg = new CreateComplexEventService(new ComplexEventService(cp.Key,cp, Process, Source),new StateCommandInfo(Process.Id, RevolutionData.Context.Actor.Commands.StartActor), Process, Source);
+                var inMsg = new CreateComplexEventService(new ComplexEventService(cp.Key, cp, Process, Source),
+                    new StateCommandInfo(Process.Id, RevolutionData.Context.Actor.Commands.StartActor), Process, Source);
                 Publish(inMsg);
                 try
                 {
@@ -145,9 +148,9 @@ namespace DataServices.Actors
                 }
                 catch (Exception ex)
                 {
-                   PublishProcesError(inMsg, ex, typeof(IServiceStarted<IComplexEventService>));
+                    PublishProcesError(inMsg, ex, typeof (IServiceStarted<IComplexEventService>));
                 }
-            }
+            });
         }
 
         private void HandleProcessEvents(IProcessSystemMessage pe)
@@ -168,10 +171,8 @@ namespace DataServices.Actors
         {
             try
             {
-                var childActor =
-                    ctx.ActorOf(
-                        Props.Create<ComplexEventActor>(inMsg),
-                        "ComplexEventActor:-" + inMsg.ComplexEventService.ActorId.GetSafeActorName());
+               Task.Run(() => ctx.ActorOf(Props.Create<ComplexEventActor>(inMsg),
+                        "ComplexEventActor:-" + inMsg.ComplexEventService.ActorId.GetSafeActorName())).ConfigureAwait(false);
                 
             }
             catch (Exception)

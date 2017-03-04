@@ -24,18 +24,18 @@ namespace ViewModels
         private dynamic _slider;
 
         [ImportingConstructor]
-	    public ScreenModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(process,viewInfo, eventSubscriptions, eventPublications,commandInfo, orientation)
+	    public ScreenModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(process,viewInfo, eventSubscriptions, eventPublications,commandInfo, orientation, priority)
         {
             this.WireEvents();
         }
     
 	    
-        public ObservableCollection<IViewModel> HeaderViewModels { get; } = new ObservableCollection<IViewModel>();
-        public ObservableCollection<IViewModel> LeftViewModels { get; } = new ObservableCollection<IViewModel>();
-        public ObservableCollection<IViewModel> RightViewModels { get; } = new ObservableCollection<IViewModel>();
-        public ObservableCollection<IViewModel> BodyViewModels { get; } = new ObservableCollection<IViewModel>();
-        public ObservableCollection<IViewModel> FooterViewModels { get; } = new ObservableCollection<IViewModel>();
-        public ObservableCollection<IViewModel> CacheViewModels { get; } = new ObservableCollection<IViewModel>();
+        public ObservableList<IViewModel> HeaderViewModels { get; } = new ObservableList<IViewModel>();
+        public ObservableList<IViewModel> LeftViewModels { get; } = new ObservableList<IViewModel>();
+        public ObservableList<IViewModel> RightViewModels { get; } = new ObservableList<IViewModel>();
+        public ObservableList<IViewModel> BodyViewModels { get; } = new ObservableList<IViewModel>();
+        public ObservableList<IViewModel> FooterViewModels { get; } = new ObservableList<IViewModel>();
+        public ObservableList<IViewModel> CacheViewModels { get; } = new ObservableList<IViewModel>();
 
         public dynamic Slider
         {

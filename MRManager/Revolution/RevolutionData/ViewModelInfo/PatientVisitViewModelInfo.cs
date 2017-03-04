@@ -197,7 +197,7 @@ namespace RevolutionData
 
             },
             typeof(IPatientVisitViewModel),
-            typeof(IBodyViewModel));
+            typeof(IBodyViewModel), 2);
 
     }
 }

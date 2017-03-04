@@ -48,6 +48,8 @@ namespace RevolutionData
             }, 
             new List<IViewModelEventCommand<IViewModel, IEvent>>(),
             typeof(IMainWindowViewModel),
-            typeof(IBodyViewModel));
+            typeof(IBodyViewModel)
+            ,0)
+            ;
     }
 }

@@ -71,7 +71,8 @@ namespace RevolutionData
                     
                 },
                 viewModelType: typeof(IEntityCacheViewModel<TEntity>),
-                orientation: typeof (ICacheViewModel));
+                orientation: typeof (ICacheViewModel),
+                priority:0);
         }
 
 

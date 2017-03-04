@@ -34,10 +34,11 @@ namespace Core.Common.UI
         protected ValidationResult ValidationResults = new ValidationResult();
         protected static ObservableListViewModel<TEntity> _instance = null;
         public static ObservableListViewModel<TEntity> Instance => _instance;
+        IEntityListViewModel<TEntity> IEntityListViewModel<TEntity>.Instance => Instance;
 
         public ObservableListViewModel() { }
 
-        public ObservableListViewModel(IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process, Type orientation) : base(process,viewInfo,eventSubscriptions,eventPublications,commandInfo, orientation)
+        public ObservableListViewModel(IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process, Type orientation, int priority) : base(process,viewInfo,eventSubscriptions,eventPublications,commandInfo, orientation, priority)
         {
             Validator = new EntityValidator<TEntity>();
             State.WhenAnyValue(x => x.Value).Subscribe(x => UpdateLocalState(x));
@@ -60,8 +61,9 @@ namespace Core.Common.UI
             }));
         }
 
+
         
-        
+
         ReactiveProperty<IProcessState<TEntity>> IEntityViewModel<TEntity>.State
         {
             get { return new ReactiveProperty<IProcessState<TEntity>>(_state.Value); }
@@ -88,6 +90,7 @@ namespace Core.Common.UI
         public virtual ReactiveProperty<ObservableList<TEntity>> EntitySet
         {
             get { return _entitySet; }
+            set { this.RaiseAndSetIfChanged(ref _entitySet, value); }
         }
 
 
@@ -141,7 +144,7 @@ namespace Core.Common.UI
         }
 
         private ObservableBindingList<TEntity> _changeTrackingList = new ObservableBindingList<TEntity>();
-        private readonly ReactiveProperty<ObservableList<TEntity>> _entitySet = new ReactiveProperty<ObservableList<TEntity>>(new ObservableList<TEntity>());
+        private ReactiveProperty<ObservableList<TEntity>> _entitySet = new ReactiveProperty<ObservableList<TEntity>>(new ObservableList<TEntity>());
 
 
         public ObservableBindingList<TEntity> ChangeTrackingList
