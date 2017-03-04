@@ -38,6 +38,8 @@ namespace RevolutionData
                     {
                         if (v.State.Value == e.State) return;
                         v.Questions = new ObservableList<IQuestionResponseOptionInfo>(e.State.EntitySet.ToList());
+                        v.CurrentQuestion.Value = v.Questions.FirstOrDefault();
+                        UpdateQuestionResponse(v);
                     }),
                
                 new ViewEventSubscription<IQuestionaireViewModel, ICurrentEntityChanged<IQuestionInfo>>(
@@ -46,8 +48,9 @@ namespace RevolutionData
                     new List<Func<IQuestionaireViewModel, ICurrentEntityChanged<IQuestionInfo>, bool>>(),
                     (v, e) =>
                     {
-                        if (v.CurrentQuestion.Value == v.Questions.FirstOrDefault(x => x.Id == e.Entity.Id)) return;
+                        if (v.CurrentQuestion.Value != null && v.CurrentQuestion.Value == v.Questions.FirstOrDefault(x => x.Id == e.Entity.Id)) return;
                         v.CurrentQuestion.Value = v.Questions.FirstOrDefault(x => x.Id == e.Entity.Id);
+                        if (v.CurrentQuestion.Value == null) v.CurrentQuestion.Value = v.Questions.FirstOrDefault();
                         UpdateQuestionResponse(v);
                     }),
 
