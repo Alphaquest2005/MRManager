@@ -14,10 +14,13 @@ namespace EventMessages.Commands
     [Export(typeof(ICreateProcessActor))]
     public class CreateProcessActor:ProcessSystemMessage, ICreateProcessActor
     {
-        public CreateProcessActor() { }
-        public CreateProcessActor(IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source):base(processInfo,process, source)
+        public CreateProcessActor(){}
+
+        public CreateProcessActor(IList<IComplexEventAction> complexEvents, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source):base(processInfo,process, source)
         {
-           
+            ComplexEvents = complexEvents;
         }
+
+        public IList<IComplexEventAction> ComplexEvents { get; }
     }
 }

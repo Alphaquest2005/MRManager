@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SystemInterfaces;
@@ -22,8 +23,9 @@ namespace DataServices.Actors
         
         private IUntypedActorContext ctx = null;
 
-        public ViewModelSupervisor(ISystemProcess process, ISystemStarted firstMsg) : base(process)
+        public ViewModelSupervisor(List<IViewModelInfo> processViewModelInfos, ISystemProcess process, ISystemStarted firstMsg) : base(process)
         {
+            ProcessViewModelInfos = processViewModelInfos;
             ctx = Context;
             Task.Run(() =>
             {
@@ -42,7 +44,7 @@ namespace DataServices.Actors
                 EventMessageBus.Current.Publish(new ServiceStarted<IViewModelSupervisor>(this,new StateEventInfo(process.Id, RevolutionData.Context.Actor.Events.ActorStarted), process, Source), Source);
             });
 
-            HandleProcessViews(firstMsg);
+            //HandleProcessViews(firstMsg);
         }
 
        
@@ -52,7 +54,7 @@ namespace DataServices.Actors
         {
             try
             {
-                Parallel.ForEach(ProcessViewModels.ProcessViewModelInfos.Where(x => x.ProcessId == pe.Process.Id),new ParallelOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount},
+                Parallel.ForEach(ProcessViewModelInfos.Where(x => x.ProcessId == pe.Process.Id),new ParallelOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount},
                     (v) =>
                     {
                         var msg = new LoadViewModel(v,
@@ -70,6 +72,8 @@ namespace DataServices.Actors
             }
 
         }
+
+        public List<IViewModelInfo> ProcessViewModelInfos { get;  }
     }
 
 }

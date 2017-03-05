@@ -83,6 +83,10 @@
       <Project>{5058D323-23EF-4EE9-9E33-9C1FFF3AE524}</Project>
       <Name>SystemInterfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ViewModel.Interfaces\ViewModel.Interfaces.csproj">
+      <Project>{2f936e24-723e-4e7a-b21c-d6f618c74651}</Project>
+      <Name>ViewModel.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

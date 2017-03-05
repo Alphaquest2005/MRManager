@@ -21,12 +21,12 @@ namespace MRManager_UnitTests
     public class DbContextUnitTest
     {
         private ISystemProcess testProcess =
-            new SystemProcess(new Process(-1, -1, "Testing", "Testing", "T", new Agent("UnitTest")),
+            new SystemProcess(new RevolutionEntities.Process.Process(-1, -1, "Testing", "Testing", "T", new Agent("UnitTest")),
                 new MachineInfo("TestMachine", 1));
 
         protected ISystemSource Source
             =>
-                new Source(Guid.NewGuid(), typeof(DbContextUnitTest).GetFriendlyName(), new SourceType(typeof(DbContextUnitTest)), new SystemProcess(new Process(1, 0, "Starting System", "Prepare system for Intial Use", "", new Agent("System")), new MachineInfo(Environment.MachineName, Environment.ProcessorCount)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+                new Source(Guid.NewGuid(), typeof(DbContextUnitTest).GetFriendlyName(), new SourceType(typeof(DbContextUnitTest)), new SystemProcess(new RevolutionEntities.Process.Process(1, 0, "Starting System", "Prepare system for Intial Use", "", new Agent("System")), new MachineInfo(Environment.MachineName, Environment.ProcessorCount)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
         static IEntityCreated<IPersons> createdPerson;
 

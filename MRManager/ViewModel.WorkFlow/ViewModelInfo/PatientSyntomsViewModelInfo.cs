@@ -5,15 +5,11 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows;
 using SystemInterfaces;
-using Actor.Interfaces;
 using EF.Entities;
-using EventMessages.Commands;
-using EventMessages.Events;
 using Interfaces;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
-using ViewMessages;
 using ViewModel.Interfaces;
 
 namespace RevolutionData

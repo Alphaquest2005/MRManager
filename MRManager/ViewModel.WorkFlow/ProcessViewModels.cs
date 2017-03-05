@@ -1,25 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive;
-using System.Reactive.Linq;
-using System.Windows;
-using SystemInterfaces;
-using EventMessages;
-using EventMessages.Commands;
-using EventMessages.Events;
+﻿using System.Collections.Generic;
 using Interfaces;
-using JB.Reactive.ExtensionMethods;
-using MoreLinq;
-using Reactive.Bindings;
-using ReactiveUI;
-using RevolutionEntities.Process;
-using RevolutionEntities.ViewModels;
-using ViewMessages;
+using RevolutionData;
 using ViewModel.Interfaces;
-using Utilities;
+using ViewModel.WorkFlow.ViewModelInfo;
 
-namespace RevolutionData
+namespace ViewModel.WorkFlow
 {
     public class ProcessViewModels
     {

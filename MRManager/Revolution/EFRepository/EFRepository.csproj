@@ -88,10 +88,6 @@
       <Project>{AD573873-C8E6-4EA3-93F5-0D39A92FC9F6}</Project>
       <Name>Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\TypeMaps\TypeMaps.csproj">
-      <Project>{75c0650c-ce23-44f5-a44f-e4b443dfff70}</Project>
-      <Name>TypeMaps</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BootStrapper\BootStrapper.csproj">
       <Project>{5dfeea8b-baba-4544-bf36-0a76a0d10c1b}</Project>
       <Name>BootStrapper</Name>

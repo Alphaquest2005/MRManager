@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using SystemInterfaces;
-using JB.Collections.Reactive;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
-using ViewMessages;
 using ViewModel.Interfaces;
 
 namespace RevolutionData

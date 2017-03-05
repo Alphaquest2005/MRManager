@@ -73,9 +73,7 @@ namespace DataServices.Actors
 
                                 });
             
-            _complexEvents =
-                    new ReadOnlyCollection<IComplexEventAction>(
-                        Processes.ProcessComplexEvents.Where(x => x.ProcessId == msg.Process.Id).ToList());
+            _complexEvents = new ReadOnlyCollection<IComplexEventAction>(msg.ComplexEvents);
                 StartActors(_complexEvents);
             
         }

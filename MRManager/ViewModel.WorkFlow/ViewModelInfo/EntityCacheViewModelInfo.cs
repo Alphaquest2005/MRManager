@@ -1,14 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using SystemInterfaces;
-using Actor.Interfaces;
-using EventMessages.Commands;
-using Interfaces;
-using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
 using ViewModel.Interfaces;
 
@@ -96,41 +90,9 @@ namespace RevolutionData
         }
 
 
-        /// 
-        public static IProcessAction IntializeCacheAction => new ProcessAction(
-            action: async cp =>
-                    await Task.Run(() => new LoadEntitySet<TEntity>(
-                        new StateCommandInfo(3, Context.EntityView.Commands.LoadEntityViewSetWithChanges),
-                        cp.Actor.Process, cp.Actor.Source)),
-            processInfo:
-                cp =>
-                    new StateCommandInfo(cp.Actor.Process.Id,
-                        Context.EntityView.Commands.LoadEntityViewSetWithChanges),
-            // take shortcut cud be IntialState
-            expectedSourceType: new SourceType(typeof (IComplexEventService)));
+       
 
-    public class ComplexActions
-    {
-        public static ComplexEventAction IntializeCache(int processId)
-        {
-            return new ComplexEventAction(
-                key: $"{typeof(TEntity).Name}EntityCache-1",
-                processId: processId,
-                events: new List<IProcessExpectedEvent>
-                {
-                    new ProcessExpectedEvent(key: "ProcessStarted",
-                        processId: processId,
-                        eventPredicate: e => e != null,
-                        eventType: typeof (ISystemProcessStarted),
-                        processInfo: new StateEventInfo(processId, Context.Process.Events.ProcessStarted),
-                        expectedSourceType: new SourceType(typeof (IComplexEventService)))
-
-                },
-                expectedMessageType: typeof (IProcessStateMessage<IInterviewInfo>),
-                action: IntializeCacheAction,
-                processInfo: new StateCommandInfo(processId, Context.Process.Commands.CreateState));
-        }
-    }
+   
 
     }
 

@@ -24,7 +24,7 @@ namespace MRManager_UnitTests
     public class ObservableViewModelTests:IProcessSource
     {
         private static readonly ProcessState<ISignInInfo> ProcessState;
-        private static readonly SystemProcess TestProcess= new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")),new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        private static readonly SystemProcess TestProcess= new SystemProcess(new RevolutionEntities.Process.Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")),new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
         static ObservableViewModelTests()
         {
@@ -32,7 +32,7 @@ namespace MRManager_UnitTests
         }
        
     
-        public ISystemSource Source => new Source(Guid.NewGuid(), $"EntityRepository:<{typeof(ObservableViewModelTests).GetFriendlyName()}>",new SourceType(typeof(ObservableViewModelTests)), new SystemProcess(new Process(1, 0, "Starting System", "Prepare system for Intial Use", "", new Agent("System")), new MachineInfo(Environment.MachineName, Environment.ProcessorCount)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public ISystemSource Source => new Source(Guid.NewGuid(), $"EntityRepository:<{typeof(ObservableViewModelTests).GetFriendlyName()}>",new SourceType(typeof(ObservableViewModelTests)), new SystemProcess(new RevolutionEntities.Process.Process(1, 0, "Starting System", "Prepare system for Intial Use", "", new Agent("System")), new MachineInfo(Environment.MachineName, Environment.ProcessorCount)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
         [TestMethod]
         public void InitalizeObserveableWithNoSubscriptions()

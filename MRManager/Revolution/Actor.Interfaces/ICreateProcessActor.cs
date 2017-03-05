@@ -11,5 +11,6 @@ namespace Actor.Interfaces
     
     public interface ICreateProcessActor : IProcessSystemMessage
     {
+        IList<IComplexEventAction> ComplexEvents { get; }
     }
 }

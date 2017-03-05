@@ -245,25 +245,21 @@
       <Project>{2f936e24-723e-4e7a-b21c-d6f618c74651}</Project>
       <Name>ViewModel.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Specifications\Specifications.csproj">
-      <Project>{0b16da18-f343-4b39-a7a5-2699e60b6308}</Project>
-      <Name>Specifications</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Transformations\Transformations.csproj">
-      <Project>{8f2aec46-7526-468f-b606-b2b8d1085101}</Project>
-      <Name>Transformations</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TypeMaps\TypeMaps.csproj">
-      <Project>{75c0650c-ce23-44f5-a44f-e4b443dfff70}</Project>
-      <Name>TypeMaps</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ValidationSets\ValidationSets.csproj">
       <Project>{6a9c99e7-2552-4a6c-b26e-2d727c5d85ce}</Project>
       <Name>ValidationSets</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ViewModel.WorkFlow\ViewModel.WorkFlow.csproj">
+      <Project>{ee2fd2ef-1f6d-4ae6-b768-b788cdcfc250}</Project>
+      <Name>ViewModel.WorkFlow</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ViewModels\ViewModels.csproj">
       <Project>{db1e7bd6-7fe0-4cdd-8b6d-edbb0d156b41}</Project>
       <Name>ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="Process.WorkFlow\Process.WorkFlow.csproj">
+      <Project>{4f0baa58-3b45-4136-8095-445d406b4d23}</Project>
+      <Name>Process.WorkFlow</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -98,9 +98,9 @@
       <Project>{ad573873-c8e6-4ea3-93f5-0d39a92fc9f6}</Project>
       <Name>Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\TypeMaps\TypeMaps.csproj">
-      <Project>{75c0650c-ce23-44f5-a44f-e4b443dfff70}</Project>
-      <Name>TypeMaps</Name>
+    <ProjectReference Include="..\..\MRManager\Process.WorkFlow\Process.WorkFlow.csproj">
+      <Project>{4f0baa58-3b45-4136-8095-445d406b4d23}</Project>
+      <Name>Process.WorkFlow</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ViewModels\ViewModels.csproj">
       <Project>{db1e7bd6-7fe0-4cdd-8b6d-edbb0d156b41}</Project>

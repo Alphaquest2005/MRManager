@@ -22,14 +22,13 @@ using RevolutionLogger;
 
 
 
-
 namespace MRManager_UnitTests
 {
     [TestClass]
     public class SystemIntializationProcess
     {
 
-        public static ISystemSource Source => new Source(Guid.NewGuid(), "TestCase" + typeof(SystemIntializationProcess).GetFriendlyName(),new SourceType(typeof(SystemIntializationProcess)), new SystemProcess(new Process(1, 0, "Starting System", "Prepare system for Intial Use", "", new Agent("System")), new MachineInfo(Environment.MachineName, Environment.ProcessorCount)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public static ISystemSource Source => new Source(Guid.NewGuid(), "TestCase" + typeof(SystemIntializationProcess).GetFriendlyName(),new SourceType(typeof(SystemIntializationProcess)), new SystemProcess(new RevolutionEntities.Process.Process(1, 0, "Starting System", "Prepare system for Intial Use", "", new Agent("System")), new MachineInfo(Environment.MachineName, Environment.ProcessorCount)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
         private static bool started;
 
         public static void StartSystem()
@@ -38,9 +37,7 @@ namespace MRManager_UnitTests
             started = true;
             if (File.Exists("MRManager-TEST-Logs.xml")) File.Delete("MRManager-TEST-Logs.xml");
             Logger.Initialize();
-            var t = new MRManagerDBContext().GetType().Assembly;
-            var x = new EFEntity<IEntity>().GetType().Assembly;
-            BootStrapper.BootStrapper.Instance.StartUp(t, x, false);
+            BootStrapper.BootStrapper.Instance.StartUp(false,Process.WorkFlow.MachineInfoData.MachineInfos,Process.WorkFlow.Processes.ProcessInfos, Process.WorkFlow.Processes.ProcessComplexEvents, ViewModel.WorkFlow.ProcessViewModels.ProcessViewModelInfos);
             var mainWindow = MainWindowViewModel.Instance;
            
         }

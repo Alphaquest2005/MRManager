@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Reflection;
+using SystemInterfaces;
 using Actor.Interfaces;
 using Akka.Actor;
 using DataServices.Actors;
-
+using ViewModel.Interfaces;
 
 
 namespace ActorBackBone
@@ -18,12 +20,12 @@ namespace ActorBackBone
         public static ActorSystem System { get; private set; }
 
 
-        public void Intialize(Assembly dbContextAssembly, Assembly entityAssembly, bool autoRun)
+        public void Intialize(bool autoRun, List<IMachineInfo> machineInfo, List<IProcessInfo> processInfos, List<IComplexEventAction> complexEventActions, List<IViewModelInfo> viewInfos)
         {
              try
             {
                 System = ActorSystem.Create("System");
-                System.ActorOf(Props.Create<ServiceManager>(dbContextAssembly, entityAssembly, autoRun),"ServiceManager");
+                System.ActorOf(Props.Create<ServiceManager>(autoRun,machineInfo, processInfos, complexEventActions,viewInfos),"ServiceManager");
                 Instance = this;
             }
             catch (Exception)

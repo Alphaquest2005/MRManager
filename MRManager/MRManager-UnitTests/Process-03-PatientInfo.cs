@@ -11,6 +11,7 @@ using EventMessages;
 using EventMessages.Commands;
 using Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Process.WorkFlow;
 using RevolutionData;
 using RevolutionEntities.Process;
 using ViewModel.Interfaces;

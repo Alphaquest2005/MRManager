@@ -4,20 +4,14 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows;
-using System.Windows.Data;
 using SystemInterfaces;
-using Actor.Interfaces;
 using EF.Entities;
-using EventMessages.Commands;
-using EventMessages.Events;
 using Interfaces;
 using JB.Collections.Reactive;
-using MoreLinq;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
 using Utilities;
-using ViewMessages;
 using ViewModel.Interfaces;
 
 namespace RevolutionData

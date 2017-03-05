@@ -96,6 +96,10 @@
       <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>
       <Name>SystemInterfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ViewModel.Interfaces\ViewModel.Interfaces.csproj">
+      <Project>{2f936e24-723e-4e7a-b21c-d6f618c74651}</Project>
+      <Name>ViewModel.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />

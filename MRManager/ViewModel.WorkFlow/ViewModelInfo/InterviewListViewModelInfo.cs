@@ -5,24 +5,19 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows;
 using SystemInterfaces;
-using Actor.Interfaces;
 using EF.Entities;
-using EventMessages.Commands;
-using EventMessages.Events;
 using Interfaces;
 using JB.Collections.Reactive;
-using Reactive.Bindings.Extensions;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
-using ViewMessages;
 using ViewModel.Interfaces;
 
-namespace RevolutionData
+namespace ViewModel.WorkFlow.ViewModelInfo
 {
     public class InterviewListViewModelInfo
     {
-        public static readonly ViewModelInfo InterviewListViewModel = new ViewModelInfo
+        public static readonly RevolutionEntities.ViewModels.ViewModelInfo InterviewListViewModel = new RevolutionEntities.ViewModels.ViewModelInfo
             (
             3,
             new ViewInfo("Interview", "", "Interviews"),
@@ -185,13 +180,13 @@ namespace RevolutionData
                     {
                         v => v.State != null
                     },
-                    messageData:s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
+                    messageData:s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, RevolutionData.Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
 
                 new ViewEventPublication<IInterviewListViewModel, ICurrentEntityChanged<IInterviewInfo>>(
                     key:"CurrentEntityChanged",
                     subject:v => v.CurrentEntity,//.WhenAnyValue(x => x.Value),
                     subjectPredicate:new List<Func<IInterviewListViewModel, bool>>{},
-                    messageData:s => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
+                    messageData:s => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value},new StateEventInfo(s.Process.Id, RevolutionData.Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
 
                 new ViewEventPublication<IInterviewListViewModel, ICurrentEntityChanged<ISyntomMedicalSystemInfo>>(
                     key:"CurrentSystemChanged",
@@ -211,7 +206,7 @@ namespace RevolutionData
 
                                                                     }));
                         return new ViewEventPublicationParameter(new object[] {s.CurrentMedicalSystem.Value},
-                            new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded), s.Process,
+                            new StateEventInfo(s.Process.Id, RevolutionData.Context.View.Events.ProcessStateLoaded), s.Process,
                             s.Source);
                     }),
             },
@@ -239,7 +234,7 @@ namespace RevolutionData
                         return new ViewEventCommandParameter(
                             new object[] {s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},
                             new StateCommandInfo(s.Process.Id,
-                                Context.EntityView.Commands.LoadEntityViewSetWithChanges), s.Process,
+                                RevolutionData.Context.EntityView.Commands.LoadEntityViewSetWithChanges), s.Process,
                             s.Source);
                     }),
 
@@ -258,7 +253,7 @@ namespace RevolutionData
                         return new ViewEventCommandParameter(
                             new object[] {s,s.RowState.Value},
                             new StateCommandInfo(s.Process.Id,
-                                Context.Process.Commands.CurrentEntityChanged), s.Process,
+                                RevolutionData.Context.Process.Commands.CurrentEntityChanged), s.Process,
                             s.Source);
                     }),
 
@@ -282,7 +277,7 @@ namespace RevolutionData
                                 v.CurrentMedicalSystem.Value.Id,
                                 res.ToDictionary(x => x.Key, x => x.Value)
                             },
-                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            new StateCommandInfo(v.Process.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), v.Process,
                             v.Source);
                         v.ChangeTracking.Clear();
                         return msg;
@@ -309,7 +304,7 @@ namespace RevolutionData
                                 v.CurrentMedicalSystem.Value.Id,
                                 res.Where(x => x.Value != null).ToDictionary(x => x.Key, x => x.Value)
                             },
-                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            new StateCommandInfo(v.Process.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), v.Process,
                             v.Source);
                         v.ChangeTracking.Clear();
                         return msg;
@@ -338,7 +333,7 @@ namespace RevolutionData
                                 v.CurrentEntity.Value.Id,
                                 res.ToDictionary(x => x.Key, x => x.Value)
                             },
-                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            new StateCommandInfo(v.Process.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), v.Process,
                             v.Source);
                         v.ChangeTracking.Clear();
                         return msg;
@@ -369,7 +364,7 @@ namespace RevolutionData
                                 v.CurrentEntity.Value.Id,
                                 res.ToDictionary(x => x.Key, x => x.Value)
                             },
-                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            new StateCommandInfo(v.Process.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), v.Process,
                             v.Source);
                         v.ChangeTracking.Clear();
                         return msg;
@@ -395,7 +390,7 @@ namespace RevolutionData
                                 0,
                                 res.ToDictionary(x => x.Key, x => x.Value)
                             },
-                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            new StateCommandInfo(v.Process.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), v.Process,
                             v.Source);
                         v.ChangeTracking.Clear();
                         return msg;
