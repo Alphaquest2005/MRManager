@@ -37,7 +37,9 @@ namespace MRManager_UnitTests
             started = true;
             if (File.Exists("MRManager-TEST-Logs.xml")) File.Delete("MRManager-TEST-Logs.xml");
             Logger.Initialize();
-            BootStrapper.BootStrapper.Instance.StartUp(false,Process.WorkFlow.MachineInfoData.MachineInfos,Process.WorkFlow.Processes.ProcessInfos, Process.WorkFlow.Processes.ProcessComplexEvents, ViewModel.WorkFlow.ProcessViewModels.ProcessViewModelInfos);
+            var dbContextAssembly = new MRManagerDBContext().GetType().Assembly;
+            var entitiesAssembly = new EFEntity<IEntity>().GetType().Assembly;
+            BootStrapper.BootStrapper.Instance.StartUp(false,Process.WorkFlow.MachineInfoData.MachineInfos,Process.WorkFlow.Processes.ProcessInfos, Process.WorkFlow.Processes.ProcessComplexEvents, ViewModel.WorkFlow.ProcessViewModels.ProcessViewModelInfos,dbContextAssembly, entitiesAssembly);
             var mainWindow = MainWindowViewModel.Instance;
            
         }

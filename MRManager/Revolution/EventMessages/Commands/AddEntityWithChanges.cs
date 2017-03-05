@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.Contracts;
 using SystemInterfaces;
@@ -17,7 +18,7 @@ namespace EventMessages.Commands
         {
             Contract.Requires(changes.Count > 0);
             Changes = changes;
-
         }
+        public Type ViewType => typeof(TEntity);
     }
 }

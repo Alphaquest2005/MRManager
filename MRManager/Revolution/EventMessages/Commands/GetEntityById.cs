@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using SystemInterfaces;
 using CommonMessages;
 
@@ -9,6 +10,7 @@ namespace EventMessages.Commands
     {
         public GetEntityById() { }
         public int EntityId { get; }
+        public Type ViewType => typeof(T);
 
         public GetEntityById( int entityId , IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo,process, source)
         {

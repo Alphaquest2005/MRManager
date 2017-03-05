@@ -41,12 +41,17 @@ namespace BootStrapper
         
         public static BootStrapper Instance { get; }
 
-        public void StartUp(bool autoRun, List<IMachineInfo> machineInfo, List<IProcessInfo> processInfos, List<IComplexEventAction> complexEventActions, List<IViewModelInfo> viewModelInfos)
+        public static Assembly DbContextAssembly { get; set; }
+        public static Assembly EntitiesAssembly { get; set; }
+
+        public void StartUp(bool autoRun, List<IMachineInfo> machineInfo, List<IProcessInfo> processInfos, List<IComplexEventAction> complexEventActions, List<IViewModelInfo> viewModelInfos, Assembly dbContextAssembly, Assembly entitiesAssembly)
         {
             try
             {
                 var x = Container.GetExport<IActorBackBone>().Value;
                 x.Intialize(autoRun,machineInfo, processInfos,complexEventActions, viewModelInfos);
+                DbContextAssembly = dbContextAssembly;
+                EntitiesAssembly = entitiesAssembly;
             }
             catch (Exception)
             {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using SystemInterfaces;
@@ -12,12 +13,13 @@ namespace EFRepository
 
     public class EntityViewDataContext<TEntityView> : EF7DataContextBase where TEntityView:IEntityView
     {
-       public static Type TEntity { get;  }
-        public static Type EntityType { get; }
-        private static Type ViewType { get; }
-        private static Type ctxType { get; }
+       public static Type TEntity { get; set; }
+        public static Type EntityType { get; set; }
+        private static Type ViewType { get; set; }
+        private static Type ctxType { get; set; }
 
-        static EntityViewDataContext()
+       
+         static EntityViewDataContext()
         {
             var bt = typeof(TEntityView).GetInterfaces().FirstOrDefault(x => x.Name.Contains("IEntityView"));
             TEntity = bt.GetGenericArguments().First();
@@ -30,17 +32,8 @@ namespace EFRepository
             if (ctxType == null) throw new InvalidOperationException("DBContext Is not Found");
         }
 
-        
 
-
-        public static void GetEntityFromPatientResponse(IGetEntityFromPatientResponse<TEntityView> msg)
-        {
-            
-            typeof(EntityViewRepository<,,,,>).MakeGenericType(typeof(TEntityView),ViewType,TEntity, EntityType, ctxType)
-                  .GetMethod("GetEntityFromPatientResponse")
-                  .Invoke(null, new object[] { msg });
-        }
-
+     
         public static void GetEntityViewById(IGetEntityViewById<TEntityView> msg)
         {
 
@@ -73,15 +66,9 @@ namespace EFRepository
                   .Invoke(null, new object[] { msg });
         }
 
-        public static void LoadPulledEntityViewSetWithChanges(ILoadPulledEntityViewSetWithChanges<TEntityView, IMatchType> msg)
-        {
-
-            typeof(EntityViewRepository<,,,,>).MakeGenericType(typeof(TEntityView), ViewType, TEntity, EntityType, ctxType)
-                  .GetMethod("LoadPulledEntityViewSetWithChanges")
-                  .Invoke(null, new object[] { msg });
-        }
 
 
 
+       
     }
 }

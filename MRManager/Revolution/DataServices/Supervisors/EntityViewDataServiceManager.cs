@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,6 +25,7 @@ namespace DataServices.Actors
 {
     public class EntityViewDataServiceManager : BaseSupervisor<EntityViewDataServiceManager>
     {
+        
         private IUntypedActorContext ctx = null;
         public EntityViewDataServiceManager(ISystemProcess process) : base(process)
         {
@@ -35,15 +37,25 @@ namespace DataServices.Actors
 
         private void handleEntityRequest(IEntityViewRequest entityRequest)
         {
-            
-            var classType =
-                entityRequest.GetType()
+            try
+            {
+                var typeArg = entityRequest.GetType()
                     .GetInterfaces()
-                    .FirstOrDefault(x => x.GetInterfaces().Any(z => z.IsGenericType && z.GetGenericTypeDefinition() == typeof(IEntityViewRequest<>))).GenericTypeArguments[0];
-            
-           
+                    .FirstOrDefault(x => x.GetInterfaces().Any(z => z.IsGenericType && z.GetGenericTypeDefinition() == typeof(IEntityViewRequest<>)));
+                var classType = typeArg != null 
+                    ? typeArg.GenericTypeArguments[0] 
+                    : entityRequest.ViewType;
 
-            CreateEntityViewActors(classType, typeof(EntityViewDataServiceSupervisor<>), "{0}EntityViewDataServiceSupervisor", entityRequest.Process, entityRequest);
+
+                CreateEntityViewActors(classType, typeof(EntityViewDataServiceSupervisor<>), "{0}EntityViewDataServiceSupervisor", entityRequest.Process, entityRequest);
+                
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
             
         }
 

@@ -60,6 +60,10 @@
     <Compile Include="ViewModelInfo\SigninViewModelInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DomainMessages\DomainMessages.csproj">
+      <Project>{7ee26a5b-63e6-450e-b4bd-66d0205fb492}</Project>
+      <Name>DomainMessages</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EFEntities\EF.Entities.csproj">
       <Project>{fad2a8c8-a1b4-4a3c-8e37-0388c0e3733c}</Project>
       <Name>EF.Entities</Name>

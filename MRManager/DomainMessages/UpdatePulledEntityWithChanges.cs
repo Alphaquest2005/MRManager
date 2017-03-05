@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using SystemInterfaces;
 using CommonMessages;
-using Interfaces;
+using System;
 
-namespace EventMessages.Commands
+namespace DomainMessages
 {
-    [Export(typeof(IUpdatePatientEntityWithChanges<IPatients>))]
-    public class UpdatePatientEntityWithChanges : ProcessSystemMessage, IUpdatePatientEntityWithChanges<IPatients>
+    [Export(typeof(IUpdatePatientEntityWithChanges<>))]
+    public class UpdatePatientEntityWithChanges<TEntity> : ProcessSystemMessage, IUpdatePatientEntityWithChanges<TEntity> where TEntity : IEntity
     {
         public UpdatePatientEntityWithChanges(){}
        public UpdatePatientEntityWithChanges(int entityId, string entityName,string syntomName,string interviewName, Dictionary<string, object> changes, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source): base(processInfo, process, source)
@@ -24,5 +24,7 @@ namespace EventMessages.Commands
         public string EntityName { get; }
         public string SyntomName { get; }
         public string InterviewName { get; }
+
+        public Type ViewType => typeof (TEntity);
     }
 }

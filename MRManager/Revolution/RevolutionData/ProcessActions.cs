@@ -85,7 +85,7 @@ namespace RevolutionData
         {
             return new ProcessAction(
                 action: async cp =>
-                         await Task.Run(() => new LoadPulledEntityViewSetWithChanges<TEntityView, IExactMatch>(entityName,new Dictionary<string, dynamic>(),
+                         await Task.Run(() => new LoadPulledEntityViewSetWithChanges<IExactMatch>(typeof(TEntityView),entityName,new Dictionary<string, dynamic>(),
                             new StateCommandInfo(cp.Actor.Process.Id,
                                 Context.EntityView.Commands.LoadEntityViewSetWithChanges),
                             cp.Actor.Process, cp.Actor.Source)),

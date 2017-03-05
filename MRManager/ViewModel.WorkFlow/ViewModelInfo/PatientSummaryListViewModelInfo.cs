@@ -5,6 +5,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows;
 using SystemInterfaces;
+using DomainMessages;
 using EF.Entities;
 using Interfaces;
 using ReactiveUI;

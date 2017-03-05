@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using SystemInterfaces;
@@ -19,6 +20,7 @@ namespace EventMessages.Commands
 
         public Dictionary<string, dynamic> Changes { get; }
         public int EntityId { get; }
+        public Type ViewType => typeof (TView);
     }
 
     [Export(typeof(IAddEntityViewWithChanges<>))]
@@ -33,6 +35,7 @@ namespace EventMessages.Commands
         }
 
         public Dictionary<string, dynamic> Changes { get; }
-        
+        public Type ViewType => typeof(TView);
+
     }
 }

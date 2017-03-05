@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using SystemInterfaces;
+using DomainMessages;
 using Interfaces;
 using ReactiveUI;
 using RevolutionEntities.Process;

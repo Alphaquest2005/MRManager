@@ -85,10 +85,6 @@
     <Compile Include="XamlGenerics.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Interfaces\Interfaces.csproj">
-      <Project>{AD573873-C8E6-4EA3-93F5-0D39A92FC9F6}</Project>
-      <Name>Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{CB6D5FBC-0C13-437D-B4F3-A0EC4D5673B3}</Project>
       <Name>Common</Name>

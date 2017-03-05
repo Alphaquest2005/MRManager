@@ -72,14 +72,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\EFDataContext\EF.DBContext.csproj">
-      <Project>{27c692a7-9601-43fb-8243-42b997107649}</Project>
-      <Name>EF.DBContext</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\EFEntities\EF.Entities.csproj">
-      <Project>{FAD2A8C8-A1B4-4A3C-8E37-0388C0E3733C}</Project>
-      <Name>EF.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Expressions\Expressions.csproj">
       <Project>{2ab54ce2-e09b-40b4-9cbf-184b3e770b0d}</Project>
       <Name>Expressions</Name>

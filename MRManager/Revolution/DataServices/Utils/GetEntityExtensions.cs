@@ -27,14 +27,10 @@ namespace DataServices.Actors
         public static void GetEntity<TEntityView>(this IGetEntityViewById<TEntityView> msg) where TEntityView : IEntityView
         {
 
-            EntityViewDataContext<TEntityView>.GetEntityViewById(msg);
+          EntityViewDataContext<TEntityView>.GetEntityViewById(msg);
         }
 
-        public static void GetEntityFromPatientResponse<TEntityView>(this IGetEntityFromPatientResponse<TEntityView> msg) where TEntityView : IEntityView
-        {
 
-            EntityViewDataContext<TEntityView>.GetEntityFromPatientResponse(msg);
-        }
 
         public static void GetEntityViewWithChanges<TEntityView>(this IGetEntityViewWithChanges<TEntityView> msg) where TEntityView : IEntityView
         {
@@ -51,15 +47,8 @@ namespace DataServices.Actors
             EntityViewDataContext<TEntityView>.LoadEntityViewSetWithChanges(msg);
         }
 
-        public static void LoadPulledEntityViewSetWithChanges<TEntityView>(this ILoadPulledEntityViewSetWithChanges<TEntityView, IMatchType> msg) where TEntityView : IEntityView
-        {
-            EntityViewDataContext<TEntityView>.LoadPulledEntityViewSetWithChanges(msg);
-        }
 
-        public static void UpdatePulledEntityWithChanges<TEntity>(this IUpdatePatientEntityWithChanges<TEntity> msg) where TEntity : IEntity
-        {
-            PulledEntityDataContext.UpdatePulledEntityWithChanges(msg);
-        }
+
 
 
     }
