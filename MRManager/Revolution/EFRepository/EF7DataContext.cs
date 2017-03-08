@@ -11,20 +11,17 @@ namespace EFRepository
 {
     public class EF7DataContext<TEntity> : EF7DataContextBase where TEntity : class, IEntity
     {
-        private static Type EntityType { get; }
-        private static Type ctxType { get; }
-        
-        static EF7DataContext()
+        private static Type EntityType { get; set; }
+        private static Type ctxType { get; set; }
+
+        static EF7DataContext() 
         {
-            
             var t = typeof(TEntity);
             EntityType = EntityTypes.FirstOrDefault(x => x.Name == (t.Name.Substring(1)));
             ctxType = ContextTypes.FirstOrDefault(x => x.BaseType != null && x.BaseType.Name.Contains("DbContext"));
             if (EntityType == null) throw new InvalidOperationException("DataType Is not Found");
             if (ctxType == null) throw new InvalidOperationException("DBContext Is not Found");
         }
-
-
 
         public static void Create(ICreateEntity<TEntity> msg )
         {
@@ -90,6 +87,7 @@ namespace EFRepository
                 .GetMethod("LoadEntitySetWithFilterWithIncludes")
                 .Invoke(null, new object[] { msg });
         }
+
 
         
     }

@@ -97,6 +97,10 @@
       <Project>{ad573873-c8e6-4ea3-93f5-0d39a92fc9f6}</Project>
       <Name>Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MRManager\Process.WorkFlow\Process.WorkFlow.csproj">
+      <Project>{4f0baa58-3b45-4136-8095-445d406b4d23}</Project>
+      <Name>Process.WorkFlow</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Revolution\CommonMessages\CommonMessages.csproj">
       <Project>{77007560-89dc-4e1f-9313-ae064a048ad4}</Project>
       <Name>CommonMessages</Name>
@@ -141,13 +145,13 @@
       <Project>{2f936e24-723e-4e7a-b21c-d6f618c74651}</Project>
       <Name>ViewModel.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Transformations\Transformations.csproj">
-      <Project>{8F2AEC46-7526-468F-B606-B2B8D1085101}</Project>
-      <Name>Transformations</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ValidationSets\ValidationSets.csproj">
       <Project>{6a9c99e7-2552-4a6c-b26e-2d727c5d85ce}</Project>
       <Name>ValidationSets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModel.WorkFlow\ViewModel.WorkFlow.csproj">
+      <Project>{EE2FD2EF-1F6D-4AE6-B768-B788CDCFC250}</Project>
+      <Name>ViewModel.WorkFlow</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

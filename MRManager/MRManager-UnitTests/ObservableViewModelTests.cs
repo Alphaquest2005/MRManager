@@ -24,7 +24,7 @@ namespace MRManager_UnitTests
     public class ObservableViewModelTests:IProcessSource
     {
         private static readonly ProcessState<ISignInInfo> ProcessState;
-        private static readonly SystemProcess TestProcess= new SystemProcess(new Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")),new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        private static readonly SystemProcess TestProcess= new SystemProcess(new RevolutionEntities.Process.Process(1, 0, "Test Proces", "This is a Test", "T", new Agent("TestManager")),new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
         static ObservableViewModelTests()
         {
@@ -32,19 +32,19 @@ namespace MRManager_UnitTests
         }
        
     
-        public ISystemSource Source => new Source(Guid.NewGuid(), $"EntityRepository:<{typeof(ObservableViewModelTests).GetFriendlyName()}>",new SourceType(typeof(ObservableViewModelTests)), new SystemProcess(new Process(1, 0, "Starting System", "Prepare system for Intial Use", "", new Agent("System")), new MachineInfo(Environment.MachineName, Environment.ProcessorCount)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+        public ISystemSource Source => new Source(Guid.NewGuid(), $"EntityRepository:<{typeof(ObservableViewModelTests).GetFriendlyName()}>",new SourceType(typeof(ObservableViewModelTests)), new SystemProcess(new RevolutionEntities.Process.Process(1, 0, "Starting System", "Prepare system for Intial Use", "", new Agent("System")), new MachineInfo(Environment.MachineName, Environment.ProcessorCount)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
 
         [TestMethod]
         public void InitalizeObserveableWithNoSubscriptions()
         {
            
             dynamic viewModel = new SigninViewModel(process: TestProcess,
-                viewInfo:new ViewInfo("","",""), 
+                viewInfo: new ViewInfo("","",""), 
                eventSubscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>(),
                eventPublications: new List<IViewModelEventPublication<IViewModel, IEvent>>()
                {
                    
-               }, commandInfo: new List<IViewModelEventCommand<IViewModel,IEvent>>(), orientation: typeof(IBodyViewModel));
+               }, commandInfo: new List<IViewModelEventCommand<IViewModel,IEvent>>(), orientation: typeof(IBodyViewModel), priority: 0);
             
             viewModel.State.Value = ProcessState;
             // var id = dynamicViewModel.GetValue("Id");
@@ -65,7 +65,7 @@ namespace MRManager_UnitTests
                        subject: (s) => s.ChangeTracking.DictionaryChanges,
                        subjectPredicate: new List<Func<SigninViewModel, bool>>(),
                        messageData: (s) => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id, s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateEventInfo(s.Process.Id, RevolutionData.Context.View.Events.EntityChanged), s.Process, s.Source ), key: "Entity Changes")
-               }, commandInfo: new List<IViewModelEventCommand<IViewModel,IEvent>>(), orientation: typeof(IBodyViewModel));
+               }, commandInfo: new List<IViewModelEventCommand<IViewModel,IEvent>>(), orientation: typeof(IBodyViewModel), priority: 0);
 
             viewModel.State.Value = ProcessState;
 
@@ -92,7 +92,7 @@ namespace MRManager_UnitTests
                            v => v.ChangeTracking.Keys.Contains(nameof(v.State.Value.Entity.Usersignin))
                        },
                        messageData: (s) => new ViewEventPublicationParameter(new object[] {s.State.Value.Entity.Id, s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateEventInfo(s.Process.Id, RevolutionData.Context.View.Events.EntityChanged), s.Process, s.Source ), key: "entity Changes")
-               }, commandInfo: new List<IViewModelEventCommand<IViewModel, IEvent>>(), orientation: typeof(IBodyViewModel));
+               }, commandInfo: new List<IViewModelEventCommand<IViewModel, IEvent>>(), orientation: typeof(IBodyViewModel), priority: 0);
 
             viewModel.State.Value = ProcessState;
 
@@ -157,7 +157,7 @@ namespace MRManager_UnitTests
                             v => v.ChangeTracking.Values.Contains(nameof(ISignInInfo.Password)) && v.ChangeTracking.Values.Contains(nameof(ISignInInfo.Usersignin)), 
                         },
                         messageData: s => new ViewEventCommandParameter(new object[] {s.State.Value.Entity.Id,s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},new StateCommandInfo(s.Process.Id, RevolutionData.Context.View.Commands.ChangeEntity),s.Process,s.Source))
-                }, orientation: typeof(IBodyViewModel));
+                }, orientation: typeof(IBodyViewModel), priority: 0);
             return viewModel;
         }
     }

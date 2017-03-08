@@ -20,7 +20,7 @@
                      VerticalAlignment="Stretch"
                      Background="#33FFFFFF"
                      IsSynchronizedWithCurrentItem="True"
-                     ItemsSource="{Binding EntitySet}"
+                     ItemsSource="{Binding EntitySet.Value}"
                      SelectedItem="{Binding CurrentEntity.Value,
                                             Mode=TwoWay}">
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Diagnostics.Contracts;
 using SystemInterfaces;
@@ -21,5 +22,7 @@ namespace EventMessages.Commands
             Changes = changes;
 
         }
+
+        public Type ViewType => typeof(TEntity);
     }
 }

@@ -5,14 +5,11 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows;
 using SystemInterfaces;
-using Actor.Interfaces;
-using EventMessages.Commands;
-using EventMessages.Events;
+using EF.Entities;
 using Interfaces;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
-using ViewMessages;
 using ViewModel.Interfaces;
 
 namespace RevolutionData
@@ -57,20 +54,20 @@ namespace RevolutionData
                         {
 
 
-                       var f = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
+                       var f = v.EntitySet.Value.FirstOrDefault(x => x.Id == e.Entity.Id);
                         if (v.CurrentEntity.Value.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
                         if (f == null)
                         {
-                            v.EntitySet.Insert(v.EntitySet.Count() - 1,e.Entity);
-                            v.EntitySet.Reset();
+                            v.EntitySet.Value.Insert(v.EntitySet.Value.Count() - 1,e.Entity);
+                            v.EntitySet.Value.Reset();
                         }
                         else
                         {
                             //f = e.Entity;
-                            var idx = v.EntitySet.IndexOf(f);
-                            v.EntitySet.Remove(f);
-                            v.EntitySet.Insert(idx, e.Entity);
-                            v.EntitySet.Reset();
+                            var idx = v.EntitySet.Value.IndexOf(f);
+                            v.EntitySet.Value.Remove(f);
+                            v.EntitySet.Value.Insert(idx, e.Entity);
+                            v.EntitySet.Value.Reset();
                         }
                         v.RowState.Value = RowState.Unchanged;
                         }));
@@ -87,20 +84,20 @@ namespace RevolutionData
                         {
 
 
-                       var f = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
+                       var f = v.EntitySet.Value.FirstOrDefault(x => x.Id == e.Entity.Id);
                         if (v.CurrentEntity.Value.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
                         if (f == null)
                         {
-                            v.EntitySet.Insert(v.EntitySet.Count() - 1,e.Entity);
-                                v.EntitySet.Reset();
+                            v.EntitySet.Value.Insert(v.EntitySet.Value.Count() - 1,e.Entity);
+                                v.EntitySet.Value.Reset();
                         }
                         else
                         {
                             //f = e.Entity;
-                            var idx = v.EntitySet.IndexOf(f);
-                            v.EntitySet.Remove(f);
-                            v.EntitySet.Insert(idx, e.Entity);
-                            v.EntitySet.Reset();
+                            var idx = v.EntitySet.Value.IndexOf(f);
+                            v.EntitySet.Value.Remove(f);
+                            v.EntitySet.Value.Insert(idx, e.Entity);
+                            v.EntitySet.Value.Reset();
                         }
                         v.RowState.Value = RowState.Unchanged;
                         }));
@@ -117,20 +114,20 @@ namespace RevolutionData
                         {
 
 
-                       var f = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
+                       var f = v.EntitySet.Value.FirstOrDefault(x => x.Id == e.Entity.Id);
                         if (v.CurrentEntity.Value.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
                         if (f == null)
                         {
-                            v.EntitySet.Insert(v.EntitySet.Count() - 1,e.Entity);
-                                v.EntitySet.Reset();
+                            v.EntitySet.Value.Insert(v.EntitySet.Value.Count() - 1,e.Entity);
+                                v.EntitySet.Value.Reset();
                         }
                         else
                         {
                             //f = e.Entity;
-                            var idx = v.EntitySet.IndexOf(f);
-                            v.EntitySet.Remove(f);
-                            v.EntitySet.Insert(idx, e.Entity);
-                            v.EntitySet.Reset();
+                            var idx = v.EntitySet.Value.IndexOf(f);
+                            v.EntitySet.Value.Remove(f);
+                            v.EntitySet.Value.Insert(idx, e.Entity);
+                            v.EntitySet.Value.Reset();
                         }
                         v.RowState.Value = RowState.Unchanged;
                         }));
@@ -148,7 +145,24 @@ namespace RevolutionData
                     {
                         v => v.State != null
                     },
-                    messageData:s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
+                    messageData:s =>
+                    {
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            if (s.CurrentPatientVisit != null &&
+                                (s.CurrentPatientVisit.Value?.Id != 0 &&
+                                 s.CurrentPatientVisit.Value?.DateOfVisit.Date == DateTime.Today.Date))
+                            {
+
+                                s.EntitySet.Value.Add(new PatientSyntomInfo() {SyntomName = "Create New..."});
+                                s.NotifyPropertyChanged(nameof(s.EntitySet));
+                            }
+
+                        }));
+                       return new ViewEventPublicationParameter(new object[] {s, s.State.Value},
+                            new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded), s.Process,
+                            s.Source);
+                    }),
 
                 new ViewEventPublication<IPatientSyntomViewModel, ICurrentEntityChanged<IPatientSyntomInfo>>(
                     key:"CurrentEntityChanged",
@@ -301,7 +315,7 @@ namespace RevolutionData
 
             },
             typeof(IPatientSyntomViewModel),
-            typeof(IBodyViewModel));
+            typeof(IBodyViewModel),3);
 
       
 

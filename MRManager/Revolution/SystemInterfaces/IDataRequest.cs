@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.Composition;
 
 namespace SystemInterfaces
@@ -9,5 +10,6 @@ namespace SystemInterfaces
 
     public interface IEntityRequest:IProcessSystemMessage
     {
+        Type ViewType { get; }
     }
 }

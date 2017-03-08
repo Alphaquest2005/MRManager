@@ -58,25 +58,8 @@
     <Compile Include="Context\Process.cs" />
     <Compile Include="Context\Actor.cs" />
     <Compile Include="Enums.cs" />
-    <Compile Include="ViewModelInfo\EntityCacheViewModelInfo.cs" />
-    <Compile Include="ViewModelInfo\FooterViewModelInfo.cs" />
-    <Compile Include="ViewModelInfo\HeaderViewModelInfo.cs" />
-    <Compile Include="ViewModelInfo\EntityViewCacheViewModelInfo.cs" />
-    <Compile Include="ViewModelInfo\InterviewListViewModelInfo.cs" />
-    <Compile Include="MachineInfoData.cs" />
-    <Compile Include="ViewModelInfo\MainWindowViewModelInfo.cs" />
-    <Compile Include="ViewModelInfo\PatientDetailsViewModelInfo.cs" />
-    <Compile Include="ViewModelInfo\PatientSummaryListViewModelInfo.cs" />
-    <Compile Include="ViewModelInfo\PatientSyntomsViewModelInfo.cs" />
-    <Compile Include="ViewModelInfo\PatientVisitViewModelInfo.cs" />
     <Compile Include="ProcessActions.cs" />
-    <Compile Include="ProcessViewModels.cs" />
-    <Compile Include="Processes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModelInfo\QuestionaireViewModelInfo.cs" />
-    <Compile Include="ViewModelInfo\QuestionListViewModelInfo.cs" />
-    <Compile Include="ViewModelInfo\ScreenViewModelInfo.cs" />
-    <Compile Include="ViewModelInfo\SigninViewModelInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -90,10 +73,6 @@
     <ProjectReference Include="..\..\DomainMessages\DomainMessages.csproj">
       <Project>{7ee26a5b-63e6-450e-b4bd-66d0205fb492}</Project>
       <Name>DomainMessages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\EFEntities\EF.Entities.csproj">
-      <Project>{fad2a8c8-a1b4-4a3c-8e37-0388c0e3733c}</Project>
-      <Name>EF.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Interfaces\Interfaces.csproj">
       <Project>{ad573873-c8e6-4ea3-93f5-0d39a92fc9f6}</Project>

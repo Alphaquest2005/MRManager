@@ -88,9 +88,7 @@
     <Compile Include="ILeftView.cs" />
     <Compile Include="IStartViewModelFactory.cs" />
     <Compile Include="IStartViewModelLocator.cs" />
-    <Compile Include="ISummaryViewModel.cs" />
     <Compile Include="IEntityViewModel.cs" />
-    <Compile Include="ISummaryViewModelCreated.cs" />
     <Compile Include="IViewModelCreated.cs" />
     <Compile Include="IViewModelLocator.cs" />
     <Compile Include="IScreenLayoutViewModel.cs" />

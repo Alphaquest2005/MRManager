@@ -73,7 +73,7 @@
                          HorizontalAlignment="Stretch"
                          VerticalAlignment="Stretch"
                          Background="#33FFFFFF"
-                         ItemsSource="{Binding EntitySet}"
+                         ItemsSource="{Binding EntitySet.Value}"
                          SelectedItem="{Binding CurrentEntity.Value}">
 
                     <ListBox.ItemContainerStyle>

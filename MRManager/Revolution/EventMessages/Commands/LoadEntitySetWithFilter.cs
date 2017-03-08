@@ -22,5 +22,6 @@ namespace EventMessages.Commands
             Contract.Requires(filter != null);
             Filter = filter;
         }
+        public Type ViewType => typeof(T);
     }
 }

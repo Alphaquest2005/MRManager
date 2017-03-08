@@ -20,6 +20,7 @@ namespace ViewModel.Interfaces
     {
          string Field { get; set; }
          string Value { get; set; }
+        
     }
 
     

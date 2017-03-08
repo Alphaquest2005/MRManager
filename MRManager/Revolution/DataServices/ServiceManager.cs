@@ -35,18 +35,18 @@ namespace DataServices.Actors
         
 
 
-        public ServiceManager(Assembly dbContextAssembly, Assembly entityAssembly, bool autoRun)
+        public ServiceManager(bool autoRun, List<IMachineInfo> machineInfos, List<IProcessInfo> processInfos, List<IComplexEventAction> complexEventActions, List<IViewModelInfo> viewModelInfos)
         {
             try
             {
                 var ctx = Context;
                 var machineInfo =
-                    MachineInfoData.MachineInfos.FirstOrDefault(
+                    machineInfos.FirstOrDefault(
                         x => x.MachineName == Environment.MachineName && x.Processors == Environment.ProcessorCount);
                 if (machineInfo == null) return;
-                var processInfo = Processes.ProcessInfos.FirstOrDefault(x => x.ParentProcessId == 0);
+                var processInfo = processInfos.FirstOrDefault(x => x.ParentProcessId == 0);
                 if (processInfo == null) return;
-                var systemProcess = new SystemProcess(new Process(processInfo, new Agent("System")), machineInfo);
+                var systemProcess = new SystemProcess(new RevolutionEntities.Process.Process(processInfo, new Agent("System")), machineInfo);
                 Source = new Source(Guid.NewGuid(),"ServiceManager", new SourceType(typeof(IServiceManager)),systemProcess, machineInfo);
                                     var systemStartedMsg = new SystemStarted(new StateEventInfo(systemProcess.Id, RevolutionData.Context.Process.Events.ProcessStarted), systemProcess, Source);
 
@@ -58,7 +58,7 @@ namespace DataServices.Actors
                         var child = Context.Child("ViewModelSupervisor");
                         if (!Equals(child, ActorRefs.Nobody)) return;
 
-                       await Task.Run(() =>ctx.ActorOf(Props.Create<ViewModelSupervisor>(systemProcess, systemStartedMsg),"ViewModelSupervisor")).ConfigureAwait(false);
+                       await Task.Run(() =>ctx.ActorOf(Props.Create<ViewModelSupervisor>(viewModelInfos,systemProcess, systemStartedMsg),"ViewModelSupervisor")).ConfigureAwait(false);
                        
                         await Task.Run(() => ctx.ActorOf(Props.Create<EntityDataServiceManager>(systemProcess), "EntityDataServiceManager")).ConfigureAwait(false);
                         await Task.Run(() =>ctx.ActorOf(Props.Create<EntityViewDataServiceManager>(systemProcess), "EntityViewDataServiceManager")).ConfigureAwait(false);
@@ -71,7 +71,7 @@ namespace DataServices.Actors
 
                     });
 
-                Task.Run(() =>ctx.ActorOf(Props.Create<ProcessSupervisor>(autoRun, systemStartedMsg),"ProcessSupervisor")).ConfigureAwait(false);
+                Task.Run(() =>ctx.ActorOf(Props.Create<ProcessSupervisor>(autoRun, systemStartedMsg, processInfos, complexEventActions),"ProcessSupervisor")).ConfigureAwait(false);
                 
 
 

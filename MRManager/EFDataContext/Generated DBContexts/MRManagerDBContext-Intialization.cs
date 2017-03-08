@@ -7,6 +7,7 @@ using System;
 using System.Data;
 using EF.Entities;
 using System.ComponentModel;
+using EF.DBContext;
 using Microsoft.EntityFrameworkCore;
 
 namespace EF.DBContexts
@@ -23,7 +24,8 @@ namespace EF.DBContexts
             //Instance.Database.EnsureDeleted();
             //Instance.Database.EnsureCreated();
             //CreateSeedData();
-        }
+		    var t = new PulledDBContext();
+		}
 
 		private static void CreateSeedData()
 		{

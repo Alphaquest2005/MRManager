@@ -5,6 +5,7 @@ using EventAggregator;
 using EventMessages;
 using EventMessages.Events;
 using RevolutionEntities.Process;
+using RevolutionLogger;
 using Utilities;
 
 namespace EFRepository
@@ -19,7 +20,7 @@ namespace EFRepository
                 expectedEventType: expectedMessageType,
                 exception: ex,
                 source: Source, processInfo: new StateEventInfo(msg.Process.Id, RevolutionData.Context.Process.Events.Error));
-
+            Logger.Log(LoggingLevel.Error, $"Error:ProcessId:{msg.ProcessInfo.ProcessId}, ProcessStatus:{msg.ProcessInfo.State.Status}, ExceptionMessage: {ex.Message}|||| {ex.StackTrace}");
             EventMessageBus.Current.Publish(outMsg, Source);
         }
 

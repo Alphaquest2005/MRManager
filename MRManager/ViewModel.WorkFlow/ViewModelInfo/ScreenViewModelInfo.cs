@@ -5,7 +5,6 @@ using System.Windows;
 using SystemInterfaces;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
-using ViewMessages;
 using ViewModel.Interfaces;
 
 namespace RevolutionData
@@ -96,11 +95,22 @@ namespace RevolutionData
                 {
                     if (Application.Current == null)
                     {
-                        s.BodyViewModels.Add(e.ViewModel);
+                        s.BodyViewModels.Insert(e.ViewModel.Priority,e.ViewModel);
                     }
                     else
                     {
-                        Application.Current.Dispatcher.BeginInvoke(new Action(() => s.BodyViewModels.Add(e.ViewModel)));
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                           var last = s.BodyViewModels.FirstOrDefault(x => x.Priority > e.ViewModel.Priority);
+                            if (last == null)
+                            {
+                                s.BodyViewModels.Add(e.ViewModel);
+                            }
+                            else
+                            {
+                                s.BodyViewModels.Insert(s.BodyViewModels.IndexOf(last) ,e.ViewModel);
+                            }
+                        }));
                     }
                 }),
 
@@ -214,6 +224,6 @@ namespace RevolutionData
             },
             new List<IViewModelEventCommand<IViewModel, IEvent>>(),
             typeof(IScreenModel),
-            typeof(IBodyViewModel));
+            typeof(IBodyViewModel), 0);
     }
 }

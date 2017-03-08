@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Reflection;
+using SystemInterfaces;
 using Actor.Interfaces;
 using MefContrib.Hosting.Generics;
+using ViewModel.Interfaces;
 
 
 namespace BootStrapper
@@ -39,12 +41,17 @@ namespace BootStrapper
         
         public static BootStrapper Instance { get; }
 
-        public void StartUp(Assembly dbContextAssembly, Assembly entityAssembly, bool autoRun)
+        public static Assembly DbContextAssembly { get; set; }
+        public static Assembly EntitiesAssembly { get; set; }
+
+        public void StartUp(bool autoRun, List<IMachineInfo> machineInfo, List<IProcessInfo> processInfos, List<IComplexEventAction> complexEventActions, List<IViewModelInfo> viewModelInfos, Assembly dbContextAssembly, Assembly entitiesAssembly)
         {
             try
             {
                 var x = Container.GetExport<IActorBackBone>().Value;
-                x.Intialize(dbContextAssembly, entityAssembly, autoRun);
+                x.Intialize(autoRun,machineInfo, processInfos,complexEventActions, viewModelInfos);
+                DbContextAssembly = dbContextAssembly;
+                EntitiesAssembly = entitiesAssembly;
             }
             catch (Exception)
             {

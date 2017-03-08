@@ -5,24 +5,19 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows;
 using SystemInterfaces;
-using Actor.Interfaces;
 using EF.Entities;
-using EventMessages.Commands;
-using EventMessages.Events;
 using Interfaces;
 using JB.Collections.Reactive;
-using Reactive.Bindings.Extensions;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
-using ViewMessages;
 using ViewModel.Interfaces;
 
-namespace RevolutionData
+namespace ViewModel.WorkFlow.ViewModelInfo
 {
     public class InterviewListViewModelInfo
     {
-        public static readonly ViewModelInfo InterviewListViewModel = new ViewModelInfo
+        public static readonly RevolutionEntities.ViewModels.ViewModelInfo InterviewListViewModel = new RevolutionEntities.ViewModels.ViewModelInfo
             (
             3,
             new ViewInfo("Interview", "", "Interviews"),
@@ -35,7 +30,8 @@ namespace RevolutionData
                     (v, e) =>
                     {
                         if(!v.Systems.Value.SequenceEqual(e.State.EntitySet.ToList()))
-                       v.Systems.Value = new ObservableList<ISyntomMedicalSystemInfo>(e.State.EntitySet.ToList());
+                        v.Systems.Value = new ObservableList<ISyntomMedicalSystemInfo>(e.State.EntitySet.ToList());
+                        v.Systems.Value.Add(new SyntomMedicalSystemInfo() { System = "Create New..." });
                     }),
 
                 new ViewEventSubscription<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>>(
@@ -117,20 +113,20 @@ namespace RevolutionData
                         {
 
 
-                       var f = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
+                       var f = v.EntitySet.Value.FirstOrDefault(x => x.Id == e.Entity.Id);
                         if (v.CurrentEntity.Value.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
                         if (f == null)
                         {
-                            v.EntitySet.Insert(v.EntitySet.Count() - 1,e.Entity);
-                                v.EntitySet.Reset();
+                            v.EntitySet.Value.Insert(v.EntitySet.Value.Count() - 1,e.Entity);
+                                v.EntitySet.Value.Reset();
                         }
                         else
                         {
                             //f = e.Entity;
-                            var idx = v.EntitySet.IndexOf(f);
-                            v.EntitySet.Remove(f);
-                            v.EntitySet.Insert(idx, e.Entity);
-                            v.EntitySet.Reset();
+                            var idx = v.EntitySet.Value.IndexOf(f);
+                            v.EntitySet.Value.Remove(f);
+                            v.EntitySet.Value.Insert(idx, e.Entity);
+                            v.EntitySet.Value.Reset();
                         }
                         v.RowState.Value = RowState.Unchanged;
                         }));
@@ -147,7 +143,7 @@ namespace RevolutionData
                         {
 
 
-                       var f = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
+                       var f = v.EntitySet.Value.FirstOrDefault(x => x.Id == e.Entity.Id);
                             if (e.Entity.SystemId == 0)
                             {
                                 v.CurrentMedicalSystem.Value.Interviews.Add(e.Entity);
@@ -159,16 +155,16 @@ namespace RevolutionData
                         if (v.CurrentEntity.Value.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
                         if (f == null)
                         {
-                            v.EntitySet.Insert(v.EntitySet.Count() - 1,e.Entity);
-                            v.EntitySet.Reset();
+                            v.EntitySet.Value.Insert(v.EntitySet.Value.Count() - 1,e.Entity);
+                            v.EntitySet.Value.Reset();
                         }
                         else
                         {
                             //f = e.Entity;
-                            var idx = v.EntitySet.IndexOf(f);
-                            v.EntitySet.Remove(f);
-                            v.EntitySet.Insert(idx, e.Entity);
-                            v.EntitySet.Reset();
+                            var idx = v.EntitySet.Value.IndexOf(f);
+                            v.EntitySet.Value.Remove(f);
+                            v.EntitySet.Value.Insert(idx, e.Entity);
+                            v.EntitySet.Value.Reset();
                         }
                         v.RowState.Value = RowState.Unchanged;
                         }));
@@ -184,19 +180,35 @@ namespace RevolutionData
                     {
                         v => v.State != null
                     },
-                    messageData:s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
+                    messageData:s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, RevolutionData.Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
 
                 new ViewEventPublication<IInterviewListViewModel, ICurrentEntityChanged<IInterviewInfo>>(
                     key:"CurrentEntityChanged",
                     subject:v => v.CurrentEntity,//.WhenAnyValue(x => x.Value),
                     subjectPredicate:new List<Func<IInterviewListViewModel, bool>>{},
-                    messageData:s => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
+                    messageData:s => new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value},new StateEventInfo(s.Process.Id, RevolutionData.Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
 
-                //new ViewEventPublication<IInterviewListViewModel, ICurrentEntityChanged<ISyntomMedicalSystemInfo>>(
-                //    key:"CurrentSystemChanged",
-                //    subject:v => v.CurrentMedicalSystem,//.WhenAnyValue(x => x.Value),
-                //    subjectPredicate:new List<Func<IInterviewListViewModel, bool>>{},
-                //    messageData:s => new ViewEventPublicationParameter(new object[] {s.CurrentMedicalSystem.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
+                new ViewEventPublication<IInterviewListViewModel, ICurrentEntityChanged<ISyntomMedicalSystemInfo>>(
+                    key:"CurrentSystemChanged",
+                    subject:v => v.CurrentMedicalSystem,//.WhenAnyValue(x => x.Value),
+                    subjectPredicate:new List<Func<IInterviewListViewModel, bool>>{},
+                    messageData:s =>
+                    {
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() => { 
+                                                                                   IList<IInterviewInfo> observableList = s.CurrentMedicalSystem.Value.Interviews;
+                        
+                                                                                   var res = observableList?.ToList() ?? new List<IInterviewInfo>();
+                                                                                   res.Add(new InterviewInfo() {Interview = "Create New..."});
+
+                                                                                   s.EntitySet.Value = new ObservableList<IInterviewInfo>(res);
+                                                                                   s.NotifyPropertyChanged(nameof(s.EntitySet));
+                                                                                   s.CurrentEntity.Value = res.First();
+
+                                                                    }));
+                        return new ViewEventPublicationParameter(new object[] {s.CurrentMedicalSystem.Value},
+                            new StateEventInfo(s.Process.Id, RevolutionData.Context.View.Events.ProcessStateLoaded), s.Process,
+                            s.Source);
+                    }),
             },
             new List<IViewModelEventCommand<IViewModel,IEvent>>
             {
@@ -222,7 +234,7 @@ namespace RevolutionData
                         return new ViewEventCommandParameter(
                             new object[] {s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},
                             new StateCommandInfo(s.Process.Id,
-                                Context.EntityView.Commands.LoadEntityViewSetWithChanges), s.Process,
+                                RevolutionData.Context.EntityView.Commands.LoadEntityViewSetWithChanges), s.Process,
                             s.Source);
                     }),
 
@@ -241,7 +253,7 @@ namespace RevolutionData
                         return new ViewEventCommandParameter(
                             new object[] {s,s.RowState.Value},
                             new StateCommandInfo(s.Process.Id,
-                                Context.Process.Commands.CurrentEntityChanged), s.Process,
+                                RevolutionData.Context.Process.Commands.CurrentEntityChanged), s.Process,
                             s.Source);
                     }),
 
@@ -265,7 +277,7 @@ namespace RevolutionData
                                 v.CurrentMedicalSystem.Value.Id,
                                 res.ToDictionary(x => x.Key, x => x.Value)
                             },
-                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            new StateCommandInfo(v.Process.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), v.Process,
                             v.Source);
                         v.ChangeTracking.Clear();
                         return msg;
@@ -292,7 +304,7 @@ namespace RevolutionData
                                 v.CurrentMedicalSystem.Value.Id,
                                 res.Where(x => x.Value != null).ToDictionary(x => x.Key, x => x.Value)
                             },
-                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            new StateCommandInfo(v.Process.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), v.Process,
                             v.Source);
                         v.ChangeTracking.Clear();
                         return msg;
@@ -321,7 +333,7 @@ namespace RevolutionData
                                 v.CurrentEntity.Value.Id,
                                 res.ToDictionary(x => x.Key, x => x.Value)
                             },
-                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            new StateCommandInfo(v.Process.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), v.Process,
                             v.Source);
                         v.ChangeTracking.Clear();
                         return msg;
@@ -352,7 +364,7 @@ namespace RevolutionData
                                 v.CurrentEntity.Value.Id,
                                 res.ToDictionary(x => x.Key, x => x.Value)
                             },
-                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            new StateCommandInfo(v.Process.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), v.Process,
                             v.Source);
                         v.ChangeTracking.Clear();
                         return msg;
@@ -378,7 +390,7 @@ namespace RevolutionData
                                 0,
                                 res.ToDictionary(x => x.Key, x => x.Value)
                             },
-                            new StateCommandInfo(v.Process.Id, Context.EntityView.Commands.GetEntityView), v.Process,
+                            new StateCommandInfo(v.Process.Id, RevolutionData.Context.EntityView.Commands.GetEntityView), v.Process,
                             v.Source);
                         v.ChangeTracking.Clear();
                         return msg;
@@ -386,7 +398,7 @@ namespace RevolutionData
 
             },
             typeof(IInterviewListViewModel),
-            typeof(IBodyViewModel));
+            typeof(IBodyViewModel),4);
 
 
     }

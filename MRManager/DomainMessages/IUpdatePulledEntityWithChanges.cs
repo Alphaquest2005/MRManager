@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using SystemInterfaces;
 
-namespace SystemInterfaces
+namespace DomainMessages
 {
-    public interface IUpdatePatientEntityWithChanges<out TEntity> : IProcessSystemMessage, IEntityRequest<TEntity> where TEntity:IEntity
+
+    public interface IUpdatePatientEntityWithChanges<out TEntity>: IEntityRequest<TEntity> where TEntity:IEntity
     {
         Dictionary<string, object> Changes { get; }
         int EntityId { get; }

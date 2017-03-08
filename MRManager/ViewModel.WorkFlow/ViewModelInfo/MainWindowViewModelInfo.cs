@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using SystemInterfaces;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
-using ViewMessages;
 using ViewModel.Interfaces;
 
 namespace RevolutionData
@@ -48,6 +46,8 @@ namespace RevolutionData
             }, 
             new List<IViewModelEventCommand<IViewModel, IEvent>>(),
             typeof(IMainWindowViewModel),
-            typeof(IBodyViewModel));
+            typeof(IBodyViewModel)
+            ,0)
+            ;
     }
 }

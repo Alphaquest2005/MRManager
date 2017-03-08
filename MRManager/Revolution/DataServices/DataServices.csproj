@@ -90,21 +90,13 @@
       <Project>{e7ec52dc-8650-4cf0-bcab-ed8a9473d2cf}</Project>
       <Name>DesignTimeData</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\EFEntities\EF.Entities.csproj">
-      <Project>{fad2a8c8-a1b4-4a3c-8e37-0388c0e3733c}</Project>
-      <Name>EF.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Interfaces\Interfaces.csproj">
       <Project>{ad573873-c8e6-4ea3-93f5-0d39a92fc9f6}</Project>
       <Name>Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\TypeMaps\TypeMaps.csproj">
-      <Project>{75c0650c-ce23-44f5-a44f-e4b443dfff70}</Project>
-      <Name>TypeMaps</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ViewModels\ViewModels.csproj">
-      <Project>{db1e7bd6-7fe0-4cdd-8b6d-edbb0d156b41}</Project>
-      <Name>ViewModels</Name>
+    <ProjectReference Include="..\..\MRManager\Process.WorkFlow\Process.WorkFlow.csproj">
+      <Project>{4f0baa58-3b45-4136-8095-445d406b4d23}</Project>
+      <Name>Process.WorkFlow</Name>
     </ProjectReference>
     <ProjectReference Include="..\Actor.Interfaces\Actor.Interfaces.csproj">
       <Project>{8b10c72d-9f33-4290-b562-44cf1f718fa5}</Project>
@@ -149,6 +141,10 @@
     <ProjectReference Include="..\RevolutionEntities\RevolutionEntities.csproj">
       <Project>{c827930a-0d05-4ee2-b9ac-db1cf5144e16}</Project>
       <Name>RevolutionEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RevolutionLogger\RevolutionLogger.csproj">
+      <Project>{c868cd42-b7d3-4c2d-b4a8-6bf0e94bd620}</Project>
+      <Name>RevolutionLogger</Name>
     </ProjectReference>
     <ProjectReference Include="..\SystemInterfaces\SystemInterfaces.csproj">
       <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>

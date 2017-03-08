@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 using SystemInterfaces;
 using BootStrapper;
 using CommonMessages;
@@ -24,15 +25,15 @@ namespace Core.Common.UI
         public static void WireEvents(this IViewModel viewModel)
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
-            foreach (var itm in viewModel.CommandInfo)
+            Parallel.ForEach(viewModel.CommandInfo, new ParallelOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}, (itm) =>
             {
                 var subject = itm.Subject.Invoke(viewModel);
-                
 
-                if(subject.GetType() == Observable.Empty<ReactiveCommand<IViewModel, Unit>>().GetType())
+
+                if (subject.GetType() == Observable.Empty<ReactiveCommand<IViewModel, Unit>>().GetType())
                 {
                     var publishMessage = CreateCommandMessageAction<IViewModel>(viewModel, itm);
-                    var cmd = ReactiveCommand.Create(publishMessage);//, viewModel.WhenAny(x => x, x => itm.CommandPredicate.All(z => z.Invoke(x.Value))) );
+                    var cmd = ReactiveCommand.Create(publishMessage);
 
                     viewModel.Commands.Add(itm.Key, cmd);
                 }
@@ -40,43 +41,34 @@ namespace Core.Common.UI
                 {
                     var publishMessage = CreateCommandMessageAction<dynamic>(viewModel, itm);
                     subject.Where(x => itm.CommandPredicate.All(z => z.Invoke(viewModel)))
-                     .Subscribe(publishMessage);
+                        .Subscribe(publishMessage);
                 }
-
                 
-
-                //var subject = itm.Subject.Invoke(viewModel);
-
-                
-
-                //subject//.Where(x => itm.SubjectPredicate.All(z => z.Invoke(viewModel, x)))
-                //   .Subscribe(publishMessage);
-
-            }
-            //EventMessageBus.Current.GetEvent<CurrentEntityChanged<IAddresses>>(Source).Subscribe(x => handleIdChanged(x.EntityId));  
-            foreach (var itm in viewModel.EventSubscriptions)
-            {
-                typeof(ViewModelExtensions)
-                    .GetMethod("Subscribe")
-                    .MakeGenericMethod(itm.EventType, viewModel.GetType())
-                    .Invoke(viewModel, new object[] { viewModel, itm.EventPredicate, itm.ActionPredicate, itm.Action });
+            });
+            
+            Parallel.ForEach(viewModel.EventSubscriptions,
+                new ParallelOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}, (itm) =>
+                {
+                    typeof (ViewModelExtensions)
+                        .GetMethod("Subscribe")
+                        .MakeGenericMethod(itm.EventType, viewModel.GetType())
+                        .Invoke(viewModel, new object[] {viewModel, itm.EventPredicate, itm.ActionPredicate, itm.Action});
+                });
 
 
-                // Wire(itm.EventType,itm.EventPredicate, itm.ActionPredicate,itm.Action);
-            }
+
+            Parallel.ForEach(viewModel.EventPublications,
+                new ParallelOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}, (itm) =>
+                {
+
+                    var subject = itm.Subject.Invoke(viewModel);
+
+                    var publishMessage = CreatePublishMessageAction(viewModel, itm);
+                    subject.Where(x => itm.SubjectPredicate.All(z => z.Invoke(viewModel)))
+                        .Subscribe(publishMessage);
+                });
 
             
-
-            foreach (var itm in viewModel.EventPublications)
-            {
-                var subject  = itm.Subject.Invoke(viewModel);
-
-                var publishMessage = CreatePublishMessageAction(viewModel, itm);
-                subject.Where(x => itm.SubjectPredicate.All(z => z.Invoke(viewModel)))
-                    .Subscribe(publishMessage);
-            }
-
-           //EventMessageBus.Current.Publish(new RequestProcessState(new StateCommandInfo(viewModel.Process.Id, RevolutionData.Context.Process.Commands.PublishState), viewModel.Process, viewModel.Source), viewModel.Source);
 
         }
 

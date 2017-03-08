@@ -25,5 +25,6 @@ namespace EventMessages.Commands
             Includes = includes;
            
         }
+        public Type ViewType => typeof(T);
     }
 }

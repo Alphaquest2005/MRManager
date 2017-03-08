@@ -22,12 +22,7 @@ namespace RevolutionData
 {
     public static class ProcessActions
     {
-
-
-        
-
-
-
+        public const int NullProcess = -1;
         public static IProcessAction ProcessStarted => new ProcessAction(
                         action: async cp => await Task.Run(() => new SystemProcessStarted(
                             new StateEventInfo(cp.Actor.Process.Id, Context.Process.Events.ProcessStarted),
@@ -36,16 +31,15 @@ namespace RevolutionData
                         expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
         public static IProcessAction StartProcess => new ProcessAction(
-                        action: async cp => await Task.Run(() => new StartSystemProcess(Processes.NullProcess,//HACK: to keep this generic, the process that was used to create action will be used
+                        action: async cp => await Task.Run(() => new StartSystemProcess(NullProcess,//HACK: to keep this generic, the process that was used to create action will be used
                             new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.StartProcess),
                             cp.Actor.Process, cp.Actor.Source)), 
                         processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.StartProcess),
                         expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
         public static IProcessAction StartProcessWithValidatedUser => new ProcessAction(
-                       action: async cp =>  await Task.Run(() => new StartSystemProcess(Processes.NullProcess,//HACK: to keep this generic, the process that was used to create action will be used
-                           new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.StartProcess),
-                           new SystemProcess(Processes.ProcessInfos.FirstOrDefault(x => x.Id == cp.Actor.Process.Id), cp.Messages["ValidatedUser"].UserSignIn, cp.Actor.Process.MachineInfo), cp.Actor.Source)),
+                       action: async cp =>  await Task.Run(() => new StartSystemProcess(NullProcess,//HACK: to keep this generic, the process that was used to create action will be used
+                           new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.StartProcess), cp.Actor.Process, cp.Actor.Source)),
                        processInfo: cp => new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.StartProcess),
                        expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
@@ -91,7 +85,7 @@ namespace RevolutionData
         {
             return new ProcessAction(
                 action: async cp =>
-                         await Task.Run(() => new LoadPulledEntityViewSetWithChanges<TEntityView, IExactMatch>(entityName,new Dictionary<string, dynamic>(),
+                         await Task.Run(() => new LoadPulledEntityViewSetWithChanges<IExactMatch>(typeof(TEntityView),entityName,new Dictionary<string, dynamic>(),
                             new StateCommandInfo(cp.Actor.Process.Id,
                                 Context.EntityView.Commands.LoadEntityViewSetWithChanges),
                             cp.Actor.Process, cp.Actor.Source)),
@@ -277,112 +271,81 @@ namespace RevolutionData
 
         }
 
+    }
 
-        
-
-        public class PatientInfo
+    public partial class EntityComplexActions<TEntity> where TEntity : IEntity
+    {
+        public static ComplexEventAction IntializeCache(int processId)
         {
-            public static IProcessAction IntializePatientInfoSummaryProcessState => new ProcessAction(
-                action: async cp =>
-                         await Task.Run(() => new LoadEntityViewSetWithChanges<IPatientInfo,IExactMatch>(new Dictionary<string, dynamic>(),
-                            new StateCommandInfo(3, Context.EntityView.Commands.LoadEntityViewSetWithChanges),
-                            cp.Actor.Process, cp.Actor.Source)),
-                processInfo:
-                    cp =>
-                        new StateCommandInfo(cp.Actor.Process.Id,
-                            Context.EntityView.Commands.LoadEntityViewSetWithChanges),
-                // take shortcut cud be IntialState
-                expectedSourceType: new SourceType(typeof (IComplexEventService)));
+            return new ComplexEventAction(
+                key: $"{typeof(TEntity).Name}EntityCache-1",
+                processId: processId,
+                events: new List<IProcessExpectedEvent>
+                {
+                    new ProcessExpectedEvent(key: "ProcessStarted",
+                        processId: processId,
+                        eventPredicate: e => e != null,
+                        eventType: typeof (ISystemProcessStarted),
+                        processInfo: new StateEventInfo(processId, Context.Process.Events.ProcessStarted),
+                        expectedSourceType: new SourceType(typeof (IComplexEventService)))
 
-
-            public static IProcessAction UpdatePatientInfoState => new ProcessAction(
-                action: async cp =>
-                    {
-                       var ps = new ProcessStateList<IPatientInfo>(
-                            process: cp.Actor.Process,
-                            entity: ((List<IPatientInfo>)cp.Messages["EntityViewSet"].EntitySet).FirstOrDefault(),
-                            entitySet: cp.Messages["EntityViewSet"].EntitySet,
-                            selectedEntities: new List<IPatientInfo>(),
-                            stateInfo: new StateInfo(3, new State("Loaded IPatientInfo Data", "LoadedIPatientData", "")));
-                        return await Task.Run(() => new UpdateProcessStateList<IPatientInfo>(
-                                    state:ps,
-                                    process:cp.Actor.Process,
-                                    processInfo: new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState), 
-                                    source:cp.Actor.Source));
-                    },
-                processInfo:
-                    cp =>
-                        new StateCommandInfo(cp.Actor.Process.Id,
-                            Context.Process.Commands.UpdateState),
-                // take shortcut cud be IntialState
-                expectedSourceType: new SourceType(typeof(IComplexEventService)));
-
-           
-
-           
-
-
-            ////// Interview Info
-
-
-            // patient response
-
-            ////// QuestionList actions
-            /// 
-            public static IProcessAction IntializeQuestionListProcessState => new ProcessAction(
-           action: async cp =>
-                       await Task.Run(() => new LoadEntityViewSetWithChanges<IQuestionInfo, IExactMatch>(new Dictionary<string, dynamic>(),
-                           new StateCommandInfo(3, Context.EntityView.Commands.LoadEntityViewSetWithChanges),
-                           cp.Actor.Process, cp.Actor.Source)),
-               processInfo:
-                   cp =>
-                       new StateCommandInfo(cp.Actor.Process.Id,
-                           Context.EntityView.Commands.LoadEntityViewSetWithChanges),
-               // take shortcut cud be IntialState
-               expectedSourceType: new SourceType(typeof(IComplexEventService)));
-
-
-            public static IProcessAction UpdateQuestionListState => new ProcessAction(
-                action: async cp =>
-                    {
-                        var ps = new ProcessStateList<IQuestionInfo>(
-                             process: cp.Actor.Process,
-                             entity: ((List<IQuestionInfo>)cp.Messages["EntityViewSet"].EntitySet).FirstOrDefault(),
-                             entitySet: cp.Messages["EntityViewSet"].EntitySet,
-                             selectedEntities: new List<IQuestionInfo>(),
-                             stateInfo: new StateInfo(3, new State("Loaded IQuestionInfo Data", "Loaded QuestionList Data", "")));
-                        return await Task.Run(() => new UpdateProcessStateList<IQuestionInfo>(
-                                    state: ps,
-                                    process: cp.Actor.Process,
-                                    processInfo: new StateCommandInfo(cp.Actor.Process.Id, Context.Process.Commands.UpdateState),
-                                    source: cp.Actor.Source));
-                    },
-                processInfo:
-                    cp =>
-                        new StateCommandInfo(cp.Actor.Process.Id,
-                            Context.Process.Commands.UpdateState),
-                // take shortcut cud be IntialState
-                expectedSourceType: new SourceType(typeof(IComplexEventService)));
-
-            public static IProcessAction RequestQuestionList => new ProcessAction(
-                action: async cp =>
-                        await Task.Run(() => new LoadEntityViewSetWithChanges<IQuestionInfo, IExactMatch>(new Dictionary<string, dynamic>()
-                                    {
-                                        {nameof(IQuestionInfo.InterviewId), cp.Messages["CurrentInterview"].Entity.Id },
-                                    },
-                            new StateCommandInfo(3, Context.EntityView.Commands.LoadEntityViewSetWithChanges),
-                            cp.Actor.Process, cp.Actor.Source)),
-                processInfo:
-                    cp =>
-                        new StateCommandInfo(cp.Actor.Process.Id,
-                            Context.EntityView.Commands.LoadEntityViewSetWithChanges),
-                // take shortcut cud be IntialState
-                expectedSourceType: new SourceType(typeof(IComplexEventService)));
-
+                },
+                expectedMessageType: typeof(IProcessStateMessage<IInterviewInfo>),
+                action: IntializeCacheAction,
+                processInfo: new StateCommandInfo(processId, Context.Process.Commands.CreateState));
         }
 
+        /// 
+        public static IProcessAction IntializeCacheAction => new ProcessAction(
+            action: async cp =>
+                    await Task.Run(() => new LoadEntitySet<TEntity>(
+                        new StateCommandInfo(3, Context.EntityView.Commands.LoadEntityViewSetWithChanges),
+                        cp.Actor.Process, cp.Actor.Source)),
+            processInfo:
+                cp =>
+                    new StateCommandInfo(cp.Actor.Process.Id,
+                        Context.EntityView.Commands.LoadEntityViewSetWithChanges),
+            // take shortcut cud be IntialState
+            expectedSourceType: new SourceType(typeof(IComplexEventService)));
 
     }
 
+    public partial class EntityViewComplexActions<TView> where TView : IEntityView
+    {
 
+        public static ComplexEventAction IntializeCache(int processId)
+        {
+            return new ComplexEventAction(
+                key: $"{typeof(TView).Name}EntityViewCache-1",
+                processId: processId,
+                events: new List<IProcessExpectedEvent>
+                {
+                        new ProcessExpectedEvent(key: "ProcessStarted",
+                            processId: processId,
+                            eventPredicate: e => e != null,
+                            eventType: typeof (ISystemProcessStarted),
+                            processInfo: new StateEventInfo(processId, Context.Process.Events.ProcessStarted),
+                            expectedSourceType: new SourceType(typeof (IComplexEventService)))
+
+                },
+                expectedMessageType: typeof(IProcessStateMessage<IInterviewInfo>),
+                action: IntializeCacheAction,
+                processInfo: new StateCommandInfo(processId, Context.Process.Commands.CreateState));
+        }
+
+
+        /// 
+        public static IProcessAction IntializeCacheAction => new ProcessAction(
+            action: async cp =>
+                     await Task.Run(() => new LoadEntityViewSetWithChanges<TView, IExactMatch>(new Dictionary<string, dynamic>(),
+                        new StateCommandInfo(3, Context.EntityView.Commands.LoadEntityViewSetWithChanges),
+                        cp.Actor.Process, cp.Actor.Source)),
+            processInfo:
+                cp =>
+                    new StateCommandInfo(cp.Actor.Process.Id,
+                        Context.EntityView.Commands.LoadEntityViewSetWithChanges),
+            // take shortcut cud be IntialState
+            expectedSourceType: new SourceType(typeof(IComplexEventService)));
+
+    }
 }

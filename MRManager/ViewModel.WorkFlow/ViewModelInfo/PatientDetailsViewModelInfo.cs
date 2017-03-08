@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Windows;
 using SystemInterfaces;
-using EF.Entities;
+using DomainMessages;
 using Interfaces;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
-using ViewMessages;
 using ViewModel.Interfaces;
 
 namespace RevolutionData
@@ -180,7 +178,8 @@ namespace RevolutionData
 
             },
             viewModelType: typeof(IPatientDetailsViewModel),
-            orientation: typeof(IBodyViewModel));
+            orientation: typeof(IBodyViewModel),
+            priority:1);
 
        
     }

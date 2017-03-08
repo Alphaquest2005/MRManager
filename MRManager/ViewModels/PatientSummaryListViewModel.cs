@@ -23,39 +23,27 @@ namespace ViewModels
     public class PatientSummaryListViewModel : DynamicViewModel<ObservableListViewModel<IPatientInfo>>, IPatientSummaryListViewModel
     {
         [ImportingConstructor]
-        public PatientSummaryListViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IPatientInfo>(viewInfo,eventSubscriptions, eventPublications, commandInfo, process, orientation))
+        public PatientSummaryListViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(new ObservableListViewModel<IPatientInfo>(viewInfo,eventSubscriptions, eventPublications, commandInfo, process, orientation, priority))
         {
            this.WireEvents();
-           Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => addNewRow(x));
-        }
-
-        private void addNewRow(ObservableList<IPatientInfo> observableList)
-        {
-
-            if (this.ViewModel.EntitySet.FirstOrDefault(x => x.Id == 0) != null) return;
-                var res = observableList.ToList();
-                res.Add(new PatientInfo() { Name = "Create New..." });
-                this.ViewModel.EntitySet = new ObservableList<IPatientInfo>(res);
-               OnPropertyChanged(nameof(EntitySet));
            
         }
 
 
-        
+        IEntityListViewModel<IPatientInfo> IEntityListViewModel<IPatientInfo>.Instance => (IEntityListViewModel<IPatientInfo>) PatientSummaryListViewModel.Instance;
+        public ReactiveProperty<IProcessStateList<IPatientInfo>> State => Instance.ViewModel.State;
 
 
-        public ReactiveProperty<IProcessStateList<IPatientInfo>> State => this.ViewModel.State;
+         ReactiveProperty<IProcessState<IPatientInfo>> IEntityViewModel<IPatientInfo>.State => new ReactiveProperty<IProcessState<IPatientInfo>>(Instance.ViewModel.State.Value);
+        public ReactiveProperty<IPatientInfo> CurrentEntity => Instance.ViewModel.CurrentEntity;
 
+        public ObservableDictionary<string, dynamic> ChangeTracking => Instance.ViewModel.ChangeTracking;
+       
 
-        ReactiveProperty<IProcessState<IPatientInfo>> IEntityViewModel<IPatientInfo>.State => new ReactiveProperty<IProcessState<IPatientInfo>>(this.ViewModel.State.Value);
-        public ReactiveProperty<IPatientInfo> CurrentEntity => this.ViewModel.CurrentEntity;
+        public ReactiveProperty<ObservableList<IPatientInfo>> EntitySet => Instance.ViewModel.EntitySet;
 
-        public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
-
-        public ObservableList<IPatientInfo> EntitySet => this.ViewModel.EntitySet;
-
-        public ObservableList<IPatientInfo> SelectedEntities => this.ViewModel.SelectedEntities;
-        public ObservableBindingList<IPatientInfo> ChangeTrackingList => this.ViewModel.ChangeTrackingList;
+        public ReactiveProperty<ObservableList<IPatientInfo>> SelectedEntities => Instance.ViewModel.SelectedEntities;
+        public ObservableBindingList<IPatientInfo> ChangeTrackingList => Instance.ViewModel.ChangeTrackingList;
 
 
         public string Field { get; set; }

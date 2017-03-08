@@ -10,18 +10,19 @@
                     mc:Ignorable="d">
 
     <DataTemplate DataType="{x:Type viewModels:InterviewListViewModel}">
-        <Grid Width="500" Margin="0" x:Name="ViewInterview">
+        <Grid x:Name="ViewInterview"
+              Width="500"
+              Margin="0">
 
-            <ListBox Margin="10,33,10,0"
-                     
+            <ListBox Height="88"
+                     Margin="10,33,10,0"
+                     VerticalAlignment="Top"
                      IsSynchronizedWithCurrentItem="True"
                      ItemTemplate="{DynamicResource SystemInfoTpl}"
                      ItemsSource="{Binding Systems.Value,
                                            Mode=OneWay}"
                      SelectedItem="{Binding CurrentMedicalSystem.Value,
-                                            Mode=TwoWay}" 
-                     VerticalAlignment="Top"
-                     Height="88">
+                                            Mode=TwoWay}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel IsItemsHost="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
@@ -86,9 +87,9 @@
                        TextWrapping="Wrap" />
 
             <ListBox Margin="10,154,10,14"
-                     ItemTemplate="{DynamicResource InterviewInfoTpl}"
                      IsSynchronizedWithCurrentItem="True"
-                     ItemsSource="{Binding EntitySet,
+                     ItemTemplate="{DynamicResource InterviewInfoTpl}"
+                     ItemsSource="{Binding EntitySet.Value,
                                            Mode=OneWay}"
                      SelectedItem="{Binding CurrentEntity.Value,
                                             Mode=TwoWay}">

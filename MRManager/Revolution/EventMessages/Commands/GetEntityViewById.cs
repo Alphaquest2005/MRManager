@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.Composition;
 using SystemInterfaces;
 using CommonMessages;
@@ -15,5 +16,6 @@ namespace EventMessages.Commands
         {
             EntityId = entityId;
         }
+        public Type ViewType => typeof(TView);
     }
 }

@@ -16,6 +16,7 @@ using EventMessages.Commands;
 using EventMessages.Events;
 using RevolutionData;
 using RevolutionEntities.Process;
+using RevolutionLogger;
 using Utilities;
 
 namespace DataServices.Actors
@@ -38,7 +39,7 @@ namespace DataServices.Actors
                 expectedEventType: expectedMessageType,
                 exception: ex,
                 source: Source, processInfo: new StateEventInfo(msg.Process.Id, RevolutionData.Context.Process.Events.Error));
-            
+            Logger.Log(LoggingLevel.Error, $"Error:ProcessId:{msg.ProcessInfo.ProcessId}, ProcessStatus:{msg.ProcessInfo.State.Status}, ExceptionMessage: {ex.Message}|||| {ex.StackTrace}");
             EventMessageBus.Current.Publish(outMsg, Source);
             EventMessageBus.Current.Publish(new RequestProcessLog(new StateCommandInfo(msg.Process.Id, RevolutionData.Context.Process.Commands.CreateLog), msg.Process,Source), Source);
             OutMessages = OutMessages.Add(outMsg);

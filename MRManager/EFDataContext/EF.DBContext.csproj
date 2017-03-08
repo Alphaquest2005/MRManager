@@ -49,6 +49,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Generated DBContexts\MRManagerDBContext-Intialization.cs" />
@@ -64,6 +65,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="PulledEntityDataContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -74,6 +76,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DomainMessages\DomainMessages.csproj">
+      <Project>{7EE26A5B-63E6-450E-B4BD-66D0205FB492}</Project>
+      <Name>DomainMessages</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EF.Mappings\EF.Mappings.csproj">
       <Project>{DA54313C-4B98-49B1-A8F9-B5827F121886}</Project>
       <Name>EF.Mappings</Name>
@@ -82,20 +88,62 @@
       <Project>{fad2a8c8-a1b4-4a3c-8e37-0388c0e3733c}</Project>
       <Name>EF.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Expressions\Expressions.csproj">
+      <Project>{2ab54ce2-e09b-40b4-9cbf-184b3e770b0d}</Project>
+      <Name>Expressions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{AD573873-C8E6-4EA3-93F5-0D39A92FC9F6}</Project>
       <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\BootStrapper\BootStrapper.csproj">
+      <Project>{5DFEEA8B-BABA-4544-BF36-0A76A0D10C1B}</Project>
+      <Name>BootStrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\CommonMessages\CommonMessages.csproj">
+      <Project>{77007560-89dc-4e1f-9313-ae064a048ad4}</Project>
+      <Name>CommonMessages</Name>
     </ProjectReference>
     <ProjectReference Include="..\Revolution\Common\Common.csproj">
       <Project>{cb6d5fbc-0c13-437d-b4f3-a0ec4d5673b3}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Revolution\DynamicLinq\System.Linq.Dynamic\System.Linq.Dynamic.csproj">
+      <Project>{17C0D5DE-C72D-4A06-A12C-445EBCF3B9EA}</Project>
+      <Name>System.Linq.Dynamic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\EventAggregator\EventAggregator.csproj">
+      <Project>{31e6b370-01f0-4489-832f-436cb97a6718}</Project>
+      <Name>EventAggregator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\EventMessages\EventMessages.csproj">
+      <Project>{e3d04176-3758-4c9d-84f3-7a4d3859eae5}</Project>
+      <Name>EventMessages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\RevolutionData\RevolutionData.csproj">
+      <Project>{959d7f6b-0426-452c-8962-c0f4dadbe3b4}</Project>
+      <Name>RevolutionData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\RevolutionEntities\RevolutionEntities.csproj">
+      <Project>{c827930a-0d05-4ee2-b9ac-db1cf5144e16}</Project>
+      <Name>RevolutionEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revolution\RevolutionLogger\RevolutionLogger.csproj">
+      <Project>{c868cd42-b7d3-4c2d-b4a8-6bf0e94bd620}</Project>
+      <Name>RevolutionLogger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Revolution\SystemInterfaces\SystemInterfaces.csproj">
       <Project>{e3842263-e081-49ba-a1b4-bbe82b24e2db}</Project>
       <Name>SystemInterfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Revolution\Utilities\Utilities.csproj">
+      <Project>{0F9427B1-792E-4C35-97D8-22A9494CE28F}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

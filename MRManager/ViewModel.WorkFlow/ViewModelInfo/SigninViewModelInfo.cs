@@ -4,12 +4,10 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using SystemInterfaces;
-using EventMessages.Commands;
 using Interfaces;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
-using ViewMessages;
 using ViewModel.Interfaces;
 
 namespace RevolutionData
@@ -69,6 +67,6 @@ namespace RevolutionData
 
                     
 
-            }, typeof(ISigninViewModel), typeof(IBodyViewModel));
+            }, typeof(ISigninViewModel), typeof(IBodyViewModel), 0);
     }
 }

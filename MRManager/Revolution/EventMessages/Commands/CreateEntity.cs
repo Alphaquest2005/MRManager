@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.Diagnostics.Contracts;
 using SystemInterfaces;
 using CommonMessages;
@@ -16,8 +17,7 @@ namespace EventMessages.Commands
         {
             Contract.Requires(entity != null);
             Entity = entity;
-         
-           
         }
+        public Type ViewType => typeof(T);
     }
 }

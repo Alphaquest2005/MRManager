@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using SystemInterfaces;
@@ -21,16 +22,15 @@ using ViewMessages;
 namespace DataServices.Actors
 {
     public class EntityViewDataServiceSupervisor<TEntityView> : BaseSupervisor<EntityViewDataServiceSupervisor<TEntityView>> where TEntityView : IEntityView
-        //where TEntity : class, IEntity where TEntityView:IEntityView<TEntity>
+        
     {
-       // public ISystemSource Source => new Source(Guid.NewGuid(), $"EntityViewSupervisor:<{typeof(TEntityView).GetFriendlyName()}>",new SourceType(typeof(EntityViewDataServiceSupervisor<TEntityView>)), new MachineInfo(Environment.MachineName, Environment.ProcessorCount));
+       
 
         private static readonly Action<IGetEntityViewById<TEntityView>> GetEntityByIdAction = (x) => x.GetEntity();
-        private static readonly Action<IGetEntityFromPatientResponse<TEntityView>> GetEntityFromPatientResponseAction = (x) => x.GetEntityFromPatientResponse();
         private static readonly Action<IGetEntityViewWithChanges<TEntityView>> GetEntityViewWithChangesAction = (x) => x.GetEntityViewWithChanges();
         private static readonly Action<IUpdateEntityViewWithChanges<TEntityView>> UpdateEntityViewWithChangesAction = (x) => x.UpdateEntityViewWithChanges();
         private static readonly Action<ILoadEntityViewSetWithChanges<TEntityView, IMatchType>> LoadEntityViewSetWithChangesAction = (x) => x.LoadEntityViewSetWithChanges();
-        private static readonly Action<ILoadPulledEntityViewSetWithChanges<TEntityView, IMatchType>> LoadPulledEntityViewSetWithChangesAction = (x) => x.LoadPulledEntityViewSetWithChanges();
+
 
 
 
@@ -40,37 +40,35 @@ namespace DataServices.Actors
             new Dictionary<Type, object>()
             {
                 
-                {typeof (IGetEntityFromPatientResponse<TEntityView>), GetEntityFromPatientResponseAction},
                 {typeof (IGetEntityViewById<TEntityView>), GetEntityByIdAction},
                 {typeof (IGetEntityViewWithChanges<TEntityView>), GetEntityViewWithChangesAction},
                 {typeof (IUpdateEntityViewWithChanges<TEntityView>), UpdateEntityViewWithChangesAction},
                 {typeof (ILoadEntityViewSetWithChanges<TEntityView, IMatchType>), LoadEntityViewSetWithChangesAction},
-                {typeof (ILoadPulledEntityViewSetWithChanges<TEntityView, IMatchType>), LoadPulledEntityViewSetWithChangesAction},
+                
 
 
             };
         private IUntypedActorContext ctx = null;
         public EntityViewDataServiceSupervisor(ISystemProcess process, IProcessSystemMessage msg):base(process)
         {
+            
             try
             {
                 ctx = Context;
-                 foreach (var itm in entityEvents)
-                            {
-                               this.GetType()
-                                        .GetMethod("CreateEntityViewActor")
-                                        .MakeGenericMethod(itm.Key)
-                                        .Invoke(this, new object[] {itm.Value, process, msg});
-               
-                            }
+                Parallel.ForEach(entityEvents, new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }, (itm) =>
+                {
+                    this.GetType()
+                        .GetMethod("CreateEntityViewActor")
+                        .MakeGenericMethod(itm.Key)
+                        .Invoke(this, new object[] {itm.Value, process, msg});
+
+                });
             }
             catch (Exception)
             {
                 
                 throw;
             }
-           
-
         }
 
         public void CreateEntityViewActor<TEvent>(object action, ISystemProcess process, IProcessSystemMessage msg) where TEvent : IMessage

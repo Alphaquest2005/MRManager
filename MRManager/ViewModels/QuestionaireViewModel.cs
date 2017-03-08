@@ -25,65 +25,17 @@ namespace ViewModels
     [Export(typeof(IQuestionaireViewModel))]
     public class QuestionaireViewModel : DynamicViewModel<ObservableListViewModel<IResponseOptionInfo>>, IQuestionaireViewModel
     {
+        IEntityListViewModel<IResponseOptionInfo> IEntityListViewModel<IResponseOptionInfo>.Instance => (IEntityListViewModel<IResponseOptionInfo>) QuestionaireViewModel.Instance;
 
         [ImportingConstructor]
-        public QuestionaireViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation)
+        public QuestionaireViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority)
             : base(
                 new ObservableListViewModel<IResponseOptionInfo>(viewInfo, eventSubscriptions, eventPublications, commandInfo,
-                    process, orientation))
+                    process, orientation, priority))
         {
             this.WireEvents();
-            this.WhenAnyValue(x => x.CurrentQuestion.Value).Subscribe(x => UpdateChangeCollectionList(x));
-            
            
-        }
-
-
-        private void UpdateChangeCollectionList(IQuestionResponseOptionInfo patientResponseInfo)
-        {
-
-
-            if (patientResponseInfo == null)
-            {
-                if (EntitySet.Any()) EntitySet.Clear();
-                return;
-            }
-                
-                var resLst = new List<ResponseOptionInfo>();
-                BindingOperations.EnableCollectionSynchronization(resLst, lockObject);
-               
-                if (patientResponseInfo?.ResponseOptions != null)
-                {
-
-                    resLst.AddRange(patientResponseInfo.ResponseOptions.Select(x => (ResponseOptionInfo)x ));
-                    if (CurrentPatientVisit != null)
-                    {
-                        foreach (
-                            var itm in patientResponseInfo.PatientResponses.Where(x => x.PatientVisitId == CurrentPatientVisit.Id)
-                            )
-                        {
-                           var res =  resLst.First(x => x.Id == itm.Id);
-                            res.Value = itm.Value;
-                            res.ResponseId = itm.ResponseId;
-                            res.PatientResponseId = itm.Id;
-
-                        }
-                    }
-                    
-                }
-                
-
-                resLst.Add(new ResponseOptionInfo()
-                                {
-                                    Id = 0,
-                                    Description = "Edit to Create New Response Option",
-                                    QuestionId = patientResponseInfo.Id,
-                                    QuestionResponseTypeId = 1
-                                });
-                
-                this.ViewModel.EntitySet = new ObservableList<IResponseOptionInfo>(resLst.Select(x => (IResponseOptionInfo)x).ToList());
-                OnPropertyChanged(nameof(EntitySet));
-
+           
         }
 
         public ObservableList<IQuestionResponseOptionInfo> Questions
@@ -103,7 +55,7 @@ namespace ViewModels
             set
             {
                 _currentPatientVisit = value;
-                UpdateChangeCollectionList(CurrentQuestion.Value);
+                OnPropertyChanged();
             }
         }
         private IPatientSyntomInfo _currentPatientSyntom;
@@ -113,17 +65,18 @@ namespace ViewModels
             set
             {
                 _currentPatientSyntom = value;
+                OnPropertyChanged();
             }
         }
 
         public ReactiveProperty<IQuestionResponseOptionInfo> CurrentQuestion { get; } = new ReactiveProperty<IQuestionResponseOptionInfo>();
 
         
-        private readonly object lockObject = new object();
-        private ObservableList<IQuestionResponseOptionInfo> _questions = new ObservableList<IQuestionResponseOptionInfo>();
         
+        private ObservableList<IQuestionResponseOptionInfo> _questions = new ObservableList<IQuestionResponseOptionInfo>();
 
 
+        
         public ReactiveProperty<IProcessStateList<IResponseOptionInfo>> State => this.ViewModel.State;
 
 
@@ -131,8 +84,8 @@ namespace ViewModels
         public ReactiveProperty<IResponseOptionInfo> CurrentEntity => this.ViewModel.CurrentEntity;
 
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
-        public ObservableList<IResponseOptionInfo> EntitySet => this.ViewModel.EntitySet;
-        public ObservableList<IResponseOptionInfo> SelectedEntities => this.ViewModel.SelectedEntities;
+        public ReactiveProperty<ObservableList<IResponseOptionInfo>> EntitySet => this.ViewModel.EntitySet;
+        public ReactiveProperty<ObservableList<IResponseOptionInfo>> SelectedEntities => this.ViewModel.SelectedEntities;
 
         public ReactiveProperty<IQuestionResponseTypes> DataType { get; } = new ReactiveProperty<IQuestionResponseTypes>();
         

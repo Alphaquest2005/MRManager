@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Windows;
 using SystemInterfaces;
-using Actor.Interfaces;
-using EventMessages.Commands;
-using EventMessages.Events;
+using EF.Entities;
 using Interfaces;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
-using ViewMessages;
 using ViewModel.Interfaces;
 
 namespace RevolutionData
@@ -49,20 +47,20 @@ namespace RevolutionData
                     (v, e) =>
                     {
 
-                       var f = v.EntitySet.FirstOrDefault(x => x.Id == e.Entity.Id);
+                       var f = v.EntitySet.Value.FirstOrDefault(x => x.Id == e.Entity.Id);
                         if (v.CurrentEntity.Value.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
                         if (f == null)
                         {
-                            v.EntitySet.Insert(v.EntitySet.Count() - 1,e.Entity);
+                            v.EntitySet.Value.Insert(v.EntitySet.Value.Count() - 1,e.Entity);
 
                         }
                         else
                         {
                             //f = e.Entity;
-                            var idx = v.EntitySet.IndexOf(f);
-                            v.EntitySet.Remove(f);
-                            v.EntitySet.Insert(idx, e.Entity);
-                            v.EntitySet.Reset();
+                            var idx = v.EntitySet.Value.IndexOf(f);
+                            v.EntitySet.Value.Remove(f);
+                            v.EntitySet.Value.Insert(idx, e.Entity);
+                            v.EntitySet.Value.Reset();
                         }
                         v.RowState.Value = RowState.Unchanged;
 
@@ -79,7 +77,18 @@ namespace RevolutionData
                     {
                         v => v.State != null
                     },
-                    messageData:s => new ViewEventPublicationParameter(new object[] {s,s.State.Value},new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded),s.Process,s.Source)),
+                    messageData:s =>
+                    {
+                         Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            s.EntitySet.Value.Add(new PatientVisitInfo() {Purpose = "Create New..."});
+                            s.NotifyPropertyChanged(nameof(s.EntitySet));
+                        }));
+
+                        return new ViewEventPublicationParameter(new object[] {s, s.State.Value},
+                            new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded), s.Process,
+                            s.Source);
+                    }),
 
                 new ViewEventPublication<IPatientVisitViewModel, ICurrentEntityChanged<IPatientVisitInfo>>(
                     key:"CurrentEntityChanged",
@@ -184,7 +193,7 @@ namespace RevolutionData
 
             },
             typeof(IPatientVisitViewModel),
-            typeof(IBodyViewModel));
+            typeof(IBodyViewModel), 2);
 
     }
 }
