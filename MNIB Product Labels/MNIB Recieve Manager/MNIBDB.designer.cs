@@ -45,7 +45,7 @@ namespace MNIB_Distribution_Manager
     #endregion
 		
 		public MNIBDBDataContext() : 
-				base(global::MNIB_Distribution_Manager.Properties.Settings.Default.MNIBDistributionManagerConnectionString1, mappingSource)
+				base(global::MNIB_Distribution_Manager.Properties.Settings.Default.MNIBDistributionManagerConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -167,6 +167,14 @@ namespace MNIB_Distribution_Manager
 			get
 			{
 				return this.GetTable<TransactionNetWeightLkp>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Location> Locations
+		{
+			get
+			{
+				return this.GetTable<Location>();
 			}
 		}
 	}
@@ -1602,6 +1610,51 @@ namespace MNIB_Distribution_Manager
 				if ((this._NetQuantity != value))
 				{
 					this._NetQuantity = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Locations")]
+	public partial class Location
+	{
+		
+		private string _Id;
+		
+		private string _LocationName;
+		
+		public Location()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this._Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LocationName", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string LocationName
+		{
+			get
+			{
+				return this._LocationName;
+			}
+			set
+			{
+				if ((this._LocationName != value))
+				{
+					this._LocationName = value;
 				}
 			}
 		}

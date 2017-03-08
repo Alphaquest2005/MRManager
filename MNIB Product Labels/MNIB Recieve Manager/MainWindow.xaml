@@ -298,7 +298,7 @@
                                      FontSize="21.333"
                                      FontWeight="Bold"
                                      Text="{Binding Barcode,
-                                                    Delay=300,
+                                                    Delay=1000,
                                                     UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
                         <TextBlock Grid.ColumnSpan="2"

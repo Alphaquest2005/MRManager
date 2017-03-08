@@ -96,6 +96,11 @@
     <Compile Include="HeaderTemplate.xaml.cs">
       <DependentUpon>HeaderTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MNIBDistributionManagerDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MNIBDistributionManagerDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="PrintClass.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="TransPreZeroConverter.cs" />
@@ -167,6 +172,17 @@
     </None>
     <None Include="MNIBDB.dbml.views">
       <DependentUpon>MNIBDB.dbml</DependentUpon>
+    </None>
+    <None Include="MNIBDistributionManagerDataSet.xsc">
+      <DependentUpon>MNIBDistributionManagerDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MNIBDistributionManagerDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MNIBDistributionManagerDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MNIBDistributionManagerDataSet.xss">
+      <DependentUpon>MNIBDistributionManagerDataSet.xsd</DependentUpon>
     </None>
     <None Include="MNIBReceivingManagerDB-20170222.bak" />
     <None Include="project.json" />

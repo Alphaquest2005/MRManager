@@ -50,15 +50,16 @@ namespace MNIB_Distribution_Manager
                 Customers = new ObservableCollection<Customer>(ctx.Customers);
                 Harvesters = new ObservableCollection<Harvester>(ctx.Harvesters);
                 Boxes = new ObservableCollection<Box>(ctx.Boxes);
+                ctx.Locations.Select(x => new Customer() { CustomerName = x.LocationName, CustomerAddress = x.LocationName, CustomerNumber = x.Id }).ToList().ForEach(x => Customers.Add(x));
             }
             ExportDetails.CollectionChanged += ExportDetailsOnCollectionChanged;
             InputBoxVisibility = Visibility.Collapsed;
 
-            Customers.Add(new Customer() {CustomerName = "MNIB Production", CustomerAddress = "MNIB Production", CustomerNumber = "MNIBPro"});
-            Customers.Add(new Customer() { CustomerName = "Pack House", CustomerAddress = "River Road, St. George's", CustomerNumber = "RRPH" });
-            Customers.Add(new Customer() { CustomerName = "Grand Anse", CustomerAddress = "Grand Anse, St. George's", CustomerNumber = "VLGD" });
-            Customers.Add(new Customer() { CustomerName = "MNIB SGU", CustomerAddress = "True Blue, St. George's", CustomerNumber = "MNIBSGU" });
-            Customers.Add(new Customer() { CustomerName = "MNIB Street Sales", CustomerAddress = "MNIB Street Sales", CustomerNumber = "MNIBStr" });
+            //Customers.Add(new Customer() {CustomerName = "MNIB Production", CustomerAddress = "MNIB Production", CustomerNumber = "MNIBPro"});
+            //Customers.Add(new Customer() { CustomerName = "Pack House", CustomerAddress = "River Road, St. George's", CustomerNumber = "RRPH" });
+            //Customers.Add(new Customer() { CustomerName = "Grand Anse", CustomerAddress = "Grand Anse, St. George's", CustomerNumber = "VLGD" });
+            //Customers.Add(new Customer() { CustomerName = "MNIB SGU", CustomerAddress = "True Blue, St. George's", CustomerNumber = "MNIBSGU" });
+            //Customers.Add(new Customer() { CustomerName = "MNIB Street Sales", CustomerAddress = "MNIB Street Sales", CustomerNumber = "MNIBStr" });
         }
 
         private void ExportDetailsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
@@ -767,6 +768,9 @@ namespace MNIB_Distribution_Manager
                 OnPropertyChanged(nameof(SourceTransaction));
             }
         }
+
+        private ObservableCollection<Location> locations;
+        public ObservableCollection<Location> Locations { get { return locations; } private set { locations = value; OnPropertyChanged(nameof(Locations)); } }
 
         private void DoBarcodeLookup()
         {

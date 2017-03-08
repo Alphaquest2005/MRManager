@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MNIBDistributionManager" Class="MNIBDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=ALPHAQUEST-PC\SQLEXPRESS2016;Initial Catalog=MNIBDistributionManager;Integrated Security=True" SettingsObjectName="MNIB_Distribution_Manager.Properties.Settings" SettingsPropertyName="MNIBDistributionManagerConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=winserv;Initial Catalog=MNIBDistributionManager;User ID=sa" SettingsObjectName="MNIB_Distribution_Manager.Properties.Settings" SettingsPropertyName="MNIBDistributionManagerConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Items" Member="Items">
     <Type Name="Item">
       <Column Name="ProductDescription" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
@@ -105,6 +105,12 @@
       <Column Name="LotNumber" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
       <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="NetQuantity" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Locations" Member="Locations">
+    <Type Name="Location">
+      <Column Name="Id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="LocationName" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>
