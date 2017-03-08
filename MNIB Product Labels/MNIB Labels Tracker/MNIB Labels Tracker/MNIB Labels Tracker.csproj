@@ -140,7 +140,7 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SaveCSV\SaveCSV.csproj">
+    <ProjectReference Include="..\..\SaveCSV\SaveCSV.csproj">
       <Project>{a7792cad-591b-4968-8b2e-46b87e71ab10}</Project>
       <Name>SaveCSV</Name>
     </ProjectReference>

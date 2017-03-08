@@ -13,5 +13,6 @@ namespace MNIB_Product_Labels
     /// </summary>
     public partial class App : Application
     {
+        
     }
 }
