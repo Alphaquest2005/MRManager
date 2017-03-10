@@ -35,8 +35,7 @@ namespace MNIB_Distribution_Manager.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=winserv;Initial Catalog=MNIBDistributionManager;user=sa;password=Coun" +
-            "terPoint8")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=winserv;Initial Catalog=MNIBTrackerDB;user=sa;password=CounterPoint8")]
         public string MNIBDistributionManagerConnectionString {
             get {
                 return ((string)(this["MNIBDistributionManagerConnectionString"]));

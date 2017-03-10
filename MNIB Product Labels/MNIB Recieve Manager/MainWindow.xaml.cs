@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Microsoft.Windows.Controls;
 
 namespace MNIB_Distribution_Manager
 {
@@ -23,19 +15,20 @@ namespace MNIB_Distribution_Manager
     {
         public MainWindow()
         {
+            Dispatcher.UnhandledException += Dispatcher_UnhandledException;
             InitializeComponent();
             im = FindResource("LabelViewModelDataSource") as LabelViewModel;
-            Dispatcher.UnhandledException += Dispatcher_UnhandledException;
+           
         }
 
         private void Dispatcher_UnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             var exception = e.Exception;
-            do
+            while (exception.InnerException != null)
             {
                 exception = exception.InnerException;
             }
-            while (exception.InnerException == null);
+           
             MessageBox.Show(exception.Message + "|" + exception.StackTrace);
         }
 
@@ -185,7 +178,7 @@ namespace MNIB_Distribution_Manager
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!im.VeifyBoxWeight())
+            if (im != null && !im.VeifyBoxWeight())
             {
                 e.Cancel = true;
             }
@@ -219,19 +212,16 @@ namespace MNIB_Distribution_Manager
             InputBox.Visibility = Visibility.Hidden;
         }
 
-        private async void ViewSummary(object sender, RoutedEventArgs e)
+        private void ViewSummary(object sender, RoutedEventArgs e)
         {
             ReportViewer.Visibility = Visibility.Visible;
             DailySummary res = null;
-            await Task.Run(() =>
-                             {
+            
                                 res = im.PrepareDailySummary();
-                             }).ConfigureAwait(false);
 
-            await Dispatcher.BeginInvoke(new Action(() =>
-             {
+            
                  DailyReportGD.DataContext = res;
-             }));
+          
            
             
         }
@@ -299,5 +289,7 @@ namespace MNIB_Distribution_Manager
                 BarcodeTxt.Focus();
             }
         }
+
+       
     }
 }

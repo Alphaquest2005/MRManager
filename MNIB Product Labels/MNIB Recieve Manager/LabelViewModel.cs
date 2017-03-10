@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -7,15 +6,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.RightsManagement;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
 using Core.Common.UI;
 using DataGrid2Excel;
 using MNIB_Distribution_Manager.Properties;
@@ -41,25 +33,36 @@ namespace MNIB_Distribution_Manager
 
         public LabelViewModel()
         {
-            Export = new Export() {ExportDate = DateTime.Today};
-            ExportDetails = new ObservableCollection<ExportDetail>();
-            ExportDate = DateTime.Today;
-            using (var ctx = new MNIBDBDataContext())
+            try
             {
-                Products = new ObservableCollection<Item>(ctx.Items);
-                Customers = new ObservableCollection<Customer>(ctx.Customers);
-                Harvesters = new ObservableCollection<Harvester>(ctx.Harvesters);
-                Boxes = new ObservableCollection<Box>(ctx.Boxes);
-                ctx.Locations.Select(x => new Customer() { CustomerName = x.LocationName, CustomerAddress = x.LocationName, CustomerNumber = x.Id }).ToList().ForEach(x => Customers.Add(x));
+                Export = new Export() {ExportDate = DateTime.Today};
+                ExportDetails = new ObservableCollection<ExportDetail>();
+                ExportDate = DateTime.Today;
+                using (var ctx = new MNIBDBDataContext())
+                {
+                    Products = new ObservableCollection<Item>(ctx.Items);
+                    Customers = new ObservableCollection<Customer>(ctx.Customers);
+                    Harvesters = new ObservableCollection<Harvester>(ctx.Harvesters);
+                    Boxes = new ObservableCollection<Box>(ctx.Boxes);
+                    ctx.Locations.Select(
+                        x =>
+                            new Customer()
+                            {
+                                CustomerName = x.LocationName,
+                                CustomerAddress = x.LocationName,
+                                CustomerNumber = x.Id
+                            }).ToList().ForEach(x => Customers.Add(x));
+                }
+                ExportDetails.CollectionChanged += ExportDetailsOnCollectionChanged;
+                InputBoxVisibility = Visibility.Collapsed;
             }
-            ExportDetails.CollectionChanged += ExportDetailsOnCollectionChanged;
-            InputBoxVisibility = Visibility.Collapsed;
+            catch (Exception ex)
+            {
 
-            //Customers.Add(new Customer() {CustomerName = "MNIB Production", CustomerAddress = "MNIB Production", CustomerNumber = "MNIBPro"});
-            //Customers.Add(new Customer() { CustomerName = "Pack House", CustomerAddress = "River Road, St. George's", CustomerNumber = "RRPH" });
-            //Customers.Add(new Customer() { CustomerName = "Grand Anse", CustomerAddress = "Grand Anse, St. George's", CustomerNumber = "VLGD" });
-            //Customers.Add(new Customer() { CustomerName = "MNIB SGU", CustomerAddress = "True Blue, St. George's", CustomerNumber = "MNIBSGU" });
-            //Customers.Add(new Customer() { CustomerName = "MNIB Street Sales", CustomerAddress = "MNIB Street Sales", CustomerNumber = "MNIBStr" });
+                MessageBox.Show(ex.Message);
+                Application.Current.Shutdown();
+            }
+
         }
 
         private void ExportDetailsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
@@ -528,20 +531,7 @@ namespace MNIB_Distribution_Manager
 
                 TSCLIB_DLL.barcode((HorizontalSpace * .5).ToString(), (VerticalSpace * 7).ToString(), "128", "125", "1", "0", "8", "8", itm.Barcode); //Drawing barcode
 
-              //  TSCLIB_DLL.printerfont((HorizontalSpace * 2.3).ToString(), (VerticalSpace * 8.5).ToString(), "3", "0", "2", "2", Box.Description);
-
-                //TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 4).ToString(), "3", "0", LabelFontSize, LabelFontSize, "SORT");
-                //TSCLIB_DLL.sendcommand(string.Format("BOX {0},{1},{2},{3},4,19.2", HorizontalSpace * 4,VerticalSpace * 4,HorizontalSpace * 8,VerticalSpace * 4 + 100));
-
-                //TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 5).ToString(), "3", "0", LabelFontSize, LabelFontSize, "GRADED");
-                //TSCLIB_DLL.sendcommand(string.Format("BOX {0},{1},{2},{3},4,19.2", HorizontalSpace * 4, VerticalSpace * 5, HorizontalSpace * 8, VerticalSpace * 5 + 100));
-
-                //TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 6).ToString(), "3", "0", LabelFontSize, LabelFontSize, "WASH");
-                //TSCLIB_DLL.sendcommand(string.Format("BOX {0},{1},{2},{3},4,19.2", HorizontalSpace * 4, VerticalSpace * 6, HorizontalSpace * 8, VerticalSpace * 6 + 100));
-
-                //TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 7).ToString(), "3", "0", LabelFontSize, LabelFontSize, "CHILLER#");
-                //TSCLIB_DLL.sendcommand(string.Format("BOX {0},{1},{2},{3},4,19.2", HorizontalSpace * 4, VerticalSpace * 7, HorizontalSpace * 8, VerticalSpace * 7 + 100));
-
+              
 
                 TSCLIB_DLL.printlabel("1", "1");                                                    //Print labels
             TSCLIB_DLL.closeport();
@@ -623,7 +613,7 @@ namespace MNIB_Distribution_Manager
             }
         }
 
-        internal async Task<DataTable> GetExportReport(DateTime startDate, DateTime endDate)
+        internal DataTable GetExportReport(DateTime startDate, DateTime endDate)
         {
             // var eb = db.PayrollItems.AsEnumerable().GroupBy(b => new BranchSummary { BranchName = b.Name, PayrollItems = new ObservableCollection<DataLayer.PayrollItem>(( p => p.PayrollItems)), Total = b.Sum(p => p.NetAmount) }).AsEnumerable().Pivot(E => E.PayrollItems, E => E.PayrollJob.Branch.Name, E => E.Amount, true, TransformerClassGenerationEventHandler).ToList();
             try
@@ -687,9 +677,9 @@ namespace MNIB_Distribution_Manager
 
         #endregion
 
-        public async Task Send2Excel(DateTime startDate, DateTime endDate)
+        public void Send2Excel(DateTime startDate, DateTime endDate)
         {
-            var dt = await GetExportReport(startDate, endDate).ConfigureAwait(false);
+            var dt = GetExportReport(startDate, endDate);
             var p = new ExportToExcel();
             p.GenerateReport(dt);
         }
@@ -716,7 +706,7 @@ namespace MNIB_Distribution_Manager
                                                    BarCode = w.ExportNumber
                                                 }).ToList();
                 ds.Summary = new ObservableCollection<DailySummary.SummaryLine>(
-                                                ctx.ExportReportLines.GroupBy(x => x.ReceiptNumber.Substring(0,x.ReceiptNumber.LastIndexOf("-")))
+                                                ctx.ExportReportLines.Where(x => x.ExportDate == this.ExportDate).GroupBy(x => x.ReceiptNumber.Substring(0,x.ReceiptNumber.LastIndexOf("-")))
                                                   .Select(x => new DailySummary.SummaryLine() { LotNumber = x.Key, TotalWeight = x.Sum(y => y.Weight)} )
                                                   );
 

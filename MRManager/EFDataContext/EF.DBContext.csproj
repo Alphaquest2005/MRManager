@@ -49,9 +49,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Generated DBContexts\MRManagerDBContext-Intialization.cs" />
     <Compile Include="Generated DBContexts\MRManagerDBContext.cs" />
     <Compile Include="Migrations\20161022153613_m1.cs" />

@@ -5,6 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:controls="http://schemas.microsoft.com/wpf/2008/toolkit"
         Title="MainWindow"
         Width="1175.333"
         Height="545.333"
@@ -20,7 +22,7 @@
         mc:Ignorable="d">
     <Window.Resources>
         <x:Static x:Key="LabelViewModelDataSource" Member="QS:LabelViewModel.Instance" />
-        <Style x:Key="TextButtonStyle" TargetType="{x:Type TextBlock}">
+        <!--<Style x:Key="TextButtonStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="#FF5E6701" />
             <Style.Triggers>
 
@@ -28,8 +30,8 @@
                     <Setter Property="Foreground" Value="#FFD39552" />
                 </Trigger>
             </Style.Triggers>
-        </Style>
-        <Style x:Key="CloseButtonStyle" TargetType="{x:Type TextBlock}">
+        </Style>-->
+        <!--<Style x:Key="CloseButtonStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="#FFFE2B2B" />
             <Style.Triggers>
 
@@ -37,7 +39,7 @@
                     <Setter Property="Foreground" Value="#FFFF4600" />
                 </Trigger>
             </Style.Triggers>
-        </Style>
+        </Style>-->
         <DataTemplate x:Key="ListBoxItemTemplate" DataType="QS:ExportDetail">
             <Grid Width="Auto"
                   Height="45"
@@ -298,8 +300,7 @@
                                      FontSize="21.333"
                                      FontWeight="Bold"
                                      Text="{Binding Barcode,
-                                                    Delay=1000,
-                                                    UpdateSourceTrigger=PropertyChanged}" />
+                                                    UpdateSourceTrigger=LostFocus}" />
                         </Grid>
                         <TextBlock Grid.ColumnSpan="2"
                                    Width="130"
@@ -409,16 +410,8 @@
                             <ComboBoxItem Content="Sales Order" />
                         </ComboBox>
 
-                        <DatePicker Grid.Column="1"
-                                    Width="246"
-                                    Height="30"
-                                    Margin="15,82,0,0"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Top"
-                                    FontSize="21.333"
-                                    SelectedDate="{Binding ExportDate,
-                                                           UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedDateChanged="DatePicker_OnSelectedDateChanged" />
+                        <controls:DatePicker SelectedDate="{Binding ExportDate, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Height="34" Margin="15,93,0,0" VerticalAlignment="Top" Width="246" FontSize="21.333" Grid.Column="1" SelectedDateChanged="DatePicker_OnSelectedDateChanged"/>
+                        
                         <ComboBox Grid.Column="1"
                                   Margin="15,286,671,70.333"
                                   Background="#FF363535"
@@ -538,7 +531,7 @@
                        FontFamily="Segoe UI Symbol"
                        FontSize="24"
                        MouseLeftButtonDown="CloseWindow"
-                       Style="{StaticResource CloseButtonStyle}"
+                       Foreground="Crimson"
                        Text="&#xE10A;" />
             <TextBlock Width="30"
                        Height="32"
@@ -548,7 +541,7 @@
                        FontFamily="Segoe UI Symbol"
                        FontSize="24"
                        MouseLeftButtonDown="SwitchWindowState"
-                       Style="{DynamicResource TextButtonStyle}"
+                       Foreground="Chartreuse"
                        Text="&#xE155;" />
             <TextBlock Width="30"
                        Height="25"
@@ -558,7 +551,7 @@
                        FontFamily="Segoe UI Symbol"
                        FontSize="24"
                        MouseLeftButtonDown="MinimizeWindow"
-                       Style="{DynamicResource TextButtonStyle}"
+                       Foreground="Chartreuse"
                        Text="&#xE108;" />
 
 
@@ -637,7 +630,7 @@
                                            Text="Exports Daily Summary Report"
                                            TextAlignment="Left"
                                            TextWrapping="Wrap" />
-                                <DataGrid x:Name="GridData"
+                                <controls:DataGrid x:Name="GridData"
                                           Width="Auto"
                                           Margin="0"
                                           HorizontalAlignment="Stretch"
@@ -660,7 +653,7 @@
                                            Text="Totals by Lot Number:"
                                            TextAlignment="Left"
                                            TextWrapping="Wrap" />
-                                <DataGrid x:Name="SummaryData"
+                                <controls:DataGrid x:Name="SummaryData"
                                           Width="Auto"
                                           Margin="0"
                                           HorizontalAlignment="Stretch"
