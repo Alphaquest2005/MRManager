@@ -254,7 +254,7 @@ namespace MNIB_Distribution_Manager
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (im.SourceTransaction == "Sales Order")
+            if (((ComboBoxItem)e.AddedItems[0]).Content.ToString() == "Sales Order")
             {
                 HavesterGrd.Visibility = Visibility.Visible;
                 BarCodeGrd.Visibility = Visibility.Collapsed;

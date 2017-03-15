@@ -520,7 +520,7 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="36"
-                       Foreground="#FF14520D"
+                       Foreground="Purple"
                        Text="MNIB Distribution Manager"
                        TextWrapping="Wrap" />
             <TextBlock Width="35"
@@ -541,7 +541,7 @@
                        FontFamily="Segoe UI Symbol"
                        FontSize="24"
                        MouseLeftButtonDown="SwitchWindowState"
-                       Foreground="Chartreuse"
+                       Foreground="Purple"
                        Text="&#xE155;" />
             <TextBlock Width="30"
                        Height="25"
@@ -551,7 +551,7 @@
                        FontFamily="Segoe UI Symbol"
                        FontSize="24"
                        MouseLeftButtonDown="MinimizeWindow"
-                       Foreground="Chartreuse"
+                       Foreground="Purple"
                        Text="&#xE108;" />
 
 

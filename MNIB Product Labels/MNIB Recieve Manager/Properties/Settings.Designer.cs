@@ -36,19 +36,20 @@ namespace MNIB_Distribution_Manager.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=winserv;Initial Catalog=MNIBTrackerDB;user=sa;password=CounterPoint8")]
-        public string MNIBDistributionManagerConnectionString {
+        public string MNIBLabelsDBConnectionString {
             get {
-                return ((string)(this["MNIBDistributionManagerConnectionString"]));
+                return ((string)(this["MNIBLabelsDBConnectionString"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=winserv;Initial Catalog=MNIBTrackerDB;user=sa;password=CounterPoint8")]
-        public string MNIBLabelsDBConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=winserv;Initial Catalog=MNIBDistributionManager;user=sa;password=Coun" +
+            "terPoint8")]
+        public string MNIBDistributionManagerConnectionString {
             get {
-                return ((string)(this["MNIBLabelsDBConnectionString"]));
+                return ((string)(this["MNIBDistributionManagerConnectionString"]));
             }
         }
     }
