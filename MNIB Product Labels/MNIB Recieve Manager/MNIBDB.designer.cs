@@ -45,7 +45,7 @@ namespace MNIB_Distribution_Manager
     #endregion
 		
 		public MNIBDBDataContext() : 
-				base(global::MNIB_Distribution_Manager.Properties.Settings.Default.MNIBDistributionManagerConnectionString, mappingSource)
+				base(global::MNIB_Distribution_Manager.Properties.Settings.Default.MNIBDistributionManagerConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -138,14 +138,6 @@ namespace MNIB_Distribution_Manager
 			}
 		}
 		
-		public System.Data.Linq.Table<ExportCustomer> ExportCustomers
-		{
-			get
-			{
-				return this.GetTable<ExportCustomer>();
-			}
-		}
-		
 		public System.Data.Linq.Table<ExportDetail> ExportDetails
 		{
 			get
@@ -175,6 +167,14 @@ namespace MNIB_Distribution_Manager
 			get
 			{
 				return this.GetTable<Location>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ExportCustomer> ExportCustomers
+		{
+			get
+			{
+				return this.GetTable<ExportCustomer>();
 			}
 		}
 	}
@@ -962,87 +962,6 @@ namespace MNIB_Distribution_Manager
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ExportCustomers")]
-	public partial class ExportCustomer
-	{
-		
-		private string _TicketNo;
-		
-		private string _CustomerNumber;
-		
-		private System.Nullable<System.DateTime> _TicketDate;
-		
-		private string _OrderNo;
-		
-		public ExportCustomer()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketNo", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
-		public string TicketNo
-		{
-			get
-			{
-				return this._TicketNo;
-			}
-			set
-			{
-				if ((this._TicketNo != value))
-				{
-					this._TicketNo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerNumber", DbType="VarChar(15)")]
-		public string CustomerNumber
-		{
-			get
-			{
-				return this._CustomerNumber;
-			}
-			set
-			{
-				if ((this._CustomerNumber != value))
-				{
-					this._CustomerNumber = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> TicketDate
-		{
-			get
-			{
-				return this._TicketDate;
-			}
-			set
-			{
-				if ((this._TicketDate != value))
-				{
-					this._TicketDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderNo", DbType="VarChar(15)")]
-		public string OrderNo
-		{
-			get
-			{
-				return this._OrderNo;
-			}
-			set
-			{
-				if ((this._OrderNo != value))
-				{
-					this._OrderNo = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ExportDetails")]
 	public partial class ExportDetail : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1655,6 +1574,69 @@ namespace MNIB_Distribution_Manager
 				if ((this._LocationName != value))
 				{
 					this._LocationName = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ExportCustomers")]
+	public partial class ExportCustomer
+	{
+		
+		private string _TicketNo;
+		
+		private string _CustomerNumber;
+		
+		private System.Nullable<System.DateTime> _TicketDate;
+		
+		public ExportCustomer()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketNo", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		public string TicketNo
+		{
+			get
+			{
+				return this._TicketNo;
+			}
+			set
+			{
+				if ((this._TicketNo != value))
+				{
+					this._TicketNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerNumber", DbType="VarChar(15)")]
+		public string CustomerNumber
+		{
+			get
+			{
+				return this._CustomerNumber;
+			}
+			set
+			{
+				if ((this._CustomerNumber != value))
+				{
+					this._CustomerNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> TicketDate
+		{
+			get
+			{
+				return this._TicketDate;
+			}
+			set
+			{
+				if ((this._TicketDate != value))
+				{
+					this._TicketDate = value;
 				}
 			}
 		}

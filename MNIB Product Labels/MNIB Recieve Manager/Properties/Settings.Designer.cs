@@ -52,5 +52,16 @@ namespace MNIB_Distribution_Manager.Properties {
                 return ((string)(this["MNIBDistributionManagerConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=Winserv;Initial Catalog=MNIBDistributionManager;Persist Security Info" +
+            "=True;User ID=sa;Password=CounterPoint8")]
+        public string MNIBDistributionManagerConnectionString1 {
+            get {
+                return ((string)(this["MNIBDistributionManagerConnectionString1"]));
+            }
+        }
     }
 }

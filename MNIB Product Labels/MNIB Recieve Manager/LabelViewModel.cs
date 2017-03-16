@@ -96,13 +96,13 @@ namespace MNIB_Distribution_Manager
                 switch (SourceTransaction)
                 {
                     case "Sales Order":
-                        var prn = ctx.ExportCustomers.FirstOrDefault(x => x.OrderNo == TransactionNumber);
+                        var prn = ctx.ExportCustomers.FirstOrDefault(x => x.TicketNo == TransactionNumber);
                         if (prn == null)
                         {
                             MessageBox.Show("Sales Order Not Found! Check Number and Try again.");
                             return;
                         }
-                        Instance.Customer = Instance.Customers.FirstOrDefault(x => x.CustomerNumber == prn.CustomerNumber);
+                        SetCustomer(prn.CustomerNumber);
                         break;
                     case "Invoice":
                         var trns = ctx.InvoiceCustomerLkps.FirstOrDefault(x => x.InvoiceNo == TransactionNumber);
@@ -111,7 +111,8 @@ namespace MNIB_Distribution_Manager
                             MessageBox.Show("Invoice Not Found! Check Number and Try again.");
                             return;
                         }
-                        Instance.Customer = Instance.Customers.FirstOrDefault(x => x.CustomerNumber == trns.CustomerNo);
+                        SetCustomer(trns.CustomerNo);
+                        
                         break;
                     case "Transfer":
                         var trn = ctx.TransfersLkps.FirstOrDefault(x => x.TransferNo == TransactionNumber);
@@ -120,7 +121,8 @@ namespace MNIB_Distribution_Manager
                             MessageBox.Show("Transfer Not Found! Check Number and Try again.");
                             return;
                         }
-                        Instance.Customer = Instance.Customers.FirstOrDefault(x => x.CustomerNumber == trn.ToLocation);
+                        
+                        SetCustomer(trn.ToLocation);
                         break;
                     default:
                         break;
@@ -131,6 +133,23 @@ namespace MNIB_Distribution_Manager
             }
         }
 
+        private void SetCustomer(string customerNumber)
+        {
+            var cus = Instance.Customers.FirstOrDefault(x => x.CustomerNumber == customerNumber);
+            if(cus == null)
+            {
+                using (var ctx = new MNIBDBDataContext())
+                {
+                    cus = ctx.Customers.FirstOrDefault(x => x.CustomerNumber == customerNumber);
+                    if(cus == null)
+                    {
+                        MessageBox.Show($"{customerNumber} can not be found!");
+                        
+                    }
+                }
+            }
+            Instance.Customer = cus;
+        }
 
         private Item product;
 

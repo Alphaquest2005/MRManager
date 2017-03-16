@@ -16,9 +16,21 @@ namespace MNIB_Distribution_Manager
         public MainWindow()
         {
             Dispatcher.UnhandledException += Dispatcher_UnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             InitializeComponent();
             im = FindResource("LabelViewModelDataSource") as LabelViewModel;
            
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            var exception = (Exception)e.ExceptionObject;
+            while (exception.InnerException != null)
+            {
+                exception = exception.InnerException;
+            }
+
+            MessageBox.Show(exception.Message + "|" + exception.StackTrace);
         }
 
         private void Dispatcher_UnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
