@@ -170,6 +170,7 @@ namespace MNIB_Distribution_Manager
         private void UpdateWeight()
         {
             if (string.IsNullOrEmpty(TransactionNumber) || Product == null) return;
+            if (SourceTransaction == "Sales Order") return;
             using (var ctx = new MNIBDBDataContext())
             {
                 var netWeight = ctx.TransactionNetWeightLkps.FirstOrDefault(x => x.LotNumber == Barcode);
