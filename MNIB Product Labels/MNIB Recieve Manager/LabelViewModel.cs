@@ -521,7 +521,7 @@ namespace MNIB_Distribution_Manager
             if (Export.SourceTransaction != "Sales Order") return;
             try
             {
-                for (int i = 1; i < Quantity; i++)
+                for (int i = 0; i < Quantity; i++)
                 {
 
 
@@ -551,8 +551,8 @@ namespace MNIB_Distribution_Manager
 
                     TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 5.75).ToString(), "3", "0", "2", "2", Box.Description);
 
-                    TSCLIB_DLL.printerfont((HorizontalSpace * 3).ToString(), (VerticalSpace * 5.75).ToString(), "3", "0", "2", "2", itm.Weight.ToString());
-                    TSCLIB_DLL.printerfont((HorizontalSpace * 4).ToString(), (VerticalSpace * 5.75).ToString(), "3", "0", "2", "2", "LBS.");
+                    TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 6.5).ToString(), "3", "0", "2", "2", itm.Weight.ToString());
+                    TSCLIB_DLL.printerfont((HorizontalSpace * 1.5).ToString(), (VerticalSpace * 6.5).ToString(), "3", "0", "2", "2", "LBS.");
 
                     TSCLIB_DLL.barcode((HorizontalSpace * .5).ToString(), (VerticalSpace * 7).ToString(), "128", "125", "1", "0", "8", "8", itm.Barcode); //Drawing barcode
 
