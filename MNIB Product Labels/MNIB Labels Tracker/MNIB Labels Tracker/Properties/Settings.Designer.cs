@@ -26,8 +26,8 @@ namespace MNIB_Labels_Tracker.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ALPHAQUEST-PC\\SQLEXPRESS2016;Initial Catalog=MNIBDistributionManager;" +
-            "user=sa;password=pa$$word")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=winserv;Initial Catalog=MNIBTrackerDB;Persist Security Info=True;User" +
+            " ID=sa;Password=CounterPoint8")]
         public string MNIBLabelsDBConnectionString {
             get {
                 return ((string)(this["MNIBLabelsDBConnectionString"]));
@@ -37,8 +37,7 @@ namespace MNIB_Labels_Tracker.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ALPHAQUEST-PC\\SQLEXPRESS2016;Initial Catalog=MNIBDistributionManager;" +
-            "user=sa;password=pa$$word")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=winserv;Initial Catalog=MNIBTrackerDB;user=sa;password=CounterPoint8")]
         public string MNIBTrackerDBConnectionString {
             get {
                 return ((string)(this["MNIBTrackerDBConnectionString"]));

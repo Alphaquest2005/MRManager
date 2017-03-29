@@ -237,6 +237,18 @@ namespace MNIB_Distribution_Manager
            
             
         }
+        private void ViewTransSummary(object sender, RoutedEventArgs e)
+        {
+            ReportViewer.Visibility = Visibility.Visible;
+            DailySummary res = null;
+
+            res = im.PrepareTransactionSummary();
+
+            DailyReportGD.DataContext = res;
+
+
+
+        }
 
         private void PrintReport(object sender, MouseButtonEventArgs e)
         {
@@ -280,6 +292,7 @@ namespace MNIB_Distribution_Manager
                 ExportNumberTxt.Focus();
             }
             im.TransactionNumber = "";
+            im.CurrentHarvester = null;
             im.Barcode = "";
             im.Product = null;
             im.SetCurrentExportDetailToNull();

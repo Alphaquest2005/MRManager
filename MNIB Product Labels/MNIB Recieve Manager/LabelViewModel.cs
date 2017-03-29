@@ -102,7 +102,7 @@ namespace MNIB_Distribution_Manager
                             MessageBox.Show("Sales Order Not Found! Check Number and Try again.");
                             return;
                         }
-                        SetCustomer(prn.CustomerNumber);
+                        Instance.Info = prn.CustomerInfo;
                         break;
                     case "Invoice":
                         var trns = ctx.InvoiceCustomerLkps.FirstOrDefault(x => x.InvoiceNo == TransactionNumber);
@@ -111,8 +111,8 @@ namespace MNIB_Distribution_Manager
                             MessageBox.Show("Invoice Not Found! Check Number and Try again.");
                             return;
                         }
-                        SetCustomer(trns.CustomerNo);
-                        
+                        Instance.Info = trns.CustomerInfo;
+
                         break;
                     case "Transfer":
                         var trn = ctx.TransfersLkps.FirstOrDefault(x => x.TransferNo == TransactionNumber);
@@ -121,8 +121,8 @@ namespace MNIB_Distribution_Manager
                             MessageBox.Show("Transfer Not Found! Check Number and Try again.");
                             return;
                         }
-                        
-                        SetCustomer(trn.ToLocation);
+
+                        Instance.Info = trn.Info;
                         break;
                     default:
                         break;
@@ -133,23 +133,7 @@ namespace MNIB_Distribution_Manager
             }
         }
 
-        private void SetCustomer(string customerNumber)
-        {
-            var cus = Instance.Customers.FirstOrDefault(x => x.CustomerNumber == customerNumber);
-            if(cus == null)
-            {
-                using (var ctx = new MNIBDBDataContext())
-                {
-                    cus = ctx.Customers.FirstOrDefault(x => x.CustomerNumber == customerNumber);
-                    if(cus == null)
-                    {
-                        MessageBox.Show($"{customerNumber} can not be found!");
-                        
-                    }
-                }
-            }
-            Instance.Customer = cus;
-        }
+
 
         private Item product;
 
@@ -183,19 +167,7 @@ namespace MNIB_Distribution_Manager
             }
         }
 
-        private Customer customer;
-        public Customer Customer
-        {
-            get { return customer; }
-            set
-            {
-                if (customer != value)
-                {
-                    customer = value;
-                    OnPropertyChanged(nameof(Customer));
-                }
-            }
-        }
+        
 
         private Box box;
 
@@ -236,6 +208,11 @@ namespace MNIB_Distribution_Manager
             get { return weight; }
             set
             {
+                if(value > 999)
+                {
+                    MessageBox.Show("Quantity Can't be more than 999");
+                    return;
+                }
                 if (weight != value)
                 {
                     weight = value;
@@ -251,6 +228,11 @@ namespace MNIB_Distribution_Manager
             get { return total; }
             set
             {
+                if(value > 999)
+                {
+                    MessageBox.Show("Quantity Can't be more than 999");
+                    return;
+                }
                 if (total != value)
                 {
                     total = value;
@@ -313,6 +295,16 @@ namespace MNIB_Distribution_Manager
 
         public void CreateExportDetail()
         {
+            if (SourceTransaction == "Sales Order" && CurrentHarvester == null)
+            {
+                MessageBox.Show("Please Enter Current Harvester");
+                return ;
+            }
+            if (SourceTransaction != "Sales Order" && string.IsNullOrEmpty(Barcode))
+            {
+                MessageBox.Show("Please Enter Barcode");
+                return ;
+            }
             if (CreateBoxChecks()) return;
             using (var ctx = new MNIBDBDataContext())
             {
@@ -337,23 +329,24 @@ namespace MNIB_Distribution_Manager
             rd.ExportId = Export.ExportId;
             rd.ProductDescription = Product.ProductDescription;
             rd.LineNumber = ExportDetails.DefaultIfEmpty().Max(x =>  x?.LineNumber ?? 0) + 1;
-            rd.Barcode = GetBarCode(rd);
+            
             rd.BoxId = Box.BoxId;
             rd.TransactionNumber = TransactionNumber;
-            //rd.TicketNo = Customer.TicketNo;
-            //rd.OrderNo = Customer.OrderNo;
-            rd.Weight = Weight - Box.Weight;
+            
+            rd.Quantity = Quantity;
+            rd.Weight = Weight - (Box.Weight * Quantity);
             rd.BoxWeight = Box.Weight;
-            rd.CustomerInfo = Customer.Info;
+            
             rd.ReceiptNumber = GetReceiptNumber(rd);
+            rd.Barcode = GetReceiptNumber(rd);
             return rd;
 
         }
 
         private string GetReceiptNumber(ExportDetail rd)
         {
-            return SourceTransaction == "Sales Order"? CurrentHarvester.Intials + "-" + ExportDate.ToString("yyyyMMdd") + "-" + Export.ProductNumber + "-" + (rd.LineNumber).ToString()
-                : TransactionNumber + "-" + Barcode + "-" + (rd.LineNumber).ToString();
+            return SourceTransaction == "Sales Order" ? CurrentHarvester?.Intials + ExportDate.ToString("yyyyMMdd") + Export.ProductNumber + "." + (rd.LineNumber).ToString()
+                : Barcode + "." + TransactionNumber + "-" + (rd.LineNumber).ToString();
         }
 
         private string GetBarCode(ExportDetail rd)
@@ -369,7 +362,7 @@ namespace MNIB_Distribution_Manager
                 MessageBox.Show("Please Specify Box.");
                 return true;
             }
-            if (Weight - Box.Weight <= 0)
+            if (Weight - (Box.Weight * Quantity) <= 0)
             {
                 MessageBox.Show("The Weight less the box is less than Zero");
                 return true;
@@ -379,7 +372,7 @@ namespace MNIB_Distribution_Manager
 
         public bool SetExport(MNIBDBDataContext ctx)
         {
-            ResetExport();
+            //ResetExport();
 
             if ( Product == null )
             {
@@ -407,9 +400,8 @@ namespace MNIB_Distribution_Manager
                    // MessageBox.Show("Please Enter ExportNumber");
                     return false;
                 }
-                srdetails = ctx.ExportDetails.Where(x => x.ReceiptNumber.StartsWith(TransactionNumber.ToString()) &&
-                                                         x.ReceiptNumber.Contains(Product.ProductId) &&
-                                                         x.ReceiptNumber.Contains(ExportDate.ToString("yyyyMMdd"))).ToList();
+                srdetails = ctx.ExportDetails.Where(x => x.ReceiptNumber.Contains(TransactionNumber.ToString()) &&
+                                                         x.ReceiptNumber.Contains(Barcode)).ToList();
             }
 
             //if (sr.ExportId == Export?.ExportId) return true;
@@ -424,8 +416,8 @@ namespace MNIB_Distribution_Manager
                 srdetails.ForEach(x => ExportDetails.Add(x));
                 var sr = ctx.Exports.FirstOrDefault(x => x.ExportId == srdetails.First().ExportId);
                 Export = sr;
-                TotalWeight = (float) sr.TotalWeight;
-                OnPropertyChanged(nameof(TotalWeight));
+               // TotalWeight = (float) sr.TotalWeight;
+               // OnPropertyChanged(nameof(TotalWeight));
                 return true;
             }
 
@@ -448,6 +440,16 @@ namespace MNIB_Distribution_Manager
                 MessageBox.Show("Please Enter Total Weight");
                 return false;
             }
+            if(SourceTransaction == "Sales Order" && CurrentHarvester == null)
+            {
+                MessageBox.Show("Please Enter Current Harvester");
+                return false;
+            }
+            if (SourceTransaction != "Sales Order" && string.IsNullOrEmpty(Barcode))
+            {
+                MessageBox.Show("Please Enter Barcode");
+                return false;
+            }
             if (SetExport(ctx)) return true;
 
             Export = new Export()
@@ -464,7 +466,8 @@ namespace MNIB_Distribution_Manager
             return true;
         }
 
-        public DateTime ExportDate { get; set; }
+        DateTime exportDate = DateTime.Today;
+        public DateTime ExportDate { get { return exportDate; } set { exportDate = value; OnPropertyChanged(nameof(ExportDate)); ; SetExport(new MNIBDBDataContext()); } }
 
         public void Search()
         {
@@ -518,43 +521,46 @@ namespace MNIB_Distribution_Manager
             if (Export.SourceTransaction != "Sales Order") return;
             try
             {
-
-           
-            const int VerticalSpace = 150;
-            const int HorizontalSpace = 100;
-            const string LabelFontSize = "2.5";
-
-            TSCLIB_DLL.openport(Settings.Default.TSCPrinter);                                           //Open specified printer driver
-            TSCLIB_DLL.setup("101", "150", "6", "8", "0", "5", "0");                           //Setup the media size and sensor type info
-            TSCLIB_DLL.clearbuffer();                                                           //Clear image buffer
-            TSCLIB_DLL.downloadpcx("box.pcx", "box.pcx");                                         //Download PCX file into printer
-
-                TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * .5).ToString(), "3", "0", "4", "4", "M.N.I.B.");
-                TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 1.25).ToString(), "3", "0", "1.75", "1.75", "Young Street, St. George's, Grenada");
-
-                TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 2.5).ToString(), "3", "0", LabelFontSize, LabelFontSize, Customer.CustomerName);
-                TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 3).ToString(), "3", "0", "1.75", "1.75", Customer.CustomerAddress);
+                for (int i = 1; i < Quantity; i++)
+                {
 
 
-                TSCLIB_DLL.printerfont((HorizontalSpace * .5 ).ToString(), (VerticalSpace * 4).ToString(), "3", "0", "2", "2", DateTime.Today.ToString("yyyy-MMM-dd"));        //Drawing printer font
+                    const int VerticalSpace = 150;
+                    const int HorizontalSpace = 100;
+                    const string LabelFontSize = "2.5";
 
-            
-            TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 4.5).ToString(), "3", "0", LabelFontSize, LabelFontSize, itm.Barcode);
+                    TSCLIB_DLL.openport(Settings.Default.TSCPrinter);                                           //Open specified printer driver
+                    TSCLIB_DLL.setup("101", "150", "6", "8", "0", "5", "0");                           //Setup the media size and sensor type info
+                    TSCLIB_DLL.clearbuffer();                                                           //Clear image buffer
+                    TSCLIB_DLL.downloadpcx("box.pcx", "box.pcx");                                         //Download PCX file into printer
 
-            
-            TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 5).ToString(), "3", "0", LabelFontSize, LabelFontSize, Export.ProductDescription);
+                    TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * .5).ToString(), "3", "0", "4", "4", "M.N.I.B.");
+                    TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 1.25).ToString(), "3", "0", "1.75", "1.75", "Young Street, St. George's, Grenada");
 
-                TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 5.75).ToString(), "3", "0", "2", "2", Box.Description);
+                    TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 2.5).ToString(), "3", "0", LabelFontSize, LabelFontSize, Instance.Info.Substring(0, Instance.Info.IndexOf(" - ")));
+                    TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 3).ToString(), "3", "0", "1.75", "1.75", Instance.Info.Substring(Instance.Info.IndexOf(" - ") + 1));
 
-                TSCLIB_DLL.printerfont((HorizontalSpace * 3).ToString(), (VerticalSpace * 5.75).ToString(), "3", "0", "2", "2", itm.Weight.ToString());
-                TSCLIB_DLL.printerfont((HorizontalSpace * 4).ToString(), (VerticalSpace * 5.75).ToString(), "3", "0", "2", "2", "LBS.");
 
-                TSCLIB_DLL.barcode((HorizontalSpace * .5).ToString(), (VerticalSpace * 7).ToString(), "128", "125", "1", "0", "8", "8", itm.Barcode); //Drawing barcode
+                    TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 4).ToString(), "3", "0", "2", "2", DateTime.Today.ToString("yyyy-MMM-dd"));        //Drawing printer font
 
-              
 
-                TSCLIB_DLL.printlabel("1", "1");                                                    //Print labels
-            TSCLIB_DLL.closeport();
+                    TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 4.5).ToString(), "3", "0", LabelFontSize, LabelFontSize, itm.Barcode);
+
+
+                    TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 5).ToString(), "3", "0", LabelFontSize, LabelFontSize, Export.ProductDescription);
+
+                    TSCLIB_DLL.printerfont((HorizontalSpace * .5).ToString(), (VerticalSpace * 5.75).ToString(), "3", "0", "2", "2", Box.Description);
+
+                    TSCLIB_DLL.printerfont((HorizontalSpace * 3).ToString(), (VerticalSpace * 5.75).ToString(), "3", "0", "2", "2", itm.Weight.ToString());
+                    TSCLIB_DLL.printerfont((HorizontalSpace * 4).ToString(), (VerticalSpace * 5.75).ToString(), "3", "0", "2", "2", "LBS.");
+
+                    TSCLIB_DLL.barcode((HorizontalSpace * .5).ToString(), (VerticalSpace * 7).ToString(), "128", "125", "1", "0", "8", "8", itm.Barcode); //Drawing barcode
+
+
+
+                    TSCLIB_DLL.printlabel("1", "1");                                                    //Print labels
+                    TSCLIB_DLL.closeport();
+                }
             }
             catch (Exception ex)
             {
@@ -711,8 +717,7 @@ namespace MNIB_Distribution_Manager
             {
                 var ds = new DailySummary();
                 var res = ctx.ExportReportLines.Where(x => x.ExportDate == this.ExportDate)
-                                                .OrderBy(x => x.CustomerInfo)
-                                                .ThenBy(y => y.TransactionNumber)
+                                                .OrderBy(y => y.TransactionNumber)
                                                 .ThenBy(z => z.Harvester)
                                                 .ThenBy(z => z.ProductDescription)
                                                 .Select(w => new DailySummary.ReportLine()
@@ -726,8 +731,40 @@ namespace MNIB_Distribution_Manager
                                                    BarCode = w.ExportNumber
                                                 }).ToList();
                 ds.Summary = new ObservableCollection<DailySummary.SummaryLine>(
-                                                ctx.ExportReportLines.Where(x => x.ExportDate == this.ExportDate).GroupBy(x => x.ReceiptNumber.Substring(0,x.ReceiptNumber.LastIndexOf("-")))
+                                                ctx.ExportReportLines.Where(x => x.ExportDate == this.ExportDate).GroupBy(x => x.ReceiptNumber.Substring(0,x.ReceiptNumber.LastIndexOf(".")))
                                                   .Select(x => new DailySummary.SummaryLine() { LotNumber = x.Key, TotalWeight = x.Sum(y => y.Weight)} )
+                                                  );
+
+                ds.Lines = new ObservableCollection<DailySummary.ReportLine>(res);
+                ds.TotalWeight = res.Sum(x => x.Weight);
+                ds.TotalBoxes = res.Count;
+                ds.ReportDate = ExportDate;
+                return ds;
+            }
+        }
+
+        public DailySummary PrepareTransactionSummary()
+        {
+            using (var ctx = new MNIBDBDataContext())
+            {
+                var ds = new DailySummary();
+                var res = ctx.ExportReportLines.Where(x => x.ExportDate == this.ExportDate && x.TransactionNumber == Instance.TransactionNumber)
+                                                .OrderBy(y => y.TransactionNumber)
+                                                .ThenBy(z => z.Harvester)
+                                                .ThenBy(z => z.ProductDescription)
+                                                .Select(w => new DailySummary.ReportLine()
+                                                {
+                                                    TransactionType = w.SourceTransaction,
+                                                    Customer = w.CustomerInfo,
+                                                    TransactionNumber = w.TransactionNumber,
+                                                    Harvester = w.Harvester,
+                                                    Product = w.ProductDescription,
+                                                    Weight = w.Weight,
+                                                    BarCode = w.ExportNumber
+                                                }).ToList();
+                ds.Summary = new ObservableCollection<DailySummary.SummaryLine>(
+                                                ctx.ExportReportLines.Where(x => x.ExportDate == this.ExportDate && x.TransactionNumber == Instance.TransactionNumber).GroupBy(x => x.ReceiptNumber.Substring(0, x.ReceiptNumber.LastIndexOf(".")))
+                                                  .Select(x => new DailySummary.SummaryLine() { LotNumber = x.Key, TotalWeight = x.Sum(y => y.Weight) })
                                                   );
 
                 ds.Lines = new ObservableCollection<DailySummary.ReportLine>(res);
@@ -782,6 +819,18 @@ namespace MNIB_Distribution_Manager
         private ObservableCollection<Location> locations;
         public ObservableCollection<Location> Locations { get { return locations; } private set { locations = value; OnPropertyChanged(nameof(Locations)); } }
 
+        string _info;
+        public string Info { get { return _info; } private set { _info = value;  OnPropertyChanged(nameof(Info)); } }
+
+        int quantity = 1;
+        public int Quantity { get { return quantity; } set {
+                if(value > 10 || value < 0)
+                {
+                    MessageBox.Show("Invalid Quantity");
+                    return;
+                }
+                quantity = value; OnPropertyChanged(nameof(Quantity)); } } 
+
         private void DoBarcodeLookup()
         {
             if (string.IsNullOrEmpty(Barcode)) return;
@@ -831,7 +880,7 @@ namespace MNIB_Distribution_Manager
                 rd = ctx.ExportDetails.FirstOrDefault(x => x.ExportDetailId == CurrentExportDetail.ExportDetailId);
                 UpdateExportDetail(rd);
                 OnPropertyChanged(nameof(TotalBoxWeight));
-                CurrentExportDetail.Weight = Weight - Box.Weight;
+                CurrentExportDetail.Weight = Weight - (Box.Weight * Quantity);
                 ctx.SubmitChanges();
                 Print(rd);
             }

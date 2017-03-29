@@ -562,14 +562,14 @@ namespace MNIB_Labels_Tracker
                if (locItemDetails.Any() == false) return dt;
 
                var d = (from f in locItemDetails
-                        group f by new { f.DateCreated,f.LocationCode,f.ItemDescription, f.LotNumber }
+                        group f by new { f.LocationCode,f.ItemDescription, f.LotNumber }
                             into myGroup
                             where myGroup.Any()
                             select new
                             {
                                 myGroup.Key.ItemDescription,
                                 myGroup.Key.LotNumber,
-                                myGroup.Key.DateCreated,
+                                myGroup.First().DateCreated,
                                 myGroup.Key.LocationCode,
                                 
                                 Total = myGroup.Sum(x => x.Quantity.GetValueOrDefault()).ToString("n1"),

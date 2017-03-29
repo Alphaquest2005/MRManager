@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C211C95D-44B8-4B24-8C8F-5CF45A450281}</ProjectGuid>
+    <ProjectGuid>{8D2B49A9-A8E5-4DA6-BCD7-770952DC58FE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MNIB_Distribution_Manager</RootNamespace>

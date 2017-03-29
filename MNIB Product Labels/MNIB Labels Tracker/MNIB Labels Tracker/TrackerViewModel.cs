@@ -567,14 +567,14 @@ namespace MNIB_Labels_Tracker
                if (locItemDetails.Any() == false) return dt;
 
                var d = (from f in locItemDetails
-                        group f by new { f.DateCreated,f.LocationCode,f.ItemDescription, f.LotNumber }
+                        group f by new { f.LocationCode,f.ItemDescription, f.LotNumber }
                             into myGroup
                             where myGroup.Any()
                             select new
                             {
                                 myGroup.Key.ItemDescription,
                                 myGroup.Key.LotNumber,
-                                myGroup.Key.DateCreated,
+                                myGroup.First().DateCreated,
                                 myGroup.Key.LocationCode,
                                 
                                 Total = myGroup.Sum(x => x.Quantity.GetValueOrDefault()).ToString("n1"),
@@ -1158,7 +1158,7 @@ namespace MNIB_Labels_Tracker
                                 Type = x.Type,
                                 Quantity = (decimal?) x.TrackedQuantity,
                                 Unit = x.Unit,
-                                TrackedQty = Convert.ToInt16(x.TrackedQuantity),
+                                TrackedQty = Convert.ToDouble(x.TrackedQuantity),
                                 TrackedDateTime = x.TrackedDateTime,
                                 DateCreated = x.ExportDate
                             }).ToList());
@@ -1356,7 +1356,7 @@ namespace MNIB_Labels_Tracker
                                    Type = x.Type,
                                    Quantity = (decimal?) x.TrackedQuantity,
                                    Unit = x.Unit,
-                                   TrackedQty = Convert.ToInt16(x.TrackedQuantity),
+                                   TrackedQty = Convert.ToDouble(x.TrackedQuantity),
                                    TrackedDateTime = x.TrackedDateTime,
                                    DateCreated = x.ExportDate
                                }).ToList());
@@ -1387,7 +1387,7 @@ namespace MNIB_Labels_Tracker
                                    Type = x.Type,
                                    Quantity = x.TrackedQuantity * -1,
                                    Unit = x.Unit,
-                                   TrackedQty = Convert.ToInt16(x.TrackedQuantity * -1),
+                                   TrackedQty = Convert.ToDouble(x.TrackedQuantity * -1),
                                    TrackedDateTime = x.TrackedDateTime,
                                    DateCreated = x.ReturnDate
                                }).ToList());
@@ -1510,7 +1510,7 @@ namespace MNIB_Labels_Tracker
                                    Type = x.Type,
                                    Quantity = x.TrackedQuantity,
                                    Unit = x.Unit,
-                                   TrackedQty = Convert.ToInt16(x.TrackedQuantity),
+                                   TrackedQty = Convert.ToDouble(x.TrackedQuantity),
                                    TrackedDateTime = x.TrackedDateTime,
                                    DateCreated = x.PODate
                                }).ToList());
@@ -1538,7 +1538,7 @@ namespace MNIB_Labels_Tracker
                                   Type = x.Type,
                                   Quantity = (decimal?) x.TrackedQuantity,
                                   Unit = x.Unit,
-                                  TrackedQty = Convert.ToInt16(x.TrackedQuantity),
+                                  TrackedQty = Convert.ToDouble(x.TrackedQuantity),
                                   TrackedDateTime = x.TrackedDateTime,
                                   DateCreated = x.ExportDate
                               }).ToList());
@@ -1650,7 +1650,7 @@ namespace MNIB_Labels_Tracker
                                              Type = x.Type,
                                              Quantity = x.TrackedQuantity * -1,
                                              Unit = x.Unit,
-                                             TrackedQty = Convert.ToInt16(x.TrackedQuantity * -1),
+                                             TrackedQty = Convert.ToDouble(x.TrackedQuantity * -1),
                                              TrackedDateTime = x.TrackedDateTime,
                                              DateCreated = x.ReturnDate
                                          }).ToList());
@@ -1984,22 +1984,22 @@ namespace MNIB_Labels_Tracker
                 dt.Columns.Add("LineNumber");
                 dt.Columns.Add("Weight");
                 dt.Columns.Add("TicketNo");
-                dt.Columns.Add("OrderNo");
+                
 
 
                 var lst = xDetailsData.OrderBy(x => x.ExportDate).ThenBy(x => x.Harvester)
-                                   .ThenBy(x => x.CustomerName)
+                                   .ThenBy(x => x.CustomerInfo)
                                    .Select(x => new List<string>()
                {
                    x.ExportDate.ToString("dd-MMM-yyyy"),
                    x.ReceiptNumber,
                    x.Harvester,
-                   x.CustomerName,
+                   x.CustomerInfo,
                    x.ProductDescription,
                    x.LineNumber.ToString(),
                    x.Weight.ToString("n1"),
-                    x.TicketNo.ToString(),
-                     x.OrderNo.ToString(),
+                   x.TransactionNumber.ToString(),
+                   //  x.OrderNo.ToString(),
                });
 
                 foreach (var itm in lst)
@@ -2046,7 +2046,7 @@ namespace MNIB_Labels_Tracker
         public string LotNumber { get; set; }
         public string Type { get; set; }
         public decimal? Quantity { get; set; }
-        public int? TrackedQty { get; set; }
+        public double? TrackedQty { get; set; }
         public DateTime? TrackedDateTime { get; set; }
         public string Contact { get; set; }
         public string Unit { get; set; }
