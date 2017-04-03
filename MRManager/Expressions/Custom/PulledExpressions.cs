@@ -168,7 +168,7 @@ namespace Entity.Expressions
                                 x2.Questions.EntityAttributes.Entity == "Contact" &&
                                 x2.Questions.EntityAttributes.Attribute == "PhoneNumber")
                         .SelectMany(x4 => x4.Response).Where(x6 => x6.ResponseOptions.QuestionResponseTypes.Name == "Text")
-                        .Select(x5 => new PhoneNumbersInfo()
+                        .Select(x5 => new PersonPhoneNumberInfo()
                         {
                             Id = x5.Id,
                             PersonId = x.Id,

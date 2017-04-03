@@ -6,7 +6,7 @@ using SystemInterfaces;
 namespace Interfaces
 {
     
-    public partial interface INextOfKinInfo : IEntityView<IPersons_Patient>
+    public partial interface INextOfKinInfo : IEntityView<IPatients>
     {
         Int32 PatientId { get; }
         String Relationship { get; }

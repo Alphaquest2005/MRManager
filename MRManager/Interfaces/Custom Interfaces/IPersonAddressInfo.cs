@@ -4,7 +4,7 @@ using SystemInterfaces;
 namespace Interfaces
 {
     
-    public interface IPersonAddressInfo : IEntityView<IPersons_Patient>
+    public interface IPersonAddressInfo : IEntityView<IPatients>
     {
         string AddressLines { get; }
         string City { get;  }
