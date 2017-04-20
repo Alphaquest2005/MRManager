@@ -323,7 +323,7 @@ namespace Entity.Expressions
                 DateOfVisit = x.DateOfVisit,
                 Purpose = x.VisitType.Name,
                 VisitTypeId = x.VisitTypeId,
-               // AttendingDoctor = string.Join(" ", x.Persons_Doctor.Persons.PersonNames.Select(z => z.PersonName)),
+                AttendingDoctor = string.Join(" ", x.Persons_Doctor.Persons.PersonNames.Select(z => z.PersonName)),
 
             };
 

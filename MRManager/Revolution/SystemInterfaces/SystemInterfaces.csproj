@@ -123,7 +123,6 @@
     <Compile Include="IEntityProcess.cs" />
     <Compile Include="IEvent.cs" />
     <Compile Include="IEventPublication.cs" />
-    <Compile Include="IMessageSource.cs" />
     <Compile Include="IPerson.cs" />
     <Compile Include="IProcessInfo.cs" />
     <Compile Include="IProcessState.cs" />

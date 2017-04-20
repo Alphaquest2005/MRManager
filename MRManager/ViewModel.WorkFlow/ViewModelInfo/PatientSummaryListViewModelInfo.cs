@@ -78,9 +78,13 @@ namespace RevolutionData
                     },
                     messageData:s =>
                     {
-                        
-                            
-                        
+
+                         Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            s.EntitySet.Value.Add(new PatientInfo() {Name = "Create New..."});
+                            s.NotifyPropertyChanged(nameof(s.EntitySet));
+                        }));
+
 
                        return new ViewEventPublicationParameter(new object[] {s, s.State.Value},
                             new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded), s.Process,
