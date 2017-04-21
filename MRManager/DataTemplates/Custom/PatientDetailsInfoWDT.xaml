@@ -175,11 +175,11 @@
                               FontSize="16"
                               FontWeight="Bold"
                               ItemsSource="{Binding Source={x:Static Member=viewModels:SexCacheViewModel.Instance},
-                                                    Path=EntitySet,
+                                                    Path=EntitySet.Value,
                                                     UpdateSourceTrigger=PropertyChanged,
                                                     Mode=OneWay,
                                                     IsAsync=True}"
-                              SelectedValue="{Binding Sex,
+                              SelectedValue="{Binding Name,
                                                       UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="Name" />
                     <TextBox Width="361"

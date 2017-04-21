@@ -115,7 +115,7 @@ namespace RevolutionData
 
 
                        var f = v.EntitySet.Value.FirstOrDefault(x => x.Id == e.Entity.Id);
-                        if (v.CurrentEntity.Value.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
+                        if (v.CurrentEntity?.Value?.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
                         if (f == null)
                         {
                             v.EntitySet.Value.Insert(v.EntitySet.Value.Count() - 1,e.Entity);

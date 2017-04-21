@@ -35,7 +35,7 @@ namespace RevolutionData
                     messageData: s =>
                     {
                         return new ViewEventCommandParameter(
-                            new object[] {ViewMessageConst.Instance.ViewHome},
+                            new object[] {ViewMessageConst.Instance.ViewPatientSummary},
                             new StateCommandInfo(s.Process.Id,
                                 Context.View.Commands.NavigateToView), s.Process,
                             s.Source);

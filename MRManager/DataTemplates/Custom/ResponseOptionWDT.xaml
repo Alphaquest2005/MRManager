@@ -25,7 +25,7 @@
                       DisplayMemberPath="Name"
                       FontSize="16"
                       ItemsSource="{Binding Source={x:Static Member=viewModels:QuestionResponseTypeCacheViewModel.Instance},
-                                            Path=EntitySet,
+                                            Path=EntitySet.Value,
                                             UpdateSourceTrigger=PropertyChanged,
                                             Mode=OneWay,
                                             IsAsync=True}"

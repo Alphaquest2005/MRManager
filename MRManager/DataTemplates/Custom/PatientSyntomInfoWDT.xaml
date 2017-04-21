@@ -27,11 +27,11 @@
                       FontSize="18.667"
                       IsEditable="True"
                       ItemsSource="{Binding Source={x:Static Member=viewModels:SyntomCacheViewModel.Instance},
-                                            Path=EntitySet,
+                                            Path=EntitySet.Value,
                                             UpdateSourceTrigger=PropertyChanged,
                                             Mode=OneWay,
                                             IsAsync=True}"
-                      SelectedItem="{Binding Syntom, UpdateSourceTrigger=LostFocus}"
+                      SelectedItem="{Binding SyntomName, UpdateSourceTrigger=LostFocus}"
                       SelectedValue="{Binding SymtomId, UpdateSourceTrigger=PropertyChanged}"
                       SelectedValuePath="Id"
                       Text="{Binding SyntomName,
@@ -48,7 +48,7 @@
                       DisplayMemberPath="Name"
                       FontSize="16"
                       ItemsSource="{Binding Source={x:Static Member=viewModels:SyntomPriorityCacheViewModel.Instance},
-                                            Path=EntitySet,
+                                            Path=EntitySet.Value,
                                             UpdateSourceTrigger=PropertyChanged,
                                             Mode=OneWay,
                                             IsAsync=True}"
@@ -64,7 +64,7 @@
                       DisplayMemberPath="Name"
                       FontSize="16"
                       ItemsSource="{Binding Source={x:Static Member=viewModels:SyntomStatusCacheViewModel.Instance},
-                                            Path=EntitySet,
+                                            Path=EntitySet.Value,
                                             UpdateSourceTrigger=PropertyChanged,
                                             Mode=OneWay,
                                             IsAsync=True}"
