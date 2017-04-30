@@ -17,6 +17,7 @@ namespace ViewModel.WorkFlow
             FooterViewModelInfo.FooterViewModel,
             PatientSummaryListViewModelInfo.PatientSummaryListViewModel,
             PatientDetailsViewModelInfo.PatientDetailsViewModel,
+            PatientVitalsViewModelInfo.PatientVitalsViewModel,
             PatientVisitViewModelInfo.PatientVisitViewModel,
             PatientSyntomViewModelInfo.PatientSyntomViewModel,
             InterviewListViewModelInfo.InterviewListViewModel,

@@ -69,6 +69,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Custom\PatientVitalsInfoRDT.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Custom\PatientVitalsInfoVDT.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Custom\PatientVitalsInfoWDT.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Custom\ScreenDT.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

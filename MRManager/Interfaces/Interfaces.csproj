@@ -66,6 +66,7 @@
     <Compile Include="Custom Interfaces\IInterviewInfo.cs" />
     <Compile Include="Custom Interfaces\INextOfKinInfo.cs" />
     <Compile Include="Custom Interfaces\INonResidentInfo.cs" />
+    <Compile Include="Custom Interfaces\IPatientVitalsInfo.cs" />
     <Compile Include="Custom Interfaces\IPatientDetailsInfo.cs" />
     <Compile Include="Custom Interfaces\IPatientInfo.cs" />
     <Compile Include="Custom Interfaces\IPatientResponseInfo.cs" />

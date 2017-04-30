@@ -219,7 +219,9 @@ namespace Process.WorkFlow
             ComplexActions.RequestPulledState<IPatientInfo, INonResidentInfo>(3, "NonResident"),
             ComplexActions.UpdateState<INonResidentInfo>(3),
 
-
+            ComplexActions.RequestPulledState<IPatientInfo, IPatientVitalsInfo>(3,  "Vitals"),
+            ComplexActions.UpdateState<IPatientVitalsInfo>(3),
+            ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,IPatientVitalsInfo>(3, c => c.Id, v => v.Id),
 
 
 

@@ -1,0 +1,59 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
+                    xmlns:converters="clr-namespace:Converters;assembly=Converters"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:systemInterfaces="clr-namespace:SystemInterfaces;assembly=SystemInterfaces"
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+                    mc:Ignorable="d">
+
+    <DataTemplate x:Name="PatientVitalsInfoVDT" DataType="{x:Type viewModels:PatientVitalsViewModel}">
+        <DataTemplate.Resources>
+            <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+        </DataTemplate.Resources>
+        <Grid x:Name="ViewVitals">
+        <ContentControl Focusable="True">
+            <ContentControl.Style>
+                <Style TargetType="{x:Type ContentControl}">
+
+                    <!--  Default Template  -->
+                    <Setter Property="ContentTemplate" Value="{DynamicResource PatientVitalsInfoRDT}" />
+                    <Setter Property="Height" Value="Auto" />
+                    <!--<Setter Property="Visibility" Value="{Binding Value, Converter={StaticResource NullVisibilityConverter}}"/>-->
+
+                    <!--  Triggers to change Template  -->
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=RowState.Value, Source={x:Static viewModels:PatientVitalsViewModel.Instance}}" Value="{x:Static systemInterfaces:RowState.Added}" />
+
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.Setters>
+                                <Setter Property="ContentTemplate" Value="{DynamicResource PatientVitalsInfoWDT}" />
+                                <Setter Property="Visibility" Value="Visible" />
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=RowState.Value, Source={x:Static viewModels:PatientVitalsViewModel.Instance}}" Value="{x:Static systemInterfaces:RowState.Modified}" />
+
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.Setters>
+                                <Setter Property="ContentTemplate" Value="{DynamicResource PatientVitalsInfoWDT}" />
+                                <Setter Property="Visibility" Value="Visible" />
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding Commands[EditEntity]}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ContentControl>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

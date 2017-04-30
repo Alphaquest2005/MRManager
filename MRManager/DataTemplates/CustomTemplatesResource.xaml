@@ -4,6 +4,9 @@
         <ResourceDictionary Source="Custom/PatientDetailsInfoVDT.xaml" />
         <ResourceDictionary Source="Custom/PatientDetailsInfoRDT.xaml" />
         <ResourceDictionary Source="Custom/PatientDetailsInfoWDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientVitalsInfoVDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientVitalsInfoRDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientVitalsInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/PatientSummaryInfoListVDT.xaml" />
         <ResourceDictionary Source="Custom/PatientSummaryInfoRDT.xaml" />
         <ResourceDictionary Source="Custom/PatientSummaryInfoWDT.xaml" />

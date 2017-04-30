@@ -33,7 +33,13 @@ namespace ViewModel.Interfaces
         INonResidentInfo NonResidentInfo { get; set; }
     }
 
-    
+    public interface IPatientVitalsViewModel : IEntityViewModel<IPatientVitalsInfo>
+    {
+        IPatientInfo CurrentPatient { get; set; }
+
+    }
+
+
     public interface IInterviewListViewModel : IEntityListViewModel<IInterviewInfo>
     {
         string Field { get; set; }

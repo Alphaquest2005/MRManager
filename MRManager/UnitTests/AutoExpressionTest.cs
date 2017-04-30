@@ -74,6 +74,13 @@ namespace UnitTests.Expressions
         }
 
         [TestMethod]
+        public void PulledPatientVitalsExpressionGetData()
+        {
+            var res = MRManagerDBContext.Instance.Patients.Select(PulledExpressions.PatientVitalsInfoExpression).ToList();
+            if (res.Any()) Debug.Assert(true);
+        }
+
+        [TestMethod]
         public void DistinctTest()
         {
             var res = MRManagerDBContext.Instance.UserSignIn.Select(PatientExpressions.SignInInfoExpression).Where("Usersignin = \"joe\"").ToList();

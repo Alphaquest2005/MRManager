@@ -54,6 +54,7 @@
     <Compile Include="Custom\ForeignAddressInfo.cs" />
     <Compile Include="Custom\NonResidentInfo.cs" />
     <Compile Include="Custom\PatientAddressesInfo.cs" />
+    <Compile Include="Custom\PatientVitalsInfo.cs" />
     <Compile Include="Custom\PatientDetailsInfo.cs" />
     <Compile Include="Custom\PatientInfo.cs" />
     <Compile Include="Custom\PatientNextOfKinsInfo.cs" />
