@@ -66,7 +66,12 @@ namespace ViewModel.Interfaces
         IInterviewInfo CurrentInterview { get; set; }
     }
 
-    
+    public interface IMedicalReportViewModel : IEntityListViewModel<IQuestionInfo>
+    {
+        
+    }
+
+
     public interface IPatientVisitViewModel : IEntityListViewModel<IPatientVisitInfo>
     {
         IPatientInfo CurrentPatient { get; set; }

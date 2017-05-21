@@ -35,9 +35,11 @@
         <ResourceDictionary Source="Custom/PatientVisitInfoRDT.xaml" />
         <ResourceDictionary Source="Custom/PatientVisitInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/PatientVisitListVDT.xaml" />
-        <ResourceDictionary Source="Custom/PatientSyntomListVDT.xaml" />
-        <ResourceDictionary Source="Custom/PatientSyntomInfoRDT.xaml" />
-        <ResourceDictionary Source="Custom/PatientSyntomInfoWDT.xaml" />
+
+        <ResourceDictionary Source="Custom/MedicalReportVDT.xaml" />
+
+
+
 
         <ResourceDictionary Source="Custom/SummaryPatientInfo.xaml" />
         <ResourceDictionary Source="Custom/SummaryPatientVisitInfoDT.xaml" />

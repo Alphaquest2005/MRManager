@@ -56,6 +56,7 @@
     <Compile Include="ViewModelInfo\PatientVitalsViewModelInfo.cs" />
     <Compile Include="ViewModelInfo\PatientVisitViewModelInfo.cs" />
     <Compile Include="ViewModelInfo\QuestionaireViewModelInfo.cs" />
+    <Compile Include="ViewModelInfo\MedicalReportViewModel.cs" />
     <Compile Include="ViewModelInfo\QuestionListViewModelInfo.cs" />
     <Compile Include="ViewModelInfo\ScreenViewModelInfo.cs" />
     <Compile Include="ViewModelInfo\SigninViewModelInfo.cs" />

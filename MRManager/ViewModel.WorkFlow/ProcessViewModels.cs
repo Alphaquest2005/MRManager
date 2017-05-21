@@ -18,11 +18,13 @@ namespace ViewModel.WorkFlow
             PatientSummaryListViewModelInfo.PatientSummaryListViewModel,
             PatientDetailsViewModelInfo.PatientDetailsViewModel,
             PatientVitalsViewModelInfo.PatientVitalsViewModel,
+            MedicalReportViewModelInfo.MedicalReportViewModel,
             PatientVisitViewModelInfo.PatientVisitViewModel,
             PatientSyntomViewModelInfo.PatientSyntomViewModel,
             InterviewListViewModelInfo.InterviewListViewModel,
             QuestionListViewModelInfo.QuestionListViewModel,
             QuestionaireViewModelInfo.QuestionairenaireViewViewModel,
+            
             
             EntityCacheViewModelInfo<ISyntomPriority>.CacheViewModel(3),
             EntityCacheViewModelInfo<ISyntomStatus>.CacheViewModel(3),
@@ -40,12 +42,7 @@ namespace ViewModel.WorkFlow
 
         };
 
-        public static readonly List<IViewModelInfo> ProcessCache = new List<IViewModelInfo>
-        {
-            
-
-
-        };
+        
     }
 
 

@@ -14,46 +14,46 @@
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
         </DataTemplate.Resources>
         <Grid x:Name="ViewVitals">
-        <ContentControl Focusable="True">
-            <ContentControl.Style>
-                <Style TargetType="{x:Type ContentControl}">
+            <ContentControl Focusable="True">
+                <ContentControl.Style>
+                    <Style TargetType="{x:Type ContentControl}">
 
-                    <!--  Default Template  -->
-                    <Setter Property="ContentTemplate" Value="{DynamicResource PatientVitalsInfoRDT}" />
-                    <Setter Property="Height" Value="Auto" />
-                    <!--<Setter Property="Visibility" Value="{Binding Value, Converter={StaticResource NullVisibilityConverter}}"/>-->
+                        <!--  Default Template  -->
+                        <Setter Property="ContentTemplate" Value="{DynamicResource PatientVitalsInfoRDT}" />
+                        <Setter Property="Height" Value="Auto" />
+                        <!--<Setter Property="Visibility" Value="{Binding Value, Converter={StaticResource NullVisibilityConverter}}"/>-->
 
-                    <!--  Triggers to change Template  -->
-                    <Style.Triggers>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Path=RowState.Value, Source={x:Static viewModels:PatientVitalsViewModel.Instance}}" Value="{x:Static systemInterfaces:RowState.Added}" />
+                        <!--  Triggers to change Template  -->
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=RowState.Value, Source={x:Static viewModels:PatientVitalsViewModel.Instance}}" Value="{x:Static systemInterfaces:RowState.Added}" />
 
-                            </MultiDataTrigger.Conditions>
-                            <MultiDataTrigger.Setters>
-                                <Setter Property="ContentTemplate" Value="{DynamicResource PatientVitalsInfoWDT}" />
-                                <Setter Property="Visibility" Value="Visible" />
-                            </MultiDataTrigger.Setters>
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Path=RowState.Value, Source={x:Static viewModels:PatientVitalsViewModel.Instance}}" Value="{x:Static systemInterfaces:RowState.Modified}" />
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.Setters>
+                                    <Setter Property="ContentTemplate" Value="{DynamicResource PatientVitalsInfoWDT}" />
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </MultiDataTrigger.Setters>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=RowState.Value, Source={x:Static viewModels:PatientVitalsViewModel.Instance}}" Value="{x:Static systemInterfaces:RowState.Modified}" />
 
-                            </MultiDataTrigger.Conditions>
-                            <MultiDataTrigger.Setters>
-                                <Setter Property="ContentTemplate" Value="{DynamicResource PatientVitalsInfoWDT}" />
-                                <Setter Property="Visibility" Value="Visible" />
-                            </MultiDataTrigger.Setters>
-                        </MultiDataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ContentControl.Style>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding Commands[EditEntity]}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </ContentControl>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.Setters>
+                                    <Setter Property="ContentTemplate" Value="{DynamicResource PatientVitalsInfoWDT}" />
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </MultiDataTrigger.Setters>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding Commands[EditEntity]}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ContentControl>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>
