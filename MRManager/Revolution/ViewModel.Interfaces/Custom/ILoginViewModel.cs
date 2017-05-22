@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Dynamic;
 using System.Text;
 using System.Threading.Tasks;
+using SystemInterfaces;
 using Interfaces;
 using JB.Collections.Reactive;
 using Reactive.Bindings;
@@ -66,9 +68,13 @@ namespace ViewModel.Interfaces
         IInterviewInfo CurrentInterview { get; set; }
     }
 
-    public interface IMedicalReportViewModel : IEntityListViewModel<IQuestionInfo>
+    public interface IMedicalReportViewModel: IEntityListViewModel<IPatientInfo>
     {
-        
+       // IPatientHistoryInfo PatientHistory { get; }
+
+        ReactiveProperty<IPatientDetailsInfo> PatientDetails { get;}
+        ReactiveProperty<List<IPatientVisitInfo>> PatientVisits { get; }
+        ReactiveProperty<List<ISyntomInfo>> Synptoms { get; }
     }
 
 

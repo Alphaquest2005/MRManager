@@ -49,6 +49,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Custom\PatientHistoryInfo.cs" />
     <Compile Include="Custom\DoctorInfo.cs" />
     <Compile Include="Custom\InterviewInfo.cs" />
     <Compile Include="Custom\ForeignAddressInfo.cs" />

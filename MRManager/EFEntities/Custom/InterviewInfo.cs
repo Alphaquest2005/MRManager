@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using SystemInterfaces;
 using Common.DataEntites;
 using Interfaces;
@@ -16,6 +17,7 @@ namespace EF.Entities
         public int CategoryId { get; set; }
         public string System { get; set; }
         public int SystemId { get; set; }
+        public List<IQuestionResponseOptionInfo> Questions { get; set; }
     }
 
 

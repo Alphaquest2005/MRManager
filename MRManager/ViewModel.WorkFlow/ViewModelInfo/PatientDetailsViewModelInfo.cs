@@ -21,9 +21,7 @@ namespace RevolutionData
             viewInfo: new ViewInfo("PatientDetails", "", "Patient Details"),
             subscriptions: new List<IViewModelEventSubscription<IViewModel, IEvent>>
             {
-                new ViewEventSubscription
-                    <IPatientDetailsViewModel,
-                        IProcessStateMessage<IPatientDetailsInfo>>(
+                new ViewEventSubscription <IPatientDetailsViewModel,IProcessStateMessage<IPatientDetailsInfo>>(
                     processId: 3,
                     eventPredicate: e => e != null,
                     actionPredicate: new List<Func<IPatientDetailsViewModel, IProcessStateMessage<IPatientDetailsInfo>, bool>>(),

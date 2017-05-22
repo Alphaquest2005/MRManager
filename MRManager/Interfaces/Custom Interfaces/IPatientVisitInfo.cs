@@ -15,4 +15,5 @@ namespace Interfaces
         string Purpose { get; }
         int VisitTypeId { get; }
     }
+
 }

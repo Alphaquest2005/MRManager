@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using SystemInterfaces;
 
@@ -16,5 +17,6 @@ namespace Interfaces
         string System { get; }
         int SystemId { get; }
         
+        List<IQuestionResponseOptionInfo> Questions { get; set; }
     }
 }

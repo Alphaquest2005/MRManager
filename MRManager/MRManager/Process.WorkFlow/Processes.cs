@@ -224,6 +224,8 @@ namespace Process.WorkFlow
             ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,IPatientVitalsInfo>(3, c => c.Id, v => v.Id),
 
 
+            
+
 
             ComplexActions.RequestStateList<IPatientInfo, IPatientVisitInfo>(3, c => c.Id,x => x.PatientId),
             ComplexActions.UpdateStateList<IPatientVisitInfo>(3),

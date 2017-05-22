@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Dynamic;
 using System.Linq;
 using System.Windows;
 using SystemInterfaces;
+using Common.Dynamic;
 using Core.Common.UI;
 using EF.Entities;
 using FluentValidation;
@@ -22,52 +24,54 @@ namespace ViewModels
 {
 
     [Export(typeof (IMedicalReportViewModel))]
-    public class MedicalReportViewModel : DynamicViewModel<ObservableListViewModel<IQuestionInfo>>,IMedicalReportViewModel
+    public class MedicalReportViewModel : DynamicViewModel<ObservableListViewModel<IPatientInfo>>,IMedicalReportViewModel
     {
-
-        private IInterviewInfo _currentInterview;
 
         [ImportingConstructor]
         public MedicalReportViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority)
             : base(
-                new ObservableListViewModel<IQuestionInfo>(viewInfo, eventSubscriptions, eventPublications, commandInfo, process,
+                new ObservableListViewModel<IPatientInfo>(viewInfo, eventSubscriptions, eventPublications, commandInfo, process,
                     orientation, priority))
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             this.WireEvents();
+           
+
 
         }
+        
+
+        IEntityListViewModel<IPatientInfo> IEntityListViewModel<IPatientInfo>.Instance => (IEntityListViewModel<IPatientInfo>) MedicalReportViewModel.Instance;
+
+        public ReactiveProperty<IProcessStateList<IPatientInfo>> State => this.ViewModel.State;
 
 
-        IEntityListViewModel<IQuestionInfo> IEntityListViewModel<IQuestionInfo>.Instance => (IEntityListViewModel<IQuestionInfo>) MedicalReportViewModel.Instance;
+        ReactiveProperty<IProcessState<IPatientInfo>> IEntityViewModel<IPatientInfo>.State
+            => new ReactiveProperty<IProcessState<IPatientInfo>>(this.ViewModel.State.Value);
 
-        public ReactiveProperty<IProcessStateList<IQuestionInfo>> State => this.ViewModel.State;
-
-
-        ReactiveProperty<IProcessState<IQuestionInfo>> IEntityViewModel<IQuestionInfo>.State
-            => new ReactiveProperty<IProcessState<IQuestionInfo>>(this.ViewModel.State.Value);
-
-        public ReactiveProperty<IQuestionInfo> CurrentEntity => this.ViewModel.CurrentEntity;
+        public ReactiveProperty<IPatientInfo> CurrentEntity => this.ViewModel.CurrentEntity;
 
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
 
-        public ReactiveProperty<ObservableList<IQuestionInfo>> EntitySet => this.ViewModel.EntitySet;
+        public ReactiveProperty<ObservableList<IPatientInfo>> EntitySet => this.ViewModel.EntitySet;
 
 
-        public ReactiveProperty<ObservableList<IQuestionInfo>> SelectedEntities => this.ViewModel.SelectedEntities;
-
-        public IInterviewInfo CurrentInterview
-        {
-            get { return _currentInterview; }
-            set
-            {
-                var @equals = _currentInterview?.Equals(value);
-                if (@equals != null && (bool) @equals) return;
-                _currentInterview = value;
-                OnPropertyChanged();
-            }
-        }
+        public ReactiveProperty<ObservableList<IPatientInfo>> SelectedEntities => this.ViewModel.SelectedEntities;
 
 
+        //private static IPatientHistoryInfo patientHistory = new PatientHistoryInfo() {PatientDetails = new PatientDetailsInfo() {Name = "Shit test"} };
+        //public IPatientHistoryInfo PatientHistory
+        //{
+        //    get { return patientHistory; }
+        //    set
+        //    {
+        //        patientHistory = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
+
+        public ReactiveProperty<IPatientDetailsInfo> PatientDetails { get; } = new ReactiveProperty<IPatientDetailsInfo>();
+        public ReactiveProperty<List<IPatientVisitInfo>> PatientVisits { get; } = new ReactiveProperty<List<IPatientVisitInfo>>();
+        public ReactiveProperty<List<ISyntomInfo>> Synptoms { get; } = new ReactiveProperty<List<ISyntomInfo>>();
     }
 }

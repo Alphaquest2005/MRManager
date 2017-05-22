@@ -13,107 +13,18 @@
              Height="533.731"
              Background="White"
              mc:Ignorable="d">
-    <Grid Focusable="True" DataContext="{Binding Source={x:Static viewModels:PatientVitalsViewModel.Instance}}" Background="#4CF9F8F8" Width="Auto" Height="300" Margin="350,117,348,117">
+    <Grid Width="Auto"
+                  Height="Auto"
+                  Margin="10">
         <TextBlock Width="Auto"
-                               Height="24"
-                               Margin="128,10,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="18"
-                               FontWeight="Bold"
-                               Text="Vitals"
-                               TextAlignment="Right" />
-        <TextBlock Width="Auto"
-                               Height="24"
-                               Margin="46,73,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="18"
-                               Text="Temperature:"
-                               TextAlignment="Right" />
-        <TextBox Width="123"
-                               Height="24"
-                               MinWidth="75"
-                               Margin="156,73,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="16"
-                               Text="{Binding State.Value.Entity.Temperature,
-                                              UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-        <TextBlock Width="Auto"
-                               Height="24"
-                               Margin="104,102,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="18"
-                               Text="Pulse:"
-                               TextAlignment="Right" />
-        <TextBox Width="123"
-                               Height="24"
-                               MinWidth="75"
-                               Margin="156,102,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="16"
-                               Text="{Binding State.Value.Entity.Pulse,
-                                              UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-        <TextBlock Width="Auto"
-                               Height="24"
-                               Margin="16,131,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="18"
-                               TextAlignment="Right"><Run Text="Respiratory " /><Run Text="Rate:" /></TextBlock>
-        <TextBox Width="123"
-                               Height="24"
-                               MinWidth="75"
-                               Margin="156,131,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="16"
-                               Text="{Binding State.Value.Entity.Respiratory,
-                                              UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-        <TextBlock Width="Auto"
-                               Height="24"
-                               Margin="27,160,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="18"
-                               Text="Blood Pressure:"
-                               TextAlignment="Right" />
-        <TextBox Width="123"
-                               Height="24"
-                               MinWidth="75"
-                               Margin="156,160,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="16"
-                               Text="{Binding State.Value.Entity.BloodPressure,
-                                              UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-        <TextBlock Width="Auto"
-                               Height="24"
-                               Margin="104,189,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="18"
-                               Text="SaO2:"
-                               TextAlignment="Right" />
-        <TextBox Width="123"
-                               Height="24"
-                               MinWidth="75"
-                               Margin="156,189,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontSize="16"
-                               Text="{Binding State.Value.Entity.SAO2,
-                                              UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-        <Button Width="97"
-                            Height="32"
-                            Margin="182,234,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Command="{Binding Commands[SavePatientDetails]}"
-                            Content="Save" />
+                           MinWidth="75"
+                           Margin="115,0,109,477"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Stretch"
+                           FontSize="20"
+                           Text="Medical Report"
+                           TextWrapping="WrapWithOverflow" TextAlignment="Center" />
+        <ContentControl Content="{Binding PatientHistory.Value}" Margin="0,71,0,0"/>
 
     </Grid>
 </UserControl>

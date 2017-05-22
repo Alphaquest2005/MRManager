@@ -17,6 +17,6 @@ namespace EF.Entities
         public int PriorityId { get; set; }
         public int StatusId { get; set; }
         public int PatientVisitId { get; set; }
-
+        public List<ISyntomMedicalSystemInfo> MedicalSystems { get; set; }
     }
 }

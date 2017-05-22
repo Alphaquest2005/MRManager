@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Custom Interfaces\IPatientHistoryInfo.cs" />
     <Compile Include="Custom Interfaces\ForeignAddressInfo.cs" />
     <Compile Include="Custom Interfaces\IDoctorInfo.cs" />
     <Compile Include="Custom Interfaces\IForeignPhoneNumberInfo.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Custom Interfaces\IResponseInfo.cs" />
     <Compile Include="Custom Interfaces\IResponseOptionInfo.cs" />
     <Compile Include="Custom Interfaces\ISignInInfo.cs" />
+    <Compile Include="Custom Interfaces\ISyntomInfo.cs" />
     <Compile Include="Custom Interfaces\ISyntomMedicalSystemInfo.cs" />
     <Compile Include="Custom Interfaces\MedicalSystemInterviews.cs" />
     <Compile Include="Custom Interfaces\MedicalSystems.cs" />
