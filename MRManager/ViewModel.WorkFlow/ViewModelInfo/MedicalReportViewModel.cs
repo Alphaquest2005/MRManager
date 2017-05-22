@@ -45,8 +45,8 @@ namespace RevolutionData
                     (v,e) =>
                     {
 
-                        v.PatientVisits.Value = e.State.EntitySet.ToList();
-                        foreach (var visit in v.PatientVisits.Value)
+                        v.PatientVisits.AddRangeOnScheduler(e.State.EntitySet.ToList());
+                        foreach (var visit in v.PatientVisits)
                         {
                             RequestDataList<IPatientSyntomInfo>("PatientVisitId",visit.Id.ToString(), v);
                         }
@@ -56,61 +56,72 @@ namespace RevolutionData
                     3,
                     e => e != null,
                     new List<Func<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<IPatientSyntomInfo>, bool>>(),
-                    (v,e) =>
+                    (v, e) =>
                     {
-
-                        foreach (var syntom in e.EntitySet.Where(synptom => v.Synptoms.Value.All(x => x.Id != synptom.SyntomId)))
+                        Application.Current.Dispatcher.Invoke(() =>
                         {
-                            if (syntom.Id == 0) continue;
-                            v.Synptoms.Value.Add(new SyntomInfo() {Id = syntom.SyntomId, Status = syntom.Status, Priority = syntom.Priority, SyntomName = syntom.SyntomName, MedicalSystems = new List<IMedicalSystemInfo>()});
-                            RequestDataList<ISyntomMedicalSystemInfo>("SyntomId",syntom.Id.ToString(), v);
-                           
-                        }
-                    }),
-
-                  new ViewEventSubscription<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<ISyntomMedicalSystemInfo>>(
-                    3,
-                    e => e != null,
-                    new List<Func<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<ISyntomMedicalSystemInfo>, bool>>(),
-                    (v,e) =>
-                    {
-                        foreach (var system in e.EntitySet)
-                        {
-                            var syntom = v.Synptoms.Value.FirstOrDefault(x => x.Id == system.SyntomId);
-                            if (syntom == null || syntom.MedicalSystems.Any(x => x.Id == system.MedicalSystemId)) continue;
-
-                            var ms = new MedicalSystemInfo()
+                            foreach (
+                                var syntom in
+                                    e.EntitySet.Where(synptom => v.Synptoms.All(x => x.Id != synptom.SyntomId)))
                             {
-                                Id = system.MedicalSystemId,
-                                Name = system.System,
-                                Interviews = system.Interviews.ToList()
-                            };
-                            ms.Interviews.ForEach(x => x.Questions = new List<IQuestionResponseOptionInfo>());
-                            syntom.MedicalSystems.Add(ms);
-                            ms.Interviews.ToList().ForEach(z => RequestDataList<IQuestionResponseOptionInfo>("InterviewId", z.Id.ToString(), v));
+                                if (syntom.Id == 0) continue;
+                                v.Synptoms.Add(new SyntomInfo()
+                                {
+                                    Id = syntom.SyntomId,
+                                    Status = syntom.Status,
+                                    Priority = syntom.Priority,
+                                    SyntomName = syntom.SyntomName,
+                                    MedicalSystems = new List<IMedicalSystemInfo>()
+                                });
+                                RequestDataList<ISyntomMedicalSystemInfo>("SyntomId", syntom.Id.ToString(), v);
+                            }
+                        });
+
+                    }),
+
+                  //new ViewEventSubscription<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<ISyntomMedicalSystemInfo>>(
+                  //  3,
+                  //  e => e != null,
+                  //  new List<Func<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<ISyntomMedicalSystemInfo>, bool>>(),
+                  //  (v,e) =>
+                  //  {
+                  //      foreach (var system in e.EntitySet)
+                  //      {
+                  //          var syntom = v.Synptoms.Value.FirstOrDefault(x => x.Id == system.SyntomId);
+                  //          if (syntom == null || syntom.MedicalSystems.Any(x => x.Id == system.MedicalSystemId)) continue;
+
+                  //          var ms = new MedicalSystemInfo()
+                  //          {
+                  //              Id = system.MedicalSystemId,
+                  //              Name = system.System,
+                  //              Interviews = system.Interviews.ToList()
+                  //          };
+                  //          ms.Interviews.ForEach(x => x.Questions = new List<IQuestionResponseOptionInfo>());
+                  //          syntom.MedicalSystems.Add(ms);
+                  //          ms.Interviews.ToList().ForEach(z => RequestDataList<IQuestionResponseOptionInfo>("InterviewId", z.Id.ToString(), v));
                             
-                        }
-                    }),
+                  //      }
+                  //  }),
 
 
-                  new ViewEventSubscription<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<IQuestionResponseOptionInfo>>(
-                    3,
-                    e => e != null,
-                    new List<Func<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<IQuestionResponseOptionInfo>, bool>>(),
-                    (v,e) =>
-                    {
-                        var questionResponseOptionInfo = e.EntitySet.FirstOrDefault();
-                        if (questionResponseOptionInfo != null)
-                        {
-                            var interviewid = questionResponseOptionInfo.InterviewId;
+                  //new ViewEventSubscription<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<IQuestionResponseOptionInfo>>(
+                  //  3,
+                  //  e => e != null,
+                  //  new List<Func<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<IQuestionResponseOptionInfo>, bool>>(),
+                  //  (v,e) =>
+                  //  {
+                  //      var questionResponseOptionInfo = e.EntitySet.FirstOrDefault();
+                  //      if (questionResponseOptionInfo != null)
+                  //      {
+                  //          var interviewid = questionResponseOptionInfo.InterviewId;
 
-                            var interview =
-                                v.Synptoms.Value.SelectMany(x => x.MedicalSystems.SelectMany(z => z.Interviews))
-                                    .FirstOrDefault(x => x.Id == interviewid);
-                            interview?.Questions.AddRange(e.EntitySet);
+                  //          var interview =
+                  //              v.Synptoms.Value.SelectMany(x => x.MedicalSystems.SelectMany(z => z.Interviews))
+                  //                  .FirstOrDefault(x => x.Id == interviewid);
+                  //          interview?.Questions.AddRange(e.EntitySet);
                            
-                        }
-                    }),
+                  //      }
+                  //  }),
 
                     },
             new List<IViewModelEventPublication<IViewModel, IEvent>>

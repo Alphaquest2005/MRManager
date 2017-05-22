@@ -36,7 +36,9 @@
                            FontSize="20"
                            Text="Medical Report"
                            TextWrapping="WrapWithOverflow" TextAlignment="Center" />
-                <ContentControl Content="{Binding PatientDetails.Value}" Margin="0,71,0,0"/>
+                <!--<ContentControl Content="{Binding PatientDetails.Value}" Margin="0,71,0,0"/>-->
+                <ListBox ItemsSource="{Binding Synptoms}" Margin="0,71,0,0"/>
+               
 
             </Grid>
         </Border>

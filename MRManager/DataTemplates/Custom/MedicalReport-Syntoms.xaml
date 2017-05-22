@@ -11,10 +11,10 @@
                     mc:Ignorable="d">
 
 
-   <DataTemplate DataType="{x:Type entities:SyntomInfo}">
+    <DataTemplate DataType="{x:Type entities:SyntomInfo}">
         <Grid >
-            <TextBlock Text="Syntoms" VerticalAlignment="Top" Height="40" Background="GreenYellow"/>
-            <ListBox ItemsSource="{Binding MedicalSystems}" Margin="0,45,0,0"/>
+            <TextBlock Text="{Binding SyntomName}" VerticalAlignment="Top" Height="40" Background="GreenYellow"/>
+            <!--<ListBox ItemsSource="{Binding MedicalSystems}" Margin="0,45,0,0"/>-->
         </Grid>
     </DataTemplate>
         

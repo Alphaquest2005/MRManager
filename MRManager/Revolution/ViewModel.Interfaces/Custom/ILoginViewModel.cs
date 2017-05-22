@@ -73,8 +73,8 @@ namespace ViewModel.Interfaces
        // IPatientHistoryInfo PatientHistory { get; }
 
         ReactiveProperty<IPatientDetailsInfo> PatientDetails { get;}
-        ReactiveProperty<List<IPatientVisitInfo>> PatientVisits { get; }
-        ReactiveProperty<List<ISyntomInfo>> Synptoms { get; }
+        ReactiveCollection<IPatientVisitInfo> PatientVisits { get; }
+        ReactiveCollection<ISyntomInfo> Synptoms { get; }
     }
 
 
