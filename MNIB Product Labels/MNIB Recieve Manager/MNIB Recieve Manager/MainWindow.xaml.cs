@@ -23,19 +23,8 @@ namespace MNIB_Distribution_Manager
     {
         public MainWindow()
         {
-            Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
             InitializeComponent();
             im = FindResource("LabelViewModelDataSource") as LabelViewModel;
-        }
-
-        private void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
-        {
-            var exception = e.Exception;
-            do
-                exception = exception.InnerException;
-            while (exception.InnerException != null);
-
-            MessageBox.Show(exception.Message + "|" + Properties.Settings.Default.MNIBDistributionManagerConnectionString1);
         }
 
         private LabelViewModel im;
