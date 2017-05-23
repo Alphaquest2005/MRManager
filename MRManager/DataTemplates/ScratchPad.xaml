@@ -13,18 +13,11 @@
              Height="533.731"
              Background="White"
              mc:Ignorable="d">
-    <Grid Width="Auto"
-                  Height="Auto"
-                  Margin="10">
-        <TextBlock Width="Auto"
-                           MinWidth="75"
-                           Margin="115,0,109,477"
-                           HorizontalAlignment="Stretch"
-                           VerticalAlignment="Stretch"
-                           FontSize="20"
-                           Text="Medical Report"
-                           TextWrapping="WrapWithOverflow" TextAlignment="Center" />
-        <ContentControl Content="{Binding PatientHistory.Value}" Margin="0,71,0,0"/>
+    <Grid >
+        <StackPanel >
+        <TextBlock Text="{Binding Description}" VerticalAlignment="Top" Height="40" Background="Yellow"/>
+        <TextBlock Text="{Binding Value}" VerticalAlignment="Top" Height="40" Background="Yellow"/>
+        </StackPanel>
 
     </Grid>
 </UserControl>

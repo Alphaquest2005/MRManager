@@ -69,6 +69,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Custom\MedicalReport-Response.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Custom\MedicalReport-Questions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Custom\MedicalReport-Interviews.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Custom\MedicalReport-MedicalSystems.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

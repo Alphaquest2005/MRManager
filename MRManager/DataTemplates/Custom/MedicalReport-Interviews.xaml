@@ -11,11 +11,11 @@
                     mc:Ignorable="d">
 
 
-   <DataTemplate DataType="{x:Type entities:MedicalSystemInfo}">
+   <DataTemplate DataType="{x:Type entities:InterviewInfo}">
         <Grid >
              <!--<TextBlock Text="Patient Details" VerticalAlignment="Top" Height="40" Background="GreenYellow"/>-->
-            <TextBlock Text="{Binding Name}" VerticalAlignment="Top" Height="40" Background="GreenYellow"/>
-            <ListBox ItemsSource="{Binding Interviews}" Margin="0,45,0,0" />
+            <TextBlock Text="{Binding Interview}" VerticalAlignment="Top" Height="40" Background="GreenYellow"/>
+            <ListBox ItemsSource="{Binding Questions}" Margin="0,45,0,0" />
           
         </Grid>
     </DataTemplate>

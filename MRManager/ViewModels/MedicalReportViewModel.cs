@@ -72,6 +72,16 @@ namespace ViewModels
 
         public ReactiveProperty<IPatientDetailsInfo> PatientDetails { get; } = new ReactiveProperty<IPatientDetailsInfo>();
         public ReactiveCollection<IPatientVisitInfo> PatientVisits { get; } = new ReactiveCollection<IPatientVisitInfo>();
-        public ReactiveCollection<ISyntomInfo> Synptoms { get; } = new ReactiveCollection<ISyntomInfo>();
+        private ReactiveCollection<ISyntomInfo> _synptoms = new ReactiveCollection<ISyntomInfo>();
+
+        public ReactiveCollection<ISyntomInfo> Synptoms
+        {
+            get { return _synptoms; }
+            set
+            {
+                _synptoms = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

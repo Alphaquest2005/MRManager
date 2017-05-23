@@ -79,49 +79,73 @@ namespace RevolutionData
 
                     }),
 
-                  //new ViewEventSubscription<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<ISyntomMedicalSystemInfo>>(
-                  //  3,
-                  //  e => e != null,
-                  //  new List<Func<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<ISyntomMedicalSystemInfo>, bool>>(),
-                  //  (v,e) =>
-                  //  {
-                  //      foreach (var system in e.EntitySet)
-                  //      {
-                  //          var syntom = v.Synptoms.Value.FirstOrDefault(x => x.Id == system.SyntomId);
-                  //          if (syntom == null || syntom.MedicalSystems.Any(x => x.Id == system.MedicalSystemId)) continue;
-
-                  //          var ms = new MedicalSystemInfo()
-                  //          {
-                  //              Id = system.MedicalSystemId,
-                  //              Name = system.System,
-                  //              Interviews = system.Interviews.ToList()
-                  //          };
-                  //          ms.Interviews.ForEach(x => x.Questions = new List<IQuestionResponseOptionInfo>());
-                  //          syntom.MedicalSystems.Add(ms);
-                  //          ms.Interviews.ToList().ForEach(z => RequestDataList<IQuestionResponseOptionInfo>("InterviewId", z.Id.ToString(), v));
-                            
-                  //      }
-                  //  }),
+                  new ViewEventSubscription<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<ISyntomMedicalSystemInfo>>(
+                    3,
+                    e => e != null,
+                    new List<Func<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<ISyntomMedicalSystemInfo>, bool>>(),
+                    (v, e) =>
+                    {
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            foreach (var system in e.EntitySet)
+                            {
+                                var syntom = v.Synptoms.FirstOrDefault(x => x.Id == system.SyntomId);
+                                if (syntom == null || syntom.MedicalSystems.Any(x => x.Id == system.MedicalSystemId)) continue;
 
 
-                  //new ViewEventSubscription<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<IQuestionResponseOptionInfo>>(
-                  //  3,
-                  //  e => e != null,
-                  //  new List<Func<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<IQuestionResponseOptionInfo>, bool>>(),
-                  //  (v,e) =>
-                  //  {
-                  //      var questionResponseOptionInfo = e.EntitySet.FirstOrDefault();
-                  //      if (questionResponseOptionInfo != null)
-                  //      {
-                  //          var interviewid = questionResponseOptionInfo.InterviewId;
+                                v.Synptoms.Clear();
+                               
+                                var ms = new MedicalSystemInfo()
+                                {
+                                    Id = system.MedicalSystemId,
+                                    Name = system.System,
+                                    Interviews = system.Interviews.ToList()
+                                };
+                                ms.Interviews.ForEach(x => x.Questions = new List<IQuestionResponseOptionInfo>());
+                                syntom.MedicalSystems.Add(ms);
+                                v.Synptoms.Add(syntom);
+                                ms.Interviews.ToList()
+                                    .ForEach(
+                                        z =>
+                                            RequestDataList<IQuestionResponseOptionInfo>("InterviewId", z.Id.ToString(),
+                                                v));
+                                
+                               
+                            }
 
-                  //          var interview =
-                  //              v.Synptoms.Value.SelectMany(x => x.MedicalSystems.SelectMany(z => z.Interviews))
-                  //                  .FirstOrDefault(x => x.Id == interviewid);
-                  //          interview?.Questions.AddRange(e.EntitySet);
-                           
-                  //      }
-                  //  }),
+                        });
+                    }),
+
+
+                  new ViewEventSubscription<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<IQuestionResponseOptionInfo>>(
+                    3,
+                    e => e != null,
+                    new List<Func<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<IQuestionResponseOptionInfo>, bool>>(),
+                    (v, e) =>
+                    {
+                        var questionResponseOptionInfo = e.EntitySet.FirstOrDefault();
+                        if (questionResponseOptionInfo != null)
+                        {
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                var interviewid = questionResponseOptionInfo.InterviewId;
+                                var res = v.Synptoms.ToList();
+                                v.Synptoms.Clear();
+                                var syntoms =
+                                    res.Where(
+                                        x => x.MedicalSystems.Any(z => z.Interviews.Any(y => y.Id == interviewid)))
+                                        .ToList();
+                                foreach (var syntom in syntoms)
+                                {
+                                    var interview = syntom.MedicalSystems.SelectMany(z => z.Interviews)
+                                        .FirstOrDefault(x => x.Id == interviewid);
+                                    interview?.Questions.AddRange(e.EntitySet);
+                                }
+
+                                v.Synptoms.AddRangeOnScheduler(res);
+                            });
+                        }
+                    }),
 
                     },
             new List<IViewModelEventPublication<IViewModel, IEvent>>
