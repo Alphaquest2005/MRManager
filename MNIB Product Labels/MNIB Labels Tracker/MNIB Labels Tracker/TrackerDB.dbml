@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MNIBTrackerDB" Class="TrackerDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=winserv;Initial Catalog=MNIBTrackerDB;User ID=sa" SettingsObjectName="MNIB_Labels_Tracker.Properties.Settings" SettingsPropertyName="MNIBLabelsDBConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=winserv;Initial Catalog=MNIBTrackerDB;Persist Security Info=True;User ID=sa" SettingsObjectName="MNIB_Labels_Tracker.Properties.Settings" SettingsPropertyName="MNIBLabelsDBConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Locations" Member="Locations">
     <Type Name="Location">
       <Column Name="LocationCode" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
@@ -231,15 +231,16 @@
     <Type Name="ExportData">
       <Column Name="ExportDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="ReceiptNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Harvester" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="CustomerName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Harvester" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CustomerInfo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="ProductNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ProductDescription" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="LineNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Weight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="ExportNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="TicketNo" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-      <Column Name="OrderNo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Expr1" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(9) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

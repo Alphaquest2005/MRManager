@@ -95,7 +95,7 @@
                                VerticalAlignment="Top"
                                FontSize="16"
                                FontWeight="Bold"
-                               Foreground="#FFD77B6A"
+                               Foreground="#FFFF0C00"
                                Text="{Binding State.Value.Entity.Allergies,
                                               UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Width="Auto"

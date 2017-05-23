@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.Diagnostics.Contracts;
 using SystemInterfaces;
 using CommonMessages;
@@ -18,6 +19,7 @@ namespace EventMessages.Commands
             EntityId = entityId;
         }
         public int EntityId { get; }
+        public Type ViewType => typeof(TEntity);
 
     }
 }

@@ -12,6 +12,7 @@ using EventMessages;
 using EventMessages.Commands;
 using Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Process.WorkFlow;
 using RevolutionData;
 using RevolutionEntities;
 using RevolutionEntities.Process;
@@ -99,7 +100,7 @@ namespace MRManager_UnitTests
                     });
             EventMessageBus.Current.GetEvent<IUserValidated>(Source).Subscribe(x => userValidated = x);
             EventMessageBus.Current.GetEvent<ISystemProcessCompleted>(Source).Where(x => x.Process.Id == 2).Subscribe(x => process2Completed = x);
-            EventMessageBus.Current.GetEvent<IStartSystemProcess>(Source).Where(x => x.ProcessToBeStartedId == Processes.NullProcess).Subscribe(x => StartProcess3 = x);
+            EventMessageBus.Current.GetEvent<IStartSystemProcess>(Source).Where(x => x.ProcessToBeStartedId == ProcessActions.NullProcess).Subscribe(x => StartProcess3 = x);
 
             ///////// Process Clean up ////////////////////
 

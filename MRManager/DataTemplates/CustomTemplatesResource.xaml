@@ -4,6 +4,9 @@
         <ResourceDictionary Source="Custom/PatientDetailsInfoVDT.xaml" />
         <ResourceDictionary Source="Custom/PatientDetailsInfoRDT.xaml" />
         <ResourceDictionary Source="Custom/PatientDetailsInfoWDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientVitalsInfoVDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientVitalsInfoRDT.xaml" />
+        <ResourceDictionary Source="Custom/PatientVitalsInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/PatientSummaryInfoListVDT.xaml" />
         <ResourceDictionary Source="Custom/PatientSummaryInfoRDT.xaml" />
         <ResourceDictionary Source="Custom/PatientSummaryInfoWDT.xaml" />
@@ -32,9 +35,18 @@
         <ResourceDictionary Source="Custom/PatientVisitInfoRDT.xaml" />
         <ResourceDictionary Source="Custom/PatientVisitInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/PatientVisitListVDT.xaml" />
-        <ResourceDictionary Source="Custom/PatientSyntomListVDT.xaml" />
-        <ResourceDictionary Source="Custom/PatientSyntomInfoRDT.xaml" />
-        <ResourceDictionary Source="Custom/PatientSyntomInfoWDT.xaml" />
+
+        <ResourceDictionary Source="Custom/MedicalReportVDT.xaml" />
+        <ResourceDictionary Source="Custom/MedicalReport-PatientDetails.xaml" />
+        <ResourceDictionary Source="Custom/MedicalReport-PatientHistory.xaml" />
+        <ResourceDictionary Source="Custom/MedicalReport-Response.xaml" />
+        <ResourceDictionary Source="Custom/MedicalReport-Interviews.xaml" />
+        <ResourceDictionary Source="Custom/MedicalReport-Questions.xaml" />
+        <ResourceDictionary Source="Custom/MedicalReport-MedicalSystems.xaml" />
+        <ResourceDictionary Source="Custom/MedicalReport-Syntoms.xaml" />
+
+
+
 
         <ResourceDictionary Source="Custom/SummaryPatientInfo.xaml" />
         <ResourceDictionary Source="Custom/SummaryPatientVisitInfoDT.xaml" />

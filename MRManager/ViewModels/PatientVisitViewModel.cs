@@ -28,22 +28,16 @@ namespace ViewModels
        
 
         [ImportingConstructor]
-        public PatientVisitViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IPatientVisitInfo>(viewInfo,eventSubscriptions, eventPublications, commandInfo, process, orientation))
+        public PatientVisitViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(new ObservableListViewModel<IPatientVisitInfo>(viewInfo,eventSubscriptions, eventPublications, commandInfo, process, orientation, priority))
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             this.WireEvents();
             
-            Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => addNewRow(x));
-        }
-        private void addNewRow(ObservableList<IPatientVisitInfo> observableList)
-        {
-            if (this.ViewModel.EntitySet.FirstOrDefault(x => x.Id == 0) != null) return;
-            this.ViewModel.EntitySet.Add(new PatientVisitInfo() { Purpose = "Create New..." });
-                OnPropertyChanged(nameof(EntitySet));
-           
+            
         }
 
 
+        IEntityListViewModel<IPatientVisitInfo> IEntityListViewModel<IPatientVisitInfo>.Instance => (IEntityListViewModel<IPatientVisitInfo>) PatientVisitViewModel.Instance;
         public ReactiveProperty<IProcessStateList<IPatientVisitInfo>> State => this.ViewModel.State;
 
 
@@ -52,11 +46,11 @@ namespace ViewModels
 
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
 
-        public ObservableList<IPatientVisitInfo> EntitySet => this.ViewModel.EntitySet;
+        public ReactiveProperty<ObservableList<IPatientVisitInfo>> EntitySet => this.ViewModel.EntitySet;
         
 
     
-        public ObservableList<IPatientVisitInfo> SelectedEntities => this.ViewModel.SelectedEntities;
+        public ReactiveProperty<ObservableList<IPatientVisitInfo>> SelectedEntities => this.ViewModel.SelectedEntities;
         public ObservableBindingList<IPatientVisitInfo> ChangeTrackingList => this.ViewModel.ChangeTrackingList;
 
 

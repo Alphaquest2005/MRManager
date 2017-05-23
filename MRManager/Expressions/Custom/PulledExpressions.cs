@@ -163,79 +163,86 @@ namespace Entity.Expressions
             {
                 Id = x.Id,
                 PhoneNumbers = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                        .Where(
-                            x2 =>
-                                x2.Questions.EntityAttributes.Entity == "Contact" &&
-                                x2.Questions.EntityAttributes.Attribute == "PhoneNumber")
-                        .SelectMany(x4 => x4.Response).Where(x6 => x6.ResponseOptions.QuestionResponseTypes.Name == "Text")
-                        .Select(x5 => new PhoneNumbersInfo()
-                        {
-                            Id = x5.Id,
-                            PersonId = x.Id,
-                            PhoneNumber = x5.Value,
-                            Type = x5.ResponseOptions.Description
-                        } as IPersonPhoneNumberInfo).ToList(),
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == "Contact" &&
+                            x2.Questions.EntityAttributes.Attribute == "PhoneNumber")
+                    .SelectMany(x4 => x4.Response).Where(x6 => x6.ResponseOptions.QuestionResponseTypes.Name == "Text")
+                    .Select(x5 => new PersonPhoneNumberInfo()
+                    {
+                        Id = x5.Id,
+                        PersonId = x.Id,
+                        PhoneNumber = x5.Value,
+                        Type = x5.ResponseOptions.Description
+                    } as IPersonPhoneNumberInfo).ToList(),
             };
-       
+
         public static Expression<Func<Patients, PatientNextOfKinsInfo>> PatientNextOfKinInfoExpression { get; } =
             x => new PatientNextOfKinsInfo()
             {
                 Id = x.Id,
                 NextOfKins = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                        .Where(
-                            x2 =>
-                                x2.Questions.EntityAttributes.Entity == "Patient" &&
-                                x2.Questions.EntityAttributes.Attribute == "NextOfKin")
-                        .GroupBy(x6 => x6.QuestionId)
-                        .Select(x5 => new NextOfKinInfo()
-                        {
-                            Id = x5.Key,
-                            Relationship = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Relationship")
-                                                .Select(x6 => x6.Value).FirstOrDefault(),
-                            Name = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Name")
-                                                .Select(x6 => x6.Value).FirstOrDefault(),
-                            Address = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Address")
-                                                .Select(x6 => x6.Value).FirstOrDefault(),
-                            PhoneNumber = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "PhoneNumber")
-                                                .Select(x6 => x6.Value).FirstOrDefault(),
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == "Patient" &&
+                            x2.Questions.EntityAttributes.Attribute == "NextOfKin")
+                    .GroupBy(x6 => x6.QuestionId)
+                    .Select(x5 => new NextOfKinInfo()
+                    {
+                        Id = x5.Key,
+                        Relationship =
+                            x5.SelectMany(x7 => x7.Response)
+                                .Where(x6 => x6.ResponseOptions.Description == "Relationship")
+                                .Select(x6 => x6.Value).FirstOrDefault(),
+                        Name = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Name")
+                            .Select(x6 => x6.Value).FirstOrDefault(),
+                        Address =
+                            x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Address")
+                                .Select(x6 => x6.Value).FirstOrDefault(),
+                        PhoneNumber =
+                            x5.SelectMany(x7 => x7.Response)
+                                .Where(x6 => x6.ResponseOptions.Description == "PhoneNumber")
+                                .Select(x6 => x6.Value).FirstOrDefault(),
 
-                        } as INextOfKinInfo).ToList(),
+                    } as INextOfKinInfo).ToList(),
             };
 
 
         public static Expression<Func<Patients, NonResidentInfo>> PatientNonResidentInfoExpression { get; } =
             // x => new NonResidentInfo() {Id = x.Id};
             x =>
-            x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                .Where(
-                    x2 =>
-                        x2.Questions.EntityAttributes.Entity == "NonResident")
-                .GroupBy(x6 => x6.Questions.EntityAttributes.Entity)
-                .Select(x5 => new NonResidentInfo()
-                {
-                    Id = x.Id,
-                    Type = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Type")
-                        .Select(x6 => x6.Value).FirstOrDefault(),
-                    BoatName =
-                        x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Boat Name")
+                x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == "NonResident")
+                    .GroupBy(x6 => x6.Questions.EntityAttributes.Entity)
+                    .Select(x5 => new NonResidentInfo()
+                    {
+                        Id = x.Id,
+                        Type = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Type")
                             .Select(x6 => x6.Value).FirstOrDefault(),
-                    Marina = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Marina")
-                        .Select(x6 => x6.Value).FirstOrDefault(),
-                    School =
-                        x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "School Name")
-                            .Select(x6 => x6.Value).FirstOrDefault(),
-                    DepartureDate =
-                        Convert.ToDateTime(
+                        BoatName =
+                            x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Boat Name")
+                                .Select(x6 => x6.Value).FirstOrDefault(),
+                        Marina =
+                            x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Marina")
+                                .Select(x6 => x6.Value).FirstOrDefault(),
+                        School =
                             x5.SelectMany(x7 => x7.Response)
-                                .Where(x6 => x6.ResponseOptions.Description == "Departure Date")
+                                .Where(x6 => x6.ResponseOptions.Description == "School Name")
+                                .Select(x6 => x6.Value).FirstOrDefault(),
+                        DepartureDate =
+                            Convert.ToDateTime(
+                                x5.SelectMany(x7 => x7.Response)
+                                    .Where(x6 => x6.ResponseOptions.Description == "Departure Date")
 
-                                .Select(x6 => x6.Value).FirstOrDefault()),
-                    ArrivalDate =
-                        Convert.ToDateTime(
-                            x5.SelectMany(x7 => x7.Response)
-                                .Where(x6 => x6.ResponseOptions.Description == "Arrival Date")
-                                .Select(x6 => x6.Value).FirstOrDefault()),
-                }).FirstOrDefault();
+                                    .Select(x6 => x6.Value).FirstOrDefault()),
+                        ArrivalDate =
+                            Convert.ToDateTime(
+                                x5.SelectMany(x7 => x7.Response)
+                                    .Where(x6 => x6.ResponseOptions.Description == "Arrival Date")
+                                    .Select(x6 => x6.Value).FirstOrDefault()),
+                    }).FirstOrDefault();
 
 
         public static Expression<Func<Patients, PatientAddressesInfo>> PatientPersonAddressInfoExpression { get; } =
@@ -244,31 +251,37 @@ namespace Entity.Expressions
             {
                 Id = x.Id,
                 Addresses = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                        .Where(
-                            x2 =>
-                                x2.Questions.EntityAttributes.Entity == "Contact" &&
-                                x2.Questions.EntityAttributes.Attribute == "Address")
-                        .GroupBy(x6 => x6.QuestionId)
-                        .Select(x5 => new PersonAddressInfo()
-                        {
-                            Id = x5.Key,
-                            AddressType = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Address Type")
-                                                .Select(x6 => x6.Value).FirstOrDefault(),
-                            Parish = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Parish")
-                                                .Select(x6 => x6.Value).FirstOrDefault(),
-                            AddressLines = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "AddressLine")
-                                                .Select(x6 => x6.Value).FirstOrDefault(),
-                            City = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "City")
-                                                .Select(x6 => x6.Value).FirstOrDefault(),
-                            State = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "State")
-                                                .Select(x6 => x6.Value).FirstOrDefault(),
-                            Country = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Country")
-                                                .Select(x6 => x6.Value).FirstOrDefault(),
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == "Contact" &&
+                            x2.Questions.EntityAttributes.Attribute == "Address")
+                    .GroupBy(x6 => x6.QuestionId)
+                    .Select(x5 => new PersonAddressInfo()
+                    {
+                        Id = x5.Key,
+                        AddressType =
+                            x5.SelectMany(x7 => x7.Response)
+                                .Where(x6 => x6.ResponseOptions.Description == "Address Type")
+                                .Select(x6 => x6.Value).FirstOrDefault(),
+                        Parish =
+                            x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Parish")
+                                .Select(x6 => x6.Value).FirstOrDefault(),
+                        AddressLines =
+                            x5.SelectMany(x7 => x7.Response)
+                                .Where(x6 => x6.ResponseOptions.Description == "AddressLine")
+                                .Select(x6 => x6.Value).FirstOrDefault(),
+                        City = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "City")
+                            .Select(x6 => x6.Value).FirstOrDefault(),
+                        State = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "State")
+                            .Select(x6 => x6.Value).FirstOrDefault(),
+                        Country =
+                            x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Country")
+                                .Select(x6 => x6.Value).FirstOrDefault(),
 
-                        } as IPersonAddressInfo).ToList()
+                    } as IPersonAddressInfo).ToList()
             };
 
-   
+
 
         public static Expression<Func<Patients, PatientInfo>> PatientInfoExpression { get; } =
 
@@ -276,16 +289,16 @@ namespace Entity.Expressions
             {
                 Id = x.Id,
                 Name =
-                    
-                        x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                            .Where(
-                                x2 =>
-                                    x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                                    x2.Questions.EntityAttributes.Attribute == nameof(IPatientInfo.Name))
-                            .SelectMany(x4 => x4.Response)
-                            .Select(x5 => x5.Value).FirstOrDefault(),
-               
-                BirthDate = 
+
+                    x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                        .Where(
+                            x2 =>
+                                x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                                x2.Questions.EntityAttributes.Attribute == nameof(IPatientInfo.Name))
+                        .SelectMany(x4 => x4.Response)
+                        .Select(x5 => x5.Value).FirstOrDefault(),
+
+                BirthDate =
                     Convert.ToDateTime(
                         x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                             .Where(
@@ -296,22 +309,22 @@ namespace Entity.Expressions
                             .Select(x5 => x5.Value)
                             .FirstOrDefault()),
                 Address = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                        .Where(
-                            x2 =>
-                                x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                                x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Address))
-                        .SelectMany(x4 => x4.Response)
-                        .Select(x5 => x5.Value)
-                        .FirstOrDefault(),
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.Address))
+                    .SelectMany(x4 => x4.Response)
+                    .Select(x5 => x5.Value)
+                    .FirstOrDefault(),
 
                 PhoneNumber = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
-                        .Where(
-                            x2 =>
-                                x2.Questions.EntityAttributes.Entity == Entities.Patient &&
-                                x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.PhoneNumber))
-                        .SelectMany(x4 => x4.Response)
-                        .Select(x5 => x5.Value)
-                        .FirstOrDefault(),
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == Entities.Patient &&
+                            x2.Questions.EntityAttributes.Attribute == nameof(IPatientDetailsInfo.PhoneNumber))
+                    .SelectMany(x4 => x4.Response)
+                    .Select(x5 => x5.Value)
+                    .FirstOrDefault(),
             };
 
         public static Expression<Func<PatientVisit, PatientVisitInfo>> PatientVistInfoExpression { get; } =
@@ -323,7 +336,7 @@ namespace Entity.Expressions
                 DateOfVisit = x.DateOfVisit,
                 Purpose = x.VisitType.Name,
                 VisitTypeId = x.VisitTypeId,
-               // AttendingDoctor = string.Join(" ", x.Persons_Doctor.Persons.PersonNames.Select(z => z.PersonName)),
+                AttendingDoctor = string.Join(" ", x.Persons_Doctor.Persons.PersonNames.Select(z => z.PersonName)),
 
             };
 
@@ -341,7 +354,8 @@ namespace Entity.Expressions
                 Status = z.SyntomStatus.Name,
             };
 
-        public static Expression<Func<SyntomMedicalSystems, SyntomMedicalSystemInfo>> SyntomMedicalSystemInfoExpression { get; } =
+        public static Expression<Func<SyntomMedicalSystems, SyntomMedicalSystemInfo>> SyntomMedicalSystemInfoExpression
+        { get; } =
             z => new SyntomMedicalSystemInfo()
             {
                 Id = z.Id,
@@ -363,7 +377,55 @@ namespace Entity.Expressions
                 } as IInterviewInfo).ToList()
             };
 
-       
+        public static Expression<Func<Patients, PatientVitalsInfo>> PatientVitalsInfoExpression { get; } =
+
+          x =>   x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == "Vitals")
+                    .GroupBy(x6 => x6.Questions.EntityAttributes.Entity)
+                    .Select(x5 => new PatientVitalsInfo()
+                    {
+                        Id = x.Id,
+                        Temperature = Convert.ToInt32(x5.SelectMany(x7 => x7.Response)
+                                .Where(x6 => x6.ResponseOptions.Description == "Temperature")
+                                .Select(x6 => x6.Value).FirstOrDefault()),
+                        BloodPressure = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "BloodPressure")
+                            .Select(x6 => x6.Value).FirstOrDefault(),
+                        Pulse =
+                            Convert.ToInt32(x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Pulse")
+                                .Select(x6 => x6.Value).FirstOrDefault()),
+                        SaO2 =
+                            x5.SelectMany(x7 => x7.Response)
+                                .Where(x6 => x6.ResponseOptions.Description == "SaO2")
+                                .Select(x6 => x6.Value).FirstOrDefault(),
+                    }).FirstOrDefault();
+        //x => x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+        //            .Where(
+        //                x2 =>
+        //                    x2.Questions.EntityAttributes.Entity == "Patient" &&
+        //                    x2.Questions.EntityAttributes.Attribute == "Vitals")
+        //            .GroupBy(x6 => x6.QuestionId)
+        //            .Select(x5 => new PatientVitalsInfo()
+        //            {
+        //                Id = x5.Key,
+        //                Temperature = 
+        //                    Convert.ToInt32(x5.SelectMany(x7 => x7.Response)
+        //                        .Where(x6 => x6.ResponseOptions.Description == "Temperature")
+        //                        .Select(x6 => x6.Value).FirstOrDefault()),
+        //                BloodPressure = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "BloodPressure")
+        //                    .Select(x6 => x6.Value).FirstOrDefault(),
+        //                Pulse =
+        //                    Convert.ToInt32(x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Pulse")
+        //                        .Select(x6 => x6.Value).FirstOrDefault()),
+        //                SaO2 =
+        //                    x5.SelectMany(x7 => x7.Response)
+        //                        .Where(x6 => x6.ResponseOptions.Description == "SaO2")
+        //                        .Select(x6 => x6.Value).FirstOrDefault(),
+
+        //            }).LastOrDefault()?? new PatientVitalsInfo() {Id = x.Id};
+
+
     }
 
 

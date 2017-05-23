@@ -14,4 +14,6 @@ namespace Interfaces
         IList<IInterviewInfo> Interviews { get; }
 
     }
+
+
 }

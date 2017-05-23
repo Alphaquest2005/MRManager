@@ -3288,7 +3288,7 @@ namespace MNIB_Labels_Tracker
 		
 		private string _Harvester;
 		
-		private string _CustomerName;
+		private string _CustomerInfo;
 		
 		private string _ProductNumber;
 		
@@ -3300,9 +3300,11 @@ namespace MNIB_Labels_Tracker
 		
 		private string _ExportNumber;
 		
-		private string _TicketNo;
+		private string _Expr1;
 		
-		private string _OrderNo;
+		private string _TransactionNumber;
+		
+		private string _Type;
 		
 		public ExportData()
 		{
@@ -3340,7 +3342,7 @@ namespace MNIB_Labels_Tracker
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Harvester", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Harvester", DbType="VarChar(50)")]
 		public string Harvester
 		{
 			get
@@ -3356,18 +3358,18 @@ namespace MNIB_Labels_Tracker
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerName", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
-		public string CustomerName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerInfo", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string CustomerInfo
 		{
 			get
 			{
-				return this._CustomerName;
+				return this._CustomerInfo;
 			}
 			set
 			{
-				if ((this._CustomerName != value))
+				if ((this._CustomerInfo != value))
 				{
-					this._CustomerName = value;
+					this._CustomerInfo = value;
 				}
 			}
 		}
@@ -3452,34 +3454,50 @@ namespace MNIB_Labels_Tracker
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TicketNo", DbType="VarChar(15)")]
-		public string TicketNo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Expr1", DbType="VarChar(1) NOT NULL", CanBeNull=false)]
+		public string Expr1
 		{
 			get
 			{
-				return this._TicketNo;
+				return this._Expr1;
 			}
 			set
 			{
-				if ((this._TicketNo != value))
+				if ((this._Expr1 != value))
 				{
-					this._TicketNo = value;
+					this._Expr1 = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderNo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string OrderNo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransactionNumber", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string TransactionNumber
 		{
 			get
 			{
-				return this._OrderNo;
+				return this._TransactionNumber;
 			}
 			set
 			{
-				if ((this._OrderNo != value))
+				if ((this._TransactionNumber != value))
 				{
-					this._OrderNo = value;
+					this._TransactionNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="VarChar(9) NOT NULL", CanBeNull=false)]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this._Type = value;
 				}
 			}
 		}

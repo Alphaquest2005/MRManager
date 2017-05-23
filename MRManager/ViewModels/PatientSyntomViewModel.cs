@@ -27,32 +27,16 @@ namespace ViewModels
         
        
         [ImportingConstructor]
-        public PatientSyntomViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(new ObservableListViewModel<IPatientSyntomInfo>(viewInfo,eventSubscriptions, eventPublications, commandInfo, process, orientation))
+        public PatientSyntomViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(new ObservableListViewModel<IPatientSyntomInfo>(viewInfo,eventSubscriptions, eventPublications, commandInfo, process, orientation, priority))
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             this.WireEvents();
             
-            Instance.ViewModel.WhenAnyValue(x => x.EntitySet).Subscribe(x => insertNewRow());
-            //this.WhenAnyValue(x => x.CurrentPatientVisit.Value).Subscribe(x => );
-
+          
         }
 
-        private void insertNewRow()
-        {
-                if (this.ViewModel.EntitySet.FirstOrDefault(x => x.Id == 0) != null) return;
-                if (CurrentPatientVisit != null &&
-                    (CurrentPatientVisit.Value?.Id != 0 &&
-                     CurrentPatientVisit.Value?.DateOfVisit.Date == DateTime.Today.Date))
-                {
-                
-                    this.ViewModel.EntitySet.Add(new PatientSyntomInfo() {SyntomName = "Create New..."});
-                    
-                }
 
-                OnPropertyChanged(nameof(EntitySet));
-        }
-
-       
+        IEntityListViewModel<IPatientSyntomInfo> IEntityListViewModel<IPatientSyntomInfo>.Instance => (IEntityListViewModel<IPatientSyntomInfo>) PatientSyntomViewModel.Instance;
         public ReactiveProperty<IProcessStateList<IPatientSyntomInfo>> State => this.ViewModel.State;
 
 
@@ -61,10 +45,10 @@ namespace ViewModels
 
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
 
-        public ObservableList<IPatientSyntomInfo> EntitySet => this.ViewModel.EntitySet;
+        public ReactiveProperty<ObservableList<IPatientSyntomInfo>> EntitySet => this.ViewModel.EntitySet;
 
     
-        public ObservableList<IPatientSyntomInfo> SelectedEntities => this.ViewModel.SelectedEntities;
+        public ReactiveProperty<ObservableList<IPatientSyntomInfo>> SelectedEntities => this.ViewModel.SelectedEntities;
 
         
 

@@ -12,6 +12,7 @@ using ReactiveUI;
 using RevolutionEntities.Process;
 using Utilities;
 using ViewModel.Interfaces;
+using ViewModelInterfaces;
 
 namespace Core.Common.UI
 {
@@ -26,6 +27,8 @@ namespace Core.Common.UI
 
         protected static DynamicViewModel<TViewModel> _instance = null;
         public new static DynamicViewModel<TViewModel> Instance => _instance;
+
+        
         public DynamicViewModel(TViewModel viewModel) : base(viewModel)
         {
             ViewInfo = viewModel.ViewInfo;
@@ -41,8 +44,9 @@ namespace Core.Common.UI
             Orientation = viewModel.Orientation;
             ViewModelType = typeof (TViewModel);
             RowState = viewModel.RowState;
-            _instance = this;
-            
+            Priority = viewModel.Priority;
+
+            if (_instance == null) _instance = this;
 
         }
 
@@ -67,6 +71,11 @@ namespace Core.Common.UI
             return true;
         }
 
+        public void NotifyPropertyChanged(string property)
+        {
+            this.OnPropertyChanged(property);
+        }
+
         public string ViewName { get; } 
         public string ViewSymbol { get; }
         public string ViewDescription { get; }
@@ -78,5 +87,6 @@ namespace Core.Common.UI
         public List<IViewModelEventCommand<IViewModel, IEvent>> CommandInfo { get; }
         public Type Orientation { get; }
         public Type ViewModelType { get; }
+        public int Priority { get; }
     }
 }

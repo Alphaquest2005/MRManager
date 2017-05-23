@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -26,10 +27,10 @@ namespace MRManager
 
             Task.Run(() =>
 		    {
-		        var t = new MRManagerDBContext().GetType().Assembly;
-		        var x = new EFEntity<IEntity>().GetType().Assembly;
-		        BootStrapper.BootStrapper.Instance.StartUp(t, x, true);
-		    });
+                var dbContextAssembly = new MRManagerDBContext().GetType().Assembly;
+                var entitiesAssembly = new EFEntity<IEntity>().GetType().Assembly;
+                BootStrapper.BootStrapper.Instance.StartUp( true, Process.WorkFlow.MachineInfoData.MachineInfos, Process.WorkFlow.Processes.ProcessInfos, Process.WorkFlow.Processes.ProcessComplexEvents, ViewModel.WorkFlow.ProcessViewModels.ProcessViewModelInfos.Skip(1).ToList(),dbContextAssembly,entitiesAssembly);
+		    }).ConfigureAwait(false);
 
 
 		}

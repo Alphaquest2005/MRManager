@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using SystemInterfaces;
 using CommonMessages;
-using EF.Entities;
 
 using Entity.Expressions;
 using EventAggregator;
@@ -16,7 +15,7 @@ using Microsoft.Extensions.Logging;
 using System.Linq.Dynamic;
 using BootStrapper;
 using Common;
-using EF.DBContexts;
+
 using EventMessages.Events;
 using MoreLinq;
 using RevolutionData.Context;
@@ -28,12 +27,6 @@ namespace EFRepository
 {
     public class EntityViewRepository<TView,TDbView, TEntity, TDbEntity, TDbContext>:BaseRepository<EntityViewRepository<TView, TDbView, TEntity, TDbEntity, TDbContext>>, IEntityViewRepository where TDbView:class, IEntityId, new() where TDbEntity : class,IEntity, new() where TDbContext : DbContext, new() where TEntity : class, IEntity where TView : IEntityView<TEntity>
     {
-
-      private static Dictionary<Type, Func<string, KeyValuePair<string, dynamic>, string>> IPulledMatchTypeFunctions = new Dictionary<Type, Func<string, KeyValuePair<string, object>, string>>()
-      {
-          {typeof(IExactMatch), (str, itm) => str + $"ResponseOptions.Questions.EntityAttributes.Attribute == \"{itm.Key}\" && Value == \"{itm.Value}\" &&" },
-          {typeof(IPartialMatch), (str, itm) => str + $"ResponseOptions.Questions.EntityAttributes.Attribute ==\"{itm.Key}\" && Value.Contains(\"{itm.Value}\") &&" }
-      };
 
 
         private static Dictionary<Type, Func<string, KeyValuePair<string, object>, string>> IMatchTypeFunctions = new Dictionary<Type, Func<string, KeyValuePair<string, object>, string>>()
@@ -63,86 +56,7 @@ namespace EFRepository
 
         }
 
-        public static void GetEntityFromPatientResponse(IGetEntityFromPatientResponse<TView> msg) 
-        {
-            try
-            {
-                using (var ctx = new MRManagerDBContext())
-                {
-                    var props = typeof(TView).GetProperties().ToList();
-                    var res =
-                        ctx.PatientResponses.OrderByDescending(x3 => x3.PatientVisitId).Where(x => x.PatientVisit.PatientId == msg.PatientId)
-                            .Where(x => x.Questions.EntityAttributes.Entity == msg.EntityName)
-                            .SelectMany(x => x.Response).Where(z => z.Value != null && props.Any(q => q.Name.Replace(" ", "") == z.ResponseOptions.Description.Replace(" ", "")))
-                            .GroupBy(x => x.ResponseOptions.Description)
-                            .Select(g => new KeyValuePair<string, dynamic>(g.Key, g.Any() ? g.First().Value : null))
-                            .ToList();
-                    TDbView p = new TDbView() {Id = msg.PatientId};
-                    res.ForEach(x => p.ApplyChanges(x));
-                    EventMessageBus.Current.Publish(
-                        new EntityFound<TView>((TView) (object) p,
-                            new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source),
-                        Source);
-                }
-            }
-            catch (Exception ex)
-            {
-                PublishProcesError(msg, ex, typeof (IEntityFound<TView>));
-
-            }
-        }
-
-        public static void LoadPulledEntityViewSetWithChanges(ILoadPulledEntityViewSetWithChanges<TView, IMatchType> msg)
-        {
-            try
-            {
-                using (var ctx = new MRManagerDBContext())
-                {
-                    var props = typeof(TView).GetProperties().ToList();
-                    var matchtype = msg.GetType().GenericTypeArguments[1];
-                    var whereStr = msg.Changes.Aggregate("", IPulledMatchTypeFunctions[matchtype]);
-                    whereStr = whereStr.TrimEnd('&');
-                    
-                    var entities = string.IsNullOrEmpty(whereStr)
-                        ? ctx.PatientResponses.OrderByDescending(x3 => x3.PatientVisitId)
-                            .Where(
-                                x =>
-                                    x.Questions.EntityAttributes.Entity == msg.EntityName &&
-                                    props.Any(z => z.Name == x.Questions.EntityAttributes.Attribute))
-                            .GroupBy(x => new {x.PatientVisit.PatientId})
-                            .Select(g => new
-                            {
-                                Id = g.Key.PatientId,
-                                Changes = g.SelectMany(q => q.Response)
-                                    .GroupBy(w => w.PatientResponses.Questions.EntityAttributes.Attribute)
-                                    .Select(rg => new KeyValuePair<string, dynamic>(
-                                        rg.Key,
-                                        rg.Any() ? rg.First().Value : null)).ToList()
-                            }).ToList()
-                        : ctx.PatientResponses
-                            .Where(x =>x.Questions.EntityAttributes.Entity == msg.EntityName &&props.Any(z => z.Name == x.Questions.EntityAttributes.Attribute))
-                            .Where($"Response.Where({whereStr}).Any()")
-                            .GroupBy(x => new {x.PatientVisit.PatientId})
-                            .Select(g => new
-                            {
-                                Id = g.Key.PatientId,
-                                Changes = g.SelectMany(q => q.Response)
-                                    .GroupBy(w => w.PatientResponses.Questions.EntityAttributes.Attribute)
-                                    .Select(rg => new KeyValuePair<string, dynamic>(
-                                        rg.Key,
-                                        rg.Any() ? rg.First().Value : null)).ToList()
-                            }).ToList();
-                   var res = entities.Select(x => new TDbView() {Id = x.Id}.ApplyChanges(x.Changes)).ToList();
-
-                    EventMessageBus.Current.Publish(new EntityViewSetWithChangesLoaded<TView>(res.OrderByDescending(x => x.Id).Select(x => (TView)(object)x).ToList(), msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
-                }
-            }
-            catch (Exception ex)
-            {
-                PublishProcesError(msg, ex, typeof(IEntityViewLoaded<TView>));
-            }
-
-        }
+    
 
 
         public static void GetEntityViewWithChanges(IGetEntityViewWithChanges<TView> msg)
@@ -218,13 +132,13 @@ namespace EFRepository
                     // ReSharper disable once ReplaceWithSingleCallToFirstOrDefault cuz EF7 bugging LEAVE JUST SO
                     var matchtype = msg.GetType().GenericTypeArguments[1];
                     var whereStr = msg.Changes.Aggregate("", IMatchTypeFunctions[matchtype]);
-                    whereStr = whereStr.TrimEnd('&');
-                    IQueryable<TDbView> res;
+                    whereStr = whereStr.TrimEnd('&').Trim();
+                    List<TDbView> res;
                     res = string.IsNullOrEmpty(whereStr) 
-                        ? ctx.Set<TDbEntity>().OrderByDescending(x => x.Id).AsNoTracking().Select(exp)
-                        : ctx.Set<TDbEntity>().OrderByDescending(x => x.Id).AsNoTracking().Select(exp).Where(whereStr);
+                        ? ctx.Set<TDbEntity>()?.OrderByDescending(x => x.Id)?.AsNoTracking()?.Select(exp)?.ToList()
+                        : ctx.Set<TDbEntity>()?.OrderByDescending(x => x.Id)?.AsNoTracking()?.Select(exp)?.Where(whereStr)?.ToList();
                     
-
+                    if(res.Any())
                     EventMessageBus.Current.Publish(new EntityViewSetWithChangesLoaded<TView>(res.Select(x => (TView)(object)x).ToList(), msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
                 }
             }

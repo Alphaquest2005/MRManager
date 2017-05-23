@@ -15,12 +15,14 @@ using CommonMessages;
 using Core.Common.UI;
 using EventAggregator;
 using JB.Collections.Reactive;
+using Process.WorkFlow;
 using Reactive.Bindings;
 using RevolutionData;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
 using ViewMessages;
 using ViewModel.Interfaces;
+using ViewModel.WorkFlow;
 
 namespace ViewModels
 {
@@ -42,10 +44,11 @@ namespace ViewModels
         public MainWindowViewModel()
             : base(new SystemProcess(Processes.ProcessInfos.FirstOrDefault(), new Agent("System"), new MachineInfo(Environment.MachineName, Environment.ProcessorCount)),
                   new ViewInfo("MainWindowViewModel", "", ""),
-                  ProcessViewModels.ProcessViewModelInfos.FirstOrDefault().Subscriptions,
-                  ProcessViewModels.ProcessViewModelInfos.FirstOrDefault().Publications,
-                  ProcessViewModels.ProcessViewModelInfos.FirstOrDefault().Commands,
-                  ProcessViewModels.ProcessViewModelInfos.FirstOrDefault().Orientation)
+                  ProcessViewModels.ProcessViewModelInfos.FirstOrDefault()?.Subscriptions,
+                  ProcessViewModels.ProcessViewModelInfos.FirstOrDefault()?.Publications,
+                  ProcessViewModels.ProcessViewModelInfos.FirstOrDefault()?.Commands,
+                  ProcessViewModels.ProcessViewModelInfos.FirstOrDefault()?.Orientation,
+                  ProcessViewModels.ProcessViewModelInfos.First().Priority)
         {
             this.WireEvents();
             EventMessageBus.Current.GetEvent<IProcessEventFailure>(Source).Subscribe(x => { });

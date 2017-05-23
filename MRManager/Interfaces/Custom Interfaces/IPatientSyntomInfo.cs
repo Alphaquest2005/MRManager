@@ -15,5 +15,8 @@ namespace Interfaces
         int PriorityId { get;  }
         int StatusId { get;  }
         int PatientVisitId { get; }
+
+        List<ISyntomMedicalSystemInfo> MedicalSystems { get; }
+       
     }
 }

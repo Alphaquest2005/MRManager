@@ -1,0 +1,19 @@
+﻿{
+  "dependencies": {
+    "JB.Common": "0.7.0",
+    "JB.Common.Collections": "0.7.0",
+    "JB.Common.Collections.Reactive": "0.7.0",
+    "JB.Common.Reactive": "0.7.0",
+    "Rx-Core": "2.2.5",
+    "Rx-Interfaces": "2.2.5",
+    "Rx-Linq": "2.2.5",
+    "Rx-Main": "2.2.5",
+    "Rx-PlatformServices": "2.2.5"
+  },
+  "frameworks": {
+    "net461": {}
+  },
+  "runtimes": {
+    "win": {}
+  }
+}

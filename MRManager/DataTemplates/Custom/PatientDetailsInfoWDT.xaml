@@ -104,7 +104,7 @@
                              converters:XamlExtensions.UpdateSourceOnKey="Enter"
                              FontSize="14"
                              FontWeight="Bold"
-                             Foreground="#FFD77B6A"
+                             Foreground="#FFFF0C00"
                              Text="{Binding Allergies,
                                             FallbackValue='Allergies',
                                             UpdateSourceTrigger=LostFocus}" />
@@ -175,11 +175,11 @@
                               FontSize="16"
                               FontWeight="Bold"
                               ItemsSource="{Binding Source={x:Static Member=viewModels:SexCacheViewModel.Instance},
-                                                    Path=EntitySet,
+                                                    Path=EntitySet.Value,
                                                     UpdateSourceTrigger=PropertyChanged,
                                                     Mode=OneWay,
                                                     IsAsync=True}"
-                              SelectedValue="{Binding Sex,
+                              SelectedValue="{Binding Name,
                                                       UpdateSourceTrigger=PropertyChanged}"
                               SelectedValuePath="Name" />
                     <TextBox Width="361"
@@ -207,6 +207,7 @@
                             VerticalAlignment="Top"
                             Command="{Binding Commands[SavePatientDetails]}"
                             Content="Save" />
+                    <TextBlock Text="Sex" x:Name="textBlock" HorizontalAlignment="Left" Height="24" Margin="471,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51"/>
 
 
                 </Grid>

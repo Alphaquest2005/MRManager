@@ -98,7 +98,6 @@
     <Compile Include="Commands\AddEntityWithChanges.cs" />
     <Compile Include="Commands\CleanUpSystemProcess.cs" />
     <Compile Include="Commands\CreateProcessActor.cs" />
-    <Compile Include="Commands\GetEntityFromPatientResponse.cs" />
     <Compile Include="Commands\GetEntityViewById.cs" />
     <Compile Include="Commands\LoadEntityViewSetWithChanges.cs" />
     <Compile Include="Commands\LoadPulledEntityViewSetWithChanges.cs" />
@@ -106,7 +105,6 @@
     <Compile Include="Commands\RequestProcessLog.cs" />
     <Compile Include="Commands\CreateEntityService.cs" />
     <Compile Include="Commands\UpdateEntityViewWithChanges.cs" />
-    <Compile Include="Commands\UpdatePulledEntityWithChanges.cs" />
     <Compile Include="Events\ActorTerminated.cs" />
     <Compile Include="Events\EntityViewSetWithChangesLoaded.cs" />
     <Compile Include="Events\CurrentEntityChanged.cs" />

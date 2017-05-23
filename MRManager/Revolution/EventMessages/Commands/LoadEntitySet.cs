@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using SystemInterfaces;
 using CommonMessages;
 
@@ -14,5 +15,6 @@ namespace EventMessages.Commands
         {
             
         }
+        public Type ViewType => typeof(TEntity);
     }
 }

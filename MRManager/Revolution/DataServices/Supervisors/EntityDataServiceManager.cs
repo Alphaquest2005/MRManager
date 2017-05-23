@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using SystemInterfaces;
 using Akka.Actor;
@@ -22,6 +23,7 @@ namespace DataServices.Actors
 {
     public class EntityDataServiceManager : BaseSupervisor<EntityDataServiceManager>
     {
+       
         private IUntypedActorContext ctx = null;
         public EntityDataServiceManager(ISystemProcess process) : base(process)
         {
@@ -31,14 +33,39 @@ namespace DataServices.Actors
 
         private void handleEntityRequest(IEntityRequest entityRequest)
         {
-            var classType =
-               entityRequest.GetType()
-                   .GetInterfaces()
-                   .FirstOrDefault(x => x.GetInterfaces().Any(z => z.IsGenericType && z.GetGenericTypeDefinition() == typeof(IEntityRequest<>))).GenericTypeArguments[0];
+            try
+            {
+                var type = entityRequest.GetType()
+                    .GetInterfaces()
+                    .FirstOrDefault(
+                        x =>
+                            x.GetInterfaces()
+                                .Any(
+                                    z =>
+                                        z.IsGenericType && z.GetGenericTypeDefinition() == typeof (IEntityRequest<>)));
 
-          
-                    CreateEntityActors(classType, typeof (EntityDataServiceSupervisor<>), "{0}EntityDataServiceSupervisor", entityRequest.Process, entityRequest);
-            
+                Type classType;
+                if (type != null)
+                {
+                    classType = type.GenericTypeArguments[0];
+                }
+                else
+                {
+                    classType = entityRequest.ViewType;
+                }
+
+
+                CreateEntityActors(classType, typeof (EntityDataServiceSupervisor<>), "{0}EntityDataServiceSupervisor",
+                        entityRequest.Process, entityRequest);
+                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
         }
 
         private void CreateEntityActors(Type classType, Type genericListType, string actorName, ISystemProcess process, IProcessSystemMessage msg)

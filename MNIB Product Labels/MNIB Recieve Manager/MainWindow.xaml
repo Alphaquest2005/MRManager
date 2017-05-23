@@ -5,6 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:controls="http://schemas.microsoft.com/wpf/2008/toolkit"
         Title="MainWindow"
         Width="1175.333"
         Height="545.333"
@@ -20,7 +22,7 @@
         mc:Ignorable="d">
     <Window.Resources>
         <x:Static x:Key="LabelViewModelDataSource" Member="QS:LabelViewModel.Instance" />
-        <Style x:Key="TextButtonStyle" TargetType="{x:Type TextBlock}">
+        <!--<Style x:Key="TextButtonStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="#FF5E6701" />
             <Style.Triggers>
 
@@ -28,8 +30,8 @@
                     <Setter Property="Foreground" Value="#FFD39552" />
                 </Trigger>
             </Style.Triggers>
-        </Style>
-        <Style x:Key="CloseButtonStyle" TargetType="{x:Type TextBlock}">
+        </Style>-->
+        <!--<Style x:Key="CloseButtonStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="#FFFE2B2B" />
             <Style.Triggers>
 
@@ -37,7 +39,7 @@
                     <Setter Property="Foreground" Value="#FFFF4600" />
                 </Trigger>
             </Style.Triggers>
-        </Style>
+        </Style>-->
         <DataTemplate x:Key="ListBoxItemTemplate" DataType="QS:ExportDetail">
             <Grid Width="Auto"
                   Height="45"
@@ -193,7 +195,7 @@
                                    Text="Transaction"
                                    TextWrapping="Wrap" />
                         <ComboBox Grid.ColumnSpan="2"
-                                  Margin="0,226,671,125.333"
+                                  Margin="0,203.5,671,147.833"
                                   Background="#FF5B5959"
                                   BorderBrush="#FFE7E1E1"
                                   DisplayMemberPath="ProductDescription"
@@ -207,7 +209,7 @@
                                   SelectionChanged="ProductComboBox_SelectionChanged" />
                         <Grid x:Name="HavesterGrd"
                               Grid.ColumnSpan="2"
-                              Margin="0,178,671,171.666"
+                              Margin="0,156.417,671,193.249"
                               Visibility="Collapsed">
                             <TextBlock Width="130"
                                        Height="53"
@@ -237,7 +239,7 @@
                         <TextBlock Grid.ColumnSpan="2"
                                    Width="130"
                                    Height="35"
-                                   Margin="0,289,0,0"
+                                   Margin="0,299.5,0,0"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Top"
                                    FontSize="20"
@@ -258,13 +260,13 @@
                                    TextWrapping="Wrap" />
                         <TextBlock Grid.ColumnSpan="2"
                                    Width="379"
-                                   Height="26"
-                                   Margin="0,152,0,0"
+                                   Height="37.917"
+                                   Margin="0,118.5,0,0"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Top"
                                    FontSize="14"
                                    Foreground="#FF521107"
-                                   Text="{Binding Customer.Info}"
+                                   Text="{Binding Info}"
                                    TextAlignment="Right"
                                    TextWrapping="Wrap" />
                         <TextBlock Grid.ColumnSpan="2"
@@ -280,7 +282,7 @@
                                    TextWrapping="Wrap" />
                         <Grid x:Name="BarCodeGrd"
                               Grid.ColumnSpan="2"
-                              Margin="0,178,671,171.666"
+                              Margin="-2.295,145.917,673.295,203.749"
                               Visibility="Collapsed">
                             <TextBlock Width="130"
                                        Height="39"
@@ -290,28 +292,16 @@
                                        FontWeight="Bold"
                                        Foreground="#FF14520D"
                                        Text="Barcode"
-                                       TextWrapping="Wrap" />
+                                       TextWrapping="Wrap" Margin="0,10.5,0,-6.833" />
                             <TextBox x:Name="BarcodeTxt"
-                                     Margin="135,0,0,-0.666"
+                                     Margin="135,10.5,0,-11.166"
                                      Background="#FF5B5959"
                                      BorderBrush="#FFE7E1E1"
                                      FontSize="21.333"
                                      FontWeight="Bold"
                                      Text="{Binding Barcode,
-                                                    Delay=300,
-                                                    UpdateSourceTrigger=PropertyChanged}" />
+                                                    UpdateSourceTrigger=LostFocus}" />
                         </Grid>
-                        <TextBlock Grid.ColumnSpan="2"
-                                   Width="130"
-                                   Height="34"
-                                   Margin="0,118,0,0"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Top"
-                                   FontSize="20"
-                                   FontWeight="Bold"
-                                   Foreground="#FF14520D"
-                                   Text="Customer"
-                                   TextWrapping="Wrap" />
                         <ListBox x:Name="ListBox"
                                  Grid.Column="1"
                                  Width="Auto"
@@ -409,18 +399,10 @@
                             <ComboBoxItem Content="Sales Order" />
                         </ComboBox>
 
-                        <DatePicker Grid.Column="1"
-                                    Width="246"
-                                    Height="30"
-                                    Margin="15,82,0,0"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Top"
-                                    FontSize="21.333"
-                                    SelectedDate="{Binding ExportDate,
-                                                           UpdateSourceTrigger=PropertyChanged}"
-                                    SelectedDateChanged="DatePicker_OnSelectedDateChanged" />
+                        <controls:DatePicker SelectedDate="{Binding ExportDate, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Height="34" Margin="15,79.5,0,0" VerticalAlignment="Top" Width="246" FontSize="21.333" Grid.Column="1" SelectedDateChanged="DatePicker_OnSelectedDateChanged"/>
+
                         <ComboBox Grid.Column="1"
-                                  Margin="15,286,671,70.333"
+                                  Margin="15,296.5,671,59.833"
                                   Background="#FF363535"
                                   BorderBrush="#FFE7E1E1"
                                   DisplayMemberPath="Description"
@@ -432,9 +414,9 @@
                                   SelectedValuePath="BoxId" />
                         <TextBox x:Name="textBox_Copy"
                                  Grid.Column="1"
-                                 Width="226"
+                                 Width="244"
                                  Height="42"
-                                 Margin="33,340,0,0"
+                                 Margin="15,340,0,0"
                                  HorizontalAlignment="Left"
                                  VerticalAlignment="Top"
                                  Background="#FF363535"
@@ -478,17 +460,29 @@
                                  Text="{Binding TransactionNumber,
                                                 UpdateSourceTrigger=LostFocus}"
                                  TextChanged="ExportNumberTxt_TextChanged" />
-                        <ComboBox Grid.Column="1"
-                                  Margin="15,118,671,239.666"
-                                  Background="#FF5B5959"
-                                  BorderBrush="#FFE7E1E1"
-                                  DisplayMemberPath="CustomerName"
-                                  FontSize="21.333"
-                                  FontWeight="Bold"
-                                  SelectedIndex="0"
-                                  ItemsSource="{Binding Instance.Customers}"
-                                  SelectedItem="{Binding Customer}"
-                                  SelectedValuePath="CustomerNumber" />
+                        <TextBlock Grid.ColumnSpan="2"
+                            Width="169.249"
+                            Height="42"
+                            Margin="-2.295,249.5,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="#FF14520D"
+                            Text="No. Crates/Box"
+                            TextWrapping="Wrap" />
+                        <TextBox x:Name="textBox_Copy2"
+                            Grid.Column="1"
+                            Width="207.046"
+                            Height="42"
+                            Margin="51.916,249.5,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="#FF363535"
+                            FontSize="21.333"
+                            Foreground="#FFFAFAFA"
+                            Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
+                            TextWrapping="Wrap" />
                     </Grid>
 
                     <Button Width="125"
@@ -500,14 +494,22 @@
                             Content="Print All"
                             FontSize="22"
                             Visibility="Hidden" />
-                    <Button Width="192"
+                    <Button Width="230.433"
                             Height="36"
                             Margin="0,0,32,-2.666"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
                             Click="ViewSummary"
-                            Content="View Summary"
+                            Content="View Daily Summary"
                             FontSize="22" />
+                    <Button Width="293.971"
+                        Height="36"
+                        Margin="0,0,331.915,-2.666"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Click="ViewTransSummary"
+                        Content="View Transaction Summary"
+                        FontSize="22" />
                 </Grid>
             </Grid>
 
@@ -527,7 +529,7 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="36"
-                       Foreground="#FF14520D"
+                       Foreground="Purple"
                        Text="MNIB Distribution Manager"
                        TextWrapping="Wrap" />
             <TextBlock Width="35"
@@ -538,7 +540,7 @@
                        FontFamily="Segoe UI Symbol"
                        FontSize="24"
                        MouseLeftButtonDown="CloseWindow"
-                       Style="{StaticResource CloseButtonStyle}"
+                       Foreground="Crimson"
                        Text="&#xE10A;" />
             <TextBlock Width="30"
                        Height="32"
@@ -548,7 +550,7 @@
                        FontFamily="Segoe UI Symbol"
                        FontSize="24"
                        MouseLeftButtonDown="SwitchWindowState"
-                       Style="{DynamicResource TextButtonStyle}"
+                       Foreground="Purple"
                        Text="&#xE155;" />
             <TextBlock Width="30"
                        Height="25"
@@ -558,7 +560,7 @@
                        FontFamily="Segoe UI Symbol"
                        FontSize="24"
                        MouseLeftButtonDown="MinimizeWindow"
-                       Style="{DynamicResource TextButtonStyle}"
+                       Foreground="Purple"
                        Text="&#xE108;" />
 
 
@@ -637,7 +639,7 @@
                                            Text="Exports Daily Summary Report"
                                            TextAlignment="Left"
                                            TextWrapping="Wrap" />
-                                <DataGrid x:Name="GridData"
+                                <controls:DataGrid x:Name="GridData"
                                           Width="Auto"
                                           Margin="0"
                                           HorizontalAlignment="Stretch"
@@ -660,7 +662,7 @@
                                            Text="Totals by Lot Number:"
                                            TextAlignment="Left"
                                            TextWrapping="Wrap" />
-                                <DataGrid x:Name="SummaryData"
+                                <controls:DataGrid x:Name="SummaryData"
                                           Width="Auto"
                                           Margin="0"
                                           HorizontalAlignment="Stretch"

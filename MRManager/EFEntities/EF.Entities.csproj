@@ -49,21 +49,23 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Custom\PatientHistoryInfo.cs" />
     <Compile Include="Custom\DoctorInfo.cs" />
     <Compile Include="Custom\InterviewInfo.cs" />
-    <Compile Include="Custom\NextofKinInfo.cs" />
     <Compile Include="Custom\ForeignAddressInfo.cs" />
     <Compile Include="Custom\NonResidentInfo.cs" />
+    <Compile Include="Custom\PatientAddressesInfo.cs" />
+    <Compile Include="Custom\PatientVitalsInfo.cs" />
     <Compile Include="Custom\PatientDetailsInfo.cs" />
     <Compile Include="Custom\PatientInfo.cs" />
+    <Compile Include="Custom\PatientNextOfKinsInfo.cs" />
+    <Compile Include="Custom\PatientPhoneNumbersInfo.cs" />
     <Compile Include="Custom\PatientResponseInfo.cs" />
     <Compile Include="Custom\PatientSyntomInfo.cs" />
     <Compile Include="Custom\PatientVisitInfo.cs" />
-    <Compile Include="Custom\PersonAddressInfo.cs" />
-    <Compile Include="Custom\PersonPhoneNumbersInfo.cs" />
     <Compile Include="Custom\QuestionInfo.cs" />
     <Compile Include="Custom\QuestionResponseOptionInfo.cs" />
-    <Compile Include="Custom\Response.cs" />
+    <Compile Include="Custom\ResponseInfo.cs" />
     <Compile Include="Custom\ResponseImage.cs" />
     <Compile Include="Custom\ResponseOptionInfo.cs" />
     <Compile Include="Custom\SyntomMedicalSystemInfo.cs" />

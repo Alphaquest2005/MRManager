@@ -6,47 +6,18 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:Views.ToBeGenerated"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:systemInterfaces="clr-namespace:SystemInterfaces;assembly=SystemInterfaces"
              xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
              Width="1000"
              Height="533.731"
+             Background="White"
              mc:Ignorable="d">
-    <Grid Width="Auto"
-          Height="49"
-          Margin="0,0,0,0"
-          Visibility="{Binding BoatName,
-                               Converter={StaticResource NullVisibilityConverter}}">
-        <TextBlock Width="Auto"
-                   Height="24"
-                   Margin="0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Text="Boat Name"
-                   TextAlignment="Right" />
-        <TextBlock Width="181"
-                   Height="24"
-                   MinWidth="75"
-                   Margin="140,0,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Text="{Binding BoatName,
-                                  UpdateSourceTrigger=PropertyChanged,
-                                  ValidatesOnDataErrors=True}" />
-        <TextBlock Width="Auto"
-                   Height="24"
-                   Margin="0,25,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Text="Marina "
-                   TextAlignment="Right" />
-        <TextBlock Width="181"
-                   Height="24"
-                   MinWidth="75"
-                   Margin="140,29,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Text="{Binding Marina,
-                                  UpdateSourceTrigger=PropertyChanged,
-                                  ValidatesOnDataErrors=True}" Background="#FFCB9A9A" />
+    <Grid >
+        <StackPanel >
+        <TextBlock Text="{Binding Description}" VerticalAlignment="Top" Height="40" Background="Yellow"/>
+        <TextBlock Text="{Binding Value}" VerticalAlignment="Top" Height="40" Background="Yellow"/>
+        </StackPanel>
+
     </Grid>
 </UserControl>

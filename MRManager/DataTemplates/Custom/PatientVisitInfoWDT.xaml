@@ -29,7 +29,7 @@
                       FontSize="18.667"
                       DisplayMemberPath="Name"
                       ItemsSource="{Binding Source={x:Static Member=viewModels:VisitTypeCacheViewModel.Instance},
-                                            Path=EntitySet,
+                                            Path=EntitySet.Value,
                                             UpdateSourceTrigger=PropertyChanged,
                                             Mode=OneWay,
                                             IsAsync=True}"
@@ -44,7 +44,7 @@
                       DisplayMemberPath="Name"
                       FontSize="16"
                       ItemsSource="{Binding Source={x:Static Member=viewModels:DoctorInfoCacheViewModel.Instance},
-                                            Path=EntitySet,
+                                            Path=EntitySet.Value,
                                             UpdateSourceTrigger=PropertyChanged,
                                             Mode=OneWay,
                                             IsAsync=True}"

@@ -30,8 +30,7 @@ namespace DataServices.Actors
         private static readonly Action<ISystemSource, ILoadEntitySetWithFilter<TEntity>> LoadEntitySetWithFilter = (s, x) => x.LoadEntitySet();
         private static readonly Action<ISystemSource, ILoadEntitySetWithFilterWithIncludes<TEntity>> LoadEntitySetWithFilterWithIncludes = (s, x) => x.LoadEntitySet();
 
-        private static readonly Action<ISystemSource, IUpdatePatientEntityWithChanges<TEntity>> UpdatePulledEntityWtihChangesAction = (s, x) => x.UpdatePulledEntityWithChanges();
-
+        
 
         readonly Dictionary<Type, object> entityEvents =
             new Dictionary<Type, object>()
@@ -46,8 +45,7 @@ namespace DataServices.Actors
                 {typeof (ILoadEntitySet<TEntity>), LoadEntitySet},
                 {typeof (ILoadEntitySetWithFilter<TEntity>), LoadEntitySetWithFilter},
                 {typeof (ILoadEntitySetWithFilterWithIncludes<TEntity>), LoadEntitySetWithFilterWithIncludes},
-                {typeof(IUpdatePatientEntityWithChanges<TEntity>), UpdatePulledEntityWtihChangesAction}
-
+                
             };
         private IUntypedActorContext ctx = null;
         public EntityDataServiceSupervisor(ISystemProcess process, IProcessSystemMessage msg) : base(process)
@@ -70,8 +68,7 @@ namespace DataServices.Actors
             var inMsg = new CreateEntityService(actorType,action, new StateCommandInfo(process.Id, RevolutionData.Context.Actor.Commands.StartActor),process,Source );
             try
             {
-                // pass firstmsg as constructor parameter cuz Actor system can't tell
-
+                
                 Task.Run(() =>
                 {
                     ctx.ActorOf(
@@ -82,9 +79,7 @@ namespace DataServices.Actors
                         "EntityDataServiceActor-" +
                         typeof (TEvent).GetFriendlyName().Replace("<", "'").Replace(">", "'"));
                 });
-                   // EventMessageBus.Current.GetEvent<TEvent>(Source).Subscribe(x => _childActor.Tell(x));
-              
-                //_childActor.Tell(msg);
+                
 
             }
             catch (Exception ex)
@@ -95,7 +90,6 @@ namespace DataServices.Actors
             
         }
 
-        private IActorRef _childActor;
        
 
       

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MNIBDistributionManager" Class="MNIBDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=ALPHAQUEST-PC\SQLEXPRESS2016;Initial Catalog=MNIBDistributionManager;Integrated Security=True" SettingsObjectName="MNIB_Distribution_Manager.Properties.Settings" SettingsPropertyName="MNIBDistributionManagerConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=Winserv;Initial Catalog=MNIBDistributionManager;Persist Security Info=True;User ID=sa" SettingsObjectName="MNIB_Distribution_Manager.Properties.Settings" SettingsPropertyName="MNIBDistributionManagerConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Items" Member="Items">
     <Type Name="Item">
       <Column Name="ProductDescription" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
@@ -41,20 +41,6 @@
       <Column Name="SourceTransaction" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.TransfersLkp" Member="TransfersLkps">
-    <Type Name="TransfersLkp">
-      <Column Name="TransferNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
-      <Column Name="TransferDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="FromLocation" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="ToLocation" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.InvoiceCustomerLkp" Member="InvoiceCustomerLkps">
-    <Type Name="InvoiceCustomerLkp">
-      <Column Name="InvoiceNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
-      <Column Name="CustomerNo" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Customers" Member="Customers">
     <Type Name="Customer">
       <Column Name="CustomerName" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
@@ -62,12 +48,37 @@
       <Column Name="CustomerNumber" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.TransactionNetWeightLkp" Member="TransactionNetWeightLkps">
+    <Type Name="TransactionNetWeightLkp">
+      <Column Name="LotNumber" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="NetQuantity" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Locations" Member="Locations">
+    <Type Name="Location">
+      <Column Name="Id" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="LocationName" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InvoiceCustomerLkp" Member="InvoiceCustomerLkps">
+    <Type Name="InvoiceCustomerLkp">
+      <Column Name="InvoiceNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerInfo" Type="System.String" DbType="VarChar(119)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TransfersLkp" Member="TransfersLkps">
+    <Type Name="TransfersLkp">
+      <Column Name="TransferNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="TransferDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Info" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.ExportCustomers" Member="ExportCustomers">
     <Type Name="ExportCustomer">
       <Column Name="TicketNo" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
-      <Column Name="CustomerNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="CustomerInfo" Type="System.String" DbType="VarChar(119)" CanBeNull="true" />
       <Column Name="TicketDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="OrderNo" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.ExportDetails" Member="ExportDetails">
@@ -81,8 +92,8 @@
       <Column Name="BoxId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="TransactionNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="BoxWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="CustomerInfo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="ProductDescription" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.ExportReportLines" Member="ExportReportLines">
@@ -97,14 +108,7 @@
       <Column Name="ExportNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="TransactionNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Harvester" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="CustomerInfo" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.TransactionNetWeightLkp" Member="TransactionNetWeightLkps">
-    <Type Name="TransactionNetWeightLkp">
-      <Column Name="LotNumber" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
-      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="NetQuantity" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CustomerInfo" Type="System.String" DbType="VarChar(268) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

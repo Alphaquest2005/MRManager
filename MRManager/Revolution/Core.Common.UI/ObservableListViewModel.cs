@@ -34,10 +34,11 @@ namespace Core.Common.UI
         protected ValidationResult ValidationResults = new ValidationResult();
         protected static ObservableListViewModel<TEntity> _instance = null;
         public static ObservableListViewModel<TEntity> Instance => _instance;
+        IEntityListViewModel<TEntity> IEntityListViewModel<TEntity>.Instance => Instance;
 
         public ObservableListViewModel() { }
 
-        public ObservableListViewModel(IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process, Type orientation) : base(process,viewInfo,eventSubscriptions,eventPublications,commandInfo, orientation)
+        public ObservableListViewModel(IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, ISystemProcess process, Type orientation, int priority) : base(process,viewInfo,eventSubscriptions,eventPublications,commandInfo, orientation, priority)
         {
             Validator = new EntityValidator<TEntity>();
             State.WhenAnyValue(x => x.Value).Subscribe(x => UpdateLocalState(x));
@@ -50,14 +51,19 @@ namespace Core.Common.UI
         {
             if (state == null) return;
             //CurrentEntity.Value = state.Entity;
-            EntitySet = new ObservableList<TEntity>(state.EntitySet.ToList());
-                
-            
-               if (!SelectedEntities.SequenceEqual(state.SelectedEntities.ToList())) SelectedEntities = new ObservableList<TEntity>(state.SelectedEntities.ToList());
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                EntitySet.Value = new ObservableList<TEntity>(state.EntitySet.ToList());
+                EntitySet.Value.Reset();
+
+                if (!SelectedEntities.Value.SequenceEqual(state.SelectedEntities.ToList()))
+                    SelectedEntities.Value = new ObservableList<TEntity>(state.SelectedEntities.ToList());
+            }));
         }
 
+
         
-        
+
         ReactiveProperty<IProcessState<TEntity>> IEntityViewModel<TEntity>.State
         {
             get { return new ReactiveProperty<IProcessState<TEntity>>(_state.Value); }
@@ -81,37 +87,14 @@ namespace Core.Common.UI
         }
 
 
-        private ObservableList<TEntity> _entitySet = new ObservableList<TEntity>();
-        public virtual ObservableList<TEntity> EntitySet
+        public virtual ReactiveProperty<ObservableList<TEntity>> EntitySet
         {
-            get
-            {
-                return _entitySet;
-            }
-            set
-            {
-               this.RaiseAndSetIfChanged(ref _entitySet, value);
-                
-            }
+            get { return _entitySet; }
+            set { this.RaiseAndSetIfChanged(ref _entitySet, value); }
         }
 
-        
 
-        private ObservableList<TEntity> _selectedEntities = new ObservableList<TEntity>();
-        
-
-        public ObservableList<TEntity> SelectedEntities
-        {
-            get
-            {
-                return _selectedEntities;
-            }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _selectedEntities, value);
-               
-            }
-        }
+        public ReactiveProperty<ObservableList<TEntity>> SelectedEntities => new ReactiveProperty<ObservableList<TEntity>>(new ObservableList<TEntity>());
 
 
         public dynamic GetValue([CallerMemberName] string property = "UnspecifiedProperty")
@@ -155,10 +138,14 @@ namespace Core.Common.UI
 
         
         public ObservableDictionary<string, dynamic> ChangeTracking { get; } = new ObservableDictionary<string, dynamic>();
+        public void NotifyPropertyChanged(string propertyName)
+        {
+            this.RaisePropertyChanged(propertyName);
+        }
 
         private ObservableBindingList<TEntity> _changeTrackingList = new ObservableBindingList<TEntity>();
+        private ReactiveProperty<ObservableList<TEntity>> _entitySet = new ReactiveProperty<ObservableList<TEntity>>(new ObservableList<TEntity>());
 
-        
 
         public ObservableBindingList<TEntity> ChangeTrackingList
         {

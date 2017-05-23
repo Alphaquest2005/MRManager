@@ -1,12 +1,12 @@
 ﻿{
   "dependencies": {
-    "Newtonsoft.Json": "6.0.8",
-    "SimpleMvvmToolkit": "5.5.1"
+    "Extended.Wpf.Toolkit": "2.2.1",
+    "Newtonsoft.Json": "6.0.8"
   },
   "frameworks": {
-    "net452": {}
+    "net35": {}
   },
   "runtimes": {
-    "win": {}
+    "win-x86": {}
   }
 }

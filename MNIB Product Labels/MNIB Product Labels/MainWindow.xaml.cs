@@ -24,6 +24,18 @@ namespace MNIB_Product_Labels
         {
             InitializeComponent();
             im = FindResource("LabelViewModelDataSource") as LabelViewModel;
+            Dispatcher.UnhandledException += Dispatcher_UnhandledException;
+        }
+
+        private void Dispatcher_UnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            var exception = e.Exception;
+            do
+            {
+                exception = exception.InnerException;
+            }
+            while (exception.InnerException == null);
+            MessageBox.Show(exception.Message + "|" + exception.StackTrace);
         }
 
         private LabelViewModel im;

@@ -48,7 +48,7 @@
 
             <ListBox Margin="10,65,10,10"
                      IsSynchronizedWithCurrentItem="True"
-                     ItemsSource="{Binding EntitySet,
+                     ItemsSource="{Binding EntitySet.Value,
                                            Mode=OneWay}"
                      SelectedItem="{Binding CurrentEntity.Value,
                                             Mode=TwoWay}">
@@ -91,7 +91,7 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ListBox>
-            
+
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

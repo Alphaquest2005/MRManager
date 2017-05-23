@@ -38,7 +38,7 @@ namespace ViewModels
     {
         public SyntomPriorityCacheViewModel() { }
 
-        public SyntomPriorityCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation)
+        public SyntomPriorityCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation, priority)
         {
             this.WireEvents();
         }
@@ -50,7 +50,7 @@ namespace ViewModels
     {
         public SyntomStatusCacheViewModel() { }
 
-        public SyntomStatusCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation)
+        public SyntomStatusCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation, priority)
         {
             this.WireEvents();
         }
@@ -62,7 +62,7 @@ namespace ViewModels
     {
         public SyntomCacheViewModel() { }
 
-        public SyntomCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation)
+        public SyntomCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation, priority)
         {
             this.WireEvents();
         }
@@ -74,7 +74,7 @@ namespace ViewModels
     {
         public VisitTypeCacheViewModel() { }
 
-        public VisitTypeCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation)
+        public VisitTypeCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation, priority)
         {
             this.WireEvents();
         }
@@ -86,7 +86,7 @@ namespace ViewModels
     {
         public PhaseCacheViewModel() { }
 
-        public PhaseCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation)
+        public PhaseCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation, priority)
         {
             this.WireEvents();
         }
@@ -98,7 +98,7 @@ namespace ViewModels
     {
         public MedicalCategoryCacheViewModel() { }
 
-        public MedicalCategoryCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation)
+        public MedicalCategoryCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation, priority)
         {
             this.WireEvents();
         }
@@ -110,7 +110,7 @@ namespace ViewModels
     {
         public MedicalSystemsCacheViewModel() { }
 
-        public MedicalSystemsCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation)
+        public MedicalSystemsCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation, priority)
         {
             this.WireEvents();
         }
@@ -122,7 +122,7 @@ namespace ViewModels
     {
         public QuestionResponseTypeCacheViewModel() { }
 
-        public QuestionResponseTypeCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation)
+        public QuestionResponseTypeCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation, priority)
         {
             this.WireEvents();
         }
@@ -134,7 +134,7 @@ namespace ViewModels
     {
         public SexCacheViewModel() { }
 
-        public SexCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation)
+        public SexCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation, priority)
         {
             this.WireEvents();
         }

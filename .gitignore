@@ -240,3 +240,11 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/MRManager-Amoeba/
+/Amoeba/
+/HillsValley/
+/QikTic/
+/WaterNut/
+/payroll/
+/HV/
+/GenSoft/

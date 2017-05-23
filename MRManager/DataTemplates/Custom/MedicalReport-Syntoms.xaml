@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
+                    xmlns:converters="clr-namespace:Converters;assembly=Converters"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:entities="clr-namespace:EF.Entities;assembly=EF.Entities"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:systemInterfaces="clr-namespace:SystemInterfaces;assembly=SystemInterfaces"
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+                    mc:Ignorable="d">
+
+
+    <DataTemplate DataType="{x:Type entities:SyntomInfo}">
+        <Grid>
+            <TextBlock Height="40"
+                       VerticalAlignment="Top"
+                       Background="GreenYellow"
+                       Text="{Binding SyntomName}" />
+            <ListBox Margin="0,45,0,0" ItemsSource="{Binding MedicalSystems}" />
+        </Grid>
+    </DataTemplate>
+
+    <!--<HierarchicalDataTemplate DataType="{x:Type entities:SyntomInfo}" ItemsSource="{Binding MedicalSystems}">
+        <Grid >
+            <TextBlock Text="{Binding SyntomName}" VerticalAlignment="Top" Height="40" Background="GreenYellow"/>
+        </Grid>
+        <HierarchicalDataTemplate.ItemTemplate>
+            <DataTemplate >
+                <Grid>
+    -->
+    <!--<TextBlock Text="Patient Details" VerticalAlignment="Top" Height="40" Background="GreenYellow"/>-->
+    <!--
+                <TextBlock Text="{Binding Name}" VerticalAlignment="Top" Height="40" Background="GreenYellow"/>
+    -->
+    <!--<ContentControl Content="{Binding Synptoms}"  Margin="0,45,0,0" Background="Yellow"/>-->
+    <!--
+                </Grid>
+            </DataTemplate>
+        </HierarchicalDataTemplate.ItemTemplate>
+    </HierarchicalDataTemplate>-->
+
+</ResourceDictionary>

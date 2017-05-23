@@ -104,10 +104,10 @@
         <elementListCompartment Id="665eacc5-9bd3-4c94-814a-74a4435f5ab1" absoluteBounds="1.0150000000000001, 3.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="872c1568-e942-409b-bd96-5bffcbbc427a" absoluteBounds="6.75, 2, 2, 2.9247054036458331">
+    <classShape Id="f36bfe8d-4381-4154-a0ea-0fc6b7c50c5c" absoluteBounds="8.125, 6.375, 2, 3.1170068359375">
       <DataClassMoniker Name="/TrackerDBDataContext/ExportData" />
       <nestedChildShapes>
-        <elementListCompartment Id="8a8b1028-1d46-4f14-82d7-7583af824b24" absoluteBounds="6.765, 2.46, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="37f426c2-3f86-49e9-b093-c06d00086588" absoluteBounds="8.14, 6.835, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
