@@ -36,17 +36,6 @@ namespace MNIB_Distribution_Manager.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ALPHAQUEST-PC\\SQLEXPRESS2016;Initial Catalog=MNIBDistributionManager;" +
-            "Integrated Security=True")]
-        public string MNIBDistributionManagerConnectionString1 {
-            get {
-                return ((string)(this["MNIBDistributionManagerConnectionString1"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ALPHAQUEST-PC\\SQLEXPRESS2016;Initial Catalog=MNIBDistributionManager;" +
             "user=sa;password=pa$$word")]
         public string MNIBDistributionManagerConnectionString {
             get {
@@ -61,6 +50,17 @@ namespace MNIB_Distribution_Manager.Properties {
         public string MNIBLabelsDBConnectionString {
             get {
                 return ((string)(this["MNIBLabelsDBConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ALPHAQUEST-PC\\SQLEXPRESS2016;Initial Catalog=MNIBDistributionManager;" +
+            "Integrated Security=True")]
+        public string MNIBDistributionManagerConnectionString1 {
+            get {
+                return ((string)(this["MNIBDistributionManagerConnectionString1"]));
             }
         }
     }

@@ -755,7 +755,6 @@ namespace MNIB_Distribution_Manager
                 //Todo: Do Lookup
                 DoBarcodeLookup();
 
-
             }
         }
 
