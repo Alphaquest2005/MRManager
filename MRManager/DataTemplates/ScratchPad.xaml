@@ -9,15 +9,44 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:systemInterfaces="clr-namespace:SystemInterfaces;assembly=SystemInterfaces"
              xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
-             Width="1000"
-             Height="533.731"
+             Width="816"
+             Height="1056"
              Background="White"
              mc:Ignorable="d">
     <Grid >
-        <StackPanel >
-        <TextBlock Text="{Binding Description}" VerticalAlignment="Top" Height="40" Background="Yellow"/>
-        <TextBlock Text="{Binding Value}" VerticalAlignment="Top" Height="40" Background="Yellow"/>
-        </StackPanel>
+        <Grid Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+            <TextBlock Text="{Binding Name}" VerticalAlignment="Top" Height="25" Margin="143,0,0,0" FontSize="14"/>
+            <TextBlock Text="Name:" VerticalAlignment="Top" Height="25" Margin="0,0,241,0" FontWeight="Bold" TextAlignment="Right"/>
+
+            <TextBlock Text="{Binding Sex}" VerticalAlignment="Top" Height="25" Margin="143,30,0,0" FontSize="14"/>
+            <TextBlock Text="Sex:" VerticalAlignment="Top" Height="25" Margin="0,30,241,0" FontWeight="Bold" TextAlignment="Right"/>
+
+            <TextBlock Text="{Binding BirthDate}" VerticalAlignment="Top" Height="25" Margin="143,60,0,0" FontSize="14"/>
+            <TextBlock Text="Birth Date:" VerticalAlignment="Top" Height="25" Margin="0,60,241,0" FontWeight="Bold" TextAlignment="Right"/>
+
+            <TextBlock Text="{Binding Allergies}" VerticalAlignment="Top" Height="25" Margin="143,103,0,0" FontSize="14"/>
+            <TextBlock Text="Allergies:" VerticalAlignment="Top" Height="25" Margin="0,103,241,0" FontWeight="Bold" TextAlignment="Right"/>
+
+
+        </Grid>
+        <Grid  Margin="10" HorizontalAlignment="Right" VerticalAlignment="Top">
+
+            <TextBlock Text="{Binding Address}" VerticalAlignment="Top" Height="25" Margin="143,0,0,0" FontSize="14"/>
+            <TextBlock Text="Address:" VerticalAlignment="Top" Height="25" Margin="0,0,241,0" FontWeight="Bold" TextAlignment="Right"/>
+
+            <TextBlock Text="{Binding PhoneNumber}" VerticalAlignment="Top" Height="25" Margin="143,30,0,0" FontSize="14"/>
+            <TextBlock Text="Phone Number:" VerticalAlignment="Top" Height="25" Margin="0,30,241,0" FontWeight="Bold" TextAlignment="Right"/>
+
+            <TextBlock Text="{Binding BirthCountry}" VerticalAlignment="Top" Height="25" Margin="143,60,0,0" FontSize="14"/>
+            <TextBlock Text="Country of Birth:" VerticalAlignment="Top" Height="25" Margin="0,60,241,0" FontWeight="Bold" TextAlignment="Right"/>
+
+            <TextBlock Text="{Binding EmailAddress}" VerticalAlignment="Top" Height="25" Margin="143,103,0,0" FontSize="14"/>
+            <TextBlock Text="Email Address:" VerticalAlignment="Top" Height="25" Margin="0,103,241,0" FontWeight="Bold" TextAlignment="Right"/>
+
+
+        </Grid>
+
 
     </Grid>
 </UserControl>

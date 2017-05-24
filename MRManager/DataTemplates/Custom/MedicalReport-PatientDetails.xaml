@@ -13,10 +13,40 @@
 
    <DataTemplate DataType="{x:Type entities:PatientDetailsInfo}">
         <Grid >
-             <!--<TextBlock Text="Patient Details" VerticalAlignment="Top" Height="40" Background="GreenYellow"/>-->
-            <TextBlock Text="{Binding Name}" VerticalAlignment="Top" Height="40" Background="GreenYellow"/>
-            <!--<ContentControl Content="{Binding Synptoms}"  Margin="0,45,0,0" Background="Yellow"/>-->
-          
+            <Grid Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+                <TextBlock Text="{Binding Name}" VerticalAlignment="Top" Height="25" Margin="143,0,0,0" FontSize="14" TextAlignment="Left"/>
+                <TextBlock Text="Name:" VerticalAlignment="Top" Height="25" Margin="0,0,241,0" FontSize="12" FontWeight="Bold" TextAlignment="Right"/>
+
+                <TextBlock Text="{Binding Sex}" VerticalAlignment="Top" Height="25" Margin="143,30,0,0" FontSize="14" TextAlignment="Left"/>
+                <TextBlock Text="Sex:" VerticalAlignment="Top" Height="25" Margin="0,30,241,0" FontWeight="Bold" TextAlignment="Right" FontSize="12"/>
+
+                <TextBlock Text="{Binding BirthDate}" VerticalAlignment="Top" Height="25" Margin="143,60,0,0" FontSize="14" TextAlignment="Left"/>
+                <TextBlock Text="Birth Date:" VerticalAlignment="Top" Height="25" Margin="0,60,241,0" FontWeight="Bold" TextAlignment="Right" FontSize="12"/>
+
+                <TextBlock Text="{Binding Allergies}" VerticalAlignment="Top" Height="25" Margin="143,103,0,0" FontSize="14" TextAlignment="Left"/>
+                <TextBlock Text="Allergies:" VerticalAlignment="Top" Height="25" Margin="0,103,241,0" FontWeight="Bold" TextAlignment="Right" FontSize="12"/>
+
+
+            </Grid>
+            <Grid  Margin="10" HorizontalAlignment="Right" VerticalAlignment="Top">
+
+                <TextBlock Text="{Binding Address}" VerticalAlignment="Top" Height="25" Margin="143,0,0,0" FontSize="14" TextAlignment="Left"/>
+                <TextBlock Text="Address:" VerticalAlignment="Top" Height="25" Margin="0,0,241,0" FontWeight="Bold" TextAlignment="Right" FontSize="12"/>
+
+                <TextBlock Text="{Binding PhoneNumber}" VerticalAlignment="Top" Height="25" Margin="143,30,0,0" FontSize="14" TextAlignment="Left"/>
+                <TextBlock Text="Phone Number:" VerticalAlignment="Top" Height="25" Margin="0,30,241,0" FontWeight="Bold" TextAlignment="Right" FontSize="12"/>
+
+                <TextBlock Text="{Binding BirthCountry}" VerticalAlignment="Top" Height="25" Margin="143,60,0,0" FontSize="14" TextAlignment="Left"/>
+                <TextBlock Text="Country of Birth:" VerticalAlignment="Top" Height="25" Margin="0,60,241,0" FontWeight="Bold" TextAlignment="Right" FontSize="12"/>
+
+                <TextBlock Text="{Binding EmailAddress}" VerticalAlignment="Top" Height="25" Margin="143,103,0,0" FontSize="14" TextAlignment="Left"/>
+                <TextBlock Text="Email Address:" VerticalAlignment="Top" Height="25" Margin="0,103,241,0" FontWeight="Bold" TextAlignment="Right" FontSize="12"/>
+
+
+            </Grid>
+
+
         </Grid>
     </DataTemplate>
         

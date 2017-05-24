@@ -14,33 +14,46 @@
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
             
         </DataTemplate.Resources>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Border x:Name="ViewPatientResponses"
-                Width="600"
+                Width="816"
+            
                 BorderBrush="#FFECE8E8"
-                BorderThickness="1"
-                CornerRadius="45.25">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                    <GradientStop Offset="1" Color="#7BB8B8B8" />
-                    <GradientStop Color="#4DFFFFFF" />
-                </LinearGradientBrush>
-            </Border.Background>
+                BorderThickness="1" Background="White">
+
             <Grid 
                 Margin="10">
                 <TextBlock Width="Auto"
                            MinWidth="75"
-                           Margin="115,0,109,450"
-                           Height="20"
+                           Margin="190,10,34,440"
                            HorizontalAlignment="Stretch"
-                           VerticalAlignment="Stretch"
+                           VerticalAlignment="Top"
                            FontSize="20"
-                           Text="Medical Report"
+                           Text="St. Augustine's Medical Services Inc."
                            TextWrapping="WrapWithOverflow" TextAlignment="Center" />
-                <!--<ContentControl Content="{Binding PatientDetails.Value}" Margin="0,71,0,0"/>-->
-                <ListBox ItemsSource="{Binding Synptoms}" Margin="0,71,0,0"/>
-               
+                <ContentControl Content="{Binding PatientDetails.Value}" Margin="0,113,0,0" VerticalAlignment="Top" Height="271"/>
+                <Image Source="../Graphics/St.Augustine_Logo.jpg" Margin="19,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="103" Width="149"/>
+                <ListBox ItemsSource="{Binding Synptoms}" Margin="0,389,0,0"/>
+                <TextBlock Width="Auto"
+            MinWidth="75"
+            Margin="185,43,34,410"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top"
+            FontSize="14"
+            Text="St. Paul's, St. George's, Grenada. W.I.    Tel: 473-440-6173/74/75   Fax:473-440-6176"
+            TextWrapping="WrapWithOverflow" TextAlignment="Center" />
+                <TextBlock Width="Auto"
+            MinWidth="75"
+            Margin="190,85,34,370"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top"
+            FontSize="16"
+            Text="Patient Medical Report"
+            TextWrapping="WrapWithOverflow" TextAlignment="Center" FontWeight="Bold" />
+
 
             </Grid>
         </Border>
+        </ScrollViewer>
     </DataTemplate>
 </ResourceDictionary>
