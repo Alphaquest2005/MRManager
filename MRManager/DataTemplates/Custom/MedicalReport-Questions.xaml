@@ -12,12 +12,22 @@
 
 
     <DataTemplate DataType="{x:Type entities:QuestionResponseOptionInfo}">
-        <Grid >
-             <!--<TextBlock Text="Patient Details" VerticalAlignment="Top" Height="40" Background="GreenYellow"/>-->
-            <TextBlock Text="{Binding Question}" VerticalAlignment="Top" Height="40" Background="GreenYellow"/>
-            <ListBox ItemsSource="{Binding PatientResponses}" Margin="0,45,0,0" />
-          
+        <Grid Background="White">
+
+            <Grid Margin="10,10,10,0" VerticalAlignment="Top" Height="43">
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFA6A5A5" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <TextBlock Height="19" VerticalAlignment="Top" Text="{Binding EntityAttribute}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,10,0,0" />
+
+
+            </Grid>
+            <ListBox Margin="282,21,22,0" ItemsSource="{Binding PatientResponses}" HorizontalContentAlignment="Stretch" />
         </Grid>
+
     </DataTemplate>
         
 </ResourceDictionary>

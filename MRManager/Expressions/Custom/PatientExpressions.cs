@@ -113,6 +113,8 @@ namespace Entity.Expressions
               Id = q.Id,
               Category = q.Interviews.MedicalCategory.Name,
               Question = q.Description,
+              Attribute = q.EntityAttributes.Attribute,
+              Entity = q.EntityAttributes.Entity,
               Interview = q.Interviews.Name,
               InterviewId = q.InterviewId,
               ResponseOptions = q.ResponseOptions

@@ -12,12 +12,26 @@
 
 
     <DataTemplate DataType="{x:Type entities:SyntomInfo}">
-        <Grid>
-            <TextBlock Height="40"
-                       VerticalAlignment="Top"
-                       Background="GreenYellow"
-                       Text="{Binding SyntomName}" />
-            <ListBox Margin="0,45,0,0" ItemsSource="{Binding MedicalSystems}" />
+        <Grid Background="White">
+
+            <ListBox Margin="115,66,0,0" ItemsSource="{Binding MedicalSystems}" HorizontalContentAlignment="Stretch" />
+            <Grid Margin="10" VerticalAlignment="Top">
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFA6A5A5" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <TextBlock Height="29"
+                VerticalAlignment="Top"
+                Text="{Binding SyntomName}" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" Width="235" Margin="10,10,0,0" />
+
+                <TextBlock Text="{Binding Priority}" VerticalAlignment="Top" Height="25" Margin="498,10,0,0" FontSize="14" TextAlignment="Left" HorizontalAlignment="Left" Width="111"/>
+                <TextBlock Text="Priority:" VerticalAlignment="Top" Height="25" Margin="447,10,0,0" FontSize="12" FontWeight="Bold" TextAlignment="Right" HorizontalAlignment="Left"/>
+
+                <TextBlock Text="{Binding Status}" VerticalAlignment="Top" Height="25" Margin="686,10,0,0" FontSize="14" TextAlignment="Left" HorizontalAlignment="Left" Width="101"/>
+                <TextBlock Text="Status:" VerticalAlignment="Top" Height="25" Margin="635,10,0,0" FontSize="12" FontWeight="Bold" TextAlignment="Right" HorizontalAlignment="Left"/>
+            </Grid>
         </Grid>
     </DataTemplate>
 

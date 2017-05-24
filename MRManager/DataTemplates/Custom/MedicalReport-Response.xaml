@@ -13,9 +13,10 @@
 
     <DataTemplate DataType="{x:Type entities:ResponseOptionInfo}">
         <Grid >
-            <StackPanel >
-                <TextBlock Text="{Binding Description}" VerticalAlignment="Top" Height="40" Background="Yellow"/>
-                <TextBlock Text="{Binding Value}" VerticalAlignment="Top" Height="40" Background="Yellow"/>
+            <StackPanel Orientation ="Horizontal">
+                <TextBlock Text="{Binding Description}" VerticalAlignment="Top" Height="40" />
+                <TextBlock Text=": " VerticalAlignment="Top" Height="40"/>
+                <TextBlock Text="{Binding Value}" VerticalAlignment="Top" Height="40" />
             </StackPanel>
 
         </Grid>

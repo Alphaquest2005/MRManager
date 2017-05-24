@@ -11,6 +11,10 @@ namespace EF.Entities
     {
         public string Category { get; set; }
         public string Question { get; set; }
+        public string Entity { get; set; }
+        public string Attribute { get; set; }
+
+        public string EntityAttribute => $"{Entity} : {Attribute}";
         public string Interview { get; set; }
         public int InterviewId { get; set; }
         public IList<IResponseOptionInfo> ResponseOptions { get; set; }

@@ -9,6 +9,9 @@ namespace Interfaces
     {
         string Category { get;  }
         string Question { get; }
+
+        string Entity { get; }
+        string Attribute { get; }
         string Interview { get; }
         int InterviewId { get; }
         IList<IResponseOptionInfo> ResponseOptions { get;  }

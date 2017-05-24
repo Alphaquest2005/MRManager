@@ -11,6 +11,7 @@ using EventAggregator;
 using EventMessages.Commands;
 using Interfaces;
 using MoreLinq;
+using PrintUtilities;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
@@ -139,7 +140,8 @@ namespace RevolutionData
                                 {
                                     var interview = syntom.MedicalSystems.SelectMany(z => z.Interviews)
                                         .FirstOrDefault(x => x.Id == interviewid);
-                                    interview?.Questions.AddRange(e.EntitySet);
+                                    var rq = e.EntitySet.Where(x => !interview.Questions.Any(z => z.Id == x.Id)).ToList();
+                                    if(rq.Any()) interview?.Questions.AddRange(rq);
                                 }
 
                                 v.Synptoms.AddRangeOnScheduler(res);
@@ -207,7 +209,26 @@ namespace RevolutionData
                             s.Source);
                     }),
 
-                
+                new ViewEventCommand<IMedicalReportViewModel, ILoadEntityViewSetWithChanges<IQuestionInfo,IPartialMatch>>(
+                    key:"Print",
+                    commandPredicate:new List<Func<IMedicalReportViewModel, bool>>
+                    {
+                        
+                    },
+                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+
+                    messageData: s =>
+                    {
+                        // WPF2PDF.CreateAndOpenPDF(ref s.DailyReportGD, "PayrollItemBreakDown");
+
+                        return new ViewEventCommandParameter(
+                            new object[] {s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},
+                            new StateCommandInfo(s.Process.Id,
+                                Context.EntityView.Commands.LoadEntityViewSetWithChanges), s.Process,
+                            s.Source);
+                    }),
+
+
 
             },
             typeof(IMedicalReportViewModel),

@@ -38,7 +38,6 @@
 
         <ResourceDictionary Source="Custom/MedicalReportVDT.xaml" />
         <ResourceDictionary Source="Custom/MedicalReport-PatientDetails.xaml" />
-        <ResourceDictionary Source="Custom/MedicalReport-PatientHistory.xaml" />
         <ResourceDictionary Source="Custom/MedicalReport-Response.xaml" />
         <ResourceDictionary Source="Custom/MedicalReport-Interviews.xaml" />
         <ResourceDictionary Source="Custom/MedicalReport-Questions.xaml" />

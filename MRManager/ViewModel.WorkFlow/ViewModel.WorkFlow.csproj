@@ -92,6 +92,10 @@
       <Project>{ad573873-c8e6-4ea3-93f5-0d39a92fc9f6}</Project>
       <Name>Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PrintUtilities\PrintUtilities.csproj">
+      <Project>{0a3d06b1-eec5-4d6e-8e13-a73a23c359d3}</Project>
+      <Name>PrintUtilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Revolution\Actor.Interfaces\Actor.Interfaces.csproj">
       <Project>{8b10c72d-9f33-4290-b562-44cf1f718fa5}</Project>
       <Name>Actor.Interfaces</Name>
@@ -135,6 +139,10 @@
     <ProjectReference Include="..\Revolution\ViewModel.Interfaces\ViewModel.Interfaces.csproj">
       <Project>{2f936e24-723e-4e7a-b21c-d6f618c74651}</Project>
       <Name>ViewModel.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SUT.PrintEngine\SUT.PrintEngine.csproj">
+      <Project>{0b3d76d5-d9f4-4c0e-afa9-143138ebc74d}</Project>
+      <Name>SUT.PrintEngine</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

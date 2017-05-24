@@ -13,40 +13,54 @@
              Height="1056"
              Background="White"
              mc:Ignorable="d">
-    <Grid >
-        <Grid Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Border x:Name="ViewPatientResponses"
+                Width="816"
+            
+                BorderBrush="#FFECE8E8"
+                BorderThickness="1" Background="White">
 
-            <TextBlock Text="{Binding Name}" VerticalAlignment="Top" Height="25" Margin="143,0,0,0" FontSize="14"/>
-            <TextBlock Text="Name:" VerticalAlignment="Top" Height="25" Margin="0,0,241,0" FontWeight="Bold" TextAlignment="Right"/>
+            <Grid 
+                Margin="10,50,10,10" Height="Auto">
+                <TextBlock Width="Auto"
+                           MinWidth="75"
+                           Margin="190,10,34,440"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Top"
+                           FontSize="20"
+                           Text="St. Augustine's Medical Services Inc."
+                           TextWrapping="WrapWithOverflow" TextAlignment="Center" />
+                <Image Source="../Graphics/St.Augustine_Logo.jpg" Margin="19,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="103" Width="149"/>
+                <StackPanel Margin="0,113,0,0" Orientation="Vertical">
+                    <ContentControl Content="{Binding PatientDetails.Value}" VerticalAlignment="Top" Height="Auto"/>
+                    <ListBox ItemsSource="{Binding Synptoms}" Height="Auto"/>
+                </StackPanel>
+                <TextBlock Width="Auto"
+            MinWidth="75"
+            Margin="185,43,34,410"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top"
+            FontSize="14"
+            Text="St. Paul's, St. George's, Grenada. W.I.    Tel: 473-440-6173/74/75   Fax:473-440-6176"
+            TextWrapping="WrapWithOverflow" TextAlignment="Center" />
+                <TextBlock Width="Auto"
+            MinWidth="75"
+            Margin="190,85,34,370"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top"
+            FontSize="16"
+            Text="Patient Medical Report"
+            TextWrapping="WrapWithOverflow" TextAlignment="Center" FontWeight="Bold" />
+                <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="35" Margin="685,-40,0,0" TextWrapping="Wrap" Text="Print" Style="{DynamicResource TextButtonStyle}" VerticalAlignment="Top" Width="Auto" FontSize="18">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding Commands[Print]}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBlock>
 
-            <TextBlock Text="{Binding Sex}" VerticalAlignment="Top" Height="25" Margin="143,30,0,0" FontSize="14"/>
-            <TextBlock Text="Sex:" VerticalAlignment="Top" Height="25" Margin="0,30,241,0" FontWeight="Bold" TextAlignment="Right"/>
 
-            <TextBlock Text="{Binding BirthDate}" VerticalAlignment="Top" Height="25" Margin="143,60,0,0" FontSize="14"/>
-            <TextBlock Text="Birth Date:" VerticalAlignment="Top" Height="25" Margin="0,60,241,0" FontWeight="Bold" TextAlignment="Right"/>
-
-            <TextBlock Text="{Binding Allergies}" VerticalAlignment="Top" Height="25" Margin="143,103,0,0" FontSize="14"/>
-            <TextBlock Text="Allergies:" VerticalAlignment="Top" Height="25" Margin="0,103,241,0" FontWeight="Bold" TextAlignment="Right"/>
-
-
-        </Grid>
-        <Grid  Margin="10" HorizontalAlignment="Right" VerticalAlignment="Top">
-
-            <TextBlock Text="{Binding Address}" VerticalAlignment="Top" Height="25" Margin="143,0,0,0" FontSize="14"/>
-            <TextBlock Text="Address:" VerticalAlignment="Top" Height="25" Margin="0,0,241,0" FontWeight="Bold" TextAlignment="Right"/>
-
-            <TextBlock Text="{Binding PhoneNumber}" VerticalAlignment="Top" Height="25" Margin="143,30,0,0" FontSize="14"/>
-            <TextBlock Text="Phone Number:" VerticalAlignment="Top" Height="25" Margin="0,30,241,0" FontWeight="Bold" TextAlignment="Right"/>
-
-            <TextBlock Text="{Binding BirthCountry}" VerticalAlignment="Top" Height="25" Margin="143,60,0,0" FontSize="14"/>
-            <TextBlock Text="Country of Birth:" VerticalAlignment="Top" Height="25" Margin="0,60,241,0" FontWeight="Bold" TextAlignment="Right"/>
-
-            <TextBlock Text="{Binding EmailAddress}" VerticalAlignment="Top" Height="25" Margin="143,103,0,0" FontSize="14"/>
-            <TextBlock Text="Email Address:" VerticalAlignment="Top" Height="25" Margin="0,103,241,0" FontWeight="Bold" TextAlignment="Right"/>
-
-
-        </Grid>
-
-
-    </Grid>
+            </Grid>
+        </Border>
+    </ScrollViewer>
 </UserControl>

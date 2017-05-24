@@ -15,15 +15,15 @@
             
         </DataTemplate.Resources>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Border x:Name="ViewPatientResponses"
+            <Border x:Name="ViewPatientResponses"
                 Width="816"
             
                 BorderBrush="#FFECE8E8"
-                BorderThickness="1" Background="White">
+                BorderThickness="1">
 
-            <Grid 
-                Margin="10">
-                <TextBlock Width="Auto"
+                <Grid 
+                Margin="10,50,10,10" Height="Auto" Background="White" x:Name="MedicalReportGRD">
+                    <TextBlock Width="Auto"
                            MinWidth="75"
                            Margin="190,10,34,440"
                            HorizontalAlignment="Stretch"
@@ -31,10 +31,12 @@
                            FontSize="20"
                            Text="St. Augustine's Medical Services Inc."
                            TextWrapping="WrapWithOverflow" TextAlignment="Center" />
-                <ContentControl Content="{Binding PatientDetails.Value}" Margin="0,113,0,0" VerticalAlignment="Top" Height="271"/>
-                <Image Source="../Graphics/St.Augustine_Logo.jpg" Margin="19,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="103" Width="149"/>
-                <ListBox ItemsSource="{Binding Synptoms}" Margin="0,389,0,0"/>
-                <TextBlock Width="Auto"
+                    <Image Source="../Graphics/St.Augustine_Logo.jpg" Margin="19,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="103" Width="149"/>
+                    <StackPanel Margin="0,113,0,0" Orientation="Vertical">
+                        <ContentControl Content="{Binding PatientDetails.Value}" VerticalAlignment="Top" Height="Auto"/>
+                        <ListBox ItemsSource="{Binding Synptoms}" Height="Auto"/>
+                    </StackPanel>
+                    <TextBlock Width="Auto"
             MinWidth="75"
             Margin="185,43,34,410"
             HorizontalAlignment="Stretch"
@@ -42,7 +44,7 @@
             FontSize="14"
             Text="St. Paul's, St. George's, Grenada. W.I.    Tel: 473-440-6173/74/75   Fax:473-440-6176"
             TextWrapping="WrapWithOverflow" TextAlignment="Center" />
-                <TextBlock Width="Auto"
+                    <TextBlock Width="Auto"
             MinWidth="75"
             Margin="190,85,34,370"
             HorizontalAlignment="Stretch"
@@ -50,10 +52,17 @@
             FontSize="16"
             Text="Patient Medical Report"
             TextWrapping="WrapWithOverflow" TextAlignment="Center" FontWeight="Bold" />
+                    <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="35" Margin="685,-40,0,0" TextWrapping="Wrap"  Text="Print" Style="{DynamicResource TextButtonStyle}" VerticalAlignment="Top" Width="Auto" FontSize="18">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding Commands[Print]}" CommandParameter="{Binding ElementName=MedicalReportGRD}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    </TextBlock>
 
 
-            </Grid>
-        </Border>
+                </Grid>
+            </Border>
         </ScrollViewer>
     </DataTemplate>
 </ResourceDictionary>

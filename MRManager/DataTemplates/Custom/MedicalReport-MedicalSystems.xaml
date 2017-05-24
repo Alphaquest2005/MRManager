@@ -3,21 +3,50 @@
                     xmlns:Interfaces="clr-namespace:Interfaces;assembly=Interfaces"
                     xmlns:converters="clr-namespace:Converters;assembly=Converters"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:entities="clr-namespace:EF.Entities;assembly=EF.Entities"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:systemInterfaces="clr-namespace:SystemInterfaces;assembly=SystemInterfaces"
                     xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
-                    xmlns:entities="clr-namespace:EF.Entities;assembly=EF.Entities"
                     mc:Ignorable="d">
 
 
-   <DataTemplate DataType="{x:Type entities:MedicalSystemInfo}">
-        <Grid >
-             <!--<TextBlock Text="Patient Details" VerticalAlignment="Top" Height="40" Background="GreenYellow"/>-->
-            <TextBlock Text="{Binding Name}" VerticalAlignment="Top" Height="40" Background="GreenYellow"/>
-            <ListBox ItemsSource="{Binding Interviews}" Margin="0,45,0,0" />
-          
+    <DataTemplate DataType="{x:Type entities:MedicalSystemInfo}">
+        <Grid Background="White">
+
+            <ListBox Margin="75,58,0,0" ItemsSource="{Binding Interviews}" HorizontalContentAlignment="Stretch"  />
+            <Grid Height="43"
+                  Margin="10,10,10,0"
+                  VerticalAlignment="Top">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Offset="0" Color="#FFA6A5A5" />
+                        <GradientStop Offset="1" Color="White" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <TextBlock Width="235"
+                           Height="19"
+                           Margin="59,10,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           Text="{Binding Name}" />
+
+
+                <TextBlock Height="25"
+                           Margin="10,10,0,-6"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontSize="12"
+                           FontWeight="Bold"
+                           Text="System:"
+                           TextAlignment="Right" />
+
+
+            </Grid>
         </Grid>
+
     </DataTemplate>
-        
+
 </ResourceDictionary>
