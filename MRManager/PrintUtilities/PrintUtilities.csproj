@@ -50,7 +50,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="PrintClass.cs" />
     <Compile Include="WPF2PDF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

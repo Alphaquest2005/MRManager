@@ -26,8 +26,8 @@ namespace EF.DBContext.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=MRMANAGER-PC\\SQLEXPRESS2008;Initial Catalog=Amoeba-MRManager;Integrat" +
-            "ed Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ALPHAQUEST-PC\\SQLEXPRESS2016;Initial Catalog=Amoeba-MRManager;Integra" +
+            "ted Security=True")]
         public string DbConnectionString {
             get {
                 return ((string)(this["DbConnectionString"]));
