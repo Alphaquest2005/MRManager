@@ -150,7 +150,7 @@ namespace RevolutionData
                                         var lst = x.PatientResponses.Where(z => z.PatientId == v.PatientDetails.Value.Id).ToList();
                                         x.PatientResponses = lst;
                                     });
-                                    if(rq.Any()) interview?.Questions.AddRange(rq);
+                                    if(rq.Any()) interview?.Questions.AddRange(rq.Where(x => x.PatientResponses.Any()));
                                 }
 
                                 v.Synptoms.AddRangeOnScheduler(res);
