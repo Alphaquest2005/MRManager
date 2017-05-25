@@ -8,7 +8,8 @@ namespace Process.WorkFlow
     {
         public static List<IMachineInfo> MachineInfos = new List<IMachineInfo>
         {
-            new MachineInfo("ALPHAQUEST-PC", 8)
+            new MachineInfo("ALPHAQUEST-PC", 8),
+            new MachineInfo("MRMANAGER-PC", 4)
         };
 
     }

@@ -43,9 +43,17 @@ namespace DataServices.Actors
                 var machineInfo =
                     machineInfos.FirstOrDefault(
                         x => x.MachineName == Environment.MachineName && x.Processors == Environment.ProcessorCount);
-                if (machineInfo == null) return;
+                if (machineInfo == null)
+                {
+                    Debugger.Break();
+                    return;
+                }
                 var processInfo = processInfos.FirstOrDefault(x => x.ParentProcessId == 0);
-                if (processInfo == null) return;
+                if (processInfo == null)
+                {
+                    Debugger.Break();
+                    return;
+                }
                 var systemProcess = new SystemProcess(new RevolutionEntities.Process.Process(processInfo, new Agent("System")), machineInfo);
                 Source = new Source(Guid.NewGuid(),"ServiceManager", new SourceType(typeof(IServiceManager)),systemProcess, machineInfo);
                                     var systemStartedMsg = new SystemStarted(new StateEventInfo(systemProcess.Id, RevolutionData.Context.Process.Events.ProcessStarted), systemProcess, Source);
