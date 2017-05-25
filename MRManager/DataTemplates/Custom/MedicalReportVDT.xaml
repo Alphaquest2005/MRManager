@@ -14,6 +14,7 @@
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
             
         </DataTemplate.Resources>
+        
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <Border x:Name="ViewPatientResponses"
                 Width="816"
@@ -21,8 +22,7 @@
                 BorderBrush="#FFECE8E8"
                 BorderThickness="1">
 
-                <Grid 
-                Margin="10,50,10,10" Height="Auto" Background="White" x:Name="MedicalReportGRD">
+                <Grid Margin="10,50,10,10" Height="Auto" Background="White" x:Name="MedicalReportGRD">
                     <TextBlock Width="Auto"
                            MinWidth="75"
                            Margin="190,10,34,440"
@@ -55,7 +55,7 @@
                     <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="35" Margin="685,-40,0,0" TextWrapping="Wrap"  Text="Print" Style="{DynamicResource TextButtonStyle}" VerticalAlignment="Top" Width="Auto" FontSize="18">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
-                            <i:InvokeCommandAction Command="{Binding Commands[Print]}" CommandParameter="{Binding ElementName=MedicalReportGRD}" />
+                            <i:InvokeCommandAction Command="{Binding PrintGrid}" CommandParameter="{Binding ElementName=MedicalReportGRD}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     </TextBlock>

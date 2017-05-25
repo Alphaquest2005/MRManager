@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Dynamic;
+using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using SystemInterfaces;
 using Interfaces;
 using JB.Collections.Reactive;
 using Reactive.Bindings;
+using ReactiveUI;
 using ViewModelInterfaces;
 
 namespace ViewModel.Interfaces
@@ -75,6 +78,8 @@ namespace ViewModel.Interfaces
         ReactiveProperty<IPatientDetailsInfo> PatientDetails { get;}
         ReactiveCollection<IPatientVisitInfo> PatientVisits { get; }
         ReactiveCollection<ISyntomInfo> Synptoms { get; }
+        
+        ReactiveCommand<Grid, Unit> PrintGrid { get;  }
     }
 
 

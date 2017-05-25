@@ -209,24 +209,7 @@ namespace RevolutionData
                             s.Source);
                     }),
 
-                new ViewEventCommand<IMedicalReportViewModel, ILoadEntityViewSetWithChanges<IQuestionInfo,IPartialMatch>>(
-                    key:"Print",
-                    commandPredicate:new List<Func<IMedicalReportViewModel, bool>>
-                    {
-                        
-                    },
-                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
-
-                    messageData: s =>
-                    {
-                        // WPF2PDF.CreateAndOpenPDF(ref s.DailyReportGD, "PayrollItemBreakDown");
-
-                        return new ViewEventCommandParameter(
-                            new object[] {s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)},
-                            new StateCommandInfo(s.Process.Id,
-                                Context.EntityView.Commands.LoadEntityViewSetWithChanges), s.Process,
-                            s.Source);
-                    }),
+               
 
 
 

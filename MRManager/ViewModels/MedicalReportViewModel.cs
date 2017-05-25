@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Dynamic;
 using System.Linq;
+using System.Reactive;
 using System.Windows;
+using System.Windows.Controls;
 using SystemInterfaces;
 using Common.Dynamic;
 using Core.Common.UI;
@@ -12,6 +14,7 @@ using EF.Entities;
 using FluentValidation;
 using Interfaces;
 using JB.Collections.Reactive;
+using PrintUtilities;
 using Reactive.Bindings;
 using ReactiveUI;
 using RevolutionEntities.Process;
@@ -19,6 +22,7 @@ using Utilities;
 using ValidationSets;
 using ViewModel.Interfaces;
 using ViewModelInterfaces;
+using ReactiveCommand = ReactiveUI.ReactiveCommand;
 
 namespace ViewModels
 {
@@ -35,7 +39,10 @@ namespace ViewModels
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime) return;
             this.WireEvents();
-           
+           PrintGrid = ReactiveCommand.Create<Grid>(param =>
+           {
+              WPF2PDF.CreateAndOpenPDF(ref param, "Medical Report");
+           });
 
 
         }
@@ -83,5 +90,9 @@ namespace ViewModels
                 OnPropertyChanged();
             }
         }
+
+       
+        public ReactiveCommand<Grid, Unit> PrintGrid { get; }
     }
+
 }

@@ -13,54 +13,38 @@
              Height="1056"
              Background="White"
              mc:Ignorable="d">
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Border x:Name="ViewPatientResponses"
-                Width="816"
-            
-                BorderBrush="#FFECE8E8"
-                BorderThickness="1" Background="White">
+    <Grid Background="White">
 
-            <Grid 
-                Margin="10,50,10,10" Height="Auto">
-                <TextBlock Width="Auto"
-                           MinWidth="75"
-                           Margin="190,10,34,440"
-                           HorizontalAlignment="Stretch"
+        <ListBox Margin="32,53,10,5" ItemsSource="{Binding Interviews}" HorizontalContentAlignment="Stretch"  />
+        <Grid Height="43"
+                  Margin="10,10,10,0"
+                  VerticalAlignment="Top">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0" Color="#FFA6A5A5" />
+                    <GradientStop Offset="1" Color="White" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <TextBlock Width="235"
+                           Height="19"
+                           Margin="59,10,0,0"
+                           HorizontalAlignment="Left"
                            VerticalAlignment="Top"
-                           FontSize="20"
-                           Text="St. Augustine's Medical Services Inc."
-                           TextWrapping="WrapWithOverflow" TextAlignment="Center" />
-                <Image Source="../Graphics/St.Augustine_Logo.jpg" Margin="19,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="103" Width="149"/>
-                <StackPanel Margin="0,113,0,0" Orientation="Vertical">
-                    <ContentControl Content="{Binding PatientDetails.Value}" VerticalAlignment="Top" Height="Auto"/>
-                    <ListBox ItemsSource="{Binding Synptoms}" Height="Auto"/>
-                </StackPanel>
-                <TextBlock Width="Auto"
-            MinWidth="75"
-            Margin="185,43,34,410"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Top"
-            FontSize="14"
-            Text="St. Paul's, St. George's, Grenada. W.I.    Tel: 473-440-6173/74/75   Fax:473-440-6176"
-            TextWrapping="WrapWithOverflow" TextAlignment="Center" />
-                <TextBlock Width="Auto"
-            MinWidth="75"
-            Margin="190,85,34,370"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Top"
-            FontSize="16"
-            Text="Patient Medical Report"
-            TextWrapping="WrapWithOverflow" TextAlignment="Center" FontWeight="Bold" />
-                <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="35" Margin="685,-40,0,0" TextWrapping="Wrap" Text="Print" Style="{DynamicResource TextButtonStyle}" VerticalAlignment="Top" Width="Auto" FontSize="18">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonUp">
-                            <i:InvokeCommandAction Command="{Binding Commands[Print]}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBlock>
+                           FontSize="14"
+                           FontWeight="Bold"
+                           Text="{Binding Name}" />
 
 
-            </Grid>
-        </Border>
-    </ScrollViewer>
+            <TextBlock Height="25"
+                           Margin="10,10,0,-6"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontSize="12"
+                           FontWeight="Bold"
+                           Text="System:"
+                           TextAlignment="Right" />
+
+
+        </Grid>
+    </Grid>
 </UserControl>

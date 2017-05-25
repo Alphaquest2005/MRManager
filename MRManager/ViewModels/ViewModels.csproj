@@ -103,6 +103,10 @@
       <Project>{4f0baa58-3b45-4136-8095-445d406b4d23}</Project>
       <Name>Process.WorkFlow</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PrintUtilities\PrintUtilities.csproj">
+      <Project>{0a3d06b1-eec5-4d6e-8e13-a73a23c359d3}</Project>
+      <Name>PrintUtilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Revolution\CommonMessages\CommonMessages.csproj">
       <Project>{77007560-89dc-4e1f-9313-ae064a048ad4}</Project>
       <Name>CommonMessages</Name>
@@ -146,6 +150,10 @@
     <ProjectReference Include="..\Revolution\ViewModel.Interfaces\ViewModel.Interfaces.csproj">
       <Project>{2f936e24-723e-4e7a-b21c-d6f618c74651}</Project>
       <Name>ViewModel.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SUT.PrintEngine\SUT.PrintEngine.csproj">
+      <Project>{0b3d76d5-d9f4-4c0e-afa9-143138ebc74d}</Project>
+      <Name>SUT.PrintEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\ValidationSets\ValidationSets.csproj">
       <Project>{6a9c99e7-2552-4a6c-b26e-2d727c5d85ce}</Project>
