@@ -36,6 +36,10 @@ namespace RevolutionData
                     action: (v, e) =>
                     {
                         v.PatientDetails.Value = e.State.Entity;
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            v.Synptoms.Clear();
+                        });
 
                     }),
 
@@ -141,6 +145,11 @@ namespace RevolutionData
                                     var interview = syntom.MedicalSystems.SelectMany(z => z.Interviews)
                                         .FirstOrDefault(x => x.Id == interviewid);
                                     var rq = e.EntitySet.Where(x => !interview.Questions.Any(z => z.Id == x.Id)).ToList();
+                                    rq.ForEach(x =>
+                                    {
+                                        var lst = x.PatientResponses.Where(z => z.PatientId == v.PatientDetails.Value.Id).ToList();
+                                        x.PatientResponses = lst;
+                                    });
                                     if(rq.Any()) interview?.Questions.AddRange(rq);
                                 }
 

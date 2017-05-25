@@ -15,6 +15,6 @@ namespace Interfaces
         string Interview { get; }
         int InterviewId { get; }
         IList<IResponseOptionInfo> ResponseOptions { get;  }
-        IList<IResponseOptionInfo> PatientResponses { get; }
+        IList<IResponseOptionInfo> PatientResponses { get; set; }
     }
 }
