@@ -41,7 +41,8 @@ namespace ViewModels
             this.WireEvents();
            PrintGrid = ReactiveCommand.Create<Grid>(param =>
            {
-              WPF2PDF.CreateAndOpenPDF(ref param, "Medical Report");
+               FrameworkElement rpt = (FrameworkElement)param;
+               PrintClass.Print(ref rpt);
            });
 
 
