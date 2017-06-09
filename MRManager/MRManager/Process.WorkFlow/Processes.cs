@@ -246,6 +246,7 @@ namespace Process.WorkFlow
             ComplexActions.UpdateStateList<IQuestionResponseOptionInfo>(3),
             ComplexActions.UpdateStateWhenDataChanges<IQuestionInfo,IQuestionResponseOptionInfo>(3, c => c.Id, v => v.Id),
             ComplexActions.UpdateStateWhenDataChanges<IResponseInfo,IQuestionResponseOptionInfo>(3, c => c.QuestionId, v => v.Id),
+            ComplexActions.UpdateStateWhenDataChanges<IPatientResponses,IQuestionResponseOptionInfo>(3, c => c.QuestionId, v => v.Id),
             ComplexActions.UpdateStateWhenDataChanges<IResponseOptions,IQuestionResponseOptionInfo>(3, c => c.QuestionId, v => v.Id),
             
 

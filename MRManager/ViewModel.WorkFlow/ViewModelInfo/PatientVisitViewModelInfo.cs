@@ -7,6 +7,7 @@ using System.Windows;
 using SystemInterfaces;
 using EF.Entities;
 using Interfaces;
+using JB.Collections.Reactive;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
@@ -26,10 +27,15 @@ namespace RevolutionData
                     3,
                     e => e != null,
                     new List<Func<IPatientVisitViewModel, IUpdateProcessStateList<IPatientVisitInfo>, bool>>(),
-                    (v,e) => 
+                    (v,e) =>
                     {
-                        if (v.State.Value == e.State) return;
-                        v.State.Value = e.State;
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            if (!v.EntitySet.Value.SequenceEqual(e.State.EntitySet.ToList()))
+                                v.EntitySet.Value.Clear();
+                            v.EntitySet.Value = new ObservableList<IPatientVisitInfo>(e.State.EntitySet.ToList());
+                            v.EntitySet.Value.Add(new PatientVisitInfo() {Purpose = "Create New..."});
+                        }));
                     }),
                 new ViewEventSubscription<IPatientVisitViewModel, ICurrentEntityChanged<IPatientInfo>>(
                     3,
@@ -79,11 +85,7 @@ namespace RevolutionData
                     },
                     messageData:s =>
                     {
-                         Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                        {
-                            s.EntitySet.Value.Add(new PatientVisitInfo() {Purpose = "Create New..."});
-                            s.NotifyPropertyChanged(nameof(s.EntitySet));
-                        }));
+                        
 
                         return new ViewEventPublicationParameter(new object[] {s, s.State.Value},
                             new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded), s.Process,
@@ -148,13 +150,14 @@ namespace RevolutionData
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IPatientVisitViewModel, bool>>
                     {
-                        v => v.ChangeTracking.Count == 3 && v.CurrentEntity.Value.Id == 0
+                        v => v.ChangeTracking.Count >= 2 && v.CurrentEntity.Value.Id == 0
 
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: v =>
                     {
                         v.ChangeTracking.Add(nameof(IPatientVisitInfo.PatientId), v.CurrentPatient.Id);
+                        if(!v.ChangeTracking.ContainsKey("DateOfVisit"))v.ChangeTracking.Add(nameof(IPatientVisitInfo.DateOfVisit), DateTime.Now);
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {

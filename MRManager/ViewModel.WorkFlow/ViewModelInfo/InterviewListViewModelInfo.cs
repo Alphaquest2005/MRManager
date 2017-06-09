@@ -29,16 +29,31 @@ namespace ViewModel.WorkFlow.ViewModelInfo
                     new List<Func<IInterviewListViewModel, IUpdateProcessStateList<ISyntomMedicalSystemInfo>, bool>>(),
                     (v, e) =>
                     {
-                        if(!v.Systems.Value.SequenceEqual(e.State.EntitySet.ToList()))
-                        v.Systems.Value = new ObservableList<ISyntomMedicalSystemInfo>(e.State.EntitySet.ToList());
-                        v.Systems.Value.Add(new SyntomMedicalSystemInfo() { System = "Create New..." });
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            if (!v.Systems.Value.SequenceEqual(e.State.EntitySet.ToList()))
+                                v.Systems.Value.Clear();
+                            v.Systems.Value = new ObservableList<ISyntomMedicalSystemInfo>(e.State.EntitySet.ToList())
+                            {
+                                new SyntomMedicalSystemInfo() {System = "Create New..."}
+                            };
+                        }));
                     }),
 
                 new ViewEventSubscription<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>>(
                     3,
-                    e => e != null,
+                    e => e.Entity != null,
                     new List<Func<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>, bool>>(),
-                    (v, e) => { if (v.CurrentPatientSyntom.Value != e.Entity) v.CurrentPatientSyntom.Value = e.Entity; }),
+                    (v, e) =>
+                    {
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            v.Systems.Value.Clear();
+                            if (v.Systems.Value.All(x => x.Id != 0))
+                                v.Systems.Value.Add(new SyntomMedicalSystemInfo() {System = "Create New..."});
+                            if (v.CurrentPatientSyntom.Value != e.Entity) v.CurrentPatientSyntom.Value = e.Entity;
+                        }));
+                    }),
 
 
                 new ViewEventSubscription<IInterviewListViewModel, IEntityViewWithChangesUpdated<ISyntomMedicalSystemInfo>>(
@@ -85,16 +100,18 @@ namespace ViewModel.WorkFlow.ViewModelInfo
                         if (v.CurrentMedicalSystem.Value.Id == e.Entity.Id) v.CurrentMedicalSystem.Value = e.Entity;
                         if (f == null)
                         {
-                            v.Systems.Value.Insert(v.Systems.Value.Count() - 1,e.Entity);
-                            v.Systems.Value.Reset();
+                            var res = v.Systems.Value;
+                            res.Insert(res.Count() - 1,e.Entity);
+                            v.Systems.Value = res;
                         }
                         else
                         {
                             //f = e.Entity;
-                            var idx = v.Systems.Value.IndexOf(f);
-                            v.Systems.Value.Remove(f);
-                            v.Systems.Value.Insert(idx, e.Entity);
-                            v.Systems.Value.Reset();
+                            var res = v.Systems.Value;
+                            var idx = res.IndexOf(f);
+                            res.Remove(f);
+                            res.Insert(idx, e.Entity);
+                            v.Systems.Value = res;
                         }
                         v.RowState.Value = RowState.Unchanged;
                         }));
@@ -195,8 +212,8 @@ namespace ViewModel.WorkFlow.ViewModelInfo
                     messageData:s =>
                     {
                         Application.Current.Dispatcher.BeginInvoke(new Action(() => { 
-                                                                                   IList<IInterviewInfo> observableList = s.CurrentMedicalSystem.Value.Interviews;
-                        
+                                                                                   IList<IInterviewInfo> observableList = s.CurrentMedicalSystem.Value?.Interviews;
+                                                                s.EntitySet.Value.Clear();
                                                                                    var res = observableList?.ToList() ?? new List<IInterviewInfo>();
                                                                                    res.Add(new InterviewInfo() {Interview = "Create New..."});
 

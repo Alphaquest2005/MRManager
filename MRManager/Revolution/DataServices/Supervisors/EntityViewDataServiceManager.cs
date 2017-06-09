@@ -67,7 +67,11 @@ namespace DataServices.Actors
             var specificListType = genericListType.MakeGenericType(classType);
             try
             {
-                Task.Run(() => { ctx.ActorOf(Props.Create(specificListType, process, msg), string.Format(actorName, classType.Name)); }).ConfigureAwait(false);
+                Task.Run(() => {
+                                    if (Equals(child, ActorRefs.Nobody))
+                                    ctx.ActorOf(Props.Create(specificListType, process, msg), string.Format(actorName, classType.Name));
+
+                               }).ConfigureAwait(false);
                 
 
             }

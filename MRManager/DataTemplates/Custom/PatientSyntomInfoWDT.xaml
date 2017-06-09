@@ -19,6 +19,7 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <ComboBox Width="351"
+                      x:Name ="ComboBox"
                       Height="37"
                       Margin="10,10,0,0"
                       HorizontalAlignment="Left"
@@ -31,12 +32,10 @@
                                             UpdateSourceTrigger=PropertyChanged,
                                             Mode=OneWay,
                                             IsAsync=True}"
-                      SelectedItem="{Binding SyntomName, UpdateSourceTrigger=LostFocus}"
+                      SelectedItem="{Binding Syntom, UpdateSourceTrigger=LostFocus}"
                       SelectedValue="{Binding SymtomId, UpdateSourceTrigger=PropertyChanged}"
                       SelectedValuePath="Id"
-                      Text="{Binding SyntomName,
-                                     FallbackValue=Syntom,
-                                     TargetNullValue=Syntom,
+                      Text="{Binding ElementName=ComboBox, Path=SelectedItem.SyntomName,
                                      Mode=TwoWay,
                                      UpdateSourceTrigger=LostFocus}" />
             <ComboBox Width="125"

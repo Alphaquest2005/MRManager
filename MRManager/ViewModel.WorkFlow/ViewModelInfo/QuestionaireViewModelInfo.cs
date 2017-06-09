@@ -28,12 +28,16 @@ namespace RevolutionData
                     3,
                     e => e != null,
                     new List<Func<IQuestionaireViewModel, IUpdateProcessStateList<IQuestionResponseOptionInfo>, bool>>(),
-                    (v,e) => 
+                    (v,e) =>
                     {
-                        if (v.State.Value == e.State) return;
-                        v.Questions = new ObservableList<IQuestionResponseOptionInfo>(e.State.EntitySet.ToList());
-                        v.CurrentQuestion.Value = v.Questions.FirstOrDefault();
-                        UpdateQuestionResponse(v);
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            if (v.State.Value == e.State) return;
+                            v.Questions.Clear();
+                            v.Questions = new ObservableList<IQuestionResponseOptionInfo>(e.State.EntitySet.ToList());
+                            v.CurrentQuestion.Value = v.Questions.FirstOrDefault();
+                            UpdateQuestionResponse(v);
+                        }));
                     }),
                
                 new ViewEventSubscription<IQuestionaireViewModel, ICurrentEntityChanged<IQuestionInfo>>(
@@ -157,12 +161,15 @@ namespace RevolutionData
                         else
                         {
                             //f = e.Entity;
-                            var idx = v.Questions.IndexOf(f);
-                            v.Questions.Remove(f);
-                            v.Questions.Insert(idx, e.Entity);
-                            v.Questions.Reset();
+                            var res = v.Questions;
+
+                            var idx = res.IndexOf(f);
+                            res.Remove(f);
+                            res.Insert(idx, e.Entity);
+                            v.Questions = res;
                         }
                         v.RowState.Value = RowState.Unchanged;
+                         UpdateQuestionResponse(v);
                         }));
 
                     }),

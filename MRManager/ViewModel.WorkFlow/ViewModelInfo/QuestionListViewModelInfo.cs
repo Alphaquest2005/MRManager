@@ -34,13 +34,26 @@ namespace RevolutionData
 
                 new ViewEventSubscription<IQuestionListViewModel, ICurrentEntityChanged<IInterviewInfo>>(
                     3,
-                    e => e != null,
+                    e => e.Entity != null,
                     new List<Func<IQuestionListViewModel, ICurrentEntityChanged<IInterviewInfo>, bool>>(),
                     (v, e) =>
                     {
-                        if (v.CurrentInterview == e.Entity) return;
-                        v.CurrentInterview = e.Entity;
-                        
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            if (v.CurrentInterview == e.Entity) return;
+                            v.EntitySet.Value.Clear();
+                            v.CurrentInterview = e.Entity;
+                            v.EntitySet.Value.Add(new QuestionInfo()
+                            {
+                                Id = 0,
+                                Description = "Edit to Create New Question",
+                                EntityAttributeId = 0,
+                                InterviewId = v.CurrentInterview.Id,
+                                Attribute = "Unspecified",
+                                Entity = "Unspecified",
+                                Type = "TextBox"
+                            });
+                        }));
                     }),
 
                 new ViewEventSubscription<IQuestionListViewModel, IEntityUpdated<IEntityAttributes>>(

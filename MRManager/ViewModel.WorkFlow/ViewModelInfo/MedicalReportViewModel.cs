@@ -128,34 +128,16 @@ namespace RevolutionData
                     new List<Func<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<IQuestionResponseOptionInfo>, bool>>(),
                     (v, e) =>
                     {
-                        var questionResponseOptionInfo = e.EntitySet.FirstOrDefault();
-                        if (questionResponseOptionInfo != null)
-                        {
-                            Application.Current.Dispatcher.Invoke(() =>
-                            {
-                                var interviewid = questionResponseOptionInfo.InterviewId;
-                                var res = v.Synptoms.ToList();
-                                v.Synptoms.Clear();
-                                var syntoms =
-                                    res.Where(
-                                        x => x.MedicalSystems.Any(z => z.Interviews.Any(y => y.Id == interviewid)))
-                                        .ToList();
-                                foreach (var syntom in syntoms)
-                                {
-                                    var interview = syntom.MedicalSystems.SelectMany(z => z.Interviews)
-                                        .FirstOrDefault(x => x.Id == interviewid);
-                                    var rq = e.EntitySet.Where(x => !interview.Questions.Any(z => z.Id == x.Id)).ToList();
-                                    rq.ForEach(x =>
-                                    {
-                                        var lst = x.PatientResponses.Where(z => z.PatientId == v.PatientDetails.Value.Id).ToList();
-                                        x.PatientResponses = lst;
-                                    });
-                                    if(rq.Any()) interview?.Questions.AddRange(rq.Where(x => x.PatientResponses.Any()));
-                                }
+                        ProcessListofQuestionResponseOptionInfo(e.EntitySet, v);
+                    }),
 
-                                v.Synptoms.AddRangeOnScheduler(res);
-                            });
-                        }
+                new ViewEventSubscription<IMedicalReportViewModel, IEntityViewWithChangesFound<IQuestionResponseOptionInfo>>(
+                    3,
+                    e => e != null,
+                    new List<Func<IMedicalReportViewModel, IEntityViewWithChangesFound<IQuestionResponseOptionInfo>, bool>>(),
+                    (v, e) =>
+                    {
+                        ProcessQuestionResponseOptionInfo(e.Entity, v);
                     }),
 
                     },
@@ -225,6 +207,70 @@ namespace RevolutionData
             },
             typeof(IMedicalReportViewModel),
             typeof(IBodyViewModel),5);
+
+        private static void ProcessListofQuestionResponseOptionInfo(List<IQuestionResponseOptionInfo> e, IMedicalReportViewModel v)
+        {
+            var questionResponseOptionInfo = e.FirstOrDefault();
+            if (questionResponseOptionInfo != null)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    var interviewid = questionResponseOptionInfo.InterviewId;
+                    var res = v.Synptoms.ToList();
+                    v.Synptoms.Clear();
+                    var syntoms =
+                        res.Where(
+                                x => x.MedicalSystems.Any(z => z.Interviews.Any(y => y.Id == interviewid)))
+                            .ToList();
+                    foreach (var syntom in syntoms)
+                    {
+                        var interview = syntom.MedicalSystems.SelectMany(z => z.Interviews)
+                            .FirstOrDefault(x => x.Id == interviewid);
+                        var rq = e.Where(x => !interview.Questions.Any(z => z.Id == x.Id)).ToList();
+                        rq.ForEach(x =>
+                        {
+                            var lst = x.PatientResponses.Where(z => z.PatientId == v.PatientDetails.Value.Id).ToList();
+                            x.PatientResponses = lst;
+                        });
+                        if (rq.Any()) interview?.Questions.AddRange(rq.Where(x => x.PatientResponses.Any()));
+                    }
+
+                    v.Synptoms.AddRangeOnScheduler(res);
+                });
+            }
+        }
+
+        private static void ProcessQuestionResponseOptionInfo(IQuestionResponseOptionInfo questionResponseOptionInfo, IMedicalReportViewModel v)
+        {
+            
+            if (questionResponseOptionInfo != null)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    var interviewid = questionResponseOptionInfo.InterviewId;
+                    var res = v.Synptoms.ToList();
+                    v.Synptoms.Clear();
+                    var syntoms =
+                        res.Where(
+                                x => x.MedicalSystems.Any(z => z.Interviews.Any(y => y.Id == interviewid)))
+                            .ToList();
+                    foreach (var syntom in syntoms)
+                    {
+                        var interview = syntom.MedicalSystems.SelectMany(z => z.Interviews)
+                            .FirstOrDefault(x => x.Id == interviewid);
+                        var rq = interview.Questions.Where(z => z.Id == questionResponseOptionInfo.Id).ToList();
+                        rq.ForEach(x =>
+                        {
+                            var lst = x.PatientResponses.Where(z => z.PatientId == v.PatientDetails.Value.Id).ToList();
+                            x.PatientResponses = lst;
+                        });
+                        if (rq.Any()) interview?.Questions.AddRange(rq.Where(x => x.PatientResponses.Any()));
+                    }
+
+                    v.Synptoms.AddRangeOnScheduler(res);
+                });
+            }
+        }
 
         private static void RequestDataList<TView>(string key, string value, IViewModel v) where TView : IEntityView
         {

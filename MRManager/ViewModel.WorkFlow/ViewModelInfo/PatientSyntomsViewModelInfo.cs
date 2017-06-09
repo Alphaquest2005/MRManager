@@ -7,6 +7,7 @@ using System.Windows;
 using SystemInterfaces;
 using EF.Entities;
 using Interfaces;
+using JB.Collections.Reactive;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
@@ -28,8 +29,19 @@ namespace RevolutionData
                     new List<Func<IPatientSyntomViewModel, IUpdateProcessStateList<IPatientSyntomInfo>, bool>>(),
                     (v,e) =>
                     {
-                        if (v.State.Value == e.State) return;
-                        v.State.Value = e.State;
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                                if(!v.EntitySet.Value.SequenceEqual(e.State.EntitySet.ToList()))
+                                    v.EntitySet.Value = new ObservableList<IPatientSyntomInfo>(e.State.EntitySet.ToList());
+                            if (v.CurrentPatientVisit != null &&
+                                (v.CurrentPatientVisit.Value?.Id != 0 &&
+                                 v.CurrentPatientVisit.Value?.DateOfVisit.Date == DateTime.Today.Date))
+                            {
+                                
+                                v.EntitySet.Value.Add(new PatientSyntomInfo() {SyntomName = "Create New..."});
+                            }
+
+                        }));
                     }),
 
                 new ViewEventSubscription<IPatientSyntomViewModel, ICurrentEntityChanged<IPatientVisitInfo>>(
@@ -40,6 +52,19 @@ namespace RevolutionData
                     {
                         if (v.CurrentPatientVisit.Value == e.Entity) return;
                         v.CurrentPatientVisit.Value = e.Entity;
+
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            v.EntitySet.Value.Clear();
+                            if (v.CurrentPatientVisit != null &&
+                                (v.CurrentPatientVisit.Value?.Id != 0 &&
+                                 v.CurrentPatientVisit.Value?.DateOfVisit.Date == DateTime.Today.Date))
+                            {
+
+                                v.EntitySet.Value.Add(new PatientSyntomInfo() {SyntomName = "Create New..."});
+                            }
+
+                        }));
                     }),
 
 
@@ -147,18 +172,7 @@ namespace RevolutionData
                     },
                     messageData:s =>
                     {
-                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                        {
-                            if (s.CurrentPatientVisit != null &&
-                                (s.CurrentPatientVisit.Value?.Id != 0 &&
-                                 s.CurrentPatientVisit.Value?.DateOfVisit.Date == DateTime.Today.Date))
-                            {
-
-                                s.EntitySet.Value.Add(new PatientSyntomInfo() {SyntomName = "Create New..."});
-                                s.NotifyPropertyChanged(nameof(s.EntitySet));
-                            }
-
-                        }));
+                        
                        return new ViewEventPublicationParameter(new object[] {s, s.State.Value},
                             new StateEventInfo(s.Process.Id, Context.View.Events.ProcessStateLoaded), s.Process,
                             s.Source);
@@ -222,7 +236,7 @@ namespace RevolutionData
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IPatientSyntomViewModel, bool>>
                     {
-                        v => v.ChangeTracking.Count == 4 
+                        v => v.ChangeTracking.Count >= 4 
                         && (v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.Syntom)) 
                                 && v.ChangeTracking[nameof(IPatientSyntomInfo.Syntom)] != null)
                         && v.CurrentEntity.Value.Id == 0

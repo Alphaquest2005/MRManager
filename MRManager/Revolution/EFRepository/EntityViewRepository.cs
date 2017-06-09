@@ -137,9 +137,13 @@ namespace EFRepository
                     res = string.IsNullOrEmpty(whereStr) 
                         ? ctx.Set<TDbEntity>()?.OrderByDescending(x => x.Id)?.AsNoTracking()?.Select(exp)?.ToList()
                         : ctx.Set<TDbEntity>()?.OrderByDescending(x => x.Id)?.AsNoTracking()?.Select(exp)?.Where(whereStr)?.ToList();
+
+
+                    if (res.Any())
+                    {
+                        EventMessageBus.Current.Publish(new EntityViewSetWithChangesLoaded<TView>(res.Select(x => (TView)(object)x).ToList(), msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
+                    }
                     
-                    if(res.Any())
-                    EventMessageBus.Current.Publish(new EntityViewSetWithChangesLoaded<TView>(res.Select(x => (TView)(object)x).ToList(), msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
                 }
             }
             catch (Exception ex)
