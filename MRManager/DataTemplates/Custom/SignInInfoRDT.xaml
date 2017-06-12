@@ -16,7 +16,7 @@
                      Margin="90,82,33,0"
                     VerticalAlignment="Top"
                      Text="{Binding Usersignin,
-                                    UpdateSourceTrigger=PropertyChanged}" />
+                                    UpdateSourceTrigger=PropertyChanged, Delay=100}" />
             <TextBox Height="43"
                      FontSize="20"
                      Margin="90,125,33,0"
