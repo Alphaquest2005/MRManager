@@ -36,6 +36,7 @@
                       VerticalAlignment="Top"
                       DisplayMemberPath="Name"
                       FontSize="16"
+                      Visibility="Hidden"
                       ItemsSource="{Binding Source={x:Static Member=viewModels:MedicalCategoryCacheViewModel.Instance},
                                             Path=EntitySet.Value,
                                             UpdateSourceTrigger=PropertyChanged,
@@ -51,6 +52,7 @@
                       VerticalAlignment="Top"
                       DisplayMemberPath="Name"
                       FontSize="16"
+                      Visibility="Hidden"
                       ItemsSource="{Binding Source={x:Static Member=viewModels:PhaseCacheViewModel.Instance},
                                             Path=EntitySet.Value,
                                             UpdateSourceTrigger=PropertyChanged,

@@ -57,29 +57,26 @@ namespace RevolutionData
                         }
                     }),
 
-                 new ViewEventSubscription<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<IPatientSyntomInfo>>(
+                 new ViewEventSubscription<IMedicalReportViewModel, ICurrentEntityChanged<IPatientSyntomInfo>>(
                     3,
-                    e => e != null,
-                    new List<Func<IMedicalReportViewModel, IEntityViewSetWithChangesLoaded<IPatientSyntomInfo>, bool>>(),
+                    e => e.Entity != null,
+                    new List<Func<IMedicalReportViewModel, ICurrentEntityChanged<IPatientSyntomInfo>, bool>>(),
                     (v, e) =>
                     {
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            foreach (
-                                var syntom in
-                                    e.EntitySet.Where(synptom => v.Synptoms.All(x => x.Id != synptom.SyntomId)))
+                            var syntom = e.Entity;
+                            if (syntom.Id == 0) return;
+                            v.Synptoms.Clear();
+                            v.Synptoms.Add(new SyntomInfo()
                             {
-                                if (syntom.Id == 0) continue;
-                                v.Synptoms.Add(new SyntomInfo()
-                                {
-                                    Id = syntom.SyntomId,
-                                    Status = syntom.Status,
-                                    Priority = syntom.Priority,
-                                    SyntomName = syntom.SyntomName,
-                                    MedicalSystems = new List<IMedicalSystemInfo>()
-                                });
-                                RequestDataList<ISyntomMedicalSystemInfo>("SyntomId", syntom.Id.ToString(), v);
-                            }
+                                Id = syntom.SyntomId,
+                                Status = syntom.Status,
+                                Priority = syntom.Priority,
+                                SyntomName = syntom.SyntomName,
+                                MedicalSystems = new List<IMedicalSystemInfo>()
+                            });
+                            RequestDataList<ISyntomMedicalSystemInfo>("SyntomId", syntom.Id.ToString(), v);
                         });
 
                     }),
@@ -261,10 +258,10 @@ namespace RevolutionData
                         var rq = interview.Questions.Where(z => z.Id == questionResponseOptionInfo.Id).ToList();
                         rq.ForEach(x =>
                         {
-                            var lst = x.PatientResponses.Where(z => z.PatientId == v.PatientDetails.Value.Id).ToList();
+                            var lst = questionResponseOptionInfo.PatientResponses;//.Where(z => z.PatientId == v.PatientDetails.Value.Id).ToList();
                             x.PatientResponses = lst;
                         });
-                        if (rq.Any()) interview?.Questions.AddRange(rq.Where(x => x.PatientResponses.Any()));
+                        //if (rq.Any()) interview?.Questions.AddRange(rq.Where(x => x.PatientResponses.Any()));
                     }
 
                     v.Synptoms.AddRangeOnScheduler(res);

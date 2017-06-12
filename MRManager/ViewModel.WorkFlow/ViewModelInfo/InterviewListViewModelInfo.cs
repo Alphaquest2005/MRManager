@@ -335,7 +335,7 @@ namespace ViewModel.WorkFlow.ViewModelInfo
                     commandPredicate: new List<Func<IInterviewListViewModel, bool>>
                     {
                        v => v.CurrentMedicalSystem.Value.Id != 0 &&  v.SelectedMedicalSystem.Value.Id != 0 && v.CurrentPatientSyntom.Value?.Id != 0
-                            && v.CurrentEntity.Value?.Id == 0 && v.ChangeTracking.Count == 3
+                            && v.CurrentEntity.Value?.Id == 0 && v.ChangeTracking.ContainsKey(nameof(IInterviewInfo.Interview))
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: v =>
