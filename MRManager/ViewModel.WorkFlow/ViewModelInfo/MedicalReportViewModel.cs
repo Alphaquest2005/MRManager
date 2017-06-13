@@ -248,6 +248,7 @@ namespace RevolutionData
                     });
                     if (rq.Any()) interview?.Questions.AddRange(rq.Where(x => x.PatientResponses.Any()));
                 }
+                if(res.Any())
                 Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
                 {
                     v.Synptoms.Clear();
@@ -285,7 +286,7 @@ namespace RevolutionData
                         var lst = questionResponseOptionInfo.PatientResponses;//.Where(z => z.PatientId == v.PatientDetails.Value.Id).ToList();
                             x.PatientResponses = lst;
                     });
-                    //if (rq.Any()) interview?.Questions.AddRange(rq.Where(x => x.PatientResponses.Any()));
+                  
                 }
                 Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
                 {
