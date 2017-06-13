@@ -14,7 +14,7 @@
    <DataTemplate DataType="{x:Type entities:InterviewInfo}">
         <Grid Background="White">
 
-            <ListBox Margin="75,58,0,0" ItemsSource="{Binding Questions}" HorizontalContentAlignment="Stretch"  />
+            <ListBox Margin="75,58,0,0" ItemsSource="{Binding Questions, IsAsync=True}" HorizontalContentAlignment="Stretch"  />
             <Grid Margin="10,10,10,0" VerticalAlignment="Top" Height="43">
                 <Grid.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

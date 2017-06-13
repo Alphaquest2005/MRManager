@@ -34,7 +34,7 @@
                     <Image Source="../Graphics/St.Augustine_Logo.jpg" Margin="19,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="103" Width="149"/>
                     <StackPanel Margin="0,113,0,0" Orientation="Vertical">
                         <ContentControl Content="{Binding PatientDetails.Value}" VerticalAlignment="Top" Height="Auto"/>
-                        <ListBox ItemsSource="{Binding Synptoms}" Height="Auto"/>
+                        <ListBox ItemsSource="{Binding Synptoms, IsAsync=True}" Height="Auto"/>
                     </StackPanel>
                     <TextBlock Width="Auto"
             MinWidth="75"

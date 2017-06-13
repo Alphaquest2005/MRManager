@@ -91,7 +91,9 @@ namespace RevolutionData
                     new List<Func<IPatientDetailsViewModel, ICurrentEntityChanged<IPatientInfo>, bool>>(),
                     (v, e) =>
                     {
+
                         v.CurrentPatient = e.Entity;
+                        v.State.Value = null;
                         v.Addresses = null;
                         v.PhoneNumbers = null;
                         v.NextOfKins = null;

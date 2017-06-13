@@ -14,7 +14,7 @@
     <DataTemplate DataType="{x:Type entities:MedicalSystemInfo}">
         <Grid Background="White">
 
-            <ListBox Margin="32,53,10,5" ItemsSource="{Binding Interviews}" HorizontalContentAlignment="Stretch"  />
+            <ListBox Margin="32,53,10,5" ItemsSource="{Binding Interviews, IsAsync=True}" HorizontalContentAlignment="Stretch"  />
             <Grid Height="43"
                   Margin="10,10,10,0"
                   VerticalAlignment="Top">

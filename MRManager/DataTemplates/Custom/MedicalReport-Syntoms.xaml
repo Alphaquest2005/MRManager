@@ -14,7 +14,7 @@
     <DataTemplate DataType="{x:Type entities:SyntomInfo}">
         <Grid Background="White">
 
-            <ListBox Margin="115,66,0,0" ItemsSource="{Binding MedicalSystems}" HorizontalContentAlignment="Stretch" />
+            <ListBox Margin="115,66,0,0" ItemsSource="{Binding MedicalSystems, IsAsync=True}" HorizontalContentAlignment="Stretch" />
             <Grid Margin="10" VerticalAlignment="Top">
                 <Grid.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

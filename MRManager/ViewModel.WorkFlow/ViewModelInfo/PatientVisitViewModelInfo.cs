@@ -43,8 +43,12 @@ namespace RevolutionData
                     new List<Func<IPatientVisitViewModel, ICurrentEntityChanged<IPatientInfo>, bool>>(),
                     (v, e) =>
                     {
-                        if (v.CurrentPatient == e.Entity) return;
-                        v.CurrentPatient = e.Entity;
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            if (v.CurrentPatient == e.Entity) return;
+                            v.EntitySet.Value.Clear();
+                            v.CurrentPatient = e.Entity;
+                        }));
                     }),
                 new ViewEventSubscription<IPatientVisitViewModel, IEntityViewWithChangesUpdated<IPatientVisitInfo>>(
                     3,

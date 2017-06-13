@@ -54,10 +54,11 @@ namespace RevolutionData
 
                 new ViewEventSubscription<IQuestionaireViewModel, ICurrentEntityChanged<IPatientVisitInfo>>(
                     3,
-                    e => e?.Entity != null,
+                    e => e != null,
                     new List<Func<IQuestionaireViewModel, ICurrentEntityChanged<IPatientVisitInfo>, bool>>(),
                     (v, e) =>
                     {
+
                         if (v.CurrentPatientVisit == e.Entity) return;
                         v.CurrentPatientVisit = e.Entity;
                         UpdateQuestionResponse(v);
@@ -431,7 +432,11 @@ namespace RevolutionData
                     }
                 }
             }
-            if (s.CurrentQuestion?.Value == null) return;
+            if (s.CurrentQuestion?.Value == null)
+            {
+                s.EntitySet.Value.Clear();
+                return;
+            }
             
                 resLst.Add(new ResponseOptionInfo()
                 {

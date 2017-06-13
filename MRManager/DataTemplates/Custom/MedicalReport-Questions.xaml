@@ -25,7 +25,7 @@
 
 
             </Grid>
-            <ListBox Margin="282,21,22,0" ItemsSource="{Binding PatientResponses}" HorizontalContentAlignment="Stretch" />
+            <ListBox Margin="282,21,22,0" ItemsSource="{Binding PatientResponses, IsAsync=True}" HorizontalContentAlignment="Stretch" />
         </Grid>
 
     </DataTemplate>
