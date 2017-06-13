@@ -23,6 +23,21 @@ namespace ViewModel.WorkFlow.ViewModelInfo
             new ViewInfo("Interview", "", "Interviews"),
             new List<IViewModelEventSubscription<IViewModel, IEvent>>
             {
+                //new ViewEventSubscription<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>>(
+                //    3,
+                //    e => e != null,
+                //    new List<Func<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>, bool>>(),
+                //    (v, e) =>
+                //    {
+                //        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                //        {
+                //            if (v.CurrentPatientSyntom.Value == e.Entity) return;
+                //            v.CurrentPatientSyntom.Value = e.Entity;
+                //            v.Systems.Value.Clear();
+                //            v.Systems.Value.Add(new SyntomMedicalSystemInfo() {System = "Create New..."});
+                //        }));
+                //    }),
+
                 new ViewEventSubscription<IInterviewListViewModel, IUpdateProcessStateList<ISyntomMedicalSystemInfo>>(
                     3,
                     e => e != null,
@@ -40,21 +55,7 @@ namespace ViewModel.WorkFlow.ViewModelInfo
                         }));
                     }),
 
-                new ViewEventSubscription<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>>(
-                    3,
-                    e => e.Entity != null,
-                    new List<Func<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>, bool>>(),
-                    (v, e) =>
-                    {
-                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                        {
-                            v.Systems.Value.Clear();
-                            if (v.Systems.Value.All(x => x.Id != 0))
-                                v.Systems.Value.Add(new SyntomMedicalSystemInfo() {System = "Create New..."});
-                            if (v.CurrentPatientSyntom.Value != e.Entity) v.CurrentPatientSyntom.Value = e.Entity;
-                        }));
-                    }),
-
+               
 
                 new ViewEventSubscription<IInterviewListViewModel, IEntityViewWithChangesUpdated<ISyntomMedicalSystemInfo>>(
                     3,
