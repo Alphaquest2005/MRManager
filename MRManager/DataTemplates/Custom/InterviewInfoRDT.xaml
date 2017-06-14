@@ -29,6 +29,7 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="16"
+                       Visibility="Hidden"
                        Text="{Binding Path=Category,
                                       Mode=OneWay}" />
             <TextBlock Width="159"
@@ -37,6 +38,7 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        FontSize="16"
+                       Visibility="Hidden"
                        Text="{Binding Path=Phase,
                                       Mode=OneWay}" />
 

@@ -71,7 +71,7 @@
                         FontWeight="Bold"
                         SelectedDate="{Binding BirthDate,
                                                Mode=TwoWay,
-                                               TargetNullValue={x:Static sys:DateTime.Now}, UpdateSourceTrigger=PropertyChanged}" />
+                                               FallbackValue = DateTime.Now.Date, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
 
     </DataTemplate>

@@ -11,7 +11,9 @@
                     mc:Ignorable="d">
 
     <DataTemplate x:Key="PatientVisitInfoWDT">
-
+        <DataTemplate.Resources>
+            
+        </DataTemplate.Resources>
         <Grid Width="Auto"
               Height="80"
               DataContext="{Binding Source={x:Static viewModels:PatientVisitViewModel.Instance}}">
@@ -59,8 +61,8 @@
                         VerticalAlignment="Top"
                         FontSize="16"
                         SelectedDate="{Binding DateOfVisit,
+                                       FallbackValue = DateTime.Now.Date,
                                                Mode=TwoWay,
-                                               StringFormat=D,
                                                UpdateSourceTrigger=PropertyChanged}" />
 
         </Grid>

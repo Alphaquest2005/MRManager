@@ -84,6 +84,7 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 SelectedDate="{Binding ArrivalDate,
+                                                        FallbackValue = DateTime.Now.Date,
                                                        UpdateSourceTrigger=PropertyChanged,
                                                        ValidatesOnDataErrors=True}" />
                     <TextBlock Width="Auto"
@@ -99,6 +100,7 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 SelectedDate="{Binding DepartureDate,
+                                                       FallbackValue = DateTime.Now.Date,
                                                        UpdateSourceTrigger=PropertyChanged,
                                                        ValidatesOnDataErrors=True}" />
                 </Grid>

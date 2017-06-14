@@ -62,7 +62,7 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
                                 FontSize="14"
-                                SelectedDate="{Binding BirthDate, TargetNullValue={x:Static system:DateTime.Now},
+                                SelectedDate="{Binding BirthDate, FallbackValue = DateTime.Now.Date,
                                                        UpdateSourceTrigger=PropertyChanged}" />
                     <TextBox Width="365"
                              Height="24"

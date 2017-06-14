@@ -20,6 +20,18 @@
         <TextBlock Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}"/>
     </ControlTemplate>
 
+    <Style TargetType="{x:Type DatePickerTextBox}">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <TextBox x:Name="PART_TextBox"
+                             Text="{Binding Path=SelectedDate, StringFormat='dd-MMM-yyyy', 
+                                        RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
     <LinearGradientBrush x:Key="WindowBackgroundBrush" EndPoint="0.5,1" StartPoint="0.5,0">
 		<GradientStop Color="#FFAAA93D" Offset="1"/>

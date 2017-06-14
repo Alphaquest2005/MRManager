@@ -43,7 +43,7 @@ namespace RevolutionData
                     e => e != null,
                     new List<Func<IFooterViewModel, ICurrentEntityChanged<IPatientVisitInfo>, bool>>()
                     {
-                        (v, e) => (e.Entity == null) || (e.Entity != null && e.Entity.PatientId == v.CurrentPatient.Value.Id)
+                        (v, e) => (e.Entity == null) || (e.Entity != null && v.CurrentPatient.Value != null && e.Entity.PatientId == v.CurrentPatient.Value.Id)
                     },
                     (v, e) =>
                     {
