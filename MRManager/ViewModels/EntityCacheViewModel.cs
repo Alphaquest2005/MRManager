@@ -141,4 +141,16 @@ namespace ViewModels
 
     }
 
+    [Export(typeof(IEntityCacheViewModel<IPhoneTypes>))]
+    public class PhoneTypeCacheViewModel : ObservableListViewModel<IPhoneTypes>, IEntityCacheViewModel<IPhoneTypes>
+    {
+        public PhoneTypeCacheViewModel() { }
+
+        public PhoneTypeCacheViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation, priority)
+        {
+            this.WireEvents();
+        }
+
+    }
+
 }

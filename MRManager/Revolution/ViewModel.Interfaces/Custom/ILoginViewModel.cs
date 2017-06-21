@@ -36,6 +36,9 @@ namespace ViewModel.Interfaces
         IList<IPersonPhoneNumberInfo> PhoneNumbers { get; set; }
         IList<INextOfKinInfo> NextOfKins { get; set; }
         INonResidentInfo NonResidentInfo { get; set; }
+
+        ReactiveProperty<IPersonPhoneNumberInfo> CurrentPhoneNumber { get; }
+        ReactiveProperty<IPersonAddressInfo> CurrentAddress { get; }
     }
 
     public interface IPatientVitalsViewModel : IEntityViewModel<IPatientVitalsInfo>

@@ -213,6 +213,8 @@ namespace Process.WorkFlow
             ComplexActions.RequestState<IPatientInfo, IPatientAddressesInfo>(3, x => x.Id),
             ComplexActions.UpdateState<IPatientAddressesInfo>(3),
             ComplexActions.RequestState<IPatientInfo, IPatientPhoneNumbersInfo>(3, x => x.Id),
+            ComplexActions.UpdateStateWhenDataChanges<IPersonPhoneNumbers,IPatientPhoneNumbersInfo>(3, c => c.PersonId, v => v.Id),
+
             ComplexActions.UpdateState<IPatientPhoneNumbersInfo>(3),
             ComplexActions.RequestState<IPatientInfo, IPatientNextOfKinsInfo>(3, x => x.Id),
             ComplexActions.UpdateState<IPatientNextOfKinsInfo>(3),
@@ -264,6 +266,7 @@ namespace Process.WorkFlow
             EntityComplexActions<IMedicalSystems>.IntializeCache(3),
             EntityComplexActions<IQuestionResponseTypes>.IntializeCache(3),
             EntityComplexActions<ISex>.IntializeCache(3),
+            EntityComplexActions<IPhoneTypes>.IntializeCache(3),
 
             EntityViewComplexActions<IDoctorInfo>.IntializeCache(3)
         };

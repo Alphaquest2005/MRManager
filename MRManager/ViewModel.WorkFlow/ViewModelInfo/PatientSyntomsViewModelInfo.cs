@@ -236,7 +236,7 @@ namespace RevolutionData
                     subject:v => v.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IPatientSyntomViewModel, bool>>
                     {
-                        v => v.ChangeTracking.Count >= 4 
+                        v => v.ChangeTracking.Count >= 3
                         && (v.ChangeTracking.ContainsKey(nameof(IPatientSyntomInfo.Syntom)) 
                                 && v.ChangeTracking[nameof(IPatientSyntomInfo.Syntom)] != null)
                         && v.CurrentEntity.Value.Id == 0

@@ -9,6 +9,17 @@ namespace DomainMessages
         Dictionary<string, object> Changes { get; }
         int EntityId { get; }
         string EntityName { get; }
+        string Attribute { get; }
+        string SyntomName { get; }
+        string InterviewName { get; }
+    }
+
+    public interface IUpdatePatientEntityListWithChanges<out TEntity> : IEntityRequest<TEntity> where TEntity : IEntity
+    {
+        Dictionary<string, object> Changes { get; }
+        int EntityId { get; }
+        string EntityName { get; }
+        string Attribute { get; }
         string SyntomName { get; }
         string InterviewName { get; }
     }

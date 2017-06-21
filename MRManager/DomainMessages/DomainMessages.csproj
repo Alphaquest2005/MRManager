@@ -63,6 +63,7 @@
     <Compile Include="GetEntityFromPatientResponse.cs" />
     <Compile Include="IGetEntityFromPatientResponse.cs" />
     <Compile Include="IUpdatePulledEntityWithChanges.cs" />
+    <Compile Include="UpdatePatientEntityListWithChanges.cs" />
     <Compile Include="UpdatePulledEntityWithChanges.cs" />
     <Compile Include="UserValidated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

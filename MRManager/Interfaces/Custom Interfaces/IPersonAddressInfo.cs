@@ -6,7 +6,7 @@ namespace Interfaces
     
     public interface IPersonAddressInfo : IEntityView<IPatients>
     {
-        string AddressLines { get; }
+        string Address { get; }
         string City { get;  }
         string Country { get;  }
         string Parish { get; }

@@ -6,7 +6,7 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="d">
 
-    <DataTemplate x:Key="PS-PersonAddressInfoTpl" DataType="{x:Type interfaces:IPersonAddressInfo}">
+    <DataTemplate x:Key="PS-PersonAddressInfoWDT" DataType="{x:Type interfaces:IPersonAddressInfo}">
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
         </DataTemplate.Resources>
@@ -20,7 +20,7 @@
                        VerticalAlignment="Top"
                        Text="Address"
                        TextAlignment="Right" />
-            <TextBlock Width="Auto"
+            <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
                      Margin="150,25,0,0"
@@ -36,7 +36,7 @@
                        VerticalAlignment="Top"
                        Text="Addresslines"
                        TextAlignment="Right" />
-            <TextBlock Width="Auto"
+            <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
                      Margin="150,50,0,0"
@@ -52,7 +52,7 @@
                        VerticalAlignment="Top"
                        Text="City"
                        TextAlignment="Right" />
-            <TextBlock Width="Auto"
+            <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
                      Margin="150,75,0,0"
@@ -68,7 +68,7 @@
                        VerticalAlignment="Top"
                        Text="Parish"
                        TextAlignment="Right" />
-            <TextBlock Width="Auto"
+            <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
                      Margin="150,100,0,0"
@@ -84,7 +84,7 @@
                        VerticalAlignment="Top"
                        Text="State"
                        TextAlignment="Right" />
-            <TextBlock Width="Auto"
+            <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
                      Margin="150,125,0,0"
@@ -100,7 +100,7 @@
                        VerticalAlignment="Top"
                        Text="Zip Or Postal Code"
                        TextAlignment="Right" />
-            <TextBlock Width="Auto"
+            <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
                      Margin="150,150,0,0"
@@ -116,7 +116,7 @@
                        VerticalAlignment="Top"
                        Text="Country"
                        TextAlignment="Right" />
-            <TextBlock Width="Auto"
+            <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
                      Margin="150,175,0,0"
@@ -132,7 +132,7 @@
                        VerticalAlignment="Top"
                        Text="Address Type"
                        TextAlignment="Right" />
-            <TextBlock Width="Auto"
+            <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
                      Margin="150,200,0,0"

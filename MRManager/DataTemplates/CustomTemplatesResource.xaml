@@ -11,11 +11,17 @@
         <ResourceDictionary Source="Custom/PatientSummaryInfoRDT.xaml" />
         <ResourceDictionary Source="Custom/PatientSummaryInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/PS-ForeignAddressInfoTpl.xaml" />
+        <ResourceDictionary Source="Custom/PS-ForeignAddressInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/PS-ForeignPhoneNumberInfoTpl.xaml" />
+        <ResourceDictionary Source="Custom/PS-ForeignPhoneNumberInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/PS-NextOfKinInfoTpl.xaml" />
+        <ResourceDictionary Source="Custom/PS-NextOfKinInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/PS-NonResidentPatientInfoTpl.xaml" />
+        <ResourceDictionary Source="Custom/PS-NonResidentPatientInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/PS-PersonPhoneNumberInfoTpl.xaml" />
+        <ResourceDictionary Source="Custom/PS-PersonPhoneNumberInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/PS-PersonAddressInfoTpl.xaml" />
+        <ResourceDictionary Source="Custom/PS-PersonAddressInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/InterviewInfoRDT.xaml" />
         <ResourceDictionary Source="Custom/InterviewInfoWDT.xaml" />
         <ResourceDictionary Source="Custom/InterviewListVDT.xaml" />

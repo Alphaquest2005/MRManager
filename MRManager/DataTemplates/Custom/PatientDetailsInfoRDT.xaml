@@ -305,7 +305,7 @@
                     <ContentControl Margin="10,0,0.333,300"
                                     Content="{Binding NonResidentInfo}"
                                     ContentTemplate="{DynamicResource PS-NonResidentPatientInfoTpl}" />
-                    <!--<TextBlock Width="92"
+                    <TextBlock Width="92"
                                Height="85"
                                Margin="21,221,0,0"
                                HorizontalAlignment="Left"
@@ -336,7 +336,7 @@
                     <ListBox Height="Auto"
                              Margin="117,374,21.333,9"
                              ItemTemplate="{DynamicResource PS-ForeignAddressTpl}"
-                             ItemsSource="{Binding State.Value.Entity.NonResident.Addresses}" />-->
+                             ItemsSource="{Binding State.Value.Entity.NonResident.Addresses}" />
 
                 </Grid>
             </TabItem>

@@ -17,7 +17,8 @@ namespace EF.Entities
     {
     public int PersonId { get; set; }
     public string PhoneNumber { get; set; }
-    public string Type { get; set; }
+    public string PhoneType { get; set; }
+   
     }
 
     [Export(typeof(INextOfKinInfo))]
@@ -37,7 +38,7 @@ namespace EF.Entities
     [Export(typeof (IPersonAddressInfo))]
     public class PersonAddressInfo : EntityView<IPatients>, IPersonAddressInfo
     {
-        public string AddressLines { get; set; }
+        public string Address { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
         public string Parish { get; set; }

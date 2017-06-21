@@ -6,7 +6,7 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="d">
 
-    <DataTemplate x:Key="PS-PersonPhoneNumberInfoTpl" DataType="{x:Type interfaces:IPersonPhoneNumberInfo}">
+    <DataTemplate x:Key="PS-ForeignPhoneNumberInfoWDT" DataType="{x:Type interfaces:IForeignPhoneNumberInfo}">
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
         </DataTemplate.Resources>
@@ -20,7 +20,7 @@
                        VerticalAlignment="Top"
                        Text="Phone Number"
                        TextAlignment="Right" />
-            <TextBlock Width="Auto"
+            <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
                      Margin="150,25,0,0"
@@ -36,16 +36,15 @@
                        VerticalAlignment="Top"
                        Text="Type"
                        TextAlignment="Right" />
-            <TextBlock Width="Auto"
+            <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
                      Margin="150,50,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
-                     Text="{Binding Path=PhoneType,
+                     Text="{Binding Path=Type,
                                     UpdateSourceTrigger=PropertyChanged,
                                     ValidatesOnDataErrors=True}" />
-
 
         </Grid>
     </DataTemplate>

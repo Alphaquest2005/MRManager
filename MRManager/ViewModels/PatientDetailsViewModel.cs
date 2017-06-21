@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using SystemInterfaces;
 using Core.Common.UI;
+using EF.Entities;
 using Interfaces;
 using JB.Collections.Reactive;
 using Reactive.Bindings;
@@ -23,11 +24,13 @@ namespace ViewModels
         public PatientDetailsViewModel(ISystemProcess process, IViewInfo viewInfo, List<IViewModelEventSubscription<IViewModel, IEvent>> eventSubscriptions, List<IViewModelEventPublication<IViewModel, IEvent>> eventPublications, List<IViewModelEventCommand<IViewModel, IEvent>> commandInfo, Type orientation, int priority) : base(new ObservableViewModel<IPatientDetailsInfo>(viewInfo, eventSubscriptions, eventPublications, commandInfo, process, orientation, priority))
         {
             this.WireEvents();
+            
         }
 
+       
 
-        
-       public ReactiveProperty<IProcessState<IPatientDetailsInfo>> State => this.ViewModel.State;
+
+        public ReactiveProperty<IProcessState<IPatientDetailsInfo>> State => this.ViewModel.State;
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
 
         public IPatientInfo CurrentPatient { get; set; }
@@ -60,6 +63,7 @@ namespace ViewModels
             set { _nonResidentInfo = value; OnPropertyChanged(); }
         }
 
-        
+        public ReactiveProperty<IPersonPhoneNumberInfo> CurrentPhoneNumber { get; } = new ReactiveProperty<IPersonPhoneNumberInfo>(new PersonPhoneNumberInfo());
+        public ReactiveProperty<IPersonAddressInfo> CurrentAddress { get; } = new ReactiveProperty<IPersonAddressInfo>(new PersonAddressInfo());
     }
 }

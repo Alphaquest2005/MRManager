@@ -35,6 +35,7 @@ namespace ViewModel.WorkFlow
             EntityCacheViewModelInfo<IMedicalSystems>.CacheViewModel(3),
             EntityCacheViewModelInfo<IQuestionResponseTypes>.CacheViewModel(3),
             EntityCacheViewModelInfo<ISex>.CacheViewModel(3),
+            EntityCacheViewModelInfo<IPhoneTypes>.CacheViewModel(3),
 
             EntityViewCacheViewModelInfo<IDoctorInfo>.CacheViewModel(3),
             EntityViewCacheViewModelInfo<ISyntomMedicalSystemInfo>.CacheViewModel(3),

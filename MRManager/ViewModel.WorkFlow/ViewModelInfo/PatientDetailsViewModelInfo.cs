@@ -5,6 +5,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using SystemInterfaces;
 using DomainMessages;
+using EF.Entities;
 using Interfaces;
 using ReactiveUI;
 using RevolutionEntities.Process;
@@ -42,7 +43,10 @@ namespace RevolutionData
                     action: (v, e) =>
                     {
                         if (v.CurrentPatient != null && v.CurrentPatient?.Id != e.State.Entity.Id) return;
-                        v.Addresses = e.State.Entity.Addresses;
+                        v.Addresses = new List<IPersonAddressInfo>(e.State.Entity.Addresses)
+                        {
+                            new PersonAddressInfo(){Address = "Create New..."}
+                        }; 
                        
                     }),
 
@@ -55,7 +59,10 @@ namespace RevolutionData
                     action: (v, e) =>
                     {
                         if (v.CurrentPatient != null && v.CurrentPatient?.Id != e.State.Entity.Id) return;
-                        v.PhoneNumbers = e.State.Entity.PhoneNumbers;
+                        v.PhoneNumbers = new List<IPersonPhoneNumberInfo>(e.State.Entity.PhoneNumbers)
+                        {
+                            new PersonPhoneNumberInfo(){PhoneNumber = "Create New..."}
+                        }; 
 
                     }),
 
@@ -68,7 +75,10 @@ namespace RevolutionData
                     action: (v, e) =>
                     {
                         if (v.CurrentPatient != null && v.CurrentPatient?.Id != e.State.Entity.Id) return;
-                        v.NextOfKins = e.State.Entity.NextOfKins;
+                        v.NextOfKins = new List<INextOfKinInfo>(e.State.Entity.NextOfKins)
+                        {
+                            new NextOfKinInfo(){ Name = "Create New ..."}
+                        }; 
 
                     }),
 
@@ -95,7 +105,7 @@ namespace RevolutionData
                         v.CurrentPatient = e.Entity;
                         v.State.Value = null;
                         v.Addresses = null;
-                        v.PhoneNumbers = null;
+                        v.PhoneNumbers = new List<IPersonPhoneNumberInfo>() {new PersonPhoneNumberInfo() {PhoneNumber = "Create New..."}};
                         v.NextOfKins = null;
                         v.NonResidentInfo = null;
                         v.State.Value = null;
@@ -173,6 +183,76 @@ namespace RevolutionData
                         s.ChangeTracking.Clear();
                         s.State.Value = null;
                         
+                        return msg;
+                    }),
+
+                new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityListWithChanges<IPatients>>(
+                    key:"CreatePhoneNumber",
+                    subject:s => s.CurrentPhoneNumber,
+                    commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
+                    {
+                        v =>  v.State?.Value?.Entity != null &&
+                              v.State.Value.Entity.Id != 0 &&
+                              v.CurrentPhoneNumber.Value.Id == 0 &&
+                        !string.IsNullOrEmpty(v.CurrentPhoneNumber.Value.PhoneNumber)
+                        && !string.IsNullOrEmpty(v.CurrentPhoneNumber.Value.PhoneType)
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: s =>
+                    {
+                        var res = new Dictionary<string,object>()
+                        {
+                            {s.CurrentPhoneNumber.Value.PhoneType, s.CurrentPhoneNumber.Value.PhoneNumber },
+                           // {nameof(IPersonPhoneNumberInfo.PhoneNumber), s.CurrentPhoneNumber.Value.PhoneNumber },
+                           // {nameof(IPersonPhoneNumberInfo.PhoneType), s.CurrentPhoneNumber.Value.PhoneType },
+                        };
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                s.State.Value.Entity.Id ,
+                                "Contact",
+                                "PhoneNumber",
+                                "General",
+                                "Contact Information",
+                                res
+                            },
+                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process, s.Source);
+                        s.CurrentPhoneNumber.Value = new PersonPhoneNumberInfo(){PhoneNumber = "Create New..."};
+                            return msg;
+                    }),
+
+                new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityListWithChanges<IPatients>>(
+                    key:"CreateContactAddress",
+                    subject:s => s.CurrentPhoneNumber,
+                    commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
+                    {
+                        v =>  v.State?.Value?.Entity != null &&
+                              v.State.Value.Entity.Id != 0 &&
+                              v.CurrentPhoneNumber.Value.Id == 0 &&
+                              !string.IsNullOrEmpty(v.CurrentPhoneNumber.Value.PhoneNumber)
+                              && !string.IsNullOrEmpty(v.CurrentPhoneNumber.Value.PhoneType)
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: s =>
+                    {
+                        var res = new Dictionary<string,object>()
+                        {
+                            {s.CurrentPhoneNumber.Value.PhoneType, s.CurrentPhoneNumber.Value.PhoneNumber },
+                            // {nameof(IPersonPhoneNumberInfo.PhoneNumber), s.CurrentPhoneNumber.Value.PhoneNumber },
+                            // {nameof(IPersonPhoneNumberInfo.PhoneType), s.CurrentPhoneNumber.Value.PhoneType },
+                        };
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                s.State.Value.Entity.Id ,
+                                "Contact",
+                                "PhoneNumber",
+                                "General",
+                                "Contact Information",
+                                res
+                            },
+                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process, s.Source);
+                        s.CurrentPhoneNumber.Value = new PersonPhoneNumberInfo(){PhoneNumber = "Create New..."};
                         return msg;
                     }),
 

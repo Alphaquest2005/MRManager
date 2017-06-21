@@ -173,9 +173,17 @@ namespace Entity.Expressions
                         Id = x5.Id,
                         PersonId = x.Id,
                         PhoneNumber = x5.Value,
-                        Type = x5.ResponseOptions.Description
+                        PhoneType = x5.ResponseOptions.Description,
                     } as IPersonPhoneNumberInfo).ToList(),
             };
+
+        //public static Expression<Func<IList<IResponseOptions>, List<IPhoneTypes>>> PhoneTypesExpression { get; } =
+        //    x => x.Where(x1 => x1.Description == "PhoneType")
+        //        .Select(x2 => new PhoneTypes(){
+        //            Id = x2.Id,
+        //            Name = x2.Description} as IPhoneTypes).ToList();
+                
+           
 
         public static Expression<Func<Patients, PatientNextOfKinsInfo>> PatientNextOfKinInfoExpression { get; } =
             x => new PatientNextOfKinsInfo()
@@ -266,9 +274,9 @@ namespace Entity.Expressions
                         Parish =
                             x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Parish")
                                 .Select(x6 => x6.Value).FirstOrDefault(),
-                        AddressLines =
+                        Address =
                             x5.SelectMany(x7 => x7.Response)
-                                .Where(x6 => x6.ResponseOptions.Description == "AddressLine")
+                                .Where(x6 => x6.ResponseOptions.Description == "Address")
                                 .Select(x6 => x6.Value).FirstOrDefault(),
                         City = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "City")
                             .Select(x6 => x6.Value).FirstOrDefault(),

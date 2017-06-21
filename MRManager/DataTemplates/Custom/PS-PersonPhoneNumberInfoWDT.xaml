@@ -4,9 +4,10 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:interfaces="clr-namespace:Interfaces;assembly=Interfaces"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
-    <DataTemplate x:Key="PS-PersonPhoneNumberInfoTpl" DataType="{x:Type interfaces:IPersonPhoneNumberInfo}">
+    <DataTemplate x:Key="PS-PersonPhoneNumberInfoWDT" DataType="{x:Type interfaces:IPersonPhoneNumberInfo}">
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
         </DataTemplate.Resources>
@@ -20,14 +21,14 @@
                        VerticalAlignment="Top"
                        Text="Phone Number"
                        TextAlignment="Right" />
-            <TextBlock Width="Auto"
+            <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
                      Margin="150,25,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      Text="{Binding Path=PhoneNumber,
-                                    UpdateSourceTrigger=PropertyChanged,
+                                    UpdateSourceTrigger=LostFocus,
                                     ValidatesOnDataErrors=True}" />
             <TextBlock Width="Auto"
                        Height="24"
@@ -36,15 +37,22 @@
                        VerticalAlignment="Top"
                        Text="Type"
                        TextAlignment="Right" />
-            <TextBlock Width="Auto"
+            <ComboBox Width="Auto"
                      Height="24"
                      MinWidth="75"
                      Margin="150,50,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
-                     Text="{Binding Path=PhoneType,
-                                    UpdateSourceTrigger=PropertyChanged,
-                                    ValidatesOnDataErrors=True}" />
+                      DisplayMemberPath="Name"
+                      FontSize="16"
+                      FontWeight="Bold"
+                      ItemsSource="{Binding Source={x:Static Member=viewModels:PhoneTypeCacheViewModel.Instance},
+                                                    Path=EntitySet.Value,
+                                                    UpdateSourceTrigger=PropertyChanged,
+                                                    Mode=OneWay,
+                                                    IsAsync=True}"
+                      SelectedValue="{Binding PhoneType, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedValuePath="Name" />
 
 
         </Grid>

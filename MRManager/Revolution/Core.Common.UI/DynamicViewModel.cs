@@ -88,5 +88,7 @@ namespace Core.Common.UI
         public Type Orientation { get; }
         public Type ViewModelType { get; }
         public int Priority { get; }
+
+        
     }
 }
