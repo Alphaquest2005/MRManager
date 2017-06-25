@@ -20,7 +20,7 @@
                        FontSize="18"
                        FontWeight="Bold"
                        Text="{Binding Path=Relationship,
-                                      UpdateSourceTrigger=PropertyChanged}" />
+                                      UpdateSourceTrigger=LostFocus}" />
             <TextBox Width="Auto"
                        Height="24"
                        MinWidth="75"
@@ -30,7 +30,7 @@
                        FontSize="18"
                        Text="{Binding Path=Name,
                                       TargetNullValue='Person Name',
-                                      UpdateSourceTrigger=PropertyChanged}" />
+                                      UpdateSourceTrigger=LostFocus}" />
             <TextBox Width="Auto"
                        Height="24"
                        MinWidth="75"
@@ -39,7 +39,7 @@
                        VerticalAlignment="Top"
                        FontSize="14"
                        Text="{Binding Path=Address,
-                                      UpdateSourceTrigger=PropertyChanged}" />
+                                      UpdateSourceTrigger=LostFocus}" />
             <TextBox Width="Auto"
                        Height="24"
                        MinWidth="75"
@@ -48,38 +48,8 @@
                        VerticalAlignment="Top"
                        FontSize="14"
                        Text="{Binding Path=PhoneNumber,
-                                      UpdateSourceTrigger=PropertyChanged}" />
-            <!--<TextBlock Width="92"
-                       Height="85"
-                       Margin="38,109,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       Foreground="#FFFFFF36"
-                       Text="Phone Number"
-                       TextAlignment="Right"
-                       TextWrapping="WrapWithOverflow" />
-            <ListBox Height="Auto"
-                     Margin="145,109,36,111"
-                     ItemTemplate="{DynamicResource PS-PersonPhoneNumberInfoTpl}"
-                     ItemsSource="{Binding Path=PhoneNumbers}" />
-            <TextBlock Width="97"
-                       Height="91"
-                       Margin="33,235,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       Foreground="#FFFFFF36"
-                       Text="Address"
-                       TextAlignment="Right"
-                       TextWrapping="WrapWithOverflow" />
-            <ListBox Height="Auto"
-                     Margin="145,235,36,10"
-                     ItemTemplate="{DynamicResource PS-PersonAddressInfoTpl}"
-                     ItemsSource="{Binding Path=Addresses}" />-->
-
+                                      UpdateSourceTrigger=LostFocus}" />
+      
 
         </Grid>
     </DataTemplate>

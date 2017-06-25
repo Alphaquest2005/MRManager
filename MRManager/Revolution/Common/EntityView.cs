@@ -18,17 +18,23 @@ namespace Common.DataEntites
 
 
         private readonly Guid _entityGuid = Guid.NewGuid();
-        
+
+
+        public bool Equals(TEntity other)
+        {
+            return Id == other?.Id;
+        }
+        public bool Equals(EntityView<TEntity> other)
+        {
+            return Id == other.Id;
+        }
 
         public override bool Equals(object obj)
         {
-            
-            var other = obj as BaseEntity;
-            if (ReferenceEquals(other, null)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            if(GetType() != other.GetType()) return false;
-            if (Id == 0 || other.Id == 0) return false;
-            return Id == other.Id;
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((EntityView<TEntity>) obj);
         }
 
         public static bool operator ==(EntityView<TEntity> a, EntityView<TEntity> b)
@@ -45,9 +51,11 @@ namespace Common.DataEntites
 
         public override int GetHashCode()
         {
-            // ReSharper disable once cuz of nhibernate
-            return (_entityGuid.ToString()).GetHashCode();
+            return Id;
         }
+
+
+        
 
         
     }

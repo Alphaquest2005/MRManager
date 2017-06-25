@@ -79,13 +79,23 @@ namespace EF.DBContext
                                            DoctorId = 0,
                                            DateOfVisit = DateTime.Today.Date,
                                        }).Entity;
-
+                    var syntom = ctx.Syntoms.Include(x => x.SyntomMedicalSystems).First(x => x.Name == syntomName);
+                    
                     var currentInterview = ctx.Interviews.FirstOrDefault(x => x.Name == interviewName)
                                            ?? ctx.Interviews.Add(new Interviews()
                                            {
-                                               Name = interviewName
+                                               Name = interviewName,
+                                               RowState = RowState.Added
                                            }).Entity;
+                    int medicalSystemId;
+                    medicalSystemId = syntom.SyntomMedicalSystems.Any() 
+                                        ? syntom.SyntomMedicalSystems.First().MedicalSystemId 
+                                        : ctx.MedicalSystems.First(x => x.Name == "Patient").Id;
 
+                    if(currentInterview.RowState == RowState.Added)
+                    {
+                        currentInterview.MedicalSystemInterviews = new List<MedicalSystemInterviews>(){new MedicalSystemInterviews(){InterviewId = 0, MedicalSystemId = medicalSystemId}};
+                    }
                     var patientSyntom =
                         ctx.PatientSyntoms.Include(x => x.PatientVisit)
                             .FirstOrDefault(x => x.PatientVisit == patientVisit && x.Syntoms.Name == syntomName) ??
@@ -93,14 +103,13 @@ namespace EF.DBContext
                         {
                             PatientVisit = patientVisit,
                             StatusId = 0,
-                            SyntomId = ctx.Syntoms.First(x => x.Name == syntomName).Id,
+                            SyntomId = syntom.Id,
                             PriorityId = 0,
                         }).Entity;
 
                     foreach (var change in changes)
                     {
-                        if (attribute == null) attribute = change.Key;
-                        var attribute1 = attribute;
+                        var attribute1 = attribute ?? change.Key;
                         var questions =
                             ctx.Questions.Include(x => x.PatientResponses)
                                 .Include(x => x.ResponseOptions)

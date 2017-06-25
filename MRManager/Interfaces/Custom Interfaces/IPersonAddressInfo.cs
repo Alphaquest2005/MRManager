@@ -12,5 +12,6 @@ namespace Interfaces
         string Parish { get; }
         string State { get;  }
         string AddressType { get; }
+        int PersonId { get; }
     }
 }

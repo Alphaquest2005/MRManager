@@ -24,7 +24,7 @@ namespace EF.DBContexts
             //Instance.Database.EnsureDeleted();
             //Instance.Database.EnsureCreated();
             //CreateSeedData();
-		    var t = new PulledDBContext();
+            var t = new PulledDBContext();
 		}
 
 		private static void CreateSeedData()

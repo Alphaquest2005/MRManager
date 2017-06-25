@@ -65,5 +65,6 @@ namespace ViewModels
 
         public ReactiveProperty<IPersonPhoneNumberInfo> CurrentPhoneNumber { get; } = new ReactiveProperty<IPersonPhoneNumberInfo>(new PersonPhoneNumberInfo());
         public ReactiveProperty<IPersonAddressInfo> CurrentAddress { get; } = new ReactiveProperty<IPersonAddressInfo>(new PersonAddressInfo());
+        public ReactiveProperty<INextOfKinInfo> CurrentNextOfKin { get; } = new ReactiveProperty<INextOfKinInfo>(new NextOfKinInfo());
     }
 }

@@ -62,7 +62,7 @@
 
                         <!--  Triggers to change Template  -->
                         <Style.Triggers>
-                            <MultiDataTrigger>
+                            <!--<MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
                                     <Condition Binding="{Binding Path=RowState.Value, Source={x:Static viewModels:PatientSummaryListViewModel.Instance}}" Value="{x:Static systemInterfaces:RowState.Added}" />
                                     <Condition Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsSelected}" Value="True" />
@@ -71,7 +71,7 @@
                                     <Setter Property="ContentTemplate" Value="{DynamicResource PatientInfoWDT}" />
                                     <Setter Property="Visibility" Value="Visible" />
                                 </MultiDataTrigger.Setters>
-                            </MultiDataTrigger>
+                            </MultiDataTrigger>-->
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
                                     <Condition Binding="{Binding Path=RowState.Value, Source={x:Static viewModels:PatientSummaryListViewModel.Instance}}" Value="{x:Static systemInterfaces:RowState.Modified}" />

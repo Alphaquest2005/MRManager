@@ -8,6 +8,7 @@ using SystemInterfaces;
 using DomainMessages;
 using EF.Entities;
 using Interfaces;
+using JB.Collections.Reactive;
 using ReactiveUI;
 using RevolutionEntities.Process;
 using RevolutionEntities.ViewModels;
@@ -42,27 +43,38 @@ namespace RevolutionData
                     new List<Func<IPatientSummaryListViewModel, IEntityViewWithChangesUpdated<IPatientInfo>, bool>>(),
                     (v, e) =>
                     {
-                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        Application.Current.Dispatcher.Invoke(() =>
                         {
+                            try
+                            {
+                                var res = v.EntitySet.Value.ToList();
+                                var f = res.FirstOrDefault(x => x.Id == e.Entity.Id);
+                                if (v.CurrentEntity.Value?.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
+                                if (f == null)
+                                {
+                                    v.EntitySet.Value.Insert(v.EntitySet.Value.Count() - 1, e.Entity);
+                                    v.EntitySet.Value.Reset();
+                                }
+                                else
+                                {
+                                    
+                                    //f = e.Entity;
+                                    var idx = res.IndexOf(f);
+                                    res.Remove(f);
+                                    res.Insert(0, e.Entity);
+                                    v.EntitySet.Value = new ObservableBindingList<IPatientInfo>(res);
+                                    v.EntitySet.Value.Reset();
+                                }
+                                v.RowState.Value = RowState.Unchanged;
+                            }
+                            catch (Exception exception)
+                            {
+                                Console.WriteLine(exception);
+                                throw;
+                            }
 
 
-                       var f = v.EntitySet.Value.FirstOrDefault(x => x.Id == e.Entity.Id);
-                        if (v.CurrentEntity.Value?.Id == e.Entity.Id) v.CurrentEntity.Value = e.Entity;
-                        if (f == null)
-                        {
-                            v.EntitySet.Value.Insert(v.EntitySet.Value.Count() - 1,e.Entity);
-                            v.EntitySet.Value.Reset();
-                        }
-                        else
-                        {
-                            //f = e.Entity;
-                            var idx = v.EntitySet.Value.IndexOf(f);
-                            v.EntitySet.Value.Remove(f);
-                            v.EntitySet.Value.Insert(idx, e.Entity);
-                            v.EntitySet.Value.Reset();
-                        }
-                        v.RowState.Value = RowState.Unchanged;
-                        }));
+                        });
 
                     }),
 
@@ -81,8 +93,11 @@ namespace RevolutionData
 
                          Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                         {
-                            s.EntitySet.Value.Add(new PatientInfo() {Name = "Create New..."});
-                            s.NotifyPropertyChanged(nameof(s.EntitySet));
+                            if (s.Instance.EntitySet.Value.FirstOrDefault(x => x.Id == 0) == null)
+                            {
+                                s.EntitySet.Value.Add(new PatientInfo() {Name = "Create New...", BirthDate = DateTime.Now.Date});
+                                s.Instance.NotifyPropertyChanged(nameof(s.EntitySet));
+                            }
                         }));
 
 
@@ -99,7 +114,7 @@ namespace RevolutionData
                     {
                         if (s.Instance.EntitySet.Value.FirstOrDefault(x => x.Id == 0) == null)
                         {
-                            s.Instance.EntitySet.Value.Add(new PatientInfo() {Name = "Create New..."});
+                            s.Instance.EntitySet.Value.Add(new PatientInfo() {Name = "Create New...", BirthDate = DateTime.Now.Date});
                             s.Instance.NotifyPropertyChanged(nameof(s.EntitySet));
                         }
                         return  new ViewEventPublicationParameter(new object[] {s.CurrentEntity.Value},
@@ -147,10 +162,10 @@ namespace RevolutionData
 
                     messageData: s =>
                     {
-                        s.RowState.Value = s.RowState.Value != RowState.Modified?RowState.Modified: RowState.Unchanged;//new ReactiveProperty<RowState>(rowstate != RowState.Modified?RowState.Modified: RowState.Unchanged);
-
+                        s.Instance.RowState.Value = s.Instance.RowState.Value != RowState.Modified?RowState.Modified: RowState.Unchanged;//new ReactiveProperty<RowState>(rowstate != RowState.Modified?RowState.Modified: RowState.Unchanged);
+                        s.Instance.NotifyPropertyChanged(nameof(s.RowState));
                         return new ViewEventCommandParameter(
-                            new object[] {s,s.RowState.Value},
+                            new object[] {s,s.Instance.RowState.Value},
                             new StateCommandInfo(s.Process.Id,
                                 Context.Process.Commands.CurrentEntityChanged), s.Process,
                             s.Source);
@@ -171,7 +186,7 @@ namespace RevolutionData
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
-                                ((dynamic)s).Id,
+                                s.CurrentEntity.Value.Id,
                                 "Patient",
                                 "General",
                                 "Personal Information",
@@ -197,7 +212,7 @@ namespace RevolutionData
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
-                                ((dynamic)s).Id,
+                                s.CurrentEntity.Value.Id,
                                 "Patient",
                                 "General",
                                 "Personal Information",

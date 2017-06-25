@@ -20,6 +20,8 @@ namespace EF.Entities
         public string Email { get; set; }
         public int? MediaId { get; set; }
         public DateTime BirthDate { get; set; }
+
+       
     }
 
     

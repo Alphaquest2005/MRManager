@@ -172,7 +172,7 @@ namespace RevolutionData
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
-                                ((dynamic)s).Id,
+                                s.State.Value.Entity.Id,
                                 "Patient",
                                 "General",
                                 "Personal Information",
@@ -223,21 +223,22 @@ namespace RevolutionData
 
                 new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityListWithChanges<IPatients>>(
                     key:"CreateContactAddress",
-                    subject:s => s.CurrentPhoneNumber,
+                    subject:s => s.CurrentAddress,
                     commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
                     {
                         v =>  v.State?.Value?.Entity != null &&
                               v.State.Value.Entity.Id != 0 &&
-                              v.CurrentPhoneNumber.Value.Id == 0 &&
-                              !string.IsNullOrEmpty(v.CurrentPhoneNumber.Value.PhoneNumber)
-                              && !string.IsNullOrEmpty(v.CurrentPhoneNumber.Value.PhoneType)
+                              v.CurrentAddress.Value.Id == 0 &&
+                              !string.IsNullOrEmpty(v.CurrentAddress.Value.Address)
+                              && !string.IsNullOrEmpty(v.CurrentAddress.Value.AddressType)
+                             
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>
                     {
                         var res = new Dictionary<string,object>()
                         {
-                            {s.CurrentPhoneNumber.Value.PhoneType, s.CurrentPhoneNumber.Value.PhoneNumber },
+                            {s.CurrentAddress.Value.AddressType, s.CurrentAddress.Value.Address },
                             // {nameof(IPersonPhoneNumberInfo.PhoneNumber), s.CurrentPhoneNumber.Value.PhoneNumber },
                             // {nameof(IPersonPhoneNumberInfo.PhoneType), s.CurrentPhoneNumber.Value.PhoneType },
                         };
@@ -246,13 +247,51 @@ namespace RevolutionData
                             {
                                 s.State.Value.Entity.Id ,
                                 "Contact",
-                                "PhoneNumber",
+                                "Address",
                                 "General",
                                 "Contact Information",
                                 res
                             },
                             new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process, s.Source);
-                        s.CurrentPhoneNumber.Value = new PersonPhoneNumberInfo(){PhoneNumber = "Create New..."};
+                        s.CurrentAddress.Value = new PersonAddressInfo(){Address = "Create New..."};
+                        return msg;
+                    }),
+
+                new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityListWithChanges<IPatients>>(
+                    key:"CreateNextOfKin",
+                    subject:s => s.CurrentNextOfKin,
+                    commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
+                    {
+                        v =>  v.State?.Value?.Entity != null &&
+                              v.State.Value.Entity.Id != 0 &&
+                              v.CurrentNextOfKin.Value.Id == 0 &&
+                              !string.IsNullOrEmpty(v.CurrentNextOfKin.Value.Name)
+                              && !string.IsNullOrEmpty(v.CurrentNextOfKin.Value.Relationship)
+                              && !string.IsNullOrEmpty(v.CurrentNextOfKin.Value.PhoneNumber)
+
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: s =>
+                    {
+                        var res = new Dictionary<string,object>()
+                        {
+                            {nameof(INextOfKinInfo.PhoneNumber), s.CurrentNextOfKin.Value.PhoneNumber },
+                            {nameof(INextOfKinInfo.Name), s.CurrentNextOfKin.Value.Name },
+                            {nameof(INextOfKinInfo.Relationship), s.CurrentNextOfKin.Value.Relationship },
+                            {nameof(INextOfKinInfo.Address), s.CurrentNextOfKin.Value.Address },
+                        };
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                s.State.Value.Entity.Id ,
+                                "Contact",
+                                "NextOfKin",
+                                "General",
+                                "Contact Information",
+                                res
+                            },
+                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process, s.Source);
+                        s.CurrentNextOfKin.Value = new NextOfKinInfo(){Name = "Create New..."};
                         return msg;
                     }),
 

@@ -39,6 +39,7 @@ namespace ViewModel.Interfaces
 
         ReactiveProperty<IPersonPhoneNumberInfo> CurrentPhoneNumber { get; }
         ReactiveProperty<IPersonAddressInfo> CurrentAddress { get; }
+        ReactiveProperty<INextOfKinInfo> CurrentNextOfKin { get; }
     }
 
     public interface IPatientVitalsViewModel : IEntityViewModel<IPatientVitalsInfo>

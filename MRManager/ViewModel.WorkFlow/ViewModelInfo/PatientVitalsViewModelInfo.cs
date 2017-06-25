@@ -107,7 +107,7 @@ namespace RevolutionData
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
-                               ((dynamic)s).Id,
+                               s.CurrentPatient.Id,
                                 "Vitals",
                                 "General",
                                 "Vitals",

@@ -177,13 +177,14 @@ namespace Entity.Expressions
                     } as IPersonPhoneNumberInfo).ToList(),
             };
 
+
         //public static Expression<Func<IList<IResponseOptions>, List<IPhoneTypes>>> PhoneTypesExpression { get; } =
         //    x => x.Where(x1 => x1.Description == "PhoneType")
         //        .Select(x2 => new PhoneTypes(){
         //            Id = x2.Id,
         //            Name = x2.Description} as IPhoneTypes).ToList();
-                
-           
+
+
 
         public static Expression<Func<Patients, PatientNextOfKinsInfo>> PatientNextOfKinInfoExpression { get; } =
             x => new PatientNextOfKinsInfo()
@@ -192,12 +193,13 @@ namespace Entity.Expressions
                 NextOfKins = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                     .Where(
                         x2 =>
-                            x2.Questions.EntityAttributes.Entity == "Patient" &&
+                            x2.Questions.EntityAttributes.Entity == "Contact" &&
                             x2.Questions.EntityAttributes.Attribute == "NextOfKin")
                     .GroupBy(x6 => x6.QuestionId)
                     .Select(x5 => new NextOfKinInfo()
                     {
                         Id = x5.Key,
+                        PatientId = x.Id,
                         Relationship =
                             x5.SelectMany(x7 => x7.Response)
                                 .Where(x6 => x6.ResponseOptions.Description == "Relationship")
@@ -258,6 +260,7 @@ namespace Entity.Expressions
             x => new PatientAddressesInfo()
             {
                 Id = x.Id,
+                
                 Addresses = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                     .Where(
                         x2 =>
@@ -267,6 +270,7 @@ namespace Entity.Expressions
                     .Select(x5 => new PersonAddressInfo()
                     {
                         Id = x5.Key,
+                        PersonId = x.Id,
                         AddressType =
                             x5.SelectMany(x7 => x7.Response)
                                 .Where(x6 => x6.ResponseOptions.Description == "Address Type")

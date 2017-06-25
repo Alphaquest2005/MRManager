@@ -18,7 +18,9 @@ namespace EF.Entities
     public int PersonId { get; set; }
     public string PhoneNumber { get; set; }
     public string PhoneType { get; set; }
-   
+
+
+      
     }
 
     [Export(typeof(INextOfKinInfo))]
@@ -33,6 +35,7 @@ namespace EF.Entities
         public int? MediaId { get; set; }
         public IList<IPersonAddressInfo> Addresses { get; set; }
         public IList<IPersonPhoneNumberInfo> PhoneNumbers { get; set; }
+        
     }
 
     [Export(typeof (IPersonAddressInfo))]
@@ -44,5 +47,6 @@ namespace EF.Entities
         public string Parish { get; set; }
         public string State { get; set; }
         public string AddressType { get; set; }
+        public int PersonId { get; set; }
     }
 }

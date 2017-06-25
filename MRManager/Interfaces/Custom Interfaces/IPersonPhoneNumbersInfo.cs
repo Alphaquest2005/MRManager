@@ -5,7 +5,7 @@ using SystemInterfaces;
 namespace Interfaces
 {
     
-    public partial interface IPersonPhoneNumberInfo : IEntityView<IPersons_Patient>
+    public partial interface IPersonPhoneNumberInfo : IEntityView<IPatients>
     {
         Int32 PersonId { get; }
         string PhoneNumber { get; }

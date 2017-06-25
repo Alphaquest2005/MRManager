@@ -244,13 +244,13 @@
                                Text="Phone Numbers"
                                TextAlignment="Right" />
                     <ListBox Height="Auto"
-                             Margin="40,77,33.333,262"
+                             Margin="40,77,0,29"
                              ItemTemplate="{DynamicResource PS-PersonPhoneNumberInfoWDT}"
                              ItemsSource="{Binding PhoneNumbers}"
-                             SelectedItem="{Binding CurrentPhoneNumber.Value, UpdateSourceTrigger=PropertyChanged}"/>
+                             SelectedItem="{Binding CurrentPhoneNumber.Value, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="272" VerticalContentAlignment="Stretch"/>
                     <TextBlock Width="Auto"
                                Height="24"
-                               Margin="40,262,0,0"
+                               Margin="392,29,0,0"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="18"
@@ -259,9 +259,10 @@
                                Text="Addresses"
                                TextAlignment="Right" />
                     <ListBox Height="Auto"
-                             Margin="40,310,33.333,29"
+                             Margin="0,77,37,29"
                              ItemTemplate="{DynamicResource PS-PersonAddressInfoWDT}"
-                             ItemsSource="{Binding Addresses}" />
+                             ItemsSource="{Binding Addresses}"
+                             SelectedItem="{Binding CurrentAddress.Value, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="402"/>
 
                 </Grid>
             </TabItem>
@@ -304,7 +305,8 @@
                     <ListBox Height="Auto"
                              Margin="29,66,10.333,10"
                              ItemTemplate="{DynamicResource PS-NextOfKinInfoWDT}"
-                             ItemsSource="{Binding NextOfKins}" />
+                             ItemsSource="{Binding NextOfKins}"
+                             SelectedItem="{Binding CurrentNextOfKin.Value, UpdateSourceTrigger=PropertyChanged}"/>
 
                 </Grid>
             </TabItem>

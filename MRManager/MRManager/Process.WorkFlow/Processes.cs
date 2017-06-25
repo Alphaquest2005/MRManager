@@ -210,14 +210,21 @@ namespace Process.WorkFlow
             ComplexActions.RequestPulledState<IPatientInfo, IPatientDetailsInfo>(3,  "Patient"),
             ComplexActions.UpdateState<IPatientDetailsInfo>(3),
             ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,IPatientDetailsInfo>(3, c => c.Id, v => v.Id),
+
             ComplexActions.RequestState<IPatientInfo, IPatientAddressesInfo>(3, x => x.Id),
+            ComplexActions.UpdateStateWhenDataChanges<IPersonAddressInfo,IPatientAddressesInfo>(3, c => c.PersonId, v => v.Id),
             ComplexActions.UpdateState<IPatientAddressesInfo>(3),
+
             ComplexActions.RequestState<IPatientInfo, IPatientPhoneNumbersInfo>(3, x => x.Id),
             ComplexActions.UpdateStateWhenDataChanges<IPersonPhoneNumbers,IPatientPhoneNumbersInfo>(3, c => c.PersonId, v => v.Id),
-
             ComplexActions.UpdateState<IPatientPhoneNumbersInfo>(3),
+            
             ComplexActions.RequestState<IPatientInfo, IPatientNextOfKinsInfo>(3, x => x.Id),
+            ComplexActions.UpdateStateWhenDataChanges<INextOfKinInfo,IPatientNextOfKinsInfo>(3, c => c.PatientId, v => v.Id),
             ComplexActions.UpdateState<IPatientNextOfKinsInfo>(3),
+            
+
+
             ComplexActions.RequestPulledState<IPatientInfo, INonResidentInfo>(3, "NonResident"),
             ComplexActions.UpdateState<INonResidentInfo>(3),
 
