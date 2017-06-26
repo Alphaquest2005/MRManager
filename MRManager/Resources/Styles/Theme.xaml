@@ -106,7 +106,7 @@
 										</DoubleAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
-								<VisualState x:Name="Disabled">
+								<!--<VisualState x:Name="Disabled">
 									<Storyboard>
 										<ColorAnimationUsingKeyFrames Duration="00:00:00.001" Storyboard.TargetName="White" Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
 											<SplineColorKeyFrame KeyTime="0" Value="#FFECECEC"/>
@@ -121,7 +121,7 @@
 											<SplineDoubleKeyFrame KeyTime="0" Value="0.5"/>
 										</DoubleAnimationUsingKeyFrames>
 									</Storyboard>
-								</VisualState>
+								</VisualState>-->
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 						<Grid.RowDefinitions>

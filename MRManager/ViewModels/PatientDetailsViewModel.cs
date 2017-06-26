@@ -7,6 +7,8 @@ using EF.Entities;
 using Interfaces;
 using JB.Collections.Reactive;
 using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
+using ReactiveUI;
 using ViewModel.Interfaces;
 using ViewModelInterfaces;
 
@@ -27,7 +29,10 @@ namespace ViewModels
             
         }
 
-       
+        private object shit(IObservedChange<IPersonPhoneNumberInfo, string> observedChange)
+        {
+            throw new NotImplementedException();
+        }
 
 
         public ReactiveProperty<IProcessState<IPatientDetailsInfo>> State => this.ViewModel.State;
@@ -63,7 +68,10 @@ namespace ViewModels
             set { _nonResidentInfo = value; OnPropertyChanged(); }
         }
 
-        public ReactiveProperty<IPersonPhoneNumberInfo> CurrentPhoneNumber { get; } = new ReactiveProperty<IPersonPhoneNumberInfo>(new PersonPhoneNumberInfo());
+        private ReactiveProperty<IPersonPhoneNumberInfo> _currentPhoneNumber = new ReactiveProperty<IPersonPhoneNumberInfo>(new PersonPhoneNumberInfo(){Id = -1});
+
+        public ReactiveProperty<IPersonPhoneNumberInfo> CurrentPhoneNumber => _currentPhoneNumber;
+
         public ReactiveProperty<IPersonAddressInfo> CurrentAddress { get; } = new ReactiveProperty<IPersonAddressInfo>(new PersonAddressInfo());
         public ReactiveProperty<INextOfKinInfo> CurrentNextOfKin { get; } = new ReactiveProperty<INextOfKinInfo>(new NextOfKinInfo());
     }

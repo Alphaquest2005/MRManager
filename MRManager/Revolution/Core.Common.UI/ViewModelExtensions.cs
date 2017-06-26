@@ -33,9 +33,12 @@ namespace Core.Common.UI
                 if (subject.GetType() == Observable.Empty<ReactiveCommand<IViewModel, Unit>>().GetType())
                 {
                     var publishMessage = CreateCommandMessageAction<IViewModel>(viewModel, itm);
+                    //TODO: integrate predicate in to execution
+                    //var t = viewModel.WhenAny(x => x,x => itm.CommandPredicate.All(z => z.Invoke(viewModel)));
                     var cmd = ReactiveCommand.Create(publishMessage);
-
                     viewModel.Commands.Add(itm.Key, cmd);
+
+                    
                 }
                 else
                 {

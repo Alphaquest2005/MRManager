@@ -17,6 +17,7 @@ namespace DomainMessages
     {
         Dictionary<string, object> Changes { get; }
         int EntityId { get; }
+        int ListId { get; }
         string EntityName { get; }
         string Attribute { get; }
         string SyntomName { get; }

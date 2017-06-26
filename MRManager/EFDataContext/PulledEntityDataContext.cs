@@ -49,15 +49,15 @@ namespace EF.DBContext
 
         private static void UpdatePulledEntityListWithChanges(IUpdatePatientEntityListWithChanges<IPatients> msg)
         {
-            UpdateDatabase(msg.EntityId, msg.EntityName, msg.Attribute, msg.SyntomName, msg.InterviewName, msg.Changes, msg.Process);
+            UpdateDatabase(msg.EntityId,msg.ListId, msg.EntityName, msg.Attribute, msg.SyntomName, msg.InterviewName, msg.Changes, msg.Process);
         }
 
         public static void UpdatePulledEntityWithChanges(IUpdatePatientEntityWithChanges<IPatients> msg)
         {
-            UpdateDatabase(msg.EntityId, msg.EntityName, null, msg.SyntomName, msg.InterviewName, msg.Changes, msg.Process);
+            UpdateDatabase(msg.EntityId,null, msg.EntityName, null, msg.SyntomName, msg.InterviewName, msg.Changes, msg.Process);
         }
 
-        private static void UpdateDatabase(int entityId, string entityName, string attribute, string syntomName, string interviewName, Dictionary<string, dynamic> changes, ISystemProcess process)
+        private static void UpdateDatabase(int entityId, int? listId, string entityName, string attribute, string syntomName, string interviewName, Dictionary<string, dynamic> changes, ISystemProcess process)
         {
             using (var ctx = new MRManagerDBContext())
             {
@@ -139,8 +139,8 @@ namespace EF.DBContext
                             question = questions.First();
                         }
 
-                        responseOptions =
-                            question.ResponseOptions.FirstOrDefault(x => x.QuestionResponseTypeId == DefaultResponseType);
+                        responseOptions = question.ResponseOptions.FirstOrDefault(x => x.Description == change.Key);
+                                           
                         if (responseOptions == null)
                         {
                             responseOptions = new ResponseOptions()
@@ -166,7 +166,9 @@ namespace EF.DBContext
                                                    Response = new List<Response>()
                                                }).Entity;
 
-                        var response = patientResponses.Response.FirstOrDefault(x => x.ResponseOptions == responseOptions);
+                        var response = listId == null
+                                        ? patientResponses.Response.FirstOrDefault(x => x.ResponseOptions == responseOptions)
+                                        : patientResponses.Response.FirstOrDefault(x => x.Id == listId);
                         if (response == null)
                         {
                             response = ctx.Response.Add(new Response()
@@ -176,7 +178,8 @@ namespace EF.DBContext
                             }).Entity;
                             question.PatientResponses.Add(patientResponses);
                         }
-
+                        if (response.ResponseOptions.Description != change.Key)
+                            response.ResponseOptions.Description = change.Key;
                         response.Value = change.Value.ToString();
                     }
 

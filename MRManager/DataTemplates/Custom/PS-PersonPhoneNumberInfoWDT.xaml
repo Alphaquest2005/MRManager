@@ -27,7 +27,7 @@
                      Margin="150,25,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
-                     Text="{Binding Path=PhoneNumber,
+                     Text="{Binding PhoneNumber,
                                     UpdateSourceTrigger=LostFocus,
                                     ValidatesOnDataErrors=True}" />
             <TextBlock Width="Auto"
@@ -38,11 +38,11 @@
                        Text="Type"
                        TextAlignment="Right" />
             <ComboBox Width="Auto"
-                     Height="24"
-                     MinWidth="75"
-                     Margin="150,50,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
+                      Height="24"
+                      MinWidth="75"
+                      Margin="150,50,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
                       DisplayMemberPath="Name"
                       FontSize="16"
                       FontWeight="Bold"
@@ -53,6 +53,7 @@
                                                     IsAsync=True}"
                       SelectedValue="{Binding PhoneType, UpdateSourceTrigger=PropertyChanged}"
                       SelectedValuePath="Name" />
+            <Button Content="Save" Command="{Binding Commands[CreatePhoneNumber] ,Source={x:Static viewModels:PatientDetailsViewModel.Instance}}" HorizontalAlignment="Left" Height="24" Margin="150,79,0,0" VerticalAlignment="Top" Width="75"/>
 
 
         </Grid>

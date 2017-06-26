@@ -9,10 +9,11 @@ namespace DomainMessages
     [Export(typeof(IUpdatePatientEntityListWithChanges<>))]
     public class UpdatePatientEntityListWithChanges<TEntity> : ProcessSystemMessage, IUpdatePatientEntityListWithChanges<TEntity> where TEntity : IEntity
     {
-        public UpdatePatientEntityListWithChanges() { }
-        public UpdatePatientEntityListWithChanges(int entityId, string entityName, string attribute, string syntomName, string interviewName, Dictionary<string, object> changes, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo, process, source)
+        public UpdatePatientEntityListWithChanges(){}
+        public UpdatePatientEntityListWithChanges(int entityId, int listId, string entityName, string attribute, string syntomName, string interviewName, Dictionary<string, object> changes, IStateCommandInfo processInfo, ISystemProcess process, ISystemSource source) : base(processInfo, process, source)
         {
             Changes = changes;
+            ListId = listId;
             EntityId = entityId;
             EntityName = entityName;
             Attribute = attribute;
@@ -22,6 +23,7 @@ namespace DomainMessages
 
         public Dictionary<string, object> Changes { get; }
         public int EntityId { get; }
+        public int ListId { get; }
         public string EntityName { get; }
         public string Attribute { get; }
         public string SyntomName { get; }

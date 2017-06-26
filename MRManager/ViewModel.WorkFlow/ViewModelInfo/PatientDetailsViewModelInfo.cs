@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Windows;
 using SystemInterfaces;
 using DomainMessages;
 using EF.Entities;
@@ -46,8 +47,10 @@ namespace RevolutionData
                         v.Addresses = new List<IPersonAddressInfo>(e.State.Entity.Addresses)
                         {
                             new PersonAddressInfo(){Address = "Create New..."}
-                        }; 
-                       
+                        };
+                        v.CurrentAddress.Value = v.Addresses.FirstOrDefault();
+                        v.NotifyPropertyChanged(nameof(v.CurrentAddress));
+
                     }),
 
                 new ViewEventSubscription
@@ -58,11 +61,17 @@ namespace RevolutionData
                     actionPredicate: new List<Func<IPatientDetailsViewModel, IProcessStateMessage<IPatientPhoneNumbersInfo>, bool>>(),
                     action: (v, e) =>
                     {
-                        if (v.CurrentPatient != null && v.CurrentPatient?.Id != e.State.Entity.Id) return;
-                        v.PhoneNumbers = new List<IPersonPhoneNumberInfo>(e.State.Entity.PhoneNumbers)
+                        Application.Current.Dispatcher.Invoke(() =>
                         {
-                            new PersonPhoneNumberInfo(){PhoneNumber = "Create New..."}
-                        }; 
+                            if (v.CurrentPatient != null && v.CurrentPatient?.Id != e.State.Entity.Id) return;
+                            v.PhoneNumbers = new List<IPersonPhoneNumberInfo>(e.State.Entity.PhoneNumbers)
+                            {
+                                new PersonPhoneNumberInfo() {PhoneNumber = "Create New..."}
+                            };
+                            v.CurrentPhoneNumber.Value = v.PhoneNumbers.FirstOrDefault();
+                            v.NotifyPropertyChanged(nameof(v.CurrentPhoneNumber));
+                        });
+
 
                     }),
 
@@ -188,7 +197,7 @@ namespace RevolutionData
 
                 new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityListWithChanges<IPatients>>(
                     key:"CreatePhoneNumber",
-                    subject:s => s.CurrentPhoneNumber,
+                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),//TODO:Try to findway to get change notification
                     commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
                     {
                         v =>  v.State?.Value?.Entity != null &&
@@ -203,13 +212,12 @@ namespace RevolutionData
                         var res = new Dictionary<string,object>()
                         {
                             {s.CurrentPhoneNumber.Value.PhoneType, s.CurrentPhoneNumber.Value.PhoneNumber },
-                           // {nameof(IPersonPhoneNumberInfo.PhoneNumber), s.CurrentPhoneNumber.Value.PhoneNumber },
-                           // {nameof(IPersonPhoneNumberInfo.PhoneType), s.CurrentPhoneNumber.Value.PhoneType },
                         };
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
                                 s.State.Value.Entity.Id ,
+                                s.CurrentPhoneNumber.Value.Id ,
                                 "Contact",
                                 "PhoneNumber",
                                 "General",
@@ -221,9 +229,11 @@ namespace RevolutionData
                             return msg;
                     }),
 
+               
+
                 new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityListWithChanges<IPatients>>(
                     key:"CreateContactAddress",
-                    subject:s => s.CurrentAddress,
+                    subject:s => s.ChangeTracking.DictionaryChanges,
                     commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
                     {
                         v =>  v.State?.Value?.Entity != null &&
@@ -246,6 +256,7 @@ namespace RevolutionData
                             new object[]
                             {
                                 s.State.Value.Entity.Id ,
+                                s.CurrentAddress.Value.Id ,
                                 "Contact",
                                 "Address",
                                 "General",
@@ -284,6 +295,7 @@ namespace RevolutionData
                             new object[]
                             {
                                 s.State.Value.Entity.Id ,
+                                s.CurrentNextOfKin.Value.Id ,
                                 "Contact",
                                 "NextOfKin",
                                 "General",

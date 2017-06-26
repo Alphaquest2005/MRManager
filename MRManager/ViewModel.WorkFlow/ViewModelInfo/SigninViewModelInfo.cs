@@ -59,7 +59,7 @@ namespace RevolutionData
                     key:"ValidateUserInfo",
                     commandPredicate:new List<Func<ISigninViewModel, bool>>
                     {
-                        v => v.ChangeTracking.Keys.Contains(nameof(ISignInInfo.Usersignin)) && v.State.Value.StateInfo.State.Status == "User Validated"
+                       // v => v.ChangeTracking.Keys.Contains(nameof(ISignInInfo.Usersignin)) && v.State.Value.StateInfo.State.Status == "User Validated"
                                                     
                     },
                     subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),

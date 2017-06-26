@@ -13,73 +13,50 @@
              Height="500"
              Background="White"
              mc:Ignorable="d">
-    <Grid Width="469"
-          Height="80"
-          DataContext="{Binding Source={x:Static viewModels:PatientSummaryListViewModel.Instance}}">
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                <GradientStop Offset="0.907" Color="#33000000" />
-                <GradientStop Offset="0.069" Color="#19FFFFFF" />
-            </LinearGradientBrush>
-        </Grid.Background>
+    <Grid Width="497" Height="Auto">
 
-        <TextBox Width="264"
-                 x:Name="NameTxt"
-                 Height="37"
-                 Margin="10,10,0,0"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 FontSize="18.667"
-                 Text="{Binding Name,
-                                    Mode=TwoWay,
-                                    UpdateSourceTrigger=LostFocus}" />
-        <TextBlock Width="264"
-                   Height="37"
-                   Margin="10,10,0,0"
+
+        <TextBlock Width="Auto"
+                   Height="24"
+                   Margin="10,25,0,0"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   FontSize="18.667"
-                   Visibility="{Binding ElementName=NameTxt, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"
-                   Text="Name..." />
-        <TextBox Width="264"
-                 Height="27"
-                 Margin="10,52,0,0"
+                   Text="Phone Number"
+                   TextAlignment="Right" />
+        <TextBox Width="Auto"
+                 Height="24"
+                 MinWidth="75"
+                 Margin="150,25,0,0"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top"
-                 FontSize="16"
-                 Text="{Binding Address,
-                                    Mode=TwoWay,
-                                    UpdateSourceTrigger=LostFocus}" />
-        <TextBox Width="190"
-                 Height="27"
-                 Margin="279,10,0,0"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 FontSize="16"
                  Text="{Binding PhoneNumber,
-                                    FallbackValue=PhoneNumber,
-                                    TargetNullValue=PhoneNumber,
-                                    Mode=TwoWay,
-                                    UpdateSourceTrigger=LostFocus}" />
-        <DatePicker Width="123"
-                    Height="27"
-                    Margin="281,52,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    FontSize="14"
-                    FontWeight="Bold"
-                    SelectedDate="{Binding BirthDate,
-                                               Mode=TwoWay,
-                                               FallbackValue = DateTime.Now.Date,TargetNullValue = DateTime.Now.Date, UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="0.5,0.5" >
-            <DatePicker.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.475"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </DatePicker.RenderTransform>
-        </DatePicker>
-        <Button Content="Save" Command="{Binding Commands[CreatePatientInfo]}" HorizontalAlignment="Left" Height="28" Margin="407,52,0,0" VerticalAlignment="Top" Width="62"/>
+                                    UpdateSourceTrigger=LostFocus,
+                                    ValidatesOnDataErrors=True}" />
+        <TextBlock Width="Auto"
+                   Height="24"
+                   Margin="10,50,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Text="Type"
+                   TextAlignment="Right" />
+        <ComboBox Width="Auto"
+                  Height="24"
+                  MinWidth="75"
+                  Margin="150,50,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  DisplayMemberPath="Name"
+                  FontSize="16"
+                  FontWeight="Bold"
+                  ItemsSource="{Binding Source={x:Static Member=viewModels:PhoneTypeCacheViewModel.Instance},
+                                                    Path=EntitySet.Value,
+                                                    UpdateSourceTrigger=PropertyChanged,
+                                                    Mode=OneWay,
+                                                    IsAsync=True}"
+                  SelectedValue="{Binding PhoneType, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedValuePath="Name" />
+        <Button Content="Save" Command="{Binding Commands[CreatePhoneNumber] ,Source={x:Static viewModels:PatientDetailsViewModel.Instance}}" HorizontalAlignment="Left" Height="24" Margin="150,79,0,0" VerticalAlignment="Top" Width="75"/>
+
+
     </Grid>
 </UserControl>

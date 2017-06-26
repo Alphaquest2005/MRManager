@@ -1,14 +1,17 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using SystemInterfaces;
+using Common.Annotations;
 using Common.Dynamic;
 using ReactiveUI;
 
 namespace Common.DataEntites
 {
    
-    public abstract class EntityView<TEntity>: IEntityView<TEntity> where TEntity: IEntity
+    public abstract class EntityView<TEntity>: IEntityView<TEntity>, INotifyPropertyChanged where TEntity: IEntity
     {
         public Type EntityType => typeof(TEntity);
 
@@ -55,8 +58,12 @@ namespace Common.DataEntites
         }
 
 
-        
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

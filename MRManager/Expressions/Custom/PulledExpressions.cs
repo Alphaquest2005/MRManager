@@ -167,14 +167,15 @@ namespace Entity.Expressions
                         x2 =>
                             x2.Questions.EntityAttributes.Entity == "Contact" &&
                             x2.Questions.EntityAttributes.Attribute == "PhoneNumber")
-                    .SelectMany(x4 => x4.Response).Where(x6 => x6.ResponseOptions.QuestionResponseTypes.Name == "Text")
+                    .SelectMany(x4 => x4.Response)
+                    .OrderByDescending(x8 => x8.Id)
                     .Select(x5 => new PersonPhoneNumberInfo()
                     {
                         Id = x5.Id,
                         PersonId = x.Id,
                         PhoneNumber = x5.Value,
                         PhoneType = x5.ResponseOptions.Description,
-                    } as IPersonPhoneNumberInfo).ToList(),
+                    } as IPersonPhoneNumberInfo).ToList().DistinctBy(x7 => x7.PhoneType).ToList(),
             };
 
 

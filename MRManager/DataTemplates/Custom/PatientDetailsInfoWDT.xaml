@@ -247,7 +247,9 @@
                              Margin="40,77,0,29"
                              ItemTemplate="{DynamicResource PS-PersonPhoneNumberInfoWDT}"
                              ItemsSource="{Binding PhoneNumbers}"
-                             SelectedItem="{Binding CurrentPhoneNumber.Value, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="272" VerticalContentAlignment="Stretch"/>
+                             SelectedItem="{Binding CurrentPhoneNumber.Value, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="272" VerticalContentAlignment="Stretch">
+                        
+                    </ListBox>
                     <TextBlock Width="Auto"
                                Height="24"
                                Margin="392,29,0,0"

@@ -1,8 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using SystemInterfaces;
 using Core.Common.UI;
 using EF.DBContexts;
@@ -19,7 +21,9 @@ namespace MRManager
 	{
 		public MainWindow()
 		{
-			InitializeComponent();
+            
+		    Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
+            InitializeComponent();
             if (File.Exists("MRManager-Logs.xml")) File.Delete("MRManager-Logs.xml");
             Logger.Initialize();
 
@@ -34,7 +38,14 @@ namespace MRManager
 
 
 		}
-        private void BackBtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+
+	    private void Current_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+	    {
+	       if(e.Exception.Message.Contains("immutable")) e.Handled = true;
+	    }
+
+
+	    private void BackBtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (IsMouseOver == true)
             {
