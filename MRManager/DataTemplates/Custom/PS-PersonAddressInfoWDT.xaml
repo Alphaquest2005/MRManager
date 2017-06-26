@@ -4,6 +4,7 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:interfaces="clr-namespace:Interfaces;assembly=Interfaces"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
                     mc:Ignorable="d">
 
     <DataTemplate x:Key="PS-PersonAddressInfoWDT" DataType="{x:Type interfaces:IPersonAddressInfo}">
@@ -82,7 +83,7 @@
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
                          Text="{Binding State, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}" />
-                <TextBlock Width="Auto"
+                <!--<TextBlock Width="Auto"
                            Height="24"
                            Margin="10,181,0,0"
                            HorizontalAlignment="Left"
@@ -95,7 +96,7 @@
                          Margin="150,181,0,0"
                          HorizontalAlignment="Left"
                          VerticalAlignment="Top"
-                         Text="{Binding ZipOrPostalCode, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}" />
+                         Text="{Binding ZipOrPostalCode, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}" />-->
                 <TextBlock Width="Auto"
                            Height="24"
                            Margin="10,206,0,0"
@@ -125,7 +126,7 @@
                          VerticalAlignment="Top"
                          Text="{Binding AddressType, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}" />
 
-
+                <Button Content="Save" Command="{Binding Commands[CreateContactAddress] ,Source={x:Static viewModels:PatientDetailsViewModel.Instance}}" HorizontalAlignment="Left" Height="24" Margin="150,235,0,0" VerticalAlignment="Top" Width="75"/>
             </Grid>
         </ScrollViewer>
     </DataTemplate>

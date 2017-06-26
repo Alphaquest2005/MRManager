@@ -231,9 +231,9 @@ namespace RevolutionData
 
                
 
-                new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityListWithChanges<IPatients>>(
+                new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityWithChanges<IPatients>>(
                     key:"CreateContactAddress",
-                    subject:s => s.ChangeTracking.DictionaryChanges,
+                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
                     commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
                     {
                         v =>  v.State?.Value?.Entity != null &&
@@ -246,19 +246,21 @@ namespace RevolutionData
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>
                     {
-                        var res = new Dictionary<string,object>()
-                        {
-                            {s.CurrentAddress.Value.AddressType, s.CurrentAddress.Value.Address },
-                            // {nameof(IPersonPhoneNumberInfo.PhoneNumber), s.CurrentPhoneNumber.Value.PhoneNumber },
-                            // {nameof(IPersonPhoneNumberInfo.PhoneType), s.CurrentPhoneNumber.Value.PhoneType },
-                        };
+                        var res = new Dictionary<string, object>();
+
+                        if (!string.IsNullOrEmpty(s.CurrentAddress.Value.AddressType)) res.Add(nameof(s.CurrentAddress.Value.AddressType), s.CurrentAddress.Value.AddressType);
+                        if (!string.IsNullOrEmpty(s.CurrentAddress.Value.Address)) res.Add(nameof(s.CurrentAddress.Value.Address), s.CurrentAddress.Value.Address);
+                        if (!string.IsNullOrEmpty(s.CurrentAddress.Value.Parish)) res.Add(nameof(s.CurrentAddress.Value.Parish), s.CurrentAddress.Value.Parish);
+                        if (!string.IsNullOrEmpty(s.CurrentAddress.Value.City)) res.Add(nameof(s.CurrentAddress.Value.City), s.CurrentAddress.Value.City);
+                        if (!string.IsNullOrEmpty(s.CurrentAddress.Value.Country)) res.Add(nameof(s.CurrentAddress.Value.Country), s.CurrentAddress.Value.Country);
+                        if (!string.IsNullOrEmpty(s.CurrentAddress.Value.State)) res.Add(nameof(s.CurrentAddress.Value.State), s.CurrentAddress.Value.State);
+                       
                         var msg = new ViewEventCommandParameter(
                             new object[]
                             {
                                 s.State.Value.Entity.Id ,
-                                s.CurrentAddress.Value.Id ,
-                                "Contact",
-                                "Address",
+                                "Contact Address",
+                               // "Address",
                                 "General",
                                 "Contact Information",
                                 res

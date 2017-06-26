@@ -265,30 +265,29 @@ namespace Entity.Expressions
                 Addresses = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                     .Where(
                         x2 =>
-                            x2.Questions.EntityAttributes.Entity == "Contact" &&
-                            x2.Questions.EntityAttributes.Attribute == "Address")
-                    .GroupBy(x6 => x6.QuestionId)
+                            x2.Questions.EntityAttributes.Entity == "Contact Address")
+                    .GroupBy(x6 => x6.Questions.EntityAttributes.Entity)
                     .Select(x5 => new PersonAddressInfo()
                     {
-                        Id = x5.Key,
+                        Id = x.Id,
                         PersonId = x.Id,
                         AddressType =
                             x5.SelectMany(x7 => x7.Response)
-                                .Where(x6 => x6.ResponseOptions.Description == "Address Type")
+                                .Where(x6 => x6.ResponseOptions.Description == nameof(IPersonAddressInfo.AddressType))
                                 .Select(x6 => x6.Value).FirstOrDefault(),
                         Parish =
-                            x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Parish")
+                            x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == nameof(IPersonAddressInfo.Parish))
                                 .Select(x6 => x6.Value).FirstOrDefault(),
                         Address =
                             x5.SelectMany(x7 => x7.Response)
-                                .Where(x6 => x6.ResponseOptions.Description == "Address")
+                                .Where(x6 => x6.ResponseOptions.Description == nameof(IPersonAddressInfo.Address))
                                 .Select(x6 => x6.Value).FirstOrDefault(),
-                        City = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "City")
+                        City = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == nameof(IPersonAddressInfo.City))
                             .Select(x6 => x6.Value).FirstOrDefault(),
-                        State = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "State")
+                        State = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == nameof(IPersonAddressInfo.State))
                             .Select(x6 => x6.Value).FirstOrDefault(),
                         Country =
-                            x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Country")
+                            x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == nameof(IPersonAddressInfo.AddressType))
                                 .Select(x6 => x6.Value).FirstOrDefault(),
 
                     } as IPersonAddressInfo).ToList()

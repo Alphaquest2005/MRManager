@@ -65,7 +65,6 @@
   <ItemGroup>
     <Compile Include="BoxingSafeConverter.cs" />
     <Compile Include="ActorExtensions.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="ListExtentions.cs" />
     <Compile Include="NullableExtensions.cs" />
     <Compile Include="PropertyExtensions.cs" />

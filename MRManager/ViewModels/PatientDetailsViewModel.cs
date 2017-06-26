@@ -72,7 +72,12 @@ namespace ViewModels
 
         public ReactiveProperty<IPersonPhoneNumberInfo> CurrentPhoneNumber => _currentPhoneNumber;
 
-        public ReactiveProperty<IPersonAddressInfo> CurrentAddress { get; } = new ReactiveProperty<IPersonAddressInfo>(new PersonAddressInfo());
-        public ReactiveProperty<INextOfKinInfo> CurrentNextOfKin { get; } = new ReactiveProperty<INextOfKinInfo>(new NextOfKinInfo());
+        private readonly ReactiveProperty<IPersonAddressInfo> _currentAddress = new ReactiveProperty<IPersonAddressInfo>(new PersonAddressInfo(){Id = -1});
+
+        public ReactiveProperty<IPersonAddressInfo> CurrentAddress => _currentAddress;
+
+        private readonly ReactiveProperty<INextOfKinInfo> _currentNextOfKin = new ReactiveProperty<INextOfKinInfo>(new NextOfKinInfo() { Id = -1 });
+
+        public ReactiveProperty<INextOfKinInfo> CurrentNextOfKin => _currentNextOfKin;
     }
 }
