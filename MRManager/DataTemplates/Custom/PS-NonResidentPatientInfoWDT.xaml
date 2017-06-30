@@ -8,32 +8,13 @@
 
     <DataTemplate x:Key="PS-NonResidentPatientInfoWDT" DataType="{x:Type interfaces:INonResidentInfo}">
         <DataTemplate.Resources>
-            <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+            <converters:ParameterVisibilityConverter x:Key="ParameterVisibilityConverter" />
         </DataTemplate.Resources>
         <Grid Width="497" Height="Auto">
 
-            <TextBlock Width="Auto"
-                       Height="24"
-                       Margin="10,10,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Text="Type"
-                       TextAlignment="Right" />
-            <TextBox Width="249"
-                       Height="24"
-                       MinWidth="75"
-                       Margin="150,10,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Text="{Binding Path=Type,
-                                      UpdateSourceTrigger=PropertyChanged,
-                                      ValidatesOnDataErrors=True}" />
+            
             <StackPanel Margin="10,50,246,0" Orientation="Vertical">
-                <Grid Width="Auto"
-          Height="49"
-          Margin="0,0,0,0"
-          Visibility="{Binding BoatName,
-                               Converter={StaticResource NullVisibilityConverter}}">
+                <Grid Width="Auto" Height="49" Margin="0,0,0,0" Visibility="{Binding Type, Converter={StaticResource ParameterVisibilityConverter}, ConverterParameter='Yachty'}">
                     <TextBlock Width="Auto"
                    Height="24"
                    Margin="0"
@@ -68,9 +49,7 @@
                                   ValidatesOnDataErrors=True}"  />
                 </Grid>
                 <Grid Height="49"
-                      Margin="0,0,0.333,0"
-                      Visibility="{Binding ArrivalDate,
-                                           Converter={StaticResource NullVisibilityConverter}}">
+                      Margin="0,0,0,0">
                     <TextBlock Width="Auto"
                                Height="24"
                                Margin="0"
@@ -104,10 +83,7 @@
                                                        UpdateSourceTrigger=PropertyChanged,
                                                        ValidatesOnDataErrors=True}" />
                 </Grid>
-                <Grid Width="Auto"
-                      Height="24"
-                      Margin="0,0,26.333,0"
-                      Visibility="{Binding School, Converter={StaticResource NullVisibilityConverter}}">
+                <Grid Width="Auto" Height="24" Margin="0,0,0,0" Visibility="{Binding Type, Converter={StaticResource ParameterVisibilityConverter}, ConverterParameter='Student'}">
                     <TextBlock Width="Auto"
                                Height="24"
                                Margin="0"
@@ -125,11 +101,7 @@
                                               UpdateSourceTrigger=PropertyChanged,
                                               ValidatesOnDataErrors=True}" />
                 </Grid>
-                <Grid Width="Auto"
-                      Height="24"
-                      Margin="0,0,-61.667,0"
-                      Visibility="{Binding HotelName,
-                                           Converter={StaticResource NullVisibilityConverter}}">
+                <Grid Width="Auto" Height="24" Margin="0,0,0,0" Visibility="{Binding Type, Converter={StaticResource ParameterVisibilityConverter}, ConverterParameter='Residental'}">
                     <TextBlock Width="Auto"
                                Height="24"
                                Margin="0"

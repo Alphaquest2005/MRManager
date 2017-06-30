@@ -194,25 +194,24 @@ namespace Entity.Expressions
                 NextOfKins = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
                     .Where(
                         x2 =>
-                            x2.Questions.EntityAttributes.Entity == "Contact" &&
-                            x2.Questions.EntityAttributes.Attribute == "NextOfKin")
-                    .GroupBy(x6 => x6.QuestionId)
+                            x2.Questions.EntityAttributes.Entity == "NextOfKin")
+                    .GroupBy(x6 => x6.Questions.EntityAttributes.Entity)
                     .Select(x5 => new NextOfKinInfo()
                     {
-                        Id = x5.Key,
+                        Id = x.Id,
                         PatientId = x.Id,
                         Relationship =
                             x5.SelectMany(x7 => x7.Response)
-                                .Where(x6 => x6.ResponseOptions.Description == "Relationship")
+                                .Where(x6 => x6.ResponseOptions.Description == nameof(INextOfKinInfo.Relationship))
                                 .Select(x6 => x6.Value).FirstOrDefault(),
-                        Name = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Name")
+                        Name = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == nameof(INextOfKinInfo.Name))
                             .Select(x6 => x6.Value).FirstOrDefault(),
                         Address =
-                            x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == "Address")
+                            x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == nameof(INextOfKinInfo.Address))
                                 .Select(x6 => x6.Value).FirstOrDefault(),
                         PhoneNumber =
                             x5.SelectMany(x7 => x7.Response)
-                                .Where(x6 => x6.ResponseOptions.Description == "PhoneNumber")
+                                .Where(x6 => x6.ResponseOptions.Description == nameof(INextOfKinInfo.PhoneNumber))
                                 .Select(x6 => x6.Value).FirstOrDefault(),
 
                     } as INextOfKinInfo).ToList(),

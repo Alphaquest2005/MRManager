@@ -195,6 +195,72 @@ namespace RevolutionData
                         return msg;
                     }),
 
+                new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityWithChanges<IPatients>>(
+                    key:"SaveNonResidentType",
+                    subject:s => s.ChangeTracking.DictionaryChanges, //Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+                    commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
+                    {
+                        v => v.ChangeTracking.Count >= 1
+                             && v.State.Value.Entity.Id != 0 
+                             && v.ChangeTracking.ContainsKey("Type")
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: s =>
+                    {
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                s.State.Value.Entity.Id,
+                                "NonResident",
+                                "General",
+                                "Personal Information",
+                                s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                            },
+                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
+                            s.Source);
+                        s.ChangeTracking.Clear();
+                        s.State.Value = null;
+
+                        return msg;
+                    }),
+
+
+                new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityWithChanges<IPatients>>(
+                    key:"SaveNonResidentInfo",
+                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+                    commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
+                    {
+                        
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: s =>
+                    {
+                        var res = new Dictionary<string, object>();
+
+                        if (!string.IsNullOrEmpty(s.NonResidentInfo.BoatName)) res.Add(nameof(s.NonResidentInfo.BoatName), s.NonResidentInfo.BoatName);
+                        if (!string.IsNullOrEmpty(s.NonResidentInfo.HotelName)) res.Add(nameof(s.NonResidentInfo.HotelName), s.NonResidentInfo.HotelName);
+                        if (!string.IsNullOrEmpty(s.NonResidentInfo.Marina)) res.Add(nameof(s.NonResidentInfo.Marina), s.NonResidentInfo.Marina);
+                        if (!string.IsNullOrEmpty(s.NonResidentInfo.School)) res.Add(nameof(s.NonResidentInfo.School), s.NonResidentInfo.School);
+                        if (s.NonResidentInfo.ArrivalDate != null) res.Add(nameof(s.NonResidentInfo.ArrivalDate), s.NonResidentInfo.ArrivalDate);
+                        if (s.NonResidentInfo.DepartureDate != null) res.Add(nameof(s.NonResidentInfo.DepartureDate), s.NonResidentInfo.DepartureDate);
+
+
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                s.State.Value.Entity.Id,
+                                "NonResident",
+                                "General",
+                                "Personal Information",
+                                res
+                            },
+                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
+                            s.Source);
+                        s.NonResidentInfo = null;
+
+                        return msg;
+                    }),
+
                 new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityListWithChanges<IPatients>>(
                     key:"CreatePhoneNumber",
                     subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),//TODO:Try to findway to get change notification
@@ -270,9 +336,9 @@ namespace RevolutionData
                         return msg;
                     }),
 
-                new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityListWithChanges<IPatients>>(
+                new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityWithChanges<IPatients>>(
                     key:"CreateNextOfKin",
-                    subject:s => s.CurrentNextOfKin,
+                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
                     commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
                     {
                         v =>  v.State?.Value?.Entity != null &&
@@ -297,8 +363,6 @@ namespace RevolutionData
                             new object[]
                             {
                                 s.State.Value.Entity.Id ,
-                                s.CurrentNextOfKin.Value.Id ,
-                                "Contact",
                                 "NextOfKin",
                                 "General",
                                 "Contact Information",

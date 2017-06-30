@@ -68,7 +68,7 @@ namespace Core.Common.UI
         }
         public void SetValue(dynamic value, [CallerMemberName] string property = "UnspecifiedProperty")
         {
-            if (State.Value.Entity.GetType().GetProperty(property, BindingFlags.Public |BindingFlags.SetProperty| BindingFlags.Instance) == null) return;
+           // if (State.Value.Entity.GetType().GetProperty(property, BindingFlags.Public |BindingFlags.SetProperty| BindingFlags.Instance) == null) return;
             if (!ChangeTracking.ContainsKey(property))
             {
                 //Hack: fix this

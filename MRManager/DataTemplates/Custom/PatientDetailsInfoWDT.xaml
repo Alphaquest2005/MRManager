@@ -341,6 +341,21 @@
                     <ContentControl Margin="10,0,0.333,300"
                                     Content="{Binding NonResidentInfo}"
                                     ContentTemplate="{DynamicResource PS-NonResidentPatientInfoWDT}" />
+                    <Button Content="Save" Command="{Binding Commands[SaveNonResidentInfo] ,Source={x:Static viewModels:PatientDetailsViewModel.Instance}}" HorizontalAlignment="Left" Height="24" Margin="617,10,0,0" VerticalAlignment="Top" Width="75"/>
+                    <TextBlock Width="26"
+                               Height="24"
+                               Margin="173,10,0,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               Text="Type"
+                               TextAlignment="Right" />
+                    <TextBox Width="249"
+                             Height="24"
+                             MinWidth="75"
+                             Margin="316,10,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             Text="{Binding Type, UpdateSourceTrigger=PropertyChanged, Delay=500, Source={x:Static viewModels:PatientDetailsViewModel.Instance}}" />
                     <TextBlock Width="92"
                                Height="85"
                                Margin="21,221,0,0"

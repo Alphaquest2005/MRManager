@@ -29,11 +29,7 @@ namespace ViewModels
             
         }
 
-        private object shit(IObservedChange<IPersonPhoneNumberInfo, string> observedChange)
-        {
-            throw new NotImplementedException();
-        }
-
+       
 
         public ReactiveProperty<IProcessState<IPatientDetailsInfo>> State => this.ViewModel.State;
         public ObservableDictionary<string, dynamic> ChangeTracking => this.ViewModel.ChangeTracking;
