@@ -16,133 +16,117 @@
 
             <TextBlock Width="Auto"
                        Height="24"
-                       Margin="10,25,0,0"
+                       Margin="10,46,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Text="Address"
                        TextAlignment="Right" />
             <TextBlock Width="Auto"
-                     Height="24"
-                     MinWidth="75"
-                     Margin="150,25,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     Text="{Binding Path=Address,
+                       Height="24"
+                       MinWidth="75"
+                       Margin="150,46,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="{Binding Path=Address,
                                     UpdateSourceTrigger=PropertyChanged,
                                     ValidatesOnDataErrors=True}" />
             <TextBlock Width="Auto"
                        Height="24"
-                       Margin="10,50,0,0"
+                       Margin="10,71,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Text="Addresslines"
                        TextAlignment="Right" />
             <TextBlock Width="Auto"
-                     Height="24"
-                     MinWidth="75"
-                     Margin="150,50,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     Text="{Binding Path=Addresslines,
+                       Height="24"
+                       MinWidth="75"
+                       Margin="150,71,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="{Binding Path=Addresslines,
                                     UpdateSourceTrigger=PropertyChanged,
                                     ValidatesOnDataErrors=True}" />
             <TextBlock Width="Auto"
                        Height="24"
-                       Margin="10,75,0,0"
+                       Margin="10,96,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Text="City"
                        TextAlignment="Right" />
             <TextBlock Width="Auto"
-                     Height="24"
-                     MinWidth="75"
-                     Margin="150,75,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     Text="{Binding Path=City,
-                                    UpdateSourceTrigger=PropertyChanged,
-                                    ValidatesOnDataErrors=True}" />
-            <TextBlock Width="Auto"
                        Height="24"
-                       Margin="10,100,0,0"
+                       MinWidth="75"
+                       Margin="150,96,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
-                       Text="Parish"
-                       TextAlignment="Right" />
-            <TextBlock Width="Auto"
-                     Height="24"
-                     MinWidth="75"
-                     Margin="150,100,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     Text="{Binding Path=Parish,
+                       Text="{Binding Path=City,
                                     UpdateSourceTrigger=PropertyChanged,
                                     ValidatesOnDataErrors=True}" />
             <TextBlock Width="Auto"
                        Height="24"
-                       Margin="10,125,0,0"
+                       Margin="10,117,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Text="State"
                        TextAlignment="Right" />
             <TextBlock Width="Auto"
-                     Height="24"
-                     MinWidth="75"
-                     Margin="150,125,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     Text="{Binding Path=State,
+                       Height="24"
+                       MinWidth="75"
+                       Margin="150,117,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="{Binding Path=State,
                                     UpdateSourceTrigger=PropertyChanged,
                                     ValidatesOnDataErrors=True}" />
             <TextBlock Width="Auto"
                        Height="24"
-                       Margin="10,150,0,0"
+                       Margin="10,142,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Text="Zip Or Postal Code"
                        TextAlignment="Right" />
             <TextBlock Width="Auto"
-                     Height="24"
-                     MinWidth="75"
-                     Margin="150,150,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     Text="{Binding Path=ZipOrPostalCode,
+                       Height="24"
+                       MinWidth="75"
+                       Margin="150,142,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="{Binding Path=ZipOrPostalCode,
                                     UpdateSourceTrigger=PropertyChanged,
                                     ValidatesOnDataErrors=True}" />
             <TextBlock Width="Auto"
                        Height="24"
-                       Margin="10,175,0,0"
+                       Margin="10,167,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Text="Country"
                        TextAlignment="Right" />
             <TextBlock Width="Auto"
-                     Height="24"
-                     MinWidth="75"
-                     Margin="150,175,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     Text="{Binding Path=Country,
+                       Height="24"
+                       MinWidth="75"
+                       Margin="150,167,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="{Binding Path=Country,
                                     UpdateSourceTrigger=PropertyChanged,
                                     ValidatesOnDataErrors=True}" />
             <TextBlock Width="Auto"
                        Height="24"
-                       Margin="10,200,0,0"
+                       Margin="10,22,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
-                       Text="Address Type Name"
+                       Text="Address Type"
                        TextAlignment="Right" />
             <TextBlock Width="Auto"
-                     Height="24"
-                     MinWidth="75"
-                     Margin="150,200,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     Text="{Binding Path=AddressTypeName,
+                       Height="24"
+                       MinWidth="75"
+                       Margin="150,22,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="{Binding Path=AddressType,
                                     UpdateSourceTrigger=PropertyChanged,
                                     ValidatesOnDataErrors=True}" />
-            <StackPanel Margin="0,225,0,0" />
+
 
         </Grid>
     </DataTemplate>

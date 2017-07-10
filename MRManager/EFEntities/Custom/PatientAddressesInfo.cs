@@ -10,4 +10,10 @@ namespace EF.Entities
     {
         public IList<IPersonAddressInfo> Addresses { get; set; }
     }
+
+    [Export(typeof(IPatientForeignAddressesInfo))]
+    public class PatientForeignAddressesInfo : EntityView<IPatients>, IPatientForeignAddressesInfo
+    {
+        public IList<IForeignAddressInfo> Addresses { get; set; }
+    }
 }

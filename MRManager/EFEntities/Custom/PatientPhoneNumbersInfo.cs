@@ -12,33 +12,11 @@ namespace EF.Entities
        
     }
 
-[Export(typeof(IPersonPhoneNumberInfo))]
-    public class PersonPhoneNumberInfo : EntityView<IPatients>, IPersonPhoneNumberInfo
+    [Export(typeof(IPatientForeignPhoneNumbersInfo))]
+    public class PatientForeignPhoneNumbersInfo : EntityView<IPatients>, IPatientForeignPhoneNumbersInfo
     {
-    public int PersonId { get; set; }
-        private string _phoneNumber;
+        public IList<IForeignPhoneNumberInfo> PhoneNumbers { get; set; }
 
-        public string PhoneNumber
-        {
-            get { return _phoneNumber; }
-            set
-            {
-                _phoneNumber = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _phoneType;
-
-        public string PhoneType
-        {
-            get { return _phoneType; }
-            set
-            {
-                _phoneType = value; 
-                OnPropertyChanged();
-            }
-        }
     }
 
     [Export(typeof(INextOfKinInfo))]

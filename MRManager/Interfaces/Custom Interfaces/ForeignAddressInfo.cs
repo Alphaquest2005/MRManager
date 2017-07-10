@@ -19,11 +19,10 @@ namespace Interfaces
         string Country { get; }
         string Parish { get; }
         string State { get; }
-        string Addresstype { get; }
-
+        
         string ZipOrPostalCode { get; }
        
-        string AddressTypeName { get; }
+        string AddressType { get; }
         Int32 PersonId { get; }
 
 

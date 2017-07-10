@@ -15,7 +15,7 @@ using ViewModel.Interfaces;
 
 namespace RevolutionData
 {
-    public class PatientDetailsViewModelInfo
+    public partial class PatientDetailsViewModelInfo
     {
         public static readonly ViewModelInfo PatientDetailsViewModel = new ViewModelInfo
             (
@@ -53,6 +53,22 @@ namespace RevolutionData
 
                     }),
 
+                new ViewEventSubscription <IPatientDetailsViewModel, IProcessStateMessage<IPatientForeignAddressesInfo>>(
+                    processId: 3,
+                    eventPredicate: e => e != null,
+                    actionPredicate: new List<Func<IPatientDetailsViewModel, IProcessStateMessage<IPatientForeignAddressesInfo>, bool>>(),
+                    action: (v, e) =>
+                    {
+                        if (v.NonResidentInfo != null && v.NonResidentInfo?.Id != e.State.Entity.Id) return;
+                        v.ForeignAddresses = new List<IForeignAddressInfo>(e.State.Entity.Addresses)
+                        {
+                            new ForeignAddressInfo(){Addresslines = "Create New..."}
+                        };
+                        v.CurrentForeignAddress.Value = v.ForeignAddresses.FirstOrDefault();
+                        v.NotifyPropertyChanged(nameof(v.CurrentForeignAddress));
+
+                    }),
+
                 new ViewEventSubscription
                     <IPatientDetailsViewModel,
                         IProcessStateMessage<IPatientPhoneNumbersInfo>>(
@@ -72,6 +88,20 @@ namespace RevolutionData
                             v.NotifyPropertyChanged(nameof(v.CurrentPhoneNumber));
                         });
 
+
+                    }),
+
+                new ViewEventSubscription<IPatientDetailsViewModel,IProcessStateMessage<IPatientForeignPhoneNumbersInfo>>(
+                    processId: 3,
+                    eventPredicate: e => e != null,
+                    actionPredicate: new List<Func<IPatientDetailsViewModel, IProcessStateMessage<IPatientForeignPhoneNumbersInfo>, bool>>(),
+                    action: (v, e) =>
+                    {
+                        if (v.CurrentPatient != null && v.CurrentPatient?.Id != e.State.Entity.Id) return;
+                        v.ForeignPhoneNumbers = new List<IForeignPhoneNumberInfo>(e.State.Entity.PhoneNumbers)
+                        {
+                            new ForeignPhoneNumberInfo(){ PhoneNumber = "Create New ..."}
+                        };
 
                     }),
 
@@ -101,8 +131,33 @@ namespace RevolutionData
                     {
                         if (v.CurrentPatient != null && v.CurrentPatient?.Id != e.State.Entity.Id) return;
                         v.NonResidentInfo = e.State.Entity;
+                        v.ForeignAddresses = new List<IForeignAddressInfo>()
+                        {
+                            new ForeignAddressInfo(){ Addresslines = "Create New ..."}
+                        };
+
+                        v.ForeignPhoneNumbers = new List<IForeignPhoneNumberInfo>()
+                        {
+                            new ForeignPhoneNumberInfo(){ PhoneNumber = "Create New ..."}
+                        };
 
                     }),
+
+                new ViewEventSubscription<IPatientDetailsViewModel,IProcessStateMessage<IPatientForeignAddressesInfo>>(
+                    processId: 3,
+                    eventPredicate: e => e != null,
+                    actionPredicate: new List<Func<IPatientDetailsViewModel, IProcessStateMessage<IPatientForeignAddressesInfo>, bool>>(),
+                    action: (v, e) =>
+                    {
+                        if (v.CurrentPatient != null && v.CurrentPatient?.Id != e.State.Entity.Id) return;
+                        v.ForeignAddresses = new List<IForeignAddressInfo>(e.State.Entity.Addresses)
+                        {
+                            new ForeignAddressInfo(){ Addresslines = "Create New ..."}
+                        };
+
+                    }),
+
+
 
                 new ViewEventSubscription<IPatientDetailsViewModel, ICurrentEntityChanged<IPatientInfo>>(
                     3,
@@ -117,6 +172,8 @@ namespace RevolutionData
                         v.PhoneNumbers = new List<IPersonPhoneNumberInfo>() {new PersonPhoneNumberInfo() {PhoneNumber = "Create New..."}};
                         v.NextOfKins = null;
                         v.NonResidentInfo = null;
+                        v.ForeignAddresses = null;
+                        v.ForeignPhoneNumbers = null;
                         v.State.Value = null;
                     }),
 
@@ -168,8 +225,8 @@ namespace RevolutionData
                     }),
 
                 new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityWithChanges<IPatients>>(
-                    key:"SavePatientDetails",
-                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+                    key: "SavePatientDetails",
+                    subject: s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
                     commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
                     {
                         v => v.ChangeTracking.Count >= 1
@@ -191,23 +248,23 @@ namespace RevolutionData
                             s.Source);
                         s.ChangeTracking.Clear();
                         s.State.Value = null;
-                        
+
                         return msg;
                     }),
-
                 new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityWithChanges<IPatients>>(
-                    key:"SaveNonResidentType",
-                    subject:s => s.ChangeTracking.DictionaryChanges, //Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+                    key: "SaveNonResidentType",
+                    subject: s => s.ChangeTracking
+                        .DictionaryChanges, //Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
                     commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
                     {
                         v => v.ChangeTracking.Count >= 1
-                             && v.State.Value.Entity.Id != 0 
+                             && v.State.Value.Entity.Id != 0
                              && v.ChangeTracking.ContainsKey("Type")
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>
                     {
-                        var msg = new ViewEventCommandParameter(
+                        var msg1 = new ViewEventCommandParameter(
                             new object[]
                             {
                                 s.State.Value.Entity.Id,
@@ -221,31 +278,34 @@ namespace RevolutionData
                         s.ChangeTracking.Clear();
                         s.State.Value = null;
 
-                        return msg;
+                        return msg1;
                     }),
-
-
                 new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityWithChanges<IPatients>>(
-                    key:"SaveNonResidentInfo",
-                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+                    key: "SaveNonResidentInfo",
+                    subject: s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
                     commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
                     {
-                        
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>
                     {
                         var res = new Dictionary<string, object>();
 
-                        if (!string.IsNullOrEmpty(s.NonResidentInfo.BoatName)) res.Add(nameof(s.NonResidentInfo.BoatName), s.NonResidentInfo.BoatName);
-                        if (!string.IsNullOrEmpty(s.NonResidentInfo.HotelName)) res.Add(nameof(s.NonResidentInfo.HotelName), s.NonResidentInfo.HotelName);
-                        if (!string.IsNullOrEmpty(s.NonResidentInfo.Marina)) res.Add(nameof(s.NonResidentInfo.Marina), s.NonResidentInfo.Marina);
-                        if (!string.IsNullOrEmpty(s.NonResidentInfo.School)) res.Add(nameof(s.NonResidentInfo.School), s.NonResidentInfo.School);
-                        if (s.NonResidentInfo.ArrivalDate != null) res.Add(nameof(s.NonResidentInfo.ArrivalDate), s.NonResidentInfo.ArrivalDate);
-                        if (s.NonResidentInfo.DepartureDate != null) res.Add(nameof(s.NonResidentInfo.DepartureDate), s.NonResidentInfo.DepartureDate);
+                        if (!string.IsNullOrEmpty(s.NonResidentInfo.BoatName))
+                            res.Add(nameof(s.NonResidentInfo.BoatName), s.NonResidentInfo.BoatName);
+                        if (!string.IsNullOrEmpty(s.NonResidentInfo.HotelName))
+                            res.Add(nameof(s.NonResidentInfo.HotelName), s.NonResidentInfo.HotelName);
+                        if (!string.IsNullOrEmpty(s.NonResidentInfo.Marina))
+                            res.Add(nameof(s.NonResidentInfo.Marina), s.NonResidentInfo.Marina);
+                        if (!string.IsNullOrEmpty(s.NonResidentInfo.School))
+                            res.Add(nameof(s.NonResidentInfo.School), s.NonResidentInfo.School);
+                        if (s.NonResidentInfo.ArrivalDate != null)
+                            res.Add(nameof(s.NonResidentInfo.ArrivalDate), s.NonResidentInfo.ArrivalDate);
+                        if (s.NonResidentInfo.DepartureDate != null)
+                            res.Add(nameof(s.NonResidentInfo.DepartureDate), s.NonResidentInfo.DepartureDate);
 
 
-                        var msg = new ViewEventCommandParameter(
+                        var msg2 = new ViewEventCommandParameter(
                             new object[]
                             {
                                 s.State.Value.Entity.Id,
@@ -258,126 +318,94 @@ namespace RevolutionData
                             s.Source);
                         s.NonResidentInfo = null;
 
-                        return msg;
+                        return msg2;
                     }),
-
+                GetCreatePhoneNumber(),
+                GetCreateContactAddress(),
+                GetCreateNextOfKin(),
                 new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityListWithChanges<IPatients>>(
-                    key:"CreatePhoneNumber",
-                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),//TODO:Try to findway to get change notification
+                    key: "SaveForeignPhoneNumber",
+                    subject: s => Observable
+                        .Empty<ReactiveCommand<IViewModel, Unit>>(), //TODO:Try to findway to get change notification
                     commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
                     {
-                        v =>  v.State?.Value?.Entity != null &&
-                              v.State.Value.Entity.Id != 0 &&
-                              v.CurrentPhoneNumber.Value.Id == 0 &&
-                        !string.IsNullOrEmpty(v.CurrentPhoneNumber.Value.PhoneNumber)
-                        && !string.IsNullOrEmpty(v.CurrentPhoneNumber.Value.PhoneType)
+                        v => v.State?.Value?.Entity != null &&
+                             v.State.Value.Entity.Id != 0 &&
+                             v.CurrentForeignPhoneNumber.Value.Id == 0 &&
+                             !string.IsNullOrEmpty(v.CurrentForeignPhoneNumber.Value.PhoneNumber)
+                             && !string.IsNullOrEmpty(v.CurrentForeignPhoneNumber.Value.PhoneType)
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>
                     {
-                        var res = new Dictionary<string,object>()
+                        var res1 = new Dictionary<string, object>()
                         {
-                            {s.CurrentPhoneNumber.Value.PhoneType, s.CurrentPhoneNumber.Value.PhoneNumber },
+                            {s.CurrentForeignPhoneNumber.Value.PhoneType, s.CurrentForeignPhoneNumber.Value.PhoneNumber},
                         };
-                        var msg = new ViewEventCommandParameter(
+                        var msg3 = new ViewEventCommandParameter(
                             new object[]
                             {
-                                s.State.Value.Entity.Id ,
-                                s.CurrentPhoneNumber.Value.Id ,
-                                "Contact",
+                                s.State.Value.Entity.Id,
+                                s.CurrentForeignPhoneNumber.Value.Id,
+                                "NonResident",
                                 "PhoneNumber",
                                 "General",
-                                "Contact Information",
-                                res
+                                "NonResident Information",
+                                res1
                             },
-                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process, s.Source);
-                        s.CurrentPhoneNumber.Value = new PersonPhoneNumberInfo(){PhoneNumber = "Create New..."};
-                            return msg;
+                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
+                            s.Source);
+                        s.CurrentForeignPhoneNumber.Value = new ForeignPhoneNumberInfo() {PhoneNumber = "Create New..."};
+                        return msg3;
                     }),
-
-               
-
                 new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityWithChanges<IPatients>>(
-                    key:"CreateContactAddress",
-                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+                    key: "SaveForeignAddress",
+                    subject: s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
                     commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
                     {
-                        v =>  v.State?.Value?.Entity != null &&
-                              v.State.Value.Entity.Id != 0 &&
-                              v.CurrentAddress.Value.Id == 0 &&
-                              !string.IsNullOrEmpty(v.CurrentAddress.Value.Address)
-                              && !string.IsNullOrEmpty(v.CurrentAddress.Value.AddressType)
-                             
+                        v => v.State?.Value?.Entity != null &&
+                             v.State.Value.Entity.Id != 0 &&
+                             v.CurrentForeignAddress.Value.Id == 0 &&
+                             !string.IsNullOrEmpty(v.CurrentForeignAddress.Value.Address)
+                             && !string.IsNullOrEmpty(v.CurrentForeignAddress.Value.AddressType)
                     },
                     //TODO: Make a type to capture this info... i killing it here
                     messageData: s =>
                     {
-                        var res = new Dictionary<string, object>();
+                        var res2 = new Dictionary<string, object>();
 
-                        if (!string.IsNullOrEmpty(s.CurrentAddress.Value.AddressType)) res.Add(nameof(s.CurrentAddress.Value.AddressType), s.CurrentAddress.Value.AddressType);
-                        if (!string.IsNullOrEmpty(s.CurrentAddress.Value.Address)) res.Add(nameof(s.CurrentAddress.Value.Address), s.CurrentAddress.Value.Address);
-                        if (!string.IsNullOrEmpty(s.CurrentAddress.Value.Parish)) res.Add(nameof(s.CurrentAddress.Value.Parish), s.CurrentAddress.Value.Parish);
-                        if (!string.IsNullOrEmpty(s.CurrentAddress.Value.City)) res.Add(nameof(s.CurrentAddress.Value.City), s.CurrentAddress.Value.City);
-                        if (!string.IsNullOrEmpty(s.CurrentAddress.Value.Country)) res.Add(nameof(s.CurrentAddress.Value.Country), s.CurrentAddress.Value.Country);
-                        if (!string.IsNullOrEmpty(s.CurrentAddress.Value.State)) res.Add(nameof(s.CurrentAddress.Value.State), s.CurrentAddress.Value.State);
-                       
-                        var msg = new ViewEventCommandParameter(
+                        if (!string.IsNullOrEmpty(s.CurrentForeignAddress.Value.AddressType))
+                            res2.Add(nameof(s.CurrentForeignAddress.Value.AddressType),
+                                s.CurrentForeignAddress.Value.AddressType);
+                        if (!string.IsNullOrEmpty(s.CurrentForeignAddress.Value.Addresslines))
+                            res2.Add(nameof(s.CurrentForeignAddress.Value.Addresslines), s.CurrentForeignAddress.Value.Addresslines);
+                        if (!string.IsNullOrEmpty(s.CurrentForeignAddress.Value.ZipOrPostalCode))
+                            res2.Add(nameof(s.CurrentForeignAddress.Value.ZipOrPostalCode), s.CurrentForeignAddress.Value.ZipOrPostalCode);
+                        if (!string.IsNullOrEmpty(s.CurrentForeignAddress.Value.City))
+                            res2.Add(nameof(s.CurrentForeignAddress.Value.City), s.CurrentForeignAddress.Value.City);
+                        if (!string.IsNullOrEmpty(s.CurrentForeignAddress.Value.Country))
+                            res2.Add(nameof(s.CurrentForeignAddress.Value.Country), s.CurrentForeignAddress.Value.Country);
+                        if (!string.IsNullOrEmpty(s.CurrentForeignAddress.Value.State))
+                            res2.Add(nameof(s.CurrentForeignAddress.Value.State), s.CurrentForeignAddress.Value.State);
+
+                        var msg4 = new ViewEventCommandParameter(
                             new object[]
                             {
-                                s.State.Value.Entity.Id ,
-                                "Contact Address",
-                               // "Address",
+                                s.State.Value.Entity.Id,
+                                "NonResident Address",
                                 "General",
-                                "Contact Information",
-                                res
+                                "NonResident Information",
+                                res2
                             },
-                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process, s.Source);
-                        s.CurrentAddress.Value = new PersonAddressInfo(){Address = "Create New..."};
-                        return msg;
-                    }),
-
-                new ViewEventCommand<IPatientDetailsViewModel, IUpdatePatientEntityWithChanges<IPatients>>(
-                    key:"CreateNextOfKin",
-                    subject:s => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
-                    commandPredicate: new List<Func<IPatientDetailsViewModel, bool>>
-                    {
-                        v =>  v.State?.Value?.Entity != null &&
-                              v.State.Value.Entity.Id != 0 &&
-                              v.CurrentNextOfKin.Value.Id == 0 &&
-                              !string.IsNullOrEmpty(v.CurrentNextOfKin.Value.Name)
-                              && !string.IsNullOrEmpty(v.CurrentNextOfKin.Value.Relationship)
-                              && !string.IsNullOrEmpty(v.CurrentNextOfKin.Value.PhoneNumber)
-
-                    },
-                    //TODO: Make a type to capture this info... i killing it here
-                    messageData: s =>
-                    {
-                        var res = new Dictionary<string,object>()
-                        {
-                            {nameof(INextOfKinInfo.PhoneNumber), s.CurrentNextOfKin.Value.PhoneNumber },
-                            {nameof(INextOfKinInfo.Name), s.CurrentNextOfKin.Value.Name },
-                            {nameof(INextOfKinInfo.Relationship), s.CurrentNextOfKin.Value.Relationship },
-                            {nameof(INextOfKinInfo.Address), s.CurrentNextOfKin.Value.Address },
-                        };
-                        var msg = new ViewEventCommandParameter(
-                            new object[]
-                            {
-                                s.State.Value.Entity.Id ,
-                                "NextOfKin",
-                                "General",
-                                "Contact Information",
-                                res
-                            },
-                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process, s.Source);
-                        s.CurrentNextOfKin.Value = new NextOfKinInfo(){Name = "Create New..."};
-                        return msg;
+                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
+                            s.Source);
+                        s.CurrentForeignAddress.Value = new ForeignAddressInfo() {Addresslines = "Create New..."};
+                        return msg4;
                     }),
 
             },
             viewModelType: typeof(IPatientDetailsViewModel),
             orientation: typeof(IBodyViewModel),
             priority:1);
-
-       
     }
 }

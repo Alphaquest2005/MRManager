@@ -178,6 +178,26 @@ namespace Entity.Expressions
                     } as IPersonPhoneNumberInfo).ToList().DistinctBy(x7 => x7.PhoneType).ToList(),
             };
 
+        public static Expression<Func<Patients, PatientForeignPhoneNumbersInfo>> PatientForeignPhoneNumbersInfoExpression { get; } =
+            x => new PatientForeignPhoneNumbersInfo()
+            {
+                Id = x.Id,
+                PhoneNumbers = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == "NonResident" &&
+                            x2.Questions.EntityAttributes.Attribute == "PhoneNumber")
+                    .SelectMany(x4 => x4.Response)
+                    .OrderByDescending(x8 => x8.Id)
+                    .Select(x5 => new ForeignPhoneNumberInfo()
+                    {
+                        Id = x5.Id,
+                        PersonId = x.Id,
+                        PhoneNumber = x5.Value,
+                        PhoneType = x5.ResponseOptions.Description,
+                    } as IForeignPhoneNumberInfo).ToList().DistinctBy(x7 => x7.PhoneType).ToList(),
+            };
+
 
         //public static Expression<Func<IList<IResponseOptions>, List<IPhoneTypes>>> PhoneTypesExpression { get; } =
         //    x => x.Where(x1 => x1.Description == "PhoneType")
@@ -292,6 +312,43 @@ namespace Entity.Expressions
                     } as IPersonAddressInfo).ToList()
             };
 
+
+        public static Expression<Func<Patients, PatientForeignAddressesInfo>> PatientForeignAddressInfoExpression { get; } =
+
+            x => new PatientForeignAddressesInfo()
+            {
+                Id = x.Id,
+
+                Addresses = x.PatientVisit.OrderByDescending(x3 => x3.Id).SelectMany(x3 => x3.PatientResponses)
+                    .Where(
+                        x2 =>
+                            x2.Questions.EntityAttributes.Entity == "NonResident Address")
+                    .GroupBy(x6 => x6.Questions.EntityAttributes.Entity)
+                    .Select(x5 => new ForeignAddressInfo()
+                    {
+                        Id = x.Id,
+                        PersonId = x.Id,
+                        AddressType =
+                            x5.SelectMany(x7 => x7.Response)
+                                .Where(x6 => x6.ResponseOptions.Description == nameof(IForeignAddressInfo.AddressType))
+                                .Select(x6 => x6.Value).FirstOrDefault(),
+                        Addresslines =
+                            x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == nameof(IForeignAddressInfo.Addresslines))
+                                .Select(x6 => x6.Value).FirstOrDefault(),
+                        ZipOrPostalCode =
+                            x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == nameof(IForeignAddressInfo.ZipOrPostalCode))
+                                .Select(x6 => x6.Value).FirstOrDefault(),
+                        
+                        City = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == nameof(IForeignAddressInfo.City))
+                            .Select(x6 => x6.Value).FirstOrDefault(),
+                        State = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == nameof(IForeignAddressInfo.State))
+                            .Select(x6 => x6.Value).FirstOrDefault(),
+                        Country =
+                            x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == nameof(IForeignAddressInfo.AddressType))
+                                .Select(x6 => x6.Value).FirstOrDefault(),
+
+                    } as IForeignAddressInfo).ToList()
+            };
 
 
         public static Expression<Func<Patients, PatientInfo>> PatientInfoExpression { get; } =

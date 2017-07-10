@@ -218,7 +218,11 @@ namespace Process.WorkFlow
             ComplexActions.RequestState<IPatientInfo, IPatientPhoneNumbersInfo>(3, x => x.Id),
             ComplexActions.UpdateStateWhenDataChanges<IPersonPhoneNumbers,IPatientPhoneNumbersInfo>(3, c => c.PersonId, v => v.Id),
             ComplexActions.UpdateState<IPatientPhoneNumbersInfo>(3),
-            
+
+            ComplexActions.RequestState<IPatientInfo, IPatientForeignPhoneNumbersInfo>(3, x => x.Id),
+            ComplexActions.UpdateStateWhenDataChanges<IForeignPhoneNumberInfo,IPatientForeignPhoneNumbersInfo>(3, c => c.PersonId, v => v.Id),
+            ComplexActions.UpdateState<IPatientForeignPhoneNumbersInfo>(3),
+
             ComplexActions.RequestState<IPatientInfo, IPatientNextOfKinsInfo>(3, x => x.Id),
             ComplexActions.UpdateStateWhenDataChanges<INextOfKinInfo,IPatientNextOfKinsInfo>(3, c => c.PatientId, v => v.Id),
             ComplexActions.UpdateState<IPatientNextOfKinsInfo>(3),
@@ -226,6 +230,12 @@ namespace Process.WorkFlow
             ComplexActions.RequestPulledState<IPatientInfo, INonResidentInfo>(3, "NonResident"),
             ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,INonResidentInfo>(3, c => c.Id, v => v.Id),
             ComplexActions.UpdateState<INonResidentInfo>(3),
+
+            ComplexActions.RequestState<IPatientInfo, IPatientForeignAddressesInfo>(3, x => x.Id),
+            ComplexActions.UpdateStateWhenDataChanges<IForeignAddressInfo,IPatientForeignAddressesInfo>(3, c => c.PersonId, v => v.Id),
+            ComplexActions.UpdateState<IPatientForeignAddressesInfo>(3),
+
+            
 
 
             ComplexActions.RequestPulledState<IPatientInfo, IPatientVitalsInfo>(3,  "Vitals"),

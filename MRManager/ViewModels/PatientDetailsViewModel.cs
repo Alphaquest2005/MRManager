@@ -52,6 +52,22 @@ namespace ViewModels
             set { _phoneNumbers = value; OnPropertyChanged(); }
         }
 
+        private IList<IForeignAddressInfo> _foreignAddresses;
+
+        public IList<IForeignAddressInfo> ForeignAddresses
+        {
+            get { return _foreignAddresses; }
+            set { _foreignAddresses = value; OnPropertyChanged(); }
+        }
+
+        private IList<IForeignPhoneNumberInfo> _foreignPhoneNumbers;
+
+        public IList<IForeignPhoneNumberInfo> ForeignPhoneNumbers
+        {
+            get { return _foreignPhoneNumbers; }
+            set { _foreignPhoneNumbers = value; OnPropertyChanged(); }
+        }
+
         public IList<INextOfKinInfo> NextOfKins
         {
             get { return _nextOfKins; }
@@ -75,5 +91,14 @@ namespace ViewModels
         private readonly ReactiveProperty<INextOfKinInfo> _currentNextOfKin = new ReactiveProperty<INextOfKinInfo>(new NextOfKinInfo() { Id = -1 });
 
         public ReactiveProperty<INextOfKinInfo> CurrentNextOfKin => _currentNextOfKin;
+
+        private ReactiveProperty<IForeignPhoneNumberInfo> _currentForeignPhoneNumber = new ReactiveProperty<IForeignPhoneNumberInfo>(new ForeignPhoneNumberInfo() { Id = -1 });
+
+        public ReactiveProperty<IForeignPhoneNumberInfo> CurrentForeignPhoneNumber => _currentForeignPhoneNumber;
+
+        private readonly ReactiveProperty<IForeignAddressInfo> _currentForeignAddress = new ReactiveProperty<IForeignAddressInfo>(new ForeignAddressInfo() { Id = -1 });
+
+        public ReactiveProperty<IForeignAddressInfo> CurrentForeignAddress => _currentForeignAddress;
+
     }
 }

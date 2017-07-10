@@ -247,7 +247,8 @@
                              Margin="40,77,0,29"
                              ItemTemplate="{DynamicResource PS-PersonPhoneNumberInfoWDT}"
                              ItemsSource="{Binding PhoneNumbers}"
-                             SelectedItem="{Binding CurrentPhoneNumber.Value, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="272" VerticalContentAlignment="Stretch">
+                             SelectedItem="{Binding CurrentPhoneNumber.Value, UpdateSourceTrigger=PropertyChanged}"
+                             HorizontalAlignment="Left" Width="272" VerticalContentAlignment="Stretch">
                         
                     </ListBox>
                     <TextBlock Width="Auto"
@@ -349,13 +350,17 @@
                                VerticalAlignment="Top"
                                Text="Type"
                                TextAlignment="Right" />
-                    <TextBox Width="249"
+                    <ComboBox Width="249"
                              Height="24"
                              MinWidth="75"
                              Margin="316,10,0,0"
                              HorizontalAlignment="Left"
                              VerticalAlignment="Top"
-                             Text="{Binding Type, UpdateSourceTrigger=PropertyChanged, Delay=500, Source={x:Static viewModels:PatientDetailsViewModel.Instance}}" />
+                             Text="{Binding Type, UpdateSourceTrigger=PropertyChanged, Source={x:Static viewModels:PatientDetailsViewModel.Instance}}">
+                        <ComboBoxItem Content="Student" />
+                        <ComboBoxItem Content="Yachty" />
+                        <ComboBoxItem Content="Hotelier" />
+                    </ComboBox>
                     <TextBlock Width="92"
                                Height="85"
                                Margin="21,221,0,0"
@@ -368,12 +373,14 @@
                                TextAlignment="Right"
                                TextWrapping="WrapWithOverflow" />
                     <ListBox Height="Auto"
-                             Margin="128,221,10.333,162"
+                             Margin="128,221,0,10"
                              ItemTemplate="{DynamicResource PS-ForeignPhoneNumberInfoWDT}"
-                             ItemsSource="{Binding State.Value.Entity.NonResident.PhoneNumbers}" />
-                    <TextBlock Width="97"
+                             ItemsSource="{Binding ForeignPhoneNumbers}"
+                             SelectedItem="{Binding CurrentForeignPhoneNumber.Value, UpdateSourceTrigger=PropertyChanged}"
+                             HorizontalAlignment="Left" Width="248" />
+                    <TextBlock Width="77"
                                Height="64"
-                               Margin="10,374,0,0"
+                               Margin="381,221,0,0"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="18"
@@ -385,9 +392,13 @@
 
 
                     <ListBox Height="Auto"
-                             Margin="117,374,21.333,9"
+                             Margin="0,221,25,9"
                              ItemTemplate="{DynamicResource PS-ForeignAddressWDT}"
-                             ItemsSource="{Binding State.Value.Entity.NonResident.Addresses}" />
+                             ItemsSource="{Binding ForeignAddresses}"
+                             SelectedItem="{Binding CurrentForeignAddress.Value, UpdateSourceTrigger=PropertyChanged}"
+                             HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" Width="314" >
+                        
+                    </ListBox>
 
                 </Grid>
             </TabItem>

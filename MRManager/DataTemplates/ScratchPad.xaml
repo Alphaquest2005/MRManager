@@ -13,57 +13,7 @@
              Height="500"
              Background="White"
              mc:Ignorable="d">
-    <Grid>
-        <ContentControl Margin="10,0,0.333,300"
-                        Content="{Binding NonResidentInfo}"
-                        ContentTemplate="{DynamicResource PS-NonResidentPatientInfoWDT}" />
-        <Button Content="Save" Command="{Binding Commands[SaveNonResidentInfo] ,Source={x:Static viewModels:PatientDetailsViewModel.Instance}}" HorizontalAlignment="Left" Height="24" Margin="617,10,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBlock Width="26"
-                   Height="24"
-                   Margin="173,10,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Text="Type"
-                   TextAlignment="Right" />
-        <TextBox Width="249"
-                 Height="24"
-                 MinWidth="75"
-                 Margin="316,10,0,0"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 Text="{Binding Type, UpdateSourceTrigger=LostFocus}" />
-        <TextBlock Width="92"
-                   Height="85"
-                   Margin="21,221,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   FontSize="18"
-                   FontWeight="Bold"
-                   Foreground="#FFFFFF36"
-                   Text="Foreign Phone Number"
-                   TextAlignment="Right"
-                   TextWrapping="WrapWithOverflow" />
-        <ListBox Height="Auto"
-                 Margin="128,221,10.333,162"
-                 ItemTemplate="{DynamicResource PS-ForeignPhoneNumberInfoWDT}"
-                 ItemsSource="{Binding State.Value.Entity.NonResident.PhoneNumbers}" />
-        <TextBlock Width="97"
-                   Height="64"
-                   Margin="10,374,0,0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   FontSize="18"
-                   FontWeight="Bold"
-                   Foreground="#FFFFFF36"
-                   Text="Foreign Address"
-                   TextAlignment="Right"
-                   TextWrapping="WrapWithOverflow" />
 
 
-        <ListBox Height="Auto"
-                 Margin="117,374,21.333,9"
-                 ItemTemplate="{DynamicResource PS-ForeignAddressWDT}"
-                 ItemsSource="{Binding State.Value.Entity.NonResident.Addresses}" />
 
-    </Grid>
 </UserControl>

@@ -80,6 +80,13 @@ namespace UnitTests.Expressions
             if (res.Any()) Debug.Assert(true);
         }
 
+	    [TestMethod]
+	    public void PulledPatientForeignPhoneExpressionGetData()
+	    {
+	        var res = MRManagerDBContext.Instance.Patients.Select(PulledExpressions.PatientForeignPhoneNumbersInfoExpression).ToList();
+	        if (res.Any()) Debug.Assert(true);
+	    }
+
         [TestMethod]
         public void DistinctTest()
         {

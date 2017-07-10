@@ -4,43 +4,44 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:interfaces="clr-namespace:Interfaces;assembly=Interfaces"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+
                     mc:Ignorable="d">
 
     <DataTemplate x:Key="PS-ForeignAddressWDT" DataType="{x:Type interfaces:IForeignAddressInfo}">
         <DataTemplate.Resources>
             <converters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
         </DataTemplate.Resources>
-        <Grid Width="497" Height="Auto">
+        <Grid Width="497" Height="211">
 
 
             <TextBlock Width="Auto"
                        Height="24"
-                       Margin="10,25,0,0"
+                       Margin="6,27,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Text="Address"
                        TextAlignment="Right" />
-            <TextBox Width="Auto"
-                     Height="24"
-                     MinWidth="75"
-                     Margin="150,25,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     Text="{Binding Path=Address,
+            <TextBlock Width="Auto"
+                       Height="24"
+                       MinWidth="75"
+                       Margin="146,27,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="{Binding Path=Address,
                                     UpdateSourceTrigger=PropertyChanged,
                                     ValidatesOnDataErrors=True}" />
             <TextBlock Width="Auto"
                        Height="24"
-                       Margin="10,50,0,0"
+                       Margin="6,52,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
-                       Text="Addresslines"
+                       Text="Address lines"
                        TextAlignment="Right" />
             <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
-                     Margin="150,50,0,0"
+                     Margin="146,52,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      Text="{Binding Path=Addresslines,
@@ -48,7 +49,7 @@
                                     ValidatesOnDataErrors=True}" />
             <TextBlock Width="Auto"
                        Height="24"
-                       Margin="10,75,0,0"
+                       Margin="6,77,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Text="City"
@@ -56,7 +57,7 @@
             <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
-                     Margin="150,75,0,0"
+                     Margin="146,77,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      Text="{Binding Path=City,
@@ -64,23 +65,7 @@
                                     ValidatesOnDataErrors=True}" />
             <TextBlock Width="Auto"
                        Height="24"
-                       Margin="10,100,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Text="Parish"
-                       TextAlignment="Right" />
-            <TextBox Width="Auto"
-                     Height="24"
-                     MinWidth="75"
-                     Margin="150,100,0,0"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top"
-                     Text="{Binding Path=Parish,
-                                    UpdateSourceTrigger=PropertyChanged,
-                                    ValidatesOnDataErrors=True}" />
-            <TextBlock Width="Auto"
-                       Height="24"
-                       Margin="10,125,0,0"
+                       Margin="6,102,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Text="State"
@@ -88,7 +73,7 @@
             <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
-                     Margin="150,125,0,0"
+                     Margin="146,102,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      Text="{Binding Path=State,
@@ -96,7 +81,7 @@
                                     ValidatesOnDataErrors=True}" />
             <TextBlock Width="Auto"
                        Height="24"
-                       Margin="10,150,0,0"
+                       Margin="6,127,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Text="Zip Or Postal Code"
@@ -104,7 +89,7 @@
             <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
-                     Margin="150,150,0,0"
+                     Margin="146,127,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      Text="{Binding Path=ZipOrPostalCode,
@@ -112,7 +97,7 @@
                                     ValidatesOnDataErrors=True}" />
             <TextBlock Width="Auto"
                        Height="24"
-                       Margin="10,175,0,0"
+                       Margin="6,152,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
                        Text="Country"
@@ -120,7 +105,7 @@
             <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
-                     Margin="150,175,0,0"
+                     Margin="146,152,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      Text="{Binding Path=Country,
@@ -128,21 +113,22 @@
                                     ValidatesOnDataErrors=True}" />
             <TextBlock Width="Auto"
                        Height="24"
-                       Margin="10,200,0,0"
+                       Margin="6,3,0,0"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
-                       Text="Address Type Name"
+                       Text="Address Type"
                        TextAlignment="Right" />
             <TextBox Width="Auto"
                      Height="24"
                      MinWidth="75"
-                     Margin="150,200,0,0"
+                     Margin="146,3,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
-                     Text="{Binding Path=AddressTypeName,
+                     Text="{Binding Path=AddressType,
                                     UpdateSourceTrigger=PropertyChanged,
                                     ValidatesOnDataErrors=True}" />
-            <StackPanel Margin="0,225,0,0" />
+
+            <Button Content="Save" Command="{Binding Commands[SaveForeignAddress], Source={x:Static viewModels:PatientDetailsViewModel.Instance}}" HorizontalAlignment="Left" Height="24" Margin="146,181,0,0" VerticalAlignment="Top" Width="75"/>
 
         </Grid>
     </DataTemplate>

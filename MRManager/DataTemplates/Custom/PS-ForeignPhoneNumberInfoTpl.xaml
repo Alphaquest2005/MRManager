@@ -42,7 +42,7 @@
                      Margin="150,50,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top"
-                     Text="{Binding Path=Type,
+                     Text="{Binding Path=PhoneType,
                                     UpdateSourceTrigger=PropertyChanged,
                                     ValidatesOnDataErrors=True}" />
 

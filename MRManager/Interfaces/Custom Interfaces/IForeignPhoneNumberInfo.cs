@@ -7,6 +7,6 @@ namespace Interfaces
     {
         Int32 PersonId { get; }
         string PhoneNumber { get; }
-        String Type { get; }
+        String PhoneType { get; }
     }
 }

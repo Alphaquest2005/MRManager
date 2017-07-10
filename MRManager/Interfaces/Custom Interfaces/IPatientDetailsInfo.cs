@@ -33,6 +33,11 @@ namespace Interfaces
         IList<IPersonAddressInfo> Addresses { get; }
     }
 
+    public interface IPatientForeignAddressesInfo : IEntityView<IPatients>
+    {
+        IList<IForeignAddressInfo> Addresses { get; }
+    }
+
     public interface IPatientNextOfKinsInfo : IEntityView<IPatients>
     {
         IList<INextOfKinInfo> NextOfKins { get; }
@@ -41,5 +46,10 @@ namespace Interfaces
     public interface IPatientPhoneNumbersInfo : IEntityView<IPatients>
     {
         IList<IPersonPhoneNumberInfo> PhoneNumbers { get; }
+    }
+
+    public interface IPatientForeignPhoneNumbersInfo : IEntityView<IPatients>
+    {
+        IList<IForeignPhoneNumberInfo> PhoneNumbers { get; }
     }
 }

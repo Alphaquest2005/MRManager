@@ -49,6 +49,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Custom\ForeignPhoneNumberInfo.cs" />
     <Compile Include="Custom\PatientHistoryInfo.cs" />
     <Compile Include="Custom\DoctorInfo.cs" />
     <Compile Include="Custom\InterviewInfo.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Custom\PatientResponseInfo.cs" />
     <Compile Include="Custom\PatientSyntomInfo.cs" />
     <Compile Include="Custom\PatientVisitInfo.cs" />
+    <Compile Include="Custom\PersonPhoneNumberInfo.cs" />
     <Compile Include="Custom\QuestionInfo.cs" />
     <Compile Include="Custom\QuestionResponseOptionInfo.cs" />
     <Compile Include="Custom\ResponseInfo.cs" />

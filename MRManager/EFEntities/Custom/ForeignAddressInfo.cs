@@ -8,7 +8,7 @@ namespace EF.Entities
     public class ForeignAddressInfo : EntityView<IPersons_Patient>, IForeignAddressInfo
     {
         
-        public string Address { get; set; }
+        public string Address => $"{Addresslines}, {City}, {Parish}, {State}, {ZipOrPostalCode}, {Country}";
         public string Addresslines { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
@@ -16,7 +16,7 @@ namespace EF.Entities
         public string State { get; set; }
         public string Addresstype { get; set; }
         public string ZipOrPostalCode { get; set; }
-        public string AddressTypeName { get; set; }
+        public string AddressType { get; set; }
         public int PersonId { get; set; }
     }
 }

@@ -34,12 +34,17 @@ namespace ViewModel.Interfaces
         IPatientInfo CurrentPatient { get; set; }
         IList<IPersonAddressInfo> Addresses { get; set; }
         IList<IPersonPhoneNumberInfo> PhoneNumbers { get; set; }
+        IList<IForeignAddressInfo> ForeignAddresses { get; set; }
+        IList<IForeignPhoneNumberInfo> ForeignPhoneNumbers { get; set; }
         IList<INextOfKinInfo> NextOfKins { get; set; }
         INonResidentInfo NonResidentInfo { get; set; }
 
         ReactiveProperty<IPersonPhoneNumberInfo> CurrentPhoneNumber { get; }
         ReactiveProperty<IPersonAddressInfo> CurrentAddress { get; }
         ReactiveProperty<INextOfKinInfo> CurrentNextOfKin { get; }
+        ReactiveProperty<IForeignPhoneNumberInfo> CurrentForeignPhoneNumber { get; }
+        ReactiveProperty<IForeignAddressInfo> CurrentForeignAddress { get; }
+
     }
 
     public interface IPatientVitalsViewModel : IEntityViewModel<IPatientVitalsInfo>

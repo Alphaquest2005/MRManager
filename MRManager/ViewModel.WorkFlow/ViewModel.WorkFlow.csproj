@@ -68,7 +68,15 @@
     <Compile Include="ViewModelInfo\HeaderViewModelInfo.cs" />
     <Compile Include="ViewModelInfo\InterviewListViewModelInfo.cs" />
     <Compile Include="ViewModelInfo\MainWindowViewModelInfo.cs" />
+    <Compile Include="ViewModelInfo\PatientDetailsViewModelInfo.CreateContactAddress.cs" />
+    <Compile Include="ViewModelInfo\PatientDetailsViewModelInfo.CreateNextOfKin.cs" />
+    <Compile Include="ViewModelInfo\PatientDetailsViewModelInfo.CreatePhoneNumber.cs" />
     <Compile Include="ViewModelInfo\PatientDetailsViewModelInfo.cs" />
+    <Compile Include="ViewModelInfo\PatientDetailsViewModelInfo.SaveForeignAddress.cs" />
+    <Compile Include="ViewModelInfo\PatientDetailsViewModelInfo.SaveForeignPhoneNumber.cs" />
+    <Compile Include="ViewModelInfo\PatientDetailsViewModelInfo.SaveNonResidentInfo.cs" />
+    <Compile Include="ViewModelInfo\PatientDetailsViewModelInfo.SaveNonResidentType.cs" />
+    <Compile Include="ViewModelInfo\PatientDetailsViewModelInfo.SavePatientDetails.cs" />
     <Compile Include="ViewModelInfo\PatientSummaryListViewModelInfo.cs" />
     <Compile Include="ViewModelInfo\PatientSyntomsViewModelInfo.cs" />
     <Compile Include="ViewModelInfo\PatientVitalsViewModelInfo.cs" />
