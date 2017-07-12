@@ -39,6 +39,8 @@ namespace ViewModel.Interfaces
         IList<INextOfKinInfo> NextOfKins { get; set; }
         INonResidentInfo NonResidentInfo { get; set; }
 
+        int SelectedTabIndex { get; set; }
+
         ReactiveProperty<IPersonPhoneNumberInfo> CurrentPhoneNumber { get; }
         ReactiveProperty<IPersonAddressInfo> CurrentAddress { get; }
         ReactiveProperty<INextOfKinInfo> CurrentNextOfKin { get; }

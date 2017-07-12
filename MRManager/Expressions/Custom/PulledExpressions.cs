@@ -344,7 +344,7 @@ namespace Entity.Expressions
                         State = x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == nameof(IForeignAddressInfo.State))
                             .Select(x6 => x6.Value).FirstOrDefault(),
                         Country =
-                            x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == nameof(IForeignAddressInfo.AddressType))
+                            x5.SelectMany(x7 => x7.Response).Where(x6 => x6.ResponseOptions.Description == nameof(IForeignAddressInfo.Country))
                                 .Select(x6 => x6.Value).FirstOrDefault(),
 
                     } as IForeignAddressInfo).ToList()

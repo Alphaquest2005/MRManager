@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WaterNutDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaSalesAllocationsEx' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AsycudaSalesAllocationsEx">
+          <Key>
+            <PropertyRef Name="AllocationId" />
+            
+            
+            
+            
+          </Key>
+          <Property Name="AllocationId" Type="int" Nullable="false" />
+          <Property Name="TotalValue" Type="float" />
+          <Property Name="AllocatedValue" Type="float" />
+          <Property Name="Status" Type="varchar(max)" />
+          <Property Name="QtyAllocated" Type="float" />
+          <Property Name="xLineNumber" Type="int" />
+          <Property Name="PreviousItem_Id" Type="int" Nullable="false" />
+          <Property Name="InvoiceDate" Type="datetime" />
+          <Property Name="SalesQuantity" Type="float" />
+          <Property Name="SalesQtyAllocated" Type="float" />
+          <Property Name="InvoiceNo" Type="varchar" MaxLength="50" />
+          <Property Name="ItemNumber" Type="varchar" MaxLength="50" />
+          <Property Name="ItemDescription" Type="varchar(max)" />
+          <Property Name="EntryDataDetailsId" Type="int" />
+          <Property Name="xBond_Item_Id" Type="int" Nullable="false" />
+          <Property Name="DutyFreePaid" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="pCNumber" Type="varchar(max)" />
+          <Property Name="pRegistrationDate" Type="datetime" />
+          <Property Name="pQuantity" Type="float" />
+          <Property Name="pQtyAllocated" Type="float" />
+          <Property Name="PiQuantity" Type="float" />
+          <Property Name="xCNumber" Type="varchar(max)" />
+          <Property Name="xRegistrationDate" Type="datetime" />
+          <Property Name="pReferenceNumber" Type="nvarchar(max)" />
+          <Property Name="pLineNumber" Type="int" />
+          <Property Name="xASYCUDA_Id" Type="int" />
+          <Property Name="pASYCUDA_Id" Type="int" />
+          <Property Name="Cost" Type="float" />
+          <Property Name="Total_CIF_itm" Type="float" />
+          <Property Name="DutyLiability" Type="float" />
+          <Property Name="TaxAmount" Type="float" />
+          <Property Name="pIsAssessed" Type="bit" />
+          <Property Name="DoNotAllocateSales" Type="bit" />
+          <Property Name="DoNotAllocatePreviousEntry" Type="bit" />
+          <Property Name="SANumber" Type="int" Nullable="false" />
+          <Property Name="xReferenceNumber" Type="nvarchar(max)" />
+          <Property Name="TariffCode" Type="varchar" MaxLength="8" />
+          <Property Name="Invalid" Type="bit" />
+          <Property Name="pExpiryDate" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="WaterNutDBModelStoreContainer">
+          <EntitySet Name="AsycudaSalesAllocationsEx" EntityType="Self.AsycudaSalesAllocationsEx" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[AsycudaSalesAllocationsEx].[AllocationId] AS [AllocationId], 
+[AsycudaSalesAllocationsEx].[TotalValue] AS [TotalValue], 
+[AsycudaSalesAllocationsEx].[AllocatedValue] AS [AllocatedValue], 
+[AsycudaSalesAllocationsEx].[Status] AS [Status], 
+[AsycudaSalesAllocationsEx].[QtyAllocated] AS [QtyAllocated], 
+[AsycudaSalesAllocationsEx].[xLineNumber] AS [xLineNumber], 
+[AsycudaSalesAllocationsEx].[PreviousItem_Id] AS [PreviousItem_Id], 
+[AsycudaSalesAllocationsEx].[InvoiceDate] AS [InvoiceDate], 
+[AsycudaSalesAllocationsEx].[SalesQuantity] AS [SalesQuantity], 
+[AsycudaSalesAllocationsEx].[SalesQtyAllocated] AS [SalesQtyAllocated], 
+[AsycudaSalesAllocationsEx].[InvoiceNo] AS [InvoiceNo], 
+[AsycudaSalesAllocationsEx].[ItemNumber] AS [ItemNumber], 
+[AsycudaSalesAllocationsEx].[ItemDescription] AS [ItemDescription], 
+[AsycudaSalesAllocationsEx].[EntryDataDetailsId] AS [EntryDataDetailsId], 
+[AsycudaSalesAllocationsEx].[xBond_Item_Id] AS [xBond_Item_Id], 
+[AsycudaSalesAllocationsEx].[DutyFreePaid] AS [DutyFreePaid], 
+[AsycudaSalesAllocationsEx].[pCNumber] AS [pCNumber], 
+[AsycudaSalesAllocationsEx].[pRegistrationDate] AS [pRegistrationDate], 
+[AsycudaSalesAllocationsEx].[pQuantity] AS [pQuantity], 
+[AsycudaSalesAllocationsEx].[pQtyAllocated] AS [pQtyAllocated], 
+[AsycudaSalesAllocationsEx].[PiQuantity] AS [PiQuantity], 
+[AsycudaSalesAllocationsEx].[xCNumber] AS [xCNumber], 
+[AsycudaSalesAllocationsEx].[xRegistrationDate] AS [xRegistrationDate], 
+[AsycudaSalesAllocationsEx].[pReferenceNumber] AS [pReferenceNumber], 
+[AsycudaSalesAllocationsEx].[pLineNumber] AS [pLineNumber], 
+[AsycudaSalesAllocationsEx].[xASYCUDA_Id] AS [xASYCUDA_Id], 
+[AsycudaSalesAllocationsEx].[pASYCUDA_Id] AS [pASYCUDA_Id], 
+[AsycudaSalesAllocationsEx].[Cost] AS [Cost], 
+[AsycudaSalesAllocationsEx].[Total_CIF_itm] AS [Total_CIF_itm], 
+[AsycudaSalesAllocationsEx].[DutyLiability] AS [DutyLiability], 
+[AsycudaSalesAllocationsEx].[TaxAmount] AS [TaxAmount], 
+[AsycudaSalesAllocationsEx].[pIsAssessed] AS [pIsAssessed], 
+[AsycudaSalesAllocationsEx].[DoNotAllocateSales] AS [DoNotAllocateSales], 
+[AsycudaSalesAllocationsEx].[DoNotAllocatePreviousEntry] AS [DoNotAllocatePreviousEntry], 
+[AsycudaSalesAllocationsEx].[SANumber] AS [SANumber], 
+[AsycudaSalesAllocationsEx].[xReferenceNumber] AS [xReferenceNumber], 
+[AsycudaSalesAllocationsEx].[TariffCode] AS [TariffCode], 
+[AsycudaSalesAllocationsEx].[Invalid] AS [Invalid], 
+[AsycudaSalesAllocationsEx].[pExpiryDate] AS [pExpiryDate]
+FROM [dbo].[AsycudaSalesAllocationsEx] AS [AsycudaSalesAllocationsEx]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WaterNutDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AllocationQS" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="AsycudaSalesAllocationsExs" EntityType="WaterNutDBModel.AsycudaSalesAllocationsEx" />
+        </EntityContainer>
+        <EntityType Name="AsycudaSalesAllocationsEx">
+          <Key>
+            <PropertyRef Name="AllocationId" />
+          </Key>
+          <Property Name="AllocationId" Type="Int32" Nullable="false" />
+          <Property Name="TotalValue" Type="Double"><a:DisplayTotalsProperty xmlns:a="http://schemas.tempuri.com/DisplayTotalsProperty">True</a:DisplayTotalsProperty></Property>
+          <Property Name="AllocatedValue" Type="Double"><a:DisplayTotalsProperty xmlns:a="http://schemas.tempuri.com/DisplayTotalsProperty">True</a:DisplayTotalsProperty></Property>
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="QtyAllocated" Type="Double" />
+          <Property Name="xLineNumber" Type="Int32" />
+          <Property Name="PreviousItem_Id" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="3"><a:OrderByProperty xmlns:a="http://schemas.tempuri.com/OrderByProperty">Desc</a:OrderByProperty></Property>
+          <Property Name="SalesQuantity" Type="Double" />
+          <Property Name="SalesQtyAllocated" Type="Double" />
+          <Property Name="InvoiceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EntryDataDetailsId" Type="Int32" />
+          <Property Name="xBond_Item_Id" Type="Int32" Nullable="false" />
+          <Property Name="DutyFreePaid" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="pCNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pRegistrationDate" Type="DateTime" Precision="3" />
+          <Property Name="pQuantity" Type="Double" />
+          <Property Name="pQtyAllocated" Type="Double" />
+          <Property Name="PiQuantity" Type="Double" />
+          <Property Name="xCNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="xRegistrationDate" Type="DateTime" Precision="3" />
+          <Property Name="pLineNumber" Type="Int32" />
+          <Property Name="xASYCUDA_Id" Type="Int32" />
+          <Property Name="pASYCUDA_Id" Type="Int32" />
+          <Property Name="Cost" Type="Double" />
+          <Property Name="Total_CIF_itm" Type="Double" />
+          <Property Name="DutyLiability" Type="Double" />
+          <Property Name="TaxAmount" Type="Double" />
+          <Property Name="pIsAssessed" Type="Boolean" />
+          <Property Name="DoNotAllocateSales" Type="Boolean" />
+          <Property Name="DoNotAllocatePreviousEntry" Type="Boolean" />
+          <Property Name="SANumber" Type="Int32" Nullable="false" />
+          <Property Name="pReferenceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="xReferenceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TariffCode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Invalid" Type="Boolean" />
+          <Property Name="pExpiryDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WaterNutDBModelStoreContainer" CdmEntityContainer="AllocationQS">
+          <EntitySetMapping Name="AsycudaSalesAllocationsExs">
+            <EntityTypeMapping TypeName="WaterNutDBModel.AsycudaSalesAllocationsEx">
+              <MappingFragment StoreEntitySet="AsycudaSalesAllocationsEx">
+                <ScalarProperty Name="pExpiryDate" ColumnName="pExpiryDate" />
+                <ScalarProperty Name="Invalid" ColumnName="Invalid" />
+                <ScalarProperty Name="TariffCode" ColumnName="TariffCode" />
+                <ScalarProperty Name="xReferenceNumber" ColumnName="xReferenceNumber" />
+                <ScalarProperty Name="pReferenceNumber" ColumnName="pReferenceNumber" />
+                <ScalarProperty Name="SANumber" ColumnName="SANumber" />
+                <ScalarProperty Name="DoNotAllocatePreviousEntry" ColumnName="DoNotAllocatePreviousEntry" />
+                <ScalarProperty Name="DoNotAllocateSales" ColumnName="DoNotAllocateSales" />
+                <ScalarProperty Name="pIsAssessed" ColumnName="pIsAssessed" />
+                <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+                <ScalarProperty Name="DutyLiability" ColumnName="DutyLiability" />
+                <ScalarProperty Name="Total_CIF_itm" ColumnName="Total_CIF_itm" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="pASYCUDA_Id" ColumnName="pASYCUDA_Id" />
+                <ScalarProperty Name="xASYCUDA_Id" ColumnName="xASYCUDA_Id" />
+                <ScalarProperty Name="pLineNumber" ColumnName="pLineNumber" />
+                <ScalarProperty Name="xRegistrationDate" ColumnName="xRegistrationDate" />
+                <ScalarProperty Name="xCNumber" ColumnName="xCNumber" />
+                <ScalarProperty Name="PiQuantity" ColumnName="PiQuantity" />
+                <ScalarProperty Name="pQtyAllocated" ColumnName="pQtyAllocated" />
+                <ScalarProperty Name="pQuantity" ColumnName="pQuantity" />
+                <ScalarProperty Name="pRegistrationDate" ColumnName="pRegistrationDate" />
+                <ScalarProperty Name="pCNumber" ColumnName="pCNumber" />
+                <ScalarProperty Name="DutyFreePaid" ColumnName="DutyFreePaid" />
+                <ScalarProperty Name="xBond_Item_Id" ColumnName="xBond_Item_Id" />
+                <ScalarProperty Name="EntryDataDetailsId" ColumnName="EntryDataDetailsId" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="ItemNumber" ColumnName="ItemNumber" />
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+                <ScalarProperty Name="SalesQtyAllocated" ColumnName="SalesQtyAllocated" />
+                <ScalarProperty Name="SalesQuantity" ColumnName="SalesQuantity" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="PreviousItem_Id" ColumnName="PreviousItem_Id" />
+                <ScalarProperty Name="xLineNumber" ColumnName="xLineNumber" />
+                <ScalarProperty Name="QtyAllocated" ColumnName="QtyAllocated" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AllocatedValue" ColumnName="AllocatedValue" />
+                <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+                <ScalarProperty Name="AllocationId" ColumnName="AllocationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

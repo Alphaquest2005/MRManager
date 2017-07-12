@@ -56,31 +56,35 @@ namespace EFRepository
 
         }
 
-    
 
 
-        public static void GetEntityViewWithChanges(IGetEntityViewWithChanges<TView> msg)
+       public static void GetEntityViewWithChanges(IGetEntityViewWithChanges<TView> msg)
         {
             try
             {
-                var exp = FindExpressionClass.FindExpression<TDbEntity, TDbView>();
-                using (var ctx = new TDbContext())
-                {
-                    // ReSharper disable once ReplaceWithSingleCallToFirstOrDefault cuz EF7 bugging LEAVE JUST SO
-                    var whereStr = msg.Changes.Aggregate("", (str, itm) => str + ($"{itm.Key} == \"{itm.Value}\" &&"));
-                    whereStr = whereStr.TrimEnd('&');
-                    if (string.IsNullOrEmpty(whereStr)) return;
-                    var res = ctx.Set<TDbEntity>().AsNoTracking().Select(exp).Where(whereStr).FirstOrDefault();//
-                    if (res != null)
+                    var exp = FindExpressionClass.FindExpression<TDbEntity, TDbView>();
+                    using (var ctx = new TDbContext())
                     {
-                        EventMessageBus.Current.Publish(new EntityViewWithChangesFound<TView>((TView)(object)res, msg.Changes, new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process, Source), Source);
+                        // ReSharper disable once ReplaceWithSingleCallToFirstOrDefault cuz EF7 bugging LEAVE JUST SO
+                        var whereStr =
+                            msg.Changes.Aggregate("", (str, itm) => str + ($"{itm.Key} == \"{itm.Value}\" &&"));
+                        whereStr = whereStr.TrimEnd('&');
+                        if (string.IsNullOrEmpty(whereStr)) return;
+                        var res = ctx.Set<TDbEntity>().AsNoTracking().Select(exp).Where(whereStr).FirstOrDefault(); //
+
+                        if (res != null)
+                        {
+                            EventMessageBus.Current.Publish(
+                                new EntityViewWithChangesFound<TView>((TView) (object) res, msg.Changes,
+                                    new StateEventInfo(msg.Process.Id, EntityView.Events.EntityViewFound), msg.Process,
+                                    Source), Source);
+                        }
+                        else
+                        {
+                            // not found
+                        }
                     }
-                    else
-                    {
-                        // not found
-                    }
-                    
-                }
+                
             }
             catch (Exception ex)
             {

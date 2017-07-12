@@ -14,6 +14,49 @@
              Background="White"
              mc:Ignorable="d">
 
+    <Grid>
+        <ContentControl Margin="10,0,0.333,300"
+                                    Content="{Binding NonResidentInfo}"
+                                    ContentTemplate="{DynamicResource PS-NonResidentPatientInfoTpl}" />
+        <TextBlock Width="218"
+                               Height="21"
+                               Margin="56,195,0,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="#FFFFFF36"
+                               Text="Foreign Phone Number"
+                               TextAlignment="Right"
+                               TextWrapping="WrapWithOverflow" />
+        <ListBox Height="Auto"
+                             Margin="56,221,0,10"
+                             ItemTemplate="{DynamicResource PS-ForeignPhoneNumberInfoTpl}"
+                             ItemsSource="{Binding ForeignPhoneNumbers}"
+                             SelectedItem="{Binding CurrentForeignPhoneNumber.Value, UpdateSourceTrigger=PropertyChanged}"
+                             HorizontalAlignment="Left" Width="280" />
+        <TextBlock Width="161"
+                               Height="26"
+                               Margin="397,197,0,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="#FFFFFF36"
+                               Text="Foreign Address"
+                               TextAlignment="Right"
+                               TextWrapping="WrapWithOverflow" />
 
+
+        <ListBox Height="Auto"
+                             Margin="0,221,60,9"
+                             ItemTemplate="{DynamicResource PS-ForeignAddressTpl}"
+                             ItemsSource="{Binding ForeignAddresses}"
+                             SelectedItem="{Binding CurrentForeignAddress.Value, UpdateSourceTrigger=PropertyChanged}"
+                             HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" Width="329" >
+
+        </ListBox>
+
+    </Grid>
 
 </UserControl>

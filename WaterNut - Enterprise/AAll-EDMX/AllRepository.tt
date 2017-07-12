@@ -1,0 +1,73 @@
+﻿<#@ template language="C#" debug="false" hostspecific="true"#>
+<#@ output extension=".cs"#>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="C:\Prism\Core.Common\T4 Library\T4\Repository.tt" #>
+<#
+
+
+    RepositoryTPL sv = new RepositoryTPL();            
+    
+
+    sv.CreateRepositories("WaterNut","AllocationQS",
+					 @"C:\prism\WaterNut - Enterprise\AllocationQS\AllocationQS.edmx",                     
+                     @"C:\Prism\WaterNut - Enterprise\WaterNut.Client.Repositories\WaterNut.Client.Repositories.csproj" );   
+
+		sv.CreateRepositories("WaterNut","CounterPointQS",
+			@"C:\prism\WaterNut - Enterprise\CounterPointQS\CounterPointQS.edmx",            
+            @"C:\Prism\WaterNut - Enterprise\WaterNut.Client.Repositories\WaterNut.Client.Repositories.csproj" );   
+
+		sv.CreateRepositories("WaterNut","CoreEntities",
+					@"C:\prism\WaterNut - Enterprise\CoreEntities\CoreEntities.edmx",                   
+                    @"C:\Prism\WaterNut - Enterprise\WaterNut.Client.Repositories\WaterNut.Client.Repositories.csproj" );   
+
+	sv.CreateRepositories("WaterNut","EntryDataQS",
+					 @"C:\prism\WaterNut - Enterprise\EntryDataQS\EntryDataQS.edmx",                     
+                     @"C:\Prism\WaterNut - Enterprise\WaterNut.Client.Repositories\WaterNut.Client.Repositories.csproj" );   
+
+	sv.CreateRepositories("WaterNut","InventoryQS",
+					 @"C:\prism\WaterNut - Enterprise\InventoryQS\InventoryQS.edmx",                    
+                     @"C:\Prism\WaterNut - Enterprise\WaterNut.Client.Repositories\WaterNut.Client.Repositories.csproj" );   
+
+	sv.CreateRepositories("WaterNut","PreviousDocumentQS",
+					 @"C:\prism\WaterNut - Enterprise\PreviousDocumentQS\PreviousDocumentQS.edmx",                    
+                     @"C:\Prism\WaterNut - Enterprise\WaterNut.Client.Repositories\WaterNut.Client.Repositories.csproj" );     
+
+   sv.CreateRepositories("WaterNut","SalesDataQS",
+				     @"C:\prism\WaterNut - Enterprise\SalesDataQS\SalesDataQS.edmx",                     
+                     @"C:\Prism\WaterNut - Enterprise\WaterNut.Client.Repositories\WaterNut.Client.Repositories.csproj" );
+
+    sv.CreateRepositories("WaterNut","OversShortQS",
+				     @"C:\prism\WaterNut - Enterprise\OversShortQS\OversShortQS.edmx",                     
+                     @"C:\Prism\WaterNut - Enterprise\WaterNut.Client.Repositories\WaterNut.Client.Repositories.csproj" );
+
+//////////////////////////////////////////Data space///////////////////////////////////////
+
+//
+	//sv.CreateRepositories("WaterNut","AllocationDS",
+                     //@"C:\Prism\WaterNut - Enterprise\AllocationDS\AllocationDS.edmx",
+                     //@"C:\Prism\WaterNut - Enterprise\WaterNut.Client.Repositories\WaterNut.Client.Repositories.csproj" );   
+//
+	//sv.CreateRepositories("WaterNut","DocumentDS",
+                     //@"C:\Prism\WaterNut - Enterprise\DocumentDS\DocumentDS.edmx",
+                     //@"C:\Prism\WaterNut - Enterprise\WaterNut.Client.Repositories\WaterNut.Client.Repositories.csproj" );   
+//
+	//sv.CreateRepositories("WaterNut","DocumentItemDS",
+                     //@"C:\Prism\WaterNut - Enterprise\DocumentItemDS\DocumentItemDS.edmx",
+                    //@"C:\Prism\WaterNut - Enterprise\WaterNut.Client.Repositories\WaterNut.Client.Repositories.csproj" );   
+//
+	//sv.CreateRepositories("WaterNut","EntryDataDS.edmx",
+                     //@"C:\Prism\WaterNut - Enterprise\EntryDataDS\EntryDataDS.edmx",
+                     //@"C:\Prism\WaterNut - Enterprise\WaterNut.Client.Repositories\WaterNut.Client.Repositories.csproj" );   
+//
+	//sv.CreateRepositories("WaterNut","InventoryDS",
+                     //@"C:\Prism\WaterNut - Enterprise\InventoryDS\InventoryDS.edmx",
+                     //@"C:\Prism\WaterNut - Enterprise\WaterNut.Client.Repositories\WaterNut.Client.Repositories.csproj" );   
+//
+	//sv.CreateRepositories("WaterNut","PreviousDocumentDS",
+                     //@"C:\Prism\WaterNut - Enterprise\PreviousDocumentDS\PreviousDocumentDS.edmx",
+                     //@"C:\Prism\WaterNut - Enterprise\WaterNut.Client.Repositories\WaterNut.Client.Repositories.csproj" );     
+//
+    //sv.CreateRepositories("WaterNut","QuickBooksDS",
+                     //@"C:\Prism\WaterNut - Enterprise\QuickBooksDS\QuickBooksDS.edmx",
+                     //@"C:\Prism\WaterNut - Enterprise\WaterNut.Client.Repositories\WaterNut.Client.Repositories.csproj" );  
+#>

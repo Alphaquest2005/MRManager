@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EC5D3B67-8BEC-4678-A876-ED6ECBBFE59A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WaterNut.Client.Services</RootNamespace>
+    <AssemblyName>WaterNut.Client.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Core.Common">
+      <HintPath>..\Common Dlls\Core.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Core.Common.Contracts">
+      <HintPath>..\Common Dlls\Core.Common.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Serialize.Linq">
+      <HintPath>..\packages\Serialize.Linq.1.2.3\lib\net45\Serialize.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <HintPath>..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.ComponentModel.DataAnnotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AllocationQS\AsycudaSalesAllocationsExClient.cs" />
+    <Compile Include="ClientService.cs" />
+    <Compile Include="CoreEntities\ApplicationSettingsClient.cs" />
+    <Compile Include="CoreEntities\AsycudaDocumentClient.cs" />
+    <Compile Include="CoreEntities\AsycudaDocumentItemClient.cs" />
+    <Compile Include="CoreEntities\AsycudaDocumentSetExClient.cs" />
+    <Compile Include="CoreEntities\Customs_ProcedureClient.cs" />
+    <Compile Include="CoreEntities\Document_TypeClient.cs" />
+    <Compile Include="CoreEntities\EntryPreviousItemsClient.cs" />
+    <Compile Include="CoreEntities\LicenceSummaryClient.cs" />
+    <Compile Include="CoreEntities\SubItemsClient.cs" />
+    <Compile Include="CoreEntities\xcuda_Supplementary_unitClient.cs" />
+    <Compile Include="CounterPointQS\CounterPointPODetailsClient.cs" />
+    <Compile Include="CounterPointQS\CounterPointPOsClient.cs" />
+    <Compile Include="CounterPointQS\CounterPointSalesClient.cs" />
+    <Compile Include="CounterPointQS\CounterPointSalesDetailsClient.cs" />
+    <Compile Include="Custom Services\AllocationQS\AsycudaSalesAllocationsExClient.cs" />
+    <Compile Include="Custom Services\AllocationQS\AllocationsClient.cs" />
+    <Compile Include="Custom Services\CoreEntities\AsycudaDocumentItemClient.cs" />
+    <Compile Include="Custom Services\CoreEntities\SystemClient.cs" />
+    <Compile Include="Custom Services\CoreEntities\DocumentSetClient.cs" />
+    <Compile Include="Custom Services\CoreEntities\AsycudaDocumentClient.cs" />
+    <Compile Include="Custom Services\CounterPointQS\CounterPointPOsClient.cs" />
+    <Compile Include="Custom Services\CounterPointQS\CounterPointSalesClient.cs" />
+    <Compile Include="Custom Services\EntryDataQS\ContainerExClient.cs" />
+    <Compile Include="Custom Services\EntryDataQS\EntryDataDetailsExClient.cs" />
+    <Compile Include="Custom Services\EntryDataQS\EntryDataExClient.cs" />
+    <Compile Include="Custom Services\InventoryQS\InventoryItemsEXClient.cs" />
+    <Compile Include="Custom Services\OversShortQS\OverShortDetailsEXClient.cs" />
+    <Compile Include="Custom Services\OversShortQS\OversShortEXClient.cs" />
+    <Compile Include="Custom Services\SalesDataQS\SalesDataClient.cs" />
+    <Compile Include="Custom Services\SalesDataQS\SalesDataDetailClient.cs" />
+    <Compile Include="EntryDataQS\AsycudaDocumentEntryDataClient.cs" />
+    <Compile Include="EntryDataQS\AsycudaDocumentSetEntryDataClient.cs" />
+    <Compile Include="EntryDataQS\AsycudaDocumentSetEntryDataDetailClient.cs" />
+    <Compile Include="EntryDataQS\ContainerEntryDataClient.cs" />
+    <Compile Include="EntryDataQS\ContainerExClient.cs" />
+    <Compile Include="EntryDataQS\ContainerTypeClient.cs" />
+    <Compile Include="EntryDataQS\EmptyFullCodeClient.cs" />
+    <Compile Include="EntryDataQS\EntryDataDetailsExClient.cs" />
+    <Compile Include="EntryDataQS\EntryDataExClient.cs" />
+    <Compile Include="EntryDataQS\InventoryItemsExClient.cs" />
+    <Compile Include="EntryDataQS\PackageTypeClient.cs" />
+    <Compile Include="InventoryQS\EntryDataDetailsExClient.cs" />
+    <Compile Include="InventoryQS\InventoryItemsExClient.cs" />
+    <Compile Include="InventoryQS\TariffCategoryClient.cs" />
+    <Compile Include="InventoryQS\TariffCodesClient.cs" />
+    <Compile Include="InventoryQS\TariffSupUnitLkpsClient.cs" />
+    <Compile Include="OversShortQS\AsycudaDocumentClient.cs" />
+    <Compile Include="OversShortQS\AsycudaDocumentItemClient.cs" />
+    <Compile Include="OversShortQS\InventoryItemClient.cs" />
+    <Compile Include="OversShortQS\OverShortAllocationsEXClient.cs" />
+    <Compile Include="OversShortQS\OverShortDetailAllocationClient.cs" />
+    <Compile Include="OversShortQS\OverShortDetailClient.cs" />
+    <Compile Include="OversShortQS\OverShortDetailsEXClient.cs" />
+    <Compile Include="OversShortQS\OverShortSuggestedDocumentClient.cs" />
+    <Compile Include="OversShortQS\OversShortClient.cs" />
+    <Compile Include="OversShortQS\OversShortEXClient.cs" />
+    <Compile Include="PreviousDocumentQS\PreviousDocumentClient.cs" />
+    <Compile Include="PreviousDocumentQS\PreviousDocumentItemClient.cs" />
+    <Compile Include="PreviousDocumentQS\PreviousItemsExClient.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalesDataQS\AsycudaDocumentEntryDataClient.cs" />
+    <Compile Include="SalesDataQS\AsycudaDocumentSetEntryDataClient.cs" />
+    <Compile Include="SalesDataQS\AsycudaDocumentSetEntryDataDetailsClient.cs" />
+    <Compile Include="SalesDataQS\SalesDataAllocationsClient.cs" />
+    <Compile Include="SalesDataQS\SalesDataClient.cs" />
+    <Compile Include="SalesDataQS\SalesDataDetailClient.cs" />
+    <Compile Include="ServiceFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WaterNut.Client.Contracts\WaterNut.Client.Contracts.csproj">
+      <Project>{658bb505-087e-48b0-9adc-b227367af83c}</Project>
+      <Name>WaterNut.Client.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WaterNut.Client.DTO\WaterNut.Client.DTO.csproj">
+      <Project>{c05bd1be-cb99-451e-845d-077243489c5b}</Project>
+      <Name>WaterNut.Client.DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Custom Services\DocumentDS\" />
+    <Folder Include="Custom Services\DocumentItemDS\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

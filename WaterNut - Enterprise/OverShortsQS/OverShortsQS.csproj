@@ -1,0 +1,462 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CCBE069C-6B98-43EC-BC45-DA7D4CF2B7FE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OverShortsQS</RootNamespace>
+    <AssemblyName>OverShortsQS</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business.Entities.cs">
+      <DependentUpon>Business.Entities.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Business.Models.cs">
+      <DependentUpon>Business.Models.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Client.Entities.cs">
+      <DependentUpon>Client.Entities.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Client.Models.cs">
+      <DependentUpon>Client.Models.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="DomainInterface.cs">
+      <DependentUpon>DomainInterface.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Mapping.cs">
+      <DependentUpon>Mapping.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ObjectContext.cs">
+      <DependentUpon>ObjectContext.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="OverShortQS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OverShortQS.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ServiceLayer.cs">
+      <DependentUpon>ServiceLayer.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModels.cs">
+      <DependentUpon>ViewModels.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views.cs">
+      <DependentUpon>Views.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="OverShortQS.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OverShortQS.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="Business.Entities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Business.Entities.cs</LastGenOutput>
+      <LastOutputs>
+..\WaterNut.Business.Entities\Generated Business Entities\OverShortQS\AsycudaDocument.cs
+..\WaterNut.Business.Entities\Generated Business Entities\OverShortQS\AsycudaDocumentItem.cs
+..\WaterNut.Business.Entities\Generated Business Entities\OverShortQS\InventoryItem.cs
+..\WaterNut.Business.Entities\Generated Business Entities\OverShortQS\OverShortAllocationsEX.cs
+..\WaterNut.Business.Entities\Generated Business Entities\OverShortQS\OverShortDetail.cs
+..\WaterNut.Business.Entities\Generated Business Entities\OverShortQS\OverShortDetailAllocation.cs
+..\WaterNut.Business.Entities\Generated Business Entities\OverShortQS\OverShortDetailsEX.cs
+..\WaterNut.Business.Entities\Generated Business Entities\OverShortQS\OverShortSuggestedDocument.cs
+..\WaterNut.Business.Entities\Generated Business Entities\OverShortQS\OversShort.cs
+..\WaterNut.Business.Entities\Generated Business Entities\OverShortQS\OversShortEX.cs
+</LastOutputs>
+    </None>
+    <None Include="Business.Models.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Business.Models.cs</LastGenOutput>
+      <LastOutputs>
+..\WaterNut.Business.Entities\Generated Constructors Models\OverShortQS\AsycudaDocument.cs
+..\WaterNut.Business.Entities\Generated Constructors Models\OverShortQS\AsycudaDocumentItem.cs
+..\WaterNut.Business.Entities\Generated Constructors Models\OverShortQS\InventoryItem.cs
+..\WaterNut.Business.Entities\Generated Constructors Models\OverShortQS\OverShortAllocationsEX.cs
+..\WaterNut.Business.Entities\Generated Constructors Models\OverShortQS\OverShortDetail.cs
+..\WaterNut.Business.Entities\Generated Constructors Models\OverShortQS\OverShortDetailAllocation.cs
+..\WaterNut.Business.Entities\Generated Constructors Models\OverShortQS\OverShortDetailsEX.cs
+..\WaterNut.Business.Entities\Generated Constructors Models\OverShortQS\OverShortSuggestedDocument.cs
+..\WaterNut.Business.Entities\Generated Constructors Models\OverShortQS\OversShort.cs
+..\WaterNut.Business.Entities\Generated Constructors Models\OverShortQS\OversShortEX.cs
+..\WaterNut.Business.Entities\Generated IEntitiyWithKey Models\OverShortQS\AsycudaDocument.cs
+..\WaterNut.Business.Entities\Generated IEntitiyWithKey Models\OverShortQS\AsycudaDocumentItem.cs
+..\WaterNut.Business.Entities\Generated IEntitiyWithKey Models\OverShortQS\InventoryItem.cs
+..\WaterNut.Business.Entities\Generated IEntitiyWithKey Models\OverShortQS\OverShortAllocationsEX.cs
+..\WaterNut.Business.Entities\Generated IEntitiyWithKey Models\OverShortQS\OverShortDetail.cs
+..\WaterNut.Business.Entities\Generated IEntitiyWithKey Models\OverShortQS\OverShortDetailAllocation.cs
+..\WaterNut.Business.Entities\Generated IEntitiyWithKey Models\OverShortQS\OverShortDetailsEX.cs
+..\WaterNut.Business.Entities\Generated IEntitiyWithKey Models\OverShortQS\OverShortSuggestedDocument.cs
+..\WaterNut.Business.Entities\Generated IEntitiyWithKey Models\OverShortQS\OversShort.cs
+..\WaterNut.Business.Entities\Generated IEntitiyWithKey Models\OverShortQS\OversShortEX.cs
+..\WaterNut.Business.Entities\Generated IIdentitfiableEntity Models\OverShortQS\AsycudaDocument.cs
+..\WaterNut.Business.Entities\Generated IIdentitfiableEntity Models\OverShortQS\AsycudaDocumentItem.cs
+..\WaterNut.Business.Entities\Generated IIdentitfiableEntity Models\OverShortQS\InventoryItem.cs
+..\WaterNut.Business.Entities\Generated IIdentitfiableEntity Models\OverShortQS\OverShortAllocationsEX.cs
+..\WaterNut.Business.Entities\Generated IIdentitfiableEntity Models\OverShortQS\OverShortDetail.cs
+..\WaterNut.Business.Entities\Generated IIdentitfiableEntity Models\OverShortQS\OverShortDetailAllocation.cs
+..\WaterNut.Business.Entities\Generated IIdentitfiableEntity Models\OverShortQS\OverShortDetailsEX.cs
+..\WaterNut.Business.Entities\Generated IIdentitfiableEntity Models\OverShortQS\OverShortSuggestedDocument.cs
+..\WaterNut.Business.Entities\Generated IIdentitfiableEntity Models\OverShortQS\OversShort.cs
+..\WaterNut.Business.Entities\Generated IIdentitfiableEntity Models\OverShortQS\OversShortEX.cs
+..\WaterNut.Business.Entities\Generated MyNavProp Models\OverShortQS\AsycudaDocument.cs
+..\WaterNut.Business.Entities\Generated MyNavProp Models\OverShortQS\AsycudaDocumentItem.cs
+..\WaterNut.Business.Entities\Generated MyNavProp Models\OverShortQS\InventoryItem.cs
+..\WaterNut.Business.Entities\Generated MyNavProp Models\OverShortQS\OverShortAllocationsEX.cs
+..\WaterNut.Business.Entities\Generated MyNavProp Models\OverShortQS\OverShortDetail.cs
+..\WaterNut.Business.Entities\Generated MyNavProp Models\OverShortQS\OverShortDetailAllocation.cs
+..\WaterNut.Business.Entities\Generated MyNavProp Models\OverShortQS\OverShortDetailsEX.cs
+..\WaterNut.Business.Entities\Generated MyNavProp Models\OverShortQS\OverShortSuggestedDocument.cs
+..\WaterNut.Business.Entities\Generated MyNavProp Models\OverShortQS\OversShort.cs
+..\WaterNut.Business.Entities\Generated MyNavProp Models\OverShortQS\OversShortEX.cs
+</LastOutputs>
+    </None>
+    <None Include="Client.Entities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Client.Entities.cs</LastGenOutput>
+      <LastOutputs>
+..\WaterNut.Client.DTO\Generated Client Entities\OverShortQS\AsycudaDocumentDTO.cs
+..\WaterNut.Client.DTO\Generated Client Entities\OverShortQS\AsycudaDocumentItemDTO.cs
+..\WaterNut.Client.DTO\Generated Client Entities\OverShortQS\InventoryItemDTO.cs
+..\WaterNut.Client.DTO\Generated Client Entities\OverShortQS\OverShortAllocationsEXDTO.cs
+..\WaterNut.Client.DTO\Generated Client Entities\OverShortQS\OverShortDetailAllocationDTO.cs
+..\WaterNut.Client.DTO\Generated Client Entities\OverShortQS\OverShortDetailDTO.cs
+..\WaterNut.Client.DTO\Generated Client Entities\OverShortQS\OverShortDetailsEXDTO.cs
+..\WaterNut.Client.DTO\Generated Client Entities\OverShortQS\OverShortSuggestedDocumentDTO.cs
+..\WaterNut.Client.DTO\Generated Client Entities\OverShortQS\OversShortDTO.cs
+..\WaterNut.Client.DTO\Generated Client Entities\OverShortQS\OversShortEXDTO.cs
+..\WaterNut.Client.Entities\Generated Client Entities\OverShortQS\AsycudaDocument.cs
+..\WaterNut.Client.Entities\Generated Client Entities\OverShortQS\AsycudaDocumentItem.cs
+..\WaterNut.Client.Entities\Generated Client Entities\OverShortQS\InventoryItem.cs
+..\WaterNut.Client.Entities\Generated Client Entities\OverShortQS\OverShortAllocationsEX.cs
+..\WaterNut.Client.Entities\Generated Client Entities\OverShortQS\OverShortDetail.cs
+..\WaterNut.Client.Entities\Generated Client Entities\OverShortQS\OverShortDetailAllocation.cs
+..\WaterNut.Client.Entities\Generated Client Entities\OverShortQS\OverShortDetailsEX.cs
+..\WaterNut.Client.Entities\Generated Client Entities\OverShortQS\OverShortSuggestedDocument.cs
+..\WaterNut.Client.Entities\Generated Client Entities\OverShortQS\OversShort.cs
+..\WaterNut.Client.Entities\Generated Client Entities\OverShortQS\OversShortEX.cs
+</LastOutputs>
+    </None>
+    <None Include="Client.Models.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Client.Models.cs</LastGenOutput>
+      <LastOutputs>
+..\WaterNut.Client.DTO\Generated IIdentitfiableEntity Models\OverShortQS\AsycudaDocumentDTO.cs
+..\WaterNut.Client.DTO\Generated IIdentitfiableEntity Models\OverShortQS\AsycudaDocumentItemDTO.cs
+..\WaterNut.Client.DTO\Generated IIdentitfiableEntity Models\OverShortQS\InventoryItemDTO.cs
+..\WaterNut.Client.DTO\Generated IIdentitfiableEntity Models\OverShortQS\OverShortAllocationsEXDTO.cs
+..\WaterNut.Client.DTO\Generated IIdentitfiableEntity Models\OverShortQS\OverShortDetailAllocationDTO.cs
+..\WaterNut.Client.DTO\Generated IIdentitfiableEntity Models\OverShortQS\OverShortDetailDTO.cs
+..\WaterNut.Client.DTO\Generated IIdentitfiableEntity Models\OverShortQS\OverShortDetailsEXDTO.cs
+..\WaterNut.Client.DTO\Generated IIdentitfiableEntity Models\OverShortQS\OverShortSuggestedDocumentDTO.cs
+..\WaterNut.Client.DTO\Generated IIdentitfiableEntity Models\OverShortQS\OversShortDTO.cs
+..\WaterNut.Client.DTO\Generated IIdentitfiableEntity Models\OverShortQS\OversShortEXDTO.cs
+..\WaterNut.Client.DTO\Generated MyNavProp Models\OverShortQS\AsycudaDocumentDTO.cs
+..\WaterNut.Client.DTO\Generated MyNavProp Models\OverShortQS\AsycudaDocumentItemDTO.cs
+..\WaterNut.Client.DTO\Generated MyNavProp Models\OverShortQS\InventoryItemDTO.cs
+..\WaterNut.Client.DTO\Generated MyNavProp Models\OverShortQS\OverShortAllocationsEXDTO.cs
+..\WaterNut.Client.DTO\Generated MyNavProp Models\OverShortQS\OverShortDetailAllocationDTO.cs
+..\WaterNut.Client.DTO\Generated MyNavProp Models\OverShortQS\OverShortDetailDTO.cs
+..\WaterNut.Client.DTO\Generated MyNavProp Models\OverShortQS\OverShortDetailsEXDTO.cs
+..\WaterNut.Client.DTO\Generated MyNavProp Models\OverShortQS\OverShortSuggestedDocumentDTO.cs
+..\WaterNut.Client.DTO\Generated MyNavProp Models\OverShortQS\OversShortDTO.cs
+..\WaterNut.Client.DTO\Generated MyNavProp Models\OverShortQS\OversShortEXDTO.cs
+..\WaterNut.Client.Entities\Generated Constructors Models\OverShortQS\AsycudaDocument.cs
+..\WaterNut.Client.Entities\Generated Constructors Models\OverShortQS\AsycudaDocumentItem.cs
+..\WaterNut.Client.Entities\Generated Constructors Models\OverShortQS\InventoryItem.cs
+..\WaterNut.Client.Entities\Generated Constructors Models\OverShortQS\OverShortAllocationsEX.cs
+..\WaterNut.Client.Entities\Generated Constructors Models\OverShortQS\OverShortDetail.cs
+..\WaterNut.Client.Entities\Generated Constructors Models\OverShortQS\OverShortDetailAllocation.cs
+..\WaterNut.Client.Entities\Generated Constructors Models\OverShortQS\OverShortDetailsEX.cs
+..\WaterNut.Client.Entities\Generated Constructors Models\OverShortQS\OverShortSuggestedDocument.cs
+..\WaterNut.Client.Entities\Generated Constructors Models\OverShortQS\OversShort.cs
+..\WaterNut.Client.Entities\Generated Constructors Models\OverShortQS\OversShortEX.cs
+..\WaterNut.Client.Entities\Generated CreateEntityFromString\OverShortQS\AsycudaDocument.cs
+..\WaterNut.Client.Entities\Generated CreateEntityFromString\OverShortQS\AsycudaDocumentItem.cs
+..\WaterNut.Client.Entities\Generated CreateEntityFromString\OverShortQS\InventoryItem.cs
+..\WaterNut.Client.Entities\Generated CreateEntityFromString\OverShortQS\OverShortAllocationsEX.cs
+..\WaterNut.Client.Entities\Generated CreateEntityFromString\OverShortQS\OverShortDetail.cs
+..\WaterNut.Client.Entities\Generated CreateEntityFromString\OverShortQS\OverShortDetailAllocation.cs
+..\WaterNut.Client.Entities\Generated CreateEntityFromString\OverShortQS\OverShortDetailsEX.cs
+..\WaterNut.Client.Entities\Generated CreateEntityFromString\OverShortQS\OverShortSuggestedDocument.cs
+..\WaterNut.Client.Entities\Generated CreateEntityFromString\OverShortQS\OversShort.cs
+..\WaterNut.Client.Entities\Generated CreateEntityFromString\OverShortQS\OversShortEX.cs
+..\WaterNut.Client.Entities\Generated IIdentitfiableEntity Models\OverShortQS\AsycudaDocument.cs
+..\WaterNut.Client.Entities\Generated IIdentitfiableEntity Models\OverShortQS\AsycudaDocumentItem.cs
+..\WaterNut.Client.Entities\Generated IIdentitfiableEntity Models\OverShortQS\InventoryItem.cs
+..\WaterNut.Client.Entities\Generated IIdentitfiableEntity Models\OverShortQS\OverShortAllocationsEX.cs
+..\WaterNut.Client.Entities\Generated IIdentitfiableEntity Models\OverShortQS\OverShortDetail.cs
+..\WaterNut.Client.Entities\Generated IIdentitfiableEntity Models\OverShortQS\OverShortDetailAllocation.cs
+..\WaterNut.Client.Entities\Generated IIdentitfiableEntity Models\OverShortQS\OverShortDetailsEX.cs
+..\WaterNut.Client.Entities\Generated IIdentitfiableEntity Models\OverShortQS\OverShortSuggestedDocument.cs
+..\WaterNut.Client.Entities\Generated IIdentitfiableEntity Models\OverShortQS\OversShort.cs
+..\WaterNut.Client.Entities\Generated IIdentitfiableEntity Models\OverShortQS\OversShortEX.cs
+..\WaterNut.Client.Entities\Generated MyNavProp Models\OverShortQS\AsycudaDocument.cs
+..\WaterNut.Client.Entities\Generated MyNavProp Models\OverShortQS\AsycudaDocumentItem.cs
+..\WaterNut.Client.Entities\Generated MyNavProp Models\OverShortQS\InventoryItem.cs
+..\WaterNut.Client.Entities\Generated MyNavProp Models\OverShortQS\OverShortAllocationsEX.cs
+..\WaterNut.Client.Entities\Generated MyNavProp Models\OverShortQS\OverShortDetail.cs
+..\WaterNut.Client.Entities\Generated MyNavProp Models\OverShortQS\OverShortDetailAllocation.cs
+..\WaterNut.Client.Entities\Generated MyNavProp Models\OverShortQS\OverShortDetailsEX.cs
+..\WaterNut.Client.Entities\Generated MyNavProp Models\OverShortQS\OverShortSuggestedDocument.cs
+..\WaterNut.Client.Entities\Generated MyNavProp Models\OverShortQS\OversShort.cs
+..\WaterNut.Client.Entities\Generated MyNavProp Models\OverShortQS\OversShortEX.cs
+</LastOutputs>
+    </None>
+    <None Include="DomainInterface.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DomainInterface.cs</LastGenOutput>
+      <LastOutputs>
+..\DomainInterfaces\Generated Interfaces\IInventoryItem.cs
+..\WaterNut.Client.Entities\Generated Interface Implementation\OverShortQS\IInventoryItem\InventoryItem.cs
+</LastOutputs>
+    </None>
+    <None Include="Mapping.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Mapping.cs</LastGenOutput>
+      <LastOutputs>
+..\WaterNut.Business.Entities\Generated Mappings\OverShortQS\AsycudaDocument.map.cs
+..\WaterNut.Business.Entities\Generated Mappings\OverShortQS\AsycudaDocumentItem.map.cs
+..\WaterNut.Business.Entities\Generated Mappings\OverShortQS\InventoryItem.map.cs
+..\WaterNut.Business.Entities\Generated Mappings\OverShortQS\OverShortAllocationsEX.map.cs
+..\WaterNut.Business.Entities\Generated Mappings\OverShortQS\OverShortDetail.map.cs
+..\WaterNut.Business.Entities\Generated Mappings\OverShortQS\OverShortDetailAllocation.map.cs
+..\WaterNut.Business.Entities\Generated Mappings\OverShortQS\OverShortDetailsEX.map.cs
+..\WaterNut.Business.Entities\Generated Mappings\OverShortQS\OverShortSuggestedDocument.map.cs
+..\WaterNut.Business.Entities\Generated Mappings\OverShortQS\OversShort.map.cs
+..\WaterNut.Business.Entities\Generated Mappings\OverShortQS\OversShortEX.map.cs
+..\WaterNut.Data\DbContextMappings\OverShortQS.Mappings.cs
+</LastOutputs>
+    </None>
+    <None Include="ObjectContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ObjectContext.cs</LastGenOutput>
+      <LastOutputs>..\WaterNut.Data\ObjectContexts\OverShortQS.Context.cs</LastOutputs>
+    </None>
+    <None Include="OverShortQS.edmx.diagram">
+      <DependentUpon>OverShortQS.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Repository.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Repository.cs</LastGenOutput>
+      <LastOutputs>
+..\WaterNut.Client.Repositories\Generated Repositories\OverShortQS\AsycudaDocumentItemRepository.cs
+..\WaterNut.Client.Repositories\Generated Repositories\OverShortQS\AsycudaDocumentRepository.cs
+..\WaterNut.Client.Repositories\Generated Repositories\OverShortQS\InventoryItemRepository.cs
+..\WaterNut.Client.Repositories\Generated Repositories\OverShortQS\OverShortAllocationsEXRepository.cs
+..\WaterNut.Client.Repositories\Generated Repositories\OverShortQS\OverShortDetailAllocationRepository.cs
+..\WaterNut.Client.Repositories\Generated Repositories\OverShortQS\OverShortDetailRepository.cs
+..\WaterNut.Client.Repositories\Generated Repositories\OverShortQS\OverShortDetailsEXRepository.cs
+..\WaterNut.Client.Repositories\Generated Repositories\OverShortQS\OverShortSuggestedDocumentRepository.cs
+..\WaterNut.Client.Repositories\Generated Repositories\OverShortQS\OversShortEXRepository.cs
+..\WaterNut.Client.Repositories\Generated Repositories\OverShortQS\OversShortRepository.cs
+..\WaterNut.Client.Repositories\Generated Repositories\OverShortQSRepository.cs
+</LastOutputs>
+    </None>
+    <None Include="ServiceLayer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ServiceLayer.cs</LastGenOutput>
+      <LastOutputs>
+..\WaterNut.Business.Services\Contracts\OverShortQS\IAsycudaDocumentItemService.cs
+..\WaterNut.Business.Services\Contracts\OverShortQS\IAsycudaDocumentService.cs
+..\WaterNut.Business.Services\Contracts\OverShortQS\IInventoryItemService.cs
+..\WaterNut.Business.Services\Contracts\OverShortQS\IOverShortAllocationsEXService.cs
+..\WaterNut.Business.Services\Contracts\OverShortQS\IOverShortDetailAllocationService.cs
+..\WaterNut.Business.Services\Contracts\OverShortQS\IOverShortDetailService.cs
+..\WaterNut.Business.Services\Contracts\OverShortQS\IOverShortDetailsEXService.cs
+..\WaterNut.Business.Services\Contracts\OverShortQS\IOverShortSuggestedDocumentService.cs
+..\WaterNut.Business.Services\Contracts\OverShortQS\IOversShortEXService.cs
+..\WaterNut.Business.Services\Contracts\OverShortQS\IOversShortService.cs
+..\WaterNut.Business.Services\Services\OverShortQS\AsycudaDocumentItemService.cs
+..\WaterNut.Business.Services\Services\OverShortQS\AsycudaDocumentService.cs
+..\WaterNut.Business.Services\Services\OverShortQS\InventoryItemService.cs
+..\WaterNut.Business.Services\Services\OverShortQS\OverShortAllocationsEXService.cs
+..\WaterNut.Business.Services\Services\OverShortQS\OverShortDetailAllocationService.cs
+..\WaterNut.Business.Services\Services\OverShortQS\OverShortDetailService.cs
+..\WaterNut.Business.Services\Services\OverShortQS\OverShortDetailsEXService.cs
+..\WaterNut.Business.Services\Services\OverShortQS\OverShortSuggestedDocumentService.cs
+..\WaterNut.Business.Services\Services\OverShortQS\OversShortEXService.cs
+..\WaterNut.Business.Services\Services\OverShortQS\OversShortService.cs
+..\WaterNut.Client.Contracts\OverShortQS\IAsycudaDocumentItemService.cs
+..\WaterNut.Client.Contracts\OverShortQS\IAsycudaDocumentService.cs
+..\WaterNut.Client.Contracts\OverShortQS\IInventoryItemService.cs
+..\WaterNut.Client.Contracts\OverShortQS\IOverShortAllocationsEXService.cs
+..\WaterNut.Client.Contracts\OverShortQS\IOverShortDetailAllocationService.cs
+..\WaterNut.Client.Contracts\OverShortQS\IOverShortDetailService.cs
+..\WaterNut.Client.Contracts\OverShortQS\IOverShortDetailsEXService.cs
+..\WaterNut.Client.Contracts\OverShortQS\IOverShortSuggestedDocumentService.cs
+..\WaterNut.Client.Contracts\OverShortQS\IOversShortEXService.cs
+..\WaterNut.Client.Contracts\OverShortQS\IOversShortService.cs
+..\WaterNut.Client.Services\OverShortQS\AsycudaDocumentClient.cs
+..\WaterNut.Client.Services\OverShortQS\AsycudaDocumentItemClient.cs
+..\WaterNut.Client.Services\OverShortQS\InventoryItemClient.cs
+..\WaterNut.Client.Services\OverShortQS\OverShortAllocationsEXClient.cs
+..\WaterNut.Client.Services\OverShortQS\OverShortDetailAllocationClient.cs
+..\WaterNut.Client.Services\OverShortQS\OverShortDetailClient.cs
+..\WaterNut.Client.Services\OverShortQS\OverShortDetailsEXClient.cs
+..\WaterNut.Client.Services\OverShortQS\OverShortSuggestedDocumentClient.cs
+..\WaterNut.Client.Services\OverShortQS\OversShortClient.cs
+..\WaterNut.Client.Services\OverShortQS\OversShortEXClient.cs
+</LastOutputs>
+    </None>
+    <None Include="ViewModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ViewModels.cs</LastGenOutput>
+      <LastOutputs>
+..\WaterNut\ViewModels\Generated Models\QuerySpace\OverShortQS\AsycudaDocumentItemViewModel.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\OverShortQS\AsycudaDocumentViewModel.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\OverShortQS\BaseViewModel.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\OverShortQS\InventoryItemViewModel.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\OverShortQS\MessageToken.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\OverShortQS\OverShortAllocationsEXViewModel.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\OverShortQS\OverShortDetailAllocationViewModel.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\OverShortQS\OverShortDetailsEXViewModel.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\OverShortQS\OverShortDetailViewModel.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\OverShortQS\OverShortSuggestedDocumentViewModel.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\OverShortQS\OversShortEXViewModel.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\OverShortQS\OversShortSummaryListViewModel.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\OverShortQS\OversShortViewModel.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\Totals\OverShortQS\AsycudaDocumentItemTotals.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\Totals\OverShortQS\AsycudaDocumentTotals.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\Totals\OverShortQS\InventoryItemTotals.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\Totals\OverShortQS\OverShortAllocationsEXTotals.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\Totals\OverShortQS\OverShortDetailAllocationTotals.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\Totals\OverShortQS\OverShortDetailsEXTotals.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\Totals\OverShortQS\OverShortDetailTotals.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\Totals\OverShortQS\OverShortSuggestedDocumentTotals.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\Totals\OverShortQS\OversShortEXTotals.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\Totals\OverShortQS\OversShortTotals.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\VirturalListLoaders\OverShortQS\AsycudaDocumentItemVirturalListLoader.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\VirturalListLoaders\OverShortQS\AsycudaDocumentVirturalListLoader.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\VirturalListLoaders\OverShortQS\InventoryItemVirturalListLoader.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\VirturalListLoaders\OverShortQS\OverShortAllocationsEXVirturalListLoader.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\VirturalListLoaders\OverShortQS\OverShortDetailAllocationVirturalListLoader.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\VirturalListLoaders\OverShortQS\OverShortDetailsEXVirturalListLoader.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\VirturalListLoaders\OverShortQS\OverShortDetailVirturalListLoader.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\VirturalListLoaders\OverShortQS\OverShortSuggestedDocumentVirturalListLoader.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\VirturalListLoaders\OverShortQS\OversShortEXVirturalListLoader.cs
+..\WaterNut\ViewModels\Generated Models\QuerySpace\VirturalListLoaders\OverShortQS\OversShortVirturalListLoader.cs
+</LastOutputs>
+    </None>
+    <None Include="Views.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Views.cs</LastGenOutput>
+      <LastOutputs>
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\AsycudaDocumentGridListView.xaml
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\AsycudaDocumentGridListView.xaml.cs
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\AsycudaDocumentItemGridListView.xaml
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\AsycudaDocumentItemGridListView.xaml.cs
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\InventoryItemGridListView.xaml
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\InventoryItemGridListView.xaml.cs
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\OverShortAllocationsEXGridListView.xaml
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\OverShortAllocationsEXGridListView.xaml.cs
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\OverShortDetailAllocationGridListView.xaml
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\OverShortDetailAllocationGridListView.xaml.cs
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\OverShortDetailGridListView.xaml
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\OverShortDetailGridListView.xaml.cs
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\OverShortDetailsEXGridListView.xaml
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\OverShortDetailsEXGridListView.xaml.cs
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\OverShortQSSummaryView.xaml
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\OverShortQSSummaryView.xaml.cs
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\OverShortSuggestedDocumentGridListView.xaml
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\OverShortSuggestedDocumentGridListView.xaml.cs
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\OversShortEXGridListView.xaml
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\OversShortEXGridListView.xaml.cs
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\OversShortGridListView.xaml
+..\WaterNut\Views\Generated Views\QuerySpace\OverShortQS\OversShortGridListView.xaml.cs
+</LastOutputs>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

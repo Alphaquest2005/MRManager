@@ -212,26 +212,32 @@ namespace Process.WorkFlow
             ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,IPatientDetailsInfo>(3, c => c.Id, v => v.Id),
 
             ComplexActions.RequestState<IPatientInfo, IPatientAddressesInfo>(3, x => x.Id),
+            ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,IPatientAddressesInfo>(3, c => c.Id, v => v.Id),
             ComplexActions.UpdateStateWhenDataChanges<IPersonAddressInfo,IPatientAddressesInfo>(3, c => c.PersonId, v => v.Id),
             ComplexActions.UpdateState<IPatientAddressesInfo>(3),
 
             ComplexActions.RequestState<IPatientInfo, IPatientPhoneNumbersInfo>(3, x => x.Id),
+            ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,IPatientPhoneNumbersInfo>(3, c => c.Id, v => v.Id),
             ComplexActions.UpdateStateWhenDataChanges<IPersonPhoneNumbers,IPatientPhoneNumbersInfo>(3, c => c.PersonId, v => v.Id),
             ComplexActions.UpdateState<IPatientPhoneNumbersInfo>(3),
 
-            ComplexActions.RequestState<IPatientInfo, IPatientForeignPhoneNumbersInfo>(3, x => x.Id),
+            ComplexActions.RequestState<INonResidentInfo, IPatientForeignPhoneNumbersInfo>(3, x => x.Id),
+            ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,IPatientForeignPhoneNumbersInfo>(3, c => c.Id, v => v.Id),
             ComplexActions.UpdateStateWhenDataChanges<IForeignPhoneNumberInfo,IPatientForeignPhoneNumbersInfo>(3, c => c.PersonId, v => v.Id),
             ComplexActions.UpdateState<IPatientForeignPhoneNumbersInfo>(3),
 
             ComplexActions.RequestState<IPatientInfo, IPatientNextOfKinsInfo>(3, x => x.Id),
+            ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,IPatientNextOfKinsInfo>(3, c => c.Id, v => v.Id),
             ComplexActions.UpdateStateWhenDataChanges<INextOfKinInfo,IPatientNextOfKinsInfo>(3, c => c.PatientId, v => v.Id),
             ComplexActions.UpdateState<IPatientNextOfKinsInfo>(3),
             
             ComplexActions.RequestPulledState<IPatientInfo, INonResidentInfo>(3, "NonResident"),
-            ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,INonResidentInfo>(3, c => c.Id, v => v.Id),
+           // ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,INonResidentInfo>(3, c => c.Id, v => v.Id),
+           // ComplexActions.UpdateStateWhenDataChanges<INonResidentInfo,IPatientDetailsInfo>(3, c => c.Id, v => v.Id),
             ComplexActions.UpdateState<INonResidentInfo>(3),
 
-            ComplexActions.RequestState<IPatientInfo, IPatientForeignAddressesInfo>(3, x => x.Id),
+            ComplexActions.RequestState<INonResidentInfo, IPatientForeignAddressesInfo>(3, x => x.Id),
+            ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,IPatientForeignAddressesInfo>(3, c => c.Id, v => v.Id),
             ComplexActions.UpdateStateWhenDataChanges<IForeignAddressInfo,IPatientForeignAddressesInfo>(3, c => c.PersonId, v => v.Id),
             ComplexActions.UpdateState<IPatientForeignAddressesInfo>(3),
 
@@ -239,8 +245,9 @@ namespace Process.WorkFlow
 
 
             ComplexActions.RequestPulledState<IPatientInfo, IPatientVitalsInfo>(3,  "Vitals"),
+            //ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,IPatientVitalsInfo>(3, c => c.Id, v => v.Id),
             ComplexActions.UpdateState<IPatientVitalsInfo>(3),
-            ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,IPatientVitalsInfo>(3, c => c.Id, v => v.Id),
+            
 
 
             
@@ -405,7 +412,12 @@ namespace Process.WorkFlow
                             "CurrentEntity", processId, e => e.Entity != null,
                             expectedSourceType: new SourceType(typeof (IViewModel)),
                             //todo: check this cuz it comes from viewmodel
-                            processInfo: new StateEventInfo(processId, RevolutionData.Context.EntityView.Events.EntityViewFound))
+                            processInfo: new StateEventInfo(processId, RevolutionData.Context.EntityView.Events.EntityViewFound)),
+                        new ProcessExpectedEvent<IEntityViewWithChangesUpdated<TCurrentEntity>>(
+                            "CurrentEntity", processId, e => e.Entity != null,
+                            expectedSourceType: new SourceType(typeof (IViewModel)),
+                            //todo: check this cuz it comes from viewmodel
+                            processInfo: new StateEventInfo(processId, RevolutionData.Context.EntityView.Events.EntityViewUpdated))
                     },
                     expectedMessageType: typeof(IProcessStateMessage<TEntityView>),
                     action: ProcessActions.RequestPulledState<TEntityView>(entityName),

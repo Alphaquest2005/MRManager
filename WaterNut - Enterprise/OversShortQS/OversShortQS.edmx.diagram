@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="81c2b187c5544c9b8ea94befa189f87d" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="Model.InventoryItem" Width="1.5" PointX="6.375" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OverShortDetailAllocation" Width="2.125" PointX="10.875" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OverShortDetail" Width="1.5" PointX="13.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OversShort" Width="1.5" PointX="11.125" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OverShortAllocationsEX" Width="2.375" PointX="13.75" PointY="5.5" />
+        <AssociationConnector Association="Model.OverShortDetailAllocationOverShortAllocationsEX" />
+        <EntityTypeShape EntityType="Model.AsycudaDocumentItem" Width="2.125" PointX="8" PointY="11.75" />
+        <EntityTypeShape EntityType="Model.AsycudaDocument" Width="1.5" PointX="5.75" PointY="12.125" />
+        <AssociationConnector Association="Model.AsycudaDocumentAsycudaDocumentItem" />
+        <EntityTypeShape EntityType="Model.OverShortSuggestedDocument" Width="1.5" PointX="5.125" PointY="4.5" />
+        <EntityTypeShape EntityType="Model.OverShortDetailsEX" Width="1.5" PointX="11.25" PointY="4" />
+        <EntityTypeShape EntityType="Model.OversShortEX" PointX="7.125" PointY="1.625" Width="1.5" />
+        <InheritanceConnector EntityType="Model.OversShortEX" />
+        <InheritanceConnector EntityType="Model.OverShortDetailsEX" />
+        <AssociationConnector Association="Model.OversShortEXOverShortDetailsEX" />
+        <AssociationConnector Association="Model.OversShortEXOverShortSuggestedDocument" />
+        <AssociationConnector Association="Model.InventoryItemOverShortDetailsEX" ManuallyRouted="true" >
+          <ConnectorPoint PointX="7.28125" PointY="7.875" />
+          <ConnectorPoint PointX="7.28125" PointY="6.6684374999344351" />
+          <ConnectorPoint PointX="9.8142902018747264" PointY="6.6684374999344351" />
+          <ConnectorPoint PointX="9.8142902018747264" PointY="5.6228297665675093" />
+          <ConnectorPoint PointX="10.776215766618659" PointY="5.6228297665675093" />
+          <ConnectorPoint PointX="10.776215766618659" PointY="7.4655012989357532" />
+          <ConnectorPoint PointX="11.25" PointY="5.7879850260416665" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.OverShortDetailsEXOverShortAllocationsEX" />
+        <AssociationConnector Association="Model.AsycudaDocumentItemOverShortAllocationsEX" />
+        <AssociationConnector Association="Model.FK_OverShortDetailAllocations_OverShortDetails" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

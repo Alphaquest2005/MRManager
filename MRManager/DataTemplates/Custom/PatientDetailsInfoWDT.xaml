@@ -19,6 +19,8 @@
                     d:DesignWidth="1000"
                     Background="#4CF9F8F8"
                     DataContext="{Binding Source={x:Static viewModels:PatientDetailsViewModel.Instance}}"
+                    SelectedIndex="{Binding SelectedTabIndex, Source={x:Static viewModels:PatientDetailsViewModel.Instance}}"
+                    
                     Focusable="True"
                     TabStripPlacement="Left">
 
@@ -358,12 +360,13 @@
                              VerticalAlignment="Top"
                              Text="{Binding Type, UpdateSourceTrigger=PropertyChanged, Source={x:Static viewModels:PatientDetailsViewModel.Instance}}">
                         <ComboBoxItem Content="Student" />
-                        <ComboBoxItem Content="Yachty" />
-                        <ComboBoxItem Content="Hotelier" />
+                        <ComboBoxItem Content="Cruiser" />
+                        <ComboBoxItem Content="Long-Term" />
+
                     </ComboBox>
-                    <TextBlock Width="92"
-                               Height="85"
-                               Margin="21,221,0,0"
+                    <TextBlock Width="204"
+                               Height="24"
+                               Margin="42,150,0,0"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="18"
@@ -373,14 +376,14 @@
                                TextAlignment="Right"
                                TextWrapping="WrapWithOverflow" />
                     <ListBox Height="Auto"
-                             Margin="128,221,0,10"
+                             Margin="42,179,0,10"
                              ItemTemplate="{DynamicResource PS-ForeignPhoneNumberInfoWDT}"
                              ItemsSource="{Binding ForeignPhoneNumbers}"
                              SelectedItem="{Binding CurrentForeignPhoneNumber.Value, UpdateSourceTrigger=PropertyChanged}"
-                             HorizontalAlignment="Left" Width="248" />
-                    <TextBlock Width="77"
-                               Height="64"
-                               Margin="381,221,0,0"
+                             HorizontalAlignment="Left" Width="313" />
+                    <TextBlock Width="150"
+                               Height="24"
+                               Margin="477,150,0,0"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                FontSize="18"
@@ -392,12 +395,12 @@
 
 
                     <ListBox Height="Auto"
-                             Margin="0,221,25,9"
+                             Margin="0,179,25,9"
                              ItemTemplate="{DynamicResource PS-ForeignAddressWDT}"
                              ItemsSource="{Binding ForeignAddresses}"
                              SelectedItem="{Binding CurrentForeignAddress.Value, UpdateSourceTrigger=PropertyChanged}"
                              HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" Width="314" >
-                        
+
                     </ListBox>
 
                 </Grid>

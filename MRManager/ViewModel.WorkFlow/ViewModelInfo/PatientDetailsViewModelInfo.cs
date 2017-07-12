@@ -157,7 +157,7 @@ namespace RevolutionData
 
                     }),
 
-
+               
 
                 new ViewEventSubscription<IPatientDetailsViewModel, ICurrentEntityChanged<IPatientInfo>>(
                     3,
@@ -276,7 +276,7 @@ namespace RevolutionData
                             new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
                             s.Source);
                         s.ChangeTracking.Clear();
-                        s.State.Value = null;
+                        //s.State.Value = null;
 
                         return msg1;
                     }),

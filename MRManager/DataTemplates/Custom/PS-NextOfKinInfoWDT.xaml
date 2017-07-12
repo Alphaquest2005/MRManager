@@ -22,6 +22,7 @@
                      FontWeight="Bold"
                      Text="{Binding Path=Relationship,
                                 FallbackValue='Relationship',
+                                TargetNullValue='Relationship',
                                       UpdateSourceTrigger=LostFocus}" />
             <TextBox Width="154"
                      Height="24"
@@ -31,7 +32,8 @@
                      VerticalAlignment="Top"
                      FontSize="18"
                      Text="{Binding Path=Name,
-                                      FallbackValue='Person Name',                    
+                                      FallbackValue='Person Name',    
+                                      TargetNullValue='Person Name',
                                       UpdateSourceTrigger=LostFocus}" />
             <TextBox Width="154"
                      Height="24"
@@ -42,6 +44,7 @@
                      FontSize="14"
                      Text="{Binding Path=Address,
                                     FallbackValue='Address',
+                                    TargetNullValue='Address',
                                       UpdateSourceTrigger=LostFocus}" />
             <TextBox Width="154"
                      Height="24"
@@ -52,6 +55,7 @@
                      FontSize="14"
                      Text="{Binding Path=PhoneNumber,
                                 FallbackValue='PhoneNumber',
+                                TargetNullValue='PhoneNumber',
                                       UpdateSourceTrigger=LostFocus}" />
             <Button Content="Save" Command="{Binding Commands[CreateNextOfKin], Source={x:Static viewModels:PatientDetailsViewModel.Instance}}" HorizontalAlignment="Left" Height="24" Margin="145,87,0,0" VerticalAlignment="Top" Width="75"/>
 

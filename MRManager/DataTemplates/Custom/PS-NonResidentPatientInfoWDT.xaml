@@ -14,7 +14,7 @@
 
             
             <StackPanel Margin="10,50,246,0" Orientation="Vertical">
-                <Grid Width="Auto" Height="49" Margin="0,0,0,0" Visibility="{Binding Type, Converter={StaticResource ParameterVisibilityConverter}, ConverterParameter='Yachty'}">
+                <Grid Width="Auto" Height="49" Margin="0,0,0,0" Visibility="{Binding Type, Converter={StaticResource ParameterVisibilityConverter}, ConverterParameter='Cruiser'}">
                     <TextBlock Width="Auto"
                    Height="24"
                    Margin="0"
@@ -101,7 +101,7 @@
                                               UpdateSourceTrigger=PropertyChanged,
                                               ValidatesOnDataErrors=True}" />
                 </Grid>
-                <Grid Width="Auto" Height="24" Margin="0,0,0,0" Visibility="{Binding Type, Converter={StaticResource ParameterVisibilityConverter}, ConverterParameter='Residental'}">
+                <Grid Width="Auto" Height="24" Margin="0,0,0,0" Visibility="{Binding Type, Converter={StaticResource ParameterVisibilityConverter}, ConverterParameter='Long-Term'}">
                     <TextBlock Width="Auto"
                                Height="24"
                                Margin="0"

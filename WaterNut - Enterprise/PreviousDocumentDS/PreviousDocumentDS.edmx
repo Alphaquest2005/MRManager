@@ -1,0 +1,555 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WaterNutDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EntryDataDetails">
+          <Key>
+            <PropertyRef Name="EntryDataDetailsId" />
+          </Key>
+          <Property Name="EntryDataDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntryDataId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LineNumber" Type="int" />
+          <Property Name="ItemNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
+          <Property Name="Units" Type="varchar" MaxLength="15" />
+          <Property Name="ItemDescription" Type="varchar(max)" Nullable="false" />
+          <Property Name="Cost" Type="float" Nullable="false" />
+          <Property Name="QtyAllocated" Type="float" />
+          <Property Name="UnitWeight" Type="float" />
+          <Property Name="DoNotAllocate" Type="bit" />
+        </EntityType>
+        <EntityType Name="EntryPreviousItems">
+          <Key>
+            <PropertyRef Name="PreviousItem_Id" />
+            <PropertyRef Name="Item_Id" />
+          </Key>
+          <Property Name="PreviousItem_Id" Type="int" Nullable="false" />
+          <Property Name="Item_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="xcuda_HScode">
+          <Key>
+            <PropertyRef Name="Item_Id" />
+          </Key>
+          <Property Name="Commodity_code" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Precision_1" Type="varchar(max)" />
+          <Property Name="Precision_4" Type="varchar" MaxLength="50" />
+          <Property Name="Item_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="xcuda_Item">
+          <Key>
+            <PropertyRef Name="Item_Id" />
+          </Key>
+          <Property Name="Amount_deducted_from_licence" Type="varchar(max)" />
+          <Property Name="Quantity_deducted_from_licence" Type="varchar(max)" />
+          <Property Name="Item_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASYCUDA_Id" Type="int" Nullable="false" />
+          <Property Name="Licence_number" Type="nvarchar(max)" />
+          <Property Name="Free_text_1" Type="nvarchar(max)" />
+          <Property Name="Free_text_2" Type="nvarchar(max)" />
+          <Property Name="EntryDataDetailsId" Type="int" />
+          <Property Name="LineNumber" Type="int" Nullable="false" />
+          <Property Name="IsAssessed" Type="bit" />
+          <Property Name="DPQtyAllocated" Type="float" />
+          <Property Name="DFQtyAllocated" Type="float" />
+          <Property Name="EntryTimeStamp" Type="datetime" />
+          <Property Name="AttributeOnlyAllocation" Type="bit" />
+          <Property Name="DoNotAllocate" Type="bit" />
+          <Property Name="DoNotEX" Type="bit" />
+        </EntityType>
+        <EntityType Name="xcuda_PreviousItem">
+          <Key>
+            <PropertyRef Name="PreviousItem_Id" />
+          </Key>
+          <Property Name="Packages_number" Type="varchar(max)" />
+          <Property Name="Previous_Packages_number" Type="varchar(max)" />
+          <Property Name="Hs_code" Type="varchar(max)" />
+          <Property Name="Commodity_code" Type="varchar(max)" />
+          <Property Name="Previous_item_number" Type="varchar(max)" />
+          <Property Name="Goods_origin" Type="varchar(max)" />
+          <Property Name="Net_weight" Type="float" Nullable="false" />
+          <Property Name="Prev_net_weight" Type="float" Nullable="false" />
+          <Property Name="Prev_reg_ser" Type="varchar(max)" />
+          <Property Name="Prev_reg_nbr" Type="varchar(max)" />
+          <Property Name="Prev_reg_dat" Type="varchar(max)" />
+          <Property Name="Prev_reg_cuo" Type="varchar(max)" />
+          <Property Name="Suplementary_Quantity" Type="float" Nullable="false" />
+          <Property Name="Preveious_suplementary_quantity" Type="float" Nullable="false" />
+          <Property Name="Current_value" Type="float" Nullable="false" />
+          <Property Name="Previous_value" Type="float" Nullable="false" />
+          <Property Name="Current_item_number" Type="varchar(max)" />
+          <Property Name="PreviousItem_Id" Type="int" Nullable="false" />
+          <Property Name="ASYCUDA_Id" Type="int" />
+          <Property Name="QtyAllocated" Type="float" />
+        </EntityType>
+        <EntityType Name="xcuda_Tarification">
+          <Key>
+            <PropertyRef Name="Item_Id" />
+          </Key>
+          <Property Name="Extended_customs_procedure" Type="varchar(max)" />
+          <Property Name="National_customs_procedure" Type="varchar(max)" />
+          <Property Name="Item_price" Type="float" Nullable="false" />
+          <Property Name="Item_Id" Type="int" Nullable="false" />
+          <Property Name="Value_item" Type="nvarchar(max)" />
+          <Property Name="Attached_doc_item" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="xcuda_Valuation_item">
+          <Key>
+            <PropertyRef Name="Item_Id" />
+          </Key>
+          <Property Name="Total_cost_itm" Type="float" Nullable="false" />
+          <Property Name="Total_CIF_itm" Type="float" Nullable="false" />
+          <Property Name="Rate_of_adjustement" Type="float" />
+          <Property Name="Statistical_value" Type="float" Nullable="false" />
+          <Property Name="Alpha_coeficient_of_apportionment" Type="varchar(max)" />
+          <Property Name="Item_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_EntryPreviousItems_xcuda_Item">
+          <End Role="xcuda_Item" Type="Self.xcuda_Item" Multiplicity="1" />
+          <End Role="EntryPreviousItems" Type="Self.EntryPreviousItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="xcuda_Item">
+              <PropertyRef Name="Item_Id" />
+            </Principal>
+            <Dependent Role="EntryPreviousItems">
+              <PropertyRef Name="Item_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntryPreviousItems_xcuda_PreviousItem">
+          <End Role="xcuda_PreviousItem" Type="Self.xcuda_PreviousItem" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EntryPreviousItems" Type="Self.EntryPreviousItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="xcuda_PreviousItem">
+              <PropertyRef Name="PreviousItem_Id" />
+            </Principal>
+            <Dependent Role="EntryPreviousItems">
+              <PropertyRef Name="PreviousItem_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Tarification">
+          <End Role="xcuda_Item" Type="Self.xcuda_Item" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="xcuda_Tarification" Type="Self.xcuda_Tarification" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="xcuda_Item">
+              <PropertyRef Name="Item_Id" />
+            </Principal>
+            <Dependent Role="xcuda_Tarification">
+              <PropertyRef Name="Item_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Valuation_item">
+          <End Role="xcuda_Item" Type="Self.xcuda_Item" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="xcuda_Valuation_item" Type="Self.xcuda_Valuation_item" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="xcuda_Item">
+              <PropertyRef Name="Item_Id" />
+            </Principal>
+            <Dependent Role="xcuda_Valuation_item">
+              <PropertyRef Name="Item_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tarification_HScode">
+          <End Role="xcuda_Tarification" Type="Self.xcuda_Tarification" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="xcuda_HScode" Type="Self.xcuda_HScode" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="xcuda_Tarification">
+              <PropertyRef Name="Item_Id" />
+            </Principal>
+            <Dependent Role="xcuda_HScode">
+              <PropertyRef Name="Item_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_xcuda_PreviousItem_xcuda_Item">
+          <End Role="xcuda_Item" Type="Self.xcuda_Item" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="xcuda_PreviousItem" Type="Self.xcuda_PreviousItem" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="xcuda_Item">
+              <PropertyRef Name="Item_Id" />
+            </Principal>
+            <Dependent Role="xcuda_PreviousItem">
+              <PropertyRef Name="PreviousItem_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WaterNutDBModelStoreContainer">
+          <EntitySet Name="EntryDataDetails" EntityType="Self.EntryDataDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EntryPreviousItems" EntityType="Self.EntryPreviousItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="xcuda_HScode" EntityType="Self.xcuda_HScode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="xcuda_Item" EntityType="Self.xcuda_Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="xcuda_PreviousItem" EntityType="Self.xcuda_PreviousItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="xcuda_Tarification" EntityType="Self.xcuda_Tarification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="xcuda_Valuation_item" EntityType="Self.xcuda_Valuation_item" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EntryPreviousItems_xcuda_Item" Association="Self.FK_EntryPreviousItems_xcuda_Item">
+            <End Role="xcuda_Item" EntitySet="xcuda_Item" />
+            <End Role="EntryPreviousItems" EntitySet="EntryPreviousItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntryPreviousItems_xcuda_PreviousItem" Association="Self.FK_EntryPreviousItems_xcuda_PreviousItem">
+            <End Role="xcuda_PreviousItem" EntitySet="xcuda_PreviousItem" />
+            <End Role="EntryPreviousItems" EntitySet="EntryPreviousItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Tarification" Association="Self.FK_Item_Tarification">
+            <End Role="xcuda_Item" EntitySet="xcuda_Item" />
+            <End Role="xcuda_Tarification" EntitySet="xcuda_Tarification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Valuation_item" Association="Self.FK_Item_Valuation_item">
+            <End Role="xcuda_Item" EntitySet="xcuda_Item" />
+            <End Role="xcuda_Valuation_item" EntitySet="xcuda_Valuation_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tarification_HScode" Association="Self.FK_Tarification_HScode">
+            <End Role="xcuda_Tarification" EntitySet="xcuda_Tarification" />
+            <End Role="xcuda_HScode" EntitySet="xcuda_HScode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_xcuda_PreviousItem_xcuda_Item" Association="Self.FK_xcuda_PreviousItem_xcuda_Item">
+            <End Role="xcuda_Item" EntitySet="xcuda_Item" />
+            <End Role="xcuda_PreviousItem" EntitySet="xcuda_PreviousItem" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WaterNutDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PreviousDocumentDS" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="xcuda_HScode" EntityType="WaterNutDBModel.xcuda_HScode" />
+          <EntitySet Name="PreviousEntries" EntityType="WaterNutDBModel.PreviousEntry" />
+          <EntitySet Name="xcuda_PreviousItem" EntityType="WaterNutDBModel.xcuda_PreviousItem" />
+          <EntitySet Name="xcuda_Tarification" EntityType="WaterNutDBModel.xcuda_Tarification" />
+          <EntitySet Name="xcuda_Valuation_item" EntityType="WaterNutDBModel.xcuda_Valuation_item" />
+          <AssociationSet Name="FK_Tarification_HScode" Association="WaterNutDBModel.FK_Tarification_HScode">
+            <End Role="xcuda_Tarification" EntitySet="xcuda_Tarification" />
+            <End Role="xcuda_HScode" EntitySet="xcuda_HScode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Tarification" Association="WaterNutDBModel.FK_Item_Tarification">
+            <End Role="xcuda_Item" EntitySet="PreviousEntries" />
+            <End Role="xcuda_Tarification" EntitySet="xcuda_Tarification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Valuation_item" Association="WaterNutDBModel.FK_Item_Valuation_item">
+            <End Role="xcuda_Item" EntitySet="PreviousEntries" />
+            <End Role="xcuda_Valuation_item" EntitySet="xcuda_Valuation_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_xcuda_PreviousItem_xcuda_Item" Association="WaterNutDBModel.FK_xcuda_PreviousItem_xcuda_Item">
+            <End Role="xcuda_Item" EntitySet="PreviousEntries" />
+            <End Role="xcuda_PreviousItem" EntitySet="xcuda_PreviousItem" />
+          </AssociationSet>
+          <EntitySet Name="EntryDataDetails" EntityType="WaterNutDBModel.EntryDataDetails" />
+          <AssociationSet Name="EntryPreviousItems" Association="WaterNutDBModel.EntryPreviousItems">
+            <End Role="PreviousEntry" EntitySet="PreviousEntries" />
+            <End Role="xcuda_PreviousItem" EntitySet="xcuda_PreviousItem" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="xcuda_HScode">
+          <Key>
+            <PropertyRef Name="Item_Id" />
+          </Key>
+          <Property Type="String" Name="Commodity_code" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Precision_1" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Precision_4" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Item_Id" Nullable="false" />
+          <NavigationProperty Name="xcuda_Tarification" Relationship="WaterNutDBModel.FK_Tarification_HScode" FromRole="xcuda_HScode" ToRole="xcuda_Tarification" />
+        </EntityType>
+        <EntityType Name="PreviousEntry">
+          <Key>
+            <PropertyRef Name="Item_Id" />
+          </Key>
+          <Property Type="String" Name="Amount_deducted_from_licence" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Quantity_deducted_from_licence" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Item_Id" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ASYCUDA_Id" Nullable="false" />
+          <Property Type="String" Name="Licence_number" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Free_text_1" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Free_text_2" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="EntryDataDetailsId" />
+          <Property Type="Int32" Name="LineNumber" Nullable="false" />
+          <Property Type="Boolean" Name="IsAssessed" />
+          <Property Type="Double" Name="DPQtyAllocated" />
+          <Property Type="Double" Name="DFQtyAllocated" />
+          <Property Type="DateTime" Name="EntryTimeStamp" Precision="3" />
+          <Property Type="Boolean" Name="AttributeOnlyAllocation" />
+          <Property Type="Boolean" Name="DoNotAllocate" />
+          <Property Type="Boolean" Name="DoNotEX" />
+          <NavigationProperty Name="xcuda_Tarification" Relationship="WaterNutDBModel.FK_Item_Tarification" FromRole="xcuda_Item" ToRole="xcuda_Tarification" />
+          <NavigationProperty Name="xcuda_Valuation_item" Relationship="WaterNutDBModel.FK_Item_Valuation_item" FromRole="xcuda_Item" ToRole="xcuda_Valuation_item" />
+          <NavigationProperty Name="xcuda_PreviousItem" Relationship="WaterNutDBModel.FK_xcuda_PreviousItem_xcuda_Item" FromRole="xcuda_Item" ToRole="xcuda_PreviousItem" />
+          <NavigationProperty Name="xcuda_PreviousItem1" Relationship="WaterNutDBModel.EntryPreviousItems" FromRole="PreviousEntry" ToRole="xcuda_PreviousItem" />
+        </EntityType>
+        <EntityType Name="xcuda_PreviousItem">
+          <Key>
+            <PropertyRef Name="PreviousItem_Id" />
+          </Key>
+          <Property Type="String" Name="Packages_number" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Previous_Packages_number" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Hs_code" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Commodity_code" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Previous_item_number" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Goods_origin" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Single" Name="Net_weight" Nullable="false" />
+          <Property Type="Single" Name="Prev_net_weight" Nullable="false" />
+          <Property Type="String" Name="Prev_reg_ser" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Prev_reg_nbr" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Prev_reg_dat" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Prev_reg_cuo" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Single" Name="Suplementary_Quantity" Nullable="false" />
+          <Property Type="Single" Name="Preveious_suplementary_quantity" Nullable="false" />
+          <Property Type="Single" Name="Current_value" Nullable="false" />
+          <Property Type="Single" Name="Previous_value" Nullable="false" />
+          <Property Type="String" Name="Current_item_number" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="PreviousItem_Id" Nullable="false" />
+          <Property Type="Int32" Name="ASYCUDA_Id" />
+          <Property Type="Single" Name="QtyAllocated" />
+          <NavigationProperty Name="PreviousEntry" Relationship="WaterNutDBModel.FK_xcuda_PreviousItem_xcuda_Item" FromRole="xcuda_PreviousItem" ToRole="xcuda_Item" />
+          <NavigationProperty Name="PreviousEntries" Relationship="WaterNutDBModel.EntryPreviousItems" FromRole="xcuda_PreviousItem" ToRole="PreviousEntry" />
+        </EntityType>
+        <EntityType Name="xcuda_Tarification">
+          <Key>
+            <PropertyRef Name="Item_Id" />
+          </Key>
+          <Property Type="String" Name="Extended_customs_procedure" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="National_customs_procedure" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Single" Name="Item_price" Nullable="false" />
+          <Property Type="Int32" Name="Item_Id" Nullable="false" />
+          <Property Type="String" Name="Value_item" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Attached_doc_item" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="xcuda_HScode" Relationship="WaterNutDBModel.FK_Tarification_HScode" FromRole="xcuda_Tarification" ToRole="xcuda_HScode" />
+          <NavigationProperty Name="xcuda_Item" Relationship="WaterNutDBModel.FK_Item_Tarification" FromRole="xcuda_Tarification" ToRole="xcuda_Item" />
+        </EntityType>
+        <EntityType Name="xcuda_Valuation_item">
+          <Key>
+            <PropertyRef Name="Item_Id" />
+          </Key>
+          <Property Type="Single" Name="Total_cost_itm" Nullable="false" />
+          <Property Type="Single" Name="Total_CIF_itm" Nullable="false" />
+          <Property Type="Single" Name="Rate_of_adjustement" />
+          <Property Type="Single" Name="Statistical_value" Nullable="false" />
+          <Property Type="String" Name="Alpha_coeficient_of_apportionment" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Item_Id" Nullable="false" />
+          <NavigationProperty Name="xcuda_Item" Relationship="WaterNutDBModel.FK_Item_Valuation_item" FromRole="xcuda_Valuation_item" ToRole="xcuda_Item" />
+        </EntityType>
+        <Association Name="FK_Tarification_HScode">
+          <End Type="WaterNutDBModel.xcuda_Tarification" Role="xcuda_Tarification" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WaterNutDBModel.xcuda_HScode" Role="xcuda_HScode" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="xcuda_Tarification">
+              <PropertyRef Name="Item_Id" />
+            </Principal>
+            <Dependent Role="xcuda_HScode">
+              <PropertyRef Name="Item_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Tarification">
+          <End Type="WaterNutDBModel.PreviousEntry" Role="xcuda_Item" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WaterNutDBModel.xcuda_Tarification" Role="xcuda_Tarification" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="xcuda_Item">
+              <PropertyRef Name="Item_Id" />
+            </Principal>
+            <Dependent Role="xcuda_Tarification">
+              <PropertyRef Name="Item_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Valuation_item">
+          <End Type="WaterNutDBModel.PreviousEntry" Role="xcuda_Item" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WaterNutDBModel.xcuda_Valuation_item" Role="xcuda_Valuation_item" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="xcuda_Item">
+              <PropertyRef Name="Item_Id" />
+            </Principal>
+            <Dependent Role="xcuda_Valuation_item">
+              <PropertyRef Name="Item_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_xcuda_PreviousItem_xcuda_Item">
+          <End Type="WaterNutDBModel.PreviousEntry" Role="xcuda_Item" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WaterNutDBModel.xcuda_PreviousItem" Role="xcuda_PreviousItem" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="xcuda_Item">
+              <PropertyRef Name="Item_Id" />
+            </Principal>
+            <Dependent Role="xcuda_PreviousItem">
+              <PropertyRef Name="PreviousItem_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EntryDataDetails">
+          <Key>
+            <PropertyRef Name="EntryDataDetailsId" />
+          </Key>
+          <Property Type="Int32" Name="EntryDataDetailsId" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="EntryDataId" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="LineNumber" />
+          <Property Type="String" Name="ItemNumber" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Single" Name="Quantity" Nullable="false" />
+          <Property Type="String" Name="Units" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ItemDescription" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Single" Name="Cost" Nullable="false" />
+          <Property Type="Double" Name="QtyAllocated" />
+          <Property Type="Single" Name="UnitWeight" />
+          <Property Type="Boolean" Name="DoNotAllocate" />
+        </EntityType>
+        <Association Name="EntryPreviousItems">
+          <End Type="WaterNutDBModel.PreviousEntry" Role="PreviousEntry" Multiplicity="*" />
+          <End Type="WaterNutDBModel.xcuda_PreviousItem" Role="xcuda_PreviousItem" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WaterNutDBModelStoreContainer" CdmEntityContainer="PreviousDocumentDS">
+          <EntitySetMapping Name="xcuda_HScode">
+            <EntityTypeMapping TypeName="WaterNutDBModel.xcuda_HScode">
+              <MappingFragment StoreEntitySet="xcuda_HScode">
+                <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+                <ScalarProperty Name="Precision_4" ColumnName="Precision_4" />
+                <ScalarProperty Name="Precision_1" ColumnName="Precision_1" />
+                <ScalarProperty Name="Commodity_code" ColumnName="Commodity_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PreviousEntries">
+            <EntityTypeMapping TypeName="WaterNutDBModel.PreviousEntry">
+              <MappingFragment StoreEntitySet="xcuda_Item">
+                <ScalarProperty Name="DoNotEX" ColumnName="DoNotEX" />
+                <ScalarProperty Name="DoNotAllocate" ColumnName="DoNotAllocate" />
+                <ScalarProperty Name="AttributeOnlyAllocation" ColumnName="AttributeOnlyAllocation" />
+                <ScalarProperty Name="EntryTimeStamp" ColumnName="EntryTimeStamp" />
+                <ScalarProperty Name="DFQtyAllocated" ColumnName="DFQtyAllocated" />
+                <ScalarProperty Name="DPQtyAllocated" ColumnName="DPQtyAllocated" />
+                <ScalarProperty Name="IsAssessed" ColumnName="IsAssessed" />
+                <ScalarProperty Name="LineNumber" ColumnName="LineNumber" />
+                <ScalarProperty Name="EntryDataDetailsId" ColumnName="EntryDataDetailsId" />
+                <ScalarProperty Name="Free_text_2" ColumnName="Free_text_2" />
+                <ScalarProperty Name="Free_text_1" ColumnName="Free_text_1" />
+                <ScalarProperty Name="Licence_number" ColumnName="Licence_number" />
+                <ScalarProperty Name="ASYCUDA_Id" ColumnName="ASYCUDA_Id" />
+                <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+                <ScalarProperty Name="Quantity_deducted_from_licence" ColumnName="Quantity_deducted_from_licence" />
+                <ScalarProperty Name="Amount_deducted_from_licence" ColumnName="Amount_deducted_from_licence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="xcuda_PreviousItem">
+            <EntityTypeMapping TypeName="WaterNutDBModel.xcuda_PreviousItem">
+              <MappingFragment StoreEntitySet="xcuda_PreviousItem">
+                <ScalarProperty Name="QtyAllocated" ColumnName="QtyAllocated" />
+                <ScalarProperty Name="ASYCUDA_Id" ColumnName="ASYCUDA_Id" />
+                <ScalarProperty Name="PreviousItem_Id" ColumnName="PreviousItem_Id" />
+                <ScalarProperty Name="Current_item_number" ColumnName="Current_item_number" />
+                <ScalarProperty Name="Previous_value" ColumnName="Previous_value" />
+                <ScalarProperty Name="Current_value" ColumnName="Current_value" />
+                <ScalarProperty Name="Preveious_suplementary_quantity" ColumnName="Preveious_suplementary_quantity" />
+                <ScalarProperty Name="Suplementary_Quantity" ColumnName="Suplementary_Quantity" />
+                <ScalarProperty Name="Prev_reg_cuo" ColumnName="Prev_reg_cuo" />
+                <ScalarProperty Name="Prev_reg_dat" ColumnName="Prev_reg_dat" />
+                <ScalarProperty Name="Prev_reg_nbr" ColumnName="Prev_reg_nbr" />
+                <ScalarProperty Name="Prev_reg_ser" ColumnName="Prev_reg_ser" />
+                <ScalarProperty Name="Prev_net_weight" ColumnName="Prev_net_weight" />
+                <ScalarProperty Name="Net_weight" ColumnName="Net_weight" />
+                <ScalarProperty Name="Goods_origin" ColumnName="Goods_origin" />
+                <ScalarProperty Name="Previous_item_number" ColumnName="Previous_item_number" />
+                <ScalarProperty Name="Commodity_code" ColumnName="Commodity_code" />
+                <ScalarProperty Name="Hs_code" ColumnName="Hs_code" />
+                <ScalarProperty Name="Previous_Packages_number" ColumnName="Previous_Packages_number" />
+                <ScalarProperty Name="Packages_number" ColumnName="Packages_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="xcuda_Tarification">
+            <EntityTypeMapping TypeName="WaterNutDBModel.xcuda_Tarification">
+              <MappingFragment StoreEntitySet="xcuda_Tarification">
+                <ScalarProperty Name="Attached_doc_item" ColumnName="Attached_doc_item" />
+                <ScalarProperty Name="Value_item" ColumnName="Value_item" />
+                <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+                <ScalarProperty Name="Item_price" ColumnName="Item_price" />
+                <ScalarProperty Name="National_customs_procedure" ColumnName="National_customs_procedure" />
+                <ScalarProperty Name="Extended_customs_procedure" ColumnName="Extended_customs_procedure" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="xcuda_Valuation_item">
+            <EntityTypeMapping TypeName="WaterNutDBModel.xcuda_Valuation_item">
+              <MappingFragment StoreEntitySet="xcuda_Valuation_item">
+                <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+                <ScalarProperty Name="Alpha_coeficient_of_apportionment" ColumnName="Alpha_coeficient_of_apportionment" />
+                <ScalarProperty Name="Statistical_value" ColumnName="Statistical_value" />
+                <ScalarProperty Name="Rate_of_adjustement" ColumnName="Rate_of_adjustement" />
+                <ScalarProperty Name="Total_CIF_itm" ColumnName="Total_CIF_itm" />
+                <ScalarProperty Name="Total_cost_itm" ColumnName="Total_cost_itm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntryDataDetails">
+            <EntityTypeMapping TypeName="WaterNutDBModel.EntryDataDetails">
+              <MappingFragment StoreEntitySet="EntryDataDetails">
+                <ScalarProperty Name="DoNotAllocate" ColumnName="DoNotAllocate" />
+                <ScalarProperty Name="UnitWeight" ColumnName="UnitWeight" />
+                <ScalarProperty Name="QtyAllocated" ColumnName="QtyAllocated" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ItemNumber" ColumnName="ItemNumber" />
+                <ScalarProperty Name="LineNumber" ColumnName="LineNumber" />
+                <ScalarProperty Name="EntryDataId" ColumnName="EntryDataId" />
+                <ScalarProperty Name="EntryDataDetailsId" ColumnName="EntryDataDetailsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="EntryPreviousItems" TypeName="WaterNutDBModel.EntryPreviousItems" StoreEntitySet="EntryPreviousItems">
+            <EndProperty Name="xcuda_PreviousItem">
+              <ScalarProperty Name="PreviousItem_Id" ColumnName="PreviousItem_Id" />
+            </EndProperty>
+            <EndProperty Name="PreviousEntry">
+              <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

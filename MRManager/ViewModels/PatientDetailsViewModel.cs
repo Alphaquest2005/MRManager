@@ -97,8 +97,10 @@ namespace ViewModels
         public ReactiveProperty<IForeignPhoneNumberInfo> CurrentForeignPhoneNumber => _currentForeignPhoneNumber;
 
         private readonly ReactiveProperty<IForeignAddressInfo> _currentForeignAddress = new ReactiveProperty<IForeignAddressInfo>(new ForeignAddressInfo() { Id = -1 });
-
+        
         public ReactiveProperty<IForeignAddressInfo> CurrentForeignAddress => _currentForeignAddress;
 
+        private int _selectedTabIndex;
+        public int SelectedTabIndex { get { return _selectedTabIndex; } set { _selectedTabIndex = value; OnPropertyChanged(); } }
     }
 }
