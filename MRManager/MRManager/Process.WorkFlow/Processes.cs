@@ -232,8 +232,6 @@ namespace Process.WorkFlow
             ComplexActions.UpdateState<IPatientNextOfKinsInfo>(3),
             
             ComplexActions.RequestPulledState<IPatientInfo, INonResidentInfo>(3, "NonResident"),
-           // ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,INonResidentInfo>(3, c => c.Id, v => v.Id),
-           // ComplexActions.UpdateStateWhenDataChanges<INonResidentInfo,IPatientDetailsInfo>(3, c => c.Id, v => v.Id),
             ComplexActions.UpdateState<INonResidentInfo>(3),
 
             ComplexActions.RequestState<INonResidentInfo, IPatientForeignAddressesInfo>(3, x => x.Id),
@@ -245,7 +243,6 @@ namespace Process.WorkFlow
 
 
             ComplexActions.RequestPulledState<IPatientInfo, IPatientVitalsInfo>(3,  "Vitals"),
-            //ComplexActions.UpdateStateWhenDataChanges<IPatientInfo,IPatientVitalsInfo>(3, c => c.Id, v => v.Id),
             ComplexActions.UpdateState<IPatientVitalsInfo>(3),
             
 

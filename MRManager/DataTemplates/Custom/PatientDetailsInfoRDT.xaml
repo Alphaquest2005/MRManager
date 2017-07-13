@@ -275,6 +275,7 @@
                     <ListBox Height="Auto"
                              Margin="29,66,10.333,10"
                              ItemTemplate="{DynamicResource PS-NextOfKinInfoTpl}"
+                             SelectedItem="{Binding CurrentNextOfKin.Value, UpdateSourceTrigger=PropertyChanged}"
                              ItemsSource="{Binding NextOfKins}" />
 
                 </Grid>
