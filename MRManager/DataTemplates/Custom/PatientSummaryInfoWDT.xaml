@@ -81,7 +81,7 @@
                     </TransformGroup>
                 </DatePicker.RenderTransform>
             </DatePicker>
-            <Button Content="Save" Command="{Binding Commands[CreatePatientInfo]}" HorizontalAlignment="Left" Height="28" Margin="407,52,0,0" VerticalAlignment="Top" Width="62"/>
+            <Button Content="Save" Command="{Binding Commands[SavePatientInfoButton]}" HorizontalAlignment="Left" Height="28" Margin="407,52,0,0" VerticalAlignment="Top" Width="62"/>
         </Grid>
 
     </DataTemplate>

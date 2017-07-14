@@ -224,6 +224,32 @@ namespace RevolutionData
                         return msg;
                     }),
 
+                new ViewEventCommand<IPatientSummaryListViewModel, IUpdatePatientEntityWithChanges<IPatients>>(
+                    key:"SavePatientInfoButton",
+                    subject:v => Observable.Empty<ReactiveCommand<IViewModel, Unit>>(),
+                    commandPredicate: new List<Func<IPatientSummaryListViewModel, bool>>
+                    {
+                        v => v.ChangeTracking.Count == 4
+                             && v.CurrentEntity.Value.Id == 0
+                    },
+                    //TODO: Make a type to capture this info... i killing it here
+                    messageData: s =>
+                    {
+                        var msg = new ViewEventCommandParameter(
+                            new object[]
+                            {
+                                s.CurrentEntity.Value.Id,
+                                "Patient",
+                                "General",
+                                "Personal Information",
+                                s.ChangeTracking.ToDictionary(x => x.Key, x => x.Value)
+                            },
+                            new StateCommandInfo(s.Process.Id, Context.EntityView.Commands.GetEntityView), s.Process,
+                            s.Source);
+                        s.ChangeTracking.Clear();
+                        return msg;
+                    }),
+
             },
             typeof(IPatientSummaryListViewModel),
             typeof(IBodyViewModel), 0);
