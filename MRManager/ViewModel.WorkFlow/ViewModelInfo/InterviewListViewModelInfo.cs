@@ -23,20 +23,20 @@ namespace ViewModel.WorkFlow.ViewModelInfo
             new ViewInfo("Interview", "", "Interviews"),
             new List<IViewModelEventSubscription<IViewModel, IEvent>>
             {
-                //new ViewEventSubscription<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>>(
-                //    3,
-                //    e => e != null,
-                //    new List<Func<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>, bool>>(),
-                //    (v, e) =>
-                //    {
-                //        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                //        {
-                //            if (v.CurrentPatientSyntom.Value == e.Entity) return;
-                //            v.CurrentPatientSyntom.Value = e.Entity;
-                //            v.Systems.Value.Clear();
-                //            v.Systems.Value.Add(new SyntomMedicalSystemInfo() {System = "Create New..."});
-                //        }));
-                //    }),
+                new ViewEventSubscription<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>>(
+                    3,
+                    e => e != null,
+                    new List<Func<IInterviewListViewModel, ICurrentEntityChanged<IPatientSyntomInfo>, bool>>(),
+                    (v, e) =>
+                    {
+                        Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            if (v.CurrentPatientSyntom.Value == e.Entity) return;
+                            v.CurrentPatientSyntom.Value = e.Entity;
+                            v.Systems.Value.Clear();
+                            v.Systems.Value.Add(new SyntomMedicalSystemInfo() {System = "Create New..."});
+                        }));
+                    }),
 
                 new ViewEventSubscription<IInterviewListViewModel, IUpdateProcessStateList<ISyntomMedicalSystemInfo>>(
                     3,

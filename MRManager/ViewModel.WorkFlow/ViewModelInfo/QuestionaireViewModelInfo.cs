@@ -48,7 +48,7 @@ namespace RevolutionData
                     {
                         if (v.CurrentQuestion.Value != null && v.CurrentQuestion.Value == v.Questions.FirstOrDefault(x => x.Id == e.Entity.Id)) return;
                         v.CurrentQuestion.Value = v.Questions.FirstOrDefault(x => x.Id == e.Entity.Id);
-                        if (v.CurrentQuestion.Value == null) v.CurrentQuestion.Value = v.Questions.FirstOrDefault();
+                       // if (v.CurrentQuestion.Value == null) v.CurrentQuestion.Value = v.Questions.FirstOrDefault();
                         UpdateQuestionResponse(v);
                     }),
 
@@ -146,7 +146,11 @@ namespace RevolutionData
 
 
                        var f = v.Questions.FirstOrDefault(x => x.Id == e.Entity.Id);
-                        if (v.CurrentQuestion.Value == null || v.CurrentQuestion.Value.Id == e.Entity.Id) v.CurrentQuestion.Value = e.Entity;
+                            if (v.CurrentQuestion.Value == null || v.CurrentQuestion.Value.Id == e.Entity.Id)
+                            {
+                                v.CurrentQuestion.Value = null;
+                                v.CurrentQuestion.Value = e.Entity;
+                            }
                         if (f == null)
                         {
                             if (v.Questions.Any())
