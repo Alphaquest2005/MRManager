@@ -1,0 +1,53 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	xmlns:local="clr-namespace:PayrollManager"
+	x:Class="PayrollManager.EmployeeSummaryList" Height="522.274" Width="652.991" VerticalAlignment="Top">
+    <UserControl.Resources>
+        <local:EmployeeSummaryListModel x:Key="EmployeeSummaryListModelDataSource" />
+
+        <DataTemplate x:Key="EmployeeSummaryIDT">
+            <Grid Height="79" Width="615.2">
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#33000000" Offset="0.907"/>
+                        <GradientStop Color="#19FFFFFF" Offset="0.069"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <TextBlock Text="{Binding DisplayName}" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="37" Width="338" FontSize="18.667"/>
+                <TextBlock Text="{Binding Title}" Margin="353,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="112" FontSize="21.333"/>
+                <Label Content="{Binding NetAmount}" Margin="470,16,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="53" Width="118" FontSize="24" VerticalContentAlignment="Center" ContentStringFormat="c"/>
+                <TextBlock Text="{Binding TotalIncome, StringFormat=c}" Margin="105.671,47.453,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21.342" Width="151.642" FontSize="16"/>
+                <TextBlock Text="{Binding TotalDeductions,StringFormat=c}" Margin="366,47,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="22" Width="99" FontSize="16"/>
+                <TextBlock HorizontalAlignment="Left" Height="16" Margin="0,50,0,0" TextWrapping="Wrap" Text="Income" VerticalAlignment="Top" Width="90" TextAlignment="Right" FontSize="14"/>
+                <TextBlock HorizontalAlignment="Left" Height="16" Margin="267,51,0,0" TextWrapping="Wrap" Text="Deductions" VerticalAlignment="Top" Width="81" TextAlignment="Right" FontSize="14"/>
+            </Grid>
+        </DataTemplate>
+        <Style TargetType="{x:Type TextBox}" x:Key="TransparentTextBoxStyle">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <ScrollViewer x:Name="PART_ContentHost"
+        						Background="#4CFFFFFF"
+        						Focusable="True"
+        						HorizontalScrollBarVisibility="Hidden"
+        						VerticalScrollBarVisibility="Hidden" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource EmployeeSummaryListModelDataSource}}" Margin="0,0,9.991,-0.926">
+        <ListBox  ItemsSource="{Binding Employees}" ItemTemplate="{DynamicResource EmployeeSummaryIDT}" SelectedItem="{Binding CurrentEmployee, Mode=TwoWay}" HorizontalAlignment="Left" Height="388" Margin="10,125,0,0" VerticalAlignment="Top" Width="632" Background="#4CFFFFFF"/>
+        <TextBlock HorizontalAlignment="Left" Height="44" Margin="22,10,0,0" TextWrapping="Wrap" Text="Employees" VerticalAlignment="Top" Width="281" FontSize="26" Foreground="#FF17204A"/>
+        <TextBox Text="{Binding EmployeeFilter, UpdateSourceTrigger=PropertyChanged}" Background="#4CFFFFFF" HorizontalAlignment="Left" Height="33" Margin="222,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" FontSize="16"  TextAlignment="Center" Style="{DynamicResource TransparentTextBoxStyle}"/>
+        <TextBlock HorizontalAlignment="Left" Height="46" Margin="22,59,0,0" TextWrapping="Wrap" Text="Filter by Employee Name" VerticalAlignment="Top" Width="146" FontSize="14"/>
+    </Grid>
+</UserControl>

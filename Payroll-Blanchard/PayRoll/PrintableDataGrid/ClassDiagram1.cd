@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ICP.Controls.PrintableListView.DocumentPaginatorSource" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="6" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DocumentPaginatorExtention.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICP.Controls.PrintableListView.DocumentPaginatorExtention">
+    <Position X="1.75" Y="6" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAiiQAAIgAEAEgABAACgQBAAAAACAEgAAARA=</HashCode>
+      <FileName>DocumentPaginatorExtention.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICP.Controls.PrintableListView.HeaderFooterDataContext">
+    <Position X="7.25" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAiAAAAIoAAAECAEAAAAAAAAAAAAAAAAAAgAAAAQAAA=</HashCode>
+      <FileName>HeaderFooterDataContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICP.Controls.PrintableListView.PrintableListView">
+    <Position X="3" Y="1" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAIAAAACGAIQAACAAAAgKAAAAAAABAAEAIAAAI=</HashCode>
+      <FileName>PrintableListView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Group" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ICP.Controls.PrintableListView.ReportGroup">
+    <Position X="6" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAEAAAAAEAIQhCAIAAEAIAQAAAAIBAAAEAEQwA=</HashCode>
+      <FileName>ReportGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

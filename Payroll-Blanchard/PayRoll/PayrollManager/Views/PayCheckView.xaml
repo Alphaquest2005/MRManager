@@ -1,0 +1,119 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	xmlns:local="clr-namespace:PayrollManager"
+	xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:converters="clr-namespace:PayrollManager.Converters"
+	x:Class="PayrollManager.PayCheckView" d:DesignHeight="661.17" Width="967.2">
+	<UserControl.Resources>
+		<local:PayCheckViewModel x:Key="PayCheckViewModelDataSource" />
+        <converters:NumToWords x:Key="NumToWords" />
+		<converters:PayrollItemSubtotalConverter x:Key="PayrollItemSubtotalConverter"/>
+        <converters:BooleanToIncomeDeduction x:Key="BooleanToIncomeDeduction" />
+      
+	  
+        
+      
+        <DataTemplate x:Key="CheckTemplate">
+            <Grid Height="195" Margin="0"  VerticalAlignment="Top" Width="819.4">
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFEAF7D5"/>
+                        <GradientStop Color="#FF97C450" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid Margin="310.606,15.197,10,10">
+            		<TextBlock Text="{Binding CurrentBranch.Name, Source={StaticResource PayCheckViewModelDataSource}}" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Width="177.6"/>
+            		<TextBlock Text="{Binding CurrentBranch.Address, Source={StaticResource PayCheckViewModelDataSource}}" Margin="0,17.051,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Width="146.4"/>
+            		<TextBlock Text="{Binding CurrentBranch.PhoneNumber, Source={StaticResource PayCheckViewModelDataSource}}" Margin="0,34.102,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Width="146.4"/>
+            		<TextBlock Text="{Binding Employee.DisplayName}" Margin="82.046,76.809,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Width="312.8"/>
+            		<TextBlock HorizontalAlignment="Left" Height="35.525" Margin="0,63.79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="66.335"><Run Text="Pay To The "/><LineBreak/><Run Text="Order Of"/></TextBlock>
+            		<Rectangle Fill="#FFC4D7BF" HorizontalAlignment="Left" Height="1" Margin="2.619,103.77,0,0" Stroke="Black" VerticalAlignment="Top" Width="357.644" RenderTransformOrigin="0.5,0.5">
+            			<Rectangle.RenderTransform>
+            				<TransformGroup>
+            					<ScaleTransform ScaleY="-1"/>
+            					<SkewTransform/>
+            					<RotateTransform/>
+            					<TranslateTransform/>
+            				</TransformGroup>
+            			</Rectangle.RenderTransform>
+            		</Rectangle>
+            		<TextBlock Text="{Binding Total, StringFormat=c}" Margin="388.794,76.907,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="112" FontSize="18.667"/>
+            		<Rectangle Fill="#FFC4D7BF" HorizontalAlignment="Left" Height="1" Margin="388.124,104.424,0,0" Stroke="Black" VerticalAlignment="Top" Width="103.866" RenderTransformOrigin="0.5,0.5">
+            			<Rectangle.RenderTransform>
+            				<TransformGroup>
+            					<ScaleTransform ScaleY="-1"/>
+            					<SkewTransform/>
+            					<RotateTransform/>
+            					<TranslateTransform/>
+            				</TransformGroup>
+            			</Rectangle.RenderTransform>
+            		</Rectangle>
+            		<TextBlock Text="{Binding Date}" HorizontalAlignment="Left" Height="22.693" Margin="332.548,34.914,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232.246" FontSize="16"/>
+            		<TextBlock HorizontalAlignment="Left" Height="24.913" Margin="183.574,144.89,0,0" TextWrapping="Wrap" Text="{Binding AccountNumber}" VerticalAlignment="Top" Width="152.119" FontSize="14.667"/>
+            		<TextBlock Text="{Binding Total, Converter={StaticResource NumToWords}}" Margin="3.712,111.285,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Width="461.379"/>
+            		<Rectangle Fill="#FFC4D7BF" HorizontalAlignment="Left" Height="1" Margin="1.746,136.065,0,0" Stroke="Black" VerticalAlignment="Top" Width="490.528" RenderTransformOrigin="0.5,0.5">
+            			<Rectangle.RenderTransform>
+            				<TransformGroup>
+            					<ScaleTransform ScaleY="-1"/>
+            					<SkewTransform/>
+            					<RotateTransform/>
+            					<TranslateTransform/>
+            				</TransformGroup>
+            			</Rectangle.RenderTransform>
+            		</Rectangle>
+            	</Grid>
+                <Grid Margin="10,10,539.4,2.5">
+                	<StackPanel Margin="281.2,0.1,-20.8,2.4" Orientation="Vertical" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                		<StackPanel.RenderTransform>
+                			<TransformGroup>
+                				<ScaleTransform ScaleX="-1"/>
+                				<SkewTransform/>
+                				<RotateTransform/>
+                				<TranslateTransform/>
+                			</TransformGroup>
+                		</StackPanel.RenderTransform>
+                		<Border BorderBrush="Black" Margin="0,5,0,0" BorderThickness="1" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top" Width="3" Background="Black"/>
+                		<Border BorderBrush="Black" Margin="0,5,0,0" BorderThickness="1" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top" Width="3" Background="Black"/>
+                		<Border BorderBrush="Black" Margin="0,5,0,0" BorderThickness="1" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top" Width="3" Background="Black"/>
+                		<Border BorderBrush="Black" Margin="0,5,0,0" BorderThickness="1" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top" Width="3" Background="Black"/>
+                		<Border BorderBrush="Black" Margin="0,5,0,0" BorderThickness="1" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top" Width="3" Background="Black"/>
+                		<Border BorderBrush="Black" Margin="0,5,0,0" BorderThickness="1" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top" Width="3" Background="Black"/>
+                		<Border BorderBrush="Black" Margin="0,5,0,0" BorderThickness="1" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top" Width="3" Background="Black"/>
+                		<Border BorderBrush="Black" Margin="0,5,0,0" BorderThickness="1" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top" Width="3" Background="Black"/>
+                		<Border BorderBrush="Black" Margin="0,5,0,0" BorderThickness="1" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top" Width="3" Background="Black"/>
+
+                	</StackPanel>
+                	<StackPanel Margin="5,2.5,0,0" Orientation="Vertical" CanVerticallyScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" HorizontalAlignment="Left" Width="255">
+                		<TextBlock HorizontalAlignment="Left" Height="18.944" Margin="0" TextWrapping="Wrap" Text="Cheque Stub" VerticalAlignment="Top" Width="79.2" FontWeight="Bold"/>
+                		<TextBlock Text="Income" Background="#FF4E6E06" Foreground="White" Height="19.16" Margin="0,0,17.4,0"/>
+                		<ListBox HorizontalAlignment="Left" Height="61.456" Margin="0" VerticalAlignment="Top" Width="254" Background="{x:Null}" ItemTemplate="{DynamicResource AccountEntryTemplate}" ItemsSource="{Binding CreditEntries}" ItemContainerStyle="{DynamicResource ReportListBoxItemStyle}" Style="{DynamicResource ReportListBox}"/>
+						<TextBlock Text="Deductions" Background="#FFD29B32" Foreground="White" Height="19.16" Margin="0,0,17.4,0"/>
+                		
+                		<ListBox HorizontalAlignment="Left" Height="56.854" Margin="0" VerticalAlignment="Top" Width="254" Background="{x:Null}" ItemTemplate="{DynamicResource AccountEntryTemplate}" ItemsSource="{Binding DebitEntries}" ItemContainerStyle="{DynamicResource ReportListBoxItemStyle}" Style="{DynamicResource ReportListBox}"/>
+                	</StackPanel>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="AccountEntryTemplate">
+        	<Grid Height="19.201" Width="214.314">
+        		<TextBlock Text="{Binding Total, StringFormat=c}" Margin="148.724,1.678,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="59.213" FontWeight="Bold" TextAlignment="Right" Background="{x:Null}"/>
+        		<TextBlock Text="{Binding PayrollItem.Name}" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139.287" Height="15.638"/>
+        		<Rectangle Fill="Gray" Height="1" Margin="0,38.16,-12,0" Visibility="Hidden"/>
+        		
+        	</Grid>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+	<Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource PayCheckViewModelDataSource}}">
+            <ListBox Margin="0,82,140.2,10" Background="Transparent" ItemTemplate="{DynamicResource CheckTemplate}" ItemsSource="{Binding CurrentEmployee.EmployeeAccounts}"/>
+            <TextBlock HorizontalAlignment="Left" Height="37" Margin="10,10,0,0" TextWrapping="Wrap" Text="Cheque Preview" VerticalAlignment="Top" Width="340.6" FontSize="26"/>
+       
+        <TextBlock Style="{DynamicResource TextButtonStyle}"  HorizontalAlignment="Left" Height="30" Margin="732,26,0,0" TextWrapping="Wrap" Text="Print &#xE1A5;" VerticalAlignment="Top" Width="95" FontSize="20" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="PrintReport"/>
+    </Grid>
+</UserControl>

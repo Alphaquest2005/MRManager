@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4d5da783942c41ff9cc0532a46f22ab3" Name="Diagram1" ZoomLevel="70">
+        <EntityTypeShape EntityType="DataLayer.AccountEntry" Width="1.5" PointX="17.75" PointY="9.75" />
+        <EntityTypeShape EntityType="DataLayer.Account" Width="2.125" PointX="12.125" PointY="0.75" />
+        <EntityTypeShape EntityType="DataLayer.AccountType" Width="1.5" PointX="1.75" PointY="4.375" />
+        <EntityTypeShape EntityType="DataLayer.Branch" Width="1.5" PointX="5.25" PointY="20.5" />
+        <EntityTypeShape EntityType="DataLayer.ChargeType" Width="1.5" PointX="3.75" PointY="4.375" />
+        <EntityTypeShape EntityType="DataLayer.Employee" Width="1.875" PointX="6.125" PointY="24" />
+        <EntityTypeShape EntityType="DataLayer.User" Width="1.5" PointX="8.5" PointY="29.625" />
+        <EntityTypeShape EntityType="DataLayer.Institution" Width="1.5" PointX="7.125" PointY="5" />
+        <EntityTypeShape EntityType="DataLayer.PayrollEmployeeSetup" Width="1.875" PointX="4.875" PointY="11.625" />
+        <EntityTypeShape EntityType="DataLayer.PayrollItem" Width="1.75" PointX="15.25" PointY="12.5" />
+        <EntityTypeShape EntityType="DataLayer.PayrollJob" Width="1.5" PointX="3" PointY="20.125" />
+        <EntityTypeShape EntityType="DataLayer.PayrollJobType" Width="1.5" PointX="0.75" PointY="16.375" />
+        <EntityTypeShape EntityType="DataLayer.PayrollSetupItem" Width="1.875" PointX="9.625" PointY="11.5" />
+        <AssociationConnector Association="DataLayer.FK_AccountAccountEntry" />
+        <AssociationConnector Association="DataLayer.FK_PayrollItemAccountEntry" />
+        <AssociationConnector Association="DataLayer.FK_AccountPayrollItem" />
+        <AssociationConnector Association="DataLayer.FK_AccountPayrollItem1" />
+        <AssociationConnector Association="DataLayer.FK_AccountPayrollSetupItem" />
+        <AssociationConnector Association="DataLayer.FK_InstitutionAccountASN" />
+        <AssociationConnector Association="DataLayer.FK_BranchEmployee" />
+        <AssociationConnector Association="DataLayer.FK_BranchPayrollJob" />
+        <AssociationConnector Association="DataLayer.FK_PayrollJobBranch" />
+        <AssociationConnector Association="DataLayer.FK_EmployeeEmployee" />
+        <AssociationConnector Association="DataLayer.FK_EmployeePayrollEmployeeSetup" />
+        <AssociationConnector Association="DataLayer.FK_EmployeePayrollItem" />
+        <AssociationConnector Association="DataLayer.FK_PayrollJobTypePayrollEmployeeSetup" />
+        <AssociationConnector Association="DataLayer.FK_PayrollSetupItemPayrollEmployeeSetup" />
+        <AssociationConnector Association="DataLayer.FK_PayrollItemPayrollItem" />
+        <AssociationConnector Association="DataLayer.FK_PayrollJobPayrollItem" />
+        <AssociationConnector Association="DataLayer.FK_PayrollSetupItemPayrollItem" />
+        <AssociationConnector Association="DataLayer.FK_PayrollJobTypePayrollJob" />
+        <EntityTypeShape EntityType="DataLayer.EmployeeAccount" Width="1.5" PointX="11.375" PointY="29.625" />
+        <InheritanceConnector EntityType="DataLayer.EmployeeAccount" />
+        <AssociationConnector Association="DataLayer.EmployeeEmployeeAccount" />
+        <EntityTypeShape EntityType="DataLayer.InstitutionAccount" Width="1.5" PointX="10" PointY="8" />
+        <InheritanceConnector EntityType="DataLayer.InstitutionAccount" />
+        <AssociationConnector Association="DataLayer.InstitutionInstitutionAccount" />
+        <InheritanceConnector EntityType="DataLayer.User" />
+        <EntityTypeShape EntityType="DataLayer.EmailTemplate" Width="1.5" PointX="3.75" PointY="7.375" />
+        <AssociationConnector Association="DataLayer.AccountPayrollEmployeeSetup" />
+        <AssociationConnector Association="DataLayer.AccountPayrollEmployeeSetup1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

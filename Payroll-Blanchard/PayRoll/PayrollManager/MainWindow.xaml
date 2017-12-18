@@ -1,0 +1,164 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   
+   
+	xmlns:local="clr-namespace:PayrollManager" 
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
+     
+	x:Class="PayrollManager.MainWindow"
+	x:Name="Window"
+    
+    
+    
+	Title="MainWindow"
+	Width="1609.91" Height="480"  WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" WindowStyle="None" BorderBrush="#FF3F3F3F" WindowState="Maximized">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF4663C4" Offset="0.945"/>
+            <GradientStop Color="#FFC4C9FF" Offset="0.049"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+
+
+    <Grid x:Name="LayoutRoot" >
+        <local:MainView Margin="0,0,0,105"  />
+        <Border Height="80" Margin="0,0,0,25" VerticalAlignment="Bottom" BorderThickness="2" Background="#4CFAFAFA"   >
+            <Border.Effect>
+                <DropShadowEffect Color="Green"/>
+            </Border.Effect>
+
+            <DockPanel LastChildFill="False" x:Name="FooterBar"  PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown"  Height="80">
+
+
+
+
+
+                <Expander IsExpanded="False" ExpandDirection="Right" Width="Auto" VerticalAlignment="Top" DockPanel.Dock="Right" Expanded="Expander_Expanded_1">
+                    <Expander.Header>
+                        <Grid Width="75">
+                            <TextBlock Height="71" Style="{StaticResource TextButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0" Width="72" FontFamily="Segoe UI Symbol" FontSize="40" Text="&#xE1A3;"/>
+                        </Grid>
+                    </Expander.Header>
+                    <Grid Width="300">
+
+
+                    </Grid>
+                </Expander>
+
+
+                <Expander IsExpanded="False" ExpandDirection="Right" Width="Auto" VerticalAlignment="Top" DockPanel.Dock="Right" Expanded="Expander_Expanded_1">
+                    <Expander.Header>
+                        <Grid Width="75">
+                            <TextBlock x:Name="PayrollSetupBtn" Height="63" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,3,7,0" Width="55" Style="{StaticResource TextButtonStyle}" FontFamily="Segoe UI Symbol" FontSize="40"  Text="&#xE1CB;" MouseLeftButtonDown="PayrollSetupBtn_MouseLeftButtonDown"/>
+                            <TextBlock Text="Payroll Setup" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Right" Height="20" Margin="0,0,0,-1" TextWrapping="Wrap"  VerticalAlignment="Bottom" Width="82" TextAlignment="Center"/>
+                        </Grid>
+                    </Expander.Header>
+                    <Grid Width="500">
+                        <Grid Margin="0">
+                            <TextBlock Text="Setup Steps"  HorizontalAlignment="Left" Height="49" Margin="0,5,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="82" TextAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="#FFFDFFB9"/>
+                            <TextBlock  Text="2. Create Payroll Item" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_1" Margin="87,32,0,0" FontFamily="Segoe UI Symbol"/>
+                            <TextBlock Text="3. Employee Payroll Setup" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="18" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_2" Margin="87,50,0,0" FontFamily="Segoe UI Symbol"/>
+                            <TextBlock  Text="1. Create Institutional Accounts" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="198" MouseLeftButtonDown="CreateInstAcc" Margin="87,7,0,0" FontFamily="Segoe UI Symbol"/>
+
+                        </Grid>
+
+                    </Grid>
+                </Expander>
+
+
+
+
+                <Expander IsExpanded="False" ExpandDirection="Right" Width="Auto" VerticalAlignment="Top" DockPanel.Dock="Right" Expanded="Expander_Expanded_1" >
+                    <Expander.Header>
+                        <Grid Width="75">
+                            <TextBlock x:Name="PaymentsBtn" Height="63" Style="{StaticResource TextButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,2,0,0" Width="55" FontFamily="Segoe UI Symbol" FontSize="40"  Text="" MouseLeftButtonDown="PaymentsBtn_MouseLeftButtonDown"/>
+                            <TextBlock Text="Accounts" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Right" Height="20" Margin="0,0,0,-1" TextWrapping="Wrap"  VerticalAlignment="Bottom" Width="65" TextAlignment="Center"/>
+                        </Grid>
+                    </Expander.Header>
+                    <Grid Width="300">
+                        <Grid Margin="0">
+
+
+                            <TextBlock Text="Common Tasks"  HorizontalAlignment="Left" Height="49" Margin="0,5,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="82" TextAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="#FFFDFFB9"/>
+                            <TextBlock Text=" View Institutional Accounts" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" Margin="93,12,0,0" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_4"/>
+                            <TextBlock Text="&#xE236; Create Institutional Account" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" Margin="93,29,0,0" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_3"/>
+                            <!--<TextBlock x:Name="editEmp_Copy1" Text="&#xE236; View Employee Pay Cheque" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" MouseLeftButtonDown="editEmp_Copy1_MouseLeftButtonDown_1" Margin="93,30,0,0" FontFamily="Segoe UI Symbol"/>-->
+
+                        </Grid>
+
+                    </Grid>
+                </Expander>
+
+
+                <Expander IsExpanded="False" ExpandDirection="Right" Width="Auto" VerticalAlignment="Top" DockPanel.Dock="Right" Expanded="Expander_Expanded_1" Height="73">
+                    <Expander.Header>
+                        <Grid Width="75">
+                            <TextBlock x:Name="EmployeeBtn" Height="63" Style="{StaticResource TextButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,1,3,0" Width="55" FontFamily="Segoe UI Symbol" FontSize="40" Text="&#xE125;" MouseLeftButtonDown="EmployeeBtn_MouseLeftButtonDown_1"/>
+                            <TextBlock Text="Employees" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Right" Height="20" Margin="0,0,0,-1" TextWrapping="Wrap"  VerticalAlignment="Bottom" Width="65" TextAlignment="Center" RenderTransformOrigin="0.535,1.32"/>
+                        </Grid>
+                    </Expander.Header>
+                    <Grid Width="800" >
+                        <Grid Margin="510,7,9,3">
+                            <TextBlock x:Name="editEmp" Text="1. Add/Edit Employee" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" Margin="93,0,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="82" TextAlignment="Center" MouseLeftButtonDown="editEmp_MouseLeftButtonDown"/>
+                            <TextBlock x:Name="EmpAcc" Text="2. Create Employee Accounts" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" Margin="93,21,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="175" TextAlignment="Center" MouseLeftButtonDown="EmpAcc_MouseLeftButtonDown"/>
+                            <TextBlock x:Name="emppaysetup" Text="3. Employee Payroll Setup" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" Margin="86,41,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="175" TextAlignment="Center" MouseLeftButtonDown="emppaysetup_MouseLeftButtonDown"/>
+                            <TextBlock Text="Setup Employees"  HorizontalAlignment="Left" Height="49" Margin="0,5,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="82" TextAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="#FFFDFFB9"/>
+
+                        </Grid>
+                        <Grid Margin="0,7,295,3">
+                            <TextBlock Text="  Salary Advance" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" Margin="274,0,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="136" FontFamily="Segoe UI Symbol" Foreground="#FFB0B9AD"/>
+                            <TextBlock Text="  View Employee History" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" Margin="275,19,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="175" FontFamily="Segoe UI Symbol" Foreground="#FFB0B9AD"/>
+                            <TextBlock Text="Common Tasks"  HorizontalAlignment="Left" Height="49" Margin="0,5,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="82" TextAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="#FFFDFFB9"/>
+                            <TextBlock  Text=" Review Employe Payroll" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" MouseLeftButtonDown="EmpSumTxt_MouseLeftButtonDown_1" Margin="93,3,0,0" FontFamily="Segoe UI Symbol"/>
+                            <TextBlock  Text="&#xE236; Employee Pay Cheque" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" MouseLeftButtonDown="editEmp_Copy1_MouseLeftButtonDown_1" Margin="93,21,0,0" FontFamily="Segoe UI Symbol"/>
+
+                        </Grid>
+                    </Grid>
+                </Expander>
+
+                <Expander Name="homeexpand" IsExpanded="True" ExpandDirection="Right" Width="Auto" VerticalAlignment="Top" DockPanel.Dock="Left" Collapsed="HomeExpander_Collapsed" Expanded="HomeExpander_Expanded_1">
+                    <Expander.Header>
+                        <Grid Width="75">
+                            <TextBlock x:Name="HomeBtn" Height="63" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="22,6,0,0" Width="55" Style="{StaticResource TextButtonStyle}" FontFamily="Segoe UI Symbol" FontSize="40"  Text="" MouseLeftButtonDown="HomeBtn_MouseLeftButtonDown"/>
+                            <TextBlock Text="Home" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" Margin="4,0,0,-1" TextWrapping="Wrap"  VerticalAlignment="Bottom" Width="82" TextAlignment="Center"/>
+
+                        </Grid>
+                    </Expander.Header>
+                    <Grid Width="1074">
+                        <Grid Margin="0,7,295,3">
+                            <TextBlock Text="Payroll Steps"  HorizontalAlignment="Left" Height="49" Margin="0,5,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="82" TextAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="#FFFDFFB9"/>
+                            <TextBlock  Text="1. Create Payroll Job" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" MouseLeftButtonDown="CreatePayrollJob" Margin="93,3,0,0" FontFamily="Segoe UI Symbol"/>
+                            <TextBlock  Text="2. Generate Payroll Items" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" MouseLeftButtonDown="GeneratePayrollItems" Margin="93,21,0,0" FontFamily="Segoe UI Symbol"/>
+                            <TextBlock  Text="3. Review/Edit Payroll" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" MouseLeftButtonDown="ReviewPayroll" Margin="262,3,0,0" FontFamily="Segoe UI Symbol"/>
+                            <TextBlock  Text="4. Post Payroll Job" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" MouseLeftButtonDown="PostPayroll" Margin="262,21,0,0" FontFamily="Segoe UI Symbol"/>
+                            <TextBlock  Text="5. Review Employee Cheques" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" MouseLeftButtonDown="ReviewEmpChecks" Margin="431,3,0,0" FontFamily="Segoe UI Symbol"/>
+                            <TextBlock  Text="6. Review Institutional Payments" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="30" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" MouseLeftButtonDown="ReviewInstPayments" Margin="431,21,0,0" FontFamily="Segoe UI Symbol"/>
+                            <TextBlock Text="Payroll Config"  HorizontalAlignment="Left" Height="49" Margin="600,5,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="82" TextAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="#FFFDFFB9"/>
+                            <TextBlock x:Name="emppaysetup_Copy" Text="⚫ Employee Payroll Setup" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" Margin="665,21,-61.4,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="175" TextAlignment="Center" MouseLeftButtonDown="emppaysetup_MouseLeftButtonDown"/>
+                            <TextBlock x:Name="editEmp_Copy" Text="⚫ Add/Edit Employees" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" Margin="682,5,-26.4,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="123" TextAlignment="Center" MouseLeftButtonDown="editEmp_MouseLeftButtonDown"/>
+                            <TextBlock  Text="⚫ Add/Edit Payroll Items" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_1" Margin="682,40,-67.4,0" FontFamily="Segoe UI Symbol"/>
+
+                        </Grid>
+
+                    </Grid>
+                </Expander>
+
+            </DockPanel>
+        </Border>
+        <Grid x:Name="HeaderBar" Height="35" Margin="0,0,-0.49,0" VerticalAlignment="Top" Background="#00000000">
+
+            <Grid PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown_1" Background="#00000000" Margin="0,0,-0.49,0"/>
+
+            <TextBlock Text="&#xE10A;" Style="{StaticResource CloseButtonStyle}"  HorizontalAlignment="Right" Height="50" VerticalAlignment="Top" Width="35" FontFamily="Segoe UI Symbol" FontSize="24" Margin="0,10,0.4,0" MouseLeftButtonDown="Button_Click_1"/>
+            <TextBlock Text="&#xE155;" Style="{DynamicResource TextButtonStyle}"  HorizontalAlignment="Right" Height="32" VerticalAlignment="Top" Width="30" FontFamily="Segoe UI Symbol" FontSize="24" Margin="0,8,39.69,-5" MouseLeftButtonDown="SwitchWindowState" />
+            <TextBlock Text="&#xE108;" Style="{DynamicResource TextButtonStyle}"  HorizontalAlignment="Right" Height="25" VerticalAlignment="Top" Width="30" FontFamily="Segoe UI Symbol" FontSize="24" Margin="0,16,69.69,-6" MouseLeftButtonDown="MinimizeWindow" />
+        </Grid>
+    </Grid>
+
+
+
+
+</Window>

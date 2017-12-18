@@ -1,0 +1,12 @@
+﻿{
+  "dependencies": {
+    "EntityFramework": "6.1.3",
+    "PostSharp": "5.0.33"
+  },
+  "frameworks": {
+    "net45": {}
+  },
+  "runtimes": {
+    "win": {}
+  }
+}

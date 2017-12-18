@@ -1,0 +1,57 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	xmlns:local="clr-namespace:PayrollManager"
+	x:Class="PayrollManager.EmployeePaysub"
+	d:DesignWidth="896.716" Height="514.962">
+    <UserControl.Resources>
+        <local:EmployeePayStubModel x:Key="EmployeePayStubModelDataSource" />
+
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot">
+        <Border x:Name="ReportBRD" Margin="25,42,4.716,28" Width="867">
+            <ScrollViewer x:Name="ReportGrd" Margin="0,10,0,20">
+                <Grid x:Name="DailyReportGD"  DataContext="{Binding Source={StaticResource EmployeePayStubModelDataSource}}" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Top" Width="816" Background="White">
+                    <Grid HorizontalAlignment="Left" Height="27" Margin="40,156,0,0" VerticalAlignment="Top" Width="734"  Background="#FFD7D7D7">
+
+                    </Grid>
+                    <TextBlock Text="{Binding CurrentEmployee.NetAmount, StringFormat=c}" Margin="630,157,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="129" Height="26" FontSize="21.333" Foreground="#FF353623"/>
+                    <TextBlock HorizontalAlignment="Center" Height="32" Margin="460,81,42,0" TextWrapping="Wrap" Text="Employee Payment Report" VerticalAlignment="Top" Width="314" FontSize="25" TextAlignment="Right" Foreground="Black" Background="White"/>
+                    <TextBlock Text="{Binding CurrentPayrollJob.Name}" Margin="460,131,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14.667" Foreground="Black" Width="314" TextAlignment="Right"/>
+                    <StackPanel Margin="40,183,42,0" Orientation="Vertical" Height="Auto">
+                        <TextBlock HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="259" Margin="0,15,0,15" FontSize="20" Foreground="#FF393939" TextAlignment="Left" Text="Income " />
+                        <DataGrid x:Name="IncomeDataGrid" ItemsSource="{Binding IncomePayrollLineItems}" AutoGenerateColumns="False" HorizontalAlignment="Left"  Height="Auto" VerticalAlignment="Top" Width="690" Background="White"  CanUserAddRows="False" RowHeight="28" GridLinesVisibility="None" AlternatingRowBackground="#FFCFCCCC" FontSize="16" Margin="13,0,0,0" d:DataContext="{d:DesignData /SampleData/EmployeePayStubSampleData.xaml}" LoadingRow="IncomeDataGrid_LoadingRow"  >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="LineItemDescription" Binding="{Binding LineItemDescription, Mode=OneWay}" Width="200" ClipboardContentBinding="{x:Null}"/>
+                                <DataGridTextColumn Header="CurrentAmount" Binding="{Binding CurrentAmount, StringFormat=c}" Width="150" ClipboardContentBinding="{x:Null}"/>
+                                <DataGridTextColumn Header="YearAmount" Binding="{Binding YearAmount, StringFormat=c}" Width="150" ClipboardContentBinding="{x:Null}"/>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <TextBlock HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" Text="Deductions" VerticalAlignment="Top" Margin="0,15,0,15" Width="237" FontSize="20" Foreground="#FF393939" TextAlignment="Left"/>
+                        <DataGrid x:Name="DeductionDataGrid" ItemsSource="{Binding DeductionPayrollLineItems}" LoadingRow="IncomeDataGrid_LoadingRow" HorizontalAlignment="Left"  Height="Auto" VerticalAlignment="Top" Width="690" Background="White" AutoGenerateColumns="False" CanUserAddRows="False" RowHeight="28" GridLinesVisibility="None" AlternatingRowBackground="#FFCFCCCC" FontSize="16" Margin="12,0,0,0" d:DataContext="{d:DesignData /SampleData/EmployeePayStubSampleData.xaml}"  >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="LineItemDescription" Binding="{Binding LineItemDescription, Mode=OneWay}" Width="200" ClipboardContentBinding="{x:Null}"/>
+                                <DataGridTextColumn Header="CurrentAmount" Binding="{Binding CurrentAmount, StringFormat=c}" Width="150" ClipboardContentBinding="{x:Null}"/>
+                                <DataGridTextColumn Header="YearAmount" Binding="{Binding YearAmount, StringFormat=c}" Width="150" ClipboardContentBinding="{x:Null}"/>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                    <TextBlock HorizontalAlignment="Left" Height="30" Margin="37,85,0,0" TextWrapping="Wrap" Text="{Binding CurrentEmployee.DisplayName}" VerticalAlignment="Top" Width="368" FontSize="24"/>
+                    <TextBlock HorizontalAlignment="Left" Height="20" Margin="37,131,0,0" TextWrapping="Wrap" Text="{Binding CurrentEmployee.Title}" VerticalAlignment="Top" Width="243" FontSize="16"/>
+                    <TextBlock HorizontalAlignment="Center" Height="32" Margin="168,10,172,0" TextWrapping="Wrap" Text="Communal Co-operative Credit Union Ltd." VerticalAlignment="Top" Width="476" FontSize="25" TextAlignment="Right" Foreground="Black" Background="White"/>
+                    <TextBlock HorizontalAlignment="Center" Height="32" Margin="37,47,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="769" TextAlignment="Center" Foreground="Black" Background="White"><Run Text="Halifax Street,St. George's,Grenada. W.I.Tel# 1 473 440 1755. "/><LineBreak/><Run Text="Website:www.thecommunalcu.com mail:comcreditunion@communalcu.com   "/></TextBlock>
+
+                </Grid>
+            </ScrollViewer>
+        </Border>
+        <TextBlock Style="{DynamicResource TextButtonStyle}"  HorizontalAlignment="Left" Height="30" Margin="792,10,0,0" TextWrapping="Wrap" Text="Print &#xE1A5;" VerticalAlignment="Top" Width="95" FontSize="20" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="PrintReport"/>
+        <TextBlock Style="{DynamicResource TextButtonStyle}"  HorizontalAlignment="Left" Height="30" Margin="692,10,0,0" TextWrapping="Wrap" Text="Email &#xE1A5;" VerticalAlignment="Top" Width="95" FontSize="20" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="EmailReport"/>
+        <TextBlock Style="{DynamicResource TextButtonStyle}"  HorizontalAlignment="Left" Height="30" Margin="555,10,0,0" TextWrapping="Wrap" Text="Email All &#xE1A5;" VerticalAlignment="Top" Width="114" FontSize="20" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="EmailAllReport"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,44 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	xmlns:local="clr-namespace:PayrollManager"
+	x:Class="PayrollManager.Views.IntroScreen"
+	d:DesignWidth="783.313" d:DesignHeight="480">
+    <UserControl.Resources>
+        <local:IntroScreenModel x:Key="IntroScreenModelDataSource" />
+
+        <DataTemplate x:Key="PayrollJobTemplate3">
+            <Grid Height="62" Width="471">
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#4CE3D7A3" Offset="0.958"/>
+                        <GradientStop Offset="0.126"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <TextBlock x:Name="NameTxt" Text="{Binding Name}" Margin="61,5,123,32" FontSize="16" FontWeight="Bold"/>
+                <TextBlock x:Name="StatusTxt" Text="{Binding Status}" Margin="0,15.96,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23.16" Width="54.527" FontSize="18.667"/>
+                <TextBlock x:Name="DurationTxt" Text="{Binding DurationInDays, StringFormat=0 Days}" Margin="61,32,245.527,-0.48" FontSize="18.667"/>
+                <TextBlock x:Name="NetAmountTxt" Text="{Binding NetAmount, StringFormat=c, UpdateSourceTrigger=PropertyChanged}" Margin="353,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="42" Width="108" FontSize="18.667" TextAlignment="Right"/>
+                <TextBlock x:Name="DurationTxt_Copy" Text="{Binding PaymentDate, StringFormat='MMM-dd-yy'}" Margin="189,35,117.527,-0.48" FontSize="15"/>
+                <TextBlock HorizontalAlignment="Left" Height="23" Margin="162,39,0,-0.48" TextWrapping="Wrap" Text="Due" VerticalAlignment="Top" Width="22"/>
+
+            </Grid>
+        </DataTemplate>
+
+
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource IntroScreenModelDataSource}}" Margin="0,0,0.333,0" d:DataContext="{d:DesignData /SampleData/PayrollJobSampleData.xaml}">
+        <ListBox HorizontalAlignment="Left" Height="349" ItemTemplate="{DynamicResource PayrollJobTemplate3}" ItemsSource="{Binding PayrollJobs}" SelectedItem="{Binding CurrentPayrollJob, Mode=TwoWay}" SelectionChanged="Selector_OnSelectionChanged" Margin="214,80,-65.333,0" VerticalAlignment="Top" Width="534" Background="#4CF8F8F8"   />
+        <TextBlock HorizontalAlignment="Left" Height="45.6" Margin="213.8,10,0,0" TextWrapping="Wrap" Text="Select Payroll Job" VerticalAlignment="Top" Width="245.327" FontSize="26"/>
+        <TextBlock x:Name="StartJobBtn" HorizontalAlignment="Left" Height="24.8" Margin="10,81.4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="116.8" FontSize="16" Style="{DynamicResource TextButtonStyle}" MouseLeftButtonDown="StartJobBtn_MouseLeftButtonDown"><Run Text="Start New Job"/><LineBreak/><Run/></TextBlock>
+        <TextBlock x:Name="ConfigPayItemsBtn" HorizontalAlignment="Left" Height="24.8" Margin="10,111.2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" FontSize="16" Text="Configure Payroll  Items" Style="{DynamicResource TextButtonStyle}" MouseLeftButtonDown="ConfigPayItemsBtn_MouseLeftButtonDown"/>
+        <TextBlock HorizontalAlignment="Left" Height="24.8" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" FontSize="16" Style="{DynamicResource TextButtonStyle}"><Run x:Name="PayrollBtn" Text="Create New Payroll Item" MouseLeftButtonDown="PayrollBtn_MouseLeftButtonDown"/><LineBreak/><Run/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="64" Margin="10,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" FontSize="20" Style="{DynamicResource TextButtonStyle}"><Run x:Name="GenPayrollBtn" Text="Generate Payroll Items for Job" MouseLeftButtonDown="GenPayrollBtn_MouseLeftButtonDown_1"/><LineBreak/><Run/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="64" Margin="10,287,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" FontSize="20" Style="{DynamicResource TextButtonStyle}"><Run x:Name="PostPayrollBtn1" Text="Post Payroll Job" MouseLeftButtonDown="PostPayrollBtn_MouseLeftButtonDown_1"/><LineBreak/><Run/></TextBlock>
+        <ComboBox SelectedValue="{Binding CurrentYear}" ItemsSource="{Binding YearLst}" HorizontalAlignment="Left" Height="30" Margin="648,10,0,0" VerticalAlignment="Top" Width="100"/>
+    </Grid>
+</UserControl>

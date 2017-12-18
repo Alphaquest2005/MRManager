@@ -1,0 +1,35 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Converters="clr-namespace:PayrollManager.Converters"
+	xmlns:local="clr-namespace:PayrollManager"
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+	mc:Ignorable="d"
+	x:Class="PayrollManager.PayrollJob"
+	d:DesignWidth="372.4" Height="252">
+	<UserControl.Resources>
+		<local:PayrollJobModel x:Key="PayrollJobModelDataSource" />
+        <Converters:DisablePostedConverter x:Key="PostedConverter"/>
+	</UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource PayrollJobModelDataSource},Path=CurrentPayrollJob}"  >
+        <DatePicker SelectedDate="{Binding StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Source={StaticResource PayrollJobModelDataSource},Path=Instance.CurrentPayrollJob.Status,  Converter={StaticResource PostedConverter}}" Margin="115,59,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" d:DataContext="{d:DesignData /SampleData/PayrollJobSampleData.xaml}" Height="27" Width="161"/>
+        <DatePicker SelectedDate="{Binding EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Source={StaticResource PayrollJobModelDataSource},Path=CurrentPayrollJob.Status,  Converter={StaticResource PostedConverter}}" Margin="115,91,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" d:DataContext="{d:DesignData /SampleData/PayrollJobSampleData.xaml}" Width="161"/>
+		<TextBlock HorizontalAlignment="Left" Height="23" Margin="20,63,0,0" TextWrapping="Wrap" Text="Start Date" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
+		<TextBlock HorizontalAlignment="Left" Height="22" Margin="20,91,0,0" TextWrapping="Wrap" Text="End Date" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
+		<TextBlock HorizontalAlignment="Left" Height="34.8" Margin="31.5,10,0,0" TextWrapping="Wrap" Text="Start Payroll Job" VerticalAlignment="Top" Width="241.2" FontSize="26"/>
+
+        <ComboBox SelectedValue="{Binding PayrollJobTypeId, UpdateSourceTrigger=PropertyChanged}" 
+					DisplayMemberPath="Name" SelectedValuePath="PayrollJobTypeId" ItemsSource="{Binding PayrollJobTypes, Source={StaticResource PayrollJobModelDataSource}}"
+            IsEnabled="{Binding Source={StaticResource PayrollJobModelDataSource},Path=CurrentPayrollJob.Status,  Converter={StaticResource PostedConverter}}"
+            HorizontalAlignment="Left" Height="25" Margin="115,170,0,0" VerticalAlignment="Top" Width="161"/>
+        <TextBlock HorizontalAlignment="Left" Height="22" Margin="20,170,0,0" TextWrapping="Wrap" Text="Job Type" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
+        <DatePicker SelectedDate="{Binding PaymentDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Source={StaticResource PayrollJobModelDataSource},Path=CurrentPayrollJob.Status,  Converter={StaticResource PostedConverter}}" Margin="115,131,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" d:DataContext="{d:DesignData /SampleData/PayrollJobSampleData.xaml}" Width="161"/>
+        <TextBlock HorizontalAlignment="Left" Height="22" Margin="20,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" TextAlignment="Right"><Run Text="Payment Date"/><LineBreak/><Run/></TextBlock>
+        <TextBlock x:Name="SaveBtn" IsEnabled="{Binding Source={StaticResource PayrollJobModelDataSource},Path=CurrentPayrollJob.Status,  Converter={StaticResource PostedConverter}}" HorizontalAlignment="Left" Height="27" Margin="240,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="33" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="20" MouseLeftButtonDown="SaveBtn_MouseLeftButtonDown"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="&#xE105;"/></Span></TextBlock>
+        <TextBlock x:Name="DeleteBtn" HorizontalAlignment="Left" Height="27" Margin="338,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="33" TextAlignment="Center" Style="{DynamicResource CloseButtonStyle}" FontSize="20" MouseLeftButtonDown="DeleteBtn_MouseLeftButtonDown"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="&#xE106;"/></Span><LineBreak/><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run/></Span></TextBlock>
+        <TextBlock x:Name="NewBtn" HorizontalAlignment="Left" Height="27" Margin="202,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="20" Text="&#xE109;" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="NewBtn_MouseLeftButtonDown"/>
+    </Grid>
+</UserControl>

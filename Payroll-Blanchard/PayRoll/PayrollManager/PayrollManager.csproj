@@ -1,0 +1,565 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ExpressionBlendVersion>5.2.30810.0</ExpressionBlendVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{55E0FD5D-6A5E-4E54-8ACC-1B6E9D5111FA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PayrollManager</RootNamespace>
+    <AssemblyName>PayrollManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ApplicationIcon>Application.ico</ApplicationIcon>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <DontImportPostSharp>True</DontImportPostSharp>
+    <PublishUrl>ftp://ftp.insight-software.biz/home2/insighw6/public_html/App/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://app.insight-software.biz/</InstallUrl>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>PayrollManager.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>D55A13ED33C44E5E0F7327B9DE4BDA19785D79A5</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>PayrollManager_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Unity.2.1.505.0\lib\NET35\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp-WPF">
+      <HintPath>..\PdfSharp-WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Xps">
+      <HintPath>..\PdfSharp.Xps.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System.Printing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Microsoft.Expression.Interactions" />
+    <Reference Include="System.Windows.Interactivity" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Converters\DataGrid2Excel.cs" />
+    <Compile Include="Converters\DisablePostedConverter.cs" />
+    <Compile Include="Converters\EnumToBooleanConverter.cs" />
+    <Compile Include="Converters\GroupItemSalesSubtotalConverter.cs" />
+    <Compile Include="Converters\NumToWords.cs" />
+    <Compile Include="Converters\PrintClass.cs" />
+    <Compile Include="Converters\WPF2PDF.cs" />
+    <Compile Include="DataLayer\CustomClasses\AccountEntry.cs" />
+    <Compile Include="DataLayer\CustomClasses\Accounts.cs" />
+    <Compile Include="DataLayer\CustomClasses\Branch.cs" />
+    <Compile Include="DataLayer\CustomClasses\AllBranch.cs" />
+    <Compile Include="DataLayer\CustomClasses\Employee.cs" />
+    <Compile Include="DataLayer\CustomClasses\InsititutionAccounts.cs" />
+    <Compile Include="DataLayer\CustomClasses\PayrollEmployeeSetup.cs" />
+    <Compile Include="DataLayer\CustomClasses\PayrollItems.cs" />
+    <Compile Include="DataLayer\CustomClasses\PayrollJob.cs" />
+    <Compile Include="DataLayer\CustomClasses\PayrollSetupItems.cs" />
+    <Compile Include="DataLayer\PayrollDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PayrollDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLayer\PayrollDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PayrollDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="LogInScreen.xaml.cs">
+      <DependentUpon>LogInScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="SplashScreen2.cs" />
+    <Compile Include="ViewModels\AccountDetailsModel.cs" />
+    <Compile Include="ViewModels\AccountsSummaryModel.cs" />
+    <Compile Include="ViewModels\AccountsSummaryReportModel.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\BranchPayrollItemBreakDownModel.cs" />
+    <Compile Include="ViewModels\Common.cs" />
+    <Compile Include="ViewModels\BranchEmployeeInstitutionsModel.cs" />
+    <Compile Include="ViewModels\InstitutionDetailsModel.cs" />
+    <Compile Include="ViewModels\EmployeeAccountDetailsModel.cs" />
+    <Compile Include="ViewModels\EmployeeBreakDownReportModel.cs" />
+    <Compile Include="ViewModels\EmployeeDetailsModel.cs" />
+    <Compile Include="ViewModels\EmployeePayrollItemsListModel.cs" />
+    <Compile Include="ViewModels\EmployeePayStub.cs" />
+    <Compile Include="ViewModels\EmployeeSummaryListModel.cs" />
+    <Compile Include="ViewModels\IntroScreenModel.cs" />
+    <Compile Include="ViewModels\PayCheckViewModel.cs" />
+    <Compile Include="ViewModels\PayrollEmployeeSetupDetailsModel.cs" />
+    <Compile Include="ViewModels\PayrollItemDetailsModel.cs" />
+    <Compile Include="ViewModels\PayrollItemsReportModel.cs" />
+    <Compile Include="ViewModels\PayrollJobModel.cs" />
+    <Compile Include="ViewModels\PayrollSetupItemsModel.cs" />
+    <Compile Include="ViewModels\PayrollSetupSummaryModel.cs" />
+    <Compile Include="ViewModels\PaysubModel.cs" />
+    <Compile Include="Views\AccountDetails.xaml.cs">
+      <DependentUpon>AccountDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AccountsSummary.xaml.cs">
+      <DependentUpon>AccountsSummary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AccountsSummaryReport.xaml.cs">
+      <DependentUpon>AccountsSummaryReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BranchPayrollItemBreakDown.xaml.cs">
+      <DependentUpon>BranchPayrollItemBreakDown.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BranchEmployeeInstitutions.xaml.cs">
+      <DependentUpon>BranchEmployeeInstitutions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InstitutionDetails.xaml.cs">
+      <DependentUpon>InstitutionDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeBreakDownReport.xaml.cs">
+      <DependentUpon>EmployeeBreakDownReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeePaysub.xaml.cs">
+      <DependentUpon>EmployeePaysub.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeSummaryList.xaml.cs">
+      <DependentUpon>EmployeeSummaryList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HeaderTemplate.xaml.cs">
+      <DependentUpon>HeaderTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InstitutionCheckView.xaml.cs">
+      <DependentUpon>InstitutionCheckView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeAccountDetails.xaml.cs">
+      <DependentUpon>EmployeeAccountDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeAccountSummaryList.xaml.cs">
+      <DependentUpon>EmployeeAccountSummaryList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeDetails.xaml.cs">
+      <DependentUpon>EmployeeDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeePayrollItemsList.xaml.cs">
+      <DependentUpon>EmployeePayrollItemsList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InstitutionSummaryList.xaml.cs">
+      <DependentUpon>InstitutionSummaryList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IntroScreen.xaml.cs">
+      <DependentUpon>IntroScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PayCheckView.xaml.cs">
+      <DependentUpon>PayCheckView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PayrollEmployeeSetupDetails.xaml.cs">
+      <DependentUpon>PayrollEmployeeSetupDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PayrollItemDetails.xaml.cs">
+      <DependentUpon>PayrollItemDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PayrollItemsReport.xaml.cs">
+      <DependentUpon>PayrollItemsReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PayrollJob.xaml.cs">
+      <DependentUpon>PayrollJob.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PayrollSetupItems.xaml.cs">
+      <DependentUpon>PayrollSetupItems.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PayrollSetupSummary.xaml.cs">
+      <DependentUpon>PayrollSetupSummary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PaymentReport.xaml.cs">
+      <DependentUpon>PaymentReport.xaml</DependentUpon>
+    </Compile>
+    <Page Include="LogInScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="SliderControl.cs" />
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Styles\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AccountDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AccountsSummary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AccountsSummaryReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BranchPayrollItemBreakDown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BranchEmployeeInstitutions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\InstitutionDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EmployeeBreakDownReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EmployeePaysub.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EmployeeSummaryList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\HeaderTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InstitutionCheckView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EmployeeAccountDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EmployeeAccountSummaryList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EmployeeDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EmployeePayrollItemsList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\InstitutionSummaryList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\IntroScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PayCheckView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PayrollEmployeeSetupDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PayrollItemDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PayrollItemsReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PayrollJob.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PayrollSetupItems.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PayrollSetupSummary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PaymentReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <AppDesigner Include="Properties\" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Application.ico">
+      <Visible>false</Visible>
+    </None>
+    <EntityDeploy Include="DataLayer\PayrollDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PayrollDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DataLayer\PayrollDB.edmx.diagram">
+      <DependentUpon>PayrollDB.edmx</DependentUpon>
+    </None>
+    <None Include="DataLayer\PayrollDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PayrollDB.cs</LastGenOutput>
+      <DependentUpon>PayrollDB.edmx</DependentUpon>
+    </None>
+    <None Include="PayrollManager_TemporaryKey.pfx" />
+    <None Include="project.json" />
+    <None Include="Properties\DataSources\QuickSalesManager.DataLayer.PayrollDB.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Page Include="Styles\ButtonStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ComboBoxStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\CheckBoxStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\DataGridCustomizations.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TextBlockStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\DataGridStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\GroupBoxStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ListBoxStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\MenuStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ScrollBarStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TabControlStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TextBoxStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\WindowStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="blue_purple_green_copy-408x259.jpg" />
+    <Content Include="DataLayer\AllData.sql" />
+    <Content Include="DataLayer\Clear Data.sql" />
+    <Content Include="DataLayer\PayrollDB.edmx.sql" />
+    <Content Include="DataLayer\Total Setup Data.sql" />
+    <Content Include="DataLayer\PayrollData.edmx.sql" />
+    <Resource Include="Styles\Collapse.png" />
+    <Resource Include="Styles\Expand.png" />
+    <Resource Include="XMLFile1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CustomWPFControls\CustomWPFControls.csproj">
+      <Project>{c1ad7e08-655b-40f5-97fa-61c16870a17f}</Project>
+      <Name>CustomWPFControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Emailing\EmailLogger.csproj">
+      <Project>{b645979d-7f26-4029-921a-3a1c7b9c5cec}</Project>
+      <Name>EmailLogger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LinqLib\LinqLib.csproj">
+      <Project>{5666d5d2-a992-40cc-9a98-e5525ecc59be}</Project>
+      <Name>LinqLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Outlook\Outlook.csproj">
+      <Project>{4e1731f1-b17f-4919-9bb9-5eb4da12fbbd}</Project>
+      <Name>Outlook</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PrintableDataGrid\PrintableDataGrid.csproj">
+      <Project>{6181dfab-93d9-4501-9799-b120707843c1}</Project>
+      <Name>PrintableDataGrid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SUT.PrintEngine\SUT.PrintEngine.csproj">
+      <Project>{0b3d76d5-d9f4-4c0e-afa9-143138ebc74d}</Project>
+      <Name>SUT.PrintEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SQL.Server.Compact.4.0">
+      <Visible>False</Visible>
+      <ProductName>SQL Server Compact 4.0 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Report1.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SampleData\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath32)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\PostSharp.4.2.17\tools\PostSharp.targets" Condition="Exists('..\packages\PostSharp.4.2.17\tools\PostSharp.targets')" />
+  <!--<Target Name="EnsurePostSharpImported" BeforeTargets="BeforeBuild" Condition="'$(PostSharp30Imported)' == ''">
+    <Error Condition="!Exists('..\packages\PostSharp.4.2.17\tools\PostSharp.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore." />
+    <Error Condition="Exists('..\packages\PostSharp.4.2.17\tools\PostSharp.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://www.postsharp.net/links/nuget-restore." />
+  </Target>-->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	     Other similar extension points exist, see Microsoft.Common.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>

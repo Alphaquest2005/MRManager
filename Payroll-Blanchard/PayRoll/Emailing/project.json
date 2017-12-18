@@ -1,0 +1,11 @@
+﻿{
+  "dependencies": {
+    "PostSharp": "5.0.33"
+  },
+  "frameworks": {
+    "net45": {}
+  },
+  "runtimes": {
+    "win": {}
+  }
+}

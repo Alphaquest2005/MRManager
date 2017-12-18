@@ -136,6 +136,7 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
                     try
                     {
                         await AsycudaDocumentSetExRepository.Instance.ExportDocument(f, BaseViewModel.Instance.CurrentAsycudaDocument.ASYCUDA_Id).ConfigureAwait(false);
+
                     }
                     catch (Exception)
                     {

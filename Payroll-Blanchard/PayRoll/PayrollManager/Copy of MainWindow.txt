@@ -1,0 +1,94 @@
+﻿
+<Controls:Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+     xmlns:Controls="clr-namespace:Elysium.Controls;assembly=Elysium"
+    xmlns:params="http://schemas.codeplex.com/elysium/params"
+	xmlns:local="clr-namespace:QuickSalesManager" 
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
+     params:Design.Theme="Light"
+     params:Manager.Theme="Light"
+	x:Class="QuickSalesManager.MainWindow"
+	x:Name="Window"
+    
+    
+    
+	Title="MainWindow"
+	Width="640" Height="480"  WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" WindowStyle="None" BorderBrush="#FF3F3F3F" WindowState="Maximized">
+    <Controls:Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF4663C4" Offset="0.945"/>
+            <GradientStop Color="#FFC4C9FF" Offset="0.049"/>
+        </LinearGradientBrush>
+    </Controls:Window.Background>
+
+
+
+    <Grid x:Name="LayoutRoot" >
+        <local:MainView Margin="0,0,0,105"  />
+            <Border Height="80" Margin="0,0,0,25" VerticalAlignment="Bottom" BorderThickness="2" Background="#4CFAFAFA"   >
+            <Border.Effect>
+                <DropShadowEffect/>
+            </Border.Effect>
+
+            <Grid x:Name="FooterBar"  PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown"  Height="80">
+
+                <TextBlock Height="71" Style="{StaticResource TextButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,48.6,0" Width="62" FontFamily="Segoe UI Symbol" FontSize="40" Text="&#xE1A3;">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <ei:CallMethodAction MethodName="ViewModelMethod" TargetObject="{Binding}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                </TextBlock>
+                <TextBlock Height="63" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,3,451.6,0" Width="55" Style="{StaticResource TextButtonStyle}" FontFamily="Segoe UI Symbol" FontSize="40"  Text="&#xE1CB;">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <ei:CallMethodAction MethodName="ViewModelMethod" TargetObject="{Binding}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                  
+                      
+                  
+                </TextBlock>
+                <TextBlock Text="Ticket" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Right" Height="20" Margin="0,0,454.6,-2" TextWrapping="Wrap"  VerticalAlignment="Bottom" Width="65" TextAlignment="Center"/>
+
+                <TextBlock Height="63" Style="{StaticResource TextButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,2,326.6,0" Width="55" FontFamily="Segoe UI Symbol" FontSize="40"  Text="&#xE1A9;">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <ei:CallMethodAction MethodName="ViewModelMethod" TargetObject="{Binding}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                </TextBlock>
+                <TextBlock Text="Pass" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Right" Height="20" Margin="0,0,329.6,-1" TextWrapping="Wrap"  VerticalAlignment="Bottom" Width="65" TextAlignment="Center"/>
+                <TextBlock Height="63" Style="{StaticResource TextButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,1,183.4,0" Width="55" FontFamily="Segoe UI Symbol" FontSize="40" Text="&#xE125;">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <ei:CallMethodAction MethodName="ViewModelMethod" TargetObject="{Binding}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                </TextBlock>
+                <TextBlock Text="Cashiers" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Right" Height="20" Margin="0,0,183.6,-1" TextWrapping="Wrap"  VerticalAlignment="Bottom" Width="65" TextAlignment="Center" RenderTransformOrigin="0.535,1.32"/>
+                </Grid>
+            </Border>
+        <Grid x:Name="HeaderBar" Height="70" Margin="0,0,0,0" VerticalAlignment="Top"  Background="#00000000">
+            <Grid PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown_1" Background="Transparent"/>
+            <Button Height="64" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="14,4,0,-8" Width="60" FontFamily="Segoe UI Symbol" FontSize="40" BorderBrush="{x:Null}" Content="&#xE0C0;" d:IsHidden="True" Visibility="Hidden">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <ei:CallMethodAction MethodName="ViewModelMethod" TargetObject="{Binding}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </Button>
+            <TextBlock Text="&#xE10A;" Style="{StaticResource CloseButtonStyle}"  HorizontalAlignment="Right" Height="50" VerticalAlignment="Top" Width="35" FontFamily="Segoe UI Symbol" FontSize="24" Margin="0,10,0.4,0" MouseLeftButtonDown="Button_Click_1"/>
+        </Grid>
+    </Grid>
+
+
+ 
+
+</Controls:Window>

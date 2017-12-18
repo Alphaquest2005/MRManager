@@ -1,0 +1,42 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	xmlns:local="clr-namespace:PayrollManager"
+	x:Class="PayrollManager.EmployeeAccountDetails"
+	d:DesignWidth="640" d:DesignHeight="480">
+	<UserControl.Resources>
+		<local:EmployeeAccountDetailsModel x:Key="EmployeeAccountDetailsModelDataSource" />
+        
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource EmployeeAccountDetailsModelDataSource}, Path=CurrentEmployeeAccount}">
+        <Grid HorizontalAlignment="Left" Height="400" Background="#33FFFFFF" Margin="0,80,0,0" VerticalAlignment="Top" Width="640">
+            <TextBox x:Name="AccountNameTxt" Text="{Binding AccountName,FallbackValue='Create new Account', UpdateSourceTrigger=PropertyChanged}" Margin="123,190,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="33" Width="309" FontSize="16"/>
+            <TextBox Text="{Binding AccountNumber, UpdateSourceTrigger=PropertyChanged}" Margin="123,100,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="309"/>
+			<TextBlock HorizontalAlignment="Left" Height="26" Margin="19,195,0,0" TextWrapping="Wrap" Text="Account Name" VerticalAlignment="Top" Width="99" FontSize="13.333" TextAlignment="Right"/>
+            <ComboBox x:Name="InstitutionCmb" SelectedValue="{Binding InstitutionId, UpdateSourceTrigger=PropertyChanged}" 
+                      DisplayMemberPath="Name" SelectedValuePath="InstitutionId" ItemsSource="{Binding Institutions, Source={StaticResource EmployeeAccountDetailsModelDataSource}, UpdateSourceTrigger=PropertyChanged}"
+                      Margin="122,59,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="29" Width="309" SelectionChanged="InstitutionCmb_SelectionChanged"/>
+			<TextBlock HorizontalAlignment="Left" Height="26" Margin="10,99,0,0" TextWrapping="Wrap" Text="Account Number" VerticalAlignment="Top" Width="108" FontSize="13.333" TextAlignment="Right"/>
+			<TextBlock HorizontalAlignment="Left" Height="26" Margin="18,61,0,0" TextWrapping="Wrap" Text="Institution" VerticalAlignment="Top" Width="99" FontSize="13.333" TextAlignment="Right"/>
+			<TextBlock x:Name="SaveBtn" HorizontalAlignment="Left" Height="39" Margin="378,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="26.667" MouseLeftButtonDown="SaveBtn_MouseLeftButtonDown"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="&#xE105;"/></Span></TextBlock>
+			<TextBlock x:Name="DeleteBtn" HorizontalAlignment="Left" Height="39" Margin="577,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35" TextAlignment="Center" Style="{DynamicResource CloseButtonStyle}" FontSize="26.667" MouseLeftButtonDown="DeleteBtn_MouseLeftButtonDown"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="&#xE106;"/></Span><LineBreak/><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run/></Span></TextBlock>
+			<TextBlock x:Name="NewBtn" HorizontalAlignment="Left" Height="39" Margin="338,275,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="26.667" Text="&#xE109;" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="NewBtn_MouseLeftButtonDown"/>
+            <TextBlock HorizontalAlignment="Left" Height="26" Margin="18,21,0,0" TextWrapping="Wrap" Text="Employee" VerticalAlignment="Top" Width="100" FontSize="13.333" TextAlignment="Right"/>
+            <ComboBox Name="EmployeeCmb" SelectedValue="{Binding EmployeeId, UpdateSourceTrigger=PropertyChanged}" 
+				DisplayMemberPath="DisplayName" SelectedValuePath="EmployeeId" ItemsSource="{Binding Employees, Source={StaticResource EmployeeAccountDetailsModelDataSource}}"
+				Margin="123,21,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="309" RenderTransformOrigin="0.501,0.554" SelectionChanged="EmployeeCmb_SelectionChanged" />
+
+            <ComboBox x:Name="AccountTypeCmb"  Text="{Binding AccountType, UpdateSourceTrigger=PropertyChanged}"
+                DisplayMemberPath="AccountTypeName" SelectedValuePath="AccountType"
+            	 ItemsSource="{Binding EmployeeAccountTypes, Source={StaticResource EmployeeAccountDetailsModelDataSource}}"
+                       
+            	Margin="123,143,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="199" IsEditable="True" SelectionChanged="AccountTypeCmb_SelectionChanged"  />
+            <TextBlock HorizontalAlignment="Left" Height="26" Margin="18,146,0,0" TextWrapping="Wrap" Text="Account Type" VerticalAlignment="Top" Width="100" FontSize="13.333" TextAlignment="Right"/>
+        </Grid>
+		<TextBlock HorizontalAlignment="Left" Height="32.766" Margin="8.838,14.011,0,0" TextWrapping="Wrap" Text="Create/Edit Accounts" VerticalAlignment="Top" Width="284.54" FontSize="21.333"/>
+	</Grid>
+</UserControl>
