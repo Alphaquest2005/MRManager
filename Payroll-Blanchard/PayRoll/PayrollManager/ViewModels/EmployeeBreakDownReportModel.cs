@@ -28,7 +28,7 @@ namespace PayrollManager
         private void EmployeeBreakDownReportModel_staticPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e.PropertyName);
-            if (e.PropertyName == "CurrentBranch" || e.PropertyName == "CurrentPayrollJob")//
+            if (e.PropertyName == "CurrentCompany" || e.PropertyName == "CurrentPayrollJob")//
             {
                 isDirty = true;
                 OnPropertyChanged("EmployeeBreakDown");
@@ -83,7 +83,7 @@ namespace PayrollManager
 	    {
 
 	        
-	            if (CurrentPayrollJob == null || CurrentBranch == null) return new List<EmpSummary>();
+	            if (CurrentPayrollJob == null || CurrentCompany == null) return new List<EmpSummary>();
 	            int cpjob = CurrentPayrollJob.PayrollJobId;
 	            using (var ctx = new PayrollDB())
 	            {
@@ -194,7 +194,7 @@ namespace PayrollManager
         {
            
 
-                if (CurrentBranch != null && emplst.Any() && CurrentPayrollJob != null)//&& CurrentBranch.Employees.Any(e => e.PayrollItems.Any(p => p.PayrollJob == CurrentPayrollJob))
+                if (CurrentCompany != null && emplst.Any() && CurrentPayrollJob != null)//&& CurrentCompany.Employees.Any(e => e.PayrollItems.Any(p => p.PayrollJob == CurrentPayrollJob))
                 {
                     try
                     {

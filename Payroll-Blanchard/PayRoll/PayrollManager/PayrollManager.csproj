@@ -486,10 +486,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="blue_purple_green_copy-408x259.jpg" />
-    <Content Include="DataLayer\AllData.sql" />
     <Content Include="DataLayer\Clear Data.sql" />
     <Content Include="DataLayer\PayrollDB.edmx.sql" />
-    <Content Include="DataLayer\Total Setup Data.sql" />
     <Content Include="DataLayer\PayrollData.edmx.sql" />
     <Resource Include="Styles\Collapse.png" />
     <Resource Include="Styles\Expand.png" />

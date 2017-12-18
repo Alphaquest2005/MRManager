@@ -5,13 +5,13 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
 	xmlns:local="clr-namespace:PayrollManager"
-	x:Class="PayrollManager.BranchPayrollItemBreakDown"
+	x:Class="PayrollManager.CompanyPayrollItemBreakDown"
 	d:DesignWidth="1056" d:DesignHeight="550">
     <UserControl.Resources>
-        <local:BranchPayrollItemBreakDownModel x:Key="BranchPayrollItemBreakDownModelDataSource" />
+        <local:CompanyPayrollItemBreakDownModel x:Key="CompanyPayrollItemBreakDownModelDataSource" />
     </UserControl.Resources>
 
-    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource BranchPayrollItemBreakDownModelDataSource}}" >
+    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource CompanyPayrollItemBreakDownModelDataSource}}" >
         <Border x:Name="ReportBRD" Margin="0,66,0,0" Width="Auto" MinWidth="1000">
             <ScrollViewer x:Name="ReportGrd" Margin="0,0,0,10" HorizontalScrollBarVisibility="Auto">
                 <Grid x:Name="DailyReportGD" DataContext="{Binding}" HorizontalAlignment="Center" Height="816" VerticalAlignment="Top" Width="1344" Background="White" >
@@ -28,7 +28,7 @@
                             <StackPanel Margin="40,140,42,10" Orientation="Vertical">
                                 <TextBlock HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" Margin="0,15,0,15" FontSize="20" Foreground="#FF393939" TextAlignment="Left" Text="Payroll Item Summary"/>
                                 <DataGrid x:Name="GridData" 
-                                  ItemsSource="{Binding BranchData, IsAsync=True}"
+                                  ItemsSource="{Binding CompanyData, IsAsync=True}"
                                   HorizontalAlignment="Stretch"  Margin="0" AlternatingRowBackground="#FFE6F0F4" RowBackground="White" GridLinesVisibility="None" VerticalAlignment="Top"  AutoGenerateColumns="False" RowHeight="25" LoadingRow="GridData_LoadingRow" ClipboardCopyMode="IncludeHeader" />
 
                                 <TextBlock HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="330" Margin="40,50,0,0" FontSize="14" Foreground="#FF393939" TextAlignment="Left" Text="Prepared By:.........................................................."/>

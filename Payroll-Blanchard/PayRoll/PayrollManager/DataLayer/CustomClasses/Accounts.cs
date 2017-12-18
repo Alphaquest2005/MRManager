@@ -71,11 +71,11 @@ namespace PayrollManager.DataLayer
                         BaseViewModel.Instance.CurrentPayrollJob.PayrollJobId != _currentAccountEntries.First().PayrollItem.PayrollJobId))
                 {
                     if ( BaseViewModel.Instance.CurrentPayrollJob == null ||
-                        BaseViewModel.Instance.CurrentBranch == null) return null;
+                        BaseViewModel.Instance.CurrentCompany == null) return null;
                     //return new ObservableCollection<AccountEntry>(AccountEntries.Where(a => a.PayrollItem.PayrollJobId == BaseViewModel.InstanceCurrentPayrollJob.PayrollJobId 
-                    //                                                && a.PayrollItem.Employee.BranchId == BaseViewModel.InstanceCurrentBranch.BranchId 
+                    //                                                && a.PayrollItem.Employee.BranchId == BaseViewModel.InstanceCurrentCompany.BranchId 
                     //                                                && a.PayrollItem.PayrollJob.Branch != null 
-                    //                                                && a.PayrollItem.PayrollJob.Branch.BranchId == BaseViewModel.InstanceCurrentBranch.BranchId)
+                    //                                                && a.PayrollItem.PayrollJob.Branch.BranchId == BaseViewModel.InstanceCurrentCompany.BranchId)
                     //                                                .OrderByDescending(x => x.PayrollItem.IncomeDeduction).ThenBy(x => x.PayrollItem.Priority));
                     List<AccountEntry> alst;
                     using (var ctx = new PayrollDB())
@@ -84,7 +84,7 @@ namespace PayrollManager.DataLayer
                             ctx.AccountEntries
                                      .Where(a => a.PayrollItem.PayrollJobId == BaseViewModel.Instance.CurrentPayrollJob.PayrollJobId
                                                  && a.AccountId == AccountId
-                                                 && a.PayrollItem.Employee.BranchId == BaseViewModel.Instance.CurrentBranch.BranchId)
+                                                 && a.PayrollItem.Employee.CompanyId == BaseViewModel.Instance.CurrentCompany.CompanyId)
                                      .Include(x => x.PayrollItem)
                                      .OrderByDescending(x => x.PayrollItem.IncomeDeduction)
                                      .ThenBy(x => x.PayrollItem.Priority).ToList();

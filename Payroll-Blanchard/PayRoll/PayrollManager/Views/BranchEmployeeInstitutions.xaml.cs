@@ -20,14 +20,14 @@ using SUT.PrintEngine.Utils;
 namespace PayrollManager
 {
     /// <summary>
-    /// Interaction logic for BranchPayrollItemBreakDown.xaml
+    /// Interaction logic for CompanyPayrollItemBreakDown.xaml
     /// </summary>
-    public partial class BranchEmployeeInstitutions : UserControl
+    public partial class CompanyEmployeeInstitutions : UserControl
     {
-        public BranchEmployeeInstitutions()
+        public CompanyEmployeeInstitutions()
         {
             this.InitializeComponent();
-            im = (BranchEmployeeInstitutionsModel)this.FindResource("BranchEmployeeInstitutionsModelDataSource");
+            im = (CompanyEmployeeInstitutionsModel)this.FindResource("CompanyEmployeeInstitutionsModelDataSource");
             im.DeductionsGrid = DeductionsGrid;
             im.NetSalaryGrid = NetSalaryGrid;
             im.GrandTotalGrid = GrandTotalGrid;
@@ -57,11 +57,11 @@ namespace PayrollManager
         {
             im.PopulateDeductionsGrid();
         }
-        BranchEmployeeInstitutionsModel im;
+        CompanyEmployeeInstitutionsModel im;
         private void PrintDeductions(object sender, MouseButtonEventArgs e)
         {
             //FrameworkElement rpt = (FrameworkElement)DailyReportGD;
-           // WPF2PDF.CreateAndOpenPDF(ref DailyReportGD, "BranchEmployeeInstitutions");
+           // WPF2PDF.CreateAndOpenPDF(ref DailyReportGD, "CompanyEmployeeInstitutions");
             //if (DeductionsGrid.PrintCommand.CanExecute(DeductionsGrid))
             //DeductionsGrid.PrintCommand.Execute(DeductionsGrid);
 
@@ -76,7 +76,7 @@ namespace PayrollManager
         {
             if (e.Row.IsNewItem == false)
             {
-                if ((e.Row.Item as BranchEmployeeInstitutionsModel.EmployeeSummaryLine).Employee == "Total")
+                if ((e.Row.Item as CompanyEmployeeInstitutionsModel.EmployeeSummaryLine).Employee == "Total")
                 {
                     // e.Row.Background = new SolidColorBrush(Colors.DodgerBlue);
                     // e.Row.FontSize = 14;
@@ -90,7 +90,7 @@ namespace PayrollManager
         {
             if (e.Row.IsNewItem == false)
             {
-                if ((e.Row.Item as BranchEmployeeInstitutionsModel.EmployeeAccountSummaryLine).Employee == "Total")
+                if ((e.Row.Item as CompanyEmployeeInstitutionsModel.EmployeeAccountSummaryLine).Employee == "Total")
                 {
                     // e.Row.Background = new SolidColorBrush(Colors.DodgerBlue);
                     // e.Row.FontSize = 14;

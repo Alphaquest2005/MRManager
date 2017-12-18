@@ -29,8 +29,7 @@ namespace PayrollManager
            CurrentYear = DateTime.Now.Year;
 
             staticPropertyChanged +=BaseViewModel_staticPropertyChanged;
-         // _currentBranch = db.Branches.Include(x => x.Employees).FirstOrDefault();
-           _instance = this;
+         _instance = this;
 
        }
 
@@ -255,18 +254,18 @@ namespace PayrollManager
             }
         }
 
-        static List<Branch> _branches;//static ListCollectionView _branches = null;
-        public  List<Branch> Branches
+        static List<Company> _companies;
+        public  List<Company> Companies
         {
             get
             {
-                if (_branches != null) return _branches;
+                if (_companies != null) return _companies;
                 using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
                 {
-                    _branches = ctx.Branches.Include(x => x.CurrentPayrollJob.PayrollJobType).ToList();
+                    _companies = ctx.Companies.Include(x => x.CurrentPayrollJob.PayrollJobType).ToList();
                     
                 }
-                return _branches;
+                return _companies;
             }
         }
 
@@ -280,17 +279,7 @@ namespace PayrollManager
         }
 
        
-        //static ListCollectionView _PayrollEmployeeSetup = new ListCollectionView(db.PayrollEmployeeSetup.ToList<DataLayer.PayrollEmployeeSetup>());
-        //public ListCollectionView PayrollEmployeeSetup
-        //{
-        //    get
-        //    {
-        //       _PayrollEmployeeSetup.CurrentChanged +=_PayrollEmployeeSetup_CurrentChanged;
-
-        //        return _PayrollEmployeeSetup;
-        //    }
-        //}
-
+  
         private void _PayrollEmployeeSetup_CurrentChanged(object sender, EventArgs e)
         {
           
@@ -316,8 +305,8 @@ namespace PayrollManager
         {
             get
             {
-                if (CurrentBranch == null) return null;
-                if (_employees != null) return new ObservableCollection<Employee>(_employees.Where(x => x.BranchId == CurrentBranch.BranchId).ToList());
+                if (CurrentCompany == null) return null;
+                if (_employees != null) return new ObservableCollection<Employee>(_employees.Where(x => x.CompanyId == CurrentCompany.CompanyId).ToList());
                                         
                 return GetEmployees();
             }
@@ -339,12 +328,12 @@ namespace PayrollManager
                         .Where(e => (e.EmploymentEndDate.HasValue == false
                                      || EntityFunctions.TruncateTime(e.EmploymentEndDate) >=
                                      EntityFunctions.TruncateTime(DateTime.Now)))
-                        .Where(x => x.BranchId == CurrentBranch.BranchId && x.PayrollItems.Any(p => p.PayrollJobId == cpjobId))
+                        .Where(x => x.CompanyId == CurrentCompany.CompanyId && x.PayrollItems.Any(p => p.PayrollJobId == cpjobId))
                         .OrderBy(x => x.LastName)
                         .Select(x => new
                         {
                             x.FirstName,
-                            x.BranchId,
+                            BranchId = x.CompanyId,
                             x.DriversLicence,
                             x.EmailAddress,
                             x.EmployeeId,
@@ -390,7 +379,7 @@ namespace PayrollManager
                         var nemp = new Employee()
                         {
                             FirstName = emp.FirstName,
-                            BranchId = emp.BranchId,
+                            CompanyId = emp.BranchId,
                             DriversLicence = emp.DriversLicence,
                             EmailAddress = emp.EmailAddress,
                             EmployeeId = emp.EmployeeId,
@@ -434,9 +423,9 @@ namespace PayrollManager
         {
             get
             {
-                if (CurrentBranch == null) return null;
+                if (CurrentCompany == null) return null;
 
-               if (_payrollJobs != null) return new ObservableCollection<DataLayer.PayrollJob>(_payrollJobs.Where(x => x.BranchId == CurrentBranch.BranchId).ToList());
+               if (_payrollJobs != null) return new ObservableCollection<DataLayer.PayrollJob>(_payrollJobs.Where(x => x.CompanyId == CurrentCompany.CompanyId).ToList());
                 UpdatePayrollJobs();
                 return _payrollJobs;
 
@@ -458,7 +447,7 @@ namespace PayrollManager
                         {
                             x.PayrollJobId,
                             x.PayrollJobTypeId,
-                            x.BranchId,
+                            BranchId = x.CompanyId,
                             x.EndDate,
                             x.StartDate,
                             x.PaymentDate,
@@ -466,17 +455,17 @@ namespace PayrollManager
                             PayrollJobTypeName = x.PayrollJobType.Name,
                             TotalDeductions = (double?) x.PayrollItems
                                 .Where(p => p.IncomeDeduction == false && p.ParentPayrollItem == null &&
-                                            p.Employee != null && p.Employee.BranchId == x.BranchId)
+                                            p.Employee != null && p.Employee.CompanyId == x.CompanyId)
                                 .Sum(p => p.Amount),
                             TotalIncome = (double?) x.PayrollItems
                                 .Where(p => p.IncomeDeduction == true && p.ParentPayrollItem == null &&
-                                            p.Employee != null && p.Employee.BranchId == x.BranchId)
+                                            p.Employee != null && p.Employee.CompanyId == x.CompanyId)
                                 .Sum(p => p.Amount)
                         }).ToList().Select(x => new DataLayer.PayrollJob()
                         {
                             PayrollJobId = x.PayrollJobId,
                             PayrollJobTypeId = x.PayrollJobTypeId,
-                            BranchId = x.BranchId,
+                            CompanyId = x.BranchId,
                             EndDate = x.EndDate,
                             PaymentDate = x.PaymentDate,
                             StartDate = x.StartDate,
@@ -744,7 +733,7 @@ namespace PayrollManager
                 if (_currentEmployee == null & value != null )
                 {
                    // _currentEmployee = value;
-                    CurrentEmployee.BranchReference.AssociationChanged += AssociationChanged;
+                    CurrentEmployee.CompanyReference.AssociationChanged += AssociationChanged;
                     CurrentEmployee.EmployeeAccounts.AssociationChanged += AssociationChanged;
                     CurrentEmployee.Employees.AssociationChanged += AssociationChanged;
                     CurrentEmployee.PayrollEmployeeSetups.AssociationChanged += AssociationChanged;
@@ -807,24 +796,24 @@ namespace PayrollManager
             }
         }
 
-        static DataLayer.Branch _currentBranch;
+        static DataLayer.Company _currentCompany;
        
-        public  Branch CurrentBranch
+        public  Company CurrentCompany
         {
             get
             {
-                return _currentBranch;
+                return _currentCompany;
             }
             set
             {
-                _currentBranch = value;
+                _currentCompany = value;
                 //
-                if (_currentBranch != null && _currentBranch.CurrentPayrollJob != null)
+                if (_currentCompany != null && _currentCompany.CurrentPayrollJob != null)
                 {
-                    if (CurrentPayrollJob != _currentBranch.CurrentPayrollJob)
+                    if (CurrentPayrollJob != _currentCompany.CurrentPayrollJob)
                     {
-                        CurrentPayrollJob = _currentBranch.CurrentPayrollJob;
-                        _currentPayrollJobType = _currentBranch.CurrentPayrollJob.PayrollJobType;
+                        CurrentPayrollJob = _currentCompany.CurrentPayrollJob;
+                        _currentPayrollJobType = _currentCompany.CurrentPayrollJob.PayrollJobType;
 
                     }
                     else
@@ -838,7 +827,7 @@ namespace PayrollManager
                     _institutionAccounts = null;
                         OnStaticPropertyChanged("InstitutionAccounts");
                 }
-                OnStaticPropertyChanged("CurrentBranch");
+                OnStaticPropertyChanged("CurrentCompany");
                 OnStaticPropertyChanged("Employees");
                 OnStaticPropertyChanged("CurrentEmployee");
                 
@@ -879,17 +868,17 @@ namespace PayrollManager
             {
                 if (_currentPayrollJob == value) return;
                 _currentPayrollJob = value;
-                if (_currentPayrollJob != null && CurrentBranch.CurrentPayrollJob != CurrentPayrollJob)
+                if (_currentPayrollJob != null && CurrentCompany.CurrentPayrollJob != CurrentPayrollJob)
                 {
                     using (var ctx = new PayrollDB())
                     {
-                        var ritm = ctx.Branches.First(x => x.BranchId == CurrentBranch.BranchId);
-                        CurrentBranch.CurrentPayrollJobId = _currentPayrollJob.PayrollJobId;
-                        ctx.Branches.Attach(ritm);
-                        ctx.Branches.ApplyCurrentValues(CurrentBranch);
+                        var ritm = ctx.Companies.First(x => x.CompanyId == CurrentCompany.CompanyId);
+                        CurrentCompany.CurrentPayrollJobId = _currentPayrollJob.PayrollJobId;
+                        ctx.Companies.Attach(ritm);
+                        ctx.Companies.ApplyCurrentValues(CurrentCompany);
                         SaveDatabase(ctx);
 
-                        //CurrentBranch = ctx.Branches.Include(x => x.CurrentPayrollJob).First(x => x.BranchId == CurrentBranch.BranchId);
+                        //CurrentCompany = ctx.Branches.Include(x => x.CurrentPayrollJob).First(x => x.BranchId == CurrentCompany.BranchId);
                     }
 
                 }
@@ -922,15 +911,15 @@ namespace PayrollManager
         
 
         //[MyExceptionHandlerAspect]
-        internal  void CycleCurrentBranch()
+        internal  void CycleCurrentCompany()
         {
-            DataLayer.Branch b = _currentBranch;
+            DataLayer.Company b = _currentCompany;
 
-            _currentBranch = Branches.FirstOrDefault();
+            _currentCompany = Companies.FirstOrDefault();
             
-            OnStaticPropertyChanged("CurrentBranch");
-            _currentBranch = b;
-            OnStaticPropertyChanged("CurrentBranch");
+            OnStaticPropertyChanged("CurrentCompany");
+            _currentCompany = b;
+            OnStaticPropertyChanged("CurrentCompany");
            
         }
         //[MyExceptionHandlerAspect]
@@ -1008,7 +997,7 @@ namespace PayrollManager
                             .Include(x => x.Employee)
                             .Include(x => x.PayrollSetupItem)
                             .Where(p => p.PayrollJobTypeId == CurrentPayrollJob.PayrollJobTypeId &&
-                                        p.Employee.BranchId == CurrentBranch.BranchId
+                                        p.Employee.CompanyId == CurrentCompany.CompanyId
                                 //  && p.EmployeeId == 69
                             )
                         orderby p.PayrollSetupItem.Priority
@@ -1027,7 +1016,7 @@ namespace PayrollManager
 
                     foreach (var item in pitmlst)
                     {
-                        if (item.Employee.BranchId != CurrentBranch.BranchId) continue;
+                        if (item.Employee.CompanyId != CurrentCompany.CompanyId) continue;
                         if (item.Employee.EmploymentEndDate.HasValue == true &&
                             item.Employee.EmploymentEndDate.Value.Date <= _currentPayrollJob.StartDate.Date) continue;
 
@@ -1052,8 +1041,8 @@ namespace PayrollManager
                         pi = (from p in ctx.PayrollItems
                               .Include(x => x.ChildPayrollItems)
                                .Where(p => p.PayrollJobId == CurrentPayrollJob.PayrollJobId
-                                            && p.PayrollJob.BranchId == CurrentBranch.BranchId
-                                            && p.Employee.BranchId == CurrentBranch.BranchId
+                                            && p.PayrollJob.CompanyId == CurrentCompany.CompanyId
+                                            && p.Employee.CompanyId == CurrentCompany.CompanyId
                                             && p.EmployeeId == item.EmployeeId
                                             && p.PayrollSetupItemId == item.PayrollSetupItemId
                                             && (p.CreditAccountId == item.CreditAccountId &&

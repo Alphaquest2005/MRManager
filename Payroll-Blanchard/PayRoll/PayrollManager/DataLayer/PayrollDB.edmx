@@ -50,23 +50,23 @@
           <Property Name="AccountTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AccountTypeName" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <EntityType Name="Branches">
-          <Key>
-            <PropertyRef Name="BranchId" />
-          </Key>
-          <Property Name="BranchId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ShortName" Type="nvarchar(max)" />
-          <Property Name="CurrentPayrollJobId" Type="int" />
-        </EntityType>
         <EntityType Name="ChargeTypes">
           <Key>
             <PropertyRef Name="ChargeTypeId" />
           </Key>
           <Property Name="ChargeTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ChargeTypeName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ShortName" Type="nvarchar(max)" />
+          <Property Name="CurrentPayrollJobId" Type="int" />
         </EntityType>
         <EntityType Name="EmailTemplate">
           <Key>
@@ -87,7 +87,7 @@
           <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="MiddleName" Type="nvarchar(max)" />
-          <Property Name="BranchId" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
           <Property Name="SupervisorId" Type="int" />
           <Property Name="EmploymentStartDate" Type="datetime" Nullable="false" />
           <Property Name="UnionMember" Type="bit" />
@@ -169,7 +169,7 @@
           <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PayrollJobTypeId" Type="int" Nullable="false" />
           <Property Name="PaymentDate" Type="datetime" Nullable="false" />
-          <Property Name="BranchId" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PayrollJobTypes">
           <Key>
@@ -279,26 +279,26 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BranchEmployee">
-          <End Role="Branches" Type="Self.Branches" Multiplicity="1" />
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Branches">
-              <PropertyRef Name="BranchId" />
+            <Principal Role="Companies">
+              <PropertyRef Name="CompanyId" />
             </Principal>
             <Dependent Role="Employees">
-              <PropertyRef Name="BranchId" />
+              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BranchPayrollJob">
-          <End Role="Branches" Type="Self.Branches" Multiplicity="1" />
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
           <End Role="PayrollJobs" Type="Self.PayrollJobs" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Branches">
-              <PropertyRef Name="BranchId" />
+            <Principal Role="Companies">
+              <PropertyRef Name="CompanyId" />
             </Principal>
             <Dependent Role="PayrollJobs">
-              <PropertyRef Name="BranchId" />
+              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -418,12 +418,12 @@
         </Association>
         <Association Name="FK_PayrollJobBranch">
           <End Role="PayrollJobs" Type="Self.PayrollJobs" Multiplicity="0..1" />
-          <End Role="Branches" Type="Self.Branches" Multiplicity="*" />
+          <End Role="Companies" Type="Self.Companies" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PayrollJobs">
               <PropertyRef Name="PayrollJobId" />
             </Principal>
-            <Dependent Role="Branches">
+            <Dependent Role="Companies">
               <PropertyRef Name="CurrentPayrollJobId" />
             </Dependent>
           </ReferentialConstraint>
@@ -512,8 +512,8 @@
           <EntitySet Name="Accounts_EmployeeAccount" EntityType="Self.Accounts_EmployeeAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Accounts_InstitutionAccount" EntityType="Self.Accounts_InstitutionAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountTypes" EntityType="Self.AccountTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Branches" EntityType="Self.Branches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChargeTypes" EntityType="Self.ChargeTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailTemplate" EntityType="Self.EmailTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees_User" EntityType="Self.Employees_User" Schema="dbo" store:Type="Tables" />
@@ -548,11 +548,11 @@
             <End Role="PayrollSetupItems" EntitySet="PayrollSetupItems" />
           </AssociationSet>
           <AssociationSet Name="FK_BranchEmployee" Association="Self.FK_BranchEmployee">
-            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Companies" EntitySet="Companies" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
           <AssociationSet Name="FK_BranchPayrollJob" Association="Self.FK_BranchPayrollJob">
-            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Companies" EntitySet="Companies" />
             <End Role="PayrollJobs" EntitySet="PayrollJobs" />
           </AssociationSet>
           <AssociationSet Name="FK_EmployeeAccount_inherits_Account" Association="Self.FK_EmployeeAccount_inherits_Account">
@@ -593,7 +593,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_PayrollJobBranch" Association="Self.FK_PayrollJobBranch">
             <End Role="PayrollJobs" EntitySet="PayrollJobs" />
-            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Companies" EntitySet="Companies" />
           </AssociationSet>
           <AssociationSet Name="FK_PayrollJobPayrollItem" Association="Self.FK_PayrollJobPayrollItem">
             <End Role="PayrollJobs" EntitySet="PayrollJobs" />
@@ -628,7 +628,6 @@
           <EntitySet Name="AccountEntries" EntityType="DataLayer.AccountEntry" />
           <EntitySet Name="Accounts" EntityType="DataLayer.Account" />
           <EntitySet Name="AccountTypes" EntityType="DataLayer.AccountType" />
-          <EntitySet Name="Branches" EntityType="DataLayer.Branch" />
           <EntitySet Name="ChargeTypes" EntityType="DataLayer.ChargeType" />
           <EntitySet Name="Employees" EntityType="DataLayer.Employee" />
           <EntitySet Name="Institutions" EntityType="DataLayer.Institution" />
@@ -660,18 +659,6 @@
           <AssociationSet Name="FK_InstitutionAccountASN" Association="DataLayer.FK_InstitutionAccountASN">
             <End Role="Institutions" EntitySet="Institutions" />
             <End Role="Accounts" EntitySet="Accounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BranchEmployee" Association="DataLayer.FK_BranchEmployee">
-            <End Role="Branches" EntitySet="Branches" />
-            <End Role="Employees" EntitySet="Employees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BranchPayrollJob" Association="DataLayer.FK_BranchPayrollJob">
-            <End Role="Branches" EntitySet="Branches" />
-            <End Role="PayrollJobs" EntitySet="PayrollJobs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PayrollJobBranch" Association="DataLayer.FK_PayrollJobBranch">
-            <End Role="PayrollJobs" EntitySet="PayrollJobs" />
-            <End Role="Branches" EntitySet="Branches" />
           </AssociationSet>
           <AssociationSet Name="FK_EmployeeEmployee" Association="DataLayer.FK_EmployeeEmployee">
             <End Role="Employees" EntitySet="Employees" />
@@ -726,6 +713,19 @@
             <End Role="Account" EntitySet="Accounts" />
             <End Role="PayrollEmployeeSetup" EntitySet="PayrollEmployeeSetup" />
           </AssociationSet>
+          <EntitySet Name="Companies" EntityType="DataLayer.Company" />
+          <AssociationSet Name="FK_BranchEmployee1" Association="DataLayer.FK_BranchEmployee1">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BranchPayrollJob1" Association="DataLayer.FK_BranchPayrollJob1">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="PayrollJob" EntitySet="PayrollJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PayrollJobBranch1" Association="DataLayer.FK_PayrollJobBranch1">
+            <End Role="PayrollJob" EntitySet="PayrollJobs" />
+            <End Role="Companies" EntitySet="Companies" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccountEntry">
           <Key>
@@ -766,20 +766,6 @@
           <Property Type="Int32" Name="AccountTypeId" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="AccountTypeName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Branch">
-          <Key>
-            <PropertyRef Name="BranchId" />
-          </Key>
-          <Property Type="Int32" Name="BranchId" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Type="String" Name="Address" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Type="String" Name="PhoneNumber" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Type="Int32" Name="CurrentPayrollJobId" />
-          <NavigationProperty Name="Employees" Relationship="DataLayer.FK_BranchEmployee" FromRole="Branches" ToRole="Employees" />
-          <NavigationProperty Name="PayrollJobs" Relationship="DataLayer.FK_BranchPayrollJob" FromRole="Branches" ToRole="PayrollJobs" />
-          <NavigationProperty Name="CurrentPayrollJob" Relationship="DataLayer.FK_PayrollJobBranch" FromRole="Branches" ToRole="PayrollJobs" />
-          <Property Type="String" Name="ShortName" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="ChargeType">
           <Key>
             <PropertyRef Name="ChargeTypeId" />
@@ -795,11 +781,9 @@
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="LastName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="MiddleName" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="BranchId" Nullable="false" />
           <Property Type="Int32" Name="SupervisorId" />
           <Property Type="DateTime" Name="EmploymentStartDate" Precision="3" Nullable="false" />
           <Property Type="Boolean" Name="UnionMember" />
-          <NavigationProperty Name="Branch" Relationship="DataLayer.FK_BranchEmployee" FromRole="Employees" ToRole="Branches" />
           <NavigationProperty Name="Employees" Relationship="DataLayer.FK_EmployeeEmployee" FromRole="Employees" ToRole="Employees1" />
           <NavigationProperty Name="Supervisors" Relationship="DataLayer.FK_EmployeeEmployee" FromRole="Employees1" ToRole="Employees" />
           <NavigationProperty Name="PayrollEmployeeSetups" Relationship="DataLayer.FK_EmployeePayrollEmployeeSetup" FromRole="Employees" ToRole="PayrollEmployeeSetup" />
@@ -811,6 +795,8 @@
           <Property Type="String" Name="DriversLicence" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="DriversLicenceClass" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="SexId" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="DataLayer.FK_BranchEmployee1" FromRole="Employee" ToRole="Companies" />
         </EntityType>
         <EntityType Name="User" BaseType="DataLayer.Employee">
           <Property Type="String" Name="Username" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -894,11 +880,11 @@
           <Property Type="String" Name="Status" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="PayrollJobTypeId" Nullable="false" />
           <Property Type="DateTime" Name="PaymentDate" Nullable="false" Precision="3" />
-          <Property Type="Int32" Name="BranchId" Nullable="false" />
-          <NavigationProperty Name="Branch" Relationship="DataLayer.FK_BranchPayrollJob" FromRole="PayrollJobs" ToRole="Branches" />
-          <NavigationProperty Name="Branches" Relationship="DataLayer.FK_PayrollJobBranch" FromRole="PayrollJobs" ToRole="Branches" />
           <NavigationProperty Name="PayrollItems" Relationship="DataLayer.FK_PayrollJobPayrollItem" FromRole="PayrollJobs" ToRole="PayrollItems" />
           <NavigationProperty Name="PayrollJobType" Relationship="DataLayer.FK_PayrollJobTypePayrollJob" FromRole="PayrollJobs" ToRole="PayrollJobTypes" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="DataLayer.FK_BranchPayrollJob1" FromRole="PayrollJob" ToRole="Companies" />
+          <NavigationProperty Name="Companies" Relationship="DataLayer.FK_PayrollJobBranch1" FromRole="PayrollJob" ToRole="Companies" />
         </EntityType>
         <EntityType Name="PayrollJobType">
           <Key>
@@ -1011,42 +997,6 @@
             </Principal>
             <Dependent Role="Accounts">
               <PropertyRef Name="InstitutionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BranchEmployee">
-          <End Type="DataLayer.Branch" Role="Branches" Multiplicity="1" />
-          <End Type="DataLayer.Employee" Role="Employees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Branches">
-              <PropertyRef Name="BranchId" />
-            </Principal>
-            <Dependent Role="Employees">
-              <PropertyRef Name="BranchId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BranchPayrollJob">
-          <End Type="DataLayer.Branch" Role="Branches" Multiplicity="1" />
-          <End Type="DataLayer.PayrollJob" Role="PayrollJobs" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Branches">
-              <PropertyRef Name="BranchId" />
-            </Principal>
-            <Dependent Role="PayrollJobs">
-              <PropertyRef Name="BranchId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PayrollJobBranch">
-          <End Type="DataLayer.PayrollJob" Role="PayrollJobs" Multiplicity="0..1" />
-          <End Type="DataLayer.Branch" Role="Branches" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PayrollJobs">
-              <PropertyRef Name="PayrollJobId" />
-            </Principal>
-            <Dependent Role="Branches">
-              <PropertyRef Name="CurrentPayrollJobId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1230,6 +1180,56 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentPayrollJobId" Type="Int32" />
+          <NavigationProperty Name="Employees" Relationship="DataLayer.FK_BranchEmployee1" FromRole="Companies" ToRole="Employee" />
+          <NavigationProperty Name="PayrollJobs" Relationship="DataLayer.FK_BranchPayrollJob1" FromRole="Companies" ToRole="PayrollJob" />
+          <NavigationProperty Name="CurrentPayrollJob" Relationship="DataLayer.FK_PayrollJobBranch1" FromRole="Companies" ToRole="PayrollJob" />
+        </EntityType>
+        <Association Name="FK_BranchEmployee1">
+          <End Type="DataLayer.Company" Role="Companies" Multiplicity="1" />
+          <End Type="DataLayer.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BranchPayrollJob1">
+          <End Type="DataLayer.Company" Role="Companies" Multiplicity="1" />
+          <End Type="DataLayer.PayrollJob" Role="PayrollJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="PayrollJob">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PayrollJobBranch1">
+          <End Type="DataLayer.PayrollJob" Role="PayrollJob" Multiplicity="0..1" />
+          <End Type="DataLayer.Company" Role="Companies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayrollJob">
+              <PropertyRef Name="PayrollJobId" />
+            </Principal>
+            <Dependent Role="Companies">
+              <PropertyRef Name="CurrentPayrollJobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1282,18 +1282,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Branches">
-      <EntityTypeMapping TypeName="IsTypeOf(DataLayer.Branch)">
-        <MappingFragment StoreEntitySet="Branches">
-          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
-                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="CurrentPayrollJobId" ColumnName="CurrentPayrollJobId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ChargeTypes">
       <EntityTypeMapping TypeName="IsTypeOf(DataLayer.ChargeType)">
         <MappingFragment StoreEntitySet="ChargeTypes">
@@ -1305,7 +1293,8 @@
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="IsTypeOf(DataLayer.Employee)">
         <MappingFragment StoreEntitySet="Employees">
-          <ScalarProperty Name="SexId" ColumnName="SexId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="SexId" ColumnName="SexId" />
                 <ScalarProperty Name="DriversLicenceClass" ColumnName="DriversLicenceClass" />
                 <ScalarProperty Name="DriversLicence" ColumnName="DriversLicence" />
                 <ScalarProperty Name="EntryDateTime" ColumnName="EntryDateTime" />
@@ -1314,7 +1303,6 @@
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-          <ScalarProperty Name="BranchId" ColumnName="BranchId" />
           <ScalarProperty Name="SupervisorId" ColumnName="SupervisorId" />
           <ScalarProperty Name="EmploymentStartDate" ColumnName="EmploymentStartDate" />
           <ScalarProperty Name="UnionMember" ColumnName="UnionMember" />
@@ -1386,7 +1374,8 @@
     <EntitySetMapping Name="PayrollJobs">
       <EntityTypeMapping TypeName="IsTypeOf(DataLayer.PayrollJob)">
         <MappingFragment StoreEntitySet="PayrollJobs">
-          <ScalarProperty Name="PayrollJobId" ColumnName="PayrollJobId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="PayrollJobId" ColumnName="PayrollJobId" />
           <ScalarProperty Name="CheckedBy" ColumnName="CheckedBy" />
           <ScalarProperty Name="PreparedBy" ColumnName="PreparedBy" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
@@ -1394,7 +1383,6 @@
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="PayrollJobTypeId" ColumnName="PayrollJobTypeId" />
           <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
-          <ScalarProperty Name="BranchId" ColumnName="BranchId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1447,6 +1435,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="DataLayer.Company">
+              <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="CurrentPayrollJobId" ColumnName="CurrentPayrollJobId" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

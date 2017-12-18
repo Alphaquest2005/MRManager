@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PayrollManager.DataLayer
 {
-    public partial class Branch
+    public partial class Company
     {
-        public Branch()
+        public Company()
         {
             
         }

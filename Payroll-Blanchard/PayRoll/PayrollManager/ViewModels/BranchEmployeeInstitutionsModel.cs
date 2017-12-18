@@ -17,10 +17,10 @@ using PayrollManager.DataLayer;
 
 namespace PayrollManager
 {
-    public class BranchEmployeeInstitutionsModel : BaseViewModel
+    public class CompanyEmployeeInstitutionsModel : BaseViewModel
     {
         private static object syncRoot = new Object();
-        public BranchEmployeeInstitutionsModel()
+        public CompanyEmployeeInstitutionsModel()
         {
             staticPropertyChanged += BranchEmployeeInstitutionsModel_staticPropertyChanged;
             ReportDate = DateTime.Now;
@@ -34,7 +34,7 @@ namespace PayrollManager
         private void BranchEmployeeInstitutionsModel_staticPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e.PropertyName);
-            if (e.PropertyName == "CurrentPayrollJob" || e.PropertyName == "CurrentBranch")
+            if (e.PropertyName == "CurrentPayrollJob" || e.PropertyName == "CurrentCompany")
             {
                 isDirty = true;
                 allbranch = false;

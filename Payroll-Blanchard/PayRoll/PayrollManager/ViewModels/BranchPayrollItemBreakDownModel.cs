@@ -15,23 +15,23 @@ using PayrollManager.DataLayer;
 
 namespace PayrollManager
 {
-	public class BranchPayrollItemBreakDownModel : BaseViewModel
+	public class CompanyPayrollItemBreakDownModel : BaseViewModel
 	{
         private static object syncRoot = new Object();
-		public BranchPayrollItemBreakDownModel()
+		public CompanyPayrollItemBreakDownModel()
 		{
-			staticPropertyChanged +=BranchPayrollItemBreakDownModel_staticPropertyChanged;
+			staticPropertyChanged +=CompanyPayrollItemBreakDownModel_staticPropertyChanged;
             ReportDate = DateTime.Now;
 		}
 
 	    private static bool isDirty = false;
-        private void BranchPayrollItemBreakDownModel_staticPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void CompanyPayrollItemBreakDownModel_staticPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e.PropertyName);
             if (e.PropertyName == "CurrentPayrollJob")
             {
                 isDirty = true;
-                OnPropertyChanged("BranchData");
+                OnPropertyChanged("CompanyData");
             }
 
         }
@@ -46,7 +46,7 @@ namespace PayrollManager
             set
             {
                 _myDataGrid = value;
-                OnPropertyChanged("BranchData");
+                OnPropertyChanged("CompanyData");
             }
 
         }
@@ -62,11 +62,11 @@ namespace PayrollManager
                 _reportDate = value;
                 isDirty = true;
                 OnPropertyChanged("ReportDate");
-                OnPropertyChanged("BranchData");
+                OnPropertyChanged("CompanyData");
             }
         }
 
-        public object BranchData
+        public object CompanyData
         {
             get 
             {
@@ -74,9 +74,9 @@ namespace PayrollManager
                 {
                     if (isDirty)
                     {
-                        var _plist = GetBranchData();
-                        CalcBranchData(_plist);
-                        SetBranchTotals();
+                        var _plist = GetCompanyData();
+                        CalcCompanyData(_plist);
+                        SetCompanyTotals();
                         isDirty = false;
                     }
                 }
@@ -86,7 +86,7 @@ namespace PayrollManager
 
       
 
-        private List<BranchPayrollItemSummaryLine> GetBranchData()
+        private List<CompanyPayrollItemSummaryLine> GetCompanyData()
 	    {
             try
             {
@@ -104,13 +104,13 @@ namespace PayrollManager
                             pi =>
                                 pi.PayrollJob.EndDate.Month == ReportDate.Month &&
                                 pi.PayrollJob.EndDate.Year == ReportDate.Year)
-                        .Include(x => x.PayrollJob.Branch)
+                        .Include(x => x.PayrollJob.Company)
                         
                         .OrderByDescending(x => x.IncomeDeduction)
                         .ThenBy(x => x.PayrollSetupItem == null ? x.Priority : x.PayrollSetupItem.Priority)
                         group p by new {p.Name}
                         into g 
-                        select new BranchPayrollItemSummaryLine
+                        select new CompanyPayrollItemSummaryLine
                         {
                             Payroll_Item = g.Key.Name,
                             Total = g.Sum(p => p.Amount),
@@ -123,7 +123,7 @@ namespace PayrollManager
                     plst.ForEach(x => x.PayrollItems.ToList().ForEach(z =>
                     {
                         z.PayrollJobReference.Load();
-                        z.PayrollJob.BranchReference.Load();
+                        z.PayrollJob.CompanyReference.Load();
                     }));
                     return plst;
                     
@@ -180,7 +180,7 @@ namespace PayrollManager
             }
 	    }
 
-	    private void SetBranchTotals()
+	    private void SetCompanyTotals()
 	    {
 	        try
 	        {
@@ -215,15 +215,15 @@ namespace PayrollManager
 	        }
 	    }
 
-	    private void CalcBranchData(List<BranchPayrollItemSummaryLine> plist)
+	    private void CalcCompanyData(List<CompanyPayrollItemSummaryLine> plist)
 	    {
 	        try
 	        {
                 if (plist == null) return;
 	            _eb = plist.Pivot(
-	                X => X.PayrollItems.GroupBy(p => p.PayrollJob.Branch.Name)
-	                        .Select(g => new BranchSummary {BranchName = g.Key, Total = g.Sum(p => p.Amount)}),
-	                X => X.BranchName, X => X.Total, true, null).ToList();
+	                X => X.PayrollItems.GroupBy(p => p.PayrollJob.Company.Name)
+	                        .Select(g => new CompanySummary {CompanyName = g.Key, Total = g.Sum(p => p.Amount)}),
+	                X => X.CompanyName, X => X.Total, true, null).ToList();
 	        }
 	        catch (Exception)
 	        {
@@ -239,17 +239,17 @@ namespace PayrollManager
         
 
     
-        public class BranchSummary
+        public class CompanySummary
         {
-            public string BranchName { get; set; }
+            public string CompanyName { get; set; }
             public ObservableCollection<DataLayer.PayrollItem> PayrollItems {get;set;}
             public double Total { get; set; }
         }
 
-        public class BranchPayrollItemSummaryLine
+        public class CompanyPayrollItemSummaryLine
         {
             public string Payroll_Item { get; set; }
-            //public string BranchName { get; set; }
+            //public string CompanyName { get; set; }
             //public int Priority { get; set; }
             //public bool IncomeDeduction { get; set; }
             public double Total { get; set; }

@@ -7,24 +7,24 @@
     mc:Ignorable="d"
 	xmlns:local="clr-namespace:PayrollManager"
 	
-	x:Class="PayrollManager.BranchEmployeeInstitutions"
+	x:Class="PayrollManager.CompanyEmployeeInstitutions"
 	d:DesignWidth="1056" d:DesignHeight="550">
     <UserControl.Resources>
-        <local:BranchEmployeeInstitutionsModel x:Key="BranchEmployeeInstitutionsModelDataSource" />
+        <local:CompanyEmployeeInstitutionsModel x:Key="CompanyEmployeeInstitutionsModelDataSource" />
         <Style x:Key="RightAlignStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="TextAlignment" Value="Right" />
             <Setter Property="Padding" Value="5,0"/>
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
         <CollectionViewSource x:Key='src' 
-                          Source="{Binding Source={StaticResource BranchEmployeeInstitutionsModelDataSource}, Path=DeductionsData}">
+                          Source="{Binding Source={StaticResource CompanyEmployeeInstitutionsModelDataSource}, Path=DeductionsData}">
             <!--<CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Name" />
             </CollectionViewSource.GroupDescriptions>-->
         </CollectionViewSource>
     </UserControl.Resources>
 
-    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource BranchEmployeeInstitutionsModelDataSource}}" >
+    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource CompanyEmployeeInstitutionsModelDataSource}}" >
         <Border x:Name="ReportBRD" Margin="0,66,0,0" Width="Auto" MinWidth="1000">
             <ScrollViewer x:Name="ReportGrd" Margin="0,0,0,10">
                 <Grid x:Name="DailyReportGD" DataContext="{Binding}" HorizontalAlignment="Center" Height="Auto" VerticalAlignment="Top" Width="1344" Background="White" MinWidth="1000">

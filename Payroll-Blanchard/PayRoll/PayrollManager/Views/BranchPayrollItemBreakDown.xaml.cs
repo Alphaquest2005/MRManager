@@ -15,14 +15,14 @@ using PayrollManager.Converters;
 namespace PayrollManager
 {
 	/// <summary>
-	/// Interaction logic for BranchPayrollItemBreakDown.xaml
+	/// Interaction logic for CompanyPayrollItemBreakDown.xaml
 	/// </summary>
-	public partial class BranchPayrollItemBreakDown : UserControl
+	public partial class CompanyPayrollItemBreakDown : UserControl
 	{
-		public BranchPayrollItemBreakDown()
+		public CompanyPayrollItemBreakDown()
 		{
 			this.InitializeComponent();
-            im = (BranchPayrollItemBreakDownModel)this.FindResource("BranchPayrollItemBreakDownModelDataSource");
+            im = (CompanyPayrollItemBreakDownModel)this.FindResource("CompanyPayrollItemBreakDownModelDataSource");
             im.MyDataGrid = GridData;
 			// Insert code required on object creation below this point.
             var dpd = DependencyPropertyDescriptor.FromProperty(ItemsControl.ItemsSourceProperty, typeof(DataGrid));
@@ -36,7 +36,7 @@ namespace PayrollManager
         {
            im.PopulateGrid();
         }
-        BranchPayrollItemBreakDownModel im;
+        CompanyPayrollItemBreakDownModel im;
         private void PrintReport(object sender, MouseButtonEventArgs e)
         {
 
@@ -50,7 +50,7 @@ namespace PayrollManager
         {
             if (e.Row.IsNewItem == false)
             {
-                if ((e.Row.Item as BranchPayrollItemBreakDownModel.BranchPayrollItemSummaryLine).Payroll_Item == "Total")
+                if ((e.Row.Item as CompanyPayrollItemBreakDownModel.CompanyPayrollItemSummaryLine).Payroll_Item == "Total")
                 {
                     // e.Row.Background = new SolidColorBrush(Colors.DodgerBlue);
                     // e.Row.FontSize = 14;

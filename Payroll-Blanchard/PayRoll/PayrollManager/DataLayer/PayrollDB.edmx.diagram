@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="DataLayer.AccountEntry" Width="1.5" PointX="17.75" PointY="9.75" />
         <EntityTypeShape EntityType="DataLayer.Account" Width="2.125" PointX="12.125" PointY="0.75" />
         <EntityTypeShape EntityType="DataLayer.AccountType" Width="1.5" PointX="1.75" PointY="4.375" />
-        <EntityTypeShape EntityType="DataLayer.Branch" Width="1.5" PointX="5.25" PointY="20.5" />
         <EntityTypeShape EntityType="DataLayer.ChargeType" Width="1.5" PointX="3.75" PointY="4.375" />
         <EntityTypeShape EntityType="DataLayer.Employee" Width="1.875" PointX="6.125" PointY="24" />
         <EntityTypeShape EntityType="DataLayer.User" Width="1.5" PointX="8.5" PointY="29.625" />
@@ -24,9 +23,6 @@
         <AssociationConnector Association="DataLayer.FK_AccountPayrollItem1" />
         <AssociationConnector Association="DataLayer.FK_AccountPayrollSetupItem" />
         <AssociationConnector Association="DataLayer.FK_InstitutionAccountASN" />
-        <AssociationConnector Association="DataLayer.FK_BranchEmployee" />
-        <AssociationConnector Association="DataLayer.FK_BranchPayrollJob" />
-        <AssociationConnector Association="DataLayer.FK_PayrollJobBranch" />
         <AssociationConnector Association="DataLayer.FK_EmployeeEmployee" />
         <AssociationConnector Association="DataLayer.FK_EmployeePayrollEmployeeSetup" />
         <AssociationConnector Association="DataLayer.FK_EmployeePayrollItem" />
@@ -46,6 +42,10 @@
         <EntityTypeShape EntityType="DataLayer.EmailTemplate" Width="1.5" PointX="3.75" PointY="7.375" />
         <AssociationConnector Association="DataLayer.AccountPayrollEmployeeSetup" />
         <AssociationConnector Association="DataLayer.AccountPayrollEmployeeSetup1" />
+        <EntityTypeShape EntityType="DataLayer.Company" Width="1.5" PointX="5.5" PointY="20.25" />
+        <AssociationConnector Association="DataLayer.FK_BranchEmployee1" />
+        <AssociationConnector Association="DataLayer.FK_BranchPayrollJob1" />
+        <AssociationConnector Association="DataLayer.FK_PayrollJobBranch1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

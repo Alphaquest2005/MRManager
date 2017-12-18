@@ -23,8 +23,8 @@
 
     <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource EmployeeDetailsModelDataSource}, Path=CurrentEmployee}" Margin="0,61,0.4,0.484">
         <Grid HorizontalAlignment="Left"  Margin="0,0,0,-0.484" VerticalAlignment="Top" Width="594" Height="439">
-            <ComboBox SelectedValue="{Binding BranchId}" 
-					DisplayMemberPath="Name" SelectedValuePath="BranchId" ItemsSource="{Binding Branches, Source={StaticResource EmployeeDetailsModelDataSource}}"
+            <ComboBox SelectedValue="{Binding CompanyId}" 
+					DisplayMemberPath="Name" SelectedValuePath="BranchId" ItemsSource="{Binding Companies, Source={StaticResource EmployeeDetailsModelDataSource}}"
 					Margin="405,81,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="166"/>
             <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" Margin="120,54,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="166"/>
             <TextBlock HorizontalAlignment="Left" Height="20.323" Margin="28.316,53.833,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75.063" TextAlignment="Right"><Run Text="First Name"/><LineBreak/><Run/></TextBlock>

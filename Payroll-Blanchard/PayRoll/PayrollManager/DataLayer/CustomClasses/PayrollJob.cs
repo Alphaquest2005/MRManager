@@ -26,22 +26,7 @@ namespace PayrollManager.DataLayer
        
 
 
-        //DataLayer.Branch _branch;
-        //public DataLayer.Branch Branch
-        //{
-        //    get
-        //    {
-        //        return _branch;
-        //    }
-        //    set
-        //    {
-        //        _branch = value;
-        //        OnPropertyChanged("Branch");
-        //        OnPropertyChanged("TotalIncome");
-        //        OnPropertyChanged("TotalDeductions");
-        //        OnPropertyChanged("NetAmount"); 
-        //    }
-        //}
+
 
         public string Name { get; set; }
         public double TotalIncome { get; set; }

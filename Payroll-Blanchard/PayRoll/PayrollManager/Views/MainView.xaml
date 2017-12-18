@@ -35,7 +35,7 @@
 
     </UserControl.Resources>
 
-    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource BaseModelViewDataSource}}" d:DataContext="{d:DesignData /SampleData/BranchSampleData.xaml}" Background="{x:Null}" Margin="1,0,-1,0"  >
+    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource BaseModelViewDataSource}}" d:DataContext="{d:DesignData /SampleData/CompanySampleData.xaml}" Background="{x:Null}" Margin="1,0,-1,0"  >
 
         <TextBlock HorizontalAlignment="Left" Height="70" Margin="116,0,0,0" TextWrapping="Wrap" Text="Payroll Manager" VerticalAlignment="Top" Width="463" FontSize="48" FontFamily="Segoe UI Light"/>
         <Border Margin="116,70,26,0" BorderThickness="0,0,0,1" Height="55" VerticalAlignment="Top" Grid.ColumnSpan="2" >
@@ -47,10 +47,10 @@
                 </LinearGradientBrush>
             </Border.BorderBrush>
             <Grid DataContext="{Binding}" Margin="0,0,-0.6,0.2" >
-                <ComboBox Text="{Binding CurrentBranch.Name}" DisplayMemberPath="Name" ItemsSource="{Binding Branches}" SelectedItem="{Binding CurrentBranch, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23.916" Width="300" FontSize="13.333" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,10,0,0"/>
+                <ComboBox Text="{Binding CurrentCompany.Name}" DisplayMemberPath="Name" ItemsSource="{Binding Companies}" SelectedItem="{Binding CurrentCompany, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23.916" Width="300" FontSize="13.333" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,10,0,0"/>
                 <TextBlock Text="{Binding CurrentPayrollJob.NetAmount, StringFormat=c}" Margin="899.813,7.818,-142.668,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="117.284" FontSize="13.333" Foreground="#FFFFFED6" />
                 <TextBlock HorizontalAlignment="Left" Height="31.994" Margin="819.513,7.818,-20.384,0" TextWrapping="Wrap" Text="Net Amt:" VerticalAlignment="Top" Width="75.3" FontSize="13.333" Foreground="#FFFFFED6"/>
-                <TextBlock Text="{Binding CurrentBranch.TotalEmployees}" Margin="392,8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="50" FontSize="14" Foreground="#FFFFFED6"/>
+                <TextBlock Text="{Binding CurrentCompany.TotalEmployees}" Margin="392,8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="50" FontSize="14" Foreground="#FFFFFED6"/>
                 <TextBlock HorizontalAlignment="Left" Height="32" Margin="337,10,0,0" TextWrapping="Wrap" Text="Emp#" VerticalAlignment="Top" Width="50" FontSize="13.333" RenderTransformOrigin="-1.217,0.371" Foreground="#FFFFFED6"/>
                 <TextBlock Text="{Binding CurrentPayrollJob.Name, FallbackValue=Select payroll job}" Margin="593.122,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23.916" Width="191.271" FontSize="13.333" Foreground="#FFFFFED6"/>
                 <TextBlock HorizontalAlignment="Left" Height="39.812" Margin="512.822,0,0,0" TextWrapping="Wrap" Text="Current Payroll Job" VerticalAlignment="Top" Width="75.3" FontSize="13.333" Foreground="#FFFFFED6"/>
@@ -89,7 +89,7 @@
                     <local:PayrollJob VerticalAlignment="Top"  MouseEnter="BringIntoView"/>
 
                 </Expander>
-                <Expander ExpandDirection="Right" x:Name="BranchPayrollItemBreakDownEXP"  Margin="50,10,0,-110" Width="Auto" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top"  Padding="5,5,5,10">
+                <Expander ExpandDirection="Right" x:Name="CompanyPayrollItemBreakDownEXP"  Margin="50,10,0,-110" Width="Auto" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top"  Padding="5,5,5,10">
                     <Expander.Header>
                         <Grid Height="Auto" MouseEnter="BringIntoView">
                             <TextBlock Height="63" Style="{DynamicResource ExpHeadStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,1,14,0" Width="55" FontFamily="Segoe UI Symbol" FontSize="40" Text="&#xE115;"/>
@@ -98,10 +98,10 @@
                         </Grid>
                     </Expander.Header>
                     <!--<local:Cashiers Height="300" VerticalAlignment="Top" />-->
-                    <local:BranchPayrollItemBreakDown VerticalAlignment="Top"  MouseEnter="BringIntoView"/>
+                    <local:CompanyPayrollItemBreakDown VerticalAlignment="Top"  MouseEnter="BringIntoView"/>
                 </Expander>
 
-                <Expander ExpandDirection="Right" x:Name="BranchEmployeeInstitutionEXP"  Margin="50,10,0,-110" Width="Auto" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top"  Padding="5,5,5,10">
+                <Expander ExpandDirection="Right" x:Name="CompanyEmployeeInstitutionEXP"  Margin="50,10,0,-110" Width="Auto" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top"  Padding="5,5,5,10">
                     <Expander.Header>
                         <Grid Height="Auto" MouseEnter="BringIntoView">
                             <TextBlock Height="63" Style="{DynamicResource ExpHeadStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,1,14,0" Width="55" FontFamily="Segoe UI Symbol" FontSize="40" Text="&#xE115;"/>
@@ -110,7 +110,7 @@
                         </Grid>
                     </Expander.Header>
                     <!--<local:Cashiers Height="300" VerticalAlignment="Top" />-->
-                    <local:BranchEmployeeInstitutions VerticalAlignment="Top"  MouseEnter="BringIntoView"/>
+                    <local:CompanyEmployeeInstitutions VerticalAlignment="Top"  MouseEnter="BringIntoView"/>
                 </Expander>
 
                 <Expander ExpandDirection="Right" x:Name="EmployeeBreakDownEXP" Margin="50,10,0,-110" Width="Auto" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top"  Padding="5,5,5,10">

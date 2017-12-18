@@ -25,9 +25,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("DataLayer", "FK_AccountPayrollItem1", "Accounts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "PayrollItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollItem), true)]
 [assembly: EdmRelationshipAttribute("DataLayer", "FK_AccountPayrollSetupItem", "Accounts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "PayrollSetupItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollSetupItem), true)]
 [assembly: EdmRelationshipAttribute("DataLayer", "FK_InstitutionAccountASN", "Institutions", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Institution), "Accounts", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.Account), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_BranchEmployee", "Branches", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Branch), "Employees", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.Employee), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_BranchPayrollJob", "Branches", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Branch), "PayrollJobs", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollJob), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollJobBranch", "PayrollJobs", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PayrollManager.DataLayer.PayrollJob), "Branches", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.Branch), true)]
 [assembly: EdmRelationshipAttribute("DataLayer", "FK_EmployeeEmployee", "Employees", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PayrollManager.DataLayer.Employee), "Employees1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.Employee), true)]
 [assembly: EdmRelationshipAttribute("DataLayer", "FK_EmployeePayrollEmployeeSetup", "Employees", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Employee), "PayrollEmployeeSetup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollEmployeeSetup), true)]
 [assembly: EdmRelationshipAttribute("DataLayer", "FK_EmployeePayrollItem", "Employees", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Employee), "PayrollItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollItem), true)]
@@ -41,6 +38,9 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("DataLayer", "InstitutionInstitutionAccount", "Institution", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Institution), "InstitutionAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.InstitutionAccount), true)]
 [assembly: EdmRelationshipAttribute("DataLayer", "AccountPayrollEmployeeSetup", "Account", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "PayrollEmployeeSetup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollEmployeeSetup), true)]
 [assembly: EdmRelationshipAttribute("DataLayer", "AccountPayrollEmployeeSetup1", "Account", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "PayrollEmployeeSetup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollEmployeeSetup), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_BranchEmployee1", "Companies", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Company), "Employee", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.Employee), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_BranchPayrollJob1", "Companies", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Company), "PayrollJob", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollJob), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollJobBranch1", "PayrollJob", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PayrollManager.DataLayer.PayrollJob), "Companies", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.Company), true)]
 
 #endregion
 
@@ -139,22 +139,6 @@ namespace PayrollManager.DataLayer
             }
         }
         private ObjectSet<AccountType> _AccountTypes;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Branch> Branches
-        {
-            get
-            {
-                if ((_Branches == null))
-                {
-                    _Branches = base.CreateObjectSet<Branch>("Branches");
-                }
-                return _Branches;
-            }
-        }
-        private ObjectSet<Branch> _Branches;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -299,6 +283,22 @@ namespace PayrollManager.DataLayer
             }
         }
         private ObjectSet<EmailTemplate> _EmailTemplate;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Company> Companies
+        {
+            get
+            {
+                if ((_Companies == null))
+                {
+                    _Companies = base.CreateObjectSet<Company>("Companies");
+                }
+                return _Companies;
+            }
+        }
+        private ObjectSet<Company> _Companies;
 
         #endregion
 
@@ -326,14 +326,6 @@ namespace PayrollManager.DataLayer
         public void AddToAccountTypes(AccountType accountType)
         {
             base.AddObject("AccountTypes", accountType);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Branches EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToBranches(Branch branch)
-        {
-            base.AddObject("Branches", branch);
         }
     
         /// <summary>
@@ -406,6 +398,14 @@ namespace PayrollManager.DataLayer
         public void AddToEmailTemplate(EmailTemplate emailTemplate)
         {
             base.AddObject("EmailTemplate", emailTemplate);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Companies EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToCompanies(Company company)
+        {
+            base.AddObject("Companies", company);
         }
 
         #endregion
@@ -1153,28 +1153,24 @@ namespace PayrollManager.DataLayer
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="DataLayer", Name="Branch")]
+    [EdmEntityTypeAttribute(NamespaceName="DataLayer", Name="ChargeType")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Branch : EntityObject
+    public partial class ChargeType : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Branch object.
+        /// Create a new ChargeType object.
         /// </summary>
-        /// <param name="branchId">Initial value of the BranchId property.</param>
-        /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="address">Initial value of the Address property.</param>
-        /// <param name="phoneNumber">Initial value of the PhoneNumber property.</param>
-        public static Branch CreateBranch(global::System.Int32 branchId, global::System.String name, global::System.String address, global::System.String phoneNumber)
+        /// <param name="chargeTypeId">Initial value of the ChargeTypeId property.</param>
+        /// <param name="chargeTypeName">Initial value of the ChargeTypeName property.</param>
+        public static ChargeType CreateChargeType(global::System.Int32 chargeTypeId, global::System.String chargeTypeName)
         {
-            Branch branch = new Branch();
-            branch.BranchId = branchId;
-            branch.Name = name;
-            branch.Address = address;
-            branch.PhoneNumber = phoneNumber;
-            return branch;
+            ChargeType chargeType = new ChargeType();
+            chargeType.ChargeTypeId = chargeTypeId;
+            chargeType.ChargeTypeName = chargeTypeName;
+            return chargeType;
         }
 
         #endregion
@@ -1186,27 +1182,113 @@ namespace PayrollManager.DataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 BranchId
+        public global::System.Int32 ChargeTypeId
         {
             get
             {
-                return _BranchId;
+                return _ChargeTypeId;
             }
             set
             {
-                if (_BranchId != value)
+                if (_ChargeTypeId != value)
                 {
-                    OnBranchIdChanging(value);
-                    ReportPropertyChanging("BranchId");
-                    _BranchId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("BranchId");
-                    OnBranchIdChanged();
+                    OnChargeTypeIdChanging(value);
+                    ReportPropertyChanging("ChargeTypeId");
+                    _ChargeTypeId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ChargeTypeId");
+                    OnChargeTypeIdChanged();
                 }
             }
         }
-        private global::System.Int32 _BranchId;
-        partial void OnBranchIdChanging(global::System.Int32 value);
-        partial void OnBranchIdChanged();
+        private global::System.Int32 _ChargeTypeId;
+        partial void OnChargeTypeIdChanging(global::System.Int32 value);
+        partial void OnChargeTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ChargeTypeName
+        {
+            get
+            {
+                return _ChargeTypeName;
+            }
+            set
+            {
+                OnChargeTypeNameChanging(value);
+                ReportPropertyChanging("ChargeTypeName");
+                _ChargeTypeName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ChargeTypeName");
+                OnChargeTypeNameChanged();
+            }
+        }
+        private global::System.String _ChargeTypeName;
+        partial void OnChargeTypeNameChanging(global::System.String value);
+        partial void OnChargeTypeNameChanged();
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DataLayer", Name="Company")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Company : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Company object.
+        /// </summary>
+        /// <param name="companyId">Initial value of the CompanyId property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="address">Initial value of the Address property.</param>
+        /// <param name="phoneNumber">Initial value of the PhoneNumber property.</param>
+        public static Company CreateCompany(global::System.Int32 companyId, global::System.String name, global::System.String address, global::System.String phoneNumber)
+        {
+            Company company = new Company();
+            company.CompanyId = companyId;
+            company.Name = name;
+            company.Address = address;
+            company.PhoneNumber = phoneNumber;
+            return company;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CompanyId
+        {
+            get
+            {
+                return _CompanyId;
+            }
+            set
+            {
+                if (_CompanyId != value)
+                {
+                    OnCompanyIdChanging(value);
+                    ReportPropertyChanging("CompanyId");
+                    _CompanyId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("CompanyId");
+                    OnCompanyIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _CompanyId;
+        partial void OnCompanyIdChanging(global::System.Int32 value);
+        partial void OnCompanyIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1285,30 +1367,6 @@ namespace PayrollManager.DataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> CurrentPayrollJobId
-        {
-            get
-            {
-                return _CurrentPayrollJobId;
-            }
-            set
-            {
-                OnCurrentPayrollJobIdChanging(value);
-                ReportPropertyChanging("CurrentPayrollJobId");
-                _CurrentPayrollJobId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CurrentPayrollJobId");
-                OnCurrentPayrollJobIdChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _CurrentPayrollJobId;
-        partial void OnCurrentPayrollJobIdChanging(Nullable<global::System.Int32> value);
-        partial void OnCurrentPayrollJobIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public global::System.String ShortName
         {
             get
@@ -1327,6 +1385,30 @@ namespace PayrollManager.DataLayer
         private global::System.String _ShortName;
         partial void OnShortNameChanging(global::System.String value);
         partial void OnShortNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> CurrentPayrollJobId
+        {
+            get
+            {
+                return _CurrentPayrollJobId;
+            }
+            set
+            {
+                OnCurrentPayrollJobIdChanging(value);
+                ReportPropertyChanging("CurrentPayrollJobId");
+                _CurrentPayrollJobId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CurrentPayrollJobId");
+                OnCurrentPayrollJobIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _CurrentPayrollJobId;
+        partial void OnCurrentPayrollJobIdChanging(Nullable<global::System.Int32> value);
+        partial void OnCurrentPayrollJobIdChanged();
 
         #endregion
 
@@ -1338,18 +1420,18 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_BranchEmployee", "Employees")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_BranchEmployee1", "Employee")]
         public EntityCollection<Employee> Employees
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Employee>("DataLayer.FK_BranchEmployee", "Employees");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Employee>("DataLayer.FK_BranchEmployee1", "Employee");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Employee>("DataLayer.FK_BranchEmployee", "Employees", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Employee>("DataLayer.FK_BranchEmployee1", "Employee", value);
                 }
             }
         }
@@ -1360,18 +1442,18 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_BranchPayrollJob", "PayrollJobs")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_BranchPayrollJob1", "PayrollJob")]
         public EntityCollection<PayrollJob> PayrollJobs
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollJob>("DataLayer.FK_BranchPayrollJob", "PayrollJobs");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollJob>("DataLayer.FK_BranchPayrollJob1", "PayrollJob");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollJob>("DataLayer.FK_BranchPayrollJob", "PayrollJobs", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollJob>("DataLayer.FK_BranchPayrollJob1", "PayrollJob", value);
                 }
             }
         }
@@ -1382,16 +1464,16 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobBranch", "PayrollJobs")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobBranch1", "PayrollJob")]
         public PayrollJob CurrentPayrollJob
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobBranch", "PayrollJobs").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobBranch1", "PayrollJob").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobBranch", "PayrollJobs").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobBranch1", "PayrollJob").Value = value;
             }
         }
         /// <summary>
@@ -1403,98 +1485,16 @@ namespace PayrollManager.DataLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobBranch", "PayrollJobs");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobBranch1", "PayrollJob");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobBranch", "PayrollJobs", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobBranch1", "PayrollJob", value);
                 }
             }
         }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="DataLayer", Name="ChargeType")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class ChargeType : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new ChargeType object.
-        /// </summary>
-        /// <param name="chargeTypeId">Initial value of the ChargeTypeId property.</param>
-        /// <param name="chargeTypeName">Initial value of the ChargeTypeName property.</param>
-        public static ChargeType CreateChargeType(global::System.Int32 chargeTypeId, global::System.String chargeTypeName)
-        {
-            ChargeType chargeType = new ChargeType();
-            chargeType.ChargeTypeId = chargeTypeId;
-            chargeType.ChargeTypeName = chargeTypeName;
-            return chargeType;
-        }
-
-        #endregion
-
-        #region Simple Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ChargeTypeId
-        {
-            get
-            {
-                return _ChargeTypeId;
-            }
-            set
-            {
-                if (_ChargeTypeId != value)
-                {
-                    OnChargeTypeIdChanging(value);
-                    ReportPropertyChanging("ChargeTypeId");
-                    _ChargeTypeId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("ChargeTypeId");
-                    OnChargeTypeIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _ChargeTypeId;
-        partial void OnChargeTypeIdChanging(global::System.Int32 value);
-        partial void OnChargeTypeIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String ChargeTypeName
-        {
-            get
-            {
-                return _ChargeTypeName;
-            }
-            set
-            {
-                OnChargeTypeNameChanging(value);
-                ReportPropertyChanging("ChargeTypeName");
-                _ChargeTypeName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("ChargeTypeName");
-                OnChargeTypeNameChanged();
-            }
-        }
-        private global::System.String _ChargeTypeName;
-        partial void OnChargeTypeNameChanging(global::System.String value);
-        partial void OnChargeTypeNameChanged();
 
         #endregion
 
@@ -1703,16 +1703,16 @@ namespace PayrollManager.DataLayer
         /// <param name="employeeId">Initial value of the EmployeeId property.</param>
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="lastName">Initial value of the LastName property.</param>
-        /// <param name="branchId">Initial value of the BranchId property.</param>
         /// <param name="employmentStartDate">Initial value of the EmploymentStartDate property.</param>
-        public static Employee CreateEmployee(global::System.Int32 employeeId, global::System.String firstName, global::System.String lastName, global::System.Int32 branchId, global::System.DateTime employmentStartDate)
+        /// <param name="companyId">Initial value of the CompanyId property.</param>
+        public static Employee CreateEmployee(global::System.Int32 employeeId, global::System.String firstName, global::System.String lastName, global::System.DateTime employmentStartDate, global::System.Int32 companyId)
         {
             Employee employee = new Employee();
             employee.EmployeeId = employeeId;
             employee.FirstName = firstName;
             employee.LastName = lastName;
-            employee.BranchId = branchId;
             employee.EmploymentStartDate = employmentStartDate;
+            employee.CompanyId = companyId;
             return employee;
         }
 
@@ -1818,30 +1818,6 @@ namespace PayrollManager.DataLayer
         private global::System.String _MiddleName;
         partial void OnMiddleNameChanging(global::System.String value);
         partial void OnMiddleNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 BranchId
-        {
-            get
-            {
-                return _BranchId;
-            }
-            set
-            {
-                OnBranchIdChanging(value);
-                ReportPropertyChanging("BranchId");
-                _BranchId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("BranchId");
-                OnBranchIdChanged();
-            }
-        }
-        private global::System.Int32 _BranchId;
-        partial void OnBranchIdChanging(global::System.Int32 value);
-        partial void OnBranchIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2058,48 +2034,34 @@ namespace PayrollManager.DataLayer
         private Nullable<global::System.Int32> _SexId;
         partial void OnSexIdChanging(Nullable<global::System.Int32> value);
         partial void OnSexIdChanged();
-
-        #endregion
-
-        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_BranchEmployee", "Branches")]
-        public Branch Branch
+        public global::System.Int32 CompanyId
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Branch>("DataLayer.FK_BranchEmployee", "Branches").Value;
+                return _CompanyId;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Branch>("DataLayer.FK_BranchEmployee", "Branches").Value = value;
+                OnCompanyIdChanging(value);
+                ReportPropertyChanging("CompanyId");
+                _CompanyId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CompanyId");
+                OnCompanyIdChanged();
             }
         }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Branch> BranchReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Branch>("DataLayer.FK_BranchEmployee", "Branches");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Branch>("DataLayer.FK_BranchEmployee", "Branches", value);
-                }
-            }
-        }
+        private global::System.Int32 _CompanyId;
+        partial void OnCompanyIdChanging(global::System.Int32 value);
+        partial void OnCompanyIdChanged();
+
+        #endregion
+
+        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2223,6 +2185,44 @@ namespace PayrollManager.DataLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EmployeeAccount>("DataLayer.EmployeeEmployeeAccount", "EmployeeAccount", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_BranchEmployee1", "Companies")]
+        public Company Company
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_BranchEmployee1", "Companies").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_BranchEmployee1", "Companies").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Company> CompanyReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_BranchEmployee1", "Companies");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Company>("DataLayer.FK_BranchEmployee1", "Companies", value);
                 }
             }
         }
@@ -3999,8 +3999,8 @@ namespace PayrollManager.DataLayer
         /// <param name="status">Initial value of the Status property.</param>
         /// <param name="payrollJobTypeId">Initial value of the PayrollJobTypeId property.</param>
         /// <param name="paymentDate">Initial value of the PaymentDate property.</param>
-        /// <param name="branchId">Initial value of the BranchId property.</param>
-        public static PayrollJob CreatePayrollJob(global::System.Int32 payrollJobId, global::System.String preparedBy, global::System.DateTime startDate, global::System.DateTime endDate, global::System.String status, global::System.Int32 payrollJobTypeId, global::System.DateTime paymentDate, global::System.Int32 branchId)
+        /// <param name="companyId">Initial value of the CompanyId property.</param>
+        public static PayrollJob CreatePayrollJob(global::System.Int32 payrollJobId, global::System.String preparedBy, global::System.DateTime startDate, global::System.DateTime endDate, global::System.String status, global::System.Int32 payrollJobTypeId, global::System.DateTime paymentDate, global::System.Int32 companyId)
         {
             PayrollJob payrollJob = new PayrollJob();
             payrollJob.PayrollJobId = payrollJobId;
@@ -4010,7 +4010,7 @@ namespace PayrollManager.DataLayer
             payrollJob.Status = status;
             payrollJob.PayrollJobTypeId = payrollJobTypeId;
             payrollJob.PaymentDate = paymentDate;
-            payrollJob.BranchId = branchId;
+            payrollJob.CompanyId = companyId;
             return payrollJob;
         }
 
@@ -4218,88 +4218,28 @@ namespace PayrollManager.DataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 BranchId
+        public global::System.Int32 CompanyId
         {
             get
             {
-                return _BranchId;
+                return _CompanyId;
             }
             set
             {
-                OnBranchIdChanging(value);
-                ReportPropertyChanging("BranchId");
-                _BranchId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("BranchId");
-                OnBranchIdChanged();
+                OnCompanyIdChanging(value);
+                ReportPropertyChanging("CompanyId");
+                _CompanyId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CompanyId");
+                OnCompanyIdChanged();
             }
         }
-        private global::System.Int32 _BranchId;
-        partial void OnBranchIdChanging(global::System.Int32 value);
-        partial void OnBranchIdChanged();
+        private global::System.Int32 _CompanyId;
+        partial void OnCompanyIdChanging(global::System.Int32 value);
+        partial void OnCompanyIdChanged();
 
         #endregion
 
         #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_BranchPayrollJob", "Branches")]
-        public Branch Branch
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Branch>("DataLayer.FK_BranchPayrollJob", "Branches").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Branch>("DataLayer.FK_BranchPayrollJob", "Branches").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Branch> BranchReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Branch>("DataLayer.FK_BranchPayrollJob", "Branches");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Branch>("DataLayer.FK_BranchPayrollJob", "Branches", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobBranch", "Branches")]
-        public EntityCollection<Branch> Branches
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Branch>("DataLayer.FK_PayrollJobBranch", "Branches");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Branch>("DataLayer.FK_PayrollJobBranch", "Branches", value);
-                }
-            }
-        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -4357,6 +4297,66 @@ namespace PayrollManager.DataLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollJob", "PayrollJobTypes", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_BranchPayrollJob1", "Companies")]
+        public Company Company
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_BranchPayrollJob1", "Companies").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_BranchPayrollJob1", "Companies").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Company> CompanyReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_BranchPayrollJob1", "Companies");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Company>("DataLayer.FK_BranchPayrollJob1", "Companies", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobBranch1", "Companies")]
+        public EntityCollection<Company> Companies
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Company>("DataLayer.FK_PayrollJobBranch1", "Companies");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Company>("DataLayer.FK_PayrollJobBranch1", "Companies", value);
                 }
             }
         }
@@ -5193,18 +5193,18 @@ namespace PayrollManager.DataLayer
         /// <param name="employeeId">Initial value of the EmployeeId property.</param>
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="lastName">Initial value of the LastName property.</param>
-        /// <param name="branchId">Initial value of the BranchId property.</param>
         /// <param name="employmentStartDate">Initial value of the EmploymentStartDate property.</param>
+        /// <param name="companyId">Initial value of the CompanyId property.</param>
         /// <param name="username">Initial value of the Username property.</param>
         /// <param name="password">Initial value of the Password property.</param>
-        public static User CreateUser(global::System.Int32 employeeId, global::System.String firstName, global::System.String lastName, global::System.Int32 branchId, global::System.DateTime employmentStartDate, global::System.String username, global::System.String password)
+        public static User CreateUser(global::System.Int32 employeeId, global::System.String firstName, global::System.String lastName, global::System.DateTime employmentStartDate, global::System.Int32 companyId, global::System.String username, global::System.String password)
         {
             User user = new User();
             user.EmployeeId = employeeId;
             user.FirstName = firstName;
             user.LastName = lastName;
-            user.BranchId = branchId;
             user.EmploymentStartDate = employmentStartDate;
+            user.CompanyId = companyId;
             user.Username = username;
             user.Password = password;
             return user;

@@ -20,10 +20,10 @@ namespace PayrollManager
 		private void EmployeeSummaryListModel_staticPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 
-			if (e.PropertyName == "CurrentBranch" && CurrentBranch != null || e.PropertyName == "Employees")
+			if (e.PropertyName == "CurrentCompany" && CurrentCompany != null || e.PropertyName == "Employees")
 			{
 
-				if (CurrentBranch == null)
+				if (CurrentCompany == null)
 				{
 					Employees = new ObservableCollection<DataLayer.Employee>(base.Employees
 						.Where(x => x.EmploymentEndDate.HasValue == false ||
@@ -36,7 +36,7 @@ namespace PayrollManager
 					Employees = new ObservableCollection<DataLayer.Employee>(base.Employees
 						.Where(x => x.EmploymentEndDate.HasValue == false ||
 									EntityFunctions.TruncateTime(x.EmploymentEndDate.Value) >= EntityFunctions.TruncateTime(DateTime.Now))
-						.Where(emp => emp.BranchId == CurrentBranch.BranchId &&
+						.Where(emp => emp.CompanyId == CurrentCompany.CompanyId &&
 									  emp.DisplayName.ToUpper().Contains(EmployeeFilter.ToUpper()) == true)
 						.OrderBy(x => x.LastName).ToList());
 				}

@@ -20,14 +20,14 @@ namespace PayrollManager
 
         private void EmployeePayrollItemsListModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if ((e.PropertyName == "CurrentEmployee" || e.PropertyName == "CurrentBranch" || e.PropertyName == "PayrollItems" || e.PropertyName == "CurrentPayrollJob") && CurrentEmployee != null && CurrentBranch != null && CurrentPayrollJob != null)
+            if ((e.PropertyName == "CurrentEmployee" || e.PropertyName == "CurrentCompany" || e.PropertyName == "PayrollItems" || e.PropertyName == "CurrentPayrollJob") && CurrentEmployee != null && CurrentCompany != null && CurrentPayrollJob != null)
             {
                 using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
                 {
                     var lst = (from p in ctx.PayrollItems//.AsEnumerable()
                         where p.EmployeeId == CurrentEmployee.EmployeeId &&
-                              p.PayrollJobId == CurrentPayrollJob.PayrollJobId && p.PayrollJob.Branch != null &&
-                              p.PayrollJob.Branch.BranchId == CurrentBranch.BranchId
+                              p.PayrollJobId == CurrentPayrollJob.PayrollJobId && p.PayrollJob.Company != null &&
+                              p.PayrollJob.Company.CompanyId == CurrentCompany.CompanyId
                         select p).ToList();
                     PayrollItemList = lst.Any() 
                         ? new ObservableCollection<DataLayer.PayrollItem>(lst) 

@@ -26,7 +26,7 @@ namespace PayrollManager
                 OnPropertyChanged("NetAmount");
             }
 
-            if (e.PropertyName == "CurrentBranch" || e.PropertyName == "CurrentYear")
+            if (e.PropertyName == "CurrentCompany" || e.PropertyName == "CurrentYear")
             {
                 OnStaticPropertyChanged("PayrollJobs");
             }
@@ -36,8 +36,8 @@ namespace PayrollManager
 	    {
 	        get
 	        {
-	            if (CurrentBranch == null || CurrentBranch.PayrollJobs.Any() == false) return new int[] {DateTime.Now.Year};
-	            return CurrentBranch.PayrollJobs.Select(x => x.StartDate.Year).Distinct().ToArray();
+	            if (CurrentCompany == null || CurrentCompany.PayrollJobs.Any() == false) return new int[] {DateTime.Now.Year};
+	            return CurrentCompany.PayrollJobs.Select(x => x.StartDate.Year).Distinct().ToArray();
 	        }
 	    }
 
