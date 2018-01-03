@@ -13,35 +13,38 @@ using System.Windows.Shapes;
 namespace PayrollManager
 {
 	/// <summary>
-	/// Interaction logic for AccountDetails.xaml
+	/// Interaction logic for Institution.xaml
 	/// </summary>
 	public partial class InstitutionDetails : UserControl
 	{
-        public InstitutionDetails()
+		public InstitutionDetails()
 		{
 			this.InitializeComponent();
-            im = (InstitutionDetailsModel)this.FindResource("InstitutionDetailsModelDataSource");
-            // Insert code required on object creation below this point.
+             im = (InstitutionDetailsModel)this.FindResource("InstitutionModelDataSource");
+			// Insert code required on object creation below this point.
+		}
+	    InstitutionDetailsModel im;
+        //private void CreatePayrollBtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+         
+        //    im.CreateInstitution();
+        //}
+
+        private void SaveBtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            im.SaveInstitution();
         }
 
-        InstitutionDetailsModel im;
+        private void DeleteBtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            im.DeleteInstitution();
+        }
+
         private void NewBtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             im.NewInstitution();
         }
 
-        private void SaveBtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-          
-                im.SaveInstitution();
-            
-        }
-
-        private void DeleteBtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            im.DeleteInstition();
-        }
-
-     
+       
 	}
 }

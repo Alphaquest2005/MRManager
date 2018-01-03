@@ -3,37 +3,32 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	mc:Ignorable="d"
+    xmlns:Converters="clr-namespace:PayrollManager.Converters"
 	xmlns:local="clr-namespace:PayrollManager"
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+	mc:Ignorable="d"
 	x:Class="PayrollManager.InstitutionDetails"
-	d:DesignWidth="640" d:DesignHeight="480">
-	<UserControl.Resources>
-        <local:InstitutionDetailsModel x:Key="InstitutionDetailsModelDataSource" />
-        
+	d:DesignWidth="372.4" Height="268.551">
+    <UserControl.Resources>
+        <local:InstitutionDetailsModel x:Key="InstitutionModelDataSource" />
+        <Converters:DisablePostedConverter x:Key="PostedConverter"/>
+        <local:PayrollJobModel x:Key="PayrollJobModelDataSource" />
     </UserControl.Resources>
 
-    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource InstitutionDetailsModelDataSource}, Path=CurrentInstitutionAccount}">
-        <Grid HorizontalAlignment="Left" Height="400" Background="#33FFFFFF" Margin="0,80,0,0" VerticalAlignment="Top" Width="640">
-			<TextBox Text="{Binding AccountName,FallbackValue='Create new Account', UpdateSourceTrigger=PropertyChanged}" Margin="123,23,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="33" Width="309" FontSize="16"/>
-            <TextBox Text="{Binding AccountNumber, UpdateSourceTrigger=PropertyChanged}" Margin="123,66,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="309"/>
-			<TextBlock HorizontalAlignment="Left" Height="26.307" Margin="18.323,23.28,0,0" TextWrapping="Wrap" Text="Account Name" VerticalAlignment="Top" Width="99.331" FontSize="13.333" TextAlignment="Right"/>
-            <ComboBox SelectedValue="{Binding InstitutionId, UpdateSourceTrigger=PropertyChanged}" 
-                      DisplayMemberPath="Name" SelectedValuePath="InstitutionId" ItemsSource="{Binding Institutions, Source={StaticResource AccountDetailsModelDataSource}}"
-                      Margin="122.654,100.552,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28.894" Width="309.044"/>
-			<TextBlock HorizontalAlignment="Left" Height="26" Margin="10,65,0,0" TextWrapping="Wrap" Text="Account Number" VerticalAlignment="Top" Width="108" FontSize="13.333" TextAlignment="Right"/>
-			<TextBlock HorizontalAlignment="Left" Height="26.307" Margin="18.323,100.552,0,0" TextWrapping="Wrap" Text="Institution" VerticalAlignment="Top" Width="99.331" FontSize="13.333" TextAlignment="Right"/>
-			<TextBlock x:Name="SaveBtn" HorizontalAlignment="Left" Height="39" Margin="378,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="26.667" MouseLeftButtonDown="SaveBtn_MouseLeftButtonDown"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="&#xE105;"/></Span></TextBlock>
-			<TextBlock x:Name="DeleteBtn" HorizontalAlignment="Left" Height="39" Margin="577,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35" TextAlignment="Center" Style="{DynamicResource CloseButtonStyle}" FontSize="26.667" MouseLeftButtonDown="DeleteBtn_MouseLeftButtonDown"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="&#xE106;"/></Span><LineBreak/><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run/></Span></TextBlock>
-			<TextBlock x:Name="NewBtn" HorizontalAlignment="Left" Height="39" Margin="338,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="26.667" Text="&#xE109;" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="NewBtn_MouseLeftButtonDown"/>
-            <ComboBox Text="{Binding AccountType, UpdateSourceTrigger=PropertyChanged}" 
-            	DisplayMemberPath="AccountTypeName" SelectedValuePath="AccountTypeName" ItemsSource="{Binding AccountTypes, Source={StaticResource AccountDetailsModelDataSource}}"
-            	Margin="123,143,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="199" IsEditable="True"/>
-            <TextBlock HorizontalAlignment="Left" Height="26" Margin="18,143,0,0" TextWrapping="Wrap" Text="Account Type" VerticalAlignment="Top" Width="100" FontSize="13.333" TextAlignment="Right"/>
-            <ComboBox  Name="InstitutionAccountCmb"  SelectedValue="{Binding PayeeInstitutionId, UpdateSourceTrigger=PropertyChanged}"
-            	DisplayMemberPath="Name" SelectedValuePath="InstitutionId" ItemsSource="{Binding Institutions, Source={StaticResource AccountDetailsModelDataSource}}"
-            	Margin="123,209,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="29" Width="309" />
-            <TextBlock HorizontalAlignment="Left" Height="26" Margin="18,212,0,0" TextWrapping="Wrap" Text="Payee" VerticalAlignment="Top" Width="100" FontSize="13.333" TextAlignment="Right"/>
-        </Grid>
-		<TextBlock HorizontalAlignment="Left" Height="32.766" Margin="8.838,14.011,0,0" TextWrapping="Wrap" Text="Create/Edit Accounts" VerticalAlignment="Top" Width="284.54" FontSize="21.333"/>
-	</Grid>
+    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource InstitutionModelDataSource},Path=CurrentInstitution}"  >
+        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="115,57,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="166"/>
+        <TextBlock Text="Name" HorizontalAlignment="Left" Height="23" Margin="20,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
+        <TextBlock  Text="Institution Details" HorizontalAlignment="Left" Height="34.8" Margin="31.5,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241.2" FontSize="26"/>
+        <TextBlock Text="Short Name" HorizontalAlignment="Left" Height="22" Margin="20,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
+        <TextBlock x:Name="SaveBtn" HorizontalAlignment="Left" Height="27" Margin="240,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="33" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="20" MouseLeftButtonDown="SaveBtn_MouseLeftButtonDown"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="&#xE105;"/></Span></TextBlock>
+        <TextBlock x:Name="DeleteBtn" HorizontalAlignment="Left" Height="27" Margin="338,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="33" TextAlignment="Center" Style="{DynamicResource CloseButtonStyle}" FontSize="20" MouseLeftButtonDown="DeleteBtn_MouseLeftButtonDown"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="&#xE106;"/></Span><LineBreak/><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run/></Span></TextBlock>
+        <TextBlock x:Name="NewBtn" HorizontalAlignment="Left" Height="27" Margin="202,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="20" Text="&#xE109;" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="NewBtn_MouseLeftButtonDown"/>
+        <TextBox Text="{Binding ShortName, UpdateSourceTrigger=PropertyChanged}" Margin="115,84,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="59"/>
+        <DatePicker SelectedDate="{Binding StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="115,130,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="27" Width="161"/>
+        <DatePicker SelectedDate="{Binding EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="115,162,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="161"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="20,134,0,0" TextWrapping="Wrap" Text="Start Date" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
+        <TextBlock HorizontalAlignment="Left" Height="22" Margin="20,162,0,0" TextWrapping="Wrap" Text="End Date" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
+        <TextBlock Text="Prority" HorizontalAlignment="Left" Height="22" Margin="20,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
+        <TextBox Text="{Binding Priority, UpdateSourceTrigger=PropertyChanged}" Margin="115,108,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="59"/>
+    </Grid>
 </UserControl>

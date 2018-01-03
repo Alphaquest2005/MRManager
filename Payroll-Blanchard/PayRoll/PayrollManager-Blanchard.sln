@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayrollManager", "PayrollManager\PayrollManager.csproj", "{55E0FD5D-6A5E-4E54-8ACC-1B6E9D5111FA}"
 EndProject
@@ -16,6 +16,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrintableDataGrid", "PrintableDataGrid\PrintableDataGrid.csproj", "{6181DFAB-93D9-4501-9799-B120707843C1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SUT.PrintEngine", "SUT.PrintEngine\SUT.PrintEngine.csproj", "{0B3D76D5-D9F4-4C0E-AFA9-143138EBC74D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PopClient", "PopClient\PopClient.csproj", "{28D38D69-0A6C-436F-B381-97C46388EE11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureSmtpClient", "SecureSmtpClient\SecureSmtpClient.csproj", "{52A952B8-6CD5-4489-8020-098C5F329B13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,8 +109,35 @@ Global
 		{0B3D76D5-D9F4-4C0E-AFA9-143138EBC74D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0B3D76D5-D9F4-4C0E-AFA9-143138EBC74D}.Release|x86.ActiveCfg = Release|Any CPU
 		{0B3D76D5-D9F4-4C0E-AFA9-143138EBC74D}.Release|x86.Build.0 = Release|Any CPU
+		{28D38D69-0A6C-436F-B381-97C46388EE11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28D38D69-0A6C-436F-B381-97C46388EE11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28D38D69-0A6C-436F-B381-97C46388EE11}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{28D38D69-0A6C-436F-B381-97C46388EE11}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{28D38D69-0A6C-436F-B381-97C46388EE11}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{28D38D69-0A6C-436F-B381-97C46388EE11}.Debug|x86.Build.0 = Debug|Any CPU
+		{28D38D69-0A6C-436F-B381-97C46388EE11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28D38D69-0A6C-436F-B381-97C46388EE11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28D38D69-0A6C-436F-B381-97C46388EE11}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{28D38D69-0A6C-436F-B381-97C46388EE11}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{28D38D69-0A6C-436F-B381-97C46388EE11}.Release|x86.ActiveCfg = Release|Any CPU
+		{28D38D69-0A6C-436F-B381-97C46388EE11}.Release|x86.Build.0 = Release|Any CPU
+		{52A952B8-6CD5-4489-8020-098C5F329B13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52A952B8-6CD5-4489-8020-098C5F329B13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52A952B8-6CD5-4489-8020-098C5F329B13}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{52A952B8-6CD5-4489-8020-098C5F329B13}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{52A952B8-6CD5-4489-8020-098C5F329B13}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{52A952B8-6CD5-4489-8020-098C5F329B13}.Debug|x86.Build.0 = Debug|Any CPU
+		{52A952B8-6CD5-4489-8020-098C5F329B13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52A952B8-6CD5-4489-8020-098C5F329B13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52A952B8-6CD5-4489-8020-098C5F329B13}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{52A952B8-6CD5-4489-8020-098C5F329B13}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{52A952B8-6CD5-4489-8020-098C5F329B13}.Release|x86.ActiveCfg = Release|Any CPU
+		{52A952B8-6CD5-4489-8020-098C5F329B13}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {31E1C812-D9AE-4BC7-8D62-E3D2B8D0D35F}
 	EndGlobalSection
 EndGlobal

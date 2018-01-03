@@ -59,9 +59,9 @@ namespace PayrollManager
         private void AccountTypeCmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //if (((ComboBox)sender).SelectedItem != null)
-            //    AccountNameTxt.Text += " " + ((DataLayer.AccountType)((ComboBox)sender).SelectedItem).AccountTypeName;
+            //    AccountNameTxt.Text += " " + ((DataLayer.AccountType)((ComboBox)sender).SelectedItem).Name;
             if (e.AddedItems.Count > 0 && e.AddedItems[0] != AccountTypeCmb.SelectedItem)
-                AccountNameTxt.Text += " " + ((DataLayer.AccountType)e.AddedItems[0]).AccountTypeName;
+                AccountNameTxt.Text += " " + ((DataLayer.AccountType)e.AddedItems[0]).Name;
 
         }
 

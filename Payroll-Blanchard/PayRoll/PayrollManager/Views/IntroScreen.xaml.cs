@@ -52,7 +52,14 @@ namespace PayrollManager.Views
 
 	    private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
 	    {
-	        MessageBox.Show($"Payroll Job Selected - {BaseViewModel.Instance.CurrentPayrollJob.Name}");
+	        if (BaseViewModel.Instance.CurrentPayrollJob != null)
+	        {
+	            MessageBox.Show($"Payroll Job Selected - {BaseViewModel.Instance.CurrentPayrollJob.Name}");
+	        }
+	        else
+	        {
+	           MessageBox.Show($"No Payroll Job Selected"); 
+	        }
 	    }
 	}
 }

@@ -30,13 +30,13 @@
 				DisplayMemberPath="DisplayName" SelectedValuePath="EmployeeId" ItemsSource="{Binding Employees, Source={StaticResource EmployeeAccountDetailsModelDataSource}}"
 				Margin="123,21,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="309" RenderTransformOrigin="0.501,0.554" SelectionChanged="EmployeeCmb_SelectionChanged" />
 
-            <ComboBox x:Name="AccountTypeCmb"  Text="{Binding AccountType, UpdateSourceTrigger=PropertyChanged}"
-                DisplayMemberPath="AccountTypeName" SelectedValuePath="AccountType"
+            <ComboBox x:Name="AccountTypeCmb"  SelectedValue="{Binding AccountTypeId, UpdateSourceTrigger=PropertyChanged}"
+                DisplayMemberPath="Name" SelectedValuePath="AccountTypeId"
             	 ItemsSource="{Binding EmployeeAccountTypes, Source={StaticResource EmployeeAccountDetailsModelDataSource}}"
                        
             	Margin="123,143,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="199" IsEditable="True" SelectionChanged="AccountTypeCmb_SelectionChanged"  />
             <TextBlock HorizontalAlignment="Left" Height="26" Margin="18,146,0,0" TextWrapping="Wrap" Text="Account Type" VerticalAlignment="Top" Width="100" FontSize="13.333" TextAlignment="Right"/>
         </Grid>
-		<TextBlock HorizontalAlignment="Left" Height="32.766" Margin="8.838,14.011,0,0" TextWrapping="Wrap" Text="Create/Edit Accounts" VerticalAlignment="Top" Width="284.54" FontSize="21.333"/>
+		<TextBlock Text="Create/Edit Employee Accounts" HorizontalAlignment="Left" Height="32.766" Margin="8.838,14.011,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="284.54" FontSize="21.333"/>
 	</Grid>
 </UserControl>

@@ -222,7 +222,7 @@ namespace PayrollManager
                 if (plist == null) return;
 	            _eb = plist.Pivot(
 	                X => X.PayrollItems.GroupBy(p => p.PayrollJob.Company.Name)
-	                        .Select(g => new CompanySummary {CompanyName = g.Key, Total = g.Sum(p => p.Amount)}),
+	                        .Select(g => new CompaniesSummary {CompanyName = g.Key, Total = g.Sum(p => p.Amount)}),
 	                X => X.CompanyName, X => X.Total, true, null).ToList();
 	        }
 	        catch (Exception)
@@ -239,7 +239,7 @@ namespace PayrollManager
         
 
     
-        public class CompanySummary
+        public class CompaniesSummary
         {
             public string CompanyName { get; set; }
             public ObservableCollection<DataLayer.PayrollItem> PayrollItems {get;set;}

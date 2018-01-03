@@ -23,6 +23,6 @@ namespace PayrollManager.DataLayer
             }
         }
 
-
+        
     }
 }

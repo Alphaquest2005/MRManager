@@ -31,7 +31,7 @@ namespace PayrollManager
                 
                 SaveDatabase(ctx);
             }
-            
+            GetEmployees();
             OnStaticPropertyChanged("CurrentEmployee");
             OnStaticPropertyChanged("Employees");
 

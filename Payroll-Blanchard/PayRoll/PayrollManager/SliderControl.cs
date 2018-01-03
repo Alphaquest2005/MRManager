@@ -268,7 +268,11 @@ namespace PayrollManager
                 slidcontents = PayrollManager.Common.FindChild<Expander>(slid, ctl);
             }
 
-
+            if (slidcontents == null)
+            {
+                MessageBox.Show("Broken Link, Please contact Joseph Bartholomew");
+                return;
+            }
 
 
             // double sl = VisualTreeHelper.GetOffset(slidcontents).X*-1;

@@ -29,7 +29,7 @@
             </Grid>
         </DataTemplate>
 
-        <CollectionViewSource Source="{Binding PayrollSetupItemsList, Source={StaticResource PayrollSetupSummaryModelDataSource}}" x:Key="cvs">
+        <CollectionViewSource Source="{Binding PayrollSetupItems, Source={StaticResource PayrollSetupSummaryModelDataSource}}" x:Key="cvs">
             <CollectionViewSource.SortDescriptions>
                 <ComponentModel:SortDescription PropertyName="IncomeDeduction" Direction="Descending"  />
                 <ComponentModel:SortDescription PropertyName="Name" />

@@ -132,7 +132,7 @@
     <Compile Include="Converters\WPF2PDF.cs" />
     <Compile Include="DataLayer\CustomClasses\AccountEntry.cs" />
     <Compile Include="DataLayer\CustomClasses\Accounts.cs" />
-    <Compile Include="DataLayer\CustomClasses\Branch.cs" />
+    <Compile Include="DataLayer\CustomClasses\Company.cs" />
     <Compile Include="DataLayer\CustomClasses\AllBranch.cs" />
     <Compile Include="DataLayer\CustomClasses\Employee.cs" />
     <Compile Include="DataLayer\CustomClasses\InsititutionAccounts.cs" />
@@ -162,6 +162,8 @@
     <Compile Include="ViewModels\BranchPayrollItemBreakDownModel.cs" />
     <Compile Include="ViewModels\Common.cs" />
     <Compile Include="ViewModels\BranchEmployeeInstitutionsModel.cs" />
+    <Compile Include="ViewModels\CompanySummaryListModel.cs" />
+    <Compile Include="ViewModels\InstitutionAccountDetailsModel.cs" />
     <Compile Include="ViewModels\InstitutionDetailsModel.cs" />
     <Compile Include="ViewModels\EmployeeAccountDetailsModel.cs" />
     <Compile Include="ViewModels\EmployeeBreakDownReportModel.cs" />
@@ -174,6 +176,7 @@
     <Compile Include="ViewModels\PayrollEmployeeSetupDetailsModel.cs" />
     <Compile Include="ViewModels\PayrollItemDetailsModel.cs" />
     <Compile Include="ViewModels\PayrollItemsReportModel.cs" />
+    <Compile Include="ViewModels\CompanyModel.cs" />
     <Compile Include="ViewModels\PayrollJobModel.cs" />
     <Compile Include="ViewModels\PayrollSetupItemsModel.cs" />
     <Compile Include="ViewModels\PayrollSetupSummaryModel.cs" />
@@ -193,8 +196,17 @@
     <Compile Include="Views\BranchEmployeeInstitutions.xaml.cs">
       <DependentUpon>BranchEmployeeInstitutions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InstitutionAccountSummaryList.xaml.cs">
+      <DependentUpon>InstitutionAccountSummaryList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InstitutionDetails.xaml.cs">
       <DependentUpon>InstitutionDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CompanySummaryList.xaml.cs">
+      <DependentUpon>CompanySummaryList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InstitutionAccountDetails.xaml.cs">
+      <DependentUpon>InstitutionAccountDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EmployeeBreakDownReport.xaml.cs">
       <DependentUpon>EmployeeBreakDownReport.xaml</DependentUpon>
@@ -241,6 +253,9 @@
     <Compile Include="Views\PayrollItemsReport.xaml.cs">
       <DependentUpon>PayrollItemsReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CompanyDetails.xaml.cs">
+      <DependentUpon>CompanyDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PayrollJob.xaml.cs">
       <DependentUpon>PayrollJob.xaml</DependentUpon>
     </Compile>
@@ -252,6 +267,9 @@
     </Compile>
     <Compile Include="Views\PaymentReport.xaml.cs">
       <DependentUpon>PaymentReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ScratchPad.xaml.cs">
+      <DependentUpon>ScratchPad.xaml</DependentUpon>
     </Compile>
     <Page Include="LogInScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -304,7 +322,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\InstitutionAccountSummaryList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\InstitutionDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CompanySummaryList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\InstitutionAccountDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -368,6 +398,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\CompanyDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\PayrollJob.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -383,6 +417,10 @@
     <Page Include="Views\PaymentReport.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ScratchPad.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

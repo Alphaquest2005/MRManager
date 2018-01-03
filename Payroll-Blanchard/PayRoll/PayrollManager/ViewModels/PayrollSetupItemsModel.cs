@@ -59,6 +59,9 @@ namespace PayrollManager
 				SaveDatabase(ctx);
 
 			}
+
+            LoadPayrollSetupItems();
+
 			OnStaticPropertyChanged("PayrollSetupItems");
 			OnStaticPropertyChanged("CurrentPayrollSetupItem");
 			OnStaticPropertyChanged("PayrollSetupItemsCollection");
@@ -79,7 +82,8 @@ namespace PayrollManager
 				}
 			}
 			CurrentPayrollSetupItem = null;
-			OnStaticPropertyChanged("PayrollSetupItems");
+		    LoadPayrollSetupItems();
+            OnStaticPropertyChanged("PayrollSetupItems");
 			OnStaticPropertyChanged("PayrollSetupItemsCollection");
 			OnStaticPropertyChanged("CurrentPayrollSetupItem");
 

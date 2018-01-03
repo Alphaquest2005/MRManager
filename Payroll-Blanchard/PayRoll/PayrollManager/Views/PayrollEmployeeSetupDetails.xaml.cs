@@ -67,9 +67,17 @@ namespace PayrollManager
         private void xgrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             DataLayer.PayrollEmployeeSetup r = (DataLayer.PayrollEmployeeSetup)e.Row.Item;
+int rateChargeId;
+int amountChargeId;
+            using (var ctx = new PayrollDB())
+            {
+                
+                rateChargeId = ctx.ChargeTypes.First(x => x.Name == "Rate").ChargeTypeId;
+                
+                amountChargeId = ctx.ChargeTypes.First(x => x.Name == "Amount").ChargeTypeId;
+            }
 
-           
-                if (e.Column.Header.ToString() == "Payroll Item")
+            if (e.Column.Header.ToString() == "Payroll Item")
                 {
                     ComboBox cb = (ComboBox) e.EditingElement;
                     DataLayer.PayrollSetupItem ps = (DataLayer.PayrollSetupItem) cb.SelectedItem;
@@ -80,7 +88,7 @@ namespace PayrollManager
                     }
                     if (ps.Amount == null || ps.Amount == 0)
                     {
-                        r.ChargeType = "Rate";
+                        r.ChargeTypeId = rateChargeId;
                         r.Rate = Convert.ToSingle(ps.Rate);
                         r.RateRounding = ps.RateRounding;
                         if (ps.CompanyLineItemDescription != null || ps.CompanyLineItemDescription == "")
@@ -90,7 +98,7 @@ namespace PayrollManager
                     }
                     else
                     {
-                        r.ChargeType = "Amount";
+                        r.ChargeTypeId = amountChargeId;
                         r.Amount = ps.Amount;
                         if (ps.CompanyLineItemDescription != null || ps.CompanyLineItemDescription == "")
                         {
@@ -105,15 +113,15 @@ namespace PayrollManager
                 if (e.Column.Header.ToString() == "Amount")
                 {
                     TextBox t = (TextBox) (e.EditingElement);
-                    if (t.Text != "$0.00") r.ChargeType = "Amount";
+                    if (t.Text != "$0.00") r.ChargeTypeId = rateChargeId;
                 }
                 if (e.Column.Header.ToString() == "Rate")
                 {
                     TextBox t = (TextBox) (e.EditingElement);
-                    if (t.Text != "$0.00") r.ChargeType = "Rate";
+                    if (t.Text != "$0.00") r.ChargeTypeId = rateChargeId;
                 }
-          
-                //im.SavePayrollEmployeeSetup();
+            
+            //im.SavePayrollEmployeeSetup();
         }
 
 

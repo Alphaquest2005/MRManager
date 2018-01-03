@@ -62,20 +62,23 @@ namespace PayrollManager
 	    {
 	        if (e.Row.IsNewItem == true && im.CurrentEmployee != null)
 	        {
-	            im.SaveEmployee();
+	            if (im.CurrentEmployee == null) return;
+                var emp = im.CurrentEmployee;
+                im.SaveEmployee();
 	            using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
 	            {
 
 	                DataLayer.EmployeeAccount ne = (DataLayer.EmployeeAccount) e.Row.Item;
-	                if (im.CurrentEmployee == null) return;
+	                
 	                var inst = ctx.Institutions
 	                    .FirstOrDefault(i => i.InstitutionId == ne.InstitutionId);
 	                if (inst != null)
 	                {
-	                    ne.AccountName = im.CurrentEmployee.FirstName + " " +
+	                    ne.EmployeeId = emp.EmployeeId;
+	                    ne.AccountName = emp.FirstName + " " +
 	                                     inst.ShortName +
 	                                     " Salary Account";
-	                    ne.AccountType = "Salary Account";
+	                    ne.AccountTypeId = ctx.AccountTypes.First(x => x.Name == "Salary").AccountTypeId;
 	                    if (ne.AccountId == 0)
 	                    {
 	                        ctx.Accounts.AddObject(ne);
@@ -92,7 +95,7 @@ namespace PayrollManager
 
 	            }
 	        }
-
+	        e.Cancel = true;
 	    }
 
         private void GenerateItms_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

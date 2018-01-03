@@ -13,11 +13,12 @@ using PayrollManager.DataLayer;
 using System.Data.Objects;
 using EmailLogger;
 using System.Data;
+using System.Data.Objects.DataClasses;
 using EntityState = System.Data.EntityState;
 
 namespace PayrollManager
 {
-    public class BaseViewModel : DependencyObject, INotifyPropertyChanged
+    public class BaseViewModel :  INotifyPropertyChanged
     {
         private static BaseViewModel _instance = null;
         public static BaseViewModel Instance => _instance;
@@ -30,11 +31,32 @@ namespace PayrollManager
 
             staticPropertyChanged +=BaseViewModel_staticPropertyChanged;
          _instance = this;
+         LoadInstitutions();
+         LoadPayrollSetupItems();
 
        }
 
-    
-            static int instcount = 9999999;
+        public void LoadInstitutions()
+        {
+            using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
+            {
+                _institutions =  new ObservableCollection<DataLayer.Institution>(ctx.Institutions.Include(x => x.InstitutionAccounts).ToList());
+            }
+            OnStaticPropertyChanged("Institutions");
+        }
+
+        public void LoadPayrollSetupItems()
+        {
+            using (var ctx = new PayrollDB())
+            {
+                _payrollSetupItems = new ObservableCollection<DataLayer.PayrollSetupItem>(ctx
+                    .PayrollSetupItems.ToList());
+            }
+            OnStaticPropertyChanged("PayrollSetupItems");
+        }
+
+
+        static int instcount = 9999999;
         //[MyExceptionHandlerAspect]
         private void CreateInstitutionEmployeeAccounts()
         {
@@ -67,7 +89,7 @@ namespace PayrollManager
                             ia.PayeeInstitution = ist;
                             ia.AccountName = ist.Name;
                             ia.AccountNumber = "";
-                            ia.AccountType = "Summary Account";
+                            ia.AccountTypeId = ctx.AccountTypes.First(x => x.Name == "Bank").AccountTypeId;
                             ia.AccountId = instcount; //new Random().Next();
                             HybridAccountsLst.Add(ia);
                         }
@@ -122,7 +144,7 @@ namespace PayrollManager
 
 
                     var alst = ctx.Accounts.OfType<EmployeeAccount>()
-                        .Where(i => i.AccountType == "Salary Account" && i.AccountId == ia.AccountId && i.InstitutionId == ia.InstitutionId).ToList();//ia.Institution
+                        .Where(i => i.AccountTypes.Name == "Salary" && i.AccountId == ia.AccountId && i.InstitutionId == ia.InstitutionId).ToList();//ia.Institution
 
                     foreach (var acc in alst)
                         //Where(i => i.AccountType != "Summary Account"))
@@ -232,9 +254,8 @@ namespace PayrollManager
         //[MyExceptionHandlerAspect]
         private void BaseViewModel_staticPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            
-                OnPropertyChanged(e.PropertyName);
-            
+             OnPropertyChanged(e.PropertyName);
+           
         }
 
 
@@ -254,22 +275,32 @@ namespace PayrollManager
             }
         }
 
-        static List<Company> _companies;
-        public  List<Company> Companies
+
+        private static ObservableCollection<Company> _companies = new ObservableCollection<Company>(LoadCompanies());
+
+        public ObservableCollection<Company> Companies
         {
-            get
+            get { return _companies; }
+            set
             {
-                if (_companies != null) return _companies;
-                using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
-                {
-                    _companies = ctx.Companies.Include(x => x.CurrentPayrollJob.PayrollJobType).ToList();
-                    
-                }
-                return _companies;
+                _companies = value; 
+                OnPropertyChanged("Companies");
+                
             }
         }
 
-       
+
+        internal static List<Company> LoadCompanies()
+        {
+            using (var ctx = new PayrollDB())
+            {
+                return ctx.Companies.Include(x => x.CurrentPayrollJob.PayrollJobType)
+                    .Where(x => x.EndDate.HasValue == false ||
+                                EntityFunctions.TruncateTime(x.EndDate.Value) >=
+                                EntityFunctions.TruncateTime(DateTime.Now))
+                    .OrderBy(x => x.Name).ToList();
+            }
+        }
 
         static ObservableCollection<PayrollSetupItem> _currentSelectedPayrollSetups = new ObservableCollection<PayrollSetupItem>();
         public ObservableCollection<PayrollSetupItem> CurrentSelectedPayrollSetups
@@ -299,51 +330,60 @@ namespace PayrollManager
             }
         }
 
-        static List<Employee> _employees = new List<Employee>();
+       
         //[MyExceptionHandlerAspect]
+        private static ObservableCollection<Employee> _employees;
+
         public ObservableCollection<Employee> Employees
         {
-            get
+            get { return _employees; }
+            set
             {
-                if (CurrentCompany == null) return null;
-                if (_employees != null) return new ObservableCollection<Employee>(_employees.Where(x => x.CompanyId == CurrentCompany.CompanyId).ToList());
-                                        
-                return GetEmployees();
+                _employees = value;
+                OnPropertyChanged("Employees");
             }
         }
+//if (CurrentCompany == null) return null;
+//                if (_employees != null) return new ObservableCollection<Employee>(_employees.Where(x => x.CompanyId == CurrentCompany.CompanyId).ToList());
 
+//                return GetEmployees();
         public ObservableCollection<Employee> GetEmployees()
         {
             try
             {
 
-                if (CurrentPayrollJob == null) return new ObservableCollection<Employee>();
-                var cpjobId = CurrentPayrollJob.PayrollJobId;
+                
+                
 
-                _employees = new List<Employee>();
+                _employees = new ObservableCollection<Employee>();
+                if (CurrentCompany == null) return _employees;
                 using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
                 {
-                    var res = ctx.Employees
-                        .Include(x => x.EmployeeAccounts)
+                    List<EmployeeInfo> res;
+                    if(CurrentPayrollJob != null)
+                    {
+                        var cpjobId = CurrentPayrollJob?.PayrollJobId;
+                        res = ctx.Employees
+                        .Include("EmployeeAccounts.AccountTypes")
                         .Where(e => (e.EmploymentEndDate.HasValue == false
                                      || EntityFunctions.TruncateTime(e.EmploymentEndDate) >=
                                      EntityFunctions.TruncateTime(DateTime.Now)))
                         .Where(x => x.CompanyId == CurrentCompany.CompanyId && x.PayrollItems.Any(p => p.PayrollJobId == cpjobId))
                         .OrderBy(x => x.LastName)
-                        .Select(x => new
+                        .Select(x => new EmployeeInfo
                         {
-                            x.FirstName,
-                            BranchId = x.CompanyId,
-                            x.DriversLicence,
-                            x.EmailAddress,
-                            x.EmployeeId,
-                            x.EmploymentEndDate,
-                            x.EmploymentStartDate,
-                            x.LastName,
-                            x.MiddleName,
-                            x.SexId,
-                            x.SupervisorId,
-                            x.UnionMember,
+                            FirstName = x.FirstName,
+                            CompanyId = x.CompanyId,
+                            DriversLicence = x.DriversLicence,
+                            EmailAddress = x.EmailAddress,
+                            EmployeeId = x.EmployeeId,
+                            EmploymentEndDate = x.EmploymentEndDate,
+                            EmploymentStartDate  = x.EmploymentStartDate,
+                            LastName = x.LastName,
+                            MiddleName = x.MiddleName,
+                            SexId = x.SexId,
+                            SupervisorId = x.SupervisorId,
+                            UnionMember = x.UnionMember,
                             EmployeeAccounts = x.EmployeeAccounts,
                             Salary = x.PayrollEmployeeSetups
                                 .Where(p => p.PayrollSetupItem != null &&
@@ -354,32 +394,86 @@ namespace PayrollManager
                                             p.PayrollSetupItem.IncomeDeduction == true &&
                                             p.PayrollSetupItem.IsTaxableBenefit == true),
                             TotalIncome = (double?) x.PayrollItems
-                                .Where(p => p.IncomeDeduction == true && p.ParentPayrollItem == null &&
-                                            p.PayrollJobId == cpjobId)
+                                .Where(p => p.IncomeDeduction == true && p.ParentPayrollItem == null && p.PayrollJobId == cpjobId)
+                                .DefaultIfEmpty()
                                 .Sum(p => p.Amount),
                             TotalDeductions = (double?) x.PayrollItems
-                                .Where(p => p.IncomeDeduction == false && p.ParentPayrollItem == null &&
-                                            p.PayrollJobId == cpjobId)
+                                .Where(p => p.IncomeDeduction == false && p.ParentPayrollItem == null && p.PayrollJobId == cpjobId)
+                                .DefaultIfEmpty()
                                 .Sum(p => p.Amount),
                             PreTotalIncome = x.PayrollEmployeeSetups
                                 .Where(p => p.PayrollSetupItem != null &&
                                             p.PayrollSetupItem.IncomeDeduction == true &&
-                                            p.PayrollJobType.PayrollJobTypeId ==
-                                            CurrentPayrollJob.PayrollJobTypeId),
+                                            p.PayrollJobType.PayrollJobTypeId == CurrentPayrollJob.PayrollJobTypeId),
                             PreTotalDeductions =
-                            x.PayrollEmployeeSetups
-                                .Where(p => p.PayrollSetupItem != null &&
-                                            p.PayrollSetupItem.IncomeDeduction == false &&
-                                            p.PayrollJobType.PayrollJobTypeId ==
-                                            CurrentPayrollJob.PayrollJobTypeId)
+                                x.PayrollEmployeeSetups
+                                    .Where(p => p.PayrollSetupItem != null &&
+                                                p.PayrollSetupItem.IncomeDeduction == false &&
+                                                p.PayrollJobType.PayrollJobTypeId ==
+                                                CurrentPayrollJob.PayrollJobTypeId)
                         }).ToList();
+                        
+                    }
+                    else
+                    {
+                        res = ctx.Employees
+                        .Include(x => x.EmployeeAccounts)
+                        .Where(e => (e.EmploymentEndDate.HasValue == false
+                                     || EntityFunctions.TruncateTime(e.EmploymentEndDate) >=
+                                     EntityFunctions.TruncateTime(DateTime.Now)))
+                        .Where(x => x.CompanyId == CurrentCompany.CompanyId )
+                        .OrderBy(x => x.LastName)
+                        .Select(x => new EmployeeInfo
+                        {
+                            FirstName = x.FirstName,
+                            CompanyId = x.CompanyId,
+                            DriversLicence = x.DriversLicence,
+                            EmailAddress = x.EmailAddress,
+                            EmployeeId = x.EmployeeId,
+                            EmploymentEndDate = x.EmploymentEndDate,
+                            EmploymentStartDate = x.EmploymentStartDate,
+                            LastName = x.LastName,
+                            MiddleName = x.MiddleName,
+                            SexId = x.SexId,
+                            SupervisorId = x.SupervisorId,
+                            UnionMember = x.UnionMember,
+                            EmployeeAccounts = x.EmployeeAccounts,
+                            Salary = x.PayrollEmployeeSetups
+                                .Where(p => p.PayrollSetupItem != null &&
+                                            p.PayrollSetupItem.IncomeDeduction == true &&
+                                            p.PayrollSetupItem.Name == "Salary"),
+                            TaxableBenefitsTotal = x.PayrollEmployeeSetups
+                                .Where(p => p.PayrollSetupItem != null &&
+                                            p.PayrollSetupItem.IncomeDeduction == true &&
+                                            p.PayrollSetupItem.IsTaxableBenefit == true),
+                            TotalIncome = (double?)x.PayrollItems
+                                .Where(p => p.IncomeDeduction == true && p.ParentPayrollItem == null )
+                                .Sum(p => p.Amount),
+                            TotalDeductions = (double?)x.PayrollItems
+                                .Where(p => p.IncomeDeduction == false && p.ParentPayrollItem == null )
+                                .Sum(p => p.Amount),
+                            PreTotalIncome = x.PayrollEmployeeSetups
+                                .Where(p => p.PayrollSetupItem != null &&
+                                            p.PayrollSetupItem.IncomeDeduction == true),
+                            PreTotalDeductions =
+                                x.PayrollEmployeeSetups
+                                    .Where(p => p.PayrollSetupItem != null &&
+                                                p.PayrollSetupItem.IncomeDeduction == false )
+                        }).ToList();
+                    }
 
                     foreach (var emp in res)
                     {
+                        double? sum = 0;
+                        foreach (var p in emp.Salary)
+                            sum += p.CalcAmount;
+                        double? sum1 = 0;
+                        foreach (var p in emp.TaxableBenefitsTotal)
+                            sum1 += p.CalcAmount;
                         var nemp = new Employee()
                         {
                             FirstName = emp.FirstName,
-                            CompanyId = emp.BranchId,
+                            CompanyId = emp.CompanyId,
                             DriversLicence = emp.DriversLicence,
                             EmailAddress = emp.EmailAddress,
                             EmployeeId = emp.EmployeeId,
@@ -390,13 +484,13 @@ namespace PayrollManager
                             SexId = emp.SexId,
                             SupervisorId = emp.SupervisorId,
                             UnionMember = emp.UnionMember,
-                            Salary = emp.Salary.Sum(p => p.CalcAmount),
+                            Salary = (double) sum,
 
-                            TaxableBenefitsTotal = emp.TaxableBenefitsTotal.Sum(p => p.CalcAmount),
+                            TaxableBenefitsTotal = (double) sum1,
                             TotalIncome = emp.TotalIncome.GetValueOrDefault(),
                             TotalDeductions = emp.TotalDeductions.GetValueOrDefault(),
-                            PreTotalIncome = (double?) emp.PreTotalIncome.Sum(p => p.CalcAmount),
-                            PreTotalDeductions = (double?) emp.PreTotalDeductions.Sum(p => p.CalcAmount) * -1,
+                            PreTotalIncome = (double?) emp.PreTotalIncome?.Sum(p => p.CalcAmount),
+                            PreTotalDeductions = (double?) emp.PreTotalDeductions?.Sum(p => p.CalcAmount) * -1,
                         };
                         foreach (var employeeAccount in emp.EmployeeAccounts.ToList())
                         {
@@ -408,7 +502,7 @@ namespace PayrollManager
                     
                 }
                 OnStaticPropertyChanged("Employees");
-                return new ObservableCollection<Employee>(_employees);
+                return _employees;
             }
             catch (Exception)
             {
@@ -447,7 +541,7 @@ namespace PayrollManager
                         {
                             x.PayrollJobId,
                             x.PayrollJobTypeId,
-                            BranchId = x.CompanyId,
+                            CompanyId = x.CompanyId,
                             x.EndDate,
                             x.StartDate,
                             x.PaymentDate,
@@ -465,7 +559,7 @@ namespace PayrollManager
                         {
                             PayrollJobId = x.PayrollJobId,
                             PayrollJobTypeId = x.PayrollJobTypeId,
-                            CompanyId = x.BranchId,
+                            CompanyId = x.CompanyId,
                             EndDate = x.EndDate,
                             PaymentDate = x.PaymentDate,
                             StartDate = x.StartDate,
@@ -500,22 +594,23 @@ namespace PayrollManager
         //[MyExceptionHandlerAspect]
         public  ObservableCollection<InstitutionAccount> InstitutionAccounts => _institutionAccounts ?? (_institutionAccounts = GetInstitutionAccountsData());
 
-        internal ObservableCollection<Institution> _institutions;
+        
         //[MyExceptionHandlerAspect]
-        public ObservableCollection<Institution> Institutions {
-            get
-            {
-                
+        private static ObservableCollection<Institution> _institutions;
 
-                if (_institutions != null) return _institutions;
-                using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
-                {
-                    _institutions = new ObservableCollection<DataLayer.Institution>(ctx.Institutions.ToList());
-                }
-                return _institutions;
-                
+        public ObservableCollection<Institution> Institutions
+        {
+            get { return _institutions; }
+            set
+            {
+                _institutions = value;
+                OnPropertyChanged("Institutions");
             }
         }
+
+
+       
+
 
         private   ObservableCollection<InstitutionAccount> GetInstitutionAccountsData()
         {
@@ -827,6 +922,7 @@ namespace PayrollManager
                     _institutionAccounts = null;
                         OnStaticPropertyChanged("InstitutionAccounts");
                 }
+                GetEmployees();
                 OnStaticPropertyChanged("CurrentCompany");
                 OnStaticPropertyChanged("Employees");
                 OnStaticPropertyChanged("CurrentEmployee");
@@ -878,7 +974,7 @@ namespace PayrollManager
                         ctx.Companies.ApplyCurrentValues(CurrentCompany);
                         SaveDatabase(ctx);
 
-                        //CurrentCompany = ctx.Branches.Include(x => x.CurrentPayrollJob).First(x => x.BranchId == CurrentCompany.BranchId);
+                        //CurrentCompany = ctx.Branches.Include(x => x.CurrentPayrollJob).First(x => x.CompanyId == CurrentCompany.CompanyId);
                     }
 
                 }
@@ -911,16 +1007,23 @@ namespace PayrollManager
         
 
         //[MyExceptionHandlerAspect]
-        internal  void CycleCurrentCompany()
+        internal  void CycleCurrentCompany(int companyId)
         {
-            DataLayer.Company b = _currentCompany;
+            _currentCompany = Companies.FirstOrDefault(x => x.CompanyId == companyId);
+            OnStaticPropertyChanged("CurrentCompany");
 
-            _currentCompany = Companies.FirstOrDefault();
-            
-            OnStaticPropertyChanged("CurrentCompany");
-            _currentCompany = b;
-            OnStaticPropertyChanged("CurrentCompany");
-           
+        }
+
+        internal void CycleCurrentEmployee(int empId)
+        {
+            _currentEmployee = Employees.FirstOrDefault(x => x.EmployeeId == empId);
+            OnStaticPropertyChanged("CurrentEmployee");
+        }
+
+        internal void CycleCurrentInstitution(int instId)
+        {
+            _currentInstitution = Institutions.FirstOrDefault(x => x.InstitutionId == instId);
+            OnStaticPropertyChanged("CurrentInstitution");
         }
         //[MyExceptionHandlerAspect]
         internal void CycleCurrentPayrollJob()
@@ -948,27 +1051,16 @@ namespace PayrollManager
         public static event PropertyChangedEventHandler staticPropertyChanged;
         public static void OnStaticPropertyChanged(String info)
         {
-            if (staticPropertyChanged != null )
-            {
-                staticPropertyChanged(null, new PropertyChangedEventArgs(info));
-            }
+            staticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(info));
         }
 
 
         public  event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(String info)
         {
-            try
-            {
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(info));
-                    //OnStaticPropertyChanged(info);
-                }
-            }
-            catch
-            {
-            }
+            
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(info));
+            
         }
         #endregion
 
@@ -1004,7 +1096,7 @@ namespace PayrollManager
                         select p).ToList();
                     if (!pitmlst.Any())
                     {
-                        MessageBox.Show("Please Select the Current Payroll Job you want to use, then Try again.");
+                        MessageBox.Show("There are No Employee Payroll Setup Items for This Payroll Job Type");
                         return;
                     }
 
@@ -1394,18 +1486,18 @@ namespace PayrollManager
         }
 
         //[MyExceptionHandlerAspect]
-        private static DataLayer.EmployeeAccount GetEmployeeAccount(string accountType, int empid)
-        {
-            using (var ctx = new PayrollDB())
-            {
-                DataLayer.EmployeeAccount empacc = (from a in ctx.Accounts.OfType<DataLayer.EmployeeAccount>()
-                    where a.EmployeeId == empid && a.AccountType == accountType
-                    select a).FirstOrDefault();
-                return empacc;
+        //private static DataLayer.EmployeeAccount GetEmployeeAccount(string accountType, int empid)
+        //{
+        //    using (var ctx = new PayrollDB())
+        //    {
+        //        DataLayer.EmployeeAccount empacc = (from a in ctx.Accounts.OfType<DataLayer.EmployeeAccount>().Include(x => x.AccountTypes)
+        //            where a.EmployeeId == empid && a.AccountTypes.Name == accountType
+        //            select a).FirstOrDefault();
+        //        return empacc;
 
-            }
+        //    }
 
-        }
+        //}
 
         //[MyExceptionHandlerAspect]
         private void SetPayrollItemsAmounts()
@@ -1672,21 +1764,29 @@ namespace PayrollManager
 
         }
 
-        private ObservableCollection<PayrollSetupItem> _payrollSetupItems;
+       // private ObservableCollection<PayrollSetupItem> _payrollSetupItems;
+
+        private static ObservableCollection<PayrollSetupItem> _payrollSetupItems;
 
         public ObservableCollection<PayrollSetupItem> PayrollSetupItems
         {
-            get
+            get { return _payrollSetupItems; }
+            set
             {
-                if (_payrollSetupItems != null) return _payrollSetupItems;
-                using (var ctx = new PayrollDB())
-                {
-                    _payrollSetupItems = new ObservableCollection<DataLayer.PayrollSetupItem>(ctx
-                        .PayrollSetupItems.ToList());
-                }
-                return _payrollSetupItems;
+                _payrollSetupItems = value;
+                OnPropertyChanged("PayrollSetupItems");
             }
         }
+
+
+        //if (_payrollSetupItems != null) return _payrollSetupItems;
+        //using (var ctx = new PayrollDB())
+        //{
+        //    _payrollSetupItems = new ObservableCollection<DataLayer.PayrollSetupItem>(ctx
+        //        .PayrollSetupItems.ToList());
+        //}
+        //return _payrollSetupItems;
+
 
         public ObservableCollection<PayrollEmployeeSetup> GetPayrollEmployeeSetups()
         {
@@ -1805,7 +1905,7 @@ namespace PayrollManager
 
                 if (ps.Amount != null)
                 {
-                    nis.ChargeType = "Amount";
+                    nis.ChargeTypeId = ctx.ChargeTypes.First(x => x.Name == "Amount").ChargeTypeId ;
                     nis.Amount = ps.Amount;
                     nis.CompanyAmount = ps.CompanyAmount;
                 }
@@ -1814,13 +1914,13 @@ namespace PayrollManager
 
                 if (nes.Amount > ps.RateCeiling)
                 {
-                    nis.ChargeType = "Amount";
+                    nis.ChargeTypeId = ctx.ChargeTypes.First(x => x.Name == "Amount").ChargeTypeId;
                     nis.Amount = ps.RateCeilingAmount;
                     nis.CompanyAmount = ps.RateCeilingCompanyAmount;
                 }
                 else
                 {
-                    nis.ChargeType = "Rate";
+                    nis.ChargeTypeId = ctx.ChargeTypes.First(x => x.Name == "Rate").ChargeTypeId;
                     nis.Rate = Convert.ToSingle(ps.Rate);
                     nis.CompanyRate = Convert.ToSingle(ps.CompanyRate);
                 }
@@ -1878,7 +1978,7 @@ namespace PayrollManager
             if (ea.SalaryAssignment != null) nes.Amount = ea.SalaryAssignment;
             nes.PayrollSetupItem = salitm;
             nes.PayrollSetupItemId = salitm.PayrollSetupItemId;
-            nes.ChargeType = "Amount";
+            nes.ChargeTypeId = ctx.ChargeTypes.First(x => x.Name == "Amount").ChargeTypeId;
             nes.StartDate = cemp.EmploymentStartDate;
             nes.PayrollEmployeeSetupId = 0;
             nes.PayrollJobTypeId = CurrentPayrollJobType.PayrollJobTypeId; // db.PayrollJobTypes.Where(pj => pj.Name == "Salary").FirstOrDefault().PayrollJobTypeId;
@@ -1893,4 +1993,26 @@ namespace PayrollManager
 
     }
 
+    public class EmployeeInfo
+    {
+        public string FirstName { get; set; }
+        public int CompanyId { get; set; }
+        public string DriversLicence { get; set; }
+        public string EmailAddress { get; set; }
+        public int EmployeeId { get; set; }
+        public DateTime? EmploymentEndDate { get; set; }
+        public DateTime EmploymentStartDate { get; set; }
+        public string LastName { get; set; }
+        public int? SexId { get; set; }
+        public int? SupervisorId { get; set; }
+        public string MiddleName { get; set; }
+        public bool? UnionMember { get; set; }
+        public EntityCollection<EmployeeAccount> EmployeeAccounts { get; set; }
+        public IEnumerable<PayrollEmployeeSetup> Salary { get; set; }
+        public IEnumerable<PayrollEmployeeSetup> TaxableBenefitsTotal { get; set; }
+        public double? TotalIncome { get; set; }
+        public double? TotalDeductions { get; set; }
+        public IEnumerable<PayrollEmployeeSetup> PreTotalIncome { get; set; }
+        public IEnumerable<PayrollEmployeeSetup> PreTotalDeductions { get; set; }
+    }
 }

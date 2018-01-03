@@ -46,6 +46,9 @@
         <AssociationConnector Association="DataLayer.FK_BranchEmployee1" />
         <AssociationConnector Association="DataLayer.FK_BranchPayrollJob1" />
         <AssociationConnector Association="DataLayer.FK_PayrollJobBranch1" />
+        <AssociationConnector Association="DataLayer.FK_Accounts_AccountTypes" />
+        <AssociationConnector Association="DataLayer.FK_PayrollEmployeeSetup_ChargeTypes" />
+        <AssociationConnector Association="DataLayer.FK_EmailTemplate_Companies" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

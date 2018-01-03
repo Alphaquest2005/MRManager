@@ -160,7 +160,7 @@ CREATE TABLE [dbo].[PayrollJobs] (
     [Status] nvarchar(max)  NOT NULL,
     [PayrollJobTypeId] int  NOT NULL,
     [PaymentDate] datetime  NOT NULL,
-    [BranchId] int  NOT NULL
+    [CompanyId] int  NOT NULL
 );
 GO
 
@@ -171,7 +171,7 @@ CREATE TABLE [dbo].[Employees] (
     [LastName] nvarchar(max)  NOT NULL,
     [MiddleName] nvarchar(max)  NULL,
     [Title] nvarchar(max)  NULL,
-    [BranchId] int  NOT NULL,
+    [CompanyId] int  NOT NULL,
     [SupervisorId] int  NULL,
     [EmploymentStartDate] datetime  NOT NULL,
     [UnionMember] bit  NULL
@@ -180,7 +180,7 @@ GO
 
 -- Creating table 'Branches'
 CREATE TABLE [dbo].[Branches] (
-    [BranchId] int IDENTITY(1,1) NOT NULL,
+    [CompanyId] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Address] nvarchar(max)  NOT NULL,
     [PhoneNumber] nvarchar(max)  NOT NULL,
@@ -283,7 +283,7 @@ GO
 -- Creating table 'AccountTypes'
 CREATE TABLE [dbo].[AccountTypes] (
     [AccountTypeId] int IDENTITY(1,1) NOT NULL,
-    [AccountTypeName] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -333,10 +333,10 @@ ADD CONSTRAINT [PK_Employees]
     PRIMARY KEY CLUSTERED ([EmployeeId] ASC);
 GO
 
--- Creating primary key on [BranchId] in table 'Branches'
+-- Creating primary key on [CompanyId] in table 'Branches'
 ALTER TABLE [dbo].[Branches]
 ADD CONSTRAINT [PK_Branches]
-    PRIMARY KEY CLUSTERED ([BranchId] ASC);
+    PRIMARY KEY CLUSTERED ([CompanyId] ASC);
 GO
 
 -- Creating primary key on [InstitutionId] in table 'Institutions'
@@ -443,18 +443,18 @@ ON [dbo].[PayrollJobs]
     ([PreparedBy]);
 GO
 
--- Creating foreign key on [BranchId] in table 'Employees'
+-- Creating foreign key on [CompanyId] in table 'Employees'
 ALTER TABLE [dbo].[Employees]
 ADD CONSTRAINT [FK_BranchEmployee]
-    FOREIGN KEY ([BranchId])
+    FOREIGN KEY ([CompanyId])
     REFERENCES [dbo].[Branches]
-        ([BranchId])
+        ([CompanyId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BranchEmployee'
 CREATE INDEX [IX_FK_BranchEmployee]
 ON [dbo].[Employees]
-    ([BranchId]);
+    ([CompanyId]);
 GO
 
 -- Creating foreign key on [InstitutionId] in table 'Accounts'
@@ -709,18 +709,18 @@ ON [dbo].[PayrollEmployeeSetup]
     ([PayrollJobTypeId]);
 GO
 
--- Creating foreign key on [BranchId] in table 'PayrollJobs'
+-- Creating foreign key on [CompanyId] in table 'PayrollJobs'
 ALTER TABLE [dbo].[PayrollJobs]
 ADD CONSTRAINT [FK_BranchPayrollJob]
-    FOREIGN KEY ([BranchId])
+    FOREIGN KEY ([CompanyId])
     REFERENCES [dbo].[Branches]
-        ([BranchId])
+        ([CompanyId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BranchPayrollJob'
 CREATE INDEX [IX_FK_BranchPayrollJob]
 ON [dbo].[PayrollJobs]
-    ([BranchId]);
+    ([CompanyId]);
 GO
 
 -- Creating foreign key on [CurrentPayrollJobId] in table 'Branches'

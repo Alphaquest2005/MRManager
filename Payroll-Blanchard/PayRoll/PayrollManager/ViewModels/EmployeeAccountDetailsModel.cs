@@ -27,7 +27,7 @@ namespace PayrollManager
 	    public void SaveEmployeeAccount()
         {
             if (CurrentEmployeeAccount == null) return;
-
+            var empId = CurrentEmployeeAccount.EmployeeId;
             using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
             {
                 
@@ -46,7 +46,8 @@ namespace PayrollManager
                 SaveDatabase(ctx);
             }
 
-
+            GetEmployees();
+            CycleCurrentEmployee(empId);
 
             OnStaticPropertyChanged("CurrentEmployeeAccount");
             OnStaticPropertyChanged("EmployeeAccounts");
@@ -68,14 +69,22 @@ namespace PayrollManager
             using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
             {
                 if (CurrentEmployeeAccount == null) return;
-                ctx.Accounts.Attach(CurrentEmployeeAccount);
-                ctx.Accounts.DeleteObject(CurrentEmployeeAccount);
+                int empId = CurrentEmployeeAccount.EmployeeId;
+                var ea = ctx.Accounts.OfType<EmployeeAccount>()
+                    .First(x => x.AccountId == CurrentEmployeeAccount.AccountId);
+
+                ctx.Accounts.DeleteObject(ea);
                 // db.PayrollItems.Detach(CurrentPayrollItem);
 
 
                 SaveDatabase(ctx);
                 CurrentEmployeeAccount = null;
+                GetEmployees();
+                CycleCurrentEmployee(empId);
             }
+
+            OnStaticPropertyChanged("CurrentEmployeeAccount");
+            OnStaticPropertyChanged("EmployeeAccounts");
         }
 
 

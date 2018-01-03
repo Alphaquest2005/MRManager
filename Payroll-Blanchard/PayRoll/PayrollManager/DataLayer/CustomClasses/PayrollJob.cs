@@ -54,7 +54,7 @@ namespace PayrollManager.DataLayer
         //        if (Branch != null)
         //        {
         //            if(PayrollItems != null)
-        //                return PayrollItems.Where(p => p.IncomeDeduction == true && p.ParentPayrollItem == null && p.Employee != null && p.Employee.BranchId == Branch.BranchId).Sum(p => p.Amount);
+        //                return PayrollItems.Where(p => p.IncomeDeduction == true && p.ParentPayrollItem == null && p.Employee != null && p.Employee.CompanyId == Branch.CompanyId).Sum(p => p.Amount);
         //            return 0;
         //        }
         //        else
@@ -70,7 +70,7 @@ namespace PayrollManager.DataLayer
         //    {
         //        if (Branch != null)
         //        {
-        //            return PayrollItems.Where(p => p.IncomeDeduction == false && p.ParentPayrollItem == null && p.Employee != null && p.Employee.BranchId == Branch.BranchId).Sum(p => p.Amount);
+        //            return PayrollItems.Where(p => p.IncomeDeduction == false && p.ParentPayrollItem == null && p.Employee != null && p.Employee.CompanyId == Branch.CompanyId).Sum(p => p.Amount);
         //        }
         //        else
         //        {

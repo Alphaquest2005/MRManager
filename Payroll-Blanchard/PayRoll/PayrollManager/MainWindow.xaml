@@ -73,19 +73,22 @@
 
                 <Expander IsExpanded="False" ExpandDirection="Right" Width="Auto" VerticalAlignment="Top" DockPanel.Dock="Right" Expanded="Expander_Expanded_1" >
                     <Expander.Header>
-                        <Grid Width="75">
+                        <Grid Width="80">
                             <TextBlock x:Name="PaymentsBtn" Height="63" Style="{StaticResource TextButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,2,0,0" Width="55" FontFamily="Segoe UI Symbol" FontSize="40"  Text="" MouseLeftButtonDown="PaymentsBtn_MouseLeftButtonDown"/>
-                            <TextBlock Text="Accounts" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Right" Height="20" Margin="0,0,0,-1" TextWrapping="Wrap"  VerticalAlignment="Bottom" Width="65" TextAlignment="Center"/>
+                            <TextBlock Text="Configuration" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Right" Height="20" Margin="0,0,0,0" TextWrapping="Wrap"  VerticalAlignment="Bottom" Width="80" TextAlignment="Center"/>
                         </Grid>
                     </Expander.Header>
-                    <Grid Width="300">
+                    <Grid Width="Auto">
                         <Grid Margin="0">
 
 
                             <TextBlock Text="Common Tasks"  HorizontalAlignment="Left" Height="49" Margin="0,5,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="82" TextAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="#FFFDFFB9"/>
-                            <TextBlock Text=" View Institutional Accounts" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" Margin="93,12,0,0" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_4"/>
-                            <TextBlock Text="&#xE236; Create Institutional Account" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" Margin="93,29,0,0" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_3"/>
-                            <!--<TextBlock x:Name="editEmp_Copy1" Text="&#xE236; View Employee Pay Cheque" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" MouseLeftButtonDown="editEmp_Copy1_MouseLeftButtonDown_1" Margin="93,30,0,0" FontFamily="Segoe UI Symbol"/>-->
+                            <TextBlock Text=" View Institutional Accounts" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" Margin="115,39,0,0" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="ViewInstitutionalAccounts"/>
+                            <TextBlock Text="&#xE236; View/Edit Companies" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" Margin="319,21,0,0" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="ViewCompanyList"/>
+                            <TextBlock Text="Institutions"  HorizontalAlignment="Left" Height="19" Margin="115,5,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="145" FontWeight="Bold" Foreground="#FFFDFFB9"/>
+                            <TextBlock Text="&#xE236; View Institutions" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" Margin="115,21,0,0" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="ViewInstitutions"/>
+                            <TextBlock Text="Companies"  HorizontalAlignment="Left" Height="19" Margin="319,2,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="145" FontWeight="Bold" Foreground="#FFFDFFB9"/>
+
 
                         </Grid>
 
@@ -109,11 +112,9 @@
 
                         </Grid>
                         <Grid Margin="0,7,295,3">
-                            <TextBlock Text="  Salary Advance" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" Margin="274,0,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="136" FontFamily="Segoe UI Symbol" Foreground="#FFB0B9AD"/>
-                            <TextBlock Text="  View Employee History" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" Margin="275,19,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="175" FontFamily="Segoe UI Symbol" Foreground="#FFB0B9AD"/>
                             <TextBlock Text="Common Tasks"  HorizontalAlignment="Left" Height="49" Margin="0,5,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="82" TextAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="#FFFDFFB9"/>
                             <TextBlock  Text=" Review Employe Payroll" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" MouseLeftButtonDown="EmpSumTxt_MouseLeftButtonDown_1" Margin="93,3,0,0" FontFamily="Segoe UI Symbol"/>
-                            <TextBlock  Text="&#xE236; Employee Pay Cheque" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" MouseLeftButtonDown="editEmp_Copy1_MouseLeftButtonDown_1" Margin="93,21,0,0" FontFamily="Segoe UI Symbol"/>
+                            <TextBlock  Text="&#xE236; Employee Pay Cheque" Style="{StaticResource TextButtonStyle}" HorizontalAlignment="Left" Height="20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="164" MouseLeftButtonDown="ViewPayCheck" Margin="93,21,0,0" FontFamily="Segoe UI Symbol"/>
 
                         </Grid>
                     </Grid>

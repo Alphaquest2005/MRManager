@@ -32,12 +32,12 @@ namespace PayrollManager
                
                 SaveDatabase(ctx);
             }
-            
-           
+
+            LoadInstitutions();
             OnStaticPropertyChanged("CurrentInstitutionAccount");
            // CycleInstitutionAccounts();
             OnStaticPropertyChanged("InstitutionAccounts");
-
+            
         }
 
 
@@ -50,7 +50,7 @@ namespace PayrollManager
             CurrentInstitution = acc;
         }
 
-        public void DeleteInstition()
+        public void DeleteInstitution()
         {
             if (CurrentInstitution == null) return;
             if (CurrentInstitution.InstitutionId != 0)
@@ -61,7 +61,7 @@ namespace PayrollManager
                 SaveDatabase(ctx);
             }
             CurrentInstitution = null;
-
+            LoadInstitutions();
         }
 
         

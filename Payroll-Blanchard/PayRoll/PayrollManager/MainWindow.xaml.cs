@@ -47,7 +47,7 @@ namespace PayrollManager
 
         private void EmployeeBtn_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
-            BaseViewModel.slider.MoveTo("EmployeeSummaryListEXP");
+            BaseViewModel.slider.MoveTo("EmployeeSetupListEXP");
         }
 
         private void HomeBtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -107,9 +107,9 @@ namespace PayrollManager
             BaseViewModel.slider.MoveTo("PayrollEmployeeSetupDetailsBDR");
         }
 
-        private void editEmp_Copy1_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
+        private void ViewPayCheck(object sender, MouseButtonEventArgs e)
         {
-            BaseViewModel.slider.MoveTo("PayCheckViewEXP");
+            BaseViewModel.slider.MoveTo("EmployeePayStubEXP");
         }
 
         private void EmpSumTxt_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
@@ -144,7 +144,7 @@ namespace PayrollManager
 
         private void CreateInstAcc(object sender, MouseButtonEventArgs e)
         {
-            BaseViewModel.slider.MoveTo("AccountDetailsEXP"); 
+            BaseViewModel.slider.MoveTo("InstitutionAccountSummaryEXP"); 
         }
 
         private void CreatePayrollJob(object sender, MouseButtonEventArgs e)
@@ -214,8 +214,20 @@ namespace PayrollManager
 
         }
 
-       
 
-     
+	    private void ViewInstitutionalAccounts(object sender, MouseButtonEventArgs e)
+	    {
+	        BaseViewModel.slider.MoveTo("InstitutionAccountSummaryEXP");
+        }
+
+	    private void ViewCompanyList(object sender, MouseButtonEventArgs e)
+	    {
+	        BaseViewModel.slider.MoveTo("CompaniesSummaryListEXP");
+        }
+
+	    private void ViewInstitutions(object sender, MouseButtonEventArgs e)
+	    {
+	        BaseViewModel.slider.MoveTo("InstitutionSummaryEXP");
+        }
 	}
 }

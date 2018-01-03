@@ -73,9 +73,9 @@ namespace PayrollManager.DataLayer
                     if ( BaseViewModel.Instance.CurrentPayrollJob == null ||
                         BaseViewModel.Instance.CurrentCompany == null) return null;
                     //return new ObservableCollection<AccountEntry>(AccountEntries.Where(a => a.PayrollItem.PayrollJobId == BaseViewModel.InstanceCurrentPayrollJob.PayrollJobId 
-                    //                                                && a.PayrollItem.Employee.BranchId == BaseViewModel.InstanceCurrentCompany.BranchId 
+                    //                                                && a.PayrollItem.Employee.CompanyId == BaseViewModel.InstanceCurrentCompany.CompanyId 
                     //                                                && a.PayrollItem.PayrollJob.Branch != null 
-                    //                                                && a.PayrollItem.PayrollJob.Branch.BranchId == BaseViewModel.InstanceCurrentCompany.BranchId)
+                    //                                                && a.PayrollItem.PayrollJob.Branch.CompanyId == BaseViewModel.InstanceCurrentCompany.CompanyId)
                     //                                                .OrderByDescending(x => x.PayrollItem.IncomeDeduction).ThenBy(x => x.PayrollItem.Priority));
                     List<AccountEntry> alst;
                     using (var ctx = new PayrollDB())

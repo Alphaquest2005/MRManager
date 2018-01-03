@@ -16,25 +16,25 @@ namespace PayrollManager
             staticPropertyChanged += summaryModel_PropertyChanged;
                        // PropertyChanged += EmployeePayrollItemsListModel_PropertyChanged;
            UpdateDataSource();
-           PayrollSetupItemsList.CollectionChanged += PayrollSetupItemsList_CollectionChanged;
+           //PayrollSetupItemsList.CollectionChanged += PayrollSetupItemsList_CollectionChanged;
 
 		}
 
-        void PayrollSetupItemsList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
-            {
-                foreach (PayrollSetupItem itm in e.NewItems)
-                {
-                    ctx.PayrollSetupItems.Attach(itm);
-                    ctx.PayrollSetupItems.ApplyCurrentValues(itm);
-                }
+        //void PayrollSetupItemsList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        //{
+        //    using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
+        //    {
+        //        foreach (PayrollSetupItem itm in e.NewItems)
+        //        {
+        //            ctx.PayrollSetupItems.Attach(itm);
+        //            ctx.PayrollSetupItems.ApplyCurrentValues(itm);
+        //        }
                 
-                SaveDatabase(ctx);
-            }
-            OnStaticPropertyChanged("PayrollSetupItems");
-        //    UpdateDataSource();
-        }
+        //        SaveDatabase(ctx);
+        //    }
+        //    OnStaticPropertyChanged("PayrollSetupItems");
+        ////    UpdateDataSource();
+        //}
 
         Int32 _PayrollJobTypeId = -1;
         public  Int32 CurrentPayrollJobTypeId
@@ -55,30 +55,30 @@ namespace PayrollManager
         {
             if (e.PropertyName != "CurrentPayrollJobTypeId" && e.PropertyName != "PayrollSetupItemsCollection") return;
             
-            OnStaticPropertyChanged("PayrollSetupItemsList");
+          //  OnStaticPropertyChanged("PayrollSetupItemsList");
             UpdateDataSource();
-            PayrollSetupItemsList.CollectionChanged += PayrollSetupItemsList_CollectionChanged;
+            //PayrollSetupItemsList.CollectionChanged += PayrollSetupItemsList_CollectionChanged;
         }
 
-       static ObservableCollection<DataLayer.PayrollSetupItem> _payrollSetupItemsList = null;
-        public ObservableCollection<DataLayer.PayrollSetupItem> PayrollSetupItemsList
-        {
-            get
-            {
-                if (_payrollSetupItemsList != null) return _payrollSetupItemsList;
-                using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
-                {
-                    _payrollSetupItemsList = new ObservableCollection<PayrollSetupItem>(ctx.PayrollSetupItems);
-                }
-                return _payrollSetupItemsList;
-            }
-            set
-            {
-                _payrollSetupItemsList = value;
-                OnPropertyChanged("PayrollSetupItemsList");
+       //static ObservableCollection<DataLayer.PayrollSetupItem> _payrollSetupItemsList = null;
+       // public ObservableCollection<DataLayer.PayrollSetupItem> PayrollSetupItemsList
+       // {
+       //     get
+       //     {
+       //         if (_payrollSetupItemsList != null) return _payrollSetupItemsList;
+       //         using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
+       //         {
+       //             _payrollSetupItemsList = new ObservableCollection<PayrollSetupItem>(ctx.PayrollSetupItems);
+       //         }
+       //         return _payrollSetupItemsList;
+       //     }
+       //     set
+       //     {
+       //         _payrollSetupItemsList = value;
+       //         OnPropertyChanged("PayrollSetupItemsList");
                 
-            }
-        }
+       //     }
+       // }
 
         public object DataSource{get;set;}
 
@@ -102,7 +102,7 @@ namespace PayrollManager
             if (_SortReorder == true)
             {
                 CollectionViewSource pcol = new CollectionViewSource();
-                pcol.Source = PayrollSetupItemsList;
+                pcol.Source = PayrollSetupItems;// PayrollSetupItemsList;
 
                 pcol.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
                 pcol.SortDescriptions.Add(new SortDescription("Amount", ListSortDirection.Descending));
@@ -115,7 +115,7 @@ namespace PayrollManager
             }
             else
             {
-                DataSource = PayrollSetupItemsList;
+                DataSource = PayrollSetupItems; //PayrollSetupItemsList;
             }
             OnStaticPropertyChanged("DataSource");
             OnStaticPropertyChanged("SortReorder");

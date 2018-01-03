@@ -25,6 +25,7 @@ namespace PayrollManager
 
 				if (CurrentCompany == null)
 				{
+                    if(base.Employees != null)
 					Employees = new ObservableCollection<DataLayer.Employee>(base.Employees
 						.Where(x => x.EmploymentEndDate.HasValue == false ||
 									EntityFunctions.TruncateTime(x.EmploymentEndDate.Value) >= EntityFunctions.TruncateTime(DateTime.Now))
@@ -33,6 +34,7 @@ namespace PayrollManager
 				else
 				{
 					if (EmployeeFilter == null) EmployeeFilter = "";
+                    if(base.Employees != null)
 					Employees = new ObservableCollection<DataLayer.Employee>(base.Employees
 						.Where(x => x.EmploymentEndDate.HasValue == false ||
 									EntityFunctions.TruncateTime(x.EmploymentEndDate.Value) >= EntityFunctions.TruncateTime(DateTime.Now))
