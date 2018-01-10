@@ -205,9 +205,6 @@
     <Compile Include="Views\CompanySummaryList.xaml.cs">
       <DependentUpon>CompanySummaryList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\InstitutionAccountDetails.xaml.cs">
-      <DependentUpon>InstitutionAccountDetails.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\EmployeeBreakDownReport.xaml.cs">
       <DependentUpon>EmployeeBreakDownReport.xaml</DependentUpon>
     </Compile>
@@ -331,10 +328,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\CompanySummaryList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\InstitutionAccountDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

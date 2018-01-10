@@ -26,8 +26,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_BranchEmployee]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Employees] DROP CONSTRAINT [FK_BranchEmployee];
 GO
-IF OBJECT_ID(N'[dbo].[FK_InstitutionAccountASN]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Accounts] DROP CONSTRAINT [FK_InstitutionAccountASN];
+IF OBJECT_ID(N'[dbo].[FK_AccountASN]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Accounts] DROP CONSTRAINT [FK_AccountASN];
 GO
 IF OBJECT_ID(N'[dbo].[FK_EmployeeEmployeeAccount]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Accounts_EmployeeAccount] DROP CONSTRAINT [FK_EmployeeEmployeeAccount];
@@ -68,8 +68,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_AccountPayrollSetupItem]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PayrollSetupItems] DROP CONSTRAINT [FK_AccountPayrollSetupItem];
 GO
-IF OBJECT_ID(N'[dbo].[FK_InstitutionInstitutionAccount]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Accounts_InstitutionAccount] DROP CONSTRAINT [FK_InstitutionInstitutionAccount];
+IF OBJECT_ID(N'[dbo].[FK_InstitutionAccount]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Accounts_Account] DROP CONSTRAINT [FK_InstitutionAccount];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PayrollSetupItemPayrollItem]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PayrollItems] DROP CONSTRAINT [FK_PayrollSetupItemPayrollItem];
@@ -92,8 +92,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_EmployeeAccount_inherits_Account]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Accounts_EmployeeAccount] DROP CONSTRAINT [FK_EmployeeAccount_inherits_Account];
 GO
-IF OBJECT_ID(N'[dbo].[FK_InstitutionAccount_inherits_Account]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Accounts_InstitutionAccount] DROP CONSTRAINT [FK_InstitutionAccount_inherits_Account];
+IF OBJECT_ID(N'[dbo].[FK_Account_inherits_Account]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Accounts_Account] DROP CONSTRAINT [FK_Account_inherits_Account];
 GO
 
 -- --------------------------------------------------
@@ -142,8 +142,8 @@ GO
 IF OBJECT_ID(N'[dbo].[Accounts_EmployeeAccount]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Accounts_EmployeeAccount];
 GO
-IF OBJECT_ID(N'[dbo].[Accounts_InstitutionAccount]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Accounts_InstitutionAccount];
+IF OBJECT_ID(N'[dbo].[Accounts_Account]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Accounts_Account];
 GO
 
 -- --------------------------------------------------
@@ -160,7 +160,7 @@ CREATE TABLE [dbo].[PayrollJobs] (
     [Status] nvarchar(max)  NOT NULL,
     [PayrollJobTypeId] int  NOT NULL,
     [PaymentDate] datetime  NOT NULL,
-    [CompanyId] int  NOT NULL
+    [InstitutionId] int  NOT NULL
 );
 GO
 
@@ -171,7 +171,7 @@ CREATE TABLE [dbo].[Employees] (
     [LastName] nvarchar(max)  NOT NULL,
     [MiddleName] nvarchar(max)  NULL,
     [Title] nvarchar(max)  NULL,
-    [CompanyId] int  NOT NULL,
+    [InstitutionId] int  NOT NULL,
     [SupervisorId] int  NULL,
     [EmploymentStartDate] datetime  NOT NULL,
     [UnionMember] bit  NULL
@@ -180,7 +180,7 @@ GO
 
 -- Creating table 'Branches'
 CREATE TABLE [dbo].[Branches] (
-    [CompanyId] int IDENTITY(1,1) NOT NULL,
+    [InstitutionId] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Address] nvarchar(max)  NOT NULL,
     [PhoneNumber] nvarchar(max)  NOT NULL,
@@ -310,8 +310,8 @@ CREATE TABLE [dbo].[Accounts_EmployeeAccount] (
 );
 GO
 
--- Creating table 'Accounts_InstitutionAccount'
-CREATE TABLE [dbo].[Accounts_InstitutionAccount] (
+-- Creating table 'Accounts_Account'
+CREATE TABLE [dbo].[Accounts_Account] (
     [PayeeInstitutionId] int  NOT NULL,
     [AccountId] int  NOT NULL
 );
@@ -333,10 +333,10 @@ ADD CONSTRAINT [PK_Employees]
     PRIMARY KEY CLUSTERED ([EmployeeId] ASC);
 GO
 
--- Creating primary key on [CompanyId] in table 'Branches'
+-- Creating primary key on [InstitutionId] in table 'Branches'
 ALTER TABLE [dbo].[Branches]
 ADD CONSTRAINT [PK_Branches]
-    PRIMARY KEY CLUSTERED ([CompanyId] ASC);
+    PRIMARY KEY CLUSTERED ([InstitutionId] ASC);
 GO
 
 -- Creating primary key on [InstitutionId] in table 'Institutions'
@@ -405,9 +405,9 @@ ADD CONSTRAINT [PK_Accounts_EmployeeAccount]
     PRIMARY KEY CLUSTERED ([AccountId] ASC);
 GO
 
--- Creating primary key on [AccountId] in table 'Accounts_InstitutionAccount'
-ALTER TABLE [dbo].[Accounts_InstitutionAccount]
-ADD CONSTRAINT [PK_Accounts_InstitutionAccount]
+-- Creating primary key on [AccountId] in table 'Accounts_Account'
+ALTER TABLE [dbo].[Accounts_Account]
+ADD CONSTRAINT [PK_Accounts_Account]
     PRIMARY KEY CLUSTERED ([AccountId] ASC);
 GO
 
@@ -443,30 +443,30 @@ ON [dbo].[PayrollJobs]
     ([PreparedBy]);
 GO
 
--- Creating foreign key on [CompanyId] in table 'Employees'
+-- Creating foreign key on [InstitutionId] in table 'Employees'
 ALTER TABLE [dbo].[Employees]
 ADD CONSTRAINT [FK_BranchEmployee]
-    FOREIGN KEY ([CompanyId])
+    FOREIGN KEY ([InstitutionId])
     REFERENCES [dbo].[Branches]
-        ([CompanyId])
+        ([InstitutionId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BranchEmployee'
 CREATE INDEX [IX_FK_BranchEmployee]
 ON [dbo].[Employees]
-    ([CompanyId]);
+    ([InstitutionId]);
 GO
 
 -- Creating foreign key on [InstitutionId] in table 'Accounts'
 ALTER TABLE [dbo].[Accounts]
-ADD CONSTRAINT [FK_InstitutionAccountASN]
+ADD CONSTRAINT [FK_AccountASN]
     FOREIGN KEY ([InstitutionId])
     REFERENCES [dbo].[Institutions]
         ([InstitutionId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_InstitutionAccountASN'
-CREATE INDEX [IX_FK_InstitutionAccountASN]
+-- Creating non-clustered index for FOREIGN KEY 'FK_AccountASN'
+CREATE INDEX [IX_FK_AccountASN]
 ON [dbo].[Accounts]
     ([InstitutionId]);
 GO
@@ -653,17 +653,17 @@ ON [dbo].[PayrollSetupItems]
     ([PayrollItemAccountId]);
 GO
 
--- Creating foreign key on [PayeeInstitutionId] in table 'Accounts_InstitutionAccount'
-ALTER TABLE [dbo].[Accounts_InstitutionAccount]
-ADD CONSTRAINT [FK_InstitutionInstitutionAccount]
+-- Creating foreign key on [PayeeInstitutionId] in table 'Accounts_Account'
+ALTER TABLE [dbo].[Accounts_Account]
+ADD CONSTRAINT [FK_InstitutionAccount]
     FOREIGN KEY ([PayeeInstitutionId])
     REFERENCES [dbo].[Institutions]
         ([InstitutionId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
--- Creating non-clustered index for FOREIGN KEY 'FK_InstitutionInstitutionAccount'
-CREATE INDEX [IX_FK_InstitutionInstitutionAccount]
-ON [dbo].[Accounts_InstitutionAccount]
+-- Creating non-clustered index for FOREIGN KEY 'FK_InstitutionAccount'
+CREATE INDEX [IX_FK_InstitutionAccount]
+ON [dbo].[Accounts_Account]
     ([PayeeInstitutionId]);
 GO
 
@@ -709,18 +709,18 @@ ON [dbo].[PayrollEmployeeSetup]
     ([PayrollJobTypeId]);
 GO
 
--- Creating foreign key on [CompanyId] in table 'PayrollJobs'
+-- Creating foreign key on [InstitutionId] in table 'PayrollJobs'
 ALTER TABLE [dbo].[PayrollJobs]
 ADD CONSTRAINT [FK_BranchPayrollJob]
-    FOREIGN KEY ([CompanyId])
+    FOREIGN KEY ([InstitutionId])
     REFERENCES [dbo].[Branches]
-        ([CompanyId])
+        ([InstitutionId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BranchPayrollJob'
 CREATE INDEX [IX_FK_BranchPayrollJob]
 ON [dbo].[PayrollJobs]
-    ([CompanyId]);
+    ([InstitutionId]);
 GO
 
 -- Creating foreign key on [CurrentPayrollJobId] in table 'Branches'
@@ -755,9 +755,9 @@ ADD CONSTRAINT [FK_EmployeeAccount_inherits_Account]
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [AccountId] in table 'Accounts_InstitutionAccount'
-ALTER TABLE [dbo].[Accounts_InstitutionAccount]
-ADD CONSTRAINT [FK_InstitutionAccount_inherits_Account]
+-- Creating foreign key on [AccountId] in table 'Accounts_Account'
+ALTER TABLE [dbo].[Accounts_Account]
+ADD CONSTRAINT [FK_Account_inherits_Account]
     FOREIGN KEY ([AccountId])
     REFERENCES [dbo].[Accounts]
         ([AccountId])

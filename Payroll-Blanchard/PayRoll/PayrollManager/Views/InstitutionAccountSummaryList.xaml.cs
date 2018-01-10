@@ -15,9 +15,9 @@ namespace PayrollManager
 	/// <summary>
 	/// Interaction logic for EmployeeAccountSummaryList.xaml
 	/// </summary>
-	public partial class InstitutionAccountSummaryList : UserControl
+	public partial class AccountSummaryList : UserControl
 	{
-		public InstitutionAccountSummaryList()
+		public AccountSummaryList()
 		{
 			this.InitializeComponent();
 			

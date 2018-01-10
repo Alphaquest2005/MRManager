@@ -19,31 +19,34 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_AccountAccountEntry", "Accounts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "AccountEntries", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.AccountEntry), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollItemAccountEntry", "PayrollItems", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.PayrollItem), "AccountEntries", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.AccountEntry), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_AccountPayrollItem", "Accounts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "PayrollItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollItem), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_AccountPayrollItem1", "Accounts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "PayrollItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollItem), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_AccountPayrollSetupItem", "Accounts", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "PayrollSetupItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollSetupItem), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_InstitutionAccountASN", "Institutions", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Institution), "Accounts", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.Account), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_EmployeeEmployee", "Employees", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PayrollManager.DataLayer.Employee), "Employees1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.Employee), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_EmployeePayrollEmployeeSetup", "Employees", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Employee), "PayrollEmployeeSetup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollEmployeeSetup), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_EmployeePayrollItem", "Employees", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Employee), "PayrollItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollItem), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollJobTypePayrollEmployeeSetup", "PayrollJobTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.PayrollJobType), "PayrollEmployeeSetup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollEmployeeSetup), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollSetupItemPayrollEmployeeSetup", "PayrollSetupItems", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.PayrollSetupItem), "PayrollEmployeeSetup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollEmployeeSetup), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollItemPayrollItem", "PayrollItems", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PayrollManager.DataLayer.PayrollItem), "PayrollItems1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollItem), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollJobPayrollItem", "PayrollJobs", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.PayrollJob), "PayrollItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollItem), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollSetupItemPayrollItem", "PayrollSetupItems", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PayrollManager.DataLayer.PayrollSetupItem), "PayrollItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollItem), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollJobTypePayrollJob", "PayrollJobTypes", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.PayrollJobType), "PayrollJobs", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollJob), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "EmployeeEmployeeAccount", "Employee", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Employee), "EmployeeAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.EmployeeAccount), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "InstitutionInstitutionAccount", "Institution", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Institution), "InstitutionAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.InstitutionAccount), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "AccountPayrollEmployeeSetup", "Account", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "PayrollEmployeeSetup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollEmployeeSetup), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "AccountPayrollEmployeeSetup1", "Account", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "PayrollEmployeeSetup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollEmployeeSetup), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_BranchEmployee1", "Companies", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Company), "Employee", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.Employee), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_BranchPayrollJob1", "Companies", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Company), "PayrollJob", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollJob), true)]
-[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollJobBranch1", "PayrollJob", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PayrollManager.DataLayer.PayrollJob), "Companies", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.Company), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_AccountAccountEntry", "Account", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "AccountEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.AccountEntry), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollItemAccountEntry", "PayrollItem", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.PayrollItem), "AccountEntry", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.AccountEntry), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_AccountPayrollEmployeeSetup", "Account", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "PayrollEmployeeSetup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollEmployeeSetup), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_AccountPayrollEmployeeSetup1", "Account", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "PayrollEmployeeSetup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollEmployeeSetup), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_AccountPayrollItem", "Account", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "PayrollItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollItem), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_AccountPayrollItem1", "Account", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "PayrollItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollItem), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_AccountPayrollSetupItem", "Account", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "PayrollSetupItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollSetupItem), true)]
 [assembly: EdmRelationshipAttribute("DataLayer", "FK_Accounts_AccountTypes", "AccountType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.AccountType), "Account", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.Account), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_EmployeeAccount_inherits_Account", "Account", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Account), "Accounts_EmployeeAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PayrollManager.DataLayer.EmployeeAccount), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_EmployeeEmployeeAccount", "Employee", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Employee), "Accounts_EmployeeAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.EmployeeAccount), true)]
 [assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollEmployeeSetup_ChargeTypes", "ChargeType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.ChargeType), "PayrollEmployeeSetup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollEmployeeSetup), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_BranchEmployee", "Company", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PayrollManager.DataLayer.Company), "Employee", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.Employee), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_Companies_Institutions", "Institution", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Institution), "Company", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PayrollManager.DataLayer.Company), true)]
 [assembly: EdmRelationshipAttribute("DataLayer", "FK_EmailTemplate_Companies", "Company", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Company), "EmailTemplate", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.EmailTemplate), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_EmployeeEmployee", "Employee", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PayrollManager.DataLayer.Employee), "Employee1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.Employee), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_EmployeePayrollEmployeeSetup", "Employee", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Employee), "PayrollEmployeeSetup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollEmployeeSetup), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_EmployeePayrollItem", "Employee", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Employee), "PayrollItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollItem), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_User_inherits_Employee", "Employee", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Employee), "Employees_User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PayrollManager.DataLayer.User), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollJobTypePayrollEmployeeSetup", "PayrollJobType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.PayrollJobType), "PayrollEmployeeSetup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollEmployeeSetup), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollSetupItemPayrollEmployeeSetup", "PayrollSetupItem", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.PayrollSetupItem), "PayrollEmployeeSetup", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollEmployeeSetup), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollItemPayrollItem", "PayrollItem", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PayrollManager.DataLayer.PayrollItem), "PayrollItem1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollItem), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollJobPayrollItem", "PayrollJob", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.PayrollJob), "PayrollItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollItem), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollSetupItemPayrollItem", "PayrollSetupItem", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PayrollManager.DataLayer.PayrollSetupItem), "PayrollItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollItem), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_PayrollJobTypePayrollJob", "PayrollJobType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.PayrollJobType), "PayrollJob", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollJob), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "FK_Companies_PayrollJobs", "PayrollJob", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PayrollManager.DataLayer.PayrollJob), "Company", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.Company), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "CompanyPayrollJob", "Company", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Company), "PayrollJob", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.PayrollJob), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "InstitutionInstitutionAccounts", "Institution", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Institution), "InstitutionAccounts", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.InstitutionAccounts), true)]
+[assembly: EdmRelationshipAttribute("DataLayer", "InstitutionAccount", "Institution", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PayrollManager.DataLayer.Institution), "Account", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PayrollManager.DataLayer.Account), true)]
 
 #endregion
 
@@ -130,6 +133,22 @@ namespace PayrollManager.DataLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<EmployeeAccount> EmployeeAccounts
+        {
+            get
+            {
+                if ((_EmployeeAccounts == null))
+                {
+                    _EmployeeAccounts = base.CreateObjectSet<EmployeeAccount>("EmployeeAccounts");
+                }
+                return _EmployeeAccounts;
+            }
+        }
+        private ObjectSet<EmployeeAccount> _EmployeeAccounts;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<AccountType> AccountTypes
         {
             get
@@ -158,6 +177,38 @@ namespace PayrollManager.DataLayer
             }
         }
         private ObjectSet<ChargeType> _ChargeTypes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Company> Companies
+        {
+            get
+            {
+                if ((_Companies == null))
+                {
+                    _Companies = base.CreateObjectSet<Company>("Companies");
+                }
+                return _Companies;
+            }
+        }
+        private ObjectSet<Company> _Companies;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<EmailTemplate> EmailTemplates
+        {
+            get
+            {
+                if ((_EmailTemplates == null))
+                {
+                    _EmailTemplates = base.CreateObjectSet<EmailTemplate>("EmailTemplates");
+                }
+                return _EmailTemplates;
+            }
+        }
+        private ObjectSet<EmailTemplate> _EmailTemplates;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -194,18 +245,18 @@ namespace PayrollManager.DataLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<PayrollEmployeeSetup> PayrollEmployeeSetup
+        public ObjectSet<PayrollEmployeeSetup> PayrollEmployeeSetups
         {
             get
             {
-                if ((_PayrollEmployeeSetup == null))
+                if ((_PayrollEmployeeSetups == null))
                 {
-                    _PayrollEmployeeSetup = base.CreateObjectSet<PayrollEmployeeSetup>("PayrollEmployeeSetup");
+                    _PayrollEmployeeSetups = base.CreateObjectSet<PayrollEmployeeSetup>("PayrollEmployeeSetups");
                 }
-                return _PayrollEmployeeSetup;
+                return _PayrollEmployeeSetups;
             }
         }
-        private ObjectSet<PayrollEmployeeSetup> _PayrollEmployeeSetup;
+        private ObjectSet<PayrollEmployeeSetup> _PayrollEmployeeSetups;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -270,38 +321,6 @@ namespace PayrollManager.DataLayer
             }
         }
         private ObjectSet<PayrollSetupItem> _PayrollSetupItems;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<EmailTemplate> EmailTemplate
-        {
-            get
-            {
-                if ((_EmailTemplate == null))
-                {
-                    _EmailTemplate = base.CreateObjectSet<EmailTemplate>("EmailTemplate");
-                }
-                return _EmailTemplate;
-            }
-        }
-        private ObjectSet<EmailTemplate> _EmailTemplate;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Company> Companies
-        {
-            get
-            {
-                if ((_Companies == null))
-                {
-                    _Companies = base.CreateObjectSet<Company>("Companies");
-                }
-                return _Companies;
-            }
-        }
-        private ObjectSet<Company> _Companies;
 
         #endregion
 
@@ -324,6 +343,14 @@ namespace PayrollManager.DataLayer
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the EmployeeAccounts EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToEmployeeAccounts(EmployeeAccount employeeAccount)
+        {
+            base.AddObject("EmployeeAccounts", employeeAccount);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the AccountTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToAccountTypes(AccountType accountType)
@@ -337,6 +364,22 @@ namespace PayrollManager.DataLayer
         public void AddToChargeTypes(ChargeType chargeType)
         {
             base.AddObject("ChargeTypes", chargeType);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Companies EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToCompanies(Company company)
+        {
+            base.AddObject("Companies", company);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the EmailTemplates EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToEmailTemplates(EmailTemplate emailTemplate)
+        {
+            base.AddObject("EmailTemplates", emailTemplate);
         }
     
         /// <summary>
@@ -356,11 +399,11 @@ namespace PayrollManager.DataLayer
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the PayrollEmployeeSetup EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the PayrollEmployeeSetups EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToPayrollEmployeeSetup(PayrollEmployeeSetup payrollEmployeeSetup)
+        public void AddToPayrollEmployeeSetups(PayrollEmployeeSetup payrollEmployeeSetup)
         {
-            base.AddObject("PayrollEmployeeSetup", payrollEmployeeSetup);
+            base.AddObject("PayrollEmployeeSetups", payrollEmployeeSetup);
         }
     
         /// <summary>
@@ -394,22 +437,6 @@ namespace PayrollManager.DataLayer
         {
             base.AddObject("PayrollSetupItems", payrollSetupItem);
         }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the EmailTemplate EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToEmailTemplate(EmailTemplate emailTemplate)
-        {
-            base.AddObject("EmailTemplate", emailTemplate);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Companies EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToCompanies(Company company)
-        {
-            base.AddObject("Companies", company);
-        }
 
         #endregion
 
@@ -425,8 +452,7 @@ namespace PayrollManager.DataLayer
     [EdmEntityTypeAttribute(NamespaceName="DataLayer", Name="Account")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    [KnownTypeAttribute(typeof(EmployeeAccount))]
-    [KnownTypeAttribute(typeof(InstitutionAccount))]
+    [KnownTypeAttribute(typeof(InstitutionAccounts))]
     public partial class Account : EntityObject
     {
         #region Factory Method
@@ -587,18 +613,18 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountAccountEntry", "AccountEntries")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountAccountEntry", "AccountEntry")]
         public EntityCollection<AccountEntry> AccountEntries
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AccountEntry>("DataLayer.FK_AccountAccountEntry", "AccountEntries");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AccountEntry>("DataLayer.FK_AccountAccountEntry", "AccountEntry");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AccountEntry>("DataLayer.FK_AccountAccountEntry", "AccountEntries", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AccountEntry>("DataLayer.FK_AccountAccountEntry", "AccountEntry", value);
                 }
             }
         }
@@ -609,18 +635,18 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountPayrollItem", "PayrollItems")]
-        public EntityCollection<PayrollItem> PayrollItems
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountPayrollEmployeeSetup", "PayrollEmployeeSetup")]
+        public EntityCollection<PayrollEmployeeSetup> PayrollEmployeeSetups
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollItem>("DataLayer.FK_AccountPayrollItem", "PayrollItems");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollEmployeeSetup>("DataLayer.FK_AccountPayrollEmployeeSetup", "PayrollEmployeeSetup");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollItem>("DataLayer.FK_AccountPayrollItem", "PayrollItems", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollEmployeeSetup>("DataLayer.FK_AccountPayrollEmployeeSetup", "PayrollEmployeeSetup", value);
                 }
             }
         }
@@ -631,18 +657,18 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountPayrollItem1", "PayrollItems")]
-        public EntityCollection<PayrollItem> PayrollItems1
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountPayrollEmployeeSetup1", "PayrollEmployeeSetup")]
+        public EntityCollection<PayrollEmployeeSetup> PayrollEmployeeSetups1
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollItem>("DataLayer.FK_AccountPayrollItem1", "PayrollItems");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollEmployeeSetup>("DataLayer.FK_AccountPayrollEmployeeSetup1", "PayrollEmployeeSetup");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollItem>("DataLayer.FK_AccountPayrollItem1", "PayrollItems", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollEmployeeSetup>("DataLayer.FK_AccountPayrollEmployeeSetup1", "PayrollEmployeeSetup", value);
                 }
             }
         }
@@ -653,100 +679,62 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountPayrollSetupItem", "PayrollSetupItems")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountPayrollItem", "PayrollItem")]
+        public EntityCollection<PayrollItem> CreditPayrollItems
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollItem>("DataLayer.FK_AccountPayrollItem", "PayrollItem");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollItem>("DataLayer.FK_AccountPayrollItem", "PayrollItem", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountPayrollItem1", "PayrollItem")]
+        public EntityCollection<PayrollItem> DebitPayrollItems
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollItem>("DataLayer.FK_AccountPayrollItem1", "PayrollItem");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollItem>("DataLayer.FK_AccountPayrollItem1", "PayrollItem", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountPayrollSetupItem", "PayrollSetupItem")]
         public EntityCollection<PayrollSetupItem> PayrollSetupItems
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollSetupItem>("DataLayer.FK_AccountPayrollSetupItem", "PayrollSetupItems");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollSetupItem>("DataLayer.FK_AccountPayrollSetupItem", "PayrollSetupItem");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollSetupItem>("DataLayer.FK_AccountPayrollSetupItem", "PayrollSetupItems", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_InstitutionAccountASN", "Institutions")]
-        public Institution Institution
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Institution>("DataLayer.FK_InstitutionAccountASN", "Institutions").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Institution>("DataLayer.FK_InstitutionAccountASN", "Institutions").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Institution> InstitutionReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Institution>("DataLayer.FK_InstitutionAccountASN", "Institutions");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Institution>("DataLayer.FK_InstitutionAccountASN", "Institutions", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "AccountPayrollEmployeeSetup", "PayrollEmployeeSetup")]
-        public EntityCollection<PayrollEmployeeSetup> PayrollEmployeeSetup1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollEmployeeSetup>("DataLayer.AccountPayrollEmployeeSetup", "PayrollEmployeeSetup");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollEmployeeSetup>("DataLayer.AccountPayrollEmployeeSetup", "PayrollEmployeeSetup", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "AccountPayrollEmployeeSetup1", "PayrollEmployeeSetup")]
-        public EntityCollection<PayrollEmployeeSetup> PayrollEmployeeSetup2
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollEmployeeSetup>("DataLayer.AccountPayrollEmployeeSetup1", "PayrollEmployeeSetup");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollEmployeeSetup>("DataLayer.AccountPayrollEmployeeSetup1", "PayrollEmployeeSetup", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollSetupItem>("DataLayer.FK_AccountPayrollSetupItem", "PayrollSetupItem", value);
                 }
             }
         }
@@ -758,7 +746,7 @@ namespace PayrollManager.DataLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_Accounts_AccountTypes", "AccountType")]
-        public AccountType AccountTypes
+        public AccountType AccountType
         {
             get
             {
@@ -774,7 +762,7 @@ namespace PayrollManager.DataLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<AccountType> AccountTypesReference
+        public EntityReference<AccountType> AccountTypeReference
         {
             get
             {
@@ -785,6 +773,82 @@ namespace PayrollManager.DataLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<AccountType>("DataLayer.FK_Accounts_AccountTypes", "AccountType", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_EmployeeAccount_inherits_Account", "Accounts_EmployeeAccount")]
+        public EmployeeAccount EmployeeAccounts
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EmployeeAccount>("DataLayer.FK_EmployeeAccount_inherits_Account", "Accounts_EmployeeAccount").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EmployeeAccount>("DataLayer.FK_EmployeeAccount_inherits_Account", "Accounts_EmployeeAccount").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<EmployeeAccount> EmployeeAccountsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<EmployeeAccount>("DataLayer.FK_EmployeeAccount_inherits_Account", "Accounts_EmployeeAccount");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<EmployeeAccount>("DataLayer.FK_EmployeeAccount_inherits_Account", "Accounts_EmployeeAccount", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "InstitutionAccount", "Institution")]
+        public Institution Institution
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Institution>("DataLayer.InstitutionAccount", "Institution").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Institution>("DataLayer.InstitutionAccount", "Institution").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Institution> InstitutionReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Institution>("DataLayer.InstitutionAccount", "Institution");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Institution>("DataLayer.InstitutionAccount", "Institution", value);
                 }
             }
         }
@@ -1035,16 +1099,16 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountAccountEntry", "Accounts")]
-        public Account Accounts
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountAccountEntry", "Account")]
+        public Account Account
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountAccountEntry", "Accounts").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountAccountEntry", "Account").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountAccountEntry", "Accounts").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountAccountEntry", "Account").Value = value;
             }
         }
         /// <summary>
@@ -1052,17 +1116,17 @@ namespace PayrollManager.DataLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Account> AccountsReference
+        public EntityReference<Account> AccountReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountAccountEntry", "Accounts");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountAccountEntry", "Account");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Account>("DataLayer.FK_AccountAccountEntry", "Accounts", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Account>("DataLayer.FK_AccountAccountEntry", "Account", value);
                 }
             }
         }
@@ -1073,16 +1137,16 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollItemAccountEntry", "PayrollItems")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollItemAccountEntry", "PayrollItem")]
         public PayrollItem PayrollItem
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollItem>("DataLayer.FK_PayrollItemAccountEntry", "PayrollItems").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollItem>("DataLayer.FK_PayrollItemAccountEntry", "PayrollItem").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollItem>("DataLayer.FK_PayrollItemAccountEntry", "PayrollItems").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollItem>("DataLayer.FK_PayrollItemAccountEntry", "PayrollItem").Value = value;
             }
         }
         /// <summary>
@@ -1094,13 +1158,13 @@ namespace PayrollManager.DataLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollItem>("DataLayer.FK_PayrollItemAccountEntry", "PayrollItems");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollItem>("DataLayer.FK_PayrollItemAccountEntry", "PayrollItem");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollItem>("DataLayer.FK_PayrollItemAccountEntry", "PayrollItems", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollItem>("DataLayer.FK_PayrollItemAccountEntry", "PayrollItem", value);
                 }
             }
         }
@@ -1306,7 +1370,7 @@ namespace PayrollManager.DataLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollEmployeeSetup_ChargeTypes", "PayrollEmployeeSetup")]
-        public EntityCollection<PayrollEmployeeSetup> PayrollEmployeeSetup
+        public EntityCollection<PayrollEmployeeSetup> PayrollEmployeeSetups
         {
             get
             {
@@ -1338,19 +1402,11 @@ namespace PayrollManager.DataLayer
         /// <summary>
         /// Create a new Company object.
         /// </summary>
-        /// <param name="companyId">Initial value of the CompanyId property.</param>
-        /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="address">Initial value of the Address property.</param>
-        /// <param name="phoneNumber">Initial value of the PhoneNumber property.</param>
-        /// <param name="startDate">Initial value of the StartDate property.</param>
-        public static Company CreateCompany(global::System.Int32 companyId, global::System.String name, global::System.String address, global::System.String phoneNumber, global::System.DateTime startDate)
+        /// <param name="institutionId">Initial value of the InstitutionId property.</param>
+        public static Company CreateCompany(global::System.Int32 institutionId)
         {
             Company company = new Company();
-            company.CompanyId = companyId;
-            company.Name = name;
-            company.Address = address;
-            company.PhoneNumber = phoneNumber;
-            company.StartDate = startDate;
+            company.InstitutionId = institutionId;
             return company;
         }
 
@@ -1363,123 +1419,27 @@ namespace PayrollManager.DataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 CompanyId
+        public global::System.Int32 InstitutionId
         {
             get
             {
-                return _CompanyId;
+                return _InstitutionId;
             }
             set
             {
-                if (_CompanyId != value)
+                if (_InstitutionId != value)
                 {
-                    OnCompanyIdChanging(value);
-                    ReportPropertyChanging("CompanyId");
-                    _CompanyId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("CompanyId");
-                    OnCompanyIdChanged();
+                    OnInstitutionIdChanging(value);
+                    ReportPropertyChanging("InstitutionId");
+                    _InstitutionId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("InstitutionId");
+                    OnInstitutionIdChanged();
                 }
             }
         }
-        private global::System.Int32 _CompanyId;
-        partial void OnCompanyIdChanging(global::System.Int32 value);
-        partial void OnCompanyIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Name");
-                OnNameChanged();
-            }
-        }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Address
-        {
-            get
-            {
-                return _Address;
-            }
-            set
-            {
-                OnAddressChanging(value);
-                ReportPropertyChanging("Address");
-                _Address = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Address");
-                OnAddressChanged();
-            }
-        }
-        private global::System.String _Address;
-        partial void OnAddressChanging(global::System.String value);
-        partial void OnAddressChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String PhoneNumber
-        {
-            get
-            {
-                return _PhoneNumber;
-            }
-            set
-            {
-                OnPhoneNumberChanging(value);
-                ReportPropertyChanging("PhoneNumber");
-                _PhoneNumber = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("PhoneNumber");
-                OnPhoneNumberChanged();
-            }
-        }
-        private global::System.String _PhoneNumber;
-        partial void OnPhoneNumberChanging(global::System.String value);
-        partial void OnPhoneNumberChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ShortName
-        {
-            get
-            {
-                return _ShortName;
-            }
-            set
-            {
-                OnShortNameChanging(value);
-                ReportPropertyChanging("ShortName");
-                _ShortName = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("ShortName");
-                OnShortNameChanged();
-            }
-        }
-        private global::System.String _ShortName;
-        partial void OnShortNameChanging(global::System.String value);
-        partial void OnShortNameChanged();
+        private global::System.Int32 _InstitutionId;
+        partial void OnInstitutionIdChanging(global::System.Int32 value);
+        partial void OnInstitutionIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1504,54 +1464,6 @@ namespace PayrollManager.DataLayer
         private Nullable<global::System.Int32> _CurrentPayrollJobId;
         partial void OnCurrentPayrollJobIdChanging(Nullable<global::System.Int32> value);
         partial void OnCurrentPayrollJobIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime StartDate
-        {
-            get
-            {
-                return _StartDate;
-            }
-            set
-            {
-                OnStartDateChanging(value);
-                ReportPropertyChanging("StartDate");
-                _StartDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("StartDate");
-                OnStartDateChanged();
-            }
-        }
-        private global::System.DateTime _StartDate;
-        partial void OnStartDateChanging(global::System.DateTime value);
-        partial void OnStartDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> EndDate
-        {
-            get
-            {
-                return _EndDate;
-            }
-            set
-            {
-                OnEndDateChanging(value);
-                ReportPropertyChanging("EndDate");
-                _EndDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EndDate");
-                OnEndDateChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _EndDate;
-        partial void OnEndDateChanging(Nullable<global::System.DateTime> value);
-        partial void OnEndDateChanged();
 
         #endregion
 
@@ -1563,18 +1475,18 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_BranchEmployee1", "Employee")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_BranchEmployee", "Employee")]
         public EntityCollection<Employee> Employees
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Employee>("DataLayer.FK_BranchEmployee1", "Employee");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Employee>("DataLayer.FK_BranchEmployee", "Employee");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Employee>("DataLayer.FK_BranchEmployee1", "Employee", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Employee>("DataLayer.FK_BranchEmployee", "Employee", value);
                 }
             }
         }
@@ -1585,38 +1497,16 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_BranchPayrollJob1", "PayrollJob")]
-        public EntityCollection<PayrollJob> PayrollJobs
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_Companies_Institutions", "Institution")]
+        public Institution Institution
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollJob>("DataLayer.FK_BranchPayrollJob1", "PayrollJob");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Institution>("DataLayer.FK_Companies_Institutions", "Institution").Value;
             }
             set
             {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollJob>("DataLayer.FK_BranchPayrollJob1", "PayrollJob", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobBranch1", "PayrollJob")]
-        public PayrollJob CurrentPayrollJob
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobBranch1", "PayrollJob").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobBranch1", "PayrollJob").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Institution>("DataLayer.FK_Companies_Institutions", "Institution").Value = value;
             }
         }
         /// <summary>
@@ -1624,17 +1514,17 @@ namespace PayrollManager.DataLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<PayrollJob> CurrentPayrollJobReference
+        public EntityReference<Institution> InstitutionReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobBranch1", "PayrollJob");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Institution>("DataLayer.FK_Companies_Institutions", "Institution");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobBranch1", "PayrollJob", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Institution>("DataLayer.FK_Companies_Institutions", "Institution", value);
                 }
             }
         }
@@ -1646,7 +1536,7 @@ namespace PayrollManager.DataLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_EmailTemplate_Companies", "EmailTemplate")]
-        public EntityCollection<EmailTemplate> EmailTemplate
+        public EntityCollection<EmailTemplate> EmailTemplates
         {
             get
             {
@@ -1657,6 +1547,66 @@ namespace PayrollManager.DataLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EmailTemplate>("DataLayer.FK_EmailTemplate_Companies", "EmailTemplate", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_Companies_PayrollJobs", "PayrollJob")]
+        public PayrollJob CurrentPayrollJob
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_Companies_PayrollJobs", "PayrollJob").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_Companies_PayrollJobs", "PayrollJob").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<PayrollJob> CurrentPayrollJobReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_Companies_PayrollJobs", "PayrollJob");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollJob>("DataLayer.FK_Companies_PayrollJobs", "PayrollJob", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "CompanyPayrollJob", "PayrollJob")]
+        public EntityCollection<PayrollJob> PayrollJobs
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollJob>("DataLayer.CompanyPayrollJob", "PayrollJob");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollJob>("DataLayer.CompanyPayrollJob", "PayrollJob", value);
                 }
             }
         }
@@ -1884,7 +1834,7 @@ namespace PayrollManager.DataLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_EmailTemplate_Companies", "Company")]
-        public Company Companies
+        public Company Company
         {
             get
             {
@@ -1900,7 +1850,7 @@ namespace PayrollManager.DataLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Company> CompaniesReference
+        public EntityReference<Company> CompanyReference
         {
             get
             {
@@ -1937,15 +1887,13 @@ namespace PayrollManager.DataLayer
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="lastName">Initial value of the LastName property.</param>
         /// <param name="employmentStartDate">Initial value of the EmploymentStartDate property.</param>
-        /// <param name="companyId">Initial value of the CompanyId property.</param>
-        public static Employee CreateEmployee(global::System.Int32 employeeId, global::System.String firstName, global::System.String lastName, global::System.DateTime employmentStartDate, global::System.Int32 companyId)
+        public static Employee CreateEmployee(global::System.Int32 employeeId, global::System.String firstName, global::System.String lastName, global::System.DateTime employmentStartDate)
         {
             Employee employee = new Employee();
             employee.EmployeeId = employeeId;
             employee.FirstName = firstName;
             employee.LastName = lastName;
             employee.EmploymentStartDate = employmentStartDate;
-            employee.CompanyId = companyId;
             return employee;
         }
 
@@ -2057,6 +2005,30 @@ namespace PayrollManager.DataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        public Nullable<global::System.Int32> CompanyId
+        {
+            get
+            {
+                return _CompanyId;
+            }
+            set
+            {
+                OnCompanyIdChanging(value);
+                ReportPropertyChanging("CompanyId");
+                _CompanyId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CompanyId");
+                OnCompanyIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _CompanyId;
+        partial void OnCompanyIdChanging(Nullable<global::System.Int32> value);
+        partial void OnCompanyIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
         public Nullable<global::System.Int32> SupervisorId
         {
             get
@@ -2129,54 +2101,6 @@ namespace PayrollManager.DataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String EmailAddress
-        {
-            get
-            {
-                return _EmailAddress;
-            }
-            set
-            {
-                OnEmailAddressChanging(value);
-                ReportPropertyChanging("EmailAddress");
-                _EmailAddress = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("EmailAddress");
-                OnEmailAddressChanged();
-            }
-        }
-        private global::System.String _EmailAddress;
-        partial void OnEmailAddressChanging(global::System.String value);
-        partial void OnEmailAddressChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> EmploymentEndDate
-        {
-            get
-            {
-                return _EmploymentEndDate;
-            }
-            set
-            {
-                OnEmploymentEndDateChanging(value);
-                ReportPropertyChanging("EmploymentEndDate");
-                _EmploymentEndDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EmploymentEndDate");
-                OnEmploymentEndDateChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _EmploymentEndDate;
-        partial void OnEmploymentEndDateChanging(Nullable<global::System.DateTime> value);
-        partial void OnEmploymentEndDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public Nullable<global::System.DateTime> EntryDateTime
         {
             get
@@ -2195,6 +2119,30 @@ namespace PayrollManager.DataLayer
         private Nullable<global::System.DateTime> _EntryDateTime;
         partial void OnEntryDateTimeChanging(Nullable<global::System.DateTime> value);
         partial void OnEntryDateTimeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String EmailAddress
+        {
+            get
+            {
+                return _EmailAddress;
+            }
+            set
+            {
+                OnEmailAddressChanging(value);
+                ReportPropertyChanging("EmailAddress");
+                _EmailAddress = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("EmailAddress");
+                OnEmailAddressChanged();
+            }
+        }
+        private global::System.String _EmailAddress;
+        partial void OnEmailAddressChanging(global::System.String value);
+        partial void OnEmailAddressChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2271,26 +2219,26 @@ namespace PayrollManager.DataLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 CompanyId
+        public Nullable<global::System.DateTime> EmploymentEndDate
         {
             get
             {
-                return _CompanyId;
+                return _EmploymentEndDate;
             }
             set
             {
-                OnCompanyIdChanging(value);
-                ReportPropertyChanging("CompanyId");
-                _CompanyId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("CompanyId");
-                OnCompanyIdChanged();
+                OnEmploymentEndDateChanging(value);
+                ReportPropertyChanging("EmploymentEndDate");
+                _EmploymentEndDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EmploymentEndDate");
+                OnEmploymentEndDateChanged();
             }
         }
-        private global::System.Int32 _CompanyId;
-        partial void OnCompanyIdChanging(global::System.Int32 value);
-        partial void OnCompanyIdChanged();
+        private Nullable<global::System.DateTime> _EmploymentEndDate;
+        partial void OnEmploymentEndDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnEmploymentEndDateChanged();
 
         #endregion
 
@@ -2302,18 +2250,18 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_EmployeeEmployee", "Employees1")]
-        public EntityCollection<Employee> Employees
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_EmployeeEmployeeAccount", "Accounts_EmployeeAccount")]
+        public EntityCollection<EmployeeAccount> EmployeeAccounts
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Employee>("DataLayer.FK_EmployeeEmployee", "Employees1");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EmployeeAccount>("DataLayer.FK_EmployeeEmployeeAccount", "Accounts_EmployeeAccount");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Employee>("DataLayer.FK_EmployeeEmployee", "Employees1", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EmployeeAccount>("DataLayer.FK_EmployeeEmployeeAccount", "Accounts_EmployeeAccount", value);
                 }
             }
         }
@@ -2324,16 +2272,16 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_EmployeeEmployee", "Employees")]
-        public Employee Supervisors
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_BranchEmployee", "Company")]
+        public Company Company
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeeEmployee", "Employees").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_BranchEmployee", "Company").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeeEmployee", "Employees").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_BranchEmployee", "Company").Value = value;
             }
         }
         /// <summary>
@@ -2341,17 +2289,77 @@ namespace PayrollManager.DataLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Employee> SupervisorsReference
+        public EntityReference<Company> CompanyReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeeEmployee", "Employees");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_BranchEmployee", "Company");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Employee>("DataLayer.FK_EmployeeEmployee", "Employees", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Company>("DataLayer.FK_BranchEmployee", "Company", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_EmployeeEmployee", "Employee1")]
+        public EntityCollection<Employee> Employees
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Employee>("DataLayer.FK_EmployeeEmployee", "Employee1");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Employee>("DataLayer.FK_EmployeeEmployee", "Employee1", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_EmployeeEmployee", "Employee")]
+        public Employee Supervisor
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeeEmployee", "Employee").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeeEmployee", "Employee").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Employee> SupervisorReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeeEmployee", "Employee");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Employee>("DataLayer.FK_EmployeeEmployee", "Employee", value);
                 }
             }
         }
@@ -2384,78 +2392,18 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_EmployeePayrollItem", "PayrollItems")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_EmployeePayrollItem", "PayrollItem")]
         public EntityCollection<PayrollItem> PayrollItems
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollItem>("DataLayer.FK_EmployeePayrollItem", "PayrollItems");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollItem>("DataLayer.FK_EmployeePayrollItem", "PayrollItem");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollItem>("DataLayer.FK_EmployeePayrollItem", "PayrollItems", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "EmployeeEmployeeAccount", "EmployeeAccount")]
-        public EntityCollection<EmployeeAccount> EmployeeAccounts
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EmployeeAccount>("DataLayer.EmployeeEmployeeAccount", "EmployeeAccount");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EmployeeAccount>("DataLayer.EmployeeEmployeeAccount", "EmployeeAccount", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_BranchEmployee1", "Companies")]
-        public Company Company
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_BranchEmployee1", "Companies").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_BranchEmployee1", "Companies").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Company> CompanyReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_BranchEmployee1", "Companies");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Company>("DataLayer.FK_BranchEmployee1", "Companies", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollItem>("DataLayer.FK_EmployeePayrollItem", "PayrollItem", value);
                 }
             }
         }
@@ -2470,28 +2418,20 @@ namespace PayrollManager.DataLayer
     [EdmEntityTypeAttribute(NamespaceName="DataLayer", Name="EmployeeAccount")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class EmployeeAccount : Account
+    public partial class EmployeeAccount : EntityObject
     {
         #region Factory Method
     
         /// <summary>
         /// Create a new EmployeeAccount object.
         /// </summary>
-        /// <param name="accountId">Initial value of the AccountId property.</param>
-        /// <param name="accountNumber">Initial value of the AccountNumber property.</param>
-        /// <param name="institutionId">Initial value of the InstitutionId property.</param>
-        /// <param name="accountName">Initial value of the AccountName property.</param>
-        /// <param name="accountTypeId">Initial value of the AccountTypeId property.</param>
         /// <param name="employeeId">Initial value of the EmployeeId property.</param>
-        public static EmployeeAccount CreateEmployeeAccount(global::System.Int32 accountId, global::System.String accountNumber, global::System.Int32 institutionId, global::System.String accountName, global::System.Int32 accountTypeId, global::System.Int32 employeeId)
+        /// <param name="accountId">Initial value of the AccountId property.</param>
+        public static EmployeeAccount CreateEmployeeAccount(global::System.Int32 employeeId, global::System.Int32 accountId)
         {
             EmployeeAccount employeeAccount = new EmployeeAccount();
-            employeeAccount.AccountId = accountId;
-            employeeAccount.AccountNumber = accountNumber;
-            employeeAccount.InstitutionId = institutionId;
-            employeeAccount.AccountName = accountName;
-            employeeAccount.AccountTypeId = accountTypeId;
             employeeAccount.EmployeeId = employeeId;
+            employeeAccount.AccountId = accountId;
             return employeeAccount;
         }
 
@@ -2546,6 +2486,33 @@ namespace PayrollManager.DataLayer
         private global::System.Int32 _EmployeeId;
         partial void OnEmployeeIdChanging(global::System.Int32 value);
         partial void OnEmployeeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AccountId
+        {
+            get
+            {
+                return _AccountId;
+            }
+            set
+            {
+                if (_AccountId != value)
+                {
+                    OnAccountIdChanging(value);
+                    ReportPropertyChanging("AccountId");
+                    _AccountId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AccountId");
+                    OnAccountIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AccountId;
+        partial void OnAccountIdChanging(global::System.Int32 value);
+        partial void OnAccountIdChanged();
 
         #endregion
 
@@ -2557,16 +2524,54 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "EmployeeEmployeeAccount", "Employee")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_EmployeeAccount_inherits_Account", "Account")]
+        public Account Account
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_EmployeeAccount_inherits_Account", "Account").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_EmployeeAccount_inherits_Account", "Account").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Account> AccountReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_EmployeeAccount_inherits_Account", "Account");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Account>("DataLayer.FK_EmployeeAccount_inherits_Account", "Account", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_EmployeeEmployeeAccount", "Employee")]
         public Employee Employee
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.EmployeeEmployeeAccount", "Employee").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeeEmployeeAccount", "Employee").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.EmployeeEmployeeAccount", "Employee").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeeEmployeeAccount", "Employee").Value = value;
             }
         }
         /// <summary>
@@ -2578,13 +2583,13 @@ namespace PayrollManager.DataLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.EmployeeEmployeeAccount", "Employee");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeeEmployeeAccount", "Employee");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Employee>("DataLayer.EmployeeEmployeeAccount", "Employee", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Employee>("DataLayer.FK_EmployeeEmployeeAccount", "Employee", value);
                 }
             }
         }
@@ -2672,6 +2677,54 @@ namespace PayrollManager.DataLayer
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Address
+        {
+            get
+            {
+                return _Address;
+            }
+            set
+            {
+                OnAddressChanging(value);
+                ReportPropertyChanging("Address");
+                _Address = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Address");
+                OnAddressChanged();
+            }
+        }
+        private global::System.String _Address;
+        partial void OnAddressChanging(global::System.String value);
+        partial void OnAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PhoneNumber
+        {
+            get
+            {
+                return _PhoneNumber;
+            }
+            set
+            {
+                OnPhoneNumberChanging(value);
+                ReportPropertyChanging("PhoneNumber");
+                _PhoneNumber = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PhoneNumber");
+                OnPhoneNumberChanged();
+            }
+        }
+        private global::System.String _PhoneNumber;
+        partial void OnPhoneNumberChanging(global::System.String value);
+        partial void OnPhoneNumberChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2779,18 +2832,34 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_InstitutionAccountASN", "Accounts")]
-        public EntityCollection<Account> Accounts
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_Companies_Institutions", "Company")]
+        public Company Company
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Account>("DataLayer.FK_InstitutionAccountASN", "Accounts");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_Companies_Institutions", "Company").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_Companies_Institutions", "Company").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Company> CompanyReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_Companies_Institutions", "Company");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Account>("DataLayer.FK_InstitutionAccountASN", "Accounts", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Company>("DataLayer.FK_Companies_Institutions", "Company", value);
                 }
             }
         }
@@ -2801,18 +2870,40 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "InstitutionInstitutionAccount", "InstitutionAccount")]
-        public EntityCollection<InstitutionAccount> InstitutionAccounts
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "InstitutionInstitutionAccounts", "InstitutionAccounts")]
+        public EntityCollection<InstitutionAccounts> PayeeAccounts
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InstitutionAccount>("DataLayer.InstitutionInstitutionAccount", "InstitutionAccount");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InstitutionAccounts>("DataLayer.InstitutionInstitutionAccounts", "InstitutionAccounts");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InstitutionAccount>("DataLayer.InstitutionInstitutionAccount", "InstitutionAccount", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InstitutionAccounts>("DataLayer.InstitutionInstitutionAccounts", "InstitutionAccounts", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "InstitutionAccount", "Account")]
+        public EntityCollection<Account> Accounts
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Account>("DataLayer.InstitutionAccount", "Account");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Account>("DataLayer.InstitutionAccount", "Account", value);
                 }
             }
         }
@@ -2824,15 +2915,15 @@ namespace PayrollManager.DataLayer
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="DataLayer", Name="InstitutionAccount")]
+    [EdmEntityTypeAttribute(NamespaceName="DataLayer", Name="InstitutionAccounts")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class InstitutionAccount : Account
+    public partial class InstitutionAccounts : Account
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new InstitutionAccount object.
+        /// Create a new InstitutionAccounts object.
         /// </summary>
         /// <param name="accountId">Initial value of the AccountId property.</param>
         /// <param name="accountNumber">Initial value of the AccountNumber property.</param>
@@ -2840,16 +2931,16 @@ namespace PayrollManager.DataLayer
         /// <param name="accountName">Initial value of the AccountName property.</param>
         /// <param name="accountTypeId">Initial value of the AccountTypeId property.</param>
         /// <param name="payeeInstitutionId">Initial value of the PayeeInstitutionId property.</param>
-        public static InstitutionAccount CreateInstitutionAccount(global::System.Int32 accountId, global::System.String accountNumber, global::System.Int32 institutionId, global::System.String accountName, global::System.Int32 accountTypeId, global::System.Int32 payeeInstitutionId)
+        public static InstitutionAccounts CreateInstitutionAccounts(global::System.Int32 accountId, global::System.String accountNumber, global::System.Int32 institutionId, global::System.String accountName, global::System.Int32 accountTypeId, global::System.Int32 payeeInstitutionId)
         {
-            InstitutionAccount institutionAccount = new InstitutionAccount();
-            institutionAccount.AccountId = accountId;
-            institutionAccount.AccountNumber = accountNumber;
-            institutionAccount.InstitutionId = institutionId;
-            institutionAccount.AccountName = accountName;
-            institutionAccount.AccountTypeId = accountTypeId;
-            institutionAccount.PayeeInstitutionId = payeeInstitutionId;
-            return institutionAccount;
+            InstitutionAccounts institutionAccounts = new InstitutionAccounts();
+            institutionAccounts.AccountId = accountId;
+            institutionAccounts.AccountNumber = accountNumber;
+            institutionAccounts.InstitutionId = institutionId;
+            institutionAccounts.AccountName = accountName;
+            institutionAccounts.AccountTypeId = accountTypeId;
+            institutionAccounts.PayeeInstitutionId = payeeInstitutionId;
+            return institutionAccounts;
         }
 
         #endregion
@@ -2890,16 +2981,16 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "InstitutionInstitutionAccount", "Institution")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "InstitutionInstitutionAccounts", "Institution")]
         public Institution PayeeInstitution
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Institution>("DataLayer.InstitutionInstitutionAccount", "Institution").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Institution>("DataLayer.InstitutionInstitutionAccounts", "Institution").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Institution>("DataLayer.InstitutionInstitutionAccount", "Institution").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Institution>("DataLayer.InstitutionInstitutionAccounts", "Institution").Value = value;
             }
         }
         /// <summary>
@@ -2911,13 +3002,13 @@ namespace PayrollManager.DataLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Institution>("DataLayer.InstitutionInstitutionAccount", "Institution");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Institution>("DataLayer.InstitutionInstitutionAccounts", "Institution");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Institution>("DataLayer.InstitutionInstitutionAccount", "Institution", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Institution>("DataLayer.InstitutionInstitutionAccounts", "Institution", value);
                 }
             }
         }
@@ -2942,20 +3033,20 @@ namespace PayrollManager.DataLayer
         /// <param name="payrollEmployeeSetupId">Initial value of the PayrollEmployeeSetupId property.</param>
         /// <param name="payrollSetupItemId">Initial value of the PayrollSetupItemId property.</param>
         /// <param name="employeeId">Initial value of the EmployeeId property.</param>
+        /// <param name="chargeTypeId">Initial value of the ChargeTypeId property.</param>
         /// <param name="payrollJobTypeId">Initial value of the PayrollJobTypeId property.</param>
         /// <param name="creditAccountId">Initial value of the CreditAccountId property.</param>
         /// <param name="debitAccountId">Initial value of the DebitAccountId property.</param>
-        /// <param name="chargeTypeId">Initial value of the ChargeTypeId property.</param>
-        public static PayrollEmployeeSetup CreatePayrollEmployeeSetup(global::System.Int32 payrollEmployeeSetupId, global::System.Int32 payrollSetupItemId, global::System.Int32 employeeId, global::System.Int32 payrollJobTypeId, global::System.Int32 creditAccountId, global::System.Int32 debitAccountId, global::System.Int32 chargeTypeId)
+        public static PayrollEmployeeSetup CreatePayrollEmployeeSetup(global::System.Int32 payrollEmployeeSetupId, global::System.Int32 payrollSetupItemId, global::System.Int32 employeeId, global::System.Int32 chargeTypeId, global::System.Int32 payrollJobTypeId, global::System.Int32 creditAccountId, global::System.Int32 debitAccountId)
         {
             PayrollEmployeeSetup payrollEmployeeSetup = new PayrollEmployeeSetup();
             payrollEmployeeSetup.PayrollEmployeeSetupId = payrollEmployeeSetupId;
             payrollEmployeeSetup.PayrollSetupItemId = payrollSetupItemId;
             payrollEmployeeSetup.EmployeeId = employeeId;
+            payrollEmployeeSetup.ChargeTypeId = chargeTypeId;
             payrollEmployeeSetup.PayrollJobTypeId = payrollJobTypeId;
             payrollEmployeeSetup.CreditAccountId = creditAccountId;
             payrollEmployeeSetup.DebitAccountId = debitAccountId;
-            payrollEmployeeSetup.ChargeTypeId = chargeTypeId;
             return payrollEmployeeSetup;
         }
 
@@ -3211,6 +3302,30 @@ namespace PayrollManager.DataLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.Int32 ChargeTypeId
+        {
+            get
+            {
+                return _ChargeTypeId;
+            }
+            set
+            {
+                OnChargeTypeIdChanging(value);
+                ReportPropertyChanging("ChargeTypeId");
+                _ChargeTypeId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ChargeTypeId");
+                OnChargeTypeIdChanged();
+            }
+        }
+        private global::System.Int32 _ChargeTypeId;
+        partial void OnChargeTypeIdChanging(global::System.Int32 value);
+        partial void OnChargeTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Int32 PayrollJobTypeId
         {
             get
@@ -3301,30 +3416,6 @@ namespace PayrollManager.DataLayer
         private global::System.Int32 _DebitAccountId;
         partial void OnDebitAccountIdChanging(global::System.Int32 value);
         partial void OnDebitAccountIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ChargeTypeId
-        {
-            get
-            {
-                return _ChargeTypeId;
-            }
-            set
-            {
-                OnChargeTypeIdChanging(value);
-                ReportPropertyChanging("ChargeTypeId");
-                _ChargeTypeId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ChargeTypeId");
-                OnChargeTypeIdChanged();
-            }
-        }
-        private global::System.Int32 _ChargeTypeId;
-        partial void OnChargeTypeIdChanging(global::System.Int32 value);
-        partial void OnChargeTypeIdChanged();
 
         #endregion
 
@@ -3336,130 +3427,16 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_EmployeePayrollEmployeeSetup", "Employees")]
-        public Employee Employee
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeePayrollEmployeeSetup", "Employees").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeePayrollEmployeeSetup", "Employees").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Employee> EmployeeReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeePayrollEmployeeSetup", "Employees");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Employee>("DataLayer.FK_EmployeePayrollEmployeeSetup", "Employees", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobTypePayrollEmployeeSetup", "PayrollJobTypes")]
-        public PayrollJobType PayrollJobType
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollEmployeeSetup", "PayrollJobTypes").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollEmployeeSetup", "PayrollJobTypes").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<PayrollJobType> PayrollJobTypeReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollEmployeeSetup", "PayrollJobTypes");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollEmployeeSetup", "PayrollJobTypes", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollSetupItemPayrollEmployeeSetup", "PayrollSetupItems")]
-        public PayrollSetupItem PayrollSetupItem
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollSetupItem>("DataLayer.FK_PayrollSetupItemPayrollEmployeeSetup", "PayrollSetupItems").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollSetupItem>("DataLayer.FK_PayrollSetupItemPayrollEmployeeSetup", "PayrollSetupItems").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<PayrollSetupItem> PayrollSetupItemReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollSetupItem>("DataLayer.FK_PayrollSetupItemPayrollEmployeeSetup", "PayrollSetupItems");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollSetupItem>("DataLayer.FK_PayrollSetupItemPayrollEmployeeSetup", "PayrollSetupItems", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "AccountPayrollEmployeeSetup", "Account")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountPayrollEmployeeSetup", "Account")]
         public Account CreditAccount
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.AccountPayrollEmployeeSetup", "Account").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollEmployeeSetup", "Account").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.AccountPayrollEmployeeSetup", "Account").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollEmployeeSetup", "Account").Value = value;
             }
         }
         /// <summary>
@@ -3471,13 +3448,13 @@ namespace PayrollManager.DataLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.AccountPayrollEmployeeSetup", "Account");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollEmployeeSetup", "Account");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Account>("DataLayer.AccountPayrollEmployeeSetup", "Account", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Account>("DataLayer.FK_AccountPayrollEmployeeSetup", "Account", value);
                 }
             }
         }
@@ -3488,16 +3465,16 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "AccountPayrollEmployeeSetup1", "Account")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountPayrollEmployeeSetup1", "Account")]
         public Account DebitAccount
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.AccountPayrollEmployeeSetup1", "Account").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollEmployeeSetup1", "Account").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.AccountPayrollEmployeeSetup1", "Account").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollEmployeeSetup1", "Account").Value = value;
             }
         }
         /// <summary>
@@ -3509,13 +3486,13 @@ namespace PayrollManager.DataLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.AccountPayrollEmployeeSetup1", "Account");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollEmployeeSetup1", "Account");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Account>("DataLayer.AccountPayrollEmployeeSetup1", "Account", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Account>("DataLayer.FK_AccountPayrollEmployeeSetup1", "Account", value);
                 }
             }
         }
@@ -3527,7 +3504,7 @@ namespace PayrollManager.DataLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollEmployeeSetup_ChargeTypes", "ChargeType")]
-        public ChargeType ChargeTypes
+        public ChargeType ChargeType
         {
             get
             {
@@ -3543,7 +3520,7 @@ namespace PayrollManager.DataLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<ChargeType> ChargeTypesReference
+        public EntityReference<ChargeType> ChargeTypeReference
         {
             get
             {
@@ -3554,6 +3531,120 @@ namespace PayrollManager.DataLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ChargeType>("DataLayer.FK_PayrollEmployeeSetup_ChargeTypes", "ChargeType", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_EmployeePayrollEmployeeSetup", "Employee")]
+        public Employee Employee
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeePayrollEmployeeSetup", "Employee").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeePayrollEmployeeSetup", "Employee").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Employee> EmployeeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeePayrollEmployeeSetup", "Employee");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Employee>("DataLayer.FK_EmployeePayrollEmployeeSetup", "Employee", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobTypePayrollEmployeeSetup", "PayrollJobType")]
+        public PayrollJobType PayrollJobType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollEmployeeSetup", "PayrollJobType").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollEmployeeSetup", "PayrollJobType").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<PayrollJobType> PayrollJobTypeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollEmployeeSetup", "PayrollJobType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollEmployeeSetup", "PayrollJobType", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollSetupItemPayrollEmployeeSetup", "PayrollSetupItem")]
+        public PayrollSetupItem PayrollSetupItem
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollSetupItem>("DataLayer.FK_PayrollSetupItemPayrollEmployeeSetup", "PayrollSetupItem").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollSetupItem>("DataLayer.FK_PayrollSetupItemPayrollEmployeeSetup", "PayrollSetupItem").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<PayrollSetupItem> PayrollSetupItemReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollSetupItem>("DataLayer.FK_PayrollSetupItemPayrollEmployeeSetup", "PayrollSetupItem");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollSetupItem>("DataLayer.FK_PayrollSetupItemPayrollEmployeeSetup", "PayrollSetupItem", value);
                 }
             }
         }
@@ -4028,18 +4119,18 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollItemAccountEntry", "AccountEntries")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollItemAccountEntry", "AccountEntry")]
         public EntityCollection<AccountEntry> AccountEntries
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AccountEntry>("DataLayer.FK_PayrollItemAccountEntry", "AccountEntries");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AccountEntry>("DataLayer.FK_PayrollItemAccountEntry", "AccountEntry");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AccountEntry>("DataLayer.FK_PayrollItemAccountEntry", "AccountEntries", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AccountEntry>("DataLayer.FK_PayrollItemAccountEntry", "AccountEntry", value);
                 }
             }
         }
@@ -4050,16 +4141,16 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountPayrollItem", "Accounts")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountPayrollItem", "Account")]
         public Account CreditAccount
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollItem", "Accounts").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollItem", "Account").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollItem", "Accounts").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollItem", "Account").Value = value;
             }
         }
         /// <summary>
@@ -4071,13 +4162,13 @@ namespace PayrollManager.DataLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollItem", "Accounts");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollItem", "Account");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Account>("DataLayer.FK_AccountPayrollItem", "Accounts", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Account>("DataLayer.FK_AccountPayrollItem", "Account", value);
                 }
             }
         }
@@ -4088,16 +4179,16 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountPayrollItem1", "Accounts")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountPayrollItem1", "Account")]
         public Account DebitAccount
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollItem1", "Accounts").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollItem1", "Account").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollItem1", "Accounts").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollItem1", "Account").Value = value;
             }
         }
         /// <summary>
@@ -4109,13 +4200,13 @@ namespace PayrollManager.DataLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollItem1", "Accounts");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollItem1", "Account");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Account>("DataLayer.FK_AccountPayrollItem1", "Accounts", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Account>("DataLayer.FK_AccountPayrollItem1", "Account", value);
                 }
             }
         }
@@ -4126,16 +4217,16 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_EmployeePayrollItem", "Employees")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_EmployeePayrollItem", "Employee")]
         public Employee Employee
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeePayrollItem", "Employees").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeePayrollItem", "Employee").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeePayrollItem", "Employees").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeePayrollItem", "Employee").Value = value;
             }
         }
         /// <summary>
@@ -4147,13 +4238,13 @@ namespace PayrollManager.DataLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeePayrollItem", "Employees");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Employee>("DataLayer.FK_EmployeePayrollItem", "Employee");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Employee>("DataLayer.FK_EmployeePayrollItem", "Employees", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Employee>("DataLayer.FK_EmployeePayrollItem", "Employee", value);
                 }
             }
         }
@@ -4164,18 +4255,18 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollItemPayrollItem", "PayrollItems1")]
-        public EntityCollection<PayrollItem> ChildPayrollItems
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollItemPayrollItem", "PayrollItem1")]
+        public EntityCollection<PayrollItem> PayrollItems
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollItem>("DataLayer.FK_PayrollItemPayrollItem", "PayrollItems1");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollItem>("DataLayer.FK_PayrollItemPayrollItem", "PayrollItem1");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollItem>("DataLayer.FK_PayrollItemPayrollItem", "PayrollItems1", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollItem>("DataLayer.FK_PayrollItemPayrollItem", "PayrollItem1", value);
                 }
             }
         }
@@ -4186,16 +4277,16 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollItemPayrollItem", "PayrollItems")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollItemPayrollItem", "PayrollItem")]
         public PayrollItem ParentPayrollItem
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollItem>("DataLayer.FK_PayrollItemPayrollItem", "PayrollItems").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollItem>("DataLayer.FK_PayrollItemPayrollItem", "PayrollItem").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollItem>("DataLayer.FK_PayrollItemPayrollItem", "PayrollItems").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollItem>("DataLayer.FK_PayrollItemPayrollItem", "PayrollItem").Value = value;
             }
         }
         /// <summary>
@@ -4207,13 +4298,13 @@ namespace PayrollManager.DataLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollItem>("DataLayer.FK_PayrollItemPayrollItem", "PayrollItems");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollItem>("DataLayer.FK_PayrollItemPayrollItem", "PayrollItem");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollItem>("DataLayer.FK_PayrollItemPayrollItem", "PayrollItems", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollItem>("DataLayer.FK_PayrollItemPayrollItem", "PayrollItem", value);
                 }
             }
         }
@@ -4224,16 +4315,16 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobPayrollItem", "PayrollJobs")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobPayrollItem", "PayrollJob")]
         public PayrollJob PayrollJob
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobPayrollItem", "PayrollJobs").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobPayrollItem", "PayrollJob").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobPayrollItem", "PayrollJobs").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobPayrollItem", "PayrollJob").Value = value;
             }
         }
         /// <summary>
@@ -4245,13 +4336,13 @@ namespace PayrollManager.DataLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobPayrollItem", "PayrollJobs");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobPayrollItem", "PayrollJob");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobPayrollItem", "PayrollJobs", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollJob>("DataLayer.FK_PayrollJobPayrollItem", "PayrollJob", value);
                 }
             }
         }
@@ -4262,16 +4353,16 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollSetupItemPayrollItem", "PayrollSetupItems")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollSetupItemPayrollItem", "PayrollSetupItem")]
         public PayrollSetupItem PayrollSetupItem
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollSetupItem>("DataLayer.FK_PayrollSetupItemPayrollItem", "PayrollSetupItems").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollSetupItem>("DataLayer.FK_PayrollSetupItemPayrollItem", "PayrollSetupItem").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollSetupItem>("DataLayer.FK_PayrollSetupItemPayrollItem", "PayrollSetupItems").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollSetupItem>("DataLayer.FK_PayrollSetupItemPayrollItem", "PayrollSetupItem").Value = value;
             }
         }
         /// <summary>
@@ -4283,13 +4374,13 @@ namespace PayrollManager.DataLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollSetupItem>("DataLayer.FK_PayrollSetupItemPayrollItem", "PayrollSetupItems");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollSetupItem>("DataLayer.FK_PayrollSetupItemPayrollItem", "PayrollSetupItem");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollSetupItem>("DataLayer.FK_PayrollSetupItemPayrollItem", "PayrollSetupItems", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollSetupItem>("DataLayer.FK_PayrollSetupItemPayrollItem", "PayrollSetupItem", value);
                 }
             }
         }
@@ -4566,18 +4657,18 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobPayrollItem", "PayrollItems")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobPayrollItem", "PayrollItem")]
         public EntityCollection<PayrollItem> PayrollItems
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollItem>("DataLayer.FK_PayrollJobPayrollItem", "PayrollItems");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollItem>("DataLayer.FK_PayrollJobPayrollItem", "PayrollItem");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollItem>("DataLayer.FK_PayrollJobPayrollItem", "PayrollItems", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollItem>("DataLayer.FK_PayrollJobPayrollItem", "PayrollItem", value);
                 }
             }
         }
@@ -4588,16 +4679,16 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobTypePayrollJob", "PayrollJobTypes")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobTypePayrollJob", "PayrollJobType")]
         public PayrollJobType PayrollJobType
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollJob", "PayrollJobTypes").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollJob", "PayrollJobType").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollJob", "PayrollJobTypes").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollJob", "PayrollJobType").Value = value;
             }
         }
         /// <summary>
@@ -4609,13 +4700,13 @@ namespace PayrollManager.DataLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollJob", "PayrollJobTypes");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollJob", "PayrollJobType");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollJob", "PayrollJobTypes", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PayrollJobType>("DataLayer.FK_PayrollJobTypePayrollJob", "PayrollJobType", value);
                 }
             }
         }
@@ -4626,16 +4717,38 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_BranchPayrollJob1", "Companies")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_Companies_PayrollJobs", "Company")]
+        public EntityCollection<Company> CurrentCompany
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Company>("DataLayer.FK_Companies_PayrollJobs", "Company");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Company>("DataLayer.FK_Companies_PayrollJobs", "Company", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "CompanyPayrollJob", "Company")]
         public Company Company
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_BranchPayrollJob1", "Companies").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.CompanyPayrollJob", "Company").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_BranchPayrollJob1", "Companies").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.CompanyPayrollJob", "Company").Value = value;
             }
         }
         /// <summary>
@@ -4647,35 +4760,13 @@ namespace PayrollManager.DataLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.FK_BranchPayrollJob1", "Companies");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Company>("DataLayer.CompanyPayrollJob", "Company");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Company>("DataLayer.FK_BranchPayrollJob1", "Companies", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobBranch1", "Companies")]
-        public EntityCollection<Company> Companies
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Company>("DataLayer.FK_PayrollJobBranch1", "Companies");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Company>("DataLayer.FK_PayrollJobBranch1", "Companies", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Company>("DataLayer.CompanyPayrollJob", "Company", value);
                 }
             }
         }
@@ -4797,7 +4888,7 @@ namespace PayrollManager.DataLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobTypePayrollEmployeeSetup", "PayrollEmployeeSetup")]
-        public EntityCollection<PayrollEmployeeSetup> PayrollEmployeeSetup
+        public EntityCollection<PayrollEmployeeSetup> PayrollEmployeeSetups
         {
             get
             {
@@ -4818,18 +4909,18 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobTypePayrollJob", "PayrollJobs")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollJobTypePayrollJob", "PayrollJob")]
         public EntityCollection<PayrollJob> PayrollJobs
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollJob>("DataLayer.FK_PayrollJobTypePayrollJob", "PayrollJobs");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollJob>("DataLayer.FK_PayrollJobTypePayrollJob", "PayrollJob");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollJob>("DataLayer.FK_PayrollJobTypePayrollJob", "PayrollJobs", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollJob>("DataLayer.FK_PayrollJobTypePayrollJob", "PayrollJob", value);
                 }
             }
         }
@@ -5416,16 +5507,16 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountPayrollSetupItem", "Accounts")]
-        public Account PayrollItemAccount
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_AccountPayrollSetupItem", "Account")]
+        public Account Account
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollSetupItem", "Accounts").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollSetupItem", "Account").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollSetupItem", "Accounts").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollSetupItem", "Account").Value = value;
             }
         }
         /// <summary>
@@ -5433,17 +5524,17 @@ namespace PayrollManager.DataLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Account> PayrollItemAccountReference
+        public EntityReference<Account> AccountReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollSetupItem", "Accounts");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Account>("DataLayer.FK_AccountPayrollSetupItem", "Account");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Account>("DataLayer.FK_AccountPayrollSetupItem", "Accounts", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Account>("DataLayer.FK_AccountPayrollSetupItem", "Account", value);
                 }
             }
         }
@@ -5455,7 +5546,7 @@ namespace PayrollManager.DataLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollSetupItemPayrollEmployeeSetup", "PayrollEmployeeSetup")]
-        public EntityCollection<PayrollEmployeeSetup> PayrollEmployeeSetup
+        public EntityCollection<PayrollEmployeeSetup> PayrollEmployeeSetups
         {
             get
             {
@@ -5476,18 +5567,18 @@ namespace PayrollManager.DataLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollSetupItemPayrollItem", "PayrollItems")]
+        [EdmRelationshipNavigationPropertyAttribute("DataLayer", "FK_PayrollSetupItemPayrollItem", "PayrollItem")]
         public EntityCollection<PayrollItem> PayrollItems
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollItem>("DataLayer.FK_PayrollSetupItemPayrollItem", "PayrollItems");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PayrollItem>("DataLayer.FK_PayrollSetupItemPayrollItem", "PayrollItem");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollItem>("DataLayer.FK_PayrollSetupItemPayrollItem", "PayrollItems", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PayrollItem>("DataLayer.FK_PayrollSetupItemPayrollItem", "PayrollItem", value);
                 }
             }
         }
@@ -5513,17 +5604,15 @@ namespace PayrollManager.DataLayer
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="lastName">Initial value of the LastName property.</param>
         /// <param name="employmentStartDate">Initial value of the EmploymentStartDate property.</param>
-        /// <param name="companyId">Initial value of the CompanyId property.</param>
         /// <param name="username">Initial value of the Username property.</param>
         /// <param name="password">Initial value of the Password property.</param>
-        public static User CreateUser(global::System.Int32 employeeId, global::System.String firstName, global::System.String lastName, global::System.DateTime employmentStartDate, global::System.Int32 companyId, global::System.String username, global::System.String password)
+        public static User CreateUser(global::System.Int32 employeeId, global::System.String firstName, global::System.String lastName, global::System.DateTime employmentStartDate, global::System.String username, global::System.String password)
         {
             User user = new User();
             user.EmployeeId = employeeId;
             user.FirstName = firstName;
             user.LastName = lastName;
             user.EmploymentStartDate = employmentStartDate;
-            user.CompanyId = companyId;
             user.Username = username;
             user.Password = password;
             return user;

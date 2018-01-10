@@ -27,13 +27,13 @@ namespace PayrollManager
         AccountDetailsModel im;
         private void NewBtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            im.NewInstitutionAccount();
+            im.NewAccount();
         }
 
         private void SaveBtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
           
-                im.SaveInstitutionAccount();
+                im.SaveAccount();
             
         }
 

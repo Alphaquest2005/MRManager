@@ -38,7 +38,7 @@ namespace PayrollManager
 					Employees = new ObservableCollection<DataLayer.Employee>(base.Employees
 						.Where(x => x.EmploymentEndDate.HasValue == false ||
 									EntityFunctions.TruncateTime(x.EmploymentEndDate.Value) >= EntityFunctions.TruncateTime(DateTime.Now))
-						.Where(emp => emp.CompanyId == CurrentCompany.CompanyId &&
+						.Where(emp => emp.CompanyId == CurrentCompany.InstitutionId &&
 									  emp.DisplayName.ToUpper().Contains(EmployeeFilter.ToUpper()) == true)
 						.OrderBy(x => x.LastName).ToList());
 				}

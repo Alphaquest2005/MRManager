@@ -34,7 +34,7 @@ namespace PayrollManager
 
 		    if (e.PropertyName == "CompanyFilter")
 		    {
-		        Companies = new ObservableCollection<Company>(LoadCompanies().Where(c => c.Name.ToUpper().Contains(CompanyFilter.ToUpper())));
+		        Companies = new ObservableCollection<Company>(LoadCompanies().Where(c => c.Institution.Name.ToUpper().Contains(CompanyFilter.ToUpper())));
 		    }
 
 		}

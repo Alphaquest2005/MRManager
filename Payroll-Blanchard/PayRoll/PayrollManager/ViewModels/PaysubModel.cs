@@ -18,9 +18,9 @@ namespace PayrollManager
 
         void PaysubModel_staticPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "CurrentInstitutionAccount" && CurrentInstitutionAccount != null)
+            if (e.PropertyName == "CurrentAccount" && CurrentAccount != null)
             {
-                //MergeEmployeAccountIntoInstitutionAccount(CurrentInstitutionAccount);
+                //MergeEmployeAccountIntoAccount(CurrentAccount);
                 OnPropertyChanged(nameof(CurrentEmpNetCreditEntries));
                 OnPropertyChanged(nameof(CurrentEmpNetDebitEntries));
                 OnPropertyChanged(nameof(NetTotal));
@@ -38,18 +38,18 @@ namespace PayrollManager
 	                using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
 	                {
 	                    var lst = from i in ctx.AccountEntries
-	                            .Where(x => x.Accounts.Institution.InstitutionId == CurrentInstitutionAccount.InstitutionId &&
+	                            .Where(x => x.Account.Institution.InstitutionId == CurrentAccount.InstitutionId &&
 	                                         x.PayrollItem.PayrollJobId == BaseViewModel.Instance.CurrentPayrollJob.PayrollJobId
-	                                        && x.AccountId == CurrentInstitutionAccount.AccountId)
+	                                        && x.AccountId == CurrentAccount.AccountId)
 	                            .OrderBy(x => x.PayrollItem.Employee.LastName)
 	                            .ThenByDescending(x => x.PayrollItem.IncomeDeduction)
 	                            .ThenBy(x => x.PayrollItem.Priority)
-	                        group i by new { i.PayrollItem.Employee, i.Accounts }
+	                        group i by new { i.PayrollItem.Employee, i.Account }
 	                        into g
 	                        select new EmployeeAccountSummaryLine
 	                        {
 	                            Employee = (g.Key.Employee.FirstName + " " + g.Key.Employee.LastName),
-	                            Account = g.Key.Accounts,
+	                            Account = g.Key.Account,
 	                            Total = g.Sum(z => z.CreditAmount - z.DebitAmount) //
 	                        };
 
@@ -89,18 +89,18 @@ namespace PayrollManager
 	                    if (BaseViewModel.Instance.CurrentPayrollJob == null)
 	                        return new ObservableCollection<EmployeeAccountSummaryLine>();
 	                    var lst = from i in ctx.AccountEntries
-	                            .Where(x => x.Accounts.Institution.InstitutionId == CurrentInstitutionAccount.InstitutionId &&
+	                            .Where(x => x.Account.Institution.InstitutionId == CurrentAccount.InstitutionId &&
 	                                        x.PayrollItem.PayrollJobId == BaseViewModel.Instance.CurrentPayrollJob.PayrollJobId
-	                                        && x.AccountId == CurrentInstitutionAccount.AccountId)
+	                                        && x.AccountId == CurrentAccount.AccountId)
                                 .OrderByDescending(x => x.PayrollItem.IncomeDeduction)
 	                            .ThenBy(x => x.PayrollItem.Priority)
 
-	                        group i by new { i.PayrollItem.Employee, i.Accounts }
+	                        group i by new { i.PayrollItem.Employee, i.Account }
 	                        into g
 	                        select new EmployeeAccountSummaryLine
 	                        {
 	                            Employee = (g.Key.Employee.FirstName + " " + g.Key.Employee.LastName),
-	                            Account = g.Key.Accounts,
+	                            Account = g.Key.Account,
 	                            Total = g.Sum(z => z.DebitAmount - z.CreditAmount)
 	                        };
 

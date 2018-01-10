@@ -67,9 +67,9 @@
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
-                    <TextBlock HorizontalAlignment="Left" Height="29.6" Margin="37.3,13.4,0,0" TextWrapping="Wrap" Text="{Binding Instance.CurrentInstitutionAccount.Institution.Name}" VerticalAlignment="Top" Width="243.2" FontSize="24"/>
-                    <TextBlock HorizontalAlignment="Left" Height="20" Margin="37.3,48,0,0" TextWrapping="Wrap" Text="{Binding Instance.CurrentInstitutionAccount.AccountName}" VerticalAlignment="Top" Width="243.2" FontSize="16"/>
-                    <TextBlock HorizontalAlignment="Left" Height="20" Margin="37.3,65.2,0,0" TextWrapping="Wrap" Text="{Binding Instance.CurrentInstitutionAccount.AccountNumber}" VerticalAlignment="Top" Width="243.2" FontSize="16"/>
+                    <TextBlock HorizontalAlignment="Left" Height="29.6" Margin="37.3,13.4,0,0" TextWrapping="Wrap" Text="{Binding Instance.CurrentAccount.Institution.Name}" VerticalAlignment="Top" Width="243.2" FontSize="24"/>
+                    <TextBlock HorizontalAlignment="Left" Height="20" Margin="37.3,48,0,0" TextWrapping="Wrap" Text="{Binding Instance.CurrentAccount.AccountName}" VerticalAlignment="Top" Width="243.2" FontSize="16"/>
+                    <TextBlock HorizontalAlignment="Left" Height="20" Margin="37.3,65.2,0,0" TextWrapping="Wrap" Text="{Binding Instance.CurrentAccount.AccountNumber}" VerticalAlignment="Top" Width="243.2" FontSize="16"/>
                 </Grid>
             </ScrollViewer>
         </Border>

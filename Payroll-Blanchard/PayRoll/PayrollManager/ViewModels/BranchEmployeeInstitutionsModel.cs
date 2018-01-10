@@ -154,7 +154,7 @@ namespace PayrollManager
                             .Where(x => x.PayrollJob.StartDate == CurrentPayrollJob.StartDate && x.PayrollJob.EndDate == CurrentPayrollJob.EndDate && x.PayrollJob.PayrollJobTypeId == CurrentPayrollJob.PayrollJobTypeId)
                             .Include("CreditAccount.Institution")
                             .Include(x => x.Employee)
-                            .Where(pi => pi.DebitAccount is DataLayer.EmployeeAccount &&
+                            .Where(pi => pi.DebitAccount.EmployeeAccounts != null &&
                                          "Salary Deduction,Communal Birthday Club".ToUpper()
                                              .Contains(pi.Name.Trim().ToUpper()))
                             .OrderBy(x => x.Employee.LastName)
@@ -352,6 +352,7 @@ namespace PayrollManager
         private async Task<List<EmployeeAccountSummaryLine>> GetNetSalaryData()
         {
             if (CurrentPayrollJob == null) return new List<EmployeeAccountSummaryLine>();
+            var currentPayrollJob = CurrentPayrollJob;
             var t = Task.Run(() =>
             {
                 try
@@ -359,23 +360,22 @@ namespace PayrollManager
                     using (var ctx = new PayrollDB())
                     {
                         var employeeSalaryData =
-                        ctx.PayrollItems.Where(x => x.PayrollJob.StartDate == CurrentPayrollJob.StartDate
-                                                               && x.PayrollJob.EndDate == CurrentPayrollJob.EndDate
-                                                               && x.PayrollJob.PayrollJobTypeId == CurrentPayrollJob
-                                                                   .PayrollJobTypeId)
+                        ctx.PayrollItems.Where(x => x.PayrollJob.StartDate == currentPayrollJob.StartDate
+                                                               && x.PayrollJob.EndDate == currentPayrollJob.EndDate
+                                                               && x.PayrollJob.PayrollJobTypeId == currentPayrollJob.PayrollJobTypeId)
                                 .Include(x => x.CreditAccount.Institution)
                                 .Include(x => x.CreditAccount.AccountEntries)
                                 .Include(x => x.PayrollJob.PayrollJobType)
                                 .Include(x => x.Employee)
                                 //use this to get all jobs over branches
-                                .Where(pi => (pi.PayrollJob.StartDate == CurrentPayrollJob.StartDate && pi.PayrollJob.EndDate == CurrentPayrollJob.EndDate && pi.PayrollJob.PayrollJobTypeId == CurrentPayrollJob.PayrollJobTypeId)
-                                             && pi.CreditAccount is DataLayer.EmployeeAccount
+                                .Where(pi => (pi.PayrollJob.StartDate == currentPayrollJob.StartDate && pi.PayrollJob.EndDate == currentPayrollJob.EndDate && pi.PayrollJob.PayrollJobTypeId == currentPayrollJob.PayrollJobTypeId)
+                                             && pi.CreditAccount.EmployeeAccounts != null
                                              && pi.Name.Trim().ToUpper() == "Salary".ToUpper()
                                 )
                                 .OrderBy(x => x.Employee.LastName)
                             .Select(p => new { DisplayName = p.Employee.FirstName + " " + p.Employee.LastName,
                                                              p.CreditAccount,
-                                               Total = (double?)p.CreditAccount.AccountEntries.Where(z => z.PayrollItem.PayrollJob.StartDate == CurrentPayrollJob.StartDate && z.PayrollItem.PayrollJob.EndDate == CurrentPayrollJob.EndDate && z.PayrollItem.PayrollJob.PayrollJobTypeId == CurrentPayrollJob.PayrollJobTypeId).Sum(q => q.CreditAmount - q.DebitAmount)
+                                               Total = (double?)p.CreditAccount.AccountEntries.Where(z => z.PayrollItem.PayrollJob.StartDate == currentPayrollJob.StartDate && z.PayrollItem.PayrollJob.EndDate == currentPayrollJob.EndDate && z.PayrollItem.PayrollJob.PayrollJobTypeId == currentPayrollJob.PayrollJobTypeId).Sum(q => q.CreditAmount - q.DebitAmount)
                                               })
                             .Select(g => new EmployeeAccountSummaryLine
                             {
@@ -549,7 +549,7 @@ namespace PayrollManager
             public string Priority { get; set; }
         }
 
-        public class InstitutionAccountSummary
+        public class AccountSummary
         {
             public string Institution { get; set; }
             public ObservableCollection<DataLayer.AccountEntry> AccountEntries { get; set; }

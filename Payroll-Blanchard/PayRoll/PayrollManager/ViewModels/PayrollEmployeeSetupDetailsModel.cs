@@ -71,16 +71,16 @@ namespace PayrollManager
 	        {
 	            if (CurrentPayrollEmployeeSetup.PayrollEmployeeSetupId == 0)
 	            {
-	                ctx.PayrollEmployeeSetup.AddObject(CurrentPayrollEmployeeSetup);
+	                ctx.PayrollEmployeeSetups.AddObject(CurrentPayrollEmployeeSetup);
 
 	            }
 	            else
 	            {
 	                if (CurrentPayrollEmployeeSetup.EntityState == EntityState.Added) return;
-                    var ritm = ctx.PayrollEmployeeSetup.First(
+                    var ritm = ctx.PayrollEmployeeSetups.First(
 	                    x => x.PayrollEmployeeSetupId == CurrentPayrollEmployeeSetup.PayrollEmployeeSetupId);
-	                ctx.PayrollEmployeeSetup.Attach(ritm);
-	                ctx.PayrollEmployeeSetup.ApplyCurrentValues(CurrentPayrollEmployeeSetup);
+	                ctx.PayrollEmployeeSetups.Attach(ritm);
+	                ctx.PayrollEmployeeSetups.ApplyCurrentValues(CurrentPayrollEmployeeSetup);
                     
 	            }
 
@@ -99,8 +99,8 @@ namespace PayrollManager
             if (pi.PayrollEmployeeSetupId != 0)
 	        using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
 	        {
-	            var ritm = ctx.PayrollEmployeeSetup.First(x => x.PayrollEmployeeSetupId == pi.PayrollEmployeeSetupId);
-                ctx.PayrollEmployeeSetup.DeleteObject(ritm);
+	            var ritm = ctx.PayrollEmployeeSetups.First(x => x.PayrollEmployeeSetupId == pi.PayrollEmployeeSetupId);
+                ctx.PayrollEmployeeSetups.DeleteObject(ritm);
                 SaveDatabase(ctx);
 	        }
 	        pi = null;

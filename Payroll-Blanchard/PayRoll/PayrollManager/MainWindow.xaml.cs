@@ -144,7 +144,7 @@ namespace PayrollManager
 
         private void CreateInstAcc(object sender, MouseButtonEventArgs e)
         {
-            BaseViewModel.slider.MoveTo("InstitutionAccountSummaryEXP"); 
+            BaseViewModel.slider.MoveTo("AccountSummaryEXP"); 
         }
 
         private void CreatePayrollJob(object sender, MouseButtonEventArgs e)
@@ -217,7 +217,7 @@ namespace PayrollManager
 
 	    private void ViewInstitutionalAccounts(object sender, MouseButtonEventArgs e)
 	    {
-	        BaseViewModel.slider.MoveTo("InstitutionAccountSummaryEXP");
+	        BaseViewModel.slider.MoveTo("AccountSummaryEXP");
         }
 
 	    private void ViewCompanyList(object sender, MouseButtonEventArgs e)

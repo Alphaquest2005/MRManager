@@ -34,9 +34,9 @@ namespace PayrollManager
             }
 
             LoadInstitutions();
-            OnStaticPropertyChanged("CurrentInstitutionAccount");
-           // CycleInstitutionAccounts();
-            OnStaticPropertyChanged("InstitutionAccounts");
+            OnStaticPropertyChanged("CurrentAccount");
+           // CycleAccounts();
+            OnStaticPropertyChanged("Accounts");
             
         }
 

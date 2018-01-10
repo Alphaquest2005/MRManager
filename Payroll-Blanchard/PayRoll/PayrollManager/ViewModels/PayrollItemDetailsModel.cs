@@ -132,7 +132,7 @@ namespace PayrollManager
                                                         p.PayrollSetupItem != null &&
                                                           p.PayrollSetupItem.Name == "Salary").PayrollSetupItemId;
                 var salary =
-                    ctx.PayrollEmployeeSetup.First(
+                    ctx.PayrollEmployeeSetups.First(
                         x => x.PayrollSetupItemId == salaryItm && x.EmployeeId ==
                              BaseViewModel.Instance.CurrentEmployee.EmployeeId).BaseAmount.GetValueOrDefault();
                 foreach (var itm in payrollItems)
@@ -156,7 +156,7 @@ namespace PayrollManager
                     dbItm.Amount = itm.Amount;
                 }
                 SaveDatabase(ctx);
-                BaseViewModel.Instance.GetEmployees();
+                BaseViewModel.Instance.LoadEmployees();
 
             }
             catch (Exception e)

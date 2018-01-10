@@ -12,7 +12,7 @@
         
     </UserControl.Resources>
 
-    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource AccountDetailsModelDataSource}, Path=CurrentInstitutionAccount}">
+    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource AccountDetailsModelDataSource}, Path=CurrentAccount}">
         <Grid HorizontalAlignment="Left" Height="400" Background="#33FFFFFF" Margin="0,80,0,0" VerticalAlignment="Top" Width="640">
 			<TextBox Text="{Binding AccountName,FallbackValue='Create new Account', UpdateSourceTrigger=PropertyChanged}" Margin="123,23,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="33" Width="309" FontSize="16"/>
             <TextBox Text="{Binding AccountNumber, UpdateSourceTrigger=PropertyChanged}" Margin="123,66,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="309"/>
@@ -29,7 +29,7 @@
             	DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding AccountTypes, Source={StaticResource AccountDetailsModelDataSource}}"
             	Margin="123,143,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="199" IsEditable="True"/>
             <TextBlock HorizontalAlignment="Left" Height="26" Margin="18,143,0,0" TextWrapping="Wrap" Text="Account Type" VerticalAlignment="Top" Width="100" FontSize="13.333" TextAlignment="Right"/>
-            <ComboBox  Name="InstitutionAccountCmb"  SelectedValue="{Binding PayeeInstitutionId, UpdateSourceTrigger=PropertyChanged}"
+            <ComboBox  Name="AccountCmb"  SelectedValue="{Binding PayeeInstitutionId, UpdateSourceTrigger=PropertyChanged}"
             	DisplayMemberPath="Name" SelectedValuePath="InstitutionId" ItemsSource="{Binding Institutions, Source={StaticResource AccountDetailsModelDataSource}}"
             	Margin="123,209,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="29" Width="309" />
             <TextBlock HorizontalAlignment="Left" Height="26" Margin="18,212,0,0" TextWrapping="Wrap" Text="Payee" VerticalAlignment="Top" Width="100" FontSize="13.333" TextAlignment="Right"/>

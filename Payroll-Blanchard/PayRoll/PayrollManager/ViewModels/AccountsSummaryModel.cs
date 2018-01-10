@@ -18,15 +18,15 @@ namespace PayrollManager
         void AccountsSummaryModel_staticPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e.PropertyName);
-            if (e.PropertyName == "InstitutionAccountsData")
+            if (e.PropertyName == "AccountsData")
             {
-                OnPropertyChanged("InstitutionAccountsTotalCredit");
-                OnPropertyChanged("InstitutionAccountsTotalDebit");
-                OnPropertyChanged("InstitutionAccountsTotal");
+                OnPropertyChanged("AccountsTotalCredit");
+                OnPropertyChanged("AccountsTotalDebit");
+                OnPropertyChanged("AccountsTotal");
             }
         }
 
-        public double InstitutionAccountsTotalCredit
+        public double AccountsTotalCredit
         {
             get
             {
@@ -34,7 +34,7 @@ namespace PayrollManager
             }
         }
 
-        public double InstitutionAccountsTotalDebit
+        public double AccountsTotalDebit
         {
             get
             {
@@ -42,11 +42,11 @@ namespace PayrollManager
             }
         }
 
-        public double InstitutionAccountsTotal
+        public double AccountsTotal
         {
             get
             {
-                return InstitutionAccountsTotalCredit - InstitutionAccountsTotalDebit;
+                return AccountsTotalCredit - AccountsTotalDebit;
             }
         }
 

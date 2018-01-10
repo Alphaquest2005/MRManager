@@ -47,7 +47,7 @@
                 </LinearGradientBrush>
             </Border.BorderBrush>
             <Grid DataContext="{Binding}" Margin="0,0,-0.6,0.2" >
-                <ComboBox Text="{Binding CurrentCompany.Name}" DisplayMemberPath="Name" ItemsSource="{Binding Companies}" SelectedItem="{Binding CurrentCompany, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23.916" Width="300" FontSize="13.333" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,10,0,0"/>
+                <ComboBox Text="{Binding CurrentCompany.Insitution.Name}" DisplayMemberPath="Institution.Name" ItemsSource="{Binding Companies}" SelectedItem="{Binding CurrentCompany, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23.916" Width="300" FontSize="13.333" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,10,0,0"/>
                 <TextBlock Text="{Binding CurrentPayrollJob.NetAmount, StringFormat=c}" Margin="899.813,7.818,-142.668,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="117.284" FontSize="13.333" Foreground="#FFFFFED6" />
                 <TextBlock HorizontalAlignment="Left" Height="31.994" Margin="819.513,7.818,-20.384,0" TextWrapping="Wrap" Text="Net Amt:" VerticalAlignment="Top" Width="75.3" FontSize="13.333" Foreground="#FFFFFED6"/>
                 <TextBlock Text="{Binding CurrentCompany.TotalEmployees}" Margin="392,8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="50" FontSize="14" Foreground="#FFFFFED6"/>
@@ -338,24 +338,24 @@
                     </Expander.Header>
                     <local:InstitutionDetails Margin="0"  MouseEnter="BringIntoView"/>
                 </Expander>
-                <Expander x:Name="InstitutionAccountSummaryEXP" ExpandDirection="Right" IsExpanded="True"  Margin="50,10,0,-210" Width="Auto" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top"  Padding="5,5,5,10" >
+                <Expander x:Name="AccountSummaryEXP" ExpandDirection="Right" IsExpanded="True"  Margin="50,10,0,-210" Width="Auto" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top"  Padding="5,5,5,10" >
                     <Expander.Header>
                         <Grid Height="Auto" MouseEnter="BringIntoView">
                             <TextBlock Height="63" Style="{DynamicResource ExpHeadStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,10,23,0" Width="55" FontFamily="Segoe UI Symbol" FontSize="40" Text="&#xE158;"/>
                             <TextBlock Text="Institution Accounts" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Margin="-16,65,10,0" TextWrapping="Wrap" Width="84" TextAlignment="Center" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold"/>
                         </Grid>
                     </Expander.Header>
-                    <local:InstitutionAccountSummaryList Margin="0" MouseEnter="BringIntoView"/>
+                    <local:AccountSummaryList Margin="0" MouseEnter="BringIntoView"/>
                 </Expander>
 
-                <Expander x:Name="InstitutionAccountDetailEXP" IsExpanded="True" ExpandDirection="Right" Margin="50,10,0,-110" Width="Auto" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top"  Padding="5,5,5,10">
+                <Expander x:Name="AccountDetailEXP" IsExpanded="True" ExpandDirection="Right" Margin="50,10,0,-110" Width="Auto" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top"  Padding="5,5,5,10">
                     <Expander.Header>
                         <Grid Height="Auto" MouseEnter="BringIntoView">
                             <TextBlock Height="63" Style="{DynamicResource ExpHeadStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,10,23,0" Width="55" FontFamily="Segoe UI Symbol" FontSize="40" Text="&#xE1E2;"/>
                             <TextBlock Text="Add Edit Institution Account Details" Style="{DynamicResource ExpHeadStyle}" HorizontalAlignment="Right" Margin="0,65,0,175.24" TextWrapping="Wrap" Width="75" TextAlignment="Center" RenderTransformOrigin="0.535,1.32" FontSize="{DynamicResource ExpHeadFontSize}" FontWeight="Bold"/>
                         </Grid>
                     </Expander.Header>
-                    <local:InstitutionAccountDetails Margin="0"  MouseEnter="BringIntoView"/>
+                    <local:AccountDetails Margin="0"  MouseEnter="BringIntoView"/>
                 </Expander>
 
 

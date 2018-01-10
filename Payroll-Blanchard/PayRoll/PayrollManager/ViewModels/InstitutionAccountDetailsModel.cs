@@ -9,84 +9,84 @@ using PayrollManager.DataLayer;
 
 namespace PayrollManager
 {
-	public class InstitutionAccountDetailsModel : BaseViewModel
-	{
-       
+    public class InstitutionalAccountDetailsModel : BaseViewModel
+    {
 
-        public void SaveInstitutionAccount()
+
+        public void SaveAccount()
         {
-            if (CurrentInstitutionAccount == null) return;
-            var instId = CurrentInstitutionAccount.InstitutionId;
+            if (CurrentAccount == null) return;
+            var instId = CurrentAccount.InstitutionId;
             using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
             {
-                if (CurrentInstitutionAccount.AccountId == 0)
+                if (CurrentAccount.AccountId == 0)
                 {
-                    ctx.Accounts.AddObject(CurrentInstitutionAccount);
+                    ctx.Accounts.AddObject(CurrentAccount);
                 }
                 else
                 {
-                    if (CurrentInstitutionAccount.EntityState == EntityState.Added) return;
-                    var ritm = ctx.Accounts.OfType<InstitutionAccount>().First(x => x.AccountId == CurrentInstitutionAccount.AccountId);
-                     ctx.Accounts.Attach(ritm);
-                ctx.Accounts.ApplyCurrentValues(CurrentInstitutionAccount);
+                    if (CurrentAccount.EntityState == EntityState.Added) return;
+                    var ritm = ctx.Accounts.OfType<Account>().First(x => x.AccountId == CurrentAccount.AccountId);
+                    ctx.Accounts.Attach(ritm);
+                    ctx.Accounts.ApplyCurrentValues(CurrentAccount);
                 }
-               
+
                 SaveDatabase(ctx);
             }
 
             LoadInstitutions();
             CycleCurrentInstitution(instId);
-            OnStaticPropertyChanged("CurrentInstitutionAccount");
-           // CycleInstitutionAccounts();
-            OnStaticPropertyChanged("InstitutionAccounts");
-            
+            OnStaticPropertyChanged("CurrentAccount");
+            // CycleAccounts();
+            OnStaticPropertyChanged("Accounts");
+
         }
 
 
-        public void DeleteInstitutionAccount()
+        public void DeleteAccount()
         {
-            if (CurrentInstitutionAccount == null) return;
-            var instId = CurrentInstitutionAccount.InstitutionId;
-            if (CurrentInstitutionAccount.AccountId != 0)
+            if (CurrentAccount == null) return;
+            var instId = CurrentAccount.InstitutionId;
+            if (CurrentAccount.AccountId != 0)
 
-            using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
-            {
-                var ritm = ctx.Accounts.OfType<InstitutionAccount>().First(x => x.AccountId == CurrentInstitutionAccount.AccountId);
+                using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
+                {
+                    var ritm = ctx.Accounts.OfType<Account>().First(x => x.AccountId == CurrentAccount.AccountId);
                     ctx.Accounts.DeleteObject(ritm);
-                SaveDatabase(ctx);
-            }
-            CurrentInstitutionAccount = null;
+                    SaveDatabase(ctx);
+                }
+            CurrentAccount = null;
             LoadInstitutions();
             CycleCurrentInstitution(instId);
         }
 
-        
 
 
-       
 
-        public void NewInstitutionAccount()
+
+
+        public void NewAccount()
         {
-            CurrentInstitutionAccount = new InstitutionAccount();
-            if (CurrentInstitution != null) CurrentInstitutionAccount.InstitutionId = CurrentInstitution.InstitutionId;
-            OnPropertyChanged("CurrentInstitutionAccount");
+            CurrentAccount = new Account();
+            if (CurrentInstitution != null) CurrentAccount.InstitutionId = CurrentInstitution.InstitutionId;
+            OnPropertyChanged("CurrentAccount");
         }
 
 
 
 
-      
 
-		#region INotifyPropertyChanged
-		public event PropertyChangedEventHandler PropertyChanged;
 
-		private void NotifyPropertyChanged(String info)
-		{
-			if (PropertyChanged != null)
-			{
-				PropertyChanged(this, new PropertyChangedEventArgs(info));
-			}
-		}
-		#endregion
-	}
+        #region INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+        #endregion
+    }
 }

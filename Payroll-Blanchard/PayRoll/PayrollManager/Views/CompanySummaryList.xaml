@@ -18,10 +18,10 @@
                         <GradientStop Color="#19FFFFFF" Offset="0.069"/>
                     </LinearGradientBrush>
                 </Grid.Background>
-                <TextBlock Text="{Binding Name}" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="37" Width="416" FontSize="18.667"/>
-                <TextBlock Text="{Binding Address}" Margin="10,52,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="416" FontSize="21.333"/>
-                <TextBlock Text="{Binding PhoneNumber}" Margin="431,52,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="174" FontSize="24" />
-                <TextBlock Text="{Binding ShortName}" Margin="532,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="22" Width="73" FontSize="16"/>
+                <TextBlock Text="{Binding Institution.Name}" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="37" Width="416" FontSize="18.667"/>
+                <TextBlock Text="{Binding Institution.Address}" Margin="10,52,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="416" FontSize="21.333"/>
+                <TextBlock Text="{Binding Institution.PhoneNumber}" Margin="431,52,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="174" FontSize="24" />
+                <TextBlock Text="{Binding Institution.ShortName}" Margin="532,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="22" Width="73" FontSize="16"/>
 
 
             </Grid>

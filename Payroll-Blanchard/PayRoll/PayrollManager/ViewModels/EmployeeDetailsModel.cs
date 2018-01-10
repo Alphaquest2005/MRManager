@@ -31,7 +31,7 @@ namespace PayrollManager
                 
                 SaveDatabase(ctx);
             }
-            GetEmployees();
+            LoadEmployees();
             OnStaticPropertyChanged("CurrentEmployee");
             OnStaticPropertyChanged("Employees");
 
@@ -65,7 +65,7 @@ namespace PayrollManager
                     SaveDatabase(ctx);
                 }
                 CurrentEmployee = null;
-                GetEmployees();
+                LoadEmployees();
                 OnStaticPropertyChanged("CurrentEmployee");
                 OnStaticPropertyChanged("Employees");
             }
@@ -103,8 +103,8 @@ namespace PayrollManager
             if(p.AccountId != 0)
             using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
             {
-                var ritm = ctx.Accounts.OfType<EmployeeAccount>().FirstOrDefault(x => x.AccountId == p.AccountId);
-                ctx.Accounts.DeleteObject(ritm);
+                var ritm = ctx.EmployeeAccounts.FirstOrDefault(x => x.AccountId == p.AccountId);
+                ctx.EmployeeAccounts.DeleteObject(ritm);
                 OnStaticPropertyChanged("CurrentEmployee");
                 OnStaticPropertyChanged("EmployeeAccounts");
             }

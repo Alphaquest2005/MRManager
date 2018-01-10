@@ -104,7 +104,7 @@ namespace PayrollManager
                             pi =>
                                 pi.PayrollJob.EndDate.Month == ReportDate.Month &&
                                 pi.PayrollJob.EndDate.Year == ReportDate.Year)
-                        .Include(x => x.PayrollJob.Company)
+                        .Include(x => x.PayrollJob.Company.Institution)
                         
                         .OrderByDescending(x => x.IncomeDeduction)
                         .ThenBy(x => x.PayrollSetupItem == null ? x.Priority : x.PayrollSetupItem.Priority)
@@ -124,6 +124,7 @@ namespace PayrollManager
                     {
                         z.PayrollJobReference.Load();
                         z.PayrollJob.CompanyReference.Load();
+                        z.PayrollJob.Company.InstitutionReference.Load();
                     }));
                     return plst;
                     
@@ -221,7 +222,7 @@ namespace PayrollManager
 	        {
                 if (plist == null) return;
 	            _eb = plist.Pivot(
-	                X => X.PayrollItems.GroupBy(p => p.PayrollJob.Company.Name)
+	                X => X.PayrollItems.GroupBy(p => p.PayrollJob.Company.Institution.Name)
 	                        .Select(g => new CompaniesSummary {CompanyName = g.Key, Total = g.Sum(p => p.Amount)}),
 	                X => X.CompanyName, X => X.Total, true, null).ToList();
 	        }

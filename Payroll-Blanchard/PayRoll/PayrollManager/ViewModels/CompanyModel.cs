@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Data;
 using System.ComponentModel;
-using System.Data;
 using System.Windows;
 using System.Linq;
+using System.Data.Entity;
 using PayrollManager.DataLayer;
 
 namespace PayrollManager
@@ -23,7 +23,7 @@ namespace PayrollManager
                 "Are you sure you want to Delete this Company?",
                 "Delete Payroll Job", MessageBoxButton.YesNo);
             if (res == MessageBoxResult.No) return;
-            if (CurrentCompany.CompanyId != 0)
+            if (CurrentCompany.InstitutionId != 0)
                 using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
                 {
                     ctx.Companies.Attach(CurrentCompany);
@@ -46,12 +46,12 @@ namespace PayrollManager
             {
 
                 newCompany = ctx.Companies.CreateObject<DataLayer.Company>();
+                newCompany.Institution = ctx.Institutions.CreateObject<DataLayer.Institution>();
 
-
-                newCompany.Name = "Name";
-                newCompany.ShortName = "Short Name";
-                newCompany.Address = "Address";
-                newCompany.PhoneNumber = "Phone Number";
+                newCompany.Institution.Name = "Name";
+                newCompany.Institution.ShortName = "Short Name";
+                newCompany.Institution.Address = "Address";
+                newCompany.Institution.PhoneNumber = "Phone Number";
                 ctx.Companies.AddObject(newCompany);
                 SaveDatabase(ctx);
             }
@@ -64,28 +64,30 @@ namespace PayrollManager
 
         public void SaveCompany()
         {
-            var companyId = CurrentCompany.CompanyId;
+            var InstitutionId = CurrentCompany.InstitutionId;
             using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
             {
                 if (CurrentCompany == null) return;
 
-                if (CurrentCompany.CompanyId == 0)
+                if (CurrentCompany.InstitutionId == 0)
                 {
                     ctx.Companies.AddObject(CurrentCompany);
                 }
                 else
                 {
-                    if (CurrentCompany.EntityState == EntityState.Added) return;
-                    var ritm = ctx.Companies.First(x => x.CompanyId == CurrentCompany.CompanyId);
-                    ctx.Companies.Attach(ritm);
-                    ctx.Companies.ApplyCurrentValues(CurrentCompany);
+                    if (CurrentCompany.EntityState == System.Data.EntityState.Added) return;
+                    var ritm = ctx.Institutions.First(x => x.InstitutionId == CurrentCompany.InstitutionId);
+                    ctx.Institutions.Attach(ritm);
+                    ctx.Institutions.ApplyCurrentValues(CurrentCompany.Institution);
+
+
                 }
 
                 SaveDatabase(ctx);
             }
 
             OnStaticPropertyChanged("Companies");
-            CycleCurrentCompany(companyId);
+            CycleCurrentCompany(InstitutionId);
         }
     }
 }

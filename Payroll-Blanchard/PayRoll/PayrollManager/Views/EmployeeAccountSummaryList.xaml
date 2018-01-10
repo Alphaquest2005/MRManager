@@ -5,20 +5,21 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
 	xmlns:local="clr-namespace:PayrollManager"
+	xmlns:dataLayer="clr-namespace:PayrollManager.DataLayer"
 	x:Class="PayrollManager.EmployeeAccountSummaryList"
 	d:DesignWidth="640" d:DesignHeight="480">
 	<UserControl.Resources>
         <local:AccountsSummaryModel x:Key="AccountsSummaryModelDataSource" />
         <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
-        <DataTemplate x:Key="ItmTemplate">
+        <DataTemplate x:Key="ItmTemplate" DataType="dataLayer:EmployeeAccount">
             <Grid Height="54.62" AllowDrop="True">
                 <TextBlock HorizontalAlignment="Right" Text="{Binding Total, StringFormat=c}" RenderTransformOrigin="0.5,0.5" Width="106" Margin="0,0,-0.48,16.62" FontSize="24" TextAlignment="Right" />
-                <TextBlock Text="{Binding AccountName}" Height="Auto" Width="Auto" Margin="10,3,207.52,21.62" FontSize="18.667" TextWrapping="Wrap" />
+                <TextBlock Text="{Binding Account.AccountName}" Height="Auto" Width="Auto" Margin="10,3,207.52,21.62" FontSize="18.667" TextWrapping="Wrap" />
 
                 <TextBlock Text="{Binding Employee.DisplayName}" Margin="37.6,34.82,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="181.773"/>
-                <TextBlock Text="{Binding AccountNumber}" Margin="292.7,37.82,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="185.82"/>
+                <TextBlock Text="{Binding Account.AccountNumber}" Margin="292.7,37.82,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="185.82"/>
                 <TextBlock HorizontalAlignment="Left" Height="16.54" Margin="239.9,33.9,0,0" TextWrapping="Wrap" Text="Acct#:" VerticalAlignment="Top" Width="47.8"/>
-                <TextBlock Text="{Binding AccountType}" HorizontalAlignment="Right" Height="17" Margin="0,10,110.4,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="83"/>
+                <TextBlock Text="{Binding Account.AccountType}" HorizontalAlignment="Right" Height="17" Margin="0,10,110.4,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="83"/>
             </Grid>
         </DataTemplate>
         <local:AccountDetailsModel x:Key="AccountDetailsModelDataSource" />

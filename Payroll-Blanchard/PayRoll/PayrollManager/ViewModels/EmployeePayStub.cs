@@ -197,7 +197,7 @@ namespace PayrollManager
        {
            using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
            {
-               DataLayer.EmailTemplate etmp = ctx.EmailTemplate.FirstOrDefault(et => et.Key == "EmployeePayStub");
+               DataLayer.EmailTemplate etmp = ctx.EmailTemplates.FirstOrDefault(et => et.Key == "EmployeePayStub");
                if (CurrentEmployee.EmailAddress == null)
                {
                    MessageBox.Show("Please add employee's email address before proceding");

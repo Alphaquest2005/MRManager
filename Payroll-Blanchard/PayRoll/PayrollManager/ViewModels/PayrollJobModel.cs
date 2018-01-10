@@ -47,7 +47,7 @@ namespace PayrollManager
             {
 
                 newemp = ctx.PayrollJobs.CreateObject<DataLayer.PayrollJob>();
-                newemp.CompanyId = CurrentCompany.CompanyId;
+                newemp.CompanyId = CurrentCompany.InstitutionId;
                 newemp.PayrollJobType = ctx.PayrollJobTypes.FirstOrDefault();
                 newemp.StartDate = DateTime.Now;
                 newemp.EndDate = DateTime.Now;

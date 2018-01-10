@@ -20,20 +20,20 @@ namespace PayrollManager
 		private void PayrollSetupItemsModel_staticPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
 			OnPropertyChanged(e.PropertyName);
-			if (e.PropertyName == "InstitutionAccounts")
+			if (e.PropertyName == "Accounts")
 			{
-				OnPropertyChanged("InstitutionAccountsList");
+				OnPropertyChanged("AccountsList");
 			}
 		}
 
-		public ObservableCollection<DataLayer.InstitutionAccount> InstitutionAccountsList
+		public ObservableCollection<DataLayer.Account> AccountsList
 		{
 			get
 			{
 				using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
 				{
-					return new ObservableCollection<DataLayer.InstitutionAccount>(ctx.Accounts
-						.OfType<DataLayer.InstitutionAccount>());
+					return new ObservableCollection<DataLayer.Account>(ctx.Accounts
+						.OfType<DataLayer.Account>());
 				}
 			}
 		}

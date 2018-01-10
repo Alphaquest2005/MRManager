@@ -12,32 +12,32 @@ namespace PayrollManager
 	public class AccountDetailsModel : BaseViewModel
 	{
 		
-        public void SaveInstitutionAccount()
+        public void SaveAccount()
         {
 
 
             using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
             {
-                if (CurrentInstitutionAccount == null) return;
-                if (CurrentInstitutionAccount.AccountId == 0)
+                if (CurrentAccount == null) return;
+                if (CurrentAccount.AccountId == 0)
                 {
-                    ctx.Accounts.AddObject(CurrentInstitutionAccount);
+                    ctx.Accounts.AddObject(CurrentAccount);
                 }
                 else
                 {
-                    if (CurrentInstitutionAccount.EntityState == EntityState.Added) return;
-                    var ritm = ctx.Accounts.First(x => x.AccountId == CurrentInstitutionAccount.AccountId);
+                    if (CurrentAccount.EntityState == EntityState.Added) return;
+                    var ritm = ctx.Accounts.First(x => x.AccountId == CurrentAccount.AccountId);
                 ctx.Accounts.Attach(ritm);
-                ctx.Accounts.ApplyCurrentValues(CurrentInstitutionAccount);
+                ctx.Accounts.ApplyCurrentValues(CurrentAccount);
                 }
                 
                 SaveDatabase(ctx);
             }
            
            
-            OnStaticPropertyChanged("CurrentInstitutionAccount");
-           // CycleInstitutionAccounts();
-            OnStaticPropertyChanged("InstitutionAccounts");
+            OnStaticPropertyChanged("CurrentAccount");
+           // CycleAccounts();
+            OnStaticPropertyChanged("Accounts");
 
         }
 
@@ -46,23 +46,23 @@ namespace PayrollManager
 
 
 
-        public void EditAccount(DataLayer.InstitutionAccount acc)
+        public void EditAccount(DataLayer.Account acc)
         {
-            CurrentInstitutionAccount = acc;
+            CurrentAccount = acc;
         }
 
 	    public void DeleteInstitionAccount()
 	    {
-            if (CurrentInstitutionAccount == null) return;
-            if (CurrentInstitutionAccount.AccountId != 0)
+            if (CurrentAccount == null) return;
+            if (CurrentAccount.AccountId != 0)
 	            using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
 	            {
-	                var ritm = ctx.Accounts.First(x => x.AccountId == CurrentInstitutionAccount.AccountId);
+	                var ritm = ctx.Accounts.First(x => x.AccountId == CurrentAccount.AccountId);
 	                ctx.Accounts.DeleteObject(ritm);
 	                SaveDatabase(ctx);
 
 	            }
-	        CurrentInstitutionAccount = null;
+	        CurrentAccount = null;
 
 	    }
 
@@ -71,16 +71,16 @@ namespace PayrollManager
 
 
 
-	    public void NewInstitutionAccount()
+	    public void NewAccount()
         {
             using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
             {
-                DataLayer.InstitutionAccount newemp =
-                    ctx.Accounts.CreateObject<DataLayer.InstitutionAccount>();
+                DataLayer.Account newemp =
+                    ctx.Accounts.CreateObject<DataLayer.Account>();
                 ctx.Accounts.AddObject(newemp);
 
-                CurrentInstitutionAccount = newemp;
-                OnPropertyChanged("CurrentInstitutionAccount");
+                CurrentAccount = newemp;
+                OnPropertyChanged("CurrentAccount");
             }
         }
 

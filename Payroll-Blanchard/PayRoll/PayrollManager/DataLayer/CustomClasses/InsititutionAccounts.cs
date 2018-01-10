@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace PayrollManager.DataLayer
 {
-   public partial class InstitutionAccount
-    {
+   //public partial class Account
+   // {
        
            
-    }
+   // }
 }

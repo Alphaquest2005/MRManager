@@ -49,7 +49,7 @@ namespace PayrollManager
 
         private void Editbtn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            im.EditAccount((DataLayer.EmployeeAccount)((FrameworkElement)sender).DataContext);
+            im.EditAccount(((DataLayer.EmployeeAccount)((FrameworkElement)sender).DataContext).Account);
         }
 
 
@@ -71,23 +71,23 @@ namespace PayrollManager
 	                DataLayer.EmployeeAccount ne = (DataLayer.EmployeeAccount) e.Row.Item;
 	                
 	                var inst = ctx.Institutions
-	                    .FirstOrDefault(i => i.InstitutionId == ne.InstitutionId);
+	                    .FirstOrDefault(i => i.InstitutionId == ne.Account.InstitutionId);
 	                if (inst != null)
 	                {
 	                    ne.EmployeeId = emp.EmployeeId;
-	                    ne.AccountName = emp.FirstName + " " +
+	                    ne.Account.AccountName = emp.FirstName + " " +
 	                                     inst.ShortName +
 	                                     " Salary Account";
-	                    ne.AccountTypeId = ctx.AccountTypes.First(x => x.Name == "Salary").AccountTypeId;
+	                    ne.Account.AccountTypeId = ctx.AccountTypes.First(x => x.Name == "Salary").AccountTypeId;
 	                    if (ne.AccountId == 0)
 	                    {
-	                        ctx.Accounts.AddObject(ne);
+	                        ctx.EmployeeAccounts.AddObject(ne);
 	                    }
 	                    else
 	                    {
-	                        var ritm = ctx.Accounts.OfType<EmployeeAccount>().First(x => x.AccountId == ne.AccountId);
-	                    ctx.Accounts.Attach(ritm);
-	                    ctx.Accounts.ApplyCurrentValues(ne);
+	                        var ritm = ctx.EmployeeAccounts.First(x => x.AccountId == ne.AccountId);
+	                    ctx.EmployeeAccounts.Attach(ritm);
+	                    ctx.EmployeeAccounts.ApplyCurrentValues(ne);
 	                    }
 	                    
 	                    BaseViewModel.SaveDatabase(ctx);
@@ -103,6 +103,13 @@ namespace PayrollManager
             im.EmployeeAutoSetup();
         }
 
-      
+
+
+
+	    private void RowBeginEdit(object sender, DataGridBeginningEditEventArgs e)
+	    {
+	        DataLayer.EmployeeAccount ne = (DataLayer.EmployeeAccount)e.Row.Item;
+	        if(ne?.AccountId == 0 && ne.Account == null) ne.Account = new Account();
+        }
 	}
 }

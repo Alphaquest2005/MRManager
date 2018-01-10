@@ -24,7 +24,7 @@
     <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource EmployeeDetailsModelDataSource}, Path=CurrentEmployee}" Margin="0,61,0.4,0.484">
         <Grid HorizontalAlignment="Left"  Margin="0,0,0,-0.484" VerticalAlignment="Top" Width="594" Height="439">
             <ComboBox SelectedValue="{Binding CompanyId}" 
-					DisplayMemberPath="Name" SelectedValuePath="CompanyId" ItemsSource="{Binding Companies, Source={StaticResource EmployeeDetailsModelDataSource}}"
+					DisplayMemberPath="Institution.Name" SelectedValuePath="InstitutionId" ItemsSource="{Binding Companies, Source={StaticResource EmployeeDetailsModelDataSource}}"
 					Margin="405,81,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="166"/>
             <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" Margin="120,54,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="166"/>
             <TextBlock HorizontalAlignment="Left" Height="20.323" Margin="28.316,53.833,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75.063" TextAlignment="Right"><Run Text="First Name"/><LineBreak/><Run/></TextBlock>
@@ -45,18 +45,17 @@
             <TextBlock x:Name="DeleteBtn" HorizontalAlignment="Left" Height="39" Margin="528,377,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35" TextAlignment="Center" Style="{DynamicResource CloseButtonStyle}" FontSize="26.667" MouseLeftButtonDown="DeleteBtn_MouseLeftButtonDown"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="&#xE106;"/></Span><LineBreak/><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run/></Span></TextBlock>
             <TextBlock x:Name="NewBtn" HorizontalAlignment="Left" Height="39" Margin="379,377,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="26.667" Text="&#xE109;" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="NewBtn_MouseLeftButtonDown"/>
             <DatePicker SelectedDate="{Binding EmploymentStartDate, UpdateSourceTrigger=PropertyChanged, TargetNullValue={x:Static sys:DateTime.Now}}"  HorizontalAlignment="Left" Height="28" Margin="406,116,0,0" VerticalAlignment="Top" Width="166"/>
-            <DataGrid ItemsSource="{Binding EmployeeAccounts}" HorizontalAlignment="Left" Height="119" Margin="28,228,0,0" VerticalAlignment="Top" Width="543" AutoGenerateColumns="False" MinRowHeight="30" RowHeight="30" RenderTransformOrigin="0.5,0.5" AlternatingRowBackground="#FFE6F0F4" RowBackground="White" GridLinesVisibility="None"  RowEditEnding="DataGrid_RowEditEnding_1" IsTextSearchEnabled="True" ClipboardCopyMode="IncludeHeader"  >
+            <DataGrid ItemsSource="{Binding EmployeeAccounts}" HorizontalAlignment="Left" Height="119" Margin="28,228,0,0" VerticalAlignment="Top" Width="543" AutoGenerateColumns="False" MinRowHeight="30" RowHeight="30" RenderTransformOrigin="0.5,0.5" AlternatingRowBackground="#FFE6F0F4" RowBackground="White" GridLinesVisibility="None" BeginningEdit="RowBeginEdit" RowEditEnding="DataGrid_RowEditEnding_1" IsTextSearchEnabled="True" ClipboardCopyMode="IncludeHeader"  >
                 <DataGrid.Columns>
-                    <DataGridComboBoxColumn Header="Institution" SelectedValueBinding="{Binding InstitutionId, UpdateSourceTrigger=PropertyChanged}" Width="150"
+                    <DataGridComboBoxColumn Header="Institution" SelectedValueBinding="{Binding Account.InstitutionId, UpdateSourceTrigger=PropertyChanged}" Width="150"
 						DisplayMemberPath="Name" SelectedValuePath="InstitutionId" ItemsSource="{Binding Institutions, Source={StaticResource EmployeeDetailsModelDataSource}}"/>
-                    <DataGridTextColumn Header="Account Number" Binding="{Binding AccountNumber, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+                    <DataGridTextColumn Header="Account Number" Binding="{Binding Account.AccountNumber, UpdateSourceTrigger=PropertyChanged}" Width="150" />
                     <DataGridTextColumn Header="Salary Assignment" Binding="{Binding SalaryAssignment, StringFormat=c, UpdateSourceTrigger=PropertyChanged}" Width="150" />
                 </DataGrid.Columns>
             </DataGrid>
             <TextBlock HorizontalAlignment="Left" Height="40" Margin="314,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" TextAlignment="Right"><Run Text="Employment Start Date"/><LineBreak/><Run/></TextBlock>
             <TextBlock HorizontalAlignment="Left" Height="20" Margin="28,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" TextAlignment="Right"><Run Text="Employee Bank Accounts"/><LineBreak/><Run/></TextBlock>
-            <TextBlock x:Name="GenerateItms" HorizontalAlignment="Left" Height="26" Margin="212,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="14
-                       " MouseLeftButtonDown="GenerateItms_MouseLeftButtonDown" RenderTransformOrigin="1.527,0.277"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="Employee AutoSetup"/></Span></TextBlock>
+            
             <TextBox Text="{Binding EmailAddress, UpdateSourceTrigger=PropertyChanged}" Margin="120,151,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="166"/>
             <TextBlock HorizontalAlignment="Left" Height="21" Margin="28,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" TextAlignment="Right" Text="Email Address"/>
             <DatePicker SelectedDate="{Binding EmploymentEndDate,  UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Height="28" Margin="406,161,0,0" VerticalAlignment="Top" Width="166"/>
@@ -64,9 +63,11 @@
 
         </Grid>
         <TextBlock HorizontalAlignment="Left" Height="39" Margin="17,-44,0,0" TextWrapping="Wrap" Text="Add/Edit Employees" VerticalAlignment="Top" Width="202" FontSize="21.333"/>
-        <ComboBox  SelectedItem="{Binding CurrentPayrollJobType}"
+        <!--<ComboBox  SelectedItem="{Binding CurrentPayrollJobType}"
 			DisplayMemberPath="Name" SelectedValuePath="PayrollJobTypeId" ItemsSource="{Binding PayrollJobTypes, Source={StaticResource EmployeeDetailsModelDataSource}}"
 			Margin="32,384,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="162" FontSize="16"/>
         <TextBlock HorizontalAlignment="Left" Height="25" Margin="32,354,0,0" TextWrapping="Wrap" Text="Select Payroll Job Type to Auto Generate" VerticalAlignment="Top" Width="259" FontSize="14"/>
+        <TextBlock x:Name="GenerateItms" HorizontalAlignment="Left" Height="26" Margin="212,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="14
+                       " MouseLeftButtonDown="GenerateItms_MouseLeftButtonDown" RenderTransformOrigin="1.527,0.277"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="Employee AutoSetup"/></Span></TextBlock>-->
     </Grid>
 </UserControl>
