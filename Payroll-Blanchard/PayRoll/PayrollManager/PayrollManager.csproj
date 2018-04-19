@@ -187,7 +187,7 @@
     <Compile Include="Views\AccountsSummary.xaml.cs">
       <DependentUpon>AccountsSummary.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AccountsSummaryReport.xaml.cs">
+    <Compile Include="Views\Reports\AccountsSummaryReport.xaml.cs">
       <DependentUpon>AccountsSummaryReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BranchPayrollItemBreakDown.xaml.cs">
@@ -208,7 +208,7 @@
     <Compile Include="Views\EmployeeBreakDownReport.xaml.cs">
       <DependentUpon>EmployeeBreakDownReport.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EmployeePaysub.xaml.cs">
+    <Compile Include="Views\Reports\EmployeePaysub.xaml.cs">
       <DependentUpon>EmployeePaysub.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EmployeeSummaryList.xaml.cs">
@@ -307,7 +307,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\AccountsSummaryReport.xaml">
+    <Page Include="Views\Reports\AccountsSummaryReport.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -335,7 +335,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\EmployeePaysub.xaml">
+    <Page Include="Views\Reports\EmployeePaysub.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

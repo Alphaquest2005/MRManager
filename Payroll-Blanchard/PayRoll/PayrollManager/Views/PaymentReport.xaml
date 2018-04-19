@@ -36,40 +36,47 @@
         <Border x:Name="ReportBRD" Margin="25,80,4.716,28" Width="867" Padding="0,0,0,40">
             <ScrollViewer x:Name="ReportGrd" Margin="0,0,0,0"  CanContentScroll="True" >
                 <Grid x:Name="DailyReportGD" HorizontalAlignment="Center" Height="Auto" VerticalAlignment="Top" Width="816" Background="White" >
-                    <Grid HorizontalAlignment="Left" Height="38" Margin="40,97,0,0" VerticalAlignment="Top" Width="734"  Background="#FFD7D7D7">
-                        <TextBlock Text="{Binding NetTotal, StringFormat=c}" Margin="557,2,0,0" TextAlignment="Right" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177" Height="36" FontSize="21.333" Foreground="#FF353623"/>
+                    <Grid Margin="0,10,0,20" VerticalAlignment="Top">
+                        <Border Height="3" Margin="0,89,0,0" VerticalAlignment="Top"   Background="#FFD7D7D7"/>
+                        <TextBlock Text="{Binding CurrentCompany.Institution.Name}" Height="32" Margin="40,0,0,0" TextWrapping="Wrap"  VerticalAlignment="Top"  FontSize="25" Foreground="Black" Background="White"/>
+                        <TextBlock Text="{Binding CurrentCompany.Institution.PhoneNumber}" Height="23" Margin="40,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Background="White"/>
+                        <TextBlock Text="{Binding CurrentCompany.Institution.Address}" Height="21" Margin="40,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  Foreground="Black" Background="White"/>
+
                     </Grid>
-                    <TextBlock HorizontalAlignment="Center" Height="31.8" Margin="460,65.2,42,0" TextWrapping="Wrap" Text="Payment Report" VerticalAlignment="Top" Width="314" FontSize="25" TextAlignment="Right" Foreground="Black" Background="White"/>
-                    <TextBlock Text="{Binding Instance.Date, StringFormat=D}" Margin="154.3,64.8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14.667" Foreground="Black"/>
-                    <StackPanel Margin="40,140,42,20" Orientation="Vertical">
-                        <StackPanel Margin="10,0,10.4,0" Orientation="Horizontal" HorizontalAlignment="Stretch" Height="50">
-                            <TextBlock Text="Debits" HorizontalAlignment="Left" Height="34" TextWrapping="Wrap" VerticalAlignment="Top" Width="489" FontSize="20" Foreground="#FF393939" TextAlignment="Left" Margin="0,0,0,0"/>
-                            <TextBlock Text="{Binding NetTotalDebit, StringFormat=c}" HorizontalAlignment="Right" Height="34" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" FontSize="20" Foreground="#FF393939" TextAlignment="Left"/>
+                    <Grid Margin="0,125,0,0">
+                        <Grid HorizontalAlignment="Left" Height="38" Margin="40,97,0,0" VerticalAlignment="Top" Width="734"  Background="#FFD7D7D7">
+                            <TextBlock Text="{Binding NetTotal, StringFormat=c}" Margin="557,2,0,0" TextAlignment="Right" HorizontalAlignment="Left" VerticalAlignment="Top" Width="177" Height="36" FontSize="21.333" Foreground="#FF353623"/>
+                        </Grid>
+                        <TextBlock HorizontalAlignment="Center" Height="31.8" Margin="460,65.2,42,0" TextWrapping="Wrap" Text="Payment Report" VerticalAlignment="Top" Width="314" FontSize="25" TextAlignment="Right" Foreground="Black" Background="White"/>
+                        <TextBlock Text="{Binding Instance.Date, StringFormat=D}" Margin="601,23,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14.667" Foreground="Black" Width="173"/>
+                        <StackPanel Margin="40,140,42,20" Orientation="Vertical">
+                            <StackPanel Margin="10,0,10.4,0" Orientation="Horizontal" HorizontalAlignment="Stretch" Height="50">
+                                <TextBlock Text="Debits" HorizontalAlignment="Left" Height="34" TextWrapping="Wrap" VerticalAlignment="Top" Width="489" FontSize="20" Foreground="#FF393939" TextAlignment="Left" Margin="0,0,0,0"/>
+                                <TextBlock Text="{Binding NetTotalDebit, StringFormat=c}" HorizontalAlignment="Right" Height="34" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" FontSize="20" Foreground="#FF393939" TextAlignment="Left"/>
+                            </StackPanel>
+                            <DataGrid ItemsSource="{Binding CurrentEmpNetDebitEntries}" HorizontalAlignment="Left"  Height="Auto" VerticalAlignment="Top" Width="690" Background="White" AutoGenerateColumns="False" CanUserAddRows="False" RowHeight="28" GridLinesVisibility="None" AlternatingRowBackground="#FFCFCCCC" FontSize="16" Margin="13,0,0,15" ClipboardCopyMode="IncludeHeader"  >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Employee" Binding="{Binding Employee, Mode=OneWay}" Width="200" ClipboardContentBinding="{x:Null}"/>
+                                    <!--<DataGridTextColumn Header="Description" Binding="{Binding PayrollItem.Name, StringFormat=Memo: \{0\}}" Width="150" ClipboardContentBinding="{x:Null}"/>-->
+                                    <DataGridTextColumn Header="Account Number" Binding="{Binding Account.AccountNumber, StringFormat=Acct#: \{0\}}" Width="150" ClipboardContentBinding="{x:Null}"/>
+                                    <DataGridTextColumn Header="Amount" Binding="{Binding Total, StringFormat=c}" ClipboardContentBinding="{x:Null}" Width="100" ElementStyle="{StaticResource AlignRight}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <StackPanel Margin="10,0,10.4,0" Orientation="Horizontal" HorizontalAlignment="Stretch" Height="50">
+                                <TextBlock Text="Credits" HorizontalAlignment="Left" Height="34" TextWrapping="Wrap" VerticalAlignment="Top" Width="489" FontSize="20" Foreground="#FF393939" TextAlignment="Left" Margin="0,0,0,0"/>
+                                <TextBlock Text="{Binding NetTotalCredit, StringFormat=c}" HorizontalAlignment="Right" Height="34" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" FontSize="20" Foreground="#FF393939" TextAlignment="Left"/>
+                            </StackPanel>
+                            <DataGrid ItemsSource="{Binding CurrentEmpNetCreditEntries}" HorizontalAlignment="Left"  Height="Auto" VerticalAlignment="Top" Width="690" Background="White" AutoGenerateColumns="False" CanUserAddRows="False" RowHeight="28" GridLinesVisibility="None" AlternatingRowBackground="#FFCFCCCC" FontSize="16" Margin="12,0,0,0" ClipboardCopyMode="IncludeHeader" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Employee" Binding="{Binding Employee, Mode=OneWay}" Width="200" ClipboardContentBinding="{x:Null}"/>
+                                    <!--<DataGridTextColumn Header="Description" Binding="{Binding PayrollItem.Name, StringFormat=Memo: \{0\}}" Width="150" ClipboardContentBinding="{x:Null}"/>-->
+                                    <DataGridTextColumn Header="Account Number" Binding="{Binding Account.AccountNumber, StringFormat=Acct#: \{0\}}" Width="150" ClipboardContentBinding="{x:Null}"/>
+                                    <DataGridTextColumn Header="Amount" Binding="{Binding Total, StringFormat=c}" ClipboardContentBinding="{x:Null}" Width="100" ElementStyle="{StaticResource AlignRight}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </StackPanel>
-                        <DataGrid ItemsSource="{Binding CurrentEmpNetDebitEntries}" HorizontalAlignment="Left"  Height="Auto" VerticalAlignment="Top" Width="690" Background="White" AutoGenerateColumns="False" CanUserAddRows="False" RowHeight="28" GridLinesVisibility="None" AlternatingRowBackground="#FFCFCCCC" FontSize="16" Margin="13,0,0,15" ClipboardCopyMode="IncludeHeader"  >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Employee" Binding="{Binding Employee, Mode=OneWay}" Width="200" ClipboardContentBinding="{x:Null}"/>
-                                <!--<DataGridTextColumn Header="Description" Binding="{Binding PayrollItem.Name, StringFormat=Memo: \{0\}}" Width="150" ClipboardContentBinding="{x:Null}"/>-->
-                                <DataGridTextColumn Header="Account Number" Binding="{Binding Account.AccountNumber, StringFormat=Acct#: \{0\}}" Width="150" ClipboardContentBinding="{x:Null}"/>
-                                <DataGridTextColumn Header="Amount" Binding="{Binding Total, StringFormat=c}" ClipboardContentBinding="{x:Null}" Width="100" ElementStyle="{StaticResource AlignRight}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                        <StackPanel Margin="10,0,10.4,0" Orientation="Horizontal" HorizontalAlignment="Stretch" Height="50">
-                            <TextBlock Text="Credits" HorizontalAlignment="Left" Height="34" TextWrapping="Wrap" VerticalAlignment="Top" Width="489" FontSize="20" Foreground="#FF393939" TextAlignment="Left" Margin="0,0,0,0"/>
-                            <TextBlock Text="{Binding NetTotalCredit, StringFormat=c}" HorizontalAlignment="Right" Height="34" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" FontSize="20" Foreground="#FF393939" TextAlignment="Left"/>
-                        </StackPanel>
-                        <DataGrid ItemsSource="{Binding CurrentEmpNetCreditEntries}" HorizontalAlignment="Left"  Height="Auto" VerticalAlignment="Top" Width="690" Background="White" AutoGenerateColumns="False" CanUserAddRows="False" RowHeight="28" GridLinesVisibility="None" AlternatingRowBackground="#FFCFCCCC" FontSize="16" Margin="12,0,0,0" ClipboardCopyMode="IncludeHeader" >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Employee" Binding="{Binding Employee, Mode=OneWay}" Width="200" ClipboardContentBinding="{x:Null}"/>
-                                <!--<DataGridTextColumn Header="Description" Binding="{Binding PayrollItem.Name, StringFormat=Memo: \{0\}}" Width="150" ClipboardContentBinding="{x:Null}"/>-->
-                                <DataGridTextColumn Header="Account Number" Binding="{Binding Account.AccountNumber, StringFormat=Acct#: \{0\}}" Width="150" ClipboardContentBinding="{x:Null}"/>
-                                <DataGridTextColumn Header="Amount" Binding="{Binding Total, StringFormat=c}" ClipboardContentBinding="{x:Null}" Width="100" ElementStyle="{StaticResource AlignRight}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </StackPanel>
-                    <TextBlock HorizontalAlignment="Left" Height="29.6" Margin="37.3,13.4,0,0" TextWrapping="Wrap" Text="{Binding Instance.CurrentAccount.Institution.Name}" VerticalAlignment="Top" Width="243.2" FontSize="24"/>
-                    <TextBlock HorizontalAlignment="Left" Height="20" Margin="37.3,48,0,0" TextWrapping="Wrap" Text="{Binding Instance.CurrentAccount.AccountName}" VerticalAlignment="Top" Width="243.2" FontSize="16"/>
-                    <TextBlock HorizontalAlignment="Left" Height="20" Margin="37.3,65.2,0,0" TextWrapping="Wrap" Text="{Binding Instance.CurrentAccount.AccountNumber}" VerticalAlignment="Top" Width="243.2" FontSize="16"/>
+                        
+                    </Grid>
                 </Grid>
             </ScrollViewer>
         </Border>

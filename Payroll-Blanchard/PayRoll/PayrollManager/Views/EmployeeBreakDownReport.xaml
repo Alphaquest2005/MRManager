@@ -15,11 +15,19 @@
         <ScrollViewer x:Name="ReportBRD" Margin="0,45,0,10"  Width="Auto" HorizontalScrollBarVisibility="Auto" CanContentScroll="True" >
             <ScrollViewer x:Name="ReportGrd" Margin="0,0,0,10" Width="Auto" CanContentScroll="True" >
                 <Grid x:Name="DailyReportGD" DataContext="{Binding}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="1344" Background="White" MinWidth="1056">
+                    <Grid Margin="0,10,0,20" VerticalAlignment="Top">
+                        <Border Height="3" Margin="0,89,0,0" VerticalAlignment="Top"   Background="#FFD7D7D7"/>
+                        <TextBlock Text="{Binding CurrentCompany.Institution.Name}" Height="32" Margin="40,0,0,0" TextWrapping="Wrap"  VerticalAlignment="Top"  FontSize="25" Foreground="Black" Background="White"/>
+                        <TextBlock Text="{Binding CurrentCompany.Institution.PhoneNumber}" Height="23" Margin="40,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" Background="White"/>
+                        <TextBlock Text="{Binding CurrentCompany.Institution.Address}" Height="21" Margin="40,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  Foreground="Black" Background="White"/>
+
+                    </Grid>
+                    <Grid Margin="0,125,0,0">
                     <Grid HorizontalAlignment="Stretch" Height="38" Margin="40,97,0,0" VerticalAlignment="Top" Width="Auto"  Background="#FFD7D7D7">
                         <TextBlock Text="{Binding PayrollJobTotal, StringFormat='Gross Job Amount {0:c}'}" Margin="388,2,42,0" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Width="346" Height="36" FontSize="21.333" Foreground="#FF353623"/>
                     </Grid>
                     <TextBlock HorizontalAlignment="Right" Height="31.8" Margin="460,65.2,42,0" TextWrapping="Wrap" Text="Employee Breakdown" VerticalAlignment="Top" Width="314" FontSize="25" TextAlignment="Right" Foreground="Black" Background="White"/>
-                    <TextBlock Text="{Binding Date}" Margin="546,13,42,0" HorizontalAlignment="right" VerticalAlignment="Top" FontSize="14.667" Foreground="Black" Width="228" TextAlignment="Right"/>
+                        <TextBlock Text="{Binding Date, StringFormat=D}" Margin="546,13,42,0" HorizontalAlignment="right" VerticalAlignment="Top" FontSize="14.667" Foreground="Black" Width="228" TextAlignment="Right"/>
                     <StackPanel Margin="40,140,42,10" Orientation="Vertical" Width="Auto">
                         <TextBlock HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" Margin="0,15,0,15" FontSize="20" Foreground="#FF393939" TextAlignment="Left" Text="Payroll Item Summary"/>
                         <DataGrid x:Name="GridData" HorizontalAlignment="Stretch"  Width="Auto" Margin="0" AlternatingRowBackground="#FFE6F0F4" RowBackground="White" GridLinesVisibility="None" VerticalAlignment="Top"  
@@ -31,6 +39,7 @@
                     <TextBlock HorizontalAlignment="Left" Height="20" Margin="37.3,48,0,0" TextWrapping="Wrap" Text="{Binding AccountName}" VerticalAlignment="Top" Width="243.2" FontSize="16"/>
                     <TextBlock HorizontalAlignment="Left" Height="24" Margin="40,73,0,0" TextWrapping="Wrap" Text="{Binding CurrentPayrollJob.Name}" VerticalAlignment="Top" Width="321" FontSize="16" FontWeight="Bold"/>
                 </Grid>
+                    </Grid>
             </ScrollViewer>
         </ScrollViewer>
         <TextBlock Style="{DynamicResource TextButtonStyle}"  HorizontalAlignment="Left" Height="30" Margin="951,10,0,0" TextWrapping="Wrap" Text="Print &#xE1A5;" VerticalAlignment="Top" Width="95" FontSize="20" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="PrintReport"/>

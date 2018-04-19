@@ -109,7 +109,7 @@ namespace PayrollManager
 
         private void ViewPayCheck(object sender, MouseButtonEventArgs e)
         {
-            BaseViewModel.slider.MoveTo("EmployeePayStubEXP");
+            BaseViewModel.slider.MoveTo("PayCheckEmployeeSummaryListEXP");//EmployeePayStubEXP
         }
 
         private void EmpSumTxt_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
@@ -169,7 +169,7 @@ namespace PayrollManager
 
         private void ReviewEmpChecks(object sender, MouseButtonEventArgs e)
         {
-            BaseViewModel.slider.MoveTo("EmployeePayStubEXP");   
+            BaseViewModel.slider.MoveTo("PayCheckEmployeeSummaryListEXP");   //EmployeePayStubEXP
         }
 
         private void ReviewInstPayments(object sender, MouseButtonEventArgs e)

@@ -160,8 +160,8 @@ namespace PayrollManager
                                    CurrentPayrollJob.EndDate.Year &&
                                    p.PayrollItem.PayrollJob.EndDate <=
                                    EntityFunctions.AddHours(CurrentPayrollJob.EndDate, 23)
-                                  ) && p.PayrollItem.EmployeeId == CurrentEmployee.EmployeeId &&
-                                  p.PayrollItem.ParentPayrollItem == null
+                                  ) && p.PayrollItem.EmployeeId == CurrentEmployee.EmployeeId 
+                                  && p.PayrollItem.ParentPayrollItem == null
                             group p by p.PayrollItem.Name
                             into pname
                             select new PayrollSummaryLineItem
