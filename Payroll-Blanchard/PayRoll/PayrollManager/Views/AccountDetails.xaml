@@ -25,12 +25,12 @@
 			<TextBlock x:Name="SaveBtn" HorizontalAlignment="Left" Height="39" Margin="378,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="26.667" MouseLeftButtonDown="SaveBtn_MouseLeftButtonDown"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="&#xE105;"/></Span></TextBlock>
 			<TextBlock x:Name="DeleteBtn" HorizontalAlignment="Left" Height="39" Margin="577,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="35" TextAlignment="Center" Style="{DynamicResource CloseButtonStyle}" FontSize="26.667" MouseLeftButtonDown="DeleteBtn_MouseLeftButtonDown"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="&#xE106;"/></Span><LineBreak/><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run/></Span></TextBlock>
 			<TextBlock x:Name="NewBtn" HorizontalAlignment="Left" Height="39" Margin="338,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="26.667" Text="&#xE109;" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="NewBtn_MouseLeftButtonDown"/>
-            <ComboBox Text="{Binding AccountType, UpdateSourceTrigger=PropertyChanged}" 
-            	DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding AccountTypes, Source={StaticResource AccountDetailsModelDataSource}}"
-            	Margin="123,143,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="199" IsEditable="True"/>
+            <ComboBox SelectedValue="{Binding AccountTypeId, UpdateSourceTrigger=PropertyChanged}" 
+            	DisplayMemberPath="Name" SelectedValuePath="AccountTypeId" ItemsSource="{Binding AccountTypes, Source={StaticResource AccountDetailsModelDataSource}}"
+            	Margin="123,143,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="199" />
             <TextBlock HorizontalAlignment="Left" Height="26" Margin="18,143,0,0" TextWrapping="Wrap" Text="Account Type" VerticalAlignment="Top" Width="100" FontSize="13.333" TextAlignment="Right"/>
-            <ComboBox  Name="AccountCmb"  SelectedValue="{Binding PayeeInstitutionId, UpdateSourceTrigger=PropertyChanged}"
-            	DisplayMemberPath="Name" SelectedValuePath="InstitutionId" ItemsSource="{Binding Institutions, Source={StaticResource AccountDetailsModelDataSource}}"
+            <ComboBox  Name="PayeeCmb"  SelectedValue="{Binding PayeeInstitutionId, UpdateSourceTrigger=PropertyChanged}"
+            	DisplayMemberPath="Name" SelectedValuePath="InstitutionId" ItemsSource="{Binding InstitutionsAndCompanies, Source={StaticResource AccountDetailsModelDataSource}}"
             	Margin="123,209,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="29" Width="309" />
             <TextBlock HorizontalAlignment="Left" Height="26" Margin="18,212,0,0" TextWrapping="Wrap" Text="Payee" VerticalAlignment="Top" Width="100" FontSize="13.333" TextAlignment="Right"/>
         </Grid>

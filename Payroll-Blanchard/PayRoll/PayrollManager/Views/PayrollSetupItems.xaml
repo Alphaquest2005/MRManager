@@ -21,14 +21,14 @@
                 <ColumnDefinition Width="17*"/>
             </Grid.ColumnDefinitions>
             <TextBox Text="{Binding Name, FallbackValue='Please add new Item', UpdateSourceTrigger=PropertyChanged}" Margin="29.894,23.348,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="33.403" Width="248.93" FontSize="21.333"/>
-            <TextBox Text="{Binding Priority}" Margin="101,121,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="95"/>
-            <TextBlock HorizontalAlignment="Left" Height="22" Margin="18,121,0,0" TextWrapping="Wrap" Text="Priority" VerticalAlignment="Top" Width="72" TextAlignment="Right"/>
+            <TextBox Text="{Binding Priority}" Margin="112,79,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="95"/>
+            <TextBlock HorizontalAlignment="Left" Height="22" Margin="29,79,0,0" TextWrapping="Wrap" Text="Priority" VerticalAlignment="Top" Width="72" TextAlignment="Right"/>
             <RadioButton GroupName="ItemType" IsChecked="{Binding IncomeDeduction, ConverterParameter=True, Converter={StaticResource EnumConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,23,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21" Width="74" Content="Income" Grid.Column="1"/>
             <RadioButton GroupName="ItemType" IsChecked="{Binding IncomeDeduction, ConverterParameter=False, Converter={StaticResource EnumConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,65,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21" Width="74" Content="Deduction" Grid.Column="1"/>
-            <ComboBox Text="{Binding EmployeeAccountType, UpdateSourceTrigger=PropertyChanged}"
-				DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding AccountTypes, Source={StaticResource PayrollSetupItemsModelDataSource}}"
-				Margin="111,155,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="22" Width="191" Grid.Column="1"/>
-            <TextBlock HorizontalAlignment="Left" Height="35" Margin="20,149,0,0" TextWrapping="Wrap" Text="Employee Account Type" VerticalAlignment="Top" Width="86" Grid.Column="1" TextAlignment="Right"/>
+            <!--<ComboBox Text="{Binding EmployeeAccountType, UpdateSourceTrigger=PropertyChanged}"
+				DisplayMemberPath="Name" SelectedValuePath="Name" ItemsSource="{Binding AccountTypes, Source={StaticResource PayrollSetupItemsModelDataSource}}"-->
+            <!--Margin="111,155,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="22" Width="191" Grid.Column="1"/>-->
+            <!--<TextBlock HorizontalAlignment="Left" Height="35" Margin="20,149,0,0" TextWrapping="Wrap" Text="Employee Account Type" VerticalAlignment="Top" Width="86" Grid.Column="1" TextAlignment="Right"/>-->
             <TextBlock x:Name="SaveBtn" Grid.Column="1" HorizontalAlignment="Left" Height="38.793" Margin="89.668,334.279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34.776" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="26.667" MouseLeftButtonDown="SaveBtn_MouseLeftButtonDown"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="&#xE105;"/></Span></TextBlock>
             <TextBlock x:Name="DeleteBtn" Grid.Column="1" HorizontalAlignment="Left" Height="38.793" Margin="288.374,334.279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34.776" TextAlignment="Center" Style="{DynamicResource CloseButtonStyle}" FontSize="26.667" MouseLeftButtonDown="DeleteBtn_MouseLeftButtonDown"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="&#xE106;"/></Span><LineBreak/><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run/></Span></TextBlock>
             <TextBlock x:Name="NewBtn" Grid.Column="1" HorizontalAlignment="Left" Height="38.793" Margin="48.855,334.279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34.776" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="26.667" Text="&#xE109;" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="NewBtn_MouseLeftButtonDown"/>
@@ -38,14 +38,14 @@
             	DisplayMemberPath="Name" SelectedValuePath="PayrollJobTypeId" ItemsSource="{Binding PayrollJobTypes, Source={StaticResource PayrollSetupItemsModelDataSource}}"
             	Margin="101,77,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="22" Width="191" Grid.Column="1"/>-->
             <!--<TextBlock HorizontalAlignment="Left" Height="35" Margin="10,71,0,0" TextWrapping="Wrap" Text="Payroll Job Type" VerticalAlignment="Top" Width="86" Grid.Column="1" TextAlignment="Right"/>-->
-            <ComboBox SelectedValue="{Binding PayrollItemAccountId, UpdateSourceTrigger=PropertyChanged}"
+            <!--<ComboBox SelectedValue="{Binding PayrollItemAccountId, UpdateSourceTrigger=PropertyChanged}"
+            	DisplayMemberPath="AccountName" SelectedValuePath="AccountId" ItemsSource="{Binding AccountsList, Source={StaticResource PayrollSetupItemsModelDataSource}}"-->
+            <!--Margin="111,115,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="22" Width="191" Grid.Column="1"/>-->
+            <!--<TextBlock HorizontalAlignment="Left" Height="35" Margin="20,109,0,0" TextWrapping="Wrap" Text="Job Item Account" VerticalAlignment="Top" Width="86" Grid.Column="1" TextAlignment="Right"/>-->
+            <!--ComboBox SelectedValue="{Binding CompanyAccountId, UpdateSourceTrigger=PropertyChanged}"
             	DisplayMemberPath="AccountName" SelectedValuePath="AccountId" ItemsSource="{Binding AccountsList, Source={StaticResource PayrollSetupItemsModelDataSource}}"
-            	Margin="111,115,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="22" Width="191" Grid.Column="1"/>
-            <TextBlock HorizontalAlignment="Left" Height="35" Margin="20,109,0,0" TextWrapping="Wrap" Text="Job Item Account" VerticalAlignment="Top" Width="86" Grid.Column="1" TextAlignment="Right"/>
-            <ComboBox SelectedValue="{Binding CompanyAccountId, UpdateSourceTrigger=PropertyChanged}"
-            	DisplayMemberPath="AccountName" SelectedValuePath="AccountId" ItemsSource="{Binding AccountsList, Source={StaticResource PayrollSetupItemsModelDataSource}}"
-            	Margin="101,161,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="22" Width="191"/>
-            <TextBlock HorizontalAlignment="Left" Height="35" Margin="10,155,0,0" TextWrapping="Wrap" Text="Company Account" VerticalAlignment="Top" Width="86" TextAlignment="Right"/>
+            	Margin="101,161,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="22" Width="191"/>-->
+            <!--<TextBlock HorizontalAlignment="Left" Height="35" Margin="10,155,0,0" TextWrapping="Wrap" Text="Company Account" VerticalAlignment="Top" Width="86" TextAlignment="Right"/>-->
             <TextBox Text="{Binding CompanyLineItemDescription, FallbackValue=Please add new Item, UpdateSourceTrigger=PropertyChanged}" Margin="101,195,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="189" FontSize="14"/>
             <TextBlock HorizontalAlignment="Left" Height="35" Margin="10,189,0,0" TextWrapping="Wrap" Text="Company Description" VerticalAlignment="Top" Width="86" TextAlignment="Right"/>
             <ComboBox SelectedValue="{Binding RateRounding, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Content"

@@ -75,7 +75,7 @@ namespace PayrollManager
 			}
 		}
 
-		private ObservableCollection<DataLayer.Employee> _employeelist = null;
+		private ObservableCollection<DataLayer.Employee> _employeelist = new ObservableCollection<Employee>();
 		//   public new ObservableCollection<DataLayer.Employee> Employees
 		//   {
 		//       get

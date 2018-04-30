@@ -60,6 +60,11 @@ namespace PayrollManager
       
         private void xgrid_InitializingNewItem(object sender, InitializingNewItemEventArgs e)
         {
+            if (EmployeeCmb.SelectedItem == null)
+            {
+                MessageBox.Show("Please Select Employee Above.");
+                return;
+            }
             ((DataLayer.PayrollEmployeeSetup)(e.NewItem)).EmployeeId = ((DataLayer.Employee)EmployeeCmb.SelectedItem).EmployeeId;
             ((DataLayer.PayrollEmployeeSetup)(e.NewItem)).StartDate = DateTime.Now;
         }
@@ -120,8 +125,11 @@ int amountChargeId;
                     TextBox t = (TextBox) (e.EditingElement);
                     if (t.Text != "$0.00") r.ChargeTypeId = rateChargeId;
                 }
-            
-            //im.SavePayrollEmployeeSetup();
+            if (im.CurrentPayrollEmployeeSetup.CreditAccountId == 0 ||
+                im.CurrentPayrollEmployeeSetup.CreditAccountId == 0) return;
+
+            im.SavePayrollEmployeeSetup();
+            im.SetEmployeeSetupBaseAmounts(r.EmployeeId);
         }
 
 

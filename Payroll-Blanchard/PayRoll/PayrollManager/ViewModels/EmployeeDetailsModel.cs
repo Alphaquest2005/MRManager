@@ -14,9 +14,16 @@ namespace PayrollManager
 	{
         public void SaveEmployee()
         {
+            if (CurrentEmployee == null) return;
+            if (string.IsNullOrEmpty(CurrentEmployee.LastName) || string.IsNullOrEmpty(CurrentEmployee.FirstName) ||
+                CurrentEmployee.CompanyId == null)
+            {
+                MessageBox.Show("Employee Must Have First Name, Last Name and Location.");
+                return;
+            }
             using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
             {
-                if (CurrentEmployee == null) return;
+                
                 if (CurrentEmployee.EmployeeId == 0)
                 {
                     ctx.Employees.AddObject(CurrentEmployee);
@@ -49,13 +56,24 @@ namespace PayrollManager
 
         public void DeleteEmployee()
         {
+            if (CurrentEmployee == null)
+            {
+                MessageBox.Show("Please select an employee");
+                return;
+            }
+            if (CurrentEmployee.PayrollItems.Any())
+            {
+                MessageBox.Show("Cannot Delete an Employee with Payroll Items, Please set 'Employment End Date' for employee.");
+                return;
+            }
+            if (CurrentEmployee.EmployeeAccounts.Any())
+            {
+                MessageBox.Show("Please Delete Employee Accounts before deleting employee.");
+                return;
+            }
             using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
             {
-                if (CurrentEmployee == null)
-                {
-                    MessageBox.Show("Please select an employee");
-                    return;
-                }
+                
                 if (CurrentEmployee.EmployeeId != 0)
                 {
                     if (CurrentEmployee.EntityState == EntityState.Added) return;

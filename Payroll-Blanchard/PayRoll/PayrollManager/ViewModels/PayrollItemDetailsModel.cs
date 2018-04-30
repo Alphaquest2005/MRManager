@@ -123,10 +123,10 @@ namespace PayrollManager
             try
             {
                 var incomeAmts = payrollItems.Where(p => p.IncomeDeduction == true && !p.ApplyToTaxableBenefits.GetValueOrDefault() && p.ParentPayrollItem == null && ((p.PayrollSetupItem != null && p.PayrollSetupItem.Name != "Salary") || p.PayrollSetupItem == null))
-                    ?.Sum(p => p.Amount);
+                    .Select(x => x.Amount).DefaultIfEmpty(0).Sum();
 
                 var taxableBenefitsAmts = payrollItems.Where(p => p.IncomeDeduction == true && p.ApplyToTaxableBenefits.GetValueOrDefault() && p.ParentPayrollItem == null && ((p.PayrollSetupItem != null && p.PayrollSetupItem.Name != "Salary") || p.PayrollSetupItem == null))
-                    ?.Sum(p => p.Amount);
+                    .Select(x => x.Amount).DefaultIfEmpty(0).Sum();
 
                 var salaryItm = payrollItems.First(p => p.IncomeDeduction == true && p.ParentPayrollItem == null &&
                                                         p.PayrollSetupItem != null &&
@@ -140,14 +140,14 @@ namespace PayrollManager
                     if (itm.PayrollSetupItem == null)
                     {
                         itm.BaseAmount = (itm.ApplyToTaxableBenefits == true
-                            ? salary + taxableBenefitsAmts.GetValueOrDefault() + incomeAmts.GetValueOrDefault()
-                            : salary + incomeAmts.GetValueOrDefault());
+                            ? salary + taxableBenefitsAmts + incomeAmts
+                            : salary + incomeAmts);
                     }
                     else
                     {
-                        itm.BaseAmount = (itm.PayrollSetupItem.ApplyToTaxableBenefits == true
-                        ? salary + taxableBenefitsAmts.GetValueOrDefault() + incomeAmts.GetValueOrDefault()
-                        : salary + incomeAmts.GetValueOrDefault());
+                        itm.BaseAmount = itm.PayrollSetupItem.ApplyToTaxableBenefits == true
+                        ? salary + taxableBenefitsAmts + incomeAmts
+                        : salary + incomeAmts;
                     }
                     
                     itm.Amount = Math.Abs(GetPayrollAmount(itm.BaseAmount, itm).GetValueOrDefault());

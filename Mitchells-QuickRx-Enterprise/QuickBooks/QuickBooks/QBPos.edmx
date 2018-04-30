@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QBPOSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="QBPOSModelStoreContainer">
+    <EntitySet Name="InventoryAdjustmentItems" EntityType="QBPOSModel.Store.InventoryAdjustmentItems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="InventoryAdjustments" EntityType="QBPOSModel.Store.InventoryAdjustments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="InventoryItems" EntityType="QBPOSModel.Store.InventoryItems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SalesReceiptDetails" EntityType="QBPOSModel.Store.SalesReceiptDetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SalesReceipts" EntityType="QBPOSModel.Store.SalesReceipts" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_InventoryAdjustmentInventoryAdjustmentItem" Association="QBPOSModel.Store.FK_InventoryAdjustmentInventoryAdjustmentItem">
+      <End Role="InventoryAdjustment" EntitySet="InventoryAdjustments" />
+      <End Role="InventoryAdjustmentItem" EntitySet="InventoryAdjustmentItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesReceiptSalesReceiptDetails" Association="QBPOSModel.Store.FK_SalesReceiptSalesReceiptDetails">
+      <End Role="SalesReceipt" EntitySet="SalesReceipts" />
+      <End Role="SalesReceiptDetail" EntitySet="SalesReceiptDetails" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="InventoryAdjustmentItems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemListID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NewQuantity" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="OldQuantity" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="QuantityDifference" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="InventoryAdjustmentId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InventoryAdjustments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TxnDate" Type="datetime" Nullable="false" />
+    <Property Name="AdjustmentNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AdjustmentSource" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TxnID" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InventoryItems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ListID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Attribute" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ItemDesc1" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ItemDesc2" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ALU" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ItemName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Size" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DepartmentCode" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ItemNumber" Type="int" Nullable="false" />
+    <Property Name="ItemType" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TaxCode" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Price" Type="float" Nullable="true" />
+  </EntityType>
+  <EntityType Name="SalesReceiptDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SalesReceiptId" Type="int" Nullable="false" />
+    <Property Name="ItemListID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="QtySold" Type="decimal" Nullable="false" Precision="15" Scale="8" />
+    <Property Name="ItemKey" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Tax" Type="decimal" Nullable="false" Precision="15" Scale="8" />
+    <Property Name="QtyAllocated" Type="decimal" Nullable="true" Precision="18" Scale="0" />
+    <Property Name="ItemDesc1" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ItemDesc2" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ItemALU" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Price" Type="float" Nullable="true" />
+    <Property Name="TaxCode" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="SalesReceipts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SalesReceiptNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TxnDate" Type="datetime" Nullable="false" />
+    <Property Name="Associate" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Cashier" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StoreNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Workstation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TxnState" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TxnID" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="SalesReceiptType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TrackingNumber" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Discount" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_InventoryAdjustmentInventoryAdjustmentItem">
+    <End Role="InventoryAdjustment" Type="QBPOSModel.Store.InventoryAdjustments" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="InventoryAdjustmentItem" Type="QBPOSModel.Store.InventoryAdjustmentItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InventoryAdjustment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventoryAdjustmentItem">
+        <PropertyRef Name="InventoryAdjustmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesReceiptSalesReceiptDetails">
+    <End Role="SalesReceipt" Type="QBPOSModel.Store.SalesReceipts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SalesReceiptDetail" Type="QBPOSModel.Store.SalesReceiptDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesReceipt">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesReceiptDetail">
+        <PropertyRef Name="SalesReceiptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QBPOSModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="QBPOSEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="InventoryAdjustmentItems" EntityType="QBPOSModel.InventoryAdjustmentItem" />
+          <EntitySet Name="InventoryAdjustments" EntityType="QBPOSModel.InventoryAdjustment" />
+          <EntitySet Name="InventoryItems" EntityType="QBPOSModel.InventoryItem" />
+          <EntitySet Name="SalesReceiptDetails" EntityType="QBPOSModel.SalesReceiptDetail" />
+          <EntitySet Name="SalesReceipts" EntityType="QBPOSModel.SalesReceipt" />
+          <AssociationSet Name="FK_InventoryAdjustmentInventoryAdjustmentItem" Association="QBPOSModel.FK_InventoryAdjustmentInventoryAdjustmentItem">
+            <End Role="InventoryAdjustment" EntitySet="InventoryAdjustments" />
+            <End Role="InventoryAdjustmentItem" EntitySet="InventoryAdjustmentItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesReceiptSalesReceiptDetails" Association="QBPOSModel.FK_SalesReceiptSalesReceiptDetails">
+            <End Role="SalesReceipt" EntitySet="SalesReceipts" />
+            <End Role="SalesReceiptDetail" EntitySet="SalesReceiptDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="InventoryAdjustmentItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="ItemListID" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="NewQuantity" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="OldQuantity" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="QuantityDifference" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="InventoryAdjustmentId" Nullable="false" />
+          <NavigationProperty Name="InventoryAdjustment" Relationship="QBPOSModel.FK_InventoryAdjustmentInventoryAdjustmentItem" FromRole="InventoryAdjustmentItem" ToRole="InventoryAdjustment" />
+        </EntityType>
+        <EntityType Name="InventoryAdjustment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="DateTime" Name="TxnDate" Nullable="false" Precision="3" />
+          <Property Type="String" Name="AdjustmentNumber" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AdjustmentSource" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TxnID" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InventoryAdjustmentItems" Relationship="QBPOSModel.FK_InventoryAdjustmentInventoryAdjustmentItem" FromRole="InventoryAdjustment" ToRole="InventoryAdjustmentItem" />
+        </EntityType>
+        <EntityType Name="InventoryItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="ListID" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Attribute" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ItemDesc1" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ItemDesc2" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ALU" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ItemName" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Size" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DepartmentCode" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ItemNumber" Nullable="false" />
+          <Property Type="String" Name="ItemType" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TaxCode" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+        </EntityType>
+        <EntityType Name="SalesReceiptDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="SalesReceiptId" Nullable="false" />
+          <Property Type="String" Name="ItemListID" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="QtySold" Nullable="false" Precision="15" Scale="8" />
+          <Property Type="String" Name="ItemKey" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Tax" Nullable="false" Precision="15" Scale="8" />
+          <Property Type="Decimal" Name="QtyAllocated" Precision="18" Scale="0" />
+          <Property Type="String" Name="ItemDesc1" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ItemDesc2" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ItemALU" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SalesReceipt" Relationship="QBPOSModel.FK_SalesReceiptSalesReceiptDetails" FromRole="SalesReceiptDetail" ToRole="SalesReceipt" />
+          <Property Type="Double" Name="Price" />
+          <Property Type="String" Name="TaxCode" Nullable="true" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SalesReceipt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="SalesReceiptNumber" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="TxnDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SalesReceiptDetails" Relationship="QBPOSModel.FK_SalesReceiptSalesReceiptDetails" FromRole="SalesReceipt" ToRole="SalesReceiptDetail" />
+          <Property Type="String" Name="Associate" Nullable="false" />
+          <Property Type="String" Name="Cashier" Nullable="false" />
+          <Property Type="String" Name="Comments" Nullable="false" />
+          <Property Type="String" Name="StoreNumber" Nullable="false" />
+          <Property Type="String" Name="Workstation" Nullable="false" />
+          <Property Type="String" Name="TxnState" Nullable="false" />
+          <Property Type="String" Name="TxnID" Nullable="true" />
+          <Property Type="String" Name="SalesReceiptType" Nullable="false" />
+          <Property Type="String" Name="TrackingNumber" Nullable="true" />
+          <Property Type="String" Name="Discount" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_InventoryAdjustmentInventoryAdjustmentItem">
+          <End Type="QBPOSModel.InventoryAdjustment" Role="InventoryAdjustment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="QBPOSModel.InventoryAdjustmentItem" Role="InventoryAdjustmentItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryAdjustment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryAdjustmentItem">
+              <PropertyRef Name="InventoryAdjustmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesReceiptSalesReceiptDetails">
+          <End Type="QBPOSModel.SalesReceipt" Role="SalesReceipt" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="QBPOSModel.SalesReceiptDetail" Role="SalesReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesReceipt">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesReceiptDetail">
+              <PropertyRef Name="SalesReceiptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QBPOSModelStoreContainer" CdmEntityContainer="QBPOSEntities">
+    <EntitySetMapping Name="InventoryAdjustmentItems">
+      <EntityTypeMapping TypeName="IsTypeOf(QBPOSModel.InventoryAdjustmentItem)">
+        <MappingFragment StoreEntitySet="InventoryAdjustmentItems">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ItemListID" ColumnName="ItemListID" />
+          <ScalarProperty Name="NewQuantity" ColumnName="NewQuantity" />
+          <ScalarProperty Name="OldQuantity" ColumnName="OldQuantity" />
+          <ScalarProperty Name="QuantityDifference" ColumnName="QuantityDifference" />
+          <ScalarProperty Name="InventoryAdjustmentId" ColumnName="InventoryAdjustmentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InventoryAdjustments">
+      <EntityTypeMapping TypeName="IsTypeOf(QBPOSModel.InventoryAdjustment)">
+        <MappingFragment StoreEntitySet="InventoryAdjustments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TxnDate" ColumnName="TxnDate" />
+          <ScalarProperty Name="AdjustmentNumber" ColumnName="AdjustmentNumber" />
+          <ScalarProperty Name="AdjustmentSource" ColumnName="AdjustmentSource" />
+          <ScalarProperty Name="TxnID" ColumnName="TxnID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InventoryItems">
+      <EntityTypeMapping TypeName="IsTypeOf(QBPOSModel.InventoryItem)">
+        <MappingFragment StoreEntitySet="InventoryItems">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ListID" ColumnName="ListID" />
+          <ScalarProperty Name="Attribute" ColumnName="Attribute" />
+          <ScalarProperty Name="ItemDesc1" ColumnName="ItemDesc1" />
+          <ScalarProperty Name="ItemDesc2" ColumnName="ItemDesc2" />
+          <ScalarProperty Name="ALU" ColumnName="ALU" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
+          <ScalarProperty Name="ItemNumber" ColumnName="ItemNumber" />
+          <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+          <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesReceiptDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(QBPOSModel.SalesReceiptDetail)">
+        <MappingFragment StoreEntitySet="SalesReceiptDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SalesReceiptId" ColumnName="SalesReceiptId" />
+          <ScalarProperty Name="ItemListID" ColumnName="ItemListID" />
+          <ScalarProperty Name="QtySold" ColumnName="QtySold" />
+          <ScalarProperty Name="ItemKey" ColumnName="ItemKey" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="QtyAllocated" ColumnName="QtyAllocated" />
+          <ScalarProperty Name="ItemDesc1" ColumnName="ItemDesc1" />
+          <ScalarProperty Name="ItemDesc2" ColumnName="ItemDesc2" />
+          <ScalarProperty Name="ItemALU" ColumnName="ItemALU" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesReceipts">
+      <EntityTypeMapping TypeName="IsTypeOf(QBPOSModel.SalesReceipt)">
+        <MappingFragment StoreEntitySet="SalesReceipts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SalesReceiptNumber" ColumnName="SalesReceiptNumber" />
+          <ScalarProperty Name="TxnDate" ColumnName="TxnDate" />
+          <ScalarProperty Name="Associate" ColumnName="Associate" />
+          <ScalarProperty Name="Cashier" ColumnName="Cashier" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="StoreNumber" ColumnName="StoreNumber" />
+          <ScalarProperty Name="Workstation" ColumnName="Workstation" />
+          <ScalarProperty Name="TxnState" ColumnName="TxnState" />
+          <ScalarProperty Name="TxnID" ColumnName="TxnID" />
+          <ScalarProperty Name="SalesReceiptType" ColumnName="SalesReceiptType" />
+          <ScalarProperty Name="TrackingNumber" ColumnName="TrackingNumber" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams />
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,934 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RMSEntities.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="RMSEntitiesStoreContainer">
+    <EntitySet Name="Batches" EntityType="RMSEntities.Store.Batches" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CashierLogs" EntityType="RMSEntities.Store.CashierLogs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Company" EntityType="RMSEntities.Store.Company" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Item" EntityType="RMSEntities.Store.Item" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Item_Medicine" EntityType="RMSEntities.Store.Item_Medicine" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Item_StockItem" EntityType="RMSEntities.Store.Item_StockItem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Item_TicketItem" EntityType="RMSEntities.Store.Item_TicketItem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Pass" EntityType="RMSEntities.Store.Pass" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Persons" EntityType="RMSEntities.Store.Persons" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Persons_Cashier" EntityType="RMSEntities.Store.Persons_Cashier" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Persons_Customers" EntityType="RMSEntities.Store.Persons_Customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Persons_Doctor" EntityType="RMSEntities.Store.Persons_Doctor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Persons_Patient" EntityType="RMSEntities.Store.Persons_Patient" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QBInventoryItems" EntityType="RMSEntities.Store.QBInventoryItems" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Stations" EntityType="RMSEntities.Store.Stations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Stores" EntityType="RMSEntities.Store.Stores" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TenderEntryEx" EntityType="RMSEntities.Store.TenderEntryEx" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TicketSetup" EntityType="RMSEntities.Store.TicketSetup" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransactionBase" EntityType="RMSEntities.Store.TransactionBase" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransactionBase_Prescription" EntityType="RMSEntities.Store.TransactionBase_Prescription" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransactionBase_QuickPrescription" EntityType="RMSEntities.Store.TransactionBase_QuickPrescription" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransactionBase_Ticket" EntityType="RMSEntities.Store.TransactionBase_Ticket" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransactionBase_Transaction" EntityType="RMSEntities.Store.TransactionBase_Transaction" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransactionEntryBase" EntityType="RMSEntities.Store.TransactionEntryBase" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransactionEntryBase_PrescriptionEntry" EntityType="RMSEntities.Store.TransactionEntryBase_PrescriptionEntry" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransactionEntryBase_TicketEntry" EntityType="RMSEntities.Store.TransactionEntryBase_TicketEntry" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransactionEntryBase_TransactionEntry" EntityType="RMSEntities.Store.TransactionEntryBase_TransactionEntry" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CurrentItems" EntityType="RMSEntities.Store.CurrentItems" store:Type="Views" store:Schema="dbo" store:Name="CurrentItems">
+      <DefiningQuery>SELECT 
+      [CurrentItems].[Description] AS [Description], 
+      [CurrentItems].[ItemNotDiscountable] AS [ItemNotDiscountable], 
+      [CurrentItems].[ItemId] AS [ItemId], 
+      [CurrentItems].[ItemLookupCode] AS [ItemLookupCode], 
+      [CurrentItems].[Department] AS [Department], 
+      [CurrentItems].[Category] AS [Category], 
+      [CurrentItems].[Price] AS [Price], 
+      [CurrentItems].[Cost] AS [Cost], 
+      [CurrentItems].[Quantity] AS [Quantity], 
+      [CurrentItems].[ExtendedDescription] AS [ExtendedDescription], 
+      [CurrentItems].[Inactive] AS [Inactive], 
+      [CurrentItems].[DateCreated] AS [DateCreated], 
+      [CurrentItems].[SalesTax] AS [SalesTax], 
+      [CurrentItems].[QBItemListID] AS [QBItemListID]
+      FROM [dbo].[CurrentItems] AS [CurrentItems]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_BatchCashier" Association="RMSEntities.Store.FK_BatchCashier">
+      <End Role="Persons_Cashier" EntitySet="Persons_Cashier" />
+      <End Role="Batches" EntitySet="Batches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BatchCashier1" Association="RMSEntities.Store.FK_BatchCashier1">
+      <End Role="Persons_Cashier" EntitySet="Persons_Cashier" />
+      <End Role="Batches" EntitySet="Batches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BatchTransactionBase" Association="RMSEntities.Store.FK_BatchTransactionBase">
+      <End Role="Batches" EntitySet="Batches" />
+      <End Role="TransactionBase" EntitySet="TransactionBase" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BatchTransactionBase1" Association="RMSEntities.Store.FK_BatchTransactionBase1">
+      <End Role="Batches" EntitySet="Batches" />
+      <End Role="TransactionBase" EntitySet="TransactionBase" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cashier_inherits_Person" Association="RMSEntities.Store.FK_Cashier_inherits_Person">
+      <End Role="Persons" EntitySet="Persons" />
+      <End Role="Persons_Cashier" EntitySet="Persons_Cashier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashierCashierLog" Association="RMSEntities.Store.FK_CashierCashierLog">
+      <End Role="Persons_Cashier" EntitySet="Persons_Cashier" />
+      <End Role="CashierLogs" EntitySet="CashierLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CashierTransactionBase" Association="RMSEntities.Store.FK_CashierTransactionBase">
+      <End Role="Persons_Cashier" EntitySet="Persons_Cashier" />
+      <End Role="TransactionBase" EntitySet="TransactionBase" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyStore" Association="RMSEntities.Store.FK_CompanyStore">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="Stores" EntitySet="Stores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomerPass" Association="RMSEntities.Store.FK_CustomerPass">
+      <End Role="Persons" EntitySet="Persons" />
+      <End Role="Pass" EntitySet="Pass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_inherits_Person" Association="RMSEntities.Store.FK_Customers_inherits_Person">
+      <End Role="Persons" EntitySet="Persons" />
+      <End Role="Persons_Customers" EntitySet="Persons_Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomerTransaction" Association="RMSEntities.Store.FK_CustomerTransaction">
+      <End Role="Persons" EntitySet="Persons" />
+      <End Role="TransactionBase" EntitySet="TransactionBase" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Doctor_inherits_Person" Association="RMSEntities.Store.FK_Doctor_inherits_Person">
+      <End Role="Persons" EntitySet="Persons" />
+      <End Role="Persons_Doctor" EntitySet="Persons_Doctor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DoctorPrescription" Association="RMSEntities.Store.FK_DoctorPrescription">
+      <End Role="Persons_Doctor" EntitySet="Persons_Doctor" />
+      <End Role="TransactionBase_Prescription" EntitySet="TransactionBase_Prescription" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Item_QBInventoryItems" Association="RMSEntities.Store.FK_Item_QBInventoryItems">
+      <End Role="QBInventoryItems" EntitySet="QBInventoryItems" />
+      <End Role="Item" EntitySet="Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemTransactionEntryBase" Association="RMSEntities.Store.FK_ItemTransactionEntryBase">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="TransactionEntryBase" EntitySet="TransactionEntryBase" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Medicine_inherits_Item" Association="RMSEntities.Store.FK_Medicine_inherits_Item">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="Item_Medicine" EntitySet="Item_Medicine" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PassTicket" Association="RMSEntities.Store.FK_PassTicket">
+      <End Role="Pass" EntitySet="Pass" />
+      <End Role="TransactionBase_Ticket" EntitySet="TransactionBase_Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient_inherits_Person" Association="RMSEntities.Store.FK_Patient_inherits_Person">
+      <End Role="Persons" EntitySet="Persons" />
+      <End Role="Persons_Patient" EntitySet="Persons_Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientPrescription" Association="RMSEntities.Store.FK_PatientPrescription">
+      <End Role="Persons_Patient" EntitySet="Persons_Patient" />
+      <End Role="TransactionBase_Prescription" EntitySet="TransactionBase_Prescription" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Prescription_inherits_TransactionBase" Association="RMSEntities.Store.FK_Prescription_inherits_TransactionBase">
+      <End Role="TransactionBase" EntitySet="TransactionBase" />
+      <End Role="TransactionBase_Prescription" EntitySet="TransactionBase_Prescription" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrescriptionEntry_inherits_TransactionEntryBase" Association="RMSEntities.Store.FK_PrescriptionEntry_inherits_TransactionEntryBase">
+      <End Role="TransactionEntryBase" EntitySet="TransactionEntryBase" />
+      <End Role="TransactionEntryBase_PrescriptionEntry" EntitySet="TransactionEntryBase_PrescriptionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuickPrescription_inherits_TransactionBase" Association="RMSEntities.Store.FK_QuickPrescription_inherits_TransactionBase">
+      <End Role="TransactionBase" EntitySet="TransactionBase" />
+      <End Role="TransactionBase_QuickPrescription" EntitySet="TransactionBase_QuickPrescription" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StationBatch" Association="RMSEntities.Store.FK_StationBatch">
+      <End Role="Stations" EntitySet="Stations" />
+      <End Role="Batches" EntitySet="Batches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StationTransactionBase" Association="RMSEntities.Store.FK_StationTransactionBase">
+      <End Role="Stations" EntitySet="Stations" />
+      <End Role="TransactionBase" EntitySet="TransactionBase" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockItem_inherits_Item" Association="RMSEntities.Store.FK_StockItem_inherits_Item">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="Item_StockItem" EntitySet="Item_StockItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StoreStation" Association="RMSEntities.Store.FK_StoreStation">
+      <End Role="Stores" EntitySet="Stores" />
+      <End Role="Stations" EntitySet="Stations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_inherits_TransactionBase" Association="RMSEntities.Store.FK_Ticket_inherits_TransactionBase">
+      <End Role="TransactionBase" EntitySet="TransactionBase" />
+      <End Role="TransactionBase_Ticket" EntitySet="TransactionBase_Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketEntry_inherits_TransactionEntryBase" Association="RMSEntities.Store.FK_TicketEntry_inherits_TransactionEntryBase">
+      <End Role="TransactionEntryBase" EntitySet="TransactionEntryBase" />
+      <End Role="TransactionEntryBase_TicketEntry" EntitySet="TransactionEntryBase_TicketEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketItem_inherits_Item" Association="RMSEntities.Store.FK_TicketItem_inherits_Item">
+      <End Role="Item" EntitySet="Item" />
+      <End Role="Item_TicketItem" EntitySet="Item_TicketItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketSetupTicketItem" Association="RMSEntities.Store.FK_TicketSetupTicketItem">
+      <End Role="TicketSetup" EntitySet="TicketSetup" />
+      <End Role="Item_TicketItem" EntitySet="Item_TicketItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaction_inherits_TransactionBase" Association="RMSEntities.Store.FK_Transaction_inherits_TransactionBase">
+      <End Role="TransactionBase" EntitySet="TransactionBase" />
+      <End Role="TransactionBase_Transaction" EntitySet="TransactionBase_Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransactionBaseTenderEntryEx" Association="RMSEntities.Store.FK_TransactionBaseTenderEntryEx">
+      <End Role="TransactionBase" EntitySet="TransactionBase" />
+      <End Role="TenderEntryEx" EntitySet="TenderEntryEx" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransactionEntry_inherits_TransactionEntryBase" Association="RMSEntities.Store.FK_TransactionEntry_inherits_TransactionEntryBase">
+      <End Role="TransactionEntryBase" EntitySet="TransactionEntryBase" />
+      <End Role="TransactionEntryBase_TransactionEntry" EntitySet="TransactionEntryBase_TransactionEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransactionTransactionEntry" Association="RMSEntities.Store.FK_TransactionTransactionEntry">
+      <End Role="TransactionBase" EntitySet="TransactionBase" />
+      <End Role="TransactionEntryBase" EntitySet="TransactionEntryBase" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Batches">
+    <Key>
+      <PropertyRef Name="BatchId" />
+    </Key>
+    <Property Name="BatchId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="OpeningCash" Type="float" Nullable="false" />
+    <Property Name="EndingCash" Type="float" />
+    <Property Name="OpeningTime" Type="datetime" Nullable="false" />
+    <Property Name="ClosingTime" Type="datetime" />
+    <Property Name="TotalTender" Type="float" />
+    <Property Name="TotalChange" Type="float" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StationId" Type="int" Nullable="false" />
+    <Property Name="OpeningCashier" Type="int" Nullable="false" />
+    <Property Name="ClosingCashier" Type="int" />
+    <Property Name="Sales" Type="float" Nullable="false" />
+    <Property Name="OpenTransactions" Type="int" Nullable="false" />
+    <Property Name="CloseTransactions" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CashierLogs">
+    <Key>
+      <PropertyRef Name="CashierLogId" />
+    </Key>
+    <Property Name="CashierLogId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MachineName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LoginTime" Type="datetime" Nullable="false" />
+    <Property Name="LogoutTime" Type="datetime" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address1" Type="nvarchar(max)" />
+    <Property Name="SoftwareName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Motto" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="ItemId" />
+    </Key>
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="1000" />
+    <Property Name="ItemNotDiscountable" Type="bit" />
+    <Property Name="ItemId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ItemLookupCode" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Department" Type="nvarchar" MaxLength="255" />
+    <Property Name="Category" Type="nvarchar" MaxLength="255" />
+    <Property Name="Price" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Cost" Type="decimal" Precision="19" Scale="4" />
+    <Property Name="Quantity" Type="float" Nullable="false" />
+    <Property Name="ExtendedDescription" Type="nvarchar(max)" />
+    <Property Name="Inactive" Type="bit" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="SalesTax" Type="decimal" Precision="5" Scale="3" />
+    <Property Name="QBItemListID" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Item_Medicine">
+    <Key>
+      <PropertyRef Name="ItemId" />
+    </Key>
+    <Property Name="SuggestedDosage" Type="nvarchar(max)" />
+    <Property Name="ItemId" Type="int" Nullable="false" />
+    <Property Name="ExpiryDate" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Item_StockItem">
+    <Key>
+      <PropertyRef Name="ItemId" />
+    </Key>
+    <Property Name="ItemId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Item_TicketItem">
+    <Key>
+      <PropertyRef Name="ItemId" />
+    </Key>
+    <Property Name="Price1" Type="decimal" Nullable="false" Precision="5" Scale="3" />
+    <Property Name="Price2" Type="decimal" Nullable="false" Precision="5" Scale="3" />
+    <Property Name="ItemId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pass">
+    <Key>
+      <PropertyRef Name="PassId" />
+    </Key>
+    <Property Name="PassId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="PassNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FreePass" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Persons">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CompanyName" Type="nvarchar(max)" />
+    <Property Name="Salutation" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="InActive" Type="bit" />
+    <Property Name="DOB" Type="datetime" />
+    <Property Name="Sex" Type="bit" />
+  </EntityType>
+  <EntityType Name="Persons_Cashier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="SPassword" Type="nvarchar(max)" />
+    <Property Name="LoginName" Type="nvarchar(max)" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Persons_Customers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="CustomerType" Type="nvarchar(max)" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Persons_Doctor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Persons_Patient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Allergies" Type="nvarchar(max)" />
+    <Property Name="Guardian" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="QBInventoryItems">
+    <Key>
+      <PropertyRef Name="ListID" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ListID" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="ItemDesc2" Type="nvarchar(max)" />
+    <Property Name="ItemName" Type="nvarchar(max)" />
+    <Property Name="Size" Type="nvarchar(max)" />
+    <Property Name="DepartmentCode" Type="nvarchar(max)" />
+    <Property Name="ItemNumber" Type="int" Nullable="false" />
+    <Property Name="TaxCode" Type="nvarchar(max)" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Quantity" Type="float" />
+  </EntityType>
+  <EntityType Name="Stations">
+    <Key>
+      <PropertyRef Name="StationId" />
+    </Key>
+    <Property Name="StationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="StationCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StoreId" Type="int" Nullable="false" />
+    <Property Name="ReceiptPrinterName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MachineName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PrintServer" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Stores">
+    <Key>
+      <PropertyRef Name="StoreId" />
+    </Key>
+    <Property Name="StoreId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="StoreCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StoreAddress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="TransactionSeed" Type="int" Nullable="false" />
+    <Property Name="SeedTransaction" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TenderEntryEx">
+    <Key>
+      <PropertyRef Name="TenderEntryId" />
+    </Key>
+    <Property Name="TenderEntryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TransactionId" Type="int" Nullable="false" />
+    <Property Name="CashAmount" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="CustomerId" Type="int" />
+    <Property Name="CreditCardNumber" Type="nvarchar(max)" />
+    <Property Name="CreditCardAmount" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="CheckNumber" Type="nvarchar(max)" />
+    <Property Name="CheckAmount" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="AccountAmount" Type="decimal" Precision="10" Scale="3" />
+  </EntityType>
+  <EntityType Name="TicketSetup">
+    <Key>
+      <PropertyRef Name="ItemId" />
+    </Key>
+    <Property Name="FreeMinutes" Type="int" Nullable="false" />
+    <Property Name="ItemId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TransactionBase">
+    <Key>
+      <PropertyRef Name="TransactionId" />
+    </Key>
+    <Property Name="StationId" Type="int" Nullable="false" />
+    <Property Name="BatchId" Type="int" Nullable="false" />
+    <Property Name="CloseBatchId" Type="int" />
+    <Property Name="TransactionNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Time" Type="datetime" Nullable="false" />
+    <Property Name="CustomerId" Type="int" />
+    <Property Name="CashierId" Type="int" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="255" />
+    <Property Name="ReferenceNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="StoreCode" Type="varchar" MaxLength="30" />
+    <Property Name="TransactionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="OpenClose" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TransactionBase_Prescription">
+    <Key>
+      <PropertyRef Name="TransactionId" />
+    </Key>
+    <Property Name="DoctorId" Type="int" />
+    <Property Name="PatientId" Type="int" />
+    <Property Name="TransactionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TransactionBase_QuickPrescription">
+    <Key>
+      <PropertyRef Name="TransactionId" />
+    </Key>
+    <Property Name="TransactionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TransactionBase_Ticket">
+    <Key>
+      <PropertyRef Name="TransactionId" />
+    </Key>
+    <Property Name="PassId" Type="int" />
+    <Property Name="TransactionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TransactionBase_Transaction">
+    <Key>
+      <PropertyRef Name="TransactionId" />
+    </Key>
+    <Property Name="TransactionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TransactionEntryBase">
+    <Key>
+      <PropertyRef Name="TransactionEntryId" />
+    </Key>
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="TransactionEntryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TransactionId" Type="int" Nullable="false" />
+    <Property Name="ItemId" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Quantity" Type="decimal" Nullable="false" Precision="8" Scale="3" />
+    <Property Name="Taxable" Type="bit" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="255" />
+    <Property Name="TransactionTime" Type="datetime" />
+    <Property Name="SalesTaxPercent" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Discount" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="EntryNumber" Type="smallint" />
+  </EntityType>
+  <EntityType Name="TransactionEntryBase_PrescriptionEntry">
+    <Key>
+      <PropertyRef Name="TransactionEntryId" />
+    </Key>
+    <Property Name="Dosage" Type="nvarchar(max)" />
+    <Property Name="ExpiryDate" Type="nvarchar(max)" />
+    <Property Name="TransactionEntryId" Type="int" Nullable="false" />
+    <Property Name="Repeat" Type="int" />
+  </EntityType>
+  <EntityType Name="TransactionEntryBase_TicketEntry">
+    <Key>
+      <PropertyRef Name="TransactionEntryId" />
+    </Key>
+    <Property Name="VehicleNumber" Type="nvarchar(max)" />
+    <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+    <Property Name="EndDateTime" Type="datetime" />
+    <Property Name="TransactionEntryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TransactionEntryBase_TransactionEntry">
+    <Key>
+      <PropertyRef Name="TransactionEntryId" />
+    </Key>
+    <Property Name="TransactionEntryId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'QuickSales-HV.dbo.CurrentItems' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="CurrentItems">
+    <Key>
+      <PropertyRef Name="Description" />
+      <PropertyRef Name="ItemId" />
+      <PropertyRef Name="Price" />
+      <PropertyRef Name="Quantity" />
+    </Key>
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="1000" />
+    <Property Name="ItemNotDiscountable" Type="bit" />
+    <Property Name="ItemId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ItemLookupCode" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Department" Type="nvarchar" MaxLength="255" />
+    <Property Name="Category" Type="nvarchar" MaxLength="255" />
+    <Property Name="Price" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Cost" Type="decimal" Precision="19" Scale="4" />
+    <Property Name="Quantity" Type="float" Nullable="false" />
+    <Property Name="ExtendedDescription" Type="nvarchar(max)" />
+    <Property Name="Inactive" Type="bit" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="SalesTax" Type="decimal" Precision="5" Scale="3" />
+    <Property Name="QBItemListID" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_BatchCashier">
+    <End Role="Persons_Cashier" Type="RMSEntities.Store.Persons_Cashier" Multiplicity="1" />
+    <End Role="Batches" Type="RMSEntities.Store.Batches" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persons_Cashier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Batches">
+        <PropertyRef Name="OpeningCashier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BatchCashier1">
+    <End Role="Persons_Cashier" Type="RMSEntities.Store.Persons_Cashier" Multiplicity="0..1" />
+    <End Role="Batches" Type="RMSEntities.Store.Batches" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persons_Cashier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Batches">
+        <PropertyRef Name="ClosingCashier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BatchTransactionBase">
+    <End Role="Batches" Type="RMSEntities.Store.Batches" Multiplicity="1" />
+    <End Role="TransactionBase" Type="RMSEntities.Store.TransactionBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Batches">
+        <PropertyRef Name="BatchId" />
+      </Principal>
+      <Dependent Role="TransactionBase">
+        <PropertyRef Name="BatchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BatchTransactionBase1">
+    <End Role="Batches" Type="RMSEntities.Store.Batches" Multiplicity="0..1" />
+    <End Role="TransactionBase" Type="RMSEntities.Store.TransactionBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Batches">
+        <PropertyRef Name="BatchId" />
+      </Principal>
+      <Dependent Role="TransactionBase">
+        <PropertyRef Name="CloseBatchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cashier_inherits_Person">
+    <End Role="Persons" Type="RMSEntities.Store.Persons" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Persons_Cashier" Type="RMSEntities.Store.Persons_Cashier" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Persons">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Persons_Cashier">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashierCashierLog">
+    <End Role="Persons_Cashier" Type="RMSEntities.Store.Persons_Cashier" Multiplicity="1" />
+    <End Role="CashierLogs" Type="RMSEntities.Store.CashierLogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persons_Cashier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CashierLogs">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CashierTransactionBase">
+    <End Role="Persons_Cashier" Type="RMSEntities.Store.Persons_Cashier" Multiplicity="1" />
+    <End Role="TransactionBase" Type="RMSEntities.Store.TransactionBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persons_Cashier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransactionBase">
+        <PropertyRef Name="CashierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyStore">
+    <End Role="Company" Type="RMSEntities.Store.Company" Multiplicity="1" />
+    <End Role="Stores" Type="RMSEntities.Store.Stores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="Stores">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomerPass">
+    <End Role="Persons" Type="RMSEntities.Store.Persons" Multiplicity="1" />
+    <End Role="Pass" Type="RMSEntities.Store.Pass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persons">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pass">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_inherits_Person">
+    <End Role="Persons" Type="RMSEntities.Store.Persons" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Persons_Customers" Type="RMSEntities.Store.Persons_Customers" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Persons">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Persons_Customers">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomerTransaction">
+    <End Role="Persons" Type="RMSEntities.Store.Persons" Multiplicity="0..1" />
+    <End Role="TransactionBase" Type="RMSEntities.Store.TransactionBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persons">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransactionBase">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Doctor_inherits_Person">
+    <End Role="Persons" Type="RMSEntities.Store.Persons" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Persons_Doctor" Type="RMSEntities.Store.Persons_Doctor" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Persons">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Persons_Doctor">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DoctorPrescription">
+    <End Role="Persons_Doctor" Type="RMSEntities.Store.Persons_Doctor" Multiplicity="0..1" />
+    <End Role="TransactionBase_Prescription" Type="RMSEntities.Store.TransactionBase_Prescription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persons_Doctor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransactionBase_Prescription">
+        <PropertyRef Name="DoctorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Item_QBInventoryItems">
+    <End Role="QBInventoryItems" Type="RMSEntities.Store.QBInventoryItems" Multiplicity="0..1" />
+    <End Role="Item" Type="RMSEntities.Store.Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QBInventoryItems">
+        <PropertyRef Name="ListID" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="QBItemListID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemTransactionEntryBase">
+    <End Role="Item" Type="RMSEntities.Store.Item" Multiplicity="1" />
+    <End Role="TransactionEntryBase" Type="RMSEntities.Store.TransactionEntryBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ItemId" />
+      </Principal>
+      <Dependent Role="TransactionEntryBase">
+        <PropertyRef Name="ItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Medicine_inherits_Item">
+    <End Role="Item" Type="RMSEntities.Store.Item" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Item_Medicine" Type="RMSEntities.Store.Item_Medicine" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ItemId" />
+      </Principal>
+      <Dependent Role="Item_Medicine">
+        <PropertyRef Name="ItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PassTicket">
+    <End Role="Pass" Type="RMSEntities.Store.Pass" Multiplicity="0..1" />
+    <End Role="TransactionBase_Ticket" Type="RMSEntities.Store.TransactionBase_Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pass">
+        <PropertyRef Name="PassId" />
+      </Principal>
+      <Dependent Role="TransactionBase_Ticket">
+        <PropertyRef Name="PassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient_inherits_Person">
+    <End Role="Persons" Type="RMSEntities.Store.Persons" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Persons_Patient" Type="RMSEntities.Store.Persons_Patient" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Persons">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Persons_Patient">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientPrescription">
+    <End Role="Persons_Patient" Type="RMSEntities.Store.Persons_Patient" Multiplicity="0..1" />
+    <End Role="TransactionBase_Prescription" Type="RMSEntities.Store.TransactionBase_Prescription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persons_Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TransactionBase_Prescription">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Prescription_inherits_TransactionBase">
+    <End Role="TransactionBase" Type="RMSEntities.Store.TransactionBase" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TransactionBase_Prescription" Type="RMSEntities.Store.TransactionBase_Prescription" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionBase">
+        <PropertyRef Name="TransactionId" />
+      </Principal>
+      <Dependent Role="TransactionBase_Prescription">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PrescriptionEntry_inherits_TransactionEntryBase">
+    <End Role="TransactionEntryBase" Type="RMSEntities.Store.TransactionEntryBase" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TransactionEntryBase_PrescriptionEntry" Type="RMSEntities.Store.TransactionEntryBase_PrescriptionEntry" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionEntryBase">
+        <PropertyRef Name="TransactionEntryId" />
+      </Principal>
+      <Dependent Role="TransactionEntryBase_PrescriptionEntry">
+        <PropertyRef Name="TransactionEntryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuickPrescription_inherits_TransactionBase">
+    <End Role="TransactionBase" Type="RMSEntities.Store.TransactionBase" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TransactionBase_QuickPrescription" Type="RMSEntities.Store.TransactionBase_QuickPrescription" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionBase">
+        <PropertyRef Name="TransactionId" />
+      </Principal>
+      <Dependent Role="TransactionBase_QuickPrescription">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StationBatch">
+    <End Role="Stations" Type="RMSEntities.Store.Stations" Multiplicity="1" />
+    <End Role="Batches" Type="RMSEntities.Store.Batches" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stations">
+        <PropertyRef Name="StationId" />
+      </Principal>
+      <Dependent Role="Batches">
+        <PropertyRef Name="StationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StationTransactionBase">
+    <End Role="Stations" Type="RMSEntities.Store.Stations" Multiplicity="1" />
+    <End Role="TransactionBase" Type="RMSEntities.Store.TransactionBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stations">
+        <PropertyRef Name="StationId" />
+      </Principal>
+      <Dependent Role="TransactionBase">
+        <PropertyRef Name="StationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockItem_inherits_Item">
+    <End Role="Item" Type="RMSEntities.Store.Item" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Item_StockItem" Type="RMSEntities.Store.Item_StockItem" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ItemId" />
+      </Principal>
+      <Dependent Role="Item_StockItem">
+        <PropertyRef Name="ItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StoreStation">
+    <End Role="Stores" Type="RMSEntities.Store.Stores" Multiplicity="1" />
+    <End Role="Stations" Type="RMSEntities.Store.Stations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stores">
+        <PropertyRef Name="StoreId" />
+      </Principal>
+      <Dependent Role="Stations">
+        <PropertyRef Name="StoreId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_inherits_TransactionBase">
+    <End Role="TransactionBase" Type="RMSEntities.Store.TransactionBase" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TransactionBase_Ticket" Type="RMSEntities.Store.TransactionBase_Ticket" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionBase">
+        <PropertyRef Name="TransactionId" />
+      </Principal>
+      <Dependent Role="TransactionBase_Ticket">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketEntry_inherits_TransactionEntryBase">
+    <End Role="TransactionEntryBase" Type="RMSEntities.Store.TransactionEntryBase" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TransactionEntryBase_TicketEntry" Type="RMSEntities.Store.TransactionEntryBase_TicketEntry" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionEntryBase">
+        <PropertyRef Name="TransactionEntryId" />
+      </Principal>
+      <Dependent Role="TransactionEntryBase_TicketEntry">
+        <PropertyRef Name="TransactionEntryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketItem_inherits_Item">
+    <End Role="Item" Type="RMSEntities.Store.Item" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Item_TicketItem" Type="RMSEntities.Store.Item_TicketItem" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ItemId" />
+      </Principal>
+      <Dependent Role="Item_TicketItem">
+        <PropertyRef Name="ItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketSetupTicketItem">
+    <End Role="TicketSetup" Type="RMSEntities.Store.TicketSetup" Multiplicity="1" />
+    <End Role="Item_TicketItem" Type="RMSEntities.Store.Item_TicketItem" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TicketSetup">
+        <PropertyRef Name="ItemId" />
+      </Principal>
+      <Dependent Role="Item_TicketItem">
+        <PropertyRef Name="ItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaction_inherits_TransactionBase">
+    <End Role="TransactionBase" Type="RMSEntities.Store.TransactionBase" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TransactionBase_Transaction" Type="RMSEntities.Store.TransactionBase_Transaction" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionBase">
+        <PropertyRef Name="TransactionId" />
+      </Principal>
+      <Dependent Role="TransactionBase_Transaction">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransactionBaseTenderEntryEx">
+    <End Role="TransactionBase" Type="RMSEntities.Store.TransactionBase" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TenderEntryEx" Type="RMSEntities.Store.TenderEntryEx" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionBase">
+        <PropertyRef Name="TransactionId" />
+      </Principal>
+      <Dependent Role="TenderEntryEx">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransactionEntry_inherits_TransactionEntryBase">
+    <End Role="TransactionEntryBase" Type="RMSEntities.Store.TransactionEntryBase" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TransactionEntryBase_TransactionEntry" Type="RMSEntities.Store.TransactionEntryBase_TransactionEntry" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionEntryBase">
+        <PropertyRef Name="TransactionEntryId" />
+      </Principal>
+      <Dependent Role="TransactionEntryBase_TransactionEntry">
+        <PropertyRef Name="TransactionEntryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransactionTransactionEntry">
+    <End Role="TransactionBase" Type="RMSEntities.Store.TransactionBase" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TransactionEntryBase" Type="RMSEntities.Store.TransactionEntryBase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionBase">
+        <PropertyRef Name="TransactionId" />
+      </Principal>
+      <Dependent Role="TransactionEntryBase">
+        <PropertyRef Name="TransactionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

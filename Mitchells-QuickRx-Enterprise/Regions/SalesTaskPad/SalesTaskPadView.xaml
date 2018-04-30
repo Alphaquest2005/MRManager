@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="SalesTaskPad.SalesTaskPadView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:design="clr-namespace:SalesTaskPad.Design" 
+             d:DataContext="{d:DesignInstance design:SalesTaskPadVMDesign, IsDesignTimeCreatable=True}" Height="146.4" Width="609.6">
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="HighlightGray" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF484848" Offset="0.002"/>
+            <GradientStop Color="#FFB9B9B9" Offset="0.39"/>
+            <GradientStop Color="#FF4A4A4A" Offset="1"/>
+            <GradientStop Color="#FF9A9A9A" Offset="0.628"/>
+        </LinearGradientBrush>
+    </UserControl.Resources>
+        
+        <Border x:Name="SalesPad" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="147.277" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="610" Background="{DynamicResource HighlightGray}" BorderThickness="1" CornerRadius="3" BorderBrush="#FF505050">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="23" Opacity="0.725"/>
+            </Border.Effect>
+            <Grid HorizontalAlignment="Left" Height="127.277" Margin="9,9,-995.959,0" VerticalAlignment="Top" Width="1594.959">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="81*"/>
+                    <ColumnDefinition Width="37*"/>
+                    <ColumnDefinition Width="81*"/>
+                    <ColumnDefinition Width="81*"/>
+                    <ColumnDefinition Width="37*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Background="#FF464646" Margin="10,10,12,15" Width="383">
+                    <Image HorizontalAlignment="Left" Height="34.76" Margin="10,6.103,0,0" VerticalAlignment="Top" Width="38.463" Source="Basket32.png"/>
+                    <TextBox HorizontalAlignment="Left" Height="34.304" Margin="64.164,7.861,0,0" TextWrapping="Wrap" Text=" Item Description&#xD;&#xA;" VerticalAlignment="Top" Width="235.972" Background="#FF1F1F1F" Foreground="#FFD7D7D7" FontSize="18.667"/>
+                    <TextBox HorizontalAlignment="Left" Height="34.304" Margin="321.024,7.861,0,0" TextWrapping="Wrap" Text="Qty&#xA;" VerticalAlignment="Top" Width="51.976" Background="#FF1F1F1F" Foreground="#FFD7D7D7" FontSize="18.667" RenderTransformOrigin="0.488,0.466"/>
+                    <TextBox HorizontalAlignment="Left" Height="22.531" Margin="321.024,52.491,0,0" TextWrapping="Wrap" Text="Qty&#xA;" VerticalAlignment="Top" Width="51.976" Background="#FF1F1F1F" Foreground="#FFD7D7D7" FontSize="13.333" RenderTransformOrigin="0.488,0.466"/>
+                    <TextBlock HorizontalAlignment="Left" Height="27.968" Margin="11.411,47.719,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="288.987" FontSize="13.333" Foreground="White"><Run Text="Extended item description"/><LineBreak/><Run/></TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Height="19.005" Margin="240.88,57.687,0,0" TextWrapping="Wrap" Text="Discount" VerticalAlignment="Top" Width="59.256" FontSize="13.333" LineStackingStrategy="BlockLineHeight" LineHeight="13.333" Foreground="White"/>
+                    <CheckBox Content="VAT" HorizontalAlignment="Left" Height="20.79" Margin="322.205,77.598,0,0" VerticalAlignment="Top" Width="48.858" Foreground="#FFEAEAEA" VerticalContentAlignment="Center" FlowDirection="RightToLeft" HorizontalContentAlignment="Right"/>
+                </Grid>
+                <Grid Grid.Column="1" HorizontalAlignment="Left" Height="107.277" Margin="10,5.2,0,0" VerticalAlignment="Top" Width="163" RenderTransformOrigin="0.5,0.5" Background="#FF464646">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-0.069"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <TextBlock HorizontalAlignment="Left" Height="41.581" Margin="7.266,42.107,0,0" TextWrapping="Wrap" Text="Discount" VerticalAlignment="Top" Width="60.299" FontSize="13.333" LineStackingStrategy="BlockLineHeight" LineHeight="37.333" Foreground="White"/>
+                    <TextBlock HorizontalAlignment="Left" Height="41.581" Margin="7.266,1,0,0" TextWrapping="Wrap" Text="Total" VerticalAlignment="Top" Width="49.9" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="37.333" Foreground="White"/>
+                    <TextBlock HorizontalAlignment="Left" Height="29.107" Margin="52.166,54.581,0,0" TextWrapping="Wrap" Text="$15.26" VerticalAlignment="Top" Width="100.834" FontSize="21.333" TextAlignment="Right" RenderTransformOrigin="-0.791,0.354" FontFamily="DS-Digital" Foreground="White"/>
+                    <TextBlock HorizontalAlignment="Left" Height="41.581" TextWrapping="Wrap" Text="$1,050.69" VerticalAlignment="Top" Width="112.829" FontSize="29.333" TextAlignment="Right" Margin="40.171,8,0,0" FontFamily="DS-Digital" FontWeight="Bold" Foreground="White">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="#FFFFF9B3" Direction="70" ShadowDepth="0" BlurRadius="3"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Height="41.581" Margin="7.266,67.107,0,-1.411" TextWrapping="Wrap" Text="VAT" VerticalAlignment="Top" Width="49.9" FontSize="13.333" LineStackingStrategy="BlockLineHeight" LineHeight="37.333" Foreground="White"/>
+                    <TextBlock HorizontalAlignment="Left" Height="29.107" Margin="52.166,79.581,0,-1.411" TextWrapping="Wrap" Text="$15.26" VerticalAlignment="Top" Width="100.834" FontSize="21.333" TextAlignment="Right" RenderTransformOrigin="-0.791,0.354" FontFamily="DS-Digital" Foreground="White"/>
+                </Grid>
+                <Grid Background="#FF464646" Margin="13.438,10,10,15" Width="383" Grid.Column="2">
+                    <TextBox HorizontalAlignment="Left" Height="30.404" Margin="10,47.32,0,0" TextWrapping="Wrap" Text="$1,000.00&#xA;" VerticalAlignment="Top" Width="91.093" Background="#FF1F1F1F" Foreground="#FFD7D7D7" FontSize="18.667" FontFamily="DS-Digital" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,5"/>
+                    <TextBlock HorizontalAlignment="Left" Height="31.09" Margin="10,7.861,0,0" TextWrapping="Wrap" Text="Cash" VerticalAlignment="Top" Width="91.093" FontSize="24" LineStackingStrategy="BlockLineHeight" LineHeight="32" TextAlignment="Center"/>
+                    <TextBox HorizontalAlignment="Left" Height="30.404" Margin="106.093,47.32,0,0" TextWrapping="Wrap" Text="$1,000.00&#xA;" VerticalAlignment="Top" Width="79.248" Background="#FF1F1F1F" Foreground="#FFD7D7D7" FontSize="18.667" FontFamily="DS-Digital" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,5"/>
+                    <TextBlock HorizontalAlignment="Left" Height="31.09" Margin="106.093,7.861,0,0" TextWrapping="Wrap" Text="Check" VerticalAlignment="Top" Width="79.248" FontSize="21.333" LineStackingStrategy="BlockLineHeight" LineHeight="32" TextAlignment="Center"/>
+                    <TextBox HorizontalAlignment="Left" Height="30.404" Margin="190.093,47.32,0,0" TextWrapping="Wrap" Text="$1,000.00&#xA;" VerticalAlignment="Top" Width="98.755" Background="#FF1F1F1F" Foreground="#FFD7D7D7" FontSize="18.667" FontFamily="DS-Digital" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,5"/>
+                    <TextBlock HorizontalAlignment="Left" Height="31.09" Margin="190.093,7.861,0,0" TextWrapping="Wrap" Text="Credit Card" VerticalAlignment="Top" Width="98.755" FontSize="18.667" LineStackingStrategy="BlockLineHeight" LineHeight="32" TextAlignment="Center"/>
+                    <TextBox HorizontalAlignment="Left" Height="30.404" Margin="295.912,47.32,0,0" TextWrapping="Wrap" Text="$1,000.00&#xA;" VerticalAlignment="Top" Width="81.155" Background="#FF1F1F1F" Foreground="#FFD7D7D7" FontSize="18.667" FontFamily="DS-Digital" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,5,0,0"/>
+                    <TextBlock HorizontalAlignment="Left" Height="31.09" Margin="295.912,7.861,0,0" TextWrapping="Wrap" Text="Account" VerticalAlignment="Top" Width="81.155" FontSize="18.667" LineStackingStrategy="BlockLineHeight" LineHeight="32" TextAlignment="Center"/>
+                </Grid>
+                <Grid Background="#FF464646" Margin="14.544,10,10,15" Width="383" Grid.Column="3">
+                    <TextBlock HorizontalAlignment="Left" Height="33.49" Margin="10,25.841,0,0" TextWrapping="Wrap" Text="Change" VerticalAlignment="Top" Width="99.795" FontSize="24" LineStackingStrategy="BlockLineHeight" LineHeight="32" TextAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Left" Height="62.4" TextWrapping="Wrap" Text="$50.69" VerticalAlignment="Top" Width="148.652" FontSize="48" TextAlignment="Right" Margin="111.92,20.784,0,0" FontFamily="DS-Digital" FontWeight="Bold">
+                        <TextBlock.Effect>
+                            <DropShadowEffect Color="#FFFFF9B3" Direction="70" ShadowDepth="0" BlurRadius="3"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </Grid>
+                <Button Content="Print" Grid.Column="3" HorizontalAlignment="Left" Height="34.304" Margin="303.842,37.682,0,0" VerticalAlignment="Top" Width="83.302"/>
+            </Grid>
+        </Border>
+    
+</UserControl>

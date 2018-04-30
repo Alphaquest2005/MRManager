@@ -26,7 +26,7 @@ namespace PayrollManager
                 else
                 {
                     if (CurrentAccount.EntityState == EntityState.Added) return;
-                    var ritm = ctx.Accounts.OfType<Account>().First(x => x.AccountId == CurrentAccount.AccountId);
+                    var ritm = ctx.Accounts.OfType<InstitutionAccounts>().First(x => x.AccountId == CurrentAccount.AccountId);
                     ctx.Accounts.Attach(ritm);
                     ctx.Accounts.ApplyCurrentValues(CurrentAccount);
                 }
@@ -51,7 +51,7 @@ namespace PayrollManager
 
                 using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
                 {
-                    var ritm = ctx.Accounts.OfType<Account>().First(x => x.AccountId == CurrentAccount.AccountId);
+                    var ritm = ctx.Accounts.OfType<InstitutionAccounts>().First(x => x.AccountId == CurrentAccount.AccountId);
                     ctx.Accounts.DeleteObject(ritm);
                     SaveDatabase(ctx);
                 }
@@ -67,7 +67,7 @@ namespace PayrollManager
 
         public void NewAccount()
         {
-            CurrentAccount = new Account();
+            CurrentAccount = new InstitutionAccounts();
             if (CurrentInstitution != null) CurrentAccount.InstitutionId = CurrentInstitution.InstitutionId;
             OnPropertyChanged("CurrentAccount");
         }

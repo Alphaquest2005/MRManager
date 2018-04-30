@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 
 namespace PayrollManager.DataLayer
 {
-   //public partial class Account
-   // {
-       
-           
-   // }
+    public partial class Institution
+    {
+        public Institution()
+        {
+            StartDate = DateTime.Now;
+
+        }
+
+    }
 }

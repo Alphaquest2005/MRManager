@@ -19,7 +19,7 @@ namespace PayrollManager
         void AccountsSummaryReportModel_staticPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e.PropertyName);
-            if (e.PropertyName == "Accounts")
+            if (e.PropertyName == "CurrentAccount")
             {
                 OnPropertyChanged("AccountsSummaryData");
             }
@@ -29,7 +29,7 @@ namespace PayrollManager
         {
             get
             {
-                var alst = from a in Accounts.SelectMany( x => x.CurrentAccountEntries.ToList())
+                var alst = from a in CurrentAccount.CurrentAccountEntries.ToList()
                            select a;
                 return alst.ToList();
             }

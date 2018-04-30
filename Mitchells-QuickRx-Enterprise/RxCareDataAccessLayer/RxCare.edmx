@@ -1,0 +1,1281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RxCareModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="RxCareModelStoreContainer">
+    <EntitySet Name="Conditions" EntityType="RxCareModel.Store.Conditions" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Doctors" EntityType="RxCareModel.Store.Doctors" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="DoctorPhones" EntityType="RxCareModel.Store.DoctorPhones" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="InventoryItems" EntityType="RxCareModel.Store.InventoryItems" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="InventoryQuantities" EntityType="RxCareModel.Store.InventoryQuantities" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Medicines" EntityType="RxCareModel.Store.Medicines" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="MedicineContents" EntityType="RxCareModel.Store.MedicineContents" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="MedicineInventory" EntityType="RxCareModel.Store.MedicineInventory" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="MedicineNegativeInteractions" EntityType="RxCareModel.Store.MedicineNegativeInteractions" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="MedicineSideEffects" EntityType="RxCareModel.Store.MedicineSideEffects" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="MedicineUnitPrices" EntityType="RxCareModel.Store.MedicineUnitPrices" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Patients" EntityType="RxCareModel.Store.Patients" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PatientAddresses" EntityType="RxCareModel.Store.PatientAddresses" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PatientConditions" EntityType="RxCareModel.Store.PatientConditions" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PatientPhones" EntityType="RxCareModel.Store.PatientPhones" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="PresciptionDetails" EntityType="RxCareModel.Store.PresciptionDetails" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Prescriptions" EntityType="RxCareModel.Store.Prescriptions" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="MedicineInventories1" EntityType="RxCareModel.Store.MedicineInventories" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <AssociationSet Name="FK_DoctorPhone_Doctor" Association="RxCareModel.Store.FK_DoctorPhone_Doctor">
+      <End Role="Doctor" EntitySet="Doctors" />
+      <End Role="DoctorPhone" EntitySet="DoctorPhones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryQuantities_InventoryItems" Association="RxCareModel.Store.FK_InventoryQuantities_InventoryItems">
+      <End Role="InventoryItems" EntitySet="InventoryItems" />
+      <End Role="InventoryQuantities" EntitySet="InventoryQuantities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicineContents_Medicine" Association="RxCareModel.Store.FK_MedicineContents_Medicine">
+      <End Role="Medicine" EntitySet="Medicines" />
+      <End Role="MedicineContents" EntitySet="MedicineContents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicineInventory_InventoryItems" Association="RxCareModel.Store.FK_MedicineInventory_InventoryItems">
+      <End Role="InventoryItems" EntitySet="InventoryItems" />
+      <End Role="MedicineInventory" EntitySet="MedicineInventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicineInventory_Medicine" Association="RxCareModel.Store.FK_MedicineInventory_Medicine">
+      <End Role="Medicine" EntitySet="Medicines" />
+      <End Role="MedicineInventory" EntitySet="MedicineInventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicineNegativeInteractions_Medicine" Association="RxCareModel.Store.FK_MedicineNegativeInteractions_Medicine">
+      <End Role="Medicine" EntitySet="Medicines" />
+      <End Role="MedicineNegativeInteractions" EntitySet="MedicineNegativeInteractions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicineSideEffects_Medicine" Association="RxCareModel.Store.FK_MedicineSideEffects_Medicine">
+      <End Role="Medicine" EntitySet="Medicines" />
+      <End Role="MedicineSideEffects" EntitySet="MedicineSideEffects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicineUnitPrice_Medicine" Association="RxCareModel.Store.FK_MedicineUnitPrice_Medicine">
+      <End Role="Medicine" EntitySet="Medicines" />
+      <End Role="MedicineUnitPrice" EntitySet="MedicineUnitPrices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientAddress_Patient" Association="RxCareModel.Store.FK_PatientAddress_Patient">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="PatientAddress" EntitySet="PatientAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientConditions_Conditions" Association="RxCareModel.Store.FK_PatientConditions_Conditions">
+      <End Role="Conditions" EntitySet="Conditions" />
+      <End Role="PatientConditions" EntitySet="PatientConditions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientConditions_Patient" Association="RxCareModel.Store.FK_PatientConditions_Patient">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="PatientConditions" EntitySet="PatientConditions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientPhone_Patient" Association="RxCareModel.Store.FK_PatientPhone_Patient">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="PatientPhone" EntitySet="PatientPhones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresciptionDetails_Medicine" Association="RxCareModel.Store.FK_PresciptionDetails_Medicine">
+      <End Role="Medicine" EntitySet="Medicines" />
+      <End Role="PresciptionDetails" EntitySet="PresciptionDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresciptionDetails_MedicineUnitPrice" Association="RxCareModel.Store.FK_PresciptionDetails_MedicineUnitPrice">
+      <End Role="MedicineUnitPrice" EntitySet="MedicineUnitPrices" />
+      <End Role="PresciptionDetails" EntitySet="PresciptionDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresciptionDetails_Prescription" Association="RxCareModel.Store.FK_PresciptionDetails_Prescription">
+      <End Role="Prescription" EntitySet="Prescriptions" />
+      <End Role="PresciptionDetails" EntitySet="PresciptionDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Prescription_Doctor1" Association="RxCareModel.Store.FK_Prescription_Doctor1">
+      <End Role="Doctor" EntitySet="Doctors" />
+      <End Role="Prescription" EntitySet="Prescriptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryQuantities_InventoryItems1" Association="RxCareModel.Store.FK_InventoryQuantities_InventoryItems1">
+      <End Role="InventoryItem" EntitySet="InventoryItems" />
+      <End Role="InventoryQuantity" EntitySet="InventoryQuantities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Prescription_Patient1" Association="RxCareModel.Store.FK_Prescription_Patient1">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="Prescription" EntitySet="Prescriptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicineInventories1_InventoryItem" Association="RxCareModel.Store.FK_MedicineInventories_InventoryItem">
+      <End Role="InventoryItem" EntitySet="InventoryItems" />
+      <End Role="MedicineInventories" EntitySet="MedicineInventories1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicineInventories1_Medicine" Association="RxCareModel.Store.FK_MedicineInventories_Medicine">
+      <End Role="Medicine" EntitySet="Medicines" />
+      <End Role="MedicineInventories" EntitySet="MedicineInventories1" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Conditions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ConditionName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Cause" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Doctors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Office_Address" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="DoctorPhones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Type" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="DoctorId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InventoryItems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="SupplierName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Supplier" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="ReorderLevel" Type="decimal" Nullable="true" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="InventoryQuantities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Location" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Quantity" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="DateEntered" Type="datetime" Nullable="false" />
+    <Property Name="Unit" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Cost" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Price" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="InventoryItemId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Medicines">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Brand" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Generic" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="MedicineContents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Content" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Quantity" Type="decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="Unit" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Percentage" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="MedicineId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MedicineInventory">
+    <Key>
+      <PropertyRef Name="MedicineId" />
+      <PropertyRef Name="InventoryItemId" />
+    </Key>
+    <Property Name="MedicineId" Type="int" Nullable="false" />
+    <Property Name="InventoryItemId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MedicineNegativeInteractions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MedicineId2" Type="int" Nullable="false" />
+    <Property Name="MedicineId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MedicineSideEffects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SideEffect" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Action" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="MedicineId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MedicineUnitPrices">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Unit" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Price" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="MedicineID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Patients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="MiddleName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="DateofBirth" Type="datetime" Nullable="true" />
+    <Property Name="BloodType" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Sex" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Property1" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PatientAddresses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Line1" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Parish" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="City" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="PatientId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PatientConditions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateEntered" Type="datetime" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ConditionsId" Type="int" Nullable="false" />
+    <Property Name="PatientId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PatientPhones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Type" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="PatientId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PresciptionDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Days" Type="int" Nullable="true" />
+    <Property Name="Times" Type="int" Nullable="true" />
+    <Property Name="Dosage" Type="decimal" Nullable="true" Precision="18" Scale="2" />
+    <Property Name="Comments" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Price" Type="decimal" Nullable="true" Precision="19" Scale="4" />
+    <Property Name="MedicineId" Type="int" Nullable="false" />
+    <Property Name="Unit" Type="int" Nullable="false" />
+    <Property Name="PrescriptionId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Prescriptions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PrescriptionNumber" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Instructions" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DateEntered" Type="datetime" Nullable="true" />
+    <Property Name="DoctorId" Type="int" Nullable="false" />
+    <Property Name="PatientId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MedicineInventories">
+    <Key>
+      <PropertyRef Name="InventoryItems_Id" />
+      <PropertyRef Name="Medicines_Id" />
+    </Key>
+    <Property Name="InventoryItems_Id" Type="int" Nullable="false" />
+    <Property Name="Medicines_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_DoctorPhone_Doctor">
+    <End Role="Doctor" Type="RxCareModel.Store.Doctors" Multiplicity="1" />
+    <End Role="DoctorPhone" Type="RxCareModel.Store.DoctorPhones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DoctorPhone">
+        <PropertyRef Name="DoctorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryQuantities_InventoryItems">
+    <End Role="InventoryItems" Type="RxCareModel.Store.InventoryItems" Multiplicity="1" />
+    <End Role="InventoryQuantities" Type="RxCareModel.Store.InventoryQuantities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InventoryItems">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventoryQuantities">
+        <PropertyRef Name="InventoryItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicineContents_Medicine">
+    <End Role="Medicine" Type="RxCareModel.Store.Medicines" Multiplicity="1" />
+    <End Role="MedicineContents" Type="RxCareModel.Store.MedicineContents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MedicineContents">
+        <PropertyRef Name="MedicineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicineInventory_InventoryItems">
+    <End Role="InventoryItems" Type="RxCareModel.Store.InventoryItems" Multiplicity="1" />
+    <End Role="MedicineInventory" Type="RxCareModel.Store.MedicineInventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InventoryItems">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MedicineInventory">
+        <PropertyRef Name="InventoryItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicineInventory_Medicine">
+    <End Role="Medicine" Type="RxCareModel.Store.Medicines" Multiplicity="1" />
+    <End Role="MedicineInventory" Type="RxCareModel.Store.MedicineInventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MedicineInventory">
+        <PropertyRef Name="MedicineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicineNegativeInteractions_Medicine">
+    <End Role="Medicine" Type="RxCareModel.Store.Medicines" Multiplicity="1" />
+    <End Role="MedicineNegativeInteractions" Type="RxCareModel.Store.MedicineNegativeInteractions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MedicineNegativeInteractions">
+        <PropertyRef Name="MedicineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicineSideEffects_Medicine">
+    <End Role="Medicine" Type="RxCareModel.Store.Medicines" Multiplicity="1" />
+    <End Role="MedicineSideEffects" Type="RxCareModel.Store.MedicineSideEffects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MedicineSideEffects">
+        <PropertyRef Name="MedicineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicineUnitPrice_Medicine">
+    <End Role="Medicine" Type="RxCareModel.Store.Medicines" Multiplicity="1" />
+    <End Role="MedicineUnitPrice" Type="RxCareModel.Store.MedicineUnitPrices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MedicineUnitPrice">
+        <PropertyRef Name="MedicineID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientAddress_Patient">
+    <End Role="Patient" Type="RxCareModel.Store.Patients" Multiplicity="1" />
+    <End Role="PatientAddress" Type="RxCareModel.Store.PatientAddresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientAddress">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientConditions_Conditions">
+    <End Role="Conditions" Type="RxCareModel.Store.Conditions" Multiplicity="1" />
+    <End Role="PatientConditions" Type="RxCareModel.Store.PatientConditions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Conditions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientConditions">
+        <PropertyRef Name="ConditionsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientConditions_Patient">
+    <End Role="Patient" Type="RxCareModel.Store.Patients" Multiplicity="1" />
+    <End Role="PatientConditions" Type="RxCareModel.Store.PatientConditions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientConditions">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientPhone_Patient">
+    <End Role="Patient" Type="RxCareModel.Store.Patients" Multiplicity="1" />
+    <End Role="PatientPhone" Type="RxCareModel.Store.PatientPhones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientPhone">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PresciptionDetails_Medicine">
+    <End Role="Medicine" Type="RxCareModel.Store.Medicines" Multiplicity="1" />
+    <End Role="PresciptionDetails" Type="RxCareModel.Store.PresciptionDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PresciptionDetails">
+        <PropertyRef Name="MedicineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PresciptionDetails_MedicineUnitPrice">
+    <End Role="MedicineUnitPrice" Type="RxCareModel.Store.MedicineUnitPrices" Multiplicity="1" />
+    <End Role="PresciptionDetails" Type="RxCareModel.Store.PresciptionDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MedicineUnitPrice">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PresciptionDetails">
+        <PropertyRef Name="Unit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PresciptionDetails_Prescription">
+    <End Role="Prescription" Type="RxCareModel.Store.Prescriptions" Multiplicity="1" />
+    <End Role="PresciptionDetails" Type="RxCareModel.Store.PresciptionDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prescription">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PresciptionDetails">
+        <PropertyRef Name="PrescriptionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Prescription_Doctor1">
+    <End Role="Doctor" Type="RxCareModel.Store.Doctors" Multiplicity="1" />
+    <End Role="Prescription" Type="RxCareModel.Store.Prescriptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Prescription">
+        <PropertyRef Name="DoctorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryQuantities_InventoryItems1">
+    <End Role="InventoryItem" Type="RxCareModel.Store.InventoryItems" Multiplicity="1" />
+    <End Role="InventoryQuantity" Type="RxCareModel.Store.InventoryQuantities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InventoryItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventoryQuantity">
+        <PropertyRef Name="InventoryItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Prescription_Patient1">
+    <End Role="Patient" Type="RxCareModel.Store.Patients" Multiplicity="1" />
+    <End Role="Prescription" Type="RxCareModel.Store.Prescriptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Prescription">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicineInventories_InventoryItem">
+    <End Role="InventoryItem" Type="RxCareModel.Store.InventoryItems" Multiplicity="1" />
+    <End Role="MedicineInventories" Type="RxCareModel.Store.MedicineInventories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InventoryItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MedicineInventories">
+        <PropertyRef Name="InventoryItems_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicineInventories_Medicine">
+    <End Role="MedicineInventories" Type="RxCareModel.Store.MedicineInventories" Multiplicity="*" />
+    <End Role="Medicine" Type="RxCareModel.Store.Medicines" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Medicine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MedicineInventories">
+        <PropertyRef Name="Medicines_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RxCareModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="RxCareEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="Conditions" EntityType="RxCareModel.Condition" />
+          <EntitySet Name="Doctors" EntityType="RxCareModel.Doctor" />
+          <EntitySet Name="DoctorPhones" EntityType="RxCareModel.DoctorPhone" />
+          <EntitySet Name="InventoryItems" EntityType="RxCareModel.InventoryItem" />
+          <EntitySet Name="InventoryQuantities" EntityType="RxCareModel.InventoryQuantity" />
+          <EntitySet Name="Medicines" EntityType="RxCareModel.Medicine" />
+          <EntitySet Name="MedicineContents" EntityType="RxCareModel.MedicineContent" />
+          <EntitySet Name="MedicineInventory" EntityType="RxCareModel.MedicineInventory" />
+          <EntitySet Name="MedicineNegativeInteractions" EntityType="RxCareModel.MedicineNegativeInteraction" />
+          <EntitySet Name="MedicineSideEffects" EntityType="RxCareModel.MedicineSideEffect" />
+          <EntitySet Name="MedicineUnitPrices" EntityType="RxCareModel.MedicineUnitPrice" />
+          <EntitySet Name="Patients" EntityType="RxCareModel.Patient" />
+          <EntitySet Name="PatientAddresses" EntityType="RxCareModel.PatientAddress" />
+          <EntitySet Name="PatientConditions" EntityType="RxCareModel.PatientCondition" />
+          <EntitySet Name="PatientPhones" EntityType="RxCareModel.PatientPhone" />
+          <EntitySet Name="PresciptionDetails" EntityType="RxCareModel.PresciptionDetail" />
+          <EntitySet Name="Prescriptions" EntityType="RxCareModel.Prescription" />
+          <AssociationSet Name="FK_DoctorPhone_Doctor" Association="RxCareModel.FK_DoctorPhone_Doctor">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="DoctorPhone" EntitySet="DoctorPhones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryQuantities_InventoryItems" Association="RxCareModel.FK_InventoryQuantities_InventoryItems">
+            <End Role="InventoryItems" EntitySet="InventoryItems" />
+            <End Role="InventoryQuantities" EntitySet="InventoryQuantities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicineContents_Medicine" Association="RxCareModel.FK_MedicineContents_Medicine">
+            <End Role="Medicine" EntitySet="Medicines" />
+            <End Role="MedicineContents" EntitySet="MedicineContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicineInventory_InventoryItems" Association="RxCareModel.FK_MedicineInventory_InventoryItems">
+            <End Role="InventoryItems" EntitySet="InventoryItems" />
+            <End Role="MedicineInventory" EntitySet="MedicineInventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicineInventory_Medicine" Association="RxCareModel.FK_MedicineInventory_Medicine">
+            <End Role="Medicine" EntitySet="Medicines" />
+            <End Role="MedicineInventory" EntitySet="MedicineInventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicineNegativeInteractions_Medicine" Association="RxCareModel.FK_MedicineNegativeInteractions_Medicine">
+            <End Role="Medicine" EntitySet="Medicines" />
+            <End Role="MedicineNegativeInteractions" EntitySet="MedicineNegativeInteractions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicineSideEffects_Medicine" Association="RxCareModel.FK_MedicineSideEffects_Medicine">
+            <End Role="Medicine" EntitySet="Medicines" />
+            <End Role="MedicineSideEffects" EntitySet="MedicineSideEffects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MedicineUnitPrice_Medicine" Association="RxCareModel.FK_MedicineUnitPrice_Medicine">
+            <End Role="Medicine" EntitySet="Medicines" />
+            <End Role="MedicineUnitPrice" EntitySet="MedicineUnitPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientAddress_Patient" Association="RxCareModel.FK_PatientAddress_Patient">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="PatientAddress" EntitySet="PatientAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientConditions_Conditions" Association="RxCareModel.FK_PatientConditions_Conditions">
+            <End Role="Conditions" EntitySet="Conditions" />
+            <End Role="PatientConditions" EntitySet="PatientConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientConditions_Patient" Association="RxCareModel.FK_PatientConditions_Patient">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="PatientConditions" EntitySet="PatientConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientPhone_Patient" Association="RxCareModel.FK_PatientPhone_Patient">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="PatientPhone" EntitySet="PatientPhones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresciptionDetails_Medicine" Association="RxCareModel.FK_PresciptionDetails_Medicine">
+            <End Role="Medicine" EntitySet="Medicines" />
+            <End Role="PresciptionDetails" EntitySet="PresciptionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresciptionDetails_MedicineUnitPrice" Association="RxCareModel.FK_PresciptionDetails_MedicineUnitPrice">
+            <End Role="MedicineUnitPrice" EntitySet="MedicineUnitPrices" />
+            <End Role="PresciptionDetails" EntitySet="PresciptionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresciptionDetails_Prescription" Association="RxCareModel.FK_PresciptionDetails_Prescription">
+            <End Role="Prescription" EntitySet="Prescriptions" />
+            <End Role="PresciptionDetails" EntitySet="PresciptionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prescription_Doctor1" Association="RxCareModel.FK_Prescription_Doctor1">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="Prescription" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryQuantities_InventoryItems1" Association="RxCareModel.FK_InventoryQuantities_InventoryItems1">
+            <End Role="InventoryItem" EntitySet="InventoryItems" />
+            <End Role="InventoryQuantity" EntitySet="InventoryQuantities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prescription_Patient1" Association="RxCareModel.FK_Prescription_Patient1">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Prescription" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="MedicineInventories1" Association="RxCareModel.MedicineInventories">
+            <End Role="InventoryItem" EntitySet="InventoryItems" />
+            <End Role="Medicine" EntitySet="Medicines" />
+          </AssociationSet>
+        </EntityContainer>
+
+        <EntityType Name="Condition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="ConditionName" Type="String" Nullable="false" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Cause" Type="String" Nullable="false" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="PatientConditions" Relationship="RxCareModel.FK_PatientConditions_Conditions" ToRole="PatientConditions" FromRole="Conditions" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="FirstName" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Office_Address" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="DoctorPhones" Relationship="RxCareModel.FK_DoctorPhone_Doctor" ToRole="DoctorPhone" FromRole="Doctor" />
+          <NavigationProperty Name="Prescriptions" Relationship="RxCareModel.FK_Prescription_Doctor1" FromRole="Doctor" ToRole="Prescription" />
+        </EntityType>
+        <EntityType Name="DoctorPhone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Type" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="Doctor" Relationship="RxCareModel.FK_DoctorPhone_Doctor" ToRole="Doctor" FromRole="DoctorPhone" />
+        </EntityType>
+        <EntityType Name="InventoryItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="ItemName" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="SupplierName" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Supplier" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="ReorderLevel" Type="Decimal" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="InventoryQuantities" Relationship="RxCareModel.FK_InventoryQuantities_InventoryItems" ToRole="InventoryQuantities" FromRole="InventoryItems" />
+          <NavigationProperty Name="MedicineInventories" Relationship="RxCareModel.FK_MedicineInventory_InventoryItems" ToRole="MedicineInventory" FromRole="InventoryItems" />
+          <NavigationProperty Name="Medicines" Relationship="RxCareModel.MedicineInventories" FromRole="InventoryItem" ToRole="Medicine" />
+        </EntityType>
+        <EntityType Name="InventoryQuantity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" ConcurrencyMode="Fixed" />
+          <Property Name="DateEntered" Type="DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="19" Scale="4" ConcurrencyMode="Fixed" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" ConcurrencyMode="Fixed" />
+          <Property Name="InventoryItemId" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="InventoryItem" Relationship="RxCareModel.FK_InventoryQuantities_InventoryItems" ToRole="InventoryItems" FromRole="InventoryQuantities" />
+          <NavigationProperty Name="InventoryItem1" Relationship="RxCareModel.FK_InventoryQuantities_InventoryItems1" FromRole="InventoryQuantity" ToRole="InventoryItem" />
+        </EntityType>
+        <EntityType Name="Medicine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Name" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Brand" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Generic" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="MedicineContents" Relationship="RxCareModel.FK_MedicineContents_Medicine" ToRole="MedicineContents" FromRole="Medicine" />
+          <NavigationProperty Name="MedicineInventories" Relationship="RxCareModel.FK_MedicineInventory_Medicine" ToRole="MedicineInventory" FromRole="Medicine" />
+          <NavigationProperty Name="MedicineNegativeInteractions" Relationship="RxCareModel.FK_MedicineNegativeInteractions_Medicine" ToRole="MedicineNegativeInteractions" FromRole="Medicine" />
+          <NavigationProperty Name="MedicineSideEffects" Relationship="RxCareModel.FK_MedicineSideEffects_Medicine" ToRole="MedicineSideEffects" FromRole="Medicine" />
+          <NavigationProperty Name="MedicineUnitPrices" Relationship="RxCareModel.FK_MedicineUnitPrice_Medicine" ToRole="MedicineUnitPrice" FromRole="Medicine" />
+          <NavigationProperty Name="PresciptionDetails" Relationship="RxCareModel.FK_PresciptionDetails_Medicine" ToRole="PresciptionDetails" FromRole="Medicine" />
+          <NavigationProperty Name="InventoryItems" Relationship="RxCareModel.MedicineInventories" FromRole="Medicine" ToRole="InventoryItem" />
+        </EntityType>
+        <EntityType Name="MedicineContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+          <Property Name="Unit" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Percentage" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="MedicineId" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="Medicine" Relationship="RxCareModel.FK_MedicineContents_Medicine" ToRole="Medicine" FromRole="MedicineContents" />
+        </EntityType>
+        <EntityType Name="MedicineInventory">
+          <Key>
+            <PropertyRef Name="MedicineId" />
+            <PropertyRef Name="InventoryItemId" />
+          </Key>
+          <Property Name="MedicineId" Type="Int32" Nullable="false" />
+          <Property Name="InventoryItemId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InventoryItem" Relationship="RxCareModel.FK_MedicineInventory_InventoryItems" ToRole="InventoryItems" FromRole="MedicineInventory" />
+          <NavigationProperty Name="Medicine" Relationship="RxCareModel.FK_MedicineInventory_Medicine" ToRole="Medicine" FromRole="MedicineInventory" />
+        </EntityType>
+        <EntityType Name="MedicineNegativeInteraction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="MedicineId2" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <Property Name="MedicineId" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="Medicine" Relationship="RxCareModel.FK_MedicineNegativeInteractions_Medicine" ToRole="Medicine" FromRole="MedicineNegativeInteractions" />
+        </EntityType>
+        <EntityType Name="MedicineSideEffect">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="SideEffect" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Action" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="MedicineId" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="Medicine" Relationship="RxCareModel.FK_MedicineSideEffects_Medicine" ToRole="Medicine" FromRole="MedicineSideEffects" />
+        </EntityType>
+        <EntityType Name="MedicineUnitPrice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Unit" Type="String" Nullable="false" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" ConcurrencyMode="Fixed" />
+          <Property Name="MedicineID" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="Medicine" Relationship="RxCareModel.FK_MedicineUnitPrice_Medicine" ToRole="Medicine" FromRole="MedicineUnitPrice" />
+          <NavigationProperty Name="PresciptionDetails" Relationship="RxCareModel.FK_PresciptionDetails_MedicineUnitPrice" ToRole="PresciptionDetails" FromRole="MedicineUnitPrice" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="FirstName" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="DateofBirth" Type="DateTime" Precision="3" ConcurrencyMode="Fixed" />
+          <Property Name="BloodType" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Sex" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="PatientAddresses" Relationship="RxCareModel.FK_PatientAddress_Patient" ToRole="PatientAddress" FromRole="Patient" />
+          <NavigationProperty Name="PatientConditions" Relationship="RxCareModel.FK_PatientConditions_Patient" ToRole="PatientConditions" FromRole="Patient" />
+          <NavigationProperty Name="PatientPhones" Relationship="RxCareModel.FK_PatientPhone_Patient" ToRole="PatientPhone" FromRole="Patient" />
+          <NavigationProperty Name="Prescriptions" Relationship="RxCareModel.FK_Prescription_Patient1" FromRole="Patient" ToRole="Prescription" />
+          <Property Type="String" Name="Property1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientAddress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Line1" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Parish" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="City" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="Patient" Relationship="RxCareModel.FK_PatientAddress_Patient" ToRole="Patient" FromRole="PatientAddress" />
+        </EntityType>
+        <EntityType Name="PatientCondition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="DateEntered" Type="DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+          <Property Name="Notes" Type="String" MaxLength="Max" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="ConditionsId" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="Condition" Relationship="RxCareModel.FK_PatientConditions_Conditions" ToRole="Conditions" FromRole="PatientConditions" />
+          <NavigationProperty Name="Patient" Relationship="RxCareModel.FK_PatientConditions_Patient" ToRole="Patient" FromRole="PatientConditions" />
+        </EntityType>
+        <EntityType Name="PatientPhone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Type" Type="String" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="Patient" Relationship="RxCareModel.FK_PatientPhone_Patient" ToRole="Patient" FromRole="PatientPhone" />
+        </EntityType>
+        <EntityType Name="PresciptionDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Days" Type="Int32" ConcurrencyMode="Fixed" />
+          <Property Name="Times" Type="Int32" ConcurrencyMode="Fixed" />
+          <Property Name="Dosage" Type="Decimal" Precision="18" Scale="2" ConcurrencyMode="Fixed" />
+          <Property Name="Comments" Type="String" MaxLength="Max" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" ConcurrencyMode="Fixed" />
+          <Property Name="MedicineId" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <Property Name="Unit" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <Property Name="PrescriptionId" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="Medicine" Relationship="RxCareModel.FK_PresciptionDetails_Medicine" ToRole="Medicine" FromRole="PresciptionDetails" />
+          <NavigationProperty Name="MedicineUnit" Relationship="RxCareModel.FK_PresciptionDetails_MedicineUnitPrice" ToRole="MedicineUnitPrice" FromRole="PresciptionDetails" />
+          <NavigationProperty Name="Prescription" Relationship="RxCareModel.FK_PresciptionDetails_Prescription" ToRole="Prescription" FromRole="PresciptionDetails" />
+        </EntityType>
+        <EntityType Name="Prescription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="PrescriptionNumber" Type="String" Nullable="false" MaxLength="50" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="Instructions" Type="String" MaxLength="Max" ConcurrencyMode="Fixed" Unicode="true" FixedLength="false" />
+          <Property Name="DateEntered" Type="DateTime" Precision="3" ConcurrencyMode="Fixed" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="PresciptionDetails" Relationship="RxCareModel.FK_PresciptionDetails_Prescription" ToRole="PresciptionDetails" FromRole="Prescription" />
+          <NavigationProperty Name="Doctor" Relationship="RxCareModel.FK_Prescription_Doctor1" FromRole="Prescription" ToRole="Doctor" />
+          <NavigationProperty Name="Patient" Relationship="RxCareModel.FK_Prescription_Patient1" FromRole="Prescription" ToRole="Patient" />
+        </EntityType>
+        <Association Name="FK_DoctorPhone_Doctor">
+          <End Role="Doctor" Type="RxCareModel.Doctor" Multiplicity="1" />
+          <End Role="DoctorPhone" Type="RxCareModel.DoctorPhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DoctorPhone">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryQuantities_InventoryItems">
+          <End Role="InventoryItems" Type="RxCareModel.InventoryItem" Multiplicity="1" />
+          <End Role="InventoryQuantities" Type="RxCareModel.InventoryQuantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryQuantities">
+              <PropertyRef Name="InventoryItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MedicineContents_Medicine">
+          <End Role="Medicine" Type="RxCareModel.Medicine" Multiplicity="1" />
+          <End Role="MedicineContents" Type="RxCareModel.MedicineContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicineContents">
+              <PropertyRef Name="MedicineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MedicineInventory_InventoryItems">
+          <End Role="InventoryItems" Type="RxCareModel.InventoryItem" Multiplicity="1" />
+          <End Role="MedicineInventory" Type="RxCareModel.MedicineInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicineInventory">
+              <PropertyRef Name="InventoryItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MedicineInventory_Medicine">
+          <End Role="Medicine" Type="RxCareModel.Medicine" Multiplicity="1" />
+          <End Role="MedicineInventory" Type="RxCareModel.MedicineInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicineInventory">
+              <PropertyRef Name="MedicineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MedicineNegativeInteractions_Medicine">
+          <End Role="Medicine" Type="RxCareModel.Medicine" Multiplicity="1" />
+          <End Role="MedicineNegativeInteractions" Type="RxCareModel.MedicineNegativeInteraction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicineNegativeInteractions">
+              <PropertyRef Name="MedicineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MedicineSideEffects_Medicine">
+          <End Role="Medicine" Type="RxCareModel.Medicine" Multiplicity="1" />
+          <End Role="MedicineSideEffects" Type="RxCareModel.MedicineSideEffect" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicineSideEffects">
+              <PropertyRef Name="MedicineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MedicineUnitPrice_Medicine">
+          <End Role="Medicine" Type="RxCareModel.Medicine" Multiplicity="1" />
+          <End Role="MedicineUnitPrice" Type="RxCareModel.MedicineUnitPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MedicineUnitPrice">
+              <PropertyRef Name="MedicineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientAddress_Patient">
+          <End Role="Patient" Type="RxCareModel.Patient" Multiplicity="1" />
+          <End Role="PatientAddress" Type="RxCareModel.PatientAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientAddress">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientConditions_Conditions">
+          <End Role="Conditions" Type="RxCareModel.Condition" Multiplicity="1" />
+          <End Role="PatientConditions" Type="RxCareModel.PatientCondition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conditions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientConditions">
+              <PropertyRef Name="ConditionsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientConditions_Patient">
+          <End Role="Patient" Type="RxCareModel.Patient" Multiplicity="1" />
+          <End Role="PatientConditions" Type="RxCareModel.PatientCondition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientConditions">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientPhone_Patient">
+          <End Role="Patient" Type="RxCareModel.Patient" Multiplicity="1" />
+          <End Role="PatientPhone" Type="RxCareModel.PatientPhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientPhone">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresciptionDetails_Medicine">
+          <End Role="Medicine" Type="RxCareModel.Medicine" Multiplicity="1" />
+          <End Role="PresciptionDetails" Type="RxCareModel.PresciptionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PresciptionDetails">
+              <PropertyRef Name="MedicineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresciptionDetails_MedicineUnitPrice">
+          <End Role="MedicineUnitPrice" Type="RxCareModel.MedicineUnitPrice" Multiplicity="1" />
+          <End Role="PresciptionDetails" Type="RxCareModel.PresciptionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicineUnitPrice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PresciptionDetails">
+              <PropertyRef Name="Unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresciptionDetails_Prescription">
+          <End Role="Prescription" Type="RxCareModel.Prescription" Multiplicity="1" />
+          <End Role="PresciptionDetails" Type="RxCareModel.PresciptionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prescription">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PresciptionDetails">
+              <PropertyRef Name="PrescriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prescription_Doctor1">
+          <End Type="RxCareModel.Doctor" Role="Doctor" Multiplicity="1" />
+          <End Type="RxCareModel.Prescription" Role="Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prescription">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryQuantities_InventoryItems1">
+          <End Type="RxCareModel.InventoryItem" Role="InventoryItem" Multiplicity="1" />
+          <End Type="RxCareModel.InventoryQuantity" Role="InventoryQuantity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryQuantity">
+              <PropertyRef Name="InventoryItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prescription_Patient1">
+          <End Type="RxCareModel.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="RxCareModel.Prescription" Role="Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prescription">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MedicineInventories">
+          <End Type="RxCareModel.InventoryItem" Role="InventoryItem" Multiplicity="*" />
+          <End Type="RxCareModel.Medicine" Role="Medicine" Multiplicity="*" />
+        </Association>
+        
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RxCareModelStoreContainer" CdmEntityContainer="RxCareEntities">
+    <EntitySetMapping Name="Conditions">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.Condition)">
+        <MappingFragment StoreEntitySet="Conditions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ConditionName" ColumnName="ConditionName" />
+          <ScalarProperty Name="Cause" ColumnName="Cause" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Doctors">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.Doctor)">
+        <MappingFragment StoreEntitySet="Doctors">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Office_Address" ColumnName="Office_Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DoctorPhones">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.DoctorPhone)">
+        <MappingFragment StoreEntitySet="DoctorPhones">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InventoryItems">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.InventoryItem)">
+        <MappingFragment StoreEntitySet="InventoryItems">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+          <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+          <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InventoryQuantities">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.InventoryQuantity)">
+        <MappingFragment StoreEntitySet="InventoryQuantities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="InventoryItemId" ColumnName="InventoryItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Medicines">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.Medicine)">
+        <MappingFragment StoreEntitySet="Medicines">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Generic" ColumnName="Generic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedicineContents">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.MedicineContent)">
+        <MappingFragment StoreEntitySet="MedicineContents">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="MedicineId" ColumnName="MedicineId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedicineInventory">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.MedicineInventory)">
+        <MappingFragment StoreEntitySet="MedicineInventory">
+          <ScalarProperty Name="MedicineId" ColumnName="MedicineId" />
+          <ScalarProperty Name="InventoryItemId" ColumnName="InventoryItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedicineNegativeInteractions">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.MedicineNegativeInteraction)">
+        <MappingFragment StoreEntitySet="MedicineNegativeInteractions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MedicineId2" ColumnName="MedicineId2" />
+          <ScalarProperty Name="MedicineId" ColumnName="MedicineId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedicineSideEffects">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.MedicineSideEffect)">
+        <MappingFragment StoreEntitySet="MedicineSideEffects">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SideEffect" ColumnName="SideEffect" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="MedicineId" ColumnName="MedicineId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedicineUnitPrices">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.MedicineUnitPrice)">
+        <MappingFragment StoreEntitySet="MedicineUnitPrices">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="MedicineID" ColumnName="MedicineID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Patients">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.Patient)">
+        <MappingFragment StoreEntitySet="Patients">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+          <ScalarProperty Name="BloodType" ColumnName="BloodType" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Property1" ColumnName="Property1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientAddresses">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.PatientAddress)">
+        <MappingFragment StoreEntitySet="PatientAddresses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Line1" ColumnName="Line1" />
+          <ScalarProperty Name="Parish" ColumnName="Parish" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientConditions">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.PatientCondition)">
+        <MappingFragment StoreEntitySet="PatientConditions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="ConditionsId" ColumnName="ConditionsId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientPhones">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.PatientPhone)">
+        <MappingFragment StoreEntitySet="PatientPhones">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PresciptionDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.PresciptionDetail)">
+        <MappingFragment StoreEntitySet="PresciptionDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Days" ColumnName="Days" />
+          <ScalarProperty Name="Times" ColumnName="Times" />
+          <ScalarProperty Name="Dosage" ColumnName="Dosage" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="MedicineId" ColumnName="MedicineId" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="PrescriptionId" ColumnName="PrescriptionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prescriptions">
+      <EntityTypeMapping TypeName="IsTypeOf(RxCareModel.Prescription)">
+        <MappingFragment StoreEntitySet="Prescriptions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PrescriptionNumber" ColumnName="PrescriptionNumber" />
+          <ScalarProperty Name="Instructions" ColumnName="Instructions" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+          <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="MedicineInventories1" TypeName="RxCareModel.MedicineInventories" StoreEntitySet="MedicineInventories1">
+      <EndProperty Name="InventoryItem">
+        <ScalarProperty Name="Id" ColumnName="InventoryItems_Id" />
+      </EndProperty>
+      <EndProperty Name="Medicine">
+        <ScalarProperty Name="Id" ColumnName="Medicines_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="True" />
+        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams />
+  </edmx:Designer>
+</edmx:Edmx>

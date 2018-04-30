@@ -26,7 +26,7 @@
             <ComboBox SelectedValue="{Binding CompanyId}" 
 					DisplayMemberPath="Institution.Name" SelectedValuePath="InstitutionId" ItemsSource="{Binding Companies, Source={StaticResource EmployeeDetailsModelDataSource}}"
 					Margin="405,81,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="166"/>
-            <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" Margin="120,54,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="166"/>
+            <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged, FallbackValue='Create New Employee'}" Margin="120,54,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="166"/>
             <TextBlock HorizontalAlignment="Left" Height="20.323" Margin="28.316,53.833,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75.063" TextAlignment="Right"><Run Text="First Name"/><LineBreak/><Run/></TextBlock>
             <TextBox Text="{Binding MiddleName, UpdateSourceTrigger=PropertyChanged}" Margin="120,83,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Width="166"/>
             <TextBlock HorizontalAlignment="Left" Height="20.323" Margin="28.316,82.648,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75.063" TextAlignment="Right"><Run Text="Middle Name"/><LineBreak/><Run/></TextBlock>
@@ -50,7 +50,7 @@
                     <DataGridComboBoxColumn Header="Institution" SelectedValueBinding="{Binding Account.InstitutionId, UpdateSourceTrigger=PropertyChanged}" Width="150"
 						DisplayMemberPath="Name" SelectedValuePath="InstitutionId" ItemsSource="{Binding Institutions, Source={StaticResource EmployeeDetailsModelDataSource}}"/>
                     <DataGridTextColumn Header="Account Number" Binding="{Binding Account.AccountNumber, UpdateSourceTrigger=PropertyChanged}" Width="150" />
-                    <DataGridTextColumn Header="Salary Assignment" Binding="{Binding SalaryAssignment, StringFormat=c, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+                    <!--<DataGridTextColumn Header="Salary Assignment" Binding="{Binding SalaryAssignment, StringFormat=c, UpdateSourceTrigger=PropertyChanged}" Width="150" />-->
                 </DataGrid.Columns>
             </DataGrid>
             <TextBlock HorizontalAlignment="Left" Height="40" Margin="314,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" TextAlignment="Right"><Run Text="Employment Start Date"/><LineBreak/><Run/></TextBlock>

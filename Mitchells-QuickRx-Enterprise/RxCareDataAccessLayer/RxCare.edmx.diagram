@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0ebe30b14ccb4458a4f855fc8c441cfb" Name="Diagram1" ZoomLevel="81" >
+        <EntityTypeShape EntityType="RxCareModel.Condition" Width="1.5" PointX="11" PointY="29.25" />
+        <EntityTypeShape EntityType="RxCareModel.Doctor" Width="1.5" PointX="3" PointY="7.125" />
+        <EntityTypeShape EntityType="RxCareModel.DoctorPhone" Width="1.5" PointX="5.25" PointY="33.375" />
+        <AssociationConnector Association="RxCareModel.FK_DoctorPhone_Doctor" />
+        <EntityTypeShape EntityType="RxCareModel.Prescription" Width="1.5" PointX="5.5" PointY="4.125" />
+        <AssociationConnector Association="RxCareModel.FK_Prescription_Doctor1" />
+        <EntityTypeShape EntityType="RxCareModel.PresciptionDetail" Width="1.875" PointX="11.125" PointY="13.125" />
+        <AssociationConnector Association="RxCareModel.FK_PresciptionDetails_Prescription" />
+        <EntityTypeShape EntityType="RxCareModel.Patient" Width="1.5" PointX="1.375" PointY="1" />
+        <AssociationConnector Association="RxCareModel.FK_Prescription_Patient1" />
+        <EntityTypeShape EntityType="RxCareModel.PatientAddress" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="RxCareModel.FK_PatientAddress_Patient" />
+        <EntityTypeShape EntityType="RxCareModel.PatientCondition" Width="1.5" PointX="8.25" PointY="3.125" />
+        <AssociationConnector Association="RxCareModel.FK_PatientConditions_Conditions" />
+        <AssociationConnector Association="RxCareModel.FK_PatientConditions_Patient" />
+        <EntityTypeShape EntityType="RxCareModel.PatientPhone" Width="1.5" PointX="5.25" PointY="26.5" />
+        <AssociationConnector Association="RxCareModel.FK_PatientPhone_Patient" />
+        <EntityTypeShape EntityType="RxCareModel.Medicine" Width="3" PointX="3" PointY="13" />
+        <AssociationConnector Association="RxCareModel.FK_PresciptionDetails_Medicine" />
+        <EntityTypeShape EntityType="RxCareModel.MedicineUnitPrice" Width="1.75" PointX="7.75" PointY="14" />
+        <AssociationConnector Association="RxCareModel.FK_MedicineUnitPrice_Medicine" />
+        <AssociationConnector Association="RxCareModel.FK_PresciptionDetails_MedicineUnitPrice" />
+        <EntityTypeShape EntityType="RxCareModel.MedicineContent" Width="2.25" PointX="5.25" PointY="17.25" />
+        <AssociationConnector Association="RxCareModel.FK_MedicineContents_Medicine" />
+        <EntityTypeShape EntityType="RxCareModel.MedicineInventory" Width="2.75" PointX="7.75" PointY="10.625" />
+        <AssociationConnector Association="RxCareModel.FK_MedicineInventory_Medicine" />
+        <EntityTypeShape EntityType="RxCareModel.MedicineNegativeInteraction" Width="2.25" PointX="5.25" PointY="20.625" />
+        <AssociationConnector Association="RxCareModel.FK_MedicineNegativeInteractions_Medicine" />
+        <EntityTypeShape EntityType="RxCareModel.MedicineSideEffect" Width="1.5" PointX="5.25" PointY="23.375" />
+        <AssociationConnector Association="RxCareModel.FK_MedicineSideEffects_Medicine" />
+        <EntityTypeShape EntityType="RxCareModel.InventoryItem" Width="2.875" PointX="0.5" PointY="9.75" />
+        <AssociationConnector Association="RxCareModel.FK_MedicineInventory_InventoryItems" />
+        <AssociationConnector Association="RxCareModel.MedicineInventories" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

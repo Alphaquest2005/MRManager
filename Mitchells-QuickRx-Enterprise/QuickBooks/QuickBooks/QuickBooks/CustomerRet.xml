@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CustomerRet>
+  <!-- optional, may repeat -->
+  <ListID >IDTYPE</ListID>
+  <!-- optional -->
+  <TimeCreated >12-MAR-2012 10:00:00 AM</TimeCreated>
+  <!-- optional -->
+  <TimeModified >12/12/2012 10:00:00 pm</TimeModified>
+  <!-- optional -->
+  <AccountBalance >10.00</AccountBalance>
+  <!-- optional -->
+  <AccountLimit >10.00</AccountLimit>
+  <!-- optional -->
+  <AmountPastDue >10.00</AmountPastDue>
+  <!-- optional -->
+  <CompanyName >STRTYPE</CompanyName>
+  <!-- optional -->
+  <CustomerID >STRTYPE</CustomerID>
+  <!-- optional -->
+  <CustomerDiscPercent >10.01</CustomerDiscPercent>
+  <!-- optional -->
+  <!-- CustomerDiscType may have one of the following values: None, PriceLevel, Percentage -->
+  <CustomerDiscType >2</CustomerDiscType>
+  <!-- optional -->
+  <CustomerType >STRTYPE</CustomerType>
+  <!-- optional -->
+  <EMail >STRTYPE</EMail>
+  <!-- optional -->
+  <IsOkToEMail >true</IsOkToEMail>
+  <!-- optional -->
+  <FirstName >STRTYPE</FirstName>
+  <!-- optional -->
+  <FullName >STRTYPE</FullName>
+  <!-- optional -->
+  <IsAcceptingChecks >true</IsAcceptingChecks>
+  <!-- optional -->
+  <IsUsingChargeAccount >true</IsUsingChargeAccount>
+  <!-- optional -->
+  <IsUsingWithQB >true</IsUsingWithQB>
+  <!-- optional -->
+  <IsRewardsMember >true</IsRewardsMember>
+  <!-- optional -->
+  <IsNoShipToBilling >true</IsNoShipToBilling>
+  <!-- optional -->
+  <LastName >STRTYPE</LastName>
+  <!-- optional -->
+  <LastSale >12-1-2012</LastSale>
+  <!-- optional -->
+  <Notes >STRTYPE</Notes>
+  <!-- optional -->
+  <Phone >STRTYPE</Phone>
+  <!-- optional -->
+  <Phone2 >STRTYPE</Phone2>
+  <!-- optional -->
+  <Phone3 >STRTYPE</Phone3>
+  <!-- optional -->
+  <Phone4 >STRTYPE</Phone4>
+  <!-- optional -->
+  <!-- PriceLevelNumber may have one of the following values: 1, 2, 3, 4, 5 -->
+  <PriceLevelNumber >2</PriceLevelNumber>
+  <!-- optional -->
+  <Salutation >STRTYPE</Salutation>
+  <!-- optional -->
+  <!-- StoreExchangeStatus may have one of the following values: Modified, Sent, Acknowledged -->
+  <StoreExchangeStatus >2</StoreExchangeStatus>
+  <!-- optional -->
+  <TaxCategory >STRTYPE</TaxCategory>
+  <!-- optional -->
+  <WebNumber >STRTYPE</WebNumber>
+  <!-- optional -->
+  <BillAddress>
+    <!-- optional -->
+    <City >STRTYPE</City>
+    <!-- optional -->
+    <Country >STRTYPE</Country>
+    <!-- optional -->
+    <PostalCode >STRTYPE</PostalCode>
+    <!-- optional -->
+    <State >STRTYPE</State>
+    <!-- optional -->
+    <Street >STRTYPE</Street>
+    <!-- optional -->
+    <Street2 >STRTYPE</Street2>
+    <!-- optional -->
+  </BillAddress>
+  <DefaultShipAddress >STRTYPE</DefaultShipAddress>
+  <!-- optional -->
+  <ShipAddress>
+    <!-- optional, may repeat -->
+    <AddressName >STRTYPE</AddressName>
+    <!-- optional -->
+    <CompanyName >STRTYPE</CompanyName>
+    <!-- optional -->
+    <FullName >STRTYPE</FullName>
+    <!-- optional -->
+    <City >STRTYPE</City>
+    <!-- optional -->
+    <Country >STRTYPE</Country>
+    <!-- optional -->
+    <PostalCode >STRTYPE</PostalCode>
+    <!-- optional -->
+    <State >STRTYPE</State>
+    <!-- optional -->
+    <Street >STRTYPE</Street>
+    <!-- optional -->
+    <Street2 >STRTYPE</Street2>
+    <!-- optional -->
+  </ShipAddress>
+  <Reward>
+    <!-- optional, may repeat -->
+    <RewardAmount >10.00</RewardAmount>
+    <!-- optional -->
+    <RewardPercent >10.01</RewardPercent>
+    <!-- optional -->
+    <EarnedDate >12-1-2012</EarnedDate>
+    <!-- optional -->
+    <MatureDate >12-1-2012</MatureDate>
+    <!-- optional -->
+    <ExpirationDate >12-1-2012</ExpirationDate>
+    <!-- optional -->
+  </Reward>
+  <DataExtRet>
+    <!-- optional, may repeat -->
+    <OwnerID >GUIDTYPE</OwnerID>
+    <!-- required -->
+    <DataExtName >STRTYPE</DataExtName>
+    <!-- required -->
+    <!-- DataExtType may have one of the following values: INTTYPE, 10.00, PRICETYPE, QUANTYPE, PERCENTTYPE, 12-MAR-2012, STR255TYPE, STR1024TYPE -->
+    <DataExtType >2</DataExtType>
+    <!-- required -->
+    <DataExtValue >STRTYPE</DataExtValue>
+    <!-- required -->
+  </DataExtRet>
+</CustomerRet>

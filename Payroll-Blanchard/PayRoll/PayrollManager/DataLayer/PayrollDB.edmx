@@ -15,7 +15,7 @@
           <Property Name="AccountId" Type="int" Nullable="false" />
           <Property Name="DebitAmount" Type="float" Nullable="false" />
           <Property Name="CreditAmount" Type="float" Nullable="false" />
-          <Property Name="Memo" Type="nvarchar(max)" />
+          <Property Name="Memo" Type="nvarchar" MaxLength="255" />
           <Property Name="PayrollItemId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Accounts">
@@ -23,9 +23,9 @@
             <PropertyRef Name="AccountId" />
           </Key>
           <Property Name="AccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AccountNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AccountNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="InstitutionId" Type="int" Nullable="false" />
-          <Property Name="AccountName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AccountName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AccountTypeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Accounts_EmployeeAccount">
@@ -48,14 +48,14 @@
             <PropertyRef Name="AccountTypeId" />
           </Key>
           <Property Name="AccountTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="ChargeTypes">
           <Key>
             <PropertyRef Name="ChargeTypeId" />
           </Key>
           <Property Name="ChargeTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Companies">
           <Key>
@@ -69,11 +69,11 @@
             <PropertyRef Name="EmailTemplateId" />
           </Key>
           <Property Name="EmailTemplateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FromEmailAddress" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="EmailBody" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ToEmailAddress" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Key" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Subject" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FromEmailAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailBody" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ToEmailAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="CompanyId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Employees">
@@ -81,15 +81,15 @@
             <PropertyRef Name="EmployeeId" />
           </Key>
           <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
           <Property Name="CompanyId" Type="int" />
           <Property Name="SupervisorId" Type="int" />
           <Property Name="EmploymentStartDate" Type="datetime" Nullable="false" />
           <Property Name="UnionMember" Type="bit" />
           <Property Name="EntryDateTime" Type="datetime" />
-          <Property Name="EmailAddress" Type="nvarchar(max)" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" />
           <Property Name="DriversLicence" Type="nvarchar" MaxLength="50" />
           <Property Name="DriversLicenceClass" Type="nvarchar" MaxLength="50" />
           <Property Name="SexId" Type="int" />
@@ -99,8 +99,8 @@
           <Key>
             <PropertyRef Name="EmployeeId" />
           </Key>
-          <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Institutions">
@@ -108,13 +108,14 @@
             <PropertyRef Name="InstitutionId" />
           </Key>
           <Property Name="InstitutionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Address" Type="nvarchar(max)" />
-          <Property Name="PhoneNumber" Type="nvarchar(max)" />
-          <Property Name="ShortName" Type="nvarchar(max)" />
-          <Property Name="Priority" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="10" />
+          <Property Name="Priority" Type="int" />
           <Property Name="StartDate" Type="date" Nullable="false" />
           <Property Name="EndDate" Type="date" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="PayrollEmployeeSetup">
           <Key>
@@ -132,7 +133,7 @@
           <Property Name="CompanyRate" Type="real" />
           <Property Name="ChargeTypeId" Type="int" Nullable="false" />
           <Property Name="PayrollJobTypeId" Type="int" Nullable="false" />
-          <Property Name="RateRounding" Type="nvarchar(max)" />
+          <Property Name="RateRounding" Type="nvarchar" MaxLength="10" />
           <Property Name="CreditAccountId" Type="int" Nullable="false" />
           <Property Name="DebitAccountId" Type="int" Nullable="false" />
         </EntityType>
@@ -147,14 +148,14 @@
           <Property Name="Priority" Type="int" Nullable="false" />
           <Property Name="PayrollJobId" Type="int" Nullable="false" />
           <Property Name="Amount" Type="float" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Rate" Type="real" Nullable="false" />
           <Property Name="BaseAmount" Type="float" Nullable="false" />
           <Property Name="IncomeDeduction" Type="bit" Nullable="false" />
-          <Property Name="Status" Type="nvarchar(max)" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="PayrollSetupItemId" Type="int" />
           <Property Name="ParentPayrollItemId" Type="int" />
-          <Property Name="RateRounding" Type="nvarchar(max)" />
+          <Property Name="RateRounding" Type="nvarchar" MaxLength="50" />
           <Property Name="IsTaxableBenefit" Type="bit" />
           <Property Name="ApplyToTaxableBenefits" Type="bit" />
         </EntityType>
@@ -164,10 +165,10 @@
           </Key>
           <Property Name="PayrollJobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CheckedBy" Type="int" />
-          <Property Name="PreparedBy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PreparedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="StartDate" Type="datetime" Nullable="false" />
           <Property Name="EndDate" Type="datetime" Nullable="false" />
-          <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PayrollJobTypeId" Type="int" Nullable="false" />
           <Property Name="PaymentDate" Type="datetime" Nullable="false" />
           <Property Name="CompanyId" Type="int" Nullable="false" />
@@ -177,7 +178,7 @@
             <PropertyRef Name="PayrollJobTypeId" />
           </Key>
           <Property Name="PayrollJobTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PayPeriods" Type="int" />
         </EntityType>
         <EntityType Name="PayrollSetupItems">
@@ -186,15 +187,12 @@
           </Key>
           <Property Name="PayrollSetupItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Priority" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="CompanyLineItemDescription" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyLineItemDescription" Type="nvarchar" MaxLength="50" />
           <Property Name="DebitCredit" Type="bit" Nullable="false" />
-          <Property Name="RecuranceDays" Type="nvarchar(max)" />
-          <Property Name="EmployeeAccountType" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RecuranceDays" Type="nvarchar" MaxLength="50" />
           <Property Name="IncomeDeduction" Type="bit" Nullable="false" />
-          <Property Name="PayrollItemAccountId" Type="int" Nullable="false" />
-          <Property Name="CompanyAccountId" Type="int" />
-          <Property Name="RateRounding" Type="nvarchar(max)" />
+          <Property Name="RateRounding" Type="nvarchar" MaxLength="50" />
           <Property Name="Rate" Type="float" />
           <Property Name="CompanyRate" Type="float" />
           <Property Name="RateCeiling" Type="float" />
@@ -264,18 +262,6 @@
             </Principal>
             <Dependent Role="PayrollItems">
               <PropertyRef Name="DebitAccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AccountPayrollSetupItem">
-          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
-          <End Role="PayrollSetupItems" Type="Self.PayrollSetupItems" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Accounts">
-              <PropertyRef Name="AccountId" />
-            </Principal>
-            <Dependent Role="PayrollSetupItems">
-              <PropertyRef Name="PayrollItemAccountId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -604,10 +590,6 @@
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="PayrollItems" EntitySet="PayrollItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_AccountPayrollSetupItem" Association="Self.FK_AccountPayrollSetupItem">
-            <End Role="Accounts" EntitySet="Accounts" />
-            <End Role="PayrollSetupItems" EntitySet="PayrollSetupItems" />
-          </AssociationSet>
           <AssociationSet Name="FK_Accounts_AccountTypes" Association="Self.FK_Accounts_AccountTypes">
             <End Role="AccountTypes" EntitySet="AccountTypes" />
             <End Role="Accounts" EntitySet="Accounts" />
@@ -740,10 +722,6 @@
             <End Role="Account" EntitySet="Accounts" />
             <End Role="PayrollItem" EntitySet="PayrollItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_AccountPayrollSetupItem" Association="DataLayer.FK_AccountPayrollSetupItem">
-            <End Role="Account" EntitySet="Accounts" />
-            <End Role="PayrollSetupItem" EntitySet="PayrollSetupItems" />
-          </AssociationSet>
           <AssociationSet Name="FK_Accounts_AccountTypes" Association="DataLayer.FK_Accounts_AccountTypes">
             <End Role="AccountType" EntitySet="AccountTypes" />
             <End Role="Account" EntitySet="Accounts" />
@@ -839,7 +817,7 @@
           <Property Name="AccountId" Type="Int32" Nullable="false" />
           <Property Name="DebitAmount" Type="Double" Nullable="false" />
           <Property Name="CreditAmount" Type="Double" Nullable="false" />
-          <Property Name="Memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Memo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="PayrollItemId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="DataLayer.FK_AccountAccountEntry" FromRole="AccountEntry" ToRole="Account" />
           <NavigationProperty Name="PayrollItem" Relationship="DataLayer.FK_PayrollItemAccountEntry" FromRole="AccountEntry" ToRole="PayrollItem" />
@@ -849,16 +827,15 @@
             <PropertyRef Name="AccountId" />
           </Key>
           <Property Name="AccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AccountNumber" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccountNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="InstitutionId" Type="Int32" Nullable="false" />
-          <Property Name="AccountName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccountName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AccountTypeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AccountEntries" Relationship="DataLayer.FK_AccountAccountEntry" FromRole="Account" ToRole="AccountEntry" />
           <NavigationProperty Name="PayrollEmployeeSetups" Relationship="DataLayer.FK_AccountPayrollEmployeeSetup" FromRole="Account" ToRole="PayrollEmployeeSetup" />
           <NavigationProperty Name="PayrollEmployeeSetups1" Relationship="DataLayer.FK_AccountPayrollEmployeeSetup1" FromRole="Account" ToRole="PayrollEmployeeSetup" />
           <NavigationProperty Name="CreditPayrollItems" Relationship="DataLayer.FK_AccountPayrollItem" FromRole="Account" ToRole="PayrollItem" />
           <NavigationProperty Name="DebitPayrollItems" Relationship="DataLayer.FK_AccountPayrollItem1" FromRole="Account" ToRole="PayrollItem" />
-          <NavigationProperty Name="PayrollSetupItems" Relationship="DataLayer.FK_AccountPayrollSetupItem" FromRole="Account" ToRole="PayrollSetupItem" />
           <NavigationProperty Name="AccountType" Relationship="DataLayer.FK_Accounts_AccountTypes" FromRole="Account" ToRole="AccountType" />
           <NavigationProperty Name="EmployeeAccounts" Relationship="DataLayer.FK_EmployeeAccount_inherits_Account" FromRole="Account" ToRole="Accounts_EmployeeAccount" />
           <NavigationProperty Name="Institution" Relationship="DataLayer.InstitutionAccount" FromRole="Account" ToRole="Institution" />
@@ -878,7 +855,7 @@
             <PropertyRef Name="AccountTypeId" />
           </Key>
           <Property Name="AccountTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Accounts" Relationship="DataLayer.FK_Accounts_AccountTypes" FromRole="AccountType" ToRole="Account" />
         </EntityType>
         <EntityType Name="ChargeType">
@@ -886,7 +863,7 @@
             <PropertyRef Name="ChargeTypeId" />
           </Key>
           <Property Name="ChargeTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PayrollEmployeeSetups" Relationship="DataLayer.FK_PayrollEmployeeSetup_ChargeTypes" FromRole="ChargeType" ToRole="PayrollEmployeeSetup" />
         </EntityType>
         <EntityType Name="Company">
@@ -906,11 +883,11 @@
             <PropertyRef Name="EmailTemplateId" />
           </Key>
           <Property Name="EmailTemplateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FromEmailAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="EmailBody" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ToEmailAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Key" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Subject" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FromEmailAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailBody" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ToEmailAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="DataLayer.FK_EmailTemplate_Companies" FromRole="EmailTemplate" ToRole="Company" />
         </EntityType>
@@ -919,15 +896,15 @@
             <PropertyRef Name="EmployeeId" />
           </Key>
           <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CompanyId" Type="Int32" />
           <Property Name="SupervisorId" Type="Int32" />
           <Property Name="EmploymentStartDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UnionMember" Type="Boolean" />
           <Property Name="EntryDateTime" Type="DateTime" Precision="3" />
-          <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="DriversLicence" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DriversLicenceClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SexId" Type="Int32" />
@@ -940,24 +917,25 @@
           <NavigationProperty Name="PayrollItems" Relationship="DataLayer.FK_EmployeePayrollItem" FromRole="Employee" ToRole="PayrollItem" />
         </EntityType>
         <EntityType Name="User" BaseType="DataLayer.Employee">
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Institution">
           <Key>
             <PropertyRef Name="InstitutionId" />
           </Key>
           <Property Name="InstitutionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ShortName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Priority" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Priority" Type="Int32" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EndDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Company" Relationship="DataLayer.FK_Companies_Institutions" FromRole="Institution" ToRole="Company" />
           <NavigationProperty Name="PayeeAccounts" Relationship="DataLayer.InstitutionInstitutionAccounts" FromRole="Institution" ToRole="InstitutionAccounts" />
           <NavigationProperty Name="Accounts" Relationship="DataLayer.InstitutionAccount" FromRole="Institution" ToRole="Account" />
+          <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PayrollEmployeeSetup">
           <Key>
@@ -975,7 +953,7 @@
           <Property Name="CompanyRate" Type="Single" />
           <Property Name="ChargeTypeId" Type="Int32" Nullable="false" />
           <Property Name="PayrollJobTypeId" Type="Int32" Nullable="false" />
-          <Property Name="RateRounding" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RateRounding" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="CreditAccountId" Type="Int32" Nullable="false" />
           <Property Name="DebitAccountId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CreditAccount" Relationship="DataLayer.FK_AccountPayrollEmployeeSetup" FromRole="PayrollEmployeeSetup" ToRole="Account" />
@@ -996,14 +974,14 @@
           <Property Name="Priority" Type="Int32" Nullable="false" />
           <Property Name="PayrollJobId" Type="Int32" Nullable="false" />
           <Property Name="Amount" Type="Double" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Rate" Type="Single" Nullable="false" />
           <Property Name="BaseAmount" Type="Double" Nullable="false" />
           <Property Name="IncomeDeduction" Type="Boolean" Nullable="false" />
-          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PayrollSetupItemId" Type="Int32" />
           <Property Name="ParentPayrollItemId" Type="Int32" />
-          <Property Name="RateRounding" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RateRounding" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsTaxableBenefit" Type="Boolean" />
           <Property Name="ApplyToTaxableBenefits" Type="Boolean" />
           <NavigationProperty Name="AccountEntries" Relationship="DataLayer.FK_PayrollItemAccountEntry" FromRole="PayrollItem" ToRole="AccountEntry" />
@@ -1021,10 +999,10 @@
           </Key>
           <Property Name="PayrollJobId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CheckedBy" Type="Int32" />
-          <Property Name="PreparedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PreparedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PayrollJobTypeId" Type="Int32" Nullable="false" />
           <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
@@ -1038,7 +1016,7 @@
             <PropertyRef Name="PayrollJobTypeId" />
           </Key>
           <Property Name="PayrollJobTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PayPeriods" Type="Int32" />
           <NavigationProperty Name="PayrollEmployeeSetups" Relationship="DataLayer.FK_PayrollJobTypePayrollEmployeeSetup" FromRole="PayrollJobType" ToRole="PayrollEmployeeSetup" />
           <NavigationProperty Name="PayrollJobs" Relationship="DataLayer.FK_PayrollJobTypePayrollJob" FromRole="PayrollJobType" ToRole="PayrollJob" />
@@ -1049,15 +1027,12 @@
           </Key>
           <Property Name="PayrollSetupItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Priority" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyLineItemDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyLineItemDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DebitCredit" Type="Boolean" Nullable="false" />
-          <Property Name="RecuranceDays" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="EmployeeAccountType" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecuranceDays" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IncomeDeduction" Type="Boolean" Nullable="false" />
-          <Property Name="PayrollItemAccountId" Type="Int32" Nullable="false" />
-          <Property Name="CompanyAccountId" Type="Int32" />
-          <Property Name="RateRounding" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RateRounding" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Rate" Type="Double" />
           <Property Name="CompanyRate" Type="Double" />
           <Property Name="RateCeiling" Type="Double" />
@@ -1069,7 +1044,6 @@
           <Property Name="AmountFlooring" Type="Double" />
           <Property Name="IsTaxableBenefit" Type="Boolean" />
           <Property Name="ApplyToTaxableBenefits" Type="Boolean" />
-          <NavigationProperty Name="Account" Relationship="DataLayer.FK_AccountPayrollSetupItem" FromRole="PayrollSetupItem" ToRole="Account" />
           <NavigationProperty Name="PayrollEmployeeSetups" Relationship="DataLayer.FK_PayrollSetupItemPayrollEmployeeSetup" FromRole="PayrollSetupItem" ToRole="PayrollEmployeeSetup" />
           <NavigationProperty Name="PayrollItems" Relationship="DataLayer.FK_PayrollSetupItemPayrollItem" FromRole="PayrollSetupItem" ToRole="PayrollItem" />
         </EntityType>
@@ -1144,18 +1118,6 @@
             </Principal>
             <Dependent Role="PayrollItem">
               <PropertyRef Name="DebitAccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AccountPayrollSetupItem">
-          <End Type="DataLayer.Account" Role="Account" Multiplicity="1" />
-          <End Type="DataLayer.PayrollSetupItem" Role="PayrollSetupItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="AccountId" />
-            </Principal>
-            <Dependent Role="PayrollSetupItem">
-              <PropertyRef Name="PayrollItemAccountId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1548,6 +1510,7 @@
           <EntitySetMapping Name="Institutions">
             <EntityTypeMapping TypeName="DataLayer.Institution">
               <MappingFragment StoreEntitySet="Institutions">
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="Priority" ColumnName="Priority" />
@@ -1642,10 +1605,7 @@
                 <ScalarProperty Name="CompanyRate" ColumnName="CompanyRate" />
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="RateRounding" ColumnName="RateRounding" />
-                <ScalarProperty Name="CompanyAccountId" ColumnName="CompanyAccountId" />
-                <ScalarProperty Name="PayrollItemAccountId" ColumnName="PayrollItemAccountId" />
                 <ScalarProperty Name="IncomeDeduction" ColumnName="IncomeDeduction" />
-                <ScalarProperty Name="EmployeeAccountType" ColumnName="EmployeeAccountType" />
                 <ScalarProperty Name="RecuranceDays" ColumnName="RecuranceDays" />
                 <ScalarProperty Name="DebitCredit" ColumnName="DebitCredit" />
                 <ScalarProperty Name="CompanyLineItemDescription" ColumnName="CompanyLineItemDescription" />
@@ -1671,7 +1631,7 @@
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
-        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

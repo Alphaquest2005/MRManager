@@ -83,7 +83,7 @@ namespace PayrollManager
 	    {
 
 	        
-	            if (CurrentPayrollJob == null || CurrentCompany == null) return new List<EmpSummary>();
+	            if (CurrentPayrollJob == null || CurrentCompany == null || Employees == null) return new List<EmpSummary>();
 	            int cpjob = CurrentPayrollJob.PayrollJobId;
 	            using (var ctx = new PayrollDB())
 	            {
@@ -92,7 +92,7 @@ namespace PayrollManager
 	                    var payrollItems = ctx.PayrollItems.Where(p => p.PayrollJobId == cpjob
 	                                                                   && p.ParentPayrollItem == null).ToList();
 
-
+	                    if (!payrollItems.Any()) return new List<EmpSummary>();
                         var emplst = Employees
 	                        .Select(e => new EmpSummary
 	                        {

@@ -33,8 +33,9 @@ namespace PayrollManager
                 
                 SaveDatabase(ctx);
             }
-           
-           
+            LoadInstitutions();
+            LoadInstitutionsAndCompanies();
+            CurrentAccount = null;
             OnStaticPropertyChanged("CurrentAccount");
            // CycleAccounts();
             OnStaticPropertyChanged("Accounts");
@@ -46,7 +47,7 @@ namespace PayrollManager
 
 
 
-        public void EditAccount(DataLayer.Account acc)
+        public void EditAccount(DataLayer.InstitutionAccounts acc)
         {
             CurrentAccount = acc;
         }
@@ -63,8 +64,12 @@ namespace PayrollManager
 
 	            }
 	        CurrentAccount = null;
-
-	    }
+            LoadInstitutions();
+            LoadInstitutionsAndCompanies();
+	        OnStaticPropertyChanged("CurrentAccount");
+	        // CycleAccounts();
+	        OnStaticPropertyChanged("Accounts");
+        }
 
 
 
@@ -76,7 +81,7 @@ namespace PayrollManager
             using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
             {
                 DataLayer.Account newemp =
-                    ctx.Accounts.CreateObject<DataLayer.Account>();
+                    ctx.Accounts.CreateObject<DataLayer.InstitutionAccounts>();
                 ctx.Accounts.AddObject(newemp);
 
                 CurrentAccount = newemp;

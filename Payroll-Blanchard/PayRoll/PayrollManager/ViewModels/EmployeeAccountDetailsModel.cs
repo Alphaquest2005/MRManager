@@ -91,7 +91,8 @@ namespace PayrollManager
         {
             using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
             {
-                DataLayer.EmployeeAccount newemp = ctx.EmployeeAccounts.CreateObject<DataLayer.EmployeeAccount>();
+                DataLayer.EmployeeAccount newemp = ctx.EmployeeAccounts.CreateObject<EmployeeAccount>();
+                newemp.Account = ctx.Accounts.CreateObject<Account>();
                 ctx.EmployeeAccounts.AddObject(newemp);
                 CurrentEmployeeAccount = newemp;
                 

@@ -26,15 +26,17 @@ namespace PayrollManager
         //private static object syncRootbase = new Object();
         //[MyExceptionHandlerAspect]
         public BaseViewModel()
-       {
-           CurrentYear = DateTime.Now.Year;
+        {
+            CurrentYear = DateTime.Now.Year;
 
-            staticPropertyChanged +=BaseViewModel_staticPropertyChanged;
-         _instance = this;
-         LoadInstitutions();
-         LoadPayrollSetupItems();
+            staticPropertyChanged += BaseViewModel_staticPropertyChanged;
+            _instance = this;
 
-       }
+            LoadInstitutions();
+            LoadInstitutionsAndCompanies();
+            LoadPayrollSetupItems();
+
+        }
 
         public void LoadInstitutions()
         {
@@ -46,6 +48,18 @@ namespace PayrollManager
             OnStaticPropertyChanged("Institutions");
 
             
+        }
+
+        public void LoadInstitutionsAndCompanies()
+        {
+            using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
+            {
+                _institutionsAndCompanies = new ObservableCollection<DataLayer.Institution>(ctx.Institutions.Include(x => x.Accounts).ToList());
+            }
+
+            OnStaticPropertyChanged("InstitutionsAndCompanies");
+
+
         }
 
         public void LoadPayrollSetupItems()
@@ -296,11 +310,13 @@ namespace PayrollManager
         {
             using (var ctx = new PayrollDB())
             {
-                return ctx.Companies.Include(x => x.CurrentPayrollJob.PayrollJobType).Include(x => x.Institution)
+                var res = ctx.Companies.Include(x => x.CurrentPayrollJob.PayrollJobType).Include(x => x.Institution)
                     .Where(x => x.Institution.EndDate.HasValue == false ||
                                 EntityFunctions.TruncateTime(x.Institution.EndDate.Value) >=
                                 EntityFunctions.TruncateTime(DateTime.Now))
                     .OrderBy(x => x.Institution.Name).ToList();
+                _companies = new ObservableCollection<Company>(res);
+                return res;
             }
         }
 
@@ -357,12 +373,12 @@ namespace PayrollManager
                 
                 
 
-                _employees = new ObservableCollection<Employee>();
-                if (CurrentCompany == null) return _employees;
+                var empLst = new ObservableCollection<Employee>();
+                if (CurrentCompany == null) return empLst;
                 using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
                 {
                     List<EmployeeInfo> res;
-                    if(CurrentPayrollJob != null)
+                    if(CurrentPayrollJob != null && CurrentPayrollJob.PayrollItems.Any())
                     {
                         var cpjobId = CurrentPayrollJob?.PayrollJobId;
                         res = ctx.Employees
@@ -499,13 +515,15 @@ namespace PayrollManager
                             employeeAccount.AccountReference.Load();
                             nemp.EmployeeAccounts.Add(employeeAccount);
                         }
-                        _employees.Add(nemp);
+                        empLst.Add(nemp);
                     }
 
                     
                 }
+                _employees = empLst;
                 OnStaticPropertyChanged("Employees");
-                return _employees;
+                GetPayrollEmployeeSetups();
+                return empLst;
             }
             catch (Exception)
             {
@@ -611,30 +629,51 @@ namespace PayrollManager
             }
         }
 
+        private static ObservableCollection<Institution> _institutionsAndCompanies;
 
-       
-
-
-        private   ObservableCollection<Account> GetAccountsData()
+        public ObservableCollection<Institution> InstitutionsAndCompanies
         {
-           
-                try
+            get { return _institutionsAndCompanies; }
+            set
+            {
+                _institutionsAndCompanies = value;
+                OnPropertyChanged("Institutions");
+            }
+        }
+
+
+
+
+        private ObservableCollection<Account> GetAccountsData()
+        {
+
+            try
+            {
+                GenerateHybridAccounts();
+                OnStaticPropertyChanged("AccountsData");
+                ObservableCollection<Account> lst;
+                if (BaseViewModel.Instance.CurrentPayrollJob != null)
                 {
-                    GenerateHybridAccounts();
-                    OnStaticPropertyChanged("AccountsData");
-                    var lst =
-                        new ObservableCollection<Account>(
-                            HybridAccountsLst.ToList().Where(
-                                x => x.CurrentAccountEntries != null && x.CurrentAccountEntries.Count > 0).ToList());
-                    _Accounts = lst;
-                    OnStaticPropertyChanged(nameof(Accounts));
-                    return lst;
+                    lst = new ObservableCollection<Account>(
+                              HybridAccountsLst.ToList().Where(
+                                      x => x.CurrentAccountEntries != null && x.CurrentAccountEntries.Count > 0)
+                                  .ToList()) ??
+                          new ObservableCollection<Account>();
                 }
-                catch (Exception e)
+                else
                 {
-                    Console.WriteLine(e);
-                    throw;
+                    lst = new ObservableCollection<Account>();
                 }
+
+                _Accounts = lst;
+                OnStaticPropertyChanged(nameof(Accounts));
+                return lst;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
         }
 
@@ -655,7 +694,7 @@ namespace PayrollManager
             {
                 ObservableCollection<DataLayer.Account> lst = new ObservableCollection<DataLayer.Account>();
 
-                foreach (var item in ctx.Accounts.OfType<DataLayer.Account>())
+                foreach (var item in ctx.Accounts.OfType<DataLayer.InstitutionAccounts>())
                 {
                     lst.Add(item);
                 }
@@ -804,8 +843,8 @@ namespace PayrollManager
                 }
                 _currentAccount = value;
                 OnStaticPropertyChanged("CurrentAccount");
-                OnStaticPropertyChanged("Accounts");
-                OnStaticPropertyChanged("AccountTypes");
+               // OnStaticPropertyChanged("Accounts");
+               // OnStaticPropertyChanged("AccountTypes");
 
                 // SetValue(CurrentEmployeeProperty, value);
             }
@@ -922,10 +961,12 @@ namespace PayrollManager
                 }
                 else
                 {
+                    
                     _Accounts = null;
-                        OnStaticPropertyChanged("Accounts");
+                    OnStaticPropertyChanged("Accounts");
                 }
                 LoadEmployees();
+                LoadPayrollSetupItems();
                 OnStaticPropertyChanged("CurrentCompany");
                 OnStaticPropertyChanged("Employees");
                 OnStaticPropertyChanged("CurrentEmployee");
@@ -1152,7 +1193,7 @@ namespace PayrollManager
                         }
 
 
-                        TriBoolState triBool = ConfigPayrollItem(pi, item);
+                        TriBoolState triBool = ConfigPayrollItem(pi, item, true);
                         switch (triBool)
                         {
                             case TriBoolState.Fail:
@@ -1176,7 +1217,9 @@ namespace PayrollManager
 
 
                         if (string.IsNullOrEmpty(item.PayrollSetupItem.CompanyLineItemDescription)) continue;
-                        PayrollItem citem = CreateCompanyPayrollItem(pi, item);
+                        var companyAccount = ctx.Accounts.OfType<InstitutionAccounts>()
+                            .FirstOrDefault(x => x.PayeeInstitutionId == item.Employee.CompanyId);
+                        PayrollItem citem = CreateCompanyPayrollItem(pi, item, companyAccount);
 
                         ctx.PayrollItems.AddObject(citem);
                     }
@@ -1209,7 +1252,7 @@ namespace PayrollManager
             Continue
         }
         //[MyExceptionHandlerAspect]
-        public TriBoolState ConfigPayrollItem(PayrollItem pi, DataLayer.PayrollEmployeeSetup item, bool AddToCurrentPayrollJob = true)
+        public TriBoolState ConfigPayrollItem(PayrollItem pi, DataLayer.PayrollEmployeeSetup item, bool AddToCurrentPayrollJob)
         {
             
             pi.IsTaxableBenefit = item.PayrollSetupItem.IsTaxableBenefit;
@@ -1232,14 +1275,14 @@ namespace PayrollManager
           //  DataLayer.EmployeeAccount ea = item.EmployeeAccount; // GetEmployeeAccount(item.PayrollSetupItem.EmployeeAccountType, item.EmployeeId);
             if (item.CreditAccountId == 0)
             {
-                MessageBox.Show(string.Format("{0} has no Debit Account setup for Account Type:{1}", item.Employee.DisplayName, item.PayrollSetupItem.EmployeeAccountType));
+                //MessageBox.Show(string.Format("{0} has no Debit Account setup for Account Type:{1}", item.Employee.DisplayName, item.PayrollSetupItem.EmployeeAccountType));
                 
                 return TriBoolState.Fail;
             }
 
             if (item.DebitAccountId == 0)
             {
-                MessageBox.Show(string.Format("{0} has no Credit Account setup for Account Type:{1}", item.Employee.DisplayName, item.PayrollSetupItem.EmployeeAccountType));
+               // MessageBox.Show(string.Format("{0} has no Credit Account setup for Account Type:{1}", item.Employee.DisplayName, item.PayrollSetupItem.EmployeeAccountType));
                 return TriBoolState.Fail;
             }
 
@@ -1323,7 +1366,7 @@ namespace PayrollManager
 
         }
         //[MyExceptionHandlerAspect]
-        private DataLayer.PayrollItem CreateCompanyPayrollItem(DataLayer.PayrollItem item, DataLayer.PayrollEmployeeSetup empSetupItem)
+        private PayrollItem CreateCompanyPayrollItem(PayrollItem item, PayrollEmployeeSetup empSetupItem, InstitutionAccounts companyAccount)
         {
             try
             {
@@ -1343,17 +1386,20 @@ namespace PayrollManager
                 citm.RateRounding = empSetupItem.RateRounding;
                 citm.Status = "Generated";
 
-                if (item.PayrollSetupItem.IncomeDeduction == true)
-                {
-                    citm.CreditAccountId = (int)item.PayrollSetupItem.CompanyAccountId;
-                    citm.DebitAccountId = item.PayrollSetupItem.PayrollItemAccountId;
-                }
-                else
-                {
 
-                    citm.CreditAccountId = item.PayrollSetupItem.PayrollItemAccountId;
-                    citm.DebitAccountId = (int)item.PayrollSetupItem.CompanyAccountId;
-                }
+                //if (item.PayrollSetupItem.IncomeDeduction == true)
+                //{
+                //    citm.CreditAccountId = (int)item.PayrollSetupItem.CompanyAccountId;
+                //    citm.DebitAccountId = item.PayrollSetupItem.PayrollItemAccountId;
+                //}
+                //else
+                //{
+
+                //    citm.CreditAccountId = item.PayrollSetupItem.PayrollItemAccountId;
+                //    citm.DebitAccountId = (int)item.PayrollSetupItem.CompanyAccountId;
+                //}
+                citm.CreditAccountId = item.CreditAccountId;
+                citm.DebitAccountId = companyAccount.AccountId;
 
                 return citm;
             }
@@ -1740,7 +1786,8 @@ namespace PayrollManager
                                             .Where(p => p.EmployeeId == empId &&
                                                         p.PayrollSetupItem != null &&
                                                         p.PayrollSetupItem.IncomeDeduction == true &&
-                                                        p.PayrollSetupItem.IsTaxableBenefit == true).ToList().Sum(p => p.CalcAmount);
+                                                        p.PayrollSetupItem.IsTaxableBenefit == true &&
+                                                        p.PayrollSetupItem.Name != "Salary").ToList().Select(x => x.CalcAmount).DefaultIfEmpty(0).Sum();
 
                 var payrollEmployeeSetups = ctx.PayrollEmployeeSetups.Include(x => x.PayrollSetupItem)
                     .Where(p => p.EmployeeId == empId)
@@ -1793,18 +1840,24 @@ namespace PayrollManager
 
         public ObservableCollection<PayrollEmployeeSetup> GetPayrollEmployeeSetups()
         {
-            if (CurrentEmployee == null || CurrentPayrollJobType == null) return null;
-            using (var ctx = new PayrollDB())
+            if (CurrentEmployee == null || CurrentPayrollJobType == null)
             {
-                _payrollEmployeeSetups = new ObservableCollection<DataLayer.PayrollEmployeeSetup>(ctx.PayrollEmployeeSetups
-                    .Include(x => x.PayrollSetupItem)
-                    .Where(p => p.PayrollJobTypeId == CurrentPayrollJobType.PayrollJobTypeId &&
-                                p.EmployeeId == CurrentEmployee.EmployeeId));
-                OnPropertyChanged("PayrollEmployeeSetups");
-                OnStaticPropertyChanged("PayrollEmployeeSetups");
-                return _payrollEmployeeSetups;
-
+                _payrollEmployeeSetups = new ObservableCollection<PayrollEmployeeSetup>();
             }
+            else
+            {
+                using (var ctx = new PayrollDB())
+                {
+                    _payrollEmployeeSetups = new ObservableCollection<DataLayer.PayrollEmployeeSetup>(ctx
+                        .PayrollEmployeeSetups
+                        .Include(x => x.PayrollSetupItem)
+                        .Where(p => p.PayrollJobTypeId == CurrentPayrollJobType.PayrollJobTypeId &&
+                                    p.EmployeeId == CurrentEmployee.EmployeeId));
+                }
+            }
+            OnPropertyChanged("PayrollEmployeeSetups");
+            OnStaticPropertyChanged("PayrollEmployeeSetups");
+            return _payrollEmployeeSetups;
         }
 
         private static ObservableCollection<DataLayer.PayrollEmployeeSetup> _payrollEmployeeSetups = null;
@@ -1956,13 +2009,13 @@ namespace PayrollManager
             {
                 nis.CreditAccount = ea.Account;
                 nis.CreditAccountId = ea.AccountId;
-                nis.DebitAccount = ps.Account;
-                nis.DebitAccountId = ps.PayrollItemAccountId;
+                nis.DebitAccount = nis.DebitAccount;
+                nis.DebitAccountId = nis.DebitAccountId;
             }
             else
             {
-                nis.CreditAccount = ps.Account;
-                nis.CreditAccountId = ps.PayrollItemAccountId;
+                nis.CreditAccount = nis.CreditAccount;
+                nis.CreditAccountId = nis.CreditAccountId;
                 nis.DebitAccount = ea.Account;
                 nis.DebitAccountId = ea.AccountId;
             }

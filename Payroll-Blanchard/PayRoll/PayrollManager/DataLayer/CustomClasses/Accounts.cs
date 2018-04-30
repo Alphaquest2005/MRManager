@@ -64,27 +64,28 @@ namespace PayrollManager.DataLayer
         {
             get
             {
-
+                if (BaseViewModel.Instance.CurrentPayrollJob == null ||
+                    BaseViewModel.Instance.CurrentCompany == null)
+                {
+                    _currentAccountEntries = new ObservableCollection<AccountEntry>();
+                    return _currentAccountEntries;
+                }
+                var payrollJobId = BaseViewModel.Instance.CurrentPayrollJob.PayrollJobId;
+                var institutionId = BaseViewModel.Instance.CurrentCompany.InstitutionId;
                 if (_currentAccountEntries == null || !_currentAccountEntries.Any() ||
                     (BaseViewModel.Instance.CurrentPayrollJob != null && 
                         _currentAccountEntries.First().PayrollItem  != null &&
-                        BaseViewModel.Instance.CurrentPayrollJob.PayrollJobId != _currentAccountEntries.First().PayrollItem.PayrollJobId))
+                        payrollJobId != _currentAccountEntries.First().PayrollItem.PayrollJobId))
                 {
-                    if ( BaseViewModel.Instance.CurrentPayrollJob == null ||
-                        BaseViewModel.Instance.CurrentCompany == null) return null;
-                    //return new ObservableCollection<AccountEntry>(AccountEntries.Where(a => a.PayrollItem.PayrollJobId == BaseViewModel.InstanceCurrentPayrollJob.PayrollJobId 
-                    //                                                && a.PayrollItem.Employee.InstitutionId == BaseViewModel.InstanceCurrentCompany.InstitutionId 
-                    //                                                && a.PayrollItem.PayrollJob.Branch != null 
-                    //                                                && a.PayrollItem.PayrollJob.Branch.InstitutionId == BaseViewModel.InstanceCurrentCompany.InstitutionId)
-                    //                                                .OrderByDescending(x => x.PayrollItem.IncomeDeduction).ThenBy(x => x.PayrollItem.Priority));
+                   
                     List<AccountEntry> alst;
                     using (var ctx = new PayrollDB())
                     {
                         alst =
                             ctx.AccountEntries
-                                     .Where(a => a.PayrollItem.PayrollJobId == BaseViewModel.Instance.CurrentPayrollJob.PayrollJobId
+                                     .Where(a => a.PayrollItem.PayrollJobId == payrollJobId
                                                  && a.AccountId == AccountId
-                                                 && a.PayrollItem.Employee.CompanyId == BaseViewModel.Instance.CurrentCompany.InstitutionId)
+                                                 && a.PayrollItem.Employee.CompanyId == institutionId)
                                      .Include(x => x.PayrollItem)
                                      .OrderByDescending(x => x.PayrollItem.IncomeDeduction)
                                      .ThenBy(x => x.PayrollItem.Priority).ToList();

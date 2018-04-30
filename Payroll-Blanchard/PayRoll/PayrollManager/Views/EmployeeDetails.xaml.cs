@@ -93,10 +93,13 @@ namespace PayrollManager
 	                    BaseViewModel.SaveDatabase(ctx);
 	                }
 
+	                im.LoadEmployees();
+
 	            }
 	        }
 	        e.Cancel = true;
-	    }
+	        
+        }
 
         private void GenerateItms_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

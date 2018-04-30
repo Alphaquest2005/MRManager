@@ -64,7 +64,8 @@ namespace PayrollManager
 
         public void SaveCompany()
         {
-            var InstitutionId = CurrentCompany.InstitutionId;
+            if (CurrentCompany == null) return;
+            var institutionId = CurrentCompany.InstitutionId;
             using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
             {
                 if (CurrentCompany == null) return;
@@ -85,9 +86,9 @@ namespace PayrollManager
 
                 SaveDatabase(ctx);
             }
-
+            LoadCompanies();
             OnStaticPropertyChanged("Companies");
-            CycleCurrentCompany(InstitutionId);
+            CycleCurrentCompany(institutionId);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace PayrollManager.DataLayer
                                 
                         }
                         DataLayer.PayrollItem p = new PayrollItem() {PayrollSetupItem = this.PayrollSetupItem};
-                        if (BaseViewModel.Instance.ConfigPayrollItem(p, this) == BaseViewModel.TriBoolState.Success)
+                        if (BaseViewModel.Instance.ConfigPayrollItem(p, this,false) == BaseViewModel.TriBoolState.Success)
                         {
                             double amt =
                                 Convert.ToDouble(BaseViewModel.GetPayrollAmount(Convert.ToDouble(this.BaseAmount), p));

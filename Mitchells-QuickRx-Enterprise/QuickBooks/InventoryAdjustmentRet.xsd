@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="InventoryQtyAdjustmentRet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TxnID" type="xs:string" />
+        <xs:element name="TimeCreated" type="xs:date" />
+        <xs:element name="TimeModified" type="xs:date" />
+        <xs:element name="Associate" type="xs:string" />
+        <xs:element name="Comments" type="xs:string" />
+        <xs:element name="CostDifference" type="xs:decimal" />
+        <xs:element name="HistoryDocStatus" type="xs:string" />
+        <xs:element name="InventoryAdjustmentNumber" type="xs:int" />
+        <xs:element name="InventoryAdjustmentSource" type="xs:string" />
+        <xs:element name="ItemsCount" type="xs:int" />
+        <xs:element name="NewQuantity" type="xs:decimal" />
+        <xs:element name="OldQuantity" type="xs:decimal" />
+        <xs:element name="QtyDifference" type="xs:decimal" />
+        <xs:element name="QuickBooksFlag" type="xs:string" />
+        <xs:element name="Reason" type="xs:string" />
+        <xs:element name="StoreExchangeStatus" type="xs:string" />
+        <xs:element name="StoreNumber" type="xs:int" />
+        <xs:element name="TxnDate" type="xs:date" />
+        <xs:element name="TxnState" type="xs:string" />
+        <xs:element name="Workstation" type="xs:int" />
+        <xs:element name="InventoryQtyAdjustmentItemRet">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ListID" type="xs:string" />
+              <xs:element name="NewQuantity" type="xs:decimal" />
+              <xs:element name="NumberOfBaseUnits" type="xs:decimal" />
+              <xs:element name="OldQuantity" type="xs:decimal" />
+              <xs:element name="QtyDifference" type="xs:decimal" />
+              <xs:element name="SerialNumber" type="xs:string" />
+              <xs:element name="UnitOfMeasure" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DataExtRet">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="OwnerID" type="xs:string" />
+              <xs:element name="DataExtName" type="xs:string" />
+              <xs:element name="DataExtType" type="xs:string" />
+              <xs:element name="DataExtValue" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

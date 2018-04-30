@@ -1,0 +1,113 @@
+﻿<UserControl x:Class="LeftRegion.SuppView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:data="clr-namespace:RMSDataAccessLayer;assembly=RMSDataAccessLayer"
+			 mc:Ignorable="d" 
+			  Margin="10,10,10,10">
+    <UserControl.Resources>
+        
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,2,40,2" />
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="true">
+                            <Border Background="#FF560303" DockPanel.Dock="right" Margin="5,0,0,0" Width="20" Height="20" CornerRadius="10"
+									ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                                <TextBlock Text="!" VerticalAlignment="center" HorizontalAlignment="center" FontWeight="Bold" Foreground="white">
+                                </TextBlock>
+                            </Border>
+                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                                <Border BorderBrush="#4CFF0000" BorderThickness="1" />
+                            </AdornedElementPlaceholder>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+    <Grid  Width="Auto" Height="500" Background="#4C202020">
+
+        <TextBox Name="SearchBox" Height="35" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,42,10,0" Background="#FF1F1F1F" Foreground="#FFD7D7D7" FontSize="20" FontFamily="Cordia New" Style="{DynamicResource FilterTextBoxStyle}" PreviewKeyDown="TextBox_PreviewKeyDown"/>
+        <TextBlock HorizontalAlignment="Left" Height="31" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="75" FontSize="20" LineStackingStrategy="BlockLineHeight" LineHeight="32" TextAlignment="Left" Foreground="White" Margin="15,1,0,0"/>
+        <Button HorizontalAlignment="Left" Click="SearchTransactions"  Height="42" Margin="110,0,0,0" VerticalAlignment="Top" Width="47">
+            <Button.Background>
+                <SolidColorBrush Color="#FFDDDDDD" Opacity="0.0"/>
+            </Button.Background>
+            <Image Source="{DynamicResource GreenRx}" Width="42"/>
+
+        </Button>
+        <ListBox Name="SearchList" SelectedItem="{Binding TransactionData}"  ItemsSource="{Binding SearchResults, IsAsync=True}" Height="382" Margin="0,107,0.667,0" VerticalAlignment="Top" Width="Auto" MinWidth="280" Background="#33FFFFFF" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBox.Resources>
+                <DataTemplate DataType="{x:Type data:PrescriptionEntry}">
+                    <Grid Height="25" Background="#7F7182D0">
+                        <TextBlock Text="{Binding TransactionEntryItem.ItemName}" Margin="35,0,100,0" Width="150" FontSize="10" TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding Quantity, StringFormat=n0}" Margin="10,0,250,0" FontWeight="Bold" />
+                        <TextBlock Text="{Binding Price, StringFormat=c}" Margin="185,0,55,0" />
+                        <TextBlock Text="{Binding Amount, StringFormat=c}" Margin="230,0,10,0" />
+                    </Grid>
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type data:Prescription}">
+                    <Expander Expanded="Expander_Expanded">
+                        <Expander.Header>
+                            <Grid MinWidth="280">
+                                <Grid.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#7FFFFFFF" Offset="0"/>
+                                        <GradientStop Color="#7F349315" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+                                <TextBlock Text="{Binding Patient.DisplayName}" Margin="115,1,24.8,28.2"/>
+                                <TextBlock Text="{Binding Time,StringFormat='d-MMM-yyyy HH:mm:ss'}" Margin="6,26,175,3.6" FontSize="10"/>
+                                <TextBlock Text="{Binding Doctor.DisplayName}" Margin="115,26,29.8,3.2"/>
+                                <TextBlock Text="{Binding TransactionNumber}" Margin="6,3,175,26.6" FontWeight="Bold"/>
+                                <Button x:Name="AutoRepeatBtn"  HorizontalAlignment="Left" Height="25" Margin="260,1,-0.2,0"  VerticalAlignment="Top" Width="25" Background="#00000000" Content="&#xE0F2;" FontFamily="Segoe UI Symbol" FontSize="16" Foreground="#FF65E468" ToolTip="Repeat" RenderTransformOrigin="0.5,0.45" Click="AutoRepeatBtn_Click"/>
+                                <!--<Button HorizontalAlignment="Left" Click="NewPrescription"  Height="25" Margin="260,27,-0.2,0" VerticalAlignment="Top" Width="25">
+                                    <Button.Background>
+                                        <SolidColorBrush Color="#FFDDDDDD" Opacity="0.0"/>
+                                    </Button.Background>
+                                    <Image Source="{DynamicResource NewTicket}"/>
+
+                                </Button>-->
+                            </Grid>
+                        </Expander.Header>
+                        <StackPanel>
+                            <ListBox ItemsSource="{Binding TransactionEntries, IsAsync=True}"/>
+                            <ListBox ItemsSource="{Binding Transactions, IsAsync=True}" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        
+                    </Expander>
+                </DataTemplate>
+            </ListBox.Resources>
+        </ListBox>
+        <Button HorizontalAlignment="Left" Click="SearchPatient"  Height="35" Margin="208,3,0,0" VerticalAlignment="Top" Width="37">
+            <Button.Background>
+                <SolidColorBrush Color="#FFDDDDDD" Opacity="0.0"/>
+            </Button.Background>
+            <Image Source="{DynamicResource Patient}"/>
+
+        </Button>
+        <Button HorizontalAlignment="Left" Click="SearchMedication"  Height="35" Margin="166,3,0,0" VerticalAlignment="Top" Width="37">
+            <Button.Background>
+                <SolidColorBrush Color="#FFDDDDDD" Opacity="0.0"/>
+            </Button.Background>
+            <Image Source="{DynamicResource Asprin}"/>
+
+        </Button>
+        <Button HorizontalAlignment="Left" Click="SearchDoctor"  Height="35" Margin="250,3,0,0" VerticalAlignment="Top" Width="37">
+            <Button.Background>
+                <SolidColorBrush Color="#FFDDDDDD" Opacity="0.0"/>
+            </Button.Background>
+            <Image Source="{DynamicResource Doctor}"/>
+
+        </Button>
+        <TextBlock Text="{Binding SearchResults.Count, StringFormat=0 Results}" HorizontalAlignment="Left" Height="20" Margin="10,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Foreground="#FFF0FBA9"/>
+        <TextBlock x:Name="Status" HorizontalAlignment="Left" Height="20" Margin="10,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Foreground="#FFF0FBA9" TextAlignment="Right"/>
+        <CheckBox Content="Show Inactive Items" HorizontalAlignment="Right" Height="20" Margin="0,82,10.667,0" VerticalAlignment="Top" Width="128" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+    </Grid>
+</UserControl>

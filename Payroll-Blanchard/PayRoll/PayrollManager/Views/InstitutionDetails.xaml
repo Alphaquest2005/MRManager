@@ -16,19 +16,21 @@
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource InstitutionModelDataSource},Path=CurrentInstitution}"  >
-        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="115,57,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="166"/>
+        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, FallbackValue='Click Add to Create New Institution'}" Margin="115,57,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="166"/>
         <TextBlock Text="Name" HorizontalAlignment="Left" Height="23" Margin="20,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
         <TextBlock  Text="Institution Details" HorizontalAlignment="Left" Height="34.8" Margin="31.5,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241.2" FontSize="26"/>
-        <TextBlock Text="Short Name" HorizontalAlignment="Left" Height="22" Margin="20,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
+        <TextBlock Text="Short Name" HorizontalAlignment="Left" Height="22" Margin="20,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
         <TextBlock x:Name="SaveBtn" HorizontalAlignment="Left" Height="27" Margin="240,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="33" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="20" MouseLeftButtonDown="SaveBtn_MouseLeftButtonDown"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="&#xE105;"/></Span></TextBlock>
         <TextBlock x:Name="DeleteBtn" HorizontalAlignment="Left" Height="27" Margin="338,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="33" TextAlignment="Center" Style="{DynamicResource CloseButtonStyle}" FontSize="20" MouseLeftButtonDown="DeleteBtn_MouseLeftButtonDown"><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run Text="&#xE106;"/></Span><LineBreak/><Span FontFamily="Segoe UI Symbol" Language="en-us"><Run/></Span></TextBlock>
         <TextBlock x:Name="NewBtn" HorizontalAlignment="Left" Height="27" Margin="202,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" TextAlignment="Center" Style="{DynamicResource TextButtonStyle}" FontSize="20" Text="&#xE109;" FontFamily="Segoe UI Symbol" MouseLeftButtonDown="NewBtn_MouseLeftButtonDown"/>
-        <TextBox Text="{Binding ShortName, UpdateSourceTrigger=PropertyChanged}" Margin="115,84,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="59"/>
-        <DatePicker SelectedDate="{Binding StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="115,130,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="27" Width="161"/>
-        <DatePicker SelectedDate="{Binding EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="115,162,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="161"/>
-        <TextBlock HorizontalAlignment="Left" Height="23" Margin="20,134,0,0" TextWrapping="Wrap" Text="Start Date" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
-        <TextBlock HorizontalAlignment="Left" Height="22" Margin="20,162,0,0" TextWrapping="Wrap" Text="End Date" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
-        <TextBlock Text="Prority" HorizontalAlignment="Left" Height="22" Margin="20,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
-        <TextBox Text="{Binding Priority, UpdateSourceTrigger=PropertyChanged}" Margin="115,108,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="59"/>
+        <TextBox Text="{Binding ShortName, UpdateSourceTrigger=PropertyChanged}" Margin="115,111,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="59"/>
+        <DatePicker SelectedDate="{Binding StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="115,157,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="27" Width="161"/>
+        <DatePicker SelectedDate="{Binding EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="115,189,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="161"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="20,161,0,0" TextWrapping="Wrap" Text="Start Date" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
+        <TextBlock HorizontalAlignment="Left" Height="22" Margin="20,189,0,0" TextWrapping="Wrap" Text="End Date" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
+        <TextBlock Text="Prority" HorizontalAlignment="Left" Height="22" Margin="20,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
+        <TextBox Text="{Binding Priority, UpdateSourceTrigger=PropertyChanged}" Margin="115,135,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="59"/>
+        <TextBox Text="{Binding EmailAddress, UpdateSourceTrigger=PropertyChanged}" Margin="115,85,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="19" Width="166"/>
+        <TextBlock Text="Email Address" HorizontalAlignment="Left" Height="23" Margin="20,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" TextAlignment="Right"/>
     </Grid>
 </UserControl>

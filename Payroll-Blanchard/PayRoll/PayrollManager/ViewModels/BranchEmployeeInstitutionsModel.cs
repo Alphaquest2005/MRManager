@@ -127,7 +127,7 @@ namespace PayrollManager
                 var eb =
                     _employeeDeductionsData.Pivot(
                         X => X.PayrollItems.GroupBy(p => new { p.CreditAccount.Institution.ShortName, p.CreditAccount.Institution.Priority })
-                            .Select(g => new InstitutionSummary { Institution = $"{g.Key.Priority ?? "99"}-{g.Key.ShortName}", Total = g.Sum(p => p.Amount), Priority = g.Key.Priority }).OrderBy(x => x.Priority),
+                            .Select(g => new InstitutionSummary { Institution = $"{g.Key.Priority ?? 99}-{g.Key.ShortName}", Total = g.Sum(p => p.Amount), Priority = Convert.ToInt32(g.Key.Priority) }).OrderBy(x => x.Priority),
                         X => X.Institution,
                         X => X.Total, true, null).ToList();
                 return eb;
@@ -445,9 +445,9 @@ namespace PayrollManager
                                 x =>
                                     new InstitutionSummary
                                     {
-                                        Institution = $"{X.Account.Institution.Priority ?? "99"}-{X.Account.Institution.ShortName}",
+                                        Institution = $"{X.Account.Institution.Priority ?? 99}-{X.Account.Institution.ShortName}",
                                         Total = X.Total,
-                                        Priority = x.Account.Institution.Priority
+                                        Priority = Convert.ToInt32(x.Account.Institution.Priority)
                                     }).OrderBy(x => x.Priority),
                         X => X.Institution, X => X.Total, true, null).ToList();
                 return eb;
@@ -546,7 +546,7 @@ namespace PayrollManager
             public string Institution { get; set; }
             public ObservableCollection<DataLayer.PayrollItem> PayrollItems { get; set; }
             public double Total { get; set; }
-            public string Priority { get; set; }
+            public int Priority { get; set; }
         }
 
         public class AccountSummary

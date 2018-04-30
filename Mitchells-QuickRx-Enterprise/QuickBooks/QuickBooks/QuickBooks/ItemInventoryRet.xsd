@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ItemInventoryRet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ListID" type="xs:string" />
+        <xs:element name="TimeCreated" type="xs:date" />
+        <xs:element name="TimeModified" type="xs:date" />
+        <xs:element name="ALU" type="xs:string" />
+        <xs:element name="Attribute" type="xs:string" />
+        <xs:element name="COGSAccount" type="xs:string" />
+        <xs:element name="Cost" type="xs:decimal" />
+        <xs:element name="DepartmentCode" type="xs:string" />
+        <xs:element name="DepartmentListID" type="xs:string" />
+        <xs:element name="Desc1" type="xs:string" />
+        <xs:element name="Desc2" type="xs:string" />
+        <xs:element name="IncomeAccount" type="xs:string" />
+        <xs:element name="IsBelowReorder" type="xs:boolean" />
+        <xs:element name="IsEligibleForCommission" type="xs:boolean" />
+        <xs:element name="IsPrintingTags" type="xs:boolean" />
+        <xs:element name="IsUnorderable" type="xs:boolean" />
+        <xs:element name="HasPictures" type="xs:boolean" />
+        <xs:element name="IsEligibleForRewards" type="xs:boolean" />
+        <xs:element name="IsWebItem" type="xs:boolean" />
+        <xs:element name="ItemNumber" type="xs:decimal" />
+        <xs:element name="ItemType" type="xs:string" />
+        <xs:element name="LastReceived" type="xs:string" />
+        <xs:element name="MarginPercent" type="xs:decimal" />
+        <xs:element name="MarkupPercent" type="xs:decimal" />
+        <xs:element name="MSRP" type="xs:decimal" />
+        <xs:element name="OnHandStore01" type="xs:decimal" />
+        <xs:element name="OnHandStore02" type="xs:decimal" />
+        <xs:element name="OnHandStore03" type="xs:decimal" />
+        <xs:element name="OnHandStore04" type="xs:decimal" />
+        <xs:element name="OnHandStore05" type="xs:decimal" />
+        <xs:element name="OnHandStore06" type="xs:decimal" />
+        <xs:element name="OnHandStore07" type="xs:decimal" />
+        <xs:element name="OnHandStore08" type="xs:decimal" />
+        <xs:element name="OnHandStore09" type="xs:decimal" />
+        <xs:element name="OnHandStore10" type="xs:decimal" />
+        <xs:element name="OnHandStore11" type="xs:decimal" />
+        <xs:element name="OnHandStore12" type="xs:decimal" />
+        <xs:element name="OnHandStore13" type="xs:decimal" />
+        <xs:element name="OnHandStore14" type="xs:decimal" />
+        <xs:element name="OnHandStore15" type="xs:decimal" />
+        <xs:element name="OnHandStore16" type="xs:decimal" />
+        <xs:element name="OnHandStore17" type="xs:decimal" />
+        <xs:element name="OnHandStore18" type="xs:decimal" />
+        <xs:element name="OnHandStore19" type="xs:decimal" />
+        <xs:element name="OnHandStore20" type="xs:decimal" />
+        <xs:element name="ReorderPointStore01" type="xs:decimal" />
+        <xs:element name="ReorderPointStore02" type="xs:decimal" />
+        <xs:element name="ReorderPointStore03" type="xs:decimal" />
+        <xs:element name="ReorderPointStore04" type="xs:decimal" />
+        <xs:element name="ReorderPointStore05" type="xs:decimal" />
+        <xs:element name="ReorderPointStore06" type="xs:decimal" />
+        <xs:element name="ReorderPointStore07" type="xs:decimal" />
+        <xs:element name="ReorderPointStore08" type="xs:decimal" />
+        <xs:element name="ReorderPointStore09" type="xs:decimal" />
+        <xs:element name="ReorderPointStore10" type="xs:decimal" />
+        <xs:element name="ReorderPointStore11" type="xs:decimal" />
+        <xs:element name="ReorderPointStore12" type="xs:decimal" />
+        <xs:element name="ReorderPointStore13" type="xs:decimal" />
+        <xs:element name="ReorderPointStore14" type="xs:decimal" />
+        <xs:element name="ReorderPointStore15" type="xs:decimal" />
+        <xs:element name="ReorderPointStore16" type="xs:decimal" />
+        <xs:element name="ReorderPointStore17" type="xs:decimal" />
+        <xs:element name="ReorderPointStore18" type="xs:decimal" />
+        <xs:element name="ReorderPointStore19" type="xs:decimal" />
+        <xs:element name="ReorderPointStore20" type="xs:decimal" />
+        <xs:element name="OrderByUnit" type="xs:string" />
+        <xs:element name="OrderCost" type="xs:decimal" />
+        <xs:element name="Price1" type="xs:decimal" />
+        <xs:element name="Price2" type="xs:decimal" />
+        <xs:element name="Price3" type="xs:decimal" />
+        <xs:element name="Price4" type="xs:decimal" />
+        <xs:element name="Price5" type="xs:decimal" />
+        <xs:element name="QuantityOnCustomerOrder" type="xs:decimal" />
+        <xs:element name="QuantityOnHand" type="xs:decimal" />
+        <xs:element name="QuantityOnOrder" type="xs:decimal" />
+        <xs:element name="QuantityOnPendingOrder" type="xs:decimal" />
+        <xs:element name="AvailableQty">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StoreNumber" type="xs:decimal" />
+              <xs:element name="QuantityOnOrder" type="xs:decimal" />
+              <xs:element name="QuantityOnCustomerOrder" type="xs:decimal" />
+              <xs:element name="QuantityOnPendingOrder" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ReorderPoint" type="xs:decimal" />
+        <xs:element name="SellByUnit" type="xs:string" />
+        <xs:element name="SerialFlag" type="xs:string" />
+        <xs:element name="Size" type="xs:string" />
+        <xs:element name="StoreExchangeStatus" type="xs:string" />
+        <xs:element name="TaxCode" type="xs:string" />
+        <xs:element name="UnitOfMeasure" type="xs:string" />
+        <xs:element name="UPC" type="xs:string" />
+        <xs:element name="VendorCode" type="xs:string" />
+        <xs:element name="VendorListID" type="xs:string" />
+        <xs:element name="WebDesc" type="xs:string" />
+        <xs:element name="WebPrice" type="xs:decimal" />
+        <xs:element name="Manufacturer" type="xs:string" />
+        <xs:element name="Weight" type="xs:decimal" />
+        <xs:element name="WebSKU" type="xs:string" />
+        <xs:element name="Keywords" type="xs:string" />
+        <xs:element name="WebCategories" type="xs:string" />
+        <xs:element name="UnitOfMeasure1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ALU" type="xs:string" />
+              <xs:element name="MSRP" type="xs:decimal" />
+              <xs:element name="NumberOfBaseUnits" type="xs:decimal" />
+              <xs:element name="Price1" type="xs:decimal" />
+              <xs:element name="Price2" type="xs:decimal" />
+              <xs:element name="Price3" type="xs:decimal" />
+              <xs:element name="Price4" type="xs:decimal" />
+              <xs:element name="Price5" type="xs:decimal" />
+              <xs:element name="UnitOfMeasure" type="xs:string" />
+              <xs:element name="UPC" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="UnitOfMeasure2">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ALU" type="xs:string" />
+              <xs:element name="MSRP" type="xs:decimal" />
+              <xs:element name="NumberOfBaseUnits" type="xs:decimal" />
+              <xs:element name="Price1" type="xs:decimal" />
+              <xs:element name="Price2" type="xs:decimal" />
+              <xs:element name="Price3" type="xs:decimal" />
+              <xs:element name="Price4" type="xs:decimal" />
+              <xs:element name="Price5" type="xs:decimal" />
+              <xs:element name="UnitOfMeasure" type="xs:string" />
+              <xs:element name="UPC" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="UnitOfMeasure3">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ALU" type="xs:string" />
+              <xs:element name="MSRP" type="xs:decimal" />
+              <xs:element name="NumberOfBaseUnits" type="xs:decimal" />
+              <xs:element name="Price1" type="xs:decimal" />
+              <xs:element name="Price2" type="xs:decimal" />
+              <xs:element name="Price3" type="xs:decimal" />
+              <xs:element name="Price4" type="xs:decimal" />
+              <xs:element name="Price5" type="xs:decimal" />
+              <xs:element name="UnitOfMeasure" type="xs:string" />
+              <xs:element name="UPC" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="VendorInfo2">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ALU" type="xs:string" />
+              <xs:element name="OrderCost" type="xs:decimal" />
+              <xs:element name="UPC" type="xs:string" />
+              <xs:element name="VendorListID">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="useMacro" type="xs:string" use="required" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="VendorInfo3">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ALU" type="xs:string" />
+              <xs:element name="OrderCost" type="xs:decimal" />
+              <xs:element name="UPC" type="xs:string" />
+              <xs:element name="VendorListID">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="useMacro" type="xs:string" use="required" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="VendorInfo4">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ALU" type="xs:string" />
+              <xs:element name="OrderCost" type="xs:decimal" />
+              <xs:element name="UPC" type="xs:string" />
+              <xs:element name="VendorListID">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="useMacro" type="xs:string" use="required" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="VendorInfo5">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ALU" type="xs:string" />
+              <xs:element name="OrderCost" type="xs:decimal" />
+              <xs:element name="UPC" type="xs:string" />
+              <xs:element name="VendorListID">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="useMacro" type="xs:string" use="required" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DataExtRet">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="OwnerID" type="xs:string" />
+              <xs:element name="DataExtName" type="xs:string" />
+              <xs:element name="DataExtType" type="xs:string" />
+              <xs:element name="DataExtValue" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
