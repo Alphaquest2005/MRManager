@@ -1346,12 +1346,15 @@ namespace PayrollManager
                 }
                 SaveDatabase(ctx);
 }
+            var cp = CurrentPayrollJob;
             CurrentPayrollJob.Status = "Posted";
             CurrentPayrollJob.PreparedBy = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             SavePayrollJob();
             UpdatePayrollJobs();
 
             LoadEmployees();
+            _Accounts = null;
+            CurrentPayrollJob = cp;
             MessageBox.Show("Payroll Job Posted");
             OnStaticPropertyChanged("CurrentPayrollJob");
             OnStaticPropertyChanged("PayrollItems");
@@ -1360,7 +1363,7 @@ namespace PayrollManager
             OnStaticPropertyChanged("CurrentEmployee.EmployeeAccounts");
             OnStaticPropertyChanged("EmployeeAccounts");
             OnStaticPropertyChanged("CurrentAccount");
-            _Accounts = null;
+            
             OnStaticPropertyChanged("Accounts");
             OnStaticPropertyChanged("CurrentEmployeeAccount");
 

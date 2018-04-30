@@ -160,7 +160,7 @@ namespace PayrollManager
                     .OrderByDescending(x => x.IncomeDeduction)
                     .ThenByDescending(x => x.Priority)
                     .Select(x => x.PayrollItem).Distinct();
-
+                if (_eb == null) return;
                 var proplst = ((LinqLib.DynamicCodeGenerator.IDynamicPivotObject) _eb[0]).PropertiesNames.OrderBy(x => x);
 
                 foreach (var item in collst.OrderBy(x => x))

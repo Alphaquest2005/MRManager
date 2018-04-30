@@ -56,10 +56,10 @@ namespace PayrollManager.Views
 	        {
 	            MessageBox.Show($"Payroll Job Selected - {BaseViewModel.Instance.CurrentPayrollJob.Name}");
 	        }
-	        else
-	        {
-	           MessageBox.Show($"No Payroll Job Selected"); 
-	        }
+	        //else
+	        //{
+	        //   MessageBox.Show($"No Payroll Job Selected"); 
+	        //}
 	    }
 	}
 }
