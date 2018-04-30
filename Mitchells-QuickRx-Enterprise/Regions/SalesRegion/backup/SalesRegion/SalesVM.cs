@@ -102,79 +102,7 @@ namespace SalesRegion
         }
 
 
-        //public void CreateNewPrescription()
-        //{
-        //    try
-        //    {
 
-        //        Logger.Log(LoggingLevel.Info, "Create New Prescription");
-        //        if (doctor == null)
-        //        {
-        //            Logger.Log(LoggingLevel.Warning, "Doctor is Missing");
-        //            this.Status = "Doctor is Missing";
-        //            return;
-        //        }
-
-        //        if (patient == null)
-        //        {
-        //            Logger.Log(LoggingLevel.Warning, "Patient is Missing");
-        //            this.Status = "Patient is Missing";
-        //            return;
-        //        }
-
-        //        if (Store == null)
-        //        {
-        //            Logger.Log(LoggingLevel.Warning, "Store is Missing");
-        //            this.Status = "Store is Missing";
-        //            return;
-        //        }
-
-        //        if (Batch == null)
-        //        {
-        //            Logger.Log(LoggingLevel.Warning, "Batch is Missing");
-        //            this.Status = "Batch is Missing";
-        //            return;
-        //        }
-
-        //        if (CashierEx == null)
-        //        {
-        //            Logger.Log(LoggingLevel.Warning, "Cashier is Missing");
-        //            this.Status = "CashierEx is Missing";
-        //            return;
-        //        }
-
-        //        if (Station == null)
-        //        {
-        //            Logger.Log(LoggingLevel.Warning, "Station is Missing");
-        //            this.Status = "Station is Missing";
-        //            return;
-        //        }
-        //        Prescription txn = new Prescription()
-        //        {
-        //            BatchId = Batch.BatchId,
-        //            StationId = Station.StationId,
-        //            Time = DateTime.Now,
-        //            CashierId = CashierEx.Id,
-        //            PharmacistId = (CashierEx.Role == "Pharmacist" ? CashierEx.Id : null as int?),
-        //            StoreCode = Store.StoreCode,
-        //            OpenClose = true,
-        //            DoctorId = doctor.Id,
-        //            PatientId = patient.Id,
-        //            Patient = patient,
-        //            Doctor = doctor,
-        //            Cashier = CashierEx,
-        //            Pharmacist = CashierEx.Role == "Pharmacist" ? CashierEx : null,
-        //            TrackingState = TrackingState.Added
-        //        };
-        //        txn.StartTracking();
-        //        Logger.Log(LoggingLevel.Info, "Prescription Created");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Logger.Log(LoggingLevel.Error, GetCurrentMethodClass.GetCurrentMethod() + ": --- :" + ex.Message + ex.StackTrace);
-        //        throw ex;
-        //    }
-        //}
 
 
         //+ ToDo: Replace this with your own data fields
@@ -2106,33 +2034,7 @@ namespace SalesRegion
             }
         }
 
-        private void CleanTransactionNavProperties(TransactionBase titm, RMSModel ctx)
-        {
-            try
-            {
-                var itm = titm as Prescription;
-                if (itm != null)
-                {
-                    var dbEntityEntry = ctx.Entry(itm.Doctor);
-                    if (dbEntityEntry != null &&
-                        (dbEntityEntry.State != EntityState.Unchanged && dbEntityEntry.State != EntityState.Detached))
-                    {
-                        dbEntityEntry.State = EntityState.Unchanged;
-                    }
-                    var p = ctx.Entry(itm.Patient);
-                    if (p != null && (p.State != EntityState.Unchanged && p.State != EntityState.Detached))
-                    {
-                        p.State = EntityState.Unchanged;
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(LoggingLevel.Error, GetCurrentMethodClass.GetCurrentMethod() + ": --- :" + ex.Message + ex.StackTrace);
-                throw ex;
-            }
-        }
+        
         
         private static Batch batch;
 
@@ -2228,5 +2130,40 @@ namespace SalesRegion
             MessageBox.Show(($"Could Not Print No:{d} Item-'{prescriptionEntry.TransactionEntryItem.ItemName}'"));
            
         }
+
+
+        private static ObservableCollection<RxAbbrevation> _RxAbbrevations = null;
+        public ObservableCollection<RxAbbrevation> RxAbbrevations
+        {
+            get
+            {
+                if (_RxAbbrevations == null)
+                {
+                    LoadRxAbbrevations();
+                }
+                return _RxAbbrevations;
+            }
+        }
+
+        public void LoadRxAbbrevations(string boxText = "")
+        {
+            ObservableCollection<RxAbbrevation> observableCollection;
+            using (var ctx = new RMSModel())
+            {
+                observableCollection = new ObservableCollection<RxAbbrevation>(ctx.RxAbbrevations.Where(x => x.Shortcut.Contains(boxText)).ToList());
+                _RxAbbrevations = observableCollection;
+            }
+            NotifyPropertyChanged(x => x.RxAbbrevations);
+        }
+
+        private static RxAbbrevation _selectedRxAbbrevation = null;
+        public RxAbbrevation SelectedRxAbbrevation
+        {
+            get => _selectedRxAbbrevation;
+            set => _selectedRxAbbrevation = value;
+        }
+
+        public string RxSearchText { get; set; } = "";
+
     }
 }

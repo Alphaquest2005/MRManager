@@ -171,6 +171,9 @@
     </Compile>
     <Compile Include="CustomClasses\ISearchItem.cs" />
     <Compile Include="QuickSales.Views.cs" />
+    <Compile Include="RxAbbrevation.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Station.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

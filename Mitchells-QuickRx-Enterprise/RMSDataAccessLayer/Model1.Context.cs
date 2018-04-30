@@ -39,5 +39,6 @@ namespace RMSDataAccessLayer
         public virtual DbSet<TransactionsView> TransactionsViews { get; set; }
         public virtual DbSet<TransactionEntryItem> TransactionEntryItems { get; set; }
         public virtual DbSet<ItemDosage> ItemDosages { get; set; }
+        public virtual DbSet<RxAbbrevation> RxAbbrevations { get; set; }
     }
 }

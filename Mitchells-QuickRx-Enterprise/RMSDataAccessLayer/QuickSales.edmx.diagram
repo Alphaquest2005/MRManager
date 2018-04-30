@@ -39,6 +39,8 @@
         <AssociationConnector Association="RMSEntities.FK_TransactionEntryItem_TransactionEntryBase" />
         <EntityTypeShape EntityType="RMSEntities.ItemDosage" Width="1.5" PointX="20.5" PointY="1.625" />
         <AssociationConnector Association="RMSEntities.FK_TransactionBase_TransactionBase" />
+        <EntityTypeShape EntityType="RMSEntities.RxAbbrevation" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="RMSEntities.Repeats" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

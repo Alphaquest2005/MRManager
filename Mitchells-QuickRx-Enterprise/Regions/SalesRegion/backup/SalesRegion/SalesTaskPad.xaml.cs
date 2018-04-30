@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Aviad.WPF.Controls;
 using Common.Core.Logging;
 using log4netWrapper;
 using SimpleMvvmToolkit;
@@ -754,6 +755,53 @@ namespace SalesRegion
                     MessageBox.Show("Suggested Dosage Saved");
                 }
             }
+        }
+
+        private void AddDosageCode(object sender, MouseButtonEventArgs e)
+        {
+            ComboBox box = Common.FindChild<ComboBox>(TransactionGrd, "DosageCodes");
+            AutoCompleteTextBox dosage = Common.FindChild<AutoCompleteTextBox>(TransactionGrd, "AutoCompleteTextBox");
+            if (box == null || dosage == null) return;
+            using (var ctx = new RMSModel())
+            {
+                var m =
+                    ctx.RxAbbrevations.FirstOrDefault(
+                        x =>
+                            x.Shortcut == box.Text) ?? new RxAbbrevation(){Shortcut = box.Text, Sentence = dosage.Text};
+                ctx.RxAbbrevations.AddOrUpdate(m);
+                ctx.SaveChanges();
+                SalesVM.Instance.LoadRxAbbrevations();
+                MessageBox.Show("Dosage & Code Saved");
+            }
+        }
+
+        private void DosageCodes_SelectionChanged(object sender, RoutedEventArgs routedEventArgs)
+        {
+            ComboBox box = Common.FindChild<ComboBox>(TransactionGrd, "DosageCodes");
+            AutoCompleteTextBox dosage = Common.FindChild<AutoCompleteTextBox>(TransactionGrd, "AutoCompleteTextBox");
+            if (dosage == null || SalesVM.Instance.SelectedRxAbbrevation == null) return;
+
+            dosage.Text = SalesVM.Instance.SelectedRxAbbrevation.Sentence;
+          // 
+        }
+
+
+        private void DosageCodes_OnTextInput(object sender, KeyEventArgs keyEventArgs)
+        {
+
+            //if (((int) keyEventArgs.Key >= (int) Key.A && (int) keyEventArgs.Key <= (int) Key.Z)
+            //    || ((int) keyEventArgs.Key >= (int) Key.NumPad0 && (int) keyEventArgs.Key <= (int) Key.NumPad9)
+            //    || ((int) keyEventArgs.Key >= (int) Key.D0 && (int) keyEventArgs.Key <= (int) Key.D9)
+            //    || (int)keyEventArgs.Key == (int)Key.Space
+            //    || (int)keyEventArgs.Key == (int)Key.Divide
+            //    || (int)keyEventArgs.Key == (int)Key.Escape)
+            //{
+            //    var res = keyEventArgs.Key.ToString().Replace("NumPad","").Replace("Divide","/").Replace("D","").Replace("Space"," ");
+            //    SalesVM.Instance.RxSearchText += res;
+            //    if (keyEventArgs.Key == Key.Escape) SalesVM.Instance.RxSearchText = "";
+            //SalesVM.Instance.LoadRxAbbrevations(SalesVM.Instance.RxSearchText);
+            //}
+           
         }
     }
 

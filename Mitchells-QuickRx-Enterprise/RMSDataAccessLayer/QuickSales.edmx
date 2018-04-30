@@ -148,6 +148,22 @@
           <Property Name="UnitOfMeasure" Type="nvarchar" MaxLength="50" />
           <Property Name="EntryTimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
+        <EntityType Name="Repeats">
+          <Key>
+            <PropertyRef Name="OldTransactionId" />
+            <PropertyRef Name="NewTransactionId" />
+          </Key>
+          <Property Name="OldTransactionId" Type="int" Nullable="false" />
+          <Property Name="NewTransactionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RxAbbrevations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Shortcut" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sentence" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="Stations">
           <Key>
             <PropertyRef Name="StationId" />
@@ -244,7 +260,7 @@
           <Property Name="ItemId" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'QuickSales-Enterprise.dbo.ItemDosage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Mitchells-QuickSales-Enterprise.dbo.ItemDosage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ItemDosage">
           <Key>
             <PropertyRef Name="ID" />
@@ -255,9 +271,7 @@ warning 6002: The table/view 'QuickSales-Enterprise.dbo.ItemDosage' does not hav
           <Property Name="ID" Type="bigint" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'QuickSales-Enterprise.dbo.SearchView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'QuickSales-Enterprise.dbo.TransactionsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'Mitchells-QuickSales-Enterprise.dbo.TransactionsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TransactionsView">
           <Key>
             <PropertyRef Name="TransactionId" />
@@ -492,6 +506,32 @@ warning 6002: The table/view 'QuickSales-Enterprise.dbo.TransactionsView' does n
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Repeats_TransactionBase">
+          <End Role="TransactionBase" Type="Self.TransactionBase" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Repeats" Type="Self.Repeats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionBase">
+              <PropertyRef Name="TransactionId" />
+            </Principal>
+            <Dependent Role="Repeats">
+              <PropertyRef Name="OldTransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repeats_TransactionBase1">
+          <End Role="TransactionBase" Type="Self.TransactionBase" Multiplicity="1" />
+          <End Role="Repeats" Type="Self.Repeats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionBase">
+              <PropertyRef Name="TransactionId" />
+            </Principal>
+            <Dependent Role="Repeats">
+              <PropertyRef Name="NewTransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StationBatch">
           <End Role="Stations" Type="Self.Stations" Multiplicity="1" />
           <End Role="Batches" Type="Self.Batches" Multiplicity="*" />
@@ -606,6 +646,8 @@ warning 6002: The table/view 'QuickSales-Enterprise.dbo.TransactionsView' does n
           <EntitySet Name="Persons_Doctor" EntityType="Self.Persons_Doctor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persons_Patient" EntityType="Self.Persons_Patient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QBInventoryItems" EntityType="Self.QBInventoryItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Repeats" EntityType="Self.Repeats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RxAbbrevations" EntityType="Self.RxAbbrevations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stations" EntityType="Self.Stations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionBase" EntityType="Self.TransactionBase" Schema="dbo" store:Type="Tables" />
@@ -698,6 +740,14 @@ FROM [dbo].[TransactionsView] AS [TransactionsView]</DefiningQuery>
           <AssociationSet Name="FK_QuickPrescription_inherits_TransactionBase" Association="Self.FK_QuickPrescription_inherits_TransactionBase">
             <End Role="TransactionBase" EntitySet="TransactionBase" />
             <End Role="TransactionBase_QuickPrescription" EntitySet="TransactionBase_QuickPrescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repeats_TransactionBase" Association="Self.FK_Repeats_TransactionBase">
+            <End Role="TransactionBase" EntitySet="TransactionBase" />
+            <End Role="Repeats" EntitySet="Repeats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repeats_TransactionBase1" Association="Self.FK_Repeats_TransactionBase1">
+            <End Role="TransactionBase" EntitySet="TransactionBase" />
+            <End Role="Repeats" EntitySet="Repeats" />
           </AssociationSet>
           <AssociationSet Name="FK_StationBatch" Association="Self.FK_StationBatch">
             <End Role="Stations" EntitySet="Stations" />
@@ -826,6 +876,11 @@ FROM [dbo].[TransactionsView] AS [TransactionsView]</DefiningQuery>
             <End Role="TransactionBase" EntitySet="TransactionBase" />
             <End Role="TransactionBase1" EntitySet="TransactionBase" />
           </AssociationSet>
+          <EntitySet Name="RxAbbrevations" EntityType="RMSEntities.RxAbbrevation" />
+          <AssociationSet Name="Repeats" Association="RMSEntities.Repeats">
+            <End Role="TransactionBase" EntitySet="TransactionBase" />
+            <End Role="TransactionBase1" EntitySet="TransactionBase" />
+          </AssociationSet>
           
           </EntityContainer>
         <EntityType Name="Item" Abstract="false">
@@ -883,6 +938,8 @@ FROM [dbo].[TransactionsView] AS [TransactionsView]</DefiningQuery>
           <Property Name="ParentTransactionId" Type="Int32" />
           <NavigationProperty Name="Transactions" Relationship="RMSEntities.FK_TransactionBase_TransactionBase" FromRole="TransactionBase" ToRole="TransactionBase1" />
           <NavigationProperty Name="ParentTransaction" Relationship="RMSEntities.FK_TransactionBase_TransactionBase" FromRole="TransactionBase1" ToRole="TransactionBase" />
+          <NavigationProperty Name="TransactionBase11" Relationship="RMSEntities.Repeats" FromRole="TransactionBase" ToRole="TransactionBase1" />
+          <NavigationProperty Name="TransactionBases" Relationship="RMSEntities.Repeats" FromRole="TransactionBase1" ToRole="TransactionBase" />
           </EntityType>
         <EntityType Name="TransactionEntryBase" Abstract="false">
           <Key>
@@ -1323,6 +1380,18 @@ FROM [dbo].[TransactionsView] AS [TransactionsView]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="RxAbbrevation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Shortcut" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sentence" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="Repeats">
+          <End Type="RMSEntities.TransactionBase" Role="TransactionBase" Multiplicity="*" />
+          <End Type="RMSEntities.TransactionBase" Role="TransactionBase1" Multiplicity="*" />
+        </Association>
 
         </Schema>
     </edmx:ConceptualModels>
@@ -1592,6 +1661,23 @@ FROM [dbo].[TransactionsView] AS [TransactionsView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="RxAbbrevations">
+            <EntityTypeMapping TypeName="RMSEntities.RxAbbrevation">
+              <MappingFragment StoreEntitySet="RxAbbrevations">
+                <ScalarProperty Name="Sentence" ColumnName="Sentence" />
+                <ScalarProperty Name="Shortcut" ColumnName="Shortcut" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Repeats" TypeName="RMSEntities.Repeats" StoreEntitySet="Repeats">
+            <EndProperty Name="TransactionBase1">
+              <ScalarProperty Name="TransactionId" ColumnName="NewTransactionId" />
+            </EndProperty>
+            <EndProperty Name="TransactionBase">
+              <ScalarProperty Name="TransactionId" ColumnName="OldTransactionId" />
+            </EndProperty>
+          </AssociationSetMapping>
     </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

@@ -11,7 +11,7 @@ using System.Data.Entity.Infrastructure.MappingViews;
 
 [assembly: DbMappingViewCacheTypeAttribute(
     typeof(RMSDataAccessLayer.RMSModel),
-    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsc08f2a6c12a8f0bbd112ae2ef3fc7f58dd5ec9507cb21ec9c69e1b13722244a5))]
+    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetscc145b630a581ddd36212f167eb9d24f62c265c6ab658bab701bd02a0efe181e))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -23,14 +23,14 @@ namespace Edm_EntityMappingGeneratedViews
     /// Implements a mapping view cache.
     /// </summary>
     [GeneratedCode("Entity Framework 6 Power Tools", "0.9.2.0")]
-    internal sealed class ViewsForBaseEntitySetsc08f2a6c12a8f0bbd112ae2ef3fc7f58dd5ec9507cb21ec9c69e1b13722244a5 : DbMappingViewCache
+    internal sealed class ViewsForBaseEntitySetscc145b630a581ddd36212f167eb9d24f62c265c6ab658bab701bd02a0efe181e : DbMappingViewCache
     {
         /// <summary>
         /// Gets a hash value computed over the mapping closure.
         /// </summary>
         public override string MappingHashValue
         {
-            get { return "c08f2a6c12a8f0bbd112ae2ef3fc7f58dd5ec9507cb21ec9c69e1b13722244a5"; }
+            get { return "cc145b630a581ddd36212f167eb9d24f62c265c6ab658bab701bd02a0efe181e"; }
         }
 
         /// <summary>
@@ -137,84 +137,104 @@ namespace Edm_EntityMappingGeneratedViews
                 return GetView17();
             }
 
-            if (extentName == "RMSModel.Item")
+            if (extentName == "RMSEntitiesStoreContainer.Repeats")
             {
                 return GetView18();
             }
 
-            if (extentName == "RMSModel.TransactionBase")
+            if (extentName == "RMSModel.Item")
             {
                 return GetView19();
             }
 
-            if (extentName == "RMSModel.TransactionEntryBase")
+            if (extentName == "RMSModel.TransactionBase")
             {
                 return GetView20();
             }
 
-            if (extentName == "RMSModel.Company")
+            if (extentName == "RMSModel.TransactionEntryBase")
             {
                 return GetView21();
             }
 
-            if (extentName == "RMSModel.Persons")
+            if (extentName == "RMSModel.Company")
             {
                 return GetView22();
             }
 
-            if (extentName == "RMSModel.Batches")
+            if (extentName == "RMSModel.Persons")
             {
                 return GetView23();
             }
 
-            if (extentName == "RMSModel.Stations")
+            if (extentName == "RMSModel.Batches")
             {
                 return GetView24();
             }
 
-            if (extentName == "RMSModel.Stores")
+            if (extentName == "RMSModel.Stations")
             {
                 return GetView25();
             }
 
-            if (extentName == "RMSModel.CashierLogs")
+            if (extentName == "RMSModel.Stores")
             {
                 return GetView26();
             }
 
-            if (extentName == "RMSModel.TransactionEntryItems")
+            if (extentName == "RMSModel.CashierLogs")
             {
                 return GetView27();
             }
 
-            if (extentName == "RMSEntitiesStoreContainer.QBInventoryItems")
+            if (extentName == "RMSModel.TransactionEntryItems")
             {
                 return GetView28();
             }
 
-            if (extentName == "RMSModel.QBInventoryItems")
+            if (extentName == "RMSModel.Repeats")
             {
                 return GetView29();
             }
 
-            if (extentName == "RMSEntitiesStoreContainer.TransactionsView")
+            if (extentName == "RMSEntitiesStoreContainer.QBInventoryItems")
             {
                 return GetView30();
             }
 
-            if (extentName == "RMSModel.TransactionsViews")
+            if (extentName == "RMSModel.QBInventoryItems")
             {
                 return GetView31();
             }
 
-            if (extentName == "RMSEntitiesStoreContainer.ItemDosage")
+            if (extentName == "RMSEntitiesStoreContainer.TransactionsView")
             {
                 return GetView32();
             }
 
-            if (extentName == "RMSModel.ItemDosages")
+            if (extentName == "RMSModel.TransactionsViews")
             {
                 return GetView33();
+            }
+
+            if (extentName == "RMSEntitiesStoreContainer.ItemDosage")
+            {
+                return GetView34();
+            }
+
+            if (extentName == "RMSModel.ItemDosages")
+            {
+                return GetView35();
+            }
+
+            if (extentName == "RMSEntitiesStoreContainer.RxAbbrevations")
+            {
+                return GetView36();
+            }
+
+            if (extentName == "RMSModel.RxAbbrevations")
+            {
+                return GetView37();
             }
 
             return null;
@@ -649,10 +669,28 @@ namespace Edm_EntityMappingGeneratedViews
         }
 
         /// <summary>
-        /// Gets the view for RMSModel.Item.
+        /// Gets the view for RMSEntitiesStoreContainer.Repeats.
         /// </summary>
         /// <returns>The mapping view.</returns>
         private static DbMappingView GetView18()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing Repeats
+        [RMSEntities.Store.Repeats](T1.Repeats_OldTransactionId, T1.Repeats_NewTransactionId)
+    FROM (
+        SELECT 
+            Key(T.TransactionBase).TransactionId AS Repeats_OldTransactionId, 
+            Key(T.TransactionBase1).TransactionId AS Repeats_NewTransactionId, 
+            True AS _from0
+        FROM RMSModel.Repeats AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for RMSModel.Item.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView19()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Item
@@ -708,7 +746,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for RMSModel.TransactionBase.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView19()
+        private static DbMappingView GetView20()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing TransactionBase
@@ -759,7 +797,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for RMSModel.TransactionEntryBase.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView20()
+        private static DbMappingView GetView21()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing TransactionEntryBase
@@ -802,7 +840,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for RMSModel.Company.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView21()
+        private static DbMappingView GetView22()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Company
@@ -826,7 +864,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for RMSModel.Persons.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView22()
+        private static DbMappingView GetView23()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Persons
@@ -887,7 +925,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for RMSModel.Batches.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView23()
+        private static DbMappingView GetView24()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Batches
@@ -918,7 +956,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for RMSModel.Stations.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView24()
+        private static DbMappingView GetView25()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Stations
@@ -941,7 +979,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for RMSModel.Stores.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView25()
+        private static DbMappingView GetView26()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Stores
@@ -964,7 +1002,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for RMSModel.CashierLogs.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView26()
+        private static DbMappingView GetView27()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing CashierLogs
@@ -987,7 +1025,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for RMSModel.TransactionEntryItems.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView27()
+        private static DbMappingView GetView28()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing TransactionEntryItems
@@ -1005,10 +1043,38 @@ namespace Edm_EntityMappingGeneratedViews
         }
 
         /// <summary>
+        /// Gets the view for RMSModel.Repeats.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView29()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing Repeats
+        [RMSEntities.Repeats](T3.Repeats_TransactionBase, T3.Repeats_TransactionBase1)
+    FROM (
+        SELECT -- Constructing TransactionBase
+            CreateRef(RMSModel.TransactionBase, row(T2.Repeats_TransactionBase_TransactionId), [RMSEntities.TransactionBase]) AS Repeats_TransactionBase, 
+            T2.Repeats_TransactionBase1
+        FROM (
+            SELECT -- Constructing TransactionBase1
+                T1.Repeats_TransactionBase_TransactionId, 
+                CreateRef(RMSModel.TransactionBase, row(T1.Repeats_TransactionBase1_TransactionId), [RMSEntities.TransactionBase]) AS Repeats_TransactionBase1
+            FROM (
+                SELECT 
+                    T.OldTransactionId AS Repeats_TransactionBase_TransactionId, 
+                    T.NewTransactionId AS Repeats_TransactionBase1_TransactionId, 
+                    True AS _from0
+                FROM RMSEntitiesStoreContainer.Repeats AS T
+            ) AS T1
+        ) AS T2
+    ) AS T3");
+        }
+
+        /// <summary>
         /// Gets the view for RMSEntitiesStoreContainer.QBInventoryItems.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView28()
+        private static DbMappingView GetView30()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing QBInventoryItems
@@ -1035,7 +1101,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for RMSModel.QBInventoryItems.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView29()
+        private static DbMappingView GetView31()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing QBInventoryItems
@@ -1062,7 +1128,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for RMSEntitiesStoreContainer.TransactionsView.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView30()
+        private static DbMappingView GetView32()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing TransactionsView
@@ -1083,7 +1149,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for RMSModel.TransactionsViews.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView31()
+        private static DbMappingView GetView33()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing TransactionsViews
@@ -1104,7 +1170,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for RMSEntitiesStoreContainer.ItemDosage.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView32()
+        private static DbMappingView GetView34()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing ItemDosage
@@ -1124,7 +1190,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for RMSModel.ItemDosages.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView33()
+        private static DbMappingView GetView35()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing ItemDosages
@@ -1137,6 +1203,44 @@ namespace Edm_EntityMappingGeneratedViews
             T.ID AS ItemDosage_ID, 
             True AS _from0
         FROM RMSEntitiesStoreContainer.ItemDosage AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for RMSEntitiesStoreContainer.RxAbbrevations.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView36()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing RxAbbrevations
+        [RMSEntities.Store.RxAbbrevations](T1.RxAbbrevations_Id, T1.RxAbbrevations_Shortcut, T1.RxAbbrevations_Sentence)
+    FROM (
+        SELECT 
+            T.Id AS RxAbbrevations_Id, 
+            T.Shortcut AS RxAbbrevations_Shortcut, 
+            T.Sentence AS RxAbbrevations_Sentence, 
+            True AS _from0
+        FROM RMSModel.RxAbbrevations AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for RMSModel.RxAbbrevations.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView37()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing RxAbbrevations
+        [RMSEntities.RxAbbrevation](T1.RxAbbrevation_Id, T1.RxAbbrevation_Shortcut, T1.RxAbbrevation_Sentence)
+    FROM (
+        SELECT 
+            T.Id AS RxAbbrevation_Id, 
+            T.Shortcut AS RxAbbrevation_Shortcut, 
+            T.Sentence AS RxAbbrevation_Sentence, 
+            True AS _from0
+        FROM RMSEntitiesStoreContainer.RxAbbrevations AS T
     ) AS T1");
         }
     }

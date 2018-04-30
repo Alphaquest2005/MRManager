@@ -27,6 +27,8 @@ namespace RMSDataAccessLayer
         {
             this.TransactionEntries = new ObservableCollection<TransactionEntryBase>();
             this.Transactions = new ObservableCollection<TransactionBase>();
+            this.TransactionBase11 = new ObservableCollection<TransactionBase>();
+            this.TransactionBases = new ObservableCollection<TransactionBase>();
             CustomStartup();
             CustomStartup2();
             this.PropertyChanged += UpdatePropertyChanged;
@@ -393,5 +395,29 @@ namespace RMSDataAccessLayer
     	}
     	private TransactionBase _ParentTransaction;
     	private ChangeTrackingCollection<TransactionBase> ParentTransactionChangeTracker { get; set; }
+        [DataMember]
+    	public ObservableCollection<TransactionBase> TransactionBase11
+    	{
+    		get { return _TransactionBase11; }
+    		set
+    		{
+    			if (Equals(value, _TransactionBase11)) return;
+    			_TransactionBase11 = value;
+    			NotifyPropertyChanged();
+    		}
+    	}
+    	private ObservableCollection<TransactionBase> _TransactionBase11;
+        [DataMember]
+    	public ObservableCollection<TransactionBase> TransactionBases
+    	{
+    		get { return _TransactionBases; }
+    		set
+    		{
+    			if (Equals(value, _TransactionBases)) return;
+    			_TransactionBases = value;
+    			NotifyPropertyChanged();
+    		}
+    	}
+    	private ObservableCollection<TransactionBase> _TransactionBases;
     }
 }

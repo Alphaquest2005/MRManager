@@ -283,7 +283,7 @@
                 <acbox:AutoCompleteTextBox x:Name="AutoCompleteTextBox"
                                            Width="215"
                                            Height="79"
-                                           Margin="11,40,0,0"
+                                           Margin="11,67,0,0"
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Top"
                                            Background="#FF1F1F1F"
@@ -455,6 +455,44 @@
             RenderTransformOrigin="0.488,0.466"
             Text="{Binding RepeatQuantity, Mode=TwoWay, StringFormat=n0, TargetNullValue={x:Static sys:String.Empty}, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
             TextOptions.TextFormattingMode="Display" />
+         <ComboBox x:Name="DosageCodes"
+            IsEditable="True"
+            DisplayMemberPath="Shortcut"
+            ItemsSource="{Binding Instance.RxAbbrevations,
+                                            Mode=OneWay,
+                                            Source={StaticResource SalesVMDataSource}}"
+            SelectedItem="{Binding Instance.SelectedRxAbbrevation,
+                                                Mode=OneWayToSource,
+                                                Source={StaticResource SalesVMDataSource}}"
+            SelectedValuePath="Id"
+            SelectionChanged="DosageCodes_SelectionChanged"
+            PreviewKeyDown="DosageCodes_OnTextInput"
+            Width="185"
+            Height="22"
+            Margin="12,41,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#FF1F1F1F"
+            FontFamily="DS-Digital"
+            FontSize="16"
+                  
+            FontWeight="Bold"
+            Foreground="#FF203E02"
+            RenderTransformOrigin="0.488,0.466"
+            TextOptions.TextFormattingMode="Display" />
+         <TextBlock Width="24"
+            Height="20"
+            Margin="202,42,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontSize="36"
+            FontWeight="ExtraBold"
+            Foreground="#FF3AC72F"
+            LineHeight="25"
+            LineStackingStrategy="BlockLineHeight"
+            MouseLeftButtonDown="AddDosageCode"
+            Text="+"
+            TextWrapping="Wrap" TextAlignment="Center" />
 
             </Grid>
         </DataTemplate>
