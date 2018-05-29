@@ -6,9 +6,10 @@
              xmlns:local="clr-namespace:SalesRegion"
              xmlns:data="clr-namespace:RMSDataAccessLayer;assembly=RMSDataAccessLayer"
              mc:Ignorable="d"
-
+             
              d:DesignHeight="300"
-             PreviewKeyDown="ppcan_PreviewKeyDown_1" Width="424"
+             PreviewKeyDown="ppcan_PreviewKeyDown_1"
+             Width="Auto"
              HorizontalAlignment="Left" ScrollViewer.VerticalScrollBarVisibility="Disabled" ClipToBounds="False">
 
     <UserControl.Resources>
@@ -18,7 +19,7 @@
             <Canvas Name="pcanvas" MinHeight="25"
                     Height="{Binding ElementName=maingrd, Path=ActualHeight, Converter={StaticResource mathconverter},ConverterParameter=ActualHeight+10}"
                     Margin="0,0,0,0"
-                    Width="400" Focusable="False">
+                    Width="500" Focusable="False">
 
                 <Grid Name="maingrd" Height="Auto" ClipToBounds="False" Margin="5,5,5,5">
                     <!-- This is displayed whether the 
@@ -151,30 +152,22 @@
 
     </UserControl.Resources>
 
-    <StackPanel Margin="5,5,4,0" Orientation="Vertical" DataContext="{Binding Source={StaticResource SalesVMDataSource}}">
-        <Grid Height="Auto" MaxHeight="500" Background="#FFA0A0A0" Margin="0,0,0.2,0">
+    <StackPanel Margin="5,5,4,0" Width="Auto" Orientation="Vertical" DataContext="{Binding Source={StaticResource SalesVMDataSource}}">
+        <Grid Height="Auto" MaxHeight="250" Width="600" Background="#FFA0A0A0" Margin="0,0,0.2,0">
             <Grid.Resources>
 
                 <DataTemplate DataType="{x:Type data:QuickPrescription}">
-                    <Grid>
-                        <TextBlock Text="Quick Sale" Margin="139,53,0,0" Foreground="#FF144000" LineHeight="12"
-                                   Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="131"
-                                   FontFamily="Pristina" FontSize="36" />
-                        <TextBlock
-                            Text="{Binding Store.Company.CompanyName, Mode=OneWay, Source={StaticResource SalesVMDataSource}}"
-                            Margin="0,0,0.2,0" FontFamily="Myanmar Text" TextAlignment="Center" FontSize="22"
-                            Foreground="#FF085609" Height="28" VerticalAlignment="Top" />
-                        <TextBlock
-                            Text="{Binding Store.Company.Motto, Mode=OneWay, Source={StaticResource SalesVMDataSource}}"
-                            Margin="0,28,-0.8,0" FontFamily="Bradley Hand ITC" TextAlignment="Center" FontSize="16"
-                            Foreground="#FF015002" Height="20" VerticalAlignment="Top" />
-                        <Image Margin="12,5,358.8,0" Source="{DynamicResource HVLogo}" Stretch="Fill" Height="43"
-                               VerticalAlignment="Top" />
-                        <Button x:Name="AutoRepeatBtn" HorizontalAlignment="Left" Height="40" Margin="280,49,0,0"
+
+                    <Grid Width="600" Height="250" Background="White" Margin="0,0,0,0">
+                        <Image Source="{DynamicResource Logo}" Margin="0,0,0,30"/>
+                        <TextBlock Text="Quick Sale" Margin="235,201,0,0" Foreground="#FF0C570F" LineHeight="12"
+                                   Height="45" VerticalAlignment="Top" HorizontalAlignment="Left" Width="139"
+                                   FontFamily="Pristina" FontSize="36" FontWeight="Bold" />
+                        <Button x:Name="AutoRepeatBtn" HorizontalAlignment="Left" Height="40" Margin="490,201,0,0"
                                 VerticalAlignment="Top" Width="40" Background="#00000000" Content="&#xE0F2;"
                                 FontFamily="Segoe UI Symbol" FontSize="20" Foreground="#FF65E468" ToolTip="Repeat"
                                 RenderTransformOrigin="0.5,0.45" Click="AutoRepeatBtn_Click" />
-                        <Button x:Name="DeleteTranBtn" HorizontalAlignment="Left" Height="40" Margin="340,48,0,0"
+                        <Button x:Name="DeleteTranBtn" HorizontalAlignment="Left" Height="40" Margin="550,200,0,0"
                                 VerticalAlignment="Top" Width="40" Background="#00000000" Content="&#xE106;"
                                 FontFamily="Segoe UI Symbol" FontSize="20" Foreground="#FF980909"
                                 RenderTransformOrigin="0.5,0.45" Click="DeleteTranBtn_Click" />
@@ -185,55 +178,46 @@
                     <DataTemplate.Resources>
                         <local:ParentTransactionVisbilityConverter x:Key="ParentTransactionVisbilityConverter"/>
                     </DataTemplate.Resources>
-                    <Grid>
-                        <TextBlock Text="Prescription" Margin="152,42,0,0" Foreground="#FF144000" LineHeight="12"
-                                   Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="103"
-                                   FontFamily="Pristina" FontSize="24" />
+                    <Grid Background="White" Margin="0" Width="600"  Height="250">
+                        <Image Margin="12,0,10,0" Source="{DynamicResource Logo}" Stretch="Fill" Height="180"
+                               VerticalAlignment="Top" />
+                        <TextBlock Text="Prescription" Margin="179,157,0,0" Foreground="#FF144000" LineHeight="12"
+                                   Height="45" VerticalAlignment="Top" HorizontalAlignment="Left" Width="178"
+                                   FontFamily="Pristina" FontSize="36" FontWeight="Bold" />
                         <TextBlock
-                            Text="{Binding Doctor.DisplayName, Mode=OneWay, StringFormat=Doctor: 0, FallbackValue='Please Enter Doctor',ValidatesOnNotifyDataErrors=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                            Margin="50,75,137,0" Height="24" VerticalAlignment="Top" FontSize="14" FontFamily="Calibri" />
+                            Text="{Binding Doctor.DisplayName, FallbackValue=Please Enter Doctor, Mode=OneWay, StringFormat=Doctor: 0, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, ValidatesOnDataErrors=True}"
+                            Margin="98,192,89,0" Height="24" VerticalAlignment="Top" FontSize="14" FontFamily="Calibri" />
                         <TextBlock
                             Text="{Binding Patient.DisplayName, Mode=OneWay, StringFormat=Patient: 0, ValidatesOnDataErrors=True}"
-                            Margin="50,99,137,0" Height="27" VerticalAlignment="Top" />
-                        <!--<TextBox Text="{Binding Repeat}" Margin="343,99,0,0" Background="Black" Foreground="#FFF4F4F4" HorizontalAlignment="Left" Width="63" Height="32" VerticalAlignment="Top" />-->
+                            Margin="98,216,89,0" Height="27" VerticalAlignment="Top" />
                         <!--<TextBlock Text="Rep." Margin="310,105,0,0" Foreground="#FF202020" LineHeight="12" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="28"/>-->
-                        <Button x:Name="AutoRepeatBtn" HorizontalAlignment="Left" Height="24" Margin="348,75,0,0"
-                                VerticalAlignment="Top" Width="24" Background="#00000000" Content="&#xE0F2;"
-                                FontFamily="Segoe UI Symbol" FontSize="16" Foreground="#FF65E468" ToolTip="Repeat"
+                        <Button x:Name="AutoRepeatBtn" HorizontalAlignment="Left" Height="50" Margin="396,192,0,0"
+                                VerticalAlignment="Top" Width="50" Background="#00000000" Content="&#xE0F2;"
+                                FontFamily="Segoe UI Symbol" FontSize="30" Foreground="#FF65E468" ToolTip="Repeat"
                                 RenderTransformOrigin="0.5,0.45" Click="AutoRepeatBtn_Click" />
-                        <Button x:Name="DeleteTranBtn" HorizontalAlignment="Left" Height="24" Margin="377,75,0,0"
-                                VerticalAlignment="Top" Width="24" Background="#00000000" Content="&#xE106;"
-                                FontFamily="Segoe UI Symbol" FontSize="16" Foreground="#FF980909"
+                        <Button x:Name="DeleteTranBtn" HorizontalAlignment="Left" Height="50" Margin="475,192,0,0"
+                                VerticalAlignment="Top" Width="50" Background="#00000000" Content="&#xE106;"
+                                FontFamily="Segoe UI Symbol" FontSize="30" Foreground="#FF980909"
                                 RenderTransformOrigin="0.5,0.45" Click="DeleteTranBtn_Click" />
-
-                        <TextBlock
-                            Text="{Binding Store.Company.CompanyName, Mode=OneWay,Source={StaticResource SalesVMDataSource}}"
-                            Margin="0,0,0.2,0" FontFamily="Myanmar Text" TextAlignment="Center" FontSize="22"
-                            Foreground="#FF085609" Height="28" VerticalAlignment="Top" />
-                        <TextBlock
-                            Text="{Binding Store.Company.Motto, Mode=OneWay, Source={StaticResource SalesVMDataSource}}"
-                            Margin="0,28,-0.8,0" FontFamily="Bradley Hand ITC" TextAlignment="Center" FontSize="16"
-                            Foreground="#FF015002" Height="20" VerticalAlignment="Top" />
-                        <Image Margin="12,5,358.8,0" Source="{DynamicResource HVLogo}" Stretch="Fill" Height="43"
-                               VerticalAlignment="Top" />
-                        <TextBlock x:Name="EditDoctorTB" HorizontalAlignment="Left" Height="18" Margin="10,77,0,0"
+                        <TextBlock x:Name="EditDoctorTB" HorizontalAlignment="Left" Height="18" Margin="58,194,0,0"
                                    TextWrapping="Wrap" Text="Edit..." VerticalAlignment="Top" Width="31"
                                    MouseLeftButtonDown="EditDoctorTB_MouseLeftButtonDown" />
-                        <TextBlock x:Name="EditPatientTB" HorizontalAlignment="Left" Height="18" Margin="10,103,0,0"
+                        <TextBlock x:Name="EditPatientTB" HorizontalAlignment="Left" Height="18" Margin="58,220,0,0"
                                    TextWrapping="Wrap" Text="Edit..." VerticalAlignment="Top" Width="31"
                                    MouseLeftButtonDown="EditPatientTB_MouseLeftButtonDown" />
-                        <Button x:Name="AutoRepeatBtn_Copy" HorizontalAlignment="Left" Height="24" Margin="319,76,0,0"
+                        <Button x:Name="AutoRepeatBtn_Copy" HorizontalAlignment="Left" Height="24" Margin="367,193,0,0"
             VerticalAlignment="Top" Width="24" Background="#00000000" Content="M" Visibility="{Binding ParentTransactionId, Converter={StaticResource ParentTransactionVisbilityConverter}}"
             FontFamily="Segoe UI Symbol" FontSize="16" Foreground="#FFE49F65" ToolTip="Repeat"
             RenderTransformOrigin="0.5,0.45" Click="GoToMaster" FontWeight="Bold" />
                     </Grid>
 
+
                 </DataTemplate>
             </Grid.Resources>
-            <ContentControl Name="SalesHeader" Content="{Binding Instance.TransactionData, Source={StaticResource SalesVMDataSource}}" />
+            <ContentControl Name="SalesHeader"  Content="{Binding Instance.TransactionData, Source={StaticResource SalesVMDataSource}}" />
         </Grid>
         
-        <Canvas x:Name="ppcan" Background="#FF424242" Width="415" Margin="0,0,0.2,0" Height="Auto" Focusable="False">
+        <Canvas x:Name="ppcan" Background="#FF424242" Width="600" Margin="0,0,0.2,0" Height="Auto" Focusable="False">
             <ListBox x:Name="SalesLst"
                      ItemsSource="{Binding Instance.TransactionData.TransactionEntries, Source={StaticResource SalesVMDataSource}}"
                      SelectedItem="{Binding Instance.TransactionData.CurrentTransactionEntry,Source={StaticResource SalesVMDataSource}}"

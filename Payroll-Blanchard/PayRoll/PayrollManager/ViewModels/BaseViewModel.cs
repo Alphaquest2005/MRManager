@@ -378,7 +378,7 @@ namespace PayrollManager
                 using (var ctx = new PayrollDB(Properties.Settings.Default.PayrollDB))
                 {
                     List<EmployeeInfo> res;
-                    if(CurrentPayrollJob != null && CurrentPayrollJob.PayrollItems.Any())
+                    if(CurrentPayrollJob != null)
                     {
                         var cpjobId = CurrentPayrollJob?.PayrollJobId;
                         res = ctx.Employees
@@ -1318,8 +1318,9 @@ namespace PayrollManager
 
 
                 foreach (var item in ctx.PayrollItems
-                    .Where(p => p.PayrollJobId == CurrentPayrollJob.PayrollJobId && p.Status == "Amounts Processed" &&
-                                p.ParentPayrollItem == null).ToList())
+                    .Where(p => p.PayrollJobId == CurrentPayrollJob.PayrollJobId && p.Status == "Amounts Processed"
+                                                    //&& p.ParentPayrollItem == null
+                                ).ToList())
                 {
 
                     // do debit account entry

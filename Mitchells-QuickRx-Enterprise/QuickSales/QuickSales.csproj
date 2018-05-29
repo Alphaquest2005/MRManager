@@ -210,6 +210,7 @@
     <Resource Include="Doctor-256 %281%29.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="logo.jpg" />
     <Content Include="Person-Undefined-Male-Dark-256.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -217,9 +218,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Plus_sign.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="HvLogo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Doctor-256.png" />

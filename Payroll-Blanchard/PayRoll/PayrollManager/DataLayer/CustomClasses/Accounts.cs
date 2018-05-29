@@ -85,7 +85,8 @@ namespace PayrollManager.DataLayer
                             ctx.AccountEntries
                                      .Where(a => a.PayrollItem.PayrollJobId == payrollJobId
                                                  && a.AccountId == AccountId
-                                                 && a.PayrollItem.Employee.CompanyId == institutionId)
+                                                 //&& a.PayrollItem.Employee.CompanyId == institutionId
+                                                 )
                                      .Include(x => x.PayrollItem)
                                      .OrderByDescending(x => x.PayrollItem.IncomeDeduction)
                                      .ThenBy(x => x.PayrollItem.Priority).ToList();

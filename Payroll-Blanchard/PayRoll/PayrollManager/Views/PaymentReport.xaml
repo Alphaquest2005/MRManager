@@ -8,7 +8,7 @@
 	x:Class="PayrollManager.Paysub"
 	d:DesignWidth="896.716" Height="552.835">
     <UserControl.Resources>
-        <local:PaysubModel x:Key="PaysubModelDataSource" />
+        <local:AccountEntryDetailsReportModel x:Key="PaysubModelDataSource" />
         <Style x:Key="AlignRight" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Right" />
         </Style>
@@ -54,9 +54,9 @@
                                 <TextBlock Text="Debits" HorizontalAlignment="Left" Height="34" TextWrapping="Wrap" VerticalAlignment="Top" Width="489" FontSize="20" Foreground="#FF393939" TextAlignment="Left" Margin="0,0,0,0"/>
                                 <TextBlock Text="{Binding NetTotalDebit, StringFormat=c}" HorizontalAlignment="Right" Height="34" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" FontSize="20" Foreground="#FF393939" TextAlignment="Left"/>
                             </StackPanel>
-                            <DataGrid ItemsSource="{Binding CurrentEmpNetDebitEntries}" HorizontalAlignment="Left"  Height="Auto" VerticalAlignment="Top" Width="690" Background="White" AutoGenerateColumns="False" CanUserAddRows="False" RowHeight="28" GridLinesVisibility="None" AlternatingRowBackground="#FFCFCCCC" FontSize="16" Margin="13,0,0,15" ClipboardCopyMode="IncludeHeader"  >
+                            <DataGrid ItemsSource="{Binding CurrentDebitEntries}" HorizontalAlignment="Left"  Height="Auto" VerticalAlignment="Top" Width="690" Background="White" AutoGenerateColumns="False" CanUserAddRows="False" RowHeight="28" GridLinesVisibility="None" AlternatingRowBackground="#FFCFCCCC" FontSize="16" Margin="13,0,0,15" ClipboardCopyMode="IncludeHeader"  >
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Employee" Binding="{Binding Employee, Mode=OneWay}" Width="200" ClipboardContentBinding="{x:Null}"/>
+                                    <DataGridTextColumn Header="Employee" Binding="{Binding Payee, Mode=OneWay}" Width="200" ClipboardContentBinding="{x:Null}"/>
                                     <!--<DataGridTextColumn Header="Description" Binding="{Binding PayrollItem.Name, StringFormat=Memo: \{0\}}" Width="150" ClipboardContentBinding="{x:Null}"/>-->
                                     <DataGridTextColumn Header="Account Number" Binding="{Binding Account.AccountNumber, StringFormat=Acct#: \{0\}}" Width="150" ClipboardContentBinding="{x:Null}"/>
                                     <DataGridTextColumn Header="Amount" Binding="{Binding Total, StringFormat=c}" ClipboardContentBinding="{x:Null}" Width="100" ElementStyle="{StaticResource AlignRight}"/>
@@ -66,9 +66,9 @@
                                 <TextBlock Text="Credits" HorizontalAlignment="Left" Height="34" TextWrapping="Wrap" VerticalAlignment="Top" Width="489" FontSize="20" Foreground="#FF393939" TextAlignment="Left" Margin="0,0,0,0"/>
                                 <TextBlock Text="{Binding NetTotalCredit, StringFormat=c}" HorizontalAlignment="Right" Height="34" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" FontSize="20" Foreground="#FF393939" TextAlignment="Left"/>
                             </StackPanel>
-                            <DataGrid ItemsSource="{Binding CurrentEmpNetCreditEntries}" HorizontalAlignment="Left"  Height="Auto" VerticalAlignment="Top" Width="690" Background="White" AutoGenerateColumns="False" CanUserAddRows="False" RowHeight="28" GridLinesVisibility="None" AlternatingRowBackground="#FFCFCCCC" FontSize="16" Margin="12,0,0,0" ClipboardCopyMode="IncludeHeader" >
+                            <DataGrid ItemsSource="{Binding CurrentCreditEntries}" HorizontalAlignment="Left"  Height="Auto" VerticalAlignment="Top" Width="690" Background="White" AutoGenerateColumns="False" CanUserAddRows="False" RowHeight="28" GridLinesVisibility="None" AlternatingRowBackground="#FFCFCCCC" FontSize="16" Margin="12,0,0,0" ClipboardCopyMode="IncludeHeader" >
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Employee" Binding="{Binding Employee, Mode=OneWay}" Width="200" ClipboardContentBinding="{x:Null}"/>
+                                    <DataGridTextColumn Header="Employee" Binding="{Binding Payee, Mode=OneWay}" Width="200" ClipboardContentBinding="{x:Null}"/>
                                     <!--<DataGridTextColumn Header="Description" Binding="{Binding PayrollItem.Name, StringFormat=Memo: \{0\}}" Width="150" ClipboardContentBinding="{x:Null}"/>-->
                                     <DataGridTextColumn Header="Account Number" Binding="{Binding Account.AccountNumber, StringFormat=Acct#: \{0\}}" Width="150" ClipboardContentBinding="{x:Null}"/>
                                     <DataGridTextColumn Header="Amount" Binding="{Binding Total, StringFormat=c}" ClipboardContentBinding="{x:Null}" Width="100" ElementStyle="{StaticResource AlignRight}"/>

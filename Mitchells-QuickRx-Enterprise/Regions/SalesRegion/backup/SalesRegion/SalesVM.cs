@@ -787,9 +787,10 @@ namespace SalesRegion
                         ptrn = GetDBTransaction(ctx)
                             .FirstOrDefault(t => t.TransactionId < TransactionData.TransactionId);
                     }
-                    ptrn.StartTracking();
+
                     if (ptrn != null)
                     {
+                        ptrn.StartTracking();
                         IncludePrecriptionProperties(ctx, ptrn);
                         Item = null;
                         NotifyPropertyChanged(x => x.Item.DosageList);

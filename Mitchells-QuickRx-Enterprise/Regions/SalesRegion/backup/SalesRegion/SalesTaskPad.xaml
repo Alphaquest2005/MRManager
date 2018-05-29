@@ -1331,7 +1331,7 @@
                                                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                                       ScrollViewer.VerticalScrollBarVisibility="Hidden">
                                                     <Border Width="282"
-                                                            Height="172"
+                                                            Height="200"
                                                             Margin="-3,0,-1,0"
                                                             HorizontalAlignment="Center"
                                                             VerticalAlignment="Center"
@@ -1344,35 +1344,16 @@
                                                                 <RowDefinition Height="136*" />
                                                                 <RowDefinition Height="15*" />
                                                             </Grid.RowDefinitions>
-                                                            <Image Width="30"
-                                                                   Height="30"
-                                                                   Margin="3,3,0,0"
+                                                            <Image Width="165"
+                                                                   Height="66"
+                                                                   Margin="2,-5,0,0"
                                                                    HorizontalAlignment="Left"
                                                                    VerticalAlignment="Top"
-                                                                   Source="{DynamicResource HVLogo}"
-                                                                   Stretch="UniformToFill" />
-                                                            <TextBlock Margin="38,2,62,9.895"
-                                                                       FontFamily="Candara"
-                                                                       FontSize="16"
-                                                                       FontWeight="Bold"
-                                                                       Foreground="Black"
-                                                                       Text="{Binding Instance.Store.Company.CompanyName,
-                                                                                      Mode=OneWay,
-                                                                                      Source={StaticResource SalesVMDataSource}}"
-                                                                       TextWrapping="Wrap" />
-                                                            <TextBlock Grid.RowSpan="2"
-                                                                       Margin="46,21,71,118.579"
-                                                                       FontFamily="Century Gothic"
-                                                                       FontSize="9"
-                                                                       FontWeight="Bold"
-                                                                       Foreground="Black"
-                                                                       Text="{Binding Instance.Store.Company.Motto,
-                                                                                      Mode=OneWay,
-                                                                                      Source={StaticResource SalesVMDataSource}}"
-                                                                       TextWrapping="Wrap" />
-                                                            <TextBlock Width="69"
+                                                                   Source="{DynamicResource Logo}"
+                                                                   Stretch="Fill" Grid.RowSpan="2" />
+                                                            <TextBlock Width="136"
                                                                        Height="11"
-                                                                       Margin="208,3,0,0"
+                                                                       Margin="137,5,0,0"
                                                                        HorizontalAlignment="Left"
                                                                        VerticalAlignment="Top"
                                                                        FontFamily="Calibri"
@@ -1383,11 +1364,11 @@
                                                                                       Mode=OneWay,
                                                                                       Source={StaticResource SalesVMDataSource}}"
                                                                        TextAlignment="Right"
-                                                                       TextWrapping="Wrap" />
-                                                            <TextBlock Grid.RowSpan="2"
-                                                                       Width="69"
-                                                                       Height="11"
-                                                                       Margin="208,25,0,0"
+                                                                       TextWrapping="Wrap" Grid.Row="1" />
+                                                            <TextBlock
+                                                                       Width="98"
+                                                                       Height="10"
+                                                                       Margin="174,32,0,0"
                                                                        HorizontalAlignment="Left"
                                                                        VerticalAlignment="Top"
                                                                        FontFamily="Calibri"
@@ -1397,35 +1378,25 @@
                                                                                       Mode=OneWay,
                                                                                       Source={StaticResource SalesVMDataSource}}"
                                                                        TextAlignment="Right"
-                                                                       TextWrapping="Wrap" />
-                                                            <TextBlock Width="87"
-                                                                       Height="11"
-                                                                       Margin="195,14,0,0"
+                                                                       TextWrapping="Wrap" Grid.RowSpan="2" />
+                                                            <TextBlock Width="103"
+                                                                       Height="10"
+                                                                       Margin="173,7,0,0"
                                                                        HorizontalAlignment="Left"
                                                                        VerticalAlignment="Top"
                                                                        FontFamily="Calibri"
                                                                        FontSize="7.5"
                                                                        FontWeight="Bold"
                                                                        Foreground="Black"
-                                                                       Text="{Binding Instance.Store.Company.Address1,
+                                                                       Text="{Binding Instance.Store.Company.Motto,
                                                                                       Mode=OneWay,
                                                                                       Source={StaticResource SalesVMDataSource}}"
                                                                        TextAlignment="Right"
                                                                        TextWrapping="Wrap" />
-                                                            <Rectangle Grid.Row="1"
-                                                                       Grid.RowSpan="2"
-                                                                       Width="286"
-                                                                       Height="1"
-                                                                       Margin="0,136.067,0,0"
-                                                                       HorizontalAlignment="Left"
-                                                                       VerticalAlignment="Top"
-                                                                       Fill="#FFF4F4F5"
-                                                                       Stroke="Black" />
-                                                            <TextBlock Grid.Row="1"
-                                                                       Grid.RowSpan="2"
+                                                            <TextBlock Grid.Row="2"
                                                                        Width="276"
                                                                        Height="14"
-                                                                       Margin="3,125,0,0"
+                                                                       Margin="3,4,0,-2"
                                                                        HorizontalAlignment="Left"
                                                                        VerticalAlignment="Top"
                                                                        FontFamily="Arial"
@@ -1438,7 +1409,7 @@
 
                                                                 <TextBlock x:Name="DosageTxt"
                                                                            Width="278"
-                                                                           Margin="0,22,-6,-15.316"
+                                                                           Margin="0,43,-6,-20"
                                                                            HorizontalAlignment="Left"
                                                                            FontFamily="Calibri"
                                                                            FontSize="14"
@@ -1449,7 +1420,7 @@
                                                                            TextWrapping="Wrap" />
                                                                 <TextBlock Width="236"
                                                                            Height="17"
-                                                                           Margin="36,0,0,0"
+                                                                           Margin="36,21,0,0"
                                                                            HorizontalAlignment="Left"
                                                                            VerticalAlignment="Top"
                                                                            FontFamily="Calibri"
@@ -1460,7 +1431,7 @@
                                                                            TextWrapping="Wrap" />
                                                                 <TextBlock Width="32"
                                                                            Height="22"
-                                                                           Margin="3,0,0,0"
+                                                                           Margin="3,21,0,0"
                                                                            HorizontalAlignment="Left"
                                                                            VerticalAlignment="Top"
                                                                            FontFamily="Calibri"
@@ -1477,10 +1448,12 @@
                                                             <TextBlock Grid.Row="1"
                                                                        Width="164"
                                                                        Height="21"
-                                                                       Margin="3,4.105,0,0"
+                                                                       Margin="3,25,0,0"
                                                                        HorizontalAlignment="Left"
                                                                        VerticalAlignment="Top"
                                                                        FontFamily="Segoe UI"
+                                                                       FontSize="14"
+                                                                       FontWeight="Bold"
                                                                        Foreground="Black"
                                                                        LineHeight="12"
                                                                        RenderTransformOrigin="0.527,0.538"
@@ -1489,7 +1462,7 @@
                                                             <TextBlock Grid.Row="1"
                                                                        Width="100"
                                                                        Height="18"
-                                                                       Margin="200,4.105,0,0"
+                                                                       Margin="200,25,-20,0"
                                                                        HorizontalAlignment="Left"
                                                                        VerticalAlignment="Top"
                                                                        FontFamily="Calibri"
@@ -1504,7 +1477,7 @@
                                                             <TextBlock Grid.Row="1"
                                                                        Width="80"
                                                                        Height="18"
-                                                                       Margin="180,16.105,0,0"
+                                                                       Margin="180,37,0,0"
                                                                        HorizontalAlignment="Left"
                                                                        VerticalAlignment="Top"
                                                                        FontFamily="Calibri"
@@ -1533,7 +1506,7 @@
                                                                        TextWrapping="Wrap" />
                                                             <TextBlock Width="197"
                                                                        Height="16"
-                                                                       Margin="78,106,0,0"
+                                                                       Margin="78,127,0,0"
                                                                        HorizontalAlignment="Left"
                                                                        VerticalAlignment="Top"
                                                                        Background="{x:Null}"
@@ -1541,14 +1514,25 @@
                                                                        FontSize="14"
                                                                        Foreground="Black"
                                                                        Text="{Binding RepeatInfo}"
-                                                                       TextWrapping="Wrap" TextAlignment="Right" Grid.Row="1" />
+                                                                       TextWrapping="Wrap" TextAlignment="Right" Grid.Row="1" Grid.RowSpan="2" />
+                                                            <TextBlock Width="103"
+                    Height="10"
+                    Margin="174,20,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="Calibri"
+                    FontSize="7.5"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Text="{Binding Instance.Store.Company.Address1, Mode=OneWay, Source={StaticResource SalesVMDataSource}}"
+                    TextAlignment="Right"
+                    TextWrapping="Wrap" />
 
 
                                                         </Grid>
                                                     </Border>
 
                                                 </Grid>
-
 
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
@@ -1572,7 +1556,7 @@
                                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                       ScrollViewer.VerticalScrollBarVisibility="Hidden">
                                     <Border Width="281"
-                                            Height="172"
+                                            Height="200"
                                             Margin="-3,0,0,0"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
@@ -1587,73 +1571,71 @@
                                                 <RowDefinition Height="136*" />
                                                 <RowDefinition Height="15*" />
                                             </Grid.RowDefinitions>
-                                            <TextBlock Margin="38,2,62,9.895"
-                                                       FontFamily="Candara"
-                                                       FontSize="16"
-                                                       FontWeight="Bold"
-                                                       Foreground="Black"
-                                                       Text="{Binding Instance.Store.Company.CompanyName,
-                                                                      Mode=OneWay,
-                                                                      Source={StaticResource SalesVMDataSource}}"
-                                                       TextWrapping="Wrap" />
-                                            <TextBlock Grid.RowSpan="2"
-                                                       Margin="40,21,71,118.579"
-                                                       FontFamily="Century Gothic"
-                                                       FontSize="9"
-                                                       FontWeight="Bold"
-                                                       Foreground="Black"
-                                                       Text="{Binding Instance.Store.Company.Motto,
-                                                                      Mode=OneWay,
-                                                                      Source={StaticResource SalesVMDataSource}}"
-                                                       TextWrapping="Wrap" />
-                                            <TextBlock Width="69"
-                                                       Height="11"
-                                                       Margin="208,3,0,0"
-                                                       HorizontalAlignment="Left"
-                                                       VerticalAlignment="Top"
-                                                       FontFamily="Calibri"
-                                                       FontSize="7.5"
-                                                       FontWeight="Bold"
-                                                       Foreground="Black"
-                                                       Text="{Binding Instance.Store.Company.Address,
-                                                                      Mode=OneWay,
-                                                                      Source={StaticResource SalesVMDataSource}}"
-                                                       TextAlignment="Right"
-                                                       TextWrapping="Wrap" />
-                                            <TextBlock Grid.RowSpan="2"
-                                                       Width="69"
-                                                       Height="11"
-                                                       Margin="208,25,0,0"
-                                                       HorizontalAlignment="Left"
-                                                       VerticalAlignment="Top"
-                                                       FontFamily="Calibri"
-                                                       FontSize="10"
-                                                       Foreground="Black"
-                                                       Text="{Binding Instance.Store.Company.PhoneNumber,
-                                                                      Mode=OneWay,
-                                                                      Source={StaticResource SalesVMDataSource}}"
-                                                       TextAlignment="Right"
-                                                       TextWrapping="Wrap" />
-                                            <TextBlock Width="87"
-                                                       Height="11"
-                                                       Margin="195,14,0,0"
-                                                       HorizontalAlignment="Left"
-                                                       VerticalAlignment="Top"
-                                                       FontFamily="Calibri"
-                                                       FontSize="7.5"
-                                                       FontWeight="Bold"
-                                                       Foreground="Black"
-                                                       Text="{Binding Instance.Store.Company.Address1,
-                                                                      Mode=OneWay,
-                                                                      Source={StaticResource SalesVMDataSource}}"
-                                                       TextAlignment="Right"
-                                                       TextWrapping="Wrap" />
-
-                                            <TextBlock Grid.Row="1"
-                                                       Grid.RowSpan="2"
+                                            <Image Width="165"
+                       Height="66"
+                       Margin="2,-5,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Source="{DynamicResource Logo}"
+                       Stretch="Fill" Grid.RowSpan="2" />
+                                            <TextBlock Width="136"
+                                                                       Height="11"
+                                                                       Margin="137,5,0,0"
+                                                                       HorizontalAlignment="Left"
+                                                                       VerticalAlignment="Top"
+                                                                       FontFamily="Calibri"
+                                                                       FontSize="7.5"
+                                                                       FontWeight="Bold"
+                                                                       Foreground="Black"
+                                                                       Text="{Binding Instance.Store.Company.Address,
+                                                                                      Mode=OneWay,
+                                                                                      Source={StaticResource SalesVMDataSource}}"
+                                                                       TextAlignment="Right"
+                                                                       TextWrapping="Wrap" Grid.Row="1" />
+                                            <TextBlock
+                                                                       Width="98"
+                                                                       Height="10"
+                                                                       Margin="174,32,0,0"
+                                                                       HorizontalAlignment="Left"
+                                                                       VerticalAlignment="Top"
+                                                                       FontFamily="Calibri"
+                                                                       FontSize="10"
+                                                                       Foreground="Black"
+                                                                       Text="{Binding Instance.Store.Company.PhoneNumber,
+                                                                                      Mode=OneWay,
+                                                                                      Source={StaticResource SalesVMDataSource}}"
+                                                                       TextAlignment="Right"
+                                                                       TextWrapping="Wrap" Grid.RowSpan="2" />
+                                            <TextBlock Width="103"
+                                                                       Height="10"
+                                                                       Margin="173,7,0,0"
+                                                                       HorizontalAlignment="Left"
+                                                                       VerticalAlignment="Top"
+                                                                       FontFamily="Calibri"
+                                                                       FontSize="7.5"
+                                                                       FontWeight="Bold"
+                                                                       Foreground="Black"
+                                                                       Text="{Binding Instance.Store.Company.Motto,
+                                                                                      Mode=OneWay,
+                                                                                      Source={StaticResource SalesVMDataSource}}"
+                                                                       TextAlignment="Right"
+                                                                       TextWrapping="Wrap" />
+                                            <TextBlock Width="103"
+                           Height="10"
+                           Margin="174,20,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontFamily="Calibri"
+                           FontSize="7.5"
+                           FontWeight="Bold"
+                           Foreground="Black"
+                           Text="{Binding Instance.Store.Company.Address1, Mode=OneWay, Source={StaticResource SalesVMDataSource}}"
+                           TextAlignment="Right"
+                           TextWrapping="Wrap" />
+                                            <TextBlock Grid.Row="2"
                                                        Width="165"
                                                        Height="13                                                         "
-                                                       Margin="3,122.8,0,0"
+                                                       Margin="3,0,0,0"
                                                        HorizontalAlignment="Left"
                                                        VerticalAlignment="Top"
                                                        FontFamily="Arial"
@@ -1663,10 +1645,9 @@
                                                        Text="KEEP OUT THE REACH OF CHILDREN"
                                                        TextWrapping="Wrap" />
                                             <TextBlock Grid.Row="1"
-                                                       Grid.RowSpan="2"
                                                        Width="126"
                                                        Height="17"
-                                                       Margin="150,119.8,0,0"
+                                                       Margin="150,138,0,0"
                                                        HorizontalAlignment="Left"
                                                        VerticalAlignment="Top"
                                                        FontFamily="Arial"
@@ -1677,12 +1658,12 @@
                                                                       Mode=OneWay,
                                                                       Source={StaticResource SalesVMDataSource}}"
                                                        TextAlignment="Right"
-                                                       TextWrapping="Wrap" />
+                                                       TextWrapping="Wrap" Grid.RowSpan="2" />
                                             <Grid Grid.Row="1" Margin="3,29,5,30">
 
                                                 <TextBlock x:Name="DosageTxt"
                                                            Width="274"
-                                                           Margin="0,22,0,-14.8"
+                                                           Margin="0,45,-3,-11"
                                                            HorizontalAlignment="Left"
                                                            FontFamily="Calibri"
                                                            FontSize="14"
@@ -1693,7 +1674,7 @@
                                                            TextWrapping="Wrap" />
                                                 <TextBlock Width="238"
                                                            Height="17"
-                                                           Margin="36,0,0,0"
+                                                           Margin="36,24,-3,0"
                                                            HorizontalAlignment="Left"
                                                            VerticalAlignment="Top"
                                                            FontFamily="Calibri"
@@ -1704,7 +1685,6 @@
                                                            TextWrapping="Wrap" />
                                                 <TextBlock Width="32"
                                                            Height="22"
-                                                           Margin="0,0,0,0"
                                                            HorizontalAlignment="Left"
                                                            VerticalAlignment="Top"
                                                            FontFamily="Calibri"
@@ -1714,10 +1694,10 @@
                                                            Text="{Binding Quantity,
                                                                           Mode=OneWay,
                                                                           StringFormat=n0}"
-                                                           TextWrapping="Wrap" />
+                                                           TextWrapping="Wrap" Margin="0,24,0,0" />
                                                 <TextBlock Width="197"
                                                            Height="16"
-                                                           Margin="77,76,-3,-29"
+                                                           Margin="77,94,-3,-27"
                                                            HorizontalAlignment="Left"
                                                            VerticalAlignment="Top"
                                                            Background="{x:Null}"
@@ -1732,7 +1712,7 @@
                                             <TextBlock Grid.Row="1"
                                                        Width="139"
                                                        Height="12"
-                                                       Margin="3,1.105,0,0"
+                                                       Margin="3,20,0,0"
                                                        HorizontalAlignment="Left"
                                                        VerticalAlignment="Top"
                                                        FontFamily="Calibri"
@@ -1746,7 +1726,7 @@
                                             <TextBlock Grid.Row="1"
                                                        Width="192"
                                                        Height="16"
-                                                       Margin="3,15.8,0,0"
+                                                       Margin="3,34,0,0"
                                                        HorizontalAlignment="Left"
                                                        VerticalAlignment="Top"
                                                        FontFamily="Calibri"
@@ -1760,7 +1740,7 @@
                                             <TextBlock Grid.Row="1"
                                                        Width="97"
                                                        Height="18"
-                                                       Margin="180,4.105,0,0"
+                                                       Margin="180,20,0,0"
                                                        HorizontalAlignment="Left"
                                                        VerticalAlignment="Top"
                                                        Background="{x:Null}"
@@ -1777,7 +1757,7 @@
                                             <TextBlock Grid.Row="1"
                                                        Width="60"
                                                        Height="18"
-                                                       Margin="199,15.8,0,0"
+                                                       Margin="199,34,0,0"
                                                        HorizontalAlignment="Left"
                                                        VerticalAlignment="Top"
                                                        FontFamily="Calibri"

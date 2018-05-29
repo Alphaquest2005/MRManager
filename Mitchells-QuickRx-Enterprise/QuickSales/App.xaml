@@ -5,7 +5,7 @@
 
         <BitmapImage x:Key="SearchImg" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="Search-128.png"/>
         <BitmapImage x:Key="NewTicket" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="Plus_sign.png"/>
-        <BitmapImage x:Key="HVLogo" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="HvLogo.png"/>
+        <BitmapImage x:Key="Logo" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="logo.jpg"/>
         
         <!--<Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"/>

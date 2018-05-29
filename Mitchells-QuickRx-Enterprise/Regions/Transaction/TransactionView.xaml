@@ -10,7 +10,7 @@
             <ColumnDefinition Width="175"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="DownloadQB" Content="Download &#xA; Inventory" Click="DownloadQB_OnClick" Grid.Column="1" Margin="0,2,493,10" HorizontalAlignment="Right" />
+        <Button x:Name="DownloadQB" Content="Download &#xA; Inventory" Click="DownloadQB_OnClick" Grid.Column="1" Margin="0,2,493,10" HorizontalAlignment="Left" />
         <TextBlock Height="42" TextWrapping="Wrap" Text="Quick-Rx" VerticalAlignment="Top" FontSize="32" TextAlignment="Right" Margin="10,5,0,0" FontFamily="SketchFlow Print" HorizontalAlignment="Left" Width="145">
             <TextBlock.Effect>
                 <DropShadowEffect Color="#FFFFF9B3" Direction="70" ShadowDepth="0"/>

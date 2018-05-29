@@ -6,7 +6,7 @@
              xmlns:transaction="clr-namespace:Transaction;assembly=Transaction"
              xmlns:leftRegion="clr-namespace:LeftRegion;assembly=LeftRegion"
              xmlns:salesRegion="clr-namespace:SalesRegion;assembly=SalesRegion"
-
+             WindowState="Maximized"
              mc:Ignorable="d"              
              Title="QuickSales POS 2012" Height="600" Width="800">
     <Grid ClipToBounds="False">

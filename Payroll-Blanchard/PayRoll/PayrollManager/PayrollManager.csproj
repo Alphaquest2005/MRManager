@@ -180,7 +180,7 @@
     <Compile Include="ViewModels\PayrollJobModel.cs" />
     <Compile Include="ViewModels\PayrollSetupItemsModel.cs" />
     <Compile Include="ViewModels\PayrollSetupSummaryModel.cs" />
-    <Compile Include="ViewModels\PaysubModel.cs" />
+    <Compile Include="ViewModels\AccountEntryDetailsReportModel.cs" />
     <Compile Include="Views\AccountDetails.xaml.cs">
       <DependentUpon>AccountDetails.xaml</DependentUpon>
     </Compile>
