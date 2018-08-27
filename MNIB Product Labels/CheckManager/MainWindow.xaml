@@ -42,7 +42,7 @@
                            Text="{Binding ChequeNumber}"
                            TextWrapping="Wrap" />
                 <TextBlock Width="85"
-                           Height="25"
+                           Height="17"
                            Margin="0,4,10,0"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Top"
@@ -96,7 +96,7 @@
             TextWrapping="Wrap" />
                 <TextBlock Width="Auto"
             Height="25"
-            Margin="332,50,100,0"
+            Margin="327,50,105,0"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Top"
             FontSize="14"
@@ -108,7 +108,7 @@
                 </TextBlock>
                 <TextBlock Width="85"
                     Height="25"
-                    Margin="0,40,10,0"
+                    Margin="0,50,10,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     FontSize="14"
@@ -119,6 +119,16 @@
                     Text="{Binding Voucher.Action}"
                     TextAlignment="Center"
                     TextWrapping="Wrap" />
+                <TextBlock Width="Auto"
+                    Height="20"
+                    Margin="405,26,10,0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    FontSize="14"
+                    Foreground="#FF3D5000"
+                    Text="{Binding Amount, StringFormat=c}"
+                    TextAlignment="Right"
+                    TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" />
 
             </Grid>
         </DataTemplate>
@@ -199,7 +209,7 @@
                         <ListBox x:Name="ListBox"
                                  Width="Auto"
                                  MinWidth="300"
-                                 Margin="0,63,528,26.666"
+                                 Margin="-16,63,528,26.666"
                                  HorizontalAlignment="Stretch"
                                  HorizontalContentAlignment="Stretch"
                                  ItemTemplate="{DynamicResource ListBoxItemTemplate}"
@@ -224,7 +234,7 @@
                         <DatePicker SelectedDateChanged="ChequeDateChanged" 
                                     SelectedDate="{Binding ChequeDate}"
                                     HorizontalAlignment="Left" Height="34" Margin="599,4,0,0" VerticalAlignment="Top" Width="212" FontSize="21.333" Grid.Column="1" />
-                        <Grid Grid.Column="1" HorizontalAlignment="Left" Height="301" Margin="409,65,0,0" VerticalAlignment="Top" Width="513">
+                        <Grid Grid.Column="1" HorizontalAlignment="Left" Height="328" Margin="409,65,0,0" VerticalAlignment="Top" Width="513">
                             <TextBlock
                                 Width="130"
                                 Height="30"
@@ -278,8 +288,8 @@
                                 TextWrapping="Wrap" TextAlignment="Right" Text="Vender:"/>
                             <TextBlock
                                 Text="{Binding CurrentCheque.Vendor}"
-                                Width="281"
-                                Height="72"
+                                Width="342"
+                                Height="57"
                                 Margin="145,102,0,0"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
@@ -306,7 +316,7 @@
                                 FontSize="16"
                                 Foreground="#FF52130D"
                                 TextWrapping="Wrap"/>
-                            <Border  HorizontalAlignment="Left" Height="301" Margin="10,164,0,-164" VerticalAlignment="Top" Width="493" BorderBrush="#FF066A0B" BorderThickness="2" CornerRadius="10">
+                            <Border  HorizontalAlignment="Left" Height="301" Margin="10,164,0,-164" VerticalAlignment="Top" Width="493" BorderBrush="#FF066A0B" BorderThickness="2" CornerRadius="10" Background="#7FE9FFE6">
 
                                 <StackPanel Orientation="Vertical">
                                     <Grid
