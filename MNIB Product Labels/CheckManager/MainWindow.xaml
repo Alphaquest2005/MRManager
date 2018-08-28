@@ -156,7 +156,7 @@
 
 
         <Viewbox>
-            <Grid Width="1400"
+            <Grid Width="1482"
                   Height="700"
                   DataContext="{Binding Source={StaticResource CheckViewModelDataSource}}">
                 <Border Height="65"
@@ -176,7 +176,7 @@
                                HorizontalAlignment="Stretch"
                                LastChildFill="False" />
                 </Border>
-                <Grid Margin="57,79,25.333,25.333">
+                <Grid Margin="-32,79,0,25">
 
                     <Grid Width="1052.333" Margin="0,0,31,38.334">
                         <Grid.ColumnDefinitions>
@@ -206,20 +206,29 @@
                                    TextWrapping="Wrap" />
 
 
-                        <ListBox x:Name="ListBox"
+                        <ListView x:Name="ListBox"
                                  Width="Auto"
                                  MinWidth="300"
-                                 Margin="-16,63,528,26.666"
+                                 Margin="-171,65,784,23.666"
                                  HorizontalAlignment="Stretch"
                                  HorizontalContentAlignment="Stretch"
-                                 ItemTemplate="{DynamicResource ListBoxItemTemplate}"
                                  ItemsSource="{Binding Cheques}"
                                  Padding="5,0,0,0"
                                  PreviewMouseDown="ListBox_PreviewMouseDown"
                                  SelectedItem="{Binding CurrentCheque,
                                                         Mode=TwoWay}"
                                  SelectionChanged="ListBox_SelectionChanged"
-                                 SelectionMode="Single" Grid.ColumnSpan="2" />
+                                 SelectionMode="Single" Grid.ColumnSpan="2" >
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Voucher" DisplayMemberBinding="{Binding VoucherNumber}" Width="60" />
+                                    <GridViewColumn Header="Cheque Date" DisplayMemberBinding="{Binding ChequeDate, StringFormat=d}"  Width="75"  />
+                                    <GridViewColumn Header="Cheque Number" DisplayMemberBinding="{Binding ChequeNumber}"  Width="60"  />
+                                    <GridViewColumn Header="Vendor" DisplayMemberBinding="{Binding Vendor}"  Width="150" />
+                                    <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding Amount, StringFormat=c}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
                         <TextBox x:Name="SearchTxt" Grid.Column="1"
                                   Margin="15,2,671,521.666"
                                   Background="#FF5B5959"
@@ -234,7 +243,7 @@
                         <DatePicker SelectedDateChanged="ChequeDateChanged" 
                                     SelectedDate="{Binding ChequeDate}"
                                     HorizontalAlignment="Left" Height="34" Margin="599,4,0,0" VerticalAlignment="Top" Width="212" FontSize="21.333" Grid.Column="1" />
-                        <Grid Grid.Column="1" HorizontalAlignment="Left" Height="328" Margin="409,65,0,0" VerticalAlignment="Top" Width="513">
+                        <Grid Grid.Column="1" HorizontalAlignment="Left" Height="214" Margin="172,65,0,0" VerticalAlignment="Top" Width="422">
                             <TextBlock
                                 Width="130"
                                 Height="30"
@@ -244,7 +253,8 @@
                                 FontSize="16"
                                 FontWeight="Bold"
                                 Foreground="#FF1F3C1C"
-                                TextWrapping="Wrap" TextAlignment="Right" Text="Date:"/>
+                                TextWrapping="Wrap" TextAlignment="Right" 
+                                Text="Invoice Date:"/>
                             <TextBlock
                                 Width="235"
                                 Height="30"
@@ -253,7 +263,7 @@
                                 VerticalAlignment="Top"
                                 FontSize="16"
                                 Foreground="#FF52130D"
-                                Text="{Binding CurrentCheque.ChequeDate, StringFormat=D}"
+                                Text="{Binding CurrentCheque.InvoiceDate, StringFormat=D}"
                                 TextWrapping="Wrap"/>
                             <TextBlock
                                 Width="130"
@@ -264,9 +274,10 @@
                                 FontSize="16"
                                 FontWeight="Bold"
                                 Foreground="#FF1F3C1C"
-                                TextWrapping="Wrap" TextAlignment="Right" Text="Voucher No:"/>
+                                TextWrapping="Wrap" TextAlignment="Right" 
+                                Text="Transaction Ref:"/>
                             <TextBlock
-                                Text="{Binding CurrentCheque.VoucherNumber}"
+                                Text="{Binding CurrentCheque.TransactionReference}"
                                 Width="235"
                                 Height="30"
                                 Margin="145,72,0,0"
@@ -288,7 +299,7 @@
                                 TextWrapping="Wrap" TextAlignment="Right" Text="Vender:"/>
                             <TextBlock
                                 Text="{Binding CurrentCheque.Vendor}"
-                                Width="342"
+                                Width="267"
                                 Height="57"
                                 Margin="145,102,0,0"
                                 HorizontalAlignment="Left"
@@ -305,9 +316,10 @@
                                 FontSize="16"
                                 FontWeight="Bold"
                                 Foreground="#FF1F3C1C"
-                                TextWrapping="Wrap" TextAlignment="Right" Text="Cheque No:"/>
+                                TextWrapping="Wrap" TextAlignment="Right" 
+                                Text="Invoice No:"/>
                             <TextBlock
-                                Text="{Binding CurrentCheque.ChequeNumber}"
+                                Text="{Binding CurrentCheque.InvoiceNumber}"
                                 Width="235"
                                 Height="30"
                                 Margin="145,40,0,0"
@@ -316,13 +328,15 @@
                                 FontSize="16"
                                 Foreground="#FF52130D"
                                 TextWrapping="Wrap"/>
-                            <Border  HorizontalAlignment="Left" Height="301" Margin="10,164,0,-164" VerticalAlignment="Top" Width="493" BorderBrush="#FF066A0B" BorderThickness="2" CornerRadius="10" Background="#7FE9FFE6">
 
-                                <StackPanel Orientation="Vertical">
-                                    <Grid
+                        </Grid>
+                        <Border  HorizontalAlignment="Left" Height="466" Margin="615,68,-176,0" VerticalAlignment="Top" Width="493" BorderBrush="#FF066A0B" BorderThickness="2" CornerRadius="10" Background="#7FE9FFE6" Grid.Column="1">
+
+                            <StackPanel Orientation="Vertical">
+                                <Grid
                                            
-                                            x:Name ="PreparedGrd" Height="117">
-                                        <TextBlock
+                                            x:Name ="PreparedGrd" Height="171">
+                                    <TextBlock
                                                 Width="130"
                                                 Height="30"
                                                 Margin="14,40,0,0"
@@ -332,16 +346,16 @@
                                                 FontWeight="Bold"
                                                 Foreground="#FF1F3C1C"
                                                 TextWrapping="Wrap" TextAlignment="Right" Text="Prepared By:"/>
-                                        <TextBlock
+                                    <TextBlock
                                                 Text="{Binding CurrentCheque.Voucher.Prepared.User.Name}"
-                                                Width="235"
+                                                Width="256"
                                                 Height="30"
                                                 Margin="149,40,0,0"
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Top"
                                                 FontSize="16"
                                                 Foreground="#FF52130D"/>
-                                        <TextBlock
+                                    <TextBlock
                                                 Width="130"
                                                 Height="30"
                                                 Margin="14,5,0,0"
@@ -352,10 +366,10 @@
                                                 Foreground="#FF1F3C1C"
                                                 TextWrapping="Wrap" TextAlignment="Right" 
                                                 Text="Signatures"/>
-                                        <TextBox
+                                    <TextBox
                                                 Text="{Binding CurrentCheque.Voucher.Prepared.Signatures}"
                                                 TextChanged="UpdateSignatures"
-                                                IsEnabled="{Binding CurrentCheque.Voucher.Action, Converter={converters:PermissionEnabledConverter}, ConverterParameter='Prepare'}"
+                                                IsEnabled="{Binding CurrentCheque.Voucher.Action, Converter={converters:PermissionEnabledConverter}, ConverterParameter='Authorize'}"
                                                 Width="96"
                                                 Height="30"
                                                 Margin="149,5,0,0"
@@ -363,7 +377,7 @@
                                                 VerticalAlignment="Top"
                                                 FontSize="16"
                                                 Foreground="#FF52130D"/>
-                                        <TextBlock
+                                    <TextBlock
                                                 Width="130"
                                                 Height="30"
                                                 Margin="14,75,0,0"
@@ -373,21 +387,42 @@
                                                 FontWeight="Bold"
                                                 Foreground="#FF1F3C1C"
                                                 TextWrapping="Wrap" TextAlignment="Right" Text="Date Prepared:"/>
-                                        <TextBlock
+                                    <TextBlock
                                                 Text="{Binding CurrentCheque.Voucher.Prepared.DatePrepared, StringFormat=D}"
-                                                Width="235"
+                                                Width="256"
                                                 Height="30"
                                                 Margin="149,75,0,0"
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Top"
                                                 FontSize="16"
                                                 Foreground="#FF52130D"/>
-                                    </Grid>
-                                    <Grid Height="75" Width="472">
-                                        <TextBlock
+                                    <TextBox
+                                        Text="{Binding CurrentCheque.Voucher.Prepared.Notes}"
+                                        TextChanged="SaveVoucher"
+                                        IsEnabled="{Binding CurrentCheque.Voucher.Prepared.User.LoginName, ConverterParameter=Authorize, Converter={converters:UserEnabledConverter}}"
+                                        Width="330"
+                                        Height="56"
+                                        Margin="149,105,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="16"
+                                        Foreground="#FF52130D"/>
+                                    <TextBlock
+                                        Width="130"
+                                        Height="43"
+                                        Margin="10,110,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="16"
+                                        FontWeight="Bold"
+                                        Foreground="#FF1F3C1C"
+                                        TextWrapping="Wrap" TextAlignment="Right" Text="Preparation Notes"/>
+                                </Grid>
+                                <Grid Height="121" Background="#FFBEF5C6">
+                                    <TextBlock
                                                 Width="79"
                                                 Height="30"
-                                                Margin="-5,21,0,0"
+                                                Margin="-5,0,0,0"
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Top"
                                                 FontSize="12
@@ -396,18 +431,18 @@
                                                 Foreground="#FF1F3C1C"
                                                 TextWrapping="Wrap" TextAlignment="Right" 
                                                 Text="Authorized By:"/>
-                                        <ListBox
+                                    <ListBox
                                            
-                                                x:Name ="AuthorizedGrd" ItemsSource="{Binding CurrentCheque.Voucher.Authorizeds}" Margin="79,0,0,0">
-                                            <ListBox.ItemTemplate>
-                                                <DataTemplate DataType="checkManager:Authorized">
-                                                    <Grid  Height="31" Width="375">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="103*"/>
-                                                            <ColumnDefinition Width="190*"/>
-                                                        </Grid.ColumnDefinitions>
+                                                x:Name ="AuthorizedGrd" ItemsSource="{Binding CurrentCheque.Voucher.Authorizeds}" Margin="79,0,0,0" Background="{x:Null}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate DataType="checkManager:Authorized">
+                                                <Grid  Height="68" Width="425">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="103*"/>
+                                                        <ColumnDefinition Width="190*"/>
+                                                    </Grid.ColumnDefinitions>
 
-                                                        <TextBlock
+                                                    <TextBlock
                                                                 Text="{Binding User.Name}"
                                                                 Width="178"
                                                                 Height="19"
@@ -416,27 +451,37 @@
                                                                 VerticalAlignment="Top"
                                                                 FontSize="14"
                                                                 Foreground="#FF52130D" Grid.ColumnSpan="2"/>
-                                                        <TextBlock
+                                                    <TextBlock
                                                                 Text="{Binding DateAuthorized, StringFormat=D}"
                                                                 Width="176"
                                                                 Height="20"
-                                                                Margin="67,7,0,0"
+                                                                Margin="43,7,0,0"
                                                                 HorizontalAlignment="Left"
                                                                 VerticalAlignment="Top"
                                                                 FontSize="14"
                                                                 Foreground="#FF52130D" Grid.Column="1"/>
-                                                    </Grid>
-                                                </DataTemplate>
+                                                    <TextBox
+                                                        Text="{Binding Notes}"
+                                                        IsEnabled="{Binding User.LoginName, ConverterParameter=Authorize, Converter={converters:UserEnabledConverter}}"
+                                                        Width="406"
+                                                        Height="30"
+                                                        Margin="9,32,0,0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Top"
+                                                        FontSize="14"
+                                                        Foreground="#FF52130D" Grid.ColumnSpan="2"/>
+                                                </Grid>
+                                            </DataTemplate>
 
-                                            </ListBox.ItemTemplate>
-                                        </ListBox>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
 
-                                    </Grid>
+                                </Grid>
 
-                                    <Grid 
+                                <Grid 
                                            
-                                            x:Name ="DisBurseGrd" Height="117">
-                                        <TextBlock
+                                            x:Name ="DisBurseGrd" Height="177">
+                                    <TextBlock
                                                 Width="130"
                                                 Height="30"
                                                 Margin="14,50,0,0"
@@ -447,7 +492,7 @@
                                                 Foreground="#FF1F3C1C"
                                                 TextWrapping="Wrap" TextAlignment="Right"
                                                 Text="Disbursed By:"/>
-                                        <TextBlock
+                                    <TextBlock
                                                 Text="{Binding CurrentCheque.Voucher.Disbursed.User.Name}"
                                                 Width="235"
                                                 Height="30"
@@ -456,7 +501,7 @@
                                                 VerticalAlignment="Top"
                                                 FontSize="16"
                                                 Foreground="#FF52130D"/>
-                                        <TextBlock
+                                    <TextBlock
                                                 Width="50"
                                                 Height="30"
                                                 Margin="0,19,0,0"
@@ -467,7 +512,7 @@
                                                 Foreground="#FF1F3C1C"
                                                 TextWrapping="Wrap" TextAlignment="Right" 
                                                 Text="Payee:"/>
-                                        <ComboBox
+                                    <ComboBox
                                                 ItemsSource="{Binding Payees, Mode=OneWay}"
                                                 SelectedItem="{Binding CurrentCheque.Voucher.Disbursed.Payee}"
                                                 SelectedValuePath="Id"
@@ -482,7 +527,7 @@
                                                 VerticalAlignment="Top"
                                                 FontSize="16"
                                                 Foreground="#FF52130D"/>
-                                        <TextBlock
+                                    <TextBlock
                                                 Width="130"
                                                 Height="30"
                                                 Margin="14,77,0,0"
@@ -493,7 +538,7 @@
                                                 Foreground="#FF1F3C1C"
                                                 TextWrapping="Wrap" TextAlignment="Right"
                                                 Text="Date Disbursed:"/>
-                                        <TextBlock
+                                    <TextBlock
                                                 Text="{Binding CurrentCheque.Voucher.Disbursed.Date, StringFormat=D}"
                                                 Width="235"
                                                 Height="30"
@@ -502,7 +547,7 @@
                                                 VerticalAlignment="Top"
                                                 FontSize="16"
                                                 Foreground="#FF52130D"/>
-                                        <TextBox
+                                    <TextBox
                                                 Text="{Binding CurrentCheque.Voucher.Disbursed.Payee.IdNumber}"
                                                 IsEnabled="{Binding CurrentCheque.Voucher.Action, Converter={converters:PermissionEnabledConverter}, ConverterParameter='Disburse'}"
                                                 Width="117"
@@ -512,15 +557,37 @@
                                                 VerticalAlignment="Top"
                                                 FontSize="16"
                                                 Foreground="#FF52130D"/>
-                                        <Button 
+                                    <Button 
                                                 IsEnabled="{Binding CurrentCheque.Voucher.Action, Converter={converters:PermissionEnabledConverter}, ConverterParameter='Disburse'}"
                                                 Content="Save" Click="SavePayee" HorizontalAlignment="Left" Height="29" Margin="436,19,0,0" VerticalAlignment="Top" Width="36" RenderTransformOrigin="0.945,0.665"/>
-                                    </Grid>
+                                    <TextBox
+                                        Text="{Binding CurrentCheque.Voucher.Disbursed.Notes}"
+                                        IsEnabled="{Binding CurrentCheque.Voucher.Prepared.User.LoginName, ConverterParameter=Authorize, Converter={converters:UserEnabledConverter}}"
+                                        TextChanged="SaveVoucher"
+                                        Width="323"
+                                        Height="55"
+                                        Margin="149,112,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="16"
+                                        Foreground="#FF52130D"/>
+                                    <TextBlock
+                                        Width="130"
+                                        Height="30"
+                                        Margin="10,112,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        FontSize="16"
+                                        FontWeight="Bold"
+                                        Foreground="#FF1F3C1C"
+                                        TextWrapping="Wrap" TextAlignment="Right"
+                                        Text="Disburse Notes:"/>
+                                </Grid>
 
-                                </StackPanel>
+                            </StackPanel>
 
-                            </Border>
-                        </Grid>
+                        </Border>
+
                         <TextBlock
                             Width="70"
                             Height="47"
@@ -552,6 +619,23 @@
                         </ComboBox>
                         <Button Content="Refresh" Click="RefreshCheques" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="899,5,-25,0" VerticalAlignment="Top" Width="58"/>
                         <Button Content="Clear" Click="ClearFilters" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="836,6,0,0" VerticalAlignment="Top" Width="58"/>
+                        <ListView x:Name="ListBox_Copy"
+                            Width="Auto"
+                            MinWidth="300"
+                            Margin="155,293,338,23.666"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
+                            ItemsSource="{Binding CurrentCheque.Distribution}"
+                            Padding="5,0,0,0"
+                            SelectionMode="Single" Grid.Column="1" >
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Account Number" DisplayMemberBinding="{Binding AccountNumber}" Width="60" />
+                                    <GridViewColumn Header="Account Description" DisplayMemberBinding="{Binding AccountDescription}"  Width="150" />
+                                    <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding Amount, StringFormat=c}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
                     </Grid>
 
                     <Button Width="125"

@@ -163,5 +163,10 @@ namespace CheckManager
             im.ChequeStatus = null;
             im.SearchTxt = "";
         }
+
+        private void SaveVoucher(object sender, TextChangedEventArgs e)
+        {
+            im.SaveVoucher();
+        }
     }
 }

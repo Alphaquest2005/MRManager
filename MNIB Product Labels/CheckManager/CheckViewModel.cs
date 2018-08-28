@@ -75,10 +75,13 @@ namespace MNIB_Distribution_Manager
                 {
                     sourceCheques = sourceCheques.Where(x => x.ChequeDate.Value.Date == ChequeDate.Date);
                 }
+
                 var res = (from cheque in sourceCheques
-                           join voucher in ctx.Vouchers on cheque.VoucherNumber.ToString() equals voucher.VoucherNumber into ps
-                    from p in ps.DefaultIfEmpty()
-                    select new  Cheque()
+                    join v in ctx.Vouchers on cheque.VoucherNumber.ToString() equals v.VoucherNumber into comps
+                    from voucher in comps.DefaultIfEmpty()
+                    join d in ctx.Distributions on cheque.VoucherNumber equals d.VoucherNumber into prods
+                    from distribution in prods
+                         select new  Cheque()
                     {
                         Amount = cheque.Amount,
                         ChequeDate = cheque.ChequeDate,
@@ -90,7 +93,8 @@ namespace MNIB_Distribution_Manager
                         VendorName = cheque.VendorName,
                         TransactionReference = cheque.TransactionReference,
                         Vendor = cheque.Vendor,
-                        Voucher = p ?? new Voucher(),
+                        Voucher = voucher ?? new Voucher(),
+                        Distribution = prods.ToList(),
                         VoucherNumber = cheque.VoucherNumber
                     }).Take(100).ToList();
 
@@ -337,6 +341,16 @@ namespace MNIB_Distribution_Manager
                 res.Signatures = CurrentCheque.Voucher.Prepared.Signatures;
                 ctx.SubmitChanges();
             }
+        }
+
+        public void SaveVoucher()
+        {
+            //using (var ctx = new ChequeDBDataContext())
+            //{
+            //    var res = ctx.Prepareds.First(x => x.Id == CurrentCheque.Voucher.Prepared.Id);
+            //    res.Signatures = CurrentCheque.Voucher.Prepared.Signatures;
+            //    ctx.SubmitChanges();
+            //}
         }
     }
 }

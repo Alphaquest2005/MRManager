@@ -31,15 +31,9 @@ namespace CheckManager
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertAuthorized(Authorized instance);
-    partial void UpdateAuthorized(Authorized instance);
-    partial void DeleteAuthorized(Authorized instance);
     partial void InsertPermission(Permission instance);
     partial void UpdatePermission(Permission instance);
     partial void DeletePermission(Permission instance);
-    partial void InsertPrepared(Prepared instance);
-    partial void UpdatePrepared(Prepared instance);
-    partial void DeletePrepared(Prepared instance);
     partial void InsertUserPermission(UserPermission instance);
     partial void UpdateUserPermission(UserPermission instance);
     partial void DeleteUserPermission(UserPermission instance);
@@ -52,12 +46,18 @@ namespace CheckManager
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
-    partial void InsertDisbursed(Disbursed instance);
-    partial void UpdateDisbursed(Disbursed instance);
-    partial void DeleteDisbursed(Disbursed instance);
     partial void InsertPayee(Payee instance);
     partial void UpdatePayee(Payee instance);
     partial void DeletePayee(Payee instance);
+    partial void InsertAuthorized(Authorized instance);
+    partial void UpdateAuthorized(Authorized instance);
+    partial void DeleteAuthorized(Authorized instance);
+    partial void InsertDisbursed(Disbursed instance);
+    partial void UpdateDisbursed(Disbursed instance);
+    partial void DeleteDisbursed(Disbursed instance);
+    partial void InsertPrepared(Prepared instance);
+    partial void UpdatePrepared(Prepared instance);
+    partial void DeletePrepared(Prepared instance);
     #endregion
 		
 		public ChequeDBDataContext() : 
@@ -90,27 +90,11 @@ namespace CheckManager
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Authorized> Authorizeds
-		{
-			get
-			{
-				return this.GetTable<Authorized>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Permission> Permissions
 		{
 			get
 			{
 				return this.GetTable<Permission>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Prepared> Prepareds
-		{
-			get
-			{
-				return this.GetTable<Prepared>();
 			}
 		}
 		
@@ -130,14 +114,6 @@ namespace CheckManager
 			}
 		}
 		
-		public System.Data.Linq.Table<IdType> IdTypes
-		{
-			get
-			{
-				return this.GetTable<IdType>();
-			}
-		}
-		
 		public System.Data.Linq.Table<UserLog> UserLogs
 		{
 			get
@@ -154,11 +130,19 @@ namespace CheckManager
 			}
 		}
 		
-		public System.Data.Linq.Table<IdType1> IdType1s
+		public System.Data.Linq.Table<Payee> Payees
 		{
 			get
 			{
-				return this.GetTable<IdType1>();
+				return this.GetTable<Payee>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Authorized> Authorizeds
+		{
+			get
+			{
+				return this.GetTable<Authorized>();
 			}
 		}
 		
@@ -170,11 +154,11 @@ namespace CheckManager
 			}
 		}
 		
-		public System.Data.Linq.Table<Payee> Payees
+		public System.Data.Linq.Table<Prepared> Prepareds
 		{
 			get
 			{
-				return this.GetTable<Payee>();
+				return this.GetTable<Prepared>();
 			}
 		}
 		
@@ -185,238 +169,13 @@ namespace CheckManager
 				return this.GetTable<Cheque>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Authorized")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
-	public partial class Authorized : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.DateTime _DateAuthorized;
-		
-		private int _AuthorizedBy;
-		
-		private int _VoucherId;
-		
-		private EntityRef<Voucher> _Voucher;
-		
-		private EntityRef<User> _User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnDateAuthorizedChanging(System.DateTime value);
-    partial void OnDateAuthorizedChanged();
-    partial void OnAuthorizedByChanging(int value);
-    partial void OnAuthorizedByChanged();
-    partial void OnVoucherIdChanging(int value);
-    partial void OnVoucherIdChanged();
-    #endregion
-		
-		public Authorized()
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-		public int Id
+		public System.Data.Linq.Table<Distribution> Distributions
 		{
 			get
 			{
-				return this._Id;
+				return this.GetTable<Distribution>();
 			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateAuthorized", DbType="DateTime NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-		public System.DateTime DateAuthorized
-		{
-			get
-			{
-				return this._DateAuthorized;
-			}
-			set
-			{
-				if ((this._DateAuthorized != value))
-				{
-					this.OnDateAuthorizedChanging(value);
-					this.SendPropertyChanging();
-					this._DateAuthorized = value;
-					this.SendPropertyChanged("DateAuthorized");
-					this.OnDateAuthorizedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AuthorizedBy", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-		public int AuthorizedBy
-		{
-			get
-			{
-				return this._AuthorizedBy;
-			}
-			set
-			{
-				if ((this._AuthorizedBy != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnAuthorizedByChanging(value);
-					this.SendPropertyChanging();
-					this._AuthorizedBy = value;
-					this.SendPropertyChanged("AuthorizedBy");
-					this.OnAuthorizedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VoucherId", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-		public int VoucherId
-		{
-			get
-			{
-				return this._VoucherId;
-			}
-			set
-			{
-				if ((this._VoucherId != value))
-				{
-					if (this._Voucher.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnVoucherIdChanging(value);
-					this.SendPropertyChanging();
-					this._VoucherId = value;
-					this.SendPropertyChanged("VoucherId");
-					this.OnVoucherIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Voucher_Authorized", Storage="_Voucher", ThisKey="VoucherId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public Voucher Voucher
-		{
-			get
-			{
-				return this._Voucher.Entity;
-			}
-			set
-			{
-				Voucher previousValue = this._Voucher.Entity;
-				if (((previousValue != value) 
-							|| (this._Voucher.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Voucher.Entity = null;
-						previousValue.Authorizeds.Remove(this);
-					}
-					this._Voucher.Entity = value;
-					if ((value != null))
-					{
-						value.Authorizeds.Add(this);
-						this._VoucherId = value.Id;
-					}
-					else
-					{
-						this._VoucherId = default(int);
-					}
-					this.SendPropertyChanged("Voucher");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Authorized", Storage="_User", ThisKey="AuthorizedBy", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Authorizeds.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Authorizeds.Add(this);
-						this._AuthorizedBy = value.Id;
-					}
-					else
-					{
-						this._AuthorizedBy = default(int);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void Initialize()
-		{
-			this._Voucher = default(EntityRef<Voucher>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
-		{
-			this.Initialize();
 		}
 	}
 	
@@ -568,239 +327,6 @@ namespace CheckManager
 		public void OnSerialized(StreamingContext context)
 		{
 			this.serializing = false;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Prepared")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
-	public partial class Prepared : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.DateTime _DatePrepared;
-		
-		private int _PreparedBy;
-		
-		private int _Signatures;
-		
-		private EntityRef<Voucher> _Voucher;
-		
-		private EntityRef<User> _User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnDatePreparedChanging(System.DateTime value);
-    partial void OnDatePreparedChanged();
-    partial void OnPreparedByChanging(int value);
-    partial void OnPreparedByChanged();
-    partial void OnSignaturesChanging(int value);
-    partial void OnSignaturesChanged();
-    #endregion
-		
-		public Prepared()
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					if (this._Voucher.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DatePrepared", DbType="DateTime NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-		public System.DateTime DatePrepared
-		{
-			get
-			{
-				return this._DatePrepared;
-			}
-			set
-			{
-				if ((this._DatePrepared != value))
-				{
-					this.OnDatePreparedChanging(value);
-					this.SendPropertyChanging();
-					this._DatePrepared = value;
-					this.SendPropertyChanged("DatePrepared");
-					this.OnDatePreparedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PreparedBy", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-		public int PreparedBy
-		{
-			get
-			{
-				return this._PreparedBy;
-			}
-			set
-			{
-				if ((this._PreparedBy != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPreparedByChanging(value);
-					this.SendPropertyChanging();
-					this._PreparedBy = value;
-					this.SendPropertyChanged("PreparedBy");
-					this.OnPreparedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Signatures", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-		public int Signatures
-		{
-			get
-			{
-				return this._Signatures;
-			}
-			set
-			{
-				if ((this._Signatures != value))
-				{
-					this.OnSignaturesChanging(value);
-					this.SendPropertyChanging();
-					this._Signatures = value;
-					this.SendPropertyChanged("Signatures");
-					this.OnSignaturesChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Voucher_Prepared", Storage="_Voucher", ThisKey="Id", OtherKey="Id", IsForeignKey=true)]
-		public Voucher Voucher
-		{
-			get
-			{
-				return this._Voucher.Entity;
-			}
-			set
-			{
-				Voucher previousValue = this._Voucher.Entity;
-				if (((previousValue != value) 
-							|| (this._Voucher.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Voucher.Entity = null;
-						previousValue.Prepared = null;
-					}
-					this._Voucher.Entity = value;
-					if ((value != null))
-					{
-						value.Prepared = this;
-						this._Id = value.Id;
-					}
-					else
-					{
-						this._Id = default(int);
-					}
-					this.SendPropertyChanged("Voucher");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Prepared", Storage="_User", ThisKey="PreparedBy", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Prepareds.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Prepareds.Add(this);
-						this._PreparedBy = value.Id;
-					}
-					else
-					{
-						this._PreparedBy = default(int);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void Initialize()
-		{
-			this._Voucher = default(EntityRef<Voucher>);
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
-		{
-			this.Initialize();
 		}
 	}
 	
@@ -1027,9 +553,9 @@ namespace CheckManager
 		
 		private EntitySet<Authorized> _Authorizeds;
 		
-		private EntityRef<Prepared> _Prepared;
-		
 		private EntityRef<Disbursed> _Disbursed;
+		
+		private EntityRef<Prepared> _Prepared;
 		
 		private bool serializing;
 		
@@ -1132,43 +658,8 @@ namespace CheckManager
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Voucher_Prepared", Storage="_Prepared", ThisKey="Id", OtherKey="Id", IsUnique=true, IsForeignKey=false)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5, EmitDefaultValue=false)]
-		public Prepared Prepared
-		{
-			get
-			{
-				if ((this.serializing 
-							&& (this._Prepared.HasLoadedOrAssignedValue == false)))
-				{
-					return null;
-				}
-				return this._Prepared.Entity;
-			}
-			set
-			{
-				Prepared previousValue = this._Prepared.Entity;
-				if (((previousValue != value) 
-							|| (this._Prepared.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Prepared.Entity = null;
-						previousValue.Voucher = null;
-					}
-					this._Prepared.Entity = value;
-					if ((value != null))
-					{
-						value.Voucher = this;
-					}
-					this.SendPropertyChanged("Prepared");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Voucher_Disbursed", Storage="_Disbursed", ThisKey="Id", OtherKey="Id", IsUnique=true, IsForeignKey=false)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6, EmitDefaultValue=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5, EmitDefaultValue=false)]
 		public Disbursed Disbursed
 		{
 			get
@@ -1198,6 +689,41 @@ namespace CheckManager
 						value.Voucher = this;
 					}
 					this.SendPropertyChanged("Disbursed");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Voucher_Prepared", Storage="_Prepared", ThisKey="Id", OtherKey="Id", IsUnique=true, IsForeignKey=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6, EmitDefaultValue=false)]
+		public Prepared Prepared
+		{
+			get
+			{
+				if ((this.serializing 
+							&& (this._Prepared.HasLoadedOrAssignedValue == false)))
+				{
+					return null;
+				}
+				return this._Prepared.Entity;
+			}
+			set
+			{
+				Prepared previousValue = this._Prepared.Entity;
+				if (((previousValue != value) 
+							|| (this._Prepared.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Prepared.Entity = null;
+						previousValue.Voucher = null;
+					}
+					this._Prepared.Entity = value;
+					if ((value != null))
+					{
+						value.Voucher = this;
+					}
+					this.SendPropertyChanged("Prepared");
 				}
 			}
 		}
@@ -1237,8 +763,8 @@ namespace CheckManager
 		private void Initialize()
 		{
 			this._Authorizeds = new EntitySet<Authorized>(new Action<Authorized>(this.attach_Authorizeds), new Action<Authorized>(this.detach_Authorizeds));
-			this._Prepared = default(EntityRef<Prepared>);
 			this._Disbursed = default(EntityRef<Disbursed>);
+			this._Prepared = default(EntityRef<Prepared>);
 			OnCreated();
 		}
 		
@@ -1261,35 +787,6 @@ namespace CheckManager
 		public void OnSerialized(StreamingContext context)
 		{
 			this.serializing = false;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.IdTypes")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
-	public partial class IdType
-	{
-		
-		private string _Name;
-		
-		public IdType()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this._Name = value;
-				}
-			}
 		}
 	}
 	
@@ -1577,15 +1074,15 @@ namespace CheckManager
 		
 		private string _LoginName;
 		
-		private EntitySet<Authorized> _Authorizeds;
-		
-		private EntitySet<Prepared> _Prepareds;
-		
 		private EntitySet<UserPermission> _UserPermissions;
 		
 		private EntitySet<UserLog> _UserLogs;
 		
+		private EntitySet<Authorized> _Authorizeds;
+		
 		private EntitySet<Disbursed> _Disburseds;
+		
+		private EntitySet<Prepared> _Prepareds;
 		
 		private bool serializing;
 		
@@ -1715,46 +1212,8 @@ namespace CheckManager
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Authorized", Storage="_Authorizeds", ThisKey="Id", OtherKey="AuthorizedBy")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6, EmitDefaultValue=false)]
-		public EntitySet<Authorized> Authorizeds
-		{
-			get
-			{
-				if ((this.serializing 
-							&& (this._Authorizeds.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
-				return this._Authorizeds;
-			}
-			set
-			{
-				this._Authorizeds.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Prepared", Storage="_Prepareds", ThisKey="Id", OtherKey="PreparedBy")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7, EmitDefaultValue=false)]
-		public EntitySet<Prepared> Prepareds
-		{
-			get
-			{
-				if ((this.serializing 
-							&& (this._Prepareds.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
-				return this._Prepareds;
-			}
-			set
-			{
-				this._Prepareds.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserPermission", Storage="_UserPermissions", ThisKey="Id", OtherKey="UserId")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8, EmitDefaultValue=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6, EmitDefaultValue=false)]
 		public EntitySet<UserPermission> UserPermissions
 		{
 			get
@@ -1773,7 +1232,7 @@ namespace CheckManager
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserLog", Storage="_UserLogs", ThisKey="Id", OtherKey="UserId")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=9, EmitDefaultValue=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7, EmitDefaultValue=false)]
 		public EntitySet<UserLog> UserLogs
 		{
 			get
@@ -1791,8 +1250,27 @@ namespace CheckManager
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Authorized", Storage="_Authorizeds", ThisKey="Id", OtherKey="AuthorizedBy")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8, EmitDefaultValue=false)]
+		public EntitySet<Authorized> Authorizeds
+		{
+			get
+			{
+				if ((this.serializing 
+							&& (this._Authorizeds.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
+				return this._Authorizeds;
+			}
+			set
+			{
+				this._Authorizeds.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Disbursed", Storage="_Disburseds", ThisKey="Id", OtherKey="DisbursedBy")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=10, EmitDefaultValue=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=9, EmitDefaultValue=false)]
 		public EntitySet<Disbursed> Disburseds
 		{
 			get
@@ -1807,6 +1285,25 @@ namespace CheckManager
 			set
 			{
 				this._Disburseds.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Prepared", Storage="_Prepareds", ThisKey="Id", OtherKey="PreparedBy")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=10, EmitDefaultValue=false)]
+		public EntitySet<Prepared> Prepareds
+		{
+			get
+			{
+				if ((this.serializing 
+							&& (this._Prepareds.HasLoadedOrAssignedValues == false)))
+				{
+					return null;
+				}
+				return this._Prepareds;
+			}
+			set
+			{
+				this._Prepareds.Assign(value);
 			}
 		}
 		
@@ -1828,30 +1325,6 @@ namespace CheckManager
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Authorizeds(Authorized entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Authorizeds(Authorized entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
-		private void attach_Prepareds(Prepared entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Prepareds(Prepared entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
 		}
 		
 		private void attach_UserPermissions(UserPermission entity)
@@ -1878,6 +1351,18 @@ namespace CheckManager
 			entity.User = null;
 		}
 		
+		private void attach_Authorizeds(Authorized entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Authorizeds(Authorized entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
 		private void attach_Disburseds(Disbursed entity)
 		{
 			this.SendPropertyChanging();
@@ -1890,13 +1375,25 @@ namespace CheckManager
 			entity.User = null;
 		}
 		
+		private void attach_Prepareds(Prepared entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Prepareds(Prepared entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
 		private void Initialize()
 		{
-			this._Authorizeds = new EntitySet<Authorized>(new Action<Authorized>(this.attach_Authorizeds), new Action<Authorized>(this.detach_Authorizeds));
-			this._Prepareds = new EntitySet<Prepared>(new Action<Prepared>(this.attach_Prepareds), new Action<Prepared>(this.detach_Prepareds));
 			this._UserPermissions = new EntitySet<UserPermission>(new Action<UserPermission>(this.attach_UserPermissions), new Action<UserPermission>(this.detach_UserPermissions));
 			this._UserLogs = new EntitySet<UserLog>(new Action<UserLog>(this.attach_UserLogs), new Action<UserLog>(this.detach_UserLogs));
+			this._Authorizeds = new EntitySet<Authorized>(new Action<Authorized>(this.attach_Authorizeds), new Action<Authorized>(this.detach_Authorizeds));
 			this._Disburseds = new EntitySet<Disbursed>(new Action<Disbursed>(this.attach_Disburseds), new Action<Disbursed>(this.detach_Disburseds));
+			this._Prepareds = new EntitySet<Prepared>(new Action<Prepared>(this.attach_Prepareds), new Action<Prepared>(this.detach_Prepareds));
 			OnCreated();
 		}
 		
@@ -1919,309 +1416,6 @@ namespace CheckManager
 		public void OnSerialized(StreamingContext context)
 		{
 			this.serializing = false;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.IdTypes")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
-	public partial class IdType1
-	{
-		
-		private string _Name;
-		
-		public IdType1()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this._Name = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Disbursed")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
-	public partial class Disbursed : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private int _PayeeId;
-		
-		private System.DateTime _Date;
-		
-		private int _DisbursedBy;
-		
-		private EntityRef<User> _User;
-		
-		private EntityRef<Voucher> _Voucher;
-		
-		private EntityRef<Payee> _Payee;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnPayeeIdChanging(int value);
-    partial void OnPayeeIdChanged();
-    partial void OnDateChanging(System.DateTime value);
-    partial void OnDateChanged();
-    partial void OnDisbursedByChanging(int value);
-    partial void OnDisbursedByChanged();
-    #endregion
-		
-		public Disbursed()
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					if (this._Voucher.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayeeId", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-		public int PayeeId
-		{
-			get
-			{
-				return this._PayeeId;
-			}
-			set
-			{
-				if ((this._PayeeId != value))
-				{
-					if (this._Payee.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPayeeIdChanging(value);
-					this.SendPropertyChanging();
-					this._PayeeId = value;
-					this.SendPropertyChanged("PayeeId");
-					this.OnPayeeIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-		public System.DateTime Date
-		{
-			get
-			{
-				return this._Date;
-			}
-			set
-			{
-				if ((this._Date != value))
-				{
-					this.OnDateChanging(value);
-					this.SendPropertyChanging();
-					this._Date = value;
-					this.SendPropertyChanged("Date");
-					this.OnDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DisbursedBy", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-		public int DisbursedBy
-		{
-			get
-			{
-				return this._DisbursedBy;
-			}
-			set
-			{
-				if ((this._DisbursedBy != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDisbursedByChanging(value);
-					this.SendPropertyChanging();
-					this._DisbursedBy = value;
-					this.SendPropertyChanged("DisbursedBy");
-					this.OnDisbursedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Disbursed", Storage="_User", ThisKey="DisbursedBy", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Disburseds.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Disburseds.Add(this);
-						this._DisbursedBy = value.Id;
-					}
-					else
-					{
-						this._DisbursedBy = default(int);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Voucher_Disbursed", Storage="_Voucher", ThisKey="Id", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public Voucher Voucher
-		{
-			get
-			{
-				return this._Voucher.Entity;
-			}
-			set
-			{
-				Voucher previousValue = this._Voucher.Entity;
-				if (((previousValue != value) 
-							|| (this._Voucher.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Voucher.Entity = null;
-						previousValue.Disbursed = null;
-					}
-					this._Voucher.Entity = value;
-					if ((value != null))
-					{
-						value.Disbursed = this;
-						this._Id = value.Id;
-					}
-					else
-					{
-						this._Id = default(int);
-					}
-					this.SendPropertyChanged("Voucher");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Payee_Disbursed", Storage="_Payee", ThisKey="PayeeId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public Payee Payee
-		{
-			get
-			{
-				return this._Payee.Entity;
-			}
-			set
-			{
-				Payee previousValue = this._Payee.Entity;
-				if (((previousValue != value) 
-							|| (this._Payee.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Payee.Entity = null;
-						previousValue.Disburseds.Remove(this);
-					}
-					this._Payee.Entity = value;
-					if ((value != null))
-					{
-						value.Disburseds.Add(this);
-						this._PayeeId = value.Id;
-					}
-					else
-					{
-						this._PayeeId = default(int);
-					}
-					this.SendPropertyChanged("Payee");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void Initialize()
-		{
-			this._User = default(EntityRef<User>);
-			this._Voucher = default(EntityRef<Voucher>);
-			this._Payee = default(EntityRef<Payee>);
-			OnCreated();
-		}
-		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
-		{
-			this.Initialize();
 		}
 	}
 	
@@ -2423,6 +1617,821 @@ namespace CheckManager
 		public void OnSerialized(StreamingContext context)
 		{
 			this.serializing = false;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Authorized")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
+	public partial class Authorized : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.DateTime _DateAuthorized;
+		
+		private int _AuthorizedBy;
+		
+		private int _VoucherId;
+		
+		private string _Notes;
+		
+		private EntityRef<User> _User;
+		
+		private EntityRef<Voucher> _Voucher;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnDateAuthorizedChanging(System.DateTime value);
+    partial void OnDateAuthorizedChanged();
+    partial void OnAuthorizedByChanging(int value);
+    partial void OnAuthorizedByChanged();
+    partial void OnVoucherIdChanging(int value);
+    partial void OnVoucherIdChanged();
+    partial void OnNotesChanging(string value);
+    partial void OnNotesChanged();
+    #endregion
+		
+		public Authorized()
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateAuthorized", DbType="DateTime NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+		public System.DateTime DateAuthorized
+		{
+			get
+			{
+				return this._DateAuthorized;
+			}
+			set
+			{
+				if ((this._DateAuthorized != value))
+				{
+					this.OnDateAuthorizedChanging(value);
+					this.SendPropertyChanging();
+					this._DateAuthorized = value;
+					this.SendPropertyChanged("DateAuthorized");
+					this.OnDateAuthorizedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AuthorizedBy", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+		public int AuthorizedBy
+		{
+			get
+			{
+				return this._AuthorizedBy;
+			}
+			set
+			{
+				if ((this._AuthorizedBy != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAuthorizedByChanging(value);
+					this.SendPropertyChanging();
+					this._AuthorizedBy = value;
+					this.SendPropertyChanged("AuthorizedBy");
+					this.OnAuthorizedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VoucherId", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+		public int VoucherId
+		{
+			get
+			{
+				return this._VoucherId;
+			}
+			set
+			{
+				if ((this._VoucherId != value))
+				{
+					if (this._Voucher.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnVoucherIdChanging(value);
+					this.SendPropertyChanging();
+					this._VoucherId = value;
+					this.SendPropertyChanged("VoucherId");
+					this.OnVoucherIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notes", DbType="VarChar(MAX)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
+		public string Notes
+		{
+			get
+			{
+				return this._Notes;
+			}
+			set
+			{
+				if ((this._Notes != value))
+				{
+					this.OnNotesChanging(value);
+					this.SendPropertyChanging();
+					this._Notes = value;
+					this.SendPropertyChanged("Notes");
+					this.OnNotesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Authorized", Storage="_User", ThisKey="AuthorizedBy", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Authorizeds.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Authorizeds.Add(this);
+						this._AuthorizedBy = value.Id;
+					}
+					else
+					{
+						this._AuthorizedBy = default(int);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Voucher_Authorized", Storage="_Voucher", ThisKey="VoucherId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Voucher Voucher
+		{
+			get
+			{
+				return this._Voucher.Entity;
+			}
+			set
+			{
+				Voucher previousValue = this._Voucher.Entity;
+				if (((previousValue != value) 
+							|| (this._Voucher.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Voucher.Entity = null;
+						previousValue.Authorizeds.Remove(this);
+					}
+					this._Voucher.Entity = value;
+					if ((value != null))
+					{
+						value.Authorizeds.Add(this);
+						this._VoucherId = value.Id;
+					}
+					else
+					{
+						this._VoucherId = default(int);
+					}
+					this.SendPropertyChanged("Voucher");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void Initialize()
+		{
+			this._User = default(EntityRef<User>);
+			this._Voucher = default(EntityRef<Voucher>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Disbursed")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
+	public partial class Disbursed : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _PayeeId;
+		
+		private System.DateTime _Date;
+		
+		private int _DisbursedBy;
+		
+		private string _Notes;
+		
+		private EntityRef<Payee> _Payee;
+		
+		private EntityRef<User> _User;
+		
+		private EntityRef<Voucher> _Voucher;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnPayeeIdChanging(int value);
+    partial void OnPayeeIdChanged();
+    partial void OnDateChanging(System.DateTime value);
+    partial void OnDateChanged();
+    partial void OnDisbursedByChanging(int value);
+    partial void OnDisbursedByChanged();
+    partial void OnNotesChanging(string value);
+    partial void OnNotesChanged();
+    #endregion
+		
+		public Disbursed()
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					if (this._Voucher.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayeeId", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+		public int PayeeId
+		{
+			get
+			{
+				return this._PayeeId;
+			}
+			set
+			{
+				if ((this._PayeeId != value))
+				{
+					if (this._Payee.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPayeeIdChanging(value);
+					this.SendPropertyChanging();
+					this._PayeeId = value;
+					this.SendPropertyChanged("PayeeId");
+					this.OnPayeeIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+		public System.DateTime Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this.OnDateChanging(value);
+					this.SendPropertyChanging();
+					this._Date = value;
+					this.SendPropertyChanged("Date");
+					this.OnDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DisbursedBy", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+		public int DisbursedBy
+		{
+			get
+			{
+				return this._DisbursedBy;
+			}
+			set
+			{
+				if ((this._DisbursedBy != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnDisbursedByChanging(value);
+					this.SendPropertyChanging();
+					this._DisbursedBy = value;
+					this.SendPropertyChanged("DisbursedBy");
+					this.OnDisbursedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notes", DbType="VarChar(MAX)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
+		public string Notes
+		{
+			get
+			{
+				return this._Notes;
+			}
+			set
+			{
+				if ((this._Notes != value))
+				{
+					this.OnNotesChanging(value);
+					this.SendPropertyChanging();
+					this._Notes = value;
+					this.SendPropertyChanged("Notes");
+					this.OnNotesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Payee_Disbursed", Storage="_Payee", ThisKey="PayeeId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Payee Payee
+		{
+			get
+			{
+				return this._Payee.Entity;
+			}
+			set
+			{
+				Payee previousValue = this._Payee.Entity;
+				if (((previousValue != value) 
+							|| (this._Payee.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Payee.Entity = null;
+						previousValue.Disburseds.Remove(this);
+					}
+					this._Payee.Entity = value;
+					if ((value != null))
+					{
+						value.Disburseds.Add(this);
+						this._PayeeId = value.Id;
+					}
+					else
+					{
+						this._PayeeId = default(int);
+					}
+					this.SendPropertyChanged("Payee");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Disbursed", Storage="_User", ThisKey="DisbursedBy", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Disburseds.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Disburseds.Add(this);
+						this._DisbursedBy = value.Id;
+					}
+					else
+					{
+						this._DisbursedBy = default(int);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Voucher_Disbursed", Storage="_Voucher", ThisKey="Id", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Voucher Voucher
+		{
+			get
+			{
+				return this._Voucher.Entity;
+			}
+			set
+			{
+				Voucher previousValue = this._Voucher.Entity;
+				if (((previousValue != value) 
+							|| (this._Voucher.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Voucher.Entity = null;
+						previousValue.Disbursed = null;
+					}
+					this._Voucher.Entity = value;
+					if ((value != null))
+					{
+						value.Disbursed = this;
+						this._Id = value.Id;
+					}
+					else
+					{
+						this._Id = default(int);
+					}
+					this.SendPropertyChanged("Voucher");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void Initialize()
+		{
+			this._Payee = default(EntityRef<Payee>);
+			this._User = default(EntityRef<User>);
+			this._Voucher = default(EntityRef<Voucher>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Prepared")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
+	public partial class Prepared : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.DateTime _DatePrepared;
+		
+		private int _PreparedBy;
+		
+		private int _Signatures;
+		
+		private string _Notes;
+		
+		private EntityRef<User> _User;
+		
+		private EntityRef<Voucher> _Voucher;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnDatePreparedChanging(System.DateTime value);
+    partial void OnDatePreparedChanged();
+    partial void OnPreparedByChanging(int value);
+    partial void OnPreparedByChanged();
+    partial void OnSignaturesChanging(int value);
+    partial void OnSignaturesChanged();
+    partial void OnNotesChanging(string value);
+    partial void OnNotesChanged();
+    #endregion
+		
+		public Prepared()
+		{
+			this.Initialize();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					if (this._Voucher.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DatePrepared", DbType="DateTime NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+		public System.DateTime DatePrepared
+		{
+			get
+			{
+				return this._DatePrepared;
+			}
+			set
+			{
+				if ((this._DatePrepared != value))
+				{
+					this.OnDatePreparedChanging(value);
+					this.SendPropertyChanging();
+					this._DatePrepared = value;
+					this.SendPropertyChanged("DatePrepared");
+					this.OnDatePreparedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PreparedBy", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+		public int PreparedBy
+		{
+			get
+			{
+				return this._PreparedBy;
+			}
+			set
+			{
+				if ((this._PreparedBy != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPreparedByChanging(value);
+					this.SendPropertyChanging();
+					this._PreparedBy = value;
+					this.SendPropertyChanged("PreparedBy");
+					this.OnPreparedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Signatures", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+		public int Signatures
+		{
+			get
+			{
+				return this._Signatures;
+			}
+			set
+			{
+				if ((this._Signatures != value))
+				{
+					this.OnSignaturesChanging(value);
+					this.SendPropertyChanging();
+					this._Signatures = value;
+					this.SendPropertyChanged("Signatures");
+					this.OnSignaturesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notes", DbType="VarChar(MAX)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
+		public string Notes
+		{
+			get
+			{
+				return this._Notes;
+			}
+			set
+			{
+				if ((this._Notes != value))
+				{
+					this.OnNotesChanging(value);
+					this.SendPropertyChanging();
+					this._Notes = value;
+					this.SendPropertyChanged("Notes");
+					this.OnNotesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Prepared", Storage="_User", ThisKey="PreparedBy", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Prepareds.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Prepareds.Add(this);
+						this._PreparedBy = value.Id;
+					}
+					else
+					{
+						this._PreparedBy = default(int);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Voucher_Prepared", Storage="_Voucher", ThisKey="Id", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Voucher Voucher
+		{
+			get
+			{
+				return this._Voucher.Entity;
+			}
+			set
+			{
+				Voucher previousValue = this._Voucher.Entity;
+				if (((previousValue != value) 
+							|| (this._Voucher.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Voucher.Entity = null;
+						previousValue.Prepared = null;
+					}
+					this._Voucher.Entity = value;
+					if ((value != null))
+					{
+						value.Prepared = this;
+						this._Id = value.Id;
+					}
+					else
+					{
+						this._Id = default(int);
+					}
+					this.SendPropertyChanged("Voucher");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void Initialize()
+		{
+			this._User = default(EntityRef<User>);
+			this._Voucher = default(EntityRef<Voucher>);
+			OnCreated();
+		}
+		
+		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
+		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
+		public void OnDeserializing(StreamingContext context)
+		{
+			this.Initialize();
 		}
 	}
 	
@@ -2640,6 +2649,94 @@ namespace CheckManager
 				if ((this._VendorName != value))
 				{
 					this._VendorName = value;
+				}
+			}
+		}
+
+	    
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Distribution")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
+	public partial class Distribution
+	{
+		
+		private int _VoucherNumber;
+		
+		private string _AccountNumber;
+		
+		private string _AccountDescription;
+		
+		private System.Nullable<decimal> _Amount;
+		
+		public Distribution()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VoucherNumber", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+		public int VoucherNumber
+		{
+			get
+			{
+				return this._VoucherNumber;
+			}
+			set
+			{
+				if ((this._VoucherNumber != value))
+				{
+					this._VoucherNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountNumber", DbType="VarChar(8)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+		public string AccountNumber
+		{
+			get
+			{
+				return this._AccountNumber;
+			}
+			set
+			{
+				if ((this._AccountNumber != value))
+				{
+					this._AccountNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountDescription", DbType="Char(30) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+		public string AccountDescription
+		{
+			get
+			{
+				return this._AccountDescription;
+			}
+			set
+			{
+				if ((this._AccountDescription != value))
+				{
+					this._AccountDescription = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Decimal(11,2)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+		public System.Nullable<decimal> Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this._Amount = value;
 				}
 			}
 		}

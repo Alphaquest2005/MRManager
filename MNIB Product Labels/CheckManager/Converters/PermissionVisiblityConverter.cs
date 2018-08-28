@@ -48,4 +48,25 @@ namespace CheckManager.Converters
             return this;
         }
     }
+
+    public class UserEnabledConverter : System.Windows.Markup.MarkupExtension, IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+
+            if (value != null && string.IsNullOrEmpty(value.ToString())) return false;
+
+            if (CheckViewModel.Instance.User == null) return false;
+
+            return CheckViewModel.Instance.User.LoginName == value.ToString();
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return false;
+        }
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
+        }
+    }
 }

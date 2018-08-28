@@ -1,30 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CheckManager" Class="ChequeDBDataContext" Serialization="Unidirectional" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=JOSEPH-PC\SQLEXPRESS2017;Initial Catalog=CheckManager;Integrated Security=True" SettingsObjectName="CheckManager.Properties.Settings" SettingsPropertyName="CheckManagerConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Authorized" Member="Authorizeds">
-    <Type Name="Authorized">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="DateAuthorized" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="AuthorizedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="VoucherId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Voucher_Authorized" Member="Voucher" ThisKey="VoucherId" OtherKey="Id" Type="Voucher" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="User_Authorized" Member="User" ThisKey="AuthorizedBy" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Permissions" Member="Permissions">
     <Type Name="Permission">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="Permission_UserPermission" Member="UserPermissions" ThisKey="Id" OtherKey="PermissionId" Type="UserPermission" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Prepared" Member="Prepareds">
-    <Type Name="Prepared">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="DatePrepared" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="PreparedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Signatures" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Voucher_Prepared" Member="Voucher" ThisKey="Id" OtherKey="Id" Type="Voucher" IsForeignKey="true" />
-      <Association Name="User_Prepared" Member="User" ThisKey="PreparedBy" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.UserPermissions" Member="UserPermissions">
@@ -42,13 +22,8 @@
       <Column Name="VoucherNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ChequeNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="Voucher_Authorized" Member="Authorizeds" ThisKey="Id" OtherKey="VoucherId" Type="Authorized" />
-      <Association Name="Voucher_Prepared" Member="Prepared" ThisKey="Id" OtherKey="Id" Type="Prepared" Cardinality="One" />
       <Association Name="Voucher_Disbursed" Member="Disbursed" ThisKey="Id" OtherKey="Id" Type="Disbursed" Cardinality="One" />
-    </Type>
-  </Table>
-  <Table Name="dbo.IdTypes" Member="IdTypes">
-    <Type Name="IdType">
-      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Voucher_Prepared" Member="Prepared" ThisKey="Id" OtherKey="Id" Type="Prepared" Cardinality="One" />
     </Type>
   </Table>
   <Table Name="dbo.UserLogs" Member="UserLogs">
@@ -70,27 +45,11 @@
       <Column Name="Password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Signature" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="LoginName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="User_Authorized" Member="Authorizeds" ThisKey="Id" OtherKey="AuthorizedBy" Type="Authorized" />
-      <Association Name="User_Prepared" Member="Prepareds" ThisKey="Id" OtherKey="PreparedBy" Type="Prepared" />
       <Association Name="User_UserPermission" Member="UserPermissions" ThisKey="Id" OtherKey="UserId" Type="UserPermission" />
       <Association Name="User_UserLog" Member="UserLogs" ThisKey="Id" OtherKey="UserId" Type="UserLog" />
+      <Association Name="User_Authorized" Member="Authorizeds" ThisKey="Id" OtherKey="AuthorizedBy" Type="Authorized" />
       <Association Name="User_Disbursed" Member="Disburseds" ThisKey="Id" OtherKey="DisbursedBy" Type="Disbursed" />
-    </Type>
-  </Table>
-  <Table Name="dbo.IdTypes" Member="IdType1s">
-    <Type Name="IdType1">
-      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Disbursed" Member="Disburseds">
-    <Type Name="Disbursed">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="PayeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="DisbursedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="User_Disbursed" Member="User" ThisKey="DisbursedBy" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="Voucher_Disbursed" Member="Voucher" ThisKey="Id" OtherKey="Id" Type="Voucher" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="Payee_Disbursed" Member="Payee" ThisKey="PayeeId" OtherKey="Id" Type="Payee" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="User_Prepared" Member="Prepareds" ThisKey="Id" OtherKey="PreparedBy" Type="Prepared" />
     </Type>
   </Table>
   <Table Name="dbo.Payee" Member="Payees">
@@ -100,6 +59,40 @@
       <Column Name="IdNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="VendorNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="Payee_Disbursed" Member="Disburseds" ThisKey="Id" OtherKey="PayeeId" Type="Disbursed" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Authorized" Member="Authorizeds">
+    <Type Name="Authorized">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DateAuthorized" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="AuthorizedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VoucherId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Notes" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="User_Authorized" Member="User" ThisKey="AuthorizedBy" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Voucher_Authorized" Member="Voucher" ThisKey="VoucherId" OtherKey="Id" Type="Voucher" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Disbursed" Member="Disburseds">
+    <Type Name="Disbursed">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PayeeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DisbursedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Notes" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Payee_Disbursed" Member="Payee" ThisKey="PayeeId" OtherKey="Id" Type="Payee" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="User_Disbursed" Member="User" ThisKey="DisbursedBy" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Voucher_Disbursed" Member="Voucher" ThisKey="Id" OtherKey="Id" Type="Voucher" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Prepared" Member="Prepareds">
+    <Type Name="Prepared">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DatePrepared" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PreparedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Signatures" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Notes" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="User_Prepared" Member="User" ThisKey="PreparedBy" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Voucher_Prepared" Member="Voucher" ThisKey="Id" OtherKey="Id" Type="Voucher" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Cheques" Member="Cheques">
@@ -115,6 +108,14 @@
       <Column Name="TransactionReference" Type="System.String" DbType="Char(25)" CanBeNull="true" />
       <Column Name="VendorNumber" Type="System.String" DbType="Char(6)" CanBeNull="true" />
       <Column Name="VendorName" Type="System.String" DbType="Char(25) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Distribution" Member="Distributions">
+    <Type Name="Distribution">
+      <Column Name="VoucherNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AccountNumber" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="AccountDescription" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

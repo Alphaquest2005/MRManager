@@ -1,23 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.75, 13.75" name="ChequeDB">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.375, 13.75" name="ChequeDB">
   <DataContextMoniker Name="/ChequeDBDataContext" />
   <nestedChildShapes>
-    <classShape Id="1f0636f8-7787-40e6-a64c-e27858dabd34" absoluteBounds="3.5, 3.5, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/ChequeDBDataContext/Authorized" />
-      <nestedChildShapes>
-        <elementListCompartment Id="4798755b-c10c-4933-8926-d0cc182bd59f" absoluteBounds="3.515, 3.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="08dcd383-f4d6-4f8b-887a-bcc0c0c18ef2" absoluteBounds="0.75, 12.25, 2, 1.1939925130208344">
       <DataClassMoniker Name="/ChequeDBDataContext/Permission" />
       <nestedChildShapes>
         <elementListCompartment Id="312f4864-f5f2-40cb-9ff6-c48ce35732e7" absoluteBounds="0.765, 12.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="bc8c12b1-d866-44d0-b233-f93df7b2cc9c" absoluteBounds="3.5, 9.5, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/ChequeDBDataContext/Prepared" />
-      <nestedChildShapes>
-        <elementListCompartment Id="5e4858eb-06d9-4fde-ae71-0211cb67d88f" absoluteBounds="3.515, 9.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="85029da3-cdad-4cc1-8190-11121ed15236" absoluteBounds="3.5, 0.75, 2, 1.3862939453125005">
@@ -39,26 +27,6 @@
         <classShapeMoniker Id="85029da3-cdad-4cc1-8190-11121ed15236" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 7.31814697265625); (3.04166666666667 : 7.31814697265625 : JumpStart); (3.20833333333333 : 7.31814697265625 : JumpEnd); (3.22916666666667 : 7.31814697265625 : JumpStart); (3.39583333333333 : 7.31814697265625 : JumpEnd); (4.5 : 7.31814697265625); (4.5 : 5.07859537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ChequeDBDataContext/Voucher/Voucher_Authorized" />
-      <nodes>
-        <classShapeMoniker Id="844ed361-85ba-4302-869d-7a9b1e0f2607" />
-        <classShapeMoniker Id="1f0636f8-7787-40e6-a64c-e27858dabd34" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 7.69597295898438); (3.04166666666667 : 7.69597295898438 : JumpStart); (3.20833333333333 : 7.69597295898438 : JumpEnd); (3.22916666666667 : 7.69597295898438 : JumpStart); (3.39583333333333 : 7.69597295898438 : JumpEnd); (4 : 7.69597295898438); (4 : 9.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ChequeDBDataContext/Voucher/Voucher_Prepared" />
-      <nodes>
-        <classShapeMoniker Id="844ed361-85ba-4302-869d-7a9b1e0f2607" />
-        <classShapeMoniker Id="bc8c12b1-d866-44d0-b233-f93df7b2cc9c" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="2f2dee60-e03c-4d44-9aff-7b3942a86f54" absoluteBounds="12.5, 8, 2, 1.0016910807291668">
-      <DataClassMoniker Name="/ChequeDBDataContext/IdType" />
-      <nestedChildShapes>
-        <elementListCompartment Id="6ca7cf77-09c3-4478-a18b-dc052efa9a38" absoluteBounds="12.515, 8.46, 1.9700000000000002, 0.44169108072916669" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="e5bceaac-61ba-4bcc-add6-a28c6a894bb1" absoluteBounds="12.125, 1.75, 2, 2.1554996744791666">
       <DataClassMoniker Name="/ChequeDBDataContext/UserLog" />
       <nestedChildShapes>
@@ -71,20 +39,6 @@
         <elementListCompartment Id="a94c872f-7fd8-49c7-91a4-dbb225111e72" absoluteBounds="0.76500000000000012, 3.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 4.28929768880208); (3.04166666666667 : 4.28929768880208 : JumpStart); (3.20833333333333 : 4.28929768880208 : JumpEnd); (3.5 : 4.28929768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ChequeDBDataContext/User/User_Authorized" />
-      <nodes>
-        <classShapeMoniker Id="3114f043-a20e-4aab-aca0-0b0c16a20dec" />
-        <classShapeMoniker Id="1f0636f8-7787-40e6-a64c-e27858dabd34" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 5.20959553570713); (3.06607443490112 : 5.52566997060825 : JumpStart); (3.18392556509888 : 5.64352110080601 : JumpEnd); (3.3125 : 5.77209553570713); (3.3125 : 10.2892976888021); (3.5 : 10.2892976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ChequeDBDataContext/User/User_Prepared" />
-      <nodes>
-        <classShapeMoniker Id="3114f043-a20e-4aab-aca0-0b0c16a20dec" />
-        <classShapeMoniker Id="bc8c12b1-d866-44d0-b233-f93df7b2cc9c" />
-      </nodes>
-    </associationConnector>
     <associationConnector edgePoints="[(1.75 : 3.5); (1.75 : 1.82097295898438); (3.04166666666667 : 1.82097295898437 : JumpStart); (3.20833333333333 : 1.82097295898438 : JumpEnd); (3.5 : 1.82097295898438)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ChequeDBDataContext/User/User_UserPermission" />
       <nodes>
@@ -92,37 +46,11 @@
         <classShapeMoniker Id="85029da3-cdad-4cc1-8190-11121ed15236" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.2812525 : 3.5); (2.2812525 : 2.81814447265625); (3.04166666666667 : 2.81814447265625 : JumpStart); (3.20833333333333 : 2.81814447265625 : JumpEnd); (12.125 : 2.81814447265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 3.8213525390625); (3.04166666666667 : 3.8213525390625 : JumpStart); (3.20833333333333 : 3.8213525390625 : JumpEnd); (12.125 : 3.8213525390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ChequeDBDataContext/User/User_UserLog" />
       <nodes>
         <classShapeMoniker Id="3114f043-a20e-4aab-aca0-0b0c16a20dec" />
         <classShapeMoniker Id="e5bceaac-61ba-4bcc-add6-a28c6a894bb1" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="9145593c-06a4-4a0e-9cbb-3811cbb98edb" absoluteBounds="6.375, 0.75, 2, 1.0016910807291666">
-      <DataClassMoniker Name="/ChequeDBDataContext/IdType1" />
-      <nestedChildShapes>
-        <elementListCompartment Id="bc54df7e-c7ba-4d05-a402-60bb9f406b92" absoluteBounds="6.39, 1.21, 1.9700000000000002, 0.44169108072916669" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="48b98101-bc31-4775-980f-e75e30aed5b8" absoluteBounds="5.375, 6.25, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/ChequeDBDataContext/Disbursed" />
-      <nestedChildShapes>
-        <elementListCompartment Id="669158d7-8955-43bc-ba6d-02846b32fb1e" absoluteBounds="5.39, 6.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(2.75 : 5.20899367280148); (3.04166666666667 : 5.20899367280148 : JumpStart); (3.20833333333333 : 5.20899367280148 : JumpEnd); (4.41666666666667 : 5.20899367280148 : JumpStart); (4.58333333333333 : 5.20899367280148 : JumpEnd); (6.46875 : 5.20899367280148); (6.46875 : 6.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ChequeDBDataContext/User/User_Disbursed" />
-      <nodes>
-        <classShapeMoniker Id="3114f043-a20e-4aab-aca0-0b0c16a20dec" />
-        <classShapeMoniker Id="48b98101-bc31-4775-980f-e75e30aed5b8" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 6.90907348632813); (3.04166666666667 : 6.90907348632813 : JumpStart); (3.20833333333333 : 6.90907348632813 : JumpEnd); (3.22916666666667 : 6.90907348632813 : JumpStart); (3.39583333333333 : 6.90907348632813 : JumpEnd); (4.41666666666667 : 6.90907348632813 : JumpStart); (4.58333333333333 : 6.90907348632813 : JumpEnd); (5.375 : 6.90907348632813)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ChequeDBDataContext/Voucher/Voucher_Disbursed" />
-      <nodes>
-        <classShapeMoniker Id="844ed361-85ba-4302-869d-7a9b1e0f2607" />
-        <classShapeMoniker Id="48b98101-bc31-4775-980f-e75e30aed5b8" />
       </nodes>
     </associationConnector>
     <classShape Id="9631fde1-1067-4521-88ea-dbc471848ccf" absoluteBounds="6.75, 8.5, 2, 1.5785953776041666">
@@ -131,17 +59,83 @@
         <elementListCompartment Id="be4c7e87-71cc-4e75-af0d-570ae155f510" absoluteBounds="6.765, 8.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7.0625 : 8.5); (7.0625 : 7.82859537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <classShape Id="b23f1da7-daaf-490a-98f2-3407a56316c5" absoluteBounds="3.5, 4.875, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/ChequeDBDataContext/Authorized" />
+      <nestedChildShapes>
+        <elementListCompartment Id="35f9e85e-82f1-4c09-a855-25d3756a176c" absoluteBounds="3.515, 5.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="533e41ff-52f9-40df-8440-dc0d5db60821" absoluteBounds="9.5, 5.875, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/ChequeDBDataContext/Disbursed" />
+      <nestedChildShapes>
+        <elementListCompartment Id="abfea056-5555-460d-a49e-2c87fc544dd3" absoluteBounds="9.515, 6.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0d50049d-e2eb-45c8-89f4-bf5d7dd2a47a" absoluteBounds="3.5, 7.875, 2, 1.7708968098958335">
+      <DataClassMoniker Name="/ChequeDBDataContext/Prepared" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a9b8e3a0-6d5a-46ff-8c30-e3f917dcfa93" absoluteBounds="3.515, 8.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 5.07294840494792); (3.04166666666667 : 5.07294840494792 : JumpStart); (3.20833333333333 : 5.07294840494792 : JumpEnd); (3.5 : 5.07294840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ChequeDBDataContext/User/User_Authorized" />
+      <nodes>
+        <classShapeMoniker Id="3114f043-a20e-4aab-aca0-0b0c16a20dec" />
+        <classShapeMoniker Id="b23f1da7-daaf-490a-98f2-3407a56316c5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 6.6868490375601); (3.06607443490112 : 6.37077460265897 : JumpStart); (3.24642556509888 : 6.19042347246122 : JumpEnd); (3.3125 : 6.1243490375601); (3.3125 : 6.83339680989583); (3.5 : 6.64589680989583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ChequeDBDataContext/Voucher/Voucher_Authorized" />
+      <nodes>
+        <classShapeMoniker Id="844ed361-85ba-4302-869d-7a9b1e0f2607" />
+        <classShapeMoniker Id="b23f1da7-daaf-490a-98f2-3407a56316c5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.75 : 8.5); (7.75 : 6.76044840494792); (9.5 : 6.76044840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ChequeDBDataContext/Payee/Payee_Disbursed" />
       <nodes>
         <classShapeMoniker Id="9631fde1-1067-4521-88ea-dbc471848ccf" />
-        <classShapeMoniker Id="48b98101-bc31-4775-980f-e75e30aed5b8" />
+        <classShapeMoniker Id="533e41ff-52f9-40df-8440-dc0d5db60821" />
       </nodes>
     </associationConnector>
-    <classShape Id="1d306d38-b244-410c-9977-a907b8e4842d" absoluteBounds="9.375, 5, 2, 2.9247054036458331">
+    <associationConnector edgePoints="[(2.75 : 4.34817876953125); (3.04166666666667 : 4.34817876953125 : JumpStart); (3.20833333333333 : 4.34817876953125 : JumpEnd); (10.5 : 4.34817876953125); (10.5 : 5.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ChequeDBDataContext/User/User_Disbursed" />
+      <nodes>
+        <classShapeMoniker Id="3114f043-a20e-4aab-aca0-0b0c16a20dec" />
+        <classShapeMoniker Id="533e41ff-52f9-40df-8440-dc0d5db60821" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.26567260742187); (3.04166666666667 : 7.26567260742187 : JumpStart); (3.27083333333333 : 7.26567260742187 : JumpEnd); (7.66666666666667 : 7.26567260742187 : JumpStart); (7.83333333333333 : 7.26567260742187 : JumpEnd); (9.5 : 7.26567260742187)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ChequeDBDataContext/Voucher/Voucher_Disbursed" />
+      <nodes>
+        <classShapeMoniker Id="844ed361-85ba-4302-869d-7a9b1e0f2607" />
+        <classShapeMoniker Id="533e41ff-52f9-40df-8440-dc0d5db60821" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 5.20959553570713); (3.06607443490112 : 5.52566997060825 : JumpStart); (3.18392556509888 : 5.64352110080601 : JumpEnd); (3.1875 : 5.64709553570713); (3.1875 : 8.76044840494792); (3.5 : 8.76044840494792)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ChequeDBDataContext/User/User_Prepared" />
+      <nodes>
+        <classShapeMoniker Id="3114f043-a20e-4aab-aca0-0b0c16a20dec" />
+        <classShapeMoniker Id="0d50049d-e2eb-45c8-89f4-bf5d7dd2a47a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 8.0112939453125); (1.75 : 9.23442510742188); (3.04166666666667 : 9.23442510742188 : JumpStart); (3.20833333333333 : 9.23442510742188 : JumpEnd); (3.5 : 9.23442510742188)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ChequeDBDataContext/Voucher/Voucher_Prepared" />
+      <nodes>
+        <classShapeMoniker Id="844ed361-85ba-4302-869d-7a9b1e0f2607" />
+        <classShapeMoniker Id="0d50049d-e2eb-45c8-89f4-bf5d7dd2a47a" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="646fcb13-943a-4bfd-97f4-bad56eda29c1" absoluteBounds="6.375, 0.75, 2, 2.9247054036458326">
       <DataClassMoniker Name="/ChequeDBDataContext/Cheque" />
       <nestedChildShapes>
-        <elementListCompartment Id="ea347037-fc6f-4bc9-bd18-96e791e3ac4f" absoluteBounds="9.39, 5.46, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="c680beb1-6a64-4e22-bbf2-15da8788f221" absoluteBounds="6.39, 1.21, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="97df9c20-ee37-4773-a381-e347cb16b43e" absoluteBounds="9.375, 8.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ChequeDBDataContext/Distribution" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d654639a-2eca-405c-a91e-0be6578befdd" absoluteBounds="9.39, 9.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
