@@ -162,19 +162,27 @@ namespace CheckManager
 			}
 		}
 		
-		public System.Data.Linq.Table<Cheque> Cheques
-		{
-			get
-			{
-				return this.GetTable<Cheque>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Distribution> Distributions
 		{
 			get
 			{
 				return this.GetTable<Distribution>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Account> Accounts
+		{
+			get
+			{
+				return this.GetTable<Account>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Cheque> Cheques
+		{
+			get
+			{
+				return this.GetTable<Cheque>();
 			}
 		}
 	}
@@ -2435,6 +2443,140 @@ namespace CheckManager
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Distribution")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
+	public partial class Distribution
+	{
+		
+		private int _VoucherNumber;
+		
+		private string _AccountNumber;
+		
+		private string _AccountDescription;
+		
+		private System.Nullable<decimal> _Amount;
+		
+		public Distribution()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VoucherNumber", DbType="Int NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+		public int VoucherNumber
+		{
+			get
+			{
+				return this._VoucherNumber;
+			}
+			set
+			{
+				if ((this._VoucherNumber != value))
+				{
+					this._VoucherNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountNumber", DbType="VarChar(8)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+		public string AccountNumber
+		{
+			get
+			{
+				return this._AccountNumber;
+			}
+			set
+			{
+				if ((this._AccountNumber != value))
+				{
+					this._AccountNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountDescription", DbType="Char(30) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+		public string AccountDescription
+		{
+			get
+			{
+				return this._AccountDescription;
+			}
+			set
+			{
+				if ((this._AccountDescription != value))
+				{
+					this._AccountDescription = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Decimal(11,2)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+		public System.Nullable<decimal> Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this._Amount = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Accounts")]
+	[global::System.Runtime.Serialization.DataContractAttribute()]
+	public partial class Account
+	{
+		
+		private string _AccountNumber;
+		
+		private string _AccountDescription;
+		
+		public Account()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountNumber", DbType="VarChar(8)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+		public string AccountNumber
+		{
+			get
+			{
+				return this._AccountNumber;
+			}
+			set
+			{
+				if ((this._AccountNumber != value))
+				{
+					this._AccountNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountDescription", DbType="Char(30) NOT NULL", CanBeNull=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+		public string AccountDescription
+		{
+			get
+			{
+				return this._AccountDescription;
+			}
+			set
+			{
+				if ((this._AccountDescription != value))
+				{
+					this._AccountDescription = value;
+				}
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Cheques")]
 	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Cheque
@@ -2461,6 +2603,8 @@ namespace CheckManager
 		private string _VendorNumber;
 		
 		private string _VendorName;
+		
+		private string _CashAccount;
 		
 		public Cheque()
 		{
@@ -2652,91 +2796,20 @@ namespace CheckManager
 				}
 			}
 		}
-
-	    
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Distribution")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
-	public partial class Distribution
-	{
 		
-		private int _VoucherNumber;
-		
-		private string _AccountNumber;
-		
-		private string _AccountDescription;
-		
-		private System.Nullable<decimal> _Amount;
-		
-		public Distribution()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VoucherNumber", DbType="Int NOT NULL")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-		public int VoucherNumber
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CashAccount", DbType="VarChar(8)")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=12)]
+		public string CashAccount
 		{
 			get
 			{
-				return this._VoucherNumber;
+				return this._CashAccount;
 			}
 			set
 			{
-				if ((this._VoucherNumber != value))
+				if ((this._CashAccount != value))
 				{
-					this._VoucherNumber = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountNumber", DbType="VarChar(8)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-		public string AccountNumber
-		{
-			get
-			{
-				return this._AccountNumber;
-			}
-			set
-			{
-				if ((this._AccountNumber != value))
-				{
-					this._AccountNumber = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountDescription", DbType="Char(30) NOT NULL", CanBeNull=false)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-		public string AccountDescription
-		{
-			get
-			{
-				return this._AccountDescription;
-			}
-			set
-			{
-				if ((this._AccountDescription != value))
-				{
-					this._AccountDescription = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Decimal(11,2)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-		public System.Nullable<decimal> Amount
-		{
-			get
-			{
-				return this._Amount;
-			}
-			set
-			{
-				if ((this._Amount != value))
-				{
-					this._Amount = value;
+					this._CashAccount = value;
 				}
 			}
 		}

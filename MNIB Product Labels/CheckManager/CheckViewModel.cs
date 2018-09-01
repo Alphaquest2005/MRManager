@@ -13,7 +13,7 @@ using System.Windows.Input;
 using CheckManager;
 using CheckManager.Annotations;
 using Core.Common.UI;
-
+using MoreLinq;
 
 
 namespace MNIB_Distribution_Manager
@@ -26,6 +26,9 @@ namespace MNIB_Distribution_Manager
         private ObservableCollection<Cheque> _cheques;
         private ObservableCollection<Payee> _payees;
         private DateTime _chequeDate;
+        private string _distributionAccount;
+        private ObservableCollection<Account> _accounts = new ObservableCollection<Account>();
+        private string _cashAccount;
 
         public ObservableCollection<Cheque> Cheques
         {
@@ -41,10 +44,9 @@ namespace MNIB_Distribution_Manager
         static CheckViewModel()
         {
             instance = new CheckViewModel();
-           
+            
 
         }
-
 
         public static CheckViewModel Instance
         {
@@ -76,10 +78,10 @@ namespace MNIB_Distribution_Manager
                     sourceCheques = sourceCheques.Where(x => x.ChequeDate.Value.Date == ChequeDate.Date);
                 }
 
-                var res = (from cheque in sourceCheques
+                var res = (from cheque in string.IsNullOrEmpty(CashAccount) ? sourceCheques : sourceCheques.Where(x => x.CashAccount == CashAccount)
                     join v in ctx.Vouchers on cheque.VoucherNumber.ToString() equals v.VoucherNumber into comps
                     from voucher in comps.DefaultIfEmpty()
-                    join d in ctx.Distributions on cheque.VoucherNumber equals d.VoucherNumber into prods
+                    join d in string.IsNullOrEmpty(DistributionAccount) ? ctx.Distributions: ctx.Distributions.Where(x => x.AccountNumber == DistributionAccount) on cheque.VoucherNumber equals d.VoucherNumber into prods
                     from distribution in prods
                          select new  Cheque()
                     {
@@ -95,8 +97,9 @@ namespace MNIB_Distribution_Manager
                         Vendor = cheque.Vendor,
                         Voucher = voucher ?? new Voucher(),
                         Distribution = prods.ToList(),
-                        VoucherNumber = cheque.VoucherNumber
-                    }).Take(100).ToList();
+                        VoucherNumber = cheque.VoucherNumber,
+                        CashAccount = cheque.CashAccount
+                    }).DistinctBy(z => z.VoucherNumber).Take(25).ToList();
 
                 switch (ChequeStatus)
                 {
@@ -106,11 +109,11 @@ namespace MNIB_Distribution_Manager
                     case "UnAuthorized":
                         res = res.Where(x => x.Voucher != null && x.Voucher.Prepared != null && x.Voucher.Prepared.Signatures != x.Voucher.Authorizeds.Count).ToList();
                         break;
-                    case "Authorized":
-                        res = res.Where(x => x.Voucher != null && x.Voucher.Prepared != null && x.Voucher.Prepared.Signatures == x.Voucher.Authorizeds.Count && x.Voucher.Disbursed == null).ToList();
-                        break;
+                    //case "Authorized":
+                    //    res = res.Where(x => x.Voucher != null && x.Voucher.Prepared != null && x.Voucher.Prepared.Signatures == x.Voucher.Authorizeds.Count && x.Voucher.Disbursed == null).ToList();
+                    //    break;
                     case "UnDisbursed":
-                        res = res.Where(x => x.Voucher != null && x.Voucher.Prepared != null && x.Voucher.Prepared.Signatures == x.Voucher.Authorizeds.Count && x.Voucher.Disbursed != null && x.Voucher.Disbursed.PayeeId == 0).ToList();
+                        res = res.Where(x => x.Voucher != null && x.Voucher.Prepared != null && x.Voucher.Prepared.Signatures == x.Voucher.Authorizeds.Count && (x.Voucher.Disbursed == null || x.Voucher.Disbursed != null && x.Voucher.Disbursed.PayeeId == 0)).ToList();
                         break;
                     case "Disbursed":
                         res = res.Where(x => x.Voucher != null && x.Voucher.Prepared != null && x.Voucher.Prepared.Signatures == x.Voucher.Authorizeds.Count && x.Voucher.Disbursed != null && x.Voucher.Disbursed.PayeeId != 0).ToList();
@@ -124,12 +127,6 @@ namespace MNIB_Distribution_Manager
         }
 
 
-        //if (Prepared != null) return "Prepared";
-        //if(Prepared != null && Prepared.Signatures != Authorizeds.Count) return "UnAuthorized";
-        //if (Prepared != null && Prepared.Signatures == Authorizeds.Count) return "Authorized";
-        //if (Prepared != null && Prepared.Signatures == Authorizeds.Count && Disbursed == null) return "UnDisbursed";
-        //if (Prepared != null && Prepared.Signatures == Authorizeds.Count && Disbursed != null) return "Disbursed";
-        //return "UnPrepared";
         public Cheque CurrentCheque
         {
             get => _currentCheque;
@@ -155,8 +152,18 @@ namespace MNIB_Distribution_Manager
 
         public CheckViewModel()
         {
+
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                using (var ctx = new ChequeDBDataContext())
+                {
+                    Accounts = new ObservableCollection<Account>(ctx.Accounts.ToList());
+                }
+            });
+
             Cheques = new ObservableCollection<Cheque>();
-            ChequeDate = DateTime.Parse("1/1/1753 12:00:00 AM");
+            ChequeDate = DateTime.Now.Date;
             GetCheques();
         }
 
@@ -200,6 +207,41 @@ namespace MNIB_Distribution_Manager
             }
         }
 
+        public string DistributionAccount
+        {
+            get => _distributionAccount;
+            set
+            {
+                if (Equals(value, _distributionAccount)) return;
+                _distributionAccount = value;
+                GetCheques();
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<Account> Accounts
+        {
+            get => _accounts;
+            set
+            {
+                if (Equals(value, _accounts)) return;
+                _accounts = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string CashAccount
+        {
+            get => _cashAccount;
+            set
+            {
+                if (Equals(value, _cashAccount)) return;
+                _cashAccount = value;
+                GetCheques();
+                OnPropertyChanged();
+            }
+        }
+
         public void Print()
         {
             throw new NotImplementedException();
@@ -207,6 +249,9 @@ namespace MNIB_Distribution_Manager
 
         public void ProcessCheque()
         {
+            if (CheckViewModel.Instance.User.UserPermissions.All(x =>
+                x.Permission.Name != null && x.Permission.Name != CurrentCheque.Voucher.Action.ToString())) return;
+
             switch (CurrentCheque.Voucher.Action)
             {
                 case "Prepare":
@@ -343,14 +388,34 @@ namespace MNIB_Distribution_Manager
             }
         }
 
-        public void SaveVoucher()
+        public void SaveNotes()
         {
-            //using (var ctx = new ChequeDBDataContext())
-            //{
-            //    var res = ctx.Prepareds.First(x => x.Id == CurrentCheque.Voucher.Prepared.Id);
-            //    res.Signatures = CurrentCheque.Voucher.Prepared.Signatures;
-            //    ctx.SubmitChanges();
-            //}
+            using (var ctx = new ChequeDBDataContext())
+            {
+                if (CurrentCheque.Voucher.Prepared != null)
+                {
+                    var res = ctx.Prepareds.First(x => x.Id == CurrentCheque.Voucher.Prepared.Id);
+                    if (res.Notes != CurrentCheque.Voucher.Prepared.Notes)
+                        res.Notes = CurrentCheque.Voucher.Prepared.Notes;
+                   
+                }
+
+                foreach (var authorized in CurrentCheque.Voucher.Authorizeds)
+                {
+                    var res = ctx.Authorizeds.First(x => x.Id == authorized.Id);
+                    if (res.Notes != authorized.Notes)
+                        res.Notes = authorized.Notes;
+                }
+
+                if (CurrentCheque.Voucher.Disbursed != null)
+                {
+                    var res = ctx.Disburseds.First(x => x.Id == CurrentCheque.Voucher.Disbursed.Id);
+                    if (res.Notes != CurrentCheque.Voucher.Disbursed.Notes)
+                        res.Notes = CurrentCheque.Voucher.Disbursed.Notes;
+
+                }
+                ctx.SubmitChanges();
+            }
         }
     }
 }

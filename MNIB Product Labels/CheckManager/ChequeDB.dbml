@@ -95,6 +95,20 @@
       <Association Name="Voucher_Prepared" Member="Voucher" ThisKey="Id" OtherKey="Id" Type="Voucher" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Distribution" Member="Distributions">
+    <Type Name="Distribution">
+      <Column Name="VoucherNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AccountNumber" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="AccountDescription" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Accounts" Member="Accounts">
+    <Type Name="Account">
+      <Column Name="AccountNumber" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="AccountDescription" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.Cheques" Member="Cheques">
     <Type Name="Cheque">
       <Column Name="Vendor" Type="System.String" DbType="VarChar(70) NOT NULL" CanBeNull="false" />
@@ -108,14 +122,7 @@
       <Column Name="TransactionReference" Type="System.String" DbType="Char(25)" CanBeNull="true" />
       <Column Name="VendorNumber" Type="System.String" DbType="Char(6)" CanBeNull="true" />
       <Column Name="VendorName" Type="System.String" DbType="Char(25) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Distribution" Member="Distributions">
-    <Type Name="Distribution">
-      <Column Name="VoucherNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="AccountNumber" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
-      <Column Name="AccountDescription" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
-      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
+      <Column Name="CashAccount" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

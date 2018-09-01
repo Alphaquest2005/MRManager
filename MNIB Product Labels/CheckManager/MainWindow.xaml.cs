@@ -57,8 +57,8 @@ namespace CheckManager
 
         private void CloseWindow(object sender, MouseButtonEventArgs e)
         {
-            
-           this.Close();
+            Application.Current.Shutdown();
+           
         }
 
        
@@ -111,7 +111,7 @@ namespace CheckManager
 
         private void ProcessCheque(object sender, MouseButtonEventArgs e)
         {
-            im.CurrentCheque = ((sender as FrameworkElement).DataContext as Cheque);
+           
             im.ProcessCheque();
             //FrameworkElement rpt = (FrameworkElement)DailyReportGD;
             //PrintClass.Print(ref rpt);
@@ -162,11 +162,15 @@ namespace CheckManager
             im.ChequeDate = DateTime.Parse("1/1/1753 12:00:00 AM");
             im.ChequeStatus = null;
             im.SearchTxt = "";
+            im.DistributionAccount = "";
+            im.CashAccount = "";
         }
 
         private void SaveVoucher(object sender, TextChangedEventArgs e)
         {
-            im.SaveVoucher();
+            if (!(sender is TextBox textBox)) return;
+            textBox.GetBindingExpression(TextBox.TextProperty)?.UpdateSource();
+            im.SaveNotes();
         }
     }
 }
