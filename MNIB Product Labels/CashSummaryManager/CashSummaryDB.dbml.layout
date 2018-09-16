@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 18.25, 11.625" name="CashSummaryDB">
+  <DataContextMoniker Name="/CashSummaryDBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="d4364b16-7e6e-4c1f-ab66-0a6ffe5303c3" absoluteBounds="0.75, 0.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/Permission" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bb38ca2b-0624-44e9-aa8e-b37f6c040fe9" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fac7c25e-6b55-481e-a237-35a7f98f01fd" absoluteBounds="0.75, 3.5, 2, 1.7708968098958335">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a1237ac8-4d51-49df-9198-677d9233dc67" absoluteBounds="0.765, 3.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0fa3b6e8-6043-47d7-90b2-15ccce07259f" absoluteBounds="3.5, 5.375, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/UserLog" />
+      <nestedChildShapes>
+        <elementListCompartment Id="01d86e1c-58c7-431a-9d87-5d07a94854db" absoluteBounds="3.515, 5.835, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f22d26d2-b2da-469c-a966-9ffeaa1f459d" absoluteBounds="3.5, 2.625, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/UserPermission" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c70673ed-1968-451a-bd3b-6db9e456608e" absoluteBounds="3.515, 3.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.75 : 5.27089680989583); (1.75 : 6.45274983723958); (3.5 : 6.45274983723958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CashSummaryDBDataContext/User/User_UserLog" />
+      <nodes>
+        <classShapeMoniker Id="fac7c25e-6b55-481e-a237-35a7f98f01fd" />
+        <classShapeMoniker Id="0fa3b6e8-6043-47d7-90b2-15ccce07259f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 1.34699625651042); (4.5 : 1.34699625651042); (4.5 : 2.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CashSummaryDBDataContext/Permission/Permission_UserPermission" />
+      <nodes>
+        <classShapeMoniker Id="d4364b16-7e6e-4c1f-ab66-0a6ffe5303c3" />
+        <classShapeMoniker Id="f22d26d2-b2da-469c-a966-9ffeaa1f459d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 3.75564697265625); (3.5 : 3.75564697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CashSummaryDBDataContext/User/User_UserPermission" />
+      <nodes>
+        <classShapeMoniker Id="fac7c25e-6b55-481e-a237-35a7f98f01fd" />
+        <classShapeMoniker Id="f22d26d2-b2da-469c-a966-9ffeaa1f459d" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="d7c96c96-71de-4735-85f5-add05a6e4f0a" absoluteBounds="6.75, 0.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/Cashier" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0002bd79-7c9c-4c40-aeef-5f17035500ed" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6d74488d-dd8e-4c9f-9248-4d876620d9bc" absoluteBounds="6.75, 3.75, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/Drawer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dfbc1366-66b7-43ef-b22d-f2a63f5ccc73" absoluteBounds="6.765, 4.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7635e69e-6fa0-41fa-8221-b8fe1f42b6cd" absoluteBounds="9.75, 0.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/PayCode" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3bc34125-816c-4090-ba06-16d2ec923b4c" absoluteBounds="9.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="58852bf6-30c1-4810-b086-58086132b0c6" absoluteBounds="9.75, 2.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/Store" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3380944a-8bb7-4d14-b304-880bb8d6f69e" absoluteBounds="9.765, 3.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="09fb713e-e46b-4905-bbfb-35431b26172f" absoluteBounds="3.75, 9.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/Supervisor" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c5c70c5f-d385-4f33-844a-a9be9ce72b08" absoluteBounds="3.765, 10.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="41fce885-b329-4b26-be9b-0b291a95b044" absoluteBounds="15.5, 7.375, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/CashComponent" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fab17015-052a-41ae-9b64-336cea61b243" absoluteBounds="15.515, 7.8350000000000009, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6329a054-652a-464c-adc0-2a4f68c84f70" absoluteBounds="12.125, 4.875, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/CashType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bc304628-9c70-48e4-83cb-dd873c76a90a" absoluteBounds="12.14, 5.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c3cac5d9-326d-4c2d-b31d-0670b8bc9262" absoluteBounds="14.875, 4.75, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/CashTypeComponent" />
+      <nestedChildShapes>
+        <elementListCompartment Id="94f9dd9e-cb9d-4bf7-8667-483ce27dcffa" absoluteBounds="14.89, 5.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(16.1875 : 7.375); (16.1875 : 6.1362939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CashSummaryDBDataContext/CashComponent/CashComponent_CashTypeComponent" />
+      <nodes>
+        <classShapeMoniker Id="41fce885-b329-4b26-be9b-0b291a95b044" />
+        <classShapeMoniker Id="c3cac5d9-326d-4c2d-b31d-0670b8bc9262" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(14.125 : 5.47199625651042); (14.875 : 5.47199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CashSummaryDBDataContext/CashType/CashType_CashTypeComponent" />
+      <nodes>
+        <classShapeMoniker Id="6329a054-652a-464c-adc0-2a4f68c84f70" />
+        <classShapeMoniker Id="c3cac5d9-326d-4c2d-b31d-0670b8bc9262" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="12ce5a2a-7cf1-4807-b4d5-a59b3538fa02" absoluteBounds="7.875, 6.25, 2, 2.9247054036458331">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/DrawerSession" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c8b9e12c-bbdb-47ab-ae97-9b3ec4cbe5f5" absoluteBounds="7.8900000000000006, 6.71, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5b5dc536-254a-46bd-ab30-60680df8b84c" absoluteBounds="12, 7, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/DrawSessionDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d73acd7a-4f6c-4064-a798-e38f6d7ce080" absoluteBounds="12.015, 7.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5c0e510b-a602-4586-a42b-17675033f42f" absoluteBounds="16, 2.625, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/DrawerCashDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dbdc7548-b867-4449-b228-12963d109bd0" absoluteBounds="16.015, 3.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(16.4375 : 4.75); (16.4375 : 4.39589680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CashSummaryDBDataContext/CashTypeComponent/CashTypeComponent_DrawerCashDetail" />
+      <nodes>
+        <classShapeMoniker Id="c3cac5d9-326d-4c2d-b31d-0670b8bc9262" />
+        <classShapeMoniker Id="5c0e510b-a602-4586-a42b-17675033f42f" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
