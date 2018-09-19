@@ -22,7 +22,7 @@ namespace CashSummaryManager
         {
             var exception = e.Exception;
             do
-                exception = exception.InnerException;
+               if(exception.InnerException != null) exception = exception.InnerException;
             while (exception.InnerException != null);
 
             MessageBox.Show(exception.Message + "|" + Properties.Settings.Default.CashSummaryConnectionString);
@@ -74,6 +74,46 @@ namespace CashSummaryManager
         private void ToDrawerSelector(object sender, RoutedEventArgs e)
         {
             ContentControl.Content = DrawerSelector.Instance;
+        }
+
+        private void UpdateRow1(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
+        {
+            //find this checkbox parent until getting to listitem layer.
+           
+            CashBreakDown.Instance.SaveRow((sender as FrameworkElement).DataContext as DrawerCashDetail);
+        }
+
+        private void AddRow(object sender, RoutedEventArgs e)
+        {
+            CashBreakDown.Instance.AddRow();
+        }
+
+        private void DeleteRow(object sender, RoutedEventArgs e)
+        {
+            CashBreakDown.Instance.DeleteRow();
+        }
+
+        private void SelectCurrentItem(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            ListViewItem item = (ListViewItem)sender;
+            item.IsSelected = true;
+        }
+
+        private void UpdateRow(object sender, TextChangedEventArgs e)
+        {
+            CashBreakDown.Instance.SaveRow((sender as FrameworkElement).DataContext as DrawerCashDetail);
+        }
+
+        private void SelectCurrentItem(object sender, MouseButtonEventArgs e)
+        {
+            ListViewItem item = (ListViewItem)sender;
+            item.IsSelected = true;
+        }
+
+
+        private void UpdateRow(object sender, RoutedEventArgs e)
+        {
+            CashBreakDown.Instance.SaveRow((sender as FrameworkElement).DataContext as DrawerCashDetail);
         }
     }
 }

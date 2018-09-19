@@ -13,7 +13,8 @@ namespace CashSummaryManager
 
             options.LoadWith<DrawerCashDetail>(p => p.CashTypeComponent);
             options.LoadWith<CashTypeComponent>(p => p.CashComponent);
-            options.LoadWith<CashType>(p => p.CashTypeComponents);
+            options.LoadWith<CashTypeComponent>(p => p.CashType);
+           // options.LoadWith<CashType>(p => p.CashTypeComponents);
             
 
             LoadOptions = options;

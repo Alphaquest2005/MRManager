@@ -26,52 +26,143 @@
     <Window.Resources>
         <x:Static x:Key="DrawerSelectorDataSource" Member="viewModels:DrawerSelector.Instance" />
         <x:Static x:Key="BaseViewModelDataSource" Member="cashSummaryManager:BaseViewModel.Instance" />
-
+        <x:Static x:Key="CashBreakDownDataSource" Member="viewModels:CashBreakDown.Instance" />
+        
+        
         <DataTemplate DataType="{x:Type viewModels:DrawerSelector}">
             <Grid>
                 <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Trade Date" />
-                        <DatePicker SelectedDate="{Binding TradeDate}"/>
+                    <StackPanel Orientation="Horizontal" Width="450" >
+                        <TextBlock Text="Trade Date:" Width="120" TextAlignment="Right" FontSize="20"
+                                   FontWeight="Bold"
+                                   Foreground="#FF14520D" Margin="10" />
+                        <DatePicker SelectedDate="{Binding TradeDate}" Width="151"  FontSize="20" Margin="10" MinWidth="300"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Store" />
+                    <StackPanel Orientation="Horizontal" Width="450">
+                        <TextBlock Text="Store:" Width="120" TextAlignment="Right" FontSize="20"
+                                   FontWeight="Bold"
+                                   Foreground="#FF14520D" Margin="10"/>
                         <ComboBox ItemsSource="{Binding Stores, Source={StaticResource BaseViewModelDataSource}}"
-                                  SelectedItem="{Binding Store}"
-                                  DisplayMemberPath="Name"/>
+                          SelectedItem="{Binding Store}"
+                          DisplayMemberPath="Name" Width="125"  FontSize="20" Margin="10" MinWidth="300"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Drawer" />
+                    <StackPanel Orientation="Horizontal" Width="450">
+                        <TextBlock Text="Drawer:" Width="120" TextAlignment="Right" FontSize="20"
+                                   FontWeight="Bold"
+                                   Foreground="#FF14520D" Margin="10" />
                         <ComboBox ItemsSource="{Binding Drawers, Source={StaticResource BaseViewModelDataSource}}"
-                                  SelectedItem="{Binding Drawer}"
-                                  DisplayMemberPath="Name"/>
+                          SelectedItem="{Binding Drawer}"
+                          DisplayMemberPath="Name" Width="124" FontSize="20" Margin="10" MinWidth="300"/>
                     </StackPanel>
-                    <DataGrid ItemsSource="{Binding DrawerSessions}"
-                             SelectedItem="{Binding DrawerSession}" AutoGenerateColumns="True" />
-                    <StackPanel Orientation="Horizontal">
-                        <Button Content="Back"/>
-                        <Button Content="Next" Click="ButtonBase_OnClick" IsEnabled="{Binding HasSelectedDrawerSession}" />
+                    <ListView ItemsSource="{Binding DrawerSessions}"
+                      SelectedItem="{Binding DrawerSession}" Width="1000" MinHeight="350" Margin="10">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Drawer" DisplayMemberBinding="{Binding Drawer}" Width="150" />
+                                <GridViewColumn Header="Drawer Open" DisplayMemberBinding="{Binding OpenDateTime, StringFormat=dd-MMM-yyyy hh:mm:ss tt}" Width="150" />
+                                <GridViewColumn Header="Drawer Close" DisplayMemberBinding="{Binding CloseDateTime, StringFormat=dd-MMM-yyyy hh:mm:ss tt}" Width="150" />
+                                <GridViewColumn Header="Supervisor" DisplayMemberBinding="{Binding Supervisor}" Width="240" />
+                                <GridViewColumn Header="Cashier" DisplayMemberBinding="{Binding Cashier}" Width="200" />
+
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Width="400" >
+
+                        <Button Content="Next" Click="ButtonBase_OnClick" IsEnabled="{Binding HasSelectedDrawerSession}" FontSize="20" HorizontalAlignment="Right" Width="100" Margin="10"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModels:CashBreakDown}">
             <Grid>
-                <StackPanel>
-                    <TextBlock Text="Cash BreakDown"/>
-                    <DataGrid ItemsSource="{Binding DrawerSessionDetails, Mode=OneWay}"
-                              SelectedItem="{Binding DrawSessionDetail}"
-                               AutoGenerateColumns="True" />
-                    <TextBlock Text="Cash Details"/>
-                    <DataGrid ItemsSource="{Binding DrawCashDetails, Mode=OneWay}"
-                              AutoGenerateColumns="True" />
-                    <StackPanel Orientation="Horizontal">
-                        <Button Content="Back" Click="ToDrawerSelector"/>
-                        <Button Content="Next"  />
-                    </StackPanel>
-                </StackPanel>
+                <Grid Width="1000" Height="500">
+
+                    <TextBlock Text="Cash BreakDown" Margin="31,10,812,464" FontWeight="Bold" Foreground="#FF14520D" FontSize="20" />
+                    <ListView ItemsSource="{Binding DrawerSessionDetails, Mode=OneWay}"
+                              SelectedItem="{Binding DrawSessionDetail}"  Margin="31,71,655,200" 
+                              Background="#7FFBFFD1">
+                        <!--<ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Pay Code" DisplayMemberBinding="{Binding PayCode}" Width="150" />
+                                <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding Amount, StringFormat=c}" Width="150" />
+                                    
+                            </GridView>
+                        </ListView.View>-->
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Width="Auto" Height="25">
+
+                                    <TextBlock Text="{Binding PayCode}" FontWeight="Bold" Width="150" Margin="10,0,0,0"  />
+                                    <TextBlock Text="{Binding Amount}" FontWeight="Bold"  Width="100" Margin="10,0,0,0"   />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    </ListView>
+
+                    <TextBlock Text="Cash Details" Margin="394,10,456,455" FontWeight="Bold" Foreground="#FF14520D" FontSize="20" />
+                    <ListView SelectionMode="Single" ItemsSource="{Binding DrawCashDetails, Mode=OneWay}"   SelectedItem="{Binding DrawCashDetail}" Margin="394,71,6,109" Width="600" Background="#7FDBF010">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <EventSetter Event="PreviewGotKeyboardFocus" Handler="SelectCurrentItem"/>
+                                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="SelectCurrentItem"/>
+                                <!--<Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="IsSelected" Value="True"/>
+                                    </Trigger>
+                                </Style.Triggers>-->
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Width="Auto" Height="25">
+
+                                    <ComboBox 
+                                        SelectionChanged="UpdateRow1"
+                                        SelectedValue="{Binding CashTypeCompoentId}"
+                                        SelectedItem="{Binding CashTypeComponent}"
+                                        ItemsSource="{Binding CashComponents, Source={StaticResource CashBreakDownDataSource}}" 
+                                        DisplayMemberPath="CashComponentName"
+                                        SelectedValuePath="Id" FontWeight="Bold" Width="150" Margin="10,0,0,0" />
+
+                                    <TextBox Text="{Binding Quantity}" FontWeight="Bold" Width="50" Margin="10,0,0,0" Background="#7F333337" LostFocus="UpdateRow" LostMouseCapture="UpdateRow"  />
+                                    <TextBox Text="{Binding Comments}" FontWeight="Bold"  Width="150" Margin="10,0,0,0" Background="#7F333337" LostFocus="UpdateRow" LostMouseCapture="UpdateRow" />
+
+                                    <TextBlock Text="{Binding Total, StringFormat=c}" FontWeight="Bold" Width="100" Margin="10,0,0,0"  />
+                                    <Button PreviewMouseLeftButtonDown="AddRow"  Width="30" Height="30" >
+                                        <Image Source="Plus_sign.png" />
+                                    </Button>
+                                    <Button PreviewMouseLeftButtonDown="DeleteRow" Width="30" Height="30" >
+                                        <Image Source="DeleteRed.png" />
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    </ListView>
+
+                    <Button Content="Back" Click="ToDrawerSelector" Margin="31,440,919,10" Width="50" Height="50"/>
+                    <Button Content="Print" IsEnabled="{Binding IsBalanced}" Margin="944,440,6,10" Width="50" Height="50" />
+                    <TextBlock Text="Cash Type" Width="150" Margin="394,50,456,434" FontWeight="Bold" Foreground="#FFC8F307" />
+                    <TextBlock Text="Quantity" Width="50" Margin="569,50,381,434" FontWeight="Bold" Foreground="#FFC8F307" />
+                    <TextBlock Text="Comments" Width="150" Margin="655,50,195,434" FontWeight="Bold" Foreground="#FFC8F307" />
+                    <TextBlock Text="Total" Margin="840,50,70,434" FontWeight="Bold" Foreground="#FFC8F307" RenderTransformOrigin="0.444,0.375" />
+
+                    <TextBlock Text="Total" Margin="774,396,165,69" FontWeight="Bold" Foreground="#FFC8F307" FontSize="20" />
+                    <TextBlock Text="{Binding DetailTotal, StringFormat=c}" Margin="840,396,10,69" FontWeight="Bold" Foreground="#FFC8F307" FontSize="20" />
+                    <TextBlock Text="Drawer" Margin="32,315,889,150" FontWeight="Bold" Foreground="#FFC8F307" FontSize="20" />
+                    <TextBlock Text="{Binding SessionTotal, StringFormat=c}" Margin="205,315,655,150" FontWeight="Bold" Foreground="#FFC8F307" FontSize="20" />
+                    <TextBlock Text="{Binding CashTotal, StringFormat=c}" Margin="205,355,655,110" FontWeight="Bold" Foreground="#FFC8F307" FontSize="20" />
+                    <TextBlock Text="{Binding DrawCashDifference, StringFormat=c}" Margin="205,396,655,69" FontWeight="Bold" Foreground="#FFC8F307" FontSize="20" />
+                    <TextBlock Text="Cash" Margin="31,355,911,110" FontWeight="Bold" Foreground="#FFC8F307" FontSize="20" />
+                    <TextBlock Text="Diff:" Margin="31,395,911,70" FontWeight="Bold" Foreground="#FFC8F307" FontSize="20" />
+                    <TextBlock Text="Pay Code" Width="150" Margin="30,50,820,434" FontWeight="Bold" Foreground="#FFC8F307" />
+                    <TextBlock Text="Amount" Width="50" Margin="259,50,691,434" FontWeight="Bold" Foreground="#FFC8F307" />
+
                 </Grid>
-            </DataTemplate>
+            </Grid>
+        </DataTemplate>
 
 
     </Window.Resources>

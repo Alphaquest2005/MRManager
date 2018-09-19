@@ -2160,7 +2160,7 @@ namespace CashSummaryManager
 				{
 					if (this._CashTypeComponent.HasLoadedOrAssignedValue)
 					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					//	throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
 					this.OnCashTypeCompoentIdChanging(value);
 					this.SendPropertyChanging();
