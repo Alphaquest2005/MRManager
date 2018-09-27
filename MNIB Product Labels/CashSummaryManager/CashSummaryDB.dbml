@@ -99,6 +99,36 @@
       <Association Name="CashType_CashTypeComponent" Member="CashType" ThisKey="CashTypeId" OtherKey="Id" Type="CashType" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.DrawerCashDetails" Member="DrawerCashDetails">
+    <Type Name="DrawerCashDetail">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DrawSessionId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CashTypeCompoentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Comments" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="CashTypeComponent_DrawerCashDetail" Member="CashTypeComponent" ThisKey="CashTypeCompoentId" OtherKey="Id" Type="CashTypeComponent" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DrawSessionDetails" Member="DrawSessionDetails">
+    <Type Name="DrawSessionDetail">
+      <Column Name="StoreId" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="DrawId" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="PayCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="DrawSessionId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ActualAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Difference" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DrawerSessionStatus" Member="DrawerSessionStatus">
+    <Type Name="DrawerSessionStatus">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DrawSessionId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntryDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.DrawerSessions" Member="DrawerSessions">
     <Type Name="DrawerSession">
       <Column Name="TradeDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
@@ -112,25 +142,12 @@
       <Column Name="SupervisorId" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="CashierId" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="Drawer" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.DrawSessionDetails" Member="DrawSessionDetails">
-    <Type Name="DrawSessionDetail">
-      <Column Name="StoreId" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="DrawId" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="PayCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="DrawSessionId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(15,2)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.DrawerCashDetails" Member="DrawerCashDetails">
-    <Type Name="DrawerCashDetail">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="DrawSessionId" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="CashTypeCompoentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Quantity" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="Comments" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Association Name="CashTypeComponent_DrawerCashDetail" Member="CashTypeComponent" ThisKey="CashTypeCompoentId" OtherKey="Id" Type="CashTypeComponent" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="StoreName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DebitAccountNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DebitAccountDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="CreditAccountNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CreditAccountDescription" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

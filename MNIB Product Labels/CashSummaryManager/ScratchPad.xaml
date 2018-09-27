@@ -4,9 +4,38 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CheckManager"
+             xmlns:viewModels="clr-namespace:CashSummaryManager.ViewModels"
+             xmlns:cashSummaryManager="clr-namespace:CashSummaryManager"
              mc:Ignorable="d" 
              d:DesignHeight="450" Width="1041.657">
+    <UserControl.Resources>
+        <x:Static x:Key="CashSummaryDataSource" Member="viewModels:CashSummary.Instance" />
+    </UserControl.Resources>
 
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" Width="Auto" Height="25">
 
+            <TextBlock Text="{Binding PayCode}" FontSize="10" Width="60" Margin="10,0,0,0"  />
+            <TextBlock Text="{Binding Amount, StringFormat=c}"  FontSize="10" Width="60" Margin="10,0,0,0"   />
+            <Border Width="Auto" Height="2"/>
+        </StackPanel>
+        <ListBox ItemsSource="{Binding CashDetails}" BorderBrush="{x:Null}" Margin="20,0,0,0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding CashTypeComponent.CashComponentName}" FontSize="10" Width="60" Margin="10,0,0,0"  />
+                            <TextBlock Text="{Binding Quantity, StringFormat=n}" FontSize="10" Width="60" Margin="10,0,0,0"   />
+                            <TextBlock Text="{Binding CashTypeComponent.CashComponent.UnitValue , StringFormat=c}" FontSize="10"  Width="60" Margin="10,0,0,0"   />
+                            <TextBlock Text="{Binding Total , StringFormat=c}" FontSize="10"  Width="60" Margin="10,0,0,0"   />
+
+                        </StackPanel>
+                        <TextBlock Text="{Binding Comments , StringFormat=c}" FontSize="10" Width="60" Margin="10,0,0,0"   />
+                    </StackPanel>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
 
 </UserControl>

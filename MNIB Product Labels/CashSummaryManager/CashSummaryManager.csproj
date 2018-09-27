@@ -75,6 +75,8 @@
       <DependentUpon>ScratchPad.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CashBreakDown.cs" />
+    <Compile Include="ViewModels\CashSummary.cs" />
+    <Compile Include="ViewModels\PrintClass.cs" />
     <Compile Include="ViewModels\DrawerSelector.cs" />
   </ItemGroup>
   <ItemGroup>

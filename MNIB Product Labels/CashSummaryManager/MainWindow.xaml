@@ -27,37 +27,40 @@
         <x:Static x:Key="DrawerSelectorDataSource" Member="viewModels:DrawerSelector.Instance" />
         <x:Static x:Key="BaseViewModelDataSource" Member="cashSummaryManager:BaseViewModel.Instance" />
         <x:Static x:Key="CashBreakDownDataSource" Member="viewModels:CashBreakDown.Instance" />
-        
+        <x:Static x:Key="CashSummaryDataSource" Member="viewModels:CashSummary.Instance" />
         
         <DataTemplate DataType="{x:Type viewModels:DrawerSelector}">
-            <Grid>
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal" Width="450" >
-                        <TextBlock Text="Trade Date:" Width="120" TextAlignment="Right" FontSize="20"
-                                   FontWeight="Bold"
-                                   Foreground="#FF14520D" Margin="10" />
-                        <DatePicker SelectedDate="{Binding TradeDate}" Width="151"  FontSize="20" Margin="10" MinWidth="300"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Width="450">
-                        <TextBlock Text="Store:" Width="120" TextAlignment="Right" FontSize="20"
-                                   FontWeight="Bold"
-                                   Foreground="#FF14520D" Margin="10"/>
-                        <ComboBox ItemsSource="{Binding Stores, Source={StaticResource BaseViewModelDataSource}}"
-                          SelectedItem="{Binding Store}"
-                          DisplayMemberPath="Name" Width="125"  FontSize="20" Margin="10" MinWidth="300"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Width="450">
-                        <TextBlock Text="Drawer:" Width="120" TextAlignment="Right" FontSize="20"
-                                   FontWeight="Bold"
-                                   Foreground="#FF14520D" Margin="10" />
-                        <ComboBox ItemsSource="{Binding Drawers, Source={StaticResource BaseViewModelDataSource}}"
-                          SelectedItem="{Binding Drawer}"
-                          DisplayMemberPath="Name" Width="124" FontSize="20" Margin="10" MinWidth="300"/>
+            <Grid Margin="0,100,0,0" Width="1000">
+                <StackPanel >
+                    <StackPanel  Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Width="350" >
+                            <TextBlock Text="Trade Date:" Width="120" TextAlignment="Right" FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="#FF14520D" Margin="10" />
+                            <DatePicker SelectedDate="{Binding TradeDate}" Width="151"  FontSize="20" Margin="10" MinWidth="200"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Width="300">
+                            <TextBlock Text="Store:" Width="120" TextAlignment="Right" FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="#FF14520D" Margin="10"/>
+                            <ComboBox ItemsSource="{Binding Stores, Source={StaticResource BaseViewModelDataSource}}"
+                        SelectedItem="{Binding Store}"
+                        DisplayMemberPath="Name" Width="150"  FontSize="20" Margin="10" MinWidth="150"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Width="300">
+                            <TextBlock Text="Drawer:" Width="120" TextAlignment="Right" FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="#FF14520D" Margin="10" />
+                            <ComboBox ItemsSource="{Binding Drawers, Source={StaticResource BaseViewModelDataSource}}"
+                        SelectedItem="{Binding Drawer}"
+                        DisplayMemberPath="Name" Width="124" FontSize="20" Margin="10" MinWidth="150"/>
+                        </StackPanel>
                     </StackPanel>
                     <ListView ItemsSource="{Binding DrawerSessions}"
-                      SelectedItem="{Binding DrawerSession}" Width="1000" MinHeight="350" Margin="10">
+                      SelectedItem="{Binding DrawerSession}" Width="1000" MinHeight="300" Margin="10">
                         <ListView.View>
                             <GridView>
+                                <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="75" />
                                 <GridViewColumn Header="Drawer" DisplayMemberBinding="{Binding Drawer}" Width="150" />
                                 <GridViewColumn Header="Drawer Open" DisplayMemberBinding="{Binding OpenDateTime, StringFormat=dd-MMM-yyyy hh:mm:ss tt}" Width="150" />
                                 <GridViewColumn Header="Drawer Close" DisplayMemberBinding="{Binding CloseDateTime, StringFormat=dd-MMM-yyyy hh:mm:ss tt}" Width="150" />
@@ -67,9 +70,9 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Width="400" >
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Width="100" >
 
-                        <Button Content="Next" Click="ButtonBase_OnClick" IsEnabled="{Binding HasSelectedDrawerSession}" FontSize="20" HorizontalAlignment="Right" Width="100" Margin="10"/>
+                        <Button Content="Next" Click="ButtonBase_OnClick" IsEnabled="{Binding HasSelectedDrawerSession}" FontSize="20" HorizontalAlignment="Right" Width="100" Height="50"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
@@ -80,21 +83,18 @@
 
                     <TextBlock Text="Cash BreakDown" Margin="31,10,812,464" FontWeight="Bold" Foreground="#FF14520D" FontSize="20" />
                     <ListView ItemsSource="{Binding DrawerSessionDetails, Mode=OneWay}"
-                              SelectedItem="{Binding DrawSessionDetail}"  Margin="31,71,655,200" 
-                              Background="#7FFBFFD1">
-                        <!--<ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Pay Code" DisplayMemberBinding="{Binding PayCode}" Width="150" />
-                                <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding Amount, StringFormat=c}" Width="150" />
-                                    
-                            </GridView>
-                        </ListView.View>-->
+                              SelectedItem="{Binding DrawSessionDetail, Mode= OneWayToSource}"  Margin="31,71,655,200" 
+                              Background="#7FFBFFD1"
+                              >
+                        
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" Width="Auto" Height="25">
 
-                                    <TextBlock Text="{Binding PayCode}" FontWeight="Bold" Width="150" Margin="10,0,0,0"  />
-                                    <TextBlock Text="{Binding Amount}" FontWeight="Bold"  Width="100" Margin="10,0,0,0"   />
+                                    <TextBlock Text="{Binding PayCode}" FontWeight="Bold" Width="60" Margin="10,0,0,0"  />
+                                    <TextBlock Text="{Binding Amount, StringFormat=c}" FontWeight="Bold"  Width="60" Margin="10,0,0,0"   />
+                                    <TextBlock Text="{Binding ActualAmount, StringFormat=c}" FontWeight="Bold"  Width="60" Margin="10,0,0,0"   />
+                                    <TextBlock Text="{Binding Difference, StringFormat=c}" FontWeight="Bold"  Width="60" Margin="10,0,0,0"   />
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -102,7 +102,8 @@
                     </ListView>
 
                     <TextBlock Text="Cash Details" Margin="394,10,456,455" FontWeight="Bold" Foreground="#FF14520D" FontSize="20" />
-                    <ListView SelectionMode="Single" ItemsSource="{Binding DrawCashDetails, Mode=OneWay}"   SelectedItem="{Binding DrawCashDetail}" Margin="394,71,6,109" Width="600" Background="#7FDBF010">
+                    <ListView SelectionMode="Single" ItemsSource="{Binding DrawCashDetails, Mode=OneWay}"   SelectedItem="{Binding DrawCashDetail}" Margin="394,71,6,109" Width="600" Background="#7FDBF010"
+                              IsEnabled="{Binding IsNotPosted, Source={StaticResource DrawerSelectorDataSource}}">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <EventSetter Event="PreviewGotKeyboardFocus" Handler="SelectCurrentItem"/>
@@ -142,8 +143,8 @@
 
                     </ListView>
 
-                    <Button Content="Back" Click="ToDrawerSelector" Margin="31,440,919,10" Width="50" Height="50"/>
-                    <Button Content="Print" IsEnabled="{Binding IsBalanced}" Margin="944,440,6,10" Width="50" Height="50" />
+                    <Button Content="Back" Click="ToDrawerSelector" Margin="31,440,819,10" Width="100" Height="50"/>
+                    <Button Content="Post/Print" IsEnabled="{Binding IsBalanced}" Click="PostSession" Margin="844,440,6,10" Width="100" Height="50" />
                     <TextBlock Text="Cash Type" Width="150" Margin="394,50,456,434" FontWeight="Bold" Foreground="#FFC8F307" />
                     <TextBlock Text="Quantity" Width="50" Margin="569,50,381,434" FontWeight="Bold" Foreground="#FFC8F307" />
                     <TextBlock Text="Comments" Width="150" Margin="655,50,195,434" FontWeight="Bold" Foreground="#FFC8F307" />
@@ -157,10 +158,106 @@
                     <TextBlock Text="{Binding DrawCashDifference, StringFormat=c}" Margin="205,396,655,69" FontWeight="Bold" Foreground="#FFC8F307" FontSize="20" />
                     <TextBlock Text="Cash" Margin="31,355,911,110" FontWeight="Bold" Foreground="#FFC8F307" FontSize="20" />
                     <TextBlock Text="Diff:" Margin="31,395,911,70" FontWeight="Bold" Foreground="#FFC8F307" FontSize="20" />
-                    <TextBlock Text="Pay Code" Width="150" Margin="30,50,820,434" FontWeight="Bold" Foreground="#FFC8F307" />
-                    <TextBlock Text="Amount" Width="50" Margin="259,50,691,434" FontWeight="Bold" Foreground="#FFC8F307" />
+                    <TextBlock Text="Pay Code" Width="50" Margin="32,50,918,434" FontWeight="Bold" Foreground="#FFC8F307" />
+                    <TextBlock Text="Amount" Width="50" Margin="106,50,844,434" FontWeight="Bold" Foreground="#FFC8F307" />
+                    <TextBlock Text="Reading" Width="50" Margin="182,50,768,434" FontWeight="Bold" Foreground="#FFC8F307" />
+                    <TextBlock Text="Difference" Margin="257,50,679,434" FontWeight="Bold" Foreground="#FFC8F307" />
 
                 </Grid>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:CashSummary}">
+            <Grid >
+                <ScrollViewer Margin="0,0,0,150" Width="300">
+                    <StackPanel Background="White" Width="300" x:Name="CashSummaryGrd" >
+                        <TextBlock Text="Marketing &amp; National Importing Board" Margin="0,0,0,0" TextAlignment="Center" Height="21"/>
+                        <TextBlock Text="Cash Summary Report" Margin="0,0,0,0" TextAlignment="Center" Height="21"/>
+                        <TextBlock Text="{Binding Instance.DrawerSession.TradeDate, Source={StaticResource DrawerSelectorDataSource}, StringFormat=D}" Margin="0,0,0,0" TextAlignment="Center" Height="21"/>
+                        <StackPanel Orientation="Horizontal" Width="Auto" Height="18" Margin="0,20,0,0" >
+
+                            <TextBlock Text="Store" FontSize="10" Width="60" Margin="15,0,0,0"  />
+                            <TextBlock Text="{Binding Instance.DrawerSession.StoreName, Source={StaticResource DrawerSelectorDataSource}}"  FontSize="10" Width="200" Margin="10,0,0,0"   />
+
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Width="Auto" Height="18" >
+
+                            <TextBlock Text="Drawer" FontSize="10" Width="60" Margin="15,0,0,0"  />
+                            <TextBlock Text="{Binding Instance.DrawerSession.Drawer, Source={StaticResource DrawerSelectorDataSource}}"  FontSize="10" Width="200" Margin="10,0,0,0"   />
+
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Width="Auto" Height="18" >
+
+                            <TextBlock Text="Supervisor" FontSize="10" Width="60" Margin="15,0,0,0"  />
+                            <TextBlock Text="{Binding Instance.DrawerSession.Supervisor, Source={StaticResource DrawerSelectorDataSource}}"  FontSize="10" Width="200" Margin="10,0,0,0"   />
+
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Width="Auto" Height="18" >
+
+                            <TextBlock Text="Cashier" FontSize="10" Width="60" Margin="15,0,0,0"  />
+                            <TextBlock Text="{Binding Instance.DrawerSession.Cashier, Source={StaticResource DrawerSelectorDataSource}}"  FontSize="10" Width="200" Margin="10,0,0,0"   />
+
+                        </StackPanel>
+                        <TextBlock Text="BreakDown" FontWeight="Bold" Margin="0,20,0,20" TextAlignment="Center" />
+                        <ListBox ItemsSource="{Binding Instance.DrawSessionDetails, Source={StaticResource CashSummaryDataSource}}" Width="290" BorderBrush="{x:Null}">
+                            <ListBox.ItemTemplate>
+                                <HierarchicalDataTemplate DataType="cashSummaryManager:DrawSessionDetail">
+                                    <StackPanel>
+                                        <!--<Border Width="300" Height="1" Background="Black"/>-->
+                                        <StackPanel Orientation="Horizontal" Width="Auto" Height="18" Background="#FFE4E4E4">
+
+                                            <TextBlock Text="{Binding PayCode}" FontSize="10" Width="180" Margin="15,0,0,0"  />
+                                            <TextBlock Text="{Binding Amount, StringFormat=c}"  FontSize="10" Width="60" Margin="10,0,0,0"   />
+                                            
+                                        </StackPanel>
+                                        <!--<Border Width="300" Height="1" Background="Black"/>-->
+                                        <ListBox ItemsSource="{Binding CashDetails}" BorderBrush="{x:Null}" Margin="10,0,0,0">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Height="Auto" >
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="-" FontSize="10" Width="5" Margin="0,0,0,0"  />
+                                                            <TextBlock Text="{Binding CashTypeComponent.CashComponentName}" FontSize="10" Width="55" Margin="0,0,0,0"  />
+                                                            <TextBlock Text="{Binding Quantity, StringFormat=n}" FontSize="10" Width="30" Margin="10,0,0,0"   />
+                                                            <TextBlock Text="{Binding CashTypeComponent.CashComponent.UnitValue , StringFormat=c}" FontSize="10"  Width="35" Margin="10,0,0,0"   />
+                                                            <TextBlock Text="{Binding Total , StringFormat=c}" FontSize="10"  Width="50" Margin="10,0,0,0"   />
+
+                                                        </StackPanel>
+                                                        <TextBlock Text="{Binding Comments , StringFormat=c}" FontSize="10" Width="Auto" Margin="10,0,0,0"   />
+                                                    </StackPanel>
+
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <TextBlock Text="Signatures" FontSize="10" Width="60" Margin="15,20,0,0"  />
+                        <StackPanel Orientation="Horizontal" Width="Auto" Height="18" Margin="0,20,0,0">
+
+                            <TextBlock Text="Cashier" FontSize="10" Width="60" Margin="15,0,0,0"  />
+                            <TextBlock Text="{Binding Instance.DrawerSession.Cashier, Source={StaticResource DrawerSelectorDataSource}}"  FontSize="10" Width="200" Margin="10,0,0,0"   />
+
+                        </StackPanel>
+                        <TextBlock Text="..................................................................................................................................................................." 
+                                   FontSize="10" Width="300" Margin="0,20,0,40"  />
+                        <StackPanel Orientation="Horizontal" Width="Auto" Height="18" >
+
+                            <TextBlock Text="Supervisor" FontSize="10" Width="60" Margin="15,0,0,0"  />
+                            <TextBlock Text="{Binding Instance.DrawerSession.Supervisor, Source={StaticResource DrawerSelectorDataSource}}"  FontSize="10" Width="200" Margin="10,0,0,0"   />
+
+                        </StackPanel>
+                        <TextBlock Text="..................................................................................................................................................................." 
+                                   FontSize="10" Width="300" Margin="0,20,0,40"  />
+                        <Border Width="300" Height="1" Background="Black"/>
+                        <TextBlock Text="Journal Entry" FontSize="12" FontWeight="Bold" Width="80" Margin="15,20,0,20"  />
+                        <TextBlock Text="{Binding Instance.DebitEntry}" FontSize="10" Margin="10,0,0,0" TextAlignment="Left" Height="21"/>
+                        <TextBlock Text="{Binding Instance.CreditEntry}" FontSize="10" Margin="0,0,20,20" TextAlignment="Right" Height="21"/>
+                    </StackPanel>
+                </ScrollViewer>
+                <Button Content="Back" Click="ToCashBreakDown" Margin="150,390,600,10" Height="50" Width="100"/>
+                <Button Content="Print" Click="PrintCashSummary" Margin="350,390,350,10" Height="50" Width="100"/>
+                <Button Content="Next Drawer" Click="NextDrawer" Margin="660,390,236,10" Height="50" Width="100"/>
             </Grid>
         </DataTemplate>
 
@@ -188,8 +285,8 @@
 
 
         <Viewbox Margin="10">
-            <Grid Width="1600"
-                  Height="700" Margin="10,100,10,10">
+            <Grid Width="1000"
+                  Height="600" Margin="10,10,10,10">
 
                 <ContentControl x:Name="ContentControl" Content="{Binding Source={StaticResource DrawerSelectorDataSource}}">
                     <ContentControl.Resources>

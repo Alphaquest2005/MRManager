@@ -3,10 +3,9 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using CashSummaryManager;
-using MNIB_Distribution_Manager;
 
-namespace CheckManager
+
+namespace CashSummaryManager
 {
     /// <summary>
     /// Interaction logic for LogInScreen.xaml

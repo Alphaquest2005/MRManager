@@ -34,5 +34,15 @@ namespace CheckManager
         {
             throw new NotImplementedException();
         }
+
+        private void ToCashBreakDown(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void NextDrawer(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

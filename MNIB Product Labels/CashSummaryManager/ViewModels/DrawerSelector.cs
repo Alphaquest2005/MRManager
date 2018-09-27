@@ -37,15 +37,16 @@ namespace CashSummaryManager.ViewModels
             }
         }
 
-        private void GetDrawerSessions()
+        public void GetDrawerSessions()
         {
            
             using (var ctx = new CashSummaryDBDataContext())
             {
                 var res = ctx.DrawerSessions.Where(x => x.TradeDate == TradeDate);
+                if(User.UserPermissions.Any(x => x.Permission.Name == "Supervisor")) res = res.Where(x => x.Supervisor == User.Name);
                 if (Store != null) res = res.Where(x => x.StoreId == Store.StoreId);
                 if (Drawer != null) res = res.Where(x => x.DrawId == Drawer.DrawerId);
-                if (Drawer != null) res = res.Where(x => x.DrawId == Drawer.DrawerId);
+                
 
                 DrawerSessions = new ObservableCollection<DrawerSession>(res.ToList());
                 
@@ -141,6 +142,15 @@ namespace CashSummaryManager.ViewModels
                 OnPropertyChanged();
                 CashBreakDown.Instance.GetDrawerSessionDetails();
             }
+        }
+
+        public bool IsNotPosted => DrawerSession.Status != "Posted";
+        public bool IsPosted => !IsNotPosted;
+        public User User { get; set; }
+
+        public void NotifyDrawStatusChanged()
+        {
+            OnPropertyChanged(nameof(IsNotPosted));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

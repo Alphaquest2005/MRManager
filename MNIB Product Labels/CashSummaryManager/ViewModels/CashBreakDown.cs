@@ -32,13 +32,19 @@ namespace CashSummaryManager.ViewModels
         public void GetDrawerSessionDetails()
         {
             if (DrawerSelector.Instance.DrawerSession == null) return;
+            DrawSessionDetail oldDrawSessionDetail = DrawSessionDetail;
+            
                 using (var ctx = new CashSummaryDBDataContext())
 
                 {
                     Instance.DrawerSessionDetails = new ObservableCollection<DrawSessionDetail>(ctx.DrawSessionDetails.Where(x =>
                         x.DrawSessionId == DrawerSelector.Instance.DrawerSession.DrawSessionId));
                 }
-            
+
+            if (oldDrawSessionDetail != null)
+                _drawSessionDetail = Instance.DrawerSessionDetails.FirstOrDefault(x =>
+                    x.DrawSessionId == oldDrawSessionDetail.DrawSessionId && x.PayCode == oldDrawSessionDetail.PayCode);
+
         }
 
 
@@ -65,14 +71,14 @@ namespace CashSummaryManager.ViewModels
                     x.DrawSessionId == DrawSessionDetail.DrawSessionId.ToString()).ToList();
 
                 CashComponents = new ObservableCollection<CashTypeComponent>(ctx.CashTypeComponents.Where(x => x.CashType.Name == DrawSessionDetail.PayCode).ToList());
-                if (res.Any())
+                if (res.Any() || DrawerSelector.Instance.IsPosted)
                 {
                     DrawCashDetails = new ObservableCollection<DrawerCashDetail>(res);
                     return;
                 }
                 else
                 {
-                    var cc = ctx.CashTypeComponents.Where(x => x.CashType.Name == DrawSessionDetail.PayCode);
+                    var cc = ctx.CashTypeComponents.Where(x => x.CashType.Name == DrawSessionDetail.PayCode && x.CashComponent.Name != "RECON");
                     foreach (var t in cc)
                     {
                         ctx.DrawerCashDetails.InsertOnSubmit(new DrawerCashDetail()
@@ -93,6 +99,7 @@ namespace CashSummaryManager.ViewModels
 
         private void RefeshDrawerCashDetails()
         {
+            if(DrawSessionDetail == null)return;
             using (var ctx = new CashSummaryDBDataContext())
             {
                 DrawCashDetails = new ObservableCollection<DrawerCashDetail>(
@@ -100,6 +107,7 @@ namespace CashSummaryManager.ViewModels
                         x.CashTypeComponent.CashType.Name == DrawSessionDetail.PayCode &&
                         x.DrawSessionId == DrawSessionDetail.DrawSessionId.ToString()).ToList());
             }
+
             
           RefeshDrawerTotals();
         }
@@ -260,12 +268,52 @@ namespace CashSummaryManager.ViewModels
 
         private void RefeshDrawerTotals()
         {
+            GetDrawerSessionDetails();
             OnPropertyChanged(nameof(DetailTotal));
             OnPropertyChanged(nameof(SessionTotal));
             OnPropertyChanged(nameof(CashTotal));
             OnPropertyChanged(nameof(DrawCashDifference));
             OnPropertyChanged(nameof(IsBalanced));
             OnPropertyChanged(nameof(CashDetailDiff)); 
+        }
+
+        public void PostSession()
+        {
+            if (DrawerSelector.Instance.DrawerSession.Status == "Un-Posted" && DrawerSelector.Instance.User.UserPermissions.Any(x => x.Permission.Name == "Supervisor"))
+            {
+                DrawerSelector.Instance.DrawerSession.Status = "Posted";
+                using (var ctx = new CashSummaryDBDataContext())
+                {
+                    ctx.DrawerSessionStatus.InsertOnSubmit(new DrawerSessionStatus()
+                    {
+                        DrawSessionId = DrawerSelector.Instance.DrawerSession.DrawSessionId.ToString(),
+                        UserId = DrawerSelector.Instance.User.Id,
+                        EntryDateTime = DateTime.Now,
+                        Status = "Posted"
+                    });
+
+                    var res = ctx.DrawerCashDetails.Where(x =>
+                        x.DrawSessionId == DrawerSelector.Instance.DrawerSession.DrawSessionId.ToString() &&
+                        x.Quantity == 0);
+
+                   
+                   ctx.DrawerCashDetails.DeleteAllOnSubmit(res);
+                   
+
+                    ctx.SubmitChanges();
+                }
+
+                DrawerSelector.Instance.GetDrawerSessions();
+                RefeshDrawerCashDetails();
+                DrawerSelector.Instance.NotifyDrawStatusChanged();
+            }
+
+            LoadDrawerSessionCashDetails();
+        }
+
+        private void LoadDrawerSessionCashDetails()
+        {
+            CashSummary.Instance.GetDrawerSessionCashDetails();
         }
     }
 }

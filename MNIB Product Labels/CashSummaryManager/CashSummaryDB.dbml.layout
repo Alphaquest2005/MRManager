@@ -26,7 +26,7 @@
         <elementListCompartment Id="c70673ed-1968-451a-bd3b-6db9e456608e" absoluteBounds="3.515, 3.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(1.75 : 5.27089680989583); (1.75 : 6.45274983723958); (3.5 : 6.45274983723958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(1.75 : 5.27089680989583); (1.75 : 6.45274983723958); (3.5 : 6.45274983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CashSummaryDBDataContext/User/User_UserLog" />
       <nodes>
         <classShapeMoniker Id="fac7c25e-6b55-481e-a237-35a7f98f01fd" />
@@ -95,44 +95,50 @@
         <elementListCompartment Id="94f9dd9e-cb9d-4bf7-8667-483ce27dcffa" absoluteBounds="14.89, 5.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(16.1875 : 7.375); (16.1875 : 6.1362939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(16.1875 : 7.375); (16.1875 : 6.1362939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CashSummaryDBDataContext/CashComponent/CashComponent_CashTypeComponent" />
       <nodes>
         <classShapeMoniker Id="41fce885-b329-4b26-be9b-0b291a95b044" />
         <classShapeMoniker Id="c3cac5d9-326d-4c2d-b31d-0670b8bc9262" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(14.125 : 5.47199625651042); (14.875 : 5.47199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(14.125 : 5.47199625651042); (14.875 : 5.47199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CashSummaryDBDataContext/CashType/CashType_CashTypeComponent" />
       <nodes>
         <classShapeMoniker Id="6329a054-652a-464c-adc0-2a4f68c84f70" />
         <classShapeMoniker Id="c3cac5d9-326d-4c2d-b31d-0670b8bc9262" />
       </nodes>
     </associationConnector>
-    <classShape Id="12ce5a2a-7cf1-4807-b4d5-a59b3538fa02" absoluteBounds="7.875, 6.25, 2, 2.9247054036458331">
-      <DataClassMoniker Name="/CashSummaryDBDataContext/DrawerSession" />
-      <nestedChildShapes>
-        <elementListCompartment Id="c8b9e12c-bbdb-47ab-ae97-9b3ec4cbe5f5" absoluteBounds="7.8900000000000006, 6.71, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="5b5dc536-254a-46bd-ab30-60680df8b84c" absoluteBounds="12, 7, 2, 1.7708968098958331">
-      <DataClassMoniker Name="/CashSummaryDBDataContext/DrawSessionDetail" />
-      <nestedChildShapes>
-        <elementListCompartment Id="d73acd7a-4f6c-4064-a798-e38f6d7ce080" absoluteBounds="12.015, 7.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="5c0e510b-a602-4586-a42b-17675033f42f" absoluteBounds="16, 2.625, 2, 1.7708968098958331">
       <DataClassMoniker Name="/CashSummaryDBDataContext/DrawerCashDetail" />
       <nestedChildShapes>
         <elementListCompartment Id="dbdc7548-b867-4449-b228-12963d109bd0" absoluteBounds="16.015, 3.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(16.4375 : 4.75); (16.4375 : 4.39589680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(16.4375 : 4.75); (16.4375 : 4.39589680989583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CashSummaryDBDataContext/CashTypeComponent/CashTypeComponent_DrawerCashDetail" />
       <nodes>
         <classShapeMoniker Id="c3cac5d9-326d-4c2d-b31d-0670b8bc9262" />
         <classShapeMoniker Id="5c0e510b-a602-4586-a42b-17675033f42f" />
       </nodes>
     </associationConnector>
+    <classShape Id="35a4e9a4-4f76-47d3-9359-bf2bca7e5661" absoluteBounds="12.625, 0.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/DrawSessionDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b9c8af1d-3b28-4bd8-bf76-2ce6c60ea65d" absoluteBounds="12.64, 1.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ed84884c-0627-40b0-9990-a89d8f6cddcd" absoluteBounds="12.625, 6.75, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/DrawerSessionStatus" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fa5f3709-bb46-4bb2-ae92-ee258ef4cb70" absoluteBounds="12.64, 7.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="699095b7-833d-4296-94e0-e2123df956a1" absoluteBounds="9.625, 4.875, 2, 4.0785139973958326">
+      <DataClassMoniker Name="/CashSummaryDBDataContext/DrawerSession" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0265526a-6968-4d8a-a2da-c06e31f07e93" absoluteBounds="9.64, 5.335, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

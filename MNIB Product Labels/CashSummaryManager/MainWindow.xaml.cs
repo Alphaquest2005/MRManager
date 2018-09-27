@@ -115,5 +115,27 @@ namespace CashSummaryManager
         {
             CashBreakDown.Instance.SaveRow((sender as FrameworkElement).DataContext as DrawerCashDetail);
         }
+
+        private void PostSession(object sender, RoutedEventArgs e)
+        {
+            CashBreakDown.Instance.PostSession();
+            ContentControl.Content = CashSummary.Instance;
+        }
+
+        private void ToCashBreakDown(object sender, RoutedEventArgs e)
+        {
+            ContentControl.Content = CashBreakDown.Instance;
+        }
+
+        private void NextDrawer(object sender, RoutedEventArgs e)
+        {
+            ContentControl.Content = DrawerSelector.Instance;
+        }
+
+        private void PrintCashSummary(object sender, RoutedEventArgs e)
+        {
+            FrameworkElement dependencyObject = (FrameworkElement)((FrameworkElement)sender).FindName("CashSummaryGrd");
+            PrintClass.Print(ref dependencyObject);
+        }
     }
 }

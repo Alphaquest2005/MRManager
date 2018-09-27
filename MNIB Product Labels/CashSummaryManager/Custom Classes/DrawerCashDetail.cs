@@ -1,4 +1,7 @@
-﻿namespace CashSummaryManager
+﻿using System.Collections.Generic;
+using System.Windows.Documents;
+
+namespace CashSummaryManager
 {
     public partial class DrawerCashDetail
     {
@@ -17,4 +20,10 @@
             SendPropertyChanged("Total");
         }
     }
+
+    public partial class DrawSessionDetail
+    {
+        public List<DrawerCashDetail> CashDetails { get; set; }
+    }
+
 }

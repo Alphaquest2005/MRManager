@@ -54,6 +54,9 @@ namespace CashSummaryManager
     partial void InsertDrawerCashDetail(DrawerCashDetail instance);
     partial void UpdateDrawerCashDetail(DrawerCashDetail instance);
     partial void DeleteDrawerCashDetail(DrawerCashDetail instance);
+    partial void InsertDrawerSessionStatus(DrawerSessionStatus instance);
+    partial void UpdateDrawerSessionStatus(DrawerSessionStatus instance);
+    partial void DeleteDrawerSessionStatus(DrawerSessionStatus instance);
     #endregion
 		
 		public CashSummaryDBDataContext() : 
@@ -182,11 +185,11 @@ namespace CashSummaryManager
 			}
 		}
 		
-		public System.Data.Linq.Table<DrawerSession> DrawerSessions
+		public System.Data.Linq.Table<DrawerCashDetail> DrawerCashDetails
 		{
 			get
 			{
-				return this.GetTable<DrawerSession>();
+				return this.GetTable<DrawerCashDetail>();
 			}
 		}
 		
@@ -198,11 +201,19 @@ namespace CashSummaryManager
 			}
 		}
 		
-		public System.Data.Linq.Table<DrawerCashDetail> DrawerCashDetails
+		public System.Data.Linq.Table<DrawerSessionStatus> DrawerSessionStatus
 		{
 			get
 			{
-				return this.GetTable<DrawerCashDetail>();
+				return this.GetTable<DrawerSessionStatus>();
+			}
+		}
+		
+		public System.Data.Linq.Table<DrawerSession> DrawerSessions
+		{
+			get
+			{
+				return this.GetTable<DrawerSession>();
 			}
 		}
 	}
@@ -1761,6 +1772,498 @@ namespace CashSummaryManager
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DrawerCashDetails")]
+	public partial class DrawerCashDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _DrawSessionId;
+		
+		private int _CashTypeCompoentId;
+		
+		private double _Quantity;
+		
+		private string _Comments;
+		
+		private EntityRef<CashTypeComponent> _CashTypeComponent;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnDrawSessionIdChanging(string value);
+    partial void OnDrawSessionIdChanged();
+    partial void OnCashTypeCompoentIdChanging(int value);
+    partial void OnCashTypeCompoentIdChanged();
+    partial void OnQuantityChanging(double value);
+    partial void OnQuantityChanged();
+    partial void OnCommentsChanging(string value);
+    partial void OnCommentsChanged();
+    #endregion
+		
+		public DrawerCashDetail()
+		{
+			this._CashTypeComponent = default(EntityRef<CashTypeComponent>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DrawSessionId", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string DrawSessionId
+		{
+			get
+			{
+				return this._DrawSessionId;
+			}
+			set
+			{
+				if ((this._DrawSessionId != value))
+				{
+					this.OnDrawSessionIdChanging(value);
+					this.SendPropertyChanging();
+					this._DrawSessionId = value;
+					this.SendPropertyChanged("DrawSessionId");
+					this.OnDrawSessionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CashTypeCompoentId", DbType="Int NOT NULL")]
+		public int CashTypeCompoentId
+		{
+			get
+			{
+				return this._CashTypeCompoentId;
+			}
+			set
+			{
+				if ((this._CashTypeCompoentId != value))
+				{
+					if (this._CashTypeComponent.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCashTypeCompoentIdChanging(value);
+					this.SendPropertyChanging();
+					this._CashTypeCompoentId = value;
+					this.SendPropertyChanged("CashTypeCompoentId");
+					this.OnCashTypeCompoentIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Float NOT NULL")]
+		public double Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this.OnQuantityChanging(value);
+					this.SendPropertyChanging();
+					this._Quantity = value;
+					this.SendPropertyChanged("Quantity");
+					this.OnQuantityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comments", DbType="VarChar(255)")]
+		public string Comments
+		{
+			get
+			{
+				return this._Comments;
+			}
+			set
+			{
+				if ((this._Comments != value))
+				{
+					this.OnCommentsChanging(value);
+					this.SendPropertyChanging();
+					this._Comments = value;
+					this.SendPropertyChanged("Comments");
+					this.OnCommentsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CashTypeComponent_DrawerCashDetail", Storage="_CashTypeComponent", ThisKey="CashTypeCompoentId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public CashTypeComponent CashTypeComponent
+		{
+			get
+			{
+				return this._CashTypeComponent.Entity;
+			}
+			set
+			{
+				CashTypeComponent previousValue = this._CashTypeComponent.Entity;
+				if (((previousValue != value) 
+							|| (this._CashTypeComponent.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CashTypeComponent.Entity = null;
+						previousValue.DrawerCashDetails.Remove(this);
+					}
+					this._CashTypeComponent.Entity = value;
+					if ((value != null))
+					{
+						value.DrawerCashDetails.Add(this);
+						this._CashTypeCompoentId = value.Id;
+					}
+					else
+					{
+						this._CashTypeCompoentId = default(int);
+					}
+					this.SendPropertyChanged("CashTypeComponent");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DrawSessionDetails")]
+	public partial class DrawSessionDetail
+	{
+		
+		private string _StoreId;
+		
+		private string _DrawId;
+		
+		private string _PayCode;
+		
+		private long _DrawSessionId;
+		
+		private System.Nullable<double> _Amount;
+		
+		private double _ActualAmount;
+		
+		private System.Nullable<double> _Difference;
+		
+		public DrawSessionDetail()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StoreId", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string StoreId
+		{
+			get
+			{
+				return this._StoreId;
+			}
+			set
+			{
+				if ((this._StoreId != value))
+				{
+					this._StoreId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DrawId", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string DrawId
+		{
+			get
+			{
+				return this._DrawId;
+			}
+			set
+			{
+				if ((this._DrawId != value))
+				{
+					this._DrawId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayCode", DbType="VarChar(10)")]
+		public string PayCode
+		{
+			get
+			{
+				return this._PayCode;
+			}
+			set
+			{
+				if ((this._PayCode != value))
+				{
+					this._PayCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DrawSessionId", DbType="BigInt NOT NULL")]
+		public long DrawSessionId
+		{
+			get
+			{
+				return this._DrawSessionId;
+			}
+			set
+			{
+				if ((this._DrawSessionId != value))
+				{
+					this._DrawSessionId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float")]
+		public System.Nullable<double> Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this._Amount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActualAmount", DbType="Float NOT NULL")]
+		public double ActualAmount
+		{
+			get
+			{
+				return this._ActualAmount;
+			}
+			set
+			{
+				if ((this._ActualAmount != value))
+				{
+					this._ActualAmount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Difference", DbType="Float")]
+		public System.Nullable<double> Difference
+		{
+			get
+			{
+				return this._Difference;
+			}
+			set
+			{
+				if ((this._Difference != value))
+				{
+					this._Difference = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DrawerSessionStatus")]
+	public partial class DrawerSessionStatus : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _DrawSessionId;
+		
+		private string _Status;
+		
+		private int _UserId;
+		
+		private System.DateTime _EntryDateTime;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnDrawSessionIdChanging(string value);
+    partial void OnDrawSessionIdChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
+    partial void OnUserIdChanging(int value);
+    partial void OnUserIdChanged();
+    partial void OnEntryDateTimeChanging(System.DateTime value);
+    partial void OnEntryDateTimeChanged();
+    #endregion
+		
+		public DrawerSessionStatus()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DrawSessionId", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string DrawSessionId
+		{
+			get
+			{
+				return this._DrawSessionId;
+			}
+			set
+			{
+				if ((this._DrawSessionId != value))
+				{
+					this.OnDrawSessionIdChanging(value);
+					this.SendPropertyChanging();
+					this._DrawSessionId = value;
+					this.SendPropertyChanged("DrawSessionId");
+					this.OnDrawSessionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="Int NOT NULL")]
+		public int UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EntryDateTime", DbType="DateTime NOT NULL")]
+		public System.DateTime EntryDateTime
+		{
+			get
+			{
+				return this._EntryDateTime;
+			}
+			set
+			{
+				if ((this._EntryDateTime != value))
+				{
+					this.OnEntryDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._EntryDateTime = value;
+					this.SendPropertyChanged("EntryDateTime");
+					this.OnEntryDateTimeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DrawerSessions")]
 	public partial class DrawerSession
 	{
@@ -1786,6 +2289,18 @@ namespace CashSummaryManager
 		private string _CashierId;
 		
 		private string _Drawer;
+		
+		private string _Status;
+		
+		private string _StoreName;
+		
+		private string _DebitAccountNumber;
+		
+		private string _DebitAccountDescription;
+		
+		private string _CreditAccountNumber;
+		
+		private string _CreditAccountDescription;
 		
 		public DrawerSession()
 		{
@@ -1966,302 +2481,100 @@ namespace CashSummaryManager
 				}
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DrawSessionDetails")]
-	public partial class DrawSessionDetail
-	{
 		
-		private string _StoreId;
-		
-		private string _DrawId;
-		
-		private string _PayCode;
-		
-		private long _DrawSessionId;
-		
-		private System.Nullable<decimal> _Amount;
-		
-		public DrawSessionDetail()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StoreId", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string StoreId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Status
 		{
 			get
 			{
-				return this._StoreId;
+				return this._Status;
 			}
 			set
 			{
-				if ((this._StoreId != value))
+				if ((this._Status != value))
 				{
-					this._StoreId = value;
+					this._Status = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DrawId", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string DrawId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StoreName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string StoreName
 		{
 			get
 			{
-				return this._DrawId;
+				return this._StoreName;
 			}
 			set
 			{
-				if ((this._DrawId != value))
+				if ((this._StoreName != value))
 				{
-					this._DrawId = value;
+					this._StoreName = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayCode", DbType="VarChar(10)")]
-		public string PayCode
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DebitAccountNumber", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string DebitAccountNumber
 		{
 			get
 			{
-				return this._PayCode;
+				return this._DebitAccountNumber;
 			}
 			set
 			{
-				if ((this._PayCode != value))
+				if ((this._DebitAccountNumber != value))
 				{
-					this._PayCode = value;
+					this._DebitAccountNumber = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DrawSessionId", DbType="BigInt NOT NULL")]
-		public long DrawSessionId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DebitAccountDescription", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string DebitAccountDescription
 		{
 			get
 			{
-				return this._DrawSessionId;
+				return this._DebitAccountDescription;
 			}
 			set
 			{
-				if ((this._DrawSessionId != value))
+				if ((this._DebitAccountDescription != value))
 				{
-					this._DrawSessionId = value;
+					this._DebitAccountDescription = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Decimal(15,2)")]
-		public System.Nullable<decimal> Amount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreditAccountNumber", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string CreditAccountNumber
 		{
 			get
 			{
-				return this._Amount;
+				return this._CreditAccountNumber;
 			}
 			set
 			{
-				if ((this._Amount != value))
+				if ((this._CreditAccountNumber != value))
 				{
-					this._Amount = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DrawerCashDetails")]
-	public partial class DrawerCashDetail : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _DrawSessionId;
-		
-		private int _CashTypeCompoentId;
-		
-		private double _Quantity;
-		
-		private string _Comments;
-		
-		private EntityRef<CashTypeComponent> _CashTypeComponent;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnDrawSessionIdChanging(string value);
-    partial void OnDrawSessionIdChanged();
-    partial void OnCashTypeCompoentIdChanging(int value);
-    partial void OnCashTypeCompoentIdChanged();
-    partial void OnQuantityChanging(double value);
-    partial void OnQuantityChanged();
-    partial void OnCommentsChanging(string value);
-    partial void OnCommentsChanged();
-    #endregion
-		
-		public DrawerCashDetail()
-		{
-			this._CashTypeComponent = default(EntityRef<CashTypeComponent>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
+					this._CreditAccountNumber = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DrawSessionId", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string DrawSessionId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreditAccountDescription", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string CreditAccountDescription
 		{
 			get
 			{
-				return this._DrawSessionId;
+				return this._CreditAccountDescription;
 			}
 			set
 			{
-				if ((this._DrawSessionId != value))
+				if ((this._CreditAccountDescription != value))
 				{
-					this.OnDrawSessionIdChanging(value);
-					this.SendPropertyChanging();
-					this._DrawSessionId = value;
-					this.SendPropertyChanged("DrawSessionId");
-					this.OnDrawSessionIdChanged();
+					this._CreditAccountDescription = value;
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CashTypeCompoentId", DbType="Int NOT NULL")]
-		public int CashTypeCompoentId
-		{
-			get
-			{
-				return this._CashTypeCompoentId;
-			}
-			set
-			{
-				if ((this._CashTypeCompoentId != value))
-				{
-					if (this._CashTypeComponent.HasLoadedOrAssignedValue)
-					{
-					//	throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCashTypeCompoentIdChanging(value);
-					this.SendPropertyChanging();
-					this._CashTypeCompoentId = value;
-					this.SendPropertyChanged("CashTypeCompoentId");
-					this.OnCashTypeCompoentIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Float NOT NULL")]
-		public double Quantity
-		{
-			get
-			{
-				return this._Quantity;
-			}
-			set
-			{
-				if ((this._Quantity != value))
-				{
-					this.OnQuantityChanging(value);
-					this.SendPropertyChanging();
-					this._Quantity = value;
-					this.SendPropertyChanged("Quantity");
-					this.OnQuantityChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comments", DbType="VarChar(255)")]
-		public string Comments
-		{
-			get
-			{
-				return this._Comments;
-			}
-			set
-			{
-				if ((this._Comments != value))
-				{
-					this.OnCommentsChanging(value);
-					this.SendPropertyChanging();
-					this._Comments = value;
-					this.SendPropertyChanged("Comments");
-					this.OnCommentsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CashTypeComponent_DrawerCashDetail", Storage="_CashTypeComponent", ThisKey="CashTypeCompoentId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public CashTypeComponent CashTypeComponent
-		{
-			get
-			{
-				return this._CashTypeComponent.Entity;
-			}
-			set
-			{
-				CashTypeComponent previousValue = this._CashTypeComponent.Entity;
-				if (((previousValue != value) 
-							|| (this._CashTypeComponent.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._CashTypeComponent.Entity = null;
-						previousValue.DrawerCashDetails.Remove(this);
-					}
-					this._CashTypeComponent.Entity = value;
-					if ((value != null))
-					{
-						value.DrawerCashDetails.Add(this);
-						this._CashTypeCompoentId = value.Id;
-					}
-					else
-					{
-						this._CashTypeCompoentId = default(int);
-					}
-					this.SendPropertyChanged("CashTypeComponent");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
